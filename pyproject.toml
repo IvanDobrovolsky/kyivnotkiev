@@ -19,6 +19,7 @@ dependencies = [
     "requests>=2.31",
     "streamlit>=1.30",
     "geodatasets>=2024.8",
+    "kaleido>=0.2",
 ]
 
 [project.optional-dependencies]
