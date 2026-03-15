@@ -64,18 +64,27 @@ def detect_pelt(signal: np.ndarray, min_size: int = CHANGEPOINT_MIN_SIZE) -> lis
     return sorted(consensus)
 
 
-def detect_cusum(signal: np.ndarray, threshold: float = 1.0) -> list[int]:
+def detect_cusum(signal: np.ndarray, threshold: float | None = None) -> list[int]:
     """Apply CUSUM (Cumulative Sum) algorithm for change-point detection."""
+    std = signal.std()
+    if std == 0:
+        return []
+
+    if threshold is None:
+        threshold = 0.5 * std
+
     mean = signal.mean()
     cusum_pos = np.zeros(len(signal))
     cusum_neg = np.zeros(len(signal))
     change_points = []
 
+    detect_threshold = 3 * std
+
     for i in range(1, len(signal)):
         cusum_pos[i] = max(0, cusum_pos[i - 1] + signal[i] - mean - threshold)
         cusum_neg[i] = min(0, cusum_neg[i - 1] + signal[i] - mean + threshold)
 
-        if cusum_pos[i] > 4 * signal.std() or cusum_neg[i] < -4 * signal.std():
+        if cusum_pos[i] > detect_threshold or cusum_neg[i] < -detect_threshold:
             change_points.append(i)
             cusum_pos[i] = 0
             cusum_neg[i] = 0
@@ -84,76 +93,73 @@ def detect_cusum(signal: np.ndarray, threshold: float = 1.0) -> list[int]:
 
 
 def detect_bocpd(signal: np.ndarray, hazard_rate: float = 1 / 250) -> list[int]:
-    """Bayesian Online Change Point Detection.
+    """Bayesian Online Change Point Detection (simplified).
 
-    Returns indices where the posterior probability of a change point
-    exceeds a threshold.
+    Uses a sliding-window approach: compares the distribution of values
+    in a window before vs after each point using a two-sample test.
+    Points where the distributions differ significantly are change points.
     """
     n = len(signal)
-    if n < 4:
+    if n < 10:
         return []
 
-    # Run length probabilities
-    R = np.zeros((n + 1, n + 1))
-    R[0, 0] = 1.0
-
-    # Sufficient statistics for Gaussian
-    mu0 = signal.mean()
-    kappa0 = 1.0
-    alpha0 = 1.0
-    beta0 = signal.var() if signal.var() > 0 else 1.0
-
+    window = max(5, n // 20)
     change_points = []
-    max_run_length = np.zeros(n)
 
-    for t in range(n):
-        # Predictive probability under each run length
-        pred_probs = np.zeros(t + 1)
-        for r in range(t + 1):
-            # Simplified: use running mean/variance
-            start = max(0, t - r)
-            segment = signal[start:t + 1]
-            if len(segment) > 1:
-                pred_probs[r] = norm.pdf(signal[t], loc=segment.mean(), scale=max(segment.std(), 1e-6))
-            else:
-                pred_probs[r] = norm.pdf(signal[t], loc=mu0, scale=beta0 ** 0.5)
+    for t in range(window, n - window):
+        before = signal[t - window:t]
+        after = signal[t:t + window]
 
-        # Growth probabilities
-        R[1:t + 2, t + 1] = R[:t + 1, t] * pred_probs * (1 - hazard_rate)
-        # Change point probability
-        R[0, t + 1] = (R[:t + 1, t] * pred_probs * hazard_rate).sum()
-        # Normalize
-        total = R[:t + 2, t + 1].sum()
-        if total > 0:
-            R[:t + 2, t + 1] /= total
+        # Welch's t-test between before and after windows
+        t_stat, p_val = sp_ttest(before, after)
 
-        max_run_length[t] = R[:t + 2, t + 1].argmax()
-
-        # Detect change: run length drops to 0 with high probability
-        if t > 0 and R[0, t + 1] > 0.5:
-            change_points.append(t)
+        if p_val < 0.01:  # significant difference
+            # Only keep if not too close to existing change point
+            if not change_points or t - change_points[-1] > window // 2:
+                change_points.append(t)
 
     return change_points
 
 
+def sp_ttest(a: np.ndarray, b: np.ndarray) -> tuple[float, float]:
+    """Welch's t-test between two samples."""
+    n1, n2 = len(a), len(b)
+    m1, m2 = a.mean(), b.mean()
+    v1, v2 = a.var(ddof=1), b.var(ddof=1)
+
+    se = np.sqrt(v1 / n1 + v2 / n2) if (v1 / n1 + v2 / n2) > 0 else 1e-10
+    t_stat = (m1 - m2) / se
+
+    # Approximate p-value using normal distribution for simplicity
+    p_val = 2 * (1 - norm.cdf(abs(t_stat)))
+    return t_stat, p_val
+
+
 def classify_change_type(signal: np.ndarray, cp_idx: int, window: int = 8) -> str:
-    """Classify whether a change point represents a step or ramp transition."""
-    if cp_idx < window or cp_idx >= len(signal) - window:
+    """Classify whether a change point represents a step or ramp transition.
+
+    Compares the ratio of change achieved in a narrow zone (3 samples around
+    the change point) vs a wide zone (2*window samples). Steps concentrate
+    most change in the narrow zone; ramps spread it evenly.
+    """
+    wide = max(window, 10)
+    if cp_idx < wide or cp_idx >= len(signal) - wide:
         return "step"
 
-    before = signal[cp_idx - window:cp_idx]
-    after = signal[cp_idx:cp_idx + window]
+    # Wide zone: full extent of the transition
+    wide_before = signal[max(0, cp_idx - wide):cp_idx - 1].mean()
+    wide_after = signal[cp_idx + 1:min(len(signal), cp_idx + wide)].mean()
+    total_jump = abs(wide_after - wide_before)
 
-    # Check if transition is abrupt (step) or gradual (ramp)
-    # by looking at variance in the transition zone
-    transition = signal[max(0, cp_idx - 2):min(len(signal), cp_idx + 3)]
-    if len(transition) < 3:
-        return "step"
+    if total_jump < 1e-9:
+        return "none"
 
-    gradient = np.abs(np.diff(transition)).mean()
-    jump = abs(after.mean() - before.mean())
+    # Narrow zone: just 1 sample before and after the change point
+    narrow_jump = abs(signal[min(cp_idx + 1, len(signal) - 1)] - signal[max(cp_idx - 1, 0)])
 
-    if jump > 0 and gradient / jump < 0.3:
+    # In a step, the narrow zone captures most of the total change
+    # In a ramp, the narrow zone captures only a small fraction
+    if narrow_jump / total_jump > 0.5:
         return "step"
     else:
         return "ramp"
@@ -172,7 +178,7 @@ def find_crossover_date(
     above = smoothed >= 0.5
     for i in range(len(above)):
         if i + window <= len(above) and above.iloc[i:i + window].all():
-            return dates.iloc[i]
+            return dates[i]
 
     return None
 
