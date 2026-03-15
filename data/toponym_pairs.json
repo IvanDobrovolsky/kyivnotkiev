@@ -3,8 +3,8 @@
     "version": "1.0",
     "description": "Ukrainian toponym pairs for adoption analysis",
     "time_range": "2015-01-01 to 2026-03-14",
-    "total_pairs": 50,
-    "total_categories": 7
+    "total_pairs": 63,
+    "total_categories": 8
   },
   "categories": [
     {
@@ -41,6 +41,11 @@
       "id": "historical",
       "name": "Historical & Ethnographic",
       "description": "Colonial-era terms, identity markers"
+    },
+    {
+      "id": "people",
+      "name": "People & Public Figures",
+      "description": "Russian vs Ukrainian transliteration of prominent Ukrainian names"
     }
   ],
   "pairs": [
@@ -493,6 +498,123 @@
       "subcategory": null,
       "significance": "Control — already Ukrainian spelling, 1932-33 famine",
       "is_control": true
+    },
+    {
+      "id": 51,
+      "russian": "Zorya Lugansk",
+      "ukrainian": "Zorya Luhansk",
+      "category": "sports",
+      "subcategory": null,
+      "significance": "Football club — mirrors Lugansk/Luhansk geographic pair",
+      "is_control": false
+    },
+    {
+      "id": 52,
+      "russian": "Metalist Kharkov",
+      "ukrainian": "Metalist Kharkiv",
+      "category": "sports",
+      "subcategory": null,
+      "significance": "Football club — mirrors Kharkov/Kharkiv geographic pair",
+      "is_control": false
+    },
+    {
+      "id": 53,
+      "russian": "Karpaty Lvov",
+      "ukrainian": "Karpaty Lviv",
+      "category": "sports",
+      "subcategory": null,
+      "significance": "Football club — mirrors Lvov/Lviv geographic pair",
+      "is_control": false
+    },
+    {
+      "id": 54,
+      "russian": "Babi Yar",
+      "ukrainian": "Babyn Yar",
+      "category": "landmarks",
+      "subcategory": null,
+      "significance": "Holocaust memorial — deeply entrenched in English by decades of literature",
+      "is_control": false
+    },
+    {
+      "id": 55,
+      "russian": "Potemkin Stairs Odessa",
+      "ukrainian": "Potemkin Stairs Odesa",
+      "category": "landmarks",
+      "subcategory": null,
+      "significance": "Iconic landmark — tests Odessa spelling resistance in landmark context",
+      "is_control": false
+    },
+    {
+      "id": 56,
+      "russian": "Motherland Monument Kiev",
+      "ukrainian": "Motherland Monument Kyiv",
+      "category": "landmarks",
+      "subcategory": null,
+      "significance": "Iconic Kyiv statue, recently decommunized",
+      "is_control": false
+    },
+    {
+      "id": 57,
+      "russian": "Lvov Polytechnic",
+      "ukrainian": "Lviv Polytechnic",
+      "category": "institutional",
+      "subcategory": null,
+      "significance": "Tests institutional adoption outside the capital",
+      "is_control": false
+    },
+    {
+      "id": 58,
+      "russian": "Odessa National University",
+      "ukrainian": "Odesa National University",
+      "category": "institutional",
+      "subcategory": null,
+      "significance": "Tests whether Odessa spelling resistance extends to institutions",
+      "is_control": false
+    },
+    {
+      "id": 59,
+      "russian": "Galicia",
+      "ukrainian": "Halychyna",
+      "category": "historical",
+      "subcategory": null,
+      "significance": "Historical region in western Ukraine — competing with Spanish Galicia",
+      "is_control": false
+    },
+    {
+      "id": 60,
+      "russian": "Alexander Usyk",
+      "ukrainian": "Oleksandr Usyk",
+      "category": "people",
+      "subcategory": "athletes",
+      "significance": "Undisputed heavyweight champion — name spelling shifted in real time",
+      "is_control": false
+    },
+    {
+      "id": 61,
+      "russian": "Vladimir Zelensky",
+      "ukrainian": "Volodymyr Zelenskyy",
+      "category": "people",
+      "subcategory": "political",
+      "significance": "President — media had to choose transliteration under global spotlight",
+      "is_control": false
+    },
+    {
+      "id": 62,
+      "russian": "Andrei Shevchenko",
+      "ukrainian": "Andriy Shevchenko",
+      "category": "people",
+      "subcategory": "athletes",
+      "significance": "Football legend — established fame predates naming campaign",
+      "is_control": false
+    },
+    {
+      "id": 63,
+      "russian": "Vitali Klitschko",
+      "ukrainian": "Vitaliy Klychko",
+      "category": "people",
+      "subcategory": "athletes",
+      "significance": "Boxing champion + Kyiv mayor — German-influenced spelling vs Ukrainian",
+      "is_control": false
     }
   ],
   "events": [
