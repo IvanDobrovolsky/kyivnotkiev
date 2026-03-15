@@ -10,13 +10,12 @@ import argparse
 import logging
 
 import pandas as pd
-import pyarrow.parquet as pq
 
 from src.config import (
     GDELT_RAW_DIR,
-    TRENDS_RAW_DIR,
     NGRAMS_RAW_DIR,
     PROCESSED_DIR,
+    TRENDS_RAW_DIR,
     ensure_dirs,
     get_all_pairs,
 )

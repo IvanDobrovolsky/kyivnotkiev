@@ -17,10 +17,9 @@ import ruptures as rpt
 from scipy.stats import norm
 
 from src.config import (
-    PROCESSED_DIR,
     CHANGEPOINT_MIN_SIZE,
-    CHANGEPOINT_PENALTY,
     CHANGEPOINT_MODELS,
+    PROCESSED_DIR,
     ensure_dirs,
     get_all_pairs,
 )

@@ -14,11 +14,10 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 from scipy import stats as sp_stats
-from scipy.signal import correlate
 
 from src.config import (
-    PROCESSED_DIR,
     EVENTS_TIMELINE,
+    PROCESSED_DIR,
     ensure_dirs,
     get_all_pairs,
 )

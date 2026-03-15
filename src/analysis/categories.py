@@ -10,14 +10,12 @@ Usage:
 import argparse
 import logging
 
-import numpy as np
 import pandas as pd
 from scipy import stats
 
 from src.config import (
     PROCESSED_DIR,
     ensure_dirs,
-    get_categories,
     get_all_pairs,
 )
 

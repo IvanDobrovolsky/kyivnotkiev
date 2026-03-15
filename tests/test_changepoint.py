@@ -1,15 +1,15 @@
 """Tests for change-point detection algorithms."""
 
 import numpy as np
+import pandas as pd
 
 from src.analysis.changepoint import (
-    detect_pelt,
-    detect_cusum,
-    detect_bocpd,
     classify_change_type,
+    detect_bocpd,
+    detect_cusum,
+    detect_pelt,
     find_crossover_date,
 )
-import pandas as pd
 
 
 def _make_step_signal(n=200, cp=100, before=0.2, after=0.8, noise=0.05):

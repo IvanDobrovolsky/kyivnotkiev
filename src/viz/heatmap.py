@@ -10,18 +10,18 @@ Usage:
 import argparse
 import logging
 
-import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
 from src.config import (
-    PROCESSED_DIR,
-    FIGURES_DIR,
-    VIZ_DPI,
-    VIZ_STYLE,
     COLOR_RUSSIAN,
     COLOR_UKRAINIAN,
+    FIGURES_DIR,
+    PROCESSED_DIR,
+    VIZ_DPI,
+    VIZ_STYLE,
     ensure_dirs,
     get_all_pairs,
 )

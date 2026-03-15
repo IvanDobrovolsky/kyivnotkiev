@@ -8,7 +8,7 @@ This study asks a simple question: **when the world was asked to say "Kyiv" inst
 
 The #KyivNotKiev campaign, launched by Ukraine's Ministry of Foreign Affairs in October 2018, urged English-language media and institutions to adopt Ukrainian-derived spellings of place names instead of Russian-derived transliterations. This wasn't just about one city — it was a systematic effort to decolonize Ukraine's toponymic identity in the global English-language discourse.
 
-We provide the **first large-scale computational analysis** of how this adoption actually played out — not just for Kyiv, but for 33 toponym pairs across 7 categories, using three independent data sources spanning 11 years (2015–2026). We move beyond anecdotal reporting ("the AP switched in 2019") to measure **when, how fast, and how completely** Ukrainian spellings replaced Russian ones in global English usage — and critically, where they **didn't**.
+We provide the **first large-scale computational analysis** of how this adoption actually played out — not just for Kyiv, but for 44 toponym pairs across 7 categories, using three independent data sources spanning 11 years (2015–2026). We move beyond anecdotal reporting ("the AP switched in 2019") to measure **when, how fast, and how completely** Ukrainian spellings replaced Russian ones in global English usage — and critically, where they **didn't**.
 
 ### Why it matters
 
@@ -54,7 +54,7 @@ This is the gap we fill.
 
 This study is novel in five dimensions:
 
-1. **Scale:** 33 toponym pairs across 7 categories (vs. single-pair anecdotal studies)
+1. **Scale:** 44 toponym pairs across 7 categories (vs. single-pair anecdotal studies)
 2. **Sources:** Three independent data sources — GDELT (news), Google Trends (search), Google Ngrams (books) — providing triangulated evidence
 3. **Methods:** Ensemble change-point detection (PELT + CUSUM + BOCPD), event impact analysis (Welch's t-test), geographic diffusion modeling across 221 countries
 4. **Scope:** International English-language adoption (vs. domestic Ukrainian policy)
@@ -76,19 +76,19 @@ This study is novel in five dimensions:
 
 ### 4.2 Toponym pairs
 
-We analyzed **33 non-control toponym pairs** across 7 categories:
+We analyzed **44 non-control toponym pairs** across 7 categories:
 
 | Category | Pairs | Examples |
 |---|---|---|
-| Geographical | 17 | Kiev→Kyiv, Kharkov→Kharkiv, Odessa→Odesa |
-| Food & Cuisine | 3 | Chicken Kiev→Chicken Kyiv, Borscht→Borshch |
+| Geographical | 25 | Kiev→Kyiv, Kharkov→Kharkiv, Odessa→Odesa, Chernigov→Chernihiv |
+| Food & Cuisine | 5 | Chicken Kiev→Chicken Kyiv, Borscht→Borshch, Vareniki→Varenyky |
 | Landmarks & Heritage | 3 | Kiev Pechersk Lavra→Kyiv Pechersk Lavra |
 | Country-Level Framing | 1 | "the Ukraine"→"Ukraine" |
 | Institutional | 4 | Kiev National University→Kyiv National University |
 | Sports & Entertainment | 2 | Dynamo Kiev→Dynamo Kyiv |
-| Historical & Ethnographic | 3 | Kievan Rus→Kyivan Rus |
+| Historical & Ethnographic | 4 | Kievan Rus→Kyivan Rus, Cossack→Kozak, Gopak→Hopak |
 
-Plus 4 control pairs (Donetsk, Mariupol, Kherson, Shakhtar Donetsk) where the spelling is identical in both languages.
+Plus 6 control pairs (Donetsk, Mariupol, Kherson, Shakhtar Donetsk, Euromaidan, Holodomor) where the spelling is identical in both languages.
 
 ### 4.3 Analysis pipeline
 
@@ -105,7 +105,7 @@ All code is open source and reproducible.
 
 ## 5. Results by Category
 
-### 5.1 Geographical (17 pairs)
+### 5.1 Geographical (25 pairs)
 
 **Mean adoption: GDELT 0.57, Trends 0.60. Adopted: 6/17.**
 
@@ -126,7 +126,7 @@ The geographical category shows the widest spread — from fully adopted (Kharki
 - Current GDELT ratio: 0.41 (Kiev still appears more due to GDELT geocoder lag)
 - Trends data not available due to rate limiting (GDELT provides the primary evidence)
 
-### 5.2 Food & Cuisine (3 pairs)
+### 5.2 Food & Cuisine (5 pairs)
 
 **Mean adoption: GDELT 0.94*, Trends 0.28. Adopted: 0/3.**
 
@@ -173,7 +173,7 @@ Institutional names adopt fastest because the **institutions themselves control 
 - **Dynamo Kyiv** (66% Trends): Moderate adoption. UEFA/FIFA official records use "Kyiv," but sports commentary and fan usage is split.
 - **Kyiv ballet** (44% Trends): Below crossover. Cultural exports carry their established branding.
 
-### 5.7 Historical & Ethnographic (3 pairs)
+### 5.7 Historical & Ethnographic (4 pairs)
 
 **Mean adoption: GDELT 0.97*, Trends 0.56. Adopted: 1/3.**
 
@@ -276,5 +276,5 @@ All data, code, and figures are available at: `github.com/[username]/kyivnotkiev
 
 - **Data:** GDELT BigQuery exports, Google Trends CSVs, Google Ngrams (see `data/`)
 - **Analysis:** Python pipeline with PELT, CUSUM, BOCPD change-point detection (see `src/`)
-- **Figures:** 71 static + 13 interactive Plotly charts (see `paper/figures/`)
+- **Figures:** 84 static + 13 interactive Plotly charts (see `paper/figures/`)
 - **Environment:** `uv sync` to reproduce (see `pyproject.toml`)

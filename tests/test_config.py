@@ -1,13 +1,13 @@
 """Tests for config module."""
 
 from src.config import (
-    load_toponym_pairs,
-    get_all_pairs,
-    get_pairs_by_category,
-    get_non_control_pairs,
-    get_categories,
     ROOT_DIR,
     TOPONYM_PAIRS_PATH,
+    get_all_pairs,
+    get_categories,
+    get_non_control_pairs,
+    get_pairs_by_category,
+    load_toponym_pairs,
 )
 
 
@@ -20,7 +20,7 @@ def test_toponym_pairs_loads():
 
 def test_pair_count():
     pairs = get_all_pairs()
-    assert len(pairs) == 37
+    assert len(pairs) == 50
 
 
 def test_category_count():

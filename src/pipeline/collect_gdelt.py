@@ -9,19 +9,16 @@ Usage:
 
 import argparse
 import logging
-import sys
 import time
-from datetime import datetime
 
 import pandas as pd
 from google.cloud import bigquery
 
 from src.config import (
+    BQ_COST_LIMIT_TB,
+    END_DATE,
     GDELT_RAW_DIR,
     START_DATE,
-    END_DATE,
-    TARGET_COUNTRIES,
-    BQ_COST_LIMIT_TB,
     ensure_dirs,
     get_all_pairs,
 )
@@ -171,7 +168,6 @@ def collect_all(pair_ids: list[int] | None = None, dry_run: bool = False) -> dic
         pairs = [p for p in pairs if p["id"] in pair_ids]
 
     results = {}
-    total_tb = 0.0
 
     for pair in pairs:
         df = collect_pair(client, pair, dry_run)

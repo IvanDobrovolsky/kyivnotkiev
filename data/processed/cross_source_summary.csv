@@ -1,6 +1,6 @@
 id,russian,ukrainian,category,gdelt_ratio,trends_ratio,ngrams_ratio,gdelt_crossover,trends_crossover,status
-1,Kiev,Kyiv,geographical,0.40586183095259487,,0.32587819057878364,2022-02-21,,Emerging
-2,Kharkov,Kharkiv,geographical,0.998097516831982,,0.33451450512286696,2014-12-29,,Adopted
+1,Kiev,Kyiv,geographical,0.40586183095259487,0.7036753266015279,0.32587819057878364,2022-02-21,2023-12-01,Crossing
+2,Kharkov,Kharkiv,geographical,0.998097516831982,0.6685386501962589,0.33451450512286696,2014-12-29,2022-09-01,Adopted
 3,Odessa,Odesa,geographical,0.21838885077373843,0.07465282752514339,0.037401816693689034,,,Resistant
 4,Lvov,Lviv,geographical,0.9927978468277899,0.9678545962650065,0.5853710120597144,2015-01-05,2015-01-01,Adopted
 5,Zaporozhye,Zaporizhzhia,geographical,0.0,0.939661530841722,0.32711508071476236,,2022-04-01,Emerging
@@ -16,19 +16,30 @@ id,russian,ukrainian,category,gdelt_ratio,trends_ratio,ngrams_ratio,gdelt_crosso
 18,Crimea,Krym,geographical,0.5656120602034167,0.09105905059852429,0.008745780690961547,2015-01-05,,Emerging
 19,Transcarpathia,Zakarpattia,geographical,0.0,0.7812310885101508,0.204605132210179,,2015-01-01,Emerging
 20,Podolia,Podillia,geographical,0.0,0.16966239222589202,0.05663140879831904,,,Resistant
-21,Chicken Kiev,Chicken Kyiv,food,,0.13498554118837136,0.010459164912314368,,,Resistant
-22,Kiev cake,Kyiv cake,food,,0.6982279721152306,0.0,,2024-01-01,Crossing
+21,Chicken Kiev,Chicken Kyiv,food,0.475,0.13498554118837136,0.010459164912314368,2022-03-14,,Emerging
+22,Kiev cake,Kyiv cake,food,1.0,0.6982279721152306,0.0,2020-02-10,2024-01-01,Adopted
 23,Borscht,Borshch,food,0.9405906593406594,0.005025502550255026,0.07059895917445516,2015-02-16,,Emerging
-24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,,0.8458562271062271,0.0,,2025-01-01,Adopted
-25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,,0.980952380952381,,,2025-10-01,Adopted
-26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,,0.01048951048951049,0.0,,,Resistant
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,0.875,0.8458562271062271,0.0,2020-04-06,2025-01-01,Adopted
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,0.44791666666666663,0.980952380952381,,2016-05-23,2025-10-01,Crossing
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,0.25,0.01048951048951049,0.0,2025-05-05,,Resistant
 27,the Ukraine,Ukraine,country,1.0,0.8930961399711399,0.9214200855613209,2015-02-16,2015-01-01,Adopted
-28,Kiev National University,Kyiv National University,institutional,,0.9243436644933758,0.6912393192439561,,2015-01-01,Adopted
-29,Kharkov University,Kharkiv University,institutional,,0.9442129084897211,0.1256737559763212,,2015-01-01,Adopted
-30,Kiev Polytechnic,Kyiv Polytechnic,institutional,,0.9509166820022084,0.7855839475715801,,2016-11-01,Adopted
-31,Kiev Patriarchate,Kyiv Patriarchate,institutional,,0.8331204767986377,0.7268476101554824,,,Adopted
-32,Dynamo Kiev,Dynamo Kyiv,sports,1.0,0.6572916666666666,0.45002505141150007,,2021-10-01,Adopted
-34,Kiev ballet,Kyiv ballet,sports,,0.43552521101385516,0.0,,,Emerging
-35,Kievan Rus,Kyivan Rus,historical,,0.0919948531387794,0.12255679791766157,,,Resistant
+28,Kiev National University,Kyiv National University,institutional,1.0,0.9243436644933758,0.6912393192439561,2021-03-08,2015-01-01,Adopted
+29,Kharkov University,Kharkiv University,institutional,1.0,0.9442129084897211,0.1256737559763212,2022-02-28,2015-01-01,Adopted
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,1.0,0.9509166820022084,0.7855839475715801,2020-01-20,2016-11-01,Adopted
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,1.0,0.8331204767986377,0.7268476101554824,,,Adopted
+32,Dynamo Kiev,Dynamo Kyiv,sports,0.9375,0.6572916666666666,0.45002505141150007,2019-03-11,2021-10-01,Crossing
+34,Kiev ballet,Kyiv ballet,sports,0.875,0.43552521101385516,0.0,2022-06-13,,Crossing
+35,Kievan Rus,Kyivan Rus,historical,0.875,0.0919948531387794,0.12255679791766157,2023-07-24,,Emerging
 36,Cossack,Kozak,historical,0.9490987460815048,0.6000646655347057,0.21181375075524836,2015-03-02,2015-01-01,Crossing
 37,Little Russia,Ukraine,historical,1.0,1.0,0.9962990505287947,2015-02-16,2015-01-01,Adopted
+38,Chernigov,Chernihiv,geographical,0.8936880484821799,,,2015-01-12,,Adopted
+39,Chernovtsy,Chernivtsi,geographical,1.0,,,2015-01-26,,Adopted
+40,Zhitomir,Zhytomyr,geographical,0.7632199426187178,,,2015-02-16,,Crossing
+41,Cherkassy,Cherkasy,geographical,0.665525714210688,,,2015-02-09,,Crossing
+42,Uzhgorod,Uzhhorod,geographical,0.08983098268993112,,,2022-03-07,,Resistant
+43,Kremenchug,Kremenchuk,geographical,0.15317388493859083,,,2022-04-25,,Resistant
+44,Kirovograd,Kropyvnytskyi,geographical,0.0,,,,,Resistant
+45,Tarnopol,Ternopil,geographical,1.0,,,2015-01-19,,Adopted
+46,Vareniki,Varenyky,food,,,,,,No data
+47,Gorilka,Horilka,food,,,,,,No data
+48,Gopak,Hopak,historical,,,,,,No data

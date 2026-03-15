@@ -11,12 +11,10 @@ import argparse
 import logging
 from dataclasses import dataclass
 
-import numpy as np
 import pandas as pd
 
 from src.config import (
     PROCESSED_DIR,
-    TARGET_COUNTRIES,
     ensure_dirs,
     get_all_pairs,
 )
