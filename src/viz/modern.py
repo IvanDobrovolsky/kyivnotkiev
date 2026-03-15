@@ -148,12 +148,24 @@ def plot_flagship_crossover(source: str = "gdelt"):
 # ── Chart 2: Adoption Heatmap ─────────────────────────────────────────────────
 
 def plot_adoption_heatmap(source: str = "gdelt"):
-    """Clean heatmap showing adoption ratio over time for all pairs."""
-    df = pd.read_parquet(PROCESSED_DIR / f"{source}_merged.parquet")
+    """Clean heatmap showing adoption ratio over time, merging GDELT + Trends."""
+    # Merge both sources for maximum coverage
+    frames = []
+    for src in ["gdelt_merged", "trends_merged"]:
+        path = PROCESSED_DIR / f"{src}.parquet"
+        if path.exists():
+            frames.append(pd.read_parquet(path))
+
+    if not frames:
+        log.warning("No data for heatmap")
+        return
+
+    df = pd.concat(frames, ignore_index=True)
     pairs = [p for p in get_all_pairs() if not (p["is_control"] and p["russian"] == p["ukrainian"])]
 
     time_col = "week"
-    df_agg = df.groupby(["pair_id", time_col]).agg(adoption_ratio=("adoption_ratio", "mean")).reset_index()
+    # Prefer GDELT where available (take first source per pair/week)
+    df_agg = df.groupby(["pair_id", time_col]).agg(adoption_ratio=("adoption_ratio", "first")).reset_index()
 
     # Build matrix
     all_times = sorted(df_agg[time_col].unique())
@@ -173,6 +185,12 @@ def plot_adoption_heatmap(source: str = "gdelt"):
 
         labels.append(f"{pair['russian']} → {pair['ukrainian']}")
         matrix.append(row)
+
+    # Remove pairs with all NaN (no data at all)
+    has_data_mask = [not all(np.isnan(v) if v is not None else True for v in row) for row in matrix]
+    matrix = [row for row, keep in zip(matrix, has_data_mask) if keep]
+    crossover_order = [co for co, keep in zip(crossover_order, has_data_mask) if keep]
+    labels = [lb for lb, keep in zip(labels, has_data_mask) if keep]
 
     # Sort by crossover time
     order = np.argsort(crossover_order)
@@ -376,9 +394,20 @@ def plot_event_impact():
 
 # ── Chart 6: Per-Category Detail Pages ─────────────────────────────────────────
 
+def _load_best_pair_data(pair_id: int) -> tuple[pd.DataFrame, str]:
+    """Load the best available data for a pair, preferring GDELT then Trends."""
+    for source_name, file_name in [("GDELT", "gdelt_merged"), ("Trends", "trends_merged")]:
+        path = PROCESSED_DIR / f"{file_name}.parquet"
+        if path.exists():
+            df = pd.read_parquet(path)
+            pair_data = df[df["pair_id"] == pair_id]
+            if not pair_data.empty and pair_data["adoption_ratio"].notna().sum() > 2:
+                return pair_data, source_name
+    return pd.DataFrame(), "none"
+
+
 def plot_category_detail(category_id: str, source: str = "gdelt"):
-    """Multi-panel chart for a single category showing all pairs."""
-    df = pd.read_parquet(PROCESSED_DIR / f"{source}_merged.parquet")
+    """Multi-panel chart for a single category, merging GDELT + Trends."""
     pairs = [p for p in get_all_pairs()
              if p["category"] == category_id
              and not (p["is_control"] and p["russian"] == p["ukrainian"])]
@@ -392,7 +421,12 @@ def plot_category_detail(category_id: str, source: str = "gdelt"):
     cols = min(3, n_pairs)
     rows = (n_pairs + cols - 1) // cols
 
-    subtitles = [f'{p["russian"]} → {p["ukrainian"]}' for p in pairs]
+    subtitles = []
+    for p in pairs:
+        _, src = _load_best_pair_data(p["id"])
+        tag = f" [{src}]" if src != "none" else " [no data]"
+        subtitles.append(f'{p["russian"]} → {p["ukrainian"]}{tag}')
+
     fig = make_subplots(rows=rows, cols=cols, subplot_titles=subtitles,
                         vertical_spacing=0.08, horizontal_spacing=0.06)
 
@@ -400,21 +434,34 @@ def plot_category_detail(category_id: str, source: str = "gdelt"):
         row = i // cols + 1
         col = i % cols + 1
 
-        pair_data = df[df["pair_id"] == pair["id"]].sort_values(
-            "week" if "week" in df.columns else df.columns[0]
-        )
+        pair_data, src_label = _load_best_pair_data(pair["id"])
 
         if pair_data.empty:
+            # Show "No data" annotation
+            fig.add_annotation(
+                text="No data available", xref=f"x{i+1}" if i > 0 else "x",
+                yref=f"y{i+1}" if i > 0 else "y",
+                x=0.5, y=0.5, showarrow=False,
+                font=dict(size=14, color=COLORS["muted"]),
+                xanchor="center",
+            )
+            fig.update_yaxes(range=[0, 1.05], row=row, col=col, gridcolor=COLORS["grid"])
+            fig.update_xaxes(gridcolor=COLORS["grid"], row=row, col=col)
             continue
 
-        dates = pd.to_datetime(pair_data["week"] if "week" in pair_data.columns else pair_data.iloc[:, 0])
+        time_col = "week" if "week" in pair_data.columns else pair_data.columns[0]
+        pair_data = pair_data.sort_values(time_col)
+        dates = pd.to_datetime(pair_data[time_col])
         ratio = pair_data["adoption_ratio"].rolling(4, min_periods=1).mean()
+
+        line_color = COLORS["ukrainian"] if src_label == "GDELT" else "#E67E22"
+        fill_color = "rgba(0,87,184,0.15)" if src_label == "GDELT" else "rgba(230,126,34,0.15)"
 
         # Area fill for adoption ratio
         fig.add_trace(go.Scatter(
             x=dates, y=ratio, mode="lines",
-            line=dict(color=COLORS["ukrainian"], width=2),
-            fill="tozeroy", fillcolor="rgba(0,87,184,0.15)",
+            line=dict(color=line_color, width=2),
+            fill="tozeroy", fillcolor=fill_color,
             name=pair["ukrainian"], showlegend=False,
             hovertemplate="%{x|%Y-%m}: %{y:.2f}<extra></extra>",
         ), row=row, col=col)
