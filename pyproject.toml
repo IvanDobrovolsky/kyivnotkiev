@@ -18,6 +18,7 @@ dependencies = [
     "folium>=0.15",
     "requests>=2.31",
     "streamlit>=1.30",
+    "geodatasets>=2024.8",
 ]
 
 [project.optional-dependencies]
