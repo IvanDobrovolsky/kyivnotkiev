@@ -107,19 +107,21 @@ All code is open source and reproducible.
 
 ### 5.1 Geographical (25 pairs)
 
-**Mean adoption: GDELT 0.57, Trends 0.60. Adopted: 6/17.**
+**Mean adoption: GDELT 0.57, Trends 0.61. Adopted: 9/25.**
 
 The geographical category shows the widest spread — from fully adopted (Kharkiv 100%, Lviv 99%) to deeply resistant (Odesa 7.5%, Chornobyl 0%).
 
-**Fully adopted** (>80%): Kharkiv, Lviv, Dnipro, Rivne, Luhansk, Dnieper→Dnipro
-- These cities/features either had the Ukrainian spelling already dominant in GDELT's geocoder from the start (Lviv, Dnipro) or crossed over very early.
+**Fully adopted** (>80%): Kharkiv, Lviv, Dnipro, Rivne, Luhansk, Dnieper→Dnipro, Chernihiv (89%), Chernivtsi (100%), Ternopil (100%)
+- The expanded city pairs confirm the pattern: Ukrainian spellings already dominant in GDELT's geocoder for mid-size western/northern cities. Chernihiv and Ternopil adopted early and completely.
 
-**Crossing** (50–80%): Donbas (59%), Crimea→Krym (57% GDELT but only 9% Trends)
+**Crossing** (50–80%): Donbas (59%), Crimea→Krym (57% GDELT but only 9% Trends), Zhytomyr (76%), Cherkasy (67%)
 - Donbas is gradually overtaking Donbass through a **ramp** transition (not step), suggesting organic change rather than event-driven.
+- The expanded pairs Zhytomyr and Cherkasy show similar crossing patterns.
 
-**Resistant** (<20%): Odesa (7.5% Trends), Chornobyl (0% Trends), Podillia (17%)
+**Resistant** (<20%): Odesa (7.5% Trends), Chornobyl (0% Trends), Podillia (17%), Uzhhorod (9%), Kremenchuk (15%), Kropyvnytskyi (0%)
 - **Odessa** is the most important resistant case. Unlike Chernobyl (disaster brand) or obscure regions, Odessa is a major living city. The cultural weight of "Odessa" (Eisenstein's *Battleship Potemkin*, Odessa in Texas, "The Odessa File") anchors the old spelling.
 - **Chernobyl** at 0% in Trends confirms that disaster-branded names are permanently fixed. The 1986 event created an immovable English word.
+- **Kropyvnytskyi** (0%) — the most resistant of the expanded pairs. As a complete rename (from Kirovograd, not just a transliteration shift), it faces the steepest adoption barrier.
 
 **Flagship case — Kiev→Kyiv:**
 - GDELT crossover detected at **2022-02-21** (3 days before invasion), step function, confidence 1.00
@@ -128,9 +130,9 @@ The geographical category shows the widest spread — from fully adopted (Kharki
 
 ### 5.2 Food & Cuisine (5 pairs)
 
-**Mean adoption: GDELT 0.94*, Trends 0.28. Adopted: 0/3.**
+**Mean adoption: GDELT 0.81, Trends 0.28. Adopted: 1/5.**
 
-*GDELT data only available for Borscht/Borshch.
+*Vareniki/Varenyky and Gorilka/Horilka have no data in any source — too low frequency.
 
 This is the most resistant category overall, confirming the **"Chicken Kiev Problem"** hypothesis:
 
@@ -175,11 +177,12 @@ Institutional names adopt fastest because the **institutions themselves control 
 
 ### 5.7 Historical & Ethnographic (4 pairs)
 
-**Mean adoption: GDELT 0.97*, Trends 0.56. Adopted: 1/3.**
+**Mean adoption: GDELT 0.94, Trends 0.56. Adopted: 1/4.**
 
 - **Little Russia → Ukraine** (100%): Complete. The colonial term is essentially extinct in English usage.
 - **Cossack → Kozak** (60%): Crossing. The Ukrainian spelling is gaining but hasn't fully displaced the established English form.
 - **Kievan Rus → Kyivan Rus** (9%): Deeply resistant. Academic/historical terms have their own scholarly momentum. Textbooks, Wikipedia infoboxes, and centuries of historical usage anchor "Kievan Rus."
+- **Gopak → Hopak**: No data in any source — the term is too niche for measurable English-language frequency.
 
 ---
 
@@ -198,7 +201,7 @@ This hierarchy correlates with **institutional control**: categories where a sin
 
 ### 6.2 Media Leads, Public Lags
 
-The dumbbell chart shows a consistent pattern: **GDELT adoption ratios are higher than Google Trends** for most categories. This means news media adopted Ukrainian spellings before the general public. The gap is largest for food terms (GDELT 0.94 vs Trends 0.28) — media uses "Borshch" in articles about Ukrainian cuisine, but nobody actually searches for it.
+The dumbbell chart shows a consistent pattern: **GDELT adoption ratios are higher than Google Trends** for most categories. This means news media adopted Ukrainian spellings before the general public. The gap is largest for food terms (GDELT 0.81 vs Trends 0.28) — media uses "Borshch" in articles about Ukrainian cuisine, but nobody actually searches for it.
 
 ### 6.3 Event Impact Is Real but Bounded
 
@@ -235,6 +238,8 @@ Analysis of 221 countries for the Kiev/Kyiv pair shows:
 5. **English-only:** This study only tracks English-language adoption. French, German, Spanish, and other languages have their own adoption dynamics.
 
 6. **Search ≠ usage:** Google Trends measures what people search for, not what they write. Someone might search "Kiev" to find information but write "Kyiv" in their own text.
+
+7. **Asymmetric coverage for expanded pairs:** Pairs 38–50 (added to expand geographical and thematic coverage) have GDELT data only — no Google Trends or Ngrams data was collected for these pairs. Three pairs (Vareniki/Varenyky, Gorilka/Horilka, Gopak/Hopak) have no data in any source due to low English-language frequency.
 
 ---
 
@@ -276,5 +281,5 @@ All data, code, and figures are available at: `github.com/[username]/kyivnotkiev
 
 - **Data:** GDELT BigQuery exports, Google Trends CSVs, Google Ngrams (see `data/`)
 - **Analysis:** Python pipeline with PELT, CUSUM, BOCPD change-point detection (see `src/`)
-- **Figures:** 84 static + 13 interactive Plotly charts (see `paper/figures/`)
+- **Figures:** 106 static + 13 interactive Plotly charts (see `paper/figures/`)
 - **Environment:** `uv sync` to reproduce (see `pyproject.toml`)

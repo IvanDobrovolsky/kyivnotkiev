@@ -50,6 +50,20 @@ def main():
     from src.viz.event_overlay import plot_all as event_all
     event_all(source=source, pair_ids=pair_ids)
 
+    log.info("=== Modern Plotly charts ===")
+    from src.viz.modern import generate_all as modern_all
+    modern_all()
+
+    log.info("=== Cross-source summary ===")
+    try:
+        import subprocess
+        subprocess.run(
+            ["uv", "run", "python", "scripts/generate_summary.py"],
+            check=True,
+        )
+    except Exception as e:
+        log.warning(f"Summary generation failed (non-critical): {e}")
+
     log.info("=== All figures generated ===")
 
 
