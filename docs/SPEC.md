@@ -2,11 +2,11 @@
 
 ## Paper Title
 
-**"#KyivNotKiev: A Computational Analysis of Global English-Language Adoption of Ukrainian Toponyms (2015-2025)"**
+**"#KyivNotKiev: A Computational Analysis of Global English-Language Adoption of Ukrainian Toponyms (2015-2026)"**
 
 ## Abstract
 
-This study presents the first large-scale computational analysis of how English-language usage of Ukrainian place names has shifted from Russian-derived to Ukrainian-derived spellings over a 10-year period (2015-2025). Using Google Trends data, change-point detection algorithms, and geographic diffusion modeling, we analyze 40+ toponym pairs across 7 categories: geographical, food & cuisine, landmarks & heritage, country-level framing, institutional, sports & entertainment, and historical & ethnographic. We identify a three-wave adoption pattern driven by the #KyivNotKiev campaign (2018), media style guide changes (2019), and the full-scale Russian invasion (2022), and demonstrate that adoption speed varies significantly by category, with geographical names shifting fastest and food terms showing the greatest resistance to change.
+This study presents the first large-scale computational analysis of how English-language usage of Ukrainian place names has shifted from Russian-derived to Ukrainian-derived spellings over a 11-year period (2015-2026). Using Google Trends data, change-point detection algorithms, and geographic diffusion modeling, we analyze 40+ toponym pairs across 7 categories: geographical, food & cuisine, landmarks & heritage, country-level framing, institutional, sports & entertainment, and historical & ethnographic. We identify a three-wave adoption pattern driven by the #KyivNotKiev campaign (2018), media style guide changes (2019), and the full-scale Russian invasion (2022), and demonstrate that adoption speed varies significantly by category, with geographical names shifting fastest and food terms showing the greatest resistance to change.
 
 ## Research Gap
 
@@ -31,20 +31,57 @@ This study presents the first large-scale computational analysis of how English-
 
 **RQ4:** Is there a measurable correlation between specific geopolitical events and adoption acceleration?
 
-## Data Source
+## Data Sources (Multi-Source Strategy)
 
-**Google Trends** -- worldwide, English language, 2015-2025 (10-year window)
+Three complementary data sources provide triangulated evidence across different dimensions of toponym adoption.
 
-- Free, public, well-established in computational sociolinguistics research
-- Weekly granularity
-- Geographic breakdown by country
-- Comparison of up to 5 terms simultaneously
+### Source 1: GDELT (Primary -- News Media Usage)
 
-### Data collection notes:
-- `pytrends` has aggressive rate limiting; plan for batched collection with delays
-- Manual CSV download as fallback
-- Some obscure pairs may have zero search volume -- document as "below detection threshold"
-- Store raw data as CSV per toponym pair
+**Global Database of Events, Language and Tone** -- the largest open database of world news.
+
+- **Scale:** 42 billion words of news content, 152 languages, updated every 15 minutes
+- **Coverage:** 2015-2026, print + broadcast + web news media worldwide
+- **Access:** Google BigQuery (1TB/month free tier)
+- **Key field:** `Location` stores the exact spelling used in the article text (e.g., "Kiev" vs "Kyiv"), while `FeatureID` links different spellings to the same place
+- **Strengths:** Absolute counts (not relative), full text search, source metadata (country, language, outlet), massive scale
+- **Query approach:** Count articles mentioning each spelling variant per week, per source country
+- **Cost:** Free (within BigQuery free tier; partition queries by date to stay under 1TB/month)
+
+### Source 2: Google Trends (Secondary -- Public Search Interest)
+
+**Google Trends** -- worldwide, English language, 2015-2026
+
+- **Scale:** Relative search interest (0-100 scale), weekly granularity
+- **Coverage:** 11-year window with geographic breakdown by country
+- **Access:** `pytrends` (unofficial API) with rate limiting + retry logic, or SerpApi ($50-400/mo for scale)
+- **Strengths:** Measures public awareness/interest, not just media usage; geographic granularity
+- **Limitations:** Relative scale (not absolute counts), max 5 terms per comparison, aggressive rate limiting on free tier
+- **Fallback:** Manual CSV download from Google Trends web interface
+- **Pairs with zero volume:** Document as "below detection threshold"
+
+### Source 3: Google Books Ngram Viewer (Tertiary -- Published Books)
+
+**Google Ngrams** -- English-language published books corpus
+
+- **Scale:** Millions of books, 1500-2022
+- **Coverage:** Long historical baseline for academic/publishing adoption
+- **Access:** Free, bulk download available
+- **Strengths:** Shows adoption in formal/published contexts; long time horizon
+- **Limitations:** Ends at 2022, significant publication lag, books ≠ current usage
+- **Use case:** Historical context + academic adoption angle
+
+### Why multi-source?
+
+| Dimension | GDELT | Google Trends | Ngrams |
+|---|---|---|---|
+| What it measures | Media usage | Public search interest | Published book usage |
+| Scale | Absolute counts | Relative (0-100) | Relative frequency |
+| Time range | 2015-2026 | 2015-2026 | 1500-2022 |
+| Geographic granularity | Source country | Searcher country | None |
+| Update frequency | 15 minutes | Weekly | Yearly |
+| Best for | Primary analysis, RQ1-4 | Public awareness (RQ3) | Historical context |
+
+Triangulation across sources strengthens findings and is more publishable than single-source analysis.
 
 ---
 
@@ -139,13 +176,23 @@ All cities (major, conflict zone, secondary), rivers, regions, and administrativ
 
 ### Step 1: Data Collection
 
-- Use `pytrends` (Google Trends API wrapper) with rate limiting and retry logic
-- Fallback: manual CSV download from Google Trends web interface
+#### 1a: GDELT via BigQuery (primary)
+- Query GDELT GKG (Global Knowledge Graph) for article counts mentioning each spelling variant
+- Aggregate by week, by source country, by source language (filter to English)
+- Use `_PARTITIONTIME` to limit scan costs within free tier
+- Store results as Parquet files per toponym pair
+
+#### 1b: Google Trends via pytrends (secondary)
 - Pull weekly interest data for each pair: worldwide + by country (30+ countries)
-- 10-year window: January 2015 -- March 2025
-- Filter to English-language results where possible
+- Rate limiting: 1 request per 10 seconds, exponential backoff on 429s
+- 11-year window: January 2015 -- March 2026
 - Store raw data as CSV per toponym pair
 - Pairs with zero search volume documented as "below detection threshold"
+
+#### 1c: Google Ngrams (tertiary)
+- Download pre-built ngram datasets for toponym pairs
+- Extract yearly frequency for each spelling variant
+- Use as historical baseline context
 
 ### Step 2: Change-Point Detection
 
@@ -215,7 +262,7 @@ Cross-correlate search trend inflection points with events using Granger causali
 - Some countries may never have switched
 
 ### Finding 4: The "Chicken Kiev" Problem
-- "Chicken Kiev" likely still dominates in searches even in 2025
+- "Chicken Kiev" likely still dominates in searches even in 2026
 - Food terms are the most resistant to toponym de-Russification
 - Practical implications: menus, packaging, recipe databases
 
@@ -224,7 +271,7 @@ Cross-correlate search trend inflection points with events using Granger causali
 ## Visualizations
 
 ### Chart 1: Flagship Crossover
-"Kiev" vs "Kyiv" worldwide search interest (2015-2025). Two lines crossing. The iconic chart.
+"Kiev" vs "Kyiv" worldwide search interest (2015-2026). Two lines crossing. The iconic chart.
 
 ### Chart 2: Toponym Heatmap
 37 toponym pairs x time. Color = ratio of Ukrainian/Russian spelling. Visual wave propagating from early adopters to laggards.
@@ -245,9 +292,10 @@ Search volume for select pairs with vertical lines marking geopolitical events.
 | Tool | Purpose |
 |---|---|
 | Python 3.11+ | Core language |
+| google-cloud-bigquery | GDELT queries via BigQuery |
 | pytrends | Google Trends API wrapper |
 | ruptures | Change-point detection (PELT) |
-| pandas + numpy | Data processing |
+| pandas + numpy + pyarrow | Data processing + Parquet I/O |
 | plotly + matplotlib | Visualization |
 | geopandas + folium | Geographic mapping |
 | scipy | Statistical tests (Granger causality, correlation) |
@@ -260,26 +308,51 @@ Search volume for select pairs with vertical lines marking geopolitical events.
 ```
 kyivnotkiev/
 ├── docs/
-│   └── SPEC.md                   # This document
+│   └── SPEC.md                        # This document
 ├── data/
-│   ├── raw/                      # Raw Google Trends CSV downloads
-│   ├── processed/                # Cleaned, merged datasets
-│   └── toponym_pairs.json        # Definition of all 37 pairs with metadata
+│   ├── raw/
+│   │   ├── gdelt/                     # Raw GDELT BigQuery exports (Parquet)
+│   │   ├── trends/                    # Raw Google Trends CSVs
+│   │   └── ngrams/                    # Google Ngrams data
+│   ├── processed/                     # Cleaned, merged datasets
+│   └── toponym_pairs.json             # Definition of all 37 pairs with metadata
 ├── src/
-│   ├── collect.py                # Google Trends data collection
-│   ├── changepoint.py            # PELT + BOCPD change-point detection
-│   ├── geographic.py             # Country-level analysis + diffusion mapping
-│   ├── categories.py             # Category-level aggregation
-│   ├── events.py                 # Event correlation analysis
-│   └── visualize.py              # All chart generation
-├── notebooks/
-│   ├── 01_exploration.ipynb      # Initial data exploration
-│   ├── 02_changepoints.ipynb     # Change-point analysis
-│   └── 03_geographic.ipynb       # Geographic diffusion
+│   ├── __init__.py
+│   ├── config.py                      # Shared config, paths, constants
+│   ├── pipeline/
+│   │   ├── __init__.py
+│   │   ├── collect_gdelt.py           # GDELT BigQuery data collection
+│   │   ├── collect_trends.py          # Google Trends data collection (pytrends)
+│   │   ├── collect_ngrams.py          # Google Ngrams data collection
+│   │   └── preprocess.py              # Normalize, merge, validate raw data
+│   ├── analysis/
+│   │   ├── __init__.py
+│   │   ├── changepoint.py             # PELT + BOCPD + CUSUM change-point detection
+│   │   ├── geographic.py              # Country-level diffusion analysis
+│   │   ├── categories.py              # Category-level aggregation + stats
+│   │   └── events.py                  # Event correlation (Granger causality)
+│   └── viz/
+│       ├── __init__.py
+│       ├── crossover.py               # Flagship crossover charts
+│       ├── heatmap.py                 # Toponym x time heatmap
+│       ├── choropleth.py              # Geographic diffusion maps
+│       ├── category_curves.py         # Category adoption curves
+│       └── event_overlay.py           # Event-driven spike charts
+├── scripts/
+│   ├── run_collect.py                 # CLI: run all data collection
+│   ├── run_analysis.py                # CLI: run all analysis steps
+│   ├── run_viz.py                     # CLI: generate all figures
+│   └── run_pipeline.py               # CLI: end-to-end pipeline
+├── tests/
+│   ├── test_config.py
+│   ├── test_changepoint.py
+│   ├── test_geographic.py
+│   └── test_preprocess.py
 ├── paper/
-│   └── figures/                  # Publication-ready charts
+│   └── figures/                       # Publication-ready charts (output)
 ├── requirements.txt
-└── app.py                        # Optional Streamlit dashboard
+├── pyproject.toml
+└── Makefile                           # make collect / make analyze / make viz / make all
 ```
 
 ---
@@ -300,8 +373,9 @@ kyivnotkiev/
 
 | Day | Tasks |
 |---|---|
-| 1 | Data collection (pytrends for all 37 pairs x worldwide + 30 countries) |
-| 2 | Change-point detection + category analysis |
-| 3 | Geographic diffusion + event correlation |
-| 4 | Charts + paper writing |
-| 5 | Review + submit |
+| 1 | GDELT BigQuery collection (primary corpus, all 37 pairs) |
+| 2 | Google Trends collection (all 37 pairs x worldwide + 30 countries) + Ngrams |
+| 3 | Change-point detection + category analysis |
+| 4 | Geographic diffusion + event correlation |
+| 5 | Charts + paper writing |
+| 6 | Review + submit |

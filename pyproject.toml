@@ -1,0 +1,36 @@
+[project]
+name = "kyivnotkiev"
+version = "0.1.0"
+description = "Computational analysis of global Ukrainian toponym adoption (2015-2026)"
+requires-python = ">=3.11"
+dependencies = [
+    "google-cloud-bigquery>=3.25",
+    "pytrends>=4.9",
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "pyarrow>=15.0",
+    "ruptures>=1.1",
+    "scipy>=1.12",
+    "matplotlib>=3.8",
+    "plotly>=5.18",
+    "geopandas>=0.14",
+    "folium>=0.15",
+    "requests>=2.31",
+    "streamlit>=1.30",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.3",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# uv
+.python-version
+
+# Data (raw data is large, keep processed for reproducibility)
+data/raw/gdelt/*.parquet
+data/raw/trends/*.csv
+data/raw/ngrams/*.csv
+data/processed/*.parquet
+
+# Keep directory structure
+!data/raw/gdelt/.gitkeep
+!data/raw/trends/.gitkeep
+!data/raw/ngrams/.gitkeep
+!data/processed/.gitkeep
+
+# BigQuery credentials
+*.json
+!data/toponym_pairs.json
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter (shouldn't exist but just in case)
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.local
