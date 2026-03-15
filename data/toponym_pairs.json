@@ -1,0 +1,392 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "Ukrainian toponym pairs for adoption analysis",
+    "time_range": "2015-01-01 to 2026-03-14",
+    "total_pairs": 37,
+    "total_categories": 7
+  },
+  "categories": [
+    {
+      "id": "geographical",
+      "name": "Geographical",
+      "description": "Cities, rivers, regions, and administrative areas"
+    },
+    {
+      "id": "food",
+      "name": "Food & Cuisine",
+      "description": "Dishes, drinks, and food-related terms"
+    },
+    {
+      "id": "landmarks",
+      "name": "Landmarks & Heritage Sites",
+      "description": "UNESCO sites, monasteries, historical landmarks"
+    },
+    {
+      "id": "country",
+      "name": "Country-Level Framing",
+      "description": "Sovereignty and statehood markers"
+    },
+    {
+      "id": "institutional",
+      "name": "Institutional",
+      "description": "Universities, churches, and organizations"
+    },
+    {
+      "id": "sports",
+      "name": "Sports & Entertainment",
+      "description": "Football clubs, cultural exports"
+    },
+    {
+      "id": "historical",
+      "name": "Historical & Ethnographic",
+      "description": "Colonial-era terms, identity markers"
+    }
+  ],
+  "pairs": [
+    {
+      "id": 1,
+      "russian": "Kiev",
+      "ukrainian": "Kyiv",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Capital — the flagship case",
+      "is_control": false
+    },
+    {
+      "id": 2,
+      "russian": "Kharkov",
+      "ukrainian": "Kharkiv",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Second largest city, major battle site",
+      "is_control": false
+    },
+    {
+      "id": 3,
+      "russian": "Odessa",
+      "ukrainian": "Odesa",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Major port, cultural capital",
+      "is_control": false
+    },
+    {
+      "id": 4,
+      "russian": "Lvov",
+      "ukrainian": "Lviv",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Western cultural center",
+      "is_control": false
+    },
+    {
+      "id": 5,
+      "russian": "Zaporozhye",
+      "ukrainian": "Zaporizhzhia",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Nuclear plant, frontline city",
+      "is_control": false
+    },
+    {
+      "id": 6,
+      "russian": "Nikolaev",
+      "ukrainian": "Mykolaiv",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Southern city",
+      "is_control": false
+    },
+    {
+      "id": 7,
+      "russian": "Dnepropetrovsk",
+      "ukrainian": "Dnipro",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Renamed city (also decommunization)",
+      "is_control": false
+    },
+    {
+      "id": 8,
+      "russian": "Vinnitsa",
+      "ukrainian": "Vinnytsia",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Central Ukraine",
+      "is_control": false
+    },
+    {
+      "id": 9,
+      "russian": "Rovno",
+      "ukrainian": "Rivne",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Western Ukraine",
+      "is_control": false
+    },
+    {
+      "id": 10,
+      "russian": "Chernobyl",
+      "ukrainian": "Chornobyl",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Nuclear disaster site",
+      "is_control": false
+    },
+    {
+      "id": 11,
+      "russian": "Lugansk",
+      "ukrainian": "Luhansk",
+      "category": "geographical",
+      "subcategory": "conflict_zone",
+      "significance": "Occupied since 2014",
+      "is_control": false
+    },
+    {
+      "id": 12,
+      "russian": "Donetsk",
+      "ukrainian": "Donetsk",
+      "category": "geographical",
+      "subcategory": "conflict_zone",
+      "significance": "Control case — same in both languages",
+      "is_control": true
+    },
+    {
+      "id": 13,
+      "russian": "Mariupol",
+      "ukrainian": "Mariupol",
+      "category": "geographical",
+      "subcategory": "conflict_zone",
+      "significance": "Control case — massive 2022 visibility",
+      "is_control": true
+    },
+    {
+      "id": 14,
+      "russian": "Kherson",
+      "ukrainian": "Kherson",
+      "category": "geographical",
+      "subcategory": "conflict_zone",
+      "significance": "Control case — same in both",
+      "is_control": true
+    },
+    {
+      "id": 15,
+      "russian": "Dnieper",
+      "ukrainian": "Dnipro",
+      "category": "geographical",
+      "subcategory": "rivers",
+      "significance": "Major river through Kyiv",
+      "is_control": false
+    },
+    {
+      "id": 16,
+      "russian": "Dniester",
+      "ukrainian": "Dnister",
+      "category": "geographical",
+      "subcategory": "rivers",
+      "significance": "Western Ukraine river",
+      "is_control": false
+    },
+    {
+      "id": 17,
+      "russian": "Donbass",
+      "ukrainian": "Donbas",
+      "category": "geographical",
+      "subcategory": "regions",
+      "significance": "Spelling simplification",
+      "is_control": false
+    },
+    {
+      "id": 18,
+      "russian": "Crimea",
+      "ukrainian": "Krym",
+      "category": "geographical",
+      "subcategory": "regions",
+      "significance": "Contested peninsula",
+      "is_control": false
+    },
+    {
+      "id": 19,
+      "russian": "Transcarpathia",
+      "ukrainian": "Zakarpattia",
+      "category": "geographical",
+      "subcategory": "regions",
+      "significance": "Western region",
+      "is_control": false
+    },
+    {
+      "id": 20,
+      "russian": "Podolia",
+      "ukrainian": "Podillia",
+      "category": "geographical",
+      "subcategory": "regions",
+      "significance": "Historical region",
+      "is_control": false
+    },
+    {
+      "id": 21,
+      "russian": "Chicken Kiev",
+      "ukrainian": "Chicken Kyiv",
+      "category": "food",
+      "subcategory": null,
+      "significance": "Most globally known food item",
+      "is_control": false
+    },
+    {
+      "id": 22,
+      "russian": "Kiev cake",
+      "ukrainian": "Kyiv cake",
+      "category": "food",
+      "subcategory": null,
+      "significance": "Traditional dessert",
+      "is_control": false
+    },
+    {
+      "id": 23,
+      "russian": "Borscht",
+      "ukrainian": "Borshch",
+      "category": "food",
+      "subcategory": null,
+      "significance": "UNESCO-listed, cultural ownership dispute",
+      "is_control": false
+    },
+    {
+      "id": 24,
+      "russian": "Kiev Pechersk Lavra",
+      "ukrainian": "Kyiv Pechersk Lavra",
+      "category": "landmarks",
+      "subcategory": null,
+      "significance": "UNESCO World Heritage Site",
+      "is_control": false
+    },
+    {
+      "id": 25,
+      "russian": "Saint Sophia Cathedral Kiev",
+      "ukrainian": "Saint Sophia Cathedral Kyiv",
+      "category": "landmarks",
+      "subcategory": null,
+      "significance": "UNESCO site",
+      "is_control": false
+    },
+    {
+      "id": 26,
+      "russian": "Chernobyl Exclusion Zone",
+      "ukrainian": "Chornobyl Exclusion Zone",
+      "category": "landmarks",
+      "subcategory": null,
+      "significance": "Historical/tourism landmark",
+      "is_control": false
+    },
+    {
+      "id": 27,
+      "russian": "the Ukraine",
+      "ukrainian": "Ukraine",
+      "category": "country",
+      "subcategory": null,
+      "significance": "Definite article removal = sovereignty",
+      "is_control": false
+    },
+    {
+      "id": 28,
+      "russian": "Kiev National University",
+      "ukrainian": "Kyiv National University",
+      "category": "institutional",
+      "subcategory": null,
+      "significance": "Taras Shevchenko University",
+      "is_control": false
+    },
+    {
+      "id": 29,
+      "russian": "Kharkov University",
+      "ukrainian": "Kharkiv University",
+      "category": "institutional",
+      "subcategory": null,
+      "significance": "Karazin University",
+      "is_control": false
+    },
+    {
+      "id": 30,
+      "russian": "Kiev Polytechnic",
+      "ukrainian": "Kyiv Polytechnic",
+      "category": "institutional",
+      "subcategory": null,
+      "significance": "Igor Sikorsky KPI",
+      "is_control": false
+    },
+    {
+      "id": 31,
+      "russian": "Kiev Patriarchate",
+      "ukrainian": "Kyiv Patriarchate",
+      "category": "institutional",
+      "subcategory": null,
+      "significance": "Orthodox church split",
+      "is_control": false
+    },
+    {
+      "id": 32,
+      "russian": "Dynamo Kiev",
+      "ukrainian": "Dynamo Kyiv",
+      "category": "sports",
+      "subcategory": null,
+      "significance": "Champions League visibility",
+      "is_control": false
+    },
+    {
+      "id": 33,
+      "russian": "Shakhtar Donetsk",
+      "ukrainian": "Shakhtar Donetsk",
+      "category": "sports",
+      "subcategory": null,
+      "significance": "Control — unchanged",
+      "is_control": true
+    },
+    {
+      "id": 34,
+      "russian": "Kiev ballet",
+      "ukrainian": "Kyiv ballet",
+      "category": "sports",
+      "subcategory": null,
+      "significance": "Cultural export",
+      "is_control": false
+    },
+    {
+      "id": 35,
+      "russian": "Kievan Rus",
+      "ukrainian": "Kyivan Rus",
+      "category": "historical",
+      "subcategory": null,
+      "significance": "Historical state — identity claim",
+      "is_control": false
+    },
+    {
+      "id": 36,
+      "russian": "Cossack",
+      "ukrainian": "Kozak",
+      "category": "historical",
+      "subcategory": null,
+      "significance": "Ethno-historical term",
+      "is_control": false
+    },
+    {
+      "id": 37,
+      "russian": "Little Russia",
+      "ukrainian": "Ukraine",
+      "category": "historical",
+      "subcategory": null,
+      "significance": "Colonial vs sovereign framing",
+      "is_control": false
+    }
+  ],
+  "events": [
+    {"date": "2014-02-22", "name": "Euromaidan revolution"},
+    {"date": "2014-03-18", "name": "Crimea annexation"},
+    {"date": "2018-10-02", "name": "#KyivNotKiev campaign launched by MFA"},
+    {"date": "2019-08-14", "name": "AP adopts Kyiv"},
+    {"date": "2019-09-01", "name": "Wikipedia switches to Kyiv"},
+    {"date": "2019-10-14", "name": "BBC adopts Kyiv"},
+    {"date": "2022-02-24", "name": "Full-scale Russian invasion"},
+    {"date": "2022-09-06", "name": "Kharkiv counteroffensive"},
+    {"date": "2022-11-11", "name": "Kherson liberation"}
+  ]
+}
