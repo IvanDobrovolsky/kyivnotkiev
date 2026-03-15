@@ -28,9 +28,17 @@ data/processed/*.parquet
 !data/raw/ngrams/.gitkeep
 !data/processed/.gitkeep
 
-# BigQuery credentials
+# Credentials & secrets — NEVER commit these
 *.json
 !data/toponym_pairs.json
+.gcloud/
+*credentials*.json
+*service-account*.json
+*key*.json
+*.pem
+*.p12
+.env
+.env.*
 
 # IDE
 .idea/
