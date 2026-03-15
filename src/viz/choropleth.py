@@ -61,13 +61,9 @@ def plot_choropleth(
     if pair is None:
         return None
 
-    # Load world shapefile
-    try:
-        world = gpd.read_file(gpd.datasets.get_path("naturalearth_lowres"))
-    except (AttributeError, Exception):
-        # geopandas >= 1.0 removed bundled datasets
-        import geodatasets
-        world = gpd.read_file(geodatasets.get_path("naturalearth.land"))
+    # Load world shapefile with country boundaries
+    ne_url = "https://naciscdn.org/naturalearth/110m/cultural/ne_110m_admin_0_countries.zip"
+    world = gpd.read_file(ne_url)
 
     # Merge crossover data with world geometry
     pair_data = pair_data.copy()
@@ -77,47 +73,60 @@ def plot_choropleth(
             lambda x: x.toordinal() if pd.notna(x) else np.nan
         )
 
-    merged = world.merge(pair_data, left_on="iso_a3", right_on="country", how="left")
+    # Compute latest adoption ratio per country from raw geographic data
+    geo_raw_path = PROCESSED_DIR / f"{source}_geographic.parquet"
+    if geo_raw_path.exists():
+        geo_raw = pd.read_parquet(geo_raw_path)
+        pair_geo = geo_raw[geo_raw["pair_id"] == pair_id]
+        # Get latest 6 months of data per country
+        if not pair_geo.empty:
+            pair_geo = pair_geo.copy()
+            pair_geo["week"] = pd.to_datetime(pair_geo["week"])
+            cutoff = pair_geo["week"].max() - pd.Timedelta(days=180)
+            recent = pair_geo[pair_geo["week"] >= cutoff]
+            country_ratios = recent.groupby("source_country")["adoption_ratio"].mean().reset_index()
+            country_ratios.columns = ["country_code", "adoption_ratio"]
+        else:
+            country_ratios = pd.DataFrame(columns=["country_code", "adoption_ratio"])
+    else:
+        country_ratios = pd.DataFrame(columns=["country_code", "adoption_ratio"])
 
-    # Color: early adopters = green, late = red, no data = gray
+    # Try multiple join keys (GDELT uses FIPS, NE uses ISO)
+    merged = world.copy()
+    merged["adoption_ratio"] = np.nan
+
+    for _, cr in country_ratios.iterrows():
+        cc = cr["country_code"]
+        ratio = cr["adoption_ratio"]
+        # Try matching on ISO_A2, ISO_A3, FIPS_10_, or ADM0_A3
+        for col in ["ISO_A2", "ISO_A3", "FIPS_10_", "ADM0_A3", "ISO_A2_EH"]:
+            if col in merged.columns:
+                mask = merged[col] == cc
+                if mask.any():
+                    merged.loc[mask, "adoption_ratio"] = ratio
+                    break
+
     fig, ax = plt.subplots(figsize=(18, 10))
 
     # Plot base map
     world.plot(ax=ax, color="#E0E0E0", edgecolor="#CCCCCC", linewidth=0.5)
 
     # Plot countries with data
-    if "crossover_ordinal" in merged.columns:
-        has_data = merged.dropna(subset=["crossover_ordinal"])
-        no_cross = merged[merged["has_crossed"] == False] if "has_crossed" in merged.columns else gpd.GeoDataFrame()
-
-        if not has_data.empty:
-            cmap = mcolors.LinearSegmentedColormap.from_list("adoption", ["#228B22", "#FFD700", "#DC143C"])
-            has_data.plot(
-                ax=ax,
-                column="crossover_ordinal",
-                cmap=cmap,
-                edgecolor="#666666",
-                linewidth=0.5,
-                legend=True,
-                legend_kwds={"label": "Crossover date (earlier = greener)", "shrink": 0.6},
-            )
-
-        if not no_cross.empty:
-            no_cross.plot(ax=ax, color="#FF6B6B", edgecolor="#666666", linewidth=0.5, alpha=0.5)
-    else:
-        # Fall back to adoption_ratio_current
-        has_data = merged.dropna(subset=["adoption_ratio_current"])
-        if not has_data.empty:
-            has_data.plot(
-                ax=ax,
-                column="adoption_ratio_current",
-                cmap="RdYlGn",
-                edgecolor="#666666",
-                linewidth=0.5,
-                legend=True,
-                vmin=0, vmax=1,
-                legend_kwds={"label": "Current adoption ratio", "shrink": 0.6},
-            )
+    has_data = merged.dropna(subset=["adoption_ratio"])
+    if not has_data.empty:
+        cmap = mcolors.LinearSegmentedColormap.from_list(
+            "adoption", ["#E74C3C", "#FFFFFF", "#0057B8"]
+        )
+        has_data.plot(
+            ax=ax,
+            column="adoption_ratio",
+            cmap=cmap,
+            edgecolor="#666666",
+            linewidth=0.5,
+            legend=True,
+            vmin=0, vmax=1,
+            legend_kwds={"label": "Adoption ratio (0=Russian, 1=Ukrainian)", "shrink": 0.6},
+        )
 
     ax.set_title(
         f'Geographic Adoption: "{pair["russian"]}" -> "{pair["ukrainian"]}" ({source.upper()})',
