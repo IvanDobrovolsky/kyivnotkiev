@@ -61,8 +61,13 @@ def plot_choropleth(
     if pair is None:
         return None
 
-    # Load world shapefile from geopandas datasets
-    world = gpd.read_file(gpd.datasets.get_path("naturalearth_lowres"))
+    # Load world shapefile
+    try:
+        world = gpd.read_file(gpd.datasets.get_path("naturalearth_lowres"))
+    except (AttributeError, Exception):
+        # geopandas >= 1.0 removed bundled datasets
+        import geodatasets
+        world = gpd.read_file(geodatasets.get_path("naturalearth.land"))
 
     # Merge crossover data with world geometry
     pair_data = pair_data.copy()
