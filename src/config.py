@@ -29,12 +29,12 @@ TRENDS_REQUEST_DELAY = 10  # seconds between requests
 TRENDS_MAX_RETRIES = 5
 TRENDS_BACKOFF_FACTOR = 2
 
-# ── GDELT BigQuery settings ───────────────────────────────────────────────────
+# ── GDELT DOC API settings ────────────────────────────────────────────────────
 
-GDELT_PROJECT = "gdelt-bq"
-GDELT_GKG_TABLE = "gdelt-bq.gdeltv2.gkg_partitioned"
-GDELT_EVENTS_TABLE = "gdelt-bq.gdeltv2.events_partitioned"
-BQ_COST_LIMIT_TB = 0.9  # stay under 1TB free tier
+GDELT_DOC_API_URL = "https://api.gdeltproject.org/api/v2/doc/doc"
+GDELT_REQUEST_DELAY = 5  # seconds between requests (be polite)
+GDELT_MAX_RETRIES = 3
+GDELT_MODES = ["timelinevol", "timelinevolinfo", "timelinetone"]
 
 # ── Countries for geographic analysis ──────────────────────────────────────────
 
