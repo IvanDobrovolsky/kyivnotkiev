@@ -20,12 +20,12 @@ def test_toponym_pairs_loads():
 
 def test_pair_count():
     pairs = get_all_pairs()
-    assert len(pairs) == 50
+    assert len(pairs) == 63
 
 
 def test_category_count():
     categories = get_categories()
-    assert len(categories) == 7
+    assert len(categories) == 8
 
 
 def test_non_control_pairs():

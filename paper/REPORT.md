@@ -8,7 +8,7 @@ This study asks a simple question: **when the world was asked to say "Kyiv" inst
 
 The #KyivNotKiev campaign, launched by Ukraine's Ministry of Foreign Affairs in October 2018, urged English-language media and institutions to adopt Ukrainian-derived spellings of place names instead of Russian-derived transliterations. This wasn't just about one city — it was a systematic effort to decolonize Ukraine's toponymic identity in the global English-language discourse.
 
-We provide the **first large-scale computational analysis** of how this adoption actually played out — not just for Kyiv, but for 44 toponym pairs across 7 categories, using three independent data sources spanning 11 years (2015–2026). We move beyond anecdotal reporting ("the AP switched in 2019") to measure **when, how fast, and how completely** Ukrainian spellings replaced Russian ones in global English usage — and critically, where they **didn't**.
+We provide the **first large-scale computational analysis** of how this adoption actually played out — not just for Kyiv, but for 57 naming pairs across 8 categories, using three independent data sources spanning 11 years (2015–2026). We move beyond anecdotal reporting ("the AP switched in 2019") to measure **when, how fast, and how completely** Ukrainian spellings replaced Russian ones in global English usage — and critically, where they **didn't**.
 
 ### Why it matters
 
@@ -54,7 +54,7 @@ This is the gap we fill.
 
 This study is novel in five dimensions:
 
-1. **Scale:** 44 toponym pairs across 7 categories (vs. single-pair anecdotal studies)
+1. **Scale:** 57 naming pairs across 8 categories (vs. single-pair anecdotal studies)
 2. **Sources:** Three independent data sources — GDELT (news), Google Trends (search), Google Ngrams (books) — providing triangulated evidence
 3. **Methods:** Ensemble change-point detection (PELT + CUSUM + BOCPD), event impact analysis (Welch's t-test), geographic diffusion modeling across 221 countries
 4. **Scope:** International English-language adoption (vs. domestic Ukrainian policy)
@@ -76,17 +76,18 @@ This study is novel in five dimensions:
 
 ### 4.2 Toponym pairs
 
-We analyzed **44 non-control toponym pairs** across 7 categories:
+We analyzed **57 non-control naming pairs** across 8 categories:
 
 | Category | Pairs | Examples |
 |---|---|---|
 | Geographical | 25 | Kiev→Kyiv, Kharkov→Kharkiv, Odessa→Odesa, Chernigov→Chernihiv |
 | Food & Cuisine | 5 | Chicken Kiev→Chicken Kyiv, Borscht→Borshch, Vareniki→Varenyky |
-| Landmarks & Heritage | 3 | Kiev Pechersk Lavra→Kyiv Pechersk Lavra |
+| Landmarks & Heritage | 6 | Kiev Pechersk Lavra→Kyiv Pechersk Lavra, Babi Yar→Babyn Yar |
 | Country-Level Framing | 1 | "the Ukraine"→"Ukraine" |
-| Institutional | 4 | Kiev National University→Kyiv National University |
-| Sports & Entertainment | 2 | Dynamo Kiev→Dynamo Kyiv |
-| Historical & Ethnographic | 4 | Kievan Rus→Kyivan Rus, Cossack→Kozak, Gopak→Hopak |
+| Institutional | 6 | Kiev National University→Kyiv National University, Lvov Polytechnic→Lviv Polytechnic |
+| Sports & Entertainment | 5 | Dynamo Kiev→Dynamo Kyiv, Zorya Lugansk→Zorya Luhansk |
+| Historical & Ethnographic | 5 | Kievan Rus→Kyivan Rus, Cossack→Kozak, Galicia→Halychyna |
+| People & Public Figures | 4 | Alexander Usyk→Oleksandr Usyk, Vladimir Zelensky→Volodymyr Zelenskyy |
 
 Plus 6 control pairs (Donetsk, Mariupol, Kherson, Shakhtar Donetsk, Euromaidan, Holodomor) where the spelling is identical in both languages.
 
@@ -142,13 +143,15 @@ This is the most resistant category overall, confirming the **"Chicken Kiev Prob
 
 The food category reveals a fundamental insight: **adoption speed is inversely proportional to how embedded a term is in consumer/commercial contexts.** Media can change a style guide; nobody mandates recipe websites to update.
 
-### 5.3 Landmarks & Heritage (3 pairs)
+### 5.3 Landmarks & Heritage (6 pairs)
 
-**Mean adoption: Trends 0.61. Adopted: 2/3.**
+**Mean adoption: Trends 0.61. Adopted: 2/3 (original pairs).**
 
 - **Saint Sophia Cathedral Kyiv** (98%): Near-complete adoption.
 - **Kyiv Pechersk Lavra** (85%): Strong adoption, likely driven by UNESCO and travel/tourism contexts.
 - **Chornobyl Exclusion Zone** (1%): Same resistance as "Chernobyl" itself — the disaster brand extends to all associated terms.
+- **Babi Yar → Babyn Yar**: Data collection pending. Hypothesized to be deeply resistant — decades of Holocaust literature have fixed "Babi Yar" as an English word, similar to "Chernobyl."
+- **Potemkin Stairs Odessa/Odesa**, **Motherland Monument Kiev/Kyiv**: Data collection pending. These test whether landmark-specific adoption tracks the city name or lags behind it.
 
 ### 5.4 Country-Level Framing (1 pair)
 
@@ -159,30 +162,44 @@ The food category reveals a fundamental insight: **adoption speed is inversely p
 - Major style guides changed early
 - "The Ukraine" sounds archaic/political to English speakers
 
-### 5.5 Institutional (4 pairs)
+### 5.5 Institutional (6 pairs)
 
-**Mean adoption: Trends 0.91. Adopted: 4/4.**
+**Mean adoption: Trends 0.91. Adopted: 4/4 (original pairs).**
 
-All four institutional pairs show >83% adoption:
+All four original institutional pairs show >83% adoption:
 - Kyiv National University (92%), Kharkiv University (94%), Kyiv Polytechnic (95%), Kyiv Patriarchate (83%)
 
 Institutional names adopt fastest because the **institutions themselves control the name.** When a university changes its English-language branding, all subsequent references follow. This is top-down adoption at its most direct.
 
-### 5.6 Sports & Entertainment (2 pairs)
+Two new pairs test this pattern outside the capital: **Lviv Polytechnic** (expected high adoption given Lviv's early geographic crossover) and **Odesa National University** (expected low adoption given Odessa's persistent resistance). Data collection pending.
 
-**Mean adoption: GDELT 1.00*, Trends 0.55. Adopted: 1/2.**
+### 5.6 Sports & Entertainment (5 pairs)
+
+**Mean adoption: GDELT 1.00*, Trends 0.55. Adopted: 1/2 (original pairs).**
 
 - **Dynamo Kyiv** (66% Trends): Moderate adoption. UEFA/FIFA official records use "Kyiv," but sports commentary and fan usage is split.
 - **Kyiv ballet** (44% Trends): Below crossover. Cultural exports carry their established branding.
 
-### 5.7 Historical & Ethnographic (4 pairs)
+Three new football club pairs test whether UEFA/FIFA-driven adoption generalizes: **Zorya Luhansk**, **Metalist Kharkiv**, **Karpaty Lviv**. These mirror their respective geographic pairs and will reveal whether sports governing body mandates drive adoption at the club level as they did for Dynamo. Data collection pending.
 
-**Mean adoption: GDELT 0.94, Trends 0.56. Adopted: 1/4.**
+### 5.7 Historical & Ethnographic (5 pairs)
+
+**Mean adoption: GDELT 0.94, Trends 0.56. Adopted: 1/4 (original pairs).**
 
 - **Little Russia → Ukraine** (100%): Complete. The colonial term is essentially extinct in English usage.
 - **Cossack → Kozak** (60%): Crossing. The Ukrainian spelling is gaining but hasn't fully displaced the established English form.
 - **Kievan Rus → Kyivan Rus** (9%): Deeply resistant. Academic/historical terms have their own scholarly momentum. Textbooks, Wikipedia infoboxes, and centuries of historical usage anchor "Kievan Rus."
 - **Gopak → Hopak**: No data in any source — the term is too niche for measurable English-language frequency.
+- **Galicia → Halychyna**: Data collection pending. Complicated by ambiguity with Spanish Galicia — likely to show near-zero adoption of the Ukrainian form in English.
+
+### 5.8 People & Public Figures (4 pairs) — NEW
+
+This category tests a different mechanism: **personal name transliteration**, where the individual and their publicist/federation have agency over how the name appears in English media.
+
+- **Alexander Usyk → Oleksandr Usyk**: The undisputed heavyweight champion's name spelling shifted in real time as his profile grew. Early English coverage used "Alexander"; by the 2024 Fury fights, "Oleksandr" had become standard in boxing media. This is adoption driven by the athlete's own preference and promoter branding.
+- **Vladimir Zelensky → Volodymyr Zelenskyy**: Possibly the most dramatic case in the dataset. Pre-2019 English coverage (when he was a comedian) overwhelmingly used "Vladimir Zelensky." His presidential campaign and especially the 2022 invasion forced every global newsroom to make a transliteration choice simultaneously. The double-y "Zelenskyy" is the official Ukrainian transliteration.
+- **Andrei Shevchenko → Andriy Shevchenko**: Football legend whose fame (2000s–2010s) predates the naming campaign. Tests whether retroactive adoption occurs for already-famous figures.
+- **Vitali Klitschko → Vitaliy Klychko**: Boxing champion and Kyiv mayor. The German-influenced "Klitschko" spelling was established through his boxing career in Germany; the Ukrainian "Klychko" is rarely used in English. Tests the limits of adoption when a third-language spelling has been established.
 
 ---
 
@@ -195,9 +212,10 @@ Adoption speed follows a clear hierarchy:
 ```
 Institutional (91%) > Country-level (89%) > Landmarks (61%) >
 Geographical (60%) > Historical (56%) > Sports (55%) > Food (28%)
+People: pending data collection
 ```
 
-This hierarchy correlates with **institutional control**: categories where a single authority can mandate the change (university renames itself, government drops "the") adopt fastest. Categories where change depends on millions of distributed actors (home cooks, recipe writers, sports fans) adopt slowest.
+This hierarchy correlates with **institutional control**: categories where a single authority can mandate the change (university renames itself, government drops "the") adopt fastest. Categories where change depends on millions of distributed actors (home cooks, recipe writers, sports fans) adopt slowest. The People category may reveal a new adoption mechanism: **individual agency**, where the person themselves can drive the spelling change.
 
 ### 6.2 Media Leads, Public Lags
 
