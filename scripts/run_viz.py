@@ -35,8 +35,11 @@ def main():
     plot_heatmap(source=source)
 
     log.info(f"=== Choropleth maps ({source}) ===")
-    from src.viz.choropleth import plot_all as choropleth_all
-    choropleth_all(source=source, pair_ids=pair_ids)
+    try:
+        from src.viz.choropleth import plot_all as choropleth_all
+        choropleth_all(source=source, pair_ids=pair_ids)
+    except Exception as e:
+        log.warning(f"Choropleth generation failed (non-critical): {e}")
 
     log.info(f"=== Category curves ({source}) ===")
     from src.viz.category_curves import plot_category_curves

@@ -150,7 +150,9 @@ def analyze_all(
     """Run geographic diffusion analysis for all pairs."""
     ensure_dirs()
 
-    data_path = PROCESSED_DIR / f"{source}_merged.parquet"
+    # Try geographic-specific file first, fall back to merged
+    geo_data_path = PROCESSED_DIR / f"{source}_geographic.parquet"
+    data_path = geo_data_path if geo_data_path.exists() else PROCESSED_DIR / f"{source}_merged.parquet"
     if not data_path.exists():
         log.error(f"Processed data not found: {data_path}")
         return []
@@ -160,8 +162,11 @@ def analyze_all(
 
     if pair_ids:
         pairs = [p for p in pairs if p["id"] in pair_ids]
+    else:
+        # Only analyze pairs present in the geographic data
+        available_ids = set(df["pair_id"].unique())
+        pairs = [p for p in pairs if p["id"] in available_ids]
 
-    # Only analyze top pairs with enough geographic data
     geo_pairs = [p for p in pairs if not p["is_control"] or p["russian"] != p["ukrainian"]]
 
     results = []
