@@ -57,7 +57,8 @@ def test_classify_step():
 
 
 def test_classify_ramp():
-    signal = _make_ramp_signal()
+    np.random.seed(42)
+    signal = _make_ramp_signal(noise=0.01)
     change_type = classify_change_type(signal, 100)
     assert change_type == "ramp"
 
