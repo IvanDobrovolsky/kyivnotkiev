@@ -10,18 +10,17 @@ Usage:
 import argparse
 import logging
 import time
-import sys
 
 import pandas as pd
 from pytrends.request import TrendReq
 
 from src.config import (
-    TRENDS_RAW_DIR,
-    TRENDS_TIMEFRAME,
-    TRENDS_REQUEST_DELAY,
-    TRENDS_MAX_RETRIES,
-    TRENDS_BACKOFF_FACTOR,
     TARGET_COUNTRIES,
+    TRENDS_BACKOFF_FACTOR,
+    TRENDS_MAX_RETRIES,
+    TRENDS_RAW_DIR,
+    TRENDS_REQUEST_DELAY,
+    TRENDS_TIMEFRAME,
     ensure_dirs,
     get_all_pairs,
 )

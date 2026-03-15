@@ -7,16 +7,17 @@ Usage:
     python scripts/generate_summary.py
 """
 
-import logging
 import json
+import logging
 
-import pandas as pd
-import numpy as np
 import matplotlib
+import numpy as np
+import pandas as pd
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from src.config import PROCESSED_DIR, FIGURES_DIR, ensure_dirs
+from src.config import FIGURES_DIR, PROCESSED_DIR, ensure_dirs
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)

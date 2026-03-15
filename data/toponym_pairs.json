@@ -3,7 +3,7 @@
     "version": "1.0",
     "description": "Ukrainian toponym pairs for adoption analysis",
     "time_range": "2015-01-01 to 2026-03-14",
-    "total_pairs": 37,
+    "total_pairs": 50,
     "total_categories": 7
   },
   "categories": [
@@ -376,6 +376,123 @@
       "subcategory": null,
       "significance": "Colonial vs sovereign framing",
       "is_control": false
+    },
+    {
+      "id": 38,
+      "russian": "Chernigov",
+      "ukrainian": "Chernihiv",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Northern city, heavily bombed early 2022",
+      "is_control": false
+    },
+    {
+      "id": 39,
+      "russian": "Chernovtsy",
+      "ukrainian": "Chernivtsi",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Western city, former Czernowitz",
+      "is_control": false
+    },
+    {
+      "id": 40,
+      "russian": "Zhitomir",
+      "ukrainian": "Zhytomyr",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Central-western city",
+      "is_control": false
+    },
+    {
+      "id": 41,
+      "russian": "Cherkassy",
+      "ukrainian": "Cherkasy",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Central Ukraine, Dnieper city",
+      "is_control": false
+    },
+    {
+      "id": 42,
+      "russian": "Uzhgorod",
+      "ukrainian": "Uzhhorod",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Westernmost city, Transcarpathia capital",
+      "is_control": false
+    },
+    {
+      "id": 43,
+      "russian": "Kremenchug",
+      "ukrainian": "Kremenchuk",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Industrial city, 2022 shopping mall strike",
+      "is_control": false
+    },
+    {
+      "id": 44,
+      "russian": "Kirovograd",
+      "ukrainian": "Kropyvnytskyi",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Decommunization rename — completely new name",
+      "is_control": false
+    },
+    {
+      "id": 45,
+      "russian": "Tarnopol",
+      "ukrainian": "Ternopil",
+      "category": "geographical",
+      "subcategory": "major_cities",
+      "significance": "Western Ukraine, Polish historical name",
+      "is_control": false
+    },
+    {
+      "id": 46,
+      "russian": "Vareniki",
+      "ukrainian": "Varenyky",
+      "category": "food",
+      "subcategory": null,
+      "significance": "Ukrainian dumplings — spelling variant",
+      "is_control": false
+    },
+    {
+      "id": 47,
+      "russian": "Gorilka",
+      "ukrainian": "Horilka",
+      "category": "food",
+      "subcategory": null,
+      "significance": "Ukrainian vodka — G→H transliteration",
+      "is_control": false
+    },
+    {
+      "id": 48,
+      "russian": "Gopak",
+      "ukrainian": "Hopak",
+      "category": "historical",
+      "subcategory": null,
+      "significance": "Ukrainian national dance — G→H transliteration",
+      "is_control": false
+    },
+    {
+      "id": 49,
+      "russian": "Euromaidan",
+      "ukrainian": "Euromaidan",
+      "category": "historical",
+      "subcategory": null,
+      "significance": "Control — same spelling, 2014 revolution",
+      "is_control": true
+    },
+    {
+      "id": 50,
+      "russian": "Holodomor",
+      "ukrainian": "Holodomor",
+      "category": "historical",
+      "subcategory": null,
+      "significance": "Control — already Ukrainian spelling, 1932-33 famine",
+      "is_control": true
     }
   ],
   "events": [

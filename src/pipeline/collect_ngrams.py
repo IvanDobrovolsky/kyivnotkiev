@@ -10,7 +10,6 @@ Usage:
 import argparse
 import logging
 import time
-import urllib.parse
 
 import pandas as pd
 import requests
@@ -75,7 +74,7 @@ def collect_pair(pair: dict) -> pd.DataFrame | None:
     log.info(f"Pair {pair_id}: '{russian}' vs '{ukrainian}'")
 
     if pair["is_control"] and russian == ukrainian:
-        log.info(f"  Control case, collecting single term")
+        log.info("  Control case, collecting single term")
         df_r = fetch_ngram(russian)
         if df_r is not None:
             df_r["variant"] = "both"

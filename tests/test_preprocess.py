@@ -1,6 +1,5 @@
 """Tests for preprocessing validation."""
 
-import numpy as np
 import pandas as pd
 
 from src.pipeline.preprocess import validate

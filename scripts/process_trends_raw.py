@@ -4,14 +4,13 @@ Usage:
     python scripts/process_trends_raw.py
 """
 
-import logging
 import json
-from pathlib import Path
+import logging
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
-from src.config import TRENDS_RAW_DIR, PROCESSED_DIR, ensure_dirs
+from src.config import PROCESSED_DIR, TRENDS_RAW_DIR, ensure_dirs
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)

@@ -8,6 +8,7 @@ import argparse
 import logging
 
 import matplotlib
+
 matplotlib.use("Agg")  # non-interactive backend for CLI
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")

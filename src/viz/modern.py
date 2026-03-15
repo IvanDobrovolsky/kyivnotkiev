@@ -8,18 +8,15 @@ Usage:
 """
 
 import logging
-import json
 
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
-import plotly.express as px
 from plotly.subplots import make_subplots
 
 from src.config import (
-    PROCESSED_DIR,
     FIGURES_DIR,
-    EVENTS_TIMELINE,
+    PROCESSED_DIR,
     ensure_dirs,
     get_all_pairs,
     get_categories,
@@ -197,10 +194,6 @@ def plot_adoption_heatmap(source: str = "gdelt"):
     matrix = [matrix[i] for i in order]
     labels = [labels[i] for i in order]
 
-    # Subsample time axis for readability
-    step = max(1, len(all_times) // 60)
-    time_labels = [str(all_times[i])[:10] if i % step == 0 else "" for i in range(len(all_times))]
-
     fig = go.Figure(data=go.Heatmap(
         z=matrix,
         x=[str(t)[:10] for t in all_times],
@@ -359,7 +352,7 @@ def plot_event_impact():
 
     df = pd.read_parquet(events_path)
     # Focus on pair 1 (Kiev/Kyiv)
-    pair_events = df[(df["pair_id"] == 1) & (df["significant"] == True)].copy()
+    pair_events = df[(df["pair_id"] == 1) & df["significant"]].copy()
     if pair_events.empty:
         return
 

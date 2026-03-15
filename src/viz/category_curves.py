@@ -7,13 +7,13 @@ Usage:
 import argparse
 import logging
 
-import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
 import pandas as pd
 
 from src.config import (
-    PROCESSED_DIR,
     FIGURES_DIR,
+    PROCESSED_DIR,
     VIZ_DPI,
     VIZ_FIGSIZE,
     VIZ_STYLE,

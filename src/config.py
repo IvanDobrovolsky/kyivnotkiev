@@ -29,6 +29,10 @@ TRENDS_REQUEST_DELAY = 10  # seconds between requests
 TRENDS_MAX_RETRIES = 5
 TRENDS_BACKOFF_FACTOR = 2
 
+# ── BigQuery settings ─────────────────────────────────────────────────────────
+
+BQ_COST_LIMIT_TB = 1.0  # free-tier monthly quota
+
 # ── GDELT DOC API settings ────────────────────────────────────────────────────
 
 GDELT_DOC_API_URL = "https://api.gdeltproject.org/api/v2/doc/doc"

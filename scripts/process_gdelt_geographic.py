@@ -5,10 +5,10 @@ Usage:
 """
 
 import logging
-import numpy as np
+
 import pandas as pd
-import pyarrow.parquet as pq
 import pyarrow as pa
+import pyarrow.parquet as pq
 
 from src.config import GDELT_RAW_DIR, PROCESSED_DIR, ensure_dirs
 

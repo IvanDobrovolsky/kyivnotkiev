@@ -7,11 +7,11 @@ Usage:
     python scripts/process_gdelt_raw.py
 """
 
-import logging
 import json
+import logging
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 import pyarrow.parquet as pq
 
 from src.config import GDELT_RAW_DIR, PROCESSED_DIR, ensure_dirs
