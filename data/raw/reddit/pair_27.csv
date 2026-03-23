@@ -1,0 +1,43 @@
+pair_id,variant,term,subreddit,time_filter,count,source
+27,russian,the Ukraine,ukraine,all,100,reddit_search
+27,russian,the Ukraine,worldnews,all,100,reddit_search
+27,russian,the Ukraine,europe,all,100,reddit_search
+27,ukrainian,Ukraine,ukraine,all,100,reddit_search
+27,ukrainian,Ukraine,worldnews,all,100,reddit_search
+27,ukrainian,Ukraine,europe,all,100,reddit_search
+27,russian,the Ukraine,ukraine,year,48,reddit_search
+27,russian,the Ukraine,worldnews,year,2,reddit_search
+27,russian,the Ukraine,europe,year,10,reddit_search
+27,ukrainian,Ukraine,ukraine,year,100,reddit_search
+27,ukrainian,Ukraine,worldnews,year,100,reddit_search
+27,ukrainian,Ukraine,europe,year,100,reddit_search
+27,russian,the Ukraine,ukraine,month,5,reddit_search
+27,russian,the Ukraine,worldnews,month,0,reddit_search
+27,russian,the Ukraine,europe,month,0,reddit_search
+27,ukrainian,Ukraine,ukraine,month,100,reddit_search
+27,ukrainian,Ukraine,worldnews,month,100,reddit_search
+27,ukrainian,Ukraine,europe,month,100,reddit_search
+27,russian,the Ukraine,all,year_2015,0,arctic_shift
+27,russian,the Ukraine,all,year_2016,0,arctic_shift
+27,russian,the Ukraine,all,year_2017,0,arctic_shift
+27,russian,the Ukraine,all,year_2018,0,arctic_shift
+27,russian,the Ukraine,all,year_2019,0,arctic_shift
+27,russian,the Ukraine,all,year_2020,0,arctic_shift
+27,russian,the Ukraine,all,year_2021,0,arctic_shift
+27,russian,the Ukraine,all,year_2022,0,arctic_shift
+27,russian,the Ukraine,all,year_2023,0,arctic_shift
+27,russian,the Ukraine,all,year_2024,0,arctic_shift
+27,russian,the Ukraine,all,year_2025,0,arctic_shift
+27,russian,the Ukraine,all,year_2026,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2015,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2016,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2017,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2018,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2019,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2020,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2021,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2022,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2023,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2024,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2025,0,arctic_shift
+27,ukrainian,Ukraine,all,year_2026,0,arctic_shift
