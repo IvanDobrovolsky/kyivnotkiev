@@ -125,6 +125,52 @@ def run_query(client: bigquery.Client, query: str, pair_id: int, dry_run: bool =
     return df
 
 
+def build_the_ukraine_query(start: str, end: str) -> str:
+    """Special query for 'the Ukraine' vs 'Ukraine' (pair 27).
+
+    The naive regex \\bthe ukraine\\b matches false positives like
+    'the Ukraine war', 'the Ukraine crisis', 'the Ukraine conflict'
+    where 'the' modifies the noun phrase, not the country name.
+
+    This query counts 'the Ukraine' only when used as a standalone
+    country reference — i.e., followed by a verb, punctuation, comma,
+    preposition, or end of string — NOT followed by a noun/adjective
+    that would make it a compound modifier.
+    """
+    # Match "the ukraine" only when followed by:
+    #   - punctuation (.,;:!?'")
+    #   - common verbs/prepositions (is, was, has, will, and, or, to, in, as, etc.)
+    #   - end of string
+    # Do NOT match when followed by nouns like: war, crisis, conflict, situation,
+    #   government, military, army, border, invasion, peace, aid, etc.
+    return f"""
+    SELECT
+        DATE_TRUNC(DATE(_PARTITIONTIME), WEEK(MONDAY)) AS week,
+        SourceCommonName AS source_country,
+        COUNTIF(
+            REGEXP_CONTAINS(LOWER(Extras),
+                r'(?i)\\bthe ukraine\\b(?!\\s+(?:war|crisis|conflict|situation|government|military|army|navy|border|invasion|peace|aid|question|issue|problem|scandal|affair|deal|front|offensive|counteroffensive|forces|troops|grain|grain deal|support|package|aid package|defense|ministry|people|population|territory|region|side|leadership|president|government|parliament|economy|energy|refugee|reconstruction|drone|weapon|missile|attack|strike|operation)\\b)')
+            OR REGEXP_CONTAINS(LOWER(V2Extras),
+                r'(?i)\\bthe ukraine\\b(?!\\s+(?:war|crisis|conflict|situation|government|military|army|navy|border|invasion|peace|aid|question|issue|problem|scandal|affair|deal|front|offensive|counteroffensive|forces|troops|grain|grain deal|support|package|aid package|defense|ministry|people|population|territory|region|side|leadership|president|government|parliament|economy|energy|refugee|reconstruction|drone|weapon|missile|attack|strike|operation)\\b)')
+        ) AS russian_count,
+        COUNTIF(
+            REGEXP_CONTAINS(LOWER(Extras), r'(?i)\\bukraine\\b')
+            OR REGEXP_CONTAINS(LOWER(V2Extras), r'(?i)\\bukraine\\b')
+        ) AS total_ukraine_count,
+        COUNT(*) AS total_articles
+    FROM `gdelt-bq.gdeltv2.gkg_partitioned`
+    WHERE
+        _PARTITIONTIME >= TIMESTAMP('{start}')
+        AND _PARTITIONTIME < TIMESTAMP('{end}')
+        AND (
+            REGEXP_CONTAINS(LOWER(Extras), r'(?i)\\bukraine\\b')
+            OR REGEXP_CONTAINS(LOWER(V2Extras), r'(?i)\\bukraine\\b')
+        )
+    GROUP BY week, source_country
+    ORDER BY week, source_country
+    """
+
+
 def collect_pair(client: bigquery.Client, pair: dict, dry_run: bool = False) -> pd.DataFrame | None:
     """Collect GDELT data for a single toponym pair."""
     pair_id = pair["id"]
@@ -137,8 +183,11 @@ def collect_pair(client: bigquery.Client, pair: dict, dry_run: bool = False) -> 
         log.info(f"  Pair {pair_id}: control case (identical spellings), skipping")
         return None
 
+    # Special handling for "the Ukraine" vs "Ukraine" (pair 27)
+    if pair_id == 27:
+        query = build_the_ukraine_query(START_DATE, END_DATE)
     # Use locations query for geographical pairs, extras query for others
-    if pair["category"] == "geographical":
+    elif pair["category"] == "geographical":
         query = build_locations_query(russian, ukrainian, START_DATE, END_DATE)
     else:
         query = build_query(russian, ukrainian, START_DATE, END_DATE)
