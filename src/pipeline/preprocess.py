@@ -47,6 +47,17 @@ def preprocess_gdelt() -> pd.DataFrame | None:
     if "week" in combined.columns:
         combined["week"] = pd.to_datetime(combined["week"])
 
+    # Handle pair 27 ("the Ukraine" / "Ukraine") special column
+    # The query returns total_ukraine_count instead of ukrainian_count;
+    # ukrainian_count = total - russian (standalone "the Ukraine" uses)
+    if "total_ukraine_count" in combined.columns:
+        mask_27 = combined["pair_id"] == 27
+        combined.loc[mask_27, "ukrainian_count"] = (
+            combined.loc[mask_27, "total_ukraine_count"]
+            - combined.loc[mask_27, "russian_count"]
+        ).clip(lower=0)
+        combined.drop(columns=["total_ukraine_count"], inplace=True, errors="ignore")
+
     # Compute adoption ratio: ukrainian / (ukrainian + russian)
     combined["adoption_ratio"] = combined["ukrainian_count"] / (
         combined["ukrainian_count"] + combined["russian_count"]
