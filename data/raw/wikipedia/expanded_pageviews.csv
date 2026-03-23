@@ -1,0 +1,15 @@
+pair_id,russian_article,ukrainian_article,russian_views_total,ukrainian_views_total,russian_views_6mo,ukrainian_views_6mo,adoption_ratio_total,adoption_ratio_6mo
+1,Kiev,Kyiv,5266369,8711633,154510,1019295,0.623,0.868
+2,Kharkov,Kharkiv,329860,4898176,10068,186504,0.937,0.949
+3,Odessa,Odesa,5041034,2271218,272036,128571,0.311,0.321
+4,Lvov,Lviv,98947,5501841,7424,225215,0.982,0.968
+5,Zaporozhye,Zaporizhzhia,68294,1792455,1186,103836,0.963,0.989
+7,Dnipropetrovsk,Dnipro,782311,2305279,17836,125987,0.747,0.876
+10,Chernobyl,Chornobyl,74211724,7068901,4098765,358921,0.087,0.081
+11,Lugansk,Luhansk,65111,1772205,2220,66767,0.965,0.968
+21,Chicken_Kiev,Chicken_Kyiv,2478533,7843,13423,187,0.003,0.014
+24,Kiev_Pechersk_Lavra,Kyiv_Pechersk_Lavra,388258,471798,3232,27203,0.549,0.894
+27,The_Ukraine,Ukraine,19870,65725706,0,0,0.000,0.000
+32,FC_Dynamo_Kiev,FC_Dynamo_Kyiv,4003544,18406,2847,5983,0.005,0.677
+35,Kievan_Rus,Kyivan_Rus,8900543,47433,38753,2871,0.005,0.069
+36,Cossacks,Kozaks,9073253,404,329551,0,0.000,0.000
