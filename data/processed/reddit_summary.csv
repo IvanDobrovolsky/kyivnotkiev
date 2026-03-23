@@ -1,0 +1,106 @@
+pair_id,category,russian_term,ukrainian_term,time_filter,russian_count,ukrainian_count,adoption_ratio,source
+1,geographical,Kiev,Kyiv,all,300,300,0.5,reddit
+1,geographical,Kiev,Kyiv,year,43,300,0.8746355685131195,reddit
+1,geographical,Kiev,Kyiv,month,1,132,0.9924812030075187,reddit
+1,geographical,Kiev,Kyiv,year_2015,0,0,,reddit
+1,geographical,Kiev,Kyiv,year_2016,0,0,,reddit
+1,geographical,Kiev,Kyiv,year_2017,0,0,,reddit
+1,geographical,Kiev,Kyiv,year_2018,0,0,,reddit
+1,geographical,Kiev,Kyiv,year_2019,0,0,,reddit
+1,geographical,Kiev,Kyiv,year_2020,0,0,,reddit
+1,geographical,Kiev,Kyiv,year_2021,0,0,,reddit
+1,geographical,Kiev,Kyiv,year_2022,0,0,,reddit
+1,geographical,Kiev,Kyiv,year_2023,0,0,,reddit
+1,geographical,Kiev,Kyiv,year_2024,0,0,,reddit
+1,geographical,Kiev,Kyiv,year_2025,0,0,,reddit
+1,geographical,Kiev,Kyiv,year_2026,0,0,,reddit
+3,geographical,Odessa,Odesa,all,300,300,0.5,reddit
+3,geographical,Odessa,Odesa,year,10,150,0.9375,reddit
+3,geographical,Odessa,Odesa,month,0,9,1.0,reddit
+3,geographical,Odessa,Odesa,year_2015,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2016,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2017,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2018,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2019,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2020,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2021,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2022,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2023,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2024,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2025,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2026,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,all,300,159,0.3464052287581699,reddit
+10,geographical,Chernobyl,Chornobyl,year,46,67,0.5929203539823009,reddit
+10,geographical,Chernobyl,Chornobyl,month,3,3,0.5,reddit
+10,geographical,Chernobyl,Chornobyl,year_2015,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,year_2016,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,year_2017,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,year_2018,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,year_2019,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,year_2020,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,year_2021,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,year_2022,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,year_2023,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,year_2024,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,year_2025,0,0,,reddit
+10,geographical,Chernobyl,Chornobyl,year_2026,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,all,11,88,0.8888888888888888,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year,0,2,1.0,reddit
+21,food,Chicken Kiev,Chicken Kyiv,month,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2015,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2016,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2017,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2018,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2019,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2020,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2021,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2022,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2023,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2024,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2025,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2026,0,0,,reddit
+27,country,the Ukraine,Ukraine,all,300,300,0.5,reddit
+27,country,the Ukraine,Ukraine,year,60,300,0.8333333333333334,reddit
+27,country,the Ukraine,Ukraine,month,5,300,0.9836065573770492,reddit
+27,country,the Ukraine,Ukraine,year_2015,0,0,,reddit
+27,country,the Ukraine,Ukraine,year_2016,0,0,,reddit
+27,country,the Ukraine,Ukraine,year_2017,0,0,,reddit
+27,country,the Ukraine,Ukraine,year_2018,0,0,,reddit
+27,country,the Ukraine,Ukraine,year_2019,0,0,,reddit
+27,country,the Ukraine,Ukraine,year_2020,0,0,,reddit
+27,country,the Ukraine,Ukraine,year_2021,0,0,,reddit
+27,country,the Ukraine,Ukraine,year_2022,0,0,,reddit
+27,country,the Ukraine,Ukraine,year_2023,0,0,,reddit
+27,country,the Ukraine,Ukraine,year_2024,0,0,,reddit
+27,country,the Ukraine,Ukraine,year_2025,0,0,,reddit
+27,country,the Ukraine,Ukraine,year_2026,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,all,6,16,0.7272727272727273,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year,0,1,1.0,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,month,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2015,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2016,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2017,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2018,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2019,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2020,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2021,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2022,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2023,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2024,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2025,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2026,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,all,30,102,0.7727272727272727,reddit
+35,historical,Kievan Rus,Kyivan Rus,year,1,5,0.8333333333333334,reddit
+35,historical,Kievan Rus,Kyivan Rus,month,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2015,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2016,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2017,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2018,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2019,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2020,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2021,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2022,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2023,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2024,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2025,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2026,0,0,,reddit
