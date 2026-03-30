@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from src.analysis.changepoint import (
+from pipeline.analysis.changepoint import (
     classify_change_type,
     detect_bocpd,
     detect_cusum,

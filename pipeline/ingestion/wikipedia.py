@@ -9,7 +9,7 @@ in each spelling form.
 API docs: https://wikimedia.org/api/rest_v1/
 
 Usage:
-    python -m src.pipeline.collect_wikipedia [--pair-ids 1,2,3]
+    python -m pipeline.ingestion.collect_wikipedia [--pair-ids 1,2,3]
 """
 
 import argparse
@@ -22,7 +22,7 @@ from pathlib import Path
 import pandas as pd
 import requests
 
-from src.config import (
+from pipeline.config import (
     DATA_DIR,
     PROCESSED_DIR,
     ensure_dirs,

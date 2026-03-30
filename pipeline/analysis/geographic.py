@@ -4,7 +4,7 @@ Identifies crossover dates per country and models the spatial diffusion
 pattern of Ukrainian spelling adoption.
 
 Usage:
-    python -m src.analysis.geographic [--source gdelt|trends] [--pair-ids 1,2,3]
+    python -m pipeline.analysis.geographic [--source gdelt|trends] [--pair-ids 1,2,3]
 """
 
 import argparse
@@ -13,7 +13,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from src.config import (
+from pipeline.config import (
     PROCESSED_DIR,
     ensure_dirs,
     get_all_pairs,

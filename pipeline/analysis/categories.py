@@ -4,7 +4,7 @@ Computes mean adoption metrics per category and tests whether adoption
 speed differs significantly between categories.
 
 Usage:
-    python -m src.analysis.categories [--source gdelt|trends]
+    python -m pipeline.analysis.categories [--source gdelt|trends]
 """
 
 import argparse
@@ -13,7 +13,7 @@ import logging
 import pandas as pd
 from scipy import stats
 
-from src.config import (
+from pipeline.config import (
     PROCESSED_DIR,
     ensure_dirs,
     get_all_pairs,

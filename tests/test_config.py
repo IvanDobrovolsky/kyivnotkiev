@@ -1,6 +1,6 @@
 """Tests for config module."""
 
-from src.config import (
+from pipeline.config import (
     ROOT_DIR,
     TOPONYM_PAIRS_PATH,
     get_all_pairs,

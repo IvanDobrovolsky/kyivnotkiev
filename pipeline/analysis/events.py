@@ -4,7 +4,7 @@ Tests whether geopolitical events (invasion, campaigns, media changes)
 caused measurable shifts in toponym adoption.
 
 Usage:
-    python -m src.analysis.events [--source gdelt|trends] [--pair-ids 1,2,3]
+    python -m pipeline.analysis.events [--source gdelt|trends] [--pair-ids 1,2,3]
 """
 
 import argparse
@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats as sp_stats
 
-from src.config import (
+from pipeline.config import (
     EVENTS_TIMELINE,
     PROCESSED_DIR,
     ensure_dirs,

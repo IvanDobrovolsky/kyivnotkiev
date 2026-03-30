@@ -1,4 +1,4 @@
-.PHONY: install setup infra ingest analyze figures paper reproduce test lint format clean help
+.PHONY: install setup infra ingest analyze figures reproduce test lint format clean help
 
 PROJECT_ID ?= kyivnotkiev-research
 REGION ?= us-central1
@@ -71,27 +71,10 @@ ingest-ngrams:  ## Google Books Ngrams: book frequency (1800-2019)
 ingest-youtube:  ## YouTube: Data API v3 video metadata
 	python -m pipeline.ingestion.youtube
 
-# ── Legacy local collection (pre-GCP) ──────────────────────────────────────
-
-collect:  ## [legacy] Run local data collection
-	uv run python scripts/run_collect.py --source all
-
-collect-gdelt:
-	uv run python scripts/run_collect.py --source gdelt
-
-collect-trends:
-	uv run python scripts/run_collect.py --source trends
-
-collect-ngrams:
-	uv run python scripts/run_collect.py --source ngrams
-
 # ── Processing ──────────────────────────────────────────────────────────────
 
-process:  ## Process raw data into analysis-ready format
-	uv run python scripts/process_all.py
-
-preprocess:
-	uv run python -m src.pipeline.preprocess
+preprocess:  ## Process raw data into analysis-ready format
+	python -m pipeline.transform.preprocess
 
 migrate:  ## Load existing local data into BigQuery
 	python -m pipeline.transform.migrate_local
@@ -113,40 +96,20 @@ analyze-regression:  ## Run logistic regression model
 analyze-categories:  ## Run Kruskal-Wallis + pairwise tests
 	python -m pipeline.analysis.categories
 
-analyze-legacy:  ## [legacy] Run local analysis
-	uv run python scripts/run_analysis.py --source gdelt
-
 # ── Visualization ───────────────────────────────────────────────────────────
 
 figures:  ## Generate ALL figures from BigQuery data
 	python -m pipeline.figures.generate_all
 
-viz:  ## [legacy] Local visualization
-	uv run python scripts/run_viz.py --source gdelt
-
-viz-trends:
-	uv run python scripts/run_viz.py --source trends
-
-viz-modern:
-	uv run python -m src.viz.modern
-
-# ── Paper ───────────────────────────────────────────────────────────────────
-
-paper:  ## Build publication-ready docx with embedded figures
-	python scripts/build_docx.py
-
 # ── Full Pipeline ───────────────────────────────────────────────────────────
 
-reproduce: setup ingest analyze figures paper  ## Full end-to-end reproduction
-	@echo "✓ Full reproduction complete"
-
-all:  ## [legacy] Run full local pipeline
-	uv run python scripts/run_pipeline.py --source all
+reproduce: setup ingest preprocess analyze figures  ## Full end-to-end reproduction
+	@echo "Full reproduction complete"
 
 # ── Quality & Utilities ─────────────────────────────────────────────────────
 
 status:  ## Show pipeline status (watermarks per pair per source)
-	python -m pipeline.transform.watermarks --status
+	python -m pipeline.ingestion.orchestrator --status
 
 validate:  ## Run data quality checks
 	python -m pipeline.transform.validate
@@ -155,14 +118,14 @@ test:  ## Run tests
 	uv run pytest tests/ -v
 
 lint:  ## Run linter
-	uv run ruff check src/ scripts/ pipeline/ tests/
+	uv run ruff check pipeline/ tests/
 
 format:  ## Auto-format code
-	uv run ruff format src/ scripts/ pipeline/ tests/
+	uv run ruff format pipeline/ tests/
 
 clean:  ## Remove local processed files (does NOT touch BQ/GCS)
 	rm -rf data/processed/*.csv data/processed/*.parquet
-	rm -rf paper/figures/*.png paper/figures/*.html
+	rm -rf figures/*.png figures/*.html
 
 help:  ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \

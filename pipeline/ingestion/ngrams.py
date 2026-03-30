@@ -4,7 +4,7 @@ Downloads ngram frequency data for each spelling variant from the
 Google Books Ngram Viewer corpus (English, 1900-2022).
 
 Usage:
-    python -m src.pipeline.collect_ngrams [--pair-ids 1,2,3]
+    python -m pipeline.ingestion.collect_ngrams [--pair-ids 1,2,3]
 """
 
 import argparse
@@ -14,7 +14,7 @@ import time
 import pandas as pd
 import requests
 
-from src.config import (
+from pipeline.config import (
     NGRAMS_RAW_DIR,
     ensure_dirs,
     get_all_pairs,

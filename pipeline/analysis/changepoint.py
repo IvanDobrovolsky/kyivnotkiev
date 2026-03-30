@@ -4,7 +4,7 @@ Applies PELT, BOCPD, and CUSUM algorithms to identify when Ukrainian
 spellings overtook Russian-derived spellings in each data source.
 
 Usage:
-    python -m src.analysis.changepoint [--source gdelt|trends] [--pair-ids 1,2,3]
+    python -m pipeline.analysis.changepoint [--source gdelt|trends] [--pair-ids 1,2,3]
 """
 
 import argparse
@@ -16,7 +16,7 @@ import pandas as pd
 import ruptures as rpt
 from scipy.stats import norm
 
-from src.config import (
+from pipeline.config import (
     CHANGEPOINT_MIN_SIZE,
     CHANGEPOINT_MODELS,
     PROCESSED_DIR,

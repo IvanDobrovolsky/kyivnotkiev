@@ -8,8 +8,28 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 CONFIG_DIR = ROOT_DIR / "config"
 DATA_DIR = ROOT_DIR / "data"
 RAW_DIR = DATA_DIR / "raw"
+GDELT_RAW_DIR = RAW_DIR / "gdelt"
+TRENDS_RAW_DIR = RAW_DIR / "trends"
+NGRAMS_RAW_DIR = RAW_DIR / "ngrams"
 PROCESSED_DIR = DATA_DIR / "processed"
 FIGURES_DIR = ROOT_DIR / "figures"
+
+# Time range
+START_DATE = "2015-01-01"
+END_DATE = "2026-12-31"
+
+# Google Trends settings
+TRENDS_TIMEFRAME = "2015-01-01 2026-03-14"
+TRENDS_GEO = ""
+TRENDS_LANGUAGE = "en"
+TRENDS_REQUEST_DELAY = 10
+TRENDS_MAX_RETRIES = 5
+TRENDS_BACKOFF_FACTOR = 2
+
+# Change-point detection settings
+CHANGEPOINT_MIN_SIZE = 4
+CHANGEPOINT_PENALTY = "bic"
+CHANGEPOINT_MODELS = ["l2", "rbf"]
 
 # Visualization constants
 COLOR_RUSSIAN = "#E74C3C"
@@ -86,3 +106,26 @@ def get_pairs_by_category(category: str, config_dir: Path = CONFIG_DIR) -> list[
 def get_gcp_config(config_dir: Path = CONFIG_DIR) -> dict:
     """Return GCP project/region/dataset config."""
     return load_pipeline(config_dir)["gcp"]
+
+
+def get_all_pairs(config_dir: Path = CONFIG_DIR) -> list[dict]:
+    """Return all pairs (enabled and disabled)."""
+    cfg = load_pairs(config_dir)
+    return cfg["pairs"]
+
+
+def get_non_control_pairs(config_dir: Path = CONFIG_DIR) -> list[dict]:
+    """Return all pairs that are not control cases."""
+    return [p for p in get_all_pairs(config_dir) if not p.get("is_control", False)]
+
+
+def get_categories(config_dir: Path = CONFIG_DIR) -> dict:
+    """Return category definitions."""
+    cfg = load_pairs(config_dir)
+    return cfg.get("categories", {})
+
+
+def ensure_dirs():
+    """Create all output directories if they don't exist."""
+    for d in [GDELT_RAW_DIR, TRENDS_RAW_DIR, NGRAMS_RAW_DIR, PROCESSED_DIR, FIGURES_DIR]:
+        d.mkdir(parents=True, exist_ok=True)

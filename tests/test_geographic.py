@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from src.analysis.geographic import find_country_crossover
+from pipeline.analysis.geographic import find_country_crossover
 
 
 def test_crossover_found():
