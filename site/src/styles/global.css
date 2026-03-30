@@ -29,6 +29,7 @@ body {
   color: var(--text);
   line-height: 1.5;
   overflow-x: hidden;
+  font-size: 15px;
 }
 
 /* Layout */
@@ -138,8 +139,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.35rem 1rem 0.35rem 2rem;
-  font-size: 0.8rem;
+  padding: 0.4rem 1rem 0.4rem 2rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: background 0.1s;
   border-left: 2px solid transparent;
@@ -207,7 +208,7 @@ body {
 
 .stat-value {
   font-family: var(--font-mono);
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--text);
 }
@@ -238,7 +239,7 @@ body {
 }
 
 .chart-title {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
