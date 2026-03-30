@@ -593,9 +593,33 @@ function formatNum(n: number) {
     }
 
     // ── World map ─────────────────────────────────────────
+    // Crimea is Ukraine. The default world-atlas TopoJSON incorrectly
+    // shows it as part of Russia. We overlay a corrected Crimea polygon.
+    const CRIMEA_GEOJSON = {
+      type: "Feature",
+      properties: { name: "Crimea (Ukraine)" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [[
+          [33.0, 46.1], [33.5, 46.1], [34.0, 46.05], [34.5, 45.95],
+          [35.0, 45.7], [35.4, 45.35], [35.8, 45.0], [36.2, 45.2],
+          [36.6, 45.35], [36.4, 45.5], [35.8, 45.7], [35.2, 45.5],
+          [35.0, 45.55], [34.5, 45.55], [34.0, 45.6], [33.7, 45.8],
+          [33.5, 45.95], [33.65, 46.2], [33.85, 46.25], [34.1, 46.3],
+          [34.5, 46.15], [34.8, 46.1], [35.2, 46.0], [35.5, 45.75],
+          [35.8, 45.4], [36.0, 45.15], [36.5, 45.05], [36.8, 45.0],
+          [36.6, 44.7], [36.2, 44.5], [35.6, 44.4], [35.0, 44.55],
+          [34.4, 44.55], [33.8, 44.4], [33.5, 44.55], [33.0, 44.4],
+          [32.5, 44.45], [32.0, 44.65], [31.8, 44.85], [32.0, 45.15],
+          [32.5, 45.35], [32.8, 45.5], [33.0, 45.7], [33.0, 46.1]
+        ]]
+      }
+    };
+
     async function drawWorldMap() {
       const container = document.getElementById('world-map')!;
       container.innerHTML = '';
+      container.style.position = 'relative';
 
       const rect = container.getBoundingClientRect();
       const width = rect.width;
@@ -605,7 +629,6 @@ function formatNum(n: number) {
         .append('svg')
         .attr('viewBox', `0 0 ${width} ${height}`);
 
-      // Load world topology
       const worldUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
       let world: any;
       try {
@@ -630,49 +653,75 @@ function formatNum(n: number) {
 
       const adoptionMap = (countryData as any).countries as Record<string, {name: string; adoption: number}>;
 
-      // Tooltip
+      // Tooltip — positioned relative to container
       const tooltip = d3.select('#world-map')
         .append('div')
         .style('position', 'absolute')
         .style('background', 'white')
-        .style('border', '1px solid #e2e5ea')
-        .style('border-radius', '4px')
-        .style('padding', '6px 10px')
+        .style('border', '1px solid #d1d5db')
+        .style('border-radius', '6px')
+        .style('padding', '8px 12px')
         .style('font-size', '12px')
         .style('pointer-events', 'none')
         .style('opacity', '0')
-        .style('box-shadow', '0 2px 8px rgba(0,0,0,0.1)')
-        .style('z-index', '10');
+        .style('box-shadow', '0 4px 12px rgba(0,0,0,0.1)')
+        .style('z-index', '10')
+        .style('white-space', 'nowrap');
 
-      svg.selectAll('path')
+      // Draw countries
+      svg.selectAll('path.country')
         .data(countries.features)
         .enter().append('path')
+        .attr('class', 'country')
         .attr('d', path as any)
         .attr('fill', (d: any) => {
           const id = String(d.id).padStart(3, '0');
           const info = adoptionMap[id];
           return info ? colorScale(info.adoption) as string : '#f3f4f6';
         })
-        .attr('stroke', '#fff')
-        .attr('stroke-width', 0.5)
-        .on('mouseenter', function(event: MouseEvent, d: any) {
+        .attr('stroke', '#e5e7eb')
+        .attr('stroke-width', 0.4)
+        .on('mouseenter', function(_event: MouseEvent, d: any) {
           const id = String(d.id).padStart(3, '0');
           const info = adoptionMap[id];
           if (!info) return;
-
           d3.select(this).attr('stroke', '#374151').attr('stroke-width', 1.5);
-          tooltip
-            .style('opacity', '1')
-            .html(`<strong>${info.name}</strong><br/><span style="color:${colorScale(info.adoption)};font-weight:700">${info.adoption}%</span> Ukrainian spelling`);
+          tooltip.style('opacity', '1')
+            .html(`<strong>${info.name}</strong><br/><span style="color:${colorScale(info.adoption)};font-weight:700">${info.adoption}%</span> adoption`);
         })
         .on('mousemove', function(event: MouseEvent) {
-          const containerRect = container.getBoundingClientRect();
-          tooltip
-            .style('left', (event.clientX - containerRect.left + 12) + 'px')
-            .style('top', (event.clientY - containerRect.top - 10) + 'px');
+          const cr = container.getBoundingClientRect();
+          const x = event.clientX - cr.left;
+          const y = event.clientY - cr.top;
+          tooltip.style('left', (x + 16) + 'px').style('top', (y - 20) + 'px');
         })
         .on('mouseleave', function() {
-          d3.select(this).attr('stroke', '#fff').attr('stroke-width', 0.5);
+          d3.select(this).attr('stroke', '#e5e7eb').attr('stroke-width', 0.4);
+          tooltip.style('opacity', '0');
+        });
+
+      // Crimea overlay — colored as Ukraine (country 804)
+      const ukraineData = adoptionMap['804'];
+      const crimeaColor = ukraineData ? colorScale(ukraineData.adoption) as string : '#059669';
+
+      svg.append('path')
+        .datum(CRIMEA_GEOJSON as any)
+        .attr('d', path as any)
+        .attr('fill', crimeaColor)
+        .attr('stroke', '#e5e7eb')
+        .attr('stroke-width', 0.4)
+        .on('mouseenter', function() {
+          d3.select(this).attr('stroke', '#374151').attr('stroke-width', 1.5);
+          tooltip.style('opacity', '1')
+            .html(`<strong>Crimea (Ukraine)</strong><br/><span style="color:${crimeaColor};font-weight:700">${ukraineData?.adoption || 98.5}%</span> adoption`);
+        })
+        .on('mousemove', function(event: MouseEvent) {
+          const cr = container.getBoundingClientRect();
+          tooltip.style('left', (event.clientX - cr.left + 16) + 'px')
+            .style('top', (event.clientY - cr.top - 20) + 'px');
+        })
+        .on('mouseleave', function() {
+          d3.select(this).attr('stroke', '#e5e7eb').attr('stroke-width', 0.4);
           tooltip.style('opacity', '0');
         });
     }
