@@ -98,21 +98,24 @@ function formatNum(n: number) {
               <span class="new-name" id="chart-new">Kyiv</span>
             </div>
             <div class="chart-subtitle" id="chart-subtitle">
-              Ukrainian spelling adoption rate (%) across sources, 2015–2026
+              Ukrainian spelling adoption rate (%) across sources, 2010–2026
             </div>
           </div>
           <div class="chart-controls">
             <button class="source-toggle active" data-source="gdelt" style="--source-color: #0057B8">
               <span class="source-dot"></span>GDELT
             </button>
-            <button class="source-toggle active" data-source="reddit" style="--source-color: #FF4500">
-              <span class="source-dot"></span>Reddit
+            <button class="source-toggle active" data-source="trends" style="--source-color: #d97706">
+              <span class="source-dot"></span>Trends
             </button>
             <button class="source-toggle active" data-source="wikipedia" style="--source-color: #059669">
               <span class="source-dot"></span>Wikipedia
             </button>
-            <button class="source-toggle active" data-source="trends" style="--source-color: #d97706">
-              <span class="source-dot"></span>Trends
+            <button class="source-toggle active" data-source="reddit" style="--source-color: #FF4500">
+              <span class="source-dot"></span>Reddit
+            </button>
+            <button class="source-toggle active" data-source="ngrams" style="--source-color: #8b5cf6">
+              <span class="source-dot"></span>Ngrams
             </button>
             <span class="toggle-sep"></span>
             <button class="event-toggle active" id="events-toggle">Events</button>
@@ -239,19 +242,21 @@ function formatNum(n: number) {
 
     const sourceColors: Record<string, string> = {
       gdelt: '#0057B8',
-      reddit: '#FF4500',
-      wikipedia: '#059669',
       trends: '#d97706',
+      wikipedia: '#059669',
+      reddit: '#FF4500',
+      ngrams: '#8b5cf6',
     };
 
     const sourceLabels: Record<string, string> = {
       gdelt: 'GDELT (news media)',
-      reddit: 'Reddit (social)',
-      wikipedia: 'Wikipedia (pageviews)',
       trends: 'Google Trends (search)',
+      wikipedia: 'Wikipedia (pageviews)',
+      reddit: 'Reddit (social)',
+      ngrams: 'Google Books Ngrams',
     };
 
-    let activeSources = new Set(['gdelt', 'reddit', 'wikipedia', 'trends']);
+    let activeSources = new Set(['gdelt', 'trends', 'wikipedia', 'reddit', 'ngrams']);
     let showEvents = true;
     let activePairId = 1;
 
@@ -297,8 +302,9 @@ function formatNum(n: number) {
 
       if (allDates.length === 0) return;
 
+      // Always start from 2010 for consistent view
       const x = d3.scaleTime()
-        .domain(d3.extent(allDates) as [Date, Date])
+        .domain([new Date(2010, 0, 1), new Date(2026, 5, 1)])
         .range([0, width]);
 
       const y = d3.scaleLinear()
@@ -357,6 +363,23 @@ function formatNum(n: number) {
         });
       }
 
+      // Tooltip
+      const chartContainer = document.getElementById('chart')!;
+      chartContainer.style.position = 'relative';
+      const tooltip = d3.select('#chart')
+        .append('div')
+        .style('position', 'absolute')
+        .style('background', 'white')
+        .style('border', '1px solid #d1d5db')
+        .style('border-radius', '6px')
+        .style('padding', '8px 12px')
+        .style('font-size', '12px')
+        .style('pointer-events', 'none')
+        .style('opacity', '0')
+        .style('box-shadow', '0 4px 12px rgba(0,0,0,0.1)')
+        .style('z-index', '10')
+        .style('white-space', 'nowrap');
+
       // Data lines
       const line = d3.line<{date: string; adoption: number}>()
         .x(d => x(parseDate(d.date)!))
@@ -375,6 +398,30 @@ function formatNum(n: number) {
           .attr('stroke', sourceColors[src])
           .attr('stroke-width', 2.5)
           .attr('d', line);
+
+        // Hover dots for each data point
+        svg.selectAll(`.dot-${src}`)
+          .data(series)
+          .enter().append('circle')
+          .attr('cx', (d: any) => x(parseDate(d.date)!))
+          .attr('cy', (d: any) => y(d.adoption))
+          .attr('r', 6)
+          .attr('fill', 'transparent')
+          .attr('cursor', 'pointer')
+          .on('mouseenter', function(_e: MouseEvent, d: any) {
+            d3.select(this).attr('fill', sourceColors[src]).attr('r', 5);
+            tooltip.style('opacity', '1')
+              .html(`<strong>${d.date}</strong><br/><span style="color:${sourceColors[src]}">${sourceLabels[src]}: <strong>${d.adoption}%</strong></span>`);
+          })
+          .on('mousemove', function(e: MouseEvent) {
+            const cr = chartContainer.getBoundingClientRect();
+            tooltip.style('left', (e.clientX - cr.left + 14) + 'px')
+              .style('top', (e.clientY - cr.top - 24) + 'px');
+          })
+          .on('mouseleave', function() {
+            d3.select(this).attr('fill', 'transparent').attr('r', 6);
+            tooltip.style('opacity', '0');
+          });
 
         // End dot + label
         const last = series[series.length - 1];
@@ -455,7 +502,7 @@ function formatNum(n: number) {
       container.innerHTML = '';
 
       const rect = container.getBoundingClientRect();
-      const margin = { top: 10, right: 60, bottom: 20, left: 120 };
+      const margin = { top: 10, right: 60, bottom: 20, left: 180 };
       const width = rect.width - margin.left - margin.right;
       const height = rect.height - margin.top - margin.bottom;
 
