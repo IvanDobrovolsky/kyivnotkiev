@@ -15,7 +15,7 @@ PROCESSED_DIR = DATA_DIR / "processed"
 FIGURES_DIR = ROOT_DIR / "figures"
 
 # Time range
-START_DATE = "2015-01-01"
+START_DATE = "2010-01-01"
 END_DATE = "2026-12-31"
 
 # Google Trends settings
@@ -41,6 +41,8 @@ VIZ_STYLE = "seaborn-v0_8-whitegrid"
 
 # Geopolitical events timeline
 EVENTS_TIMELINE = [
+    {"date": "2012-06-08", "name": "Euro 2012 (Kyiv)", "color": "#87CEEB"},
+    {"date": "2013-11-21", "name": "Revolution of Dignity begins", "color": "#FFD700"},
     {"date": "2014-02-22", "name": "Euromaidan revolution", "color": "#FFD700"},
     {"date": "2014-03-18", "name": "Crimea annexation", "color": "#FF4500"},
     {"date": "2018-10-02", "name": "#KyivNotKiev campaign", "color": "#0057B8"},
