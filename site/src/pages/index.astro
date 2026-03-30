@@ -36,7 +36,11 @@ function formatNum(n: number) {
   <div class="app">
     <nav class="topbar">
       <div class="topbar-logo">
-        <span class="k">KYIV</span><span class="n">NOT</span><span class="k">KIEV</span>
+        <svg class="leaf" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.5 2 2 6.5 2 12c0 2.5 1 4.8 2.5 6.5C6 17 8 14 12 10c4 4 6 7 7.5 8.5C21 16.8 22 14.5 22 12c0-5.5-4.5-10-10-10z" fill="#059669" opacity="0.85"/>
+          <path d="M12 10v12M8 14l4-4 4 4" stroke="#fff" stroke-width="1.2" fill="none" opacity="0.6"/>
+        </svg>
+        <span class="k">KYIV</span><span class="n">NOT</span><span class="k struck">KIEV</span>
       </div>
       <div class="topbar-links">
         <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
@@ -133,6 +137,28 @@ function formatNum(n: number) {
         <div id="category-chart" style="width:100%; height:280px;"></div>
       </div>
 
+      <!-- World map -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" style="color: var(--text)">Global Adoption Map</div>
+            <div class="chart-subtitle">Ukrainian spelling adoption (%) by country — Kiev → Kyiv in GDELT news corpus</div>
+          </div>
+        </div>
+        <div id="world-map" style="width:100%; height:420px;"></div>
+        <div class="chart-legend" id="map-legend" style="justify-content: center; gap: 0.5rem;">
+          <span style="font-size:0.7rem; color:var(--text-muted)">0%</span>
+          <div style="display:flex; height:10px; width:200px; border-radius:5px; overflow:hidden;">
+            <div style="flex:1; background:#fef2f2"></div>
+            <div style="flex:1; background:#fecaca"></div>
+            <div style="flex:1; background:#fbbf24"></div>
+            <div style="flex:1; background:#34d399"></div>
+            <div style="flex:1; background:#059669"></div>
+          </div>
+          <span style="font-size:0.7rem; color:var(--text-muted)">100%</span>
+        </div>
+      </div>
+
       <!-- All pairs heatmap -->
       <div class="chart-container">
         <div class="chart-header">
@@ -174,8 +200,10 @@ function formatNum(n: number) {
 
   <script>
     import * as d3 from 'd3';
+    import * as topojson from 'topojson-client';
     import timeseriesData from '../data/timeseries.json';
     import pairs from '../data/pairs.json';
+    import countryData from '../data/countries.json';
 
     const sourceColors: Record<string, string> = {
       gdelt: '#0057B8',
@@ -564,10 +592,96 @@ function formatNum(n: number) {
       });
     }
 
+    // ── World map ─────────────────────────────────────────
+    async function drawWorldMap() {
+      const container = document.getElementById('world-map')!;
+      container.innerHTML = '';
+
+      const rect = container.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+
+      const svg = d3.select('#world-map')
+        .append('svg')
+        .attr('viewBox', `0 0 ${width} ${height}`);
+
+      // Load world topology
+      const worldUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+      let world: any;
+      try {
+        world = await d3.json(worldUrl);
+      } catch {
+        svg.append('text').attr('x', width/2).attr('y', height/2)
+          .attr('text-anchor', 'middle').attr('fill', '#9ca3af')
+          .text('Map loading...');
+        return;
+      }
+
+      const countries = topojson.feature(world, world.objects.countries) as any;
+
+      const projection = d3.geoNaturalEarth1()
+        .fitSize([width, height - 10], countries);
+
+      const path = d3.geoPath().projection(projection);
+
+      const colorScale = d3.scaleSequential()
+        .domain([0, 100])
+        .interpolator(d3.interpolateRgbBasis(['#fef2f2', '#fecaca', '#fbbf24', '#34d399', '#059669']));
+
+      const adoptionMap = (countryData as any).countries as Record<string, {name: string; adoption: number}>;
+
+      // Tooltip
+      const tooltip = d3.select('#world-map')
+        .append('div')
+        .style('position', 'absolute')
+        .style('background', 'white')
+        .style('border', '1px solid #e2e5ea')
+        .style('border-radius', '4px')
+        .style('padding', '6px 10px')
+        .style('font-size', '12px')
+        .style('pointer-events', 'none')
+        .style('opacity', '0')
+        .style('box-shadow', '0 2px 8px rgba(0,0,0,0.1)')
+        .style('z-index', '10');
+
+      svg.selectAll('path')
+        .data(countries.features)
+        .enter().append('path')
+        .attr('d', path as any)
+        .attr('fill', (d: any) => {
+          const id = String(d.id).padStart(3, '0');
+          const info = adoptionMap[id];
+          return info ? colorScale(info.adoption) as string : '#f3f4f6';
+        })
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 0.5)
+        .on('mouseenter', function(event: MouseEvent, d: any) {
+          const id = String(d.id).padStart(3, '0');
+          const info = adoptionMap[id];
+          if (!info) return;
+
+          d3.select(this).attr('stroke', '#374151').attr('stroke-width', 1.5);
+          tooltip
+            .style('opacity', '1')
+            .html(`<strong>${info.name}</strong><br/><span style="color:${colorScale(info.adoption)};font-weight:700">${info.adoption}%</span> Ukrainian spelling`);
+        })
+        .on('mousemove', function(event: MouseEvent) {
+          const containerRect = container.getBoundingClientRect();
+          tooltip
+            .style('left', (event.clientX - containerRect.left + 12) + 'px')
+            .style('top', (event.clientY - containerRect.top - 10) + 'px');
+        })
+        .on('mouseleave', function() {
+          d3.select(this).attr('stroke', '#fff').attr('stroke-width', 0.5);
+          tooltip.style('opacity', '0');
+        });
+    }
+
     drawChart();
     drawCategoryChart();
+    drawWorldMap();
     drawHeatmap();
-    window.addEventListener('resize', () => { drawChart(); drawCategoryChart(); drawHeatmap(); });
+    window.addEventListener('resize', () => { drawChart(); drawCategoryChart(); drawWorldMap(); drawHeatmap(); });
   </script>
 </body>
 </html>

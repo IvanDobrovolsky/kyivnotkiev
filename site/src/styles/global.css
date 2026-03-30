@@ -57,8 +57,21 @@ body {
   letter-spacing: 0.05em;
 }
 
+.topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.topbar-logo .leaf { flex-shrink: 0; }
+
 .topbar-logo .k { color: var(--blue); }
 .topbar-logo .n { color: var(--text-muted); }
+.topbar-logo .struck {
+  text-decoration: line-through;
+  color: var(--red);
+  opacity: 0.5;
+}
 
 .topbar-links {
   display: flex;
