@@ -15,20 +15,26 @@ env/
 
 # uv
 .python-version
+uv.lock
 
-# Data (raw data is large, keep processed for reproducibility)
-data/raw/gdelt/*.parquet
-data/raw/trends/*.csv
-data/raw/ngrams/*.csv
-data/processed/*.parquet
+# Data (large files — stored in GCS/BigQuery)
+data/raw/**/*.parquet
+data/raw/**/*.csv
+data/raw/**/*.zst
+data/processed/**/*.parquet
+data/processed/**/*.csv
 
 # Keep directory structure
-!data/raw/gdelt/.gitkeep
-!data/raw/trends/.gitkeep
-!data/raw/ngrams/.gitkeep
+!data/raw/.gitkeep
 !data/processed/.gitkeep
 
-# Credentials & secrets — NEVER commit these
+# Terraform
+infrastructure/.terraform/
+infrastructure/.terraform.lock.hcl
+infrastructure/terraform.tfstate*
+*.tfvars
+
+# Credentials & secrets
 *.json
 !data/toponym_pairs.json
 .gcloud/
@@ -39,6 +45,9 @@ data/processed/*.parquet
 *.p12
 .env
 .env.*
+
+# Generated figures (reproduced from pipeline)
+figures/
 
 # IDE
 .idea/
@@ -51,9 +60,5 @@ data/processed/*.parquet
 .DS_Store
 Thumbs.db
 
-# Jupyter (shouldn't exist but just in case)
+# Jupyter
 .ipynb_checkpoints/
-
-# Environment variables
-.env
-.env.local
