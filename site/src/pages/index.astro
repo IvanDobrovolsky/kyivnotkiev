@@ -72,7 +72,7 @@ function formatNum(n: number) {
     <main class="main">
       <div class="stats">
         <div class="stat-card">
-          <div class="stat-value">{formatNum(totalMentions)}</div>
+          <div class="stat-value">38.8M</div>
           <div class="stat-label">Mentions Analyzed</div>
         </div>
         <div class="stat-card">
@@ -102,19 +102,19 @@ function formatNum(n: number) {
             </div>
           </div>
           <div class="chart-controls">
-            <button class="source-toggle active" data-source="gdelt" style="--source-color: #0057B8">
-              <span class="source-dot"></span>GDELT
-            </button>
             <button class="source-toggle active" data-source="trends" style="--source-color: #d97706">
               <span class="source-dot"></span>Trends
             </button>
-            <button class="source-toggle active" data-source="wikipedia" style="--source-color: #059669">
+            <button class="source-toggle" data-source="gdelt" style="--source-color: #0057B8">
+              <span class="source-dot"></span>GDELT
+            </button>
+            <button class="source-toggle" data-source="wikipedia" style="--source-color: #059669">
               <span class="source-dot"></span>Wikipedia
             </button>
-            <button class="source-toggle active" data-source="reddit" style="--source-color: #FF4500">
+            <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500">
               <span class="source-dot"></span>Reddit
             </button>
-            <button class="source-toggle active" data-source="ngrams" style="--source-color: #8b5cf6">
+            <button class="source-toggle" data-source="ngrams" style="--source-color: #8b5cf6">
               <span class="source-dot"></span>Ngrams
             </button>
             <span class="toggle-sep"></span>
@@ -123,6 +123,42 @@ function formatNum(n: number) {
         </div>
         <div id="chart"></div>
         <div class="chart-legend" id="chart-legend"></div>
+      </div>
+
+      <!-- Per-pair world map -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" style="color: var(--text)">Adoption Map: <span id="map-pair-name">Kiev → Kyiv</span></div>
+            <div class="chart-subtitle">Country-level adoption (%) — GDELT news corpus 2024–2026</div>
+          </div>
+        </div>
+        <div id="world-map" style="width:100%; height:400px;"></div>
+        <div class="chart-legend" id="map-legend" style="justify-content: center; gap: 0.5rem;">
+          <span style="font-size:0.75rem; color:var(--text-muted)">0%</span>
+          <div style="display:flex; height:12px; width:240px; border-radius:6px; overflow:hidden;">
+            <div style="flex:1; background:#dc2626"></div>
+            <div style="flex:1; background:#f97316"></div>
+            <div style="flex:1; background:#eab308"></div>
+            <div style="flex:1; background:#22c55e"></div>
+            <div style="flex:1; background:#047857"></div>
+          </div>
+          <span style="font-size:0.75rem; color:var(--text-muted)">100%</span>
+        </div>
+      </div>
+
+      <!-- Per-pair holdouts -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" style="color: var(--text)">Holdouts: <span id="holdout-pair-name">Kiev</span></div>
+            <div class="chart-subtitle">Domains still using old spelling (2024–2026, min 20 mentions)</div>
+          </div>
+          <div class="chart-controls">
+            <button class="event-toggle" id="ru-filter-toggle">Hide .ru domains</button>
+          </div>
+        </div>
+        <div id="holdout-table" style="max-height: 400px; overflow-y: auto;"></div>
       </div>
 
       <!-- Data source availability note -->
@@ -163,28 +199,6 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- World map -->
-      <div class="chart-container">
-        <div class="chart-header">
-          <div>
-            <div class="chart-title" style="color: var(--text)">Global Adoption Map</div>
-            <div class="chart-subtitle">Kiev → Kyiv adoption (%) by country — GDELT news corpus 2024–2026</div>
-          </div>
-        </div>
-        <div id="world-map" style="width:100%; height:420px;"></div>
-        <div class="chart-legend" id="map-legend" style="justify-content: center; gap: 0.5rem;">
-          <span style="font-size:0.75rem; color:var(--text-muted)">0%</span>
-          <div style="display:flex; height:12px; width:240px; border-radius:6px; overflow:hidden;">
-            <div style="flex:1; background:#dc2626"></div>
-            <div style="flex:1; background:#f97316"></div>
-            <div style="flex:1; background:#eab308"></div>
-            <div style="flex:1; background:#22c55e"></div>
-            <div style="flex:1; background:#047857"></div>
-          </div>
-          <span style="font-size:0.75rem; color:var(--text-muted)">100%</span>
-        </div>
-      </div>
-
       <!-- All pairs heatmap -->
       <div class="chart-container">
         <div class="chart-header">
@@ -194,17 +208,6 @@ function formatNum(n: number) {
           </div>
         </div>
         <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
-      </div>
-
-      <!-- Holdout domains table -->
-      <div class="chart-container">
-        <div class="chart-header">
-          <div>
-            <div class="chart-title" style="color: var(--text)">Top Holdouts</div>
-            <div class="chart-subtitle">Media domains still predominantly using "Kiev" over "Kyiv" (2024–2026, min 50 mentions)</div>
-          </div>
-        </div>
-        <div id="holdout-table" style="max-height: 400px; overflow-y: auto;"></div>
       </div>
 
       <div class="chart-container" id="about">
@@ -242,6 +245,8 @@ function formatNum(n: number) {
     import pairs from '../data/pairs.json';
     import countryData from '../data/countries.json';
     import holdoutsData from '../data/holdouts.json';
+    import holdoutsByPair from '../data/holdouts_by_pair.json';
+    import countriesByPair from '../data/countries_by_pair.json';
 
     const sourceColors: Record<string, string> = {
       gdelt: '#0057B8',
@@ -259,7 +264,8 @@ function formatNum(n: number) {
       ngrams: 'Google Books Ngrams',
     };
 
-    let activeSources = new Set(['gdelt', 'trends', 'wikipedia', 'reddit', 'ngrams']);
+    let activeSources = new Set(['trends']);
+    let hideRuDomains = false;
     let showEvents = true;
     let activePairId = 1;
 
@@ -505,6 +511,8 @@ function formatNum(n: number) {
         if (nameEl) document.getElementById('chart-new')!.textContent = nameEl.textContent;
         if (oldEl) document.getElementById('chart-old')!.textContent = oldEl.textContent;
         drawChart();
+        drawWorldMap();
+        drawHoldoutTable();
       });
     });
 
@@ -761,7 +769,14 @@ function formatNum(n: number) {
         .domain([0, 100])
         .interpolator(d3.interpolateRgbBasis(['#dc2626', '#f97316', '#eab308', '#22c55e', '#047857']));
 
-      const adoptionMap = (countryData as any).countries as Record<string, {name: string; adoption: number}>;
+      // Use per-pair country data if available, fallback to default (pair 1)
+      const pairCountries = (countriesByPair as any)[String(activePairId)];
+      const adoptionMap = (pairCountries || (countryData as any).countries) as Record<string, {name: string; adoption: number}>;
+
+      // Update map title
+      const mapNameEl = document.getElementById('map-pair-name');
+      const mapPair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      if (mapNameEl && mapPair) mapNameEl.textContent = `${mapPair.russian} → ${mapPair.ukrainian}`;
 
       // Tooltip — positioned relative to container
       const tooltip = d3.select('#world-map')
@@ -839,13 +854,30 @@ function formatNum(n: number) {
     // ── Holdout table ─────────────────────────────────────
     function drawHoldoutTable() {
       const container = document.getElementById('holdout-table')!;
-      const holdouts = holdoutsData as any[];
+      const pairHoldouts = (holdoutsByPair as any)[String(activePairId)];
 
-      const rows = holdouts.slice(0, 30).map((h: any) => `
-        <tr style="border-bottom:1px solid #f3f4f6;">
-          <td style="padding:0.5rem 0.75rem; font-size:0.8rem; font-weight:500;">${h.source_domain}</td>
-          <td style="padding:0.5rem 0.75rem; font-size:0.8rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
-          <td style="padding:0.5rem 0.75rem; font-size:0.75rem; color:#9ca3af;">${h.total.toLocaleString()}</td>
+      // Update title
+      const nameEl = document.getElementById('holdout-pair-name');
+      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      if (nameEl && pair) nameEl.textContent = pair.russian;
+
+      if (!pairHoldouts || pairHoldouts.length === 0) {
+        container.innerHTML = '<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">No holdout data for this pair (not enough GDELT mentions)</div>';
+        return;
+      }
+
+      const filtered = hideRuDomains
+        ? pairHoldouts.filter((h: any) => !h.is_ru)
+        : pairHoldouts;
+
+      const rows = filtered.map((h: any) => `
+        <tr style="border-bottom:1px solid #f3f4f6; ${h.is_ru ? 'background:#fef2f2;' : ''}">
+          <td style="padding:0.5rem 0.75rem; font-size:0.85rem; font-weight:500;">
+            ${h.domain}
+            ${h.is_ru ? '<span style="font-size:0.65rem; color:#dc2626; margin-left:0.3rem; font-weight:600;">.ru</span>' : ''}
+          </td>
+          <td style="padding:0.5rem 0.75rem; font-size:0.85rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
+          <td style="padding:0.5rem 0.75rem; font-size:0.8rem; color:#9ca3af;">${h.total.toLocaleString()}</td>
         </tr>
       `).join('');
 
@@ -854,7 +886,7 @@ function formatNum(n: number) {
           <thead>
             <tr style="border-bottom:2px solid #e5e7eb;">
               <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Domain</th>
-              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Still "Kiev"</th>
+              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Old spelling</th>
               <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Mentions</th>
             </tr>
           </thead>
@@ -862,6 +894,15 @@ function formatNum(n: number) {
         </table>
       `;
     }
+
+    // Russian media filter toggle
+    document.getElementById('ru-filter-toggle')?.addEventListener('click', (e) => {
+      const btn = e.currentTarget as HTMLElement;
+      hideRuDomains = !hideRuDomains;
+      btn.textContent = hideRuDomains ? 'Show .ru domains' : 'Hide .ru domains';
+      btn.classList.toggle('active');
+      drawHoldoutTable();
+    });
 
     drawChart();
     drawCategoryChart();
