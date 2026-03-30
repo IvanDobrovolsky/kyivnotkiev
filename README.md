@@ -96,36 +96,18 @@ make figures         # Generate all charts
 | `make status` | Show watermarks — what's been fetched |
 | `make reproduce` | Full end-to-end reproduction |
 
-## Adding a New Pair
-
-Edit `config/pairs.yaml`:
-
-```yaml
-- id: 72
-  category: food
-  russian: "Pelmeni"
-  ukrainian: "Varenyky"
-  enabled: true
-  is_control: false
-```
-
-Run `make ingest-pair ID=72`. Done. Existing data untouched.
-
 ## Project Structure
 
 ```
-config/           → pairs.yaml, sources.yaml, pipeline.yaml
-infrastructure/   → Terraform (BigQuery, GCS, Dataproc, IAM)
-pipeline/
-  ingestion/      → GDELT, Common Crawl, Reddit, Wikipedia, Trends, Ngrams, YouTube
-  analysis/       → adoption, changepoint, categories, holdouts, regression
-  figures/        → crossover, heatmap, choropleth, category curves
-  transform/      → normalize, validate, watermarks
+config/             → pairs.yaml, sources.yaml, pipeline.yaml
+infrastructure/     → Terraform (BigQuery, GCS, Dataproc, IAM) — see infrastructure/README.md
+pipeline/           → Data pipeline — see pipeline/README.md
+  ingestion/        → GDELT, Common Crawl, Reddit, Wikipedia, Trends, Ngrams, YouTube
+  analysis/         → adoption, changepoint, categories, holdouts, regression
+  figures/          → crossover, heatmap, choropleth, category curves
+  transform/        → normalize, validate, watermarks
+website/            → kyivnotkiev.org static site
 tests/
-Dockerfile        → Full reproducible environment
-Makefile          → One-command everything
+Dockerfile          → Full reproducible environment
+Makefile            → One-command everything
 ```
-
-## Research
-
-Academic paper in preparation. See [KyivNotKiev-paper](https://github.com/IvanDobrovolsky/KyivNotKiev-paper).
