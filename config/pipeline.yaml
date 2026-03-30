@@ -1,0 +1,91 @@
+# Pipeline Configuration
+# Controls scheduling, thresholds, and GCP settings.
+
+gcp:
+  project_id: "kyivnotkiev-research"
+  region: "us-central1"
+  zone: "us-central1-a"
+
+  bigquery:
+    dataset: "kyivnotkiev"
+    location: "US"
+
+  storage:
+    bucket: "kyivnotkiev-data"
+    raw_prefix: "raw/"
+    processed_prefix: "processed/"
+    figures_prefix: "figures/"
+
+  dataproc:
+    cluster_name: "kyivnotkiev-spark"
+    master_machine_type: "n1-standard-4"
+    worker_machine_type: "n1-standard-4"
+    num_workers: 4
+    max_workers: 8  # autoscaling
+    image_version: "2.1-debian11"
+    pip_packages:
+      - pyspark==3.5.0
+      - warcio==1.7.4
+      - pyyaml==6.0.1
+
+  cloud_run:
+    service_name: "kyivnotkiev-orchestrator"
+    memory: "2Gi"
+    cpu: 2
+    timeout: 3600
+
+pipeline:
+  # Incremental ingestion settings
+  staleness_threshold_days: 7  # refetch if older than this
+  batch_size: 10               # pairs per batch for API sources
+  retry_max: 3
+  retry_backoff_seconds: 60
+
+  # Common Crawl settings
+  common_crawl:
+    crawl_ids:
+      - "CC-MAIN-2024-10"
+      - "CC-MAIN-2024-22"
+      - "CC-MAIN-2024-33"
+      - "CC-MAIN-2024-42"
+      - "CC-MAIN-2024-51"
+      - "CC-MAIN-2025-05"
+      - "CC-MAIN-2025-13"
+      # Historical crawls for longitudinal analysis
+      - "CC-MAIN-2019-09"
+      - "CC-MAIN-2020-10"
+      - "CC-MAIN-2021-10"
+      - "CC-MAIN-2022-05"
+      - "CC-MAIN-2022-21"
+      - "CC-MAIN-2022-40"
+      - "CC-MAIN-2023-06"
+      - "CC-MAIN-2023-23"
+      - "CC-MAIN-2023-40"
+      - "CC-MAIN-2023-50"
+    languages_filter: ["en"]  # English pages only for now
+    max_records_per_crawl: null  # null = process all
+
+  # Reddit Arctic Shift settings
+  reddit:
+    subreddits:
+      - ukraine
+      - worldnews
+      - europe
+      - UkrainianConflict
+      - geopolitics
+      - MapPorn
+      - soccer
+      - food
+      - travel
+      - AskReddit
+    dump_url: "https://arctic-shift.com/download"
+
+  # Analysis settings
+  analysis:
+    bootstrap_iterations: 10000
+    confidence_level: 0.95
+    changepoint_methods:
+      - pelt
+      - binseg
+      - ruptures_dynp
+    min_observations: 30  # minimum data points for analysis

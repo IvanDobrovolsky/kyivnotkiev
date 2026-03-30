@@ -1,0 +1,182 @@
+# Data Sources Configuration
+# Defines each source, its BigQuery table schema, and ingestion parameters.
+
+sources:
+  gdelt:
+    name: "GDELT Global Knowledge Graph"
+    description: "News media mentions from 42B+ articles"
+    bq_table: "raw_gdelt"
+    public_dataset: "gdelt-bq.gdeltv2.gkg_partitioned"
+    ingestion:
+      type: bigquery
+      incremental: true
+      partition_field: "_PARTITIONTIME"
+      batch_size_days: 30
+    schema:
+      - {name: pair_id, type: INT64}
+      - {name: date, type: DATE}
+      - {name: source_url, type: STRING}
+      - {name: source_domain, type: STRING}
+      - {name: source_country, type: STRING}
+      - {name: matched_term, type: STRING}
+      - {name: variant, type: STRING, description: "russian or ukrainian"}
+      - {name: count, type: INT64}
+      - {name: ingested_at, type: TIMESTAMP}
+
+  common_crawl:
+    name: "Common Crawl Web Archive"
+    description: "Billions of web pages crawled monthly"
+    bq_table: "raw_common_crawl"
+    ingestion:
+      type: spark
+      incremental: true
+      input_format: warc
+      cluster_size: "n1-standard-4 x 8"
+    schema:
+      - {name: pair_id, type: INT64}
+      - {name: url, type: STRING}
+      - {name: domain, type: STRING}
+      - {name: tld, type: STRING}
+      - {name: matched_term, type: STRING}
+      - {name: variant, type: STRING}
+      - {name: context_snippet, type: STRING, description: "100 chars around match"}
+      - {name: crawl_id, type: STRING, description: "e.g. CC-MAIN-2024-10"}
+      - {name: crawl_date, type: DATE}
+      - {name: content_language, type: STRING}
+      - {name: ingested_at, type: TIMESTAMP}
+
+  reddit:
+    name: "Reddit Comments & Posts"
+    description: "Social media discussion corpus via Arctic Shift + API"
+    bq_table: "raw_reddit"
+    ingestion:
+      type: spark
+      incremental: true
+      input_format: zst_jsonl
+      sources:
+        - arctic_shift_dump
+        - reddit_search_api
+    schema:
+      - {name: pair_id, type: INT64}
+      - {name: subreddit, type: STRING}
+      - {name: post_id, type: STRING}
+      - {name: comment_id, type: STRING, mode: NULLABLE}
+      - {name: author, type: STRING}
+      - {name: title, type: STRING, mode: NULLABLE}
+      - {name: body, type: STRING}
+      - {name: score, type: INT64}
+      - {name: matched_term, type: STRING}
+      - {name: variant, type: STRING}
+      - {name: created_utc, type: TIMESTAMP}
+      - {name: ingested_at, type: TIMESTAMP}
+
+  wikipedia:
+    name: "Wikipedia Pageviews & Edit History"
+    description: "Encyclopedia article views and revision history"
+    bq_table: "raw_wikipedia"
+    ingestion:
+      type: api
+      incremental: true
+      apis:
+        - wikimedia_pageviews
+        - wikimedia_edits
+    schema:
+      - {name: pair_id, type: INT64}
+      - {name: page_title, type: STRING}
+      - {name: variant, type: STRING}
+      - {name: date, type: DATE}
+      - {name: pageviews, type: INT64}
+      - {name: edits, type: INT64, mode: NULLABLE}
+      - {name: ingested_at, type: TIMESTAMP}
+
+  trends:
+    name: "Google Trends"
+    description: "Public search interest over time"
+    bq_table: "raw_trends"
+    ingestion:
+      type: api
+      incremental: true
+      api: pytrends
+      resolution: weekly
+    schema:
+      - {name: pair_id, type: INT64}
+      - {name: date, type: DATE}
+      - {name: term, type: STRING}
+      - {name: variant, type: STRING}
+      - {name: interest, type: INT64}
+      - {name: geo, type: STRING, description: "Country code or empty for worldwide"}
+      - {name: ingested_at, type: TIMESTAMP}
+
+  ngrams:
+    name: "Google Books Ngrams"
+    description: "Word frequency in millions of digitized books (1800-2019)"
+    bq_table: "raw_ngrams"
+    ingestion:
+      type: api
+      incremental: false
+      api: google_ngrams
+      resolution: yearly
+    schema:
+      - {name: pair_id, type: INT64}
+      - {name: year, type: INT64}
+      - {name: term, type: STRING}
+      - {name: variant, type: STRING}
+      - {name: frequency, type: FLOAT64}
+      - {name: ingested_at, type: TIMESTAMP}
+
+  youtube:
+    name: "YouTube Video Metadata"
+    description: "Video titles, descriptions, and view counts"
+    bq_table: "raw_youtube"
+    ingestion:
+      type: api
+      incremental: true
+      api: youtube_data_v3
+      requires_key: true
+    schema:
+      - {name: pair_id, type: INT64}
+      - {name: video_id, type: STRING}
+      - {name: channel_id, type: STRING}
+      - {name: channel_title, type: STRING}
+      - {name: title, type: STRING}
+      - {name: description, type: STRING}
+      - {name: matched_term, type: STRING}
+      - {name: variant, type: STRING}
+      - {name: view_count, type: INT64}
+      - {name: published_at, type: TIMESTAMP}
+      - {name: ingested_at, type: TIMESTAMP}
+
+# Analysis output tables
+analysis_tables:
+  adoption:
+    description: "Adoption ratios per pair per source per period"
+    schema:
+      - {name: pair_id, type: INT64}
+      - {name: source, type: STRING}
+      - {name: period, type: STRING}
+      - {name: period_start, type: DATE}
+      - {name: period_end, type: DATE}
+      - {name: russian_count, type: INT64}
+      - {name: ukrainian_count, type: INT64}
+      - {name: total_count, type: INT64}
+      - {name: adoption_ratio, type: FLOAT64}
+
+  changepoints:
+    description: "Detected change points with confidence intervals"
+    schema:
+      - {name: pair_id, type: INT64}
+      - {name: source, type: STRING}
+      - {name: changepoint_date, type: DATE}
+      - {name: ci_lower, type: DATE}
+      - {name: ci_upper, type: DATE}
+      - {name: method, type: STRING}
+      - {name: effect_size, type: FLOAT64}
+
+  watermarks:
+    description: "Tracks last successful ingestion per pair per source"
+    schema:
+      - {name: pair_id, type: INT64}
+      - {name: source, type: STRING}
+      - {name: last_fetched, type: TIMESTAMP}
+      - {name: row_count, type: INT64}
+      - {name: status, type: STRING, description: "success, failed, pending"}
