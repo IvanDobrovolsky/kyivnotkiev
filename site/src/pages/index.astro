@@ -27,14 +27,13 @@ function formatNum(n: number) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>KyivNotKiev — Tracking Ukrainian Toponym Adoption</title>
-  <meta name="description" content="The world's largest computational study tracking how the world adopts Ukrainian spellings. 20M+ data points, 7 sources, 69 pairs.">
+  <title>KyivNotKiev — Measuring Ukrainian Toponym Adoption Worldwide</title>
+  <meta name="description" content="How effectively did the #KyivNotKiev campaign change language? We measured 25M+ mentions across news, social media, and books to find out.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="app">
-    <!-- Top bar -->
     <nav class="topbar">
       <div class="topbar-logo">
         <span class="k">KYIV</span><span class="n">NOT</span><span class="k">KIEV</span>
@@ -45,7 +44,6 @@ function formatNum(n: number) {
       </div>
     </nav>
 
-    <!-- Sidebar -->
     <aside class="sidebar">
       {grouped.map((cat, ci) => (
         <div class="sidebar-section">
@@ -71,16 +69,15 @@ function formatNum(n: number) {
       ))}
     </aside>
 
-    <!-- Main content -->
     <main class="main">
       <div class="stats">
         <div class="stat-card">
           <div class="stat-value">{formatNum(totalMentions)}</div>
-          <div class="stat-label">Total Mentions</div>
+          <div class="stat-label">Mentions Analyzed</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">{pairs.pairs.length}</div>
-          <div class="stat-label">Pairs Tracked</div>
+          <div class="stat-label">Toponym Pairs</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">7</div>
@@ -92,7 +89,6 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Chart -->
       <div class="chart-container">
         <div class="chart-header">
           <div>
@@ -102,45 +98,53 @@ function formatNum(n: number) {
               <span class="new-name" id="chart-new">Kyiv</span>
             </div>
             <div class="chart-subtitle" id="chart-subtitle">
-              Ukrainian spelling adoption over time — GDELT global news corpus
+              Ukrainian spelling adoption rate (%) across sources, 2015–2026
             </div>
           </div>
-          <div class="source-toggles">
+          <div class="chart-controls">
             <button class="source-toggle active" data-source="gdelt" style="--source-color: #0057B8">
               <span class="source-dot"></span>GDELT
             </button>
             <button class="source-toggle active" data-source="reddit" style="--source-color: #FF4500">
               <span class="source-dot"></span>Reddit
             </button>
-            <button class="source-toggle active" data-source="wikipedia" style="--source-color: #2ecc71">
+            <button class="source-toggle active" data-source="wikipedia" style="--source-color: #059669">
               <span class="source-dot"></span>Wikipedia
             </button>
-            <button class="source-toggle active" data-source="trends" style="--source-color: #e6b800">
+            <button class="source-toggle active" data-source="trends" style="--source-color: #d97706">
               <span class="source-dot"></span>Trends
             </button>
+            <span class="toggle-sep"></span>
+            <button class="event-toggle active" id="events-toggle">Events</button>
           </div>
         </div>
         <div id="chart"></div>
+        <div class="chart-legend" id="chart-legend"></div>
       </div>
 
-      <!-- About -->
       <div class="chart-container" id="about">
-        <div style="max-width: 640px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.7;">
-          <p style="margin-bottom: 0.8rem;">
-            The world's largest computational study of real-time toponymic change.
-            We track how 69 Ukrainian names are spelled across 7 independent data
-            sources spanning a decade of global media, social platforms, and reference works.
+        <div class="about-text">
+          <p>
+            In 2018, Ukraine's Ministry of Foreign Affairs launched #KyivNotKiev — a campaign
+            to change how the world spells Ukrainian place names. We built a data pipeline to
+            measure whether it actually worked.
           </p>
-          <p style="margin-bottom: 0.8rem;">
-            The pipeline is fully open source and reproducible on Google Cloud Platform
-            using Apache Spark for TB-scale processing.
+          <p>
+            This dashboard tracks 69 Ukrainian toponym pairs (from city names to dishes to
+            historical terms) across 7 independent data sources. Every data point comes from
+            real-world usage — news articles, social media posts, encyclopedia pageviews, book
+            frequency, and web search trends.
           </p>
-          <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-            <a href="https://github.com/IvanDobrovolsky/kyivnotkiev"
-               style="color: var(--yellow); font-size: 0.8rem; text-decoration: none; border: 1px solid var(--yellow); padding: 0.4rem 0.8rem;">
-              GitHub
-            </a>
-          </div>
+          <p>
+            Some findings: social media communities adopted Ukrainian spellings 5–9x faster
+            than traditional media. "Disaster brands" like Chernobyl are nearly immovable.
+            And food terms like Borshch are fighting a separate battle, championed by chef
+            Yevhen Klopotenko's UNESCO campaign.
+          </p>
+        </div>
+        <div class="about-links">
+          <a href="https://github.com/IvanDobrovolsky/kyivnotkiev">Source Code</a>
+          <a href="https://github.com/IvanDobrovolsky/KyivNotKiev-paper">Research Paper</a>
         </div>
       </div>
     </main>
@@ -153,19 +157,29 @@ function formatNum(n: number) {
     const sourceColors: Record<string, string> = {
       gdelt: '#0057B8',
       reddit: '#FF4500',
-      wikipedia: '#2ecc71',
-      trends: '#e6b800',
+      wikipedia: '#059669',
+      trends: '#d97706',
+    };
+
+    const sourceLabels: Record<string, string> = {
+      gdelt: 'GDELT (news media)',
+      reddit: 'Reddit (social)',
+      wikipedia: 'Wikipedia (pageviews)',
+      trends: 'Google Trends (search)',
     };
 
     let activeSources = new Set(['gdelt', 'reddit', 'wikipedia', 'trends']);
+    let showEvents = true;
     let activePairId = 1;
 
     function drawChart() {
       const container = document.getElementById('chart')!;
+      const legendContainer = document.getElementById('chart-legend')!;
       container.innerHTML = '';
+      legendContainer.innerHTML = '';
 
       const rect = container.getBoundingClientRect();
-      const margin = { top: 20, right: 20, bottom: 30, left: 45 };
+      const margin = { top: 24, right: 20, bottom: 30, left: 45 };
       const width = rect.width - margin.left - margin.right;
       const height = rect.height - margin.top - margin.bottom;
 
@@ -180,7 +194,7 @@ function formatNum(n: number) {
         svg.append('text')
           .attr('x', width / 2).attr('y', height / 2)
           .attr('text-anchor', 'middle')
-          .attr('fill', '#6a6a8a')
+          .attr('fill', '#9ca3af')
           .attr('font-size', '14px')
           .text('Data coming soon');
         return;
@@ -188,14 +202,13 @@ function formatNum(n: number) {
 
       const parseDate = d3.timeParse('%Y-%m');
       const allDates: Date[] = [];
-      const allValues: number[] = [];
 
       for (const src of activeSources) {
         const series = pairData[src];
         if (!series) continue;
         for (const d of series) {
           const date = parseDate(d.date);
-          if (date) { allDates.push(date); allValues.push(d.adoption); }
+          if (date) allDates.push(date);
         }
       }
 
@@ -209,55 +222,64 @@ function formatNum(n: number) {
         .domain([0, 100])
         .range([height, 0]);
 
-      // Grid lines
-      svg.append('g')
-        .attr('class', 'grid')
-        .selectAll('line')
+      // Grid
+      svg.append('g').selectAll('line')
         .data([25, 50, 75, 100])
         .enter().append('line')
         .attr('x1', 0).attr('x2', width)
         .attr('y1', (d: number) => y(d)).attr('y2', (d: number) => y(d))
-        .attr('stroke', '#1a1a2e')
-        .attr('stroke-dasharray', '2,4');
+        .attr('stroke', '#e5e7eb')
+        .attr('stroke-dasharray', '3,4');
 
-      // Axes
+      // Y-axis labels
+      svg.append('g').selectAll('text')
+        .data([0, 25, 50, 75, 100])
+        .enter().append('text')
+        .attr('x', -8).attr('y', (d: number) => y(d) + 4)
+        .attr('text-anchor', 'end')
+        .attr('fill', '#9ca3af').attr('font-size', '11px')
+        .text((d: number) => d + '%');
+
+      // X-axis
       svg.append('g')
         .attr('transform', `translate(0,${height})`)
-        .call(d3.axisBottom(x).ticks(6).tickSize(0).tickPadding(8))
-        .selectAll('text').attr('fill', '#6a6a8a').attr('font-size', '11px');
+        .call(d3.axisBottom(x).ticks(7).tickSize(0).tickPadding(8))
+        .selectAll('text').attr('fill', '#9ca3af').attr('font-size', '11px');
 
-      svg.append('g')
-        .call(d3.axisLeft(y).ticks(5).tickSize(0).tickPadding(8).tickFormat((d: any) => d + '%'))
-        .selectAll('text').attr('fill', '#6a6a8a').attr('font-size', '11px');
+      svg.selectAll('.domain').attr('stroke', '#e5e7eb');
 
-      svg.selectAll('.domain').attr('stroke', '#1a1a2e');
+      // Event lines (staggered labels)
+      if (showEvents) {
+        const events = (timeseriesData as any).events || [];
+        events.forEach((evt: any, i: number) => {
+          const date = parseDate(evt.date);
+          if (!date) return;
+          const xPos = x(date);
+          const yOffset = 12 + (i % 3) * 14; // stagger vertically
 
-      // Event lines
-      const events = (timeseriesData as any).events || [];
-      for (const evt of events) {
-        const date = parseDate(evt.date);
-        if (!date) continue;
-        const xPos = x(date);
-        svg.append('line')
-          .attr('x1', xPos).attr('x2', xPos)
-          .attr('y1', 0).attr('y2', height)
-          .attr('stroke', evt.color)
-          .attr('stroke-width', 1)
-          .attr('stroke-dasharray', '4,3')
-          .attr('opacity', 0.6);
-        svg.append('text')
-          .attr('x', xPos + 4).attr('y', 12)
-          .attr('fill', evt.color)
-          .attr('font-size', '9px')
-          .attr('opacity', 0.8)
-          .text(evt.label);
+          svg.append('line')
+            .attr('x1', xPos).attr('x2', xPos)
+            .attr('y1', 0).attr('y2', height)
+            .attr('stroke', '#d1d5db')
+            .attr('stroke-width', 1)
+            .attr('stroke-dasharray', '4,4');
+
+          svg.append('text')
+            .attr('x', xPos + 4).attr('y', yOffset)
+            .attr('fill', '#6b7280')
+            .attr('font-size', '10px')
+            .attr('font-weight', '500')
+            .text(evt.label);
+        });
       }
 
-      // Lines
+      // Data lines
       const line = d3.line<{date: string; adoption: number}>()
         .x(d => x(parseDate(d.date)!))
         .y(d => y(d.adoption))
         .curve(d3.curveMonotoneX);
+
+      const activeLegend: {label: string; color: string; value: number}[] = [];
 
       for (const src of activeSources) {
         const series = pairData[src];
@@ -267,26 +289,47 @@ function formatNum(n: number) {
           .datum(series)
           .attr('fill', 'none')
           .attr('stroke', sourceColors[src])
-          .attr('stroke-width', 2)
-          .attr('opacity', 0.9)
+          .attr('stroke-width', 2.5)
           .attr('d', line);
 
-        // End dot
+        // End dot + label
         const last = series[series.length - 1];
+        const cx = x(parseDate(last.date)!);
+        const cy = y(last.adoption);
+
         svg.append('circle')
-          .attr('cx', x(parseDate(last.date)!))
-          .attr('cy', y(last.adoption))
+          .attr('cx', cx).attr('cy', cy)
           .attr('r', 4)
           .attr('fill', sourceColors[src]);
+
+        svg.append('text')
+          .attr('x', cx + 8).attr('y', cy + 4)
+          .attr('fill', sourceColors[src])
+          .attr('font-size', '11px')
+          .attr('font-weight', '600')
+          .text(last.adoption + '%');
+
+        activeLegend.push({
+          label: sourceLabels[src],
+          color: sourceColors[src],
+          value: last.adoption,
+        });
+      }
+
+      // Legend
+      for (const item of activeLegend) {
+        const el = document.createElement('div');
+        el.className = 'legend-item';
+        el.innerHTML = `<span class="legend-line" style="background: ${item.color}"></span>${item.label}`;
+        legendContainer.appendChild(el);
       }
     }
 
-    // Sidebar interaction
+    // Sidebar
     document.querySelectorAll('.sidebar-header').forEach(header => {
       header.addEventListener('click', () => {
         header.classList.toggle('open');
-        const items = header.nextElementSibling;
-        if (items) items.classList.toggle('open');
+        header.nextElementSibling?.classList.toggle('open');
       });
     });
 
@@ -295,12 +338,10 @@ function formatNum(n: number) {
         document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
         item.classList.add('active');
         activePairId = parseInt((item as HTMLElement).dataset.pairId || '1');
-
         const nameEl = item.querySelector('.pair-name span:first-child');
         const oldEl = item.querySelector('.old');
         if (nameEl) document.getElementById('chart-new')!.textContent = nameEl.textContent;
         if (oldEl) document.getElementById('chart-old')!.textContent = oldEl.textContent;
-
         drawChart();
       });
     });
@@ -316,7 +357,14 @@ function formatNum(n: number) {
       });
     });
 
-    // Initial draw
+    // Events toggle
+    document.getElementById('events-toggle')?.addEventListener('click', (e) => {
+      const btn = e.currentTarget as HTMLElement;
+      btn.classList.toggle('active');
+      showEvents = btn.classList.contains('active');
+      drawChart();
+    });
+
     drawChart();
     window.addEventListener('resize', drawChart);
   </script>
