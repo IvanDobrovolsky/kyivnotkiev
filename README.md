@@ -18,7 +18,7 @@ Big data pipeline tracking how the world adopts Ukrainian spellings — from Kyi
 | Toponym pairs | **71** (69 enabled) |
 | Categories | **8** (geographical, food, landmarks, country, institutional, sports, historical, people) |
 | Data sources | **7** (GDELT, Common Crawl, Reddit, Wikipedia, Google Trends, Ngrams, YouTube) |
-| Time span | **2004–2026** |
+| Time span | **2015–2026** (Ngrams: 1800–2019) |
 | Infrastructure | **GCP** (BigQuery, Dataproc/Spark, GCS, Cloud Run) |
 | Reproducibility | `make reproduce` — one command, full pipeline |
 
