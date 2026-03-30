@@ -1,0 +1,497 @@
+# Toponym Pairs Configuration
+# Single source of truth for the entire pipeline.
+# Add/remove/disable pairs here — pipeline handles the rest incrementally.
+
+metadata:
+  version: "2.0"
+  description: "Ukrainian toponym pairs for adoption analysis"
+  time_range: "2004-01-01 to 2026-12-31"
+
+categories:
+  geographical:
+    name: "Geographical"
+    description: "Cities, rivers, regions, and administrative areas"
+  food:
+    name: "Food & Cuisine"
+    description: "Dishes, drinks, and food-related terms"
+  landmarks:
+    name: "Landmarks & Heritage Sites"
+    description: "UNESCO sites, monasteries, historical landmarks"
+  country:
+    name: "Country-Level Framing"
+    description: "Sovereignty and statehood markers"
+  institutional:
+    name: "Institutional"
+    description: "Universities, churches, and organizations"
+  sports:
+    name: "Sports"
+    description: "Football clubs, cultural exports"
+  historical:
+    name: "Historical"
+    description: "Colonial-era terms, identity markers"
+  people:
+    name: "People"
+    description: "Russian vs Ukrainian transliteration of prominent Ukrainian names"
+
+pairs:
+  # ── Geographical ──────────────────────────────────────
+  - id: 1
+    category: geographical
+    russian: "Kiev"
+    ukrainian: "Kyiv"
+    enabled: true
+    is_control: false
+    notes: "Flagship pair, capital city"
+
+  - id: 2
+    category: geographical
+    russian: "Kharkov"
+    ukrainian: "Kharkiv"
+    enabled: true
+    is_control: false
+
+  - id: 3
+    category: geographical
+    russian: "Odessa"
+    ukrainian: "Odesa"
+    enabled: true
+    is_control: false
+
+  - id: 4
+    category: geographical
+    russian: "Lvov"
+    ukrainian: "Lviv"
+    enabled: true
+    is_control: false
+
+  - id: 5
+    category: geographical
+    russian: "Zaporozhye"
+    ukrainian: "Zaporizhzhia"
+    enabled: true
+    is_control: false
+
+  - id: 6
+    category: geographical
+    russian: "Nikolaev"
+    ukrainian: "Mykolaiv"
+    enabled: true
+    is_control: false
+
+  - id: 7
+    category: geographical
+    russian: "Dnepropetrovsk"
+    ukrainian: "Dnipro"
+    enabled: true
+    is_control: false
+
+  - id: 8
+    category: geographical
+    russian: "Vinnitsa"
+    ukrainian: "Vinnytsia"
+    enabled: true
+    is_control: false
+
+  - id: 9
+    category: geographical
+    russian: "Rovno"
+    ukrainian: "Rivne"
+    enabled: true
+    is_control: false
+
+  - id: 10
+    category: geographical
+    russian: "Chernobyl"
+    ukrainian: "Chornobyl"
+    enabled: true
+    is_control: false
+    notes: "Disaster brand — strongest resistance to change"
+
+  - id: 11
+    category: geographical
+    russian: "Lugansk"
+    ukrainian: "Luhansk"
+    enabled: true
+    is_control: false
+
+  - id: 12
+    category: geographical
+    russian: "Donetsk"
+    ukrainian: "Donetsk"
+    enabled: true
+    is_control: true
+    notes: "Control — same in both languages"
+
+  - id: 13
+    category: geographical
+    russian: "Mariupol"
+    ukrainian: "Mariupol"
+    enabled: true
+    is_control: true
+    notes: "Control — same in both languages"
+
+  - id: 14
+    category: geographical
+    russian: "Kherson"
+    ukrainian: "Kherson"
+    enabled: true
+    is_control: true
+    notes: "Control — same in both languages"
+
+  - id: 15
+    category: geographical
+    russian: "Dnieper"
+    ukrainian: "Dnipro"
+    enabled: true
+    is_control: false
+    notes: "River name"
+
+  - id: 16
+    category: geographical
+    russian: "Dniester"
+    ukrainian: "Dnister"
+    enabled: true
+    is_control: false
+    notes: "River name"
+
+  - id: 17
+    category: geographical
+    russian: "Donbass"
+    ukrainian: "Donbas"
+    enabled: true
+    is_control: false
+
+  - id: 18
+    category: geographical
+    russian: "Crimea"
+    ukrainian: "Krym"
+    enabled: true
+    is_control: false
+
+  - id: 19
+    category: geographical
+    russian: "Transcarpathia"
+    ukrainian: "Zakarpattia"
+    enabled: true
+    is_control: false
+
+  - id: 20
+    category: geographical
+    russian: "Podolia"
+    ukrainian: "Podillia"
+    enabled: true
+    is_control: false
+
+  - id: 38
+    category: geographical
+    russian: "Chernigov"
+    ukrainian: "Chernihiv"
+    enabled: true
+    is_control: false
+
+  - id: 39
+    category: geographical
+    russian: "Chernovtsy"
+    ukrainian: "Chernivtsi"
+    enabled: true
+    is_control: false
+
+  - id: 40
+    category: geographical
+    russian: "Zhitomir"
+    ukrainian: "Zhytomyr"
+    enabled: true
+    is_control: false
+
+  - id: 41
+    category: geographical
+    russian: "Cherkassy"
+    ukrainian: "Cherkasy"
+    enabled: true
+    is_control: false
+
+  - id: 42
+    category: geographical
+    russian: "Uzhgorod"
+    ukrainian: "Uzhhorod"
+    enabled: true
+    is_control: false
+
+  - id: 43
+    category: geographical
+    russian: "Kremenchug"
+    ukrainian: "Kremenchuk"
+    enabled: true
+    is_control: false
+
+  - id: 44
+    category: geographical
+    russian: "Kirovograd"
+    ukrainian: "Kropyvnytskyi"
+    enabled: true
+    is_control: false
+
+  - id: 45
+    category: geographical
+    russian: "Tarnopol"
+    ukrainian: "Ternopil"
+    enabled: true
+    is_control: false
+
+  # ── Food & Cuisine ───────────────────────────────────
+  - id: 21
+    category: food
+    russian: "Chicken Kiev"
+    ukrainian: "Chicken Kyiv"
+    enabled: true
+    is_control: false
+
+  - id: 22
+    category: food
+    russian: "Kiev cake"
+    ukrainian: "Kyiv cake"
+    enabled: true
+    is_control: false
+
+  - id: 23
+    category: food
+    russian: "Borscht"
+    ukrainian: "Borshch"
+    enabled: false
+    is_control: false
+    notes: "Entered English via Yiddish, not Russian — distinct case from decolonial renaming"
+
+  - id: 46
+    category: food
+    russian: "Vareniki"
+    ukrainian: "Varenyky"
+    enabled: true
+    is_control: false
+
+  - id: 47
+    category: food
+    russian: "Gorilka"
+    ukrainian: "Horilka"
+    enabled: true
+    is_control: false
+
+  # ── Landmarks & Heritage Sites ───────────────────────
+  - id: 24
+    category: landmarks
+    russian: "Kiev Pechersk Lavra"
+    ukrainian: "Kyiv Pechersk Lavra"
+    enabled: true
+    is_control: false
+
+  - id: 25
+    category: landmarks
+    russian: "Saint Sophia Cathedral Kiev"
+    ukrainian: "Saint Sophia Cathedral Kyiv"
+    enabled: true
+    is_control: false
+
+  - id: 26
+    category: landmarks
+    russian: "Chernobyl Exclusion Zone"
+    ukrainian: "Chornobyl Exclusion Zone"
+    enabled: true
+    is_control: false
+
+  - id: 54
+    category: landmarks
+    russian: "Babi Yar"
+    ukrainian: "Babyn Yar"
+    enabled: true
+    is_control: false
+
+  - id: 55
+    category: landmarks
+    russian: "Potemkin Stairs Odessa"
+    ukrainian: "Potemkin Stairs Odesa"
+    enabled: true
+    is_control: false
+
+  - id: 56
+    category: landmarks
+    russian: "Motherland Monument Kiev"
+    ukrainian: "Motherland Monument Kyiv"
+    enabled: true
+    is_control: false
+
+  # ── Country-Level Framing ────────────────────────────
+  - id: 27
+    category: country
+    russian: "the Ukraine"
+    ukrainian: "Ukraine"
+    enabled: true
+    is_control: false
+    notes: "Requires negative lookahead for 'the Ukraine war' etc."
+    filter_pattern: "\\bthe Ukraine\\b(?!\\s+(war|crisis|conflict|invasion|situation|government|military|army|front|offensive|defense|aid|support|scandal|story|deal|peace|grain|question|issue|debate|border|region|territory|people|side|thing|part|trip|visit|attack|strike|response|policy|strategy|effort|update|news|report|angle|perspective|context|dimension|topic|narrative))"
+
+  # ── Institutional ────────────────────────────────────
+  - id: 28
+    category: institutional
+    russian: "Kiev National University"
+    ukrainian: "Kyiv National University"
+    enabled: true
+    is_control: false
+
+  - id: 29
+    category: institutional
+    russian: "Kharkov University"
+    ukrainian: "Kharkiv University"
+    enabled: true
+    is_control: false
+
+  - id: 30
+    category: institutional
+    russian: "Kiev Polytechnic"
+    ukrainian: "Kyiv Polytechnic"
+    enabled: true
+    is_control: false
+
+  - id: 31
+    category: institutional
+    russian: "Kiev Patriarchate"
+    ukrainian: "Kyiv Patriarchate"
+    enabled: true
+    is_control: false
+
+  - id: 57
+    category: institutional
+    russian: "Lvov Polytechnic"
+    ukrainian: "Lviv Polytechnic"
+    enabled: true
+    is_control: false
+
+  - id: 58
+    category: institutional
+    russian: "Odessa National University"
+    ukrainian: "Odesa National University"
+    enabled: true
+    is_control: false
+
+  # ── Sports ───────────────────────────────────────────
+  - id: 32
+    category: sports
+    russian: "Dynamo Kiev"
+    ukrainian: "Dynamo Kyiv"
+    enabled: true
+    is_control: false
+
+  - id: 33
+    category: sports
+    russian: "Shakhtar Donetsk"
+    ukrainian: "Shakhtar Donetsk"
+    enabled: true
+    is_control: true
+    notes: "Control — same in both languages"
+
+  - id: 34
+    category: sports
+    russian: "Kiev ballet"
+    ukrainian: "Kyiv ballet"
+    enabled: true
+    is_control: false
+
+  - id: 51
+    category: sports
+    russian: "Zorya Lugansk"
+    ukrainian: "Zorya Luhansk"
+    enabled: true
+    is_control: false
+
+  - id: 52
+    category: sports
+    russian: "Metalist Kharkov"
+    ukrainian: "Metalist Kharkiv"
+    enabled: true
+    is_control: false
+
+  - id: 53
+    category: sports
+    russian: "Karpaty Lvov"
+    ukrainian: "Karpaty Lviv"
+    enabled: true
+    is_control: false
+
+  # ── Historical ───────────────────────────────────────
+  - id: 35
+    category: historical
+    russian: "Kievan Rus"
+    ukrainian: "Kyivan Rus"
+    enabled: true
+    is_control: false
+
+  - id: 36
+    category: historical
+    russian: "Cossack"
+    ukrainian: "Kozak"
+    enabled: true
+    is_control: false
+
+  - id: 37
+    category: historical
+    russian: "Little Russia"
+    ukrainian: "Ukraine"
+    enabled: true
+    is_control: false
+
+  - id: 48
+    category: historical
+    russian: "Gopak"
+    ukrainian: "Hopak"
+    enabled: true
+    is_control: false
+
+  - id: 49
+    category: historical
+    russian: "Euromaidan"
+    ukrainian: "Euromaidan"
+    enabled: true
+    is_control: true
+    notes: "Control — same in both languages"
+
+  - id: 50
+    category: historical
+    russian: "Holodomor"
+    ukrainian: "Holodomor"
+    enabled: true
+    is_control: true
+    notes: "Control — same in both languages"
+
+  - id: 59
+    category: historical
+    russian: "Galicia"
+    ukrainian: "Halychyna"
+    enabled: true
+    is_control: false
+
+  # ── People ───────────────────────────────────────────
+  - id: 60
+    category: people
+    russian: "Alexander Usyk"
+    ukrainian: "Oleksandr Usyk"
+    enabled: true
+    is_control: false
+
+  - id: 61
+    category: people
+    russian: "Vladimir Zelensky"
+    ukrainian: "Volodymyr Zelenskyy"
+    enabled: true
+    is_control: false
+
+  - id: 62
+    category: people
+    russian: "Andrei Shevchenko"
+    ukrainian: "Andriy Shevchenko"
+    enabled: true
+    is_control: false
+
+  - id: 63
+    category: people
+    russian: "Vitali Klitschko"
+    ukrainian: "Vitaliy Klychko"
+    enabled: true
+    is_control: false
