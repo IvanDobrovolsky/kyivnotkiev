@@ -370,18 +370,18 @@
       "russian_pct": 46.0
     },
     {
-      "domain": "tass.ru",
-      "russian_cnt": 4557,
-      "ukrainian_cnt": 6104,
-      "total": 10661,
-      "russian_pct": 42.7
-    },
-    {
       "domain": "news.eizvestia.com",
       "russian_cnt": 4888,
       "ukrainian_cnt": 5773,
       "total": 10661,
       "russian_pct": 45.8
+    },
+    {
+      "domain": "tass.ru",
+      "russian_cnt": 4557,
+      "ukrainian_cnt": 6104,
+      "total": 10661,
+      "russian_pct": 42.7
     },
     {
       "domain": "ua.112.ua",
