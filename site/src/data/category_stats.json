@@ -1,0 +1,236 @@
+{
+  "food": {
+    "count": 4,
+    "avg_adoption": 33.9,
+    "weighted_adoption": 36.7,
+    "total_mentions": 2334,
+    "pairs": [
+      {
+        "pair_id": 23,
+        "russian": "Borscht",
+        "ukrainian": "Borshch",
+        "adoption": 57.6,
+        "total": 674
+      },
+      {
+        "pair_id": 64,
+        "russian": "Borsch",
+        "ukrainian": "Borshch",
+        "adoption": 40.6,
+        "total": 956
+      },
+      {
+        "pair_id": 47,
+        "russian": "Gorilka",
+        "ukrainian": "Horilka",
+        "adoption": 27.1,
+        "total": 48
+      },
+      {
+        "pair_id": 46,
+        "russian": "Vareniki",
+        "ukrainian": "Varenyky",
+        "adoption": 10.2,
+        "total": 656
+      }
+    ]
+  },
+  "geographical": {
+    "count": 24,
+    "avg_adoption": 58.3,
+    "weighted_adoption": 47.5,
+    "total_mentions": 7330497,
+    "pairs": [
+      {
+        "pair_id": 45,
+        "russian": "Tarnopol",
+        "ukrainian": "Ternopil",
+        "adoption": 99.9,
+        "total": 103179
+      },
+      {
+        "pair_id": 39,
+        "russian": "Chernovtsy",
+        "ukrainian": "Chernivtsi",
+        "adoption": 99.9,
+        "total": 48470
+      },
+      {
+        "pair_id": 7,
+        "russian": "Dnepropetrovsk",
+        "ukrainian": "Dnipro",
+        "adoption": 99.8,
+        "total": 221517
+      },
+      {
+        "pair_id": 4,
+        "russian": "Lvov",
+        "ukrainian": "Lviv",
+        "adoption": 98.4,
+        "total": 302795
+      },
+      {
+        "pair_id": 2,
+        "russian": "Kharkov",
+        "ukrainian": "Kharkiv",
+        "adoption": 98.2,
+        "total": 593663
+      },
+      {
+        "pair_id": 9,
+        "russian": "Rovno",
+        "ukrainian": "Rivne",
+        "adoption": 97.0,
+        "total": 56941
+      },
+      {
+        "pair_id": 15,
+        "russian": "Dnieper",
+        "ukrainian": "Dnipro",
+        "adoption": 96.6,
+        "total": 228964
+      },
+      {
+        "pair_id": 19,
+        "russian": "Transcarpathia",
+        "ukrainian": "Zakarpattia",
+        "adoption": 96.5,
+        "total": 1187
+      },
+      {
+        "pair_id": 16,
+        "russian": "Dniester",
+        "ukrainian": "Dnister",
+        "adoption": 87.1,
+        "total": 263
+      },
+      {
+        "pair_id": 5,
+        "russian": "Zaporozhye",
+        "ukrainian": "Zaporizhzhia",
+        "adoption": 83.5,
+        "total": 9346
+      },
+      {
+        "pair_id": 38,
+        "russian": "Chernigov",
+        "ukrainian": "Chernihiv",
+        "adoption": 80.9,
+        "total": 129888
+      },
+      {
+        "pair_id": 41,
+        "russian": "Cherkassy",
+        "ukrainian": "Cherkasy",
+        "adoption": 76.0,
+        "total": 75790
+      },
+      {
+        "pair_id": 11,
+        "russian": "Lugansk",
+        "ukrainian": "Luhansk",
+        "adoption": 75.2,
+        "total": 230991
+      },
+      {
+        "pair_id": 18,
+        "russian": "Crimea",
+        "ukrainian": "Krym",
+        "adoption": 57.5,
+        "total": 467038
+      },
+      {
+        "pair_id": 40,
+        "russian": "Zhitomir",
+        "ukrainian": "Zhytomyr",
+        "adoption": 48.2,
+        "total": 75931
+      },
+      {
+        "pair_id": 17,
+        "russian": "Donbass",
+        "ukrainian": "Donbas",
+        "adoption": 30.1,
+        "total": 358543
+      },
+      {
+        "pair_id": 1,
+        "russian": "Kiev",
+        "ukrainian": "Kyiv",
+        "adoption": 28.9,
+        "total": 3814087
+      },
+      {
+        "pair_id": 3,
+        "russian": "Odessa",
+        "ukrainian": "Odesa",
+        "adoption": 19.8,
+        "total": 446807
+      },
+      {
+        "pair_id": 43,
+        "russian": "Kremenchug",
+        "ukrainian": "Kremenchuk",
+        "adoption": 11.8,
+        "total": 12928
+      },
+      {
+        "pair_id": 6,
+        "russian": "Nikolaev",
+        "ukrainian": "Mykolaiv",
+        "adoption": 8.2,
+        "total": 15213
+      },
+      {
+        "pair_id": 42,
+        "russian": "Uzhgorod",
+        "ukrainian": "Uzhhorod",
+        "adoption": 4.1,
+        "total": 34128
+      },
+      {
+        "pair_id": 20,
+        "russian": "Podolia",
+        "ukrainian": "Podillia",
+        "adoption": 1.7,
+        "total": 401
+      },
+      {
+        "pair_id": 8,
+        "russian": "Vinnitsa",
+        "ukrainian": "Vinnytsia",
+        "adoption": 0.7,
+        "total": 65693
+      },
+      {
+        "pair_id": 44,
+        "russian": "Kirovograd",
+        "ukrainian": "Kropyvnytskyi",
+        "adoption": 0.2,
+        "total": 36734
+      }
+    ]
+  },
+  "historical": {
+    "count": 2,
+    "avg_adoption": 19.3,
+    "weighted_adoption": 38.6,
+    "total_mentions": 6156,
+    "pairs": [
+      {
+        "pair_id": 10,
+        "russian": "Chernobyl",
+        "ukrainian": "Chornobyl",
+        "adoption": 38.6,
+        "total": 6152
+      },
+      {
+        "pair_id": 54,
+        "russian": "Babi Yar",
+        "ukrainian": "Babyn Yar",
+        "adoption": 0.0,
+        "total": 4
+      }
+    ]
+  }
+}
