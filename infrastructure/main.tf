@@ -20,14 +20,12 @@ provider "google" {
   zone    = var.zone
 }
 
-# Create the GCP project
-resource "google_project" "research" {
-  name            = "KyivNotKiev Research"
-  project_id      = var.project_id
-  billing_account = var.billing_account_id
+# Reference existing project (created via gcloud)
+data "google_project" "research" {
+  project_id = var.project_id
 }
 
-# Enable required APIs
+# Ensure required APIs are enabled
 resource "google_project_service" "apis" {
   for_each = toset([
     "bigquery.googleapis.com",
@@ -40,7 +38,7 @@ resource "google_project_service" "apis" {
     "compute.googleapis.com",
   ])
 
-  project = google_project.research.project_id
+  project = var.project_id
   service = each.value
 
   disable_dependent_services = false
