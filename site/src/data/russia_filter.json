@@ -1,14 +1,14 @@
 {
   "Non-Russia": {
-    "russian": 9939045,
-    "ukrainian": 4395420,
-    "total": 14334465,
+    "russian": 9940779,
+    "ukrainian": 4396519,
+    "total": 14337298,
     "adoption_pct": 30.7
   },
   "Russia": {
-    "russian": 2262780,
+    "russian": 2262807,
     "ukrainian": 39399,
-    "total": 2302179,
+    "total": 2302206,
     "adoption_pct": 1.7
   }
 }

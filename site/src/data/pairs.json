@@ -11,6 +11,21 @@
       "color": "#e6b800"
     },
     {
+      "id": "landmarks",
+      "name": "Landmarks & Heritage Sites",
+      "color": "#e67e22"
+    },
+    {
+      "id": "country",
+      "name": "Country-Level Framing",
+      "color": "#e74c3c"
+    },
+    {
+      "id": "institutional",
+      "name": "Institutional",
+      "color": "#1abc9c"
+    },
+    {
       "id": "sports",
       "name": "Sports",
       "color": "#2ecc71"
@@ -21,24 +36,9 @@
       "color": "#9b59b6"
     },
     {
-      "id": "landmarks",
-      "name": "Landmarks",
-      "color": "#e67e22"
-    },
-    {
-      "id": "institutional",
-      "name": "Institutional",
-      "color": "#1abc9c"
-    },
-    {
       "id": "people",
       "name": "People",
       "color": "#3498db"
-    },
-    {
-      "id": "country",
-      "name": "Country",
-      "color": "#e74c3c"
     }
   ],
   "pairs": [
@@ -116,7 +116,7 @@
     },
     {
       "id": 10,
-      "category": "historical",
+      "category": "geographical",
       "russian": "Chernobyl",
       "ukrainian": "Chornobyl",
       "adoption": 38.6,
@@ -179,12 +179,132 @@
       "total": 401
     },
     {
+      "id": 21,
+      "category": "food",
+      "russian": "Chicken Kiev",
+      "ukrainian": "Chicken Kyiv",
+      "adoption": 9.4,
+      "total": 1303
+    },
+    {
+      "id": 22,
+      "category": "food",
+      "russian": "Kiev cake",
+      "ukrainian": "Kyiv cake",
+      "adoption": 62.9,
+      "total": 1693
+    },
+    {
       "id": 23,
       "category": "food",
       "russian": "Borscht",
       "ukrainian": "Borshch",
       "adoption": 57.6,
       "total": 674
+    },
+    {
+      "id": 24,
+      "category": "landmarks",
+      "russian": "Kiev Pechersk Lavra",
+      "ukrainian": "Kyiv Pechersk Lavra",
+      "adoption": 79.9,
+      "total": 959
+    },
+    {
+      "id": 25,
+      "category": "landmarks",
+      "russian": "Saint Sophia Cathedral Kiev",
+      "ukrainian": "Saint Sophia Cathedral Kyiv",
+      "adoption": 99.7,
+      "total": 379
+    },
+    {
+      "id": 26,
+      "category": "landmarks",
+      "russian": "Chernobyl Exclusion Zone",
+      "ukrainian": "Chornobyl Exclusion Zone",
+      "adoption": 1.3,
+      "total": 319
+    },
+    {
+      "id": 27,
+      "category": "country",
+      "russian": "the Ukraine",
+      "ukrainian": "Ukraine",
+      "adoption": 94.5,
+      "total": 220
+    },
+    {
+      "id": 28,
+      "category": "institutional",
+      "russian": "Kiev National University",
+      "ukrainian": "Kyiv National University",
+      "adoption": 96.2,
+      "total": 943
+    },
+    {
+      "id": 29,
+      "category": "institutional",
+      "russian": "Kharkov University",
+      "ukrainian": "Kharkiv University",
+      "adoption": 95.6,
+      "total": 754
+    },
+    {
+      "id": 30,
+      "category": "institutional",
+      "russian": "Kiev Polytechnic",
+      "ukrainian": "Kyiv Polytechnic",
+      "adoption": 97.6,
+      "total": 1134
+    },
+    {
+      "id": 31,
+      "category": "institutional",
+      "russian": "Kiev Patriarchate",
+      "ukrainian": "Kyiv Patriarchate",
+      "adoption": 73.5,
+      "total": 226
+    },
+    {
+      "id": 32,
+      "category": "sports",
+      "russian": "Dynamo Kiev",
+      "ukrainian": "Dynamo Kyiv",
+      "adoption": 58.2,
+      "total": 232
+    },
+    {
+      "id": 34,
+      "category": "sports",
+      "russian": "Kiev ballet",
+      "ukrainian": "Kyiv ballet",
+      "adoption": 42.9,
+      "total": 2021
+    },
+    {
+      "id": 35,
+      "category": "historical",
+      "russian": "Kievan Rus",
+      "ukrainian": "Kyivan Rus",
+      "adoption": 8.0,
+      "total": 945
+    },
+    {
+      "id": 36,
+      "category": "historical",
+      "russian": "Cossack",
+      "ukrainian": "Kozak",
+      "adoption": 61.8,
+      "total": 1892
+    },
+    {
+      "id": 37,
+      "category": "historical",
+      "russian": "Little Russia",
+      "ukrainian": "Ukraine",
+      "adoption": 100.0,
+      "total": 209
     },
     {
       "id": 38,
@@ -267,12 +387,116 @@
       "total": 48
     },
     {
-      "id": 54,
+      "id": 48,
       "category": "historical",
+      "russian": "Gopak",
+      "ukrainian": "Hopak",
+      "adoption": 55.5,
+      "total": 1617
+    },
+    {
+      "id": 51,
+      "category": "sports",
+      "russian": "Zorya Lugansk",
+      "ukrainian": "Zorya Luhansk",
+      "adoption": 65.1,
+      "total": 229
+    },
+    {
+      "id": 52,
+      "category": "sports",
+      "russian": "Metalist Kharkov",
+      "ukrainian": "Metalist Kharkiv",
+      "adoption": 100.0,
+      "total": 157
+    },
+    {
+      "id": 53,
+      "category": "sports",
+      "russian": "Karpaty Lvov",
+      "ukrainian": "Karpaty Lviv",
+      "adoption": 100.0,
+      "total": 125
+    },
+    {
+      "id": 54,
+      "category": "landmarks",
       "russian": "Babi Yar",
       "ukrainian": "Babyn Yar",
       "adoption": 0.0,
       "total": 4
+    },
+    {
+      "id": 55,
+      "category": "landmarks",
+      "russian": "Potemkin Stairs Odessa",
+      "ukrainian": "Potemkin Stairs Odesa",
+      "adoption": 5.6,
+      "total": 89
+    },
+    {
+      "id": 56,
+      "category": "landmarks",
+      "russian": "Motherland Monument Kiev",
+      "ukrainian": "Motherland Monument Kyiv",
+      "adoption": 100.0,
+      "total": 192
+    },
+    {
+      "id": 57,
+      "category": "institutional",
+      "russian": "Lvov Polytechnic",
+      "ukrainian": "Lviv Polytechnic",
+      "adoption": 100.0,
+      "total": 857
+    },
+    {
+      "id": 58,
+      "category": "institutional",
+      "russian": "Odessa National University",
+      "ukrainian": "Odesa National University",
+      "adoption": 28.8,
+      "total": 1001
+    },
+    {
+      "id": 59,
+      "category": "historical",
+      "russian": "Galicia",
+      "ukrainian": "Halychyna",
+      "adoption": 0.0,
+      "total": 1350
+    },
+    {
+      "id": 60,
+      "category": "people",
+      "russian": "Alexander Usyk",
+      "ukrainian": "Oleksandr Usyk",
+      "adoption": 93.6,
+      "total": 407
+    },
+    {
+      "id": 61,
+      "category": "people",
+      "russian": "Vladimir Zelensky",
+      "ukrainian": "Volodymyr Zelenskyy",
+      "adoption": 70.3,
+      "total": 390
+    },
+    {
+      "id": 62,
+      "category": "people",
+      "russian": "Andrei Shevchenko",
+      "ukrainian": "Andriy Shevchenko",
+      "adoption": 100.0,
+      "total": 99
+    },
+    {
+      "id": 63,
+      "category": "people",
+      "russian": "Vitali Klitschko",
+      "ukrainian": "Vitaliy Klychko",
+      "adoption": 0.0,
+      "total": 43
     },
     {
       "id": 64,
@@ -281,6 +505,46 @@
       "ukrainian": "Borshch",
       "adoption": 40.6,
       "total": 956
+    },
+    {
+      "id": 65,
+      "category": "food",
+      "russian": "Pierogi",
+      "ukrainian": "Varenyky",
+      "adoption": 0.2,
+      "total": 1075
+    },
+    {
+      "id": 66,
+      "category": "food",
+      "russian": "Pirozhki",
+      "ukrainian": "Pyrizhky",
+      "adoption": 0.0,
+      "total": 156
+    },
+    {
+      "id": 67,
+      "category": "food",
+      "russian": "Syrniki",
+      "ukrainian": "Syrnyky",
+      "adoption": 0.0,
+      "total": 216
+    },
+    {
+      "id": 68,
+      "category": "food",
+      "russian": "Holubtsy",
+      "ukrainian": "Holubtsi",
+      "adoption": 100.0,
+      "total": 1394
+    },
+    {
+      "id": 69,
+      "category": "people",
+      "russian": "Sergei Rebrov",
+      "ukrainian": "Serhiy Rebrov",
+      "adoption": 53.2,
+      "total": 340
     }
   ]
 }
