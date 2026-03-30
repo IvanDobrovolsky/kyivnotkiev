@@ -125,15 +125,42 @@ function formatNum(n: number) {
         <div class="chart-legend" id="chart-legend"></div>
       </div>
 
-      <!-- Category comparison -->
-      <div class="chart-container">
-        <div class="chart-header">
-          <div>
-            <div class="chart-title" style="color: var(--text)">Adoption by Category</div>
-            <div class="chart-subtitle">Average Ukrainian spelling adoption (%) per category — GDELT 2024–2026</div>
+      <!-- Data source availability note -->
+      <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem; padding: 0.5rem 0.75rem; background: #f8f9fb; border-radius: 4px; border-left: 3px solid var(--border);">
+        Source availability varies: Trends (2010–2026), GDELT (2015–2026), Wikipedia (2015–2026), Reddit (2007–2026), Ngrams (books, 2000–2019)
+      </div>
+
+      <!-- ── GLOBAL VIEWS (static, don't change per pair) ── -->
+
+      <div style="margin: 2rem 0 1rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600;">Global Overview</div>
+
+      <!-- Russia vs World + Category side by side -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+        <div class="chart-container" style="margin-bottom: 0;">
+          <div class="chart-title" style="color: var(--text); font-size: 1.1rem;">Russia vs Rest of World</div>
+          <div class="chart-subtitle" style="margin-bottom: 1rem;">Kiev/Kyiv adoption — Russian media vs everyone else</div>
+          <div style="display: flex; gap: 1.5rem;">
+            <div style="flex:1; text-align:center; padding:1.25rem; background:#f0fdf4; border-radius:6px;">
+              <div style="font-size:2.2rem; font-weight:700; color:#059669;">30.7%</div>
+              <div style="font-size:0.8rem; color:#6b7280; margin-top:0.2rem;">Non-Russian media</div>
+              <div style="font-size:0.7rem; color:#9ca3af;">14.3M mentions</div>
+            </div>
+            <div style="flex:1; text-align:center; padding:1.25rem; background:#fef2f2; border-radius:6px;">
+              <div style="font-size:2.2rem; font-weight:700; color:#dc2626;">1.7%</div>
+              <div style="font-size:0.8rem; color:#6b7280; margin-top:0.2rem;">Russian media</div>
+              <div style="font-size:0.7rem; color:#9ca3af;">2.3M mentions</div>
+            </div>
+          </div>
+          <div style="font-size:0.75rem; color:#6b7280; text-align:center; margin-top:0.75rem;">
+            18x adoption gap
           </div>
         </div>
-        <div id="category-chart" style="width:100%; height:280px;"></div>
+
+        <div class="chart-container" style="margin-bottom: 0;">
+          <div class="chart-title" style="color: var(--text); font-size: 1.1rem;">Adoption by Category</div>
+          <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Average adoption (%) per category</div>
+          <div id="category-chart" style="width:100%; height:240px;"></div>
+        </div>
       </div>
 
       <!-- World map -->
@@ -141,20 +168,20 @@ function formatNum(n: number) {
         <div class="chart-header">
           <div>
             <div class="chart-title" style="color: var(--text)">Global Adoption Map</div>
-            <div class="chart-subtitle">Ukrainian spelling adoption (%) by country — Kiev → Kyiv in GDELT news corpus</div>
+            <div class="chart-subtitle">Kiev → Kyiv adoption (%) by country — GDELT news corpus 2024–2026</div>
           </div>
         </div>
         <div id="world-map" style="width:100%; height:420px;"></div>
         <div class="chart-legend" id="map-legend" style="justify-content: center; gap: 0.5rem;">
-          <span style="font-size:0.7rem; color:var(--text-muted)">0%</span>
-          <div style="display:flex; height:10px; width:200px; border-radius:5px; overflow:hidden;">
+          <span style="font-size:0.75rem; color:var(--text-muted)">0%</span>
+          <div style="display:flex; height:12px; width:240px; border-radius:6px; overflow:hidden;">
             <div style="flex:1; background:#dc2626"></div>
             <div style="flex:1; background:#f97316"></div>
             <div style="flex:1; background:#eab308"></div>
             <div style="flex:1; background:#22c55e"></div>
             <div style="flex:1; background:#047857"></div>
           </div>
-          <span style="font-size:0.7rem; color:var(--text-muted)">100%</span>
+          <span style="font-size:0.75rem; color:var(--text-muted)">100%</span>
         </div>
       </div>
 
@@ -167,31 +194,6 @@ function formatNum(n: number) {
           </div>
         </div>
         <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
-      </div>
-
-      <!-- Russia filter insight -->
-      <div class="chart-container">
-        <div class="chart-header">
-          <div>
-            <div class="chart-title" style="color: var(--text)">Russia vs Rest of World</div>
-            <div class="chart-subtitle">Kiev/Kyiv adoption in GDELT news — Russian media vs everyone else</div>
-          </div>
-        </div>
-        <div style="display: flex; gap: 2rem; padding: 1rem 0;">
-          <div style="flex:1; text-align:center; padding:1.5rem; background:#f0fdf4; border-radius:6px;">
-            <div style="font-size:2.5rem; font-weight:700; color:#059669;">30.7%</div>
-            <div style="font-size:0.8rem; color:#6b7280; margin-top:0.3rem;">Non-Russian media</div>
-            <div style="font-size:0.7rem; color:#9ca3af;">14.3M mentions</div>
-          </div>
-          <div style="flex:1; text-align:center; padding:1.5rem; background:#fef2f2; border-radius:6px;">
-            <div style="font-size:2.5rem; font-weight:700; color:#dc2626;">1.7%</div>
-            <div style="font-size:0.8rem; color:#6b7280; margin-top:0.3rem;">Russian media</div>
-            <div style="font-size:0.7rem; color:#9ca3af;">2.3M mentions</div>
-          </div>
-        </div>
-        <div style="font-size:0.75rem; color:#6b7280; text-align:center; margin-top:0.5rem;">
-          18x adoption gap — Russian media almost exclusively uses "Kiev"
-        </div>
       </div>
 
       <!-- Holdout domains table -->
