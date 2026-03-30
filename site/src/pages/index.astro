@@ -1,0 +1,324 @@
+---
+import '../styles/global.css';
+import pairs from '../data/pairs.json';
+
+const grouped = pairs.categories.map(cat => ({
+  ...cat,
+  pairs: pairs.pairs.filter(p => p.category === cat.id).sort((a, b) => b.total - a.total)
+})).filter(g => g.pairs.length > 0);
+
+const totalMentions = pairs.pairs.reduce((sum, p) => sum + p.total, 0);
+
+function adoptionClass(pct: number) {
+  if (pct >= 70) return 'adoption-high';
+  if (pct >= 30) return 'adoption-mid';
+  return 'adoption-low';
+}
+
+function formatNum(n: number) {
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
+  if (n >= 1_000) return (n / 1_000).toFixed(0) + 'K';
+  return n.toString();
+}
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>KyivNotKiev — Tracking Ukrainian Toponym Adoption</title>
+  <meta name="description" content="The world's largest computational study tracking how the world adopts Ukrainian spellings. 20M+ data points, 7 sources, 69 pairs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <!-- Top bar -->
+    <nav class="topbar">
+      <div class="topbar-logo">
+        <span class="k">KYIV</span><span class="n">NOT</span><span class="k">KIEV</span>
+      </div>
+      <div class="topbar-links">
+        <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
+        <a href="#about">About</a>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      {grouped.map((cat, ci) => (
+        <div class="sidebar-section">
+          <div class={`sidebar-header ${ci === 0 ? 'open' : ''}`} data-category={cat.id}>
+            <span class="dot" style={`background: ${cat.color}`}></span>
+            {cat.name}
+            <span class="arrow">▶</span>
+          </div>
+          <div class={`sidebar-items ${ci === 0 ? 'open' : ''}`}>
+            {cat.pairs.map((pair, pi) => (
+              <div class={`sidebar-item ${ci === 0 && pi === 0 ? 'active' : ''}`} data-pair-id={pair.id}>
+                <div class="pair-name">
+                  <span>{pair.ukrainian}</span>
+                  <span class="old">{pair.russian}</span>
+                </div>
+                <span class={`adoption-badge ${adoptionClass(pair.adoption)}`}>
+                  {pair.adoption}%
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-value">{formatNum(totalMentions)}</div>
+          <div class="stat-label">Total Mentions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">{pairs.pairs.length}</div>
+          <div class="stat-label">Pairs Tracked</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">7</div>
+          <div class="stat-label">Data Sources</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">2015–26</div>
+          <div class="stat-label">Time Span</div>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">
+              <span class="old-name" id="chart-old">Kiev</span>
+              <span class="arrow">→</span>
+              <span class="new-name" id="chart-new">Kyiv</span>
+            </div>
+            <div class="chart-subtitle" id="chart-subtitle">
+              Ukrainian spelling adoption over time — GDELT global news corpus
+            </div>
+          </div>
+          <div class="source-toggles">
+            <button class="source-toggle active" data-source="gdelt" style="--source-color: #0057B8">
+              <span class="source-dot"></span>GDELT
+            </button>
+            <button class="source-toggle active" data-source="reddit" style="--source-color: #FF4500">
+              <span class="source-dot"></span>Reddit
+            </button>
+            <button class="source-toggle active" data-source="wikipedia" style="--source-color: #2ecc71">
+              <span class="source-dot"></span>Wikipedia
+            </button>
+            <button class="source-toggle active" data-source="trends" style="--source-color: #e6b800">
+              <span class="source-dot"></span>Trends
+            </button>
+          </div>
+        </div>
+        <div id="chart"></div>
+      </div>
+
+      <!-- About -->
+      <div class="chart-container" id="about">
+        <div style="max-width: 640px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.7;">
+          <p style="margin-bottom: 0.8rem;">
+            The world's largest computational study of real-time toponymic change.
+            We track how 69 Ukrainian names are spelled across 7 independent data
+            sources spanning a decade of global media, social platforms, and reference works.
+          </p>
+          <p style="margin-bottom: 0.8rem;">
+            The pipeline is fully open source and reproducible on Google Cloud Platform
+            using Apache Spark for TB-scale processing.
+          </p>
+          <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <a href="https://github.com/IvanDobrovolsky/kyivnotkiev"
+               style="color: var(--yellow); font-size: 0.8rem; text-decoration: none; border: 1px solid var(--yellow); padding: 0.4rem 0.8rem;">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    import * as d3 from 'd3';
+    import timeseriesData from '../data/timeseries.json';
+
+    const sourceColors: Record<string, string> = {
+      gdelt: '#0057B8',
+      reddit: '#FF4500',
+      wikipedia: '#2ecc71',
+      trends: '#e6b800',
+    };
+
+    let activeSources = new Set(['gdelt', 'reddit', 'wikipedia', 'trends']);
+    let activePairId = 1;
+
+    function drawChart() {
+      const container = document.getElementById('chart')!;
+      container.innerHTML = '';
+
+      const rect = container.getBoundingClientRect();
+      const margin = { top: 20, right: 20, bottom: 30, left: 45 };
+      const width = rect.width - margin.left - margin.right;
+      const height = rect.height - margin.top - margin.bottom;
+
+      const svg = d3.select('#chart')
+        .append('svg')
+        .attr('viewBox', `0 0 ${rect.width} ${rect.height}`)
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
+      const pairData = (timeseriesData as any)[String(activePairId)];
+      if (!pairData) {
+        svg.append('text')
+          .attr('x', width / 2).attr('y', height / 2)
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#6a6a8a')
+          .attr('font-size', '14px')
+          .text('Data coming soon');
+        return;
+      }
+
+      const parseDate = d3.timeParse('%Y-%m');
+      const allDates: Date[] = [];
+      const allValues: number[] = [];
+
+      for (const src of activeSources) {
+        const series = pairData[src];
+        if (!series) continue;
+        for (const d of series) {
+          const date = parseDate(d.date);
+          if (date) { allDates.push(date); allValues.push(d.adoption); }
+        }
+      }
+
+      if (allDates.length === 0) return;
+
+      const x = d3.scaleTime()
+        .domain(d3.extent(allDates) as [Date, Date])
+        .range([0, width]);
+
+      const y = d3.scaleLinear()
+        .domain([0, 100])
+        .range([height, 0]);
+
+      // Grid lines
+      svg.append('g')
+        .attr('class', 'grid')
+        .selectAll('line')
+        .data([25, 50, 75, 100])
+        .enter().append('line')
+        .attr('x1', 0).attr('x2', width)
+        .attr('y1', (d: number) => y(d)).attr('y2', (d: number) => y(d))
+        .attr('stroke', '#1a1a2e')
+        .attr('stroke-dasharray', '2,4');
+
+      // Axes
+      svg.append('g')
+        .attr('transform', `translate(0,${height})`)
+        .call(d3.axisBottom(x).ticks(6).tickSize(0).tickPadding(8))
+        .selectAll('text').attr('fill', '#6a6a8a').attr('font-size', '11px');
+
+      svg.append('g')
+        .call(d3.axisLeft(y).ticks(5).tickSize(0).tickPadding(8).tickFormat((d: any) => d + '%'))
+        .selectAll('text').attr('fill', '#6a6a8a').attr('font-size', '11px');
+
+      svg.selectAll('.domain').attr('stroke', '#1a1a2e');
+
+      // Event lines
+      const events = (timeseriesData as any).events || [];
+      for (const evt of events) {
+        const date = parseDate(evt.date);
+        if (!date) continue;
+        const xPos = x(date);
+        svg.append('line')
+          .attr('x1', xPos).attr('x2', xPos)
+          .attr('y1', 0).attr('y2', height)
+          .attr('stroke', evt.color)
+          .attr('stroke-width', 1)
+          .attr('stroke-dasharray', '4,3')
+          .attr('opacity', 0.6);
+        svg.append('text')
+          .attr('x', xPos + 4).attr('y', 12)
+          .attr('fill', evt.color)
+          .attr('font-size', '9px')
+          .attr('opacity', 0.8)
+          .text(evt.label);
+      }
+
+      // Lines
+      const line = d3.line<{date: string; adoption: number}>()
+        .x(d => x(parseDate(d.date)!))
+        .y(d => y(d.adoption))
+        .curve(d3.curveMonotoneX);
+
+      for (const src of activeSources) {
+        const series = pairData[src];
+        if (!series) continue;
+
+        svg.append('path')
+          .datum(series)
+          .attr('fill', 'none')
+          .attr('stroke', sourceColors[src])
+          .attr('stroke-width', 2)
+          .attr('opacity', 0.9)
+          .attr('d', line);
+
+        // End dot
+        const last = series[series.length - 1];
+        svg.append('circle')
+          .attr('cx', x(parseDate(last.date)!))
+          .attr('cy', y(last.adoption))
+          .attr('r', 4)
+          .attr('fill', sourceColors[src]);
+      }
+    }
+
+    // Sidebar interaction
+    document.querySelectorAll('.sidebar-header').forEach(header => {
+      header.addEventListener('click', () => {
+        header.classList.toggle('open');
+        const items = header.nextElementSibling;
+        if (items) items.classList.toggle('open');
+      });
+    });
+
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        activePairId = parseInt((item as HTMLElement).dataset.pairId || '1');
+
+        const nameEl = item.querySelector('.pair-name span:first-child');
+        const oldEl = item.querySelector('.old');
+        if (nameEl) document.getElementById('chart-new')!.textContent = nameEl.textContent;
+        if (oldEl) document.getElementById('chart-old')!.textContent = oldEl.textContent;
+
+        drawChart();
+      });
+    });
+
+    // Source toggles
+    document.querySelectorAll('.source-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const src = (btn as HTMLElement).dataset.source!;
+        btn.classList.toggle('active');
+        if (activeSources.has(src)) activeSources.delete(src);
+        else activeSources.add(src);
+        drawChart();
+      });
+    });
+
+    // Initial draw
+    drawChart();
+    window.addEventListener('resize', drawChart);
+  </script>
+</body>
+</html>
