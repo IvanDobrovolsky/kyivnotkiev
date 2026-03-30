@@ -3,7 +3,7 @@
 Produces a unified dataset with consistent schema for downstream analysis.
 
 Usage:
-    python -m src.pipeline.preprocess [--source gdelt|trends|ngrams|all]
+    python -m pipeline.transform.preprocess [--source gdelt|trends|ngrams|all]
 """
 
 import argparse
@@ -11,7 +11,7 @@ import logging
 
 import pandas as pd
 
-from src.config import (
+from pipeline.config import (
     GDELT_RAW_DIR,
     NGRAMS_RAW_DIR,
     PROCESSED_DIR,

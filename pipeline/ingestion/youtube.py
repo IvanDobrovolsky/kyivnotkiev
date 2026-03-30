@@ -7,7 +7,7 @@ This provides social media video platform data — complementing Reddit
 for the social media adoption analysis.
 
 Usage:
-    python -m src.pipeline.collect_youtube [--pair-ids 1,2,3]
+    python -m pipeline.ingestion.collect_youtube [--pair-ids 1,2,3]
 """
 
 import argparse
@@ -20,7 +20,7 @@ from pathlib import Path
 import pandas as pd
 import requests
 
-from src.config import DATA_DIR, PROCESSED_DIR, ensure_dirs, get_all_pairs
+from pipeline.config import DATA_DIR, PROCESSED_DIR, ensure_dirs, get_all_pairs
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)

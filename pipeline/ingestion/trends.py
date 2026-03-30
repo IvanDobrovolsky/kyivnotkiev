@@ -4,7 +4,7 @@ Handles rate limiting with exponential backoff, collects both worldwide
 and per-country data for geographic diffusion analysis.
 
 Usage:
-    python -m src.pipeline.collect_trends [--pair-ids 1,2,3] [--countries-only] [--worldwide-only]
+    python -m pipeline.ingestion.collect_trends [--pair-ids 1,2,3] [--countries-only] [--worldwide-only]
 """
 
 import argparse
@@ -14,7 +14,7 @@ import time
 import pandas as pd
 from pytrends.request import TrendReq
 
-from src.config import (
+from pipeline.config import (
     TARGET_COUNTRIES,
     TRENDS_BACKOFF_FACTOR,
     TRENDS_MAX_RETRIES,

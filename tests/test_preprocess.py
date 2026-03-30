@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-from src.pipeline.preprocess import validate
+from pipeline.transform.preprocess import validate
 
 
 def test_validate_valid_data():
