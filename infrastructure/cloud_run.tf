@@ -1,0 +1,71 @@
+# Cloud Run service for pipeline orchestration
+
+resource "google_cloud_run_v2_service" "orchestrator" {
+  name     = "kyivnotkiev-orchestrator"
+  location = var.region
+  project  = google_project.research.project_id
+
+  template {
+    containers {
+      image = "${var.region}-docker.pkg.dev/${var.project_id}/kyivnotkiev-pipeline/orchestrator:latest"
+
+      resources {
+        limits = {
+          cpu    = "2"
+          memory = "2Gi"
+        }
+      }
+
+      env {
+        name  = "GCP_PROJECT"
+        value = var.project_id
+      }
+      env {
+        name  = "BQ_DATASET"
+        value = "kyivnotkiev"
+      }
+      env {
+        name  = "GCS_BUCKET"
+        value = "${var.project_id}-data"
+      }
+    }
+
+    timeout = "3600s"
+
+    service_account = google_service_account.pipeline.email
+  }
+
+  depends_on = [google_project_service.apis]
+}
+
+# Service account for the pipeline
+resource "google_service_account" "pipeline" {
+  account_id   = "kyivnotkiev-pipeline"
+  display_name = "KyivNotKiev Pipeline SA"
+  project      = google_project.research.project_id
+}
+
+# IAM bindings
+resource "google_project_iam_member" "pipeline_bq" {
+  project = google_project.research.project_id
+  role    = "roles/bigquery.dataEditor"
+  member  = "serviceAccount:${google_service_account.pipeline.email}"
+}
+
+resource "google_project_iam_member" "pipeline_bq_job" {
+  project = google_project.research.project_id
+  role    = "roles/bigquery.jobUser"
+  member  = "serviceAccount:${google_service_account.pipeline.email}"
+}
+
+resource "google_project_iam_member" "pipeline_gcs" {
+  project = google_project.research.project_id
+  role    = "roles/storage.objectAdmin"
+  member  = "serviceAccount:${google_service_account.pipeline.email}"
+}
+
+resource "google_project_iam_member" "pipeline_dataproc" {
+  project = google_project.research.project_id
+  role    = "roles/dataproc.editor"
+  member  = "serviceAccount:${google_service_account.pipeline.email}"
+}
