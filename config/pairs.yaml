@@ -563,6 +563,6 @@ pairs:
     category: historical
     russian: "Slava Ukraine"
     ukrainian: "Slava Ukraini"
-    enabled: true
+    enabled: false
     is_control: false
     notes: "National salute — trackable on social media. Russian-influenced English drops the -i ending."
