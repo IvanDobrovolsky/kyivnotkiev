@@ -778,7 +778,12 @@ function formatNum(n: number) {
       const mapSubEl = document.getElementById('map-subtitle');
       const mapPair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
       if (mapNameEl && mapPair) mapNameEl.textContent = `${mapPair.russian} → ${mapPair.ukrainian}`;
-      if (mapSubEl) mapSubEl.textContent = `Country-level adoption (%) — GDELT news corpus 2024–2026`;
+      const mapHasData = activeSource === 'gdelt';
+      if (mapSubEl) {
+        mapSubEl.textContent = mapHasData
+          ? `Country-level adoption (%) — GDELT news corpus 2024–2026`
+          : `Country-level data available for GDELT source only. Showing GDELT data.`;
+      }
 
       // Use per-pair country data if available, fallback to default (pair 1)
       const pairCountries = (countriesByPair as any)[String(activePairId)];
