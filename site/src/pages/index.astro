@@ -130,7 +130,7 @@ function formatNum(n: number) {
         <div class="chart-header">
           <div>
             <div class="chart-title" style="color: var(--text)">Adoption Map: <span id="map-pair-name">Kiev → Kyiv</span></div>
-            <div class="chart-subtitle">Country-level adoption (%) — GDELT news corpus 2024–2026</div>
+            <div class="chart-subtitle" id="map-subtitle">Country-level adoption (%) — GDELT news corpus 2024–2026</div>
           </div>
         </div>
         <div id="world-map" style="width:100%; height:400px;"></div>
@@ -264,7 +264,8 @@ function formatNum(n: number) {
       ngrams: 'Google Books Ngrams',
     };
 
-    let activeSources = new Set(['trends']);
+    let activeSource = 'trends';  // single source at a time
+    let activeSources = new Set(['trends']);  // kept as set for chart compatibility
     let hideRuDomains = false;
     let showEvents = true;
     let activePairId = 1;
@@ -516,14 +517,17 @@ function formatNum(n: number) {
       });
     });
 
-    // Source toggles
+    // Source toggles — radio behavior (one at a time)
     document.querySelectorAll('.source-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
         const src = (btn as HTMLElement).dataset.source!;
-        btn.classList.toggle('active');
-        if (activeSources.has(src)) activeSources.delete(src);
-        else activeSources.add(src);
+        // Deactivate all, activate clicked
+        document.querySelectorAll('.source-toggle').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeSource = src;
+        activeSources = new Set([src]);
         drawChart();
+        drawWorldMap();
       });
     });
 
@@ -769,14 +773,16 @@ function formatNum(n: number) {
         .domain([0, 100])
         .interpolator(d3.interpolateRgbBasis(['#dc2626', '#f97316', '#eab308', '#22c55e', '#047857']));
 
+      // Update map title
+      const mapNameEl = document.getElementById('map-pair-name');
+      const mapSubEl = document.getElementById('map-subtitle');
+      const mapPair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      if (mapNameEl && mapPair) mapNameEl.textContent = `${mapPair.russian} → ${mapPair.ukrainian}`;
+      if (mapSubEl) mapSubEl.textContent = `Country-level adoption (%) — GDELT news corpus 2024–2026`;
+
       // Use per-pair country data if available, fallback to default (pair 1)
       const pairCountries = (countriesByPair as any)[String(activePairId)];
       const adoptionMap = (pairCountries || (countryData as any).countries) as Record<string, {name: string; adoption: number}>;
-
-      // Update map title
-      const mapNameEl = document.getElementById('map-pair-name');
-      const mapPair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
-      if (mapNameEl && mapPair) mapNameEl.textContent = `${mapPair.russian} → ${mapPair.ukrainian}`;
 
       // Tooltip — positioned relative to container
       const tooltip = d3.select('#world-map')
