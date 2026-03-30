@@ -47,7 +47,7 @@ infrastructure/terraform.tfstate*
 .env.*
 
 # Generated figures (reproduced from pipeline)
-figures/
+/figures/
 
 # IDE
 .idea/
