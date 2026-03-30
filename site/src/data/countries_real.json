@@ -1,0 +1,374 @@
+{
+  "pair_id": 1,
+  "label": "Kiev \u2192 Kyiv",
+  "countries": {
+    "784": {
+      "name": "UAE",
+      "adoption": 0.8
+    },
+    "004": {
+      "name": "Afghanistan",
+      "adoption": 40.0
+    },
+    "008": {
+      "name": "Albania",
+      "adoption": 0.0
+    },
+    "051": {
+      "name": "Armenia",
+      "adoption": 5.0
+    },
+    "032": {
+      "name": "Argentina",
+      "adoption": 1.4
+    },
+    "040": {
+      "name": "Austria",
+      "adoption": 0.4
+    },
+    "036": {
+      "name": "Australia",
+      "adoption": 94.9
+    },
+    "031": {
+      "name": "Azerbaijan",
+      "adoption": 16.6
+    },
+    "070": {
+      "name": "Bosnia and Herzegovina",
+      "adoption": 3.3
+    },
+    "050": {
+      "name": "Bangladesh",
+      "adoption": 19.6
+    },
+    "056": {
+      "name": "Belgium",
+      "adoption": 0.2
+    },
+    "100": {
+      "name": "Bulgaria",
+      "adoption": 5.1
+    },
+    "076": {
+      "name": "Brazil",
+      "adoption": 0.1
+    },
+    "112": {
+      "name": "Belarus",
+      "adoption": 0.6
+    },
+    "124": {
+      "name": "Canada",
+      "adoption": 83.5
+    },
+    "756": {
+      "name": "Switzerland",
+      "adoption": 9.1
+    },
+    "152": {
+      "name": "Chile",
+      "adoption": 0.8
+    },
+    "156": {
+      "name": "China",
+      "adoption": 9.7
+    },
+    "170": {
+      "name": "Colombia",
+      "adoption": 52.2
+    },
+    "196": {
+      "name": "Cyprus",
+      "adoption": 0.1
+    },
+    "203": {
+      "name": "Czechia",
+      "adoption": 16.2
+    },
+    "276": {
+      "name": "Germany",
+      "adoption": 0.2
+    },
+    "208": {
+      "name": "Denmark",
+      "adoption": 33.0
+    },
+    "233": {
+      "name": "Estonia",
+      "adoption": 4.5
+    },
+    "818": {
+      "name": "Egypt",
+      "adoption": 4.6
+    },
+    "724": {
+      "name": "Spain",
+      "adoption": 1.9
+    },
+    "246": {
+      "name": "Finland",
+      "adoption": 2.5
+    },
+    "250": {
+      "name": "France",
+      "adoption": 2.9
+    },
+    "268": {
+      "name": "Georgia",
+      "adoption": 22.0
+    },
+    "288": {
+      "name": "Ghana",
+      "adoption": 83.2
+    },
+    "300": {
+      "name": "Greece",
+      "adoption": 0.8
+    },
+    "191": {
+      "name": "Croatia",
+      "adoption": 4.0
+    },
+    "348": {
+      "name": "Hungary",
+      "adoption": 1.5
+    },
+    "360": {
+      "name": "Indonesia",
+      "adoption": 56.0
+    },
+    "372": {
+      "name": "Ireland",
+      "adoption": 92.8
+    },
+    "376": {
+      "name": "Israel",
+      "adoption": 5.2
+    },
+    "356": {
+      "name": "India",
+      "adoption": 80.0
+    },
+    "364": {
+      "name": "Iran",
+      "adoption": 3.5
+    },
+    "352": {
+      "name": "Iceland",
+      "adoption": 1.8
+    },
+    "380": {
+      "name": "Italy",
+      "adoption": 1.3
+    },
+    "392": {
+      "name": "Japan",
+      "adoption": 46.4
+    },
+    "404": {
+      "name": "Kenya",
+      "adoption": 94.6
+    },
+    "417": {
+      "name": "Kyrgyzstan",
+      "adoption": 0.0
+    },
+    "410": {
+      "name": "South Korea",
+      "adoption": 91.4
+    },
+    "414": {
+      "name": "Kuwait",
+      "adoption": 14.3
+    },
+    "398": {
+      "name": "Kazakhstan",
+      "adoption": 0.8
+    },
+    "422": {
+      "name": "Lebanon",
+      "adoption": 12.1
+    },
+    "144": {
+      "name": "Sri Lanka",
+      "adoption": 70.2
+    },
+    "440": {
+      "name": "Lithuania",
+      "adoption": 16.0
+    },
+    "442": {
+      "name": "Luxembourg",
+      "adoption": 16.4
+    },
+    "428": {
+      "name": "Latvia",
+      "adoption": 1.3
+    },
+    "434": {
+      "name": "Libya",
+      "adoption": 0.2
+    },
+    "504": {
+      "name": "Morocco",
+      "adoption": 0.0
+    },
+    "498": {
+      "name": "Moldova",
+      "adoption": 0.2
+    },
+    "499": {
+      "name": "Montenegro",
+      "adoption": 2.3
+    },
+    "807": {
+      "name": "North Macedonia",
+      "adoption": 0.4
+    },
+    "496": {
+      "name": "Mongolia",
+      "adoption": 0.2
+    },
+    "470": {
+      "name": "Malta",
+      "adoption": 95.2
+    },
+    "484": {
+      "name": "Mexico",
+      "adoption": 2.0
+    },
+    "458": {
+      "name": "Malaysia",
+      "adoption": 74.7
+    },
+    "566": {
+      "name": "Nigeria",
+      "adoption": 89.4
+    },
+    "528": {
+      "name": "Netherlands",
+      "adoption": 32.3
+    },
+    "578": {
+      "name": "Norway",
+      "adoption": 95.1
+    },
+    "554": {
+      "name": "New Zealand",
+      "adoption": 96.7
+    },
+    "512": {
+      "name": "Oman",
+      "adoption": 93.5
+    },
+    "604": {
+      "name": "Peru",
+      "adoption": 1.5
+    },
+    "608": {
+      "name": "Philippines",
+      "adoption": 95.8
+    },
+    "586": {
+      "name": "Pakistan",
+      "adoption": 83.7
+    },
+    "616": {
+      "name": "Poland",
+      "adoption": 42.9
+    },
+    "620": {
+      "name": "Portugal",
+      "adoption": 1.6
+    },
+    "642": {
+      "name": "Romania",
+      "adoption": 0.8
+    },
+    "688": {
+      "name": "Serbia",
+      "adoption": 3.4
+    },
+    "643": {
+      "name": "Russia",
+      "adoption": 0.3
+    },
+    "682": {
+      "name": "Saudi Arabia",
+      "adoption": 42.1
+    },
+    "752": {
+      "name": "Sweden",
+      "adoption": 19.5
+    },
+    "702": {
+      "name": "Singapore",
+      "adoption": 21.1
+    },
+    "705": {
+      "name": "Slovenia",
+      "adoption": 2.2
+    },
+    "703": {
+      "name": "Slovakia",
+      "adoption": 12.0
+    },
+    "760": {
+      "name": "Syria",
+      "adoption": 2.0
+    },
+    "764": {
+      "name": "Thailand",
+      "adoption": 0.3
+    },
+    "788": {
+      "name": "Tunisia",
+      "adoption": 21.3
+    },
+    "792": {
+      "name": "Turkey",
+      "adoption": 14.7
+    },
+    "158": {
+      "name": "Taiwan",
+      "adoption": 0.8
+    },
+    "834": {
+      "name": "Tanzania",
+      "adoption": 77.9
+    },
+    "804": {
+      "name": "Ukraine",
+      "adoption": 42.2
+    },
+    "826": {
+      "name": "United Kingdom",
+      "adoption": 98.2
+    },
+    "840": {
+      "name": "United States",
+      "adoption": 95.3
+    },
+    "860": {
+      "name": "Uzbekistan",
+      "adoption": 0.0
+    },
+    "862": {
+      "name": "Venezuela",
+      "adoption": 1.2
+    },
+    "704": {
+      "name": "Vietnam",
+      "adoption": 7.9
+    },
+    "710": {
+      "name": "South Africa",
+      "adoption": 96.9
+    },
+    "716": {
+      "name": "Zimbabwe",
+      "adoption": 55.6
+    }
+  }
+}

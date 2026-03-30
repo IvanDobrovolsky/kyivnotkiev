@@ -1,0 +1,739 @@
+{
+  "pair_id": 18,
+  "label": "Crimea vs Krym",
+  "total_domains": 100,
+  "holdout_count": 4,
+  "adopted_count": 96,
+  "all_sources": [
+    {
+      "domain": "chaspik.spb.ru",
+      "russian_cnt": 128064,
+      "ukrainian_cnt": 123947,
+      "total": 252011,
+      "russian_pct": 50.8
+    },
+    {
+      "domain": "24tv.ua",
+      "russian_cnt": 24685,
+      "ukrainian_cnt": 35467,
+      "total": 60152,
+      "russian_pct": 41.0
+    },
+    {
+      "domain": "gazeta.ua",
+      "russian_cnt": 22853,
+      "ukrainian_cnt": 34927,
+      "total": 57780,
+      "russian_pct": 39.6
+    },
+    {
+      "domain": "censor.net.ua",
+      "russian_cnt": 16060,
+      "ukrainian_cnt": 18910,
+      "total": 34970,
+      "russian_pct": 45.9
+    },
+    {
+      "domain": "gordonua.com",
+      "russian_cnt": 17036,
+      "ukrainian_cnt": 15168,
+      "total": 32204,
+      "russian_pct": 52.9
+    },
+    {
+      "domain": "www.unn.com.ua",
+      "russian_cnt": 13595,
+      "ukrainian_cnt": 17424,
+      "total": 31019,
+      "russian_pct": 43.8
+    },
+    {
+      "domain": "sevastopol.su",
+      "russian_cnt": 12626,
+      "ukrainian_cnt": 16615,
+      "total": 29241,
+      "russian_pct": 43.2
+    },
+    {
+      "domain": "zik.ua",
+      "russian_cnt": 12204,
+      "ukrainian_cnt": 15531,
+      "total": 27735,
+      "russian_pct": 44.0
+    },
+    {
+      "domain": "www.radiosvoboda.org",
+      "russian_cnt": 12199,
+      "ukrainian_cnt": 14855,
+      "total": 27054,
+      "russian_pct": 45.1
+    },
+    {
+      "domain": "ria.ru",
+      "russian_cnt": 10204,
+      "ukrainian_cnt": 16731,
+      "total": 26935,
+      "russian_pct": 37.9
+    },
+    {
+      "domain": "www.unian.ua",
+      "russian_cnt": 9953,
+      "ukrainian_cnt": 15517,
+      "total": 25470,
+      "russian_pct": 39.1
+    },
+    {
+      "domain": "ukranews.com",
+      "russian_cnt": 10932,
+      "ukrainian_cnt": 14472,
+      "total": 25404,
+      "russian_pct": 43.0
+    },
+    {
+      "domain": "www.ukrinform.ua",
+      "russian_cnt": 12064,
+      "ukrainian_cnt": 13197,
+      "total": 25261,
+      "russian_pct": 47.8
+    },
+    {
+      "domain": "tsn.ua",
+      "russian_cnt": 10072,
+      "ukrainian_cnt": 14481,
+      "total": 24553,
+      "russian_pct": 41.0
+    },
+    {
+      "domain": "www.unian.net",
+      "russian_cnt": 9583,
+      "ukrainian_cnt": 14545,
+      "total": 24128,
+      "russian_pct": 39.7
+    },
+    {
+      "domain": "www.depo.ua",
+      "russian_cnt": 9367,
+      "ukrainian_cnt": 12673,
+      "total": 22040,
+      "russian_pct": 42.5
+    },
+    {
+      "domain": "kafanews.com",
+      "russian_cnt": 7840,
+      "ukrainian_cnt": 13843,
+      "total": 21683,
+      "russian_pct": 36.2
+    },
+    {
+      "domain": "svodka.net",
+      "russian_cnt": 9374,
+      "ukrainian_cnt": 10882,
+      "total": 20256,
+      "russian_pct": 46.3
+    },
+    {
+      "domain": "pressorg24.com",
+      "russian_cnt": 8737,
+      "ukrainian_cnt": 11281,
+      "total": 20018,
+      "russian_pct": 43.6
+    },
+    {
+      "domain": "www.segodnya.ua",
+      "russian_cnt": 8379,
+      "ukrainian_cnt": 11005,
+      "total": 19384,
+      "russian_pct": 43.2
+    },
+    {
+      "domain": "ua.korrespondent.net",
+      "russian_cnt": 8018,
+      "ukrainian_cnt": 11214,
+      "total": 19232,
+      "russian_pct": 41.7
+    },
+    {
+      "domain": "regnum.ru",
+      "russian_cnt": 8039,
+      "ukrainian_cnt": 10075,
+      "total": 18114,
+      "russian_pct": 44.4
+    },
+    {
+      "domain": "www.rbc.ua",
+      "russian_cnt": 7586,
+      "ukrainian_cnt": 10401,
+      "total": 17987,
+      "russian_pct": 42.2
+    },
+    {
+      "domain": "news.meta.ua",
+      "russian_cnt": 7460,
+      "ukrainian_cnt": 10444,
+      "total": 17904,
+      "russian_pct": 41.7
+    },
+    {
+      "domain": "riafan.ru",
+      "russian_cnt": 7451,
+      "ukrainian_cnt": 10298,
+      "total": 17749,
+      "russian_pct": 42.0
+    },
+    {
+      "domain": "investigator.org.ua",
+      "russian_cnt": 7960,
+      "ukrainian_cnt": 9752,
+      "total": 17712,
+      "russian_pct": 44.9
+    },
+    {
+      "domain": "nv.ua",
+      "russian_cnt": 7462,
+      "ukrainian_cnt": 9483,
+      "total": 16945,
+      "russian_pct": 44.0
+    },
+    {
+      "domain": "espreso.tv",
+      "russian_cnt": 6782,
+      "ukrainian_cnt": 9762,
+      "total": 16544,
+      "russian_pct": 41.0
+    },
+    {
+      "domain": "www.ziarelive.ro",
+      "russian_cnt": 8186,
+      "ukrainian_cnt": 8060,
+      "total": 16246,
+      "russian_pct": 50.4
+    },
+    {
+      "domain": "glavred.info",
+      "russian_cnt": 7136,
+      "ukrainian_cnt": 8891,
+      "total": 16027,
+      "russian_pct": 44.5
+    },
+    {
+      "domain": "www.blackseanews.net",
+      "russian_cnt": 6842,
+      "ukrainian_cnt": 8865,
+      "total": 15707,
+      "russian_pct": 43.6
+    },
+    {
+      "domain": "allkharkov.ua",
+      "russian_cnt": 6630,
+      "ukrainian_cnt": 9018,
+      "total": 15648,
+      "russian_pct": 42.4
+    },
+    {
+      "domain": "www.dialog.ua",
+      "russian_cnt": 6691,
+      "ukrainian_cnt": 8416,
+      "total": 15107,
+      "russian_pct": 44.3
+    },
+    {
+      "domain": "korrespondent.net",
+      "russian_cnt": 6482,
+      "ukrainian_cnt": 8583,
+      "total": 15065,
+      "russian_pct": 43.0
+    },
+    {
+      "domain": "focus.ua",
+      "russian_cnt": 6087,
+      "ukrainian_cnt": 8599,
+      "total": 14686,
+      "russian_pct": 41.4
+    },
+    {
+      "domain": "glavcom.ua",
+      "russian_cnt": 5579,
+      "ukrainian_cnt": 8598,
+      "total": 14177,
+      "russian_pct": 39.4
+    },
+    {
+      "domain": "lenta.ru",
+      "russian_cnt": 6247,
+      "ukrainian_cnt": 7716,
+      "total": 13963,
+      "russian_pct": 44.7
+    },
+    {
+      "domain": "echo.msk.ru",
+      "russian_cnt": 6504,
+      "ukrainian_cnt": 6998,
+      "total": 13502,
+      "russian_pct": 48.2
+    },
+    {
+      "domain": "news-front.info",
+      "russian_cnt": 5854,
+      "ukrainian_cnt": 7558,
+      "total": 13412,
+      "russian_pct": 43.6
+    },
+    {
+      "domain": "russian.rt.com",
+      "russian_cnt": 4706,
+      "ukrainian_cnt": 8694,
+      "total": 13400,
+      "russian_pct": 35.1
+    },
+    {
+      "domain": "www.dw.com",
+      "russian_cnt": 6341,
+      "ukrainian_cnt": 6624,
+      "total": 12965,
+      "russian_pct": 48.9
+    },
+    {
+      "domain": "interfax.com.ua",
+      "russian_cnt": 5437,
+      "ukrainian_cnt": 7459,
+      "total": 12896,
+      "russian_pct": 42.2
+    },
+    {
+      "domain": "lb.ua",
+      "russian_cnt": 5260,
+      "ukrainian_cnt": 7557,
+      "total": 12817,
+      "russian_pct": 41.0
+    },
+    {
+      "domain": "rueconomics.ru",
+      "russian_cnt": 5550,
+      "ukrainian_cnt": 7080,
+      "total": 12630,
+      "russian_pct": 43.9
+    },
+    {
+      "domain": "www.rbc.ru",
+      "russian_cnt": 5802,
+      "ukrainian_cnt": 6677,
+      "total": 12479,
+      "russian_pct": 46.5
+    },
+    {
+      "domain": "inosmi.ru",
+      "russian_cnt": 5551,
+      "ukrainian_cnt": 6558,
+      "total": 12109,
+      "russian_pct": 45.8
+    },
+    {
+      "domain": "obozrevatel.com",
+      "russian_cnt": 5496,
+      "ukrainian_cnt": 6200,
+      "total": 11696,
+      "russian_pct": 47.0
+    },
+    {
+      "domain": "ua.interfax.com.ua",
+      "russian_cnt": 4831,
+      "ukrainian_cnt": 6636,
+      "total": 11467,
+      "russian_pct": 42.1
+    },
+    {
+      "domain": "podrobnosti.ua",
+      "russian_cnt": 4829,
+      "ukrainian_cnt": 6549,
+      "total": 11378,
+      "russian_pct": 42.4
+    },
+    {
+      "domain": "www.n-tv.de",
+      "russian_cnt": 5951,
+      "ukrainian_cnt": 5339,
+      "total": 11290,
+      "russian_pct": 52.7
+    },
+    {
+      "domain": "news.liga.net",
+      "russian_cnt": 4792,
+      "ukrainian_cnt": 6307,
+      "total": 11099,
+      "russian_pct": 43.2
+    },
+    {
+      "domain": "www.obozrevatel.com",
+      "russian_cnt": 4968,
+      "ukrainian_cnt": 5830,
+      "total": 10798,
+      "russian_pct": 46.0
+    },
+    {
+      "domain": "tass.ru",
+      "russian_cnt": 4557,
+      "ukrainian_cnt": 6104,
+      "total": 10661,
+      "russian_pct": 42.7
+    },
+    {
+      "domain": "news.eizvestia.com",
+      "russian_cnt": 4888,
+      "ukrainian_cnt": 5773,
+      "total": 10661,
+      "russian_pct": 45.8
+    },
+    {
+      "domain": "ua.112.ua",
+      "russian_cnt": 4561,
+      "ukrainian_cnt": 6062,
+      "total": 10623,
+      "russian_pct": 42.9
+    },
+    {
+      "domain": "www.pravda.ru",
+      "russian_cnt": 4586,
+      "ukrainian_cnt": 5588,
+      "total": 10174,
+      "russian_pct": 45.1
+    },
+    {
+      "domain": "news.online.ua",
+      "russian_cnt": 4400,
+      "ukrainian_cnt": 5770,
+      "total": 10170,
+      "russian_pct": 43.3
+    },
+    {
+      "domain": "www.dsnews.ua",
+      "russian_cnt": 4291,
+      "ukrainian_cnt": 5839,
+      "total": 10130,
+      "russian_pct": 42.4
+    },
+    {
+      "domain": "infoline.ua",
+      "russian_cnt": 3931,
+      "ukrainian_cnt": 6148,
+      "total": 10079,
+      "russian_pct": 39.0
+    },
+    {
+      "domain": "charter97.org",
+      "russian_cnt": 4340,
+      "ukrainian_cnt": 5697,
+      "total": 10037,
+      "russian_pct": 43.2
+    },
+    {
+      "domain": "telegraf.com.ua",
+      "russian_cnt": 4310,
+      "ukrainian_cnt": 5503,
+      "total": 9813,
+      "russian_pct": 43.9
+    },
+    {
+      "domain": "www.msn.com",
+      "russian_cnt": 3828,
+      "ukrainian_cnt": 5592,
+      "total": 9420,
+      "russian_pct": 40.6
+    },
+    {
+      "domain": "uapress.info",
+      "russian_cnt": 3960,
+      "ukrainian_cnt": 5369,
+      "total": 9329,
+      "russian_pct": 42.4
+    },
+    {
+      "domain": "www.5.ua",
+      "russian_cnt": 3715,
+      "ukrainian_cnt": 5536,
+      "total": 9251,
+      "russian_pct": 40.2
+    },
+    {
+      "domain": "vchaspik.ua",
+      "russian_cnt": 3703,
+      "ukrainian_cnt": 5383,
+      "total": 9086,
+      "russian_pct": 40.8
+    },
+    {
+      "domain": "wz.lviv.ua",
+      "russian_cnt": 3650,
+      "ukrainian_cnt": 5358,
+      "total": 9008,
+      "russian_pct": 40.5
+    },
+    {
+      "domain": "special.tass.ru",
+      "russian_cnt": 3818,
+      "ukrainian_cnt": 5176,
+      "total": 8994,
+      "russian_pct": 42.5
+    },
+    {
+      "domain": "www.pravda.com.ua",
+      "russian_cnt": 3572,
+      "ukrainian_cnt": 5340,
+      "total": 8912,
+      "russian_pct": 40.1
+    },
+    {
+      "domain": "tvzvezda.ru",
+      "russian_cnt": 4126,
+      "ukrainian_cnt": 4708,
+      "total": 8834,
+      "russian_pct": 46.7
+    },
+    {
+      "domain": "zn.ua",
+      "russian_cnt": 3832,
+      "ukrainian_cnt": 4984,
+      "total": 8816,
+      "russian_pct": 43.5
+    },
+    {
+      "domain": "kontrakty.ua",
+      "russian_cnt": 3808,
+      "ukrainian_cnt": 4987,
+      "total": 8795,
+      "russian_pct": 43.3
+    },
+    {
+      "domain": "rg.ru",
+      "russian_cnt": 3350,
+      "ukrainian_cnt": 5254,
+      "total": 8604,
+      "russian_pct": 38.9
+    },
+    {
+      "domain": "glavpost.com",
+      "russian_cnt": 3842,
+      "ukrainian_cnt": 4759,
+      "total": 8601,
+      "russian_pct": 44.7
+    },
+    {
+      "domain": "www.kommersant.ru",
+      "russian_cnt": 3724,
+      "ukrainian_cnt": 4834,
+      "total": 8558,
+      "russian_pct": 43.5
+    },
+    {
+      "domain": "www.facenews.ua",
+      "russian_cnt": 3981,
+      "ukrainian_cnt": 4562,
+      "total": 8543,
+      "russian_pct": 46.6
+    },
+    {
+      "domain": "day.kyiv.ua",
+      "russian_cnt": 3357,
+      "ukrainian_cnt": 5058,
+      "total": 8415,
+      "russian_pct": 39.9
+    },
+    {
+      "domain": "kp.ua",
+      "russian_cnt": 3624,
+      "ukrainian_cnt": 4758,
+      "total": 8382,
+      "russian_pct": 43.2
+    },
+    {
+      "domain": "gigamir.net",
+      "russian_cnt": 3684,
+      "ukrainian_cnt": 4568,
+      "total": 8252,
+      "russian_pct": 44.6
+    },
+    {
+      "domain": "www.ostro.org",
+      "russian_cnt": 3279,
+      "ukrainian_cnt": 4924,
+      "total": 8203,
+      "russian_pct": 40.0
+    },
+    {
+      "domain": "www.bbc.com",
+      "russian_cnt": 3735,
+      "ukrainian_cnt": 4395,
+      "total": 8130,
+      "russian_pct": 45.9
+    },
+    {
+      "domain": "www.rupor.info",
+      "russian_cnt": 3820,
+      "ukrainian_cnt": 4303,
+      "total": 8123,
+      "russian_pct": 47.0
+    },
+    {
+      "domain": "hronika.info",
+      "russian_cnt": 3510,
+      "ukrainian_cnt": 4398,
+      "total": 7908,
+      "russian_pct": 44.4
+    },
+    {
+      "domain": "www.vsesmi.ru",
+      "russian_cnt": 3217,
+      "ukrainian_cnt": 4675,
+      "total": 7892,
+      "russian_pct": 40.8
+    },
+    {
+      "domain": "expres.ua",
+      "russian_cnt": 3411,
+      "ukrainian_cnt": 4455,
+      "total": 7866,
+      "russian_pct": 43.4
+    },
+    {
+      "domain": "news.yam.md",
+      "russian_cnt": 3836,
+      "ukrainian_cnt": 3844,
+      "total": 7680,
+      "russian_pct": 49.9
+    },
+    {
+      "domain": "talks.su",
+      "russian_cnt": 3147,
+      "ukrainian_cnt": 4402,
+      "total": 7549,
+      "russian_pct": 41.7
+    },
+    {
+      "domain": "ru.tsn.ua",
+      "russian_cnt": 3309,
+      "ukrainian_cnt": 4212,
+      "total": 7521,
+      "russian_pct": 44.0
+    },
+    {
+      "domain": "tyzhden.ua",
+      "russian_cnt": 3099,
+      "ukrainian_cnt": 4405,
+      "total": 7504,
+      "russian_pct": 41.3
+    },
+    {
+      "domain": "uainfo.org",
+      "russian_cnt": 3274,
+      "ukrainian_cnt": 4112,
+      "total": 7386,
+      "russian_pct": 44.3
+    },
+    {
+      "domain": "www.merkur.de",
+      "russian_cnt": 3611,
+      "ukrainian_cnt": 3724,
+      "total": 7335,
+      "russian_pct": 49.2
+    },
+    {
+      "domain": "galinfo.com.ua",
+      "russian_cnt": 2913,
+      "ukrainian_cnt": 4393,
+      "total": 7306,
+      "russian_pct": 39.9
+    },
+    {
+      "domain": "vgolos.com.ua",
+      "russian_cnt": 2996,
+      "ukrainian_cnt": 4285,
+      "total": 7281,
+      "russian_pct": 41.1
+    },
+    {
+      "domain": "www.kirov.kp.ru",
+      "russian_cnt": 907,
+      "ukrainian_cnt": 6147,
+      "total": 7054,
+      "russian_pct": 12.9
+    },
+    {
+      "domain": "regions.ru",
+      "russian_cnt": 3048,
+      "ukrainian_cnt": 3995,
+      "total": 7043,
+      "russian_pct": 43.3
+    },
+    {
+      "domain": "war.obozrevatel.com",
+      "russian_cnt": 2533,
+      "ukrainian_cnt": 4489,
+      "total": 7022,
+      "russian_pct": 36.1
+    },
+    {
+      "domain": "from-ua.com",
+      "russian_cnt": 2995,
+      "ukrainian_cnt": 3847,
+      "total": 6842,
+      "russian_pct": 43.8
+    },
+    {
+      "domain": "www.focus-news.net",
+      "russian_cnt": 3027,
+      "ukrainian_cnt": 3808,
+      "total": 6835,
+      "russian_pct": 44.3
+    },
+    {
+      "domain": "zaxid.net",
+      "russian_cnt": 2895,
+      "ukrainian_cnt": 3922,
+      "total": 6817,
+      "russian_pct": 42.5
+    },
+    {
+      "domain": "glavnoe.ua",
+      "russian_cnt": 2874,
+      "ukrainian_cnt": 3688,
+      "total": 6562,
+      "russian_pct": 43.8
+    },
+    {
+      "domain": "telegraf.by",
+      "russian_cnt": 2974,
+      "ukrainian_cnt": 3564,
+      "total": 6538,
+      "russian_pct": 45.5
+    }
+  ],
+  "holdouts": [
+    {
+      "domain": "chaspik.spb.ru",
+      "russian_cnt": 128064,
+      "ukrainian_cnt": 123947,
+      "total": 252011,
+      "russian_pct": 50.8
+    },
+    {
+      "domain": "gordonua.com",
+      "russian_cnt": 17036,
+      "ukrainian_cnt": 15168,
+      "total": 32204,
+      "russian_pct": 52.9
+    },
+    {
+      "domain": "www.ziarelive.ro",
+      "russian_cnt": 8186,
+      "ukrainian_cnt": 8060,
+      "total": 16246,
+      "russian_pct": 50.4
+    },
+    {
+      "domain": "www.n-tv.de",
+      "russian_cnt": 5951,
+      "ukrainian_cnt": 5339,
+      "total": 11290,
+      "russian_pct": 52.7
+    }
+  ]
+}
