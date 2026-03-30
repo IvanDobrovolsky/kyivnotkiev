@@ -4,7 +4,45 @@ from pathlib import Path
 from typing import Optional
 import yaml
 
-CONFIG_DIR = Path(__file__).parent.parent / "config"
+ROOT_DIR = Path(__file__).resolve().parent.parent
+CONFIG_DIR = ROOT_DIR / "config"
+DATA_DIR = ROOT_DIR / "data"
+RAW_DIR = DATA_DIR / "raw"
+PROCESSED_DIR = DATA_DIR / "processed"
+FIGURES_DIR = ROOT_DIR / "figures"
+
+# Visualization constants
+COLOR_RUSSIAN = "#E74C3C"
+COLOR_UKRAINIAN = "#0057B8"
+COLOR_EVENT = "#7F8C8D"
+VIZ_DPI = 300
+VIZ_FIGSIZE = (14, 7)
+VIZ_STYLE = "seaborn-v0_8-whitegrid"
+
+# Geopolitical events timeline
+EVENTS_TIMELINE = [
+    {"date": "2014-02-22", "name": "Euromaidan revolution", "color": "#FFD700"},
+    {"date": "2014-03-18", "name": "Crimea annexation", "color": "#FF4500"},
+    {"date": "2018-10-02", "name": "#KyivNotKiev campaign", "color": "#0057B8"},
+    {"date": "2019-08-14", "name": "AP adopts Kyiv", "color": "#87CEEB"},
+    {"date": "2019-09-01", "name": "Wikipedia switches to Kyiv", "color": "#87CEEB"},
+    {"date": "2019-10-14", "name": "BBC adopts Kyiv", "color": "#87CEEB"},
+    {"date": "2022-02-24", "name": "Full-scale invasion", "color": "#DC143C"},
+    {"date": "2022-09-06", "name": "Kharkiv counteroffensive", "color": "#228B22"},
+    {"date": "2022-11-11", "name": "Kherson liberation", "color": "#228B22"},
+]
+
+# Countries for geographic analysis
+TARGET_COUNTRIES = [
+    "US", "GB", "CA", "AU", "IE",
+    "DE", "FR", "IT", "ES", "NL",
+    "PL", "CZ", "SK", "HU", "RO",
+    "LT", "LV", "EE", "FI", "SE",
+    "NO", "DK",
+    "UA", "BY", "RU",
+    "TR", "IL", "IN", "JP", "BR",
+    "ZA", "NG", "KR", "MX",
+]
 
 
 def load_pairs(config_dir: Path = CONFIG_DIR) -> dict:
