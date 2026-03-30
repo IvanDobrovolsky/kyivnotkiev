@@ -166,6 +166,42 @@ function formatNum(n: number) {
         <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
       </div>
 
+      <!-- Russia filter insight -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" style="color: var(--text)">Russia vs Rest of World</div>
+            <div class="chart-subtitle">Kiev/Kyiv adoption in GDELT news — Russian media vs everyone else</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 2rem; padding: 1rem 0;">
+          <div style="flex:1; text-align:center; padding:1.5rem; background:#f0fdf4; border-radius:6px;">
+            <div style="font-size:2.5rem; font-weight:700; color:#059669;">30.7%</div>
+            <div style="font-size:0.8rem; color:#6b7280; margin-top:0.3rem;">Non-Russian media</div>
+            <div style="font-size:0.7rem; color:#9ca3af;">14.3M mentions</div>
+          </div>
+          <div style="flex:1; text-align:center; padding:1.5rem; background:#fef2f2; border-radius:6px;">
+            <div style="font-size:2.5rem; font-weight:700; color:#dc2626;">1.7%</div>
+            <div style="font-size:0.8rem; color:#6b7280; margin-top:0.3rem;">Russian media</div>
+            <div style="font-size:0.7rem; color:#9ca3af;">2.3M mentions</div>
+          </div>
+        </div>
+        <div style="font-size:0.75rem; color:#6b7280; text-align:center; margin-top:0.5rem;">
+          18x adoption gap — Russian media almost exclusively uses "Kiev"
+        </div>
+      </div>
+
+      <!-- Holdout domains table -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" style="color: var(--text)">Top Holdouts</div>
+            <div class="chart-subtitle">Media domains still predominantly using "Kiev" over "Kyiv" (2024–2026, min 50 mentions)</div>
+          </div>
+        </div>
+        <div id="holdout-table" style="max-height: 400px; overflow-y: auto;"></div>
+      </div>
+
       <div class="chart-container" id="about">
         <div class="about-text">
           <p>
@@ -722,10 +758,42 @@ function formatNum(n: number) {
         });
     }
 
+    // ── Holdout table ─────────────────────────────────────
+    async function drawHoldoutTable() {
+      const container = document.getElementById('holdout-table')!;
+      let holdouts: any[];
+      try {
+        const mod = await import('../data/holdouts.json');
+        holdouts = (mod.default || mod) as any[];
+      } catch { return; }
+
+      const rows = holdouts.slice(0, 30).map((h: any) => `
+        <tr style="border-bottom:1px solid #f3f4f6;">
+          <td style="padding:0.5rem 0.75rem; font-size:0.8rem; font-weight:500;">${h.domain}</td>
+          <td style="padding:0.5rem 0.75rem; font-size:0.8rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
+          <td style="padding:0.5rem 0.75rem; font-size:0.75rem; color:#9ca3af;">${h.total.toLocaleString()}</td>
+        </tr>
+      `).join('');
+
+      container.innerHTML = `
+        <table style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr style="border-bottom:2px solid #e5e7eb;">
+              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Domain</th>
+              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Still "Kiev"</th>
+              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Mentions</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
     drawChart();
     drawCategoryChart();
     drawWorldMap();
     drawHeatmap();
+    drawHoldoutTable();
     window.addEventListener('resize', () => { drawChart(); drawCategoryChart(); drawWorldMap(); drawHeatmap(); });
   </script>
 </body>
