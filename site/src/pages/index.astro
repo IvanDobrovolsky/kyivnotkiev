@@ -122,6 +122,28 @@ function formatNum(n: number) {
         <div class="chart-legend" id="chart-legend"></div>
       </div>
 
+      <!-- Category comparison -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" style="color: var(--text)">Adoption by Category</div>
+            <div class="chart-subtitle">Average Ukrainian spelling adoption (%) per category — GDELT 2024–2026</div>
+          </div>
+        </div>
+        <div id="category-chart" style="width:100%; height:280px;"></div>
+      </div>
+
+      <!-- All pairs heatmap -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" style="color: var(--text)">All Pairs Overview</div>
+            <div class="chart-subtitle">Current adoption rate — sorted by category, then by adoption %</div>
+          </div>
+        </div>
+        <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
+      </div>
+
       <div class="chart-container" id="about">
         <div class="about-text">
           <p>
@@ -153,6 +175,7 @@ function formatNum(n: number) {
   <script>
     import * as d3 from 'd3';
     import timeseriesData from '../data/timeseries.json';
+    import pairs from '../data/pairs.json';
 
     const sourceColors: Record<string, string> = {
       gdelt: '#0057B8',
@@ -179,7 +202,7 @@ function formatNum(n: number) {
       legendContainer.innerHTML = '';
 
       const rect = container.getBoundingClientRect();
-      const margin = { top: 24, right: 20, bottom: 30, left: 45 };
+      const margin = { top: 24, right: 55, bottom: 30, left: 45 };
       const width = rect.width - margin.left - margin.right;
       const height = rect.height - margin.top - margin.bottom;
 
@@ -240,11 +263,12 @@ function formatNum(n: number) {
         .attr('fill', '#9ca3af').attr('font-size', '11px')
         .text((d: number) => d + '%');
 
-      // X-axis
+      // X-axis — every year
       svg.append('g')
         .attr('transform', `translate(0,${height})`)
-        .call(d3.axisBottom(x).ticks(7).tickSize(0).tickPadding(8))
-        .selectAll('text').attr('fill', '#9ca3af').attr('font-size', '11px');
+        .call(d3.axisBottom(x).ticks(d3.timeYear.every(1)).tickSize(0).tickPadding(8)
+          .tickFormat(d3.timeFormat('%Y') as any))
+        .selectAll('text').attr('fill', '#9ca3af').attr('font-size', '10px');
 
       svg.selectAll('.domain').attr('stroke', '#e5e7eb');
 
@@ -365,8 +389,185 @@ function formatNum(n: number) {
       drawChart();
     });
 
+    // ── Category bar chart ──────────────────────────────
+    function drawCategoryChart() {
+      const container = document.getElementById('category-chart')!;
+      container.innerHTML = '';
+
+      const rect = container.getBoundingClientRect();
+      const margin = { top: 10, right: 60, bottom: 20, left: 120 };
+      const width = rect.width - margin.left - margin.right;
+      const height = rect.height - margin.top - margin.bottom;
+
+      const svg = d3.select('#category-chart')
+        .append('svg')
+        .attr('viewBox', `0 0 ${rect.width} ${rect.height}`)
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
+      // Aggregate by category
+      const catData = pairs.categories.map((cat: any) => {
+        const catPairs = pairs.pairs.filter((p: any) => p.category === cat.id);
+        const avg = catPairs.length ? catPairs.reduce((s: number, p: any) => s + p.adoption, 0) / catPairs.length : 0;
+        return { name: cat.name, avg: Math.round(avg * 10) / 10, color: cat.color, count: catPairs.length };
+      }).sort((a: any, b: any) => b.avg - a.avg);
+
+      const y = d3.scaleBand()
+        .domain(catData.map((d: any) => d.name))
+        .range([0, height])
+        .padding(0.3);
+
+      const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+
+      // Background bars
+      svg.selectAll('.bg-bar')
+        .data(catData)
+        .enter().append('rect')
+        .attr('x', 0).attr('width', width)
+        .attr('y', (d: any) => y(d.name)!)
+        .attr('height', y.bandwidth())
+        .attr('fill', '#f3f4f6')
+        .attr('rx', 3);
+
+      // Value bars
+      svg.selectAll('.val-bar')
+        .data(catData)
+        .enter().append('rect')
+        .attr('x', 0)
+        .attr('width', (d: any) => x(d.avg))
+        .attr('y', (d: any) => y(d.name)!)
+        .attr('height', y.bandwidth())
+        .attr('fill', (d: any) => d.color)
+        .attr('opacity', 0.8)
+        .attr('rx', 3);
+
+      // Labels
+      svg.selectAll('.cat-label')
+        .data(catData)
+        .enter().append('text')
+        .attr('x', -8)
+        .attr('y', (d: any) => y(d.name)! + y.bandwidth() / 2 + 4)
+        .attr('text-anchor', 'end')
+        .attr('fill', '#374151')
+        .attr('font-size', '12px')
+        .attr('font-weight', '500')
+        .text((d: any) => d.name);
+
+      // Value labels
+      svg.selectAll('.val-label')
+        .data(catData)
+        .enter().append('text')
+        .attr('x', (d: any) => x(d.avg) + 8)
+        .attr('y', (d: any) => y(d.name)! + y.bandwidth() / 2 + 4)
+        .attr('fill', '#6b7280')
+        .attr('font-size', '12px')
+        .attr('font-weight', '600')
+        .text((d: any) => d.avg + '%');
+    }
+
+    // ── Heatmap / pair overview ──────────────────────────
+    function drawHeatmap() {
+      const container = document.getElementById('heatmap-chart')!;
+      container.innerHTML = '';
+
+      const sorted = [...pairs.pairs].sort((a: any, b: any) => {
+        if (a.category !== b.category) return a.category.localeCompare(b.category);
+        return b.adoption - a.adoption;
+      });
+
+      const catColors: Record<string, string> = {};
+      pairs.categories.forEach((c: any) => { catColors[c.id] = c.color; });
+
+      const rowHeight = 28;
+      const totalHeight = sorted.length * rowHeight;
+      container.style.height = totalHeight + 'px';
+
+      const rect = container.getBoundingClientRect();
+      const margin = { top: 0, right: 55, bottom: 0, left: 180 };
+      const barWidth = rect.width - margin.left - margin.right;
+
+      const svg = d3.select('#heatmap-chart')
+        .append('svg')
+        .attr('viewBox', `0 0 ${rect.width} ${totalHeight}`)
+        .append('g')
+        .attr('transform', `translate(${margin.left},0)`);
+
+      const x = d3.scaleLinear().domain([0, 100]).range([0, barWidth]);
+
+      const colorScale = (pct: number) => {
+        if (pct >= 80) return '#059669';
+        if (pct >= 50) return '#d97706';
+        if (pct >= 20) return '#ea580c';
+        return '#dc2626';
+      };
+
+      sorted.forEach((pair: any, i: number) => {
+        const yPos = i * rowHeight;
+
+        // Category dot
+        svg.append('circle')
+          .attr('cx', -170).attr('cy', yPos + rowHeight / 2)
+          .attr('r', 4)
+          .attr('fill', catColors[pair.category] || '#999');
+
+        // Label: Ukrainian name
+        svg.append('text')
+          .attr('x', -160).attr('y', yPos + rowHeight / 2 + 4)
+          .attr('fill', '#374151')
+          .attr('font-size', '11px')
+          .attr('font-weight', '500')
+          .text(pair.ukrainian);
+
+        // Old name (strikethrough)
+        svg.append('text')
+          .attr('x', -160).attr('y', yPos + rowHeight / 2 + 4)
+          .attr('fill', 'transparent')
+          .attr('font-size', '0px')
+          .text('');
+
+        // Background bar
+        svg.append('rect')
+          .attr('x', 0).attr('width', barWidth)
+          .attr('y', yPos + 4)
+          .attr('height', rowHeight - 8)
+          .attr('fill', '#f3f4f6')
+          .attr('rx', 2);
+
+        // Value bar
+        svg.append('rect')
+          .attr('x', 0)
+          .attr('width', x(pair.adoption))
+          .attr('y', yPos + 4)
+          .attr('height', rowHeight - 8)
+          .attr('fill', colorScale(pair.adoption))
+          .attr('opacity', 0.75)
+          .attr('rx', 2);
+
+        // Percentage
+        svg.append('text')
+          .attr('x', barWidth + 8)
+          .attr('y', yPos + rowHeight / 2 + 4)
+          .attr('fill', colorScale(pair.adoption))
+          .attr('font-size', '11px')
+          .attr('font-weight', '700')
+          .attr('font-family', 'var(--font-mono)')
+          .text(pair.adoption + '%');
+
+        // Divider
+        if (i > 0 && sorted[i - 1].category !== pair.category) {
+          svg.append('line')
+            .attr('x1', -175).attr('x2', barWidth + 50)
+            .attr('y1', yPos).attr('y2', yPos)
+            .attr('stroke', '#e5e7eb')
+            .attr('stroke-width', 1);
+        }
+      });
+    }
+
     drawChart();
-    window.addEventListener('resize', drawChart);
+    drawCategoryChart();
+    drawHeatmap();
+    window.addEventListener('resize', () => { drawChart(); drawCategoryChart(); drawHeatmap(); });
   </script>
 </body>
 </html>

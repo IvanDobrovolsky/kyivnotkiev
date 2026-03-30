@@ -137,9 +137,10 @@ body {
 .sidebar-item:hover { background: var(--bg-hover); }
 
 .sidebar-item.active {
-  background: var(--yellow-bg);
+  background: #e8f0fe;
   border-left-color: var(--blue);
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--blue);
 }
 
 .sidebar-item .pair-name {
@@ -152,6 +153,10 @@ body {
   color: var(--text-dim);
   font-size: 0.65rem;
   text-decoration: line-through;
+}
+
+.sidebar-item.active .old {
+  color: #93b4d8;
 }
 
 .sidebar-item .adoption-badge {
