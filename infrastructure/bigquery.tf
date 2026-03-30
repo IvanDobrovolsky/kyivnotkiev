@@ -4,7 +4,7 @@ resource "google_bigquery_dataset" "kyivnotkiev" {
   friendly_name = "KyivNotKiev Research Dataset"
   description   = "Multi-source toponymic adoption analysis"
   location      = "US"
-  project       = google_project.research.project_id
+  project       = var.project_id
 
   labels = {
     project = "kyivnotkiev"
@@ -19,7 +19,7 @@ resource "google_bigquery_dataset" "kyivnotkiev" {
 resource "google_bigquery_table" "raw_gdelt" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "raw_gdelt"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   time_partitioning {
     type  = "DAY"
@@ -44,7 +44,7 @@ resource "google_bigquery_table" "raw_gdelt" {
 resource "google_bigquery_table" "raw_common_crawl" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "raw_common_crawl"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   time_partitioning {
     type  = "DAY"
@@ -71,7 +71,7 @@ resource "google_bigquery_table" "raw_common_crawl" {
 resource "google_bigquery_table" "raw_reddit" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "raw_reddit"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   time_partitioning {
     type  = "MONTH"
@@ -99,7 +99,7 @@ resource "google_bigquery_table" "raw_reddit" {
 resource "google_bigquery_table" "raw_wikipedia" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "raw_wikipedia"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   time_partitioning {
     type  = "MONTH"
@@ -122,7 +122,7 @@ resource "google_bigquery_table" "raw_wikipedia" {
 resource "google_bigquery_table" "raw_trends" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "raw_trends"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   clustering = ["pair_id", "variant"]
 
@@ -140,7 +140,7 @@ resource "google_bigquery_table" "raw_trends" {
 resource "google_bigquery_table" "raw_ngrams" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "raw_ngrams"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   clustering = ["pair_id", "variant"]
 
@@ -157,7 +157,7 @@ resource "google_bigquery_table" "raw_ngrams" {
 resource "google_bigquery_table" "raw_youtube" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "raw_youtube"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   time_partitioning {
     type  = "MONTH"
@@ -186,7 +186,7 @@ resource "google_bigquery_table" "raw_youtube" {
 resource "google_bigquery_table" "watermarks" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "watermarks"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   schema = jsonencode([
     { name = "pair_id", type = "INT64", mode = "REQUIRED" },
@@ -202,7 +202,7 @@ resource "google_bigquery_table" "watermarks" {
 resource "google_bigquery_table" "analysis_adoption" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "analysis_adoption"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   clustering = ["pair_id", "source"]
 
@@ -222,7 +222,7 @@ resource "google_bigquery_table" "analysis_adoption" {
 resource "google_bigquery_table" "analysis_changepoints" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "analysis_changepoints"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   schema = jsonencode([
     { name = "pair_id", type = "INT64", mode = "REQUIRED" },
@@ -240,7 +240,7 @@ resource "google_bigquery_table" "analysis_changepoints" {
 resource "google_bigquery_table" "v_cross_source" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "v_cross_source"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   view {
     query          = <<-SQL
@@ -263,7 +263,7 @@ resource "google_bigquery_table" "v_cross_source" {
 resource "google_bigquery_table" "v_latest_adoption" {
   dataset_id = google_bigquery_dataset.kyivnotkiev.dataset_id
   table_id   = "v_latest_adoption"
-  project    = google_project.research.project_id
+  project    = var.project_id
 
   view {
     query          = <<-SQL

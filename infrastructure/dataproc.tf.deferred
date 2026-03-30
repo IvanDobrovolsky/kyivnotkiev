@@ -4,7 +4,7 @@
 resource "google_dataproc_cluster" "spark" {
   name    = "kyivnotkiev-spark"
   region  = var.region
-  project = google_project.research.project_id
+  project = var.project_id
 
   cluster_config {
     staging_bucket = google_storage_bucket.dataproc_staging.name
@@ -67,7 +67,7 @@ resource "google_dataproc_cluster" "spark" {
 resource "google_dataproc_autoscaling_policy" "spark" {
   policy_id = "kyivnotkiev-autoscale"
   location  = var.region
-  project   = google_project.research.project_id
+  project   = var.project_id
 
   basic_algorithm {
     yarn_config {

@@ -19,4 +19,5 @@ variable "zone" {
 variable "billing_account_id" {
   description = "GCP billing account ID"
   type        = string
+  default     = "01FD01-FFE846-B5288F"
 }

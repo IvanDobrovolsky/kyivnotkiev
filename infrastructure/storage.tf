@@ -4,7 +4,7 @@
 resource "google_storage_bucket" "data" {
   name          = "${var.project_id}-data"
   location      = "US"
-  project       = google_project.research.project_id
+  project       = var.project_id
   force_destroy = false
 
   uniform_bucket_level_access = true
@@ -37,7 +37,7 @@ resource "google_storage_bucket" "data" {
 resource "google_storage_bucket" "dataproc_staging" {
   name          = "${var.project_id}-dataproc-staging"
   location      = "US"
-  project       = google_project.research.project_id
+  project       = var.project_id
   force_destroy = true
 
   uniform_bucket_level_access = true
@@ -60,7 +60,7 @@ resource "google_artifact_registry_repository" "pipeline" {
   repository_id = "kyivnotkiev-pipeline"
   description   = "Pipeline Docker images"
   format        = "DOCKER"
-  project       = google_project.research.project_id
+  project       = var.project_id
 
   depends_on = [google_project_service.apis]
 }
