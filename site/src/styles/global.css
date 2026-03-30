@@ -63,8 +63,6 @@ body {
   gap: 0.4rem;
 }
 
-.topbar-logo .leaf { flex-shrink: 0; }
-
 .topbar-logo .k { color: var(--blue); }
 .topbar-logo .n { color: var(--text-muted); }
 .topbar-logo .struck {
