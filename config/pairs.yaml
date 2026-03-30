@@ -257,9 +257,23 @@ pairs:
     category: food
     russian: "Borscht"
     ukrainian: "Borshch"
-    enabled: false
+    enabled: true
     is_control: false
-    notes: "Entered English via Yiddish, not Russian — distinct case from decolonial renaming"
+    notes: >
+      'Borsch without a t' — Klopotenko's UNESCO campaign (2018-2022) parallels
+      #KyivNotKiev. UNESCO inscribed Ukrainian borscht July 2022. Washington Post,
+      NPR, AP all covered the 't' debate. Yiddish etymology makes this a distinct
+      but complementary case to decolonial renaming.
+
+  - id: 64
+    category: food
+    russian: "Borsch"
+    ukrainian: "Borshch"
+    enabled: true
+    is_control: false
+    notes: >
+      Secondary variant: 'Borsch' vs 'Borshch' (both without 't'). Tracks whether
+      the Ukrainian transliteration 'shch' is gaining over simplified 'sch'.
 
   - id: 46
     category: food
