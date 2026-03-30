@@ -148,11 +148,11 @@ function formatNum(n: number) {
         <div class="chart-legend" id="map-legend" style="justify-content: center; gap: 0.5rem;">
           <span style="font-size:0.7rem; color:var(--text-muted)">0%</span>
           <div style="display:flex; height:10px; width:200px; border-radius:5px; overflow:hidden;">
-            <div style="flex:1; background:#fef2f2"></div>
-            <div style="flex:1; background:#fecaca"></div>
-            <div style="flex:1; background:#fbbf24"></div>
-            <div style="flex:1; background:#34d399"></div>
-            <div style="flex:1; background:#059669"></div>
+            <div style="flex:1; background:#dc2626"></div>
+            <div style="flex:1; background:#f97316"></div>
+            <div style="flex:1; background:#eab308"></div>
+            <div style="flex:1; background:#22c55e"></div>
+            <div style="flex:1; background:#047857"></div>
           </div>
           <span style="font-size:0.7rem; color:var(--text-muted)">100%</span>
         </div>
@@ -364,24 +364,35 @@ function formatNum(n: number) {
         });
       }
 
-      // Tooltip
+      // Data lines + crosshair tooltip
       const chartContainer = document.getElementById('chart')!;
       chartContainer.style.position = 'relative';
+
       const tooltip = d3.select('#chart')
         .append('div')
         .style('position', 'absolute')
         .style('background', 'white')
         .style('border', '1px solid #d1d5db')
-        .style('border-radius', '6px')
-        .style('padding', '8px 12px')
-        .style('font-size', '12px')
+        .style('border-radius', '8px')
+        .style('padding', '10px 14px')
+        .style('font-size', '13px')
         .style('pointer-events', 'none')
         .style('opacity', '0')
-        .style('box-shadow', '0 4px 12px rgba(0,0,0,0.1)')
+        .style('box-shadow', '0 4px 16px rgba(0,0,0,0.12)')
         .style('z-index', '10')
-        .style('white-space', 'nowrap');
+        .style('white-space', 'nowrap')
+        .style('line-height', '1.6');
 
-      // Data lines
+      const crosshairLine = svg.append('line')
+        .attr('y1', 0).attr('y2', height)
+        .attr('stroke', '#d1d5db')
+        .attr('stroke-width', 1)
+        .attr('stroke-dasharray', '4,3')
+        .style('opacity', 0);
+
+      // Build all series data for crosshair lookup
+      const allSeriesData: Record<string, {date: string; adoption: number}[]> = {};
+
       const line = d3.line<{date: string; adoption: number}>()
         .x(d => x(parseDate(d.date)!))
         .y(d => y(d.adoption))
@@ -393,36 +404,14 @@ function formatNum(n: number) {
         const series = pairData[src];
         if (!series) continue;
 
+        allSeriesData[src] = series;
+
         svg.append('path')
           .datum(series)
           .attr('fill', 'none')
           .attr('stroke', sourceColors[src])
           .attr('stroke-width', 2.5)
           .attr('d', line);
-
-        // Hover dots for each data point
-        svg.selectAll(`.dot-${src}`)
-          .data(series)
-          .enter().append('circle')
-          .attr('cx', (d: any) => x(parseDate(d.date)!))
-          .attr('cy', (d: any) => y(d.adoption))
-          .attr('r', 6)
-          .attr('fill', 'transparent')
-          .attr('cursor', 'pointer')
-          .on('mouseenter', function(_e: MouseEvent, d: any) {
-            d3.select(this).attr('fill', sourceColors[src]).attr('r', 5);
-            tooltip.style('opacity', '1')
-              .html(`<strong>${d.date}</strong><br/><span style="color:${sourceColors[src]}">${sourceLabels[src]}: <strong>${d.adoption}%</strong></span>`);
-          })
-          .on('mousemove', function(e: MouseEvent) {
-            const cr = chartContainer.getBoundingClientRect();
-            tooltip.style('left', (e.clientX - cr.left + 14) + 'px')
-              .style('top', (e.clientY - cr.top - 24) + 'px');
-          })
-          .on('mouseleave', function() {
-            d3.select(this).attr('fill', 'transparent').attr('r', 6);
-            tooltip.style('opacity', '0');
-          });
 
         // End dot + label
         const last = series[series.length - 1];
@@ -437,7 +426,7 @@ function formatNum(n: number) {
         svg.append('text')
           .attr('x', cx + 8).attr('y', cy + 4)
           .attr('fill', sourceColors[src])
-          .attr('font-size', '11px')
+          .attr('font-size', '12px')
           .attr('font-weight', '600')
           .text(last.adoption + '%');
 
@@ -447,6 +436,45 @@ function formatNum(n: number) {
           value: last.adoption,
         });
       }
+
+      // Crosshair overlay for multi-source tooltip
+      svg.append('rect')
+        .attr('width', width).attr('height', height)
+        .attr('fill', 'transparent')
+        .on('mousemove', function(event: MouseEvent) {
+          const [mx] = d3.pointer(event);
+          const hoveredDate = x.invert(mx);
+          const dateStr = d3.timeFormat('%Y-%m')(hoveredDate);
+
+          crosshairLine.attr('x1', mx).attr('x2', mx).style('opacity', 1);
+
+          // Find closest value for each source
+          let html = `<strong>${dateStr}</strong>`;
+          for (const src of Object.keys(allSeriesData)) {
+            const series = allSeriesData[src];
+            // Find closest date
+            let closest = series[0];
+            let minDist = Infinity;
+            for (const d of series) {
+              const dist = Math.abs(parseDate(d.date)!.getTime() - hoveredDate.getTime());
+              if (dist < minDist) { minDist = dist; closest = d; }
+            }
+            // Only show if within 45 days
+            if (minDist < 45 * 86400000) {
+              html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${closest.adoption}%</strong></span>`;
+            }
+          }
+
+          tooltip.style('opacity', '1').html(html);
+          const cr = chartContainer.getBoundingClientRect();
+          const left = event.clientX - cr.left;
+          tooltip.style('left', (left > width / 2 ? left - 180 : left + 20) + 'px')
+            .style('top', '10px');
+        })
+        .on('mouseleave', function() {
+          crosshairLine.style('opacity', 0);
+          tooltip.style('opacity', '0');
+        });
 
       // Legend
       for (const item of activeLegend) {
@@ -729,7 +757,7 @@ function formatNum(n: number) {
 
       const colorScale = d3.scaleSequential()
         .domain([0, 100])
-        .interpolator(d3.interpolateRgbBasis(['#fef2f2', '#fecaca', '#fbbf24', '#34d399', '#059669']));
+        .interpolator(d3.interpolateRgbBasis(['#dc2626', '#f97316', '#eab308', '#22c55e', '#047857']));
 
       const adoptionMap = (countryData as any).countries as Record<string, {name: string; adoption: number}>;
 
@@ -813,7 +841,7 @@ function formatNum(n: number) {
 
       const rows = holdouts.slice(0, 30).map((h: any) => `
         <tr style="border-bottom:1px solid #f3f4f6;">
-          <td style="padding:0.5rem 0.75rem; font-size:0.8rem; font-weight:500;">${h.domain}</td>
+          <td style="padding:0.5rem 0.75rem; font-size:0.8rem; font-weight:500;">${h.source_domain}</td>
           <td style="padding:0.5rem 0.75rem; font-size:0.8rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
           <td style="padding:0.5rem 0.75rem; font-size:0.75rem; color:#9ca3af;">${h.total.toLocaleString()}</td>
         </tr>
