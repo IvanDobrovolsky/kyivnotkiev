@@ -128,4 +128,4 @@ Makefile          → One-command everything
 
 ## Research
 
-Paper targeting **Computational Linguistics** (MIT Press). See [KyivNotKiev-paper](https://github.com/IvanDobrovolsky/KyivNotKiev-paper).
+Academic paper in preparation. See [KyivNotKiev-paper](https://github.com/IvanDobrovolsky/KyivNotKiev-paper).
