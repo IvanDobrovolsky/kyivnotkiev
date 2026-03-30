@@ -509,3 +509,60 @@ pairs:
     ukrainian: "Vitaliy Klychko"
     enabled: true
     is_control: false
+
+  # ── Food (expanded — Klopotenko movement) ────────────
+  - id: 65
+    category: food
+    russian: "Pierogi"
+    ukrainian: "Varenyky"
+    enabled: true
+    is_control: false
+    notes: "Pierogi is Polish; Ukrainian dish is varenyky. Often conflated in English."
+
+  - id: 66
+    category: food
+    russian: "Pirozhki"
+    ukrainian: "Pyrizhky"
+    enabled: true
+    is_control: false
+
+  - id: 67
+    category: food
+    russian: "Syrniki"
+    ukrainian: "Syrnyky"
+    enabled: true
+    is_control: false
+
+  - id: 68
+    category: food
+    russian: "Holubtsy"
+    ukrainian: "Holubtsi"
+    enabled: true
+    is_control: false
+    notes: "Russian golubets/golubtsy → Ukrainian holubtsi"
+
+  # ── People (expanded — common name patterns) ─────────
+  - id: 69
+    category: people
+    russian: "Sergei Rebrov"
+    ukrainian: "Serhiy Rebrov"
+    enabled: true
+    is_control: false
+    notes: "Football manager, currently coaches Ukraine national team"
+
+  - id: 70
+    category: people
+    russian: "Mykola Gogol"
+    ukrainian: "Mykola Hohol"
+    enabled: false
+    is_control: false
+    notes: "Controversial — Gogol wrote in Russian. Disabled for now."
+
+  # ── Phrases ──────────────────────────────────────────
+  - id: 71
+    category: historical
+    russian: "Slava Ukraine"
+    ukrainian: "Slava Ukraini"
+    enabled: true
+    is_control: false
+    notes: "National salute — trackable on social media. Russian-influenced English drops the -i ending."
