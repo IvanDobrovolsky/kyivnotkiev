@@ -96,9 +96,13 @@ function formatNum(n: number) {
               <span class="old-name" id="chart-old">Kiev</span>
               <span class="arrow">→</span>
               <span class="new-name" id="chart-new">Kyiv</span>
+              <span id="chart-range" style="font-size:0.75rem; color:var(--text-muted); font-weight:400; margin-left:0.5rem;"></span>
             </div>
-            <div class="chart-subtitle" id="chart-subtitle">
-              Ukrainian spelling adoption rate (%) across sources, 2010–2026
+            <div class="chart-subtitle" id="chart-subtitle" style="display:flex; align-items:center; gap:0.4rem;">
+              <span>Ukrainian spelling adoption rate (%)</span>
+              <span id="chart-info" style="display:none; cursor:help;" title="">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#9ca3af" stroke-width="1.5"/><text x="8" y="12" text-anchor="middle" font-size="11" fill="#9ca3af" font-weight="600">i</text></svg>
+              </span>
             </div>
           </div>
           <div class="chart-controls">
@@ -320,10 +324,34 @@ function formatNum(n: number) {
 
       if (allDates.length === 0) return;
 
-      // Always start from 2010 for consistent view
+      // Dynamic range based on active source
+      const minDate = d3.min(allDates) as Date;
+      const xStart = activeSource === 'ngrams' ? new Date(1900, 0, 1) : new Date(Math.min(minDate.getFullYear(), 2010), 0, 1);
       const x = d3.scaleTime()
-        .domain([new Date(2010, 0, 1), new Date(2026, 5, 1)])
+        .domain([xStart, new Date(2026, 5, 1)])
         .range([0, width]);
+
+      // Update title range and info icon
+      const rangeEl = document.getElementById('chart-range');
+      const infoEl = document.getElementById('chart-info');
+      const sourceRanges: Record<string, [string, string, string]> = {
+        trends: ['2010', '2026', ''],
+        gdelt: ['2015', '2026', 'GDELT v2 started Feb 2015'],
+        wikipedia: ['2015', '2026', 'Pageviews API started Jul 2015'],
+        reddit: ['2007', '2026', 'Quarterly aggregated, smoothed'],
+        youtube: ['2013', '2026', 'YouTube Data API, top 50 per search'],
+        ngrams: ['1900', '2019', 'Google Books corpus frozen at 2019'],
+      };
+      const [srcStart, srcEnd, srcInfo] = sourceRanges[activeSource] || ['2010', '2026', ''];
+      if (rangeEl) rangeEl.textContent = `${srcStart}–${srcEnd}`;
+      if (infoEl) {
+        if (srcInfo) {
+          infoEl.style.display = 'inline';
+          infoEl.setAttribute('title', srcInfo);
+        } else {
+          infoEl.style.display = 'none';
+        }
+      }
 
       const y = d3.scaleLinear()
         .domain([0, 100])
@@ -414,7 +442,7 @@ function formatNum(n: number) {
       const line = d3.line<{date: string; adoption: number}>()
         .x(d => x(parseDate(d.date)!))
         .y(d => y(d.adoption))
-        .curve(d3.curveMonotoneX);
+        .curve(d3.curveBasis);
 
       const activeLegend: {label: string; color: string; value: number}[] = [];
 
@@ -437,7 +465,7 @@ function formatNum(n: number) {
           const russianLine = d3.line<any>()
             .x(d => x(parseDate(d.date)!))
             .y(d => y(100 - d.adoption))
-            .curve(d3.curveMonotoneX);
+            .curve(d3.curveBasis);
 
           svg.append('path')
             .datum(series)
