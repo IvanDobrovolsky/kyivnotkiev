@@ -283,21 +283,21 @@ function formatNum(n: number) {
       <div class="chart-container" id="about">
         <div class="about-text">
           <p>
-            In 2018, Ukraine's Ministry of Foreign Affairs launched #KyivNotKiev — a campaign
-            to change how the world spells Ukrainian place names. We built a data pipeline to
-            measure whether it actually worked.
+            У 2018 році Міністерство закордонних справ України запустило кампанію #KyivNotKiev —
+            щоб змінити те, як світ пише українські географічні назви. Ми побудували конвеєр даних,
+            щоб виміряти, чи це справді спрацювало.
           </p>
           <p>
-            This dashboard tracks 55 Ukrainian toponym pairs (from city names to dishes to
-            historical terms) across 7 independent data sources. Every data point comes from
-            real-world usage — news articles, social media posts, encyclopedia pageviews, book
-            frequency, and web search trends.
+            Ця панель відстежує 55 українських пар топонімів (від назв міст до страв та
+            історичних термінів) через 7 незалежних джерел даних. Кожна точка даних — це реальне
+            використання: новинні статті, публікації в соцмережах, перегляди енциклопедій,
+            частотність у книгах та пошукові тренди.
           </p>
           <p>
-            Some findings: social media communities adopted Ukrainian spellings 5–9x faster
-            than traditional media. "Disaster brands" like Chernobyl are nearly immovable.
-            And food terms like Borshch are fighting a separate battle, championed by chef
-            Yevhen Klopotenko's UNESCO campaign.
+            Знахідки: спільноти в соцмережах перейшли на українські назви у 5–9 разів швидше,
+            ніж традиційні ЗМІ. «Бренди катастроф» як Чорнобиль майже не піддаються зміні.
+            А кулінарні терміни як «борщ» ведуть окрему битву, очолювану шефом
+            Євгеном Клопотенком та його кампанією в ЮНЕСКО.
           </p>
         </div>
         <div class="about-links">
@@ -669,7 +669,7 @@ function formatNum(n: number) {
       if (showDualLines) {
         const el = document.createElement('div');
         el.className = 'legend-item';
-        el.innerHTML = `<span class="legend-line" style="background: #dc2626; border: 1px dashed #dc2626; background: transparent;"></span>Old spelling (declining)`;
+        el.innerHTML = `<span class="legend-line" style="background: #dc2626; border: 1px dashed #dc2626; background: transparent;"></span>Стара назва`;
         legendContainer.appendChild(el);
       }
     }
