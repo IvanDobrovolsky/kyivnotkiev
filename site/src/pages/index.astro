@@ -294,6 +294,7 @@ function formatNum(n: number) {
     import holdoutsByPair from '../data/holdouts_by_pair.json';
     import countriesByPair from '../data/countries_by_pair.json';
     import pairEvents from '../data/pair_events.json';
+    import trendsCountries from '../data/trends_countries.json';
 
     const sourceColors: Record<string, string> = {
       trends: '#4285F4',
@@ -683,10 +684,10 @@ function formatNum(n: number) {
         activeSources = new Set([src]);
         drawChart();
 
-        // Show map only for GDELT (only source with country data)
+        // Show map for GDELT and Trends (both have country data)
         const mapEl = document.getElementById('map-container');
         if (mapEl) {
-          if (src === 'gdelt') {
+          if (src === 'gdelt' || src === 'trends') {
             mapEl.style.display = 'block';
             drawWorldMap();
           } else {
@@ -955,16 +956,21 @@ function formatNum(n: number) {
       const mapSubEl = document.getElementById('map-subtitle');
       const mapPair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
       if (mapNameEl && mapPair) mapNameEl.textContent = `${mapPair.russian} → ${mapPair.ukrainian}`;
-      const mapHasData = activeSource === 'gdelt';
+      // Source-specific subtitle and data
       if (mapSubEl) {
-        mapSubEl.textContent = mapHasData
-          ? `Country-level adoption (%) — GDELT news corpus 2024–2026`
-          : `Country-level data available for GDELT source only. Showing GDELT data.`;
+        mapSubEl.textContent = activeSource === 'trends'
+          ? `Search interest adoption (%) — Google Trends 2022–2026`
+          : `URL-level adoption (%) — GDELT news corpus 2024–2026`;
       }
 
-      // Use per-pair country data if available, fallback to default (pair 1)
-      const pairCountries = (countriesByPair as any)[String(activePairId)];
-      const adoptionMap = (pairCountries || (countryData as any).countries) as Record<string, {name: string; adoption: number}>;
+      // Use Trends country data or GDELT country data depending on source
+      let adoptionMap: Record<string, {name: string; adoption: number}>;
+      if (activeSource === 'trends') {
+        adoptionMap = (trendsCountries as any)[String(activePairId)] || {};
+      } else {
+        const pairCountries = (countriesByPair as any)[String(activePairId)];
+        adoptionMap = (pairCountries || (countryData as any).countries) as Record<string, {name: string; adoption: number}>;
+      }
 
       // Tooltip — positioned relative to container
       const tooltip = d3.select('#world-map')
@@ -1097,9 +1103,8 @@ function formatNum(n: number) {
     drawHeatmap();
     drawHoldoutTable();
 
-    // Hide map on initial load (default source is Trends, not GDELT)
-    const mapInitEl = document.getElementById('map-container');
-    if (mapInitEl) mapInitEl.style.display = 'none';
+    // Show map on initial load (Trends has per-country data)
+    drawWorldMap();
 
     window.addEventListener('resize', () => { drawChart(); drawCategoryChart(); drawHeatmap(); if (activeSource === 'gdelt') drawWorldMap(); });
   </script>
