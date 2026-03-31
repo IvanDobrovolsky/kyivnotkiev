@@ -1,16 +1,31 @@
 {
   "1": [
     {
-      "date": "2019-08",
-      "label": "AP adopts Kyiv",
+      "date": "2018-10",
+      "label": "#KyivNotKiev",
       "color": "#0057B8"
+    },
+    {
+      "date": "2012-06",
+      "label": "Euro 2012",
+      "color": "#6b7280"
+    },
+    {
+      "date": "1991-08",
+      "label": "Independence",
+      "color": "#6b7280"
     }
   ],
   "2": [
     {
       "date": "2022-09",
-      "label": "Kharkiv counteroffensive",
+      "label": "Counteroffensive",
       "color": "#0057B8"
+    },
+    {
+      "date": "1991-08",
+      "label": "Independence",
+      "color": "#6b7280"
     }
   ],
   "3": [
@@ -18,6 +33,11 @@
       "date": "2022-07",
       "label": "Missile strikes",
       "color": "#0057B8"
+    },
+    {
+      "date": "1991-08",
+      "label": "Independence",
+      "color": "#6b7280"
     }
   ],
   "5": [
@@ -32,9 +52,19 @@
       "date": "2016-05",
       "label": "Officially renamed",
       "color": "#0057B8"
+    },
+    {
+      "date": "1991-08",
+      "label": "Independence",
+      "color": "#6b7280"
     }
   ],
   "10": [
+    {
+      "date": "1986-04",
+      "label": "Disaster",
+      "color": "#dc2626"
+    },
     {
       "date": "2019-05",
       "label": "HBO series",
@@ -46,6 +76,11 @@
       "date": "2014-04",
       "label": "Conflict begins",
       "color": "#0057B8"
+    },
+    {
+      "date": "1991-08",
+      "label": "Independence",
+      "color": "#6b7280"
     }
   ],
   "23": [
@@ -65,7 +100,7 @@
   "60": [
     {
       "date": "2024-05",
-      "label": "Beats Fury, all belts",
+      "label": "Beats Fury",
       "color": "#0057B8"
     }
   ],
@@ -74,6 +109,20 @@
       "date": "2019-05",
       "label": "Elected president",
       "color": "#0057B8"
+    }
+  ],
+  "4": [
+    {
+      "date": "1991-08",
+      "label": "Independence",
+      "color": "#6b7280"
+    }
+  ],
+  "9": [
+    {
+      "date": "1991-08",
+      "label": "Independence",
+      "color": "#6b7280"
     }
   ]
 }
