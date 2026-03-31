@@ -1,0 +1,157 @@
+---
+import '../../styles/global.css';
+import pairs from '../../data/pairs.json';
+
+const grouped = pairs.categories.map(cat => ({
+  ...cat,
+  pairs: pairs.pairs.filter(p => p.category === cat.id).sort((a, b) => b.total - a.total)
+})).filter(g => g.pairs.length > 0);
+
+const totalMentions = pairs.pairs.reduce((sum, p) => sum + p.total, 0);
+
+function adoptionClass(pct: number) {
+  if (pct >= 70) return 'adoption-high';
+  if (pct >= 30) return 'adoption-mid';
+  return 'adoption-low';
+}
+
+function formatNum(n: number) {
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'М';
+  if (n >= 1_000) return (n / 1_000).toFixed(0) + 'К';
+  return n.toString();
+}
+
+const catNames: Record<string, string> = {
+  geographical: "Географія",
+  food: "Їжа та кухня",
+  sports: "Спорт",
+  historical: "Історія",
+  landmarks: "Памʼятки",
+  institutional: "Інституції",
+  people: "Люди",
+  country: "Країна",
+};
+---
+
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>KyivNotKiev — Як світ переходить на українські назви</title>
+  <meta name="description" content="Найбільше у світі обчислювальне дослідження того, як глобальні ЗМІ, пошук та соціальні платформи переходять на українські назви. 3.7М+ згадок, 7 джерел, 55 пар.">
+
+  <meta property="og:title" content="KyivNotKiev — Чи почув нас світ?">
+  <meta property="og:description" content="Обчислювальний аналіз переходу на українські топоніми — 3.7М+ згадок із 7 джерел.">
+  <meta property="og:image" content="https://kyivnotkiev.org/logo.jpg">
+  <meta property="og:url" content="https://kyivnotkiev.org/uk/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="uk_UA">
+
+  <link rel="icon" href="/logo.jpg" type="image/jpeg">
+  <link rel="alternate" hreflang="en" href="https://kyivnotkiev.org/">
+  <link rel="alternate" hreflang="uk" href="https://kyivnotkiev.org/uk/">
+  <link rel="canonical" href="https://kyivnotkiev.org/uk/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <nav class="topbar">
+      <div class="topbar-logo">
+        <img src="/logo.jpg" alt="Каштан Києва" style="height:28px; width:auto; margin-right:0.4rem;">
+        <span class="k">KYIV</span><span class="n">NOT</span><span class="k struck">KIEV</span>
+      </div>
+      <div class="topbar-links">
+        <a href="/">EN</a>
+        <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
+        <a href="#about">Про проєкт</a>
+      </div>
+    </nav>
+
+    <aside class="sidebar">
+      {grouped.map((cat, ci) => (
+        <div class="sidebar-section">
+          <div class={`sidebar-header ${ci === 0 ? 'open' : ''}`} data-category={cat.id}>
+            <span class="dot" style={`background: ${cat.color}`}></span>
+            {catNames[cat.id] || cat.name}
+            <span class="arrow">▶</span>
+          </div>
+          <div class={`sidebar-items ${ci === 0 ? 'open' : ''}`}>
+            {cat.pairs.map((pair, pi) => (
+              <div class={`sidebar-item ${ci === 0 && pi === 0 ? 'active' : ''}`} data-pair-id={pair.id}>
+                <div class="pair-name">
+                  <span>{pair.ukrainian}</span>
+                  <span class="old">{pair.russian}</span>
+                </div>
+                <span class={`adoption-badge ${adoptionClass(pair.adoption)}`}>
+                  {pair.adoption}%
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </aside>
+
+    <main class="main">
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-value">38.8М</div>
+          <div class="stat-label">Згадок проаналізовано</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">{pairs.pairs.length}</div>
+          <div class="stat-label">Пар топонімів</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">7</div>
+          <div class="stat-label">Джерел даних</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">2010–26</div>
+          <div class="stat-label">Період</div>
+        </div>
+      </div>
+
+      <div class="chart-container" id="about">
+        <div class="about-text">
+          <p>
+            У 2018 році Міністерство закордонних справ України запустило кампанію #KyivNotKiev —
+            щоб змінити те, як світ пише українські географічні назви. Ми побудували конвеєр даних,
+            щоб виміряти, чи це справді спрацювало.
+          </p>
+          <p>
+            Ця панель відстежує 55 українських пар топонімів (від назв міст до страв та
+            історичних термінів) через 7 незалежних джерел даних. Кожна точка даних — це реальне
+            використання: новинні статті, публікації в соцмережах, перегляди енциклопедій,
+            частотність у книгах та пошукові тренди.
+          </p>
+          <p>
+            <strong>Ключові знахідки:</strong> Спільноти в соцмережах перейшли на українські назви
+            у 5–9 разів швидше, ніж традиційні ЗМІ. «Чорнобиль» як бренд катастрофи майже не
+            піддається зміні. А кулінарні терміни як «борщ» ведуть окрему битву, очолювану шефом
+            Євгеном Клопотенком та його кампанією в ЮНЕСКО.
+          </p>
+        </div>
+        <div class="about-links">
+          <a href="https://github.com/IvanDobrovolsky/kyivnotkiev">Вихідний код</a>
+          <a href="https://github.com/IvanDobrovolsky/KyivNotKiev-paper">Наукова стаття</a>
+          <a href="/">English version</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Sidebar interaction (same as English)
+    document.querySelectorAll('.sidebar-header').forEach(header => {
+      header.addEventListener('click', () => {
+        header.classList.toggle('open');
+        header.nextElementSibling?.classList.toggle('open');
+      });
+    });
+  </script>
+</body>
+</html>
