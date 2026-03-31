@@ -429,7 +429,7 @@ function formatNum(n: number) {
       svg.append('g')
         .attr('transform', `translate(0,${height})`)
         .call(xTicks)
-        .selectAll('text').attr('fill', '#9ca3af').attr('font-size', '10px');
+        .selectAll('text').attr('fill', '#9ca3af').attr('font-size', '12px');
 
       svg.selectAll('.domain').attr('stroke', '#e5e7eb');
 
@@ -456,7 +456,7 @@ function formatNum(n: number) {
           svg.append('text')
             .attr('x', xPos + 4).attr('y', -8 - (events.length - 1 - i) * 14)
             .attr('fill', isPair ? '#0057B8' : '#9ca3af')
-            .attr('font-size', '10px')
+            .attr('font-size', '11px')
             .attr('font-weight', isPair ? '600' : '400')
             .text(evt.label);
         });
@@ -509,7 +509,7 @@ function formatNum(n: number) {
           .datum(series)
           .attr('fill', 'none')
           .attr('stroke', sourceColors[src])
-          .attr('stroke-width', 2.5)
+          .attr('stroke-width', 3)
           .attr('d', line);
 
         // Russian line (dashed, 100% - adoption) if dual mode
@@ -561,10 +561,10 @@ function formatNum(n: number) {
           .attr('fill', sourceColors[src]);
 
         svg.append('text')
-          .attr('x', cx + 8).attr('y', cy + 4)
+          .attr('x', cx + 10).attr('y', cy + 5)
           .attr('fill', sourceColors[src])
-          .attr('font-size', '12px')
-          .attr('font-weight', '600')
+          .attr('font-size', '13px')
+          .attr('font-weight', '700')
           .text(last.adoption + '%');
 
         // End date if doesn't reach 2026
