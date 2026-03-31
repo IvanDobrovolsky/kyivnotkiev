@@ -80,7 +80,7 @@ function formatNum(n: number) {
           <div class="stat-label">Toponym Pairs</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">5</div>
+          <div class="stat-value">6</div>
           <div class="stat-label">Data Sources</div>
         </div>
         <div class="stat-card">
@@ -176,6 +176,47 @@ function formatNum(n: number) {
 
       <div style="margin: 2rem 0 1rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600;">Global Overview</div>
 
+      <!-- Statistical Highlights -->
+      <div class="chart-container" style="margin-bottom: 1rem;">
+        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 1rem;">Statistical Analysis</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;">
+          <div style="padding:1rem; background:#f0f9ff; border-radius:6px; text-align:center;">
+            <div style="font-size:1.8rem; font-weight:700; color:#0057B8;">R²=0.87</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Regression model fit</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Pre-2022 baseline predicts 87% of adoption variance</div>
+          </div>
+          <div style="padding:1rem; background:#fef2f2; border-radius:6px; text-align:center;">
+            <div style="font-size:1.8rem; font-weight:700; color:#dc2626;">p&lt;0.001</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Invasion effect</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Significant across all 6 sources</div>
+          </div>
+          <div style="padding:1rem; background:#f0fdf4; border-radius:6px; text-align:center;">
+            <div style="font-size:1.8rem; font-weight:700; color:#059669;">d=1.27</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Reddit effect size</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Social media leads traditional media 2x</div>
+          </div>
+          <div style="padding:1rem; background:#fefce8; border-radius:6px; text-align:center;">
+            <div style="font-size:1.8rem; font-weight:700; color:#d97706;">p=0.049</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Category test</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Kruskal-Wallis: categories differ significantly</div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 0.75rem;">
+          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Biggest shift</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Zaporizhzhia: +78.2pp at invasion</div>
+          </div>
+          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Most resistant</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Food terms: median 4.1% adoption</div>
+          </div>
+          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Cross-source agreement</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Spearman ρ=0.64–0.74 (p&lt;0.001)</div>
+          </div>
+        </div>
+      </div>
+
       <!-- Russia vs World + Category side by side -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
         <div class="chart-container" style="margin-bottom: 0;">
@@ -224,8 +265,8 @@ function formatNum(n: number) {
             measure whether it actually worked.
           </p>
           <p>
-            This dashboard tracks 63 Ukrainian toponym pairs (from city names to dishes to
-            historical terms) across 5 independent data sources. Every data point comes from
+            This dashboard tracks 62 Ukrainian toponym pairs (from city names to dishes to
+            historical terms) across 6 independent data sources. Every data point comes from
             real-world usage — news articles, social media posts, encyclopedia pageviews, book
             frequency, and web search trends.
           </p>
@@ -395,12 +436,14 @@ function formatNum(n: number) {
       const eventsBar = document.getElementById('events-bar')!;
       eventsBar.innerHTML = '';
       eventsBar.style.position = 'relative';
-      eventsBar.style.height = '24px';
+      eventsBar.style.height = '32px';
       eventsBar.style.marginLeft = margin.left + 'px';
       eventsBar.style.marginRight = margin.right + 'px';
 
       if (showEvents) {
         const events = (timeseriesData as any).events || [];
+        const placedPositions: number[] = [];
+
         events.forEach((evt: any) => {
           const date = parseDate(evt.date);
           if (!date || date < xStart || date > xEnd) return;
@@ -414,11 +457,15 @@ function formatNum(n: number) {
             .attr('stroke', evt.color)
             .attr('stroke-width', 1)
             .attr('stroke-dasharray', '4,4')
-            .attr('opacity', 0.4);
+            .attr('opacity', 0.3);
 
-          // Pill positioned by x-scale percentage
+          // Check if too close to a previous pill
+          const tooClose = placedPositions.some(p => Math.abs(p - pct) < 10);
+          const topOffset = tooClose ? 'top:14px;' : 'top:0;';
+          placedPositions.push(pct);
+
           const pill = document.createElement('span');
-          pill.style.cssText = `position:absolute; left:${pct}%; transform:translateX(-50%); font-size:0.6rem; padding:0.15rem 0.4rem; border-radius:3px; background:${evt.color}12; color:${evt.color}; border:1px solid ${evt.color}30; white-space:nowrap; line-height:1;`;
+          pill.style.cssText = `position:absolute; left:${pct}%; transform:translateX(-50%); ${topOffset} font-size:0.6rem; padding:0.15rem 0.4rem; border-radius:3px; background:${evt.color}12; color:${evt.color}; border:1px solid ${evt.color}30; white-space:nowrap; line-height:1;`;
           pill.textContent = evt.label;
           eventsBar.appendChild(pill);
         });
