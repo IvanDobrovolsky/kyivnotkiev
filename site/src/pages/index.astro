@@ -127,7 +127,6 @@ function formatNum(n: number) {
           </div>
         </div>
         <div id="chart"></div>
-        <div id="events-bar" style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:0.5rem;"></div>
         <div class="chart-legend" id="chart-legend"></div>
       </div>
 
@@ -434,44 +433,31 @@ function formatNum(n: number) {
       svg.selectAll('.domain').attr('stroke', '#e5e7eb');
 
       // Event markers — positioned by date on x-scale
-      const eventsBar = document.getElementById('events-bar')!;
-      eventsBar.innerHTML = '';
-
       if (showEvents) {
         const globalEvents = ((timeseriesData as any).events || []).map((e: any) => ({...e, type: 'global'}));
-        const customEvents = ((pairEvents as any)[String(activePairId)] || []).map((e: any) => ({...e, color: '#0057B8', type: 'pair'}));
+        const customEvents = ((pairEvents as any)[String(activePairId)] || []).map((e: any) => ({...e, type: 'pair'}));
         const events = [...globalEvents, ...customEvents].sort((a: any, b: any) => a.date.localeCompare(b.date));
 
-        events.forEach((evt: any) => {
+        events.forEach((evt: any, i: number) => {
           const date = parseDate(evt.date);
           if (!date || date < xStart || date > xEnd) return;
           const xPos = x(date);
+          const isPair = evt.type === 'pair';
 
-          // Vertical line on chart
           svg.append('line')
             .attr('x1', xPos).attr('x2', xPos)
             .attr('y1', 0).attr('y2', height)
-            .attr('stroke', evt.type === 'pair' ? '#0057B8' : '#d1d5db')
-            .attr('stroke-width', evt.type === 'pair' ? 1.5 : 1)
-            .attr('stroke-dasharray', '4,4')
-            .attr('opacity', evt.type === 'pair' ? 0.5 : 0.3);
+            .attr('stroke', isPair ? '#0057B8' : '#d1d5db')
+            .attr('stroke-width', 1)
+            .attr('stroke-dasharray', '4,3')
+            .attr('opacity', isPair ? 0.6 : 0.4);
 
-          // Small number on the line (1, 2, 3...)
-          const idx = events.indexOf(evt) + 1;
           svg.append('text')
-            .attr('x', xPos).attr('y', -4)
-            .attr('text-anchor', 'middle')
-            .attr('fill', evt.type === 'pair' ? '#0057B8' : '#9ca3af')
-            .attr('font-size', '9px')
-            .attr('font-weight', '600')
-            .text(idx);
-
-          // Tag in the legend bar below
-          const isPair = evt.type === 'pair';
-          const tag = document.createElement('span');
-          tag.style.cssText = `font-size:0.65rem; color:${isPair ? '#0057B8' : '#6b7280'}; ${isPair ? 'font-weight:600;' : ''}`;
-          tag.textContent = `${idx}. ${evt.label}`;
-          eventsBar.appendChild(tag);
+            .attr('x', xPos + 4).attr('y', 14 + i * 14)
+            .attr('fill', isPair ? '#0057B8' : '#9ca3af')
+            .attr('font-size', '10px')
+            .attr('font-weight', isPair ? '600' : '400')
+            .text(evt.label);
         });
       }
 
