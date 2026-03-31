@@ -102,19 +102,22 @@ function formatNum(n: number) {
             </div>
           </div>
           <div class="chart-controls">
-            <button class="source-toggle active" data-source="trends" style="--source-color: #d97706">
+            <button class="source-toggle active" data-source="trends" style="--source-color: #4285F4">
               <span class="source-dot"></span>Trends
             </button>
-            <button class="source-toggle" data-source="gdelt" style="--source-color: #0057B8">
+            <button class="source-toggle" data-source="gdelt" style="--source-color: #1e3a5f">
               <span class="source-dot"></span>GDELT
             </button>
-            <button class="source-toggle" data-source="wikipedia" style="--source-color: #059669">
+            <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466">
               <span class="source-dot"></span>Wikipedia
             </button>
             <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500">
               <span class="source-dot"></span>Reddit
             </button>
-            <button class="source-toggle" data-source="ngrams" style="--source-color: #8b5cf6">
+            <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000">
+              <span class="source-dot"></span>YouTube
+            </button>
+            <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed">
               <span class="source-dot"></span>Ngrams
             </button>
             <span class="toggle-sep"></span>
@@ -122,6 +125,7 @@ function formatNum(n: number) {
             <button class="event-toggle active" id="events-toggle">Events</button>
           </div>
         </div>
+        <div id="events-bar" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.5rem;"></div>
         <div id="chart"></div>
         <div class="chart-legend" id="chart-legend"></div>
       </div>
@@ -250,19 +254,21 @@ function formatNum(n: number) {
     import countriesByPair from '../data/countries_by_pair.json';
 
     const sourceColors: Record<string, string> = {
-      gdelt: '#0057B8',
-      trends: '#d97706',
-      wikipedia: '#059669',
+      trends: '#4285F4',
+      gdelt: '#1e3a5f',
+      wikipedia: '#636466',
       reddit: '#FF4500',
-      ngrams: '#8b5cf6',
+      youtube: '#FF0000',
+      ngrams: '#7c3aed',
     };
 
     const sourceLabels: Record<string, string> = {
-      gdelt: 'GDELT (news media)',
-      trends: 'Google Trends (search)',
-      wikipedia: 'Wikipedia (pageviews)',
-      reddit: 'Reddit (social)',
-      ngrams: 'Google Books Ngrams',
+      trends: 'Google Trends',
+      gdelt: 'GDELT News',
+      wikipedia: 'Wikipedia',
+      reddit: 'Reddit',
+      youtube: 'YouTube',
+      ngrams: 'Google Books',
     };
 
     let activeSource = 'trends';  // single source at a time
@@ -350,15 +356,17 @@ function formatNum(n: number) {
 
       svg.selectAll('.domain').attr('stroke', '#e5e7eb');
 
-      // Event lines (staggered labels)
+      // Event lines — just vertical dashes, labels are in the bar above
+      const eventsBar = document.getElementById('events-bar')!;
+      eventsBar.innerHTML = '';
       if (showEvents) {
         const events = (timeseriesData as any).events || [];
-        events.forEach((evt: any, i: number) => {
+        events.forEach((evt: any) => {
           const date = parseDate(evt.date);
           if (!date) return;
           const xPos = x(date);
-          const yOffset = 12 + (i % 3) * 14; // stagger vertically
 
+          // Vertical line on chart
           svg.append('line')
             .attr('x1', xPos).attr('x2', xPos)
             .attr('y1', 0).attr('y2', height)
@@ -366,12 +374,11 @@ function formatNum(n: number) {
             .attr('stroke-width', 1)
             .attr('stroke-dasharray', '4,4');
 
-          svg.append('text')
-            .attr('x', xPos + 4).attr('y', yOffset)
-            .attr('fill', '#6b7280')
-            .attr('font-size', '10px')
-            .attr('font-weight', '500')
-            .text(evt.label);
+          // Pill above chart
+          const pill = document.createElement('span');
+          pill.style.cssText = `font-size:0.7rem; padding:0.2rem 0.5rem; border-radius:3px; background:${evt.color}18; color:${evt.color}; border:1px solid ${evt.color}40; white-space:nowrap;`;
+          pill.textContent = `${evt.date.replace('-', '/')} ${evt.label}`;
+          eventsBar.appendChild(pill);
         });
       }
 
@@ -442,6 +449,27 @@ function formatNum(n: number) {
             .attr('d', russianLine);
         }
 
+        // Start indicator (if doesn't start at 2010)
+        const first = series[0];
+        const firstDate = parseDate(first.date)!;
+        if (firstDate > new Date(2010, 6, 1)) {
+          const sx = x(firstDate);
+          const sy = y(first.adoption);
+          svg.append('circle')
+            .attr('cx', sx).attr('cy', sy)
+            .attr('r', 3)
+            .attr('fill', 'none')
+            .attr('stroke', sourceColors[src])
+            .attr('stroke-width', 1.5);
+          svg.append('text')
+            .attr('x', sx - 4).attr('y', sy - 8)
+            .attr('text-anchor', 'end')
+            .attr('fill', sourceColors[src])
+            .attr('font-size', '9px')
+            .attr('opacity', 0.7)
+            .text(first.date);
+        }
+
         // End dot + label
         const last = series[series.length - 1];
         const cx = x(parseDate(last.date)!);
@@ -458,6 +486,17 @@ function formatNum(n: number) {
           .attr('font-size', '12px')
           .attr('font-weight', '600')
           .text(last.adoption + '%');
+
+        // End date if doesn't reach 2026
+        const lastDate = parseDate(last.date)!;
+        if (lastDate < new Date(2025, 6, 1)) {
+          svg.append('text')
+            .attr('x', cx + 8).attr('y', cy + 16)
+            .attr('fill', sourceColors[src])
+            .attr('font-size', '9px')
+            .attr('opacity', 0.6)
+            .text('ends ' + last.date);
+        }
 
         activeLegend.push({
           label: sourceLabels[src],
