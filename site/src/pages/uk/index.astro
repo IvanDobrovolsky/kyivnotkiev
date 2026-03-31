@@ -28,11 +28,11 @@ function formatNum(n: number) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>KyivNotKiev — Як світ переходить на українські назви</title>
-  <meta name="description" content="The world's largest computational study tracking how global media, search, and social platforms adopt Ukrainian spellings. 3.7M+ data points, 7 sources, 55 pairs.">
+  <meta name="description" content="The world's largest computational study tracking how global media, search, and social platforms adopt Ukrainian spellings. 4.5 billion pages scanned, 3.8M verified instances, 7 sources.">
 
   <!-- Open Graph -->
   <meta property="og:title" content="KyivNotKiev — Did the World Listen?">
-  <meta property="og:description" content="Computational analysis of Ukrainian toponym adoption across 3.7M+ mentions from 7 sources. How effectively did #KyivNotKiev change language worldwide?">
+  <meta property="og:description" content="Computational analysis of Ukrainian toponym adoption across 4.5B pages scanned, 3.8M verified instances from 7 sources. How effectively did #KyivNotKiev change language worldwide?">
   <meta property="og:image" content="https://kyivnotkiev.org/logo.jpg">
   <meta property="og:url" content="https://kyivnotkiev.org">
   <meta property="og:type" content="website">
@@ -42,7 +42,7 @@ function formatNum(n: number) {
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KyivNotKiev — Did the World Listen?">
-  <meta name="twitter:description" content="3.7M+ data points, 7 sources, 55 pairs. The largest computational study of Ukrainian toponym adoption.">
+  <meta name="twitter:description" content="4.5 billion pages scanned, 3.8M verified instances, 7 sources. The largest computational study of Ukrainian toponym adoption.">
   <meta name="twitter:image" content="https://kyivnotkiev.org/logo.jpg">
 
   <!-- Favicon -->
@@ -94,11 +94,21 @@ function formatNum(n: number) {
     </aside>
 
     <main class="main">
-      <div class="stats">
+      <div class="stats" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="stat-card">
+          <div class="stat-value">4.5B</div>
+          <div class="stat-label">Сторінок проскановано</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~1 PB</div>
+          <div class="stat-label">Даних оброблено</div>
+        </div>
         <div class="stat-card">
           <div class="stat-value">3.8M</div>
-          <div class="stat-label">Згадок проаналізовано</div>
+          <div class="stat-label">Верифікованих згадок</div>
         </div>
+      </div>
+      <div class="stats">
         <div class="stat-card">
           <div class="stat-value">{pairs.pairs.length}</div>
           <div class="stat-label">Пар топонімів</div>
@@ -106,6 +116,10 @@ function formatNum(n: number) {
         <div class="stat-card">
           <div class="stat-value">7</div>
           <div class="stat-label">Джерел даних</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">33</div>
+          <div class="stat-label">Країн</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">2010–26</div>
@@ -123,7 +137,7 @@ function formatNum(n: number) {
               <span id="chart-range" style="font-size:0.75rem; color:var(--text-muted); font-weight:400; margin-left:0.5rem;"></span>
             </div>
             <div class="chart-subtitle">
-              Рівень переходу на українську назву (%) · <span id="chart-info" style="color:var(--text-dim); font-style:italic;"></span>
+              Ukrainian spelling adoption rate (%) · <span id="chart-info" style="color:var(--text-dim); font-style:italic;"></span>
             </div>
           </div>
           <div class="chart-controls">
@@ -134,7 +148,7 @@ function formatNum(n: number) {
               <span class="source-dot"></span>GDELT
             </button>
             <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466">
-              <span class="source-dot"></span>Wikipedia
+              <span class="source-dot"></span>Вікіпедія
             </button>
             <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500">
               <span class="source-dot"></span>Reddit
@@ -158,8 +172,8 @@ function formatNum(n: number) {
       <div class="chart-container" id="map-container">
         <div class="chart-header">
           <div>
-            <div class="chart-title" style="color: var(--text)">Карта переходу: <span id="map-pair-name">Kiev → Kyiv</span></div>
-            <div class="chart-subtitle" id="map-subtitle">Перехід по країнах (%) — GDELT новинний корпус 2024–2026</div>
+            <div class="chart-title" style="color: var(--text)">Adoption Map: <span id="map-pair-name">Kiev → Kyiv</span></div>
+            <div class="chart-subtitle" id="map-subtitle">Country-level adoption (%) — GDELT news corpus 2024–2026</div>
           </div>
         </div>
         <div id="world-map" style="width:100%; height:400px;"></div>
@@ -180,8 +194,8 @@ function formatNum(n: number) {
       <div class="chart-container">
         <div class="chart-header">
           <div>
-            <div class="chart-title" style="color: var(--text)">Ті, що не перейшли: <span id="holdout-pair-name">Kiev</span></div>
-            <div class="chart-subtitle">Домени, що досі використовують стару назву (2024–2026, мін. 20 згадок)</div>
+            <div class="chart-title" style="color: var(--text)">Holdouts: <span id="holdout-pair-name">Kiev</span></div>
+            <div class="chart-subtitle">Domains still using old spelling (2024–2026, min 20 mentions)</div>
           </div>
           <div class="chart-controls">
             <button class="event-toggle" id="ru-filter-toggle">Сховати .ru домени</button>
@@ -192,7 +206,7 @@ function formatNum(n: number) {
 
       <!-- Data source availability note -->
       <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem; padding: 0.5rem 0.75rem; background: #f8f9fb; border-radius: 4px; border-left: 3px solid var(--border);">
-        Доступність джерел: Trends (2010–2026), GDELT (2015–2026), Вікіпедія (2015–2026), Reddit (2007–2026), Ngrams (книги, 2000–2019)
+        Source availability varies: Trends (2010–2026), GDELT (2015–2026), Вікіпедія (2015–2026), Reddit (2007–2026), Ngrams (books, 2000–2019)
       </div>
 
       <!-- ── GLOBAL VIEWS (static, don't change per pair) ── -->
@@ -283,21 +297,21 @@ function formatNum(n: number) {
       <div class="chart-container" id="about">
         <div class="about-text">
           <p>
-            У 2018 році Міністерство закордонних справ України запустило кампанію #KyivNotKiev —
-            щоб змінити те, як світ пише українські географічні назви. Ми побудували конвеєр даних,
-            щоб виміряти, чи це справді спрацювало.
+            In 2018, Ukraine's Ministry of Foreign Affairs launched #KyivNotKiev — a campaign
+            to change how the world spells Ukrainian place names. We built a data pipeline to
+            measure whether it actually worked.
           </p>
           <p>
-            Ця панель відстежує 55 українських пар топонімів (від назв міст до страв та
-            історичних термінів) через 7 незалежних джерел даних. Кожна точка даних — це реальне
-            використання: новинні статті, публікації в соцмережах, перегляди енциклопедій,
-            частотність у книгах та пошукові тренди.
+            This dashboard tracks 55 Ukrainian toponym pairs (from city names to dishes to
+            historical terms) across 7 independent data sources. Every data point comes from
+            real-world usage — news articles, social media posts, encyclopedia pageviews, book
+            frequency, and web search trends.
           </p>
           <p>
-            Знахідки: спільноти в соцмережах перейшли на українські назви у 5–9 разів швидше,
-            ніж традиційні ЗМІ. «Бренди катастроф» як Чорнобиль майже не піддаються зміні.
-            А кулінарні терміни як «борщ» ведуть окрему битву, очолювану шефом
-            Євгеном Клопотенком та його кампанією в ЮНЕСКО.
+            Some findings: social media communities adopted Ukrainian spellings 5–9x faster
+            than traditional media. "Disaster brands" like Chernobyl are nearly immovable.
+            And food terms like Borshch are fighting a separate battle, championed by chef
+            Yevhen Klopotenko's UNESCO campaign.
           </p>
         </div>
         <div class="about-links">
@@ -318,7 +332,7 @@ function formatNum(n: number) {
     import holdoutsByPair from '../../data/holdouts_by_pair.json';
     import countriesByPair from '../../data/countries_by_pair.json';
     import pairEvents from '../../data/pair_events.json';
-    import trendsCountries from '../../data/trends_countries.json';
+    import trendsКраїн from '../../data/trends_countries.json';
 
     const sourceColors: Record<string, string> = {
       trends: '#4285F4',
@@ -413,11 +427,11 @@ function formatNum(n: number) {
       const infoEl = document.getElementById('chart-info');
       const sourceRanges: Record<string, [string, string, string]> = {
         trends: ['2010', '2026', ''],
-        gdelt: ['2015', '2026', 'GDELT v2 з лютого 2015'],
-        wikipedia: ['2015', '2026', 'API переглядів з липня 2015'],
-        reddit: ['2007', '2026', 'Квартальна агрегація'],
-        youtube: ['2013', '2026', 'Топ 50 результатів'],
-        ngrams: ['1900', '2019', 'Корпус Google Books до 2019'],
+        gdelt: ['2015', '2026', 'GDELT v2 started Feb 2015'],
+        wikipedia: ['2015', '2026', 'Pageviews API started Jul 2015'],
+        reddit: ['2007', '2026', 'Quarterly aggregated'],
+        youtube: ['2013', '2026', 'Top 50 results per search'],
+        ngrams: ['1900', '2019', 'Google Книги corpus ends 2019'],
       };
       const [srcStart, srcEnd, srcInfo] = sourceRanges[activeSource] || ['2010', '2026', ''];
       if (rangeEl) rangeEl.textContent = `${srcStart}–${srcEnd}`;
@@ -463,26 +477,42 @@ function formatNum(n: number) {
         const customEvents = ((pairEvents as any)[String(activePairId)] || []).map((e: any) => ({...e, type: 'pair'}));
         const events = [...globalEvents, ...customEvents].sort((a: any, b: any) => a.date.localeCompare(b.date));
 
-        events.forEach((evt: any, i: number) => {
+        let eventNum = 0;
+        events.forEach((evt: any) => {
           const date = parseDate(evt.date);
           if (!date || date < xStart || date > xEnd) return;
+          eventNum++;
           const xPos = x(date);
           const isPair = evt.type === 'pair';
 
+          // Vertical dashed line
           svg.append('line')
             .attr('x1', xPos).attr('x2', xPos)
-            .attr('y1', 0).attr('y2', height)
+            .attr('y1', -10).attr('y2', height)
             .attr('stroke', isPair ? '#0057B8' : '#d1d5db')
             .attr('stroke-width', 1)
             .attr('stroke-dasharray', '4,3')
-            .attr('opacity', isPair ? 0.6 : 0.4);
+            .attr('opacity', isPair ? 0.5 : 0.3);
 
+          // Numbered circle at top
+          svg.append('circle')
+            .attr('cx', xPos).attr('cy', -18)
+            .attr('r', 9)
+            .attr('fill', isPair ? '#0057B8' : '#e5e7eb');
           svg.append('text')
-            .attr('x', xPos + 4).attr('y', -8 - (events.length - 1 - i) * 14)
-            .attr('fill', isPair ? '#0057B8' : '#9ca3af')
-            .attr('font-size', '11px')
-            .attr('font-weight', isPair ? '600' : '400')
-            .text(evt.label);
+            .attr('x', xPos).attr('y', -14)
+            .attr('text-anchor', 'middle')
+            .attr('fill', isPair ? '#fff' : '#6b7280')
+            .attr('font-size', '10px')
+            .attr('font-weight', '700')
+            .text(eventNum);
+
+          // Legend entry below chart
+          const legendItem = document.createElement('span');
+          legendItem.className = 'legend-item';
+          legendItem.style.cssText = `font-size:0.78rem; color:${isPair ? '#0057B8' : '#6b7280'}; ${isPair ? 'font-weight:600;' : ''}`;
+          legendItem.innerHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:${isPair ? '#0057B8' : '#e5e7eb'};color:${isPair ? '#fff' : '#6b7280'};font-size:10px;font-weight:700;margin-right:4px;">${eventNum}</span>${evt.label} (${evt.date})`;
+          legendContainer.appendChild(legendItem);
         });
       }
 
@@ -669,7 +699,7 @@ function formatNum(n: number) {
       if (showDualLines) {
         const el = document.createElement('div');
         el.className = 'legend-item';
-        el.innerHTML = `<span class="legend-line" style="background: #dc2626; border: 1px dashed #dc2626; background: transparent;"></span>Стара назва`;
+        el.innerHTML = `<span class="legend-line" style="background: #dc2626; border: 1px dashed #dc2626; background: transparent;"></span>Old spelling`;
         legendContainer.appendChild(el);
       }
     }
@@ -983,17 +1013,17 @@ function formatNum(n: number) {
       // Source-specific subtitle and data
       if (mapSubEl) {
         mapSubEl.textContent = activeSource === 'trends'
-          ? `Пошуковий інтерес (%) — Google Trends 2022–2026`
-          : `Перехід на рівні URL (%) — GDELT новинний корпус 2024–2026`;
+          ? `Search interest adoption (%) — Google Trends 2022–2026`
+          : `URL-level adoption (%) — GDELT news corpus 2024–2026`;
       }
 
       // Use Trends country data or GDELT country data depending on source
       let adoptionMap: Record<string, {name: string; adoption: number}>;
       if (activeSource === 'trends') {
-        adoptionMap = (trendsCountries as any)[String(activePairId)] || {};
+        adoptionMap = (trendsКраїн as any)[String(activePairId)] || {};
       } else {
-        const pairCountries = (countriesByPair as any)[String(activePairId)];
-        adoptionMap = (pairCountries || (countryData as any).countries) as Record<string, {name: string; adoption: number}>;
+        const pairКраїн = (countriesByPair as any)[String(activePairId)];
+        adoptionMap = (pairКраїн || (countryData as any).countries) as Record<string, {name: string; adoption: number}>;
       }
 
       // Tooltip — positioned relative to container
@@ -1080,7 +1110,7 @@ function formatNum(n: number) {
       if (nameEl && pair) nameEl.textContent = pair.russian;
 
       if (!pairHoldouts || pairHoldouts.length === 0) {
-        container.innerHTML = '<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">Немає даних для цієї пари (недостатньо згадок у GDELT)</div>';
+        container.innerHTML = '<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">No holdout data for this pair (not enough GDELT mentions)</div>';
         return;
       }
 
@@ -1103,9 +1133,9 @@ function formatNum(n: number) {
         <table style="width:100%; border-collapse:collapse;">
           <thead>
             <tr style="border-bottom:2px solid #e5e7eb;">
-              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Домен</th>
+              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Domain</th>
               <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Стара назва</th>
-              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Згадки</th>
+              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Mentions</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
@@ -1117,7 +1147,7 @@ function formatNum(n: number) {
     document.getElementById('ru-filter-toggle')?.addEventListener('click', (e) => {
       const btn = e.currentTarget as HTMLElement;
       hideRuDomains = !hideRuDomains;
-      btn.textContent = hideRuDomains ? 'Показати .ru' : 'Сховати .ru';
+      btn.textContent = hideRuDomains ? 'Show .ru domains' : 'Hide .ru domains';
       btn.classList.toggle('active');
       drawHoldoutTable();
     });

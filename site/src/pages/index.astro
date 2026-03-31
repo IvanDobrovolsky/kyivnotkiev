@@ -94,11 +94,21 @@ function formatNum(n: number) {
     </aside>
 
     <main class="main">
-      <div class="stats">
+      <div class="stats" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="stat-card">
+          <div class="stat-value">4.5B</div>
+          <div class="stat-label">Pages Scanned</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~1 PB</div>
+          <div class="stat-label">Data Processed</div>
+        </div>
         <div class="stat-card">
           <div class="stat-value">3.8M</div>
-          <div class="stat-label">Mentions Analyzed</div>
+          <div class="stat-label">Verified Instances</div>
         </div>
+      </div>
+      <div class="stats">
         <div class="stat-card">
           <div class="stat-value">{pairs.pairs.length}</div>
           <div class="stat-label">Toponym Pairs</div>
@@ -106,6 +116,10 @@ function formatNum(n: number) {
         <div class="stat-card">
           <div class="stat-value">7</div>
           <div class="stat-label">Data Sources</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">33</div>
+          <div class="stat-label">Countries</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">2010–26</div>
@@ -463,26 +477,42 @@ function formatNum(n: number) {
         const customEvents = ((pairEvents as any)[String(activePairId)] || []).map((e: any) => ({...e, type: 'pair'}));
         const events = [...globalEvents, ...customEvents].sort((a: any, b: any) => a.date.localeCompare(b.date));
 
-        events.forEach((evt: any, i: number) => {
+        let eventNum = 0;
+        events.forEach((evt: any) => {
           const date = parseDate(evt.date);
           if (!date || date < xStart || date > xEnd) return;
+          eventNum++;
           const xPos = x(date);
           const isPair = evt.type === 'pair';
 
+          // Vertical dashed line
           svg.append('line')
             .attr('x1', xPos).attr('x2', xPos)
-            .attr('y1', 0).attr('y2', height)
+            .attr('y1', -10).attr('y2', height)
             .attr('stroke', isPair ? '#0057B8' : '#d1d5db')
             .attr('stroke-width', 1)
             .attr('stroke-dasharray', '4,3')
-            .attr('opacity', isPair ? 0.6 : 0.4);
+            .attr('opacity', isPair ? 0.5 : 0.3);
 
+          // Numbered circle at top
+          svg.append('circle')
+            .attr('cx', xPos).attr('cy', -18)
+            .attr('r', 9)
+            .attr('fill', isPair ? '#0057B8' : '#e5e7eb');
           svg.append('text')
-            .attr('x', xPos + 4).attr('y', -8 - (events.length - 1 - i) * 14)
-            .attr('fill', isPair ? '#0057B8' : '#9ca3af')
-            .attr('font-size', '11px')
-            .attr('font-weight', isPair ? '600' : '400')
-            .text(evt.label);
+            .attr('x', xPos).attr('y', -14)
+            .attr('text-anchor', 'middle')
+            .attr('fill', isPair ? '#fff' : '#6b7280')
+            .attr('font-size', '10px')
+            .attr('font-weight', '700')
+            .text(eventNum);
+
+          // Legend entry below chart
+          const legendItem = document.createElement('span');
+          legendItem.className = 'legend-item';
+          legendItem.style.cssText = `font-size:0.78rem; color:${isPair ? '#0057B8' : '#6b7280'}; ${isPair ? 'font-weight:600;' : ''}`;
+          legendItem.innerHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:${isPair ? '#0057B8' : '#e5e7eb'};color:${isPair ? '#fff' : '#6b7280'};font-size:10px;font-weight:700;margin-right:4px;">${eventNum}</span>${evt.label} (${evt.date})`;
+          legendContainer.appendChild(legendItem);
         });
       }
 
