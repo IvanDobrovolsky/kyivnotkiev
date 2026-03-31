@@ -335,7 +335,7 @@ function formatNum(n: number) {
       });
 
       const rect = container.getBoundingClientRect();
-      const margin = { top: 24, right: 55, bottom: 30, left: 45 };
+      const margin = { top: 52, right: 55, bottom: 30, left: 45 };
       const width = rect.width - margin.left - margin.right;
       const height = rect.height - margin.top - margin.bottom;
 
@@ -453,7 +453,7 @@ function formatNum(n: number) {
             .attr('opacity', isPair ? 0.6 : 0.4);
 
           svg.append('text')
-            .attr('x', xPos + 4).attr('y', 14 + i * 14)
+            .attr('x', xPos + 4).attr('y', -8 - (events.length - 1 - i) * 14)
             .attr('fill', isPair ? '#0057B8' : '#9ca3af')
             .attr('font-size', '10px')
             .attr('font-weight', isPair ? '600' : '400')
