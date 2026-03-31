@@ -1,0 +1,128 @@
+{
+  "1": [
+    {
+      "date": "2018-10",
+      "label": "#KyivNotKiev launch",
+      "color": "#6b7280"
+    },
+    {
+      "date": "2019-06",
+      "label": "US Board on Geographic Names",
+      "color": "#6b7280"
+    },
+    {
+      "date": "2019-08",
+      "label": "AP Stylebook adopts Kyiv",
+      "color": "#6b7280"
+    },
+    {
+      "date": "2019-10",
+      "label": "BBC adopts Kyiv",
+      "color": "#6b7280"
+    }
+  ],
+  "2": [
+    {
+      "date": "2022-02",
+      "label": "Battle of Kharkiv",
+      "color": "#6b7280"
+    },
+    {
+      "date": "2022-09",
+      "label": "Kharkiv counteroffensive",
+      "color": "#6b7280"
+    }
+  ],
+  "3": [
+    {
+      "date": "2022-07",
+      "label": "Russian missile strikes",
+      "color": "#6b7280"
+    }
+  ],
+  "5": [
+    {
+      "date": "2022-03",
+      "label": "Russia seizes nuclear plant",
+      "color": "#6b7280"
+    }
+  ],
+  "7": [
+    {
+      "date": "2016-05",
+      "label": "Officially renamed from Dnipropetrovsk",
+      "color": "#6b7280"
+    }
+  ],
+  "10": [
+    {
+      "date": "2019-05",
+      "label": "HBO Chernobyl series",
+      "color": "#6b7280"
+    },
+    {
+      "date": "2022-02",
+      "label": "Russia seizes plant",
+      "color": "#6b7280"
+    }
+  ],
+  "11": [
+    {
+      "date": "2014-04",
+      "label": "Separatist conflict begins",
+      "color": "#6b7280"
+    }
+  ],
+  "23": [
+    {
+      "date": "2022-07",
+      "label": "UNESCO inscribes Ukrainian borscht",
+      "color": "#6b7280"
+    }
+  ],
+  "27": [
+    {
+      "date": "1991-08",
+      "label": "Ukraine declares independence",
+      "color": "#6b7280"
+    }
+  ],
+  "32": [
+    {
+      "date": "2018-12",
+      "label": "UEFA updates to Dynamo Kyiv",
+      "color": "#6b7280"
+    }
+  ],
+  "35": [
+    {
+      "date": "2022-02",
+      "label": "Russia weaponizes Kievan Rus narrative",
+      "color": "#6b7280"
+    }
+  ],
+  "60": [
+    {
+      "date": "2021-09",
+      "label": "Beats Joshua, undisputed",
+      "color": "#6b7280"
+    },
+    {
+      "date": "2024-05",
+      "label": "Beats Fury, all belts",
+      "color": "#6b7280"
+    }
+  ],
+  "61": [
+    {
+      "date": "2019-05",
+      "label": "Elected president",
+      "color": "#6b7280"
+    },
+    {
+      "date": "2022-02",
+      "label": "Wartime leadership begins",
+      "color": "#6b7280"
+    }
+  ]
+}

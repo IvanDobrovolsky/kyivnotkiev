@@ -126,8 +126,8 @@ function formatNum(n: number) {
             <button class="event-toggle active" id="events-toggle">Events</button>
           </div>
         </div>
-        <div id="events-bar" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.5rem;"></div>
         <div id="chart"></div>
+        <div id="events-bar" style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:0.5rem;"></div>
         <div class="chart-legend" id="chart-legend"></div>
       </div>
 
@@ -294,6 +294,7 @@ function formatNum(n: number) {
     import holdoutsData from '../data/holdouts.json';
     import holdoutsByPair from '../data/holdouts_by_pair.json';
     import countriesByPair from '../data/countries_by_pair.json';
+    import pairEvents from '../data/pair_events.json';
 
     const sourceColors: Record<string, string> = {
       trends: '#4285F4',
@@ -435,39 +436,42 @@ function formatNum(n: number) {
       // Event markers — positioned by date on x-scale
       const eventsBar = document.getElementById('events-bar')!;
       eventsBar.innerHTML = '';
-      eventsBar.style.position = 'relative';
-      eventsBar.style.height = '32px';
-      eventsBar.style.marginLeft = margin.left + 'px';
-      eventsBar.style.marginRight = margin.right + 'px';
 
       if (showEvents) {
-        const events = (timeseriesData as any).events || [];
-        const placedPositions: number[] = [];
+        const globalEvents = ((timeseriesData as any).events || []).map((e: any) => ({...e, type: 'global'}));
+        const customEvents = ((pairEvents as any)[String(activePairId)] || []).map((e: any) => ({...e, color: '#0057B8', type: 'pair'}));
+        const events = [...globalEvents, ...customEvents].sort((a: any, b: any) => a.date.localeCompare(b.date));
 
         events.forEach((evt: any) => {
           const date = parseDate(evt.date);
           if (!date || date < xStart || date > xEnd) return;
           const xPos = x(date);
-          const pct = (xPos / width) * 100;
 
           // Vertical line on chart
           svg.append('line')
             .attr('x1', xPos).attr('x2', xPos)
             .attr('y1', 0).attr('y2', height)
-            .attr('stroke', evt.color)
-            .attr('stroke-width', 1)
+            .attr('stroke', evt.type === 'pair' ? '#0057B8' : '#d1d5db')
+            .attr('stroke-width', evt.type === 'pair' ? 1.5 : 1)
             .attr('stroke-dasharray', '4,4')
-            .attr('opacity', 0.3);
+            .attr('opacity', evt.type === 'pair' ? 0.5 : 0.3);
 
-          // Check if too close to a previous pill
-          const tooClose = placedPositions.some(p => Math.abs(p - pct) < 10);
-          const topOffset = tooClose ? 'top:14px;' : 'top:0;';
-          placedPositions.push(pct);
+          // Small number on the line (1, 2, 3...)
+          const idx = events.indexOf(evt) + 1;
+          svg.append('text')
+            .attr('x', xPos).attr('y', -4)
+            .attr('text-anchor', 'middle')
+            .attr('fill', evt.type === 'pair' ? '#0057B8' : '#9ca3af')
+            .attr('font-size', '9px')
+            .attr('font-weight', '600')
+            .text(idx);
 
-          const pill = document.createElement('span');
-          pill.style.cssText = `position:absolute; left:${pct}%; transform:translateX(-50%); ${topOffset} font-size:0.6rem; padding:0.15rem 0.4rem; border-radius:3px; background:${evt.color}12; color:${evt.color}; border:1px solid ${evt.color}30; white-space:nowrap; line-height:1;`;
-          pill.textContent = evt.label;
-          eventsBar.appendChild(pill);
+          // Tag in the legend bar below
+          const isPair = evt.type === 'pair';
+          const tag = document.createElement('span');
+          tag.style.cssText = `font-size:0.65rem; color:${isPair ? '#0057B8' : '#6b7280'}; ${isPair ? 'font-weight:600;' : ''}`;
+          tag.textContent = `${idx}. ${evt.label}`;
+          eventsBar.appendChild(tag);
         });
       }
 
