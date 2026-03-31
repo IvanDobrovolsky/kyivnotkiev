@@ -16,21 +16,10 @@ function adoptionClass(pct: number) {
 }
 
 function formatNum(n: number) {
-  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'М';
-  if (n >= 1_000) return (n / 1_000).toFixed(0) + 'К';
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
+  if (n >= 1_000) return (n / 1_000).toFixed(0) + 'K';
   return n.toString();
 }
-
-const catNames: Record<string, string> = {
-  geographical: "Географія",
-  food: "Їжа та кухня",
-  sports: "Спорт",
-  historical: "Історія",
-  landmarks: "Памʼятки",
-  institutional: "Інституції",
-  people: "Люди",
-  country: "Країна",
-};
 ---
 
 <html lang="uk">
@@ -39,18 +28,27 @@ const catNames: Record<string, string> = {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>KyivNotKiev — Як світ переходить на українські назви</title>
-  <meta name="description" content="Найбільше у світі обчислювальне дослідження того, як глобальні ЗМІ, пошук та соціальні платформи переходять на українські назви. 3.7М+ згадок, 7 джерел, 55 пар.">
+  <meta name="description" content="The world's largest computational study tracking how global media, search, and social platforms adopt Ukrainian spellings. 3.7M+ data points, 7 sources, 55 pairs.">
 
-  <meta property="og:title" content="KyivNotKiev — Чи почув нас світ?">
-  <meta property="og:description" content="Обчислювальний аналіз переходу на українські топоніми — 3.7М+ згадок із 7 джерел.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="KyivNotKiev — Did the World Listen?">
+  <meta property="og:description" content="Computational analysis of Ukrainian toponym adoption across 3.7M+ mentions from 7 sources. How effectively did #KyivNotKiev change language worldwide?">
   <meta property="og:image" content="https://kyivnotkiev.org/logo.jpg">
-  <meta property="og:url" content="https://kyivnotkiev.org/uk/">
+  <meta property="og:url" content="https://kyivnotkiev.org">
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="uk_UA">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="uk_UA">
 
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KyivNotKiev — Did the World Listen?">
+  <meta name="twitter:description" content="3.7M+ data points, 7 sources, 55 pairs. The largest computational study of Ukrainian toponym adoption.">
+  <meta name="twitter:image" content="https://kyivnotkiev.org/logo.jpg">
+
+  <!-- Favicon -->
   <link rel="icon" href="/logo.jpg" type="image/jpeg">
-  <link rel="alternate" hreflang="en" href="https://kyivnotkiev.org/">
   <link rel="alternate" hreflang="uk" href="https://kyivnotkiev.org/uk/">
+  <link rel="alternate" hreflang="en" href="https://kyivnotkiev.org/">
   <link rel="canonical" href="https://kyivnotkiev.org/uk/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,7 +58,7 @@ const catNames: Record<string, string> = {
   <div class="app">
     <nav class="topbar">
       <div class="topbar-logo">
-        <img src="/logo.jpg" alt="Каштан Києва" style="height:28px; width:auto; margin-right:0.4rem;">
+        <img src="/logo.jpg" alt="Kyiv chestnut" style="height:28px; width:auto; margin-right:0.4rem;">
         <span class="k">KYIV</span><span class="n">NOT</span><span class="k struck">KIEV</span>
       </div>
       <div class="topbar-links">
@@ -75,7 +73,7 @@ const catNames: Record<string, string> = {
         <div class="sidebar-section">
           <div class={`sidebar-header ${ci === 0 ? 'open' : ''}`} data-category={cat.id}>
             <span class="dot" style={`background: ${cat.color}`}></span>
-            {catNames[cat.id] || cat.name}
+            {cat.name}
             <span class="arrow">▶</span>
           </div>
           <div class={`sidebar-items ${ci === 0 ? 'open' : ''}`}>
@@ -98,7 +96,7 @@ const catNames: Record<string, string> = {
     <main class="main">
       <div class="stats">
         <div class="stat-card">
-          <div class="stat-value">38.8М</div>
+          <div class="stat-value">38.8M</div>
           <div class="stat-label">Згадок проаналізовано</div>
         </div>
         <div class="stat-card">
@@ -115,43 +113,1024 @@ const catNames: Record<string, string> = {
         </div>
       </div>
 
+      <div class="chart-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">
+              <span class="old-name" id="chart-old">Kiev</span>
+              <span class="arrow">→</span>
+              <span class="new-name" id="chart-new">Kyiv</span>
+              <span id="chart-range" style="font-size:0.75rem; color:var(--text-muted); font-weight:400; margin-left:0.5rem;"></span>
+            </div>
+            <div class="chart-subtitle">
+              Ukrainian spelling adoption rate (%) · <span id="chart-info" style="color:var(--text-dim); font-style:italic;"></span>
+            </div>
+          </div>
+          <div class="chart-controls">
+            <button class="source-toggle active" data-source="trends" style="--source-color: #4285F4">
+              <span class="source-dot"></span>Trends
+            </button>
+            <button class="source-toggle" data-source="gdelt" style="--source-color: #1e3a5f">
+              <span class="source-dot"></span>GDELT
+            </button>
+            <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466">
+              <span class="source-dot"></span>Wikipedia
+            </button>
+            <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500">
+              <span class="source-dot"></span>Reddit
+            </button>
+            <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000">
+              <span class="source-dot"></span>YouTube
+            </button>
+            <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed">
+              <span class="source-dot"></span>Ngrams
+            </button>
+            <span class="toggle-sep"></span>
+            <button class="event-toggle active" id="dual-line-toggle">Both Lines</button>
+            <button class="event-toggle active" id="events-toggle">Events</button>
+          </div>
+        </div>
+        <div id="chart"></div>
+        <div class="chart-legend" id="chart-legend"></div>
+      </div>
+
+      <!-- Per-pair world map (GDELT only) -->
+      <div class="chart-container" id="map-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" style="color: var(--text)">Adoption Map: <span id="map-pair-name">Kiev → Kyiv</span></div>
+            <div class="chart-subtitle" id="map-subtitle">Country-level adoption (%) — GDELT news corpus 2024–2026</div>
+          </div>
+        </div>
+        <div id="world-map" style="width:100%; height:400px;"></div>
+        <div class="chart-legend" id="map-legend" style="justify-content: center; gap: 0.5rem;">
+          <span style="font-size:0.75rem; color:var(--text-muted)">0%</span>
+          <div style="display:flex; height:12px; width:240px; border-radius:6px; overflow:hidden;">
+            <div style="flex:1; background:#dc2626"></div>
+            <div style="flex:1; background:#f97316"></div>
+            <div style="flex:1; background:#eab308"></div>
+            <div style="flex:1; background:#22c55e"></div>
+            <div style="flex:1; background:#047857"></div>
+          </div>
+          <span style="font-size:0.75rem; color:var(--text-muted)">100%</span>
+        </div>
+      </div>
+
+      <!-- Per-pair holdouts -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" style="color: var(--text)">Holdouts: <span id="holdout-pair-name">Kiev</span></div>
+            <div class="chart-subtitle">Domains still using old spelling (2024–2026, min 20 mentions)</div>
+          </div>
+          <div class="chart-controls">
+            <button class="event-toggle" id="ru-filter-toggle">Hide .ru domains</button>
+          </div>
+        </div>
+        <div id="holdout-table" style="max-height: 400px; overflow-y: auto;"></div>
+      </div>
+
+      <!-- Data source availability note -->
+      <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem; padding: 0.5rem 0.75rem; background: #f8f9fb; border-radius: 4px; border-left: 3px solid var(--border);">
+        Source availability varies: Trends (2010–2026), GDELT (2015–2026), Wikipedia (2015–2026), Reddit (2007–2026), Ngrams (books, 2000–2019)
+      </div>
+
+      <!-- ── GLOBAL VIEWS (static, don't change per pair) ── -->
+
+      <div style="margin: 2rem 0 1rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600;">Global Overview</div>
+
+      <!-- Statistical Highlights -->
+      <div class="chart-container" style="margin-bottom: 1rem;">
+        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 1rem;">Statistical Analysis</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;">
+          <div style="padding:1rem; background:#f0f9ff; border-radius:6px; text-align:center;">
+            <div style="font-size:1.8rem; font-weight:700; color:#0057B8;">R²=0.87</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Regression model fit</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Pre-2022 baseline predicts 87% of adoption variance</div>
+          </div>
+          <div style="padding:1rem; background:#fef2f2; border-radius:6px; text-align:center;">
+            <div style="font-size:1.8rem; font-weight:700; color:#dc2626;">p&lt;0.001</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Invasion effect</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Significant across all 6 sources</div>
+          </div>
+          <div style="padding:1rem; background:#f0fdf4; border-radius:6px; text-align:center;">
+            <div style="font-size:1.8rem; font-weight:700; color:#059669;">d=1.27</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Reddit effect size</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Social media leads traditional media 2x</div>
+          </div>
+          <div style="padding:1rem; background:#fefce8; border-radius:6px; text-align:center;">
+            <div style="font-size:1.8rem; font-weight:700; color:#d97706;">p=0.049</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Category test</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Kruskal-Wallis: categories differ significantly</div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 0.75rem;">
+          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Biggest shift</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Zaporizhzhia: +78.2pp at invasion</div>
+          </div>
+          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Most resistant</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Food terms: median 4.1% adoption</div>
+          </div>
+          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Cross-source agreement</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Spearman ρ=0.64–0.74 (p&lt;0.001)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Russia vs World + Category side by side -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+        <div class="chart-container" style="margin-bottom: 0;">
+          <div class="chart-title" style="color: var(--text); font-size: 1.1rem;">Russia vs Rest of World</div>
+          <div class="chart-subtitle" style="margin-bottom: 1rem;">Kiev/Kyiv adoption — Russian media vs everyone else</div>
+          <div style="display: flex; gap: 1.5rem;">
+            <div style="flex:1; text-align:center; padding:1.25rem; background:#f0fdf4; border-radius:6px;">
+              <div style="font-size:2.2rem; font-weight:700; color:#059669;">30.7%</div>
+              <div style="font-size:0.8rem; color:#6b7280; margin-top:0.2rem;">Non-Russian media</div>
+              <div style="font-size:0.7rem; color:#9ca3af;">14.3M mentions</div>
+            </div>
+            <div style="flex:1; text-align:center; padding:1.25rem; background:#fef2f2; border-radius:6px;">
+              <div style="font-size:2.2rem; font-weight:700; color:#dc2626;">1.7%</div>
+              <div style="font-size:0.8rem; color:#6b7280; margin-top:0.2rem;">Russian media</div>
+              <div style="font-size:0.7rem; color:#9ca3af;">2.3M mentions</div>
+            </div>
+          </div>
+          <div style="font-size:0.75rem; color:#6b7280; text-align:center; margin-top:0.75rem;">
+            18x adoption gap
+          </div>
+        </div>
+
+        <div class="chart-container" style="margin-bottom: 0;">
+          <div class="chart-title" style="color: var(--text); font-size: 1.1rem;">Adoption by Category</div>
+          <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Average adoption (%) per category</div>
+          <div id="category-chart" style="width:100%; height:240px;"></div>
+        </div>
+      </div>
+
+      <!-- All pairs heatmap -->
+      <div class="chart-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title" style="color: var(--text)">All Pairs Overview</div>
+            <div class="chart-subtitle">Current adoption rate — sorted by category, then by adoption %</div>
+          </div>
+        </div>
+        <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
+      </div>
+
       <div class="chart-container" id="about">
         <div class="about-text">
           <p>
-            У 2018 році Міністерство закордонних справ України запустило кампанію #KyivNotKiev —
-            щоб змінити те, як світ пише українські географічні назви. Ми побудували конвеєр даних,
-            щоб виміряти, чи це справді спрацювало.
+            In 2018, Ukraine's Ministry of Foreign Affairs launched #KyivNotKiev — a campaign
+            to change how the world spells Ukrainian place names. We built a data pipeline to
+            measure whether it actually worked.
           </p>
           <p>
-            Ця панель відстежує 55 українських пар топонімів (від назв міст до страв та
-            історичних термінів) через 7 незалежних джерел даних. Кожна точка даних — це реальне
-            використання: новинні статті, публікації в соцмережах, перегляди енциклопедій,
-            частотність у книгах та пошукові тренди.
+            This dashboard tracks 55 Ukrainian toponym pairs (from city names to dishes to
+            historical terms) across 7 independent data sources. Every data point comes from
+            real-world usage — news articles, social media posts, encyclopedia pageviews, book
+            frequency, and web search trends.
           </p>
           <p>
-            <strong>Ключові знахідки:</strong> Спільноти в соцмережах перейшли на українські назви
-            у 5–9 разів швидше, ніж традиційні ЗМІ. «Чорнобиль» як бренд катастрофи майже не
-            піддається зміні. А кулінарні терміни як «борщ» ведуть окрему битву, очолювану шефом
-            Євгеном Клопотенком та його кампанією в ЮНЕСКО.
+            Some findings: social media communities adopted Ukrainian spellings 5–9x faster
+            than traditional media. "Disaster brands" like Chernobyl are nearly immovable.
+            And food terms like Borshch are fighting a separate battle, championed by chef
+            Yevhen Klopotenko's UNESCO campaign.
           </p>
         </div>
         <div class="about-links">
           <a href="https://github.com/IvanDobrovolsky/kyivnotkiev">Вихідний код</a>
           <a href="https://github.com/IvanDobrovolsky/KyivNotKiev-paper">Наукова стаття</a>
-          <a href="/">English version</a>
         </div>
       </div>
     </main>
   </div>
 
   <script>
-    // Sidebar interaction (same as English)
+    import * as d3 from 'd3';
+    import * as topojson from 'topojson-client';
+    import timeseriesData from '../../data/timeseries.json';
+    import pairs from '../../data/pairs.json';
+    import countryData from '../../data/countries.json';
+    import holdoutsData from '../../data/holdouts.json';
+    import holdoutsByPair from '../../data/holdouts_by_pair.json';
+    import countriesByPair from '../../data/countries_by_pair.json';
+    import pairEvents from '../../data/pair_events.json';
+    import trendsCountries from '../../data/trends_countries.json';
+
+    const sourceColors: Record<string, string> = {
+      trends: '#4285F4',
+      gdelt: '#1e3a5f',
+      wikipedia: '#636466',
+      reddit: '#FF4500',
+      youtube: '#FF0000',
+      ngrams: '#7c3aed',
+    };
+
+    const sourceLabels: Record<string, string> = {
+      trends: 'Google Trends',
+      gdelt: 'GDELT News',
+      wikipedia: 'Wikipedia',
+      reddit: 'Reddit',
+      youtube: 'YouTube',
+      ngrams: 'Google Books',
+    };
+
+    let activeSource = 'trends';  // single source at a time
+    let activeSources = new Set(['trends']);  // kept as set for chart compatibility
+    let hideRuDomains = false;
+    let showDualLines = true;  // show both Ukrainian (solid) and Russian (dashed)
+    let showEvents = true;
+    let activePairId = 1;
+
+    function drawChart() {
+      const container = document.getElementById('chart')!;
+      const legendContainer = document.getElementById('chart-legend')!;
+
+      // Fade out, redraw, fade in
+      container.style.opacity = '0';
+      container.style.transition = 'opacity 0.15s ease';
+      container.innerHTML = '';
+      legendContainer.innerHTML = '';
+
+      requestAnimationFrame(() => {
+        container.style.opacity = '1';
+      });
+
+      const rect = container.getBoundingClientRect();
+      const margin = { top: 52, right: 55, bottom: 30, left: 45 };
+      const width = rect.width - margin.left - margin.right;
+      const height = rect.height - margin.top - margin.bottom;
+
+      const svg = d3.select('#chart')
+        .append('svg')
+        .attr('viewBox', `0 0 ${rect.width} ${rect.height}`)
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
+      const pairData = (timeseriesData as any)[String(activePairId)];
+      if (!pairData) {
+        svg.append('text')
+          .attr('x', width / 2).attr('y', height / 2)
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#9ca3af')
+          .attr('font-size', '14px')
+          .text('Data coming soon');
+        return;
+      }
+
+      const parseDate = d3.timeParse('%Y-%m');
+      const allDates: Date[] = [];
+
+      for (const src of activeSources) {
+        const series = pairData[src];
+        if (!series) continue;
+        for (const d of series) {
+          const date = parseDate(d.date);
+          if (date) allDates.push(date);
+        }
+      }
+
+      if (allDates.length === 0) return;
+
+      // Dynamic range based on active source
+      const sourceStarts: Record<string, number> = {
+        ngrams: 1900, trends: 2010, reddit: 2010, gdelt: 2015, wikipedia: 2015, youtube: 2013,
+      };
+      const sourceEnds: Record<string, number> = {
+        ngrams: 2020, trends: 2027, reddit: 2027, gdelt: 2027, wikipedia: 2027, youtube: 2027,
+      };
+      const xStart = new Date(sourceStarts[activeSource] || 2010, 0, 1);
+      const xEnd = new Date(sourceEnds[activeSource] || 2027, 0, 1);
+      const x = d3.scaleTime()
+        .domain([xStart, xEnd])
+        .range([0, width]);
+
+      // Update title range and info text
+      const rangeEl = document.getElementById('chart-range');
+      const infoEl = document.getElementById('chart-info');
+      const sourceRanges: Record<string, [string, string, string]> = {
+        trends: ['2010', '2026', ''],
+        gdelt: ['2015', '2026', 'GDELT v2 started Feb 2015'],
+        wikipedia: ['2015', '2026', 'Pageviews API started Jul 2015'],
+        reddit: ['2007', '2026', 'Quarterly aggregated'],
+        youtube: ['2013', '2026', 'Top 50 results per search'],
+        ngrams: ['1900', '2019', 'Google Books corpus ends 2019'],
+      };
+      const [srcStart, srcEnd, srcInfo] = sourceRanges[activeSource] || ['2010', '2026', ''];
+      if (rangeEl) rangeEl.textContent = `${srcStart}–${srcEnd}`;
+      if (infoEl) infoEl.textContent = srcInfo;
+
+      const y = d3.scaleLinear()
+        .domain([0, 100])
+        .range([height, 0]);
+
+      // Grid
+      svg.append('g').selectAll('line')
+        .data([25, 50, 75, 100])
+        .enter().append('line')
+        .attr('x1', 0).attr('x2', width)
+        .attr('y1', (d: number) => y(d)).attr('y2', (d: number) => y(d))
+        .attr('stroke', '#e5e7eb')
+        .attr('stroke-dasharray', '3,4');
+
+      // Y-axis labels
+      svg.append('g').selectAll('text')
+        .data([0, 25, 50, 75, 100])
+        .enter().append('text')
+        .attr('x', -8).attr('y', (d: number) => y(d) + 4)
+        .attr('text-anchor', 'end')
+        .attr('fill', '#9ca3af').attr('font-size', '11px')
+        .text((d: number) => d + '%');
+
+      // X-axis — decades for Ngrams, years for others
+      const xTicks = activeSource === 'ngrams'
+        ? d3.axisBottom(x).ticks(d3.timeYear.every(10)).tickSize(0).tickPadding(8).tickFormat(d3.timeFormat('%Y') as any)
+        : d3.axisBottom(x).ticks(d3.timeYear.every(1)).tickSize(0).tickPadding(8).tickFormat(d3.timeFormat('%Y') as any);
+
+      svg.append('g')
+        .attr('transform', `translate(0,${height})`)
+        .call(xTicks)
+        .selectAll('text').attr('fill', '#9ca3af').attr('font-size', '12px');
+
+      svg.selectAll('.domain').attr('stroke', '#e5e7eb');
+
+      // Event markers — positioned by date on x-scale
+      if (showEvents) {
+        const globalEvents = ((timeseriesData as any).events || []).map((e: any) => ({...e, type: 'global'}));
+        const customEvents = ((pairEvents as any)[String(activePairId)] || []).map((e: any) => ({...e, type: 'pair'}));
+        const events = [...globalEvents, ...customEvents].sort((a: any, b: any) => a.date.localeCompare(b.date));
+
+        events.forEach((evt: any, i: number) => {
+          const date = parseDate(evt.date);
+          if (!date || date < xStart || date > xEnd) return;
+          const xPos = x(date);
+          const isPair = evt.type === 'pair';
+
+          svg.append('line')
+            .attr('x1', xPos).attr('x2', xPos)
+            .attr('y1', 0).attr('y2', height)
+            .attr('stroke', isPair ? '#0057B8' : '#d1d5db')
+            .attr('stroke-width', 1)
+            .attr('stroke-dasharray', '4,3')
+            .attr('opacity', isPair ? 0.6 : 0.4);
+
+          svg.append('text')
+            .attr('x', xPos + 4).attr('y', -8 - (events.length - 1 - i) * 14)
+            .attr('fill', isPair ? '#0057B8' : '#9ca3af')
+            .attr('font-size', '11px')
+            .attr('font-weight', isPair ? '600' : '400')
+            .text(evt.label);
+        });
+      }
+
+      // Data lines + crosshair tooltip
+      const chartContainer = document.getElementById('chart')!;
+      chartContainer.style.position = 'relative';
+
+      const tooltip = d3.select('#chart')
+        .append('div')
+        .style('position', 'absolute')
+        .style('background', 'white')
+        .style('border', '1px solid #d1d5db')
+        .style('border-radius', '8px')
+        .style('padding', '10px 14px')
+        .style('font-size', '13px')
+        .style('pointer-events', 'none')
+        .style('opacity', '0')
+        .style('box-shadow', '0 4px 16px rgba(0,0,0,0.12)')
+        .style('z-index', '10')
+        .style('white-space', 'nowrap')
+        .style('line-height', '1.6');
+
+      const crosshairLine = svg.append('line')
+        .attr('y1', 0).attr('y2', height)
+        .attr('stroke', '#d1d5db')
+        .attr('stroke-width', 1)
+        .attr('stroke-dasharray', '4,3')
+        .style('opacity', 0);
+
+      // Build all series data for crosshair lookup
+      const allSeriesData: Record<string, {date: string; adoption: number}[]> = {};
+
+      const line = d3.line<{date: string; adoption: number}>()
+        .x(d => x(parseDate(d.date)!))
+        .y(d => y(d.adoption))
+        .curve(d3.curveBasis);
+
+      const activeLegend: {label: string; color: string; value: number}[] = [];
+
+      for (const src of activeSources) {
+        const series = pairData[src];
+        if (!series) continue;
+
+        allSeriesData[src] = series;
+
+        // Ukrainian adoption line (solid)
+        svg.append('path')
+          .datum(series)
+          .attr('fill', 'none')
+          .attr('stroke', sourceColors[src])
+          .attr('stroke-width', 3)
+          .attr('d', line);
+
+        // Russian line (dashed, 100% - adoption) if dual mode
+        if (showDualLines) {
+          const russianLine = d3.line<any>()
+            .x(d => x(parseDate(d.date)!))
+            .y(d => y(100 - d.adoption))
+            .curve(d3.curveBasis);
+
+          svg.append('path')
+            .datum(series)
+            .attr('fill', 'none')
+            .attr('stroke', '#dc2626')
+            .attr('stroke-width', 1.5)
+            .attr('stroke-dasharray', '6,4')
+            .attr('opacity', 0.5)
+            .attr('d', russianLine);
+        }
+
+        // Start indicator (if doesn't start at 2010)
+        const first = series[0];
+        const firstDate = parseDate(first.date)!;
+        if (firstDate > new Date(2010, 6, 1)) {
+          const sx = x(firstDate);
+          const sy = y(first.adoption);
+          svg.append('circle')
+            .attr('cx', sx).attr('cy', sy)
+            .attr('r', 3)
+            .attr('fill', 'none')
+            .attr('stroke', sourceColors[src])
+            .attr('stroke-width', 1.5);
+          svg.append('text')
+            .attr('x', sx - 4).attr('y', sy - 8)
+            .attr('text-anchor', 'end')
+            .attr('fill', sourceColors[src])
+            .attr('font-size', '9px')
+            .attr('opacity', 0.7)
+            .text(first.date);
+        }
+
+        // End dot + label
+        const last = series[series.length - 1];
+        const cx = x(parseDate(last.date)!);
+        const cy = y(last.adoption);
+
+        svg.append('circle')
+          .attr('cx', cx).attr('cy', cy)
+          .attr('r', 4)
+          .attr('fill', sourceColors[src]);
+
+        svg.append('text')
+          .attr('x', cx + 10).attr('y', cy + 5)
+          .attr('fill', sourceColors[src])
+          .attr('font-size', '13px')
+          .attr('font-weight', '700')
+          .text(last.adoption + '%');
+
+        // End date if doesn't reach 2026
+        const lastDate = parseDate(last.date)!;
+        if (lastDate < new Date(2025, 6, 1)) {
+          svg.append('text')
+            .attr('x', cx + 8).attr('y', cy + 16)
+            .attr('fill', sourceColors[src])
+            .attr('font-size', '9px')
+            .attr('opacity', 0.6)
+            .text('ends ' + last.date);
+        }
+
+        activeLegend.push({
+          label: sourceLabels[src],
+          color: sourceColors[src],
+          value: last.adoption,
+        });
+      }
+
+      // Crosshair overlay — interpolates between data points
+      svg.append('rect')
+        .attr('width', width).attr('height', height)
+        .attr('fill', 'transparent')
+        .on('mousemove', function(event: MouseEvent) {
+          const [mx] = d3.pointer(event);
+          const hoveredDate = x.invert(mx);
+          const dateStr = d3.timeFormat('%b %Y')(hoveredDate);
+
+          crosshairLine.attr('x1', mx).attr('x2', mx).style('opacity', 1);
+
+          let html = `<strong>${dateStr}</strong>`;
+          for (const src of Object.keys(allSeriesData)) {
+            const series = allSeriesData[src];
+            if (series.length < 2) continue;
+
+            // Convert to date-value pairs for bisection
+            const dates = series.map((d: any) => parseDate(d.date)!.getTime());
+            const vals = series.map((d: any) => d.adoption);
+
+            const t = hoveredDate.getTime();
+            // Check if within data range
+            if (t < dates[0] || t > dates[dates.length - 1]) continue;
+
+            // Binary search for bracketing points
+            let lo = 0, hi = dates.length - 1;
+            while (hi - lo > 1) {
+              const mid = (lo + hi) >> 1;
+              if (dates[mid] <= t) lo = mid; else hi = mid;
+            }
+
+            // Linear interpolation between lo and hi
+            const frac = (t - dates[lo]) / (dates[hi] - dates[lo] || 1);
+            const interpolated = vals[lo] + frac * (vals[hi] - vals[lo]);
+            const value = Math.round(interpolated * 10) / 10;
+
+            html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${value}%</strong></span>`;
+          }
+
+          tooltip.style('opacity', '1').html(html);
+          const cr = chartContainer.getBoundingClientRect();
+          const left = event.clientX - cr.left;
+          tooltip.style('left', (left > width / 2 ? left - 200 : left + 20) + 'px')
+            .style('top', '10px');
+        })
+        .on('mouseleave', function() {
+          crosshairLine.style('opacity', 0);
+          tooltip.style('opacity', '0');
+        });
+
+      // Legend
+      for (const item of activeLegend) {
+        const el = document.createElement('div');
+        el.className = 'legend-item';
+        el.innerHTML = `<span class="legend-line" style="background: ${item.color}"></span>${item.label}: ${item.value}%`;
+        legendContainer.appendChild(el);
+      }
+      if (showDualLines) {
+        const el = document.createElement('div');
+        el.className = 'legend-item';
+        el.innerHTML = `<span class="legend-line" style="background: #dc2626; border: 1px dashed #dc2626; background: transparent;"></span>Old spelling (declining)`;
+        legendContainer.appendChild(el);
+      }
+    }
+
+    // Sidebar
     document.querySelectorAll('.sidebar-header').forEach(header => {
       header.addEventListener('click', () => {
         header.classList.toggle('open');
         header.nextElementSibling?.classList.toggle('open');
       });
     });
+
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        activePairId = parseInt((item as HTMLElement).dataset.pairId || '1');
+        const nameEl = item.querySelector('.pair-name span:first-child');
+        const oldEl = item.querySelector('.old');
+        if (nameEl) document.getElementById('chart-new')!.textContent = nameEl.textContent;
+        if (oldEl) document.getElementById('chart-old')!.textContent = oldEl.textContent;
+        drawChart();
+        drawWorldMap();
+        drawHoldoutTable();
+      });
+    });
+
+    // Source toggles — radio behavior (one at a time)
+    document.querySelectorAll('.source-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const src = (btn as HTMLElement).dataset.source!;
+        // Deactivate all, activate clicked
+        document.querySelectorAll('.source-toggle').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeSource = src;
+        activeSources = new Set([src]);
+        drawChart();
+
+        // Show map for GDELT and Trends (both have country data)
+        const mapEl = document.getElementById('map-container');
+        if (mapEl) {
+          if (src === 'gdelt' || src === 'trends') {
+            mapEl.style.display = 'block';
+            drawWorldMap();
+          } else {
+            mapEl.style.display = 'none';
+          }
+        }
+      });
+    });
+
+    // Dual line toggle
+    document.getElementById('dual-line-toggle')?.addEventListener('click', (e) => {
+      const btn = e.currentTarget as HTMLElement;
+      showDualLines = !showDualLines;
+      btn.classList.toggle('active');
+      drawChart();
+    });
+
+    // Events toggle
+    document.getElementById('events-toggle')?.addEventListener('click', (e) => {
+      const btn = e.currentTarget as HTMLElement;
+      btn.classList.toggle('active');
+      showEvents = btn.classList.contains('active');
+      drawChart();
+    });
+
+    // ── Category bar chart ──────────────────────────────
+    function drawCategoryChart() {
+      const container = document.getElementById('category-chart')!;
+      container.innerHTML = '';
+
+      const rect = container.getBoundingClientRect();
+      const margin = { top: 10, right: 60, bottom: 20, left: 180 };
+      const width = rect.width - margin.left - margin.right;
+      const height = rect.height - margin.top - margin.bottom;
+
+      const svg = d3.select('#category-chart')
+        .append('svg')
+        .attr('viewBox', `0 0 ${rect.width} ${rect.height}`)
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
+      // Aggregate by category
+      const catData = pairs.categories.map((cat: any) => {
+        const catPairs = pairs.pairs.filter((p: any) => p.category === cat.id);
+        const avg = catPairs.length ? catPairs.reduce((s: number, p: any) => s + p.adoption, 0) / catPairs.length : 0;
+        return { name: cat.name, avg: Math.round(avg * 10) / 10, color: cat.color, count: catPairs.length };
+      }).sort((a: any, b: any) => b.avg - a.avg);
+
+      const y = d3.scaleBand()
+        .domain(catData.map((d: any) => d.name))
+        .range([0, height])
+        .padding(0.3);
+
+      const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+
+      // Background bars
+      svg.selectAll('.bg-bar')
+        .data(catData)
+        .enter().append('rect')
+        .attr('x', 0).attr('width', width)
+        .attr('y', (d: any) => y(d.name)!)
+        .attr('height', y.bandwidth())
+        .attr('fill', '#f3f4f6')
+        .attr('rx', 3);
+
+      // Value bars
+      svg.selectAll('.val-bar')
+        .data(catData)
+        .enter().append('rect')
+        .attr('x', 0)
+        .attr('width', (d: any) => x(d.avg))
+        .attr('y', (d: any) => y(d.name)!)
+        .attr('height', y.bandwidth())
+        .attr('fill', (d: any) => d.color)
+        .attr('opacity', 0.8)
+        .attr('rx', 3);
+
+      // Labels
+      svg.selectAll('.cat-label')
+        .data(catData)
+        .enter().append('text')
+        .attr('x', -8)
+        .attr('y', (d: any) => y(d.name)! + y.bandwidth() / 2 + 4)
+        .attr('text-anchor', 'end')
+        .attr('fill', '#374151')
+        .attr('font-size', '12px')
+        .attr('font-weight', '500')
+        .text((d: any) => d.name);
+
+      // Value labels
+      svg.selectAll('.val-label')
+        .data(catData)
+        .enter().append('text')
+        .attr('x', (d: any) => x(d.avg) + 8)
+        .attr('y', (d: any) => y(d.name)! + y.bandwidth() / 2 + 4)
+        .attr('fill', '#6b7280')
+        .attr('font-size', '12px')
+        .attr('font-weight', '600')
+        .text((d: any) => d.avg + '%');
+    }
+
+    // ── Heatmap / pair overview ──────────────────────────
+    function drawHeatmap() {
+      const container = document.getElementById('heatmap-chart')!;
+      container.innerHTML = '';
+
+      const sorted = [...pairs.pairs].sort((a: any, b: any) => {
+        if (a.category !== b.category) return a.category.localeCompare(b.category);
+        return b.adoption - a.adoption;
+      });
+
+      const catColors: Record<string, string> = {};
+      pairs.categories.forEach((c: any) => { catColors[c.id] = c.color; });
+
+      const rowHeight = 28;
+      const totalHeight = sorted.length * rowHeight;
+      container.style.height = totalHeight + 'px';
+
+      const rect = container.getBoundingClientRect();
+      const margin = { top: 0, right: 55, bottom: 0, left: 180 };
+      const barWidth = rect.width - margin.left - margin.right;
+
+      const svg = d3.select('#heatmap-chart')
+        .append('svg')
+        .attr('viewBox', `0 0 ${rect.width} ${totalHeight}`)
+        .append('g')
+        .attr('transform', `translate(${margin.left},0)`);
+
+      const x = d3.scaleLinear().domain([0, 100]).range([0, barWidth]);
+
+      const colorScale = (pct: number) => {
+        if (pct >= 80) return '#059669';
+        if (pct >= 50) return '#d97706';
+        if (pct >= 20) return '#ea580c';
+        return '#dc2626';
+      };
+
+      sorted.forEach((pair: any, i: number) => {
+        const yPos = i * rowHeight;
+
+        // Category dot
+        svg.append('circle')
+          .attr('cx', -170).attr('cy', yPos + rowHeight / 2)
+          .attr('r', 4)
+          .attr('fill', catColors[pair.category] || '#999');
+
+        // Label: Ukrainian name
+        svg.append('text')
+          .attr('x', -160).attr('y', yPos + rowHeight / 2 + 4)
+          .attr('fill', '#374151')
+          .attr('font-size', '11px')
+          .attr('font-weight', '500')
+          .text(pair.ukrainian);
+
+        // Old name (strikethrough)
+        svg.append('text')
+          .attr('x', -160).attr('y', yPos + rowHeight / 2 + 4)
+          .attr('fill', 'transparent')
+          .attr('font-size', '0px')
+          .text('');
+
+        // Background bar
+        svg.append('rect')
+          .attr('x', 0).attr('width', barWidth)
+          .attr('y', yPos + 4)
+          .attr('height', rowHeight - 8)
+          .attr('fill', '#f3f4f6')
+          .attr('rx', 2);
+
+        // Value bar
+        svg.append('rect')
+          .attr('x', 0)
+          .attr('width', x(pair.adoption))
+          .attr('y', yPos + 4)
+          .attr('height', rowHeight - 8)
+          .attr('fill', colorScale(pair.adoption))
+          .attr('opacity', 0.75)
+          .attr('rx', 2);
+
+        // Percentage
+        svg.append('text')
+          .attr('x', barWidth + 8)
+          .attr('y', yPos + rowHeight / 2 + 4)
+          .attr('fill', colorScale(pair.adoption))
+          .attr('font-size', '11px')
+          .attr('font-weight', '700')
+          .attr('font-family', 'var(--font-mono)')
+          .text(pair.adoption + '%');
+
+        // Divider
+        if (i > 0 && sorted[i - 1].category !== pair.category) {
+          svg.append('line')
+            .attr('x1', -175).attr('x2', barWidth + 50)
+            .attr('y1', yPos).attr('y2', yPos)
+            .attr('stroke', '#e5e7eb')
+            .attr('stroke-width', 1);
+        }
+      });
+    }
+
+    // ── World map ─────────────────────────────────────────
+    // Crimea is Ukraine. The default world-atlas TopoJSON incorrectly
+    // shows it as part of Russia. We overlay a corrected Crimea polygon.
+    const CRIMEA_GEOJSON = {
+      type: "Feature",
+      properties: { name: "Crimea (Ukraine)" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [[
+          [33.0, 46.1], [33.5, 46.1], [34.0, 46.05], [34.5, 45.95],
+          [35.0, 45.7], [35.4, 45.35], [35.8, 45.0], [36.2, 45.2],
+          [36.6, 45.35], [36.4, 45.5], [35.8, 45.7], [35.2, 45.5],
+          [35.0, 45.55], [34.5, 45.55], [34.0, 45.6], [33.7, 45.8],
+          [33.5, 45.95], [33.65, 46.2], [33.85, 46.25], [34.1, 46.3],
+          [34.5, 46.15], [34.8, 46.1], [35.2, 46.0], [35.5, 45.75],
+          [35.8, 45.4], [36.0, 45.15], [36.5, 45.05], [36.8, 45.0],
+          [36.6, 44.7], [36.2, 44.5], [35.6, 44.4], [35.0, 44.55],
+          [34.4, 44.55], [33.8, 44.4], [33.5, 44.55], [33.0, 44.4],
+          [32.5, 44.45], [32.0, 44.65], [31.8, 44.85], [32.0, 45.15],
+          [32.5, 45.35], [32.8, 45.5], [33.0, 45.7], [33.0, 46.1]
+        ]]
+      }
+    };
+
+    let cachedWorld: any = null;
+
+    async function drawWorldMap() {
+      const container = document.getElementById('world-map')!;
+      container.innerHTML = '';
+      container.style.position = 'relative';
+
+      const rect = container.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+
+      const svg = d3.select('#world-map')
+        .append('svg')
+        .attr('viewBox', `0 0 ${width} ${height}`);
+
+      const worldUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+      if (!cachedWorld) {
+        try {
+          cachedWorld = await d3.json(worldUrl);
+        } catch {
+          svg.append('text').attr('x', width/2).attr('y', height/2)
+            .attr('text-anchor', 'middle').attr('fill', '#9ca3af')
+            .text('Map loading...');
+          return;
+        }
+      }
+      const world = cachedWorld;
+
+      const countries = topojson.feature(world, world.objects.countries) as any;
+
+      const projection = d3.geoNaturalEarth1()
+        .fitSize([width, height - 10], countries);
+
+      const path = d3.geoPath().projection(projection);
+
+      const colorScale = d3.scaleSequential()
+        .domain([0, 100])
+        .interpolator(d3.interpolateRgbBasis(['#dc2626', '#f97316', '#eab308', '#22c55e', '#047857']));
+
+      // Update map title
+      const mapNameEl = document.getElementById('map-pair-name');
+      const mapSubEl = document.getElementById('map-subtitle');
+      const mapPair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      if (mapNameEl && mapPair) mapNameEl.textContent = `${mapPair.russian} → ${mapPair.ukrainian}`;
+      // Source-specific subtitle and data
+      if (mapSubEl) {
+        mapSubEl.textContent = activeSource === 'trends'
+          ? `Search interest adoption (%) — Google Trends 2022–2026`
+          : `URL-level adoption (%) — GDELT news corpus 2024–2026`;
+      }
+
+      // Use Trends country data or GDELT country data depending on source
+      let adoptionMap: Record<string, {name: string; adoption: number}>;
+      if (activeSource === 'trends') {
+        adoptionMap = (trendsCountries as any)[String(activePairId)] || {};
+      } else {
+        const pairCountries = (countriesByPair as any)[String(activePairId)];
+        adoptionMap = (pairCountries || (countryData as any).countries) as Record<string, {name: string; adoption: number}>;
+      }
+
+      // Tooltip — positioned relative to container
+      const tooltip = d3.select('#world-map')
+        .append('div')
+        .style('position', 'absolute')
+        .style('background', 'white')
+        .style('border', '1px solid #d1d5db')
+        .style('border-radius', '6px')
+        .style('padding', '8px 12px')
+        .style('font-size', '12px')
+        .style('pointer-events', 'none')
+        .style('opacity', '0')
+        .style('box-shadow', '0 4px 12px rgba(0,0,0,0.1)')
+        .style('z-index', '10')
+        .style('white-space', 'nowrap');
+
+      // Draw countries
+      svg.selectAll('path.country')
+        .data(countries.features)
+        .enter().append('path')
+        .attr('class', 'country')
+        .attr('d', path as any)
+        .attr('fill', (d: any) => {
+          const id = String(d.id).padStart(3, '0');
+          const info = adoptionMap[id];
+          return info ? colorScale(info.adoption) as string : '#f3f4f6';
+        })
+        .attr('stroke', '#e5e7eb')
+        .attr('stroke-width', 0.4)
+        .on('mouseenter', function(_event: MouseEvent, d: any) {
+          const id = String(d.id).padStart(3, '0');
+          const info = adoptionMap[id];
+          if (!info) return;
+          d3.select(this).attr('stroke', '#374151').attr('stroke-width', 1.5);
+          tooltip.style('opacity', '1')
+            .html(`<strong>${info.name}</strong><br/><span style="color:${colorScale(info.adoption)};font-weight:700">${info.adoption}%</span> adoption`);
+        })
+        .on('mousemove', function(event: MouseEvent) {
+          const cr = container.getBoundingClientRect();
+          const x = event.clientX - cr.left;
+          const y = event.clientY - cr.top;
+          tooltip.style('left', (x + 16) + 'px').style('top', (y - 20) + 'px');
+        })
+        .on('mouseleave', function() {
+          d3.select(this).attr('stroke', '#e5e7eb').attr('stroke-width', 0.4);
+          tooltip.style('opacity', '0');
+        });
+
+      // Crimea overlay — colored as Ukraine (country 804)
+      const ukraineData = adoptionMap['804'];
+      const crimeaColor = ukraineData ? colorScale(ukraineData.adoption) as string : '#059669';
+
+      svg.append('path')
+        .datum(CRIMEA_GEOJSON as any)
+        .attr('d', path as any)
+        .attr('fill', crimeaColor)
+        .attr('stroke', '#e5e7eb')
+        .attr('stroke-width', 0.4)
+        .on('mouseenter', function() {
+          d3.select(this).attr('stroke', '#374151').attr('stroke-width', 1.5);
+          tooltip.style('opacity', '1')
+            .html(`<strong>Crimea (Ukraine)</strong><br/><span style="color:${crimeaColor};font-weight:700">${ukraineData?.adoption || 98.5}%</span> adoption`);
+        })
+        .on('mousemove', function(event: MouseEvent) {
+          const cr = container.getBoundingClientRect();
+          tooltip.style('left', (event.clientX - cr.left + 16) + 'px')
+            .style('top', (event.clientY - cr.top - 20) + 'px');
+        })
+        .on('mouseleave', function() {
+          d3.select(this).attr('stroke', '#e5e7eb').attr('stroke-width', 0.4);
+          tooltip.style('opacity', '0');
+        });
+    }
+
+    // ── Holdout table ─────────────────────────────────────
+    function drawHoldoutTable() {
+      const container = document.getElementById('holdout-table')!;
+      const pairHoldouts = (holdoutsByPair as any)[String(activePairId)];
+
+      // Update title
+      const nameEl = document.getElementById('holdout-pair-name');
+      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      if (nameEl && pair) nameEl.textContent = pair.russian;
+
+      if (!pairHoldouts || pairHoldouts.length === 0) {
+        container.innerHTML = '<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">No holdout data for this pair (not enough GDELT mentions)</div>';
+        return;
+      }
+
+      const filtered = hideRuDomains
+        ? pairHoldouts.filter((h: any) => !h.is_ru)
+        : pairHoldouts;
+
+      const rows = filtered.map((h: any) => `
+        <tr style="border-bottom:1px solid #f3f4f6; ${h.is_ru ? 'background:#fef2f2;' : ''}">
+          <td style="padding:0.5rem 0.75rem; font-size:0.85rem; font-weight:500;">
+            ${h.domain}
+            ${h.is_ru ? '<span style="font-size:0.65rem; color:#dc2626; margin-left:0.3rem; font-weight:600;">.ru</span>' : ''}
+          </td>
+          <td style="padding:0.5rem 0.75rem; font-size:0.85rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
+          <td style="padding:0.5rem 0.75rem; font-size:0.8rem; color:#9ca3af;">${h.total.toLocaleString()}</td>
+        </tr>
+      `).join('');
+
+      container.innerHTML = `
+        <table style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr style="border-bottom:2px solid #e5e7eb;">
+              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Domain</th>
+              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Old spelling</th>
+              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Mentions</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
+    // Russian media filter toggle
+    document.getElementById('ru-filter-toggle')?.addEventListener('click', (e) => {
+      const btn = e.currentTarget as HTMLElement;
+      hideRuDomains = !hideRuDomains;
+      btn.textContent = hideRuDomains ? 'Show .ru domains' : 'Hide .ru domains';
+      btn.classList.toggle('active');
+      drawHoldoutTable();
+    });
+
+    drawChart();
+    drawCategoryChart();
+    drawHeatmap();
+    drawHoldoutTable();
+
+    // Show map on initial load (Trends has per-country data)
+    drawWorldMap();
+
+    window.addEventListener('resize', () => { drawChart(); drawCategoryChart(); drawHeatmap(); if (activeSource === 'gdelt') drawWorldMap(); });
   </script>
 </body>
 </html>
