@@ -172,8 +172,9 @@ pairs:
   category: geographical
   russian: Crimea
   ukrainian: Krym
-  enabled: true
+  enabled: false
   is_control: false
+  notes: ' [Disabled: insufficient or misleading data]'
 - id: 19
   category: geographical
   russian: Transcarpathia
@@ -425,8 +426,9 @@ pairs:
   category: historical
   russian: Little Russia
   ukrainian: Ukraine
-  enabled: true
+  enabled: false
   is_control: false
+  notes: ' [Disabled: insufficient or misleading data]'
 - id: 48
   category: historical
   russian: Gopak
@@ -451,8 +453,9 @@ pairs:
   category: historical
   russian: Galicia
   ukrainian: Halychyna
-  enabled: true
+  enabled: false
   is_control: false
+  notes: ' [Disabled: insufficient or misleading data]'
 - id: 60
   category: people
   russian: Alexander Usyk
@@ -485,8 +488,9 @@ pairs:
   category: people
   russian: Vitali Klitschko
   ukrainian: Vitaliy Klychko
-  enabled: true
+  enabled: false
   is_control: false
+  notes: ' [Disabled: insufficient or misleading data]'
 - id: 65
   category: food
   russian: Pierogi
@@ -498,21 +502,24 @@ pairs:
   category: food
   russian: Pirozhki
   ukrainian: Pyrizhky
-  enabled: true
+  enabled: false
   is_control: false
+  notes: ' [Disabled: insufficient or misleading data]'
 - id: 67
   category: food
   russian: Syrniki
   ukrainian: Syrnyky
-  enabled: true
+  enabled: false
   is_control: false
+  notes: ' [Disabled: insufficient or misleading data]'
 - id: 68
   category: food
   russian: Holubtsy
   ukrainian: Holubtsi
-  enabled: true
+  enabled: false
   is_control: false
-  notes: Russian golubets/golubtsy → Ukrainian holubtsi
+  notes: 'Russian golubets/golubtsy → Ukrainian holubtsi [Disabled: insufficient or
+    misleading data]'
 - id: 69
   category: people
   russian: Sergei Rebrov

@@ -2,16 +2,28 @@
   {
     "category": "country",
     "name": "Country-Level Framing",
-    "avg_adoption": 94.5,
+    "avg_adoption": 92.9,
     "pair_count": 1,
     "pairs": [
       "Ukraine"
     ]
   },
   {
+    "category": "people",
+    "name": "People",
+    "avg_adoption": 78.3,
+    "pair_count": 4,
+    "pairs": [
+      "Oleksandr Usyk",
+      "Volodymyr Zelenskyy",
+      "Andriy Shevchenko",
+      "Serhiy Rebrov"
+    ]
+  },
+  {
     "category": "institutional",
     "name": "Institutional",
-    "avg_adoption": 82.0,
+    "avg_adoption": 76.2,
     "pair_count": 6,
     "pairs": [
       "Kyiv National University",
@@ -25,7 +37,7 @@
   {
     "category": "sports",
     "name": "Sports",
-    "avg_adoption": 73.2,
+    "avg_adoption": 69.3,
     "pair_count": 5,
     "pairs": [
       "Dynamo Kyiv",
@@ -36,23 +48,10 @@
     ]
   },
   {
-    "category": "people",
-    "name": "People",
-    "avg_adoption": 63.4,
-    "pair_count": 5,
-    "pairs": [
-      "Oleksandr Usyk",
-      "Volodymyr Zelenskyy",
-      "Andriy Shevchenko",
-      "Vitaliy Klychko",
-      "Serhiy Rebrov"
-    ]
-  },
-  {
     "category": "geographical",
     "name": "Geographical",
     "avg_adoption": 57.6,
-    "pair_count": 25,
+    "pair_count": 24,
     "pairs": [
       "Kyiv",
       "Kharkiv",
@@ -68,7 +67,6 @@
       "Dnipro",
       "Dnister",
       "Donbas",
-      "Krym",
       "Zakarpattia",
       "Podillia",
       "Chernihiv",
@@ -84,7 +82,7 @@
   {
     "category": "landmarks",
     "name": "Landmarks & Heritage Sites",
-    "avg_adoption": 47.8,
+    "avg_adoption": 38.0,
     "pair_count": 6,
     "pairs": [
       "Kyiv Pechersk Lavra",
@@ -98,32 +96,26 @@
   {
     "category": "historical",
     "name": "Historical",
-    "avg_adoption": 45.1,
-    "pair_count": 5,
+    "avg_adoption": 38.0,
+    "pair_count": 3,
     "pairs": [
       "Kyivan Rus",
       "Kozak",
-      "Ukraine",
-      "Hopak",
-      "Halychyna"
+      "Hopak"
     ]
   },
   {
     "category": "food",
     "name": "Food & Cuisine",
-    "avg_adoption": 30.8,
-    "pair_count": 10,
+    "avg_adoption": 29.9,
+    "pair_count": 6,
     "pairs": [
       "Chicken Kyiv",
       "Kyiv cake",
       "Borshch",
       "Varenyky",
-      "Horilka",
       "Borshch",
-      "Varenyky",
-      "Pyrizhky",
-      "Syrnyky",
-      "Holubtsi"
+      "Varenyky"
     ]
   }
 ]
