@@ -201,46 +201,46 @@
     "pseudo_controls_description": "Pairs with lowest temporal variance in adoption rate serve as empirical pseudo-controls."
   },
   "regression_model": {
-    "n_pairs": 28,
-    "r_squared": 0.872,
-    "adj_r_squared": 0.843,
-    "f_statistic": 29.97,
-    "f_pvalue": 4.04164817164384e-09,
+    "n_pairs": 35,
+    "r_squared": 0.908,
+    "adj_r_squared": 0.892,
+    "f_statistic": 57.24,
+    "f_pvalue": 3.8782849107356685e-14,
     "coefficients": {
       "const": {
-        "estimate": -0.557,
-        "std_error": 9.428,
-        "p_value": 0.9534,
+        "estimate": -2.561,
+        "std_error": 8.082,
+        "p_value": 0.7536,
         "significant": false
       },
       "ukr_name_length": {
-        "estimate": 1.989,
-        "std_error": 0.995,
-        "p_value": 0.0581,
+        "estimate": 1.807,
+        "std_error": 0.886,
+        "p_value": 0.0507,
         "significant": false
       },
       "official_rename": {
-        "estimate": -13.533,
-        "std_error": 8.309,
-        "p_value": 0.1176,
+        "estimate": -12.788,
+        "std_error": 7.736,
+        "p_value": 0.1091,
         "significant": false
       },
       "pre_2022_baseline": {
-        "estimate": 0.872,
-        "std_error": 0.08,
+        "estimate": 0.933,
+        "std_error": 0.059,
         "p_value": 0.0,
         "significant": true
       },
       "cat_food": {
-        "estimate": -10.573,
-        "std_error": 6.781,
-        "p_value": 0.1332,
-        "significant": false
+        "estimate": -9.128,
+        "std_error": 4.45,
+        "p_value": 0.0493,
+        "significant": true
       },
       "cat_historical": {
-        "estimate": -15.64,
-        "std_error": 11.559,
-        "p_value": 0.1898,
+        "estimate": -5.029,
+        "std_error": 6.371,
+        "p_value": 0.4363,
         "significant": false
       }
     }
@@ -543,21 +543,21 @@
         "pairs_unchanged": 8
       },
       "gdelt_url": {
-        "n_pairs": 29,
-        "mean_pre": 41.6,
-        "mean_post": 57.9,
-        "mean_delta": 16.3,
-        "median_pre": 38.9,
-        "median_post": 53.5,
-        "median_delta": 7.6,
-        "wilcoxon_W": 73.0,
-        "wilcoxon_p": 0.00117,
-        "ttest_t": 3.72,
-        "ttest_p": 0.000886,
-        "cohens_d": 0.691,
-        "pairs_increased": 21,
-        "pairs_decreased": 8,
-        "pairs_unchanged": 0
+        "n_pairs": 36,
+        "mean_pre": 39.7,
+        "mean_post": 53.4,
+        "mean_delta": 13.6,
+        "median_pre": 35.0,
+        "median_post": 51.6,
+        "median_delta": 5.8,
+        "wilcoxon_W": 114.5,
+        "wilcoxon_p": 0.000681,
+        "ttest_t": 3.735,
+        "ttest_p": 0.000667,
+        "cohens_d": 0.622,
+        "pairs_increased": 25,
+        "pairs_decreased": 10,
+        "pairs_unchanged": 1
       },
       "wikipedia": {
         "n_pairs": 61,
@@ -893,9 +893,9 @@
         "n_common": 62
       },
       "gdelt_url": {
-        "spearman_rho": 0.591,
-        "p_value": 0.000925,
-        "n_common": 28
+        "spearman_rho": 0.701,
+        "p_value": 2e-06,
+        "n_common": 36
       },
       "wikipedia": {
         "spearman_rho": 0.443,
@@ -915,29 +915,29 @@
     },
     "gdelt_url": {
       "trends": {
-        "spearman_rho": 0.591,
-        "p_value": 0.000925,
-        "n_common": 28
+        "spearman_rho": 0.701,
+        "p_value": 2e-06,
+        "n_common": 36
       },
       "gdelt_url": {
         "spearman_rho": 1.0,
         "p_value": 0.0,
-        "n_common": 29
+        "n_common": 37
       },
       "wikipedia": {
-        "spearman_rho": -0.078,
-        "p_value": 0.691379,
-        "n_common": 28
+        "spearman_rho": 0.191,
+        "p_value": 0.264028,
+        "n_common": 36
       },
       "reddit": {
-        "spearman_rho": 0.272,
-        "p_value": 0.161395,
-        "n_common": 28
+        "spearman_rho": 0.324,
+        "p_value": 0.054035,
+        "n_common": 36
       },
       "ngrams": {
-        "spearman_rho": 0.224,
-        "p_value": 0.252135,
-        "n_common": 28
+        "spearman_rho": 0.444,
+        "p_value": 0.006722,
+        "n_common": 36
       }
     },
     "wikipedia": {
@@ -947,9 +947,9 @@
         "n_common": 61
       },
       "gdelt_url": {
-        "spearman_rho": -0.078,
-        "p_value": 0.691379,
-        "n_common": 28
+        "spearman_rho": 0.191,
+        "p_value": 0.264028,
+        "n_common": 36
       },
       "wikipedia": {
         "spearman_rho": 1.0,
@@ -974,9 +974,9 @@
         "n_common": 61
       },
       "gdelt_url": {
-        "spearman_rho": 0.272,
-        "p_value": 0.161395,
-        "n_common": 28
+        "spearman_rho": 0.324,
+        "p_value": 0.054035,
+        "n_common": 36
       },
       "wikipedia": {
         "spearman_rho": 0.507,
@@ -1001,9 +1001,9 @@
         "n_common": 55
       },
       "gdelt_url": {
-        "spearman_rho": 0.224,
-        "p_value": 0.252135,
-        "n_common": 28
+        "spearman_rho": 0.444,
+        "p_value": 0.006722,
+        "n_common": 36
       },
       "wikipedia": {
         "spearman_rho": 0.455,
@@ -1026,11 +1026,11 @@
     "source_counts": {
       "raw_trends": {
         "n_pairs": 62,
-        "total_rows": 121429
+        "total_rows": 125905
       },
       "raw_gdelt_url": {
-        "n_pairs": 29,
-        "total_rows": 3029726
+        "n_pairs": 37,
+        "total_rows": 3527727
       },
       "raw_gdelt": {
         "n_pairs": 29,
@@ -1074,7 +1074,7 @@
     ]
   },
   "metadata": {
-    "generated": "2026-03-30T19:08:47.251908",
+    "generated": "2026-03-30T22:45:28.300812",
     "analysis_date": "2026-03-30",
     "project": "kyivnotkiev-research",
     "description": "Comprehensive statistical analysis for KyivNotKiev research paper"
