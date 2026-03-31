@@ -321,6 +321,10 @@ body {
   height: 100%;
 }
 
+#chart svg path, #chart svg circle, #chart svg line, #chart svg text {
+  transition: all 0.3s ease-out;
+}
+
 /* Legend */
 .chart-legend {
   display: flex;

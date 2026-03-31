@@ -98,11 +98,8 @@ function formatNum(n: number) {
               <span class="new-name" id="chart-new">Kyiv</span>
               <span id="chart-range" style="font-size:0.75rem; color:var(--text-muted); font-weight:400; margin-left:0.5rem;"></span>
             </div>
-            <div class="chart-subtitle" id="chart-subtitle" style="display:flex; align-items:center; gap:0.4rem;">
-              <span>Ukrainian spelling adoption rate (%)</span>
-              <span id="chart-info" style="display:none; cursor:help;" title="">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#9ca3af" stroke-width="1.5"/><text x="8" y="12" text-anchor="middle" font-size="11" fill="#9ca3af" font-weight="600">i</text></svg>
-              </span>
+            <div class="chart-subtitle">
+              Ukrainian spelling adoption rate (%) · <span id="chart-info" style="color:var(--text-dim); font-style:italic;"></span>
             </div>
           </div>
           <div class="chart-controls">
@@ -285,8 +282,16 @@ function formatNum(n: number) {
     function drawChart() {
       const container = document.getElementById('chart')!;
       const legendContainer = document.getElementById('chart-legend')!;
+
+      // Fade out, redraw, fade in
+      container.style.opacity = '0';
+      container.style.transition = 'opacity 0.15s ease';
       container.innerHTML = '';
       legendContainer.innerHTML = '';
+
+      requestAnimationFrame(() => {
+        container.style.opacity = '1';
+      });
 
       const rect = container.getBoundingClientRect();
       const margin = { top: 24, right: 55, bottom: 30, left: 45 };
@@ -331,27 +336,20 @@ function formatNum(n: number) {
         .domain([xStart, new Date(2026, 5, 1)])
         .range([0, width]);
 
-      // Update title range and info icon
+      // Update title range and info text
       const rangeEl = document.getElementById('chart-range');
       const infoEl = document.getElementById('chart-info');
       const sourceRanges: Record<string, [string, string, string]> = {
         trends: ['2010', '2026', ''],
         gdelt: ['2015', '2026', 'GDELT v2 started Feb 2015'],
         wikipedia: ['2015', '2026', 'Pageviews API started Jul 2015'],
-        reddit: ['2007', '2026', 'Quarterly aggregated, smoothed'],
-        youtube: ['2013', '2026', 'YouTube Data API, top 50 per search'],
-        ngrams: ['1900', '2019', 'Google Books corpus frozen at 2019'],
+        reddit: ['2007', '2026', 'Quarterly aggregated'],
+        youtube: ['2013', '2026', 'Top 50 results per search'],
+        ngrams: ['1900', '2019', 'Google Books corpus ends 2019'],
       };
       const [srcStart, srcEnd, srcInfo] = sourceRanges[activeSource] || ['2010', '2026', ''];
       if (rangeEl) rangeEl.textContent = `${srcStart}–${srcEnd}`;
-      if (infoEl) {
-        if (srcInfo) {
-          infoEl.style.display = 'inline';
-          infoEl.setAttribute('title', srcInfo);
-        } else {
-          infoEl.style.display = 'none';
-        }
-      }
+      if (infoEl) infoEl.textContent = srcInfo;
 
       const y = d3.scaleLinear()
         .domain([0, 100])
@@ -375,11 +373,14 @@ function formatNum(n: number) {
         .attr('fill', '#9ca3af').attr('font-size', '11px')
         .text((d: number) => d + '%');
 
-      // X-axis — every year
+      // X-axis — decades for Ngrams, years for others
+      const xTicks = activeSource === 'ngrams'
+        ? d3.axisBottom(x).ticks(d3.timeYear.every(10)).tickSize(0).tickPadding(8).tickFormat(d3.timeFormat('%Y') as any)
+        : d3.axisBottom(x).ticks(d3.timeYear.every(1)).tickSize(0).tickPadding(8).tickFormat(d3.timeFormat('%Y') as any);
+
       svg.append('g')
         .attr('transform', `translate(0,${height})`)
-        .call(d3.axisBottom(x).ticks(d3.timeYear.every(1)).tickSize(0).tickPadding(8)
-          .tickFormat(d3.timeFormat('%Y') as any))
+        .call(xTicks)
         .selectAll('text').attr('fill', '#9ca3af').attr('font-size', '10px');
 
       svg.selectAll('.domain').attr('stroke', '#e5e7eb');
