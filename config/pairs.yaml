@@ -286,7 +286,7 @@ pairs:
     category: food
     russian: "Gorilka"
     ukrainian: "Horilka"
-    enabled: true
+    enabled: false
     is_control: false
 
   # ── Landmarks & Heritage Sites ───────────────────────
