@@ -131,8 +131,8 @@ function formatNum(n: number) {
         <div class="chart-legend" id="chart-legend"></div>
       </div>
 
-      <!-- Per-pair world map -->
-      <div class="chart-container">
+      <!-- Per-pair world map (GDELT only) -->
+      <div class="chart-container" id="map-container">
         <div class="chart-header">
           <div>
             <div class="chart-title" style="color: var(--text)">Adoption Map: <span id="map-pair-name">Kiev → Kyiv</span></div>
@@ -330,10 +330,16 @@ function formatNum(n: number) {
       if (allDates.length === 0) return;
 
       // Dynamic range based on active source
-      const minDate = d3.min(allDates) as Date;
-      const xStart = activeSource === 'ngrams' ? new Date(1900, 0, 1) : new Date(Math.min(minDate.getFullYear(), 2010), 0, 1);
+      const sourceStarts: Record<string, number> = {
+        ngrams: 1900, trends: 2010, reddit: 2010, gdelt: 2015, wikipedia: 2015, youtube: 2013,
+      };
+      const sourceEnds: Record<string, number> = {
+        ngrams: 2020, trends: 2027, reddit: 2027, gdelt: 2027, wikipedia: 2027, youtube: 2027,
+      };
+      const xStart = new Date(sourceStarts[activeSource] || 2010, 0, 1);
+      const xEnd = new Date(sourceEnds[activeSource] || 2027, 0, 1);
       const x = d3.scaleTime()
-        .domain([xStart, new Date(2026, 5, 1)])
+        .domain([xStart, xEnd])
         .range([0, width]);
 
       // Update title range and info text
@@ -385,28 +391,35 @@ function formatNum(n: number) {
 
       svg.selectAll('.domain').attr('stroke', '#e5e7eb');
 
-      // Event lines — just vertical dashes, labels are in the bar above
+      // Event markers — positioned by date on x-scale
       const eventsBar = document.getElementById('events-bar')!;
       eventsBar.innerHTML = '';
+      eventsBar.style.position = 'relative';
+      eventsBar.style.height = '24px';
+      eventsBar.style.marginLeft = margin.left + 'px';
+      eventsBar.style.marginRight = margin.right + 'px';
+
       if (showEvents) {
         const events = (timeseriesData as any).events || [];
         events.forEach((evt: any) => {
           const date = parseDate(evt.date);
-          if (!date) return;
+          if (!date || date < xStart || date > xEnd) return;
           const xPos = x(date);
+          const pct = (xPos / width) * 100;
 
           // Vertical line on chart
           svg.append('line')
             .attr('x1', xPos).attr('x2', xPos)
             .attr('y1', 0).attr('y2', height)
-            .attr('stroke', '#d1d5db')
+            .attr('stroke', evt.color)
             .attr('stroke-width', 1)
-            .attr('stroke-dasharray', '4,4');
+            .attr('stroke-dasharray', '4,4')
+            .attr('opacity', 0.4);
 
-          // Pill above chart
+          // Pill positioned by x-scale percentage
           const pill = document.createElement('span');
-          pill.style.cssText = `font-size:0.7rem; padding:0.2rem 0.5rem; border-radius:3px; background:${evt.color}18; color:${evt.color}; border:1px solid ${evt.color}40; white-space:nowrap;`;
-          pill.textContent = `${evt.date.replace('-', '/')} ${evt.label}`;
+          pill.style.cssText = `position:absolute; left:${pct}%; transform:translateX(-50%); font-size:0.6rem; padding:0.15rem 0.4rem; border-radius:3px; background:${evt.color}12; color:${evt.color}; border:1px solid ${evt.color}30; white-space:nowrap; line-height:1;`;
+          pill.textContent = evt.label;
           eventsBar.appendChild(pill);
         });
       }
@@ -534,38 +547,49 @@ function formatNum(n: number) {
         });
       }
 
-      // Crosshair overlay for multi-source tooltip
+      // Crosshair overlay — interpolates between data points
       svg.append('rect')
         .attr('width', width).attr('height', height)
         .attr('fill', 'transparent')
         .on('mousemove', function(event: MouseEvent) {
           const [mx] = d3.pointer(event);
           const hoveredDate = x.invert(mx);
-          const dateStr = d3.timeFormat('%Y-%m')(hoveredDate);
+          const dateStr = d3.timeFormat('%b %Y')(hoveredDate);
 
           crosshairLine.attr('x1', mx).attr('x2', mx).style('opacity', 1);
 
-          // Find closest value for each source
           let html = `<strong>${dateStr}</strong>`;
           for (const src of Object.keys(allSeriesData)) {
             const series = allSeriesData[src];
-            // Find closest date
-            let closest = series[0];
-            let minDist = Infinity;
-            for (const d of series) {
-              const dist = Math.abs(parseDate(d.date)!.getTime() - hoveredDate.getTime());
-              if (dist < minDist) { minDist = dist; closest = d; }
+            if (series.length < 2) continue;
+
+            // Convert to date-value pairs for bisection
+            const dates = series.map((d: any) => parseDate(d.date)!.getTime());
+            const vals = series.map((d: any) => d.adoption);
+
+            const t = hoveredDate.getTime();
+            // Check if within data range
+            if (t < dates[0] || t > dates[dates.length - 1]) continue;
+
+            // Binary search for bracketing points
+            let lo = 0, hi = dates.length - 1;
+            while (hi - lo > 1) {
+              const mid = (lo + hi) >> 1;
+              if (dates[mid] <= t) lo = mid; else hi = mid;
             }
-            // Only show if within 45 days
-            if (minDist < 45 * 86400000) {
-              html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${closest.adoption}%</strong></span>`;
-            }
+
+            // Linear interpolation between lo and hi
+            const frac = (t - dates[lo]) / (dates[hi] - dates[lo] || 1);
+            const interpolated = vals[lo] + frac * (vals[hi] - vals[lo]);
+            const value = Math.round(interpolated * 10) / 10;
+
+            html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${value}%</strong></span>`;
           }
 
           tooltip.style('opacity', '1').html(html);
           const cr = chartContainer.getBoundingClientRect();
           const left = event.clientX - cr.left;
-          tooltip.style('left', (left > width / 2 ? left - 180 : left + 20) + 'px')
+          tooltip.style('left', (left > width / 2 ? left - 200 : left + 20) + 'px')
             .style('top', '10px');
         })
         .on('mouseleave', function() {
@@ -621,7 +645,17 @@ function formatNum(n: number) {
         activeSource = src;
         activeSources = new Set([src]);
         drawChart();
-        drawWorldMap();
+
+        // Show map only for GDELT (only source with country data)
+        const mapEl = document.getElementById('map-container');
+        if (mapEl) {
+          if (src === 'gdelt') {
+            mapEl.style.display = 'block';
+            drawWorldMap();
+          } else {
+            mapEl.style.display = 'none';
+          }
+        }
       });
     });
 
@@ -1023,10 +1057,14 @@ function formatNum(n: number) {
 
     drawChart();
     drawCategoryChart();
-    drawWorldMap();
     drawHeatmap();
     drawHoldoutTable();
-    window.addEventListener('resize', () => { drawChart(); drawCategoryChart(); drawWorldMap(); drawHeatmap(); });
+
+    // Hide map on initial load (default source is Trends, not GDELT)
+    const mapInitEl = document.getElementById('map-container');
+    if (mapInitEl) mapInitEl.style.display = 'none';
+
+    window.addEventListener('resize', () => { drawChart(); drawCategoryChart(); drawHeatmap(); if (activeSource === 'gdelt') drawWorldMap(); });
   </script>
 </body>
 </html>
