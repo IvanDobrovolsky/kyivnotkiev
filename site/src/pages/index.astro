@@ -118,6 +118,7 @@ function formatNum(n: number) {
               <span class="source-dot"></span>Ngrams
             </button>
             <span class="toggle-sep"></span>
+            <button class="event-toggle active" id="dual-line-toggle">Both Lines</button>
             <button class="event-toggle active" id="events-toggle">Events</button>
           </div>
         </div>
@@ -267,6 +268,7 @@ function formatNum(n: number) {
     let activeSource = 'trends';  // single source at a time
     let activeSources = new Set(['trends']);  // kept as set for chart compatibility
     let hideRuDomains = false;
+    let showDualLines = true;  // show both Ukrainian (solid) and Russian (dashed)
     let showEvents = true;
     let activePairId = 1;
 
@@ -415,12 +417,30 @@ function formatNum(n: number) {
 
         allSeriesData[src] = series;
 
+        // Ukrainian adoption line (solid)
         svg.append('path')
           .datum(series)
           .attr('fill', 'none')
           .attr('stroke', sourceColors[src])
           .attr('stroke-width', 2.5)
           .attr('d', line);
+
+        // Russian line (dashed, 100% - adoption) if dual mode
+        if (showDualLines) {
+          const russianLine = d3.line<any>()
+            .x(d => x(parseDate(d.date)!))
+            .y(d => y(100 - d.adoption))
+            .curve(d3.curveMonotoneX);
+
+          svg.append('path')
+            .datum(series)
+            .attr('fill', 'none')
+            .attr('stroke', '#dc2626')
+            .attr('stroke-width', 1.5)
+            .attr('stroke-dasharray', '6,4')
+            .attr('opacity', 0.5)
+            .attr('d', russianLine);
+        }
 
         // End dot + label
         const last = series[series.length - 1];
@@ -489,7 +509,13 @@ function formatNum(n: number) {
       for (const item of activeLegend) {
         const el = document.createElement('div');
         el.className = 'legend-item';
-        el.innerHTML = `<span class="legend-line" style="background: ${item.color}"></span>${item.label}`;
+        el.innerHTML = `<span class="legend-line" style="background: ${item.color}"></span>${item.label}: ${item.value}%`;
+        legendContainer.appendChild(el);
+      }
+      if (showDualLines) {
+        const el = document.createElement('div');
+        el.className = 'legend-item';
+        el.innerHTML = `<span class="legend-line" style="background: #dc2626; border: 1px dashed #dc2626; background: transparent;"></span>Old spelling (declining)`;
         legendContainer.appendChild(el);
       }
     }
@@ -529,6 +555,14 @@ function formatNum(n: number) {
         drawChart();
         drawWorldMap();
       });
+    });
+
+    // Dual line toggle
+    document.getElementById('dual-line-toggle')?.addEventListener('click', (e) => {
+      const btn = e.currentTarget as HTMLElement;
+      showDualLines = !showDualLines;
+      btn.classList.toggle('active');
+      drawChart();
     });
 
     // Events toggle
