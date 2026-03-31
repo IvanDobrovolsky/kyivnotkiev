@@ -811,6 +811,8 @@ function formatNum(n: number) {
       }
     };
 
+    let cachedWorld: any = null;
+
     async function drawWorldMap() {
       const container = document.getElementById('world-map')!;
       container.innerHTML = '';
@@ -825,15 +827,17 @@ function formatNum(n: number) {
         .attr('viewBox', `0 0 ${width} ${height}`);
 
       const worldUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
-      let world: any;
-      try {
-        world = await d3.json(worldUrl);
-      } catch {
-        svg.append('text').attr('x', width/2).attr('y', height/2)
-          .attr('text-anchor', 'middle').attr('fill', '#9ca3af')
-          .text('Map loading...');
-        return;
+      if (!cachedWorld) {
+        try {
+          cachedWorld = await d3.json(worldUrl);
+        } catch {
+          svg.append('text').attr('x', width/2).attr('y', height/2)
+            .attr('text-anchor', 'middle').attr('fill', '#9ca3af')
+            .text('Map loading...');
+          return;
+        }
       }
+      const world = cachedWorld;
 
       const countries = topojson.feature(world, world.objects.countries) as any;
 
