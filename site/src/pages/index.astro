@@ -159,6 +159,9 @@ function formatNum(n: number) {
             <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed">
               <span class="source-dot"></span>Ngrams
             </button>
+            <button class="source-toggle" data-source="common_crawl" style="--source-color: #06b6d4">
+              <span class="source-dot"></span>Web Crawl
+            </button>
             <span class="toggle-sep"></span>
             <button class="event-toggle active" id="dual-line-toggle">Both Lines</button>
             <button class="event-toggle active" id="events-toggle">Events</button>
@@ -341,6 +344,7 @@ function formatNum(n: number) {
       reddit: '#FF4500',
       youtube: '#FF0000',
       ngrams: '#7c3aed',
+      common_crawl: '#06b6d4',
     };
 
     const sourceLabels: Record<string, string> = {
@@ -350,6 +354,7 @@ function formatNum(n: number) {
       reddit: 'Reddit',
       youtube: 'YouTube',
       ngrams: 'Google Books',
+      common_crawl: 'Common Crawl',
     };
 
     let activeSource = 'trends';  // single source at a time
@@ -411,10 +416,10 @@ function formatNum(n: number) {
 
       // Dynamic range based on active source
       const sourceStarts: Record<string, number> = {
-        ngrams: 1900, trends: 2010, reddit: 2010, gdelt: 2015, wikipedia: 2015, youtube: 2013,
+        ngrams: 1900, trends: 2010, reddit: 2010, gdelt: 2015, wikipedia: 2015, youtube: 2013, common_crawl: 2015,
       };
       const sourceEnds: Record<string, number> = {
-        ngrams: 2020, trends: 2027, reddit: 2027, gdelt: 2027, wikipedia: 2027, youtube: 2027,
+        ngrams: 2020, trends: 2027, reddit: 2027, gdelt: 2027, wikipedia: 2027, youtube: 2027, common_crawl: 2027,
       };
       const xStart = new Date(sourceStarts[activeSource] || 2010, 0, 1);
       const xEnd = new Date(sourceEnds[activeSource] || 2027, 0, 1);
@@ -432,6 +437,7 @@ function formatNum(n: number) {
         reddit: ['2007', '2026', 'Quarterly aggregated'],
         youtube: ['2013', '2026', 'Top 50 results per search'],
         ngrams: ['1900', '2019', 'Google Books corpus ends 2019'],
+        common_crawl: ['2015', '2026', 'CDX index, ~100M URLs per crawl'],
       };
       const [srcStart, srcEnd, srcInfo] = sourceRanges[activeSource] || ['2010', '2026', ''];
       if (rangeEl) rangeEl.textContent = `${srcStart}–${srcEnd}`;
