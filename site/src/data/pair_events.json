@@ -1,6 +1,16 @@
 {
   "1": [
     {
+      "date": "1991-08",
+      "label": "Independence",
+      "color": "#6b7280"
+    },
+    {
+      "date": "2018-10",
+      "label": "#KyivNotKiev campaign",
+      "color": "#0057B8"
+    },
+    {
       "date": "2019-08",
       "label": "AP adopts Kyiv",
       "color": "#0057B8"
@@ -8,25 +18,32 @@
   ],
   "2": [
     {
-      "date": "2022-09",
-      "label": "Counteroffensive",
+      "date": "2022-02",
+      "label": "Battle of Kharkiv",
       "color": "#0057B8"
     },
     {
-      "date": "1991-08",
-      "label": "Independence",
-      "color": "#6b7280"
+      "date": "2022-09",
+      "label": "Counteroffensive",
+      "color": "#059669"
     }
   ],
   "3": [
     {
-      "date": "2022-07",
-      "label": "Missile strikes",
-      "color": "#0057B8"
+      "date": "2014-05",
+      "label": "Trade Union fire",
+      "color": "#dc2626"
     },
     {
-      "date": "1991-08",
-      "label": "Independence",
+      "date": "2022-07",
+      "label": "Missile strikes",
+      "color": "#dc2626"
+    }
+  ],
+  "4": [
+    {
+      "date": "2012-06",
+      "label": "Euro 2012 host city",
       "color": "#6b7280"
     }
   ],
@@ -34,19 +51,14 @@
     {
       "date": "2022-03",
       "label": "Nuclear plant seized",
-      "color": "#0057B8"
+      "color": "#dc2626"
     }
   ],
   "7": [
     {
       "date": "2016-05",
-      "label": "Officially renamed",
+      "label": "City officially renamed",
       "color": "#0057B8"
-    },
-    {
-      "date": "1991-08",
-      "label": "Independence",
-      "color": "#6b7280"
     }
   ],
   "10": [
@@ -57,20 +69,27 @@
     },
     {
       "date": "2019-05",
-      "label": "HBO series",
+      "label": "HBO Chernobyl",
       "color": "#0057B8"
+    },
+    {
+      "date": "2022-02",
+      "label": "Russia seizes zone",
+      "color": "#dc2626"
     }
   ],
   "11": [
     {
       "date": "2014-04",
       "label": "Conflict begins",
-      "color": "#0057B8"
-    },
+      "color": "#dc2626"
+    }
+  ],
+  "17": [
     {
-      "date": "1991-08",
-      "label": "Independence",
-      "color": "#6b7280"
+      "date": "2014-04",
+      "label": "War in Donbas",
+      "color": "#dc2626"
     }
   ],
   "23": [
@@ -87,10 +106,22 @@
       "color": "#0057B8"
     }
   ],
+  "35": [
+    {
+      "date": "1991-08",
+      "label": "Independence",
+      "color": "#6b7280"
+    }
+  ],
   "60": [
     {
+      "date": "2021-09",
+      "label": "Beats Joshua",
+      "color": "#0057B8"
+    },
+    {
       "date": "2024-05",
-      "label": "Beats Fury",
+      "label": "Undisputed champion",
       "color": "#0057B8"
     }
   ],
@@ -99,20 +130,6 @@
       "date": "2019-05",
       "label": "Elected president",
       "color": "#0057B8"
-    }
-  ],
-  "4": [
-    {
-      "date": "1991-08",
-      "label": "Independence",
-      "color": "#6b7280"
-    }
-  ],
-  "9": [
-    {
-      "date": "1991-08",
-      "label": "Independence",
-      "color": "#6b7280"
     }
   ]
 }
