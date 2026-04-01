@@ -175,16 +175,16 @@
       "category": "food",
       "russian": "Chicken Kiev",
       "ukrainian": "Chicken Kyiv",
-      "adoption": 5.4,
-      "total": 11703
+      "adoption": 6.3,
+      "total": 12200
     },
     {
       "id": 22,
       "category": "food",
       "russian": "Kiev cake",
       "ukrainian": "Kyiv cake",
-      "adoption": 64.9,
-      "total": 3821
+      "adoption": 67.1,
+      "total": 5032
     },
     {
       "id": 23,
@@ -199,8 +199,8 @@
       "category": "landmarks",
       "russian": "Kiev Pechersk Lavra",
       "ukrainian": "Kyiv Pechersk Lavra",
-      "adoption": 74.4,
-      "total": 1349
+      "adoption": 76.1,
+      "total": 1441
     },
     {
       "id": 25,
