@@ -396,7 +396,25 @@ function formatNum(n: number) {
           .attr('text-anchor', 'middle')
           .attr('fill', '#9ca3af')
           .attr('font-size', '14px')
-          .text('Data coming soon');
+          .text('No data available for this pair');
+        return;
+      }
+
+      // Check if active source has data for this pair
+      const hasData = activeSources.size > 0 && [...activeSources].some(s => pairData[s] && pairData[s].length > 0);
+      if (!hasData) {
+        svg.append('text')
+          .attr('x', width / 2).attr('y', height / 2 - 10)
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#9ca3af')
+          .attr('font-size', '14px')
+          .text(`No ${sourceLabels[activeSource] || activeSource} data for this pair`);
+        svg.append('text')
+          .attr('x', width / 2).attr('y', height / 2 + 14)
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#d1d5db')
+          .attr('font-size', '12px')
+          .text('Try switching to Trends or Wikipedia for broader coverage');
         return;
       }
 
