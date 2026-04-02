@@ -94,28 +94,26 @@
     ]
   },
   {
-    "category": "historical",
-    "name": "Historical",
-    "avg_adoption": 38.0,
-    "pair_count": 3,
-    "pairs": [
-      "Kyivan Rus",
-      "Kozak",
-      "Hopak"
-    ]
-  },
-  {
     "category": "food",
     "name": "Food & Cuisine",
-    "avg_adoption": 30.4,
-    "pair_count": 6,
+    "avg_adoption": 36.4,
+    "pair_count": 5,
     "pairs": [
       "Chicken Kyiv",
       "Kyiv cake",
       "Borshch",
       "Varenyky",
-      "Borshch",
-      "Varenyky"
+      "Borshch"
+    ]
+  },
+  {
+    "category": "historical",
+    "name": "Historical",
+    "avg_adoption": 32.1,
+    "pair_count": 2,
+    "pairs": [
+      "Kyivan Rus",
+      "Hopak"
     ]
   }
 ]

@@ -177,13 +177,13 @@ pairs:
   notes: ' [Disabled: insufficient or misleading data]'
 - id: 19
   category: geographical
-  russian: Transcarpathia
+  russian: Zakarpatye
   ukrainian: Zakarpattia
   enabled: true
   is_control: false
 - id: 20
   category: geographical
-  russian: Podolia
+  russian: Podolye
   ukrainian: Podillia
   enabled: true
   is_control: false
@@ -231,7 +231,7 @@ pairs:
   is_control: false
 - id: 45
   category: geographical
-  russian: Tarnopol
+  russian: Ternopol
   ukrainian: Ternopil
   enabled: true
   is_control: false
@@ -418,7 +418,7 @@ pairs:
     label: Russia weaponizes Kievan Rus narrative
 - id: 36
   category: historical
-  russian: Cossack
+  russian: Kazak
   ukrainian: Kozak
   enabled: true
   is_control: false
@@ -495,7 +495,7 @@ pairs:
   category: food
   russian: Pierogi
   ukrainian: Varenyky
-  enabled: true
+  enabled: false
   is_control: false
   notes: Pierogi is Polish; Ukrainian dish is varenyky. Often conflated in English.
 - id: 66
