@@ -1,0 +1,33 @@
+<svg width="500" height="500" viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg">
+
+<!-- Sticker: gray outer border -->
+<path fill="#c8c8c8" stroke="#c8c8c8" stroke-width="30" stroke-linejoin="round"
+  d="M340,75 L415,205 L430,198 L526,197 L477,276 L495,308 L535,425 L410,448 L358,480 L358,500 L322,500 L322,480 L270,448 L145,425 L185,308 L203,276 L154,197 L250,198 L265,205 Z"/>
+
+<!-- Sticker: white fill -->
+<path fill="white" stroke="white" stroke-width="24" stroke-linejoin="round"
+  d="M340,75 L415,205 L430,198 L526,197 L477,276 L495,308 L535,425 L410,448 L358,480 L358,500 L322,500 L322,480 L270,448 L145,425 L185,308 L203,276 L154,197 L250,198 L265,205 Z"/>
+
+<!-- Top leaflet -->
+<polygon fill="#111111" points="330,288 265,205 340,75 415,205 350,288"/>
+<!-- Upper-right leaflet -->
+<polygon fill="#111111" points="350,288 430,198 526,197 477,276 360,305"/>
+<!-- Lower-right leaflet -->
+<polygon fill="#111111" points="360,305 495,308 535,425 410,448 349,323"/>
+<!-- Stem -->
+<polygon fill="#111111" points="349,323 358,480 358,500 322,500 322,480 332,323"/>
+<!-- Lower-left leaflet -->
+<polygon fill="#111111" points="332,323 270,448 145,425 185,308 320,305"/>
+<!-- Upper-left leaflet -->
+<polygon fill="#111111" points="320,305 203,276 154,197 250,198 330,288"/>
+<!-- Center fill -->
+<circle cx="340" cy="305" r="25" fill="#111111"/>
+
+<!-- White gap lines from center -->
+<line x1="340" y1="305" x2="242" y2="127" stroke="white" stroke-width="6" stroke-linecap="round"/>
+<line x1="340" y1="305" x2="438" y2="127" stroke="white" stroke-width="6" stroke-linecap="round"/>
+<line x1="340" y1="305" x2="500" y2="305" stroke="white" stroke-width="6" stroke-linecap="round"/>
+<line x1="340" y1="305" x2="376" y2="462" stroke="white" stroke-width="6" stroke-linecap="round"/>
+<line x1="340" y1="305" x2="304" y2="462" stroke="white" stroke-width="6" stroke-linecap="round"/>
+<line x1="340" y1="305" x2="180" y2="305" stroke="white" stroke-width="6" stroke-linecap="round"/>
+</svg>
