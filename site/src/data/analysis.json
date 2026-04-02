@@ -578,20 +578,20 @@
       },
       "reddit": {
         "n_pairs": 60,
-        "mean_pre": 38.6,
-        "mean_post": 62.8,
-        "mean_delta": 24.2,
-        "median_pre": 37.5,
+        "mean_pre": 39.5,
+        "mean_post": 63.9,
+        "mean_delta": 24.4,
+        "median_pre": 36.7,
         "median_post": 66.8,
-        "median_delta": 28.6,
+        "median_delta": 28.2,
         "wilcoxon_W": 65.5,
         "wilcoxon_p": 0.0,
-        "ttest_t": 9.827,
+        "ttest_t": 10.076,
         "ttest_p": 0.0,
-        "cohens_d": 1.269,
-        "pairs_increased": 52,
+        "cohens_d": 1.301,
+        "pairs_increased": 53,
         "pairs_decreased": 6,
-        "pairs_unchanged": 2
+        "pairs_unchanged": 1
       }
     },
     "top_movers": {
@@ -834,18 +834,25 @@
           "delta": 58.3
         },
         {
-          "pair_id": 11,
-          "pair": "Lugansk -> Luhansk",
-          "pre": 0.5,
-          "post": 55.0,
-          "delta": 54.5
-        },
-        {
           "pair_id": 5,
           "pair": "Zaporozhye -> Zaporizhzhia",
-          "pre": 16.7,
-          "post": 69.6,
-          "delta": 52.9
+          "pre": 15.6,
+          "post": 70.2,
+          "delta": 54.6
+        },
+        {
+          "pair_id": 11,
+          "pair": "Lugansk -> Luhansk",
+          "pre": 5.6,
+          "post": 56.3,
+          "delta": 50.7
+        },
+        {
+          "pair_id": 3,
+          "pair": "Odessa -> Odesa",
+          "pre": 9.4,
+          "post": 56.1,
+          "delta": 46.7
         },
         {
           "pair_id": 30,
@@ -855,25 +862,18 @@
           "delta": 46.7
         },
         {
-          "pair_id": 3,
-          "pair": "Odessa -> Odesa",
-          "pre": 11.4,
-          "post": 58.0,
-          "delta": 46.6
-        },
-        {
           "pair_id": 6,
           "pair": "Nikolaev -> Mykolaiv",
-          "pre": 17.2,
-          "post": 61.7,
-          "delta": 44.5
+          "pre": 16.1,
+          "post": 62.1,
+          "delta": 46.0
         },
         {
           "pair_id": 1,
           "pair": "Kiev -> Kyiv",
-          "pre": 20.6,
-          "post": 61.7,
-          "delta": 41.1
+          "pre": 18.1,
+          "post": 62.7,
+          "delta": 44.6
         },
         {
           "pair_id": 22,
@@ -903,7 +903,7 @@
         "n_common": 61
       },
       "reddit": {
-        "spearman_rho": 0.64,
+        "spearman_rho": 0.684,
         "p_value": 0.0,
         "n_common": 61
       },
@@ -930,8 +930,8 @@
         "n_common": 36
       },
       "reddit": {
-        "spearman_rho": 0.324,
-        "p_value": 0.054035,
+        "spearman_rho": 0.42,
+        "p_value": 0.010717,
         "n_common": 36
       },
       "ngrams": {
@@ -957,8 +957,8 @@
         "n_common": 61
       },
       "reddit": {
-        "spearman_rho": 0.507,
-        "p_value": 3.5e-05,
+        "spearman_rho": 0.493,
+        "p_value": 6.4e-05,
         "n_common": 60
       },
       "ngrams": {
@@ -969,18 +969,18 @@
     },
     "reddit": {
       "trends": {
-        "spearman_rho": 0.64,
+        "spearman_rho": 0.684,
         "p_value": 0.0,
         "n_common": 61
       },
       "gdelt_url": {
-        "spearman_rho": 0.324,
-        "p_value": 0.054035,
+        "spearman_rho": 0.42,
+        "p_value": 0.010717,
         "n_common": 36
       },
       "wikipedia": {
-        "spearman_rho": 0.507,
-        "p_value": 3.5e-05,
+        "spearman_rho": 0.493,
+        "p_value": 6.4e-05,
         "n_common": 60
       },
       "reddit": {
@@ -989,8 +989,8 @@
         "n_common": 61
       },
       "ngrams": {
-        "spearman_rho": 0.473,
-        "p_value": 0.000306,
+        "spearman_rho": 0.474,
+        "p_value": 0.000295,
         "n_common": 54
       }
     },
@@ -1011,8 +1011,8 @@
         "n_common": 54
       },
       "reddit": {
-        "spearman_rho": 0.473,
-        "p_value": 0.000306,
+        "spearman_rho": 0.474,
+        "p_value": 0.000295,
         "n_common": 54
       },
       "ngrams": {
@@ -1026,7 +1026,7 @@
     "source_counts": {
       "raw_trends": {
         "n_pairs": 62,
-        "total_rows": 125905
+        "total_rows": 148934
       },
       "raw_gdelt_url": {
         "n_pairs": 37,
@@ -1042,15 +1042,15 @@
       },
       "raw_reddit": {
         "n_pairs": 61,
-        "total_rows": 22319
+        "total_rows": 24262
       },
       "raw_ngrams": {
         "n_pairs": 55,
         "total_rows": 11880
       },
       "raw_youtube": {
-        "n_pairs": 49,
-        "total_rows": 4574
+        "n_pairs": 56,
+        "total_rows": 11994
       }
     },
     "category_counts": {
@@ -1074,7 +1074,7 @@
     ]
   },
   "metadata": {
-    "generated": "2026-03-30T22:45:28.300812",
+    "generated": "2026-04-01T20:22:56.546115",
     "analysis_date": "2026-03-30",
     "project": "kyivnotkiev-research",
     "description": "Comprehensive statistical analysis for KyivNotKiev research paper"
