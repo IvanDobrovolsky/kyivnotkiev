@@ -109,10 +109,11 @@
   {
     "category": "historical",
     "name": "Historical",
-    "avg_adoption": 32.1,
-    "pair_count": 2,
+    "avg_adoption": 30.2,
+    "pair_count": 3,
     "pairs": [
       "Kyivan Rus",
+      "Kozak",
       "Hopak"
     ]
   }
