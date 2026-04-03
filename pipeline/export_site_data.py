@@ -300,23 +300,26 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         if total > 0:
             result[pid]["ngrams"].append({"date": f"{r['year']}-01", "adoption": round(r["ukr"] / total * 100, 1)})
 
-    # Common Crawl
-    log.info("  Common Crawl...")
-    rows = query(f"""
-        SELECT pair_id, FORMAT_DATE('%Y-%m', crawl_date) as month,
-            COUNTIF(variant='ukrainian') as ukr, COUNTIF(variant='russian') as rus
-        FROM `{DATASET}.raw_common_crawl`
-        GROUP BY pair_id, month HAVING (ukr + rus) > 0
-        ORDER BY pair_id, month
-    """)
-    for r in rows:
-        if r["pair_id"] not in enabled_ids:
-            continue
-        pid = str(r["pair_id"])
-        result.setdefault(pid, {}).setdefault("common_crawl", [])
-        total = r["ukr"] + r["rus"]
-        if total > 0:
-            result[pid]["common_crawl"].append({"date": r["month"], "adoption": round(r["ukr"] / total * 100, 1)})
+    # Academic Papers (OpenAlex — replaces Common Crawl)
+    log.info("  Academic Papers (OpenAlex local data)...")
+    openalex_path = Path(__file__).resolve().parent.parent / "data" / "raw" / "openalex" / "openalex_all_pairs.json"
+    if openalex_path.exists():
+        with open(openalex_path) as f:
+            openalex_data = json.load(f)
+        for pair_data in openalex_data:
+            pid = pair_data["pair_id"]
+            if pid not in enabled_ids:
+                continue
+            spid = str(pid)
+            result.setdefault(spid, {}).setdefault("openalex", [])
+            for yr in pair_data["yearly"]:
+                total = yr["total"]
+                if total > 0:
+                    adoption = round(yr["ukrainian_count"] / total * 100, 1)
+                    result[spid]["openalex"].append({"date": f"{yr['year']}-01", "adoption": adoption})
+        log.info(f"    Loaded {len(openalex_data)} pairs from OpenAlex")
+    else:
+        log.warning("    No OpenAlex data found — run: python -m pipeline.ingestion.openalex")
 
     pair_count = len([k for k in result if k != "events"])
     log.info(f"  Timeseries: {pair_count} pairs")
@@ -345,6 +348,18 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         for cid, info in categories_raw.items()
     ]
 
+    # ── OpenAlex stats from local data ──
+    openalex_path = Path(__file__).resolve().parent.parent / "data" / "raw" / "openalex" / "openalex_all_pairs.json"
+    openalex_total_papers = 0
+    openalex_total_pairs = 0
+    if openalex_path.exists():
+        with open(openalex_path) as f:
+            oa_data = json.load(f)
+        openalex_total_pairs = len(oa_data)
+        openalex_total_papers = sum(
+            sum(yr["total"] for yr in p["yearly"]) for p in oa_data
+        )
+
     # ── Per-source stats from BQ ──
     log.info("  Querying per-source stats...")
     stats_rows = query(f"""
@@ -355,7 +370,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         UNION ALL SELECT 'reddit', COUNT(*), COUNT(DISTINCT pair_id), 'posts' FROM `{DATASET}.raw_reddit`
         UNION ALL SELECT 'youtube', COUNT(*), COUNT(DISTINCT pair_id), 'videos' FROM `{DATASET}.raw_youtube`
         UNION ALL SELECT 'ngrams', COUNT(*), COUNT(DISTINCT pair_id), 'records' FROM `{DATASET}.raw_ngrams`
-        UNION ALL SELECT 'common_crawl', COUNT(*), COUNT(DISTINCT pair_id), 'matches' FROM `{DATASET}.raw_common_crawl`
+        -- OpenAlex stats computed from local data, not BQ
     """)
     source_stats = {r["source"]: {"records": r["records"], "pairs": r["pairs"], "unit": r["unit"]}
                     for r in stats_rows}
@@ -450,7 +465,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         })
 
     # Total records = sum across all sources
-    total_records = sum(s["records"] for s in source_stats.values())
+    total_records = sum(s["records"] for s in source_stats.values()) + openalex_total_papers
 
     manifest = {
         # ── Counts ──
@@ -513,12 +528,12 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
                 "extra": "8M+ volumes",
                 "color": "#7c3aed",
             },
-            "common_crawl": {
-                "records": source_stats["common_crawl"]["records"],
-                "pairs": source_stats["common_crawl"]["pairs"],
-                "label": "Pages Crawled",
-                "unit": "matches",
-                "extra": "~1 PB",
+            "openalex": {
+                "records": openalex_total_papers,
+                "pairs": openalex_total_pairs,
+                "label": "Academic Papers",
+                "unit": "papers",
+                "extra": "250M+ works indexed",
                 "color": "#06b6d4",
             },
         },
