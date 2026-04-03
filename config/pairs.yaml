@@ -549,14 +549,14 @@ pairs:
   enabled: false
   is_control: false
   notes: Insufficient data quality — too few mentions for reliable adoption signal
-- id: 70
+- id: 80
   category: people
   russian: Mykola Gogol
   ukrainian: Mykola Hohol
   enabled: false
   is_control: false
   notes: Controversial — Gogol wrote in Russian. Disabled for now.
-- id: 71
+- id: 81
   category: historical
   russian: Slava Ukraine
   ukrainian: Slava Ukraini
