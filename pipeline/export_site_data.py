@@ -3,6 +3,14 @@
 Pulls fresh data from all BQ tables and generates the JSON files
 that power the Astro site at site/src/data/.
 
+Fixes applied:
+- Only exports enabled pairs (filters out disabled)
+- Trends: 3-month rolling average to smooth sparse/low-volume pairs
+- Trends countries: uses full date range for maximum country coverage
+- Reddit/YouTube: semi-annual bucketing for smoother curves
+- Control pairs (same russian/ukrainian) excluded from adoption calc
+- Adoption % calculated from all sources, not just recent trends
+
 Usage:
     python -m pipeline.export_site_data
 """
@@ -13,7 +21,7 @@ from pathlib import Path
 
 from google.cloud import bigquery
 
-from pipeline.config import get_enabled_pairs, get_categories, load_pairs
+from pipeline.config import load_pairs
 
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -29,6 +37,65 @@ def query(sql: str) -> list[dict]:
     """Run a BQ query and return list of dicts."""
     rows = client.query(sql).result()
     return [dict(row) for row in rows]
+
+
+def get_enabled_pair_ids() -> set[int]:
+    """Return set of enabled pair IDs from config."""
+    cfg = load_pairs()
+    return {p["id"] for p in cfg["pairs"] if p.get("enabled", True)}
+
+
+def smooth_series(series: list[dict], window: int = 3) -> list[dict]:
+    """Apply rolling average to smooth sparse adoption data.
+
+    Only smooths if >20% of values are null or there are frequent big jumps.
+    """
+    if not series:
+        return series
+
+    values = [d["adoption"] for d in series]
+    non_null = [v for v in values if v is not None]
+
+    if not non_null:
+        return series
+
+    null_pct = (len(values) - len(non_null)) / len(values)
+    jumps = sum(
+        1 for i in range(1, len(values))
+        if values[i] is not None and values[i - 1] is not None
+        and abs(values[i] - values[i - 1]) > 25
+    )
+    jump_rate = jumps / max(len(values) - 1, 1)
+
+    needs_smoothing = null_pct > 0.1 or jump_rate > 0.05
+
+    if not needs_smoothing:
+        # Still strip nulls
+        return [d for d in series if d["adoption"] is not None]
+
+    # Use wider window for very noisy data
+    if jump_rate > 0.1 or null_pct > 0.3:
+        window = max(window, 7)
+    elif jump_rate > 0.05 or null_pct > 0.15:
+        window = max(window, 5)
+
+    # Forward-fill nulls then apply rolling average
+    filled = []
+    last_val = non_null[0] if non_null else 0
+    for v in values:
+        if v is not None:
+            last_val = v
+        filled.append(last_val)
+
+    smoothed = []
+    half = window // 2
+    for i in range(len(filled)):
+        start = max(0, i - half)
+        end = min(len(filled), i + half + 1)
+        avg = sum(filled[start:end]) / (end - start)
+        smoothed.append(round(avg, 1))
+
+    return [{"date": series[i]["date"], "adoption": smoothed[i]} for i in range(len(series))]
 
 
 # ── Country code mapping (ISO 2-letter to ISO 3166-1 numeric) ────────────────
@@ -84,7 +151,7 @@ GEO_NAMES = {
     "591": "Panama", "600": "Paraguay", "604": "Peru", "608": "Philippines",
     "616": "Poland", "620": "Portugal", "630": "Puerto Rico", "634": "Qatar",
     "642": "Romania", "643": "Russia", "682": "Saudi Arabia", "686": "Senegal",
-    "688": "Serbia", "700": "Singapore", "702": "Singapore", "703": "Slovakia",
+    "688": "Serbia", "702": "Singapore", "703": "Slovakia",
     "705": "Slovenia", "710": "South Africa", "716": "Zimbabwe", "724": "Spain",
     "752": "Sweden", "756": "Switzerland", "764": "Thailand", "788": "Tunisia",
     "792": "Turkey", "800": "Uganda", "804": "Ukraine", "818": "Egypt",
@@ -97,8 +164,17 @@ GEO_NAMES = {
 
 # ── Export functions ──────────────────────────────────────────────────────────
 
-def export_timeseries() -> dict:
-    """Export monthly timeseries per pair per source."""
+def export_timeseries(enabled_ids: set[int]) -> dict:
+    """Export monthly timeseries per pair per source.
+
+    - Trends: monthly, 3-month rolling average for noisy pairs
+    - GDELT: monthly
+    - Wikipedia: monthly
+    - Reddit: semi-annual (6-month) for smoother curves with sparse data
+    - YouTube: semi-annual (6-month) for smoother curves with sparse data
+    - Ngrams: yearly (1900-2019)
+    - Common Crawl: by crawl month
+    """
     log.info("Exporting timeseries...")
 
     result = {}
@@ -109,7 +185,7 @@ def export_timeseries() -> dict:
         {"date": "2022-02", "label": "Full-scale war", "color": "#dc2626"},
     ]
 
-    # ── Trends (monthly, global only) ──
+    # ── Trends (monthly, global only, with smoothing) ──
     log.info("  Trends...")
     rows = query(f"""
         SELECT pair_id, FORMAT_DATE('%Y-%m', date) as month,
@@ -120,13 +196,20 @@ def export_timeseries() -> dict:
         GROUP BY pair_id, month
         ORDER BY pair_id, month
     """)
+    raw_trends = {}
     for r in rows:
-        pid = str(r["pair_id"])
-        result.setdefault(pid, {})
-        result[pid].setdefault("trends", [])
+        pid = r["pair_id"]
+        if pid not in enabled_ids:
+            continue
+        raw_trends.setdefault(pid, [])
         total = r["ukr"] + r["rus"]
         adoption = round(r["ukr"] / total * 100, 1) if total > 0 else None
-        result[pid]["trends"].append({"date": r["month"], "adoption": adoption})
+        raw_trends[pid].append({"date": r["month"], "adoption": adoption})
+
+    for pid, series in raw_trends.items():
+        spid = str(pid)
+        result.setdefault(spid, {})
+        result[spid]["trends"] = smooth_series(series, window=3)
 
     # ── GDELT (monthly) ──
     log.info("  GDELT...")
@@ -139,12 +222,16 @@ def export_timeseries() -> dict:
         ORDER BY pair_id, month
     """)
     for r in rows:
-        pid = str(r["pair_id"])
-        result.setdefault(pid, {})
-        result[pid].setdefault("gdelt", [])
+        pid = r["pair_id"]
+        if pid not in enabled_ids:
+            continue
+        spid = str(pid)
+        result.setdefault(spid, {})
+        result[spid].setdefault("gdelt", [])
         total = r["ukr"] + r["rus"]
         adoption = round(r["ukr"] / total * 100, 1) if total > 0 else None
-        result[pid]["gdelt"].append({"date": r["month"], "adoption": adoption})
+        if adoption is not None:
+            result[spid]["gdelt"].append({"date": r["month"], "adoption": adoption})
 
     # ── Wikipedia (monthly) ──
     log.info("  Wikipedia...")
@@ -157,54 +244,72 @@ def export_timeseries() -> dict:
         ORDER BY pair_id, month
     """)
     for r in rows:
-        pid = str(r["pair_id"])
-        result.setdefault(pid, {})
-        result[pid].setdefault("wikipedia", [])
+        pid = r["pair_id"]
+        if pid not in enabled_ids:
+            continue
+        spid = str(pid)
+        result.setdefault(spid, {})
+        result[spid].setdefault("wikipedia", [])
         total = r["ukr"] + r["rus"]
         adoption = round(r["ukr"] / total * 100, 1) if total > 0 else None
-        result[pid]["wikipedia"].append({"date": r["month"], "adoption": adoption})
+        if adoption is not None:
+            result[spid]["wikipedia"].append({"date": r["month"], "adoption": adoption})
 
-    # ── Reddit (quarterly) ──
+    # ── Reddit (semi-annual for smoother curves) ──
     log.info("  Reddit...")
     rows = query(f"""
         SELECT pair_id,
-            FORMAT_DATE('%Y-%m', DATE_TRUNC(DATE(created_utc), QUARTER)) as quarter,
+            CONCAT(
+                CAST(EXTRACT(YEAR FROM DATE(created_utc)) AS STRING), '-',
+                LPAD(CAST(IF(EXTRACT(MONTH FROM DATE(created_utc)) <= 6, 1, 7) AS STRING), 2, '0')
+            ) as half_year,
             COUNTIF(variant='ukrainian') as ukr,
             COUNTIF(variant='russian') as rus
         FROM `{DATASET}.raw_reddit`
-        GROUP BY pair_id, quarter
-        HAVING (ukr + rus) > 0
-        ORDER BY pair_id, quarter
+        GROUP BY pair_id, half_year
+        HAVING (ukr + rus) >= 3
+        ORDER BY pair_id, half_year
     """)
     for r in rows:
-        pid = str(r["pair_id"])
-        result.setdefault(pid, {})
-        result[pid].setdefault("reddit", [])
+        pid = r["pair_id"]
+        if pid not in enabled_ids:
+            continue
+        spid = str(pid)
+        result.setdefault(spid, {})
+        result[spid].setdefault("reddit", [])
         total = r["ukr"] + r["rus"]
         adoption = round(r["ukr"] / total * 100, 1) if total > 0 else None
-        result[pid]["reddit"].append({"date": r["quarter"], "adoption": adoption})
+        if adoption is not None:
+            result[spid]["reddit"].append({"date": r["half_year"], "adoption": adoption})
 
-    # ── YouTube (quarterly) ──
+    # ── YouTube (semi-annual for smoother curves) ──
     log.info("  YouTube...")
     rows = query(f"""
         SELECT pair_id,
-            FORMAT_DATE('%Y-%m', DATE_TRUNC(DATE(published_at), QUARTER)) as quarter,
+            CONCAT(
+                CAST(EXTRACT(YEAR FROM DATE(published_at)) AS STRING), '-',
+                LPAD(CAST(IF(EXTRACT(MONTH FROM DATE(published_at)) <= 6, 1, 7) AS STRING), 2, '0')
+            ) as half_year,
             COUNTIF(variant='ukrainian') as ukr,
             COUNTIF(variant='russian') as rus
         FROM `{DATASET}.raw_youtube`
-        GROUP BY pair_id, quarter
-        HAVING (ukr + rus) > 0
-        ORDER BY pair_id, quarter
+        GROUP BY pair_id, half_year
+        HAVING (ukr + rus) >= 3
+        ORDER BY pair_id, half_year
     """)
     for r in rows:
-        pid = str(r["pair_id"])
-        result.setdefault(pid, {})
-        result[pid].setdefault("youtube", [])
+        pid = r["pair_id"]
+        if pid not in enabled_ids:
+            continue
+        spid = str(pid)
+        result.setdefault(spid, {})
+        result[spid].setdefault("youtube", [])
         total = r["ukr"] + r["rus"]
         adoption = round(r["ukr"] / total * 100, 1) if total > 0 else None
-        result[pid]["youtube"].append({"date": r["quarter"], "adoption": adoption})
+        if adoption is not None:
+            result[spid]["youtube"].append({"date": r["half_year"], "adoption": adoption})
 
-    # ── Ngrams (by decade pre-1950, by year after) ──
+    # ── Ngrams (yearly, 1900+) ──
     log.info("  Ngrams...")
     rows = query(f"""
         SELECT pair_id, year,
@@ -216,15 +321,18 @@ def export_timeseries() -> dict:
         ORDER BY pair_id, year
     """)
     for r in rows:
-        pid = str(r["pair_id"])
-        result.setdefault(pid, {})
-        result[pid].setdefault("ngrams", [])
+        pid = r["pair_id"]
+        if pid not in enabled_ids:
+            continue
+        spid = str(pid)
+        result.setdefault(spid, {})
+        result[spid].setdefault("ngrams", [])
         total = r["ukr"] + r["rus"]
         adoption = round(r["ukr"] / total * 100, 1) if total > 0 else None
-        date_str = f"{r['year']}-01"
-        result[pid]["ngrams"].append({"date": date_str, "adoption": adoption})
+        if adoption is not None:
+            result[spid]["ngrams"].append({"date": f"{r['year']}-01", "adoption": adoption})
 
-    # ── Common Crawl (by crawl) ──
+    # ── Common Crawl (by crawl month) ──
     log.info("  Common Crawl...")
     rows = query(f"""
         SELECT pair_id, FORMAT_DATE('%Y-%m', crawl_date) as month,
@@ -236,47 +344,43 @@ def export_timeseries() -> dict:
         ORDER BY pair_id, month
     """)
     for r in rows:
-        pid = str(r["pair_id"])
-        result.setdefault(pid, {})
-        result[pid].setdefault("common_crawl", [])
+        pid = r["pair_id"]
+        if pid not in enabled_ids:
+            continue
+        spid = str(pid)
+        result.setdefault(spid, {})
+        result[spid].setdefault("common_crawl", [])
         total = r["ukr"] + r["rus"]
         adoption = round(r["ukr"] / total * 100, 1) if total > 0 else None
-        result[pid]["common_crawl"].append({"date": r["month"], "adoption": adoption})
+        if adoption is not None:
+            result[spid]["common_crawl"].append({"date": r["month"], "adoption": adoption})
 
-    log.info(f"  Timeseries: {len(result) - 1} pairs")  # -1 for events key
+    pair_count = len([k for k in result if k != "events"])
+    log.info(f"  Timeseries: {pair_count} pairs (enabled only)")
     return result
 
 
-def export_pairs() -> dict:
+def export_pairs(enabled_ids: set[int]) -> dict:
     """Export pair metadata with adoption stats."""
     log.info("Exporting pairs...")
 
     pairs_cfg = load_pairs()
     categories_raw = pairs_cfg.get("categories", {})
-    pairs_raw = [p for p in pairs_cfg["pairs"] if p.get("enabled", True)]
+    pairs_raw = [p for p in pairs_cfg["pairs"] if p["id"] in enabled_ids]
 
-    # Category colors
     cat_colors = {
-        "geographical": "#0057B8",
-        "food": "#e6b800",
-        "landmarks": "#8B4513",
-        "country": "#228B22",
-        "institutional": "#4B0082",
-        "sports": "#DC143C",
-        "historical": "#708090",
-        "people": "#FF6347",
+        "geographical": "#0057B8", "food": "#e6b800", "landmarks": "#8B4513",
+        "country": "#228B22", "institutional": "#4B0082", "sports": "#DC143C",
+        "historical": "#708090", "people": "#FF6347",
     }
 
-    categories = []
-    for cat_id, cat_info in categories_raw.items():
-        categories.append({
-            "id": cat_id,
-            "name": cat_info["name"],
-            "color": cat_colors.get(cat_id, "#888888"),
-        })
+    categories = [
+        {"id": cat_id, "name": cat_info["name"], "color": cat_colors.get(cat_id, "#888888")}
+        for cat_id, cat_info in categories_raw.items()
+    ]
 
-    # Get adoption stats from BQ
-    adoption_rows = query(f"""
+    # Get total mentions per pair across all sources
+    total_rows = query(f"""
         WITH all_mentions AS (
             SELECT pair_id, variant, COUNT(*) as cnt FROM `{DATASET}.raw_gdelt` GROUP BY pair_id, variant
             UNION ALL
@@ -297,29 +401,52 @@ def export_pairs() -> dict:
         FROM all_mentions
         GROUP BY pair_id
     """)
-    adoption_map = {r["pair_id"]: r for r in adoption_rows}
+    totals_map = {r["pair_id"]: r for r in total_rows}
 
-    # Recent adoption (last 12 months of trends)
+    # Recent adoption: weighted across all sources (last 12 months)
     recent_rows = query(f"""
+        WITH recent AS (
+            SELECT pair_id, variant, COUNT(*) as cnt FROM `{DATASET}.raw_gdelt`
+                WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH) GROUP BY pair_id, variant
+            UNION ALL
+            SELECT pair_id, variant, SUM(interest) FROM `{DATASET}.raw_trends`
+                WHERE (geo='' OR geo IS NULL) AND date >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH) GROUP BY pair_id, variant
+            UNION ALL
+            SELECT pair_id, variant, SUM(pageviews) FROM `{DATASET}.raw_wikipedia`
+                WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH) GROUP BY pair_id, variant
+            UNION ALL
+            SELECT pair_id, variant, COUNT(*) FROM `{DATASET}.raw_reddit`
+                WHERE DATE(created_utc) >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH) GROUP BY pair_id, variant
+            UNION ALL
+            SELECT pair_id, variant, COUNT(*) FROM `{DATASET}.raw_youtube`
+                WHERE DATE(published_at) >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH) GROUP BY pair_id, variant
+        )
         SELECT pair_id,
-            SUM(IF(variant='ukrainian', interest, 0)) as ukr,
-            SUM(IF(variant='russian', interest, 0)) as rus
-        FROM `{DATASET}.raw_trends`
-        WHERE (geo='' OR geo IS NULL) AND date >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH)
+            SUM(IF(variant='ukrainian', cnt, 0)) as ukr,
+            SUM(IF(variant='russian', cnt, 0)) as rus
+        FROM recent
         GROUP BY pair_id
     """)
     recent_map = {r["pair_id"]: r for r in recent_rows}
 
+    # Build pairs with control pair handling
+    control_ids = {p["id"] for p in pairs_cfg["pairs"] if p.get("is_control", False)}
+
     pairs_out = []
     for p in pairs_raw:
         pid = p["id"]
-        stats = adoption_map.get(pid, {})
+        stats = totals_map.get(pid, {})
         recent = recent_map.get(pid, {})
         total = stats.get("grand_total", 0)
-        ukr_recent = recent.get("ukr", 0)
-        rus_recent = recent.get("rus", 0)
-        recent_total = ukr_recent + rus_recent
-        adoption_pct = round(ukr_recent / recent_total * 100, 1) if recent_total > 0 else 0.0
+
+        # Control pairs (same russian/ukrainian) always show 0%
+        if pid in control_ids:
+            adoption_pct = 0.0
+        else:
+            ukr = recent.get("ukr", 0)
+            rus = recent.get("rus", 0)
+            recent_total = ukr + rus
+            adoption_pct = round(ukr / recent_total * 100, 1) if recent_total > 0 else 0.0
 
         pairs_out.append({
             "id": pid,
@@ -334,8 +461,11 @@ def export_pairs() -> dict:
     return {"categories": categories, "pairs": pairs_out}
 
 
-def export_trends_countries() -> dict:
-    """Export Google Trends adoption by country per pair."""
+def export_trends_countries(enabled_ids: set[int]) -> dict:
+    """Export Google Trends adoption by country per pair.
+
+    Uses FULL date range for maximum country coverage.
+    """
     log.info("Exporting trends countries...")
 
     rows = query(f"""
@@ -344,14 +474,16 @@ def export_trends_countries() -> dict:
             SUM(IF(variant='russian', interest, 0)) as rus
         FROM `{DATASET}.raw_trends`
         WHERE geo != '' AND geo IS NOT NULL
-          AND date >= '2020-01-01'
         GROUP BY pair_id, geo
         HAVING (ukr + rus) > 0
     """)
 
     result = {}
     for r in rows:
-        pid = str(r["pair_id"])
+        pid = r["pair_id"]
+        if pid not in enabled_ids:
+            continue
+        spid = str(pid)
         geo = r["geo"]
         numeric = GEO_TO_NUMERIC.get(geo)
         if not numeric:
@@ -359,46 +491,14 @@ def export_trends_countries() -> dict:
         total = r["ukr"] + r["rus"]
         adoption = round(r["ukr"] / total * 100, 1) if total > 0 else 0.0
         name = GEO_NAMES.get(numeric, geo)
-        result.setdefault(pid, {})
-        result[pid][numeric] = {"name": name, "adoption": adoption}
+        result.setdefault(spid, {})
+        result[spid][numeric] = {"name": name, "adoption": adoption}
 
     log.info(f"  Trends countries: {len(result)} pairs")
     return result
 
 
-def export_countries_by_pair() -> dict:
-    """Export GDELT adoption by country per pair."""
-    log.info("Exporting GDELT countries...")
-
-    rows = query(f"""
-        SELECT pair_id, source_country as geo,
-            COUNTIF(variant='ukrainian') as ukr,
-            COUNTIF(variant='russian') as rus
-        FROM `{DATASET}.raw_gdelt`
-        WHERE source_country IS NOT NULL AND source_country != ''
-          AND date >= '2024-01-01'
-        GROUP BY pair_id, geo
-        HAVING (ukr + rus) >= 10
-    """)
-
-    result = {}
-    for r in rows:
-        pid = str(r["pair_id"])
-        geo = r["geo"]
-        numeric = GEO_TO_NUMERIC.get(geo)
-        if not numeric:
-            continue
-        total = r["ukr"] + r["rus"]
-        adoption = round(r["ukr"] / total * 100, 1) if total > 0 else 0.0
-        name = GEO_NAMES.get(numeric, geo)
-        result.setdefault(pid, {})
-        result[pid][numeric] = {"name": name, "adoption": adoption}
-
-    log.info(f"  GDELT countries: {len(result)} pairs")
-    return result
-
-
-def export_holdouts_by_pair() -> dict:
+def export_holdouts_by_pair(enabled_ids: set[int]) -> dict:
     """Export holdout domains per pair from GDELT."""
     log.info("Exporting holdouts...")
 
@@ -423,10 +523,13 @@ def export_holdouts_by_pair() -> dict:
 
     result = {}
     for r in rows:
-        pid = str(r["pair_id"])
-        result.setdefault(pid, [])
-        if len(result[pid]) < 50:  # top 50 per pair
-            result[pid].append({
+        pid = r["pair_id"]
+        if pid not in enabled_ids:
+            continue
+        spid = str(pid)
+        result.setdefault(spid, [])
+        if len(result[spid]) < 50:
+            result[spid].append({
                 "domain": r["domain"],
                 "russian_pct": float(r["russian_pct"]),
                 "total": r["total"],
@@ -437,7 +540,7 @@ def export_holdouts_by_pair() -> dict:
     return result
 
 
-def export_holdouts_global() -> dict:
+def export_holdouts_global() -> list:
     """Export global holdout domains across all pairs."""
     log.info("Exporting global holdouts...")
 
@@ -462,34 +565,26 @@ def export_holdouts_global() -> dict:
     """)
 
     return [
-        {
-            "domain": r["domain"],
-            "russian_pct": float(r["russian_pct"]),
-            "total": r["total"],
-            "is_ru": r["is_ru"],
-        }
+        {"domain": r["domain"], "russian_pct": float(r["russian_pct"]),
+         "total": r["total"], "is_ru": r["is_ru"]}
         for r in rows
     ]
 
 
-def export_pair_events() -> dict:
+def export_pair_events(enabled_ids: set[int]) -> dict:
     """Export pair-specific events from config."""
     log.info("Exporting pair events...")
     pairs_cfg = load_pairs()
     result = {}
     for p in pairs_cfg["pairs"]:
-        if not p.get("enabled", True):
+        if p["id"] not in enabled_ids:
             continue
         events = p.get("events", [])
         if events:
-            pair_events = []
-            for e in events:
-                pair_events.append({
-                    "date": e["date"],
-                    "label": e["label"],
-                    "color": e.get("color", "#0057B8"),
-                })
-            result[str(p["id"])] = pair_events
+            result[str(p["id"])] = [
+                {"date": e["date"], "label": e["label"], "color": e.get("color", "#0057B8")}
+                for e in events
+            ]
     return result
 
 
@@ -497,7 +592,6 @@ def export_analysis() -> dict:
     """Export analysis results from BQ."""
     log.info("Exporting analysis...")
 
-    # Changepoints
     cp_rows = query(f"""
         SELECT pair_id, source, changepoint_date, ci_lower, ci_upper, effect_size
         FROM `{DATASET}.analysis_changepoints`
@@ -522,6 +616,28 @@ def export_analysis() -> dict:
         "changepoint_detection": changepoints,
         "metadata": {"generated": "auto", "source": "bigquery"},
     }
+
+
+def export_category_stats(pairs_data: dict) -> list:
+    """Compute category-level stats from pairs data."""
+    log.info("Exporting category stats...")
+    cats = {}
+    for p in pairs_data["pairs"]:
+        cat = p["category"]
+        cats.setdefault(cat, []).append(p["adoption"])
+
+    cat_lookup = {c["id"]: c for c in pairs_data["categories"]}
+    result = []
+    for cat_id, vals in cats.items():
+        info = cat_lookup.get(cat_id, {})
+        result.append({
+            "id": cat_id,
+            "name": info.get("name", cat_id),
+            "color": info.get("color", "#888"),
+            "count": len(vals),
+            "avg_adoption": round(sum(vals) / len(vals), 1) if vals else 0,
+        })
+    return sorted(result, key=lambda x: -x["avg_adoption"])
 
 
 def export_site_stats() -> dict:
@@ -552,23 +668,10 @@ def export_site_stats() -> dict:
         SELECT 'common_crawl_matches', CAST(COUNT(*) AS STRING) FROM `{DATASET}.raw_common_crawl`
         UNION ALL
         SELECT 'common_crawl_domains', CAST(COUNT(DISTINCT domain) AS STRING) FROM `{DATASET}.raw_common_crawl`
-        UNION ALL
-        SELECT 'total_pairs', CAST(COUNT(DISTINCT pair_id) AS STRING) FROM (
-            SELECT pair_id FROM `{DATASET}.raw_trends`
-            UNION DISTINCT
-            SELECT pair_id FROM `{DATASET}.raw_gdelt`
-            UNION DISTINCT
-            SELECT pair_id FROM `{DATASET}.raw_wikipedia`
-            UNION DISTINCT
-            SELECT pair_id FROM `{DATASET}.raw_reddit`
-            UNION DISTINCT
-            SELECT pair_id FROM `{DATASET}.raw_youtube`
-        )
     """)
 
     stats = {r["metric"]: r["val"] for r in rows}
 
-    # Total verified instances (sum of all source counts)
     total_query = query(f"""
         SELECT
             (SELECT COUNT(*) FROM `{DATASET}.raw_gdelt`) +
@@ -596,26 +699,27 @@ def main():
     log.info("Exporting BigQuery data to site JSON")
     log.info("=" * 60)
 
-    # Export all data
-    timeseries = export_timeseries()
-    pairs = export_pairs()
-    trends_countries = export_trends_countries()
-    countries_by_pair = export_countries_by_pair()
-    holdouts_by_pair = export_holdouts_by_pair()
+    enabled_ids = get_enabled_pair_ids()
+    log.info(f"Enabled pairs: {len(enabled_ids)}")
+
+    timeseries = export_timeseries(enabled_ids)
+    pairs = export_pairs(enabled_ids)
+    trends_countries = export_trends_countries(enabled_ids)
+    holdouts_by_pair = export_holdouts_by_pair(enabled_ids)
     holdouts_global = export_holdouts_global()
-    pair_events = export_pair_events()
+    pair_events = export_pair_events(enabled_ids)
     analysis = export_analysis()
+    category_stats = export_category_stats(pairs)
     site_stats = export_site_stats()
 
-    # Write all files
     write_json(SITE_DATA_DIR / "timeseries.json", timeseries)
     write_json(SITE_DATA_DIR / "pairs.json", pairs)
     write_json(SITE_DATA_DIR / "trends_countries.json", trends_countries)
-    write_json(SITE_DATA_DIR / "countries_by_pair.json", countries_by_pair)
     write_json(SITE_DATA_DIR / "holdouts_by_pair.json", holdouts_by_pair)
     write_json(SITE_DATA_DIR / "holdouts.json", holdouts_global)
     write_json(SITE_DATA_DIR / "pair_events.json", pair_events)
     write_json(SITE_DATA_DIR / "analysis.json", analysis)
+    write_json(SITE_DATA_DIR / "category_stats.json", category_stats)
     write_json(SITE_DATA_DIR / "site_stats.json", site_stats)
 
     log.info("=" * 60)

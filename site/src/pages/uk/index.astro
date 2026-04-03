@@ -122,15 +122,15 @@ function formatNum(n: number) {
         </div>
       </div>
       <div class="stats source-stats" style="grid-template-columns: repeat(7, 1fr);">
-        <div class="stat-card mini" style="--accent: #1e3a5f">
-          <div class="stat-value">{fmtBig(siteStats.gdelt_articles)}</div>
-          <div class="stat-label">Новин</div>
-          <div class="stat-source">GDELT · {fmtBig(siteStats.gdelt_domains)} доменів</div>
-        </div>
         <div class="stat-card mini" style="--accent: #4285F4">
           <div class="stat-value">{fmtBig(siteStats.trends_datapoints)}</div>
           <div class="stat-label">Пошукових трендів</div>
           <div class="stat-source">Google · {siteStats.trends_countries} країн</div>
+        </div>
+        <div class="stat-card mini" style="--accent: #1e3a5f">
+          <div class="stat-value">{fmtBig(siteStats.gdelt_articles)}</div>
+          <div class="stat-label">Новин</div>
+          <div class="stat-source">GDELT · {fmtBig(siteStats.gdelt_domains)} доменів</div>
         </div>
         <div class="stat-card mini" style="--accent: #636466">
           <div class="stat-value">{fmtBig(siteStats.wikipedia_pageviews)}</div>
