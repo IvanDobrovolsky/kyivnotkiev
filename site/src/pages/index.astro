@@ -171,8 +171,8 @@ function formatNum(n: number) {
             <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed">
               <span class="source-dot"></span>Ngrams
             </button>
-            <button class="source-toggle" data-source="common_crawl" style="--source-color: #06b6d4">
-              <span class="source-dot"></span>Web Crawl
+            <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4">
+              <span class="source-dot"></span>Academic
             </button>
             <span class="toggle-sep"></span>
             <button class="event-toggle active" id="dual-line-toggle">Both Lines</button>
@@ -358,7 +358,7 @@ function formatNum(n: number) {
       reddit: '#FF4500',
       youtube: '#FF0000',
       ngrams: '#7c3aed',
-      common_crawl: '#06b6d4',
+      openalex: '#06b6d4',
     };
 
     const sourceLabels: Record<string, string> = {
@@ -368,7 +368,7 @@ function formatNum(n: number) {
       reddit: 'Reddit',
       youtube: 'YouTube',
       ngrams: 'Google Books',
-      common_crawl: 'Common Crawl',
+      openalex: 'Academic Papers',
     };
 
     let activeSource = 'trends';  // single source at a time
