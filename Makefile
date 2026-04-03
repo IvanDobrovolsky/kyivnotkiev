@@ -79,6 +79,9 @@ publish-dataset:  ## Upload dataset to Hugging Face Hub
 analyze:  ## Run ALL statistical tests from fresh BQ data
 	python -m pipeline.analysis.recompute_stats
 
+analyze-errors:  ## Cross-source error analysis (disagreements between sources)
+	python -m pipeline.analysis.error_analysis
+
 analyze-categories:  ## Run Kruskal-Wallis + pairwise tests
 	python -m pipeline.analysis.categories
 

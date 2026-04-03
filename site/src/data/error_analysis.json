@@ -1,0 +1,1019 @@
+{
+  "disagreements": [
+    {
+      "pair_id": 1,
+      "russian": "Kiev",
+      "ukrainian": "Kyiv",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 28.9,
+        "reddit": 71.4,
+        "trends": 51.0,
+        "wikipedia": 87.8,
+        "youtube": 55.2,
+        "openalex": 94.4
+      },
+      "spread_pp": 65.5,
+      "outliers": {
+        "gdelt": 28.9,
+        "wikipedia": 87.8,
+        "openalex": 94.4
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias); Public search adopts faster than news URLs (URL stickiness)"
+    },
+    {
+      "pair_id": 2,
+      "russian": "Kharkov",
+      "ukrainian": "Kharkiv",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 98.2,
+        "reddit": 80.6,
+        "trends": 87.4,
+        "wikipedia": 95.5,
+        "youtube": 51.9,
+        "openalex": 96.7
+      },
+      "spread_pp": 46.3,
+      "outliers": {
+        "youtube": 51.9
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 3,
+      "russian": "Odessa",
+      "ukrainian": "Odesa",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 19.8,
+        "reddit": 66.0,
+        "trends": 6.6,
+        "wikipedia": 82.0,
+        "youtube": 41.1,
+        "openalex": 65.5
+      },
+      "spread_pp": 75.4,
+      "outliers": {
+        "gdelt": 19.8,
+        "trends": 6.6,
+        "wikipedia": 82.0
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias)"
+    },
+    {
+      "pair_id": 4,
+      "russian": "Lvov",
+      "ukrainian": "Lviv",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 98.4,
+        "reddit": 75.7,
+        "trends": 95.4,
+        "wikipedia": 98.0,
+        "youtube": 42.2,
+        "openalex": 97.8
+      },
+      "spread_pp": 56.2,
+      "outliers": {
+        "youtube": 42.2
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 5,
+      "russian": "Zaporozhye",
+      "ukrainian": "Zaporizhzhia",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 83.5,
+        "reddit": 75.6,
+        "trends": 90.3,
+        "wikipedia": 50.0,
+        "youtube": 51.5,
+        "openalex": 87.0
+      },
+      "spread_pp": 40.3,
+      "outliers": {
+        "wikipedia": 50.0,
+        "youtube": 51.5
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
+    },
+    {
+      "pair_id": 6,
+      "russian": "Nikolaev",
+      "ukrainian": "Mykolaiv",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 8.2,
+        "reddit": 47.6,
+        "trends": 55.2,
+        "wikipedia": 100.0,
+        "youtube": 43.4,
+        "openalex": 81.6
+      },
+      "spread_pp": 91.8,
+      "outliers": {
+        "gdelt": 8.2,
+        "wikipedia": 100.0,
+        "openalex": 81.6
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias); Public search adopts faster than news URLs (URL stickiness)"
+    },
+    {
+      "pair_id": 7,
+      "russian": "Dnepropetrovsk",
+      "ukrainian": "Dnipro",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 99.8,
+        "reddit": 65.2,
+        "trends": 97.2,
+        "wikipedia": 50.0,
+        "youtube": 47.2,
+        "openalex": 99.4
+      },
+      "spread_pp": 52.6,
+      "outliers": {
+        "gdelt": 99.8,
+        "trends": 97.2,
+        "wikipedia": 50.0,
+        "youtube": 47.2,
+        "openalex": 99.4
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
+    },
+    {
+      "pair_id": 8,
+      "russian": "Vinnitsa",
+      "ukrainian": "Vinnytsia",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 0.7,
+        "reddit": 80.7,
+        "trends": 79.6,
+        "wikipedia": 96.5,
+        "youtube": 45.5,
+        "openalex": 100.0
+      },
+      "spread_pp": 99.3,
+      "outliers": {
+        "gdelt": 0.7,
+        "wikipedia": 96.5,
+        "youtube": 45.5,
+        "openalex": 100.0
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias); Public search adopts faster than news URLs (URL stickiness)"
+    },
+    {
+      "pair_id": 9,
+      "russian": "Rovno",
+      "ukrainian": "Rivne",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 97.0,
+        "reddit": 66.2,
+        "trends": 87.2,
+        "wikipedia": 96.2,
+        "youtube": 40.8,
+        "openalex": 27.9
+      },
+      "spread_pp": 69.1,
+      "outliers": {
+        "gdelt": 97.0,
+        "wikipedia": 96.2,
+        "youtube": 40.8,
+        "openalex": 27.9
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias)"
+    },
+    {
+      "pair_id": 10,
+      "russian": "Chernobyl",
+      "ukrainian": "Chornobyl",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 38.6,
+        "reddit": 48.7,
+        "trends": 0.8,
+        "wikipedia": 0.1,
+        "youtube": 51.8,
+        "openalex": 34.2
+      },
+      "spread_pp": 51.7,
+      "outliers": {
+        "trends": 0.8,
+        "wikipedia": 0.1,
+        "youtube": 51.8
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views; Public search lags behind news media adoption (media-public gap)"
+    },
+    {
+      "pair_id": 11,
+      "russian": "Lugansk",
+      "ukrainian": "Luhansk",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 75.2,
+        "reddit": 48.9,
+        "trends": 77.9,
+        "wikipedia": 97.5,
+        "youtube": 59.5,
+        "openalex": 60.6
+      },
+      "spread_pp": 48.6,
+      "outliers": {
+        "reddit": 48.9,
+        "wikipedia": 97.5
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias)"
+    },
+    {
+      "pair_id": 15,
+      "russian": "Dnieper",
+      "ukrainian": "Dnipro",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 96.6,
+        "reddit": 64.7,
+        "trends": 88.1,
+        "wikipedia": 0.1,
+        "youtube": 50.2,
+        "openalex": 71.2
+      },
+      "spread_pp": 96.5,
+      "outliers": {
+        "gdelt": 96.6,
+        "trends": 88.1,
+        "wikipedia": 0.1
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
+    },
+    {
+      "pair_id": 16,
+      "russian": "Dniester",
+      "ukrainian": "Dnister",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 87.1,
+        "reddit": 43.7,
+        "trends": 48.9,
+        "wikipedia": 1.5,
+        "youtube": 15.2,
+        "openalex": 9.3
+      },
+      "spread_pp": 85.6,
+      "outliers": {
+        "gdelt": 87.1,
+        "wikipedia": 1.5,
+        "openalex": 9.3
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views; Public search lags behind news media adoption (media-public gap)"
+    },
+    {
+      "pair_id": 17,
+      "russian": "Donbass",
+      "ukrainian": "Donbas",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 30.1,
+        "reddit": 66.3,
+        "trends": 49.6,
+        "wikipedia": 50.0,
+        "youtube": 52.2,
+        "openalex": 48.9
+      },
+      "spread_pp": 36.2,
+      "outliers": {},
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 20,
+      "russian": "Podolye",
+      "ukrainian": "Podillia",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 1.7,
+        "reddit": 100.0,
+        "trends": 94.6,
+        "youtube": 77.8,
+        "openalex": 100.0
+      },
+      "spread_pp": 98.3,
+      "outliers": {
+        "gdelt": 1.7,
+        "reddit": 100.0,
+        "openalex": 100.0
+      },
+      "explanation": "Public search adopts faster than news URLs (URL stickiness)"
+    },
+    {
+      "pair_id": 21,
+      "russian": "Chicken Kiev",
+      "ukrainian": "Chicken Kyiv",
+      "category": "food",
+      "sources": {
+        "reddit": 52.1,
+        "trends": 9.4,
+        "wikipedia": 50.0,
+        "youtube": 57.0,
+        "openalex": 100.0
+      },
+      "spread_pp": 90.6,
+      "outliers": {
+        "trends": 9.4,
+        "openalex": 100.0
+      },
+      "explanation": "Food terms: recipe searches use familiar spelling, media uses updated form"
+    },
+    {
+      "pair_id": 22,
+      "russian": "Kiev cake",
+      "ukrainian": "Kyiv cake",
+      "category": "food",
+      "sources": {
+        "reddit": 59.1,
+        "trends": 62.9,
+        "wikipedia": 99.2,
+        "youtube": 47.6
+      },
+      "spread_pp": 51.6,
+      "outliers": {
+        "wikipedia": 99.2
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias); Food terms: recipe searches use familiar spelling, media uses updated form"
+    },
+    {
+      "pair_id": 23,
+      "russian": "Borscht",
+      "ukrainian": "Borshch",
+      "category": "food",
+      "sources": {
+        "gdelt": 57.6,
+        "reddit": 31.1,
+        "trends": 0.7,
+        "wikipedia": 50.0,
+        "youtube": 52.9,
+        "openalex": 75.0
+      },
+      "spread_pp": 74.3,
+      "outliers": {
+        "trends": 0.7,
+        "openalex": 75.0
+      },
+      "explanation": "Public search lags behind news media adoption (media-public gap); Food terms: recipe searches use familiar spelling, media uses updated form"
+    },
+    {
+      "pair_id": 24,
+      "russian": "Kiev Pechersk Lavra",
+      "ukrainian": "Kyiv Pechersk Lavra",
+      "category": "landmarks",
+      "sources": {
+        "reddit": 47.1,
+        "trends": 79.9,
+        "wikipedia": 89.6,
+        "youtube": 54.1,
+        "openalex": 100.0
+      },
+      "spread_pp": 52.9,
+      "outliers": {
+        "reddit": 47.1,
+        "youtube": 54.1,
+        "openalex": 100.0
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 25,
+      "russian": "Saint Sophia Cathedral Kiev",
+      "ukrainian": "Saint Sophia Cathedral Kyiv",
+      "category": "landmarks",
+      "sources": {
+        "reddit": 100.0,
+        "trends": 99.7,
+        "wikipedia": 50.0,
+        "youtube": 61.4,
+        "openalex": 100.0
+      },
+      "spread_pp": 50.0,
+      "outliers": {
+        "wikipedia": 50.0,
+        "youtube": 61.4
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
+    },
+    {
+      "pair_id": 26,
+      "russian": "Chernobyl Exclusion Zone",
+      "ukrainian": "Chornobyl Exclusion Zone",
+      "category": "landmarks",
+      "sources": {
+        "reddit": 44.7,
+        "trends": 1.3,
+        "wikipedia": 0.3,
+        "youtube": 52.1,
+        "openalex": 50.0
+      },
+      "spread_pp": 51.8,
+      "outliers": {
+        "trends": 1.3,
+        "wikipedia": 0.3,
+        "youtube": 52.1,
+        "openalex": 50.0
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
+    },
+    {
+      "pair_id": 27,
+      "russian": "the Ukraine",
+      "ukrainian": "Ukraine",
+      "category": "country",
+      "sources": {
+        "reddit": 76.1,
+        "trends": 94.5,
+        "wikipedia": 50.0,
+        "youtube": 33.1,
+        "openalex": 50.0
+      },
+      "spread_pp": 61.4,
+      "outliers": {
+        "trends": 94.5,
+        "youtube": 33.1
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 28,
+      "russian": "Kiev National University",
+      "ukrainian": "Kyiv National University",
+      "category": "institutional",
+      "sources": {
+        "reddit": 100.0,
+        "trends": 96.2,
+        "wikipedia": 80.8,
+        "youtube": 50.0,
+        "openalex": 100.0
+      },
+      "spread_pp": 50.0,
+      "outliers": {
+        "youtube": 50.0
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 29,
+      "russian": "Kharkov University",
+      "ukrainian": "Kharkiv University",
+      "category": "institutional",
+      "sources": {
+        "reddit": 55.6,
+        "trends": 95.6,
+        "wikipedia": 51.5,
+        "youtube": 43.3,
+        "openalex": 98.7
+      },
+      "spread_pp": 55.4,
+      "outliers": {
+        "trends": 95.6,
+        "youtube": 43.3,
+        "openalex": 98.7
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
+    },
+    {
+      "pair_id": 30,
+      "russian": "Kiev Polytechnic",
+      "ukrainian": "Kyiv Polytechnic",
+      "category": "institutional",
+      "sources": {
+        "reddit": 97.2,
+        "trends": 97.6,
+        "wikipedia": 78.4,
+        "youtube": 50.0,
+        "openalex": 100.0
+      },
+      "spread_pp": 50.0,
+      "outliers": {
+        "youtube": 50.0
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 31,
+      "russian": "Kiev Patriarchate",
+      "ukrainian": "Kyiv Patriarchate",
+      "category": "institutional",
+      "sources": {
+        "reddit": 66.7,
+        "trends": 73.5,
+        "wikipedia": 0.0,
+        "youtube": 55.9,
+        "openalex": 100.0
+      },
+      "spread_pp": 100.0,
+      "outliers": {
+        "wikipedia": 0.0,
+        "openalex": 100.0
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
+    },
+    {
+      "pair_id": 32,
+      "russian": "Dynamo Kiev",
+      "ukrainian": "Dynamo Kyiv",
+      "category": "sports",
+      "sources": {
+        "reddit": 72.4,
+        "trends": 58.2,
+        "wikipedia": 82.2,
+        "youtube": 50.9
+      },
+      "spread_pp": 31.3,
+      "outliers": {},
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias)"
+    },
+    {
+      "pair_id": 34,
+      "russian": "Kiev ballet",
+      "ukrainian": "Kyiv ballet",
+      "category": "sports",
+      "sources": {
+        "reddit": 93.1,
+        "trends": 42.9,
+        "youtube": 48.4,
+        "openalex": 85.7
+      },
+      "spread_pp": 50.2,
+      "outliers": {
+        "reddit": 93.1,
+        "trends": 42.9
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 35,
+      "russian": "Kievan Rus",
+      "ukrainian": "Kyivan Rus",
+      "category": "historical",
+      "sources": {
+        "reddit": 96.4,
+        "trends": 8.0,
+        "wikipedia": 50.0,
+        "youtube": 44.1,
+        "openalex": 66.1
+      },
+      "spread_pp": 88.4,
+      "outliers": {
+        "reddit": 96.4,
+        "trends": 8.0
+      },
+      "explanation": "Historical terms: scholarship preserves traditional naming, public follows media"
+    },
+    {
+      "pair_id": 36,
+      "russian": "Kazak",
+      "ukrainian": "Kozak",
+      "category": "historical",
+      "sources": {
+        "reddit": 89.9,
+        "trends": 26.3,
+        "wikipedia": 56.9,
+        "youtube": 37.0,
+        "openalex": 24.3
+      },
+      "spread_pp": 65.6,
+      "outliers": {
+        "reddit": 89.9,
+        "trends": 26.3,
+        "openalex": 24.3
+      },
+      "explanation": "Historical terms: scholarship preserves traditional naming, public follows media"
+    },
+    {
+      "pair_id": 38,
+      "russian": "Chernigov",
+      "ukrainian": "Chernihiv",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 80.9,
+        "reddit": 34.0,
+        "trends": 85.5,
+        "wikipedia": 88.3,
+        "youtube": 63.4,
+        "openalex": 93.2
+      },
+      "spread_pp": 59.2,
+      "outliers": {
+        "reddit": 34.0
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 39,
+      "russian": "Chernovtsy",
+      "ukrainian": "Chernivtsi",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 99.9,
+        "reddit": 90.9,
+        "trends": 97.9,
+        "wikipedia": 96.6,
+        "youtube": 60.0,
+        "openalex": 100.0
+      },
+      "spread_pp": 40.0,
+      "outliers": {
+        "youtube": 60.0
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 40,
+      "russian": "Zhitomir",
+      "ukrainian": "Zhytomyr",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 48.2,
+        "reddit": 68.0,
+        "trends": 92.6,
+        "wikipedia": 93.3,
+        "youtube": 60.0,
+        "openalex": 98.8
+      },
+      "spread_pp": 50.6,
+      "outliers": {
+        "gdelt": 48.2,
+        "openalex": 98.8
+      },
+      "explanation": "Public search adopts faster than news URLs (URL stickiness)"
+    },
+    {
+      "pair_id": 41,
+      "russian": "Cherkassy",
+      "ukrainian": "Cherkasy",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 76.0,
+        "reddit": 74.2,
+        "trends": 91.8,
+        "wikipedia": 95.9,
+        "youtube": 50.0,
+        "openalex": 95.9
+      },
+      "spread_pp": 45.9,
+      "outliers": {
+        "youtube": 50.0
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 42,
+      "russian": "Uzhgorod",
+      "ukrainian": "Uzhhorod",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 4.1,
+        "reddit": 72.1,
+        "trends": 72.9,
+        "wikipedia": 98.6,
+        "youtube": 52.9,
+        "openalex": 80.8
+      },
+      "spread_pp": 94.5,
+      "outliers": {
+        "gdelt": 4.1,
+        "wikipedia": 98.6
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias); Public search adopts faster than news URLs (URL stickiness)"
+    },
+    {
+      "pair_id": 43,
+      "russian": "Kremenchug",
+      "ukrainian": "Kremenchuk",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 11.8,
+        "reddit": 69.8,
+        "trends": 86.3,
+        "wikipedia": 91.4,
+        "youtube": 54.8,
+        "openalex": 87.5
+      },
+      "spread_pp": 79.6,
+      "outliers": {
+        "gdelt": 11.8,
+        "wikipedia": 91.4,
+        "openalex": 87.5
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias); Public search adopts faster than news URLs (URL stickiness)"
+    },
+    {
+      "pair_id": 44,
+      "russian": "Kirovograd",
+      "ukrainian": "Kropyvnytskyi",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 0.2,
+        "reddit": 58.2,
+        "trends": 70.1,
+        "wikipedia": 96.0,
+        "youtube": 72.4,
+        "openalex": 59.1
+      },
+      "spread_pp": 95.8,
+      "outliers": {
+        "gdelt": 0.2,
+        "wikipedia": 96.0
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias); Public search adopts faster than news URLs (URL stickiness)"
+    },
+    {
+      "pair_id": 45,
+      "russian": "Ternopol",
+      "ukrainian": "Ternopil",
+      "category": "geographical",
+      "sources": {
+        "gdelt": 99.9,
+        "reddit": 100.0,
+        "trends": 92.0,
+        "wikipedia": 98.8,
+        "youtube": 47.5,
+        "openalex": 96.8
+      },
+      "spread_pp": 52.5,
+      "outliers": {
+        "youtube": 47.5
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 46,
+      "russian": "Vareniki",
+      "ukrainian": "Varenyky",
+      "category": "food",
+      "sources": {
+        "gdelt": 10.2,
+        "reddit": 64.2,
+        "trends": 12.9,
+        "wikipedia": 82.9,
+        "youtube": 85.1,
+        "openalex": 100.0
+      },
+      "spread_pp": 89.8,
+      "outliers": {
+        "gdelt": 10.2,
+        "trends": 12.9,
+        "wikipedia": 82.9,
+        "youtube": 85.1,
+        "openalex": 100.0
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias); Food terms: recipe searches use familiar spelling, media uses updated form"
+    },
+    {
+      "pair_id": 48,
+      "russian": "Gopak",
+      "ukrainian": "Hopak",
+      "category": "historical",
+      "sources": {
+        "reddit": 79.1,
+        "trends": 55.5,
+        "wikipedia": 98.4,
+        "youtube": 46.7,
+        "openalex": 50.0
+      },
+      "spread_pp": 51.7,
+      "outliers": {
+        "wikipedia": 98.4
+      },
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias); Historical terms: scholarship preserves traditional naming, public follows media"
+    },
+    {
+      "pair_id": 52,
+      "russian": "Metalist Kharkov",
+      "ukrainian": "Metalist Kharkiv",
+      "category": "sports",
+      "sources": {
+        "reddit": 100.0,
+        "trends": 100.0,
+        "wikipedia": 50.0,
+        "youtube": 63.6
+      },
+      "spread_pp": 50.0,
+      "outliers": {
+        "reddit": 100.0,
+        "trends": 100.0,
+        "wikipedia": 50.0
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
+    },
+    {
+      "pair_id": 53,
+      "russian": "Karpaty Lvov",
+      "ukrainian": "Karpaty Lviv",
+      "category": "sports",
+      "sources": {
+        "reddit": 96.6,
+        "trends": 100.0,
+        "wikipedia": 50.0,
+        "youtube": 57.8,
+        "openalex": 100.0
+      },
+      "spread_pp": 50.0,
+      "outliers": {
+        "wikipedia": 50.0,
+        "youtube": 57.8
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
+    },
+    {
+      "pair_id": 54,
+      "russian": "Babi Yar",
+      "ukrainian": "Babyn Yar",
+      "category": "landmarks",
+      "sources": {
+        "gdelt": 0.0,
+        "reddit": 35.6,
+        "trends": 17.0,
+        "wikipedia": 50.0,
+        "youtube": 38.1,
+        "openalex": 93.9
+      },
+      "spread_pp": 93.9,
+      "outliers": {
+        "gdelt": 0.0,
+        "trends": 17.0,
+        "openalex": 93.9
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 55,
+      "russian": "Potemkin Stairs Odessa",
+      "ukrainian": "Potemkin Stairs Odesa",
+      "category": "landmarks",
+      "sources": {
+        "reddit": 50.0,
+        "trends": 5.6,
+        "wikipedia": 50.0,
+        "youtube": 58.5
+      },
+      "spread_pp": 52.9,
+      "outliers": {
+        "trends": 5.6
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 56,
+      "russian": "Motherland Monument Kiev",
+      "ukrainian": "Motherland Monument Kyiv",
+      "category": "landmarks",
+      "sources": {
+        "reddit": 0.0,
+        "trends": 100.0,
+        "wikipedia": 50.0,
+        "youtube": 48.1
+      },
+      "spread_pp": 100.0,
+      "outliers": {
+        "reddit": 0.0,
+        "trends": 100.0
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 57,
+      "russian": "Lvov Polytechnic",
+      "ukrainian": "Lviv Polytechnic",
+      "category": "institutional",
+      "sources": {
+        "reddit": 100.0,
+        "trends": 100.0,
+        "wikipedia": 100.0,
+        "youtube": 25.0,
+        "openalex": 100.0
+      },
+      "spread_pp": 75.0,
+      "outliers": {
+        "youtube": 25.0
+      },
+      "explanation": "Multi-domain adoption varies by audience and editorial control"
+    },
+    {
+      "pair_id": 58,
+      "russian": "Odessa National University",
+      "ukrainian": "Odesa National University",
+      "category": "institutional",
+      "sources": {
+        "trends": 28.8,
+        "wikipedia": 0.0,
+        "youtube": 50.0,
+        "openalex": 61.9
+      },
+      "spread_pp": 61.9,
+      "outliers": {
+        "wikipedia": 0.0,
+        "openalex": 61.9
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
+    },
+    {
+      "pair_id": 60,
+      "russian": "Alexander Usyk",
+      "ukrainian": "Oleksandr Usyk",
+      "category": "people",
+      "sources": {
+        "reddit": 92.5,
+        "trends": 93.6,
+        "wikipedia": 50.0,
+        "youtube": 49.4,
+        "openalex": 100.0
+      },
+      "spread_pp": 50.6,
+      "outliers": {
+        "wikipedia": 50.0,
+        "youtube": 49.4,
+        "openalex": 100.0
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
+    },
+    {
+      "pair_id": 61,
+      "russian": "Vladimir Zelensky",
+      "ukrainian": "Volodymyr Zelenskyy",
+      "category": "people",
+      "sources": {
+        "gdelt": 26.4,
+        "reddit": 84.5,
+        "trends": 70.3,
+        "wikipedia": 50.0,
+        "youtube": 50.5,
+        "openalex": 76.9
+      },
+      "spread_pp": 58.1,
+      "outliers": {
+        "gdelt": 26.4,
+        "reddit": 84.5
+      },
+      "explanation": "Public search adopts faster than news URLs (URL stickiness)"
+    },
+    {
+      "pair_id": 64,
+      "russian": "Borsch",
+      "ukrainian": "Borshch",
+      "category": "food",
+      "sources": {
+        "gdelt": 40.6,
+        "reddit": 46.7,
+        "trends": 6.0,
+        "wikipedia": 25.5,
+        "youtube": 48.0,
+        "openalex": 0.5
+      },
+      "spread_pp": 47.5,
+      "outliers": {
+        "trends": 6.0,
+        "youtube": 48.0,
+        "openalex": 0.5
+      },
+      "explanation": "Public search lags behind news media adoption (media-public gap); Food terms: recipe searches use familiar spelling, media uses updated form"
+    },
+    {
+      "pair_id": 71,
+      "russian": "Prince of Kiev",
+      "ukrainian": "Prince of Kyiv",
+      "category": "historical",
+      "sources": {
+        "trends": 27.4,
+        "wikipedia": 1.8,
+        "openalex": 75.0
+      },
+      "spread_pp": 73.2,
+      "outliers": {
+        "wikipedia": 1.8,
+        "openalex": 75.0
+      },
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views; Historical terms: scholarship preserves traditional naming, public follows media"
+    }
+  ],
+  "agreements": [
+    {
+      "pair_id": 70,
+      "russian": "Vladimir the Great",
+      "ukrainian": "Volodymyr the Great",
+      "category": "historical",
+      "avg_adoption": 6.2,
+      "spread_pp": 8.3,
+      "n_sources": 3
+    }
+  ],
+  "summary": {
+    "pairs_analyzed": 54,
+    "median_spread_pp": 54.2,
+    "mean_spread_pp": 62.2,
+    "max_spread_pp": 100.0,
+    "n_disagreements": 51,
+    "n_agreements": 1
+  }
+}
