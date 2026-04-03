@@ -5,7 +5,11 @@ import siteStats from '../../data/site_stats.json';
 
 const grouped = pairs.categories.map(cat => ({
   ...cat,
-  pairs: pairs.pairs.filter(p => p.category === cat.id).sort((a, b) => b.total - a.total)
+  pairs: pairs.pairs.filter(p => p.category === cat.id).sort((a, b) => {
+    if (a.id === 1) return -1;
+    if (b.id === 1) return 1;
+    return b.total - a.total;
+  })
 })).filter(g => g.pairs.length > 0);
 
 const totalMentions = pairs.pairs.reduce((sum, p) => sum + p.total, 0);
@@ -66,10 +70,10 @@ function formatNum(n: number) {
 <body>
   <div class="app">
     <nav class="topbar">
-      <div class="topbar-logo">
-        <img src="/logo.svg" alt="Kyiv chestnut" style="height:28px; width:auto; margin-right:0.4rem;">
+      <a href="/uk/" class="topbar-logo" style="text-decoration:none;">
+        <img src="/logo.svg" alt="Kyiv chestnut" style="height:28px; width:auto; margin-right:0.4rem; filter: brightness(0) saturate(100%) invert(32%) sepia(80%) saturate(500%) hue-rotate(75deg) brightness(95%);">
         <span class="k">KYIV</span><span class="n">NOT</span><span class="k struck">KIEV</span>
-      </div>
+      </a>
       <div class="topbar-links">
         <a href="/">EN</a>
         <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
@@ -87,7 +91,7 @@ function formatNum(n: number) {
           </div>
           <div class={`sidebar-items ${ci === 0 ? 'open' : ''}`}>
             {cat.pairs.map((pair, pi) => (
-              <div class={`sidebar-item ${ci === 0 && pi === 0 ? 'active' : ''}`} data-pair-id={pair.id}>
+              <div class={`sidebar-item ${pair.id === 1 ? 'active' : ''}`} data-pair-id={pair.id}>
                 <div class="pair-name">
                   <span>{pair.ukrainian}</span>
                   <span class="old">{pair.russian}</span>
@@ -103,10 +107,14 @@ function formatNum(n: number) {
     </aside>
 
     <main class="main">
-      <div class="stats" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="stats" style="grid-template-columns: repeat(5, 1fr);">
         <div class="stat-card">
-          <div class="stat-value">{fmtBig(siteStats.total_records)}</div>
+          <div class="stat-value">{fmtBig(parseInt(siteStats.gdelt_articles) + parseInt(siteStats.reddit_posts) + parseInt(siteStats.youtube_videos) + parseInt(siteStats.wikipedia_pageviews) + parseInt(siteStats.trends_datapoints) + parseInt(siteStats.ngrams_datapoints))}</div>
           <div class="stat-label">Записів проаналізовано</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~1.2 PB</div>
+          <div class="stat-label">Даних оброблено</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">{pairs.pairs.length}</div>
@@ -384,12 +392,33 @@ function formatNum(n: number) {
       ngrams: 'Google Книги',
     };
 
-    let activeSource = 'trends';  // single source at a time
-    let activeSources = new Set(['trends']);  // kept as set for chart compatibility
+    let activeSource = 'trends';
+    let activeSources = new Set(['trends']);
     let hideRuDomains = false;
-    let showDualLines = true;  // show both Ukrainian (solid) and Russian (dashed)
+    let showDualLines = true;
     let showEvents = true;
-    let activePairId = 1;
+
+    function getPairFromUrl(): number {
+      const params = new URLSearchParams(window.location.search);
+      const p = params.get('pair');
+      if (p) {
+        const id = parseInt(p);
+        if (!isNaN(id) && (pairs as any).pairs.some((pp: any) => pp.id === id)) return id;
+      }
+      return 1;
+    }
+
+    function updateUrl(pairId: number) {
+      const url = new URL(window.location.href);
+      if (pairId === 1) {
+        url.searchParams.delete('pair');
+      } else {
+        url.searchParams.set('pair', String(pairId));
+      }
+      window.history.replaceState({}, '', url.toString());
+    }
+
+    let activePairId = getPairFromUrl();
 
     function drawChart() {
       const container = document.getElementById('chart')!;
@@ -744,20 +773,39 @@ function formatNum(n: number) {
       });
     });
 
+    function selectPair(pairId: number) {
+      activePairId = pairId;
+      updateUrl(pairId);
+      document.querySelectorAll('.sidebar-item').forEach(i => {
+        const id = parseInt((i as HTMLElement).dataset.pairId || '0');
+        i.classList.toggle('active', id === pairId);
+        if (id === pairId) {
+          const section = i.closest('.sidebar-section');
+          if (section) {
+            section.querySelector('.sidebar-header')?.classList.add('open');
+            section.querySelector('.sidebar-items')?.classList.add('open');
+          }
+        }
+      });
+      const pair = (pairs as any).pairs.find((p: any) => p.id === pairId);
+      if (pair) {
+        document.getElementById('chart-new')!.textContent = pair.ukrainian;
+        document.getElementById('chart-old')!.textContent = pair.russian;
+      }
+      drawChart();
+      drawWorldMap();
+      drawHoldoutTable();
+    }
+
     document.querySelectorAll('.sidebar-item').forEach(item => {
       item.addEventListener('click', () => {
-        document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-        activePairId = parseInt((item as HTMLElement).dataset.pairId || '1');
-        const nameEl = item.querySelector('.pair-name span:first-child');
-        const oldEl = item.querySelector('.old');
-        if (nameEl) document.getElementById('chart-new')!.textContent = nameEl.textContent;
-        if (oldEl) document.getElementById('chart-old')!.textContent = oldEl.textContent;
-        drawChart();
-        drawWorldMap();
-        drawHoldoutTable();
+        selectPair(parseInt((item as HTMLElement).dataset.pairId || '1'));
       });
     });
+
+    if (activePairId !== 1) {
+      selectPair(activePairId);
+    }
 
     // Source toggles — radio behavior (one at a time)
     document.querySelectorAll('.source-toggle').forEach(btn => {
