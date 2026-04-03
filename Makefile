@@ -2,7 +2,9 @@
 
 PROJECT_ID ?= kyivnotkiev-research
 REGION ?= us-central1
-DOCKER_IMAGE = $(REGION)-docker.pkg.dev/$(PROJECT_ID)/kyivnotkiev-pipeline/orchestrator
+MAX_PARALLEL ?= 3
+DATASET_DIR ?= ./dataset
+HF_REPO ?= IvanDobrovolsky/kyivnotkiev-dataset
 
 # ── Local Setup ─────────────────────────────────────────────────────────────
 
@@ -10,8 +12,6 @@ install:  ## Install Python dependencies locally
 	uv sync
 
 # ── GCP Infrastructure ──────────────────────────────────────────────────────
-
-setup: infra docker-build docker-push  ## Full GCP setup: Terraform + Docker
 
 infra:  ## Deploy GCP infrastructure with Terraform
 	cd infrastructure && terraform init && terraform apply -auto-approve \
@@ -28,17 +28,9 @@ infra-destroy:  ## Tear down GCP infrastructure
 		-var="project_id=$(PROJECT_ID)" \
 		-var="billing_account_id=$(BILLING_ACCOUNT_ID)"
 
-docker-build:  ## Build pipeline Docker image
-	docker build -t $(DOCKER_IMAGE):latest .
+# ── Data Ingestion ─────────────────────────────────────────────────────────
 
-docker-push:  ## Push Docker image to Artifact Registry
-	docker push $(DOCKER_IMAGE):latest
-
-# ── Data Ingestion (incremental — only fetches new/changed pairs) ───────────
-
-MAX_PARALLEL ?= 3
-
-ingest:  ## Run incremental ingestion for ALL enabled pairs, ALL sources (max 3 concurrent)
+ingest:  ## Run incremental ingestion for ALL sources (max 3 concurrent)
 	python -m pipeline.ingestion.orchestrator --all --max-parallel $(MAX_PARALLEL)
 
 ingest-pair:  ## Ingest one pair across all sources: make ingest-pair ID=1
@@ -50,66 +42,61 @@ ingest-source:  ## Ingest one source for all pairs: make ingest-source SOURCE=gd
 ingest-gdelt:  ## GDELT: BigQuery public → our BigQuery
 	python -m pipeline.ingestion.gdelt
 
-ingest-common-crawl:  ## Common Crawl: Spark on Dataproc (TB-scale web crawl)
-	gcloud dataproc jobs submit pyspark \
-		--cluster=kyivnotkiev-spark \
-		--region=$(REGION) \
-		--project=$(PROJECT_ID) \
-		pipeline/ingestion/common_crawl.py \
-		-- --config config/pipeline.yaml
-
-ingest-reddit:  ## Reddit: Arctic Shift bulk dump via Spark
-	python -m pipeline.ingestion.reddit
-
-ingest-wikipedia:  ## Wikipedia: pageviews + edit history
-	python -m pipeline.ingestion.wikipedia
-
-ingest-trends:  ## Google Trends: search interest
+ingest-trends:  ## Google Trends: search interest (global + country-level)
 	python -m pipeline.ingestion.trends
 
-ingest-ngrams:  ## Google Books Ngrams: book frequency (1800-2019)
-	python -m pipeline.ingestion.ngrams
+ingest-trends-countries:  ## Fill missing country-level Google Trends data
+	python -m pipeline.ingestion.trends_countries_fill
 
-ingest-youtube:  ## YouTube: Data API v3 video metadata
+ingest-wikipedia:  ## Wikipedia: pageviews API
+	python -m pipeline.ingestion.wikipedia
+
+ingest-reddit:  ## Reddit: Arctic Shift + Reddit search API
+	python -m pipeline.ingestion.reddit
+
+ingest-youtube:  ## YouTube: yt-dlp search + YouTube Data API
 	python -m pipeline.ingestion.youtube
 
-export-site:  ## Export BigQuery data to site JSON files
+ingest-ngrams:  ## Google Books Ngrams: book frequency (1900-2019)
+	python -m pipeline.ingestion.ngrams
+
+ingest-openalex:  ## OpenAlex: academic paper title mentions (FREE API)
+	python -m pipeline.ingestion.openalex
+
+# ── Export & Publish ───────────────────────────────────────────────────────
+
+export-site:  ## Export BigQuery → site JSON (manifest.json = single source of truth)
 	python -m pipeline.export_site_data
 
-# ── Processing ──────────────────────────────────────────────────────────────
+export-dataset:  ## Export BigQuery → publishable Parquet dataset
+	python -m pipeline.export_dataset --output-dir $(DATASET_DIR)
 
-preprocess:  ## Process raw data into analysis-ready format
-	python -m pipeline.transform.preprocess
-
-migrate:  ## Load existing local data into BigQuery
-	python -m pipeline.transform.migrate_local
+publish-dataset:  ## Upload dataset to Hugging Face Hub
+	huggingface-cli upload $(HF_REPO) $(DATASET_DIR)
 
 # ── Analysis ────────────────────────────────────────────────────────────────
 
-analyze:  ## Run ALL analysis (adoption, changepoints, regression, categories)
-	python -m pipeline.analysis.run_all
-
-analyze-adoption:  ## Compute adoption ratios per pair per source
-	python -m pipeline.analysis.adoption
-
-analyze-changepoints:  ## Detect change points with bootstrap CIs
-	python -m pipeline.analysis.changepoint
-
-analyze-regression:  ## Run logistic regression model
-	python -m pipeline.analysis.regression
+analyze:  ## Run ALL statistical tests from fresh BQ data
+	python -m pipeline.analysis.recompute_stats
 
 analyze-categories:  ## Run Kruskal-Wallis + pairwise tests
 	python -m pipeline.analysis.categories
 
-# ── Visualization ───────────────────────────────────────────────────────────
+# ── Site ────────────────────────────────────────────────────────────────────
 
-figures:  ## Generate ALL figures from BigQuery data
-	python -m pipeline.figures.generate_all
+site-build:  ## Build the Astro site
+	cd site && npm run build
+
+site-dev:  ## Run site dev server
+	cd site && npm run dev
 
 # ── Full Pipeline ───────────────────────────────────────────────────────────
 
-reproduce: setup ingest preprocess analyze figures  ## Full end-to-end reproduction
+reproduce: ingest export-site analyze site-build  ## Full end-to-end reproduction
 	@echo "Full reproduction complete"
+
+refresh: export-site site-build  ## Quick refresh: re-export BQ data + rebuild site
+	@echo "Site refreshed from BigQuery"
 
 # ── Quality & Utilities ─────────────────────────────────────────────────────
 
@@ -131,6 +118,7 @@ format:  ## Auto-format code
 clean:  ## Remove local processed files (does NOT touch BQ/GCS)
 	rm -rf data/processed/*.csv data/processed/*.parquet
 	rm -rf figures/*.png figures/*.html
+	rm -rf dataset/
 
 help:  ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
