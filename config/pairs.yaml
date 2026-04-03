@@ -380,9 +380,9 @@ pairs:
   category: sports
   russian: Shakhtar Donetsk
   ukrainian: Shakhtar Donetsk
-  enabled: true
+  enabled: false
   is_control: true
-  notes: Control — same in both languages
+  notes: Control — same in both languages, no adoption signal
 - id: 34
   category: sports
   russian: Kiev ballet
@@ -482,8 +482,9 @@ pairs:
   category: people
   russian: Andrei Shevchenko
   ukrainian: Andriy Shevchenko
-  enabled: true
+  enabled: false
   is_control: false
+  notes: Insufficient data quality — borderline adoption signal
 - id: 63
   category: people
   russian: Vitali Klitschko
@@ -524,9 +525,9 @@ pairs:
   category: people
   russian: Sergei Rebrov
   ukrainian: Serhiy Rebrov
-  enabled: true
+  enabled: false
   is_control: false
-  notes: Football manager, currently coaches Ukraine national team
+  notes: Insufficient data quality — too few mentions for reliable adoption signal
 - id: 70
   category: people
   russian: Mykola Gogol
