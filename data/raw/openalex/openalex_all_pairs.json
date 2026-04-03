@@ -6,66 +6,6 @@
     "category": "geographical",
     "yearly": [
       {
-        "year": 2000,
-        "russian_count": 0,
-        "ukrainian_count": 9,
-        "total": 9
-      },
-      {
-        "year": 2001,
-        "russian_count": 0,
-        "ukrainian_count": 5,
-        "total": 5
-      },
-      {
-        "year": 2002,
-        "russian_count": 34,
-        "ukrainian_count": 10,
-        "total": 44
-      },
-      {
-        "year": 2003,
-        "russian_count": 50,
-        "ukrainian_count": 13,
-        "total": 63
-      },
-      {
-        "year": 2004,
-        "russian_count": 0,
-        "ukrainian_count": 16,
-        "total": 16
-      },
-      {
-        "year": 2005,
-        "russian_count": 0,
-        "ukrainian_count": 25,
-        "total": 25
-      },
-      {
-        "year": 2006,
-        "russian_count": 38,
-        "ukrainian_count": 17,
-        "total": 55
-      },
-      {
-        "year": 2007,
-        "russian_count": 37,
-        "ukrainian_count": 18,
-        "total": 55
-      },
-      {
-        "year": 2008,
-        "russian_count": 44,
-        "ukrainian_count": 25,
-        "total": 69
-      },
-      {
-        "year": 2009,
-        "russian_count": 46,
-        "ukrainian_count": 23,
-        "total": 69
-      },
-      {
         "year": 2010,
         "russian_count": 46,
         "ukrainian_count": 38,
@@ -168,8 +108,8 @@
         "total": 73
       }
     ],
-    "total_russian": 1613,
-    "total_ukrainian": 4583
+    "total_russian": 1364,
+    "total_ukrainian": 4422
   },
   {
     "pair_id": 2,
@@ -177,66 +117,6 @@
     "ukrainian_term": "Kharkiv",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 7,
-        "ukrainian_count": 3,
-        "total": 10
-      },
-      {
-        "year": 2001,
-        "russian_count": 10,
-        "ukrainian_count": 5,
-        "total": 15
-      },
-      {
-        "year": 2002,
-        "russian_count": 13,
-        "ukrainian_count": 5,
-        "total": 18
-      },
-      {
-        "year": 2003,
-        "russian_count": 8,
-        "ukrainian_count": 3,
-        "total": 11
-      },
-      {
-        "year": 2004,
-        "russian_count": 14,
-        "ukrainian_count": 5,
-        "total": 19
-      },
-      {
-        "year": 2005,
-        "russian_count": 9,
-        "ukrainian_count": 7,
-        "total": 16
-      },
-      {
-        "year": 2006,
-        "russian_count": 6,
-        "ukrainian_count": 8,
-        "total": 14
-      },
-      {
-        "year": 2007,
-        "russian_count": 13,
-        "ukrainian_count": 16,
-        "total": 29
-      },
-      {
-        "year": 2008,
-        "russian_count": 17,
-        "ukrainian_count": 7,
-        "total": 24
-      },
-      {
-        "year": 2009,
-        "russian_count": 11,
-        "ukrainian_count": 21,
-        "total": 32
-      },
       {
         "year": 2010,
         "russian_count": 17,
@@ -340,8 +220,8 @@
         "total": 39
       }
     ],
-    "total_russian": 467,
-    "total_ukrainian": 2180
+    "total_russian": 359,
+    "total_ukrainian": 2100
   },
   {
     "pair_id": 3,
@@ -349,66 +229,6 @@
     "ukrainian_term": "Odesa",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 15,
-        "ukrainian_count": 1,
-        "total": 16
-      },
-      {
-        "year": 2001,
-        "russian_count": 22,
-        "ukrainian_count": 1,
-        "total": 23
-      },
-      {
-        "year": 2002,
-        "russian_count": 20,
-        "ukrainian_count": 1,
-        "total": 21
-      },
-      {
-        "year": 2003,
-        "russian_count": 27,
-        "ukrainian_count": 0,
-        "total": 27
-      },
-      {
-        "year": 2004,
-        "russian_count": 20,
-        "ukrainian_count": 0,
-        "total": 20
-      },
-      {
-        "year": 2005,
-        "russian_count": 29,
-        "ukrainian_count": 1,
-        "total": 30
-      },
-      {
-        "year": 2006,
-        "russian_count": 45,
-        "ukrainian_count": 3,
-        "total": 48
-      },
-      {
-        "year": 2007,
-        "russian_count": 46,
-        "ukrainian_count": 8,
-        "total": 54
-      },
-      {
-        "year": 2008,
-        "russian_count": 52,
-        "ukrainian_count": 5,
-        "total": 57
-      },
-      {
-        "year": 2009,
-        "russian_count": 37,
-        "ukrainian_count": 2,
-        "total": 39
-      },
       {
         "year": 2010,
         "russian_count": 53,
@@ -512,8 +332,8 @@
         "total": 27
       }
     ],
-    "total_russian": 1834,
-    "total_ukrainian": 766
+    "total_russian": 1521,
+    "total_ukrainian": 744
   },
   {
     "pair_id": 4,
@@ -521,66 +341,6 @@
     "ukrainian_term": "Lviv",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 6,
-        "ukrainian_count": 8,
-        "total": 14
-      },
-      {
-        "year": 2001,
-        "russian_count": 0,
-        "ukrainian_count": 11,
-        "total": 11
-      },
-      {
-        "year": 2002,
-        "russian_count": 6,
-        "ukrainian_count": 4,
-        "total": 10
-      },
-      {
-        "year": 2003,
-        "russian_count": 0,
-        "ukrainian_count": 18,
-        "total": 18
-      },
-      {
-        "year": 2004,
-        "russian_count": 4,
-        "ukrainian_count": 13,
-        "total": 17
-      },
-      {
-        "year": 2005,
-        "russian_count": 10,
-        "ukrainian_count": 11,
-        "total": 21
-      },
-      {
-        "year": 2006,
-        "russian_count": 13,
-        "ukrainian_count": 12,
-        "total": 25
-      },
-      {
-        "year": 2007,
-        "russian_count": 14,
-        "ukrainian_count": 16,
-        "total": 30
-      },
-      {
-        "year": 2008,
-        "russian_count": 11,
-        "ukrainian_count": 24,
-        "total": 35
-      },
-      {
-        "year": 2009,
-        "russian_count": 14,
-        "ukrainian_count": 40,
-        "total": 54
-      },
       {
         "year": 2010,
         "russian_count": 11,
@@ -684,8 +444,8 @@
         "total": 30
       }
     ],
-    "total_russian": 346,
-    "total_ukrainian": 3379
+    "total_russian": 268,
+    "total_ukrainian": 3222
   },
   {
     "pair_id": 5,
@@ -693,42 +453,6 @@
     "ukrainian_term": "Zaporizhzhia",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2001,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2002,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2003,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2004,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2005,
-        "russian_count": 1,
-        "ukrainian_count": 1,
-        "total": 2
-      },
-      {
-        "year": 2009,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
       {
         "year": 2010,
         "russian_count": 2,
@@ -832,8 +556,8 @@
         "total": 6
       }
     ],
-    "total_russian": 89,
-    "total_ukrainian": 339
+    "total_russian": 81,
+    "total_ukrainian": 338
   },
   {
     "pair_id": 6,
@@ -841,54 +565,6 @@
     "ukrainian_term": "Mykolaiv",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 4,
-        "ukrainian_count": 1,
-        "total": 5
-      },
-      {
-        "year": 2001,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
-      {
-        "year": 2002,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2003,
-        "russian_count": 7,
-        "ukrainian_count": 0,
-        "total": 7
-      },
-      {
-        "year": 2005,
-        "russian_count": 3,
-        "ukrainian_count": 4,
-        "total": 7
-      },
-      {
-        "year": 2007,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2008,
-        "russian_count": 6,
-        "ukrainian_count": 0,
-        "total": 6
-      },
-      {
-        "year": 2009,
-        "russian_count": 5,
-        "ukrainian_count": 1,
-        "total": 6
-      },
       {
         "year": 2010,
         "russian_count": 7,
@@ -992,8 +668,8 @@
         "total": 16
       }
     ],
-    "total_russian": 192,
-    "total_ukrainian": 267
+    "total_russian": 164,
+    "total_ukrainian": 259
   },
   {
     "pair_id": 7,
@@ -1001,60 +677,6 @@
     "ukrainian_term": "Dnipro",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 3,
-        "ukrainian_count": 1,
-        "total": 4
-      },
-      {
-        "year": 2002,
-        "russian_count": 0,
-        "ukrainian_count": 2,
-        "total": 2
-      },
-      {
-        "year": 2003,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2004,
-        "russian_count": 0,
-        "ukrainian_count": 2,
-        "total": 2
-      },
-      {
-        "year": 2005,
-        "russian_count": 3,
-        "ukrainian_count": 4,
-        "total": 7
-      },
-      {
-        "year": 2006,
-        "russian_count": 0,
-        "ukrainian_count": 5,
-        "total": 5
-      },
-      {
-        "year": 2007,
-        "russian_count": 2,
-        "ukrainian_count": 1,
-        "total": 3
-      },
-      {
-        "year": 2008,
-        "russian_count": 3,
-        "ukrainian_count": 1,
-        "total": 4
-      },
-      {
-        "year": 2009,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
       {
         "year": 2010,
         "russian_count": 2,
@@ -1158,8 +780,8 @@
         "total": 27
       }
     ],
-    "total_russian": 112,
-    "total_ukrainian": 974
+    "total_russian": 97,
+    "total_ukrainian": 958
   },
   {
     "pair_id": 8,
@@ -1167,36 +789,6 @@
     "ukrainian_term": "Vinnytsia",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2001,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2002,
-        "russian_count": 1,
-        "ukrainian_count": 1,
-        "total": 2
-      },
-      {
-        "year": 2004,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2005,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2009,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
       {
         "year": 2011,
         "russian_count": 3,
@@ -1294,8 +886,8 @@
         "total": 5
       }
     ],
-    "total_russian": 88,
-    "total_ukrainian": 369
+    "total_russian": 80,
+    "total_ukrainian": 368
   },
   {
     "pair_id": 9,
@@ -1303,54 +895,6 @@
     "ukrainian_term": "Rivne",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2001,
-        "russian_count": 2,
-        "ukrainian_count": 2,
-        "total": 4
-      },
-      {
-        "year": 2004,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2005,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2006,
-        "russian_count": 8,
-        "ukrainian_count": 0,
-        "total": 8
-      },
-      {
-        "year": 2007,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
-      {
-        "year": 2008,
-        "russian_count": 7,
-        "ukrainian_count": 1,
-        "total": 8
-      },
-      {
-        "year": 2009,
-        "russian_count": 8,
-        "ukrainian_count": 1,
-        "total": 9
-      },
       {
         "year": 2010,
         "russian_count": 10,
@@ -1454,8 +998,8 @@
         "total": 80
       }
     ],
-    "total_russian": 412,
-    "total_ukrainian": 369
+    "total_russian": 380,
+    "total_ukrainian": 364
   },
   {
     "pair_id": 10,
@@ -1463,66 +1007,6 @@
     "ukrainian_term": "Chornobyl",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 187,
-        "ukrainian_count": 21,
-        "total": 208
-      },
-      {
-        "year": 2001,
-        "russian_count": 192,
-        "ukrainian_count": 19,
-        "total": 211
-      },
-      {
-        "year": 2002,
-        "russian_count": 234,
-        "ukrainian_count": 14,
-        "total": 248
-      },
-      {
-        "year": 2003,
-        "russian_count": 191,
-        "ukrainian_count": 10,
-        "total": 201
-      },
-      {
-        "year": 2004,
-        "russian_count": 155,
-        "ukrainian_count": 3,
-        "total": 158
-      },
-      {
-        "year": 2005,
-        "russian_count": 166,
-        "ukrainian_count": 12,
-        "total": 178
-      },
-      {
-        "year": 2006,
-        "russian_count": 287,
-        "ukrainian_count": 18,
-        "total": 305
-      },
-      {
-        "year": 2007,
-        "russian_count": 198,
-        "ukrainian_count": 8,
-        "total": 206
-      },
-      {
-        "year": 2008,
-        "russian_count": 151,
-        "ukrainian_count": 10,
-        "total": 161
-      },
-      {
-        "year": 2009,
-        "russian_count": 180,
-        "ukrainian_count": 3,
-        "total": 183
-      },
       {
         "year": 2010,
         "russian_count": 135,
@@ -1626,8 +1110,8 @@
         "total": 58
       }
     ],
-    "total_russian": 5390,
-    "total_ukrainian": 863
+    "total_russian": 3449,
+    "total_ukrainian": 745
   },
   {
     "pair_id": 11,
@@ -1635,54 +1119,6 @@
     "ukrainian_term": "Luhansk",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2002,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2003,
-        "russian_count": 0,
-        "ukrainian_count": 2,
-        "total": 2
-      },
-      {
-        "year": 2004,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2005,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2007,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2008,
-        "russian_count": 1,
-        "ukrainian_count": 2,
-        "total": 3
-      },
-      {
-        "year": 2009,
-        "russian_count": 5,
-        "ukrainian_count": 0,
-        "total": 5
-      },
       {
         "year": 2010,
         "russian_count": 1,
@@ -1786,8 +1222,8 @@
         "total": 14
       }
     ],
-    "total_russian": 148,
-    "total_ukrainian": 302
+    "total_russian": 138,
+    "total_ukrainian": 296
   },
   {
     "pair_id": 15,
@@ -1795,66 +1231,6 @@
     "ukrainian_term": "Dnipro",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 29,
-        "ukrainian_count": 1,
-        "total": 30
-      },
-      {
-        "year": 2001,
-        "russian_count": 11,
-        "ukrainian_count": 0,
-        "total": 11
-      },
-      {
-        "year": 2002,
-        "russian_count": 17,
-        "ukrainian_count": 2,
-        "total": 19
-      },
-      {
-        "year": 2003,
-        "russian_count": 24,
-        "ukrainian_count": 0,
-        "total": 24
-      },
-      {
-        "year": 2004,
-        "russian_count": 12,
-        "ukrainian_count": 2,
-        "total": 14
-      },
-      {
-        "year": 2005,
-        "russian_count": 7,
-        "ukrainian_count": 4,
-        "total": 11
-      },
-      {
-        "year": 2006,
-        "russian_count": 26,
-        "ukrainian_count": 5,
-        "total": 31
-      },
-      {
-        "year": 2007,
-        "russian_count": 18,
-        "ukrainian_count": 1,
-        "total": 19
-      },
-      {
-        "year": 2008,
-        "russian_count": 18,
-        "ukrainian_count": 1,
-        "total": 19
-      },
-      {
-        "year": 2009,
-        "russian_count": 20,
-        "ukrainian_count": 0,
-        "total": 20
-      },
       {
         "year": 2010,
         "russian_count": 27,
@@ -1958,8 +1334,8 @@
         "total": 34
       }
     ],
-    "total_russian": 1184,
-    "total_ukrainian": 974
+    "total_russian": 1002,
+    "total_ukrainian": 958
   },
   {
     "pair_id": 16,
@@ -1967,66 +1343,6 @@
     "ukrainian_term": "Dnister",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 4,
-        "ukrainian_count": 3,
-        "total": 7
-      },
-      {
-        "year": 2001,
-        "russian_count": 4,
-        "ukrainian_count": 1,
-        "total": 5
-      },
-      {
-        "year": 2002,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2003,
-        "russian_count": 4,
-        "ukrainian_count": 0,
-        "total": 4
-      },
-      {
-        "year": 2004,
-        "russian_count": 6,
-        "ukrainian_count": 1,
-        "total": 7
-      },
-      {
-        "year": 2005,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
-      {
-        "year": 2006,
-        "russian_count": 7,
-        "ukrainian_count": 2,
-        "total": 9
-      },
-      {
-        "year": 2007,
-        "russian_count": 4,
-        "ukrainian_count": 0,
-        "total": 4
-      },
-      {
-        "year": 2008,
-        "russian_count": 5,
-        "ukrainian_count": 2,
-        "total": 7
-      },
-      {
-        "year": 2009,
-        "russian_count": 9,
-        "ukrainian_count": 2,
-        "total": 11
-      },
       {
         "year": 2010,
         "russian_count": 10,
@@ -2130,8 +1446,8 @@
         "total": 8
       }
     ],
-    "total_russian": 699,
-    "total_ukrainian": 143
+    "total_russian": 653,
+    "total_ukrainian": 131
   },
   {
     "pair_id": 17,
@@ -2139,66 +1455,6 @@
     "ukrainian_term": "Donbas",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 4,
-        "ukrainian_count": 11,
-        "total": 15
-      },
-      {
-        "year": 2001,
-        "russian_count": 0,
-        "ukrainian_count": 2,
-        "total": 2
-      },
-      {
-        "year": 2002,
-        "russian_count": 6,
-        "ukrainian_count": 6,
-        "total": 12
-      },
-      {
-        "year": 2003,
-        "russian_count": 3,
-        "ukrainian_count": 15,
-        "total": 18
-      },
-      {
-        "year": 2004,
-        "russian_count": 0,
-        "ukrainian_count": 3,
-        "total": 3
-      },
-      {
-        "year": 2005,
-        "russian_count": 3,
-        "ukrainian_count": 3,
-        "total": 6
-      },
-      {
-        "year": 2006,
-        "russian_count": 8,
-        "ukrainian_count": 4,
-        "total": 12
-      },
-      {
-        "year": 2007,
-        "russian_count": 4,
-        "ukrainian_count": 5,
-        "total": 9
-      },
-      {
-        "year": 2008,
-        "russian_count": 0,
-        "ukrainian_count": 5,
-        "total": 5
-      },
-      {
-        "year": 2009,
-        "russian_count": 7,
-        "ukrainian_count": 5,
-        "total": 12
-      },
       {
         "year": 2010,
         "russian_count": 10,
@@ -2302,8 +1558,8 @@
         "total": 24
       }
     ],
-    "total_russian": 759,
-    "total_ukrainian": 809
+    "total_russian": 724,
+    "total_ukrainian": 750
   },
   {
     "pair_id": 19,
@@ -2311,18 +1567,6 @@
     "ukrainian_term": "Zakarpattia",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2007,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
       {
         "year": 2010,
         "russian_count": 0,
@@ -2426,8 +1670,8 @@
         "total": 7
       }
     ],
-    "total_russian": 1,
-    "total_ukrainian": 154
+    "total_russian": 0,
+    "total_ukrainian": 153
   },
   {
     "pair_id": 20,
@@ -2435,18 +1679,6 @@
     "ukrainian_term": "Podillia",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2007,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2009,
-        "russian_count": 1,
-        "ukrainian_count": 2,
-        "total": 3
-      },
       {
         "year": 2010,
         "russian_count": 0,
@@ -2550,8 +1782,8 @@
         "total": 3
       }
     ],
-    "total_russian": 5,
-    "total_ukrainian": 295
+    "total_russian": 4,
+    "total_ukrainian": 292
   },
   {
     "pair_id": 38,
@@ -2559,48 +1791,6 @@
     "ukrainian_term": "Chernihiv",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
-      {
-        "year": 2003,
-        "russian_count": 2,
-        "ukrainian_count": 2,
-        "total": 4
-      },
-      {
-        "year": 2004,
-        "russian_count": 4,
-        "ukrainian_count": 0,
-        "total": 4
-      },
-      {
-        "year": 2005,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2006,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
-      {
-        "year": 2008,
-        "russian_count": 2,
-        "ukrainian_count": 2,
-        "total": 4
-      },
-      {
-        "year": 2009,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
       {
         "year": 2010,
         "russian_count": 0,
@@ -2698,8 +1888,8 @@
         "total": 11
       }
     ],
-    "total_russian": 77,
-    "total_ukrainian": 418
+    "total_russian": 63,
+    "total_ukrainian": 412
   },
   {
     "pair_id": 39,
@@ -2707,54 +1897,6 @@
     "ukrainian_term": "Chernivtsi",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 0,
-        "ukrainian_count": 2,
-        "total": 2
-      },
-      {
-        "year": 2001,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2002,
-        "russian_count": 0,
-        "ukrainian_count": 4,
-        "total": 4
-      },
-      {
-        "year": 2004,
-        "russian_count": 0,
-        "ukrainian_count": 2,
-        "total": 2
-      },
-      {
-        "year": 2005,
-        "russian_count": 1,
-        "ukrainian_count": 1,
-        "total": 2
-      },
-      {
-        "year": 2006,
-        "russian_count": 1,
-        "ukrainian_count": 5,
-        "total": 6
-      },
-      {
-        "year": 2007,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2009,
-        "russian_count": 0,
-        "ukrainian_count": 4,
-        "total": 4
-      },
       {
         "year": 2010,
         "russian_count": 0,
@@ -2858,8 +2000,8 @@
         "total": 7
       }
     ],
-    "total_russian": 5,
-    "total_ukrainian": 484
+    "total_russian": 3,
+    "total_ukrainian": 464
   },
   {
     "pair_id": 40,
@@ -2867,60 +2009,6 @@
     "ukrainian_term": "Zhytomyr",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 0,
-        "ukrainian_count": 2,
-        "total": 2
-      },
-      {
-        "year": 2001,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2002,
-        "russian_count": 1,
-        "ukrainian_count": 2,
-        "total": 3
-      },
-      {
-        "year": 2003,
-        "russian_count": 1,
-        "ukrainian_count": 1,
-        "total": 2
-      },
-      {
-        "year": 2004,
-        "russian_count": 2,
-        "ukrainian_count": 3,
-        "total": 5
-      },
-      {
-        "year": 2006,
-        "russian_count": 1,
-        "ukrainian_count": 2,
-        "total": 3
-      },
-      {
-        "year": 2007,
-        "russian_count": 0,
-        "ukrainian_count": 4,
-        "total": 4
-      },
-      {
-        "year": 2008,
-        "russian_count": 0,
-        "ukrainian_count": 5,
-        "total": 5
-      },
-      {
-        "year": 2009,
-        "russian_count": 2,
-        "ukrainian_count": 5,
-        "total": 7
-      },
       {
         "year": 2010,
         "russian_count": 1,
@@ -3024,8 +2112,8 @@
         "total": 13
       }
     ],
-    "total_russian": 50,
-    "total_ukrainian": 623
+    "total_russian": 41,
+    "total_ukrainian": 599
   },
   {
     "pair_id": 41,
@@ -3033,30 +2121,6 @@
     "ukrainian_term": "Cherkasy",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2005,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2008,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2009,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
       {
         "year": 2010,
         "russian_count": 1,
@@ -3160,8 +2224,8 @@
         "total": 5
       }
     ],
-    "total_russian": 43,
-    "total_ukrainian": 294
+    "total_russian": 39,
+    "total_ukrainian": 293
   },
   {
     "pair_id": 42,
@@ -3169,54 +2233,6 @@
     "ukrainian_term": "Uzhhorod",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2002,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2003,
-        "russian_count": 2,
-        "ukrainian_count": 1,
-        "total": 3
-      },
-      {
-        "year": 2004,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2005,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2006,
-        "russian_count": 5,
-        "ukrainian_count": 0,
-        "total": 5
-      },
-      {
-        "year": 2007,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2008,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
       {
         "year": 2010,
         "russian_count": 0,
@@ -3314,8 +2330,8 @@
         "total": 1
       }
     ],
-    "total_russian": 62,
-    "total_ukrainian": 128
+    "total_russian": 49,
+    "total_ukrainian": 126
   },
   {
     "pair_id": 43,
@@ -3323,42 +2339,6 @@
     "ukrainian_term": "Kremenchuk",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2001,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2003,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2007,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2008,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2009,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
       {
         "year": 2010,
         "russian_count": 0,
@@ -3456,7 +2436,7 @@
         "total": 2
       }
     ],
-    "total_russian": 43,
+    "total_russian": 36,
     "total_ukrainian": 69
   },
   {
@@ -3465,24 +2445,6 @@
     "ukrainian_term": "Kropyvnytskyi",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2003,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2008,
-        "russian_count": 4,
-        "ukrainian_count": 0,
-        "total": 4
-      },
       {
         "year": 2010,
         "russian_count": 1,
@@ -3580,7 +2542,7 @@
         "total": 4
       }
     ],
-    "total_russian": 75,
+    "total_russian": 69,
     "total_ukrainian": 24
   },
   {
@@ -3589,54 +2551,6 @@
     "ukrainian_term": "Ternopil",
     "category": "geographical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2001,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2003,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2004,
-        "russian_count": 1,
-        "ukrainian_count": 1,
-        "total": 2
-      },
-      {
-        "year": 2005,
-        "russian_count": 0,
-        "ukrainian_count": 6,
-        "total": 6
-      },
-      {
-        "year": 2006,
-        "russian_count": 0,
-        "ukrainian_count": 4,
-        "total": 4
-      },
-      {
-        "year": 2008,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2009,
-        "russian_count": 0,
-        "ukrainian_count": 3,
-        "total": 3
-      },
       {
         "year": 2010,
         "russian_count": 0,
@@ -3740,8 +2654,8 @@
         "total": 5
       }
     ],
-    "total_russian": 14,
-    "total_ukrainian": 502
+    "total_russian": 12,
+    "total_ukrainian": 485
   },
   {
     "pair_id": 21,
@@ -3771,42 +2685,6 @@
     "ukrainian_term": "Borshch",
     "category": "food",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2001,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2003,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2004,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2007,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2008,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
       {
         "year": 2010,
         "russian_count": 1,
@@ -3904,7 +2782,7 @@
         "total": 7
       }
     ],
-    "total_russian": 50,
+    "total_russian": 43,
     "total_ukrainian": 16
   },
   {
@@ -3913,48 +2791,6 @@
     "ukrainian_term": "Borshch",
     "category": "food",
     "yearly": [
-      {
-        "year": 2001,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2004,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2005,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2006,
-        "russian_count": 5,
-        "ukrainian_count": 0,
-        "total": 5
-      },
-      {
-        "year": 2007,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
-      {
-        "year": 2008,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
-      {
-        "year": 2009,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
       {
         "year": 2010,
         "russian_count": 1,
@@ -4034,7 +2870,7 @@
         "total": 301
       }
     ],
-    "total_russian": 2007,
+    "total_russian": 1990,
     "total_ukrainian": 16
   },
   {
@@ -4065,12 +2901,6 @@
     "ukrainian_term": "Kyiv Pechersk Lavra",
     "category": "landmarks",
     "yearly": [
-      {
-        "year": 2006,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
       {
         "year": 2014,
         "russian_count": 2,
@@ -4145,7 +2975,7 @@
       }
     ],
     "total_russian": 10,
-    "total_ukrainian": 71
+    "total_ukrainian": 70
   },
   {
     "pair_id": 25,
@@ -4187,66 +3017,6 @@
     "ukrainian_term": "Chornobyl Exclusion Zone",
     "category": "landmarks",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 5,
-        "ukrainian_count": 0,
-        "total": 5
-      },
-      {
-        "year": 2001,
-        "russian_count": 9,
-        "ukrainian_count": 4,
-        "total": 13
-      },
-      {
-        "year": 2002,
-        "russian_count": 4,
-        "ukrainian_count": 2,
-        "total": 6
-      },
-      {
-        "year": 2003,
-        "russian_count": 10,
-        "ukrainian_count": 1,
-        "total": 11
-      },
-      {
-        "year": 2004,
-        "russian_count": 4,
-        "ukrainian_count": 0,
-        "total": 4
-      },
-      {
-        "year": 2005,
-        "russian_count": 12,
-        "ukrainian_count": 2,
-        "total": 14
-      },
-      {
-        "year": 2006,
-        "russian_count": 12,
-        "ukrainian_count": 0,
-        "total": 12
-      },
-      {
-        "year": 2007,
-        "russian_count": 1,
-        "ukrainian_count": 2,
-        "total": 3
-      },
-      {
-        "year": 2008,
-        "russian_count": 12,
-        "ukrainian_count": 0,
-        "total": 12
-      },
-      {
-        "year": 2009,
-        "russian_count": 19,
-        "ukrainian_count": 0,
-        "total": 19
-      },
       {
         "year": 2010,
         "russian_count": 8,
@@ -4350,8 +3120,8 @@
         "total": 8
       }
     ],
-    "total_russian": 391,
-    "total_ukrainian": 138
+    "total_russian": 303,
+    "total_ukrainian": 127
   },
   {
     "pair_id": 54,
@@ -4359,42 +3129,6 @@
     "ukrainian_term": "Babyn Yar",
     "category": "landmarks",
     "yearly": [
-      {
-        "year": 2002,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
-      {
-        "year": 2003,
-        "russian_count": 6,
-        "ukrainian_count": 0,
-        "total": 6
-      },
-      {
-        "year": 2004,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2005,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2007,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
-      {
-        "year": 2008,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
       {
         "year": 2010,
         "russian_count": 1,
@@ -4498,7 +3232,7 @@
         "total": 1
       }
     ],
-    "total_russian": 95,
+    "total_russian": 77,
     "total_ukrainian": 83
   },
   {
@@ -4539,66 +3273,6 @@
     "ukrainian_term": "Ukraine",
     "category": "country",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 722,
-        "ukrainian_count": 722,
-        "total": 1444
-      },
-      {
-        "year": 2001,
-        "russian_count": 695,
-        "ukrainian_count": 695,
-        "total": 1390
-      },
-      {
-        "year": 2002,
-        "russian_count": 707,
-        "ukrainian_count": 707,
-        "total": 1414
-      },
-      {
-        "year": 2003,
-        "russian_count": 731,
-        "ukrainian_count": 731,
-        "total": 1462
-      },
-      {
-        "year": 2004,
-        "russian_count": 807,
-        "ukrainian_count": 807,
-        "total": 1614
-      },
-      {
-        "year": 2005,
-        "russian_count": 900,
-        "ukrainian_count": 900,
-        "total": 1800
-      },
-      {
-        "year": 2006,
-        "russian_count": 1078,
-        "ukrainian_count": 1078,
-        "total": 2156
-      },
-      {
-        "year": 2007,
-        "russian_count": 1151,
-        "ukrainian_count": 1151,
-        "total": 2302
-      },
-      {
-        "year": 2008,
-        "russian_count": 1353,
-        "ukrainian_count": 1353,
-        "total": 2706
-      },
-      {
-        "year": 2009,
-        "russian_count": 1844,
-        "ukrainian_count": 1844,
-        "total": 3688
-      },
       {
         "year": 2010,
         "russian_count": 1982,
@@ -4702,8 +3376,8 @@
         "total": 7490
       }
     ],
-    "total_russian": 181823,
-    "total_ukrainian": 181823
+    "total_russian": 171835,
+    "total_ukrainian": 171835
   },
   {
     "pair_id": 28,
@@ -4711,42 +3385,6 @@
     "ukrainian_term": "Kyiv National University",
     "category": "institutional",
     "yearly": [
-      {
-        "year": 2003,
-        "russian_count": 0,
-        "ukrainian_count": 2,
-        "total": 2
-      },
-      {
-        "year": 2004,
-        "russian_count": 0,
-        "ukrainian_count": 3,
-        "total": 3
-      },
-      {
-        "year": 2006,
-        "russian_count": 1,
-        "ukrainian_count": 1,
-        "total": 2
-      },
-      {
-        "year": 2007,
-        "russian_count": 0,
-        "ukrainian_count": 2,
-        "total": 2
-      },
-      {
-        "year": 2008,
-        "russian_count": 1,
-        "ukrainian_count": 1,
-        "total": 2
-      },
-      {
-        "year": 2009,
-        "russian_count": 0,
-        "ukrainian_count": 3,
-        "total": 3
-      },
       {
         "year": 2010,
         "russian_count": 2,
@@ -4844,8 +3482,8 @@
         "total": 15
       }
     ],
-    "total_russian": 18,
-    "total_ukrainian": 227
+    "total_russian": 16,
+    "total_ukrainian": 215
   },
   {
     "pair_id": 29,
@@ -4853,48 +3491,6 @@
     "ukrainian_term": "Kharkiv University",
     "category": "institutional",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2002,
-        "russian_count": 3,
-        "ukrainian_count": 1,
-        "total": 4
-      },
-      {
-        "year": 2004,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2005,
-        "russian_count": 2,
-        "ukrainian_count": 1,
-        "total": 3
-      },
-      {
-        "year": 2007,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2008,
-        "russian_count": 5,
-        "ukrainian_count": 0,
-        "total": 5
-      },
-      {
-        "year": 2009,
-        "russian_count": 2,
-        "ukrainian_count": 3,
-        "total": 5
-      },
       {
         "year": 2010,
         "russian_count": 2,
@@ -4992,8 +3588,8 @@
         "total": 13
       }
     ],
-    "total_russian": 41,
-    "total_ukrainian": 291
+    "total_russian": 25,
+    "total_ukrainian": 285
   },
   {
     "pair_id": 30,
@@ -5001,24 +3597,6 @@
     "ukrainian_term": "Kyiv Polytechnic",
     "category": "institutional",
     "yearly": [
-      {
-        "year": 2004,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2008,
-        "russian_count": 1,
-        "ukrainian_count": 1,
-        "total": 2
-      },
-      {
-        "year": 2009,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
       {
         "year": 2011,
         "russian_count": 0,
@@ -5098,8 +3676,8 @@
         "total": 7
       }
     ],
-    "total_russian": 4,
-    "total_ukrainian": 54
+    "total_russian": 1,
+    "total_ukrainian": 52
   },
   {
     "pair_id": 31,
@@ -5159,18 +3737,6 @@
     "ukrainian_term": "Lviv Polytechnic",
     "category": "institutional",
     "yearly": [
-      {
-        "year": 2003,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2009,
-        "russian_count": 0,
-        "ukrainian_count": 2,
-        "total": 2
-      },
       {
         "year": 2011,
         "russian_count": 1,
@@ -5251,7 +3817,7 @@
       }
     ],
     "total_russian": 4,
-    "total_ukrainian": 84
+    "total_ukrainian": 81
   },
   {
     "pair_id": 58,
@@ -5259,12 +3825,6 @@
     "ukrainian_term": "Odesa National University",
     "category": "institutional",
     "yearly": [
-      {
-        "year": 2006,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
       {
         "year": 2010,
         "russian_count": 2,
@@ -5362,7 +3922,7 @@
         "total": 2
       }
     ],
-    "total_russian": 104,
+    "total_russian": 103,
     "total_ukrainian": 66
   },
   {
@@ -5372,19 +3932,13 @@
     "category": "sports",
     "yearly": [
       {
-        "year": 2002,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
         "year": 2011,
         "russian_count": 1,
         "ukrainian_count": 0,
         "total": 1
       }
     ],
-    "total_russian": 2,
+    "total_russian": 1,
     "total_ukrainian": 0
   },
   {
@@ -5393,12 +3947,6 @@
     "ukrainian_term": "Kyiv ballet",
     "category": "sports",
     "yearly": [
-      {
-        "year": 2007,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
       {
         "year": 2016,
         "russian_count": 0,
@@ -5442,7 +3990,7 @@
         "total": 4
       }
     ],
-    "total_russian": 5,
+    "total_russian": 3,
     "total_ukrainian": 10
   },
   {
@@ -5473,66 +4021,6 @@
     "ukrainian_term": "Kyivan Rus",
     "category": "historical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
-      {
-        "year": 2001,
-        "russian_count": 1,
-        "ukrainian_count": 2,
-        "total": 3
-      },
-      {
-        "year": 2002,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2003,
-        "russian_count": 2,
-        "ukrainian_count": 2,
-        "total": 4
-      },
-      {
-        "year": 2004,
-        "russian_count": 5,
-        "ukrainian_count": 0,
-        "total": 5
-      },
-      {
-        "year": 2005,
-        "russian_count": 3,
-        "ukrainian_count": 0,
-        "total": 3
-      },
-      {
-        "year": 2006,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
-      {
-        "year": 2007,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2008,
-        "russian_count": 4,
-        "ukrainian_count": 0,
-        "total": 4
-      },
-      {
-        "year": 2009,
-        "russian_count": 2,
-        "ukrainian_count": 0,
-        "total": 2
-      },
       {
         "year": 2010,
         "russian_count": 4,
@@ -5636,8 +4124,8 @@
         "total": 1
       }
     ],
-    "total_russian": 217,
-    "total_ukrainian": 122
+    "total_russian": 193,
+    "total_ukrainian": 118
   },
   {
     "pair_id": 36,
@@ -5645,66 +4133,6 @@
     "ukrainian_term": "Kozak",
     "category": "historical",
     "yearly": [
-      {
-        "year": 2000,
-        "russian_count": 15,
-        "ukrainian_count": 7,
-        "total": 22
-      },
-      {
-        "year": 2001,
-        "russian_count": 29,
-        "ukrainian_count": 6,
-        "total": 35
-      },
-      {
-        "year": 2002,
-        "russian_count": 16,
-        "ukrainian_count": 8,
-        "total": 24
-      },
-      {
-        "year": 2003,
-        "russian_count": 31,
-        "ukrainian_count": 11,
-        "total": 42
-      },
-      {
-        "year": 2004,
-        "russian_count": 29,
-        "ukrainian_count": 9,
-        "total": 38
-      },
-      {
-        "year": 2005,
-        "russian_count": 51,
-        "ukrainian_count": 7,
-        "total": 58
-      },
-      {
-        "year": 2006,
-        "russian_count": 34,
-        "ukrainian_count": 18,
-        "total": 52
-      },
-      {
-        "year": 2007,
-        "russian_count": 41,
-        "ukrainian_count": 13,
-        "total": 54
-      },
-      {
-        "year": 2008,
-        "russian_count": 61,
-        "ukrainian_count": 25,
-        "total": 86
-      },
-      {
-        "year": 2009,
-        "russian_count": 65,
-        "ukrainian_count": 9,
-        "total": 74
-      },
       {
         "year": 2010,
         "russian_count": 65,
@@ -5808,8 +4236,8 @@
         "total": 18
       }
     ],
-    "total_russian": 1425,
-    "total_ukrainian": 367
+    "total_russian": 1053,
+    "total_ukrainian": 254
   },
   {
     "pair_id": 48,
@@ -5817,30 +4245,6 @@
     "ukrainian_term": "Hopak",
     "category": "historical",
     "yearly": [
-      {
-        "year": 2001,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2002,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
-      {
-        "year": 2006,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2007,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      },
       {
         "year": 2014,
         "russian_count": 0,
@@ -5890,8 +4294,8 @@
         "total": 1
       }
     ],
-    "total_russian": 5,
-    "total_ukrainian": 12
+    "total_russian": 3,
+    "total_ukrainian": 10
   },
   {
     "pair_id": 60,
