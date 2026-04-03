@@ -1,1 +1,270 @@
-{"changepoint_detection":[],"metadata":{"generated":"auto","source":"bigquery"}}
+{
+  "kruskal_wallis": {
+    "H": 13.54,
+    "p": 0.0352,
+    "significant": "True",
+    "n_categories": 7
+  },
+  "category_means_trends": {
+    "food": {
+      "mean": 18.4,
+      "median": 9.4,
+      "n": 5
+    },
+    "geographical": {
+      "mean": 75.0,
+      "median": 86.7,
+      "n": 24
+    },
+    "historical": {
+      "mean": 29.9,
+      "median": 26.3,
+      "n": 3
+    },
+    "institutional": {
+      "mean": 81.9,
+      "median": 95.9,
+      "n": 6
+    },
+    "landmarks": {
+      "mean": 50.6,
+      "median": 48.5,
+      "n": 6
+    },
+    "people": {
+      "mean": 79.3,
+      "median": 81.9,
+      "n": 4
+    },
+    "sports": {
+      "mean": 73.2,
+      "median": 65.1,
+      "n": 5
+    }
+  },
+  "pairwise_mannwhitney": [
+    {
+      "cat1": "food",
+      "cat2": "geographical",
+      "U": 11.0,
+      "p": 0.0025,
+      "sig": "True"
+    },
+    {
+      "cat1": "food",
+      "cat2": "historical",
+      "U": 5.0,
+      "p": 0.5714,
+      "sig": "False"
+    },
+    {
+      "cat1": "food",
+      "cat2": "institutional",
+      "U": 1.0,
+      "p": 0.0087,
+      "sig": "True"
+    },
+    {
+      "cat1": "food",
+      "cat2": "landmarks",
+      "U": 9.0,
+      "p": 0.329,
+      "sig": "False"
+    },
+    {
+      "cat1": "food",
+      "cat2": "people",
+      "U": 1.0,
+      "p": 0.0317,
+      "sig": "True"
+    },
+    {
+      "cat1": "food",
+      "cat2": "sports",
+      "U": 2.0,
+      "p": 0.0361,
+      "sig": "True"
+    },
+    {
+      "cat1": "geographical",
+      "cat2": "historical",
+      "U": 62.0,
+      "p": 0.0458,
+      "sig": "True"
+    },
+    {
+      "cat1": "geographical",
+      "cat2": "institutional",
+      "U": 46.5,
+      "p": 0.1949,
+      "sig": "False"
+    },
+    {
+      "cat1": "geographical",
+      "cat2": "landmarks",
+      "U": 83.5,
+      "p": 0.5684,
+      "sig": "False"
+    },
+    {
+      "cat1": "geographical",
+      "cat2": "people",
+      "U": 41.5,
+      "p": 0.6936,
+      "sig": "False"
+    },
+    {
+      "cat1": "geographical",
+      "cat2": "sports",
+      "U": 59.0,
+      "p": 0.977,
+      "sig": "False"
+    },
+    {
+      "cat1": "historical",
+      "cat2": "institutional",
+      "U": 1.0,
+      "p": 0.0476,
+      "sig": "True"
+    },
+    {
+      "cat1": "historical",
+      "cat2": "landmarks",
+      "U": 8.0,
+      "p": 0.9048,
+      "sig": "False"
+    },
+    {
+      "cat1": "historical",
+      "cat2": "people",
+      "U": 1.0,
+      "p": 0.1143,
+      "sig": "False"
+    },
+    {
+      "cat1": "historical",
+      "cat2": "sports",
+      "U": 1.0,
+      "p": 0.0719,
+      "sig": "False"
+    },
+    {
+      "cat1": "institutional",
+      "cat2": "landmarks",
+      "U": 23.5,
+      "p": 0.4225,
+      "sig": "False"
+    },
+    {
+      "cat1": "institutional",
+      "cat2": "people",
+      "U": 14.5,
+      "p": 0.6689,
+      "sig": "False"
+    },
+    {
+      "cat1": "institutional",
+      "cat2": "sports",
+      "U": 16.0,
+      "p": 0.9266,
+      "sig": "False"
+    },
+    {
+      "cat1": "landmarks",
+      "cat2": "people",
+      "U": 8.5,
+      "p": 0.5212,
+      "sig": "False"
+    },
+    {
+      "cat1": "landmarks",
+      "cat2": "sports",
+      "U": 10.0,
+      "p": 0.407,
+      "sig": "False"
+    },
+    {
+      "cat1": "people",
+      "cat2": "sports",
+      "U": 11.0,
+      "p": 0.9009,
+      "sig": "False"
+    }
+  ],
+  "invasion_effect": {
+    "trends": {
+      "n_pairs": 61,
+      "pre_mean": 40.1,
+      "post_mean": 59.0,
+      "delta_pp": 18.9,
+      "wilcoxon_stat": 1279.0,
+      "p": 0.0,
+      "cohens_d": 0.85,
+      "significant": "True"
+    },
+    "gdelt": {
+      "n_pairs": 29,
+      "pre_mean": 42.9,
+      "post_mean": 53.3,
+      "delta_pp": 10.3,
+      "wilcoxon_stat": 353.0,
+      "p": 0.000318,
+      "cohens_d": 0.59,
+      "significant": "True"
+    },
+    "wikipedia": {
+      "n_pairs": 59,
+      "pre_mean": 57.5,
+      "post_mean": 62.9,
+      "delta_pp": 5.3,
+      "wilcoxon_stat": 524.0,
+      "p": 0.000309,
+      "cohens_d": 0.35,
+      "significant": "True"
+    },
+    "reddit": {
+      "n_pairs": 53,
+      "pre_mean": 42.1,
+      "post_mean": 66.5,
+      "delta_pp": 24.4,
+      "wilcoxon_stat": 1335.0,
+      "p": 0.0,
+      "cohens_d": 1.38,
+      "significant": "True"
+    }
+  },
+  "cross_source_correlations": {
+    "trends_vs_gdelt": {
+      "rho": 0.526,
+      "p": 0.0034
+    },
+    "trends_vs_wikipedia": {
+      "rho": 0.397,
+      "p": 0.0019
+    },
+    "trends_vs_reddit": {
+      "rho": 0.599,
+      "p": 0.0
+    },
+    "gdelt_vs_wikipedia": {
+      "rho": 0.061,
+      "p": 0.7566
+    },
+    "gdelt_vs_reddit": {
+      "rho": 0.233,
+      "p": 0.2246
+    },
+    "wikipedia_vs_reddit": {
+      "rho": 0.349,
+      "p": 0.0072
+    }
+  },
+  "regression": {
+    "beta": 0.702,
+    "intercept": 0.368,
+    "r_squared": 0.526,
+    "t_stat": 7.6,
+    "p": 0.0,
+    "n": 54
+  }
+}
