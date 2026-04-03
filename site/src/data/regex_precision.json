@@ -1,0 +1,1935 @@
+{
+  "overall_precision": 99.8,
+  "total_sampled": 1444,
+  "total_false_positives": 3,
+  "pairs_evaluated": 29,
+  "pairs": [
+    {
+      "pair_id": 1,
+      "russian": "Kiev",
+      "ukrainian": "Kyiv",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 12.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "russian",
+            "count": 319354
+          },
+          {
+            "domain": "www.unn.com.ua",
+            "variant": "ukrainian",
+            "count": 261069
+          },
+          {
+            "domain": "www.unn.com.ua",
+            "variant": "russian",
+            "count": 244190
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "russian",
+            "count": 157837
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "russian",
+            "count": 150400
+          },
+          {
+            "domain": "day.kyiv.ua",
+            "variant": "ukrainian",
+            "count": 132565
+          },
+          {
+            "domain": "ria.ru",
+            "variant": "russian",
+            "count": 126524
+          },
+          {
+            "domain": "regnum.ru",
+            "variant": "russian",
+            "count": 121606
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "russian",
+            "count": 102182
+          },
+          {
+            "domain": "www.zazoom.it",
+            "variant": "russian",
+            "count": 101726
+          }
+        ],
+        "ru_domain_mentions": 716342,
+        "ua_domain_mentions": 1267135
+      }
+    },
+    {
+      "pair_id": 2,
+      "russian": "Kharkov",
+      "ukrainian": "Kharkiv",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 4.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "allkharkov.ua",
+            "variant": "ukrainian",
+            "count": 110924
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "ukrainian",
+            "count": 47158
+          },
+          {
+            "domain": "dozor.kharkov.ua",
+            "variant": "russian",
+            "count": 43867
+          },
+          {
+            "domain": "www.objectiv.tv",
+            "variant": "ukrainian",
+            "count": 37621
+          },
+          {
+            "domain": "atn.ua",
+            "variant": "ukrainian",
+            "count": 37539
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 35598
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "ukrainian",
+            "count": 32818
+          },
+          {
+            "domain": "kharkivoda.gov.ua",
+            "variant": "ukrainian",
+            "count": 26412
+          },
+          {
+            "domain": "vecherniy.kharkov.ua",
+            "variant": "russian",
+            "count": 26047
+          },
+          {
+            "domain": "www.ukrinform.ua",
+            "variant": "ukrainian",
+            "count": 25016
+          }
+        ],
+        "ru_domain_mentions": 0,
+        "ua_domain_mentions": 516974
+      }
+    },
+    {
+      "pair_id": 3,
+      "russian": "Odessa",
+      "ukrainian": "Odesa",
+      "total_sampled": 50,
+      "false_positives": 3,
+      "precision": 94.0,
+      "ru_domain_pct": 6.0,
+      "fp_examples": [
+        {
+          "url": "https://ua.korrespondent.net/city/odessa/4559536-shmyhal-v-odesi-skladna-sytuatsiia-zi-svitlom",
+          "reason": "URL pattern match"
+        },
+        {
+          "url": "https://www.zazoom.it/2022-04-02/ucraina-missili-su-odessa-sirene-anche-a-kiev-almeno-5mila-morti-a-",
+          "reason": "URL pattern match"
+        },
+        {
+          "url": "http://odessa-daily.com.ua/news/kommunalcshiki-podrezayut-derevya-v-centre-odessy-dvizhenie-zatrudne",
+          "reason": "URL pattern match"
+        }
+      ],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "odessa-life.od.ua",
+            "variant": "russian",
+            "count": 58954
+          },
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "russian",
+            "count": 55920
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "russian",
+            "count": 50896
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "russian",
+            "count": 43116
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "russian",
+            "count": 35588
+          },
+          {
+            "domain": "news.meta.ua",
+            "variant": "russian",
+            "count": 27581
+          },
+          {
+            "domain": "www.unn.com.ua",
+            "variant": "russian",
+            "count": 23455
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "russian",
+            "count": 22470
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "russian",
+            "count": 22016
+          },
+          {
+            "domain": "www.048.ua",
+            "variant": "russian",
+            "count": 21495
+          }
+        ],
+        "ru_domain_mentions": 55920,
+        "ua_domain_mentions": 390473
+      }
+    },
+    {
+      "pair_id": 4,
+      "russian": "Lvov",
+      "ukrainian": "Lviv",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 10.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "wz.lviv.ua",
+            "variant": "ukrainian",
+            "count": 184213
+          },
+          {
+            "domain": "portal.lviv.ua",
+            "variant": "ukrainian",
+            "count": 135944
+          },
+          {
+            "domain": "galinfo.com.ua",
+            "variant": "ukrainian",
+            "count": 80319
+          },
+          {
+            "domain": "dailylviv.com",
+            "variant": "ukrainian",
+            "count": 63700
+          },
+          {
+            "domain": "zik.ua",
+            "variant": "ukrainian",
+            "count": 61265
+          },
+          {
+            "domain": "zaxid.net",
+            "variant": "ukrainian",
+            "count": 56035
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "ukrainian",
+            "count": 44445
+          },
+          {
+            "domain": "tvoemisto.tv",
+            "variant": "ukrainian",
+            "count": 43937
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 36178
+          },
+          {
+            "domain": "www.032.ua",
+            "variant": "ukrainian",
+            "count": 30706
+          }
+        ],
+        "ru_domain_mentions": 21165,
+        "ua_domain_mentions": 704605
+      }
+    },
+    {
+      "pair_id": 5,
+      "russian": "Zaporozhye",
+      "ukrainian": "Zaporizhzhia",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 2.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "mig.com.ua",
+            "variant": "ukrainian",
+            "count": 2915
+          },
+          {
+            "domain": "www.segodnya.ua",
+            "variant": "russian",
+            "count": 2480
+          },
+          {
+            "domain": "www.zazoom.it",
+            "variant": "ukrainian",
+            "count": 2353
+          },
+          {
+            "domain": "korrespondent.net",
+            "variant": "russian",
+            "count": 1811
+          },
+          {
+            "domain": "ua.korrespondent.net",
+            "variant": "russian",
+            "count": 1739
+          },
+          {
+            "domain": "news.online.ua",
+            "variant": "ukrainian",
+            "count": 754
+          },
+          {
+            "domain": "www.ehfcl.com",
+            "variant": "russian",
+            "count": 743
+          },
+          {
+            "domain": "menafn.com",
+            "variant": "ukrainian",
+            "count": 702
+          },
+          {
+            "domain": "runews24.ru",
+            "variant": "russian",
+            "count": 555
+          },
+          {
+            "domain": "ua.korrespondent.net",
+            "variant": "ukrainian",
+            "count": 461
+          }
+        ],
+        "ru_domain_mentions": 759,
+        "ua_domain_mentions": 6644
+      }
+    },
+    {
+      "pair_id": 6,
+      "russian": "Nikolaev",
+      "ukrainian": "Mykolaiv",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 2.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "nikvesti.com",
+            "variant": "russian",
+            "count": 11242
+          },
+          {
+            "domain": "news.pn",
+            "variant": "russian",
+            "count": 5803
+          },
+          {
+            "domain": "nikolaev-city.net",
+            "variant": "russian",
+            "count": 5101
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "russian",
+            "count": 4722
+          },
+          {
+            "domain": "www.mk.mk.ua",
+            "variant": "russian",
+            "count": 2356
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "russian",
+            "count": 1905
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "russian",
+            "count": 1827
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "russian",
+            "count": 1772
+          },
+          {
+            "domain": "nikcenter.org",
+            "variant": "russian",
+            "count": 1700
+          },
+          {
+            "domain": "mk.depo.ua",
+            "variant": "russian",
+            "count": 1548
+          }
+        ],
+        "ru_domain_mentions": 0,
+        "ua_domain_mentions": 21609
+      }
+    },
+    {
+      "pair_id": 7,
+      "russian": "Dnepropetrovsk",
+      "ukrainian": "Dnipro",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 8.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "ukrainian",
+            "count": 40524
+          },
+          {
+            "domain": "news.meta.ua",
+            "variant": "ukrainian",
+            "count": 34261
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "ukrainian",
+            "count": 29773
+          },
+          {
+            "domain": "dv-gazeta.info",
+            "variant": "ukrainian",
+            "count": 27189
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 23324
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "ukrainian",
+            "count": 21530
+          },
+          {
+            "domain": "news.online.ua",
+            "variant": "ukrainian",
+            "count": 15925
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "ukrainian",
+            "count": 12690
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "ukrainian",
+            "count": 11380
+          },
+          {
+            "domain": "www.ukrinform.ua",
+            "variant": "ukrainian",
+            "count": 10233
+          }
+        ],
+        "ru_domain_mentions": 40524,
+        "ua_domain_mentions": 204397
+      }
+    },
+    {
+      "pair_id": 8,
+      "russian": "Vinnitsa",
+      "ukrainian": "Vinnytsia",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 8.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "vn.20minut.ua",
+            "variant": "russian",
+            "count": 39243
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "russian",
+            "count": 13586
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "russian",
+            "count": 11051
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "russian",
+            "count": 8477
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "russian",
+            "count": 6511
+          },
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "russian",
+            "count": 6353
+          },
+          {
+            "domain": "www.unian.net",
+            "variant": "russian",
+            "count": 5134
+          },
+          {
+            "domain": "www.unn.com.ua",
+            "variant": "russian",
+            "count": 5018
+          },
+          {
+            "domain": "www.ukrinform.ua",
+            "variant": "russian",
+            "count": 4931
+          },
+          {
+            "domain": "pressorg24.com",
+            "variant": "russian",
+            "count": 4853
+          }
+        ],
+        "ru_domain_mentions": 6353,
+        "ua_domain_mentions": 109924
+      }
+    },
+    {
+      "pair_id": 9,
+      "russian": "Rovno",
+      "ukrainian": "Rivne",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 4.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "rivnepost.rv.ua",
+            "variant": "ukrainian",
+            "count": 24259
+          },
+          {
+            "domain": "vse.rv.ua",
+            "variant": "ukrainian",
+            "count": 9043
+          },
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "ukrainian",
+            "count": 7298
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "ukrainian",
+            "count": 6982
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "ukrainian",
+            "count": 6234
+          },
+          {
+            "domain": "ogo.ua",
+            "variant": "ukrainian",
+            "count": 5666
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 5447
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "ukrainian",
+            "count": 4062
+          },
+          {
+            "domain": "www.unian.net",
+            "variant": "ukrainian",
+            "count": 3744
+          },
+          {
+            "domain": "www.volynnews.com",
+            "variant": "ukrainian",
+            "count": 3678
+          }
+        ],
+        "ru_domain_mentions": 7298,
+        "ua_domain_mentions": 72439
+      }
+    },
+    {
+      "pair_id": 10,
+      "russian": "Chernobyl",
+      "ukrainian": "Chornobyl",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 4.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "www.zazoom.it",
+            "variant": "russian",
+            "count": 1336
+          },
+          {
+            "domain": "www.kyivpost.com",
+            "variant": "ukrainian",
+            "count": 583
+          },
+          {
+            "domain": "www.msn.com",
+            "variant": "russian",
+            "count": 545
+          },
+          {
+            "domain": "en.interfax.com.ua",
+            "variant": "ukrainian",
+            "count": 399
+          },
+          {
+            "domain": "nuclear-news.net",
+            "variant": "russian",
+            "count": 290
+          },
+          {
+            "domain": "www.iaea.org",
+            "variant": "ukrainian",
+            "count": 280
+          },
+          {
+            "domain": "www.dailymail.co.uk",
+            "variant": "russian",
+            "count": 248
+          },
+          {
+            "domain": "www.tecnoandroid.it",
+            "variant": "russian",
+            "count": 239
+          },
+          {
+            "domain": "www.msn.com",
+            "variant": "ukrainian",
+            "count": 235
+          },
+          {
+            "domain": "menafn.com",
+            "variant": "ukrainian",
+            "count": 211
+          }
+        ],
+        "ru_domain_mentions": 0,
+        "ua_domain_mentions": 399
+      }
+    },
+    {
+      "pair_id": 11,
+      "russian": "Lugansk",
+      "ukrainian": "Luhansk",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 18.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "ukrainian",
+            "count": 113191
+          },
+          {
+            "domain": "polit.ru",
+            "variant": "russian",
+            "count": 33972
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "ukrainian",
+            "count": 33529
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 31756
+          },
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "russian",
+            "count": 28320
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "ukrainian",
+            "count": 22156
+          },
+          {
+            "domain": "www.unn.com.ua",
+            "variant": "ukrainian",
+            "count": 21833
+          },
+          {
+            "domain": "zik.ua",
+            "variant": "ukrainian",
+            "count": 19503
+          },
+          {
+            "domain": "www.ukrinform.ua",
+            "variant": "ukrainian",
+            "count": 19001
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "ukrainian",
+            "count": 18957
+          }
+        ],
+        "ru_domain_mentions": 175483,
+        "ua_domain_mentions": 209091
+      }
+    },
+    {
+      "pair_id": 15,
+      "russian": "Dnieper",
+      "ukrainian": "Dnipro",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 8.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "ukrainian",
+            "count": 40524
+          },
+          {
+            "domain": "news.meta.ua",
+            "variant": "ukrainian",
+            "count": 34261
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "ukrainian",
+            "count": 29773
+          },
+          {
+            "domain": "dv-gazeta.info",
+            "variant": "ukrainian",
+            "count": 27189
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 23324
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "ukrainian",
+            "count": 21530
+          },
+          {
+            "domain": "news.online.ua",
+            "variant": "ukrainian",
+            "count": 15925
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "ukrainian",
+            "count": 12690
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "ukrainian",
+            "count": 11380
+          },
+          {
+            "domain": "www.ukrinform.ua",
+            "variant": "ukrainian",
+            "count": 10233
+          }
+        ],
+        "ru_domain_mentions": 40524,
+        "ua_domain_mentions": 204397
+      }
+    },
+    {
+      "pair_id": 16,
+      "russian": "Dniester",
+      "ukrainian": "Dnister",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 0.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "www.unn.com.ua",
+            "variant": "ukrainian",
+            "count": 32
+          },
+          {
+            "domain": "vn.20minut.ua",
+            "variant": "ukrainian",
+            "count": 24
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "ukrainian",
+            "count": 21
+          },
+          {
+            "domain": "www.civic.md",
+            "variant": "russian",
+            "count": 21
+          },
+          {
+            "domain": "pravda.if.ua",
+            "variant": "ukrainian",
+            "count": 20
+          },
+          {
+            "domain": "Dniester region media highlights in Russian ",
+            "variant": "russian",
+            "count": 17
+          },
+          {
+            "domain": "portal.lviv.ua",
+            "variant": "ukrainian",
+            "count": 17
+          },
+          {
+            "domain": "ua.korrespondent.net",
+            "variant": "ukrainian",
+            "count": 16
+          },
+          {
+            "domain": "www.yahoo.com",
+            "variant": "ukrainian",
+            "count": 15
+          },
+          {
+            "domain": "regionews.ua",
+            "variant": "ukrainian",
+            "count": 15
+          }
+        ],
+        "ru_domain_mentions": 0,
+        "ua_domain_mentions": 177
+      }
+    },
+    {
+      "pair_id": 17,
+      "russian": "Donbass",
+      "ukrainian": "Donbas",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 16.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "russian",
+            "count": 145060
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "russian",
+            "count": 62122
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "russian",
+            "count": 60420
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 52413
+          },
+          {
+            "domain": "news.meta.ua",
+            "variant": "russian",
+            "count": 43669
+          },
+          {
+            "domain": "novosti.dn.ua",
+            "variant": "russian",
+            "count": 39696
+          },
+          {
+            "domain": "censor.net.ua",
+            "variant": "russian",
+            "count": 34764
+          },
+          {
+            "domain": "www.radiosvoboda.org",
+            "variant": "russian",
+            "count": 31207
+          },
+          {
+            "domain": "www.unn.com.ua",
+            "variant": "russian",
+            "count": 30925
+          },
+          {
+            "domain": "zik.ua",
+            "variant": "russian",
+            "count": 30152
+          }
+        ],
+        "ru_domain_mentions": 193957,
+        "ua_domain_mentions": 515380
+      }
+    },
+    {
+      "pair_id": 19,
+      "russian": "Zakarpatye",
+      "ukrainian": "Zakarpattia",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 0.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "news.online.ua",
+            "variant": "russian",
+            "count": 7773
+          },
+          {
+            "domain": "zakarpattya.net.ua",
+            "variant": "ukrainian",
+            "count": 3819
+          },
+          {
+            "domain": "novyny.online.ua",
+            "variant": "russian",
+            "count": 3350
+          },
+          {
+            "domain": "mukachevo.net",
+            "variant": "ukrainian",
+            "count": 717
+          },
+          {
+            "domain": "ua.korrespondent.net",
+            "variant": "ukrainian",
+            "count": 187
+          },
+          {
+            "domain": "transkarpatia.net",
+            "variant": "russian",
+            "count": 137
+          },
+          {
+            "domain": "wz.lviv.ua",
+            "variant": "ukrainian",
+            "count": 95
+          },
+          {
+            "domain": "www.5.ua",
+            "variant": "ukrainian",
+            "count": 72
+          },
+          {
+            "domain": "ua.112.ua",
+            "variant": "ukrainian",
+            "count": 70
+          },
+          {
+            "domain": "www.unian.info",
+            "variant": "ukrainian",
+            "count": 66
+          }
+        ],
+        "ru_domain_mentions": 0,
+        "ua_domain_mentions": 15318
+      }
+    },
+    {
+      "pair_id": 20,
+      "russian": "Podolye",
+      "ukrainian": "Podillia",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 6.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "www.niedziela.pl",
+            "variant": "russian",
+            "count": 125
+          },
+          {
+            "domain": "www.wnp.pl",
+            "variant": "russian",
+            "count": 114
+          },
+          {
+            "domain": "dzieje.pl",
+            "variant": "russian",
+            "count": 83
+          },
+          {
+            "domain": "www.polskieradio.pl",
+            "variant": "russian",
+            "count": 77
+          },
+          {
+            "domain": "wiadomosci.onet.pl",
+            "variant": "russian",
+            "count": 59
+          },
+          {
+            "domain": "wiadomosci.wp.pl",
+            "variant": "russian",
+            "count": 56
+          },
+          {
+            "domain": "dorzeczy.pl",
+            "variant": "russian",
+            "count": 49
+          },
+          {
+            "domain": "niezalezna.pl",
+            "variant": "russian",
+            "count": 43
+          },
+          {
+            "domain": "www.rp.pl",
+            "variant": "russian",
+            "count": 39
+          },
+          {
+            "domain": "radio.opole.pl",
+            "variant": "russian",
+            "count": 36
+          }
+        ],
+        "ru_domain_mentions": 30,
+        "ua_domain_mentions": 0
+      }
+    },
+    {
+      "pair_id": 23,
+      "russian": "Borscht",
+      "ukrainian": "Borshch",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 8.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "ls-eng.obozrevatel.com",
+            "variant": "russian",
+            "count": 74
+          },
+          {
+            "domain": "www.segodnya.ua",
+            "variant": "ukrainian",
+            "count": 58
+          },
+          {
+            "domain": "eng.obozrevatel.com",
+            "variant": "russian",
+            "count": 56
+          },
+          {
+            "domain": "gordonua.com",
+            "variant": "ukrainian",
+            "count": 56
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "ukrainian",
+            "count": 54
+          },
+          {
+            "domain": "www.unian.net",
+            "variant": "ukrainian",
+            "count": 51
+          },
+          {
+            "domain": "www.rbc.ua",
+            "variant": "ukrainian",
+            "count": 42
+          },
+          {
+            "domain": "focus.ua",
+            "variant": "ukrainian",
+            "count": 35
+          },
+          {
+            "domain": "telegraf.com.ua",
+            "variant": "ukrainian",
+            "count": 32
+          },
+          {
+            "domain": "wz.lviv.ua",
+            "variant": "ukrainian",
+            "count": 32
+          }
+        ],
+        "ru_domain_mentions": 56,
+        "ua_domain_mentions": 329
+      }
+    },
+    {
+      "pair_id": 38,
+      "russian": "Chernigov",
+      "ukrainian": "Chernihiv",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 10.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "24tv.ua",
+            "variant": "ukrainian",
+            "count": 16361
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 12794
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "ukrainian",
+            "count": 12030
+          },
+          {
+            "domain": "www.ukrinform.ua",
+            "variant": "ukrainian",
+            "count": 9176
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "ukrainian",
+            "count": 8241
+          },
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "russian",
+            "count": 8078
+          },
+          {
+            "domain": "ua.korrespondent.net",
+            "variant": "ukrainian",
+            "count": 6710
+          },
+          {
+            "domain": "www.rbc.ua",
+            "variant": "ukrainian",
+            "count": 6630
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "ukrainian",
+            "count": 6488
+          },
+          {
+            "domain": "ua.interfax.com.ua",
+            "variant": "ukrainian",
+            "count": 6110
+          }
+        ],
+        "ru_domain_mentions": 8078,
+        "ua_domain_mentions": 105306
+      }
+    },
+    {
+      "pair_id": 39,
+      "russian": "Chernovtsy",
+      "ukrainian": "Chernivtsi",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 4.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "www.0372.ua",
+            "variant": "ukrainian",
+            "count": 19648
+          },
+          {
+            "domain": "molbuk.ua",
+            "variant": "ukrainian",
+            "count": 13725
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "ukrainian",
+            "count": 11408
+          },
+          {
+            "domain": "zik.ua",
+            "variant": "ukrainian",
+            "count": 8367
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 8164
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "ukrainian",
+            "count": 7976
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "ukrainian",
+            "count": 5407
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "ukrainian",
+            "count": 5262
+          },
+          {
+            "domain": "www.unian.net",
+            "variant": "ukrainian",
+            "count": 4390
+          },
+          {
+            "domain": "ua.korrespondent.net",
+            "variant": "ukrainian",
+            "count": 4093
+          }
+        ],
+        "ru_domain_mentions": 0,
+        "ua_domain_mentions": 90834
+      }
+    },
+    {
+      "pair_id": 40,
+      "russian": "Zhitomir",
+      "ukrainian": "Zhytomyr",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 6.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "24tv.ua",
+            "variant": "russian",
+            "count": 9662
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 7574
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "russian",
+            "count": 7203
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "russian",
+            "count": 7049
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "ukrainian",
+            "count": 7033
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "ukrainian",
+            "count": 7026
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "russian",
+            "count": 5905
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "russian",
+            "count": 5140
+          },
+          {
+            "domain": "www.unn.com.ua",
+            "variant": "russian",
+            "count": 4550
+          },
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "russian",
+            "count": 4449
+          }
+        ],
+        "ru_domain_mentions": 7743,
+        "ua_domain_mentions": 70640
+      }
+    },
+    {
+      "pair_id": 41,
+      "russian": "Cherkassy",
+      "ukrainian": "Cherkasy",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 10.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 11854
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "ukrainian",
+            "count": 10299
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "ukrainian",
+            "count": 6888
+          },
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "russian",
+            "count": 4776
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "ukrainian",
+            "count": 4769
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "ukrainian",
+            "count": 4657
+          },
+          {
+            "domain": "www.unian.net",
+            "variant": "ukrainian",
+            "count": 4228
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "russian",
+            "count": 4088
+          },
+          {
+            "domain": "www.unn.com.ua",
+            "variant": "ukrainian",
+            "count": 4038
+          },
+          {
+            "domain": "ua.korrespondent.net",
+            "variant": "ukrainian",
+            "count": 3929
+          }
+        ],
+        "ru_domain_mentions": 4776,
+        "ua_domain_mentions": 67232
+      }
+    },
+    {
+      "pair_id": 42,
+      "russian": "Uzhgorod",
+      "ukrainian": "Uzhhorod",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 4.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "zakarpattya.net.ua",
+            "variant": "russian",
+            "count": 30329
+          },
+          {
+            "domain": "news.meta.ua",
+            "variant": "russian",
+            "count": 15936
+          },
+          {
+            "domain": "zaholovok.com.ua",
+            "variant": "russian",
+            "count": 13020
+          },
+          {
+            "domain": "goloskarpat.info",
+            "variant": "russian",
+            "count": 10611
+          },
+          {
+            "domain": "ua-reporter.com",
+            "variant": "russian",
+            "count": 10084
+          },
+          {
+            "domain": "www.mukachevo.net",
+            "variant": "russian",
+            "count": 8083
+          },
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "russian",
+            "count": 6787
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "russian",
+            "count": 6648
+          },
+          {
+            "domain": "www.ua-reporter.com",
+            "variant": "russian",
+            "count": 5661
+          },
+          {
+            "domain": "zik.ua",
+            "variant": "russian",
+            "count": 4556
+          }
+        ],
+        "ru_domain_mentions": 6787,
+        "ua_domain_mentions": 84945
+      }
+    },
+    {
+      "pair_id": 43,
+      "russian": "Kremenchug",
+      "ukrainian": "Kremenchuk",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 10.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "gazeta.ua",
+            "variant": "russian",
+            "count": 3029
+          },
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "russian",
+            "count": 2758
+          },
+          {
+            "domain": "hi-fidelity-forum.com",
+            "variant": "russian",
+            "count": 2541
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "russian",
+            "count": 2332
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "russian",
+            "count": 1894
+          },
+          {
+            "domain": "www.unn.com.ua",
+            "variant": "russian",
+            "count": 1229
+          },
+          {
+            "domain": "news.meta.ua",
+            "variant": "russian",
+            "count": 1193
+          },
+          {
+            "domain": "polpravda.com",
+            "variant": "russian",
+            "count": 968
+          },
+          {
+            "domain": "pressorg24.com",
+            "variant": "russian",
+            "count": 933
+          },
+          {
+            "domain": "interfax.com.ua",
+            "variant": "russian",
+            "count": 906
+          }
+        ],
+        "ru_domain_mentions": 2758,
+        "ua_domain_mentions": 14609
+      }
+    },
+    {
+      "pair_id": 44,
+      "russian": "Kirovograd",
+      "ukrainian": "Kropyvnytskyi",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 8.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "kirovograd.net",
+            "variant": "russian",
+            "count": 31845
+          },
+          {
+            "domain": "www.kirovograd.net",
+            "variant": "russian",
+            "count": 11138
+          },
+          {
+            "domain": "gre4ka.info",
+            "variant": "russian",
+            "count": 3503
+          },
+          {
+            "domain": "www.unn.com.ua",
+            "variant": "russian",
+            "count": 1743
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "russian",
+            "count": 1701
+          },
+          {
+            "domain": "pressorg24.com",
+            "variant": "russian",
+            "count": 1563
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "russian",
+            "count": 1244
+          },
+          {
+            "domain": "daily.com.ua",
+            "variant": "russian",
+            "count": 1185
+          },
+          {
+            "domain": "korrespondent.net",
+            "variant": "russian",
+            "count": 1079
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "russian",
+            "count": 1059
+          }
+        ],
+        "ru_domain_mentions": 0,
+        "ua_domain_mentions": 12698
+      }
+    },
+    {
+      "pair_id": 45,
+      "russian": "Ternopol",
+      "ukrainian": "Ternopil",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 10.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "chaspik.spb.ru",
+            "variant": "ukrainian",
+            "count": 29513
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "ukrainian",
+            "count": 18329
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "ukrainian",
+            "count": 15017
+          },
+          {
+            "domain": "zik.ua",
+            "variant": "ukrainian",
+            "count": 11670
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "ukrainian",
+            "count": 10729
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "ukrainian",
+            "count": 8348
+          },
+          {
+            "domain": "pravda.if.ua",
+            "variant": "ukrainian",
+            "count": 7489
+          },
+          {
+            "domain": "www.ukrinform.ua",
+            "variant": "ukrainian",
+            "count": 6949
+          },
+          {
+            "domain": "news.meta.ua",
+            "variant": "ukrainian",
+            "count": 6932
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "ukrainian",
+            "count": 6658
+          }
+        ],
+        "ru_domain_mentions": 29513,
+        "ua_domain_mentions": 113822
+      }
+    },
+    {
+      "pair_id": 46,
+      "russian": "Vareniki",
+      "ukrainian": "Varenyky",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 2.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "food.obozrevatel.com",
+            "variant": "russian",
+            "count": 273
+          },
+          {
+            "domain": "gordonua.com",
+            "variant": "russian",
+            "count": 110
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "russian",
+            "count": 95
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "russian",
+            "count": 65
+          },
+          {
+            "domain": "smachnonews.24tv.ua",
+            "variant": "russian",
+            "count": 64
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "russian",
+            "count": 52
+          },
+          {
+            "domain": "fakty.ua",
+            "variant": "russian",
+            "count": 41
+          },
+          {
+            "domain": "www.segodnya.ua",
+            "variant": "russian",
+            "count": 28
+          },
+          {
+            "domain": "www.unian.net",
+            "variant": "russian",
+            "count": 28
+          },
+          {
+            "domain": "ukranews.com",
+            "variant": "ukrainian",
+            "count": 26
+          }
+        ],
+        "ru_domain_mentions": 0,
+        "ua_domain_mentions": 441
+      }
+    },
+    {
+      "pair_id": 54,
+      "russian": "Babi Yar",
+      "ukrainian": "Babyn Yar",
+      "total_sampled": 44,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 2.3,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "999thepoint.com",
+            "variant": "russian",
+            "count": 3
+          },
+          {
+            "domain": "www.cpr.org",
+            "variant": "russian",
+            "count": 3
+          },
+          {
+            "domain": "www.kgwn.tv",
+            "variant": "russian",
+            "count": 2
+          },
+          {
+            "domain": "theknow.denverpost.com",
+            "variant": "russian",
+            "count": 2
+          },
+          {
+            "domain": "www.westword.com",
+            "variant": "russian",
+            "count": 2
+          },
+          {
+            "domain": "k99.com",
+            "variant": "russian",
+            "count": 2
+          },
+          {
+            "domain": "www.ijn.com",
+            "variant": "russian",
+            "count": 2
+          },
+          {
+            "domain": "denvergazette.com",
+            "variant": "russian",
+            "count": 2
+          },
+          {
+            "domain": "www.denverpost.com",
+            "variant": "russian",
+            "count": 2
+          },
+          {
+            "domain": "www.9news.com",
+            "variant": "russian",
+            "count": 2
+          }
+        ],
+        "ru_domain_mentions": 1,
+        "ua_domain_mentions": 0
+      }
+    },
+    {
+      "pair_id": 61,
+      "russian": "Vladimir Zelensky",
+      "ukrainian": "Volodymyr Zelenskyy",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 6.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "www.zazoom.it",
+            "variant": "russian",
+            "count": 24986
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "russian",
+            "count": 17126
+          },
+          {
+            "domain": "unn.ua",
+            "variant": "russian",
+            "count": 12216
+          },
+          {
+            "domain": "24tv.ua",
+            "variant": "russian",
+            "count": 11419
+          },
+          {
+            "domain": "ua.korrespondent.net",
+            "variant": "russian",
+            "count": 9723
+          },
+          {
+            "domain": "korrespondent.net",
+            "variant": "russian",
+            "count": 9205
+          },
+          {
+            "domain": "www.unian.net",
+            "variant": "russian",
+            "count": 8989
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "russian",
+            "count": 8782
+          },
+          {
+            "domain": "russian.rt.com",
+            "variant": "russian",
+            "count": 7945
+          },
+          {
+            "domain": "www.rbc.ua",
+            "variant": "russian",
+            "count": 7148
+          }
+        ],
+        "ru_domain_mentions": 7945,
+        "ua_domain_mentions": 84659
+      }
+    },
+    {
+      "pair_id": 64,
+      "russian": "Borsch",
+      "ukrainian": "Borshch",
+      "total_sampled": 50,
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 10.0,
+      "fp_examples": [],
+      "domain_distribution": {
+        "top_domains": [
+          {
+            "domain": "bug.org.ua",
+            "variant": "russian",
+            "count": 1549
+          },
+          {
+            "domain": "gazeta.ua",
+            "variant": "russian",
+            "count": 225
+          },
+          {
+            "domain": "tsn.ua",
+            "variant": "russian",
+            "count": 137
+          },
+          {
+            "domain": "food.obozrevatel.com",
+            "variant": "russian",
+            "count": 135
+          },
+          {
+            "domain": "www.segodnya.ua",
+            "variant": "ukrainian",
+            "count": 58
+          },
+          {
+            "domain": "gordonua.com",
+            "variant": "ukrainian",
+            "count": 56
+          },
+          {
+            "domain": "www.unian.ua",
+            "variant": "ukrainian",
+            "count": 54
+          },
+          {
+            "domain": "www.unian.net",
+            "variant": "ukrainian",
+            "count": 51
+          },
+          {
+            "domain": "www.rbc.ua",
+            "variant": "ukrainian",
+            "count": 42
+          },
+          {
+            "domain": "kp.ua",
+            "variant": "russian",
+            "count": 41
+          }
+        ],
+        "ru_domain_mentions": 71,
+        "ua_domain_mentions": 2300
+      }
+    }
+  ]
+}
