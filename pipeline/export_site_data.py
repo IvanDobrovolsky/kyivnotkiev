@@ -81,7 +81,8 @@ def smooth_series(series: list[dict], window: int = 3) -> list[dict]:
         end = min(len(filled), i + half + 1)
         avg = sum(filled[start:end]) / (end - start)
         smoothed.append(round(avg, 1))
-    return [{"date": series[i]["date"], "adoption": smoothed[i]} for i in range(len(series))]
+    return [{**{k: v for k, v in series[i].items() if k != "adoption"}, "adoption": smoothed[i]}
+            for i in range(len(series))]
 
 
 # ── Country codes ─────────────────────────────────────────────────────────────
@@ -175,7 +176,7 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         raw.setdefault(pid, [])
         total = r["ukr"] + r["rus"]
         adoption = round(r["ukr"] / total * 100, 1) if total > 0 else None
-        raw[pid].append({"date": r["month"], "adoption": adoption})
+        raw[pid].append({"date": r["month"], "adoption": adoption, "ukr": r["ukr"], "rus": r["rus"]})
     for pid, series in raw.items():
         result.setdefault(str(pid), {})
         result[str(pid)]["trends"] = smooth_series(series, window=3)
@@ -195,7 +196,7 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         result.setdefault(pid, {}).setdefault("gdelt", [])
         total = r["ukr"] + r["rus"]
         if total > 0:
-            result[pid]["gdelt"].append({"date": r["month"], "adoption": round(r["ukr"] / total * 100, 1)})
+            result[pid]["gdelt"].append({"date": r["month"], "adoption": round(r["ukr"] / total * 100, 1), "ukr": r["ukr"], "rus": r["rus"]})
 
     # Wikipedia (monthly)
     log.info("  Wikipedia...")
@@ -213,7 +214,7 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         result.setdefault(pid, {}).setdefault("wikipedia", [])
         total = r["ukr"] + r["rus"]
         if total > 0:
-            result[pid]["wikipedia"].append({"date": r["month"], "adoption": round(r["ukr"] / total * 100, 1)})
+            result[pid]["wikipedia"].append({"date": r["month"], "adoption": round(r["ukr"] / total * 100, 1), "ukr": r["ukr"], "rus": r["rus"]})
 
     # Reddit (annual for consistency across pairs)
     log.info("  Reddit...")
@@ -232,7 +233,7 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         result.setdefault(pid, {}).setdefault("reddit", [])
         total = r["ukr"] + r["rus"]
         if total > 0:
-            result[pid]["reddit"].append({"date": f"{r['yr']}-01", "adoption": round(r["ukr"] / total * 100, 1)})
+            result[pid]["reddit"].append({"date": f"{r['yr']}-01", "adoption": round(r["ukr"] / total * 100, 1), "ukr": r["ukr"], "rus": r["rus"]})
 
     # YouTube: merge BQ data with local yt-dlp CSVs (local has all 54 pairs, 2010-2026)
     log.info("  YouTube (BQ + local CSVs)...")
@@ -280,7 +281,7 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
             ukr, rus = yt_data[pid][yr]
             total = ukr + rus
             if total > 0:
-                result[spid]["youtube"].append({"date": f"{yr}-01", "adoption": round(ukr / total * 100, 1)})
+                result[spid]["youtube"].append({"date": f"{yr}-01", "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
 
     # Ngrams (yearly)
     log.info("  Ngrams...")

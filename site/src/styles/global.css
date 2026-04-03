@@ -292,7 +292,7 @@ body {
   align-items: center;
 }
 
-.source-toggle, .event-toggle, .line-mode {
+.source-toggle, .event-toggle, .line-mode, .chart-mode {
   display: flex;
   align-items: center;
   gap: 0.35rem;
@@ -313,7 +313,7 @@ body {
   background: color-mix(in srgb, var(--source-color, var(--blue)) 8%, transparent);
 }
 
-.event-toggle.active, .line-mode.active {
+.event-toggle.active, .line-mode.active, .chart-mode.active {
   border-color: var(--text-muted);
   color: var(--text);
   background: var(--bg-hover);
