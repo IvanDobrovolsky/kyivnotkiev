@@ -464,7 +464,8 @@ def export_pairs(enabled_ids: set[int]) -> dict:
 def export_trends_countries(enabled_ids: set[int]) -> dict:
     """Export Google Trends adoption by country per pair.
 
-    Uses FULL date range for maximum country coverage.
+    Uses FULL date range. Requires minimum total interest of 100 to avoid
+    spurious 0% or 100% from low-volume pairs where only one variant appears.
     """
     log.info("Exporting trends countries...")
 
@@ -475,7 +476,9 @@ def export_trends_countries(enabled_ids: set[int]) -> dict:
         FROM `{DATASET}.raw_trends`
         WHERE geo != '' AND geo IS NOT NULL
         GROUP BY pair_id, geo
-        HAVING (ukr + rus) > 0
+        HAVING (ukr + rus) >= 100
+            AND SUM(IF(variant='ukrainian', interest, 0)) > 0
+            AND SUM(IF(variant='russian', interest, 0)) > 0
     """)
 
     result = {}
