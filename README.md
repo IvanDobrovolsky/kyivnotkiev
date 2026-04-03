@@ -1,24 +1,28 @@
-```
-██╗  ██╗██╗   ██╗██╗██╗   ██╗    ███╗   ██╗ ██████╗ ████████╗    ██╗  ██╗██╗███████╗██╗   ██╗
-██║ ██╔╝╚██╗ ██╔╝██║██║   ██║    ████╗  ██║██╔═══██╗╚══██╔══╝    ██║ ██╔╝██║██╔════╝██║   ██║
-█████╔╝  ╚████╔╝ ██║██║   ██║    ██╔██╗ ██║██║   ██║   ██║       █████╔╝ ██║█████╗  ██║   ██║
-██╔═██╗   ╚██╔╝  ██║╚██╗ ██╔╝    ██║╚██╗██║██║   ██║   ██║       ██╔═██╗ ██║██╔══╝  ╚██╗ ██╔╝
-██║  ██╗   ██║   ██║ ╚████╔╝     ██║ ╚████║╚██████╔╝   ██║       ██║  ██╗██║███████╗ ╚████╔╝
-╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═══╝      ╚═╝  ╚═══╝ ╚═════╝    ╚═╝       ╚═╝  ╚═╝╚═╝╚══════╝  ╚═══╝
-```
+<p align="center">
+  <img src="logo.svg" width="80" alt="Kyiv chestnut">
+</p>
 
-**Computational analysis of Ukrainian toponym adoption across 1.5B+ mentions from 7 sources.**
+<h1 align="center">KYIV <sub>NOT</sub> <s>KIEV</s></h1>
 
-Big data pipeline tracking how the world adopts Ukrainian spellings — from Kyiv to Borshch — using Apache Spark on Google Cloud.
+<p align="center">
+  <strong>Computational analysis of Ukrainian toponym adoption across 601M+ records from 7 sources.</strong><br>
+  Big data pipeline tracking how the world adopts Ukrainian spellings — from Kyiv to Borshch — using Apache Spark on Google Cloud.
+</p>
+
+<p align="center">
+  <a href="https://kyivnotkiev.org">kyivnotkiev.org</a>
+</p>
 
 ---
 
 | Metric | Value |
 |--------|-------|
-| Toponym pairs | **71** (69 enabled) |
-| Categories | **8** (geographical, food, landmarks, country, institutional, sports, historical, people) |
-| Data sources | **7** (GDELT, Common Crawl, Reddit, Wikipedia, Google Trends, Ngrams, YouTube) |
-| Time span | **2015–2026** (Ngrams: 1800–2019) |
+| Records analyzed | **601M+** (38.7M news articles, 562M page views, 22K posts, 14.5K videos) |
+| Data processed | **~1.2 PB** |
+| Toponym pairs | **60** enabled across **8** categories |
+| Data sources | **7** (Google Trends, GDELT, Wikipedia, Reddit, YouTube, Google Books Ngrams, Common Crawl) |
+| Time span | **2010–2026** (Ngrams: 1900–2019) |
+| Countries | **55** with per-country adoption data |
 | Infrastructure | **GCP** (BigQuery, Dataproc/Spark, GCS, Cloud Run) |
 | Reproducibility | `make reproduce` — one command, full pipeline |
 
