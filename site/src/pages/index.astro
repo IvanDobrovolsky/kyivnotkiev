@@ -1,19 +1,16 @@
 ---
 import '../styles/global.css';
-import pairs from '../data/pairs.json';
-import siteStats from '../data/site_stats.json';
+import m from '../data/manifest.json';
 
-const grouped = pairs.categories.map(cat => ({
+// manifest.json is the single source of truth — all stats, pairs, categories
+const grouped = m.categories.map(cat => ({
   ...cat,
-  pairs: pairs.pairs.filter(p => p.category === cat.id).sort((a, b) => {
-    // Kyiv (id=1) always first in geographical
+  pairs: m.pairs.filter(p => p.category === cat.id).sort((a, b) => {
     if (a.id === 1) return -1;
     if (b.id === 1) return 1;
     return b.total - a.total;
   })
 })).filter(g => g.pairs.length > 0);
-
-const totalMentions = pairs.pairs.reduce((sum, p) => sum + p.total, 0);
 
 function fmtBig(n: string | number) {
   const v = typeof n === 'string' ? parseInt(n) : n;
@@ -28,6 +25,8 @@ function adoptionClass(pct: number) {
   if (pct >= 30) return 'adoption-mid';
   return 'adoption-low';
 }
+
+const src = (name: string) => (m.sources as any)[name];
 
 function formatNum(n: number) {
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
@@ -110,62 +109,34 @@ function formatNum(n: number) {
     <main class="main">
       <div class="stats" style="grid-template-columns: repeat(5, 1fr);">
         <div class="stat-card">
-          <div class="stat-value">{fmtBig(parseInt(siteStats.gdelt_articles) + parseInt(siteStats.reddit_posts) + parseInt(siteStats.youtube_videos) + parseInt(siteStats.wikipedia_pageviews) + parseInt(siteStats.trends_datapoints) + parseInt(siteStats.ngrams_datapoints))}</div>
+          <div class="stat-value">{fmtBig(m.total_records)}</div>
           <div class="stat-label">Records Analyzed</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">~1.2 PB</div>
+          <div class="stat-value">~{m.data_processed_pb} PB</div>
           <div class="stat-label">Data Processed</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">{pairs.pairs.length}</div>
+          <div class="stat-value">{m.analyzable_pairs}</div>
           <div class="stat-label">Toponym Pairs</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">7</div>
+          <div class="stat-value">{m.num_sources}</div>
           <div class="stat-label">Data Sources</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">2010–26</div>
+          <div class="stat-value">{m.time_span}</div>
           <div class="stat-label">Time Span</div>
         </div>
       </div>
       <div class="stats source-stats" style="grid-template-columns: repeat(7, 1fr);">
-        <div class="stat-card mini" style="--accent: #4285F4">
-          <div class="stat-value">{fmtBig(siteStats.trends_datapoints)}</div>
-          <div class="stat-label">Search Trends</div>
-          <div class="stat-source">Google · {siteStats.trends_countries} countries</div>
-        </div>
-        <div class="stat-card mini" style="--accent: #1e3a5f">
-          <div class="stat-value">{fmtBig(siteStats.gdelt_articles)}</div>
-          <div class="stat-label">News Articles</div>
-          <div class="stat-source">GDELT · {fmtBig(siteStats.gdelt_domains)} domains</div>
-        </div>
-        <div class="stat-card mini" style="--accent: #636466">
-          <div class="stat-value">{fmtBig(siteStats.wikipedia_pageviews)}</div>
-          <div class="stat-label">Page Views</div>
-          <div class="stat-source">Wikipedia · monthly</div>
-        </div>
-        <div class="stat-card mini" style="--accent: #FF4500">
-          <div class="stat-value">{fmtBig(siteStats.reddit_posts)}</div>
-          <div class="stat-label">Posts</div>
-          <div class="stat-source">Reddit · {fmtBig(siteStats.reddit_subreddits)} subs</div>
-        </div>
-        <div class="stat-card mini" style="--accent: #FF0000">
-          <div class="stat-value">{fmtBig(siteStats.youtube_videos)}</div>
-          <div class="stat-label">Videos</div>
-          <div class="stat-source">YouTube · {fmtBig(siteStats.youtube_channels)} channels</div>
-        </div>
-        <div class="stat-card mini" style="--accent: #7c3aed">
-          <div class="stat-value">{fmtBig(siteStats.ngrams_datapoints)}</div>
-          <div class="stat-label">Book Records</div>
-          <div class="stat-source">Google Books · 8M+ volumes</div>
-        </div>
-        <div class="stat-card mini" style="--accent: #06b6d4">
-          <div class="stat-value">4.5B</div>
-          <div class="stat-label">Pages Crawled</div>
-          <div class="stat-source">Common Crawl · ~1 PB</div>
-        </div>
+        {Object.entries(m.sources).map(([key, s]: [string, any]) => (
+          <div class="stat-card mini" style={`--accent: ${s.color}`}>
+            <div class="stat-value">{fmtBig(s.records)}</div>
+            <div class="stat-label">{s.label}</div>
+            <div class="stat-source">{s.extra}</div>
+          </div>
+        ))}
       </div>
 
       <div class="chart-container">
@@ -370,13 +341,15 @@ function formatNum(n: number) {
     import * as d3 from 'd3';
     import * as topojson from 'topojson-client';
     import timeseriesData from '../data/timeseries.json';
-    import pairs from '../data/pairs.json';
-    import countryData from '../data/countries.json';
+    import manifest from '../data/manifest.json';
     import holdoutsData from '../data/holdouts.json';
     import holdoutsByPair from '../data/holdouts_by_pair.json';
     import countriesByPair from '../data/countries_by_pair.json';
     import pairEvents from '../data/pair_events.json';
     import trendsCountries from '../data/trends_countries.json';
+
+    // Use manifest as the single pairs source
+    const pairs = { categories: manifest.categories, pairs: manifest.pairs };
 
     const sourceColors: Record<string, string> = {
       trends: '#4285F4',
@@ -1131,7 +1104,7 @@ function formatNum(n: number) {
         adoptionMap = (trendsCountries as any)[String(activePairId)] || {};
       } else {
         const pairCountries = (countriesByPair as any)[String(activePairId)];
-        adoptionMap = (pairCountries || (countryData as any).countries) as Record<string, {name: string; adoption: number}>;
+        adoptionMap = (pairCountries || {}) as Record<string, {name: string; adoption: number}>;
       }
 
       // Tooltip — positioned relative to container
