@@ -30,7 +30,7 @@ REQUEST_DELAY = 0.2  # OpenAlex is generous: 10 req/s for polite pool
 MAILTO = "ivan@kyivnotkiev.org"  # Gets us into the polite pool (faster)
 
 # Year range
-START_YEAR = 2000  # Academic papers go back further, useful context
+START_YEAR = 2010  # Pre-2010 data too sparse/noisy for meaningful adoption signal
 END_YEAR = 2026
 
 

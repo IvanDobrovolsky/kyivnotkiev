@@ -311,12 +311,14 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
             if pid not in enabled_ids:
                 continue
             spid = str(pid)
-            result.setdefault(spid, {}).setdefault("openalex", [])
+            raw_series = []
             for yr in pair_data["yearly"]:
                 total = yr["total"]
-                if total > 0:
-                    adoption = round(yr["ukrainian_count"] / total * 100, 1)
-                    result[spid]["openalex"].append({"date": f"{yr['year']}-01", "adoption": adoption})
+                adoption = round(yr["ukrainian_count"] / total * 100, 1) if total > 0 else None
+                raw_series.append({"date": f"{yr['year']}-01", "adoption": adoption})
+            # Smooth with 3-year window (annual data can be noisy for small pairs)
+            result.setdefault(spid, {})
+            result[spid]["openalex"] = smooth_series(raw_series, window=3)
         log.info(f"    Loaded {len(openalex_data)} pairs from OpenAlex")
     else:
         log.warning("    No OpenAlex data found — run: python -m pipeline.ingestion.openalex")
