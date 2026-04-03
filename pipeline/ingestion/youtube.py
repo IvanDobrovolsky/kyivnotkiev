@@ -77,12 +77,19 @@ def search_youtube_api(
 
 
 def search_youtube_noapi(query: str, max_results: int = 20) -> list[dict]:
-    """Search YouTube without API key using Invidious public instances."""
-    # Use Invidious API (public YouTube frontend with API)
+    """Search YouTube without API key using yt-dlp or Invidious."""
+    # Method 1: yt-dlp (most reliable, no API key needed)
+    results = _search_ytdlp(query, max_results)
+    if results:
+        return results
+
+    # Method 2: Invidious public instances (updated list)
     instances = [
-        "https://vid.puffyan.us",
-        "https://invidious.fdn.fr",
-        "https://inv.tux.pizza",
+        "https://invidious.privacyredirect.com",
+        "https://inv.nadeko.net",
+        "https://invidious.nerdvpn.de",
+        "https://invidious.jing.rocks",
+        "https://invidious.protokolla.fi",
     ]
 
     for instance in instances:
@@ -96,12 +103,50 @@ def search_youtube_noapi(query: str, max_results: int = 20) -> list[dict]:
             resp = requests.get(url, params=params, timeout=15)
             if resp.status_code == 200:
                 results = resp.json()
-                return results[:max_results]
+                if results:
+                    return results[:max_results]
         except (requests.RequestException, json.JSONDecodeError):
             continue
 
-    log.warning(f"  All Invidious instances failed for: {query}")
+    log.warning(f"  All search methods failed for: {query}")
     return []
+
+
+def _search_ytdlp(query: str, max_results: int = 20) -> list[dict]:
+    """Search YouTube via yt-dlp (no API key needed)."""
+    import shutil
+    import subprocess
+
+    if not shutil.which("yt-dlp"):
+        return []
+
+    try:
+        cmd = [
+            "yt-dlp",
+            f"ytsearch{max_results}:{query}",
+            "--dump-json",
+            "--flat-playlist",
+            "--no-download",
+            "--quiet",
+            "--no-warnings",
+        ]
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+        if result.returncode != 0:
+            return []
+
+        items = []
+        for line in result.stdout.strip().split("\n"):
+            if not line:
+                continue
+            try:
+                data = json.loads(line)
+                items.append({"title": data.get("title", ""), "id": data.get("id", "")})
+            except json.JSONDecodeError:
+                continue
+        return items
+    except (subprocess.TimeoutExpired, OSError) as e:
+        log.warning(f"  yt-dlp search failed: {e}")
+        return []
 
 
 def count_term_in_titles(results: list[dict], term: str) -> int:
@@ -132,10 +177,10 @@ def collect_pair_youtube(pair_id: int, api_key: str | None = None) -> pd.DataFra
 
     rows = []
 
-    # Search for each variant by year
-    for year in range(2018, 2027):
+    # Search for each variant by year (2010-2026 for full coverage)
+    for year in range(2010, 2027):
         published_after = f"{year}-01-01T00:00:00Z"
-        published_before = f"{year}-12-31T23:59:59Z" if year < 2026 else "2026-03-15T23:59:59Z"
+        published_before = f"{year}-12-31T23:59:59Z" if year < 2026 else "2026-04-01T23:59:59Z"
 
         for variant, term in [("russian", russian), ("ukrainian", ukrainian)]:
             if api_key:
@@ -237,6 +282,15 @@ def preprocess_youtube() -> pd.DataFrame | None:
     result.to_csv(out_path, index=False)
     log.info(f"YouTube processed: {len(result)} rows -> {out_path}")
     return result
+
+
+def run(pair_ids: list[int] | None = None):
+    """Entry point for orchestrator."""
+    import os
+    api_key = os.environ.get("YOUTUBE_API_KEY")
+    target = [p for p in (pair_ids or list(SEARCH_TERMS.keys())) if p in SEARCH_TERMS]
+    collect_all(pair_ids=target, api_key=api_key)
+    preprocess_youtube()
 
 
 def main():

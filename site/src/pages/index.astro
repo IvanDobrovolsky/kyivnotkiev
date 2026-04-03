@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import pairs from '../data/pairs.json';
+import siteStats from '../data/site_stats.json';
 
 const grouped = pairs.categories.map(cat => ({
   ...cat,
@@ -8,6 +9,14 @@ const grouped = pairs.categories.map(cat => ({
 })).filter(g => g.pairs.length > 0);
 
 const totalMentions = pairs.pairs.reduce((sum, p) => sum + p.total, 0);
+
+function fmtBig(n: string | number) {
+  const v = typeof n === 'string' ? parseInt(n) : n;
+  if (v >= 1_000_000_000) return (v / 1_000_000_000).toFixed(1) + 'B';
+  if (v >= 1_000_000) return (v / 1_000_000).toFixed(1) + 'M';
+  if (v >= 1_000) return (v / 1_000).toFixed(1) + 'K';
+  return v.toString();
+}
 
 function adoptionClass(pct: number) {
   if (pct >= 70) return 'adoption-high';
@@ -28,11 +37,11 @@ function formatNum(n: number) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>KyivNotKiev — Measuring Ukrainian Toponym Adoption Worldwide</title>
-  <meta name="description" content="The world's largest computational study tracking how global media, search, and social platforms adopt Ukrainian spellings. 4.5 billion pages scanned, 3.8M verified instances, 7 sources.">
+  <meta name="description" content="The world's largest computational study tracking how global media, search, and social platforms adopt Ukrainian spellings. 38.7M news articles, 562M Wikipedia views, 22K Reddit posts, 14.5K YouTube videos across 7 sources.">
 
   <!-- Open Graph -->
   <meta property="og:title" content="KyivNotKiev — Did the World Listen?">
-  <meta property="og:description" content="Computational analysis of Ukrainian toponym adoption across 4.5B pages scanned, 3.8M verified instances from 7 sources. How effectively did #KyivNotKiev change language worldwide?">
+  <meta property="og:description" content="Computational analysis of Ukrainian toponym adoption across 38.7M news articles, 562M Wikipedia views, 14.5K videos from 7 sources. How effectively did #KyivNotKiev change language worldwide?">
   <meta property="og:image" content="https://kyivnotkiev.org/logo.jpg">
   <meta property="og:url" content="https://kyivnotkiev.org">
   <meta property="og:type" content="website">
@@ -42,7 +51,7 @@ function formatNum(n: number) {
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KyivNotKiev — Did the World Listen?">
-  <meta name="twitter:description" content="4.5 billion pages scanned, 3.8M verified instances, 7 sources. The largest computational study of Ukrainian toponym adoption.">
+  <meta name="twitter:description" content="38.7M news articles, 562M page views, 22K posts, 14.5K videos, 7 sources. The largest computational study of Ukrainian toponym adoption.">
   <meta name="twitter:image" content="https://kyivnotkiev.org/logo.jpg">
 
   <!-- Favicon -->
@@ -94,21 +103,11 @@ function formatNum(n: number) {
     </aside>
 
     <main class="main">
-      <div class="stats" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="stats" style="grid-template-columns: repeat(4, 1fr);">
         <div class="stat-card">
-          <div class="stat-value">4.5B</div>
-          <div class="stat-label">Pages Scanned</div>
+          <div class="stat-value">{fmtBig(siteStats.total_records)}</div>
+          <div class="stat-label">Records Analyzed</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-value">~1 PB</div>
-          <div class="stat-label">Data Processed</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">3.9M</div>
-          <div class="stat-label">Verified Instances</div>
-        </div>
-      </div>
-      <div class="stats">
         <div class="stat-card">
           <div class="stat-value">{pairs.pairs.length}</div>
           <div class="stat-label">Toponym Pairs</div>
@@ -118,12 +117,45 @@ function formatNum(n: number) {
           <div class="stat-label">Data Sources</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">55</div>
-          <div class="stat-label">Countries</div>
-        </div>
-        <div class="stat-card">
           <div class="stat-value">2010–26</div>
           <div class="stat-label">Time Span</div>
+        </div>
+      </div>
+      <div class="stats source-stats" style="grid-template-columns: repeat(7, 1fr);">
+        <div class="stat-card mini" style="--accent: #1e3a5f">
+          <div class="stat-value">{fmtBig(siteStats.gdelt_articles)}</div>
+          <div class="stat-label">News Articles</div>
+          <div class="stat-source">GDELT · {fmtBig(siteStats.gdelt_domains)} domains</div>
+        </div>
+        <div class="stat-card mini" style="--accent: #4285F4">
+          <div class="stat-value">{fmtBig(siteStats.trends_datapoints)}</div>
+          <div class="stat-label">Search Trends</div>
+          <div class="stat-source">Google · {siteStats.trends_countries} countries</div>
+        </div>
+        <div class="stat-card mini" style="--accent: #636466">
+          <div class="stat-value">{fmtBig(siteStats.wikipedia_pageviews)}</div>
+          <div class="stat-label">Page Views</div>
+          <div class="stat-source">Wikipedia · monthly</div>
+        </div>
+        <div class="stat-card mini" style="--accent: #FF4500">
+          <div class="stat-value">{fmtBig(siteStats.reddit_posts)}</div>
+          <div class="stat-label">Posts</div>
+          <div class="stat-source">Reddit · {fmtBig(siteStats.reddit_subreddits)} subs</div>
+        </div>
+        <div class="stat-card mini" style="--accent: #FF0000">
+          <div class="stat-value">{fmtBig(siteStats.youtube_videos)}</div>
+          <div class="stat-label">Videos</div>
+          <div class="stat-source">YouTube · {fmtBig(siteStats.youtube_channels)} channels</div>
+        </div>
+        <div class="stat-card mini" style="--accent: #7c3aed">
+          <div class="stat-value">{fmtBig(siteStats.ngrams_datapoints)}</div>
+          <div class="stat-label">Book Records</div>
+          <div class="stat-source">Google Books · 8M+ volumes</div>
+        </div>
+        <div class="stat-card mini" style="--accent: #06b6d4">
+          <div class="stat-value">4.5B</div>
+          <div class="stat-label">Pages Crawled</div>
+          <div class="stat-source">Common Crawl · ~1 PB</div>
         </div>
       </div>
 

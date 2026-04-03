@@ -30,7 +30,8 @@ USER_AGENT = "KyivNotKiev-Research/1.0 (academic research)"
 REQUEST_DELAY = 2  # Reddit rate limit: ~60 req/min for unauthenticated
 
 # Arctic Shift API for historical Reddit data (free, research-friendly)
-ARCTIC_SHIFT_API = "https://arctic-shift.photon-reddit.com/api"
+# Correct endpoint: /api/posts/search (requires subreddit param)
+ARCTIC_SHIFT_BASE = "https://arctic-shift.photon-reddit.com/api"
 
 # Target subreddits for analysis
 SUBREDDITS = [
@@ -59,25 +60,26 @@ SEARCH_TERMS = {
 
 def search_arctic_shift(
     term: str,
-    subreddit: str | None = None,
-    after: str = "2015-01-01",
-    before: str = "2026-03-15",
-    search_type: str = "submissions",  # "submissions" or "comments"
+    subreddit: str = "worldnews",
+    after: str = "2010-01-01",
+    before: str = "2026-04-01",
+    search_type: str = "posts",  # "posts" or "comments"
     limit: int = 100,
 ) -> list[dict]:
-    """Search Arctic Shift API for Reddit posts/comments containing a term."""
+    """Search Arctic Shift API for Reddit posts/comments containing a term.
+
+    Note: Arctic Shift requires a subreddit parameter for text searches.
+    """
     params = {
-        "q": term,
+        "title": term,
+        "subreddit": subreddit,
         "after": after,
         "before": before,
-        "limit": limit,
-        "sort": "created_utc",
-        "order": "asc",
+        "limit": min(limit, 100),
+        "sort": "asc",
     }
-    if subreddit:
-        params["subreddit"] = subreddit
 
-    url = f"{ARCTIC_SHIFT_API}/{search_type}/search"
+    url = f"{ARCTIC_SHIFT_BASE}/{search_type}/search"
     headers = {"User-Agent": USER_AGENT}
 
     try:
@@ -179,28 +181,31 @@ def collect_pair_reddit(pair_id: int) -> pd.DataFrame | None:
                 log.info(f"    r/{sub} [{time_filter}] '{term}': {count} posts")
                 time.sleep(REQUEST_DELAY)
 
-    # Method 2: Arctic Shift for historical data (if available)
+    # Method 2: Arctic Shift for historical yearly data (2010-2026)
+    arctic_subreddits = ["worldnews", "ukraine", "europe", "news"]
     for variant, term in [("russian", russian), ("ukrainian", ukrainian)]:
-        # Try yearly buckets
-        for year in range(2015, 2027):
+        for year in range(2010, 2027):
             after = f"{year}-01-01"
-            before = f"{year}-12-31" if year < 2026 else "2026-03-15"
-            results = search_arctic_shift(
-                term, after=after, before=before,
-                search_type="submissions", limit=100,
-            )
+            before = f"{year}-12-31" if year < 2026 else "2026-04-01"
+            total_count = 0
+            for sub in arctic_subreddits:
+                results = search_arctic_shift(
+                    term, subreddit=sub, after=after, before=before,
+                    search_type="posts", limit=100,
+                )
+                total_count += len(results)
+                time.sleep(REQUEST_DELAY)
             rows.append({
                 "pair_id": pair_id,
                 "variant": variant,
                 "term": term,
-                "subreddit": "all",
+                "subreddit": "multi",
                 "time_filter": f"year_{year}",
-                "count": len(results),
+                "count": total_count,
                 "source": "arctic_shift",
             })
-            if results:
-                log.info(f"    Arctic Shift {year} '{term}': {len(results)} submissions")
-            time.sleep(REQUEST_DELAY)
+            if total_count:
+                log.info(f"    Arctic Shift {year} '{term}': {total_count} posts")
 
     if not rows:
         return None
@@ -277,6 +282,13 @@ def preprocess_reddit() -> pd.DataFrame | None:
     result.to_csv(out_path, index=False)
     log.info(f"Reddit processed: {len(result)} rows -> {out_path}")
     return result
+
+
+def run(pair_ids: list[int] | None = None):
+    """Entry point for orchestrator."""
+    target = [p for p in (pair_ids or list(SEARCH_TERMS.keys())) if p in SEARCH_TERMS]
+    collect_all(pair_ids=target)
+    preprocess_reddit()
 
 
 def main():
