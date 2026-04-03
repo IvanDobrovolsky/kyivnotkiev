@@ -468,15 +468,14 @@ function formatNum(n: number) {
 
       if (allDates.length === 0) return;
 
-      // Dynamic range based on active source
-      const sourceStarts: Record<string, number> = {
-        ngrams: 1900, trends: 2010, reddit: 2010, gdelt: 2015, wikipedia: 2015, youtube: 2013, common_crawl: 2015,
-      };
-      const sourceEnds: Record<string, number> = {
-        ngrams: 2020, trends: 2027, reddit: 2027, gdelt: 2027, wikipedia: 2027, youtube: 2027, common_crawl: 2027,
-      };
-      const xStart = new Date(sourceStarts[activeSource] || 2010, 0, 1);
-      const xEnd = new Date(sourceEnds[activeSource] || 2027, 0, 1);
+      // Dynamic range based on actual data for this pair + source
+      const seriesData = pairData[activeSource] || [];
+      const dataMinDate = d3.min(allDates) as Date;
+      const dataMaxDate = d3.max(allDates) as Date;
+
+      // Pad 6 months before/after data range
+      const xStart = new Date(dataMinDate.getFullYear(), dataMinDate.getMonth() - 6, 1);
+      const xEnd = new Date(dataMaxDate.getFullYear(), dataMaxDate.getMonth() + 6, 1);
       const x = d3.scaleTime()
         .domain([xStart, xEnd])
         .range([0, width]);
@@ -484,18 +483,19 @@ function formatNum(n: number) {
       // Update title range and info text
       const rangeEl = document.getElementById('chart-range');
       const infoEl = document.getElementById('chart-info');
-      const sourceRanges: Record<string, [string, string, string]> = {
-        trends: ['2010', '2026', ''],
-        gdelt: ['2015', '2026', 'GDELT v2 started Feb 2015'],
-        wikipedia: ['2015', '2026', 'Pageviews API started Jul 2015'],
-        reddit: ['2007', '2026', 'Quarterly aggregated'],
-        youtube: ['2013', '2026', 'Top 50 results per search'],
-        ngrams: ['1900', '2019', 'Google Books corpus ends 2019'],
-        common_crawl: ['2015', '2026', 'CDX index, ~100M URLs per crawl'],
+      const sourceInfo: Record<string, string> = {
+        trends: 'Monthly search interest',
+        gdelt: 'GDELT v2 news monitoring',
+        wikipedia: 'Pageviews API',
+        reddit: 'Reddit posts, annual',
+        youtube: 'Video title matches, annual',
+        ngrams: 'Google Books corpus',
+        openalex: 'OpenAlex academic papers',
       };
-      const [srcStart, srcEnd, srcInfo] = sourceRanges[activeSource] || ['2010', '2026', ''];
-      if (rangeEl) rangeEl.textContent = `${srcStart}–${srcEnd}`;
-      if (infoEl) infoEl.textContent = srcInfo;
+      const startYear = dataMinDate.getFullYear();
+      const endYear = dataMaxDate.getFullYear();
+      if (rangeEl) rangeEl.textContent = `${startYear}–${endYear}`;
+      if (infoEl) infoEl.textContent = sourceInfo[activeSource] || '';
 
       const y = d3.scaleLinear()
         .domain([0, 100])
