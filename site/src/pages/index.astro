@@ -140,46 +140,50 @@ function formatNum(n: number) {
       </div>
 
       <div class="chart-container">
-        <div class="chart-header">
-          <div>
-            <div class="chart-title">
+        <div class="chart-header" style="flex-direction:column; align-items:stretch; gap:0.4rem;">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+            <div class="chart-title" style="margin:0;">
               <span class="old-name" id="chart-old">Kiev</span>
               <span class="arrow">→</span>
               <span class="new-name" id="chart-new">Kyiv</span>
               <span id="chart-range" style="font-size:0.75rem; color:var(--text-muted); font-weight:400; margin-left:0.5rem;"></span>
+              <span id="chart-info" style="font-size:0.7rem; color:var(--text-dim); font-style:italic; margin-left:0.5rem;"></span>
             </div>
-            <div class="chart-subtitle">
-              Ukrainian spelling adoption rate (%) · <span id="chart-info" style="color:var(--text-dim); font-style:italic;"></span>
+            <div class="chart-controls" style="margin:0;">
+              <button class="source-toggle active" data-source="trends" style="--source-color: #4285F4">
+                <span class="source-dot"></span>Trends
+              </button>
+              <button class="source-toggle" data-source="gdelt" style="--source-color: #1e3a5f">
+                <span class="source-dot"></span>GDELT
+              </button>
+              <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466">
+                <span class="source-dot"></span>Wiki
+              </button>
+              <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500">
+                <span class="source-dot"></span>Reddit
+              </button>
+              <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000">
+                <span class="source-dot"></span>YouTube
+              </button>
+              <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed">
+                <span class="source-dot"></span>Ngrams
+              </button>
+              <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4">
+                <span class="source-dot"></span>Academic
+              </button>
             </div>
           </div>
-          <div class="chart-controls">
-            <button class="source-toggle active" data-source="trends" style="--source-color: #4285F4">
-              <span class="source-dot"></span>Trends
-            </button>
-            <button class="source-toggle" data-source="gdelt" style="--source-color: #1e3a5f">
-              <span class="source-dot"></span>GDELT
-            </button>
-            <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466">
-              <span class="source-dot"></span>Wikipedia
-            </button>
-            <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500">
-              <span class="source-dot"></span>Reddit
-            </button>
-            <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000">
-              <span class="source-dot"></span>YouTube
-            </button>
-            <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed">
-              <span class="source-dot"></span>Ngrams
-            </button>
-            <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4">
-              <span class="source-dot"></span>Academic
-            </button>
-            <span class="toggle-sep"></span>
-            <button class="line-mode active" data-mode="both">Both</button>
-            <button class="line-mode" data-mode="ukrainian">Ukrainian</button>
-            <button class="line-mode" data-mode="russian">Russian</button>
-            <span class="toggle-sep"></span>
-            <button class="event-toggle active" id="events-toggle">Events</button>
+          <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+            <div class="chart-controls" style="margin:0;">
+              <button class="chart-mode active" data-chart="adoption">Adoption %</button>
+              <button class="chart-mode" data-chart="volume">Volume</button>
+              <span class="toggle-sep"></span>
+              <button class="line-mode active" data-mode="both">All</button>
+              <button class="line-mode" data-mode="ukrainian">UA</button>
+              <button class="line-mode" data-mode="russian">RU</button>
+              <span class="toggle-sep"></span>
+              <button class="event-toggle active" id="events-toggle">Events</button>
+            </div>
           </div>
         </div>
         <div id="chart"></div>
@@ -386,6 +390,7 @@ function formatNum(n: number) {
     let activeSources = new Set(['trends']);  // kept as set for chart compatibility
     let hideRuDomains = false;
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
+    let chartMode: 'adoption' | 'volume' = 'adoption';
     let showEvents = true;
 
     // Read pair from URL query param (?pair=1), default to Kyiv (1)
@@ -508,13 +513,20 @@ function formatNum(n: number) {
       if (rangeEl) rangeEl.textContent = `${startYear}–${endYear}`;
       if (infoEl) infoEl.textContent = sourceInfo[activeSource] || '';
 
-      const y = d3.scaleLinear()
-        .domain([0, 100])
-        .range([height, 0]);
+      // Y-axis depends on chart mode
+      let y: d3.ScaleLinear<number, number>;
+      if (chartMode === 'volume') {
+        // Find max count across all data points
+        const maxCount = Math.max(...(seriesData || []).map((d: any) => Math.max(d.ukr || 0, d.rus || 0, (d.ukr || 0) + (d.rus || 0))), 10);
+        y = d3.scaleLinear().domain([0, maxCount * 1.1]).range([height, 0]);
+      } else {
+        y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
+      }
 
       // Grid
+      const gridTicks = chartMode === 'volume' ? y.ticks(5) : [25, 50, 75, 100];
       svg.append('g').selectAll('line')
-        .data([25, 50, 75, 100])
+        .data(gridTicks)
         .enter().append('line')
         .attr('x1', 0).attr('x2', width)
         .attr('y1', (d: number) => y(d)).attr('y2', (d: number) => y(d))
@@ -528,7 +540,7 @@ function formatNum(n: number) {
         .attr('x', -8).attr('y', (d: number) => y(d) + 4)
         .attr('text-anchor', 'end')
         .attr('fill', '#9ca3af').attr('font-size', '11px')
-        .text((d: number) => d + '%');
+        .text((d: number) => chartMode === 'volume' ? (d >= 1000 ? (d/1000).toFixed(0) + 'K' : String(d)) : d + '%');
 
       // X-axis — decades for Ngrams, years for others
       const xTicks = activeSource === 'ngrams'
@@ -614,46 +626,77 @@ function formatNum(n: number) {
         .style('opacity', 0);
 
       // Build all series data for crosshair lookup
-      const allSeriesData: Record<string, {date: string; adoption: number}[]> = {};
-
-      const line = d3.line<{date: string; adoption: number}>()
-        .x(d => x(parseDate(d.date)!))
-        .y(d => y(d.adoption))
-        .curve(d3.curveBasis);
-
+      const allSeriesData: Record<string, any[]> = {};
       const activeLegend: {label: string; color: string; value: number}[] = [];
 
       for (const src of activeSources) {
         const series = pairData[src];
         if (!series) continue;
-
         allSeriesData[src] = series;
 
-        // Ukrainian adoption line (solid)
-        if (lineMode !== 'russian') {
-          svg.append('path')
-            .datum(series)
-            .attr('fill', 'none')
-            .attr('stroke', sourceColors[src])
-            .attr('stroke-width', 3)
-            .attr('d', line);
-        }
+        if (chartMode === 'volume') {
+          // ── VOLUME MODE: stacked bar chart ──
+          const barWidth = Math.max(2, Math.min(20, width / series.length - 2));
+          series.forEach((d: any) => {
+            const date = parseDate(d.date);
+            if (!date) return;
+            const ukr = d.ukr || 0;
+            const rus = d.rus || 0;
+            const cx = x(date);
 
-        // Russian line (dashed, 100% - adoption)
-        if (lineMode !== 'ukrainian') {
-          const russianLine = d3.line<any>()
-            .x(d => x(parseDate(d.date)!))
-            .y(d => y(100 - d.adoption))
+            if (lineMode !== 'russian' && ukr > 0) {
+              svg.append('rect')
+                .attr('x', cx - barWidth / 2)
+                .attr('y', y(ukr + (lineMode === 'both' ? rus : 0)))
+                .attr('width', barWidth)
+                .attr('height', Math.max(0, height - y(ukr)))
+                .attr('fill', sourceColors[src])
+                .attr('opacity', 0.8)
+                .attr('rx', 1);
+            }
+
+            if (lineMode !== 'ukrainian' && rus > 0) {
+              svg.append('rect')
+                .attr('x', cx - barWidth / 2)
+                .attr('y', lineMode === 'both' ? y(rus) : y(rus))
+                .attr('width', barWidth)
+                .attr('height', Math.max(0, height - y(rus)))
+                .attr('fill', '#dc2626')
+                .attr('opacity', lineMode === 'russian' ? 0.8 : 0.4)
+                .attr('rx', 1);
+            }
+          });
+        } else {
+          // ── ADOPTION MODE: line chart ──
+          const line = d3.line<any>()
+            .x((d: any) => x(parseDate(d.date)!))
+            .y((d: any) => y(d.adoption))
             .curve(d3.curveBasis);
 
-          svg.append('path')
-            .datum(series)
-            .attr('fill', 'none')
-            .attr('stroke', '#dc2626')
-            .attr('stroke-width', lineMode === 'russian' ? 3 : 1.5)
-            .attr('stroke-dasharray', lineMode === 'russian' ? 'none' : '6,4')
-            .attr('opacity', lineMode === 'russian' ? 1 : 0.5)
-            .attr('d', russianLine);
+          if (lineMode !== 'russian') {
+            svg.append('path')
+              .datum(series)
+              .attr('fill', 'none')
+              .attr('stroke', sourceColors[src])
+              .attr('stroke-width', 3)
+              .attr('d', line);
+          }
+
+          if (lineMode !== 'ukrainian') {
+            const russianLine = d3.line<any>()
+              .x((d: any) => x(parseDate(d.date)!))
+              .y((d: any) => y(100 - d.adoption))
+              .curve(d3.curveBasis);
+
+            svg.append('path')
+              .datum(series)
+              .attr('fill', 'none')
+              .attr('stroke', '#dc2626')
+              .attr('stroke-width', lineMode === 'russian' ? 3 : 1.5)
+              .attr('stroke-dasharray', lineMode === 'russian' ? 'none' : '6,4')
+              .attr('opacity', lineMode === 'russian' ? 1 : 0.5)
+              .attr('d', russianLine);
+          }
         }
 
         // Start indicator (if doesn't start at 2010)
@@ -848,7 +891,17 @@ function formatNum(n: number) {
       });
     });
 
-    // Line mode radio (Both / Ukrainian / Russian)
+    // Chart mode radio (Adoption % / Volume)
+    document.querySelectorAll('.chart-mode').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.chart-mode').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        chartMode = (btn as HTMLElement).dataset.chart as any;
+        drawChart();
+      });
+    });
+
+    // Line mode radio (All / UA / RU)
     document.querySelectorAll('.line-mode').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.line-mode').forEach(b => b.classList.remove('active'));
