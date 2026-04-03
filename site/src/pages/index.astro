@@ -175,7 +175,10 @@ function formatNum(n: number) {
               <span class="source-dot"></span>Academic
             </button>
             <span class="toggle-sep"></span>
-            <button class="event-toggle active" id="dual-line-toggle">Both Lines</button>
+            <button class="line-mode active" data-mode="both">Both</button>
+            <button class="line-mode" data-mode="ukrainian">Ukrainian</button>
+            <button class="line-mode" data-mode="russian">Russian</button>
+            <span class="toggle-sep"></span>
             <button class="event-toggle active" id="events-toggle">Events</button>
           </div>
         </div>
@@ -374,7 +377,7 @@ function formatNum(n: number) {
     let activeSource = 'trends';  // single source at a time
     let activeSources = new Set(['trends']);  // kept as set for chart compatibility
     let hideRuDomains = false;
-    let showDualLines = true;  // show both Ukrainian (solid) and Russian (dashed)
+    let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
     let showEvents = true;
 
     // Read pair from URL query param (?pair=1), default to Kyiv (1)
@@ -619,15 +622,17 @@ function formatNum(n: number) {
         allSeriesData[src] = series;
 
         // Ukrainian adoption line (solid)
-        svg.append('path')
-          .datum(series)
-          .attr('fill', 'none')
-          .attr('stroke', sourceColors[src])
-          .attr('stroke-width', 3)
-          .attr('d', line);
+        if (lineMode !== 'russian') {
+          svg.append('path')
+            .datum(series)
+            .attr('fill', 'none')
+            .attr('stroke', sourceColors[src])
+            .attr('stroke-width', 3)
+            .attr('d', line);
+        }
 
-        // Russian line (dashed, 100% - adoption) if dual mode
-        if (showDualLines) {
+        // Russian line (dashed, 100% - adoption)
+        if (lineMode !== 'ukrainian') {
           const russianLine = d3.line<any>()
             .x(d => x(parseDate(d.date)!))
             .y(d => y(100 - d.adoption))
@@ -637,9 +642,9 @@ function formatNum(n: number) {
             .datum(series)
             .attr('fill', 'none')
             .attr('stroke', '#dc2626')
-            .attr('stroke-width', 1.5)
-            .attr('stroke-dasharray', '6,4')
-            .attr('opacity', 0.5)
+            .attr('stroke-width', lineMode === 'russian' ? 3 : 1.5)
+            .attr('stroke-dasharray', lineMode === 'russian' ? 'none' : '6,4')
+            .attr('opacity', lineMode === 'russian' ? 1 : 0.5)
             .attr('d', russianLine);
         }
 
@@ -750,16 +755,19 @@ function formatNum(n: number) {
         });
 
       // Legend
-      for (const item of activeLegend) {
-        const el = document.createElement('div');
-        el.className = 'legend-item';
-        el.innerHTML = `<span class="legend-line" style="background: ${item.color}"></span>${item.label}: ${item.value}%`;
-        legendContainer.appendChild(el);
+      if (lineMode !== 'russian') {
+        for (const item of activeLegend) {
+          const el = document.createElement('div');
+          el.className = 'legend-item';
+          el.innerHTML = `<span class="legend-line" style="background: ${item.color}"></span>${item.label}: ${item.value}%`;
+          legendContainer.appendChild(el);
+        }
       }
-      if (showDualLines) {
+      if (lineMode !== 'ukrainian') {
         const el = document.createElement('div');
         el.className = 'legend-item';
-        el.innerHTML = `<span class="legend-line" style="background: #dc2626; border: 1px dashed #dc2626; background: transparent;"></span>Old spelling`;
+        const lastVal = activeLegend[0] ? (100 - activeLegend[0].value).toFixed(1) : '?';
+        el.innerHTML = `<span class="legend-line" style="background: #dc2626"></span>Old spelling: ${lastVal}%`;
         legendContainer.appendChild(el);
       }
     }
@@ -832,12 +840,14 @@ function formatNum(n: number) {
       });
     });
 
-    // Dual line toggle
-    document.getElementById('dual-line-toggle')?.addEventListener('click', (e) => {
-      const btn = e.currentTarget as HTMLElement;
-      showDualLines = !showDualLines;
-      btn.classList.toggle('active');
-      drawChart();
+    // Line mode radio (Both / Ukrainian / Russian)
+    document.querySelectorAll('.line-mode').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.line-mode').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        lineMode = (btn as HTMLElement).dataset.mode as any;
+        drawChart();
+      });
     });
 
     // Events toggle
