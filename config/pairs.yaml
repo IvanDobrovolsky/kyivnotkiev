@@ -463,6 +463,13 @@ pairs:
   - date: 2016-11
     label: Poroshenko unveils Volodymyr statue in Kyiv
     color: "#0057B8"
+- id: 71
+  category: historical
+  russian: Prince of Kiev
+  ukrainian: Prince of Kyiv
+  enabled: true
+  is_control: false
+  notes: Historical title for rulers of Kyivan Rus. Russian framing dominates English-language scholarship.
 - id: 59
   category: historical
   russian: Galicia
