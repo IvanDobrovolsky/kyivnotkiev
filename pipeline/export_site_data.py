@@ -215,16 +215,15 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         if total > 0:
             result[pid]["wikipedia"].append({"date": r["month"], "adoption": round(r["ukr"] / total * 100, 1)})
 
-    # Reddit (semi-annual, min 3)
+    # Reddit (annual for consistency across pairs)
     log.info("  Reddit...")
     rows = query(f"""
         SELECT pair_id,
-            CONCAT(CAST(EXTRACT(YEAR FROM DATE(created_utc)) AS STRING), '-',
-                   LPAD(CAST(IF(EXTRACT(MONTH FROM DATE(created_utc)) <= 6, 1, 7) AS STRING), 2, '0')) as half,
+            CAST(EXTRACT(YEAR FROM DATE(created_utc)) AS STRING) as yr,
             COUNTIF(variant='ukrainian') as ukr, COUNTIF(variant='russian') as rus
         FROM `{DATASET}.raw_reddit`
-        GROUP BY pair_id, half HAVING (ukr + rus) >= 3
-        ORDER BY pair_id, half
+        GROUP BY pair_id, yr HAVING (ukr + rus) >= 2
+        ORDER BY pair_id, yr
     """)
     for r in rows:
         if r["pair_id"] not in enabled_ids:
@@ -233,27 +232,55 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         result.setdefault(pid, {}).setdefault("reddit", [])
         total = r["ukr"] + r["rus"]
         if total > 0:
-            result[pid]["reddit"].append({"date": r["half"], "adoption": round(r["ukr"] / total * 100, 1)})
+            result[pid]["reddit"].append({"date": f"{r['yr']}-01", "adoption": round(r["ukr"] / total * 100, 1)})
 
-    # YouTube (semi-annual, min 3)
-    log.info("  YouTube...")
+    # YouTube: merge BQ data with local yt-dlp CSVs (local has all 54 pairs, 2010-2026)
+    log.info("  YouTube (BQ + local CSVs)...")
+    import csv
+    from collections import defaultdict
+
+    # First load BQ data (annual)
     rows = query(f"""
         SELECT pair_id,
-            CONCAT(CAST(EXTRACT(YEAR FROM DATE(published_at)) AS STRING), '-',
-                   LPAD(CAST(IF(EXTRACT(MONTH FROM DATE(published_at)) <= 6, 1, 7) AS STRING), 2, '0')) as half,
+            CAST(EXTRACT(YEAR FROM DATE(published_at)) AS STRING) as yr,
             COUNTIF(variant='ukrainian') as ukr, COUNTIF(variant='russian') as rus
         FROM `{DATASET}.raw_youtube`
-        GROUP BY pair_id, half HAVING (ukr + rus) >= 3
-        ORDER BY pair_id, half
+        GROUP BY pair_id, yr HAVING (ukr + rus) >= 2
+        ORDER BY pair_id, yr
     """)
+    yt_data = defaultdict(dict)  # {pid: {year: (ukr, rus)}}
     for r in rows:
         if r["pair_id"] not in enabled_ids:
             continue
-        pid = str(r["pair_id"])
-        result.setdefault(pid, {}).setdefault("youtube", [])
-        total = r["ukr"] + r["rus"]
-        if total > 0:
-            result[pid]["youtube"].append({"date": r["half"], "adoption": round(r["ukr"] / total * 100, 1)})
+        yt_data[r["pair_id"]][r["yr"]] = (r["ukr"], r["rus"])
+
+    # Merge local yt-dlp CSVs (title_matches per year)
+    yt_local_dir = Path(__file__).resolve().parent.parent / "data" / "raw" / "youtube"
+    if yt_local_dir.exists():
+        for csv_file in sorted(yt_local_dir.glob("pair_*.csv")):
+            with open(csv_file) as f:
+                for row in csv.DictReader(f):
+                    pid = int(row["pair_id"])
+                    if pid not in enabled_ids:
+                        continue
+                    yr = str(row["year"])
+                    matches = int(row.get("title_matches", 0))
+                    variant = row["variant"]
+                    existing = yt_data[pid].get(yr, (0, 0))
+                    if variant == "ukrainian":
+                        yt_data[pid][yr] = (existing[0] + matches, existing[1])
+                    else:
+                        yt_data[pid][yr] = (existing[0], existing[1] + matches)
+
+    # Build timeseries
+    for pid in sorted(yt_data.keys()):
+        spid = str(pid)
+        result.setdefault(spid, {}).setdefault("youtube", [])
+        for yr in sorted(yt_data[pid].keys()):
+            ukr, rus = yt_data[pid][yr]
+            total = ukr + rus
+            if total > 0:
+                result[spid]["youtube"].append({"date": f"{yr}-01", "adoption": round(ukr / total * 100, 1)})
 
     # Ngrams (yearly)
     log.info("  Ngrams...")
