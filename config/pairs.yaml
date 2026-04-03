@@ -449,6 +449,20 @@ pairs:
   enabled: true
   is_control: true
   notes: Control — same in both languages
+- id: 70
+  category: historical
+  russian: Vladimir the Great
+  ukrainian: Volodymyr the Great
+  enabled: true
+  is_control: false
+  notes: Prince who Christianized Rus (988). Both Russia and Ukraine claim him as founding figure. Key test of historical identity reclamation.
+  events:
+  - date: 2015-07
+    label: Putin unveils Vladimir statue in Moscow
+    color: "#dc2626"
+  - date: 2016-11
+    label: Poroshenko unveils Volodymyr statue in Kyiv
+    color: "#0057B8"
 - id: 59
   category: historical
   russian: Galicia

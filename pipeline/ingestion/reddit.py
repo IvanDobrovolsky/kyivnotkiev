@@ -100,6 +100,7 @@ SEARCH_TERMS = {
     62: {"russian": "Andrei Shevchenko", "ukrainian": "Andriy Shevchenko"},
     64: {"russian": "Borsch", "ukrainian": "Borshch"},
     69: {"russian": "Sergei Rebrov", "ukrainian": "Serhiy Rebrov"},
+    70: {"russian": "Vladimir the Great", "ukrainian": "Volodymyr the Great"},
 }
 
 

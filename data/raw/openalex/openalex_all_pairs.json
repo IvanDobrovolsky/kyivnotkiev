@@ -4298,6 +4298,112 @@
     "total_ukrainian": 10
   },
   {
+    "pair_id": 70,
+    "russian_term": "Vladimir the Great",
+    "ukrainian_term": "Volodymyr the Great",
+    "category": "historical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2011,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2013,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2014,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2015,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      },
+      {
+        "year": 2017,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "total": 7
+      },
+      {
+        "year": 2018,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "total": 5
+      },
+      {
+        "year": 2019,
+        "russian_count": 12,
+        "ukrainian_count": 1,
+        "total": 13
+      },
+      {
+        "year": 2020,
+        "russian_count": 9,
+        "ukrainian_count": 3,
+        "total": 12
+      },
+      {
+        "year": 2021,
+        "russian_count": 12,
+        "ukrainian_count": 0,
+        "total": 12
+      },
+      {
+        "year": 2022,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "total": 7
+      },
+      {
+        "year": 2023,
+        "russian_count": 9,
+        "ukrainian_count": 0,
+        "total": 9
+      },
+      {
+        "year": 2024,
+        "russian_count": 10,
+        "ukrainian_count": 1,
+        "total": 11
+      },
+      {
+        "year": 2025,
+        "russian_count": 5,
+        "ukrainian_count": 1,
+        "total": 6
+      },
+      {
+        "year": 2026,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      }
+    ],
+    "total_russian": 90,
+    "total_ukrainian": 7
+  },
+  {
     "pair_id": 60,
     "russian_term": "Alexander Usyk",
     "ukrainian_term": "Oleksandr Usyk",
@@ -4376,33 +4482,5 @@
     ],
     "total_russian": 8,
     "total_ukrainian": 25
-  },
-  {
-    "pair_id": 62,
-    "russian_term": "Andrei Shevchenko",
-    "ukrainian_term": "Andriy Shevchenko",
-    "category": "people",
-    "yearly": [
-      {
-        "year": 2010,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2012,
-        "russian_count": 0,
-        "ukrainian_count": 1,
-        "total": 1
-      },
-      {
-        "year": 2013,
-        "russian_count": 1,
-        "ukrainian_count": 0,
-        "total": 1
-      }
-    ],
-    "total_russian": 1,
-    "total_ukrainian": 2
   }
 ]
