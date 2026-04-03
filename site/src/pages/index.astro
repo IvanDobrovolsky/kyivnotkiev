@@ -231,45 +231,52 @@ function formatNum(n: number) {
 
       <div style="margin: 2rem 0 1rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600;">Global Overview</div>
 
-      <!-- Statistical Highlights -->
+      <!-- Statistical Highlights — values from analysis.json (recomputed from BQ) -->
       <div class="chart-container" style="margin-bottom: 1rem;">
         <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 1rem;">Statistical Analysis</div>
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;">
           <div style="padding:1rem; background:#f0f9ff; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#0057B8;">R²=0.87</div>
+            <div style="font-size:1.8rem; font-weight:700; color:#0057B8;">R²=0.53</div>
             <div style="font-size:0.75rem; color:#6b7280;">Regression model fit</div>
-            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Pre-2022 baseline predicts 87% of adoption variance</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Pre-2022 baseline predicts current adoption (β=0.70, p&lt;0.001)</div>
           </div>
           <div style="padding:1rem; background:#fef2f2; border-radius:6px; text-align:center;">
             <div style="font-size:1.8rem; font-weight:700; color:#dc2626;">p&lt;0.001</div>
             <div style="font-size:0.75rem; color:#6b7280;">Invasion effect</div>
-            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Significant across all 6 sources</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Significant across all 4 tested sources (Wilcoxon)</div>
           </div>
           <div style="padding:1rem; background:#f0fdf4; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#059669;">d=1.27</div>
+            <div style="font-size:1.8rem; font-weight:700; color:#059669;">d=1.38</div>
             <div style="font-size:0.75rem; color:#6b7280;">Reddit effect size</div>
-            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Social media leads traditional media 2x</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Largest invasion effect; Trends d=0.85, GDELT d=0.59</div>
           </div>
           <div style="padding:1rem; background:#fefce8; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#d97706;">p=0.049</div>
+            <div style="font-size:1.8rem; font-weight:700; color:#d97706;">p=0.035</div>
             <div style="font-size:0.75rem; color:#6b7280;">Category test</div>
-            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Kruskal-Wallis: categories differ significantly</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Kruskal-Wallis H=13.54: categories differ significantly</div>
           </div>
         </div>
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 0.75rem;">
           <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Biggest shift</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Zaporizhzhia: +78.2pp at invasion</div>
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Cross-source spread</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Median 54pp between sources — adoption is domain-dependent</div>
+          </div>
+          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Historical identity gap</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Kyiv 74% adopted, but Vladimir the Great only 7% — deep history remains Russian-framed</div>
           </div>
           <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
             <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Most resistant</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Food terms: median 4.1% adoption</div>
-          </div>
-          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Cross-source agreement</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Spearman ρ=0.64–0.74 (p&lt;0.001)</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Chernobyl: 1% in Trends, 0% in Wikipedia — disaster brand entrenchment</div>
           </div>
         </div>
+      </div>
+
+      <!-- Cross-Source Disagreements -->
+      <div class="chart-container" style="margin-bottom: 1rem;">
+        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Cross-Source Analysis</div>
+        <div class="chart-subtitle" style="margin-bottom: 1rem;">Where do sources agree and disagree on adoption?</div>
+        <div id="error-analysis-chart" style="width:100%;"></div>
       </div>
 
       <!-- Russia vs World + Category side by side -->
@@ -350,6 +357,7 @@ function formatNum(n: number) {
     import countriesByPair from '../data/countries_by_pair.json';
     import pairEvents from '../data/pair_events.json';
     import trendsCountries from '../data/trends_countries.json';
+    import errorAnalysis from '../data/error_analysis.json';
 
     // Use manifest as the single pairs source
     const pairs = { categories: manifest.categories, pairs: manifest.pairs };
@@ -1247,11 +1255,103 @@ function formatNum(n: number) {
     drawCategoryChart();
     drawHeatmap();
     drawHoldoutTable();
+    drawErrorAnalysis();
 
     // Show map on initial load (Trends has per-country data)
     drawWorldMap();
 
-    window.addEventListener('resize', () => { drawChart(); drawCategoryChart(); drawHeatmap(); if (activeSource === 'gdelt') drawWorldMap(); });
+    window.addEventListener('resize', () => { drawChart(); drawCategoryChart(); drawHeatmap(); drawErrorAnalysis(); if (activeSource === 'gdelt') drawWorldMap(); });
+
+    // ── Error Analysis chart ─────────────────────────────────
+    function drawErrorAnalysis() {
+      const container = document.getElementById('error-analysis-chart');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const ea = errorAnalysis as any;
+      const items = ea.disagreements
+        .filter((d: any) => Object.keys(d.sources).length >= 3)
+        .sort((a: any, b: any) => b.spread_pp - a.spread_pp)
+        .slice(0, 15);
+
+      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      const srcNames: Record<string, string> = {
+        trends: 'Trends', gdelt: 'GDELT', wikipedia: 'Wiki',
+        reddit: 'Reddit', youtube: 'YouTube', ngrams: 'Books', openalex: 'Academic',
+      };
+
+      const rowH = 28;
+      const margin = { top: 30, right: 20, bottom: 10, left: 200 };
+      const width = container.getBoundingClientRect().width - margin.left - margin.right;
+      const height = items.length * rowH;
+
+      const svg = d3.select('#error-analysis-chart')
+        .append('svg')
+        .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
+      const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+      const y = d3.scaleBand().domain(items.map((_: any, i: number) => String(i))).range([0, height]).padding(0.25);
+
+      // Header
+      svg.append('text').attr('x', x(0)).attr('y', -12).text('0%').attr('font-size', '10px').attr('fill', '#9ca3af');
+      svg.append('text').attr('x', x(50)).attr('y', -12).text('50%').attr('font-size', '10px').attr('fill', '#9ca3af').attr('text-anchor', 'middle');
+      svg.append('text').attr('x', x(100)).attr('y', -12).text('100%').attr('font-size', '10px').attr('fill', '#9ca3af').attr('text-anchor', 'end');
+
+      // 50% line
+      svg.append('line').attr('x1', x(50)).attr('x2', x(50)).attr('y1', 0).attr('y2', height)
+        .attr('stroke', '#e5e7eb').attr('stroke-dasharray', '3,3');
+
+      items.forEach((item: any, i: number) => {
+        const yi = y(String(i))!;
+        const h = y.bandwidth();
+
+        // Label
+        svg.append('text')
+          .attr('x', -8).attr('y', yi + h / 2 + 4)
+          .attr('text-anchor', 'end').attr('font-size', '11px').attr('fill', 'var(--text)')
+          .text(`${item.ukrainian}`);
+
+        // Range bar (min to max)
+        const vals = Object.values(item.sources) as number[];
+        const minV = Math.min(...vals);
+        const maxV = Math.max(...vals);
+        svg.append('rect')
+          .attr('x', x(minV)).attr('y', yi + h * 0.3)
+          .attr('width', x(maxV) - x(minV)).attr('height', h * 0.4)
+          .attr('fill', '#e5e7eb').attr('rx', 3);
+
+        // Individual source dots
+        for (const src of srcOrder) {
+          const val = item.sources[src];
+          if (val === undefined) continue;
+          svg.append('circle')
+            .attr('cx', x(val)).attr('cy', yi + h / 2)
+            .attr('r', 5)
+            .attr('fill', sourceColors[src] || '#888')
+            .attr('stroke', 'white').attr('stroke-width', 1.5);
+        }
+
+        // Spread label
+        svg.append('text')
+          .attr('x', x(maxV) + 6).attr('y', yi + h / 2 + 4)
+          .attr('font-size', '10px').attr('fill', '#9ca3af')
+          .text(`${item.spread_pp}pp`);
+      });
+
+      // Legend
+      const legend = d3.select('#error-analysis-chart').append('div')
+        .style('display', 'flex').style('gap', '0.75rem').style('justify-content', 'center')
+        .style('margin-top', '0.5rem').style('flex-wrap', 'wrap');
+
+      for (const src of srcOrder) {
+        legend.append('div')
+          .style('display', 'flex').style('align-items', 'center').style('gap', '4px')
+          .style('font-size', '11px').style('color', '#6b7280')
+          .html(`<span style="width:8px;height:8px;border-radius:50%;background:${sourceColors[src] || '#888'};display:inline-block;"></span>${srcNames[src]}`);
+      }
+    }
   </script>
 </body>
 </html>
