@@ -3,9 +3,13 @@
 The orchestrator reads pairs.yaml, checks watermarks, and only fetches
 data for pairs that are new, stale, or failed. This is the main entry point
 for `make ingest`.
+
+Supports --max-parallel to limit concurrent source ingestion processes
+(default: 3) to avoid overwhelming local machines.
 """
 
 import argparse
+import concurrent.futures
 import logging
 import sys
 
@@ -91,13 +95,43 @@ def show_status():
               f"{wm['row_count']:<10} {wm['status']}")
 
 
+def ingest_sources_parallel(sources: list[str], cfg: dict, max_parallel: int = 3, force: bool = False):
+    """Run multiple source ingestions with limited concurrency."""
+    logger.info(f"Parallel ingestion: {len(sources)} sources, max {max_parallel} concurrent")
+
+    def _ingest_one(source):
+        logger.info(f"[{source}] Starting...")
+        try:
+            ingest_source_all_pairs(source, cfg, force=force)
+            logger.info(f"[{source}] Done")
+            return source, True
+        except Exception as e:
+            logger.error(f"[{source}] FAILED: {e}")
+            return source, False
+
+    results = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_parallel) as pool:
+        futures = {pool.submit(_ingest_one, s): s for s in sources}
+        for future in concurrent.futures.as_completed(futures):
+            source, ok = future.result()
+            results[source] = ok
+
+    succeeded = [s for s, ok in results.items() if ok]
+    failed = [s for s, ok in results.items() if not ok]
+    logger.info(f"Ingestion complete: {len(succeeded)} succeeded, {len(failed)} failed")
+    if failed:
+        logger.warning(f"Failed sources: {failed}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="KyivNotKiev pipeline orchestrator")
     parser.add_argument("--all", action="store_true", help="Ingest all enabled pairs, all sources")
     parser.add_argument("--pair-id", type=int, help="Ingest a single pair across all sources")
-    parser.add_argument("--source", type=str, help="Ingest all pairs for a single source")
+    parser.add_argument("--source", type=str, nargs="+", help="Ingest all pairs for one or more sources")
     parser.add_argument("--force", action="store_true", help="Ignore watermarks, force re-fetch")
     parser.add_argument("--status", action="store_true", help="Show pipeline status")
+    parser.add_argument("--max-parallel", type=int, default=3,
+                        help="Max concurrent source ingestions (default: 3)")
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-8s %(message)s")
@@ -117,15 +151,19 @@ def main():
         ingest_pair_all_sources(pair, cfg, force=args.force)
 
     elif args.source:
-        if args.source not in SOURCES:
-            logger.error(f"Unknown source: {args.source}. Valid: {SOURCES}")
-            sys.exit(1)
-        ingest_source_all_pairs(args.source, cfg, force=args.force)
+        sources = args.source if isinstance(args.source, list) else [args.source]
+        for s in sources:
+            if s not in SOURCES:
+                logger.error(f"Unknown source: {s}. Valid: {SOURCES}")
+                sys.exit(1)
+        if len(sources) > 1:
+            ingest_sources_parallel(sources, cfg, max_parallel=args.max_parallel, force=args.force)
+        else:
+            ingest_source_all_pairs(sources[0], cfg, force=args.force)
 
     elif args.all:
-        logger.info("Full incremental ingestion: all sources, all enabled pairs")
-        for source in SOURCES:
-            ingest_source_all_pairs(source, cfg, force=args.force)
+        logger.info(f"Full ingestion: all sources, max {args.max_parallel} concurrent")
+        ingest_sources_parallel(SOURCES, cfg, max_parallel=args.max_parallel, force=args.force)
 
     else:
         parser.print_help()

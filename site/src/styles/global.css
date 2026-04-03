@@ -222,6 +222,31 @@ body {
   margin-top: 0.2rem;
 }
 
+.stat-card.mini {
+  padding: 0.7rem 0.8rem;
+  border-top: 2px solid var(--accent, var(--border));
+}
+
+.stat-card.mini .stat-value {
+  font-size: 1.15rem;
+  color: var(--accent, var(--blue));
+}
+
+.stat-card.mini .stat-label {
+  font-size: 0.65rem;
+  margin-top: 0.1rem;
+}
+
+.stat-source {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  margin-top: 0.15rem;
+}
+
+.source-stats {
+  gap: 0.5rem;
+}
+
 /* Chart area */
 .chart-container {
   background: var(--bg-card);
@@ -393,4 +418,9 @@ body {
     max-height: 40vh;
   }
   .stats { grid-template-columns: repeat(2, 1fr); }
+  .source-stats { grid-template-columns: repeat(4, 1fr) !important; }
+}
+
+@media (max-width: 600px) {
+  .source-stats { grid-template-columns: repeat(2, 1fr) !important; }
 }

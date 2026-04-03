@@ -36,8 +36,10 @@ docker-push:  ## Push Docker image to Artifact Registry
 
 # ── Data Ingestion (incremental — only fetches new/changed pairs) ───────────
 
-ingest:  ## Run incremental ingestion for ALL enabled pairs, ALL sources
-	python -m pipeline.ingestion.orchestrator --all
+MAX_PARALLEL ?= 3
+
+ingest:  ## Run incremental ingestion for ALL enabled pairs, ALL sources (max 3 concurrent)
+	python -m pipeline.ingestion.orchestrator --all --max-parallel $(MAX_PARALLEL)
 
 ingest-pair:  ## Ingest one pair across all sources: make ingest-pair ID=1
 	python -m pipeline.ingestion.orchestrator --pair-id $(ID)
@@ -70,6 +72,9 @@ ingest-ngrams:  ## Google Books Ngrams: book frequency (1800-2019)
 
 ingest-youtube:  ## YouTube: Data API v3 video metadata
 	python -m pipeline.ingestion.youtube
+
+export-site:  ## Export BigQuery data to site JSON files
+	python -m pipeline.export_site_data
 
 # ── Processing ──────────────────────────────────────────────────────────────
 
