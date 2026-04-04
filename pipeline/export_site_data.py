@@ -389,29 +389,49 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
 
     # ── Per-pair adoption from all sources (last 12 months) ──
     log.info("  Querying per-pair adoption...")
+    # Adoption = mean adoption ratio across sources (equal weight per source)
+    # This prevents Wikipedia's millions of pageviews from dominating
     recent_rows = query(f"""
-        WITH recent AS (
-            SELECT pair_id, variant, COUNT(*) as cnt FROM `{DATASET}.raw_gdelt`
-                WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH) GROUP BY pair_id, variant
+        WITH per_source AS (
+            SELECT pair_id, 'gdelt' as src,
+                SAFE_DIVIDE(COUNTIF(variant='ukrainian'), COUNT(*)) as ratio
+            FROM `{DATASET}.raw_gdelt`
+            WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH)
+            GROUP BY pair_id HAVING COUNT(*) >= 5
             UNION ALL
-            SELECT pair_id, variant, SUM(interest) FROM `{DATASET}.raw_trends`
-                WHERE (geo='' OR geo IS NULL) AND date >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH) GROUP BY pair_id, variant
+            SELECT pair_id, 'trends',
+                SAFE_DIVIDE(SUM(IF(variant='ukrainian', interest, 0)), SUM(interest))
+            FROM `{DATASET}.raw_trends`
+            WHERE (geo='' OR geo IS NULL) AND date >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH)
+            GROUP BY pair_id HAVING SUM(interest) >= 5
             UNION ALL
-            SELECT pair_id, variant, SUM(pageviews) FROM `{DATASET}.raw_wikipedia`
-                WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH) GROUP BY pair_id, variant
+            SELECT pair_id, 'wikipedia',
+                SAFE_DIVIDE(SUM(IF(variant='ukrainian', pageviews, 0)), SUM(pageviews))
+            FROM `{DATASET}.raw_wikipedia`
+            WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH)
+            GROUP BY pair_id HAVING SUM(pageviews) >= 10
             UNION ALL
-            SELECT pair_id, variant, COUNT(*) FROM `{DATASET}.raw_reddit`
-                WHERE DATE(created_utc) >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH) GROUP BY pair_id, variant
+            SELECT pair_id, 'reddit',
+                SAFE_DIVIDE(COUNTIF(variant='ukrainian'), COUNT(*))
+            FROM `{DATASET}.raw_reddit`
+            WHERE DATE(created_utc) >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH)
+            GROUP BY pair_id HAVING COUNT(*) >= 3
             UNION ALL
-            SELECT pair_id, variant, COUNT(*) FROM `{DATASET}.raw_youtube`
-                WHERE DATE(published_at) >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH) GROUP BY pair_id, variant
+            SELECT pair_id, 'youtube',
+                SAFE_DIVIDE(COUNTIF(variant='ukrainian'), COUNT(*))
+            FROM `{DATASET}.raw_youtube`
+            WHERE DATE(published_at) >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH)
+            GROUP BY pair_id HAVING COUNT(*) >= 3
         )
         SELECT pair_id,
-            SUM(IF(variant='ukrainian', cnt, 0)) as ukr,
-            SUM(IF(variant='russian', cnt, 0)) as rus
-        FROM recent GROUP BY pair_id
+            ROUND(AVG(ratio) * 100, 1) as adoption_pct,
+            COUNT(*) as n_sources
+        FROM per_source
+        WHERE ratio IS NOT NULL
+        GROUP BY pair_id
     """)
-    recent_map = {r["pair_id"]: r for r in recent_rows}
+    recent_map = {r["pair_id"]: {"adoption": float(r["adoption_pct"]), "n_sources": r["n_sources"]}
+                  for r in recent_rows}
 
     # Total mentions per pair
     total_rows = query(f"""
@@ -437,10 +457,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         if pid in control_ids:
             adoption_pct = 0.0
         else:
-            ukr = recent.get("ukr", 0)
-            rus = recent.get("rus", 0)
-            t = ukr + rus
-            adoption_pct = round(ukr / t * 100, 1) if t > 0 else 0.0
+            adoption_pct = recent.get("adoption", 0.0)
 
         pairs_out.append({
             "id": pid,
