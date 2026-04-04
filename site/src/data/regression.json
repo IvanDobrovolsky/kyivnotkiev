@@ -1,0 +1,89 @@
+{
+  "models": [
+    {
+      "name": "Baseline only",
+      "predictors": [
+        "pre-2022 baseline"
+      ],
+      "r2": 0.537,
+      "adj_r2": 0.528
+    },
+    {
+      "name": "+ Search volume",
+      "predictors": [
+        "baseline",
+        "log(volume)"
+      ],
+      "r2": 0.548,
+      "adj_r2": 0.531
+    },
+    {
+      "name": "+ Name length",
+      "predictors": [
+        "baseline",
+        "log(volume)",
+        "length_diff"
+      ],
+      "r2": 0.555,
+      "adj_r2": 0.528
+    },
+    {
+      "name": "+ Category",
+      "predictors": [
+        "baseline",
+        "log(volume)",
+        "length_diff",
+        "category_dummies"
+      ],
+      "r2": 0.657,
+      "adj_r2": 0.573
+    },
+    {
+      "name": "Full model",
+      "predictors": [
+        "baseline",
+        "log(volume)",
+        "length_diff",
+        "ru_name_length",
+        "category_dummies"
+      ],
+      "r2": 0.665,
+      "adj_r2": 0.577
+    }
+  ],
+  "best_model": {
+    "r2": 0.665,
+    "adj_r2": 0.577,
+    "f_stat": 7.57,
+    "f_p": 1e-06,
+    "n": 54,
+    "k": 11,
+    "coefficients": {
+      "baseline": {
+        "beta": 0.634,
+        "interpretation": "Pre-2022 adoption momentum"
+      },
+      "cat_food": {
+        "beta": -0.235,
+        "interpretation": "Food terms resist change"
+      },
+      "cat_historical": {
+        "beta": -0.242,
+        "interpretation": "Historical terms deeply entrenched"
+      },
+      "cat_geographical": {
+        "beta": 0.08,
+        "interpretation": "City names adopt faster"
+      },
+      "len_diff": {
+        "beta": 0.029,
+        "interpretation": "Longer Ukrainian form slightly helps (visibility)"
+      },
+      "log_volume": {
+        "beta": -0.023,
+        "interpretation": "Higher volume slightly resists change (inertia)"
+      }
+    }
+  },
+  "key_finding": "Category membership explains +12pp variance beyond baseline alone (R\u00b2 0.537 \u2192 0.657). Food and historical terms are the strongest negative predictors. Pre-2022 baseline remains dominant (\u03b2=0.63)."
+}
