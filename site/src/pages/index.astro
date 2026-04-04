@@ -337,7 +337,7 @@ function formatNum(n: number) {
         <div class="chart-header">
           <div>
             <div class="chart-title" style="color: var(--text)">All Pairs Overview</div>
-            <div class="chart-subtitle">Current adoption rate — sorted by category, then by adoption %</div>
+            <div class="chart-subtitle">Current adoption rate — mean across sources, last 12 months</div>
           </div>
         </div>
         <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
@@ -1143,10 +1143,7 @@ function formatNum(n: number) {
       const container = document.getElementById('heatmap-chart')!;
       container.innerHTML = '';
 
-      const sorted = [...pairs.pairs].sort((a: any, b: any) => {
-        if (a.category !== b.category) return a.category.localeCompare(b.category);
-        return b.adoption - a.adoption;
-      });
+      const sorted = [...pairs.pairs].sort((a: any, b: any) => b.adoption - a.adoption);
 
       const catColors: Record<string, string> = {};
       pairs.categories.forEach((c: any) => { catColors[c.id] = c.color; });
