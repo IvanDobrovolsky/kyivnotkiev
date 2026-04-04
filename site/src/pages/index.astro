@@ -197,7 +197,13 @@ function formatNum(n: number) {
       </div>
 
       <!-- Per-pair source stats -->
-      <div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(7, 1fr); margin-bottom: 1rem;"></div>
+      <div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(7, 1fr); margin-bottom: 0.75rem;"></div>
+
+      <!-- Adoption calculation card -->
+      <div id="adoption-calc" class="chart-container" style="margin-bottom: 1rem; padding: 0.75rem 1rem;">
+        <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Adoption Calculation</div>
+        <div id="adoption-calc-body" style="font-size:0.75rem; color:var(--text-muted); line-height:1.6;"></div>
+      </div>
 
       <!-- Cross-lingual chart (only for pairs with data) -->
       <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom: 1rem;">
@@ -462,7 +468,7 @@ function formatNum(n: number) {
       });
 
       const rect = container.getBoundingClientRect();
-      const margin = { top: 40, right: 15, bottom: 30, left: 40 };
+      const margin = { top: 35, right: 10, bottom: 28, left: 35 };
       const width = rect.width - margin.left - margin.right;
       const height = rect.height - margin.top - margin.bottom;
 
@@ -567,14 +573,18 @@ function formatNum(n: number) {
       let y: d3.ScaleLinear<number, number>;
       if (chartMode === 'volume') {
         // Find max count across all data points
-        // Y max based on line mode: stacked total for All, individual for UA/RU
-        const getMax = (d: any) => {
+        // Y max: use P90 to avoid extreme spikes crushing the chart
+        const getVal = (d: any) => {
           if (lineMode === 'ukrainian') return d.ukr || 0;
           if (lineMode === 'russian') return d.rus || 0;
           return (d.ukr || 0) + (d.rus || 0);
         };
-        const maxCount = Math.max(...(seriesData || []).map(getMax), 1);
-        y = d3.scaleLinear().domain([0, maxCount * 1.05]).range([height, 0]).nice();
+        const allVals = (seriesData || []).map(getVal).filter((v: number) => v > 0).sort((a: number, b: number) => a - b);
+        const p90 = allVals.length > 0 ? allVals[Math.floor(allVals.length * 0.9)] : 1;
+        const maxVal = allVals.length > 0 ? allVals[allVals.length - 1] : 1;
+        // Use p90 * 1.3 as ceiling, but at least show up to max if max < p90*2
+        const yMax = maxVal <= p90 * 2 ? maxVal * 1.1 : p90 * 1.5;
+        y = d3.scaleLinear().domain([0, yMax]).range([height, 0]).nice();
       } else {
         y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
       }
@@ -875,11 +885,51 @@ function formatNum(n: number) {
       }
       drawChart();
       drawPairStats();
+      drawAdoptionCalc();
       drawPairSourceChart();
       drawMediaOrigin();
       drawCrossLingual();
       drawWorldMap();
       drawHoldoutTable();
+    }
+
+    function drawAdoptionCalc() {
+      const body = document.getElementById('adoption-calc-body');
+      if (!body) return;
+
+      const pairData = (timeseriesData as any)[String(activePairId)];
+      if (!pairData) { body.innerHTML = ''; return; }
+
+      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      if (!pair) return;
+
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
+
+      let lines: string[] = [];
+      let ratios: number[] = [];
+
+      for (const src of srcOrder) {
+        const series = pairData[src];
+        if (!series || series.length === 0) continue;
+        const last = series[series.length - 1];
+        const ukr = last.ukr || 0;
+        const rus = last.rus || 0;
+        const total = ukr + rus;
+        if (total === 0) {
+          lines.push(`<span style="color:${sourceColors[src]}">●</span> ${sourceLabels[src]}: ${last.adoption}% <span style="color:#d1d5db">(ratio only)</span>`);
+          ratios.push(last.adoption);
+        } else {
+          lines.push(`<span style="color:${sourceColors[src]}">●</span> ${sourceLabels[src]}: <strong>${fN(ukr)}</strong> / (${fN(ukr)} + ${fN(rus)}) = <strong>${last.adoption}%</strong>`);
+          ratios.push(last.adoption);
+        }
+      }
+
+      const avg = ratios.length > 0 ? (ratios.reduce((a, b) => a + b, 0) / ratios.length) : 0;
+
+      lines.push(`<div style="border-top:1px solid #e5e7eb; margin-top:0.4rem; padding-top:0.4rem; font-weight:600; color:var(--text);">Mean adoption = (${ratios.map(r => r + '%').join(' + ')}) / ${ratios.length} = <strong>${avg.toFixed(1)}%</strong></div>`);
+
+      body.innerHTML = lines.join('<br>');
     }
 
     function drawPairSourceChart() {
