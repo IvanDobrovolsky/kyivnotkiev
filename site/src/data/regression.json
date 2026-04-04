@@ -2,88 +2,72 @@
   "models": [
     {
       "name": "Baseline only",
-      "predictors": [
-        "pre-2022 baseline"
-      ],
       "r2": 0.537,
-      "adj_r2": 0.528
-    },
-    {
-      "name": "+ Search volume",
-      "predictors": [
-        "baseline",
-        "log(volume)"
-      ],
-      "r2": 0.548,
-      "adj_r2": 0.531
-    },
-    {
-      "name": "+ Name length",
-      "predictors": [
-        "baseline",
-        "log(volume)",
-        "length_diff"
-      ],
-      "r2": 0.555,
-      "adj_r2": 0.528
+      "adj_r2": 0.529
     },
     {
       "name": "+ Category",
-      "predictors": [
-        "baseline",
-        "log(volume)",
-        "length_diff",
-        "category_dummies"
-      ],
-      "r2": 0.657,
-      "adj_r2": 0.573
+      "r2": 0.646,
+      "adj_r2": 0.583
+    },
+    {
+      "name": "+ Campaign gain",
+      "r2": 0.65,
+      "adj_r2": 0.579
+    },
+    {
+      "name": "+ Invasion bump",
+      "r2": 0.8,
+      "adj_r2": 0.753
+    },
+    {
+      "name": "+ Wiki prominence",
+      "r2": 0.851,
+      "adj_r2": 0.811
+    },
+    {
+      "name": "+ Spelling similarity",
+      "r2": 0.853,
+      "adj_r2": 0.809
     },
     {
       "name": "Full model",
-      "predictors": [
-        "baseline",
-        "log(volume)",
-        "length_diff",
-        "ru_name_length",
-        "category_dummies"
-      ],
-      "r2": 0.665,
-      "adj_r2": 0.577
+      "r2": 0.868,
+      "adj_r2": 0.816
     }
   ],
   "best_model": {
-    "r2": 0.665,
-    "adj_r2": 0.577,
-    "f_stat": 7.57,
-    "f_p": 1e-06,
+    "r2": 0.868,
+    "adj_r2": 0.816,
     "n": 54,
-    "k": 11,
-    "coefficients": {
-      "baseline": {
-        "beta": 0.634,
-        "interpretation": "Pre-2022 adoption momentum"
+    "k": 15,
+    "top_predictors": [
+      {
+        "name": "invasion_bump",
+        "beta": 0.868,
+        "meaning": "Feb-Dec 2022 adoption spike \u2014 the invasion effect is the #1 predictor"
       },
-      "cat_food": {
-        "beta": -0.235,
-        "interpretation": "Food terms resist change"
+      {
+        "name": "category (food)",
+        "beta": -0.243,
+        "meaning": "Food terms resist adoption (recipe search inertia)"
       },
-      "cat_historical": {
-        "beta": -0.242,
-        "interpretation": "Historical terms deeply entrenched"
+      {
+        "name": "category (historical)",
+        "beta": -0.247,
+        "meaning": "Historical terms deeply entrenched (Russian identity claim)"
       },
-      "cat_geographical": {
-        "beta": 0.08,
-        "interpretation": "City names adopt faster"
+      {
+        "name": "is_compound",
+        "beta": 0.136,
+        "meaning": "Multi-word terms adopt faster (more editorial control)"
       },
-      "len_diff": {
-        "beta": 0.029,
-        "interpretation": "Longer Ukrainian form slightly helps (visibility)"
-      },
-      "log_volume": {
-        "beta": -0.023,
-        "interpretation": "Higher volume slightly resists change (inertia)"
+      {
+        "name": "campaign_gain",
+        "beta": -0.13,
+        "meaning": "Campaign-era gains partially reversed (regression to mean)"
       }
-    }
+    ]
   },
-  "key_finding": "Category membership explains +12pp variance beyond baseline alone (R\u00b2 0.537 \u2192 0.657). Food and historical terms are the strongest negative predictors. Pre-2022 baseline remains dominant (\u03b2=0.63)."
+  "key_finding": "The Feb 2022 invasion is the dominant predictor (\u03b2=0.87) \u2014 it reshuffled adoption rankings. Pre-2022 baseline, which explained 54% alone, drops to near-zero when invasion bump is included. Category adds 11pp. Full model: R\u00b2=0.87, adj=0.82."
 }
