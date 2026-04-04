@@ -74,6 +74,7 @@ function formatNum(n: number) {
         <img src="/logo.svg" alt="Kyiv chestnut" style="height:28px; width:auto; margin-right:0.4rem;">
         <span class="k">KYIV</span><span class="n">NOT</span><span class="k struck">KIEV</span>
       </a>
+      <span style="font-size:0.7rem; color:var(--text-dim); font-weight:500; margin-left:-0.5rem;">#KyivNotKiev</span>
       <div class="topbar-links">
         <a href="/uk/">UA</a>
         <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
@@ -109,17 +110,16 @@ function formatNum(n: number) {
     <main class="main">
       <!-- ══ LANDING VIEW (visible when no pair selected) ══ -->
       <div id="landing-view">
-        <div style="text-align:center; padding:3rem 1rem 2rem; margin-bottom:1.25rem;">
-          <img src="/logo.svg" alt="Kyiv chestnut" style="height:80px; width:auto; margin-bottom:1rem;">
-          <h1 style="font-size:2rem; font-weight:800; margin:0; line-height:1.2; color:#0057B8;">
-            #KyivNotKiev
-          </h1>
-          <p style="color:var(--text); font-size:1rem; margin:0.8rem auto 0; max-width:700px; line-height:1.5;">
-            Measuring Real-Time Toponymic Change: A Multi-Source Computational Framework for Tracking Ukrainian Spelling Adoption (2010–2026)
-          </p>
-          <p style="color:var(--text-muted); font-size:0.85rem; margin:0.5rem auto 0; max-width:600px;">
-            {fmtBig(m.total_records)} records · {m.analyzable_pairs} toponym pairs · {m.num_sources} sources · {m.num_countries} countries
-          </p>
+        <div style="display:flex; align-items:center; gap:1.5rem; padding:2rem 0.5rem 1.5rem; margin-bottom:1rem;">
+          <img src="/logo.svg" alt="Kyiv chestnut" style="height:100px; width:auto; flex-shrink:0;">
+          <div>
+            <h1 style="font-size:1.6rem; font-weight:700; margin:0; line-height:1.3; color:var(--text);">
+              Measuring Real-Time Toponymic Change
+            </h1>
+            <p style="color:var(--text-muted); font-size:0.9rem; margin:0.4rem 0 0; line-height:1.5;">
+              A multi-source computational framework tracking Ukrainian spelling adoption across {fmtBig(m.total_records)} records from {m.num_sources} sources, {m.num_countries} countries, 2010–2026.
+            </p>
+          </div>
         </div>
 
       <div class="stats" style="grid-template-columns: repeat(5, 1fr);">
@@ -476,7 +476,7 @@ function formatNum(n: number) {
       });
 
       const rect = container.getBoundingClientRect();
-      const margin = { top: 52, right: 55, bottom: 30, left: 45 };
+      const margin = { top: 40, right: 15, bottom: 30, left: 40 };
       const width = rect.width - margin.left - margin.right;
       const height = rect.height - margin.top - margin.bottom;
 
@@ -562,8 +562,14 @@ function formatNum(n: number) {
       let y: d3.ScaleLinear<number, number>;
       if (chartMode === 'volume') {
         // Find max count across all data points
-        const maxCount = Math.max(...(seriesData || []).map((d: any) => Math.max(d.ukr || 0, d.rus || 0, (d.ukr || 0) + (d.rus || 0))), 10);
-        y = d3.scaleLinear().domain([0, maxCount * 1.1]).range([height, 0]);
+        // Y max based on line mode: stacked total for All, individual for UA/RU
+        const getMax = (d: any) => {
+          if (lineMode === 'ukrainian') return d.ukr || 0;
+          if (lineMode === 'russian') return d.rus || 0;
+          return (d.ukr || 0) + (d.rus || 0);
+        };
+        const maxCount = Math.max(...(seriesData || []).map(getMax), 1);
+        y = d3.scaleLinear().domain([0, maxCount * 1.05]).range([height, 0]).nice();
       } else {
         y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
       }
