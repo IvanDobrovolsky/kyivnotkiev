@@ -211,11 +211,19 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Cross-lingual chart (only for pairs with data) -->
-      <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1rem; margin-bottom: 0.5rem;">Cross-Lingual Adoption</div>
-        <div class="chart-subtitle" style="margin-bottom: 0.75rem;">Ukrainian spelling adoption in news media by country (GDELT domain TLD)</div>
-        <div id="cross-lingual-chart" style="width:100%;"></div>
+      <!-- Source Comparison + Cross-Lingual side by side -->
+      <div id="comparison-row" style="display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:1rem;">
+        <!-- Source comparison always shown -->
+        <div class="chart-container" id="source-comp-container" style="margin-bottom:0;">
+          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Source Comparison</div>
+          <div id="pair-source-chart" style="width:100%;"></div>
+        </div>
+        <!-- Cross-lingual only for pairs with data -->
+        <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom:0;">
+          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Cross-Lingual Adoption</div>
+          <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">GDELT news by domain TLD</div>
+          <div id="cross-lingual-chart" style="width:100%;"></div>
+        </div>
       </div>
 
       <!-- Per-pair world map (GDELT only) -->
@@ -259,12 +267,7 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Per-pair: Cross-Source Comparison -->
-      <div class="chart-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1rem;">Source Comparison</div>
-        <div class="chart-subtitle">Adoption % by source for this pair</div>
-        <div id="pair-source-chart" style="width:100%;"></div>
-      </div>
+      <!-- Source comparison moved to comparison-row above -->
 
       <!-- Per-pair holdouts (GDELT only) -->
       <div class="chart-container" id="holdout-container">
@@ -967,10 +970,8 @@ function formatNum(n: number) {
         }
       }
 
-      const avg = ratios.length > 0 ? (ratios.reduce((a, b) => a + b, 0) / ratios.length) : 0;
-
-      lines.push(`<div style="border-top:1px solid #e5e7eb; margin-top:0.4rem; padding-top:0.4rem; font-weight:600; color:var(--text);">Mean (latest point) = (${ratios.map(r => r + '%').join(' + ')}) / ${ratios.length} = <strong>${avg.toFixed(1)}%</strong></div>`);
-      lines.push(`<div style="font-size:0.7rem; color:#9ca3af;">Sidebar shows ${pair.adoption}% — averaged over last 12 months from BigQuery (may differ slightly from latest point)</div>`);
+      lines.push(`<div style="border-top:1px solid #e5e7eb; margin-top:0.4rem; padding-top:0.4rem; font-weight:600; color:var(--text);">Adoption = <strong>${pair.adoption}%</strong></div>`);
+      lines.push(`<div style="font-size:0.68rem; color:#9ca3af;">Mean of per-source ratios, last 12 months (BigQuery)</div>`);
 
       body.innerHTML = lines.join('<br>');
     }
@@ -1175,12 +1176,15 @@ function formatNum(n: number) {
       const gdeltData = cl.gdelt?.[pid];
       const trendsData = cl.trends?.[pid];
 
+      const compRow = document.getElementById('comparison-row');
       if (!gdeltData && !trendsData) {
         container.style.display = 'none';
+        if (compRow) compRow.style.gridTemplateColumns = '1fr';
         return;
       }
 
       container.style.display = 'block';
+      if (compRow) compRow.style.gridTemplateColumns = '1fr 1fr';
       chartEl.innerHTML = '';
 
       // Merge GDELT + Trends data
