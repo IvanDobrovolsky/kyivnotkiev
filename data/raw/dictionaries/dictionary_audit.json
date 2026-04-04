@@ -1,0 +1,1338 @@
+[
+  {
+    "pair_id": 1,
+    "russian": "Kiev",
+    "ukrainian": "Kyiv",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Kyiv:\nThe capital city of Ukraine and the administrative centre of Kyiv Oblast.\nAn oblast of Ukraine. Seat: Kyiv.\n The government of Ukraine.",
+          "The capital city of Ukraine and the administrative centre of Kyiv Oblast.",
+          "An oblast of Ukraine. Seat: Kyiv."
+        ],
+        "raw": true,
+        "term": "Kiev",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "The capital city of Ukraine and regional administrative centre of Kyiv Oblast.\n\nAn oblast of Ukraine. Seat: Kyiv.\n A former voivodeship of Polish\u2013Lithuanian Commonwealth, established in 1471, disestablished in 1793.\n A former governorate of Tsardom of Russia, the Russian Empire, the Ukrainian People's Republic, Ukrainian State and the Ukrainian Soviet Socialist Republic, established in December 18, 1708, disestablished in November 7, 1764, re-established in 1802, disestablished again in 1925.\n A former uyezd in Kiev Governorate, Russian Empire.",
+          "An oblast of Ukraine. Seat: Kyiv.",
+          " A former voivodeship of Polish\u2013Lithuanian Commonwealth, established in 1471, disestablished in 1793."
+        ],
+        "raw": true,
+        "term": "Kyiv",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": true,
+      "mentions_ukrainian": true,
+      "mentions_ukraine": true,
+      "mentions_russia": true,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": true,
+      "neutral": false
+    }
+  },
+  {
+    "pair_id": 2,
+    "russian": "Kharkov",
+    "ukrainian": "Kharkiv",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Kharkiv.\nSynonym of Kharkiv (city).\n",
+          "Synonym of Kharkiv (city)."
+        ],
+        "raw": true,
+        "term": "Kharkov",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Asteroid Kharkiv: an asteroid in Asteroid Belt, Solar System; the 9167th asteroid registered",
+          " An industrial city, the administrative centre of Kharkiv Raion, Kharkiv Oblast, in eastern Ukraine.",
+          " A raion of Kharkiv Oblast, in eastern Ukraine. Seat: Kharkiv."
+        ],
+        "raw": true,
+        "term": "Kharkiv",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 3,
+    "russian": "Odessa",
+    "ukrainian": "Odesa",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A locale in Ukraine:\nA port city, the administrative center of Odessa Raion and Odesa Oblast, Ukraine, situated on the northwestern shore of the Black Sea.",
+          "A port city, the administrative center of Odessa Raion and Odesa Oblast, Ukraine, situated on the northwestern shore of the Black Sea.",
+          "A raion of Odesa Oblast, Ukraine. Capital: Odessa."
+        ],
+        "raw": true,
+        "term": "Odessa",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative spelling of Odessa:\n\nA port city, the administrative center of Odessa Raion and Odesa Oblast, Ukraine, situated on the northwestern shore of the Black Sea.\nA raion of Odesa Oblast, Ukraine.\nAn oblast of Ukraine.",
+          "A port city, the administrative center of Odessa Raion and Odesa Oblast, Ukraine, situated on the northwestern shore of the Black Sea.",
+          "A raion of Odesa Oblast, Ukraine."
+        ],
+        "raw": true,
+        "term": "Odesa",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": true,
+      "neutral": false
+    }
+  },
+  {
+    "pair_id": 4,
+    "russian": "Lvov",
+    "ukrainian": "Lviv",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Lviv."
+        ],
+        "raw": true,
+        "term": "Lvov",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A city, the administrative centre of Lviv Oblast, in western Ukraine.\nA miskrada of the raion of the same name of Lviv Oblast, Ukraine.\nAn oblast in western Ukraine, established in December 1939.\nAn urban hromada of Lviv Raion, Lviv Oblast, Ukraine, established in July 2020.\nA raion of Lviv Oblast, Ukraine, established in July 2020.\nA railway station in Lviv, Ukraine, opened in 1904",
+          "A miskrada of the raion of the same name of Lviv Oblast, Ukraine.",
+          "An oblast in western Ukraine, established in December 1939."
+        ],
+        "raw": true,
+        "term": "Lviv",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 5,
+    "russian": "Zaporozhye",
+    "ukrainian": "Zaporizhzhia",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Zaporizhzhia:\nAn industrial city, the administrative centre of Zaporizhzhia urban hromada, Zaporizhzhia Raion and Zaporizhzhia Oblast, in south-central Ukraine, on the River Dnipro.\nA raion of Zaporizhzhia Oblast, Ukraine.\nAn oblast in southeast Ukraine, also illicitly claimed by Russia.\n A geographic region south-central Ukraine, \u201cbeyond the rapids\u201d in the lower reaches of the Dnipro River, base of the Zaporozhian Cossacks.",
+          "An industrial city, the administrative centre of Zaporizhzhia urban hromada, Zaporizhzhia Raion and Zaporizhzhia Oblast, in south-central Ukraine, on the River Dnipro.",
+          "A raion of Zaporizhzhia Oblast, Ukraine."
+        ],
+        "raw": true,
+        "term": "Zaporozhye",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "An industrial city, the administrative centre of Zaporizhzhia urban hromada, Zaporizhzhia Raion and Zaporizhzhia Oblast, in south-central Ukraine, on the River Dnipro.",
+          "A raion of Zaporizhzhia Oblast, Ukraine. Administrative center: Zaporizhzhia.",
+          "An oblast in southeast Ukraine, also illicitly claimed by Russia. Administrative center: Zaporizhzhia."
+        ],
+        "raw": true,
+        "term": "Zaporizhzhia",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": true,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 6,
+    "russian": "Nikolaev",
+    "ukrainian": "Mykolaiv",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative spelling of Nikolayev."
+        ],
+        "raw": true,
+        "term": "Nikolaev",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A village in Bobrovytsia urban hromada, Nizhyn Raion, Chernihiv Oblast, Ukraine, founded in 1587.",
+          "A village in Chornyi Ostriv settlement hromada, Khmelnytskyi Raion, Khmelnytskyi Oblast, Ukraine, founded in 1555.",
+          "A village in Lopatyn settlement hromada, Chervonohrad Raion, Lviv Oblast, Ukraine, founded before 1772."
+        ],
+        "raw": true,
+        "term": "Mykolaiv",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 7,
+    "russian": "Dnepropetrovsk",
+    "ukrainian": "Dnipro",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Dnipropetrovsk: an oblast of Ukraine.",
+          " Former name of Dnipropetrovsk: a city, the administrative center of Dnipropetrovsk Oblast, Ukraine."
+        ],
+        "raw": true,
+        "term": "Dnepropetrovsk",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          " A major East European river which flows south through Russia, Belarus and Ukraine into the Black Sea.",
+          "A city, a municipal and regional administrative centre, as well as, a raion, an urban hromada of Dnipropetrovsk Oblast, Ukraine, on the Dnieper.",
+          "Clipping of Dnipropetrovs'k, an oblast of Ukraine."
+        ],
+        "raw": true,
+        "term": "Dnipro",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": true,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": true,
+      "neutral": false
+    }
+  },
+  {
+    "pair_id": 8,
+    "russian": "Vinnitsa",
+    "ukrainian": "Vinnytsia",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Vinnytsia."
+        ],
+        "raw": true,
+        "term": "Vinnitsa",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A city, municipal and regional administrative centre in Vinnytsia Oblast, Ukraine, founded in 1363.\n\nAn urban hromada of Vinnytsia Raion, Vinnytsia Oblast, Ukraine, established in October 2018. Seat: Vinnytsia\nAn oblast in central Ukraine, established in February 1932. Seat: Vinnytsia.\nA raion in Vinnytsia oblast in central Ukraine, established in 1923. Seat: Vinnytsia.",
+          "An urban hromada of Vinnytsia Raion, Vinnytsia Oblast, Ukraine, established in October 2018. Seat: Vinnytsia",
+          "An oblast in central Ukraine, established in February 1932. Seat: Vinnytsia."
+        ],
+        "raw": true,
+        "term": "Vinnytsia",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 9,
+    "russian": "Rovno",
+    "ukrainian": "Rivne",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Rivne."
+        ],
+        "raw": true,
+        "term": "Rovno",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A city, the administrative centre of Rivne Oblast, Ukraine.\nA miskrada of the raion of the same name of Rivne Oblast, Ukraine.\nAn oblast in northwestern Ukraine, established in November 1939.\nAn urban hromada of Rivne Raion, Rivne Oblast, Ukraine, established in 2020.\nA raion of Rivne Oblast, Ukraine, established in 1940.",
+          "A miskrada of the raion of the same name of Rivne Oblast, Ukraine.",
+          "An oblast in northwestern Ukraine, established in November 1939."
+        ],
+        "raw": true,
+        "term": "Rivne",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 10,
+    "russian": "Chernobyl",
+    "ukrainian": "Chornobyl",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A partially abandoned city and ghost town in northern Ukraine, known as the site of a nuclear disaster.",
+          " The 1986 nuclear accident which resulted in the abandonment of the aforementioned city.",
+          " A major nuclear-energy accident."
+        ],
+        "raw": true,
+        "term": "Chernobyl",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative spelling of Chernobyl."
+        ],
+        "raw": true,
+        "term": "Chornobyl",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 11,
+    "russian": "Lugansk",
+    "ukrainian": "Luhansk",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Luhansk."
+        ],
+        "raw": true,
+        "term": "Lugansk",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          " A city, the administrative capital of Luhansk Raion, Luhansk Oblast in the Donbas region, in eastern Ukraine, former administrative capital of the eponymous provonce.",
+          " An urban hromada in the Luhansk Raion, Luhansk Oblast, in eastern Ukraine. Seat: Luhansk",
+          " A raion of Luhansk Oblast in the Donbas region, in eastern Ukraine. Seat: Luhansk. The district is not recognized in Luhansk by the separatist government, as it was imposed from Kiev, which was not in control of the region at the time of its formation."
+        ],
+        "raw": true,
+        "term": "Luhansk",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 15,
+    "russian": "Dnieper",
+    "ukrainian": "Dnipro",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A major river in Eastern Europe which flows south through Belarus, Russia and Ukraine into the Black Sea. (see usage notes)"
+        ],
+        "raw": true,
+        "term": "Dnieper",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          " A major East European river which flows south through Russia, Belarus and Ukraine into the Black Sea.",
+          "A city, a municipal and regional administrative centre, as well as, a raion, an urban hromada of Dnipropetrovsk Oblast, Ukraine, on the Dnieper.",
+          "Clipping of Dnipropetrovs'k, an oblast of Ukraine."
+        ],
+        "raw": true,
+        "term": "Dnipro",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": true,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": true,
+      "neutral": false
+    }
+  },
+  {
+    "pair_id": 16,
+    "russian": "Dniester",
+    "ukrainian": "Dnister",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A major river in Eastern Europe, flowing south through Ukraine and Moldova to the Black Sea.",
+          "A raion of Chernivtsi Oblast, Ukraine, established in July 2020. Administrative centre: Kelmentsi."
+        ],
+        "raw": true,
+        "term": "Dniester",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Synonym of Dniester, a river in Eastern Europe."
+        ],
+        "raw": true,
+        "term": "Dnister",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 17,
+    "russian": "Donbass",
+    "ukrainian": "Donbas",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative spelling of Donbas."
+        ],
+        "raw": true,
+        "term": "Donbass",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          " An industrial region in eastern Ukraine.",
+          " The two Russian separatist enclaves, the Donetsk People\u2019s Republic and the Luhansk People\u2019s Republic."
+        ],
+        "raw": true,
+        "term": "Donbas",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": true,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 19,
+    "russian": "Zakarpatye",
+    "ukrainian": "Zakarpattia",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Zakarpattia: an oblast in western Ukraine.",
+          " Carpathian Ruthenia, a historic region in the Carpathian Mountains in the west of Ukraine, eastern Slovakia, southeastern Poland, and northwestern Romania."
+        ],
+        "raw": true,
+        "term": "Zakarpatye",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "An oblast in western Ukraine.",
+          " Carpathian Ruthenia, a historic region in the Carpathian Mountains in then-westernmost of Ukraine, -eastern Slovakia, -southeastern Poland, and -northwestern Romania."
+        ],
+        "raw": true,
+        "term": "Zakarpattia",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": true,
+      "neutral": false
+    }
+  },
+  {
+    "pair_id": 20,
+    "russian": "Podolye",
+    "ukrainian": "Podillia",
+    "category": "geographical",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 38,
+    "russian": "Chernigov",
+    "ukrainian": "Chernihiv",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Chernihiv."
+        ],
+        "raw": true,
+        "term": "Chernigov",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A port city, the administrative centre of Chernihiv Raion, Chernihiv Oblast, in northern Ukraine, on the Desna River.\nA miskrada in Chernihiv Raion, Chernihiv Oblast, Ukraine, founded in October 1932. Seat: Chernihiv.\nAn urban hromada of Chernihiv Raion, Chernihiv Oblast, Ukraine, established in June 2020. Seat: Chernihiv.\nA raion of Chernihiv Oblast, Ukraine, established in 1923. Seat: Chernihiv.\nAn oblast of Ukraine, established in October 1932. Seat: Chernihiv.\n\n A former voivodeship of Polish\u2013Lithuanian Commonwealth, established in 1635, disestablished in 1654.\n A former governorate of the Russian Empire, the Ukrainian People's Republic, Ukrainian State and the Ukrainian Soviet Socialist Republic, established in 1802, abolished in 1925.\n A former uyezd in Chernigov Governorate, Russian Empire.",
+          "A miskrada in Chernihiv Raion, Chernihiv Oblast, Ukraine, founded in October 1932. Seat: Chernihiv.",
+          "An urban hromada of Chernihiv Raion, Chernihiv Oblast, Ukraine, established in June 2020. Seat: Chernihiv."
+        ],
+        "raw": true,
+        "term": "Chernihiv",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": true,
+      "mentions_ukrainian": true,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": true,
+      "neutral": false
+    }
+  },
+  {
+    "pair_id": 39,
+    "russian": "Chernovtsy",
+    "ukrainian": "Chernivtsi",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Chernivtsi."
+        ],
+        "raw": true,
+        "term": "Chernovtsy",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A city, administrative centre, and raion of Chernivtsi Oblast in the Bukovyna region, Ukraine, on the Prut river.",
+          "An oblast in southwestern Ukraine."
+        ],
+        "raw": true,
+        "term": "Chernivtsi",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 40,
+    "russian": "Zhitomir",
+    "ukrainian": "Zhytomyr",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Zhytomyr."
+        ],
+        "raw": true,
+        "term": "Zhitomir",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A city and raion of Ukraine, municipal and regional administrative centre of Zhytomyr Oblast.",
+          " An oblast in north-western Ukraine. Seat: Zhytomyr."
+        ],
+        "raw": true,
+        "term": "Zhytomyr",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": true,
+      "neutral": false
+    }
+  },
+  {
+    "pair_id": 41,
+    "russian": "Cherkassy",
+    "ukrainian": "Cherkasy",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A port city, administrative centre, and raion of Cherkasy Oblast, Ukraine, on the Dnipro/Dnieper.",
+          "An oblast in central Ukraine."
+        ],
+        "raw": true,
+        "term": "Cherkasy",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "ukrainian",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 42,
+    "russian": "Uzhgorod",
+    "ukrainian": "Uzhhorod",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Uzhhorod."
+        ],
+        "raw": true,
+        "term": "Uzhgorod",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A city in the Carpathian Mountains, municipal and regional administrative centre of Zakarpattia Oblast in western Ukraine.",
+          "A raion of Zakarpattia Oblast, in western Ukraine. Seat: Uzhhorod"
+        ],
+        "raw": true,
+        "term": "Uzhhorod",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 43,
+    "russian": "Kremenchug",
+    "ukrainian": "Kremenchuk",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A city and raion of Poltava Oblast, Ukraine."
+        ],
+        "raw": true,
+        "term": "Kremenchuk",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "ukrainian",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 44,
+    "russian": "Kirovograd",
+    "ukrainian": "Kropyvnytskyi",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Kirovohrad."
+        ],
+        "raw": true,
+        "term": "Kirovograd",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A city, the administrative center of Kropyvnytskyi Raion and Kirovohrad Oblast, Ukraine.",
+          "A raion of Kirovohrad Oblast, Ukraine.",
+          "A surname from Ukrainian"
+        ],
+        "raw": true,
+        "term": "Kropyvnytskyi",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": true,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": true,
+      "neutral": false
+    }
+  },
+  {
+    "pair_id": 45,
+    "russian": "Ternopol",
+    "ukrainian": "Ternopil",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Ternopil."
+        ],
+        "raw": true,
+        "term": "Ternopol",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A city, administrative center, and raion of Ternopil Oblast, Ukraine.",
+          "An oblast of Ukraine."
+        ],
+        "raw": true,
+        "term": "Ternopil",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": true,
+      "neutral": false
+    }
+  },
+  {
+    "pair_id": 21,
+    "russian": "Chicken Kiev",
+    "ukrainian": "Chicken Kyiv",
+    "category": "food",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 22,
+    "russian": "Kiev cake",
+    "ukrainian": "Kyiv cake",
+    "category": "food",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A Ukrainian dessert cake having two layers of meringue with hazelnuts, chocolate glaze, and a buttercream-like filling."
+        ],
+        "raw": true,
+        "term": "Kiev cake",
+        "variant": "russian"
+      }
+    ],
+    "spelling_preference": "russian",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": true,
+      "mentions_ukraine": false,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": true,
+      "neutral": false
+    }
+  },
+  {
+    "pair_id": 23,
+    "russian": "Borscht",
+    "ukrainian": "Borshch",
+    "category": "food",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [],
+        "raw": true,
+        "term": "Borscht",
+        "variant": "russian"
+      },
+      {
+        "source": "FreeDictionary",
+        "definitions": [
+          "A beetroot soup that can be served hot or cold, usually with sour cream.",
+          "Any similar sour soup made of other ingredients such as sorrel, cabbage, hogweed"
+        ],
+        "origin": "",
+        "term": "Borscht",
+        "variant": "russian"
+      }
+    ],
+    "spelling_preference": "russian",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": false,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 64,
+    "russian": "Borsch",
+    "ukrainian": "Borshch",
+    "category": "food",
+    "dictionaries": [
+      {
+        "source": "FreeDictionary",
+        "definitions": [
+          "A beetroot soup that can be served hot or cold, usually with sour cream.",
+          "Any similar sour soup made of other ingredients such as sorrel, cabbage, hogweed"
+        ],
+        "origin": "",
+        "term": "Borsch",
+        "variant": "russian"
+      }
+    ],
+    "spelling_preference": "russian",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": false,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 46,
+    "russian": "Vareniki",
+    "ukrainian": "Varenyky",
+    "category": "food",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 24,
+    "russian": "Kiev Pechersk Lavra",
+    "ukrainian": "Kyiv Pechersk Lavra",
+    "category": "landmarks",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 25,
+    "russian": "Saint Sophia Cathedral Kiev",
+    "ukrainian": "Saint Sophia Cathedral Kyiv",
+    "category": "landmarks",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 26,
+    "russian": "Chernobyl Exclusion Zone",
+    "ukrainian": "Chornobyl Exclusion Zone",
+    "category": "landmarks",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 54,
+    "russian": "Babi Yar",
+    "ukrainian": "Babyn Yar",
+    "category": "landmarks",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 55,
+    "russian": "Potemkin Stairs Odessa",
+    "ukrainian": "Potemkin Stairs Odesa",
+    "category": "landmarks",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 56,
+    "russian": "Motherland Monument Kiev",
+    "ukrainian": "Motherland Monument Kyiv",
+    "category": "landmarks",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 27,
+    "russian": "the Ukraine",
+    "ukrainian": "Ukraine",
+    "category": "country",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A country in Eastern Europe, bordering on the north shore of the Black Sea. Capital and largest city: Kyiv."
+        ],
+        "raw": true,
+        "term": "Ukraine",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "ukrainian",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": false,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 28,
+    "russian": "Kiev National University",
+    "ukrainian": "Kyiv National University",
+    "category": "institutional",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 29,
+    "russian": "Kharkov University",
+    "ukrainian": "Kharkiv University",
+    "category": "institutional",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 30,
+    "russian": "Kiev Polytechnic",
+    "ukrainian": "Kyiv Polytechnic",
+    "category": "institutional",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 31,
+    "russian": "Kiev Patriarchate",
+    "ukrainian": "Kyiv Patriarchate",
+    "category": "institutional",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 57,
+    "russian": "Lvov Polytechnic",
+    "ukrainian": "Lviv Polytechnic",
+    "category": "institutional",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 58,
+    "russian": "Odessa National University",
+    "ukrainian": "Odesa National University",
+    "category": "institutional",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 32,
+    "russian": "Dynamo Kiev",
+    "ukrainian": "Dynamo Kyiv",
+    "category": "sports",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 34,
+    "russian": "Kiev ballet",
+    "ukrainian": "Kyiv ballet",
+    "category": "sports",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 51,
+    "russian": "Zorya Lugansk",
+    "ukrainian": "Zorya Luhansk",
+    "category": "sports",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 52,
+    "russian": "Metalist Kharkov",
+    "ukrainian": "Metalist Kharkiv",
+    "category": "sports",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 53,
+    "russian": "Karpaty Lvov",
+    "ukrainian": "Karpaty Lviv",
+    "category": "sports",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 35,
+    "russian": "Kievan Rus",
+    "ukrainian": "Kyivan Rus",
+    "category": "historical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          " A medieval principality in Eastern Europe centred around Kyiv; at its maximum extent covering much of modern Ukraine, Belarus and western Russia and considered an early predecessor of each country."
+        ],
+        "raw": true,
+        "term": "Kievan Rus",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Kievan Rus."
+        ],
+        "raw": true,
+        "term": "Kyivan Rus",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": true,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 36,
+    "russian": "Kazak",
+    "ukrainian": "Kozak",
+    "category": "historical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Official term for the local Kazakh nationality in the People\u2019s Republic of China.",
+          "A kind of ornamental rug from the town of Kazak in Azerbaijan."
+        ],
+        "raw": true,
+        "term": "Kazak",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A surname.",
+          "A Cossack."
+        ],
+        "raw": true,
+        "term": "Kozak",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": false,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  },
+  {
+    "pair_id": 48,
+    "russian": "Gopak",
+    "ukrainian": "Hopak",
+    "category": "historical",
+    "dictionaries": [
+      {
+        "source": "FreeDictionary",
+        "definitions": [
+          "A Ukrainian national dance in 2/4 time."
+        ],
+        "origin": "",
+        "term": "Gopak",
+        "variant": "russian"
+      },
+      {
+        "source": "FreeDictionary",
+        "definitions": [
+          "A Ukrainian national dance in 2/4 time."
+        ],
+        "origin": "",
+        "term": "Hopak",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": true,
+      "mentions_ukraine": false,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": true,
+      "neutral": false
+    }
+  },
+  {
+    "pair_id": 70,
+    "russian": "Vladimir the Great",
+    "ukrainian": "Volodymyr the Great",
+    "category": "historical",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 71,
+    "russian": "Prince of Kiev",
+    "ukrainian": "Prince of Kyiv",
+    "category": "historical",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 60,
+    "russian": "Alexander Usyk",
+    "ukrainian": "Oleksandr Usyk",
+    "category": "people",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 61,
+    "russian": "Vladimir Zelensky",
+    "ukrainian": "Volodymyr Zelenskyy",
+    "category": "people",
+    "dictionaries": [],
+    "spelling_preference": "neither",
+    "origin_attribution": null
+  },
+  {
+    "pair_id": 72,
+    "russian": "Artemovsk",
+    "ukrainian": "Bakhmut",
+    "category": "geographical",
+    "dictionaries": [
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "Alternative form of Artemivsk."
+        ],
+        "raw": true,
+        "term": "Artemovsk",
+        "variant": "russian"
+      },
+      {
+        "source": "Wiktionary",
+        "definitions": [
+          "A city, the administrative centre of Bakhmut Raion, Donetsk Oblast, Ukraine.\n\n A miskrada in Bakhmut Raion, Donetsk Oblast, Ukraine, disestablished in June 2019.\nAn urban hromada of Bakhmut Raion, Donetsk Oblast, Ukraine, established in June 2019.\nA raion of Donetsk Oblast, Ukraine, established in 1923.",
+          " A miskrada in Bakhmut Raion, Donetsk Oblast, Ukraine, disestablished in June 2019.",
+          "An urban hromada of Bakhmut Raion, Donetsk Oblast, Ukraine, established in June 2019."
+        ],
+        "raw": true,
+        "term": "Bakhmut",
+        "variant": "ukrainian"
+      }
+    ],
+    "spelling_preference": "both",
+    "origin_attribution": {
+      "mentions_russian": false,
+      "mentions_ukrainian": false,
+      "mentions_ukraine": true,
+      "mentions_russia": false,
+      "attributes_to_russia": false,
+      "attributes_to_ukraine": false,
+      "neutral": true
+    }
+  }
+]

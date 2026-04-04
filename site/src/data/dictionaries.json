@@ -1,0 +1,756 @@
+{
+  "pairs": [
+    {
+      "pair_id": 1,
+      "russian": "Kiev",
+      "ukrainian": "Kyiv",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": true,
+        "mentions_ukrainian": true,
+        "mentions_ukraine": true,
+        "mentions_russia": true,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": true,
+        "neutral": false
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 2,
+      "russian": "Kharkov",
+      "ukrainian": "Kharkiv",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 3,
+      "russian": "Odessa",
+      "ukrainian": "Odesa",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": true,
+        "neutral": false
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 4,
+      "russian": "Lvov",
+      "ukrainian": "Lviv",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 5,
+      "russian": "Zaporozhye",
+      "ukrainian": "Zaporizhzhia",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": true,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 6,
+      "russian": "Nikolaev",
+      "ukrainian": "Mykolaiv",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 7,
+      "russian": "Dnepropetrovsk",
+      "ukrainian": "Dnipro",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": true,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": true,
+        "neutral": false
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 8,
+      "russian": "Vinnitsa",
+      "ukrainian": "Vinnytsia",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 9,
+      "russian": "Rovno",
+      "ukrainian": "Rivne",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 10,
+      "russian": "Chernobyl",
+      "ukrainian": "Chornobyl",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 11,
+      "russian": "Lugansk",
+      "ukrainian": "Luhansk",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 15,
+      "russian": "Dnieper",
+      "ukrainian": "Dnipro",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": true,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": true,
+        "neutral": false
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 16,
+      "russian": "Dniester",
+      "ukrainian": "Dnister",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 17,
+      "russian": "Donbass",
+      "ukrainian": "Donbas",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": true,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 19,
+      "russian": "Zakarpatye",
+      "ukrainian": "Zakarpattia",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": true,
+        "neutral": false
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 20,
+      "russian": "Podolye",
+      "ukrainian": "Podillia",
+      "category": "geographical",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 38,
+      "russian": "Chernigov",
+      "ukrainian": "Chernihiv",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": true,
+        "mentions_ukrainian": true,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": true,
+        "neutral": false
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 39,
+      "russian": "Chernovtsy",
+      "ukrainian": "Chernivtsi",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 40,
+      "russian": "Zhitomir",
+      "ukrainian": "Zhytomyr",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": true,
+        "neutral": false
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 41,
+      "russian": "Cherkassy",
+      "ukrainian": "Cherkasy",
+      "category": "geographical",
+      "spelling_preference": "ukrainian",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 1
+    },
+    {
+      "pair_id": 42,
+      "russian": "Uzhgorod",
+      "ukrainian": "Uzhhorod",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 43,
+      "russian": "Kremenchug",
+      "ukrainian": "Kremenchuk",
+      "category": "geographical",
+      "spelling_preference": "ukrainian",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 1
+    },
+    {
+      "pair_id": 44,
+      "russian": "Kirovograd",
+      "ukrainian": "Kropyvnytskyi",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": true,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": true,
+        "neutral": false
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 45,
+      "russian": "Ternopol",
+      "ukrainian": "Ternopil",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": true,
+        "neutral": false
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 21,
+      "russian": "Chicken Kiev",
+      "ukrainian": "Chicken Kyiv",
+      "category": "food",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 22,
+      "russian": "Kiev cake",
+      "ukrainian": "Kyiv cake",
+      "category": "food",
+      "spelling_preference": "russian",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": true,
+        "mentions_ukraine": false,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": true,
+        "neutral": false
+      },
+      "dict_count": 1
+    },
+    {
+      "pair_id": 23,
+      "russian": "Borscht",
+      "ukrainian": "Borshch",
+      "category": "food",
+      "spelling_preference": "russian",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": false,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 64,
+      "russian": "Borsch",
+      "ukrainian": "Borshch",
+      "category": "food",
+      "spelling_preference": "russian",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": false,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 1
+    },
+    {
+      "pair_id": 46,
+      "russian": "Vareniki",
+      "ukrainian": "Varenyky",
+      "category": "food",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 24,
+      "russian": "Kiev Pechersk Lavra",
+      "ukrainian": "Kyiv Pechersk Lavra",
+      "category": "landmarks",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 25,
+      "russian": "Saint Sophia Cathedral Kiev",
+      "ukrainian": "Saint Sophia Cathedral Kyiv",
+      "category": "landmarks",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 26,
+      "russian": "Chernobyl Exclusion Zone",
+      "ukrainian": "Chornobyl Exclusion Zone",
+      "category": "landmarks",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 54,
+      "russian": "Babi Yar",
+      "ukrainian": "Babyn Yar",
+      "category": "landmarks",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 55,
+      "russian": "Potemkin Stairs Odessa",
+      "ukrainian": "Potemkin Stairs Odesa",
+      "category": "landmarks",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 56,
+      "russian": "Motherland Monument Kiev",
+      "ukrainian": "Motherland Monument Kyiv",
+      "category": "landmarks",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 27,
+      "russian": "the Ukraine",
+      "ukrainian": "Ukraine",
+      "category": "country",
+      "spelling_preference": "ukrainian",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": false,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 1
+    },
+    {
+      "pair_id": 28,
+      "russian": "Kiev National University",
+      "ukrainian": "Kyiv National University",
+      "category": "institutional",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 29,
+      "russian": "Kharkov University",
+      "ukrainian": "Kharkiv University",
+      "category": "institutional",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 30,
+      "russian": "Kiev Polytechnic",
+      "ukrainian": "Kyiv Polytechnic",
+      "category": "institutional",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 31,
+      "russian": "Kiev Patriarchate",
+      "ukrainian": "Kyiv Patriarchate",
+      "category": "institutional",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 57,
+      "russian": "Lvov Polytechnic",
+      "ukrainian": "Lviv Polytechnic",
+      "category": "institutional",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 58,
+      "russian": "Odessa National University",
+      "ukrainian": "Odesa National University",
+      "category": "institutional",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 32,
+      "russian": "Dynamo Kiev",
+      "ukrainian": "Dynamo Kyiv",
+      "category": "sports",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 34,
+      "russian": "Kiev ballet",
+      "ukrainian": "Kyiv ballet",
+      "category": "sports",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 51,
+      "russian": "Zorya Lugansk",
+      "ukrainian": "Zorya Luhansk",
+      "category": "sports",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 52,
+      "russian": "Metalist Kharkov",
+      "ukrainian": "Metalist Kharkiv",
+      "category": "sports",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 53,
+      "russian": "Karpaty Lvov",
+      "ukrainian": "Karpaty Lviv",
+      "category": "sports",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 35,
+      "russian": "Kievan Rus",
+      "ukrainian": "Kyivan Rus",
+      "category": "historical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": true,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 36,
+      "russian": "Kazak",
+      "ukrainian": "Kozak",
+      "category": "historical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": false,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 48,
+      "russian": "Gopak",
+      "ukrainian": "Hopak",
+      "category": "historical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": true,
+        "mentions_ukraine": false,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": true,
+        "neutral": false
+      },
+      "dict_count": 2
+    },
+    {
+      "pair_id": 70,
+      "russian": "Vladimir the Great",
+      "ukrainian": "Volodymyr the Great",
+      "category": "historical",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 71,
+      "russian": "Prince of Kiev",
+      "ukrainian": "Prince of Kyiv",
+      "category": "historical",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 60,
+      "russian": "Alexander Usyk",
+      "ukrainian": "Oleksandr Usyk",
+      "category": "people",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 61,
+      "russian": "Vladimir Zelensky",
+      "ukrainian": "Volodymyr Zelenskyy",
+      "category": "people",
+      "spelling_preference": "neither",
+      "origin_attribution": null,
+      "dict_count": 0
+    },
+    {
+      "pair_id": 72,
+      "russian": "Artemovsk",
+      "ukrainian": "Bakhmut",
+      "category": "geographical",
+      "spelling_preference": "both",
+      "origin_attribution": {
+        "mentions_russian": false,
+        "mentions_ukrainian": false,
+        "mentions_ukraine": true,
+        "mentions_russia": false,
+        "attributes_to_russia": false,
+        "attributes_to_ukraine": false,
+        "neutral": true
+      },
+      "dict_count": 2
+    }
+  ],
+  "summary": {
+    "russian_preferred": 3,
+    "ukrainian_preferred": 3,
+    "both_found": 25,
+    "neither_found": 24,
+    "attributed_russia": 0,
+    "attributed_ukraine": 11,
+    "neutral_attribution": 20
+  }
+}
