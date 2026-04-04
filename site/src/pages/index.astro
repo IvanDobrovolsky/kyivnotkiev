@@ -598,46 +598,53 @@ function formatNum(n: number) {
 
       // Y-axis depends on chart mode
       let y: d3.ScaleLinear<number, number>;
+      let yTicks: number[];
+
       if (chartMode === 'volume') {
-        // Find max count across all data points
-        // Y max: actual max + 10% headroom, no .nice() rounding
+        // Max = highest single bar value (side-by-side, not stacked)
         const getVal = (d: any) => {
           if (lineMode === 'ukrainian') return d.ukr || 0;
           if (lineMode === 'russian') return d.rus || 0;
-          return (d.ukr || 0) + (d.rus || 0);
+          return Math.max(d.ukr || 0, d.rus || 0);  // side-by-side: max of either
         };
         const allVals = (seriesData || []).map(getVal).filter((v: number) => v > 0);
         const maxVal = allVals.length > 0 ? Math.max(...allVals) : 1;
-        y = d3.scaleLinear().domain([0, maxVal * 1.1]).range([height, 0]);
+        const yMax = maxVal * 1.1;
+        y = d3.scaleLinear().domain([0, yMax]).range([height, 0]);
+
+        // Dynamic grid: 4 evenly spaced ticks based on actual data
+        const step = yMax / 4;
+        yTicks = [0, step, step * 2, step * 3, yMax].map(v => Math.round(v));
       } else {
         y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
+        yTicks = [0, 25, 50, 75, 100];
       }
 
-      // Grid
-      const gridTicks = chartMode === 'volume' ? y.ticks(4) : [25, 50, 75, 100];
+      // Grid lines
       svg.append('g').selectAll('line')
-        .data(gridTicks)
+        .data(yTicks)
         .enter().append('line')
         .attr('x1', 0).attr('x2', width)
         .attr('y1', (d: number) => y(d)).attr('y2', (d: number) => y(d))
         .attr('stroke', '#e5e7eb')
         .attr('stroke-dasharray', '3,4');
 
-      // Y-axis labels
+      // Y-axis labels — same ticks as grid
+      const fmtY = (d: number) => {
+        if (chartMode === 'volume') {
+          if (d >= 1e6) return (d / 1e6).toFixed(1) + 'M';
+          if (d >= 1e3) return (d / 1e3).toFixed(0) + 'K';
+          return d === 0 ? '0' : String(Math.round(d));
+        }
+        return d + '%';
+      };
       svg.append('g').selectAll('text')
-        .data([0, 25, 50, 75, 100])
+        .data(yTicks)
         .enter().append('text')
         .attr('x', -8).attr('y', (d: number) => y(d) + 4)
         .attr('text-anchor', 'end')
-        .attr('fill', '#9ca3af').attr('font-size', '11px')
-        .text((d: number) => {
-          if (chartMode === 'volume') {
-            if (d >= 1e6) return (d/1e6).toFixed(1) + 'M';
-            if (d >= 1e3) return (d/1e3).toFixed(0) + 'K';
-            return d === 0 ? '0' : String(Math.round(d));
-          }
-          return d + '%';
-        });
+        .attr('fill', '#9ca3af').attr('font-size', '10px')
+        .text(fmtY);
 
       // X-axis — decades for Ngrams, years for others
       const xTicks = activeSource === 'ngrams'
