@@ -41,10 +41,10 @@ function formatNum(n: number) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>#KyivNotKiev — Measuring Real-Time Toponymic Change</title>
-  <meta name="description" content="Did the world listen? Multi-source computational framework tracking Ukrainian spelling adoption across 613M+ records from 7 sources, 55 countries, 2010–2026.">
+  <meta name="description" content="Multi-source computational framework tracking Ukrainian spelling adoption across 613M+ records from 7 sources, 55 countries, 2010–2026.">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="#KyivNotKiev — Did the World Listen?">
+  <meta property="og:title" content="#KyivNotKiev — Measuring Real-Time Toponymic Change">
   <meta property="og:description" content="Measuring real-time toponymic change across 613M+ records from 7 sources. The largest computational study of Ukrainian spelling adoption worldwide.">
   <meta property="og:image" content="https://kyivnotkiev.org/og.png">
   <meta property="og:url" content="https://kyivnotkiev.org">
@@ -54,7 +54,7 @@ function formatNum(n: number) {
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="#KyivNotKiev — Did the World Listen?">
+  <meta name="twitter:title" content="#KyivNotKiev — Measuring Real-Time Toponymic Change">
   <meta name="twitter:description" content="613M+ records, 7 sources, 55 countries. Measuring real-time toponymic change 2010–2026.">
   <meta name="twitter:image" content="https://kyivnotkiev.org/og.png">
 
@@ -116,7 +116,7 @@ function formatNum(n: number) {
               #KyivNotKiev
             </h1>
             <p style="color:var(--text); font-size:0.95rem; margin:0.4rem 0 0; line-height:1.5;">
-              Did the world listen? Tracking Ukrainian spelling adoption across {fmtBig(m.total_records)} records from {m.num_sources} sources, {m.num_countries} countries, 2010–2026.
+              Tracking Ukrainian spelling adoption across {fmtBig(m.total_records)} records from {m.num_sources} sources, {m.num_countries} countries, 2010–2026.
             </p>
           </div>
         </div>
@@ -434,7 +434,7 @@ function formatNum(n: number) {
 
     let activeSource = 'gdelt';  // GDELT first — news coverage is most precise
     let activeSources = new Set(['gdelt']);
-    let hideRuDomains = false;
+    // hideRuDomains replaced by holdoutFilter
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
     let chartMode: 'adoption' | 'volume' = 'volume';  // Volume by default — shows actual data density
     let showEvents = true;
@@ -1657,56 +1657,72 @@ function formatNum(n: number) {
     }
 
     // ── Holdout table ─────────────────────────────────────
+    let holdoutFilter = 'intl'; // default: hide .ru
+
     function drawHoldoutTable() {
       const container = document.getElementById('holdout-table')!;
       const pairHoldouts = (holdoutsByPair as any)[String(activePairId)];
 
-      // Update title
       const nameEl = document.getElementById('holdout-pair-name');
       const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
       if (nameEl && pair) nameEl.textContent = pair.russian;
 
       if (!pairHoldouts || pairHoldouts.length === 0) {
-        container.innerHTML = '<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">No holdout data for this pair (not enough GDELT mentions)</div>';
+        container.innerHTML = '<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">No holdout data for this pair</div>';
         return;
       }
 
-      const filtered = hideRuDomains
-        ? pairHoldouts.filter((h: any) => !h.is_ru)
-        : pairHoldouts;
+      // Filter by domain type
+      let filtered = pairHoldouts;
+      if (holdoutFilter === 'intl') filtered = pairHoldouts.filter((h: any) => !h.is_ru && !h.domain.endsWith('.ua'));
+      else if (holdoutFilter === 'ru') filtered = pairHoldouts.filter((h: any) => h.is_ru);
+      else if (holdoutFilter === 'ua') filtered = pairHoldouts.filter((h: any) => h.domain.endsWith('.ua'));
 
-      const rows = filtered.map((h: any) => `
-        <tr style="border-bottom:1px solid #f3f4f6; ${h.is_ru ? 'background:#fef2f2;' : ''}">
-          <td style="padding:0.5rem 0.75rem; font-size:0.85rem; font-weight:500;">
-            ${h.domain}
-            ${h.is_ru ? '<span style="font-size:0.65rem; color:#dc2626; margin-left:0.3rem; font-weight:600;">.ru</span>' : ''}
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="padding:1.5rem; text-align:center; color:#9ca3af; font-size:0.8rem;">No holdouts in this category</div>`;
+        return;
+      }
+
+      const rows = filtered.map((h: any) => {
+        const searchUrl = `https://www.google.com/search?q=site:${h.domain}+${pair?.russian || ''}`;
+        const isRu = h.is_ru;
+        const isUa = h.domain.endsWith('.ua');
+        const tag = isRu ? '<span style="font-size:0.6rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ru</span>'
+                  : isUa ? '<span style="font-size:0.6rem; color:#0057B8; background:#f0f9ff; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ua</span>'
+                  : '';
+
+        return `<tr style="border-bottom:1px solid #f3f4f6; ${isRu ? 'background:#fef2f2;' : ''}">
+          <td style="padding:0.4rem 0.6rem; font-size:0.8rem;">
+            <a href="https://${h.domain}" target="_blank" rel="noopener" style="color:var(--text); font-weight:500; text-decoration:none; border-bottom:1px dotted #d1d5db;">${h.domain}</a>${tag}
           </td>
-          <td style="padding:0.5rem 0.75rem; font-size:0.85rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
-          <td style="padding:0.5rem 0.75rem; font-size:0.8rem; color:#9ca3af;">${h.total.toLocaleString()}</td>
-        </tr>
-      `).join('');
+          <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
+          <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${h.total.toLocaleString()}</td>
+          <td style="padding:0.4rem 0.6rem;"><a href="${searchUrl}" target="_blank" rel="noopener" style="font-size:0.65rem; color:#4285F4; text-decoration:none;">verify →</a></td>
+        </tr>`;
+      }).join('');
 
       container.innerHTML = `
         <table style="width:100%; border-collapse:collapse;">
-          <thead>
-            <tr style="border-bottom:2px solid #e5e7eb;">
-              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Domain</th>
-              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Old spelling</th>
-              <th style="padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280;">Mentions</th>
-            </tr>
-          </thead>
+          <thead><tr style="border-bottom:2px solid #e5e7eb;">
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Domain</th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Old %</th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Articles</th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;"></th>
+          </tr></thead>
           <tbody>${rows}</tbody>
         </table>
+        <div style="font-size:0.65rem; color:#9ca3af; padding:0.4rem 0.6rem;">${filtered.length} domains · ${pairHoldouts.length} total</div>
       `;
     }
 
-    // Russian media filter toggle
-    document.getElementById('ru-filter-toggle')?.addEventListener('click', (e) => {
-      const btn = e.currentTarget as HTMLElement;
-      hideRuDomains = !hideRuDomains;
-      btn.textContent = hideRuDomains ? 'Show .ru domains' : 'Hide .ru domains';
-      btn.classList.toggle('active');
-      drawHoldoutTable();
+    // Holdout filter tabs
+    document.querySelectorAll('[data-holdout]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-holdout]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        holdoutFilter = (btn as HTMLElement).dataset.holdout!;
+        drawHoldoutTable();
+      });
     });
 
     // Initial load: landing or pair view based on URL
