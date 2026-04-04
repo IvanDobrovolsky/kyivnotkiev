@@ -91,6 +91,12 @@ ingest-dictionaries:  ## Dictionary audit (Wiktionary + FreeDictionary for all p
 ingest-enforcement:  ## Spellcheck/enforcement audit (Grammarly, Google, hunspell)
 	python -m pipeline.ingestion.spellcheck_audit
 
+audit-search:  ## DuckDuckGo search audit (Wikipedia article framing, all pairs)
+	python -m pipeline.ingestion.playwright_audits.ddg_autocorrect
+
+audit-dictionaries:  ## Dictionary scraper (Oxford, Cambridge, MW, Britannica)
+	python -m pipeline.ingestion.playwright_audits.dictionary_scraper
+
 analyze-categories:  ## Run Kruskal-Wallis + pairwise tests
 	python -m pipeline.analysis.categories
 
