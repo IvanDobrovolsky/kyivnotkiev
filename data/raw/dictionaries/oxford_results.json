@@ -1,0 +1,162 @@
+[
+  {
+    "pair_id": 23,
+    "term": "borscht",
+    "variant": "russian",
+    "exists": true,
+    "title": "borscht",
+    "definition": "a soup made from beetroot (= a dark red root vegetable), originally from Ukraine and also associated with Russia and Poland",
+    "origin": "from Russian borshch.",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 23,
+    "term": "borshch",
+    "variant": "ukrainian",
+    "exists": false,
+    "title": "No exact match found for \u201cborshch\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 36,
+    "term": "Cossack",
+    "variant": "russian",
+    "exists": false,
+    "title": "No exact match found for \u201cCossack\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 36,
+    "term": "Kozak",
+    "variant": "ukrainian",
+    "exists": false,
+    "title": "No exact match found for \u201cKozak\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 21,
+    "term": "chicken Kiev",
+    "variant": "russian",
+    "exists": false,
+    "title": "No exact match found for \u201cchicken Kiev\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 21,
+    "term": "chicken Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "title": "No exact match found for \u201cchicken Kyiv\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 46,
+    "term": "vareniki",
+    "variant": "russian",
+    "exists": false,
+    "title": "No exact match found for \u201cvareniki\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 46,
+    "term": "varenyky",
+    "variant": "ukrainian",
+    "exists": false,
+    "title": "No exact match found for \u201cvarenyky\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 48,
+    "term": "gopak",
+    "variant": "russian",
+    "exists": false,
+    "title": "No exact match found for \u201cgopak\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 48,
+    "term": "hopak",
+    "variant": "ukrainian",
+    "exists": false,
+    "title": "No exact match found for \u201chopak\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 1,
+    "term": "Kiev",
+    "variant": "russian",
+    "exists": false,
+    "title": "No exact match found for \u201cKiev\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 1,
+    "term": "Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "title": "No exact match found for \u201cKyiv\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 10,
+    "term": "Chernobyl",
+    "variant": "russian",
+    "exists": false,
+    "title": "No exact match found for \u201cChernobyl\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 10,
+    "term": "Chornobyl",
+    "variant": "ukrainian",
+    "exists": false,
+    "title": "No exact match found for \u201cChornobyl\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 3,
+    "term": "Odessa",
+    "variant": "russian",
+    "exists": false,
+    "title": "No exact match found for \u201cOdessa\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  },
+  {
+    "pair_id": 3,
+    "term": "Odesa",
+    "variant": "ukrainian",
+    "exists": false,
+    "title": "No exact match found for \u201cOdesa\u201d in English",
+    "definition": "",
+    "origin": "",
+    "dictionary": "Oxford Learners"
+  }
+]
