@@ -199,10 +199,16 @@ function formatNum(n: number) {
       <!-- Per-pair source stats -->
       <div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(7, 1fr); margin-bottom: 0.75rem;"></div>
 
-      <!-- Adoption calculation card -->
-      <div id="adoption-calc" class="chart-container" style="margin-bottom: 1rem; padding: 0.75rem 1rem;">
-        <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Adoption Calculation</div>
-        <div id="adoption-calc-body" style="font-size:0.75rem; color:var(--text-muted); line-height:1.6;"></div>
+      <!-- Adoption + Reference side by side -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+        <div id="adoption-calc" class="chart-container" style="margin-bottom:0; padding:0.75rem 1rem;">
+          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Adoption Calculation</div>
+          <div id="adoption-calc-body" style="font-size:0.75rem; color:var(--text-muted); line-height:1.6;"></div>
+        </div>
+        <div class="chart-container" id="dict-container" style="margin-bottom:0; padding:0.75rem 1rem;">
+          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Reference Audit</div>
+          <div id="search-preview"></div>
+        </div>
       </div>
 
       <!-- Cross-lingual chart (only for pairs with data) -->
@@ -267,12 +273,7 @@ function formatNum(n: number) {
         Source availability varies: Trends (2010–2026), GDELT (2015–2026), Wikipedia (2015–2026), Reddit (2007–2026), Ngrams (books, 2000–2019)
       </div>
 
-      <!-- Reference Audit -->
-      <div class="chart-container" id="dict-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1rem; margin-bottom:0.3rem;">Reference Audit</div>
-        <div class="chart-subtitle" style="margin-bottom:0.5rem;">How dictionaries, encyclopedias, and tools handle this pair</div>
-        <div id="search-preview"></div>
-      </div>
+      <!-- Reference Audit moved to grid above -->
 
       </div><!-- end pair-view -->
 
