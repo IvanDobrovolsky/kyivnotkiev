@@ -348,6 +348,62 @@ function formatNum(n: number) {
         <div id="category-chart" style="width:100%; height:260px;"></div>
       </div>
 
+      <!-- Top 6 Deep Dive -->
+      <div class="chart-container" style="margin-bottom: 1rem;">
+        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Key Pairs: Deep Dive</div>
+        <div class="chart-subtitle" style="margin-bottom: 1rem;">6 pairs representing the full spectrum — from campaign success to historical resistance</div>
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;">
+          <div class="top6-card" data-pair-id="1" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline;">
+              <div style="font-weight:600; color:var(--text);">Kiev → Kyiv</div>
+              <div style="font-size:0.8rem; font-weight:700; color:#059669;">60.3%</div>
+            </div>
+            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Flagship — campaign success story</div>
+            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:60.3%; background:#059669; border-radius:2px;"></div></div>
+          </div>
+          <div class="top6-card" data-pair-id="10" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline;">
+              <div style="font-weight:600; color:var(--text);">Chernobyl → Chornobyl</div>
+              <div style="font-size:0.8rem; font-weight:700; color:#dc2626;">26.8%</div>
+            </div>
+            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Disaster brand — impervious to change</div>
+            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:26.8%; background:#dc2626; border-radius:2px;"></div></div>
+          </div>
+          <div class="top6-card" data-pair-id="3" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline;">
+              <div style="font-weight:600; color:var(--text);">Odessa → Odesa</div>
+              <div style="font-size:0.8rem; font-weight:700; color:#d97706;">43.0%</div>
+            </div>
+            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Cultural entrenchment — contested</div>
+            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:43%; background:#d97706; border-radius:2px;"></div></div>
+          </div>
+          <div class="top6-card" data-pair-id="61" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline;">
+              <div style="font-weight:600; color:var(--text);">Vladimir → Volodymyr Zelenskyy</div>
+              <div style="font-size:0.8rem; font-weight:700; color:#d97706;">49.1%</div>
+            </div>
+            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Wartime president — first name + last name contested</div>
+            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:49.1%; background:#d97706; border-radius:2px;"></div></div>
+          </div>
+          <div class="top6-card" data-pair-id="70" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline;">
+              <div style="font-weight:600; color:var(--text);">Vladimir → Volodymyr the Great</div>
+              <div style="font-size:0.8rem; font-weight:700; color:#dc2626;">4.8%</div>
+            </div>
+            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Historical identity — Russia claims our past</div>
+            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:4.8%; background:#dc2626; border-radius:2px;"></div></div>
+          </div>
+          <div class="top6-card" data-pair-id="72" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline;">
+              <div style="font-weight:600; color:var(--text);">Artemovsk → Bakhmut</div>
+              <div style="font-size:0.8rem; font-weight:700; color:#059669;">89.6%</div>
+            </div>
+            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Naming as resistance — occupation rename rejected</div>
+            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:89.6%; background:#059669; border-radius:2px;"></div></div>
+          </div>
+        </div>
+      </div>
+
       <!-- All pairs heatmap -->
       <div class="chart-container">
         <div class="chart-header">
@@ -1004,13 +1060,18 @@ function formatNum(n: number) {
       if (items.length === 0) return;
 
       const margin = {top: 5, right: 50, bottom: 5, left: 110};
-      const rowH = 28;
+      const rowH = 26;
       const width = container.getBoundingClientRect().width - margin.left - margin.right;
       const height = items.length * rowH;
+      const totalH = height + margin.top + margin.bottom;
+      const totalW = width + margin.left + margin.right;
 
       const svg = d3.select('#pair-source-chart')
         .append('svg')
-        .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        .attr('width', '100%')
+        .attr('height', totalH)
+        .attr('viewBox', `0 0 ${totalW} ${totalH}`)
+        .attr('preserveAspectRatio', 'xMinYMin meet')
         .append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
       const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
@@ -1747,6 +1808,17 @@ function formatNum(n: number) {
       setTimeout(() => {
         document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
+    });
+
+    // Top 6 cards click → navigate to pair
+    document.querySelectorAll('.top6-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const pid = parseInt((card as HTMLElement).dataset.pairId || '1');
+        selectPair(pid);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      card.addEventListener('mouseenter', () => { (card as HTMLElement).style.borderColor = '#0057B8'; (card as HTMLElement).style.boxShadow = '0 2px 8px rgba(0,87,184,0.1)'; });
+      card.addEventListener('mouseleave', () => { (card as HTMLElement).style.borderColor = '#e5e7eb'; (card as HTMLElement).style.boxShadow = 'none'; });
     });
 
     window.addEventListener('resize', () => {
