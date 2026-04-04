@@ -82,6 +82,15 @@ analyze:  ## Run ALL statistical tests from fresh BQ data
 analyze-errors:  ## Cross-source error analysis (disagreements between sources)
 	python -m pipeline.analysis.error_analysis
 
+analyze-precision:  ## Regex precision evaluation (sample GDELT matches)
+	python -m pipeline.analysis.regex_precision
+
+ingest-dictionaries:  ## Dictionary audit (Wiktionary + FreeDictionary for all pairs)
+	python -m pipeline.ingestion.dictionaries
+
+ingest-enforcement:  ## Spellcheck/enforcement audit (Grammarly, Google, hunspell)
+	python -m pipeline.ingestion.spellcheck_audit
+
 analyze-categories:  ## Run Kruskal-Wallis + pairwise tests
 	python -m pipeline.analysis.categories
 
