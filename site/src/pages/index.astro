@@ -181,8 +181,8 @@ function formatNum(n: number) {
             </div>
           </div>
           <div class="chart-controls" style="margin:0;">
-            <button class="chart-mode" data-chart="adoption">Adoption %</button>
             <button class="chart-mode active" data-chart="volume" id="volume-btn">Volume</button>
+            <button class="chart-mode" data-chart="adoption">Adoption %</button>
             <span class="toggle-sep"></span>
             <button class="line-mode active" data-mode="both">All</button>
             <button class="line-mode" data-mode="ukrainian">UA</button>
@@ -1018,26 +1018,6 @@ function formatNum(n: number) {
         btn.classList.add('active');
         activeSource = src;
         activeSources = new Set([src]);
-
-        // Disable volume for sources without count data
-        const noVolume = ['ngrams', 'openalex'];
-        const volBtn = document.getElementById('volume-btn');
-        if (volBtn) {
-          if (noVolume.includes(src)) {
-            volBtn.classList.add('disabled');
-            (volBtn as HTMLElement).style.opacity = '0.3';
-            (volBtn as HTMLElement).style.pointerEvents = 'none';
-            if (chartMode === 'volume') {
-              chartMode = 'adoption';
-              document.querySelectorAll('.chart-mode').forEach(b => b.classList.remove('active'));
-              document.querySelector('.chart-mode[data-chart="adoption"]')?.classList.add('active');
-            }
-          } else {
-            volBtn.classList.remove('disabled');
-            (volBtn as HTMLElement).style.opacity = '1';
-            (volBtn as HTMLElement).style.pointerEvents = 'auto';
-          }
-        }
 
         drawChart();
 
