@@ -925,7 +925,6 @@ function formatNum(n: number) {
       drawChart();
       drawPairStats();
       drawAdoptionCalc();
-      drawPairSourceChart();
       drawMediaOrigin();
       drawCrossLingual();
       drawWorldMap();
@@ -1765,11 +1764,13 @@ function formatNum(n: number) {
         html += `<div style="padding:0.35rem 0.5rem; font-weight:500; border-bottom:1px solid #f3f4f6; display:flex; align-items:center; gap:0.3rem;"><span style="font-size:0.85rem;">${src.icon}</span>${src.name}</div>`;
 
         if (src.key === 'wikipedia') {
-          html += refBadge(data?.russian_article, pair.russian, pair.ukrainian, 'wiki');
-          html += refBadge(data?.ukrainian_article, pair.russian, pair.ukrainian, 'wiki');
+          html += refBadge(data?.russian_article, pair.russian, pair.ukrainian, 'wiki', true);
+          html += refBadge(data?.ukrainian_article, pair.russian, pair.ukrainian, 'wiki', false);
         } else {
-          html += refBadge(data?.russian, pair.russian, pair.ukrainian, src.key);
-          html += refBadge(data?.ukrainian, pair.russian, pair.ukrainian, src.key);
+          const ruData = data?.russian ? {...data.russian, _isRussianCol: true} : data?.russian;
+          const ukData = data?.ukrainian ? {...data.ukrainian, _isRussianCol: false} : data?.ukrainian;
+          html += refBadge(ruData, pair.russian, pair.ukrainian, src.key);
+          html += refBadge(ukData, pair.russian, pair.ukrainian, src.key);
         }
       }
 
@@ -1790,21 +1791,25 @@ function formatNum(n: number) {
       return `<span style="display:inline-flex; align-items:center; gap:0.2rem; padding:0.15rem 0.4rem; border-radius:4px; background:${color}11; border:1px solid ${color}33; font-size:0.68rem; color:${color};"><strong>${icon}</strong> ${label}</span>`;
     }
 
-    function refBadge(data: any, ru: string, uk: string, type: string): string {
+    function refBadge(data: any, ru: string, uk: string, type: string, isRuCol?: boolean): string {
       const cell = 'padding:0.3rem 0.4rem; border-bottom:1px solid #f3f4f6; font-size:0.72rem;';
 
       if (type === 'wiki') {
         if (!data) return `<div style="${cell} color:#d1d5db;">—</div>`;
         const artClean = data.toLowerCase().replace(/[\s']/g, '');
         const ukClean = uk.toLowerCase().replace(/[\s']/g, '');
-        const ruClean = ru.toLowerCase().replace(/[\s']/g, '');
         const isUkr = artClean.includes(ukClean);
-        const isRu = !isUkr && artClean.includes(ruClean);
-        const icon = isUkr ? '✅' : isRu ? '⚠️' : '➖';
+        // For wiki: if article uses Ukrainian form = ✅, otherwise ⚠️
+        const icon = isUkr ? '✅' : '⚠️';
         return `<div style="${cell}">${icon} <strong>${data}</strong></div>`;
       }
 
       if (!data || !data.exists) return `<div style="${cell} color:#d1d5db;">✗ none</div>`;
+
+      // Determine if this is a "good" (Ukrainian form) or "bad" (Russian form) entry
+      // For the Russian column: entry exists = ⚠️ (still using old form)
+      // We detect this from the parent call context via a hidden flag
+      const isRussianColumn = data._isRussianCol;
 
       let label = '';
       let sub = '';
@@ -1819,7 +1824,8 @@ function formatNum(n: number) {
         if (data.redirected) label += ' ↗';
       }
 
-      let html = `<div style="${cell}">✅ <strong>${label}</strong>`;
+      const icon = isRussianColumn ? '⚠️' : '✅';
+      let html = `<div style="${cell}">${icon} <strong>${label}</strong>`;
       if (sub) html += `<div style="font-size:0.58rem; color:#9ca3af; margin-top:0.1rem;">${sub}</div>`;
       html += '</div>';
       return html;
