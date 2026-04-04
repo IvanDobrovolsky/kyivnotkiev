@@ -201,7 +201,7 @@ function formatNum(n: number) {
       <!-- Cross-lingual chart (only for pairs with data) -->
       <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom: 1rem;">
         <div class="chart-title" style="color: var(--text); font-size: 1rem; margin-bottom: 0.5rem;">Cross-Lingual Adoption</div>
-        <div class="chart-subtitle" style="margin-bottom: 0.75rem;">How different languages adopt this spelling change (GDELT news domains by TLD)</div>
+        <div class="chart-subtitle" style="margin-bottom: 0.75rem;">Ukrainian spelling adoption in news media by country (GDELT domain TLD)</div>
         <div id="cross-lingual-chart" style="width:100%;"></div>
       </div>
 
@@ -227,12 +227,26 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Per-pair holdouts -->
-      <div class="chart-container">
+      <!-- Per-pair: Media Origin (International / Ukraine / Russia) -->
+      <div class="chart-container" id="media-origin-container" style="margin-bottom: 1rem;">
+        <div class="chart-title" style="color: var(--text); font-size: 1rem;">Media Origin</div>
+        <div class="chart-subtitle">Adoption by media origin — GDELT news domains</div>
+        <div id="media-origin-chart" style="display:flex; gap:1rem; justify-content:center; margin-top:0.75rem;"></div>
+      </div>
+
+      <!-- Per-pair: Cross-Source Comparison -->
+      <div class="chart-container" style="margin-bottom: 1rem;">
+        <div class="chart-title" style="color: var(--text); font-size: 1rem;">Source Comparison</div>
+        <div class="chart-subtitle">Adoption % by source for this pair</div>
+        <div id="pair-source-chart" style="width:100%;"></div>
+      </div>
+
+      <!-- Per-pair holdouts (GDELT only) -->
+      <div class="chart-container" id="holdout-container">
         <div class="chart-header">
           <div>
             <div class="chart-title" style="color: var(--text)">Holdouts: <span id="holdout-pair-name">Kiev</span></div>
-            <div class="chart-subtitle">Domains still using old spelling (2024–2026, min 20 mentions)</div>
+            <div class="chart-subtitle">GDELT domains still using old spelling (2024–2026, min 20 mentions)</div>
           </div>
           <div class="chart-controls">
             <button class="event-toggle" id="ru-filter-toggle">Hide .ru domains</button>
@@ -296,40 +310,11 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Cross-Source Disagreements -->
+      <!-- Category chart -->
       <div class="chart-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Cross-Source Analysis</div>
-        <div class="chart-subtitle" style="margin-bottom: 1rem;">Where do sources agree and disagree on adoption?</div>
-        <div id="error-analysis-chart" style="width:100%;"></div>
-      </div>
-
-      <!-- Russia vs World + Category side by side -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-        <div class="chart-container" style="margin-bottom: 0;">
-          <div class="chart-title" style="color: var(--text); font-size: 1.1rem;">Russia vs Rest of World</div>
-          <div class="chart-subtitle" style="margin-bottom: 1rem;">Kiev/Kyiv adoption — Russian media vs everyone else</div>
-          <div style="display: flex; gap: 1.5rem;">
-            <div style="flex:1; text-align:center; padding:1.25rem; background:#f0fdf4; border-radius:6px;">
-              <div style="font-size:2.2rem; font-weight:700; color:#059669;">30.7%</div>
-              <div style="font-size:0.8rem; color:#6b7280; margin-top:0.2rem;">Non-Russian media</div>
-              <div style="font-size:0.7rem; color:#9ca3af;">14.3M mentions</div>
-            </div>
-            <div style="flex:1; text-align:center; padding:1.25rem; background:#fef2f2; border-radius:6px;">
-              <div style="font-size:2.2rem; font-weight:700; color:#dc2626;">1.7%</div>
-              <div style="font-size:0.8rem; color:#6b7280; margin-top:0.2rem;">Russian media</div>
-              <div style="font-size:0.7rem; color:#9ca3af;">2.3M mentions</div>
-            </div>
-          </div>
-          <div style="font-size:0.75rem; color:#6b7280; text-align:center; margin-top:0.75rem;">
-            18x adoption gap
-          </div>
-        </div>
-
-        <div class="chart-container" style="margin-bottom: 0;">
-          <div class="chart-title" style="color: var(--text); font-size: 1.1rem;">Adoption by Category</div>
-          <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Average adoption (%) per category</div>
-          <div id="category-chart" style="width:100%; height:240px;"></div>
-        </div>
+        <div class="chart-title" style="color: var(--text); font-size: 1.1rem;">Adoption by Category</div>
+        <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Mean adoption (%) per category — equal weight per source</div>
+        <div id="category-chart" style="width:100%; height:260px;"></div>
       </div>
 
       <!-- All pairs heatmap -->
@@ -863,9 +848,103 @@ function formatNum(n: number) {
       }
       drawChart();
       drawPairStats();
+      drawPairSourceChart();
+      drawMediaOrigin();
       drawCrossLingual();
       drawWorldMap();
       drawHoldoutTable();
+    }
+
+    function drawPairSourceChart() {
+      const container = document.getElementById('pair-source-chart');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const pairData = (timeseriesData as any)[String(activePairId)];
+      if (!pairData) return;
+
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      const items: {src: string; adoption: number; n: number}[] = [];
+
+      for (const src of srcOrder) {
+        const series = pairData[src];
+        if (!series || series.length === 0) continue;
+        const last = series[series.length - 1];
+        items.push({src, adoption: last.adoption, n: series.length});
+      }
+
+      if (items.length === 0) return;
+
+      const margin = {top: 5, right: 50, bottom: 5, left: 80};
+      const rowH = 28;
+      const width = container.getBoundingClientRect().width - margin.left - margin.right;
+      const height = items.length * rowH;
+
+      const svg = d3.select('#pair-source-chart')
+        .append('svg')
+        .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        .append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+      const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+      const y = d3.scaleBand().domain(items.map(d => d.src)).range([0, height]).padding(0.3);
+
+      // 50% line
+      svg.append('line').attr('x1', x(50)).attr('x2', x(50)).attr('y1', 0).attr('y2', height)
+        .attr('stroke', '#e5e7eb').attr('stroke-dasharray', '3,3');
+
+      items.forEach(item => {
+        svg.append('text').attr('x', -6).attr('y', y(item.src)! + y.bandwidth()/2 + 4)
+          .attr('text-anchor', 'end').attr('font-size', '11px').attr('fill', 'var(--text)')
+          .text(sourceLabels[item.src] || item.src);
+
+        svg.append('rect')
+          .attr('x', 0).attr('y', y(item.src)!)
+          .attr('width', Math.max(2, x(item.adoption))).attr('height', y.bandwidth())
+          .attr('fill', sourceColors[item.src]).attr('rx', 3).attr('opacity', 0.85);
+
+        svg.append('text')
+          .attr('x', x(item.adoption) + 6).attr('y', y(item.src)! + y.bandwidth()/2 + 4)
+          .attr('font-size', '11px').attr('font-weight', '600').attr('fill', sourceColors[item.src])
+          .text(`${item.adoption}%`);
+      });
+    }
+
+    function drawMediaOrigin() {
+      const container = document.getElementById('media-origin-chart');
+      const wrapper = document.getElementById('media-origin-container');
+      if (!container || !wrapper) return;
+      container.innerHTML = '';
+
+      // Only show for pairs with GDELT data
+      const pairData = (timeseriesData as any)[String(activePairId)];
+      if (!pairData?.gdelt || pairData.gdelt.length === 0) {
+        wrapper.style.display = 'none';
+        return;
+      }
+      wrapper.style.display = 'block';
+
+      // Sum GDELT counts by domain category (last 24 months)
+      const recent = pairData.gdelt.slice(-24);
+      const ukr_total = recent.reduce((s: number, d: any) => s + (d.ukr || 0), 0);
+      const rus_total = recent.reduce((s: number, d: any) => s + (d.rus || 0), 0);
+      const total = ukr_total + rus_total;
+      const adoption = total > 0 ? Math.round(ukr_total / total * 100) : 0;
+
+      // We show overall GDELT adoption as 3 cards
+      const cards = [
+        {label: 'Ukrainian Spelling', value: adoption + '%', color: '#0057B8', sub: ukr_total.toLocaleString() + ' mentions'},
+        {label: 'Russian Spelling', value: (100 - adoption) + '%', color: '#dc2626', sub: rus_total.toLocaleString() + ' mentions'},
+        {label: 'Total Articles', value: total >= 1e6 ? (total/1e6).toFixed(1)+'M' : total >= 1e3 ? (total/1e3).toFixed(1)+'K' : String(total), color: '#1e3a5f', sub: 'GDELT news corpus'},
+      ];
+
+      for (const card of cards) {
+        const el = document.createElement('div');
+        el.style.cssText = 'flex:1; text-align:center; padding:1rem; background:#f8f9fb; border-radius:8px; border-top:3px solid ' + card.color;
+        el.innerHTML = `<div style="font-size:1.6rem; font-weight:700; color:${card.color}">${card.value}</div>
+          <div style="font-size:0.75rem; color:#6b7280; margin-top:0.2rem">${card.label}</div>
+          <div style="font-size:0.65rem; color:#9ca3af">${card.sub}</div>`;
+        container.appendChild(el);
+      }
     }
 
     function drawPairStats() {
@@ -935,8 +1014,7 @@ function formatNum(n: number) {
         geo,
         name: langNames[geo],
         gdelt: gdeltData?.[geo === 'us' ? 'com' : geo] ?? null,
-        trends: trendsData?.[geo] ?? null,
-      })).filter(d => d.gdelt !== null || d.trends !== null);
+      })).filter(d => d.gdelt !== null);
 
       if (items.length === 0) {
         container.style.display = 'none';
@@ -974,34 +1052,17 @@ function formatNum(n: number) {
           .attr('text-anchor', 'end').attr('font-size', '12px').attr('fill', 'var(--text)')
           .text(item.name);
 
-        // GDELT bar
+        // GDELT bar only
         if (item.gdelt !== null) {
           svg.append('rect')
-            .attr('x', x(0)).attr('y', yi)
-            .attr('width', x(item.gdelt)).attr('height', h * 0.45)
-            .attr('fill', '#1e3a5f').attr('rx', 3).attr('opacity', 0.8);
-          svg.append('text').attr('x', x(item.gdelt) + 4).attr('y', yi + h * 0.3)
-            .attr('font-size', '10px').attr('fill', '#1e3a5f')
+            .attr('x', x(0)).attr('y', yi + h * 0.15)
+            .attr('width', Math.max(2, x(item.gdelt))).attr('height', h * 0.7)
+            .attr('fill', '#1e3a5f').attr('rx', 3).attr('opacity', 0.85);
+          svg.append('text').attr('x', x(item.gdelt) + 6).attr('y', yi + h/2 + 4)
+            .attr('font-size', '11px').attr('fill', '#1e3a5f').attr('font-weight', '600')
             .text(item.gdelt.toFixed(0) + '%');
         }
-
-        // Trends dot
-        if (item.trends !== null) {
-          svg.append('circle')
-            .attr('cx', x(item.trends)).attr('cy', yi + h * 0.7)
-            .attr('r', 5).attr('fill', '#4285F4');
-          svg.append('text').attr('x', x(item.trends) + 8).attr('y', yi + h * 0.75)
-            .attr('font-size', '10px').attr('fill', '#4285F4')
-            .text(item.trends.toFixed(0) + '%');
-        }
       });
-
-      // Legend
-      const legend = d3.select('#cross-lingual-chart').append('div')
-        .style('display', 'flex').style('gap', '1rem').style('justify-content', 'center')
-        .style('margin-top', '0.5rem').style('font-size', '11px').style('color', '#6b7280');
-      legend.append('div').html('<span style="display:inline-block;width:12px;height:8px;background:#1e3a5f;border-radius:2px;margin-right:4px;"></span>GDELT News');
-      legend.append('div').html('<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#4285F4;margin-right:4px;"></span>Google Trends');
     }
 
     document.querySelectorAll('.sidebar-item').forEach(item => {
@@ -1457,7 +1518,6 @@ function formatNum(n: number) {
       showView('landing');
       drawCategoryChart();
       drawHeatmap();
-      drawErrorAnalysis();
     }
 
     // Logo click → back to landing
@@ -1473,7 +1533,6 @@ function formatNum(n: number) {
       } else {
         drawCategoryChart();
         drawHeatmap();
-        drawErrorAnalysis();
       }
     });
 
