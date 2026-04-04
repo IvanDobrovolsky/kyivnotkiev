@@ -240,11 +240,18 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Per-pair: GDELT Spelling Split -->
-      <div class="chart-container" id="media-origin-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1rem;">GDELT Spelling Split</div>
-        <div class="chart-subtitle">Ukrainian vs Russian spelling in global news articles (last 24 months)</div>
-        <div id="media-origin-chart" style="display:flex; gap:1rem; justify-content:center; margin-top:0.75rem;"></div>
+      <!-- Per-pair: GDELT Analysis (spelling + domain origin) -->
+      <div id="media-origin-container" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+        <div class="chart-container" style="margin-bottom:0;">
+          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Spelling Split</div>
+          <div style="font-size:0.68rem; color:var(--text-muted); margin-bottom:0.5rem;">Ukrainian vs Russian in GDELT (24mo)</div>
+          <div id="spelling-pie" style="display:flex; align-items:center; justify-content:center;"></div>
+        </div>
+        <div class="chart-container" style="margin-bottom:0;">
+          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Media Origin</div>
+          <div style="font-size:0.68rem; color:var(--text-muted); margin-bottom:0.5rem;">Articles by domain: .ru, .ua, international</div>
+          <div id="origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
+        </div>
       </div>
 
       <!-- Per-pair: Cross-Source Comparison -->
@@ -388,6 +395,7 @@ function formatNum(n: number) {
     import dictCombined from '../data/dictionary_combined.json';
     import enforcementData from '../data/enforcement.json';
     import searchAudit from '../data/search_audit.json';
+    import domainOrigins from '../data/domain_origins.json';
 
     // Make cross-lingual data available to drawCrossLingual
     (window as any).__crossLingual = crossLingual;
@@ -1011,41 +1019,86 @@ function formatNum(n: number) {
     }
 
     function drawMediaOrigin() {
-      const container = document.getElementById('media-origin-chart');
       const wrapper = document.getElementById('media-origin-container');
-      if (!container || !wrapper) return;
-      container.innerHTML = '';
+      const spellingEl = document.getElementById('spelling-pie');
+      const originEl = document.getElementById('origin-pie');
+      if (!wrapper || !spellingEl || !originEl) return;
+      spellingEl.innerHTML = '';
+      originEl.innerHTML = '';
 
-      // Only show for pairs with GDELT data
       const pairData = (timeseriesData as any)[String(activePairId)];
       if (!pairData?.gdelt || pairData.gdelt.length === 0) {
         wrapper.style.display = 'none';
         return;
       }
-      wrapper.style.display = 'block';
+      wrapper.style.display = 'grid';
 
-      // Sum GDELT counts by domain category (last 24 months)
+      // Spelling pie
       const recent = pairData.gdelt.slice(-24);
-      const ukr_total = recent.reduce((s: number, d: any) => s + (d.ukr || 0), 0);
-      const rus_total = recent.reduce((s: number, d: any) => s + (d.rus || 0), 0);
-      const total = ukr_total + rus_total;
-      const adoption = total > 0 ? Math.round(ukr_total / total * 100) : 0;
+      const ukr = recent.reduce((s: number, d: any) => s + (d.ukr || 0), 0);
+      const rus = recent.reduce((s: number, d: any) => s + (d.rus || 0), 0);
+      drawPie(spellingEl, [
+        {label: 'Ukrainian', value: ukr, color: '#0057B8'},
+        {label: 'Russian', value: rus, color: '#dc2626'},
+      ]);
 
-      // We show overall GDELT adoption as 3 cards
-      const cards = [
-        {label: 'Ukrainian Spelling', value: adoption + '%', color: '#0057B8', sub: ukr_total.toLocaleString() + ' mentions'},
-        {label: 'Russian Spelling', value: (100 - adoption) + '%', color: '#dc2626', sub: rus_total.toLocaleString() + ' mentions'},
-        {label: 'Total Articles', value: total >= 1e6 ? (total/1e6).toFixed(1)+'M' : total >= 1e3 ? (total/1e3).toFixed(1)+'K' : String(total), color: '#1e3a5f', sub: 'GDELT news corpus'},
-      ];
-
-      for (const card of cards) {
-        const el = document.createElement('div');
-        el.style.cssText = 'flex:1; text-align:center; padding:1rem; background:#f8f9fb; border-radius:8px; border-top:3px solid ' + card.color;
-        el.innerHTML = `<div style="font-size:1.6rem; font-weight:700; color:${card.color}">${card.value}</div>
-          <div style="font-size:0.75rem; color:#6b7280; margin-top:0.2rem">${card.label}</div>
-          <div style="font-size:0.65rem; color:#9ca3af">${card.sub}</div>`;
-        container.appendChild(el);
+      // Domain origin pie
+      const origins = (domainOrigins as any)[String(activePairId)];
+      if (origins) {
+        drawPie(originEl, [
+          {label: 'International', value: origins.intl?.total || 0, color: '#059669'},
+          {label: '.ua domains', value: origins.ua?.total || 0, color: '#0057B8'},
+          {label: '.ru domains', value: origins.ru?.total || 0, color: '#dc2626'},
+        ]);
+      } else {
+        originEl.innerHTML = '<div style="color:#9ca3af; font-size:0.75rem;">No domain data</div>';
       }
+    }
+
+    function drawPie(container: HTMLElement, slices: {label: string; value: number; color: string}[]) {
+      const total = slices.reduce((s, d) => s + d.value, 0);
+      if (total === 0) return;
+
+      const size = 130;
+      const r = size / 2 - 5;
+      const cx = size / 2;
+      const cy = size / 2;
+
+      let svg = `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">`;
+      let startAngle = -Math.PI / 2;
+
+      for (const slice of slices) {
+        const pct = slice.value / total;
+        const angle = pct * 2 * Math.PI;
+        const endAngle = startAngle + angle;
+        const large = angle > Math.PI ? 1 : 0;
+
+        const x1 = cx + r * Math.cos(startAngle);
+        const y1 = cy + r * Math.sin(startAngle);
+        const x2 = cx + r * Math.cos(endAngle);
+        const y2 = cy + r * Math.sin(endAngle);
+
+        if (pct > 0.001) {
+          svg += `<path d="M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z" fill="${slice.color}" opacity="0.85"/>`;
+        }
+        startAngle = endAngle;
+      }
+      svg += '</svg>';
+
+      // Legend below
+      let legend = '<div style="display:flex; flex-direction:column; gap:0.2rem; margin-top:0.3rem;">';
+      for (const slice of slices) {
+        const pct = total > 0 ? (slice.value / total * 100).toFixed(1) : '0';
+        const fmtVal = slice.value >= 1e6 ? (slice.value/1e6).toFixed(1)+'M' : slice.value >= 1e3 ? (slice.value/1e3).toFixed(1)+'K' : String(slice.value);
+        legend += `<div style="display:flex; align-items:center; gap:0.3rem; font-size:0.68rem;">`;
+        legend += `<span style="width:8px; height:8px; border-radius:2px; background:${slice.color}; flex-shrink:0;"></span>`;
+        legend += `<span style="color:var(--text);">${slice.label}</span>`;
+        legend += `<span style="color:var(--text-muted); margin-left:auto;">${pct}% (${fmtVal})</span>`;
+        legend += '</div>';
+      }
+      legend += '</div>';
+
+      container.innerHTML = svg + legend;
     }
 
     function drawPairStats() {

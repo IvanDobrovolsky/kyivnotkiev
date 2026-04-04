@@ -685,6 +685,43 @@ def write_json(path: Path, data):
     log.info(f"  Wrote {path.name} ({path.stat().st_size / 1024:.0f} KB)")
 
 
+def export_domain_origins(enabled_ids: set[int]) -> dict:
+    """Export GDELT domain origin breakdown (ru/ua/intl) per pair."""
+    log.info("Exporting domain origins...")
+    rows = query(f"""
+        WITH domain_data AS (
+            SELECT pair_id,
+                CASE
+                    WHEN REGEXP_CONTAINS(source_domain, r'\\.ru$') THEN 'ru'
+                    WHEN REGEXP_CONTAINS(source_domain, r'\\.ua$') THEN 'ua'
+                    ELSE 'intl'
+                END as origin,
+                variant, COUNT(*) as cnt
+            FROM `{DATASET}.raw_gdelt`
+            WHERE date >= DATE_SUB(CURRENT_DATE(), INTERVAL 24 MONTH)
+            GROUP BY pair_id, origin, variant
+        )
+        SELECT pair_id, origin,
+            SUM(IF(variant='ukrainian', cnt, 0)) as ukr,
+            SUM(IF(variant='russian', cnt, 0)) as rus,
+            SUM(cnt) as total
+        FROM domain_data
+        GROUP BY pair_id, origin
+        ORDER BY pair_id, origin
+    """)
+    result = {}
+    for r in rows:
+        pid = r["pair_id"]
+        if pid not in enabled_ids:
+            continue
+        result.setdefault(str(pid), {})[r["origin"]] = {
+            "ukr": r["ukr"], "rus": r["rus"], "total": r["total"],
+            "adoption": round(r["ukr"] / r["total"] * 100, 1) if r["total"] > 0 else 0,
+        }
+    log.info(f"  Domain origins: {len(result)} pairs")
+    return result
+
+
 def main():
     log.info("=" * 60)
     log.info("Exporting BigQuery data to site JSON")
@@ -702,10 +739,12 @@ def main():
     holdouts_by_pair, holdouts_global = export_holdouts(enabled_ids)
     pair_events = export_pair_events(enabled_ids)
     analysis = export_analysis()
+    domain_origins = export_domain_origins(enabled_ids)
 
     write_json(SITE_DATA_DIR / "manifest.json", manifest)
     write_json(SITE_DATA_DIR / "timeseries.json", timeseries)
     write_json(SITE_DATA_DIR / "trends_countries.json", trends_countries)
+    write_json(SITE_DATA_DIR / "domain_origins.json", domain_origins)
     write_json(SITE_DATA_DIR / "holdouts_by_pair.json", holdouts_by_pair)
     write_json(SITE_DATA_DIR / "holdouts.json", holdouts_global)
     write_json(SITE_DATA_DIR / "pair_events.json", pair_events)
