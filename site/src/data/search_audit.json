@@ -1,6 +1,6 @@
 {
   "source": "DuckDuckGo",
-  "total_searches": 28,
+  "total_searches": 110,
   "results": [
     {
       "query": "Kiev",
@@ -10,7 +10,7 @@
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Kyiv",
+      "wikipedia_snippet": null,
       "page_title": "Kiev at DuckDuckGo",
       "screenshot": "pair1_russian_Kiev.png"
     },
@@ -34,7 +34,7 @@
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Kharkiv",
+      "wikipedia_snippet": null,
       "page_title": "Kharkov at DuckDuckGo",
       "screenshot": "pair2_russian_Kharkov.png"
     },
@@ -75,6 +75,150 @@
       "screenshot": "pair3_ukrainian_Odesa.png"
     },
     {
+      "query": "Lvov",
+      "variant": "russian",
+      "pair_id": 4,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "Lvov at DuckDuckGo",
+      "screenshot": "pair4_russian_Lvov.png"
+    },
+    {
+      "query": "Lviv",
+      "variant": "ukrainian",
+      "pair_id": 4,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Lviv",
+      "page_title": "Lviv at DuckDuckGo",
+      "screenshot": "pair4_ukrainian_Lviv.png"
+    },
+    {
+      "query": "Zaporozhye",
+      "variant": "russian",
+      "pair_id": 5,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "Zaporozhye at DuckDuckGo",
+      "screenshot": "pair5_russian_Zaporozhye.png"
+    },
+    {
+      "query": "Zaporizhzhia",
+      "variant": "ukrainian",
+      "pair_id": 5,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Zaporizhzhia",
+      "page_title": "Zaporizhzhia at DuckDuckGo",
+      "screenshot": "pair5_ukrainian_Zaporizhzhia.png"
+    },
+    {
+      "query": "Nikolaev",
+      "variant": "russian",
+      "pair_id": 6,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "Nikolaev at DuckDuckGo",
+      "screenshot": "pair6_russian_Nikolaev.png"
+    },
+    {
+      "query": "Mykolaiv",
+      "variant": "ukrainian",
+      "pair_id": 6,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Mykolaiv",
+      "page_title": "Mykolaiv at DuckDuckGo",
+      "screenshot": "pair6_ukrainian_Mykolaiv.png"
+    },
+    {
+      "query": "Dnepropetrovsk",
+      "variant": "russian",
+      "pair_id": 7,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Dnipro",
+      "page_title": "Dnepropetrovsk at DuckDuckGo",
+      "screenshot": "pair7_russian_Dnepropetrovsk.png"
+    },
+    {
+      "query": "Dnipro",
+      "variant": "ukrainian",
+      "pair_id": 7,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Dnipro",
+      "page_title": "Dnipro at DuckDuckGo",
+      "screenshot": "pair7_ukrainian_Dnipro.png"
+    },
+    {
+      "query": "Vinnitsa",
+      "variant": "russian",
+      "pair_id": 8,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Vinnytsia",
+      "page_title": "Vinnitsa at DuckDuckGo",
+      "screenshot": "pair8_russian_Vinnitsa.png"
+    },
+    {
+      "query": "Vinnytsia",
+      "variant": "ukrainian",
+      "pair_id": 8,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Vinnytsia",
+      "page_title": "Vinnytsia at DuckDuckGo",
+      "screenshot": "pair8_ukrainian_Vinnytsia.png"
+    },
+    {
+      "query": "Rovno",
+      "variant": "russian",
+      "pair_id": 9,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "Rovno at DuckDuckGo",
+      "screenshot": "pair9_russian_Rovno.png"
+    },
+    {
+      "query": "Rivne",
+      "variant": "ukrainian",
+      "pair_id": 9,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Rivne",
+      "page_title": "Rivne at DuckDuckGo",
+      "screenshot": "pair9_ukrainian_Rivne.png"
+    },
+    {
       "query": "Chernobyl",
       "variant": "russian",
       "pair_id": 10,
@@ -82,7 +226,7 @@
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Chernobyl disaster",
+      "wikipedia_snippet": null,
       "page_title": "Chernobyl at DuckDuckGo",
       "screenshot": "pair10_russian_Chernobyl.png"
     },
@@ -94,9 +238,345 @@
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Chernobyl disaster",
+      "wikipedia_snippet": null,
       "page_title": "Chornobyl at DuckDuckGo",
       "screenshot": "pair10_ukrainian_Chornobyl.png"
+    },
+    {
+      "query": "Lugansk",
+      "variant": "russian",
+      "pair_id": 11,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Luhansk",
+      "page_title": "Lugansk at DuckDuckGo",
+      "screenshot": "pair11_russian_Lugansk.png"
+    },
+    {
+      "query": "Luhansk",
+      "variant": "ukrainian",
+      "pair_id": 11,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "Luhansk at DuckDuckGo",
+      "screenshot": "pair11_ukrainian_Luhansk.png"
+    },
+    {
+      "query": "Dnieper",
+      "variant": "russian",
+      "pair_id": 15,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Dnieper",
+      "page_title": "Dnieper at DuckDuckGo",
+      "screenshot": "pair15_russian_Dnieper.png"
+    },
+    {
+      "query": "Dnipro",
+      "variant": "ukrainian",
+      "pair_id": 15,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Dnipro",
+      "page_title": "Dnipro at DuckDuckGo",
+      "screenshot": "pair15_ukrainian_Dnipro.png"
+    },
+    {
+      "query": "Dniester",
+      "variant": "russian",
+      "pair_id": 16,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Dniester",
+      "page_title": "Dniester at DuckDuckGo",
+      "screenshot": "pair16_russian_Dniester.png"
+    },
+    {
+      "query": "Dnister",
+      "variant": "ukrainian",
+      "pair_id": 16,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Dniester",
+      "page_title": "Dnister at DuckDuckGo",
+      "screenshot": "pair16_ukrainian_Dnister.png"
+    },
+    {
+      "query": "Donbass",
+      "variant": "russian",
+      "pair_id": 17,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "Donbass at DuckDuckGo",
+      "screenshot": "pair17_russian_Donbass.png"
+    },
+    {
+      "query": "Donbas",
+      "variant": "ukrainian",
+      "pair_id": 17,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "Donbas at DuckDuckGo",
+      "screenshot": "pair17_ukrainian_Donbas.png"
+    },
+    {
+      "query": "Zakarpatye",
+      "variant": "russian",
+      "pair_id": 19,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "Zakarpatye at DuckDuckGo",
+      "screenshot": "pair19_russian_Zakarpatye.png"
+    },
+    {
+      "query": "Zakarpattia",
+      "variant": "ukrainian",
+      "pair_id": 19,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Zakarpattia Oblast",
+      "page_title": "Zakarpattia at DuckDuckGo",
+      "screenshot": "pair19_ukrainian_Zakarpattia.png"
+    },
+    {
+      "query": "Podolye",
+      "variant": "russian",
+      "pair_id": 20,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "Podolye at DuckDuckGo",
+      "screenshot": "pair20_russian_Podolye.png"
+    },
+    {
+      "query": "Podillia",
+      "variant": "ukrainian",
+      "pair_id": 20,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Podolia",
+      "page_title": "Podillia at DuckDuckGo",
+      "screenshot": "pair20_ukrainian_Podillia.png"
+    },
+    {
+      "query": "Chernigov",
+      "variant": "russian",
+      "pair_id": 38,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Chernihiv",
+      "page_title": "Chernigov at DuckDuckGo",
+      "screenshot": "pair38_russian_Chernigov.png"
+    },
+    {
+      "query": "Chernihiv",
+      "variant": "ukrainian",
+      "pair_id": 38,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Chernihiv",
+      "page_title": "Chernihiv at DuckDuckGo",
+      "screenshot": "pair38_ukrainian_Chernihiv.png"
+    },
+    {
+      "query": "Chernovtsy",
+      "variant": "russian",
+      "pair_id": 39,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Chernivtsi",
+      "page_title": "Chernovtsy at DuckDuckGo",
+      "screenshot": "pair39_russian_Chernovtsy.png"
+    },
+    {
+      "query": "Chernivtsi",
+      "variant": "ukrainian",
+      "pair_id": 39,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Chernivtsi",
+      "page_title": "Chernivtsi at DuckDuckGo",
+      "screenshot": "pair39_ukrainian_Chernivtsi.png"
+    },
+    {
+      "query": "Zhitomir",
+      "variant": "russian",
+      "pair_id": 40,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Zhytomyr",
+      "page_title": "Zhitomir at DuckDuckGo",
+      "screenshot": "pair40_russian_Zhitomir.png"
+    },
+    {
+      "query": "Zhytomyr",
+      "variant": "ukrainian",
+      "pair_id": 40,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Zhytomyr",
+      "page_title": "Zhytomyr at DuckDuckGo",
+      "screenshot": "pair40_ukrainian_Zhytomyr.png"
+    },
+    {
+      "query": "Cherkassy",
+      "variant": "russian",
+      "pair_id": 41,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Cherkasy",
+      "page_title": "Cherkassy at DuckDuckGo",
+      "screenshot": "pair41_russian_Cherkassy.png"
+    },
+    {
+      "query": "Cherkasy",
+      "variant": "ukrainian",
+      "pair_id": 41,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Cherkasy",
+      "page_title": "Cherkasy at DuckDuckGo",
+      "screenshot": "pair41_ukrainian_Cherkasy.png"
+    },
+    {
+      "query": "Uzhgorod",
+      "variant": "russian",
+      "pair_id": 42,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Uzhhorod",
+      "page_title": "Uzhgorod at DuckDuckGo",
+      "screenshot": "pair42_russian_Uzhgorod.png"
+    },
+    {
+      "query": "Uzhhorod",
+      "variant": "ukrainian",
+      "pair_id": 42,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Uzhhorod",
+      "page_title": "Uzhhorod at DuckDuckGo",
+      "screenshot": "pair42_ukrainian_Uzhhorod.png"
+    },
+    {
+      "query": "Kremenchug",
+      "variant": "russian",
+      "pair_id": 43,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Kremenchuk",
+      "page_title": "Kremenchug at DuckDuckGo",
+      "screenshot": "pair43_russian_Kremenchug.png"
+    },
+    {
+      "query": "Kremenchuk",
+      "variant": "ukrainian",
+      "pair_id": 43,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Kremenchuk",
+      "page_title": "Kremenchuk at DuckDuckGo",
+      "screenshot": "pair43_ukrainian_Kremenchuk.png"
+    },
+    {
+      "query": "Kirovograd",
+      "variant": "russian",
+      "pair_id": 44,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Kirovohrad Oblast",
+      "page_title": "Kirovograd at DuckDuckGo",
+      "screenshot": "pair44_russian_Kirovograd.png"
+    },
+    {
+      "query": "Kropyvnytskyi",
+      "variant": "ukrainian",
+      "pair_id": 44,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Kropyvnytskyi",
+      "page_title": "Kropyvnytskyi at DuckDuckGo",
+      "screenshot": "pair44_ukrainian_Kropyvnytskyi.png"
+    },
+    {
+      "query": "Ternopol",
+      "variant": "russian",
+      "pair_id": 45,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Ternopil",
+      "page_title": "Ternopol at DuckDuckGo",
+      "screenshot": "pair45_russian_Ternopol.png"
+    },
+    {
+      "query": "Ternopil",
+      "variant": "ukrainian",
+      "pair_id": 45,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Ternopil",
+      "page_title": "Ternopil at DuckDuckGo",
+      "screenshot": "pair45_ukrainian_Ternopil.png"
     },
     {
       "query": "Chicken Kiev",
@@ -123,7 +603,31 @@
       "screenshot": "pair21_ukrainian_Chicken_Kyiv.png"
     },
     {
-      "query": "borscht",
+      "query": "Kiev cake",
+      "variant": "russian",
+      "pair_id": 22,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Kiev cake",
+      "page_title": "Kiev cake at DuckDuckGo",
+      "screenshot": "pair22_russian_Kiev_cake.png"
+    },
+    {
+      "query": "Kyiv cake",
+      "variant": "ukrainian",
+      "pair_id": 22,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Kyiv cake",
+      "page_title": "Kyiv cake at DuckDuckGo",
+      "screenshot": "pair22_ukrainian_Kyiv_cake.png"
+    },
+    {
+      "query": "Borscht",
       "variant": "russian",
       "pair_id": 23,
       "autocorrected": false,
@@ -131,11 +635,11 @@
       "wikipedia_panel": null,
       "wikipedia_title": null,
       "wikipedia_snippet": "Borscht",
-      "page_title": "borscht at DuckDuckGo",
-      "screenshot": "pair23_russian_borscht.png"
+      "page_title": "Borscht at DuckDuckGo",
+      "screenshot": "pair23_russian_Borscht.png"
     },
     {
-      "query": "borshch",
+      "query": "Borshch",
       "variant": "ukrainian",
       "pair_id": 23,
       "autocorrected": false,
@@ -143,56 +647,128 @@
       "wikipedia_panel": null,
       "wikipedia_title": null,
       "wikipedia_snippet": "Borscht",
-      "page_title": "borshch at DuckDuckGo",
-      "screenshot": "pair23_ukrainian_borshch.png"
+      "page_title": "Borshch at DuckDuckGo",
+      "screenshot": "pair23_ukrainian_Borshch.png"
     },
     {
-      "query": "Kievan Rus",
+      "query": "Borsch",
       "variant": "russian",
-      "pair_id": 35,
+      "pair_id": 64,
       "autocorrected": false,
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Kievan Rus'",
-      "page_title": "Kievan Rus at DuckDuckGo",
-      "screenshot": "pair35_russian_Kievan_Rus.png"
+      "wikipedia_snippet": "Borscht",
+      "page_title": "Borsch at DuckDuckGo",
+      "screenshot": "pair64_russian_Borsch.png"
     },
     {
-      "query": "Kyivan Rus",
+      "query": "Borshch",
       "variant": "ukrainian",
-      "pair_id": 35,
+      "pair_id": 64,
       "autocorrected": false,
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Kievan Rus'",
-      "page_title": "Kyivan Rus at DuckDuckGo",
-      "screenshot": "pair35_ukrainian_Kyivan_Rus.png"
+      "wikipedia_snippet": "Borscht",
+      "page_title": "Borshch at DuckDuckGo",
+      "screenshot": "pair64_ukrainian_Borshch.png"
     },
     {
-      "query": "Cossack",
+      "query": "Vareniki",
       "variant": "russian",
-      "pair_id": 36,
+      "pair_id": 46,
       "autocorrected": false,
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Cossacks",
-      "page_title": "Cossack at DuckDuckGo",
-      "screenshot": "pair36_russian_Cossack.png"
+      "wikipedia_snippet": null,
+      "page_title": "Vareniki at DuckDuckGo",
+      "screenshot": "pair46_russian_Vareniki.png"
     },
     {
-      "query": "Kozak",
+      "query": "Varenyky",
       "variant": "ukrainian",
-      "pair_id": 36,
+      "pair_id": 46,
       "autocorrected": false,
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Kozak (armored personnel carrier)",
-      "page_title": "Kozak at DuckDuckGo",
-      "screenshot": "pair36_ukrainian_Kozak.png"
+      "wikipedia_snippet": "Varenyky",
+      "page_title": "Varenyky at DuckDuckGo",
+      "screenshot": "pair46_ukrainian_Varenyky.png"
+    },
+    {
+      "query": "Kiev Pechersk Lavra",
+      "variant": "russian",
+      "pair_id": 24,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Kiev Pechersk Lavra",
+      "page_title": "Kiev Pechersk Lavra at DuckDuckGo",
+      "screenshot": "pair24_russian_Kiev_Pechersk_Lavra.png"
+    },
+    {
+      "query": "Kyiv Pechersk Lavra",
+      "variant": "ukrainian",
+      "pair_id": 24,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Kyiv Pechersk Lavra",
+      "page_title": "Kyiv Pechersk Lavra at DuckDuckGo",
+      "screenshot": "pair24_ukrainian_Kyiv_Pechersk_Lavra.png"
+    },
+    {
+      "query": "Saint Sophia Cathedral Kiev",
+      "variant": "russian",
+      "pair_id": 25,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Saint Sophia Cathedral%2C Kyiv",
+      "page_title": "Saint Sophia Cathedral Kiev at DuckDuckGo",
+      "screenshot": "pair25_russian_Saint_Sophia_Cathedral_Kiev.png"
+    },
+    {
+      "query": "Saint Sophia Cathedral Kyiv",
+      "variant": "ukrainian",
+      "pair_id": 25,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": "Saint Sophia Cathedral%2C Kyiv",
+      "page_title": "Saint Sophia Cathedral Kyiv at DuckDuckGo",
+      "screenshot": "pair25_ukrainian_Saint_Sophia_Cathedral_Kyiv.png"
+    },
+    {
+      "query": "Chernobyl Exclusion Zone",
+      "variant": "russian",
+      "pair_id": 26,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "Chernobyl Exclusion Zone at DuckDuckGo",
+      "screenshot": "pair26_russian_Chernobyl_Exclusion_Zone.png"
+    },
+    {
+      "query": "Chornobyl Exclusion Zone",
+      "variant": "ukrainian",
+      "pair_id": 26,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "Chornobyl Exclusion Zone at DuckDuckGo",
+      "screenshot": "pair26_ukrainian_Chornobyl_Exclusion_Zone.png"
     },
     {
       "query": "Babi Yar",
@@ -202,8 +778,8 @@
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Babi Yar",
-      "page_title": "Babi Yar at DuckDuckGo",
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
       "screenshot": "pair54_russian_Babi_Yar.png"
     },
     {
@@ -214,57 +790,417 @@
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Babi Yar",
-      "page_title": "Babyn Yar at DuckDuckGo",
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
       "screenshot": "pair54_ukrainian_Babyn_Yar.png"
     },
     {
-      "query": "Alexander Usyk",
+      "query": "Potemkin Stairs Odessa",
       "variant": "russian",
-      "pair_id": 60,
+      "pair_id": 55,
       "autocorrected": false,
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Oleksandr Usyk",
-      "page_title": "Alexander Usyk at DuckDuckGo",
-      "screenshot": "pair60_russian_Alexander_Usyk.png"
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair55_russian_Potemkin_Stairs_Odessa.png"
     },
     {
-      "query": "Oleksandr Usyk",
+      "query": "Potemkin Stairs Odesa",
       "variant": "ukrainian",
-      "pair_id": 60,
+      "pair_id": 55,
       "autocorrected": false,
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Oleksandr Usyk",
-      "page_title": "Oleksandr Usyk at DuckDuckGo",
-      "screenshot": "pair60_ukrainian_Oleksandr_Usyk.png"
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair55_ukrainian_Potemkin_Stairs_Odesa.png"
     },
     {
-      "query": "Vladimir Zelensky",
+      "query": "Motherland Monument Kiev",
       "variant": "russian",
-      "pair_id": 61,
+      "pair_id": 56,
       "autocorrected": false,
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Volodymyr Zelenskyy",
-      "page_title": "Vladimir Zelensky at DuckDuckGo",
-      "screenshot": "pair61_russian_Vladimir_Zelensky.png"
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair56_russian_Motherland_Monument_Kiev.png"
     },
     {
-      "query": "Volodymyr Zelenskyy",
+      "query": "Motherland Monument Kyiv",
       "variant": "ukrainian",
-      "pair_id": 61,
+      "pair_id": 56,
       "autocorrected": false,
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Volodymyr Zelenskyy",
-      "page_title": "Volodymyr Zelenskyy at DuckDuckGo",
-      "screenshot": "pair61_ukrainian_Volodymyr_Zelenskyy.png"
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair56_ukrainian_Motherland_Monument_Kyiv.png"
+    },
+    {
+      "query": "the Ukraine",
+      "variant": "russian",
+      "pair_id": 27,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair27_russian_the_Ukraine.png"
+    },
+    {
+      "query": "Ukraine",
+      "variant": "ukrainian",
+      "pair_id": 27,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair27_ukrainian_Ukraine.png"
+    },
+    {
+      "query": "Kiev National University",
+      "variant": "russian",
+      "pair_id": 28,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair28_russian_Kiev_National_University.png"
+    },
+    {
+      "query": "Kyiv National University",
+      "variant": "ukrainian",
+      "pair_id": 28,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair28_ukrainian_Kyiv_National_University.png"
+    },
+    {
+      "query": "Kharkov University",
+      "variant": "russian",
+      "pair_id": 29,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair29_russian_Kharkov_University.png"
+    },
+    {
+      "query": "Kharkiv University",
+      "variant": "ukrainian",
+      "pair_id": 29,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair29_ukrainian_Kharkiv_University.png"
+    },
+    {
+      "query": "Kiev Polytechnic",
+      "variant": "russian",
+      "pair_id": 30,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair30_russian_Kiev_Polytechnic.png"
+    },
+    {
+      "query": "Kyiv Polytechnic",
+      "variant": "ukrainian",
+      "pair_id": 30,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair30_ukrainian_Kyiv_Polytechnic.png"
+    },
+    {
+      "query": "Kiev Patriarchate",
+      "variant": "russian",
+      "pair_id": 31,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair31_russian_Kiev_Patriarchate.png"
+    },
+    {
+      "query": "Kyiv Patriarchate",
+      "variant": "ukrainian",
+      "pair_id": 31,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair31_ukrainian_Kyiv_Patriarchate.png"
+    },
+    {
+      "query": "Lvov Polytechnic",
+      "variant": "russian",
+      "pair_id": 57,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair57_russian_Lvov_Polytechnic.png"
+    },
+    {
+      "query": "Lviv Polytechnic",
+      "variant": "ukrainian",
+      "pair_id": 57,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair57_ukrainian_Lviv_Polytechnic.png"
+    },
+    {
+      "query": "Odessa National University",
+      "variant": "russian",
+      "pair_id": 58,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair58_russian_Odessa_National_University.png"
+    },
+    {
+      "query": "Odesa National University",
+      "variant": "ukrainian",
+      "pair_id": 58,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair58_ukrainian_Odesa_National_University.png"
+    },
+    {
+      "query": "Dynamo Kiev",
+      "variant": "russian",
+      "pair_id": 32,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair32_russian_Dynamo_Kiev.png"
+    },
+    {
+      "query": "Dynamo Kyiv",
+      "variant": "ukrainian",
+      "pair_id": 32,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair32_ukrainian_Dynamo_Kyiv.png"
+    },
+    {
+      "query": "Kiev ballet",
+      "variant": "russian",
+      "pair_id": 34,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair34_russian_Kiev_ballet.png"
+    },
+    {
+      "query": "Kyiv ballet",
+      "variant": "ukrainian",
+      "pair_id": 34,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair34_ukrainian_Kyiv_ballet.png"
+    },
+    {
+      "query": "Zorya Lugansk",
+      "variant": "russian",
+      "pair_id": 51,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair51_russian_Zorya_Lugansk.png"
+    },
+    {
+      "query": "Zorya Luhansk",
+      "variant": "ukrainian",
+      "pair_id": 51,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair51_ukrainian_Zorya_Luhansk.png"
+    },
+    {
+      "query": "Metalist Kharkov",
+      "variant": "russian",
+      "pair_id": 52,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair52_russian_Metalist_Kharkov.png"
+    },
+    {
+      "query": "Metalist Kharkiv",
+      "variant": "ukrainian",
+      "pair_id": 52,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair52_ukrainian_Metalist_Kharkiv.png"
+    },
+    {
+      "query": "Karpaty Lvov",
+      "variant": "russian",
+      "pair_id": 53,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair53_russian_Karpaty_Lvov.png"
+    },
+    {
+      "query": "Karpaty Lviv",
+      "variant": "ukrainian",
+      "pair_id": 53,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair53_ukrainian_Karpaty_Lviv.png"
+    },
+    {
+      "query": "Kievan Rus",
+      "variant": "russian",
+      "pair_id": 35,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair35_russian_Kievan_Rus.png"
+    },
+    {
+      "query": "Kyivan Rus",
+      "variant": "ukrainian",
+      "pair_id": 35,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair35_ukrainian_Kyivan_Rus.png"
+    },
+    {
+      "query": "Kazak",
+      "variant": "russian",
+      "pair_id": 36,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair36_russian_Kazak.png"
+    },
+    {
+      "query": "Kozak",
+      "variant": "ukrainian",
+      "pair_id": 36,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair36_ukrainian_Kozak.png"
+    },
+    {
+      "query": "Gopak",
+      "variant": "russian",
+      "pair_id": 48,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair48_russian_Gopak.png"
+    },
+    {
+      "query": "Hopak",
+      "variant": "ukrainian",
+      "pair_id": 48,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair48_ukrainian_Hopak.png"
     },
     {
       "query": "Vladimir the Great",
@@ -274,8 +1210,8 @@
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Vladimir the Great",
-      "page_title": "Vladimir the Great at DuckDuckGo",
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
       "screenshot": "pair70_russian_Vladimir_the_Great.png"
     },
     {
@@ -286,8 +1222,8 @@
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Vladimir the Great",
-      "page_title": "Volodymyr the Great at DuckDuckGo",
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
       "screenshot": "pair70_ukrainian_Volodymyr_the_Great.png"
     },
     {
@@ -298,8 +1234,8 @@
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Grand Prince of Kiev",
-      "page_title": "Prince of Kiev at DuckDuckGo",
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
       "screenshot": "pair71_russian_Prince_of_Kiev.png"
     },
     {
@@ -310,33 +1246,81 @@
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Grand Prince of Kiev",
-      "page_title": "Prince of Kyiv at DuckDuckGo",
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
       "screenshot": "pair71_ukrainian_Prince_of_Kyiv.png"
     },
     {
-      "query": "Bakhmut",
+      "query": "Alexander Usyk",
+      "variant": "russian",
+      "pair_id": 60,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair60_russian_Alexander_Usyk.png"
+    },
+    {
+      "query": "Oleksandr Usyk",
+      "variant": "ukrainian",
+      "pair_id": 60,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair60_ukrainian_Oleksandr_Usyk.png"
+    },
+    {
+      "query": "Vladimir Zelensky",
+      "variant": "russian",
+      "pair_id": 61,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair61_russian_Vladimir_Zelensky.png"
+    },
+    {
+      "query": "Volodymyr Zelenskyy",
+      "variant": "ukrainian",
+      "pair_id": 61,
+      "autocorrected": false,
+      "autocorrect_suggestion": null,
+      "wikipedia_panel": null,
+      "wikipedia_title": null,
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair61_ukrainian_Volodymyr_Zelenskyy.png"
+    },
+    {
+      "query": "Artemovsk",
       "variant": "russian",
       "pair_id": 72,
       "autocorrected": false,
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Bakhmut",
-      "page_title": "Bakhmut at DuckDuckGo",
-      "screenshot": "pair72_russian_Bakhmut.png"
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair72_russian_Artemovsk.png"
     },
     {
-      "query": "Artemovsk",
+      "query": "Bakhmut",
       "variant": "ukrainian",
       "pair_id": 72,
       "autocorrected": false,
       "autocorrect_suggestion": null,
       "wikipedia_panel": null,
       "wikipedia_title": null,
-      "wikipedia_snippet": "Bakhmut",
-      "page_title": "Artemovsk at DuckDuckGo",
-      "screenshot": "pair72_ukrainian_Artemovsk.png"
+      "wikipedia_snippet": null,
+      "page_title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+      "screenshot": "pair72_ukrainian_Bakhmut.png"
     }
   ],
   "wikipedia_mapping": [
@@ -344,14 +1328,14 @@
       "pair_id": 1,
       "russian_query": "Kiev",
       "ukrainian_query": "Kyiv",
-      "russian_wiki": "Kyiv",
+      "russian_wiki": null,
       "ukrainian_wiki": "Kyiv"
     },
     {
       "pair_id": 2,
       "russian_query": "Kharkov",
       "ukrainian_query": "Kharkiv",
-      "russian_wiki": "Kharkiv",
+      "russian_wiki": null,
       "ukrainian_wiki": "Kharkiv"
     },
     {
@@ -362,11 +1346,151 @@
       "ukrainian_wiki": "Odesa"
     },
     {
+      "pair_id": 4,
+      "russian_query": "Lvov",
+      "ukrainian_query": "Lviv",
+      "russian_wiki": null,
+      "ukrainian_wiki": "Lviv"
+    },
+    {
+      "pair_id": 5,
+      "russian_query": "Zaporozhye",
+      "ukrainian_query": "Zaporizhzhia",
+      "russian_wiki": null,
+      "ukrainian_wiki": "Zaporizhzhia"
+    },
+    {
+      "pair_id": 6,
+      "russian_query": "Nikolaev",
+      "ukrainian_query": "Mykolaiv",
+      "russian_wiki": null,
+      "ukrainian_wiki": "Mykolaiv"
+    },
+    {
+      "pair_id": 7,
+      "russian_query": "Dnepropetrovsk",
+      "ukrainian_query": "Dnipro",
+      "russian_wiki": "Dnipro",
+      "ukrainian_wiki": "Dnipro"
+    },
+    {
+      "pair_id": 8,
+      "russian_query": "Vinnitsa",
+      "ukrainian_query": "Vinnytsia",
+      "russian_wiki": "Vinnytsia",
+      "ukrainian_wiki": "Vinnytsia"
+    },
+    {
+      "pair_id": 9,
+      "russian_query": "Rovno",
+      "ukrainian_query": "Rivne",
+      "russian_wiki": null,
+      "ukrainian_wiki": "Rivne"
+    },
+    {
       "pair_id": 10,
       "russian_query": "Chernobyl",
       "ukrainian_query": "Chornobyl",
-      "russian_wiki": "Chernobyl disaster",
-      "ukrainian_wiki": "Chernobyl disaster"
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 11,
+      "russian_query": "Lugansk",
+      "ukrainian_query": "Luhansk",
+      "russian_wiki": "Luhansk",
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 15,
+      "russian_query": "Dnieper",
+      "ukrainian_query": "Dnipro",
+      "russian_wiki": "Dnieper",
+      "ukrainian_wiki": "Dnipro"
+    },
+    {
+      "pair_id": 16,
+      "russian_query": "Dniester",
+      "ukrainian_query": "Dnister",
+      "russian_wiki": "Dniester",
+      "ukrainian_wiki": "Dniester"
+    },
+    {
+      "pair_id": 17,
+      "russian_query": "Donbass",
+      "ukrainian_query": "Donbas",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 19,
+      "russian_query": "Zakarpatye",
+      "ukrainian_query": "Zakarpattia",
+      "russian_wiki": null,
+      "ukrainian_wiki": "Zakarpattia Oblast"
+    },
+    {
+      "pair_id": 20,
+      "russian_query": "Podolye",
+      "ukrainian_query": "Podillia",
+      "russian_wiki": null,
+      "ukrainian_wiki": "Podolia"
+    },
+    {
+      "pair_id": 38,
+      "russian_query": "Chernigov",
+      "ukrainian_query": "Chernihiv",
+      "russian_wiki": "Chernihiv",
+      "ukrainian_wiki": "Chernihiv"
+    },
+    {
+      "pair_id": 39,
+      "russian_query": "Chernovtsy",
+      "ukrainian_query": "Chernivtsi",
+      "russian_wiki": "Chernivtsi",
+      "ukrainian_wiki": "Chernivtsi"
+    },
+    {
+      "pair_id": 40,
+      "russian_query": "Zhitomir",
+      "ukrainian_query": "Zhytomyr",
+      "russian_wiki": "Zhytomyr",
+      "ukrainian_wiki": "Zhytomyr"
+    },
+    {
+      "pair_id": 41,
+      "russian_query": "Cherkassy",
+      "ukrainian_query": "Cherkasy",
+      "russian_wiki": "Cherkasy",
+      "ukrainian_wiki": "Cherkasy"
+    },
+    {
+      "pair_id": 42,
+      "russian_query": "Uzhgorod",
+      "ukrainian_query": "Uzhhorod",
+      "russian_wiki": "Uzhhorod",
+      "ukrainian_wiki": "Uzhhorod"
+    },
+    {
+      "pair_id": 43,
+      "russian_query": "Kremenchug",
+      "ukrainian_query": "Kremenchuk",
+      "russian_wiki": "Kremenchuk",
+      "ukrainian_wiki": "Kremenchuk"
+    },
+    {
+      "pair_id": 44,
+      "russian_query": "Kirovograd",
+      "ukrainian_query": "Kropyvnytskyi",
+      "russian_wiki": "Kirovohrad Oblast",
+      "ukrainian_wiki": "Kropyvnytskyi"
+    },
+    {
+      "pair_id": 45,
+      "russian_query": "Ternopol",
+      "ukrainian_query": "Ternopil",
+      "russian_wiki": "Ternopil",
+      "ukrainian_wiki": "Ternopil"
     },
     {
       "pair_id": 21,
@@ -376,67 +1500,214 @@
       "ukrainian_wiki": "Chicken Kiev"
     },
     {
+      "pair_id": 22,
+      "russian_query": "Kiev cake",
+      "ukrainian_query": "Kyiv cake",
+      "russian_wiki": "Kiev cake",
+      "ukrainian_wiki": "Kyiv cake"
+    },
+    {
       "pair_id": 23,
-      "russian_query": "borscht",
-      "ukrainian_query": "borshch",
+      "russian_query": "Borscht",
+      "ukrainian_query": "Borshch",
       "russian_wiki": "Borscht",
       "ukrainian_wiki": "Borscht"
     },
     {
-      "pair_id": 35,
-      "russian_query": "Kievan Rus",
-      "ukrainian_query": "Kyivan Rus",
-      "russian_wiki": "Kievan Rus'",
-      "ukrainian_wiki": "Kievan Rus'"
+      "pair_id": 64,
+      "russian_query": "Borsch",
+      "ukrainian_query": "Borshch",
+      "russian_wiki": "Borscht",
+      "ukrainian_wiki": "Borscht"
     },
     {
-      "pair_id": 36,
-      "russian_query": "Cossack",
-      "ukrainian_query": "Kozak",
-      "russian_wiki": "Cossacks",
-      "ukrainian_wiki": "Kozak (armored personnel carrier)"
+      "pair_id": 46,
+      "russian_query": "Vareniki",
+      "ukrainian_query": "Varenyky",
+      "russian_wiki": null,
+      "ukrainian_wiki": "Varenyky"
+    },
+    {
+      "pair_id": 24,
+      "russian_query": "Kiev Pechersk Lavra",
+      "ukrainian_query": "Kyiv Pechersk Lavra",
+      "russian_wiki": "Kiev Pechersk Lavra",
+      "ukrainian_wiki": "Kyiv Pechersk Lavra"
+    },
+    {
+      "pair_id": 25,
+      "russian_query": "Saint Sophia Cathedral Kiev",
+      "ukrainian_query": "Saint Sophia Cathedral Kyiv",
+      "russian_wiki": "Saint Sophia Cathedral%2C Kyiv",
+      "ukrainian_wiki": "Saint Sophia Cathedral%2C Kyiv"
+    },
+    {
+      "pair_id": 26,
+      "russian_query": "Chernobyl Exclusion Zone",
+      "ukrainian_query": "Chornobyl Exclusion Zone",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
     },
     {
       "pair_id": 54,
       "russian_query": "Babi Yar",
       "ukrainian_query": "Babyn Yar",
-      "russian_wiki": "Babi Yar",
-      "ukrainian_wiki": "Babi Yar"
+      "russian_wiki": null,
+      "ukrainian_wiki": null
     },
     {
-      "pair_id": 60,
-      "russian_query": "Alexander Usyk",
-      "ukrainian_query": "Oleksandr Usyk",
-      "russian_wiki": "Oleksandr Usyk",
-      "ukrainian_wiki": "Oleksandr Usyk"
+      "pair_id": 55,
+      "russian_query": "Potemkin Stairs Odessa",
+      "ukrainian_query": "Potemkin Stairs Odesa",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
     },
     {
-      "pair_id": 61,
-      "russian_query": "Vladimir Zelensky",
-      "ukrainian_query": "Volodymyr Zelenskyy",
-      "russian_wiki": "Volodymyr Zelenskyy",
-      "ukrainian_wiki": "Volodymyr Zelenskyy"
+      "pair_id": 56,
+      "russian_query": "Motherland Monument Kiev",
+      "ukrainian_query": "Motherland Monument Kyiv",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 27,
+      "russian_query": "the Ukraine",
+      "ukrainian_query": "Ukraine",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 28,
+      "russian_query": "Kiev National University",
+      "ukrainian_query": "Kyiv National University",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 29,
+      "russian_query": "Kharkov University",
+      "ukrainian_query": "Kharkiv University",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 30,
+      "russian_query": "Kiev Polytechnic",
+      "ukrainian_query": "Kyiv Polytechnic",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 31,
+      "russian_query": "Kiev Patriarchate",
+      "ukrainian_query": "Kyiv Patriarchate",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 57,
+      "russian_query": "Lvov Polytechnic",
+      "ukrainian_query": "Lviv Polytechnic",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 58,
+      "russian_query": "Odessa National University",
+      "ukrainian_query": "Odesa National University",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 32,
+      "russian_query": "Dynamo Kiev",
+      "ukrainian_query": "Dynamo Kyiv",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 34,
+      "russian_query": "Kiev ballet",
+      "ukrainian_query": "Kyiv ballet",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 51,
+      "russian_query": "Zorya Lugansk",
+      "ukrainian_query": "Zorya Luhansk",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 52,
+      "russian_query": "Metalist Kharkov",
+      "ukrainian_query": "Metalist Kharkiv",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 53,
+      "russian_query": "Karpaty Lvov",
+      "ukrainian_query": "Karpaty Lviv",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 35,
+      "russian_query": "Kievan Rus",
+      "ukrainian_query": "Kyivan Rus",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 36,
+      "russian_query": "Kazak",
+      "ukrainian_query": "Kozak",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 48,
+      "russian_query": "Gopak",
+      "ukrainian_query": "Hopak",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
     },
     {
       "pair_id": 70,
       "russian_query": "Vladimir the Great",
       "ukrainian_query": "Volodymyr the Great",
-      "russian_wiki": "Vladimir the Great",
-      "ukrainian_wiki": "Vladimir the Great"
+      "russian_wiki": null,
+      "ukrainian_wiki": null
     },
     {
       "pair_id": 71,
       "russian_query": "Prince of Kiev",
       "ukrainian_query": "Prince of Kyiv",
-      "russian_wiki": "Grand Prince of Kiev",
-      "ukrainian_wiki": "Grand Prince of Kiev"
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 60,
+      "russian_query": "Alexander Usyk",
+      "ukrainian_query": "Oleksandr Usyk",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
+    },
+    {
+      "pair_id": 61,
+      "russian_query": "Vladimir Zelensky",
+      "ukrainian_query": "Volodymyr Zelenskyy",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
     },
     {
       "pair_id": 72,
-      "russian_query": "Bakhmut",
-      "ukrainian_query": "Artemovsk",
-      "russian_wiki": "Bakhmut",
-      "ukrainian_wiki": "Bakhmut"
+      "russian_query": "Artemovsk",
+      "ukrainian_query": "Bakhmut",
+      "russian_wiki": null,
+      "ukrainian_wiki": null
     }
   ]
 }

@@ -24,23 +24,16 @@ SCREENSHOT_DIR = Path(__file__).resolve().parent.parent.parent.parent / "data" /
 OUT_DIR = Path(__file__).resolve().parent.parent.parent.parent / "data" / "raw" / "search_audit"
 SITE_DATA = Path(__file__).resolve().parent.parent.parent.parent / "site" / "src" / "data"
 
-# Key pairs to test
-TEST_PAIRS = [
-    (1, "Kiev", "Kyiv"),
-    (2, "Kharkov", "Kharkiv"),
-    (3, "Odessa", "Odesa"),
-    (10, "Chernobyl", "Chornobyl"),
-    (21, "Chicken Kiev", "Chicken Kyiv"),
-    (23, "borscht", "borshch"),
-    (35, "Kievan Rus", "Kyivan Rus"),
-    (36, "Cossack", "Kozak"),
-    (54, "Babi Yar", "Babyn Yar"),
-    (60, "Alexander Usyk", "Oleksandr Usyk"),
-    (61, "Vladimir Zelensky", "Volodymyr Zelenskyy"),
-    (70, "Vladimir the Great", "Volodymyr the Great"),
-    (71, "Prince of Kiev", "Prince of Kyiv"),
-    (72, "Bakhmut", "Artemovsk"),
-]
+# Load all pairs from config
+def get_test_pairs():
+    cfg = load_pairs()
+    pairs = []
+    for p in cfg["pairs"]:
+        if p.get("enabled", True) and not p.get("is_control", False):
+            pairs.append((p["id"], p["russian"], p["ukrainian"]))
+    return pairs
+
+TEST_PAIRS = get_test_pairs()
 
 
 def search_ddg(page, query: str, pair_id: int, variant: str) -> dict:
@@ -119,7 +112,7 @@ def main():
     results = []
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, slow_mo=300)
+        browser = p.chromium.launch(headless=True, slow_mo=100)
         context = browser.new_context(
             viewport={"width": 1280, "height": 900},
             locale="en-US",
