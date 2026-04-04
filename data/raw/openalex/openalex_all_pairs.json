@@ -55,9 +55,9 @@
       },
       {
         "year": 2018,
-        "russian_count": 93,
+        "russian_count": 94,
         "ukrainian_count": 248,
-        "total": 341
+        "total": 342
       },
       {
         "year": 2019,
@@ -98,18 +98,18 @@
       {
         "year": 2025,
         "russian_count": 37,
-        "ukrainian_count": 711,
-        "total": 748
+        "ukrainian_count": 712,
+        "total": 749
       },
       {
         "year": 2026,
         "russian_count": 0,
-        "ukrainian_count": 73,
-        "total": 73
+        "ukrainian_count": 76,
+        "total": 76
       }
     ],
-    "total_russian": 1364,
-    "total_ukrainian": 4422
+    "total_russian": 1365,
+    "total_ukrainian": 4426
   },
   {
     "pair_id": 2,
@@ -216,12 +216,12 @@
       {
         "year": 2026,
         "russian_count": 0,
-        "ukrainian_count": 39,
-        "total": 39
+        "ukrainian_count": 40,
+        "total": 40
       }
     ],
     "total_russian": 359,
-    "total_ukrainian": 2100
+    "total_ukrainian": 2101
   },
   {
     "pair_id": 3,
@@ -327,13 +327,13 @@
       },
       {
         "year": 2026,
-        "russian_count": 17,
-        "ukrainian_count": 10,
-        "total": 27
+        "russian_count": 18,
+        "ukrainian_count": 11,
+        "total": 29
       }
     ],
-    "total_russian": 1521,
-    "total_ukrainian": 744
+    "total_russian": 1522,
+    "total_ukrainian": 745
   },
   {
     "pair_id": 4,
@@ -440,12 +440,12 @@
       {
         "year": 2026,
         "russian_count": 0,
-        "ukrainian_count": 30,
-        "total": 30
+        "ukrainian_count": 31,
+        "total": 31
       }
     ],
     "total_russian": 268,
-    "total_ukrainian": 3222
+    "total_ukrainian": 3223
   },
   {
     "pair_id": 5,
@@ -776,12 +776,12 @@
       {
         "year": 2026,
         "russian_count": 0,
-        "ukrainian_count": 27,
-        "total": 27
+        "ukrainian_count": 28,
+        "total": 28
       }
     ],
     "total_russian": 97,
-    "total_ukrainian": 958
+    "total_ukrainian": 959
   },
   {
     "pair_id": 8,
@@ -994,12 +994,12 @@
       {
         "year": 2026,
         "russian_count": 76,
-        "ukrainian_count": 4,
-        "total": 80
+        "ukrainian_count": 5,
+        "total": 81
       }
     ],
     "total_russian": 380,
-    "total_ukrainian": 364
+    "total_ukrainian": 365
   },
   {
     "pair_id": 10,
@@ -1099,18 +1099,18 @@
       },
       {
         "year": 2025,
-        "russian_count": 171,
+        "russian_count": 172,
         "ukrainian_count": 89,
-        "total": 260
+        "total": 261
       },
       {
         "year": 2026,
-        "russian_count": 45,
+        "russian_count": 47,
         "ukrainian_count": 13,
-        "total": 58
+        "total": 60
       }
     ],
-    "total_russian": 3449,
+    "total_russian": 3452,
     "total_ukrainian": 745
   },
   {
@@ -1330,12 +1330,12 @@
       {
         "year": 2026,
         "russian_count": 7,
-        "ukrainian_count": 27,
-        "total": 34
+        "ukrainian_count": 28,
+        "total": 35
       }
     ],
     "total_russian": 1002,
-    "total_ukrainian": 958
+    "total_ukrainian": 959
   },
   {
     "pair_id": 16,
@@ -1778,12 +1778,12 @@
       {
         "year": 2026,
         "russian_count": 0,
-        "ukrainian_count": 3,
-        "total": 3
+        "ukrainian_count": 6,
+        "total": 6
       }
     ],
     "total_russian": 4,
-    "total_ukrainian": 292
+    "total_ukrainian": 295
   },
   {
     "pair_id": 38,
@@ -2426,8 +2426,8 @@
       {
         "year": 2025,
         "russian_count": 1,
-        "ukrainian_count": 7,
-        "total": 8
+        "ukrainian_count": 8,
+        "total": 9
       },
       {
         "year": 2026,
@@ -2437,7 +2437,7 @@
       }
     ],
     "total_russian": 36,
-    "total_ukrainian": 69
+    "total_ukrainian": 70
   },
   {
     "pair_id": 44,
@@ -2650,12 +2650,12 @@
       {
         "year": 2026,
         "russian_count": 0,
-        "ukrainian_count": 5,
-        "total": 5
+        "ukrainian_count": 8,
+        "total": 8
       }
     ],
     "total_russian": 12,
-    "total_ukrainian": 485
+    "total_ukrainian": 488
   },
   {
     "pair_id": 21,
@@ -2865,12 +2865,12 @@
       },
       {
         "year": 2026,
-        "russian_count": 294,
+        "russian_count": 463,
         "ukrainian_count": 7,
-        "total": 301
+        "total": 470
       }
     ],
-    "total_russian": 1990,
+    "total_russian": 2159,
     "total_ukrainian": 16
   },
   {
@@ -3317,15 +3317,15 @@
       },
       {
         "year": 2017,
-        "russian_count": 6954,
-        "ukrainian_count": 6954,
-        "total": 13908
+        "russian_count": 6955,
+        "ukrainian_count": 6955,
+        "total": 13910
       },
       {
         "year": 2018,
-        "russian_count": 9600,
-        "ukrainian_count": 9600,
-        "total": 19200
+        "russian_count": 9601,
+        "ukrainian_count": 9601,
+        "total": 19202
       },
       {
         "year": 2019,
@@ -3359,25 +3359,25 @@
       },
       {
         "year": 2024,
-        "russian_count": 20282,
-        "ukrainian_count": 20282,
-        "total": 40564
+        "russian_count": 20283,
+        "ukrainian_count": 20283,
+        "total": 40566
       },
       {
         "year": 2025,
-        "russian_count": 21054,
-        "ukrainian_count": 21054,
-        "total": 42108
+        "russian_count": 21079,
+        "ukrainian_count": 21079,
+        "total": 42158
       },
       {
         "year": 2026,
-        "russian_count": 3745,
-        "ukrainian_count": 3745,
-        "total": 7490
+        "russian_count": 3823,
+        "ukrainian_count": 3823,
+        "total": 7646
       }
     ],
-    "total_russian": 171835,
-    "total_ukrainian": 171835
+    "total_russian": 171941,
+    "total_ukrainian": 171941
   },
   {
     "pair_id": 28,
@@ -4570,5 +4570,87 @@
     ],
     "total_russian": 8,
     "total_ukrainian": 25
+  },
+  {
+    "pair_id": 72,
+    "russian_term": "Artemovsk",
+    "ukrainian_term": "Bakhmut",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2012,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2013,
+        "russian_count": 0,
+        "ukrainian_count": 5,
+        "total": 5
+      },
+      {
+        "year": 2014,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2016,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2018,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2019,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2021,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 2,
+        "ukrainian_count": 8,
+        "total": 10
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "total": 9
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      }
+    ],
+    "total_russian": 6,
+    "total_ukrainian": 39
   }
 ]
