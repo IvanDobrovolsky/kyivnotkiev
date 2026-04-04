@@ -1653,92 +1653,90 @@ function formatNum(n: number) {
       if (!pair) return;
 
       const dc = (dictCombined as any)[String(activePairId)];
-      const wikiData = dc?.wikipedia;
-      const wikt = dc?.wiktionary;
-      const brit = dc?.britannica;
-      const camb = dc?.cambridge;
+      if (!dc) { container.innerHTML = '<div style="font-size:0.75rem; color:#9ca3af;">No reference data</div>'; return; }
 
-      // Reference table
-      let html = '<table style="width:100%; border-collapse:collapse; font-size:0.75rem;">';
-      html += '<thead><tr style="border-bottom:2px solid #e5e7eb; text-align:left;">';
-      html += `<th style="padding:0.4rem 0.5rem; color:var(--text-muted); font-weight:600;">Source</th>`;
-      html += `<th style="padding:0.4rem 0.5rem; color:#dc2626; font-weight:600;">${pair.russian}</th>`;
-      html += `<th style="padding:0.4rem 0.5rem; color:#0057B8; font-weight:600;">${pair.ukrainian}</th>`;
-      html += '</tr></thead><tbody>';
+      const sources = [
+        { key: 'wikipedia', name: 'Wikipedia', icon: '📖' },
+        { key: 'wiktionary', name: 'Wiktionary', icon: '📝' },
+        { key: 'britannica', name: 'Britannica', icon: '🔵' },
+        { key: 'cambridge', name: 'Cambridge', icon: '📕' },
+      ];
 
-      // Wikipedia
-      const ruWiki = wikiData?.russian_article;
-      const ukWiki = wikiData?.ukrainian_article;
-      html += '<tr style="border-bottom:1px solid #f0f0f0;">';
-      html += '<td style="padding:0.4rem 0.5rem; font-weight:500;">Wikipedia</td>';
-      html += wikiCell(ruWiki, pair.russian, pair.ukrainian);
-      html += wikiCell(ukWiki, pair.russian, pair.ukrainian);
-      html += '</tr>';
+      let html = '<div style="display:grid; grid-template-columns: auto 1fr 1fr; gap:0; font-size:0.75rem;">';
 
-      // Wiktionary
-      html += '<tr style="border-bottom:1px solid #f0f0f0;">';
-      html += '<td style="padding:0.4rem 0.5rem; font-weight:500;">Wiktionary</td>';
-      html += dictCell(wikt?.russian);
-      html += dictCell(wikt?.ukrainian);
-      html += '</tr>';
+      // Header
+      html += '<div style="padding:0.35rem 0.5rem; font-weight:600; color:var(--text-muted); border-bottom:2px solid #e5e7eb;"></div>';
+      html += `<div style="padding:0.35rem 0.5rem; font-weight:700; color:#9ca3af; border-bottom:2px solid #e5e7eb; text-decoration:line-through;">${pair.russian}</div>`;
+      html += `<div style="padding:0.35rem 0.5rem; font-weight:700; color:#0057B8; border-bottom:2px solid #e5e7eb;">${pair.ukrainian}</div>`;
 
-      // Britannica
-      html += '<tr style="border-bottom:1px solid #f0f0f0;">';
-      html += '<td style="padding:0.4rem 0.5rem; font-weight:500;">Britannica</td>';
-      html += britCell(brit?.russian);
-      html += britCell(brit?.ukrainian);
-      html += '</tr>';
+      for (const src of sources) {
+        const data = dc[src.key];
+        html += `<div style="padding:0.35rem 0.5rem; font-weight:500; border-bottom:1px solid #f3f4f6; display:flex; align-items:center; gap:0.3rem;"><span style="font-size:0.85rem;">${src.icon}</span>${src.name}</div>`;
 
-      // Cambridge
-      html += '<tr style="border-bottom:1px solid #f0f0f0;">';
-      html += '<td style="padding:0.4rem 0.5rem; font-weight:500;">Cambridge</td>';
-      html += cambCell(camb?.russian);
-      html += cambCell(camb?.ukrainian);
-      html += '</tr>';
+        if (src.key === 'wikipedia') {
+          html += refBadge(data?.russian_article, pair.russian, pair.ukrainian, 'wiki');
+          html += refBadge(data?.ukrainian_article, pair.russian, pair.ukrainian, 'wiki');
+        } else {
+          html += refBadge(data?.russian, pair.russian, pair.ukrainian, src.key);
+          html += refBadge(data?.ukrainian, pair.russian, pair.ukrainian, src.key);
+        }
+      }
 
       // Enforcement row
-      html += '<tr>';
-      html += '<td style="padding:0.4rem 0.5rem; font-weight:500;">Spellcheck</td>';
-      html += '<td style="padding:0.4rem 0.5rem;" colspan="2">';
-      html += '<span style="color:#059669">✓</span> Grammarly &nbsp; ';
-      html += '<span style="color:#059669">✓</span> AP/BBC &nbsp; ';
-      html += '<span style="color:#dc2626">✗</span> Hunspell &nbsp; ';
-      html += '<span style="color:#6b7280">—</span> Word/Apple';
-      html += '</td></tr>';
+      html += '<div style="padding:0.4rem 0.5rem; font-weight:500; display:flex; align-items:center; gap:0.3rem;"><span style="font-size:0.85rem;">🔧</span>Tools</div>';
+      html += '<div style="padding:0.4rem 0.5rem; grid-column: span 2; display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">';
+      html += badge('Grammarly', '#059669', '✓');
+      html += badge('AP/BBC', '#059669', '✓');
+      html += badge('Hunspell', '#dc2626', '✗');
+      html += badge('Word', '#9ca3af', '—');
+      html += '</div>';
 
-      html += '</tbody></table>';
+      html += '</div>';
       container.innerHTML = html;
     }
 
-    function wikiCell(article: string | null, ru: string, uk: string): string {
-      if (!article) return '<td style="padding:0.4rem 0.5rem; color:#d1d5db;">—</td>';
-      const ruClean = ru.toLowerCase().replace(/[\s']/g, '');
-      const ukClean = uk.toLowerCase().replace(/[\s']/g, '');
-      const artClean = article.toLowerCase().replace(/[\s']/g, '');
-      const isUkr = artClean.includes(ukClean);
-      const isRu = artClean.includes(ruClean);
-      const color = isUkr ? '#059669' : isRu ? '#dc2626' : '#6b7280';
-      const icon = isUkr ? '✓' : isRu ? '→' : '~';
-      return `<td style="padding:0.4rem 0.5rem;"><span style="color:${color}">${icon}</span> <span style="color:#1a0dab; font-size:0.7rem;">${article}</span></td>`;
+    function badge(label: string, color: string, icon: string): string {
+      return `<span style="display:inline-flex; align-items:center; gap:0.2rem; padding:0.15rem 0.4rem; border-radius:4px; background:${color}11; border:1px solid ${color}33; font-size:0.68rem; color:${color};"><strong>${icon}</strong> ${label}</span>`;
     }
 
-    function dictCell(data: any): string {
-      if (!data || !data.exists) return '<td style="padding:0.4rem 0.5rem; color:#d1d5db;">—</td>';
-      const etym = data.etymology ? `<div style="font-size:0.65rem; color:#9ca3af; margin-top:0.1rem;">${data.etymology.slice(0, 60)}...</div>` : '';
-      return `<td style="padding:0.4rem 0.5rem;"><span style="color:#059669">✓</span> ${data.title || 'entry'}${etym}</td>`;
-    }
+    function refBadge(data: any, ru: string, uk: string, type: string): string {
+      const cell = 'padding:0.35rem 0.5rem; border-bottom:1px solid #f3f4f6;';
 
-    function britCell(data: any): string {
-      if (!data || !data.exists) return '<td style="padding:0.4rem 0.5rem; color:#d1d5db;">—</td>';
-      return `<td style="padding:0.4rem 0.5rem;"><span style="color:#059669">✓</span> ${data.top_result || 'found'}</td>`;
-    }
+      if (type === 'wiki') {
+        // data is the article name string
+        if (!data) return `<div style="${cell}"><span style="color:#d1d5db; font-size:0.7rem;">—</span></div>`;
+        const artClean = data.toLowerCase().replace(/[\s']/g, '');
+        const ukClean = uk.toLowerCase().replace(/[\s']/g, '');
+        const ruClean = ru.toLowerCase().replace(/[\s']/g, '');
+        const isUkr = artClean.includes(ukClean);
+        const isRu = !isUkr && artClean.includes(ruClean);
+        const color = isUkr ? '#059669' : isRu ? '#dc2626' : '#6b7280';
+        const bg = isUkr ? '#05966911' : isRu ? '#dc262611' : '#6b728011';
+        return `<div style="${cell}"><span style="padding:0.1rem 0.35rem; border-radius:3px; background:${bg}; color:${color}; font-size:0.7rem; font-weight:500;">${data}</span></div>`;
+      }
 
-    function cambCell(data: any): string {
-      if (!data || !data.exists) return '<td style="padding:0.4rem 0.5rem; color:#d1d5db;">—</td>';
-      const hw = data.headword || '';
-      const redir = data.redirected ? ' <span style="color:#d97706; font-size:0.65rem;">redirect</span>' : '';
-      const defn = data.definition ? `<div style="font-size:0.65rem; color:#9ca3af; margin-top:0.1rem;">${data.definition.slice(0, 50)}...</div>` : '';
-      return `<td style="padding:0.4rem 0.5rem;"><span style="color:#059669">✓</span> ${hw}${redir}${defn}</td>`;
+      // Dictionary data object
+      if (!data || !data.exists) return `<div style="${cell}"><span style="color:#d1d5db; font-size:0.7rem;">not found</span></div>`;
+
+      let label = '';
+      let sub = '';
+      if (type === 'wiktionary') {
+        label = data.title || '✓';
+        if (data.etymology) sub = data.etymology.slice(0, 55) + '...';
+      } else if (type === 'britannica') {
+        label = data.top_result || '✓';
+        if (label === 'article found') label = '✓ found';
+      } else if (type === 'cambridge') {
+        label = data.headword || '✓';
+        if (data.definition) sub = data.definition.slice(0, 50) + '...';
+        if (data.redirected) label += ' ↗';
+      }
+
+      let html = `<div style="${cell}">`;
+      html += `<span style="padding:0.1rem 0.35rem; border-radius:3px; background:#05966911; color:#059669; font-size:0.7rem; font-weight:500;">${label}</span>`;
+      if (sub) html += `<div style="font-size:0.6rem; color:#9ca3af; margin-top:0.15rem; line-height:1.3;">${sub}</div>`;
+      html += '</div>';
+      return html;
     }
 
     function drawErrorAnalysis() {
