@@ -72,9 +72,8 @@ function formatNum(n: number) {
     <nav class="topbar">
       <a href="/" class="topbar-logo" style="text-decoration:none;">
         <img src="/logo.svg" alt="Kyiv chestnut" style="height:28px; width:auto; margin-right:0.4rem;">
-        <span class="k">KYIV</span><span class="n">NOT</span><span class="k struck">KIEV</span>
+        <span style="font-size:0.85rem; font-weight:700; color:var(--text);">#</span><span class="k">KYIV</span><span class="n">NOT</span><span class="k struck">KIEV</span>
       </a>
-      <span style="font-size:0.7rem; color:var(--text-dim); font-weight:500; margin-left:-0.5rem;">#KyivNotKiev</span>
       <div class="topbar-links">
         <a href="/uk/">UA</a>
         <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
@@ -113,11 +112,11 @@ function formatNum(n: number) {
         <div style="display:flex; align-items:center; gap:1.5rem; padding:2rem 0.5rem 1.5rem; margin-bottom:1rem;">
           <img src="/logo.svg" alt="Kyiv chestnut" style="height:100px; width:auto; flex-shrink:0;">
           <div>
-            <h1 style="font-size:1.6rem; font-weight:700; margin:0; line-height:1.3; color:var(--text);">
-              Measuring Real-Time Toponymic Change
+            <h1 style="font-size:1.8rem; font-weight:800; margin:0; line-height:1.2; color:#0057B8;">
+              #KyivNotKiev
             </h1>
-            <p style="color:var(--text-muted); font-size:0.9rem; margin:0.4rem 0 0; line-height:1.5;">
-              A multi-source computational framework tracking Ukrainian spelling adoption across {fmtBig(m.total_records)} records from {m.num_sources} sources, {m.num_countries} countries, 2010–2026.
+            <p style="color:var(--text); font-size:0.95rem; margin:0.4rem 0 0; line-height:1.5;">
+              Did the world listen? Tracking Ukrainian spelling adoption across {fmtBig(m.total_records)} records from {m.num_sources} sources, {m.num_countries} countries, 2010–2026.
             </p>
           </div>
         </div>
@@ -160,16 +159,18 @@ function formatNum(n: number) {
       <div id="pair-view" style="display:none;">
 
       <div class="chart-container">
-        <div class="chart-header" style="flex-direction:column; align-items:stretch; gap:0.35rem;">
-          <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <div class="chart-header" style="flex-direction:column; align-items:stretch; gap:0.3rem;">
+          <div style="display:flex; align-items:baseline; gap:0.5rem; flex-wrap:wrap;">
             <div class="chart-title" style="margin:0; white-space:nowrap;">
               <span class="old-name" id="chart-old">Kiev</span>
               <span class="arrow">→</span>
               <span class="new-name" id="chart-new">Kyiv</span>
             </div>
-            <span id="chart-range" style="font-size:0.72rem; color:var(--text-muted); font-weight:400;"></span>
+            <span id="chart-range" style="font-size:0.72rem; color:var(--text-muted);"></span>
             <span id="chart-info" style="font-size:0.68rem; color:var(--text-dim); font-style:italic;"></span>
-            <div style="flex:1;"></div>
+            <span id="chart-adoption-formula" style="font-size:0.68rem; color:var(--text-dim);"></span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.4rem;">
             <div class="chart-controls" style="margin:0;">
               <button class="source-toggle active" data-source="gdelt" style="--source-color: #1e3a5f"><span class="source-dot"></span>GDELT</button>
               <button class="source-toggle" data-source="trends" style="--source-color: #4285F4"><span class="source-dot"></span>Trends</button>
@@ -179,16 +180,16 @@ function formatNum(n: number) {
               <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed"><span class="source-dot"></span>Ngrams</button>
               <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4"><span class="source-dot"></span>Academic</button>
             </div>
-          </div>
-          <div class="chart-controls" style="margin:0;">
-            <button class="chart-mode active" data-chart="volume" id="volume-btn">Volume</button>
-            <button class="chart-mode" data-chart="adoption">Adoption %</button>
-            <span class="toggle-sep"></span>
-            <button class="line-mode active" data-mode="both">All</button>
-            <button class="line-mode" data-mode="ukrainian">UA</button>
-            <button class="line-mode" data-mode="russian">RU</button>
-            <span class="toggle-sep"></span>
-            <button class="event-toggle active" id="events-toggle">Events</button>
+            <div class="chart-controls" style="margin:0;">
+              <button class="chart-mode active" data-chart="volume" id="volume-btn">Volume</button>
+              <button class="chart-mode" data-chart="adoption">Adoption %</button>
+              <span class="toggle-sep"></span>
+              <button class="line-mode active" data-mode="both">All</button>
+              <button class="line-mode" data-mode="ukrainian">UA</button>
+              <button class="line-mode" data-mode="russian">RU</button>
+              <span class="toggle-sep"></span>
+              <button class="event-toggle active" id="events-toggle">Events</button>
+            </div>
           </div>
         </div>
         <div id="chart"></div>
@@ -227,10 +228,10 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Per-pair: Media Origin (International / Ukraine / Russia) -->
+      <!-- Per-pair: GDELT Spelling Split -->
       <div class="chart-container" id="media-origin-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1rem;">Media Origin</div>
-        <div class="chart-subtitle">Adoption by media origin — GDELT news domains</div>
+        <div class="chart-title" style="color: var(--text); font-size: 1rem;">GDELT Spelling Split</div>
+        <div class="chart-subtitle">Ukrainian vs Russian spelling in global news articles (last 24 months)</div>
         <div id="media-origin-chart" style="display:flex; gap:1rem; justify-content:center; margin-top:0.75rem;"></div>
       </div>
 
@@ -543,6 +544,20 @@ function formatNum(n: number) {
       if (rangeEl) rangeEl.textContent = `${startYear}–${endYear}`;
       if (infoEl) infoEl.textContent = sourceInfo[activeSource] || '';
 
+      // Show adoption formula
+      const formulaEl = document.getElementById('chart-adoption-formula');
+      if (formulaEl && seriesData.length > 0) {
+        const last = seriesData[seriesData.length - 1];
+        const ukr = last.ukr || 0;
+        const rus = last.rus || 0;
+        const total = ukr + rus;
+        if (total > 0 && chartMode === 'adoption') {
+          formulaEl.textContent = `· ${ukr.toLocaleString()} UA / (${ukr.toLocaleString()} + ${rus.toLocaleString()}) = ${last.adoption}%`;
+        } else {
+          formulaEl.textContent = '';
+        }
+      }
+
       // Y-axis depends on chart mode
       let y: d3.ScaleLinear<number, number>;
       if (chartMode === 'volume') {
@@ -576,7 +591,14 @@ function formatNum(n: number) {
         .attr('x', -8).attr('y', (d: number) => y(d) + 4)
         .attr('text-anchor', 'end')
         .attr('fill', '#9ca3af').attr('font-size', '11px')
-        .text((d: number) => chartMode === 'volume' ? (d >= 1000 ? (d/1000).toFixed(0) + 'K' : String(d)) : d + '%');
+        .text((d: number) => {
+          if (chartMode === 'volume') {
+            if (d >= 1e6) return (d/1e6).toFixed(1) + 'M';
+            if (d >= 1e3) return (d/1e3).toFixed(0) + 'K';
+            return d === 0 ? '0' : String(Math.round(d));
+          }
+          return d + '%';
+        });
 
       // X-axis — decades for Ngrams, years for others
       const xTicks = activeSource === 'ngrams'
@@ -1006,8 +1028,8 @@ function formatNum(n: number) {
       // Merge GDELT + Trends data
       const langs = ['us', 'gb', 'fr', 'de', 'es', 'it', 'pl'];
       const langNames: Record<string, string> = {
-        us: 'US', gb: 'UK', fr: 'France', de: 'Germany',
-        es: 'Spain', it: 'Italy', pl: 'Poland',
+        us: 'English (.com)', gb: 'English (.co.uk)', fr: 'French (.fr)', de: 'German (.de)',
+        es: 'Spanish (.es)', it: 'Italian (.it)', pl: 'Polish (.pl)',
       };
 
       const items = langs.map(geo => ({
@@ -1087,6 +1109,13 @@ function formatNum(n: number) {
         activeSources = new Set([src]);
 
         drawChart();
+
+        // Show/hide GDELT-specific sections
+        const gdeltSections = ['media-origin-container', 'holdout-container'];
+        gdeltSections.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = src === 'gdelt' ? 'block' : 'none';
+        });
 
         // Show map for GDELT and Trends (both have country data)
         const mapEl = document.getElementById('map-container');
