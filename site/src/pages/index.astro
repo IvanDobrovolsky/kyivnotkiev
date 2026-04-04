@@ -244,18 +244,18 @@ function formatNum(n: number) {
       <div id="media-origin-container" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
         <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
           <div style="font-size:0.78rem; font-weight:600; color:var(--text); margin-bottom:0.2rem;">Overall Spelling</div>
-          <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">All GDELT articles (24mo)</div>
+          <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Ukrainian vs Russian (24mo)</div>
           <div id="spelling-pie" style="display:flex; align-items:center; justify-content:center;"></div>
         </div>
         <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-          <div style="font-size:0.78rem; font-weight:600; color:var(--text); margin-bottom:0.2rem;">By Media Origin</div>
-          <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Adoption within each domain group</div>
-          <div id="origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
+          <div style="font-size:0.78rem; font-weight:600; color:#0057B8; margin-bottom:0.2rem;">Ukrainian Spelling Sources</div>
+          <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Where do UA-form articles come from?</div>
+          <div id="ua-origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
         </div>
         <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-          <div style="font-size:0.78rem; font-weight:600; color:var(--text); margin-bottom:0.2rem;">Volume by Origin</div>
-          <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Article count: .ru vs .ua vs intl</div>
-          <div id="volume-pie" style="display:flex; align-items:center; justify-content:center;"></div>
+          <div style="font-size:0.78rem; font-weight:600; color:#dc2626; margin-bottom:0.2rem;">Russian Spelling Sources</div>
+          <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Where do RU-form articles come from?</div>
+          <div id="ru-origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
         </div>
       </div>
 
@@ -1026,12 +1026,12 @@ function formatNum(n: number) {
     function drawMediaOrigin() {
       const wrapper = document.getElementById('media-origin-container');
       const spellingEl = document.getElementById('spelling-pie');
-      const originEl = document.getElementById('origin-pie');
-      const volumeEl = document.getElementById('volume-pie');
-      if (!wrapper || !spellingEl || !originEl || !volumeEl) return;
+      const uaOriginEl = document.getElementById('ua-origin-pie');
+      const ruOriginEl = document.getElementById('ru-origin-pie');
+      if (!wrapper || !spellingEl || !uaOriginEl || !ruOriginEl) return;
       spellingEl.innerHTML = '';
-      originEl.innerHTML = '';
-      volumeEl.innerHTML = '';
+      uaOriginEl.innerHTML = '';
+      ruOriginEl.innerHTML = '';
 
       const pairData = (timeseriesData as any)[String(activePairId)];
       if (!pairData?.gdelt || pairData.gdelt.length === 0) {
@@ -1049,45 +1049,29 @@ function formatNum(n: number) {
         {label: 'Russian', value: rus, color: '#dc2626'},
       ]);
 
-      // 2 + 3: Domain origin data
+      // Domain origin data
       const origins = (domainOrigins as any)[String(activePairId)];
       if (origins) {
         const intl = origins.intl || {ukr:0, rus:0, total:0};
         const ua = origins.ua || {ukr:0, rus:0, total:0};
         const ru = origins.ru || {ukr:0, rus:0, total:0};
 
-        // 2. Adoption % within each domain group (horizontal bars)
-        const groups = [
-          {label: 'International', adoption: intl.total > 0 ? intl.ukr / intl.total * 100 : 0, total: intl.total, color: '#059669'},
-          {label: '.ua media', adoption: ua.total > 0 ? ua.ukr / ua.total * 100 : 0, total: ua.total, color: '#0057B8'},
-          {label: '.ru media', adoption: ru.total > 0 ? ru.ukr / ru.total * 100 : 0, total: ru.total, color: '#dc2626'},
-        ];
+        // 2. Ukrainian spelling sources — where do UA-form articles come from?
+        drawPie(uaOriginEl, [
+          {label: 'International', value: intl.ukr, color: '#059669'},
+          {label: '.ua domains', value: ua.ukr, color: '#0057B8'},
+          {label: '.ru domains', value: ru.ukr, color: '#dc2626'},
+        ]);
 
-        let bars = '<div style="display:flex; flex-direction:column; gap:0.4rem; width:100%;">';
-        for (const g of groups) {
-          const pct = g.adoption.toFixed(1);
-          const fmtT = g.total >= 1e6 ? (g.total/1e6).toFixed(1)+'M' : g.total >= 1e3 ? (g.total/1e3).toFixed(1)+'K' : String(g.total);
-          bars += `<div>`;
-          bars += `<div style="display:flex; justify-content:space-between; font-size:0.68rem; margin-bottom:0.15rem;">`;
-          bars += `<span style="color:${g.color}; font-weight:500;">${g.label}</span>`;
-          bars += `<span style="color:var(--text-muted);">${pct}% UA · ${fmtT}</span>`;
-          bars += `</div>`;
-          bars += `<div style="height:12px; background:#f0f0f0; border-radius:6px; overflow:hidden;">`;
-          bars += `<div style="height:100%; width:${Math.min(100, g.adoption)}%; background:${g.color}; border-radius:6px; opacity:0.8;"></div>`;
-          bars += `</div></div>`;
-        }
-        bars += '</div>';
-        originEl.innerHTML = bars;
-
-        // 3. Volume by origin pie
-        drawPie(volumeEl, [
-          {label: 'International', value: intl.total, color: '#059669'},
-          {label: '.ua media', value: ua.total, color: '#0057B8'},
-          {label: '.ru media', value: ru.total, color: '#dc2626'},
+        // 3. Russian spelling sources — where do RU-form articles come from?
+        drawPie(ruOriginEl, [
+          {label: 'International', value: intl.rus, color: '#059669'},
+          {label: '.ua domains', value: ua.rus, color: '#0057B8'},
+          {label: '.ru domains', value: ru.rus, color: '#dc2626'},
         ]);
       } else {
-        originEl.innerHTML = '<div style="color:#9ca3af; font-size:0.75rem;">No domain data</div>';
-        volumeEl.innerHTML = '';
+        uaOriginEl.innerHTML = '<div style="color:#9ca3af; font-size:0.75rem;">No data</div>';
+        ruOriginEl.innerHTML = '';
       }
     }
 
