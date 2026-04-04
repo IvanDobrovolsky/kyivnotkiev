@@ -19,6 +19,7 @@ import re
 from pathlib import Path
 
 from playwright.async_api import async_playwright
+from playwright_stealth import Stealth
 
 from pipeline.config import load_pairs
 
@@ -48,6 +49,14 @@ async def search_google(page, query: str, pair_id: int, variant: str) -> dict:
         url = f"https://www.google.com/search?q={query.replace(' ', '+')}&hl=en"
         await page.goto(url, wait_until="domcontentloaded", timeout=15000)
         await page.wait_for_timeout(2000)
+
+        # Detect captcha — pause for manual solve
+        content_check = await page.content()
+        if "captcha" in content_check.lower() or "unusual traffic" in content_check.lower() or "recaptcha" in content_check.lower():
+            log.warning(f"    ⚠️  CAPTCHA detected! Solve it manually in the browser...")
+            await page.wait_for_url("**/search?**", timeout=120000)  # wait up to 2 min
+            await page.wait_for_timeout(2000)
+            log.info(f"    ✓ Captcha solved, continuing")
 
         # Check for "Showing results for" or "Did you mean"
         content = await page.content()
@@ -119,13 +128,18 @@ async def run_audit():
     results = []
 
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(headless=True)
+        browser = await pw.chromium.launch(
+            headless=False, slow_mo=500,
+            args=["--disable-blink-features=AutomationControlled"]
+        )
         context = await browser.new_context(
             viewport={"width": 1280, "height": 900},
             locale="en-US",
-            user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+            user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
         )
+        stealth = Stealth()
         page = await context.new_page()
+        await stealth.apply_stealth_async(page)
 
         for pair in test_pairs:
             log.info(f"  Pair {pair['id']}: {pair['russian']} / {pair['ukrainian']}")
@@ -133,12 +147,12 @@ async def run_audit():
             # Search Russian form
             ru_result = await search_google(page, pair["russian"], pair["id"], "russian")
             results.append(ru_result)
-            await page.wait_for_timeout(3000)
+            await page.wait_for_timeout(5000)
 
             # Search Ukrainian form
             uk_result = await search_google(page, pair["ukrainian"], pair["id"], "ukrainian")
             results.append(uk_result)
-            await page.wait_for_timeout(3000)
+            await page.wait_for_timeout(5000)
 
         await browser.close()
 
