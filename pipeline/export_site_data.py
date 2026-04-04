@@ -299,7 +299,7 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         result.setdefault(pid, {}).setdefault("ngrams", [])
         total = r["ukr"] + r["rus"]
         if total > 0:
-            result[pid]["ngrams"].append({"date": f"{r['year']}-01", "adoption": round(r["ukr"] / total * 100, 1)})
+            result[pid]["ngrams"].append({"date": f"{r['year']}-01", "adoption": round(r["ukr"] / total * 100, 1), "ukr": int(r["ukr"] * 1e9), "rus": int(r["rus"] * 1e9)})
 
     # Academic Papers (OpenAlex — replaces Common Crawl)
     log.info("  Academic Papers (OpenAlex local data)...")
@@ -316,7 +316,7 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
             for yr in pair_data["yearly"]:
                 total = yr["total"]
                 adoption = round(yr["ukrainian_count"] / total * 100, 1) if total > 0 else None
-                raw_series.append({"date": f"{yr['year']}-01", "adoption": adoption})
+                raw_series.append({"date": f"{yr['year']}-01", "adoption": adoption, "ukr": yr["ukrainian_count"], "rus": yr["russian_count"]})
             # Smooth with 3-year window (annual data can be noisy for small pairs)
             result.setdefault(spid, {})
             result[spid]["openalex"] = smooth_series(raw_series, window=3)
