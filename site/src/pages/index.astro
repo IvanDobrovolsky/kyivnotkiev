@@ -267,11 +267,9 @@ function formatNum(n: number) {
         Source availability varies: Trends (2010–2026), GDELT (2015–2026), Wikipedia (2015–2026), Reddit (2007–2026), Ngrams (books, 2000–2019)
       </div>
 
-      <!-- Per-pair dictionary info -->
+      <!-- Search & Reference Preview -->
       <div class="chart-container" id="dict-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1rem;">Dictionary & Enforcement</div>
-        <div class="chart-subtitle">How dictionaries, spellchecks, and style guides handle this pair</div>
-        <div id="dict-info" style="margin-top: 0.5rem;"></div>
+        <div id="search-preview" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;"></div>
       </div>
 
       </div><!-- end pair-view -->
@@ -914,7 +912,7 @@ function formatNum(n: number) {
       drawCrossLingual();
       drawWorldMap();
       drawHoldoutTable();
-      drawDictInfo();
+      drawSearchPreview();
     }
 
     function drawAdoptionCalc() {
@@ -1646,63 +1644,110 @@ function formatNum(n: number) {
     });
 
     // ── Error Analysis chart ─────────────────────────────────
-    function drawDictInfo() {
-      const container = document.getElementById('dict-info');
+    function drawSearchPreview() {
+      const container = document.getElementById('search-preview');
       if (!container) return;
       container.innerHTML = '';
 
-      const dd = (dictData as any).pairs?.find((p: any) => p.pair_id === activePairId);
-      const ef = enforcementData as any;
+      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      if (!pair) return;
+
       const sa = (window as any).__searchAudit;
       const wikiMap = sa?.wikipedia_mapping?.find((m: any) => m.pair_id === activePairId);
+      const dd = (dictData as any).pairs?.find((p: any) => p.pair_id === activePairId);
 
-      let html = '<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem;">';
+      // LEFT: Search Preview (looks like a search result)
+      let left = '<div>';
+      left += '<div style="font-size:0.85rem; font-weight:600; color:var(--text); margin-bottom:0.75rem;">Search Preview</div>';
 
-      // Wikipedia article framing
-      html += '<div style="padding:0.75rem; background:#f8f9fb; border-radius:6px;">';
-      html += '<div style="font-size:0.8rem; font-weight:600; margin-bottom:0.3rem;">Wikipedia Article</div>';
-      if (wikiMap) {
-        const ruWiki = wikiMap.russian_wiki || '—';
-        const ukWiki = wikiMap.ukrainian_wiki || '—';
-        if (ruWiki !== '—') {
-          const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
-          const ruForm = pair?.russian?.toLowerCase().replace(/\s/g, '') || '';
-          const isRussianFramed = ruWiki.toLowerCase().replace(/[\s']/g, '').includes(ruForm);
-          const color = isRussianFramed ? '#dc2626' : '#059669';
-          const label = isRussianFramed ? 'Russian-form title' : 'Ukrainian-form title';
-          html += `<div style="font-size:0.75rem;"><strong style="color:${color}">"${ruWiki}"</strong></div>`;
-          html += `<div style="font-size:0.65rem; color:${color}; margin-top:0.2rem;">${label}</div>`;
-        } else {
-          html += '<div style="font-size:0.75rem; color:#9ca3af;">No Wikipedia article found</div>';
-        }
-      } else {
-        html += '<div style="font-size:0.75rem; color:#9ca3af;">No search data</div>';
-      }
-      html += '</div>';
+      // Russian form search
+      const ruWiki = wikiMap?.russian_wiki || null;
+      const ukWiki = wikiMap?.ukrainian_wiki || null;
 
-      // Dictionary status
-      html += '<div style="padding:0.75rem; background:#f8f9fb; border-radius:6px;">';
-      html += '<div style="font-size:0.8rem; font-weight:600; margin-bottom:0.3rem;">Dictionaries</div>';
-      if (dd) {
+      left += buildSearchCard(pair.russian, ruWiki, pair, 'russian');
+      left += '<div style="height:0.5rem;"></div>';
+      left += buildSearchCard(pair.ukrainian, ukWiki, pair, 'ukrainian');
+
+      left += '</div>';
+
+      // RIGHT: Dictionary & Enforcement
+      let right = '<div>';
+      right += '<div style="font-size:0.85rem; font-weight:600; color:var(--text); margin-bottom:0.75rem;">Reference & Tools</div>';
+
+      // Dictionary
+      right += '<div style="padding:0.6rem 0.75rem; background:#f8f9fb; border-radius:6px; margin-bottom:0.5rem;">';
+      right += '<div style="font-size:0.75rem; font-weight:600; color:var(--text);">📖 Dictionaries</div>';
+      if (dd && dd.spelling_preference !== 'neither') {
         const pref = dd.spelling_preference;
-        const prefColor = pref === 'ukrainian' ? '#059669' : pref === 'russian' ? '#dc2626' : '#6b7280';
-        html += `<div style="font-size:0.75rem; color:${prefColor}; font-weight:600;">${pref === 'both' ? 'Both forms listed' : pref === 'neither' ? 'Not in dictionaries' : pref.charAt(0).toUpperCase() + pref.slice(1) + ' form only'}</div>`;
-        html += `<div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">${dd.dict_count} entries (Wiktionary + FreeDictionary)</div>`;
+        const icon = pref === 'ukrainian' ? '✓' : pref === 'russian' ? '✗' : '◐';
+        const color = pref === 'ukrainian' ? '#059669' : pref === 'russian' ? '#dc2626' : '#6b7280';
+        const label = pref === 'both' ? 'Both forms listed' : pref.charAt(0).toUpperCase() + pref.slice(1) + ' form only';
+        right += `<div style="font-size:0.72rem; color:${color}; margin-top:0.2rem;">${icon} ${label}</div>`;
       } else {
-        html += '<div style="font-size:0.75rem; color:#9ca3af;">Not checked</div>';
+        right += '<div style="font-size:0.72rem; color:#9ca3af; margin-top:0.2rem;">Not in major dictionaries</div>';
       }
-      html += '</div>';
+      right += '</div>';
 
       // Enforcement
-      html += '<div style="padding:0.75rem; background:#f8f9fb; border-radius:6px;">';
-      html += '<div style="font-size:0.8rem; font-weight:600; margin-bottom:0.3rem;">Spellcheck</div>';
-      html += '<div style="font-size:0.7rem;"><span style="color:#059669">●</span> Grammarly: enforces UA</div>';
-      html += '<div style="font-size:0.7rem;"><span style="color:#dc2626">●</span> Google: may correct to RU</div>';
-      html += '<div style="font-size:0.7rem;"><span style="color:#d97706">●</span> Hunspell: RU accepted, UA rejected</div>';
+      right += '<div style="padding:0.6rem 0.75rem; background:#f8f9fb; border-radius:6px;">';
+      right += '<div style="font-size:0.75rem; font-weight:600; color:var(--text);">🔧 Spellcheck & Style</div>';
+      right += '<div style="font-size:0.7rem; margin-top:0.3rem; line-height:1.6;">';
+      right += '<span style="color:#059669">✓</span> <strong>Grammarly</strong> flags Russian form<br>';
+      right += '<span style="color:#059669">✓</span> <strong>AP / BBC / Reuters</strong> use Ukrainian<br>';
+      right += '<span style="color:#dc2626">✗</span> <strong>Hunspell</strong> accepts only Russian form<br>';
+      right += '<span style="color:#6b7280">—</span> MS Word / Apple: no preference';
+      right += '</div></div>';
+
+      right += '</div>';
+
+      container.innerHTML = left + right;
+    }
+
+    function buildSearchCard(query: string, wikiArticle: string | null, pair: any, variant: string): string {
+      const isUkr = variant === 'ukrainian';
+      const searchColor = isUkr ? '#0057B8' : '#9ca3af';
+
+      let html = '<div style="border:1px solid #e5e7eb; border-radius:8px; padding:0.6rem 0.75rem; background:white;">';
+
+      // Search bar
+      html += `<div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.4rem;">`;
+      html += `<span style="font-size:0.75rem; color:#9ca3af;">🔍</span>`;
+      html += `<span style="font-size:0.8rem; color:var(--text); font-weight:500;">${query}</span>`;
       html += '</div>';
 
+      // Wikipedia result
+      if (wikiArticle) {
+        const ruForm = pair.russian.toLowerCase().replace(/\s/g, '');
+        const ukForm = pair.ukrainian.toLowerCase().replace(/\s/g, '');
+        const articleClean = wikiArticle.toLowerCase().replace(/[\s']/g, '');
+
+        let framing: string;
+        let framingColor: string;
+        let framingIcon: string;
+
+        if (articleClean.includes(ukForm.replace(/\s/g, ''))) {
+          framing = 'Ukrainian form';
+          framingColor = '#059669';
+          framingIcon = '✓';
+        } else if (articleClean.includes(ruForm.replace(/\s/g, ''))) {
+          framing = 'Russian form';
+          framingColor = '#dc2626';
+          framingIcon = '✗';
+        } else {
+          framing = 'Other form';
+          framingColor = '#6b7280';
+          framingIcon = '—';
+        }
+
+        html += `<div style="font-size:0.7rem; color:#1a0dab; font-weight:500;">en.wikipedia.org</div>`;
+        html += `<div style="font-size:0.78rem; color:#1a0dab; font-weight:600; margin-top:0.1rem;">${wikiArticle}</div>`;
+        html += `<div style="font-size:0.65rem; color:${framingColor}; margin-top:0.15rem;">${framingIcon} Wikipedia uses ${framing}</div>`;
+      } else {
+        html += `<div style="font-size:0.7rem; color:#9ca3af;">No Wikipedia article found</div>`;
+      }
+
       html += '</div>';
-      container.innerHTML = html;
+      return html;
     }
 
     function drawErrorAnalysis() {
