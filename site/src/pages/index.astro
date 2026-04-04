@@ -252,19 +252,19 @@ function formatNum(n: number) {
         <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 1rem;">Statistical Analysis</div>
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;">
           <div style="padding:1rem; background:#f0f9ff; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#0057B8;">R²=0.53</div>
+            <div style="font-size:1.8rem; font-weight:700; color:#0057B8;">R²=0.87</div>
             <div style="font-size:0.75rem; color:#6b7280;">Regression model fit</div>
-            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Pre-2022 baseline predicts current adoption (β=0.70, p&lt;0.001)</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Invasion bump (β=0.87) is #1 predictor of current adoption</div>
           </div>
           <div style="padding:1rem; background:#fef2f2; border-radius:6px; text-align:center;">
             <div style="font-size:1.8rem; font-weight:700; color:#dc2626;">p&lt;0.001</div>
             <div style="font-size:0.75rem; color:#6b7280;">Invasion effect</div>
-            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Significant across all 4 tested sources (Wilcoxon)</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Significant across all 4 tested sources (Wilcoxon); Reddit d=1.38</div>
           </div>
           <div style="padding:1rem; background:#f0fdf4; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#059669;">d=1.38</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Reddit effect size</div>
-            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Largest invasion effect; Trends d=0.85, GDELT d=0.59</div>
+            <div style="font-size:1.8rem; font-weight:700; color:#059669;">99.8%</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Regex precision</div>
+            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">1,444 GDELT matches sampled — 3 false positives (Odessa only)</div>
           </div>
           <div style="padding:1rem; background:#fefce8; border-radius:6px; text-align:center;">
             <div style="font-size:1.8rem; font-weight:700; color:#d97706;">p=0.035</div>
@@ -272,18 +272,22 @@ function formatNum(n: number) {
             <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Kruskal-Wallis H=13.54: categories differ significantly</div>
           </div>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 0.75rem;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 0.75rem;">
           <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
             <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Cross-source spread</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Median 54pp between sources — adoption is domain-dependent</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Median 54pp — adoption is highly domain-dependent</div>
           </div>
           <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Historical identity gap</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Kyiv 74% adopted, but Vladimir the Great only 7% — deep history remains Russian-framed</div>
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Historical identity</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Kyiv 74% but Vladimir the Great 7% — history still Russian-framed</div>
           </div>
           <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Most resistant</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Chernobyl: 1% in Trends, 0% in Wikipedia — disaster brand entrenchment</div>
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Cross-lingual</div>
+            <div style="font-size:0.75rem; color:#6b7280;">US 47% → FR 4% → IT 2% — campaign barely reached beyond English</div>
+          </div>
+          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Disaster brand</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Chernobyl: 1% in Trends, 0% in Wikipedia — impervious to change</div>
           </div>
         </div>
       </div>
