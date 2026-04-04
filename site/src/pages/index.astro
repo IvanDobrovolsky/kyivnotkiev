@@ -191,6 +191,16 @@ function formatNum(n: number) {
         <div class="chart-legend" id="chart-legend"></div>
       </div>
 
+      <!-- Per-pair source stats -->
+      <div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(7, 1fr); margin-bottom: 1rem;"></div>
+
+      <!-- Cross-lingual chart (only for pairs with data) -->
+      <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom: 1rem;">
+        <div class="chart-title" style="color: var(--text); font-size: 1rem; margin-bottom: 0.5rem;">Cross-Lingual Adoption</div>
+        <div class="chart-subtitle" style="margin-bottom: 0.75rem;">How different languages adopt this spelling change (GDELT news domains by TLD)</div>
+        <div id="cross-lingual-chart" style="width:100%;"></div>
+      </div>
+
       <!-- Per-pair world map (GDELT only) -->
       <div class="chart-container" id="map-container">
         <div class="chart-header">
@@ -366,6 +376,10 @@ function formatNum(n: number) {
     import pairEvents from '../data/pair_events.json';
     import trendsCountries from '../data/trends_countries.json';
     import errorAnalysis from '../data/error_analysis.json';
+    import crossLingual from '../data/cross_lingual.json';
+
+    // Make cross-lingual data available to drawCrossLingual
+    (window as any).__crossLingual = crossLingual;
 
     // Use manifest as the single pairs source
     const pairs = { categories: manifest.categories, pairs: manifest.pairs };
@@ -882,8 +896,146 @@ function formatNum(n: number) {
         document.getElementById('chart-old')!.textContent = pair.russian;
       }
       drawChart();
+      drawPairStats();
+      drawCrossLingual();
       drawWorldMap();
       drawHoldoutTable();
+    }
+
+    function drawPairStats() {
+      const container = document.getElementById('pair-stats');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const pairData = (timeseriesData as any)[String(activePairId)];
+      if (!pairData) return;
+
+      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      for (const src of srcOrder) {
+        const series = pairData[src];
+        const card = document.createElement('div');
+        card.className = 'stat-card mini';
+        card.style.setProperty('--accent', sourceColors[src] || '#888');
+
+        if (series && series.length > 0) {
+          const total = series.reduce((s: number, d: any) => s + (d.ukr || 0) + (d.rus || 0), 0);
+          const last = series[series.length - 1];
+          const fmtN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
+          card.innerHTML = `
+            <div class="stat-value">${total > 0 ? fmtN(total) : last.adoption + '%'}</div>
+            <div class="stat-label">${sourceLabels[src]}</div>
+            <div class="stat-source">${series.length} data points</div>
+          `;
+        } else {
+          card.innerHTML = `
+            <div class="stat-value" style="color:#d1d5db;">—</div>
+            <div class="stat-label">${sourceLabels[src]}</div>
+            <div class="stat-source">No data</div>
+          `;
+          card.style.opacity = '0.4';
+        }
+        container.appendChild(card);
+      }
+    }
+
+    function drawCrossLingual() {
+      const container = document.getElementById('cross-lingual-container');
+      const chartEl = document.getElementById('cross-lingual-chart');
+      if (!container || !chartEl) return;
+
+      const cl = (window as any).__crossLingual;
+      if (!cl) return;
+
+      const pid = String(activePairId);
+      const gdeltData = cl.gdelt?.[pid];
+      const trendsData = cl.trends?.[pid];
+
+      if (!gdeltData && !trendsData) {
+        container.style.display = 'none';
+        return;
+      }
+
+      container.style.display = 'block';
+      chartEl.innerHTML = '';
+
+      // Merge GDELT + Trends data
+      const langs = ['us', 'gb', 'fr', 'de', 'es', 'it', 'pl'];
+      const langNames: Record<string, string> = {
+        us: 'US', gb: 'UK', fr: 'France', de: 'Germany',
+        es: 'Spain', it: 'Italy', pl: 'Poland',
+      };
+
+      const items = langs.map(geo => ({
+        geo,
+        name: langNames[geo],
+        gdelt: gdeltData?.[geo === 'us' ? 'com' : geo] ?? null,
+        trends: trendsData?.[geo] ?? null,
+      })).filter(d => d.gdelt !== null || d.trends !== null);
+
+      if (items.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+
+      const margin = { top: 20, right: 20, bottom: 10, left: 70 };
+      const width = chartEl.getBoundingClientRect().width - margin.left - margin.right;
+      const rowH = 32;
+      const height = items.length * rowH;
+
+      const svg = d3.select('#cross-lingual-chart')
+        .append('svg')
+        .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
+      const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+      const y = d3.scaleBand().domain(items.map(d => d.geo)).range([0, height]).padding(0.3);
+
+      // 50% line
+      svg.append('line').attr('x1', x(50)).attr('x2', x(50)).attr('y1', 0).attr('y2', height)
+        .attr('stroke', '#e5e7eb').attr('stroke-dasharray', '3,3');
+
+      // Header
+      svg.append('text').attr('x', x(0)).attr('y', -6).text('0%').attr('font-size', '10px').attr('fill', '#9ca3af');
+      svg.append('text').attr('x', x(100)).attr('y', -6).text('100%').attr('font-size', '10px').attr('fill', '#9ca3af').attr('text-anchor', 'end');
+
+      items.forEach(item => {
+        const yi = y(item.geo)!;
+        const h = y.bandwidth();
+
+        // Country label
+        svg.append('text').attr('x', -8).attr('y', yi + h/2 + 4)
+          .attr('text-anchor', 'end').attr('font-size', '12px').attr('fill', 'var(--text)')
+          .text(item.name);
+
+        // GDELT bar
+        if (item.gdelt !== null) {
+          svg.append('rect')
+            .attr('x', x(0)).attr('y', yi)
+            .attr('width', x(item.gdelt)).attr('height', h * 0.45)
+            .attr('fill', '#1e3a5f').attr('rx', 3).attr('opacity', 0.8);
+          svg.append('text').attr('x', x(item.gdelt) + 4).attr('y', yi + h * 0.3)
+            .attr('font-size', '10px').attr('fill', '#1e3a5f')
+            .text(item.gdelt.toFixed(0) + '%');
+        }
+
+        // Trends dot
+        if (item.trends !== null) {
+          svg.append('circle')
+            .attr('cx', x(item.trends)).attr('cy', yi + h * 0.7)
+            .attr('r', 5).attr('fill', '#4285F4');
+          svg.append('text').attr('x', x(item.trends) + 8).attr('y', yi + h * 0.75)
+            .attr('font-size', '10px').attr('fill', '#4285F4')
+            .text(item.trends.toFixed(0) + '%');
+        }
+      });
+
+      // Legend
+      const legend = d3.select('#cross-lingual-chart').append('div')
+        .style('display', 'flex').style('gap', '1rem').style('justify-content', 'center')
+        .style('margin-top', '0.5rem').style('font-size', '11px').style('color', '#6b7280');
+      legend.append('div').html('<span style="display:inline-block;width:12px;height:8px;background:#1e3a5f;border-radius:2px;margin-right:4px;"></span>GDELT News');
+      legend.append('div').html('<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#4285F4;margin-right:4px;"></span>Google Trends');
     }
 
     document.querySelectorAll('.sidebar-item').forEach(item => {
