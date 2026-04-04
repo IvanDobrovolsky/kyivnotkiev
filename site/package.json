@@ -5,12 +5,21 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "npm run build && wrangler dev",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.1.7",
     "astro": "^6.1.1",
     "d3": "^7.9.0",
     "topojson-client": "^3.1.0",
     "world-atlas": "^2.0.2"
+  },
+  "devDependencies": {
+    "wrangler": "^4.80.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
