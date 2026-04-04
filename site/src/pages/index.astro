@@ -386,6 +386,9 @@ function formatNum(n: number) {
     import crossLingual from '../data/cross_lingual.json';
     import dictData from '../data/dictionaries.json';
     import enforcementData from '../data/enforcement.json';
+    import searchAudit from '../data/search_audit.json';
+
+    (window as any).__searchAudit = searchAudit;
 
     // Make cross-lingual data available to drawCrossLingual
     (window as any).__crossLingual = crossLingual;
@@ -1650,39 +1653,55 @@ function formatNum(n: number) {
 
       const dd = (dictData as any).pairs?.find((p: any) => p.pair_id === activePairId);
       const ef = enforcementData as any;
+      const sa = (window as any).__searchAudit;
+      const wikiMap = sa?.wikipedia_mapping?.find((m: any) => m.pair_id === activePairId);
 
-      let html = '<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">';
+      let html = '<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem;">';
 
-      // Dictionary status
+      // Wikipedia article framing
       html += '<div style="padding:0.75rem; background:#f8f9fb; border-radius:6px;">';
-      html += '<div style="font-size:0.8rem; font-weight:600; margin-bottom:0.3rem;">Dictionary Status</div>';
-      if (dd) {
-        const pref = dd.spelling_preference;
-        const prefColor = pref === 'ukrainian' ? '#059669' : pref === 'russian' ? '#dc2626' : '#6b7280';
-        html += `<div style="font-size:0.75rem; color:${prefColor}; font-weight:600;">${pref === 'both' ? 'Both forms found' : pref === 'neither' ? 'Not in dictionaries' : pref.charAt(0).toUpperCase() + pref.slice(1) + ' form preferred'}</div>`;
-        html += `<div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">${dd.dict_count} dictionary entries found</div>`;
+      html += '<div style="font-size:0.8rem; font-weight:600; margin-bottom:0.3rem;">Wikipedia Article</div>';
+      if (wikiMap) {
+        const ruWiki = wikiMap.russian_wiki || '—';
+        const ukWiki = wikiMap.ukrainian_wiki || '—';
+        if (ruWiki !== '—') {
+          const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+          const ruForm = pair?.russian?.toLowerCase().replace(/\s/g, '') || '';
+          const isRussianFramed = ruWiki.toLowerCase().replace(/[\s']/g, '').includes(ruForm);
+          const color = isRussianFramed ? '#dc2626' : '#059669';
+          const label = isRussianFramed ? 'Russian-form title' : 'Ukrainian-form title';
+          html += `<div style="font-size:0.75rem;"><strong style="color:${color}">"${ruWiki}"</strong></div>`;
+          html += `<div style="font-size:0.65rem; color:${color}; margin-top:0.2rem;">${label}</div>`;
+        } else {
+          html += '<div style="font-size:0.75rem; color:#9ca3af;">No Wikipedia article found</div>';
+        }
       } else {
-        html += '<div style="font-size:0.75rem; color:#9ca3af;">No dictionary data</div>';
+        html += '<div style="font-size:0.75rem; color:#9ca3af;">No search data</div>';
       }
       html += '</div>';
 
-      // Enforcement status
+      // Dictionary status
       html += '<div style="padding:0.75rem; background:#f8f9fb; border-radius:6px;">';
-      html += '<div style="font-size:0.8rem; font-weight:600; margin-bottom:0.3rem;">Enforcement</div>';
-      const hunspell = ef.hunspell || {};
-      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
-      if (pair) {
-        const ruTerm = pair.russian;
-        const h = hunspell[ruTerm];
-        if (h) {
-          html += `<div style="font-size:0.7rem;">Hunspell: <strong style="color:#059669">${ruTerm}</strong> accepted, Ukrainian form <strong style="color:#dc2626">rejected</strong></div>`;
-        }
-        html += '<div style="font-size:0.7rem; margin-top:0.2rem;"><span style="color:#059669">●</span> Grammarly: enforces Ukrainian</div>';
-        html += '<div style="font-size:0.7rem;"><span style="color:#dc2626">●</span> Google: may autocorrect to Russian</div>';
-        html += '<div style="font-size:0.7rem;"><span style="color:#6b7280">●</span> MS Word/Apple: no enforcement</div>';
+      html += '<div style="font-size:0.8rem; font-weight:600; margin-bottom:0.3rem;">Dictionaries</div>';
+      if (dd) {
+        const pref = dd.spelling_preference;
+        const prefColor = pref === 'ukrainian' ? '#059669' : pref === 'russian' ? '#dc2626' : '#6b7280';
+        html += `<div style="font-size:0.75rem; color:${prefColor}; font-weight:600;">${pref === 'both' ? 'Both forms listed' : pref === 'neither' ? 'Not in dictionaries' : pref.charAt(0).toUpperCase() + pref.slice(1) + ' form only'}</div>`;
+        html += `<div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">${dd.dict_count} entries (Wiktionary + FreeDictionary)</div>`;
+      } else {
+        html += '<div style="font-size:0.75rem; color:#9ca3af;">Not checked</div>';
       }
-      html += '</div></div>';
+      html += '</div>';
 
+      // Enforcement
+      html += '<div style="padding:0.75rem; background:#f8f9fb; border-radius:6px;">';
+      html += '<div style="font-size:0.8rem; font-weight:600; margin-bottom:0.3rem;">Spellcheck</div>';
+      html += '<div style="font-size:0.7rem;"><span style="color:#059669">●</span> Grammarly: enforces UA</div>';
+      html += '<div style="font-size:0.7rem;"><span style="color:#dc2626">●</span> Google: may correct to RU</div>';
+      html += '<div style="font-size:0.7rem;"><span style="color:#d97706">●</span> Hunspell: RU accepted, UA rejected</div>';
+      html += '</div>';
+
+      html += '</div>';
       container.innerHTML = html;
     }
 
