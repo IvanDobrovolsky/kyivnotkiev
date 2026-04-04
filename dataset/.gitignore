@@ -1,0 +1,4 @@
+# Dataset export (uploaded to Hugging Face, not committed to git)
+*
+!.gitignore
+!README.md
