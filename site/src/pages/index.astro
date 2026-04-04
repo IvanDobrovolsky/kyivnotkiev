@@ -72,12 +72,12 @@ function formatNum(n: number) {
     <nav class="topbar">
       <a href="/" class="topbar-logo" style="text-decoration:none;">
         <img src="/logo.svg" alt="Kyiv chestnut" style="height:28px; width:auto; margin-right:0.4rem;">
-        <span style="font-size:0.85rem; font-weight:700; color:var(--text);">#</span><span class="k">KYIV</span><span class="n">NOT</span><span class="k struck">KIEV</span>
+        <span style="font-size:0.9rem; font-weight:800; color:#0057B8;">#KyivNotKiev</span>
       </a>
       <div class="topbar-links">
         <a href="/uk/">UA</a>
         <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
-        <a href="#about">About</a>
+        <a href="/" id="about-link">About</a>
       </div>
     </nav>
 
@@ -106,9 +106,9 @@ function formatNum(n: number) {
       ))}
     </aside>
 
-    <main class="main">
+    <main class="main" style="opacity:0; transition:opacity 0.15s;">
       <!-- ══ LANDING VIEW (visible when no pair selected) ══ -->
-      <div id="landing-view">
+      <div id="landing-view" style="display:none;">
         <div style="display:flex; align-items:center; gap:1.5rem; padding:2rem 0.5rem 1.5rem; margin-bottom:1rem;">
           <img src="/logo.svg" alt="Kyiv chestnut" style="height:100px; width:auto; flex-shrink:0;">
           <div>
@@ -355,8 +355,6 @@ function formatNum(n: number) {
         <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
       </div>
 
-      </div><!-- end global-view -->
-
       <div class="chart-container" id="about">
         <div class="about-text">
           <p>
@@ -382,6 +380,8 @@ function formatNum(n: number) {
           <a href="https://github.com/IvanDobrovolsky/KyivNotKiev-paper">Research Paper</a>
         </div>
       </div>
+
+      </div><!-- end global-view -->
     </main>
   </div>
 
@@ -460,9 +460,12 @@ function formatNum(n: number) {
       const landing = document.getElementById('landing-view');
       const global = document.getElementById('global-view');
       const pair = document.getElementById('pair-view');
+      const main = document.querySelector('.main') as HTMLElement;
       if (landing) landing.style.display = mode === 'landing' ? 'block' : 'none';
       if (global) global.style.display = mode === 'landing' ? 'block' : 'none';
       if (pair) pair.style.display = mode === 'pair' ? 'block' : 'none';
+      // Fade in on first render
+      if (main) main.style.opacity = '1';
     }
 
     function showLanding() {
@@ -1705,6 +1708,15 @@ function formatNum(n: number) {
     document.querySelector('.topbar-logo')?.addEventListener('click', (e) => {
       e.preventDefault();
       showLanding();
+    });
+
+    // About link → landing + scroll to about
+    document.getElementById('about-link')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      showLanding();
+      setTimeout(() => {
+        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     });
 
     window.addEventListener('resize', () => {
