@@ -1,0 +1,868 @@
+[
+  {
+    "pair_id": 1,
+    "term": "Kiev",
+    "variant": "russian",
+    "exists": true,
+    "title": "Kyiv",
+    "snippet": "Kyiv, chief city and capital of Ukraine. A port on the Dnieper (Dnipro) River and a large railroad junction, it is a city with an ancient and proud history. As the centre of Kyivan (Kievan) Rus, the f",
+    "redirected": true,
+    "final_url": "https://www.britannica.com/place/Kyiv",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 1,
+    "term": "Kyiv",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Kyiv",
+    "snippet": "Kyiv, chief city and capital of Ukraine. A port on the Dnieper (Dnipro) River and a large railroad junction, it is a city with an ancient and proud history. As the centre of Kyivan (Kievan) Rus, the f",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/place/Kyiv",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 2,
+    "term": "Kharkov",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 2,
+    "term": "Kharkiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 3,
+    "term": "Odessa",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 3,
+    "term": "Odesa",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 4,
+    "term": "Lvov",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 4,
+    "term": "Lviv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 5,
+    "term": "Zaporozhye",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 5,
+    "term": "Zaporizhzhia",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 6,
+    "term": "Nikolaev",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 6,
+    "term": "Mykolaiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 7,
+    "term": "Dnepropetrovsk",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 7,
+    "term": "Dnipro",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 8,
+    "term": "Vinnitsa",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 8,
+    "term": "Vinnytsia",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 9,
+    "term": "Rovno",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 9,
+    "term": "Rivne",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 10,
+    "term": "Chernobyl",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 10,
+    "term": "Chornobyl",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Chornobyl",
+    "snippet": "\u2026the city of Chernobyl (Ukrainian: Chornobyl) and 65 miles (104 km) north of Kyiv, Ukraine. The station consisted of four reactors, each capable of producing 1,000 megawatts of electric power; it had ",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/place/Chornobyl",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 11,
+    "term": "Lugansk",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 11,
+    "term": "Luhansk",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 15,
+    "term": "Dnieper",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 15,
+    "term": "Dnipro",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 16,
+    "term": "Dniester",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 16,
+    "term": "Dnister",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 17,
+    "term": "Donbass",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 17,
+    "term": "Donbas",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Donbas",
+    "snippet": "Donbas, large mining and industrial region of southeastern Europe, notable for its sizable coal reserves. The industrial area of the Donbas includes much of the Ukrainian oblasti (provinces) of Donets",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/place/Donbas",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 19,
+    "term": "Zakarpatye",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 19,
+    "term": "Zakarpattia",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 20,
+    "term": "Podolye",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 20,
+    "term": "Podillia",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 38,
+    "term": "Chernigov",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 38,
+    "term": "Chernihiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 39,
+    "term": "Chernovtsy",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 39,
+    "term": "Chernivtsi",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 40,
+    "term": "Zhitomir",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 40,
+    "term": "Zhytomyr",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 41,
+    "term": "Cherkassy",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 41,
+    "term": "Cherkasy",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 42,
+    "term": "Uzhgorod",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 42,
+    "term": "Uzhhorod",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Uzhhorod",
+    "snippet": "Uzhhorod, city, western Ukraine. It is situated along the Uzh River just east of the Slovak border. For centuries Uzhhorod has been an important cultural, educational, religious, and economic center o",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/place/Uzhhorod",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 43,
+    "term": "Kremenchug",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 43,
+    "term": "Kremenchuk",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Kremenchuk",
+    "snippet": "Kremenchuk, city, central Ukraine. The city lies along the Dnieper River where it is crossed by the Kharkiv-Kirovohrad railway. Founded in 1571 as a fortress, Kremenchuk acquired city status in 1765. ",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/place/Kremenchuk",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 44,
+    "term": "Kirovograd",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 44,
+    "term": "Kropyvnytskyi",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 45,
+    "term": "Ternopol",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 45,
+    "term": "Ternopil",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 21,
+    "term": "Chicken Kiev",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 21,
+    "term": "Chicken Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 22,
+    "term": "Kiev cake",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 22,
+    "term": "Kyiv cake",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 23,
+    "term": "Borscht",
+    "variant": "russian",
+    "exists": true,
+    "title": "borscht",
+    "snippet": "borscht, beet soup of the Slavic countries. Although borscht is important in Russian and Polish cuisines, Ukraine is frequently cited as its place of origin. Its name is thought to be derived from the",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/topic/borscht",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 23,
+    "term": "Borshch",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 64,
+    "term": "Borsch",
+    "variant": "russian",
+    "exists": true,
+    "title": "borscht",
+    "snippet": "borscht, beet soup of the Slavic countries. Although borscht is important in Russian and Polish cuisines, Ukraine is frequently cited as its place of origin. Its name is thought to be derived from the",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/topic/borscht",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 64,
+    "term": "Borshch",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 46,
+    "term": "Vareniki",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 46,
+    "term": "Varenyky",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 24,
+    "term": "Kiev Pechersk Lavra",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 24,
+    "term": "Kyiv Pechersk Lavra",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 25,
+    "term": "Saint Sophia Cathedral Kiev",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 25,
+    "term": "Saint Sophia Cathedral Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 26,
+    "term": "Chernobyl Exclusion Zone",
+    "variant": "russian",
+    "exists": true,
+    "title": "Chernobyl Exclusion Zone",
+    "snippet": "\u2026Soviet Union created a circle-shaped exclusion zone with a radius of about 18.6 miles (30 km) centred on the nuclear power plant. The exclusion zone covered an area of about 1,017 square miles (2,634",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/place/Chernobyl-Exclusion-Zone",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 26,
+    "term": "Chornobyl Exclusion Zone",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 54,
+    "term": "Babi Yar",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 54,
+    "term": "Babyn Yar",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 55,
+    "term": "Potemkin Stairs Odessa",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 55,
+    "term": "Potemkin Stairs Odesa",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 56,
+    "term": "Motherland Monument Kiev",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 56,
+    "term": "Motherland Monument Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 27,
+    "term": "the Ukraine",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 27,
+    "term": "Ukraine",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Ukraine",
+    "snippet": "Ukraine, country located in eastern Europe, the second largest on the continent after Russia. The capital is Kyiv, located on the Dnieper River in north-central Ukraine.",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/place/Ukraine",
+    "mentions_russian": false,
+    "mentions_ukrainian": true,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 28,
+    "term": "Kiev National University",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 28,
+    "term": "Kyiv National University",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 29,
+    "term": "Kharkov University",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 29,
+    "term": "Kharkiv University",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 30,
+    "term": "Kiev Polytechnic",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 30,
+    "term": "Kyiv Polytechnic",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 31,
+    "term": "Kiev Patriarchate",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 31,
+    "term": "Kyiv Patriarchate",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 57,
+    "term": "Lvov Polytechnic",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 57,
+    "term": "Lviv Polytechnic",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 58,
+    "term": "Odessa National University",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 58,
+    "term": "Odesa National University",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 32,
+    "term": "Dynamo Kiev",
+    "variant": "russian",
+    "exists": true,
+    "title": "Dynamo Kyiv",
+    "snippet": "Dynamo Kyiv, Ukrainian professional football (soccer) team located in Kyiv. Dynamo Kyiv was one of the strongest teams in the former Union of Soviet Socialist Republics (Soviet Union) and is, along wi",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/topic/Dynamo-Kiev",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 32,
+    "term": "Dynamo Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 34,
+    "term": "Kiev ballet",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 34,
+    "term": "Kyiv ballet",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 51,
+    "term": "Zorya Lugansk",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 51,
+    "term": "Zorya Luhansk",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 52,
+    "term": "Metalist Kharkov",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 52,
+    "term": "Metalist Kharkiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 53,
+    "term": "Karpaty Lvov",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 53,
+    "term": "Karpaty Lviv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 35,
+    "term": "Kievan Rus",
+    "variant": "russian",
+    "exists": true,
+    "title": "Kyivan Rus",
+    "snippet": "Kyivan Rus, the first East Slavic state. It reached its peak in the early to mid-11th century.",
+    "redirected": true,
+    "final_url": "https://www.britannica.com/topic/Kyivan-Rus",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 35,
+    "term": "Kyivan Rus",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Kyivan Rus",
+    "snippet": "Kyivan Rus, the first East Slavic state. It reached its peak in the early to mid-11th century.",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/topic/Kyivan-Rus",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 36,
+    "term": "Kazak",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 36,
+    "term": "Kozak",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 48,
+    "term": "Gopak",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 48,
+    "term": "Hopak",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "hopak",
+    "snippet": "hopak, Ukrainian folk dance originating as a male dance among the Zaporozhian Cossacks but later danced by couples, male soloists, and mixed groups of dancers. In western Ukraine, as the hopak-kolo, i",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/art/hopak",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 70,
+    "term": "Vladimir the Great",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 70,
+    "term": "Volodymyr the Great",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 71,
+    "term": "Prince of Kiev",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 71,
+    "term": "Prince of Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 60,
+    "term": "Alexander Usyk",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 60,
+    "term": "Oleksandr Usyk",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Oleksandr Usyk",
+    "snippet": "Oleksandr Usyk (born January 17, 1987, Simferopol, Crimea, Ukraine) is a Ukrainian professional boxer who became the two-time undisputed heavyweight world champion by unanimous decision on July 19, 20",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/biography/Oleksandr-Usyk",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 61,
+    "term": "Vladimir Zelensky",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 61,
+    "term": "Volodymyr Zelenskyy",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 72,
+    "term": "Artemovsk",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 72,
+    "term": "Bakhmut",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Bakhmut",
+    "snippet": "Bakhmut, city, eastern Ukraine, on the Bakhmut River. The town originated in the 17th century as a fort protecting the Russian frontiers against the Crimean Tatars. Peter I (the Great) established a s",
+    "redirected": false,
+    "final_url": "https://www.britannica.com/place/Bakhmut",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "dictionary": "Britannica"
+  }
+]
