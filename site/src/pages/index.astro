@@ -211,19 +211,11 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Source Comparison + Cross-Lingual side by side -->
-      <div id="comparison-row" style="display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:1rem;">
-        <!-- Source comparison always shown -->
-        <div class="chart-container" id="source-comp-container" style="margin-bottom:0;">
-          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Source Comparison</div>
-          <div id="pair-source-chart" style="width:100%;"></div>
-        </div>
-        <!-- Cross-lingual only for pairs with data -->
-        <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom:0;">
-          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Cross-Lingual Adoption</div>
-          <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">GDELT news by domain TLD</div>
-          <div id="cross-lingual-chart" style="width:100%;"></div>
-        </div>
+      <!-- Cross-lingual only for pairs with data -->
+      <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom:1rem;">
+        <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Cross-Lingual Adoption</div>
+        <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Ukrainian spelling adoption by language (GDELT domain TLD)</div>
+        <div id="cross-lingual-chart" style="width:100%;"></div>
       </div>
 
       <!-- Per-pair world map (GDELT only) -->
@@ -1185,15 +1177,12 @@ function formatNum(n: number) {
       const gdeltData = cl.gdelt?.[pid];
       const trendsData = cl.trends?.[pid];
 
-      const compRow = document.getElementById('comparison-row');
       if (!gdeltData && !trendsData) {
         container.style.display = 'none';
-        if (compRow) compRow.style.gridTemplateColumns = '1fr';
         return;
       }
 
       container.style.display = 'block';
-      if (compRow) compRow.style.gridTemplateColumns = '1fr 1fr';
       chartEl.innerHTML = '';
 
       // Merge GDELT + Trends data
@@ -1802,41 +1791,36 @@ function formatNum(n: number) {
     }
 
     function refBadge(data: any, ru: string, uk: string, type: string): string {
-      const cell = 'padding:0.35rem 0.5rem; border-bottom:1px solid #f3f4f6;';
+      const cell = 'padding:0.3rem 0.4rem; border-bottom:1px solid #f3f4f6; font-size:0.72rem;';
 
       if (type === 'wiki') {
-        // data is the article name string
-        if (!data) return `<div style="${cell}"><span style="color:#d1d5db; font-size:0.7rem;">—</span></div>`;
+        if (!data) return `<div style="${cell} color:#d1d5db;">—</div>`;
         const artClean = data.toLowerCase().replace(/[\s']/g, '');
         const ukClean = uk.toLowerCase().replace(/[\s']/g, '');
         const ruClean = ru.toLowerCase().replace(/[\s']/g, '');
         const isUkr = artClean.includes(ukClean);
         const isRu = !isUkr && artClean.includes(ruClean);
-        const color = isUkr ? '#059669' : isRu ? '#dc2626' : '#6b7280';
-        const bg = isUkr ? '#05966911' : isRu ? '#dc262611' : '#6b728011';
-        return `<div style="${cell}"><span style="padding:0.1rem 0.35rem; border-radius:3px; background:${bg}; color:${color}; font-size:0.7rem; font-weight:500;">${data}</span></div>`;
+        const icon = isUkr ? '✅' : isRu ? '⚠️' : '➖';
+        return `<div style="${cell}">${icon} <strong>${data}</strong></div>`;
       }
 
-      // Dictionary data object
-      if (!data || !data.exists) return `<div style="${cell}"><span style="color:#d1d5db; font-size:0.7rem;">not found</span></div>`;
+      if (!data || !data.exists) return `<div style="${cell} color:#d1d5db;">✗ none</div>`;
 
       let label = '';
       let sub = '';
       if (type === 'wiktionary') {
-        label = data.title || '✓';
-        if (data.etymology) sub = data.etymology.slice(0, 55) + '...';
+        label = data.title || 'found';
+        if (data.etymology) sub = data.etymology.slice(0, 45) + '…';
       } else if (type === 'britannica') {
-        label = data.top_result || '✓';
-        if (label === 'article found') label = '✓ found';
+        label = data.top_result || 'found';
       } else if (type === 'cambridge') {
-        label = data.headword || '✓';
-        if (data.definition) sub = data.definition.slice(0, 50) + '...';
+        label = data.headword || 'found';
+        if (data.definition) sub = data.definition.slice(0, 40) + '…';
         if (data.redirected) label += ' ↗';
       }
 
-      let html = `<div style="${cell}">`;
-      html += `<span style="padding:0.1rem 0.35rem; border-radius:3px; background:#05966911; color:#059669; font-size:0.7rem; font-weight:500;">${label}</span>`;
-      if (sub) html += `<div style="font-size:0.6rem; color:#9ca3af; margin-top:0.15rem; line-height:1.3;">${sub}</div>`;
+      let html = `<div style="${cell}">✅ <strong>${label}</strong>`;
+      if (sub) html += `<div style="font-size:0.58rem; color:#9ca3af; margin-top:0.1rem;">${sub}</div>`;
       html += '</div>';
       return html;
     }
