@@ -551,8 +551,13 @@ function formatNum(n: number) {
         const ukr = last.ukr || 0;
         const rus = last.rus || 0;
         const total = ukr + rus;
-        if (total > 0 && chartMode === 'adoption') {
-          formulaEl.textContent = `· ${ukr.toLocaleString()} UA / (${ukr.toLocaleString()} + ${rus.toLocaleString()}) = ${last.adoption}%`;
+        if (total > 0) {
+          const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
+          if (chartMode === 'adoption') {
+            formulaEl.innerHTML = `· Adoption = <strong>${fN(ukr)}</strong> / (<strong>${fN(ukr)}</strong> + ${fN(rus)}) = <strong>${last.adoption}%</strong>`;
+          } else {
+            formulaEl.innerHTML = `· Latest: <strong style="color:#0057B8">${fN(ukr)}</strong> UA + <strong style="color:#dc2626">${fN(rus)}</strong> RU = ${fN(total)} total`;
+          }
         } else {
           formulaEl.textContent = '';
         }
@@ -897,7 +902,7 @@ function formatNum(n: number) {
 
       if (items.length === 0) return;
 
-      const margin = {top: 5, right: 50, bottom: 5, left: 80};
+      const margin = {top: 5, right: 50, bottom: 5, left: 110};
       const rowH = 28;
       const width = container.getBoundingClientRect().width - margin.left - margin.right;
       const height = items.length * rowH;
@@ -1043,7 +1048,7 @@ function formatNum(n: number) {
         return;
       }
 
-      const margin = { top: 20, right: 20, bottom: 10, left: 70 };
+      const margin = { top: 20, right: 20, bottom: 10, left: 120 };
       const width = chartEl.getBoundingClientRect().width - margin.left - margin.right;
       const rowH = 32;
       const height = items.length * rowH;
