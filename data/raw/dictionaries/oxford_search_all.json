@@ -1,0 +1,1176 @@
+[
+  {
+    "pair_id": 1,
+    "term": "Kiev",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: kikes",
+      "SUGGEST: kited",
+      "SUGGEST: kites"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 1,
+    "term": "Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 2,
+    "term": "Kharkov",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Sharon",
+      "SUGGEST: harbor",
+      "SUGGEST: harked"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 2,
+    "term": "Kharkiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: khaki",
+      "SUGGEST: khakis",
+      "SUGGEST: kharif"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 3,
+    "term": "Odessa",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Tessa",
+      "SUGGEST: lodestar",
+      "SUGGEST: Vanessa"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 3,
+    "term": "Odesa",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: odes",
+      "SUGGEST: modest",
+      "SUGGEST: lodestar"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 4,
+    "term": "Lvov",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Avon",
+      "SUGGEST: Ivor",
+      "SUGGEST: avow"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 4,
+    "term": "Lviv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Evie",
+      "SUGGEST: Liv",
+      "SUGGEST: Maiv"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 5,
+    "term": "Zaporozhye",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: vaporize",
+      "SUGGEST: Dorothy",
+      "SUGGEST: agoroth"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 5,
+    "term": "Zaporizhzhia",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 6,
+    "term": "Nikolaev",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Nicola",
+      "SUGGEST: areolae",
+      "SUGGEST: bipolar"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 6,
+    "term": "Mykolaiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: mislaid",
+      "SUGGEST: molar",
+      "SUGGEST: molars"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 7,
+    "term": "Dnepropetrovsk",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: propellors",
+      "SUGGEST: propellors",
+      "SUGGEST: propers"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 7,
+    "term": "Dnipro",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: snipers",
+      "SUGGEST: antiproton",
+      "SUGGEST: appro"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 8,
+    "term": "Vinnitsa",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Finnish",
+      "SUGGEST: innit",
+      "SUGGEST: ninnies"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 8,
+    "term": "Vinnytsia",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: intarsia",
+      "SUGGEST: vinyls",
+      "SUGGEST: zinnia"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 9,
+    "term": "Rovno",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: roving",
+      "SUGGEST: Provo",
+      "SUGGEST: mono"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 9,
+    "term": "Rivne",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 10,
+    "term": "Chernobyl",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 10,
+    "term": "Chornobyl",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: choirboy",
+      "SUGGEST: choirboys",
+      "SUGGEST: choosy"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 11,
+    "term": "Lugansk",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 11,
+    "term": "Luhansk",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Cubans",
+      "SUGGEST: dhansak",
+      "SUGGEST: humans"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 15,
+    "term": "Dnieper",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: deeper",
+      "SUGGEST: diaper",
+      "SUGGEST: dipper"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 15,
+    "term": "Dnipro",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 16,
+    "term": "Dniester",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: digester",
+      "SUGGEST: Leicester",
+      "SUGGEST: trimester"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 16,
+    "term": "Dnister",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 17,
+    "term": "Donbass",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 17,
+    "term": "Donbas",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: dongas",
+      "SUGGEST: dhabas",
+      "SUGGEST: donga"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 19,
+    "term": "Zakarpatye",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: karate",
+      "SUGGEST: eukaryote",
+      "SUGGEST: extirpate"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 19,
+    "term": "Zakarpattia",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 20,
+    "term": "Podolye",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: condole",
+      "SUGGEST: dolce",
+      "SUGGEST: gooly"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 20,
+    "term": "Podillia",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: sapodilla",
+      "SUGGEST: cedilla",
+      "SUGGEST: podia"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 38,
+    "term": "Chernigov",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: cheerio",
+      "SUGGEST: chenille",
+      "SUGGEST: cherish"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 38,
+    "term": "Chernihiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 39,
+    "term": "Chernovtsy",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 39,
+    "term": "Chernivtsi",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: chemists",
+      "SUGGEST: cherish",
+      "SUGGEST: cheroots"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 40,
+    "term": "Zhitomir",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: epitomise",
+      "SUGGEST: epitomize",
+      "SUGGEST: atomic"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 40,
+    "term": "Zhytomyr",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: -ectomy",
+      "SUGGEST: anatomy",
+      "SUGGEST: customer"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 41,
+    "term": "Cherkassy",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: brassy",
+      "SUGGEST: cheaply",
+      "SUGGEST: cheats"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 41,
+    "term": "Cherkasy",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 42,
+    "term": "Uzhgorod",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: agorot",
+      "SUGGEST: gored",
+      "SUGGEST: hooroo"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 42,
+    "term": "Uzhhorod",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: chord",
+      "SUGGEST: hooroo",
+      "SUGGEST: shored"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 43,
+    "term": "Kremenchug",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: tremendous",
+      "SUGGEST: French",
+      "SUGGEST: bronchus"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 43,
+    "term": "Kremenchuk",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: tremendous",
+      "SUGGEST: French",
+      "SUGGEST: bronchus"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 44,
+    "term": "Kirovograd",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 44,
+    "term": "Kropyvnytskyi",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 45,
+    "term": "Ternopol",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: afternoon",
+      "SUGGEST: terminology",
+      "SUGGEST: Interpol"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 45,
+    "term": "Ternopil",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: terrapin",
+      "SUGGEST: terrapins",
+      "SUGGEST: terrorise"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 21,
+    "term": "Chicken Kiev",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 21,
+    "term": "Chicken Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 22,
+    "term": "Kiev cake",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: seed cake",
+      "SUGGEST: simnel cake",
+      "SUGGEST: fairy cake"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 22,
+    "term": "Kyiv cake",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: fairy cake",
+      "SUGGEST: fruit cake",
+      "SUGGEST: layer cake"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 23,
+    "term": "Borscht",
+    "variant": "russian",
+    "exists": true,
+    "results": [
+      "borscht",
+      "DEF: a soup made from beetroot (= a dark red root vegetable), originally from Ukraine and also associated"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 23,
+    "term": "Borshch",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: borsch",
+      "SUGGEST: borscht",
+      "SUGGEST: borough"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 64,
+    "term": "Borsch",
+    "variant": "russian",
+    "exists": true,
+    "results": [
+      "borscht",
+      "DEF: a soup made from beetroot (= a dark red root vegetable), originally from Ukraine and also associated"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 64,
+    "term": "Borshch",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 46,
+    "term": "Vareniki",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: reiki",
+      "SUGGEST: varnish",
+      "SUGGEST: careening"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 46,
+    "term": "Varenyky",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 24,
+    "term": "Kiev Pechersk Lavra",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 24,
+    "term": "Kyiv Pechersk Lavra",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 25,
+    "term": "Saint Sophia Cathedral Kiev",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 25,
+    "term": "Saint Sophia Cathedral Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 26,
+    "term": "Chernobyl Exclusion Zone",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 26,
+    "term": "Chornobyl Exclusion Zone",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: exclusion zone",
+      "SUGGEST: exclusion zones",
+      "SUGGEST: social exclusion"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 54,
+    "term": "Babi Yar",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: baby fat",
+      "SUGGEST: baby corn",
+      "SUGGEST: baby fats"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 54,
+    "term": "Babyn Yar",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: baby fat",
+      "SUGGEST: baby corn",
+      "SUGGEST: baby fats"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 55,
+    "term": "Potemkin Stairs Odessa",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 55,
+    "term": "Potemkin Stairs Odesa",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 56,
+    "term": "Motherland Monument Kiev",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: mother countries",
+      "SUGGEST: mother countries"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 56,
+    "term": "Motherland Monument Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: mother country",
+      "SUGGEST: mother country",
+      "SUGGEST: mother country"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 27,
+    "term": "the Ukraine",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 27,
+    "term": "Ukraine",
+    "variant": "ukrainian",
+    "exists": true,
+    "results": [
+      "Ukraine",
+      "DEF: a country in eastern Europe"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 28,
+    "term": "Kiev National University",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 28,
+    "term": "Kyiv National University",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Princeton University",
+      "SUGGEST: Aston University",
+      "SUGGEST: biological diversity"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 29,
+    "term": "Kharkov University",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: state university",
+      "SUGGEST: Stanford University",
+      "SUGGEST: Aston University"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 29,
+    "term": "Kharkiv University",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: state university",
+      "SUGGEST: Harvard University",
+      "SUGGEST: Howard University"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 30,
+    "term": "Kiev Polytechnic",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 30,
+    "term": "Kyiv Polytechnic",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: polytechnic",
+      "SUGGEST: polytechnics",
+      "SUGGEST: pyrotechnic"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 31,
+    "term": "Kiev Patriarchate",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: patriarchate",
+      "SUGGEST: patriarchates",
+      "SUGGEST: patriarchal"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 31,
+    "term": "Kyiv Patriarchate",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: patriarchate",
+      "SUGGEST: patriarchates",
+      "SUGGEST: patriarchal"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 57,
+    "term": "Lvov Polytechnic",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: polytechnic",
+      "SUGGEST: polytechnics",
+      "SUGGEST: pyrotechnic"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 57,
+    "term": "Lviv Polytechnic",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 58,
+    "term": "Odessa National University",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Aston University",
+      "SUGGEST: state university",
+      "SUGGEST: Johns Hopkins University"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 58,
+    "term": "Odesa National University",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Aston University",
+      "SUGGEST: state university",
+      "SUGGEST: Johns Hopkins University"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 32,
+    "term": "Dynamo Kiev",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: dynamic",
+      "SUGGEST: dynamics",
+      "SUGGEST: dynamism"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 32,
+    "term": "Dynamo Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: dynamic",
+      "SUGGEST: dynamo",
+      "SUGGEST: dynamos"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 34,
+    "term": "Kiev ballet",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 34,
+    "term": "Kyiv ballet",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Royal Ballet",
+      "SUGGEST: magic bullet",
+      "SUGGEST: air ball"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 51,
+    "term": "Zorya Lugansk",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: soya beans",
+      "SUGGEST: soya beans"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 51,
+    "term": "Zorya Luhansk",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: soya beans",
+      "SUGGEST: soya beans"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 52,
+    "term": "Metalist Kharkov",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 52,
+    "term": "Metalist Kharkiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: metastasis",
+      "SUGGEST: metastatic",
+      "SUGGEST: metastasis"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 53,
+    "term": "Karpaty Lvov",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 53,
+    "term": "Karpaty Lviv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: party line",
+      "SUGGEST: party list",
+      "SUGGEST: tarpaulin"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 35,
+    "term": "Kievan Rus",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Belarus",
+      "SUGGEST: divan bed",
+      "SUGGEST: divans"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 35,
+    "term": "Kyivan Rus",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: divan bed",
+      "SUGGEST: divans",
+      "SUGGEST: trial run"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 36,
+    "term": "Kazak",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: kayak",
+      "SUGGEST: Kazakh",
+      "SUGGEST: arak"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 36,
+    "term": "Kozak",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: kayak",
+      "SUGGEST: kook",
+      "SUGGEST: kora"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 48,
+    "term": "Gopak",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: dopa",
+      "SUGGEST: go at",
+      "SUGGEST: goad"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 48,
+    "term": "Hopak",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: dopa",
+      "SUGGEST: hoax",
+      "SUGGEST: hock"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 70,
+    "term": "Vladimir the Great",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 70,
+    "term": "Volodymyr the Great",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Alfred the Great",
+      "SUGGEST: for the rest",
+      "SUGGEST: for the rest"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 71,
+    "term": "Prince of Kiev",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Prince of Wales",
+      "SUGGEST: presence of mind",
+      "SUGGEST: Princess of Wales"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 71,
+    "term": "Prince of Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Prince of Wales",
+      "SUGGEST: presence of mind",
+      "SUGGEST: Princess of Wales"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 60,
+    "term": "Alexander Usyk",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: Alexander Pope",
+      "SUGGEST: Alexander",
+      "SUGGEST: alexandrine"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 60,
+    "term": "Oleksandr Usyk",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: oleanders",
+      "SUGGEST: polyandrous",
+      "SUGGEST: oleanders"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 61,
+    "term": "Vladimir Zelensky",
+    "variant": "russian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 61,
+    "term": "Volodymyr Zelenskyy",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 72,
+    "term": "Artemovsk",
+    "variant": "russian",
+    "exists": false,
+    "results": [
+      "SUGGEST: art house",
+      "SUGGEST: arteries",
+      "SUGGEST: artwork"
+    ],
+    "dictionary": "Oxford"
+  },
+  {
+    "pair_id": 72,
+    "term": "Bakhmut",
+    "variant": "ukrainian",
+    "exists": false,
+    "results": [
+      "SUGGEST: gamut",
+      "SUGGEST: bakehouse",
+      "SUGGEST: bakehouses"
+    ],
+    "dictionary": "Oxford"
+  }
+]
