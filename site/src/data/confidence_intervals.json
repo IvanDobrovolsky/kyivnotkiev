@@ -1,0 +1,1510 @@
+{
+  "estimates": [
+    {
+      "pair_id": 2,
+      "source": "reddit",
+      "adoption": 80.6,
+      "ci_low": 75.8,
+      "ci_high": 84.6,
+      "n": 304
+    },
+    {
+      "pair_id": 3,
+      "source": "reddit",
+      "adoption": 66.0,
+      "ci_low": 61.0,
+      "ci_high": 70.6,
+      "n": 376
+    },
+    {
+      "pair_id": 6,
+      "source": "reddit",
+      "adoption": 47.6,
+      "ci_low": 40.1,
+      "ci_high": 55.2,
+      "n": 164
+    },
+    {
+      "pair_id": 10,
+      "source": "reddit",
+      "adoption": 48.7,
+      "ci_low": 44.1,
+      "ci_high": 53.3,
+      "n": 450
+    },
+    {
+      "pair_id": 16,
+      "source": "reddit",
+      "adoption": 43.7,
+      "ci_low": 35.6,
+      "ci_high": 52.1,
+      "n": 135
+    },
+    {
+      "pair_id": 54,
+      "source": "reddit",
+      "adoption": 35.6,
+      "ci_low": 24.6,
+      "ci_high": 48.3,
+      "n": 59
+    },
+    {
+      "pair_id": 23,
+      "source": "reddit",
+      "adoption": 31.1,
+      "ci_low": 25.5,
+      "ci_high": 37.4,
+      "n": 228
+    },
+    {
+      "pair_id": 21,
+      "source": "reddit",
+      "adoption": 52.1,
+      "ci_low": 44.0,
+      "ci_high": 60.0,
+      "n": 146
+    },
+    {
+      "pair_id": 22,
+      "source": "reddit",
+      "adoption": 59.1,
+      "ci_low": 38.7,
+      "ci_high": 76.7,
+      "n": 22
+    },
+    {
+      "pair_id": 35,
+      "source": "reddit",
+      "adoption": 96.4,
+      "ci_low": 89.9,
+      "ci_high": 98.8,
+      "n": 83
+    },
+    {
+      "pair_id": 30,
+      "source": "reddit",
+      "adoption": 97.2,
+      "ci_low": 85.8,
+      "ci_high": 99.5,
+      "n": 36
+    },
+    {
+      "pair_id": 60,
+      "source": "reddit",
+      "adoption": 92.5,
+      "ci_low": 86.4,
+      "ci_high": 96.0,
+      "n": 120
+    },
+    {
+      "pair_id": 46,
+      "source": "reddit",
+      "adoption": 64.2,
+      "ci_low": 55.4,
+      "ci_high": 72.1,
+      "n": 123
+    },
+    {
+      "pair_id": 19,
+      "source": "reddit",
+      "adoption": 100.0,
+      "ci_low": 93.9,
+      "ci_high": 100,
+      "n": 59
+    },
+    {
+      "pair_id": 36,
+      "source": "reddit",
+      "adoption": 89.9,
+      "ci_low": 80.5,
+      "ci_high": 95.0,
+      "n": 69
+    },
+    {
+      "pair_id": 9,
+      "source": "reddit",
+      "adoption": 66.2,
+      "ci_low": 59.9,
+      "ci_high": 72.1,
+      "n": 228
+    },
+    {
+      "pair_id": 53,
+      "source": "reddit",
+      "adoption": 96.6,
+      "ci_low": 82.8,
+      "ci_high": 99.4,
+      "n": 29
+    },
+    {
+      "pair_id": 44,
+      "source": "reddit",
+      "adoption": 58.2,
+      "ci_low": 48.8,
+      "ci_high": 67.0,
+      "n": 110
+    },
+    {
+      "pair_id": 20,
+      "source": "reddit",
+      "adoption": 100.0,
+      "ci_low": 70.1,
+      "ci_high": 100,
+      "n": 9
+    },
+    {
+      "pair_id": 15,
+      "source": "reddit",
+      "adoption": 64.7,
+      "ci_low": 47.9,
+      "ci_high": 78.5,
+      "n": 34
+    },
+    {
+      "pair_id": 55,
+      "source": "reddit",
+      "adoption": 50.0,
+      "ci_low": 9.5,
+      "ci_high": 90.5,
+      "n": 2
+    },
+    {
+      "pair_id": 5,
+      "source": "reddit",
+      "adoption": 75.6,
+      "ci_low": 69.4,
+      "ci_high": 80.9,
+      "n": 213
+    },
+    {
+      "pair_id": 7,
+      "source": "reddit",
+      "adoption": 65.2,
+      "ci_low": 58.7,
+      "ci_high": 71.1,
+      "n": 224
+    },
+    {
+      "pair_id": 40,
+      "source": "reddit",
+      "adoption": 68.0,
+      "ci_low": 61.3,
+      "ci_high": 74.0,
+      "n": 203
+    },
+    {
+      "pair_id": 26,
+      "source": "reddit",
+      "adoption": 44.7,
+      "ci_low": 35.0,
+      "ci_high": 54.7,
+      "n": 94
+    },
+    {
+      "pair_id": 31,
+      "source": "reddit",
+      "adoption": 66.7,
+      "ci_low": 41.7,
+      "ci_high": 84.8,
+      "n": 15
+    },
+    {
+      "pair_id": 24,
+      "source": "reddit",
+      "adoption": 47.1,
+      "ci_low": 34.1,
+      "ci_high": 60.5,
+      "n": 51
+    },
+    {
+      "pair_id": 27,
+      "source": "reddit",
+      "adoption": 76.1,
+      "ci_low": 72.9,
+      "ci_high": 79.1,
+      "n": 708
+    },
+    {
+      "pair_id": 42,
+      "source": "reddit",
+      "adoption": 72.1,
+      "ci_low": 63.6,
+      "ci_high": 79.3,
+      "n": 122
+    },
+    {
+      "pair_id": 28,
+      "source": "reddit",
+      "adoption": 100.0,
+      "ci_low": 74.1,
+      "ci_high": 100,
+      "n": 11
+    },
+    {
+      "pair_id": 34,
+      "source": "reddit",
+      "adoption": 93.1,
+      "ci_low": 78.0,
+      "ci_high": 98.1,
+      "n": 29
+    },
+    {
+      "pair_id": 56,
+      "source": "reddit",
+      "adoption": 0.0,
+      "ci_low": 0,
+      "ci_high": 65.8,
+      "n": 2
+    },
+    {
+      "pair_id": 72,
+      "source": "trends",
+      "adoption": 100.0,
+      "ci_low": 93.7,
+      "ci_high": 100.0,
+      "n": 57
+    },
+    {
+      "pair_id": 60,
+      "source": "trends",
+      "adoption": 93.6,
+      "ci_low": 90.8,
+      "ci_high": 95.6,
+      "n": 407
+    },
+    {
+      "pair_id": 54,
+      "source": "trends",
+      "adoption": 17.0,
+      "ci_low": 13.3,
+      "ci_high": 21.6,
+      "n": 317
+    },
+    {
+      "pair_id": 64,
+      "source": "trends",
+      "adoption": 6.0,
+      "ci_low": 5.1,
+      "ci_high": 7.1,
+      "n": 2183
+    },
+    {
+      "pair_id": 23,
+      "source": "trends",
+      "adoption": 0.7,
+      "ci_low": 0.3,
+      "ci_high": 1.8,
+      "n": 565
+    },
+    {
+      "pair_id": 41,
+      "source": "trends",
+      "adoption": 91.8,
+      "ci_low": 89.7,
+      "ci_high": 93.6,
+      "n": 785
+    },
+    {
+      "pair_id": 38,
+      "source": "trends",
+      "adoption": 85.5,
+      "ci_low": 80.7,
+      "ci_high": 89.3,
+      "n": 256
+    },
+    {
+      "pair_id": 39,
+      "source": "trends",
+      "adoption": 97.9,
+      "ci_low": 96.8,
+      "ci_high": 98.7,
+      "n": 907
+    },
+    {
+      "pair_id": 10,
+      "source": "trends",
+      "adoption": 0.8,
+      "ci_low": 0.1,
+      "ci_high": 4.3,
+      "n": 127
+    },
+    {
+      "pair_id": 26,
+      "source": "trends",
+      "adoption": 1.3,
+      "ci_low": 0.5,
+      "ci_high": 3.2,
+      "n": 319
+    },
+    {
+      "pair_id": 21,
+      "source": "trends",
+      "adoption": 9.4,
+      "ci_low": 8.0,
+      "ci_high": 11.1,
+      "n": 1303
+    },
+    {
+      "pair_id": 7,
+      "source": "trends",
+      "adoption": 97.2,
+      "ci_low": 93.0,
+      "ci_high": 98.9,
+      "n": 143
+    },
+    {
+      "pair_id": 15,
+      "source": "trends",
+      "adoption": 88.1,
+      "ci_low": 82.1,
+      "ci_high": 92.2,
+      "n": 159
+    },
+    {
+      "pair_id": 16,
+      "source": "trends",
+      "adoption": 48.9,
+      "ci_low": 46.3,
+      "ci_high": 51.5,
+      "n": 1392
+    },
+    {
+      "pair_id": 17,
+      "source": "trends",
+      "adoption": 49.6,
+      "ci_low": 41.1,
+      "ci_high": 58.1,
+      "n": 129
+    },
+    {
+      "pair_id": 32,
+      "source": "trends",
+      "adoption": 58.2,
+      "ci_low": 51.8,
+      "ci_high": 64.4,
+      "n": 232
+    },
+    {
+      "pair_id": 48,
+      "source": "trends",
+      "adoption": 55.5,
+      "ci_low": 53.0,
+      "ci_high": 57.9,
+      "n": 1617
+    },
+    {
+      "pair_id": 53,
+      "source": "trends",
+      "adoption": 100.0,
+      "ci_low": 97.0,
+      "ci_high": 100,
+      "n": 125
+    },
+    {
+      "pair_id": 36,
+      "source": "trends",
+      "adoption": 26.3,
+      "ci_low": 23.8,
+      "ci_high": 29.0,
+      "n": 1103
+    },
+    {
+      "pair_id": 2,
+      "source": "trends",
+      "adoption": 87.4,
+      "ci_low": 83.5,
+      "ci_high": 90.4,
+      "n": 356
+    },
+    {
+      "pair_id": 29,
+      "source": "trends",
+      "adoption": 95.6,
+      "ci_low": 93.9,
+      "ci_high": 96.9,
+      "n": 754
+    },
+    {
+      "pair_id": 1,
+      "source": "trends",
+      "adoption": 51.0,
+      "ci_low": 45.8,
+      "ci_high": 56.1,
+      "n": 359
+    },
+    {
+      "pair_id": 28,
+      "source": "trends",
+      "adoption": 96.2,
+      "ci_low": 94.8,
+      "ci_high": 97.2,
+      "n": 943
+    },
+    {
+      "pair_id": 31,
+      "source": "trends",
+      "adoption": 73.5,
+      "ci_low": 67.3,
+      "ci_high": 78.8,
+      "n": 226
+    },
+    {
+      "pair_id": 24,
+      "source": "trends",
+      "adoption": 79.9,
+      "ci_low": 77.2,
+      "ci_high": 82.3,
+      "n": 959
+    },
+    {
+      "pair_id": 30,
+      "source": "trends",
+      "adoption": 97.6,
+      "ci_low": 96.6,
+      "ci_high": 98.4,
+      "n": 1134
+    },
+    {
+      "pair_id": 34,
+      "source": "trends",
+      "adoption": 42.9,
+      "ci_low": 40.7,
+      "ci_high": 45.0,
+      "n": 2021
+    },
+    {
+      "pair_id": 22,
+      "source": "trends",
+      "adoption": 62.9,
+      "ci_low": 60.6,
+      "ci_high": 65.2,
+      "n": 1693
+    },
+    {
+      "pair_id": 35,
+      "source": "trends",
+      "adoption": 8.0,
+      "ci_low": 6.5,
+      "ci_high": 10.0,
+      "n": 945
+    },
+    {
+      "pair_id": 44,
+      "source": "trends",
+      "adoption": 70.1,
+      "ci_low": 66.9,
+      "ci_high": 73.1,
+      "n": 833
+    },
+    {
+      "pair_id": 43,
+      "source": "trends",
+      "adoption": 86.3,
+      "ci_low": 80.3,
+      "ci_high": 90.7,
+      "n": 168
+    },
+    {
+      "pair_id": 11,
+      "source": "trends",
+      "adoption": 77.9,
+      "ci_low": 72.0,
+      "ci_high": 82.9,
+      "n": 222
+    },
+    {
+      "pair_id": 4,
+      "source": "trends",
+      "adoption": 95.4,
+      "ci_low": 93.7,
+      "ci_high": 96.7,
+      "n": 723
+    },
+    {
+      "pair_id": 57,
+      "source": "trends",
+      "adoption": 100.0,
+      "ci_low": 99.6,
+      "ci_high": 100.0,
+      "n": 857
+    },
+    {
+      "pair_id": 52,
+      "source": "trends",
+      "adoption": 100.0,
+      "ci_low": 97.6,
+      "ci_high": 100,
+      "n": 157
+    },
+    {
+      "pair_id": 56,
+      "source": "trends",
+      "adoption": 100.0,
+      "ci_low": 98.0,
+      "ci_high": 100.0,
+      "n": 192
+    },
+    {
+      "pair_id": 6,
+      "source": "trends",
+      "adoption": 55.2,
+      "ci_low": 50.3,
+      "ci_high": 60.0,
+      "n": 404
+    },
+    {
+      "pair_id": 3,
+      "source": "trends",
+      "adoption": 6.6,
+      "ci_low": 5.4,
+      "ci_high": 8.1,
+      "n": 1356
+    },
+    {
+      "pair_id": 58,
+      "source": "trends",
+      "adoption": 28.8,
+      "ci_low": 26.1,
+      "ci_high": 31.7,
+      "n": 1001
+    },
+    {
+      "pair_id": 20,
+      "source": "trends",
+      "adoption": 94.6,
+      "ci_low": 92.4,
+      "ci_high": 96.2,
+      "n": 557
+    },
+    {
+      "pair_id": 55,
+      "source": "trends",
+      "adoption": 5.6,
+      "ci_low": 2.4,
+      "ci_high": 12.5,
+      "n": 89
+    },
+    {
+      "pair_id": 71,
+      "source": "trends",
+      "adoption": 27.4,
+      "ci_low": 24.9,
+      "ci_high": 30.0,
+      "n": 1209
+    },
+    {
+      "pair_id": 9,
+      "source": "trends",
+      "adoption": 87.2,
+      "ci_low": 85.1,
+      "ci_high": 88.9,
+      "n": 1184
+    },
+    {
+      "pair_id": 25,
+      "source": "trends",
+      "adoption": 99.7,
+      "ci_low": 98.5,
+      "ci_high": 100.0,
+      "n": 379
+    },
+    {
+      "pair_id": 45,
+      "source": "trends",
+      "adoption": 92.0,
+      "ci_low": 90.2,
+      "ci_high": 93.6,
+      "n": 992
+    },
+    {
+      "pair_id": 27,
+      "source": "trends",
+      "adoption": 94.5,
+      "ci_low": 90.7,
+      "ci_high": 96.9,
+      "n": 220
+    },
+    {
+      "pair_id": 42,
+      "source": "trends",
+      "adoption": 72.9,
+      "ci_low": 70.2,
+      "ci_high": 75.3,
+      "n": 1168
+    },
+    {
+      "pair_id": 46,
+      "source": "trends",
+      "adoption": 12.9,
+      "ci_low": 9.0,
+      "ci_high": 18.1,
+      "n": 209
+    },
+    {
+      "pair_id": 8,
+      "source": "trends",
+      "adoption": 79.6,
+      "ci_low": 76.7,
+      "ci_high": 82.2,
+      "n": 833
+    },
+    {
+      "pair_id": 61,
+      "source": "trends",
+      "adoption": 70.3,
+      "ci_low": 65.5,
+      "ci_high": 74.6,
+      "n": 390
+    },
+    {
+      "pair_id": 70,
+      "source": "trends",
+      "adoption": 6.0,
+      "ci_low": 4.9,
+      "ci_high": 7.5,
+      "n": 1324
+    },
+    {
+      "pair_id": 19,
+      "source": "trends",
+      "adoption": 100.0,
+      "ci_low": 99.5,
+      "ci_high": 100,
+      "n": 707
+    },
+    {
+      "pair_id": 5,
+      "source": "trends",
+      "adoption": 90.3,
+      "ci_low": 86.5,
+      "ci_high": 93.2,
+      "n": 300
+    },
+    {
+      "pair_id": 40,
+      "source": "trends",
+      "adoption": 92.6,
+      "ci_low": 89.3,
+      "ci_high": 95.0,
+      "n": 326
+    },
+    {
+      "pair_id": 51,
+      "source": "trends",
+      "adoption": 65.1,
+      "ci_low": 58.7,
+      "ci_high": 70.9,
+      "n": 229
+    },
+    {
+      "pair_id": 1,
+      "source": "reddit",
+      "adoption": 71.4,
+      "ci_low": 67.6,
+      "ci_high": 74.8,
+      "n": 604
+    },
+    {
+      "pair_id": 4,
+      "source": "reddit",
+      "adoption": 75.7,
+      "ci_low": 70.7,
+      "ci_high": 80.1,
+      "n": 313
+    },
+    {
+      "pair_id": 8,
+      "source": "reddit",
+      "adoption": 80.7,
+      "ci_low": 72.7,
+      "ci_high": 86.8,
+      "n": 119
+    },
+    {
+      "pair_id": 11,
+      "source": "reddit",
+      "adoption": 48.9,
+      "ci_low": 38.7,
+      "ci_high": 59.1,
+      "n": 88
+    },
+    {
+      "pair_id": 17,
+      "source": "reddit",
+      "adoption": 66.3,
+      "ci_low": 60.2,
+      "ci_high": 71.9,
+      "n": 249
+    },
+    {
+      "pair_id": 38,
+      "source": "reddit",
+      "adoption": 34.0,
+      "ci_low": 25.6,
+      "ci_high": 43.6,
+      "n": 103
+    },
+    {
+      "pair_id": 39,
+      "source": "reddit",
+      "adoption": 90.9,
+      "ci_low": 84.5,
+      "ci_high": 94.8,
+      "n": 121
+    },
+    {
+      "pair_id": 64,
+      "source": "reddit",
+      "adoption": 46.7,
+      "ci_low": 39.0,
+      "ci_high": 54.6,
+      "n": 152
+    },
+    {
+      "pair_id": 41,
+      "source": "reddit",
+      "adoption": 74.2,
+      "ci_low": 67.3,
+      "ci_high": 80.0,
+      "n": 178
+    },
+    {
+      "pair_id": 32,
+      "source": "reddit",
+      "adoption": 72.4,
+      "ci_low": 63.2,
+      "ci_high": 80.0,
+      "n": 105
+    },
+    {
+      "pair_id": 43,
+      "source": "reddit",
+      "adoption": 69.8,
+      "ci_low": 59.4,
+      "ci_high": 78.5,
+      "n": 86
+    },
+    {
+      "pair_id": 57,
+      "source": "reddit",
+      "adoption": 100.0,
+      "ci_low": 72.2,
+      "ci_high": 100,
+      "n": 10
+    },
+    {
+      "pair_id": 61,
+      "source": "reddit",
+      "adoption": 84.5,
+      "ci_low": 79.3,
+      "ci_high": 88.5,
+      "n": 238
+    },
+    {
+      "pair_id": 51,
+      "source": "reddit",
+      "adoption": 72.2,
+      "ci_low": 49.1,
+      "ci_high": 87.5,
+      "n": 18
+    },
+    {
+      "pair_id": 48,
+      "source": "reddit",
+      "adoption": 79.1,
+      "ci_low": 70.8,
+      "ci_high": 85.6,
+      "n": 115
+    },
+    {
+      "pair_id": 29,
+      "source": "reddit",
+      "adoption": 55.6,
+      "ci_low": 26.7,
+      "ci_high": 81.1,
+      "n": 9
+    },
+    {
+      "pair_id": 45,
+      "source": "reddit",
+      "adoption": 100.0,
+      "ci_low": 94.5,
+      "ci_high": 100,
+      "n": 66
+    },
+    {
+      "pair_id": 52,
+      "source": "reddit",
+      "adoption": 100.0,
+      "ci_low": 85.1,
+      "ci_high": 100,
+      "n": 22
+    },
+    {
+      "pair_id": 19,
+      "source": "wikipedia",
+      "adoption": 97.2,
+      "ci_low": 96.6,
+      "ci_high": 97.6,
+      "n": 4385
+    },
+    {
+      "pair_id": 36,
+      "source": "wikipedia",
+      "adoption": 56.9,
+      "ci_low": 56.1,
+      "ci_high": 57.7,
+      "n": 16147
+    },
+    {
+      "pair_id": 45,
+      "source": "wikipedia",
+      "adoption": 98.8,
+      "ci_low": 98.8,
+      "ci_high": 98.8,
+      "n": 252792
+    },
+    {
+      "pair_id": 70,
+      "source": "wikipedia",
+      "adoption": 2.2,
+      "ci_low": 2.2,
+      "ci_high": 2.3,
+      "n": 705587
+    },
+    {
+      "pair_id": 71,
+      "source": "wikipedia",
+      "adoption": 1.8,
+      "ci_low": 1.7,
+      "ci_high": 1.8,
+      "n": 141752
+    },
+    {
+      "pair_id": 72,
+      "source": "wikipedia",
+      "adoption": 99.9,
+      "ci_low": 99.9,
+      "ci_high": 99.9,
+      "n": 1602401
+    },
+    {
+      "pair_id": 54,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.9,
+      "ci_high": 50.1,
+      "n": 1663718
+    },
+    {
+      "pair_id": 64,
+      "source": "wikipedia",
+      "adoption": 25.5,
+      "ci_low": 24.9,
+      "ci_high": 26.0,
+      "n": 23080
+    },
+    {
+      "pair_id": 23,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.9,
+      "ci_high": 50.1,
+      "n": 2818378
+    },
+    {
+      "pair_id": 41,
+      "source": "wikipedia",
+      "adoption": 95.9,
+      "ci_low": 95.8,
+      "ci_high": 96.0,
+      "n": 184630
+    },
+    {
+      "pair_id": 38,
+      "source": "wikipedia",
+      "adoption": 88.3,
+      "ci_low": 88.1,
+      "ci_high": 88.4,
+      "n": 256524
+    },
+    {
+      "pair_id": 26,
+      "source": "wikipedia",
+      "adoption": 0.3,
+      "ci_low": 0.3,
+      "ci_high": 0.4,
+      "n": 283467
+    },
+    {
+      "pair_id": 10,
+      "source": "wikipedia",
+      "adoption": 0.1,
+      "ci_low": 0.1,
+      "ci_high": 0.1,
+      "n": 10611954
+    },
+    {
+      "pair_id": 39,
+      "source": "wikipedia",
+      "adoption": 96.6,
+      "ci_low": 96.5,
+      "ci_high": 96.6,
+      "n": 431466
+    },
+    {
+      "pair_id": 21,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.9,
+      "ci_high": 50.1,
+      "n": 1342994
+    },
+    {
+      "pair_id": 15,
+      "source": "wikipedia",
+      "adoption": 0.1,
+      "ci_low": 0.1,
+      "ci_high": 0.2,
+      "n": 547532
+    },
+    {
+      "pair_id": 16,
+      "source": "wikipedia",
+      "adoption": 1.5,
+      "ci_low": 1.4,
+      "ci_high": 1.5,
+      "n": 214721
+    },
+    {
+      "pair_id": 7,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.9,
+      "ci_high": 50.1,
+      "n": 1271556
+    },
+    {
+      "pair_id": 17,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.9,
+      "ci_high": 50.1,
+      "n": 2782812
+    },
+    {
+      "pair_id": 32,
+      "source": "wikipedia",
+      "adoption": 82.2,
+      "ci_low": 81.7,
+      "ci_high": 82.7,
+      "n": 26459
+    },
+    {
+      "pair_id": 53,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.9,
+      "ci_high": 50.1,
+      "n": 766098
+    },
+    {
+      "pair_id": 52,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.8,
+      "ci_high": 50.2,
+      "n": 266130
+    },
+    {
+      "pair_id": 51,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.9,
+      "ci_high": 50.1,
+      "n": 1024624
+    },
+    {
+      "pair_id": 48,
+      "source": "wikipedia",
+      "adoption": 98.4,
+      "ci_low": 98.3,
+      "ci_high": 98.4,
+      "n": 149293
+    },
+    {
+      "pair_id": 29,
+      "source": "wikipedia",
+      "adoption": 51.5,
+      "ci_low": 50.8,
+      "ci_high": 52.3,
+      "n": 18222
+    },
+    {
+      "pair_id": 2,
+      "source": "wikipedia",
+      "adoption": 95.5,
+      "ci_low": 95.4,
+      "ci_high": 95.5,
+      "n": 1075261
+    },
+    {
+      "pair_id": 1,
+      "source": "wikipedia",
+      "adoption": 87.8,
+      "ci_low": 87.8,
+      "ci_high": 87.9,
+      "n": 2560366
+    },
+    {
+      "pair_id": 28,
+      "source": "wikipedia",
+      "adoption": 80.8,
+      "ci_low": 79.3,
+      "ci_high": 82.1,
+      "n": 3093
+    },
+    {
+      "pair_id": 31,
+      "source": "wikipedia",
+      "adoption": 0.0,
+      "ci_low": 0,
+      "ci_high": 0.4,
+      "n": 915
+    },
+    {
+      "pair_id": 24,
+      "source": "wikipedia",
+      "adoption": 89.6,
+      "ci_low": 89.5,
+      "ci_high": 89.8,
+      "n": 156608
+    },
+    {
+      "pair_id": 30,
+      "source": "wikipedia",
+      "adoption": 78.4,
+      "ci_low": 77.9,
+      "ci_high": 78.9,
+      "n": 25895
+    },
+    {
+      "pair_id": 22,
+      "source": "wikipedia",
+      "adoption": 99.2,
+      "ci_low": 99.1,
+      "ci_high": 99.2,
+      "n": 208604
+    },
+    {
+      "pair_id": 35,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 50.0,
+      "ci_high": 50.0,
+      "n": 4493812
+    },
+    {
+      "pair_id": 44,
+      "source": "wikipedia",
+      "adoption": 96.0,
+      "ci_low": 96.0,
+      "ci_high": 96.1,
+      "n": 161136
+    },
+    {
+      "pair_id": 43,
+      "source": "wikipedia",
+      "adoption": 91.4,
+      "ci_low": 91.2,
+      "ci_high": 91.5,
+      "n": 135309
+    },
+    {
+      "pair_id": 11,
+      "source": "wikipedia",
+      "adoption": 97.5,
+      "ci_low": 97.4,
+      "ci_high": 97.5,
+      "n": 356104
+    },
+    {
+      "pair_id": 4,
+      "source": "wikipedia",
+      "adoption": 98.0,
+      "ci_low": 98.0,
+      "ci_high": 98.0,
+      "n": 1197744
+    },
+    {
+      "pair_id": 56,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.4,
+      "ci_high": 50.6,
+      "n": 31012
+    },
+    {
+      "pair_id": 3,
+      "source": "wikipedia",
+      "adoption": 82.0,
+      "ci_low": 81.9,
+      "ci_high": 82.0,
+      "n": 1516611
+    },
+    {
+      "pair_id": 58,
+      "source": "wikipedia",
+      "adoption": 0.0,
+      "ci_low": 0,
+      "ci_high": 0.3,
+      "n": 1218
+    },
+    {
+      "pair_id": 60,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 50.0,
+      "ci_high": 50.0,
+      "n": 15536242
+    },
+    {
+      "pair_id": 55,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.8,
+      "ci_high": 50.2,
+      "n": 220222
+    },
+    {
+      "pair_id": 9,
+      "source": "wikipedia",
+      "adoption": 96.2,
+      "ci_low": 96.1,
+      "ci_high": 96.3,
+      "n": 171648
+    },
+    {
+      "pair_id": 25,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.5,
+      "ci_high": 50.5,
+      "n": 45034
+    },
+    {
+      "pair_id": 27,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 50.0,
+      "ci_high": 50.0,
+      "n": 23591994
+    },
+    {
+      "pair_id": 42,
+      "source": "wikipedia",
+      "adoption": 98.6,
+      "ci_low": 98.5,
+      "ci_high": 98.6,
+      "n": 258084
+    },
+    {
+      "pair_id": 46,
+      "source": "wikipedia",
+      "adoption": 82.9,
+      "ci_low": 82.6,
+      "ci_high": 83.1,
+      "n": 76542
+    },
+    {
+      "pair_id": 8,
+      "source": "wikipedia",
+      "adoption": 96.5,
+      "ci_low": 96.4,
+      "ci_high": 96.5,
+      "n": 267616
+    },
+    {
+      "pair_id": 61,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 50.0,
+      "ci_high": 50.0,
+      "n": 15268614
+    },
+    {
+      "pair_id": 5,
+      "source": "wikipedia",
+      "adoption": 50.0,
+      "ci_low": 49.9,
+      "ci_high": 50.1,
+      "n": 1125846
+    },
+    {
+      "pair_id": 40,
+      "source": "wikipedia",
+      "adoption": 93.3,
+      "ci_low": 93.2,
+      "ci_high": 93.4,
+      "n": 221079
+    },
+    {
+      "pair_id": 57,
+      "source": "wikipedia",
+      "adoption": 100.0,
+      "ci_low": 100.0,
+      "ci_high": 100,
+      "n": 44469
+    },
+    {
+      "pair_id": 6,
+      "source": "wikipedia",
+      "adoption": 100.0,
+      "ci_low": 100.0,
+      "ci_high": 100,
+      "n": 348240
+    },
+    {
+      "pair_id": 64,
+      "source": "gdelt",
+      "adoption": 40.6,
+      "ci_low": 37.5,
+      "ci_high": 43.7,
+      "n": 956
+    },
+    {
+      "pair_id": 45,
+      "source": "gdelt",
+      "adoption": 99.9,
+      "ci_low": 99.9,
+      "ci_high": 99.9,
+      "n": 103179
+    },
+    {
+      "pair_id": 10,
+      "source": "gdelt",
+      "adoption": 38.6,
+      "ci_low": 37.4,
+      "ci_high": 39.8,
+      "n": 6152
+    },
+    {
+      "pair_id": 8,
+      "source": "gdelt",
+      "adoption": 0.7,
+      "ci_low": 0.7,
+      "ci_high": 0.8,
+      "n": 65693
+    },
+    {
+      "pair_id": 23,
+      "source": "gdelt",
+      "adoption": 57.6,
+      "ci_low": 53.8,
+      "ci_high": 61.2,
+      "n": 674
+    },
+    {
+      "pair_id": 38,
+      "source": "gdelt",
+      "adoption": 80.9,
+      "ci_low": 80.7,
+      "ci_high": 81.1,
+      "n": 129888
+    },
+    {
+      "pair_id": 42,
+      "source": "gdelt",
+      "adoption": 4.1,
+      "ci_low": 3.9,
+      "ci_high": 4.4,
+      "n": 34128
+    },
+    {
+      "pair_id": 15,
+      "source": "gdelt",
+      "adoption": 96.6,
+      "ci_low": 96.5,
+      "ci_high": 96.6,
+      "n": 228964
+    },
+    {
+      "pair_id": 3,
+      "source": "gdelt",
+      "adoption": 19.8,
+      "ci_low": 19.7,
+      "ci_high": 19.9,
+      "n": 446807
+    },
+    {
+      "pair_id": 61,
+      "source": "gdelt",
+      "adoption": 26.4,
+      "ci_low": 26.3,
+      "ci_high": 26.6,
+      "n": 383245
+    },
+    {
+      "pair_id": 39,
+      "source": "gdelt",
+      "adoption": 99.9,
+      "ci_low": 99.9,
+      "ci_high": 99.9,
+      "n": 48470
+    },
+    {
+      "pair_id": 41,
+      "source": "gdelt",
+      "adoption": 76.0,
+      "ci_low": 75.7,
+      "ci_high": 76.3,
+      "n": 75790
+    },
+    {
+      "pair_id": 11,
+      "source": "gdelt",
+      "adoption": 75.2,
+      "ci_low": 75.0,
+      "ci_high": 75.4,
+      "n": 230991
+    },
+    {
+      "pair_id": 1,
+      "source": "gdelt",
+      "adoption": 28.9,
+      "ci_low": 28.8,
+      "ci_high": 28.9,
+      "n": 3814087
+    },
+    {
+      "pair_id": 20,
+      "source": "gdelt",
+      "adoption": 1.7,
+      "ci_low": 0.8,
+      "ci_high": 3.6,
+      "n": 401
+    },
+    {
+      "pair_id": 7,
+      "source": "gdelt",
+      "adoption": 99.8,
+      "ci_low": 99.8,
+      "ci_high": 99.8,
+      "n": 221517
+    },
+    {
+      "pair_id": 40,
+      "source": "gdelt",
+      "adoption": 48.2,
+      "ci_low": 47.8,
+      "ci_high": 48.6,
+      "n": 75931
+    },
+    {
+      "pair_id": 44,
+      "source": "gdelt",
+      "adoption": 0.2,
+      "ci_low": 0.2,
+      "ci_high": 0.3,
+      "n": 36734
+    },
+    {
+      "pair_id": 17,
+      "source": "gdelt",
+      "adoption": 30.1,
+      "ci_low": 29.9,
+      "ci_high": 30.2,
+      "n": 358543
+    },
+    {
+      "pair_id": 4,
+      "source": "gdelt",
+      "adoption": 98.4,
+      "ci_low": 98.3,
+      "ci_high": 98.4,
+      "n": 302795
+    },
+    {
+      "pair_id": 46,
+      "source": "gdelt",
+      "adoption": 10.2,
+      "ci_low": 8.1,
+      "ci_high": 12.8,
+      "n": 656
+    },
+    {
+      "pair_id": 9,
+      "source": "gdelt",
+      "adoption": 97.0,
+      "ci_low": 96.9,
+      "ci_high": 97.2,
+      "n": 56941
+    },
+    {
+      "pair_id": 16,
+      "source": "gdelt",
+      "adoption": 87.1,
+      "ci_low": 82.5,
+      "ci_high": 90.6,
+      "n": 263
+    },
+    {
+      "pair_id": 5,
+      "source": "gdelt",
+      "adoption": 83.5,
+      "ci_low": 82.7,
+      "ci_high": 84.2,
+      "n": 9346
+    },
+    {
+      "pair_id": 2,
+      "source": "gdelt",
+      "adoption": 98.2,
+      "ci_low": 98.1,
+      "ci_high": 98.2,
+      "n": 593663
+    },
+    {
+      "pair_id": 54,
+      "source": "gdelt",
+      "adoption": 0.0,
+      "ci_low": 0,
+      "ci_high": 49.0,
+      "n": 4
+    },
+    {
+      "pair_id": 43,
+      "source": "gdelt",
+      "adoption": 11.8,
+      "ci_low": 11.3,
+      "ci_high": 12.4,
+      "n": 12928
+    },
+    {
+      "pair_id": 72,
+      "source": "gdelt",
+      "adoption": 72.5,
+      "ci_low": 70.2,
+      "ci_high": 74.6,
+      "n": 1627
+    },
+    {
+      "pair_id": 6,
+      "source": "gdelt",
+      "adoption": 8.2,
+      "ci_low": 7.8,
+      "ci_high": 8.6,
+      "n": 15213
+    },
+    {
+      "pair_id": 19,
+      "source": "gdelt",
+      "adoption": 96.5,
+      "ci_low": 95.3,
+      "ci_high": 97.4,
+      "n": 1187
+    }
+  ],
+  "method": "Wilson score interval",
+  "confidence": 0.95
+}
