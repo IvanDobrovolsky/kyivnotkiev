@@ -91,7 +91,7 @@ function formatNum(n: number) {
           </div>
           <div class={`sidebar-items ${ci === 0 ? 'open' : ''}`}>
             {cat.pairs.map((pair, pi) => (
-              <div class={`sidebar-item ${pair.id === 1 ? 'active' : ''}`} data-pair-id={pair.id}>
+              <div class="sidebar-item" data-pair-id={pair.id}>
                 <div class="pair-name">
                   <span>{pair.ukrainian}</span>
                   <span class="old">{pair.russian}</span>
@@ -107,6 +107,17 @@ function formatNum(n: number) {
     </aside>
 
     <main class="main">
+      <!-- ══ LANDING VIEW (visible when no pair selected) ══ -->
+      <div id="landing-view">
+        <div style="text-align:center; padding:2.5rem 1rem 2rem; margin-bottom:1.25rem;">
+          <h1 style="font-size:2.2rem; font-weight:800; margin:0; line-height:1.2;">
+            Did the world listen?
+          </h1>
+          <p style="color:var(--text-muted); font-size:0.95rem; margin:0.6rem auto 0; max-width:640px;">
+            The largest computational study tracking how global media, search, and academia adopt Ukrainian spellings — from <span style="text-decoration:line-through; color:#9ca3af;">Kiev</span> to <strong style="color:#0057B8;">Kyiv</strong> — across {fmtBig(m.total_records)} records from 7 sources.
+          </p>
+        </div>
+
       <div class="stats" style="grid-template-columns: repeat(5, 1fr);">
         <div class="stat-card">
           <div class="stat-value">{fmtBig(m.total_records)}</div>
@@ -138,6 +149,11 @@ function formatNum(n: number) {
           </div>
         ))}
       </div>
+
+      </div><!-- end landing-view -->
+
+      <!-- ══ PAIR VIEW (visible when pair selected) ══ -->
+      <div id="pair-view" style="display:none;">
 
       <div class="chart-container">
         <div class="chart-header" style="flex-direction:column; align-items:stretch; gap:0.35rem;">
@@ -216,9 +232,10 @@ function formatNum(n: number) {
         Source availability varies: Trends (2010–2026), GDELT (2015–2026), Wikipedia (2015–2026), Reddit (2007–2026), Ngrams (books, 2000–2019)
       </div>
 
-      <!-- ── GLOBAL VIEWS (static, don't change per pair) ── -->
+      </div><!-- end pair-view -->
 
-      <div style="margin: 2rem 0 1rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600;">Global Overview</div>
+      <!-- ══ GLOBAL VIEWS (visible on landing, hidden on pair view) ══ -->
+      <div id="global-view">
 
       <!-- Statistical Highlights — values from analysis.json (recomputed from BQ) -->
       <div class="chart-container" style="margin-bottom: 1rem;">
@@ -308,6 +325,8 @@ function formatNum(n: number) {
         <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
       </div>
 
+      </div><!-- end global-view -->
+
       <div class="chart-container" id="about">
         <div class="about-text">
           <p>
@@ -386,17 +405,36 @@ function formatNum(n: number) {
         const id = parseInt(p);
         if (!isNaN(id) && (pairs as any).pairs.some((pp: any) => pp.id === id)) return id;
       }
-      return 1;
+      return 0; // 0 = landing/overview, no pair selected
     }
 
     function updateUrl(pairId: number) {
       const url = new URL(window.location.href);
-      if (pairId === 1) {
+      if (pairId === 0) {
         url.searchParams.delete('pair');
       } else {
         url.searchParams.set('pair', String(pairId));
       }
       window.history.replaceState({}, '', url.toString());
+    }
+
+    function showView(mode: 'landing' | 'pair') {
+      const landing = document.getElementById('landing-view');
+      const global = document.getElementById('global-view');
+      const pair = document.getElementById('pair-view');
+      if (landing) landing.style.display = mode === 'landing' ? 'block' : 'none';
+      if (global) global.style.display = mode === 'landing' ? 'block' : 'none';
+      if (pair) pair.style.display = mode === 'pair' ? 'block' : 'none';
+    }
+
+    function showLanding() {
+      activePairId = 0;
+      updateUrl(0);
+      showView('landing');
+      document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+      drawCategoryChart();
+      drawHeatmap();
+      drawErrorAnalysis();
     }
 
     let activePairId = getPairFromUrl();
@@ -825,6 +863,7 @@ function formatNum(n: number) {
     function selectPair(pairId: number) {
       activePairId = pairId;
       updateUrl(pairId);
+      showView('pair');
       document.querySelectorAll('.sidebar-item').forEach(i => {
         const id = parseInt((i as HTMLElement).dataset.pairId || '0');
         i.classList.toggle('active', id === pairId);
@@ -1316,16 +1355,32 @@ function formatNum(n: number) {
       drawHoldoutTable();
     });
 
-    drawChart();
-    drawCategoryChart();
-    drawHeatmap();
-    drawHoldoutTable();
-    drawErrorAnalysis();
+    // Initial load: landing or pair view based on URL
+    if (activePairId > 0) {
+      selectPair(activePairId);
+    } else {
+      showView('landing');
+      drawCategoryChart();
+      drawHeatmap();
+      drawErrorAnalysis();
+    }
 
-    // Show map on initial load (Trends has per-country data)
-    drawWorldMap();
+    // Logo click → back to landing
+    document.querySelector('.topbar-logo')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      showLanding();
+    });
 
-    window.addEventListener('resize', () => { drawChart(); drawCategoryChart(); drawHeatmap(); drawErrorAnalysis(); if (activeSource === 'gdelt') drawWorldMap(); });
+    window.addEventListener('resize', () => {
+      if (activePairId > 0) {
+        drawChart();
+        drawWorldMap();
+      } else {
+        drawCategoryChart();
+        drawHeatmap();
+        drawErrorAnalysis();
+      }
+    });
 
     // ── Error Analysis chart ─────────────────────────────────
     function drawErrorAnalysis() {
