@@ -600,7 +600,7 @@ function formatNum(n: number) {
       let y: d3.ScaleLinear<number, number>;
       if (chartMode === 'volume') {
         // Find max count across all data points
-        // Y max: use actual max — no more clipping
+        // Y max: actual max + 10% headroom, no .nice() rounding
         const getVal = (d: any) => {
           if (lineMode === 'ukrainian') return d.ukr || 0;
           if (lineMode === 'russian') return d.rus || 0;
@@ -608,7 +608,7 @@ function formatNum(n: number) {
         };
         const allVals = (seriesData || []).map(getVal).filter((v: number) => v > 0);
         const maxVal = allVals.length > 0 ? Math.max(...allVals) : 1;
-        y = d3.scaleLinear().domain([0, maxVal]).range([height, 0]).nice();
+        y = d3.scaleLinear().domain([0, maxVal * 1.1]).range([height, 0]);
       } else {
         y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
       }
