@@ -1,0 +1,224 @@
+[
+  {
+    "pair_id": 1,
+    "term": "Kiev",
+    "variant": "russian",
+    "exists": true,
+    "title": "Kyiv",
+    "snippet": "Kyiv, chief city and capital of Ukraine. A port on the Dnieper (Dnipro) River and a large railroad junction, it is a city with an ancient and proud history. As the centre of Kyivan (Kievan) Rus, the first eastern Slavic state, 1,000 years ago, it acquired the title \u201cMother of Rus Cities.\u201d It was sev",
+    "mentions_russian": false,
+    "mentions_ukrainian": true,
+    "redirected": true,
+    "final_url": "https://www.britannica.com/place/Kyiv",
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 1,
+    "term": "Kyiv",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Kyiv",
+    "snippet": "Kyiv, chief city and capital of Ukraine. A port on the Dnieper (Dnipro) River and a large railroad junction, it is a city with an ancient and proud history. As the centre of Kyivan (Kievan) Rus, the first eastern Slavic state, 1,000 years ago, it acquired the title \u201cMother of Rus Cities.\u201d It was sev",
+    "mentions_russian": false,
+    "mentions_ukrainian": true,
+    "redirected": false,
+    "final_url": "https://www.britannica.com/place/Kyiv",
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 2,
+    "term": "Kharkov",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 2,
+    "term": "Kharkiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 3,
+    "term": "Odessa",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 3,
+    "term": "Odesa",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 10,
+    "term": "Chernobyl",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 10,
+    "term": "Chornobyl",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Chornobyl",
+    "snippet": "\u2026the city of Chernobyl (Ukrainian: Chornobyl) and 65 miles (104 km) north of Kyiv, Ukraine. The station consisted of four reactors, each capable of producing 1,000 megawatts of electric power; it had come online in 1977\u201383.",
+    "mentions_russian": false,
+    "mentions_ukrainian": true,
+    "redirected": false,
+    "final_url": "https://www.britannica.com/place/Chornobyl",
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 23,
+    "term": "borscht",
+    "variant": "russian",
+    "exists": true,
+    "title": "borscht",
+    "snippet": "borscht, beet soup of the Slavic countries. Although borscht is important in Russian and Polish cuisines, Ukraine is frequently cited as its place of origin. Its name is thought to be derived from the Slavic word for the cow parsnip, or common hogweed (Heracleum sphondylium), or from a fermented bev",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "redirected": false,
+    "final_url": "https://www.britannica.com/topic/borscht",
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 23,
+    "term": "borshch",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 36,
+    "term": "Cossack",
+    "variant": "russian",
+    "exists": true,
+    "title": "Cossack",
+    "snippet": "Cossack, (from Turkic kazak, \u201cadventurer\u201d or \u201cfree man\u201d), member of a people dwelling in the northern hinterlands of the Black and Caspian seas. They had a tradition of independence and finally received privileges from the Russian government in return for military services. Originally (in the 15th c",
+    "mentions_russian": true,
+    "mentions_ukrainian": false,
+    "redirected": false,
+    "final_url": "https://www.britannica.com/topic/Cossack",
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 36,
+    "term": "Kozak",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 54,
+    "term": "Babi Yar",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 54,
+    "term": "Babyn Yar",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 35,
+    "term": "Kievan Rus",
+    "variant": "russian",
+    "exists": true,
+    "title": "Kyivan Rus",
+    "snippet": "Kyivan Rus, the first East Slavic state. It reached its peak in the early to mid-11th century.",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "redirected": true,
+    "final_url": "https://www.britannica.com/topic/Kyivan-Rus",
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 35,
+    "term": "Kyivan Rus",
+    "variant": "ukrainian",
+    "exists": true,
+    "title": "Kyivan Rus",
+    "snippet": "Kyivan Rus, the first East Slavic state. It reached its peak in the early to mid-11th century.",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "redirected": false,
+    "final_url": "https://www.britannica.com/topic/Kyivan-Rus",
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 70,
+    "term": "Vladimir I",
+    "variant": "russian",
+    "exists": true,
+    "title": "Vladimir I",
+    "snippet": "Vladimir I (born c. 956, Kyiv, Kievan Rus [now in Ukraine]\u2014died July 15, 1015, Berestova, near Kyiv; feast day July 15) was the grand prince of Kyiv and the first Christian ruler in Kievan Rus. His military conquests consolidated the provinces of Kyiv and Novgorod into a single state, and his Byzant",
+    "mentions_russian": false,
+    "mentions_ukrainian": false,
+    "redirected": false,
+    "final_url": "https://www.britannica.com/biography/Vladimir-I",
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 70,
+    "term": "Volodymyr the Great",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 72,
+    "term": "Bakhmut",
+    "variant": "russian",
+    "exists": true,
+    "title": "Bakhmut",
+    "snippet": "Bakhmut, city, eastern Ukraine, on the Bakhmut River. The town originated in the 17th century as a fort protecting the Russian frontiers against the Crimean Tatars. Peter I (the Great) established a salt industry there in 1701, but seven years later the fort was destroyed in the Bulavin revolt. It o",
+    "mentions_russian": true,
+    "mentions_ukrainian": true,
+    "redirected": false,
+    "final_url": "https://www.britannica.com/place/Bakhmut",
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 72,
+    "term": "Artemovsk",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 61,
+    "term": "Volodymyr Zelenskyy",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 61,
+    "term": "Zelensky",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 21,
+    "term": "chicken Kiev",
+    "variant": "russian",
+    "exists": false,
+    "dictionary": "Britannica"
+  },
+  {
+    "pair_id": 21,
+    "term": "chicken Kyiv",
+    "variant": "ukrainian",
+    "exists": false,
+    "dictionary": "Britannica"
+  }
+]
