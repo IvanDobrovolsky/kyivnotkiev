@@ -1,0 +1,177 @@
+{
+  "enforcement": {
+    "style_guides": {
+      "AP Stylebook": {
+        "adopted": "2019-08",
+        "pairs": {
+          "1": "Kyiv",
+          "2": "Kharkiv",
+          "3": "Odesa",
+          "4": "Lviv"
+        },
+        "notes": "First major English style guide to switch. Triggered cascade."
+      },
+      "BBC News Style Guide": {
+        "adopted": "2019-10",
+        "pairs": {
+          "1": "Kyiv"
+        },
+        "notes": "BBC switched after AP. Major influence on Commonwealth media."
+      },
+      "The Guardian": {
+        "adopted": "2022-02",
+        "pairs": {
+          "1": "Kyiv",
+          "2": "Kharkiv"
+        },
+        "notes": "Switched at invasion. Previously used Kiev."
+      },
+      "Reuters": {
+        "adopted": "2019",
+        "pairs": {
+          "1": "Kyiv"
+        },
+        "notes": "Wire service \u2014 feeds thousands of outlets."
+      },
+      "US Board on Geographic Names": {
+        "adopted": "2019-06",
+        "pairs": {
+          "1": "Kyiv",
+          "2": "Kharkiv",
+          "3": "Odesa",
+          "4": "Lviv",
+          "5": "Zaporizhzhia"
+        },
+        "notes": "Official US government standard. Federal agencies must comply."
+      },
+      "Wikipedia": {
+        "adopted": "2019-09",
+        "pairs": {
+          "1": "Kyiv"
+        },
+        "notes": "Article moved from Kiev to Kyiv after contested RFC."
+      }
+    },
+    "tech_tools": {
+      "Grammarly": {
+        "status": "enforces_ukrainian",
+        "pairs": {
+          "1": "Kyiv",
+          "2": "Kharkiv"
+        },
+        "notes": "Ukrainian-founded company. Flags 'Kiev' as incorrect, suggests 'Kyiv'.",
+        "credit": true
+      },
+      "Google Search": {
+        "status": "mixed",
+        "pairs": {
+          "1": "shows both",
+          "70": "corrects Volodymyr to Vladimir"
+        },
+        "notes": "Google autocorrects 'Volodymyr the Great' to 'Vladimir the Great'. Does NOT enforce Ukrainian forms consistently.",
+        "problematic": true
+      },
+      "Microsoft Word": {
+        "status": "no_enforcement",
+        "notes": "Neither form flagged. No preference enforced."
+      },
+      "Apple autocorrect": {
+        "status": "no_enforcement",
+        "notes": "Neither form flagged on iOS/macOS."
+      }
+    },
+    "organizations": {
+      "IATA (aviation)": {
+        "code": "KBP",
+        "name": "Boryspil International Airport, Kyiv",
+        "status": "uses_kyiv"
+      },
+      "UEFA": {
+        "adopted": "2018",
+        "pairs": {
+          "32": "Dynamo Kyiv"
+        },
+        "notes": "One of the first international organizations to switch."
+      },
+      "FIFA": {
+        "adopted": "2019",
+        "pairs": {},
+        "notes": "Uses Ukrainian spellings in official documents."
+      },
+      "UN": {
+        "status": "uses_kyiv",
+        "notes": "United Nations uses Kyiv in all official documents since 2019."
+      }
+    }
+  },
+  "hunspell": {
+    "Kiev": {
+      "variant": "russian",
+      "in_dictionary": true,
+      "suggestions": []
+    },
+    "Kyiv": {
+      "variant": "ukrainian",
+      "in_dictionary": false,
+      "suggestions": [
+        "Kiev"
+      ]
+    },
+    "Kharkov": {
+      "variant": "russian",
+      "in_dictionary": true,
+      "suggestions": []
+    },
+    "Kharkiv": {
+      "variant": "ukrainian",
+      "in_dictionary": false,
+      "suggestions": [
+        "Kharkov"
+      ]
+    },
+    "Odessa": {
+      "variant": "russian",
+      "in_dictionary": true,
+      "suggestions": []
+    },
+    "Odesa": {
+      "variant": "ukrainian",
+      "in_dictionary": false,
+      "suggestions": [
+        "Odessa"
+      ]
+    },
+    "Chernobyl": {
+      "variant": "russian",
+      "in_dictionary": true,
+      "suggestions": []
+    },
+    "Chornobyl": {
+      "variant": "ukrainian",
+      "in_dictionary": false,
+      "suggestions": [
+        "Chernobyl"
+      ]
+    },
+    "borscht": {
+      "variant": "russian",
+      "in_dictionary": true,
+      "suggestions": []
+    },
+    "borshch": {
+      "variant": "ukrainian",
+      "in_dictionary": false,
+      "suggestions": [
+        "borscht"
+      ]
+    }
+  },
+  "findings": {
+    "grammarly_enforces": true,
+    "google_corrects_against_ukrainian": true,
+    "hunspell_prefers_russian": 5,
+    "hunspell_accepts_ukrainian": 0,
+    "style_guides_adopted": 6,
+    "key_finding": "Standard English spellcheck dictionaries (hunspell) still list Russian forms as correct and flag Ukrainian forms as misspelled. Grammarly is the notable exception \u2014 it actively enforces Ukrainian spellings. Google Search autocorrects 'Volodymyr the Great' to 'Vladimir the Great', actively working against Ukrainian historical identity."
+  }
+}
