@@ -203,13 +203,13 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 1.1rem 1.25rem;
+  padding: 0.75rem 1rem;
   box-shadow: var(--shadow);
 }
 
 .stat-value {
   font-family: var(--font-mono);
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--blue);
 }

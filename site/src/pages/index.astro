@@ -140,50 +140,35 @@ function formatNum(n: number) {
       </div>
 
       <div class="chart-container">
-        <div class="chart-header" style="flex-direction:column; align-items:stretch; gap:0.4rem;">
-          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
-            <div class="chart-title" style="margin:0;">
+        <div class="chart-header" style="flex-direction:column; align-items:stretch; gap:0.35rem;">
+          <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+            <div class="chart-title" style="margin:0; white-space:nowrap;">
               <span class="old-name" id="chart-old">Kiev</span>
               <span class="arrow">→</span>
               <span class="new-name" id="chart-new">Kyiv</span>
-              <span id="chart-range" style="font-size:0.75rem; color:var(--text-muted); font-weight:400; margin-left:0.5rem;"></span>
-              <span id="chart-info" style="font-size:0.7rem; color:var(--text-dim); font-style:italic; margin-left:0.5rem;"></span>
             </div>
+            <span id="chart-range" style="font-size:0.72rem; color:var(--text-muted); font-weight:400;"></span>
+            <span id="chart-info" style="font-size:0.68rem; color:var(--text-dim); font-style:italic;"></span>
+            <div style="flex:1;"></div>
             <div class="chart-controls" style="margin:0;">
-              <button class="source-toggle active" data-source="trends" style="--source-color: #4285F4">
-                <span class="source-dot"></span>Trends
-              </button>
-              <button class="source-toggle" data-source="gdelt" style="--source-color: #1e3a5f">
-                <span class="source-dot"></span>GDELT
-              </button>
-              <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466">
-                <span class="source-dot"></span>Wiki
-              </button>
-              <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500">
-                <span class="source-dot"></span>Reddit
-              </button>
-              <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000">
-                <span class="source-dot"></span>YouTube
-              </button>
-              <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed">
-                <span class="source-dot"></span>Ngrams
-              </button>
-              <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4">
-                <span class="source-dot"></span>Academic
-              </button>
+              <button class="source-toggle active" data-source="trends" style="--source-color: #4285F4"><span class="source-dot"></span>Trends</button>
+              <button class="source-toggle" data-source="gdelt" style="--source-color: #1e3a5f"><span class="source-dot"></span>GDELT</button>
+              <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466"><span class="source-dot"></span>Wiki</button>
+              <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500"><span class="source-dot"></span>Reddit</button>
+              <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000"><span class="source-dot"></span>YouTube</button>
+              <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed"><span class="source-dot"></span>Ngrams</button>
+              <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4"><span class="source-dot"></span>Academic</button>
             </div>
           </div>
-          <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
-            <div class="chart-controls" style="margin:0;">
-              <button class="chart-mode active" data-chart="adoption">Adoption %</button>
-              <button class="chart-mode" data-chart="volume">Volume</button>
-              <span class="toggle-sep"></span>
-              <button class="line-mode active" data-mode="both">All</button>
-              <button class="line-mode" data-mode="ukrainian">UA</button>
-              <button class="line-mode" data-mode="russian">RU</button>
-              <span class="toggle-sep"></span>
-              <button class="event-toggle active" id="events-toggle">Events</button>
-            </div>
+          <div class="chart-controls" style="margin:0;">
+            <button class="chart-mode active" data-chart="adoption">Adoption %</button>
+            <button class="chart-mode" data-chart="volume" id="volume-btn">Volume</button>
+            <span class="toggle-sep"></span>
+            <button class="line-mode active" data-mode="both">All</button>
+            <button class="line-mode" data-mode="ukrainian">UA</button>
+            <button class="line-mode" data-mode="russian">RU</button>
+            <span class="toggle-sep"></span>
+            <button class="event-toggle active" id="events-toggle">Events</button>
           </div>
         </div>
         <div id="chart"></div>
@@ -720,32 +705,33 @@ function formatNum(n: number) {
             .text(first.date);
         }
 
-        // End dot + label
+        // End dot + label (adoption mode only)
         const last = series[series.length - 1];
-        const cx = x(parseDate(last.date)!);
-        const cy = y(last.adoption);
+        if (chartMode === 'adoption' && lineMode !== 'russian') {
+          const cx = x(parseDate(last.date)!);
+          const cy = y(last.adoption);
 
-        svg.append('circle')
-          .attr('cx', cx).attr('cy', cy)
-          .attr('r', 4)
-          .attr('fill', sourceColors[src]);
+          svg.append('circle')
+            .attr('cx', cx).attr('cy', cy)
+            .attr('r', 4)
+            .attr('fill', sourceColors[src]);
 
-        svg.append('text')
-          .attr('x', cx + 10).attr('y', cy + 5)
-          .attr('fill', sourceColors[src])
-          .attr('font-size', '13px')
-          .attr('font-weight', '700')
-          .text(last.adoption + '%');
-
-        // End date if doesn't reach 2026
-        const lastDate = parseDate(last.date)!;
-        if (lastDate < new Date(2025, 6, 1)) {
           svg.append('text')
-            .attr('x', cx + 8).attr('y', cy + 16)
+            .attr('x', cx + 10).attr('y', cy + 5)
             .attr('fill', sourceColors[src])
-            .attr('font-size', '9px')
-            .attr('opacity', 0.6)
-            .text('ends ' + last.date);
+            .attr('font-size', '13px')
+            .attr('font-weight', '700')
+            .text(last.adoption + '%');
+
+          const lastDate = parseDate(last.date)!;
+          if (lastDate < new Date(2025, 6, 1)) {
+            svg.append('text')
+              .attr('x', cx + 8).attr('y', cy + 16)
+              .attr('fill', sourceColors[src])
+              .attr('font-size', '9px')
+              .attr('opacity', 0.6)
+              .text('ends ' + last.date);
+          }
         }
 
         activeLegend.push({
@@ -771,27 +757,32 @@ function formatNum(n: number) {
             const series = allSeriesData[src];
             if (series.length < 2) continue;
 
-            // Convert to date-value pairs for bisection
             const dates = series.map((d: any) => parseDate(d.date)!.getTime());
             const vals = series.map((d: any) => d.adoption);
-
             const t = hoveredDate.getTime();
-            // Check if within data range
             if (t < dates[0] || t > dates[dates.length - 1]) continue;
 
-            // Binary search for bracketing points
             let lo = 0, hi = dates.length - 1;
             while (hi - lo > 1) {
               const mid = (lo + hi) >> 1;
               if (dates[mid] <= t) lo = mid; else hi = mid;
             }
 
-            // Linear interpolation between lo and hi
-            const frac = (t - dates[lo]) / (dates[hi] - dates[lo] || 1);
-            const interpolated = vals[lo] + frac * (vals[hi] - vals[lo]);
-            const value = Math.round(interpolated * 10) / 10;
+            const closest = Math.abs(t - dates[lo]) < Math.abs(t - dates[hi]) ? lo : hi;
+            const d = series[closest];
+            const value = Math.round(d.adoption * 10) / 10;
 
-            html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${value}%</strong></span>`;
+            if (chartMode === 'volume' && d.ukr !== undefined) {
+              html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}</span>`;
+              html += `<br/>&nbsp;&nbsp;<span style="color:${sourceColors[src]}">UA: <strong>${(d.ukr || 0).toLocaleString()}</strong></span>`;
+              html += `<br/>&nbsp;&nbsp;<span style="color:#dc2626">RU: <strong>${(d.rus || 0).toLocaleString()}</strong></span>`;
+              html += `<br/>&nbsp;&nbsp;<span style="color:#6b7280">Adoption: ${value}%</span>`;
+            } else {
+              html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${value}%</strong></span>`;
+              if (d.ukr !== undefined) {
+                html += ` <span style="color:#9ca3af;font-size:0.8em">(UA:${(d.ukr||0).toLocaleString()} / RU:${(d.rus||0).toLocaleString()})</span>`;
+              }
+            }
           }
 
           tooltip.style('opacity', '1').html(html);
@@ -876,6 +867,27 @@ function formatNum(n: number) {
         btn.classList.add('active');
         activeSource = src;
         activeSources = new Set([src]);
+
+        // Disable volume for sources without count data
+        const noVolume = ['ngrams', 'openalex'];
+        const volBtn = document.getElementById('volume-btn');
+        if (volBtn) {
+          if (noVolume.includes(src)) {
+            volBtn.classList.add('disabled');
+            (volBtn as HTMLElement).style.opacity = '0.3';
+            (volBtn as HTMLElement).style.pointerEvents = 'none';
+            if (chartMode === 'volume') {
+              chartMode = 'adoption';
+              document.querySelectorAll('.chart-mode').forEach(b => b.classList.remove('active'));
+              document.querySelector('.chart-mode[data-chart="adoption"]')?.classList.add('active');
+            }
+          } else {
+            volBtn.classList.remove('disabled');
+            (volBtn as HTMLElement).style.opacity = '1';
+            (volBtn as HTMLElement).style.pointerEvents = 'auto';
+          }
+        }
+
         drawChart();
 
         // Show map for GDELT and Trends (both have country data)
