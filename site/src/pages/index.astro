@@ -40,12 +40,12 @@ function formatNum(n: number) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>KyivNotKiev — Measuring Ukrainian Toponym Adoption Worldwide</title>
-  <meta name="description" content="The world's largest computational study tracking how global media, search, and social platforms adopt Ukrainian spellings. 38.7M news articles, 562M Wikipedia views, 22K Reddit posts, 14.5K YouTube videos across 7 sources.">
+  <title>#KyivNotKiev — Measuring Real-Time Toponymic Change</title>
+  <meta name="description" content="Did the world listen? Multi-source computational framework tracking Ukrainian spelling adoption across 613M+ records from 7 sources, 55 countries, 2010–2026.">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="KyivNotKiev — Did the World Listen?">
-  <meta property="og:description" content="Computational analysis of Ukrainian toponym adoption across 38.7M news articles, 562M Wikipedia views, 14.5K videos from 7 sources. How effectively did #KyivNotKiev change language worldwide?">
+  <meta property="og:title" content="#KyivNotKiev — Did the World Listen?">
+  <meta property="og:description" content="Measuring real-time toponymic change across 613M+ records from 7 sources. The largest computational study of Ukrainian spelling adoption worldwide.">
   <meta property="og:image" content="https://kyivnotkiev.org/og.png">
   <meta property="og:url" content="https://kyivnotkiev.org">
   <meta property="og:type" content="website">
@@ -54,8 +54,8 @@ function formatNum(n: number) {
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="KyivNotKiev — Did the World Listen?">
-  <meta name="twitter:description" content="38.7M news articles, 562M page views, 22K posts, 14.5K videos, 7 sources. The largest computational study of Ukrainian toponym adoption.">
+  <meta name="twitter:title" content="#KyivNotKiev — Did the World Listen?">
+  <meta name="twitter:description" content="613M+ records, 7 sources, 55 countries. Measuring real-time toponymic change 2010–2026.">
   <meta name="twitter:image" content="https://kyivnotkiev.org/og.png">
 
   <!-- Favicon -->
@@ -109,12 +109,16 @@ function formatNum(n: number) {
     <main class="main">
       <!-- ══ LANDING VIEW (visible when no pair selected) ══ -->
       <div id="landing-view">
-        <div style="text-align:center; padding:2.5rem 1rem 2rem; margin-bottom:1.25rem;">
-          <h1 style="font-size:2.2rem; font-weight:800; margin:0; line-height:1.2;">
-            Did the world listen?
+        <div style="text-align:center; padding:3rem 1rem 2rem; margin-bottom:1.25rem;">
+          <img src="/logo.svg" alt="Kyiv chestnut" style="height:80px; width:auto; margin-bottom:1rem;">
+          <h1 style="font-size:2rem; font-weight:800; margin:0; line-height:1.2; color:#0057B8;">
+            #KyivNotKiev
           </h1>
-          <p style="color:var(--text-muted); font-size:0.95rem; margin:0.6rem auto 0; max-width:640px;">
-            The largest computational study tracking how global media, search, and academia adopt Ukrainian spellings — from <span style="text-decoration:line-through; color:#9ca3af;">Kiev</span> to <strong style="color:#0057B8;">Kyiv</strong> — across {fmtBig(m.total_records)} records from 7 sources.
+          <p style="color:var(--text); font-size:1rem; margin:0.8rem auto 0; max-width:700px; line-height:1.5;">
+            Measuring Real-Time Toponymic Change: A Multi-Source Computational Framework for Tracking Ukrainian Spelling Adoption (2010–2026)
+          </p>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin:0.5rem auto 0; max-width:600px;">
+            {fmtBig(m.total_records)} records · {m.analyzable_pairs} toponym pairs · {m.num_sources} sources · {m.num_countries} countries
           </p>
         </div>
 
@@ -167,8 +171,8 @@ function formatNum(n: number) {
             <span id="chart-info" style="font-size:0.68rem; color:var(--text-dim); font-style:italic;"></span>
             <div style="flex:1;"></div>
             <div class="chart-controls" style="margin:0;">
-              <button class="source-toggle active" data-source="trends" style="--source-color: #4285F4"><span class="source-dot"></span>Trends</button>
-              <button class="source-toggle" data-source="gdelt" style="--source-color: #1e3a5f"><span class="source-dot"></span>GDELT</button>
+              <button class="source-toggle active" data-source="gdelt" style="--source-color: #1e3a5f"><span class="source-dot"></span>GDELT</button>
+              <button class="source-toggle" data-source="trends" style="--source-color: #4285F4"><span class="source-dot"></span>Trends</button>
               <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466"><span class="source-dot"></span>Wiki</button>
               <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500"><span class="source-dot"></span>Reddit</button>
               <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000"><span class="source-dot"></span>YouTube</button>
@@ -177,8 +181,8 @@ function formatNum(n: number) {
             </div>
           </div>
           <div class="chart-controls" style="margin:0;">
-            <button class="chart-mode active" data-chart="adoption">Adoption %</button>
-            <button class="chart-mode" data-chart="volume" id="volume-btn">Volume</button>
+            <button class="chart-mode" data-chart="adoption">Adoption %</button>
+            <button class="chart-mode active" data-chart="volume" id="volume-btn">Volume</button>
             <span class="toggle-sep"></span>
             <button class="line-mode active" data-mode="both">All</button>
             <button class="line-mode" data-mode="ukrainian">UA</button>
@@ -408,11 +412,11 @@ function formatNum(n: number) {
       openalex: 'Academic Papers',
     };
 
-    let activeSource = 'trends';  // single source at a time
-    let activeSources = new Set(['trends']);  // kept as set for chart compatibility
+    let activeSource = 'gdelt';  // GDELT first — news coverage is most precise
+    let activeSources = new Set(['gdelt']);
     let hideRuDomains = false;
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
-    let chartMode: 'adoption' | 'volume' = 'adoption';
+    let chartMode: 'adoption' | 'volume' = 'volume';  // Volume by default — shows actual data density
     let showEvents = true;
 
     // Read pair from URL query param (?pair=1), default to Kyiv (1)
@@ -740,55 +744,7 @@ function formatNum(n: number) {
           }
         }
 
-        // Start indicator (if doesn't start at 2010)
-        const first = series[0];
-        const firstDate = parseDate(first.date)!;
-        if (firstDate > new Date(2010, 6, 1)) {
-          const sx = x(firstDate);
-          const sy = y(first.adoption);
-          svg.append('circle')
-            .attr('cx', sx).attr('cy', sy)
-            .attr('r', 3)
-            .attr('fill', 'none')
-            .attr('stroke', sourceColors[src])
-            .attr('stroke-width', 1.5);
-          svg.append('text')
-            .attr('x', sx - 4).attr('y', sy - 8)
-            .attr('text-anchor', 'end')
-            .attr('fill', sourceColors[src])
-            .attr('font-size', '9px')
-            .attr('opacity', 0.7)
-            .text(first.date);
-        }
-
-        // End dot + label (adoption mode only)
         const last = series[series.length - 1];
-        if (chartMode === 'adoption' && lineMode !== 'russian') {
-          const cx = x(parseDate(last.date)!);
-          const cy = y(last.adoption);
-
-          svg.append('circle')
-            .attr('cx', cx).attr('cy', cy)
-            .attr('r', 4)
-            .attr('fill', sourceColors[src]);
-
-          svg.append('text')
-            .attr('x', cx + 10).attr('y', cy + 5)
-            .attr('fill', sourceColors[src])
-            .attr('font-size', '13px')
-            .attr('font-weight', '700')
-            .text(last.adoption + '%');
-
-          const lastDate = parseDate(last.date)!;
-          if (lastDate < new Date(2025, 6, 1)) {
-            svg.append('text')
-              .attr('x', cx + 8).attr('y', cy + 16)
-              .attr('fill', sourceColors[src])
-              .attr('font-size', '9px')
-              .attr('opacity', 0.6)
-              .text('ends ' + last.date);
-          }
-        }
 
         activeLegend.push({
           label: sourceLabels[src],
@@ -1545,19 +1501,16 @@ function formatNum(n: number) {
       container.innerHTML = '';
 
       const ea = errorAnalysis as any;
+      // Pick 10 most interesting pairs (mix of high/low spread)
       const items = ea.disagreements
         .filter((d: any) => Object.keys(d.sources).length >= 3)
         .sort((a: any, b: any) => b.spread_pp - a.spread_pp)
-        .slice(0, 15);
+        .slice(0, 10);
 
-      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
-      const srcNames: Record<string, string> = {
-        trends: 'Trends', gdelt: 'GDELT', wikipedia: 'Wiki',
-        reddit: 'Reddit', youtube: 'YouTube', ngrams: 'Books', openalex: 'Academic',
-      };
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'openalex'];
 
-      const rowH = 28;
-      const margin = { top: 30, right: 20, bottom: 10, left: 200 };
+      const rowH = 36;
+      const margin = { top: 25, right: 50, bottom: 10, left: 140 };
       const width = container.getBoundingClientRect().width - margin.left - margin.right;
       const height = items.length * rowH;
 
@@ -1568,51 +1521,46 @@ function formatNum(n: number) {
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
       const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
-      const y = d3.scaleBand().domain(items.map((_: any, i: number) => String(i))).range([0, height]).padding(0.25);
+      const y = d3.scaleBand().domain(items.map((_: any, i: number) => String(i))).range([0, height]).padding(0.2);
 
-      // Header
-      svg.append('text').attr('x', x(0)).attr('y', -12).text('0%').attr('font-size', '10px').attr('fill', '#9ca3af');
-      svg.append('text').attr('x', x(50)).attr('y', -12).text('50%').attr('font-size', '10px').attr('fill', '#9ca3af').attr('text-anchor', 'middle');
-      svg.append('text').attr('x', x(100)).attr('y', -12).text('100%').attr('font-size', '10px').attr('fill', '#9ca3af').attr('text-anchor', 'end');
-
-      // 50% line
-      svg.append('line').attr('x1', x(50)).attr('x2', x(50)).attr('y1', 0).attr('y2', height)
-        .attr('stroke', '#e5e7eb').attr('stroke-dasharray', '3,3');
+      // Grid
+      [0, 25, 50, 75, 100].forEach(v => {
+        svg.append('line').attr('x1', x(v)).attr('x2', x(v)).attr('y1', -5).attr('y2', height)
+          .attr('stroke', v === 50 ? '#d1d5db' : '#f0f0f0').attr('stroke-dasharray', v === 50 ? '3,3' : 'none');
+        svg.append('text').attr('x', x(v)).attr('y', -10).attr('text-anchor', 'middle')
+          .attr('font-size', '9px').attr('fill', '#9ca3af').text(v + '%');
+      });
 
       items.forEach((item: any, i: number) => {
         const yi = y(String(i))!;
         const h = y.bandwidth();
+        const barH = h / (srcOrder.length + 1);
 
         // Label
         svg.append('text')
-          .attr('x', -8).attr('y', yi + h / 2 + 4)
+          .attr('x', -6).attr('y', yi + h / 2 + 4)
           .attr('text-anchor', 'end').attr('font-size', '11px').attr('fill', 'var(--text)')
-          .text(`${item.ukrainian}`);
+          .attr('font-weight', '500')
+          .text(item.ukrainian.length > 18 ? item.ukrainian.slice(0, 16) + '...' : item.ukrainian);
 
-        // Range bar (min to max)
-        const vals = Object.values(item.sources) as number[];
-        const minV = Math.min(...vals);
-        const maxV = Math.max(...vals);
-        svg.append('rect')
-          .attr('x', x(minV)).attr('y', yi + h * 0.3)
-          .attr('width', x(maxV) - x(minV)).attr('height', h * 0.4)
-          .attr('fill', '#e5e7eb').attr('rx', 3);
-
-        // Individual source dots
+        // One bar per source
+        let barIdx = 0;
         for (const src of srcOrder) {
           const val = item.sources[src];
           if (val === undefined) continue;
-          svg.append('circle')
-            .attr('cx', x(val)).attr('cy', yi + h / 2)
-            .attr('r', 5)
+          svg.append('rect')
+            .attr('x', x(0)).attr('y', yi + barIdx * barH)
+            .attr('width', Math.max(2, x(val))).attr('height', barH - 1)
             .attr('fill', sourceColors[src] || '#888')
-            .attr('stroke', 'white').attr('stroke-width', 1.5);
+            .attr('opacity', 0.8).attr('rx', 2);
+          barIdx++;
         }
 
         // Spread label
+        const vals = Object.values(item.sources) as number[];
         svg.append('text')
-          .attr('x', x(maxV) + 6).attr('y', yi + h / 2 + 4)
-          .attr('font-size', '10px').attr('fill', '#9ca3af')
+          .attr('x', x(Math.max(...vals)) + 6).attr('y', yi + h / 2 + 4)
+          .attr('font-size', '10px').attr('fill', '#9ca3af').attr('font-weight', '600')
           .text(`${item.spread_pp}pp`);
       });
 
