@@ -954,30 +954,35 @@ function formatNum(n: number) {
       const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
       const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
 
-      let lines: string[] = [];
-      let srcCount = 0;
+      // Big number at top
+      let html = `<div style="display:flex; align-items:baseline; gap:0.5rem; margin-bottom:0.5rem;">`;
+      html += `<span style="font-size:1.8rem; font-weight:800; color:#0057B8;">${pair.adoption}%</span>`;
+      html += `<span style="font-size:0.7rem; color:var(--text-muted);">mean across ${srcOrder.filter(s => pairData[s]?.length > 0).length} sources</span>`;
+      html += `</div>`;
 
+      // Per-source bars
+      html += '<div style="display:flex; flex-direction:column; gap:0.3rem;">';
       for (const src of srcOrder) {
         const series = pairData[src];
         if (!series || series.length === 0) continue;
-        srcCount++;
         const last = series[series.length - 1];
+        const pct = last.adoption;
         const ukr = last.ukr || 0;
         const rus = last.rus || 0;
         const total = ukr + rus;
-        if (total > 0) {
-          lines.push(`<span style="color:${sourceColors[src]}">●</span> ${sourceLabels[src]}: ${fN(ukr)} / (${fN(ukr)} + ${fN(rus)}) = <strong>${last.adoption}%</strong>`);
-        } else {
-          lines.push(`<span style="color:${sourceColors[src]}">●</span> ${sourceLabels[src]}: <strong>${last.adoption}%</strong>`);
-        }
+        const countStr = total > 0 ? `${fN(ukr)}/${fN(total)}` : '';
+
+        html += `<div style="display:flex; align-items:center; gap:0.4rem;">`;
+        html += `<span style="width:60px; font-size:0.65rem; color:var(--text-muted); text-align:right; flex-shrink:0;">${sourceLabels[src].split(' ')[0]}</span>`;
+        html += `<div style="flex:1; height:14px; background:#f0f0f0; border-radius:7px; overflow:hidden; position:relative;">`;
+        html += `<div style="height:100%; width:${Math.min(100, pct)}%; background:${sourceColors[src]}; border-radius:7px; opacity:0.8;"></div>`;
+        html += `</div>`;
+        html += `<span style="width:38px; font-size:0.68rem; font-weight:600; color:${sourceColors[src]}; text-align:right; flex-shrink:0;">${pct}%</span>`;
+        html += `</div>`;
       }
+      html += '</div>';
 
-      lines.push(`<div style="border-top:1px solid #e5e7eb; margin-top:0.4rem; padding-top:0.4rem;">`);
-      lines.push(`<div style="font-size:0.82rem; font-weight:700; color:var(--text);">Adoption: ${pair.adoption}%</div>`);
-      lines.push(`<div style="font-size:0.65rem; color:var(--text-muted); margin-top:0.15rem; line-height:1.4;">= mean(UA/(UA+RU)) per source, last 12 months<br>${srcCount} sources with sufficient data (min 3–10 records)</div>`);
-      lines.push('</div>');
-
-      body.innerHTML = lines.join('<br>');
+      body.innerHTML = html;
     }
 
     function drawPairSourceChart() {
