@@ -248,7 +248,7 @@ function formatNum(n: number) {
         <div class="chart-container" style="margin-bottom:0;">
           <div class="chart-title" style="color: var(--text)">Source Comparison</div>
           <div class="chart-subtitle" style="margin-bottom:0.5rem;">Adoption rate per data source for this pair</div>
-          <div id="pair-source-chart" style="width:100%;"></div>
+          <div id="pair-source-chart" style="width:100%; min-height:200px;"></div>
         </div>
         <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom:0;">
         <div class="chart-title" style="color: var(--text)">Cross-Lingual Adoption</div>
@@ -1134,7 +1134,8 @@ function formatNum(n: number) {
 
       const margin = {top: 5, right: 50, bottom: 5, left: 110};
       const rowH = 26;
-      const width = container.getBoundingClientRect().width - margin.left - margin.right;
+      // Use fixed viewBox width — SVG scales via width:100%, avoids getBoundingClientRect timing issues
+      const width = 500;
       const height = items.length * rowH;
       const totalH = height + margin.top + margin.bottom;
       const totalW = width + margin.left + margin.right;
@@ -1142,9 +1143,7 @@ function formatNum(n: number) {
       const svg = d3.select('#pair-source-chart')
         .append('svg')
         .attr('width', '100%')
-        .attr('height', totalH)
         .attr('viewBox', `0 0 ${totalW} ${totalH}`)
-        .attr('preserveAspectRatio', 'xMinYMin meet')
         .append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
       const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
