@@ -87,6 +87,31 @@ Our context classifier enables measurement of WHERE within discourse adoption oc
    - Per-source ablation (does the model generalize across Reddit/GDELT/academic?)
    - Cross-lingual transfer (does it work on Cyrillic texts?)
 
+### Training Hyperparameters
+
+All three encoders use identical hyperparameters for fair comparison:
+
+| Parameter | Value | Justification |
+|-----------|-------|---------------|
+| Epochs | 3 | Standard for fine-tuning; val F1 reported per epoch to show convergence |
+| Batch size | 16 train / 32 eval | Balanced GPU memory and gradient stability |
+| Learning rate | 2e-5 | Default for BERT-family fine-tuning (Devlin et al., 2019) |
+| Warmup ratio | 0.1 | 10% of steps, prevents early divergence on new classification head |
+| Weight decay | 0.01 | Standard L2 regularization |
+| Max sequence length | 512 tokens | Covers 95th percentile text length (435 words ≈ ~550 tokens) |
+| Precision | BF16 | Native on B200, no quality loss vs FP32 for training |
+| Optimizer | AdamW | HuggingFace Trainer default |
+| Model selection | Best val F1-macro across 3 epochs | F1-macro preferred over accuracy due to class imbalance |
+| Label confidence filter | ≥ 0.6 | Removes ~2% lowest-confidence LLM annotations |
+| Train/val/test split | 80/10/10 stratified | Preserves label distribution across splits |
+
+**Reproducibility notes:**
+- Random seed: 42 for all splits and model initialization
+- Hardware: NVIDIA B200 183GB, single GPU
+- Software: HuggingFace Transformers, PyTorch with BF16
+- Training time: ~12 minutes per model (3 epochs on 23,922 texts)
+- All hyperparameters chosen from established defaults, no tuning performed — this is intentional, as hyperparameter optimization would conflate model capability with tuning effort
+
 ### Why This Methodology
 
 - **Why not GPT?** Reproducibility. Llama is open-weights, versioned, deterministic at temperature 0.05. The exact prompt and model are documented.
