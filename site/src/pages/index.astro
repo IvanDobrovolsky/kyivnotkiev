@@ -472,6 +472,9 @@ function formatNum(n: number) {
     // Use manifest as the single pairs source
     const pairs = { categories: manifest.categories, pairs: manifest.pairs };
 
+    // Declared early to avoid TDZ in drawWorldMap
+    let cachedWorld: any = null;
+
     const sourceColors: Record<string, string> = {
       trends: '#4285F4',
       gdelt: '#1e3a5f',
@@ -1631,8 +1634,6 @@ function formatNum(n: number) {
         ]]
       }
     };
-
-    let cachedWorld: any = null;
 
     async function drawWorldMap() {
       const container = document.getElementById('world-map')!;
