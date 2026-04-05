@@ -1,1 +1,775 @@
-{"total_pairs":55,"analyzable_pairs":55,"control_pairs":6,"total_records":613547012,"data_processed_pb":1.2,"time_span":"2010-2026","num_sources":7,"num_countries":55,"sources":{"trends":{"records":151933,"pairs":64,"label":"Search Trends","unit":"datapoints","extra":"55 countries","color":"#4285F4"},"gdelt":{"records":39589705,"pairs":33,"label":"News Articles","unit":"articles","extra":"53209 domains","color":"#1e3a5f"},"wikipedia":{"records":573377974,"pairs":62,"label":"Page Views","unit":"pageviews","extra":"monthly","color":"#636466"},"reddit":{"records":22556,"pairs":60,"label":"Posts","unit":"posts","extra":"1785 subreddits","color":"#FF4500"},"youtube":{"records":14515,"pairs":55,"label":"Videos","unit":"videos","extra":"4187 channels","color":"#FF0000"},"ngrams":{"records":11640,"pairs":54,"label":"Book Records","unit":"records","extra":"8M+ volumes","color":"#7c3aed"},"openalex":{"records":378689,"pairs":52,"label":"Academic Papers","unit":"papers","extra":"250M+ works indexed","color":"#06b6d4"}},"categories":[{"id":"geographical","name":"Geographical","color":"#0057B8"},{"id":"food","name":"Food & Cuisine","color":"#e6b800"},{"id":"landmarks","name":"Landmarks & Heritage Sites","color":"#8B4513"},{"id":"country","name":"Country-Level Framing","color":"#228B22"},{"id":"institutional","name":"Institutional","color":"#4B0082"},{"id":"sports","name":"Sports","color":"#DC143C"},{"id":"historical","name":"Historical","color":"#708090"},{"id":"people","name":"People","color":"#FF6347"}],"category_stats":[{"id":"sports","name":"Sports","color":"#DC143C","count":5,"avg_adoption":71.2},{"id":"geographical","name":"Geographical","color":"#0057B8","count":25,"avg_adoption":67.2},{"id":"country","name":"Country-Level Framing","color":"#228B22","count":1,"avg_adoption":63.9},{"id":"people","name":"People","color":"#FF6347","count":2,"avg_adoption":63.7},{"id":"institutional","name":"Institutional","color":"#4B0082","count":6,"avg_adoption":62.4},{"id":"landmarks","name":"Landmarks & Heritage Sites","color":"#8B4513","count":6,"avg_adoption":51.3},{"id":"food","name":"Food & Cuisine","color":"#e6b800","count":5,"avg_adoption":44.9},{"id":"historical","name":"Historical","color":"#708090","count":5,"avg_adoption":39.5}],"pairs":[{"id":1,"category":"geographical","russian":"Kiev","ukrainian":"Kyiv","adoption":60.3,"total":30659223,"is_control":false},{"id":2,"category":"geographical","russian":"Kharkov","ukrainian":"Kharkiv","adoption":82.9,"total":7305942,"is_control":false},{"id":3,"category":"geographical","russian":"Odessa","ukrainian":"Odesa","adoption":43.2,"total":10054041,"is_control":false},{"id":4,"category":"geographical","russian":"Lvov","ukrainian":"Lviv","adoption":81.8,"total":7739068,"is_control":false},{"id":5,"category":"geographical","russian":"Zaporozhye","ukrainian":"Zaporizhzhia","adoption":70.6,"total":3637306,"is_control":false},{"id":6,"category":"geographical","russian":"Nikolaev","ukrainian":"Mykolaiv","adoption":49.3,"total":1650775,"is_control":false},{"id":7,"category":"geographical","russian":"Dnepropetrovsk","ukrainian":"Dnipro","adoption":72.2,"total":5607537,"is_control":false},{"id":8,"category":"geographical","russian":"Vinnitsa","ukrainian":"Vinnytsia","adoption":62.8,"total":1661673,"is_control":false},{"id":9,"category":"geographical","russian":"Rovno","ukrainian":"Rivne","adoption":76.6,"total":976406,"is_control":false},{"id":10,"category":"geographical","russian":"Chernobyl","ukrainian":"Chornobyl","adoption":26.8,"total":74521205,"is_control":false},{"id":11,"category":"geographical","russian":"Lugansk","ukrainian":"Luhansk","adoption":71.9,"total":4118808,"is_control":false},{"id":15,"category":"geographical","russian":"Dnieper","ukrainian":"Dnipro","adoption":60.1,"total":3475573,"is_control":false},{"id":16,"category":"geographical","russian":"Dniester","ukrainian":"Dnister","adoption":36.7,"total":795562,"is_control":false},{"id":17,"category":"geographical","russian":"Donbass","ukrainian":"Donbas","adoption":54.1,"total":14420094,"is_control":false},{"id":19,"category":"geographical","russian":"Zakarpatye","ukrainian":"Zakarpattia","adoption":94.2,"total":41080,"is_control":false},{"id":20,"category":"geographical","russian":"Podolye","ukrainian":"Podillia","adoption":58.5,"total":3513,"is_control":false},{"id":21,"category":"food","russian":"Chicken Kiev","ukrainian":"Chicken Kyiv","adoption":36.4,"total":4982125,"is_control":false},{"id":22,"category":"food","russian":"Kiev cake","ukrainian":"Kyiv cake","adoption":68.1,"total":511092,"is_control":false},{"id":23,"category":"food","russian":"Borscht","ukrainian":"Borshch","adoption":39.2,"total":13093300,"is_control":false},{"id":24,"category":"landmarks","russian":"Kiev Pechersk Lavra","ukrainian":"Kyiv Pechersk Lavra","adoption":74.7,"total":867920,"is_control":false},{"id":25,"category":"landmarks","russian":"Saint Sophia Cathedral Kiev","ukrainian":"Saint Sophia Cathedral Kyiv","adoption":71.7,"total":141203,"is_control":false},{"id":26,"category":"landmarks","russian":"Chernobyl Exclusion Zone","ukrainian":"Chornobyl Exclusion Zone","adoption":21.9,"total":4218622,"is_control":false},{"id":27,"category":"country","russian":"the Ukraine","ukrainian":"Ukraine","adoption":63.9,"total":131856336,"is_control":false},{"id":28,"category":"institutional","russian":"Kiev National University","ukrainian":"Kyiv National University","adoption":82.6,"total":18932,"is_control":false},{"id":29,"category":"institutional","russian":"Kharkov University","ukrainian":"Kharkiv University","adoption":55.5,"total":95039,"is_control":false},{"id":30,"category":"institutional","russian":"Kiev Polytechnic","ukrainian":"Kyiv Polytechnic","adoption":78.3,"total":231653,"is_control":false},{"id":31,"category":"institutional","russian":"Kiev Patriarchate","ukrainian":"Kyiv Patriarchate","adoption":53.3,"total":7172,"is_control":false},{"id":32,"category":"sports","russian":"Dynamo Kiev","ukrainian":"Dynamo Kyiv","adoption":71.0,"total":230643,"is_control":false},{"id":34,"category":"sports","russian":"Kiev ballet","ukrainian":"Kyiv ballet","adoption":65.5,"total":5431,"is_control":false},{"id":35,"category":"historical","russian":"Kievan Rus","ukrainian":"Kyivan Rus","adoption":49.8,"total":17861115,"is_control":false},{"id":36,"category":"historical","russian":"Kazak","ukrainian":"Kozak","adoption":50.2,"total":113603,"is_control":false},{"id":38,"category":"geographical","russian":"Chernigov","ukrainian":"Chernihiv","adoption":71.5,"total":1781953,"is_control":false},{"id":39,"category":"geographical","russian":"Chernovtsy","ukrainian":"Chernivtsi","adoption":91.2,"total":2527599,"is_control":false},{"id":40,"category":"geographical","russian":"Zhitomir","ukrainian":"Zhytomyr","adoption":73.7,"total":1421276,"is_control":false},{"id":41,"category":"geographical","russian":"Cherkassy","ukrainian":"Cherkasy","adoption":81.7,"total":1162983,"is_control":false},{"id":42,"category":"geographical","russian":"Uzhgorod","ukrainian":"Uzhhorod","adoption":60.8,"total":1277269,"is_control":false},{"id":43,"category":"geographical","russian":"Kremenchug","ukrainian":"Kremenchuk","adoption":62.2,"total":627410,"is_control":false},{"id":44,"category":"geographical","russian":"Kirovograd","ukrainian":"Kropyvnytskyi","adoption":58.4,"total":740568,"is_control":false},{"id":45,"category":"geographical","russian":"Ternopol","ukrainian":"Ternopil","adoption":88.0,"total":1446636,"is_control":false},{"id":46,"category":"food","russian":"Vareniki","ukrainian":"Varenyky","adoption":50.7,"total":350890,"is_control":false},{"id":48,"category":"historical","russian":"Gopak","ukrainian":"Hopak","adoption":70.2,"total":649855,"is_control":false},{"id":51,"category":"sports","russian":"Zorya Lugansk","ukrainian":"Zorya Luhansk","adoption":65.3,"total":3203545,"is_control":false},{"id":52,"category":"sports","russian":"Metalist Kharkov","ukrainian":"Metalist Kharkiv","adoption":80.7,"total":1805588,"is_control":false},{"id":53,"category":"sports","russian":"Karpaty Lvov","ukrainian":"Karpaty Lviv","adoption":73.3,"total":1809330,"is_control":false},{"id":54,"category":"landmarks","russian":"Babi Yar","ukrainian":"Babyn Yar","adoption":35.6,"total":7636561,"is_control":false},{"id":55,"category":"landmarks","russian":"Potemkin Stairs Odessa","ukrainian":"Potemkin Stairs Odesa","adoption":39.0,"total":1078235,"is_control":false},{"id":56,"category":"landmarks","russian":"Motherland Monument Kiev","ukrainian":"Motherland Monument Kyiv","adoption":64.8,"total":862003,"is_control":false},{"id":57,"category":"institutional","russian":"Lvov Polytechnic","ukrainian":"Lviv Polytechnic","adoption":81.3,"total":198491,"is_control":false},{"id":58,"category":"institutional","russian":"Odessa National University","ukrainian":"Odesa National University","adoption":23.2,"total":18359,"is_control":false},{"id":60,"category":"people","russian":"Alexander Usyk","ukrainian":"Oleksandr Usyk","adoption":69.9,"total":36253414,"is_control":false},{"id":61,"category":"people","russian":"Vladimir Zelensky","ukrainian":"Volodymyr Zelenskyy","adoption":57.4,"total":51835410,"is_control":false},{"id":64,"category":"food","russian":"Borsch","ukrainian":"Borshch","adoption":30.0,"total":150907,"is_control":false},{"id":70,"category":"historical","russian":"Vladimir the Great","ukrainian":"Volodymyr the Great","adoption":4.8,"total":3033817,"is_control":false},{"id":71,"category":"historical","russian":"Prince of Kiev","ukrainian":"Prince of Kyiv","adoption":22.7,"total":526624,"is_control":false},{"id":72,"category":"geographical","russian":"Artemovsk","ukrainian":"Bakhmut","adoption":89.6,"total":7047849,"is_control":false}]}
+{
+  "total_pairs": 55,
+  "analyzable_pairs": 55,
+  "control_pairs": 6,
+  "total_records": 613547012,
+  "data_processed_pb": 1.2,
+  "time_span": "2010-2026",
+  "num_sources": 7,
+  "num_countries": 55,
+  "sources": {
+    "trends": {
+      "records": 151933,
+      "pairs": 64,
+      "label": "Search Trends",
+      "unit": "datapoints",
+      "extra": "55 countries",
+      "color": "#4285F4"
+    },
+    "gdelt": {
+      "records": 39589705,
+      "pairs": 33,
+      "label": "News Articles",
+      "unit": "articles",
+      "extra": "53209 domains",
+      "color": "#1e3a5f"
+    },
+    "wikipedia": {
+      "records": 573377974,
+      "pairs": 62,
+      "label": "Page Views",
+      "unit": "pageviews",
+      "extra": "monthly",
+      "color": "#636466"
+    },
+    "reddit": {
+      "records": 22556,
+      "pairs": 60,
+      "label": "Posts",
+      "unit": "posts",
+      "extra": "1785 subreddits",
+      "color": "#FF4500"
+    },
+    "youtube": {
+      "records": 14515,
+      "pairs": 55,
+      "label": "Videos",
+      "unit": "videos",
+      "extra": "4187 channels",
+      "color": "#FF0000"
+    },
+    "ngrams": {
+      "records": 11640,
+      "pairs": 54,
+      "label": "Book Records",
+      "unit": "records",
+      "extra": "8M+ volumes",
+      "color": "#7c3aed"
+    },
+    "openalex": {
+      "records": 378689,
+      "pairs": 52,
+      "label": "Academic Papers",
+      "unit": "papers",
+      "extra": "250M+ works indexed",
+      "color": "#06b6d4"
+    }
+  },
+  "categories": [
+    {
+      "id": "geographical",
+      "name": "Geographical",
+      "color": "#0057B8"
+    },
+    {
+      "id": "food",
+      "name": "Food & Cuisine",
+      "color": "#e6b800"
+    },
+    {
+      "id": "landmarks",
+      "name": "Landmarks & Heritage Sites",
+      "color": "#8B4513"
+    },
+    {
+      "id": "country",
+      "name": "Country-Level Framing",
+      "color": "#228B22"
+    },
+    {
+      "id": "institutional",
+      "name": "Institutional",
+      "color": "#4B0082"
+    },
+    {
+      "id": "sports",
+      "name": "Sports",
+      "color": "#DC143C"
+    },
+    {
+      "id": "historical",
+      "name": "Historical",
+      "color": "#708090"
+    },
+    {
+      "id": "people",
+      "name": "People",
+      "color": "#FF6347"
+    }
+  ],
+  "category_stats": [
+    {
+      "id": "sports",
+      "name": "Sports",
+      "color": "#DC143C",
+      "count": 5,
+      "avg_adoption": 71.2
+    },
+    {
+      "id": "geographical",
+      "name": "Geographical",
+      "color": "#0057B8",
+      "count": 25,
+      "avg_adoption": 67.2
+    },
+    {
+      "id": "country",
+      "name": "Country-Level Framing",
+      "color": "#228B22",
+      "count": 1,
+      "avg_adoption": 63.9
+    },
+    {
+      "id": "people",
+      "name": "People",
+      "color": "#FF6347",
+      "count": 2,
+      "avg_adoption": 63.7
+    },
+    {
+      "id": "institutional",
+      "name": "Institutional",
+      "color": "#4B0082",
+      "count": 6,
+      "avg_adoption": 62.4
+    },
+    {
+      "id": "landmarks",
+      "name": "Landmarks & Heritage Sites",
+      "color": "#8B4513",
+      "count": 6,
+      "avg_adoption": 51.3
+    },
+    {
+      "id": "food",
+      "name": "Food & Cuisine",
+      "color": "#e6b800",
+      "count": 5,
+      "avg_adoption": 44.9
+    },
+    {
+      "id": "historical",
+      "name": "Historical",
+      "color": "#708090",
+      "count": 5,
+      "avg_adoption": 39.5
+    }
+  ],
+  "pairs": [
+    {
+      "id": 1,
+      "category": "geographical",
+      "russian": "Kiev",
+      "ukrainian": "Kyiv",
+      "adoption": 60.3,
+      "total": 30659223,
+      "is_control": false,
+      "starred": true,
+      "starred_label": "Flagship \u2014 campaign success story"
+    },
+    {
+      "id": 2,
+      "category": "geographical",
+      "russian": "Kharkov",
+      "ukrainian": "Kharkiv",
+      "adoption": 82.9,
+      "total": 7305942,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 3,
+      "category": "geographical",
+      "russian": "Odessa",
+      "ukrainian": "Odesa",
+      "adoption": 43.2,
+      "total": 10054041,
+      "is_control": false,
+      "starred": true,
+      "starred_label": "Cultural entrenchment \u2014 contested"
+    },
+    {
+      "id": 4,
+      "category": "geographical",
+      "russian": "Lvov",
+      "ukrainian": "Lviv",
+      "adoption": 81.8,
+      "total": 7739068,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 5,
+      "category": "geographical",
+      "russian": "Zaporozhye",
+      "ukrainian": "Zaporizhzhia",
+      "adoption": 70.6,
+      "total": 3637306,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 6,
+      "category": "geographical",
+      "russian": "Nikolaev",
+      "ukrainian": "Mykolaiv",
+      "adoption": 49.3,
+      "total": 1650775,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 7,
+      "category": "geographical",
+      "russian": "Dnepropetrovsk",
+      "ukrainian": "Dnipro",
+      "adoption": 72.2,
+      "total": 5607537,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 8,
+      "category": "geographical",
+      "russian": "Vinnitsa",
+      "ukrainian": "Vinnytsia",
+      "adoption": 62.8,
+      "total": 1661673,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 9,
+      "category": "geographical",
+      "russian": "Rovno",
+      "ukrainian": "Rivne",
+      "adoption": 76.6,
+      "total": 976406,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 10,
+      "category": "geographical",
+      "russian": "Chernobyl",
+      "ukrainian": "Chornobyl",
+      "adoption": 26.8,
+      "total": 74521205,
+      "is_control": false,
+      "starred": true,
+      "starred_label": "Disaster brand \u2014 impervious to change"
+    },
+    {
+      "id": 11,
+      "category": "geographical",
+      "russian": "Lugansk",
+      "ukrainian": "Luhansk",
+      "adoption": 71.9,
+      "total": 4118808,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 15,
+      "category": "geographical",
+      "russian": "Dnieper",
+      "ukrainian": "Dnipro",
+      "adoption": 60.1,
+      "total": 3475573,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 16,
+      "category": "geographical",
+      "russian": "Dniester",
+      "ukrainian": "Dnister",
+      "adoption": 36.7,
+      "total": 795562,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 17,
+      "category": "geographical",
+      "russian": "Donbass",
+      "ukrainian": "Donbas",
+      "adoption": 54.1,
+      "total": 14420094,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 19,
+      "category": "geographical",
+      "russian": "Zakarpatye",
+      "ukrainian": "Zakarpattia",
+      "adoption": 94.2,
+      "total": 41080,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 20,
+      "category": "geographical",
+      "russian": "Podolye",
+      "ukrainian": "Podillia",
+      "adoption": 58.5,
+      "total": 3513,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 21,
+      "category": "food",
+      "russian": "Chicken Kiev",
+      "ukrainian": "Chicken Kyiv",
+      "adoption": 36.4,
+      "total": 4982125,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 22,
+      "category": "food",
+      "russian": "Kiev cake",
+      "ukrainian": "Kyiv cake",
+      "adoption": 68.1,
+      "total": 511092,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 23,
+      "category": "food",
+      "russian": "Borscht",
+      "ukrainian": "Borshch",
+      "adoption": 39.2,
+      "total": 13093300,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 24,
+      "category": "landmarks",
+      "russian": "Kiev Pechersk Lavra",
+      "ukrainian": "Kyiv Pechersk Lavra",
+      "adoption": 74.7,
+      "total": 867920,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 25,
+      "category": "landmarks",
+      "russian": "Saint Sophia Cathedral Kiev",
+      "ukrainian": "Saint Sophia Cathedral Kyiv",
+      "adoption": 71.7,
+      "total": 141203,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 26,
+      "category": "landmarks",
+      "russian": "Chernobyl Exclusion Zone",
+      "ukrainian": "Chornobyl Exclusion Zone",
+      "adoption": 21.9,
+      "total": 4218622,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 27,
+      "category": "country",
+      "russian": "the Ukraine",
+      "ukrainian": "Ukraine",
+      "adoption": 63.9,
+      "total": 131856336,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 28,
+      "category": "institutional",
+      "russian": "Kiev National University",
+      "ukrainian": "Kyiv National University",
+      "adoption": 82.6,
+      "total": 18932,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 29,
+      "category": "institutional",
+      "russian": "Kharkov University",
+      "ukrainian": "Kharkiv University",
+      "adoption": 55.5,
+      "total": 95039,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 30,
+      "category": "institutional",
+      "russian": "Kiev Polytechnic",
+      "ukrainian": "Kyiv Polytechnic",
+      "adoption": 78.3,
+      "total": 231653,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 31,
+      "category": "institutional",
+      "russian": "Kiev Patriarchate",
+      "ukrainian": "Kyiv Patriarchate",
+      "adoption": 53.3,
+      "total": 7172,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 32,
+      "category": "sports",
+      "russian": "Dynamo Kiev",
+      "ukrainian": "Dynamo Kyiv",
+      "adoption": 71.0,
+      "total": 230643,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 34,
+      "category": "sports",
+      "russian": "Kiev ballet",
+      "ukrainian": "Kyiv ballet",
+      "adoption": 65.5,
+      "total": 5431,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 35,
+      "category": "historical",
+      "russian": "Kievan Rus",
+      "ukrainian": "Kyivan Rus",
+      "adoption": 49.8,
+      "total": 17861115,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 36,
+      "category": "historical",
+      "russian": "Kazak",
+      "ukrainian": "Kozak",
+      "adoption": 50.2,
+      "total": 113603,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 38,
+      "category": "geographical",
+      "russian": "Chernigov",
+      "ukrainian": "Chernihiv",
+      "adoption": 71.5,
+      "total": 1781953,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 39,
+      "category": "geographical",
+      "russian": "Chernovtsy",
+      "ukrainian": "Chernivtsi",
+      "adoption": 91.2,
+      "total": 2527599,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 40,
+      "category": "geographical",
+      "russian": "Zhitomir",
+      "ukrainian": "Zhytomyr",
+      "adoption": 73.7,
+      "total": 1421276,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 41,
+      "category": "geographical",
+      "russian": "Cherkassy",
+      "ukrainian": "Cherkasy",
+      "adoption": 81.7,
+      "total": 1162983,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 42,
+      "category": "geographical",
+      "russian": "Uzhgorod",
+      "ukrainian": "Uzhhorod",
+      "adoption": 60.8,
+      "total": 1277269,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 43,
+      "category": "geographical",
+      "russian": "Kremenchug",
+      "ukrainian": "Kremenchuk",
+      "adoption": 62.2,
+      "total": 627410,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 44,
+      "category": "geographical",
+      "russian": "Kirovograd",
+      "ukrainian": "Kropyvnytskyi",
+      "adoption": 58.4,
+      "total": 740568,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 45,
+      "category": "geographical",
+      "russian": "Ternopol",
+      "ukrainian": "Ternopil",
+      "adoption": 88.0,
+      "total": 1446636,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 46,
+      "category": "food",
+      "russian": "Vareniki",
+      "ukrainian": "Varenyky",
+      "adoption": 50.7,
+      "total": 350890,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 48,
+      "category": "historical",
+      "russian": "Gopak",
+      "ukrainian": "Hopak",
+      "adoption": 70.2,
+      "total": 649855,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 51,
+      "category": "sports",
+      "russian": "Zorya Lugansk",
+      "ukrainian": "Zorya Luhansk",
+      "adoption": 65.3,
+      "total": 3203545,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 52,
+      "category": "sports",
+      "russian": "Metalist Kharkov",
+      "ukrainian": "Metalist Kharkiv",
+      "adoption": 80.7,
+      "total": 1805588,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 53,
+      "category": "sports",
+      "russian": "Karpaty Lvov",
+      "ukrainian": "Karpaty Lviv",
+      "adoption": 73.3,
+      "total": 1809330,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 54,
+      "category": "landmarks",
+      "russian": "Babi Yar",
+      "ukrainian": "Babyn Yar",
+      "adoption": 35.6,
+      "total": 7636561,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 55,
+      "category": "landmarks",
+      "russian": "Potemkin Stairs Odessa",
+      "ukrainian": "Potemkin Stairs Odesa",
+      "adoption": 39.0,
+      "total": 1078235,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 56,
+      "category": "landmarks",
+      "russian": "Motherland Monument Kiev",
+      "ukrainian": "Motherland Monument Kyiv",
+      "adoption": 64.8,
+      "total": 862003,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 57,
+      "category": "institutional",
+      "russian": "Lvov Polytechnic",
+      "ukrainian": "Lviv Polytechnic",
+      "adoption": 81.3,
+      "total": 198491,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 58,
+      "category": "institutional",
+      "russian": "Odessa National University",
+      "ukrainian": "Odesa National University",
+      "adoption": 23.2,
+      "total": 18359,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 60,
+      "category": "people",
+      "russian": "Alexander Usyk",
+      "ukrainian": "Oleksandr Usyk",
+      "adoption": 69.9,
+      "total": 36253414,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 61,
+      "category": "people",
+      "russian": "Vladimir Zelensky",
+      "ukrainian": "Volodymyr Zelenskyy",
+      "adoption": 57.4,
+      "total": 51835410,
+      "is_control": false,
+      "starred": true,
+      "starred_label": "Wartime president \u2014 first name + last name contested"
+    },
+    {
+      "id": 64,
+      "category": "food",
+      "russian": "Borsch",
+      "ukrainian": "Borshch",
+      "adoption": 30.0,
+      "total": 150907,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 70,
+      "category": "historical",
+      "russian": "Vladimir the Great",
+      "ukrainian": "Volodymyr the Great",
+      "adoption": 4.8,
+      "total": 3033817,
+      "is_control": false,
+      "starred": true,
+      "starred_label": "Historical identity \u2014 Russia claims our past"
+    },
+    {
+      "id": 71,
+      "category": "historical",
+      "russian": "Prince of Kiev",
+      "ukrainian": "Prince of Kyiv",
+      "adoption": 22.7,
+      "total": 526624,
+      "is_control": false,
+      "starred": false,
+      "starred_label": ""
+    },
+    {
+      "id": 72,
+      "category": "geographical",
+      "russian": "Artemovsk",
+      "ukrainian": "Bakhmut",
+      "adoption": 89.6,
+      "total": 7047849,
+      "is_control": false,
+      "starred": true,
+      "starred_label": "Naming as resistance \u2014 occupation rename rejected"
+    }
+  ]
+}

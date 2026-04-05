@@ -44,6 +44,8 @@ pairs:
     label: AP Stylebook adopts Kyiv
   - date: 2019-10
     label: BBC adopts Kyiv
+  starred: true
+  starred_label: Flagship — campaign success story
 - id: 2
   category: geographical
   russian: Kharkov
@@ -55,6 +57,7 @@ pairs:
     label: Battle of Kharkiv
   - date: 2022-09
     label: Kharkiv counteroffensive
+  starred: false
 - id: 3
   category: geographical
   russian: Odessa
@@ -64,12 +67,15 @@ pairs:
   events:
   - date: 2022-07
     label: Russian missile strikes
+  starred: true
+  starred_label: Cultural entrenchment — contested
 - id: 4
   category: geographical
   russian: Lvov
   ukrainian: Lviv
   enabled: true
   is_control: false
+  starred: false
 - id: 5
   category: geographical
   russian: Zaporozhye
@@ -79,12 +85,14 @@ pairs:
   events:
   - date: 2022-03
     label: Russia seizes nuclear plant
+  starred: false
 - id: 6
   category: geographical
   russian: Nikolaev
   ukrainian: Mykolaiv
   enabled: true
   is_control: false
+  starred: false
 - id: 7
   category: geographical
   russian: Dnepropetrovsk
@@ -94,18 +102,21 @@ pairs:
   events:
   - date: 2016-05
     label: Officially renamed from Dnipropetrovsk
+  starred: false
 - id: 8
   category: geographical
   russian: Vinnitsa
   ukrainian: Vinnytsia
   enabled: true
   is_control: false
+  starred: false
 - id: 9
   category: geographical
   russian: Rovno
   ukrainian: Rivne
   enabled: true
   is_control: false
+  starred: false
 - id: 10
   category: geographical
   russian: Chernobyl
@@ -118,6 +129,8 @@ pairs:
     label: HBO Chernobyl series
   - date: 2022-02
     label: Russia seizes plant
+  starred: true
+  starred_label: Disaster brand — impervious to change
 - id: 11
   category: geographical
   russian: Lugansk
@@ -127,6 +140,7 @@ pairs:
   events:
   - date: 2014-04
     label: Separatist conflict begins
+  starred: false
 - id: 12
   category: geographical
   russian: Donetsk
@@ -134,6 +148,7 @@ pairs:
   enabled: false
   is_control: true
   notes: Control — same in both languages
+  starred: false
 - id: 13
   category: geographical
   russian: Mariupol
@@ -141,6 +156,7 @@ pairs:
   enabled: false
   is_control: true
   notes: Control — same in both languages
+  starred: false
 - id: 14
   category: geographical
   russian: Kherson
@@ -148,6 +164,7 @@ pairs:
   enabled: false
   is_control: true
   notes: Control — same in both languages
+  starred: false
 - id: 15
   category: geographical
   russian: Dnieper
@@ -155,6 +172,7 @@ pairs:
   enabled: true
   is_control: false
   notes: River name
+  starred: false
 - id: 16
   category: geographical
   russian: Dniester
@@ -162,12 +180,14 @@ pairs:
   enabled: true
   is_control: false
   notes: River name
+  starred: false
 - id: 17
   category: geographical
   russian: Donbass
   ukrainian: Donbas
   enabled: true
   is_control: false
+  starred: false
 - id: 18
   category: geographical
   russian: Crimea
@@ -175,151 +195,173 @@ pairs:
   enabled: false
   is_control: false
   notes: ' [Disabled: insufficient or misleading data]'
+  starred: false
 - id: 19
   category: geographical
   russian: Zakarpatye
   ukrainian: Zakarpattia
   enabled: true
   is_control: false
+  starred: false
 - id: 20
   category: geographical
   russian: Podolye
   ukrainian: Podillia
   enabled: true
   is_control: false
+  starred: false
 - id: 38
   category: geographical
   russian: Chernigov
   ukrainian: Chernihiv
   enabled: true
   is_control: false
+  starred: false
 - id: 39
   category: geographical
   russian: Chernovtsy
   ukrainian: Chernivtsi
   enabled: true
   is_control: false
+  starred: false
 - id: 40
   category: geographical
   russian: Zhitomir
   ukrainian: Zhytomyr
   enabled: true
   is_control: false
+  starred: false
 - id: 41
   category: geographical
   russian: Cherkassy
   ukrainian: Cherkasy
   enabled: true
   is_control: false
+  starred: false
 - id: 42
   category: geographical
   russian: Uzhgorod
   ukrainian: Uzhhorod
   enabled: true
   is_control: false
+  starred: false
 - id: 43
   category: geographical
   russian: Kremenchug
   ukrainian: Kremenchuk
   enabled: true
   is_control: false
+  starred: false
 - id: 44
   category: geographical
   russian: Kirovograd
   ukrainian: Kropyvnytskyi
   enabled: true
   is_control: false
+  starred: false
 - id: 45
   category: geographical
   russian: Ternopol
   ukrainian: Ternopil
   enabled: true
   is_control: false
+  starred: false
 - id: 21
   category: food
   russian: Chicken Kiev
   ukrainian: Chicken Kyiv
   enabled: true
   is_control: false
+  starred: false
 - id: 22
   category: food
   russian: Kiev cake
   ukrainian: Kyiv cake
   enabled: true
   is_control: false
+  starred: false
 - id: 23
   category: food
   russian: Borscht
   ukrainian: Borshch
   enabled: true
   is_control: false
-  notes: '''Borsch without a t'' — Klopotenko''s UNESCO campaign (2018-2022) parallels
-    #KyivNotKiev. UNESCO inscribed Ukrainian borscht July 2022. Washington Post, NPR,
-    AP all covered the ''t'' debate. Yiddish etymology makes this a distinct but complementary
-    case to decolonial renaming.
+  notes: '''Borsch without a t'' — Klopotenko''s UNESCO campaign (2018-2022) parallels #KyivNotKiev. UNESCO inscribed Ukrainian
+    borscht July 2022. Washington Post, NPR, AP all covered the ''t'' debate. Yiddish etymology makes this a distinct but
+    complementary case to decolonial renaming.
 
     '
   events:
   - date: 2022-07
     label: UNESCO inscribes Ukrainian borscht
+  starred: false
 - id: 64
   category: food
   russian: Borsch
   ukrainian: Borshch
   enabled: true
   is_control: false
-  notes: 'Secondary variant: ''Borsch'' vs ''Borshch'' (both without ''t''). Tracks
-    whether the Ukrainian transliteration ''shch'' is gaining over simplified ''sch''.
+  notes: 'Secondary variant: ''Borsch'' vs ''Borshch'' (both without ''t''). Tracks whether the Ukrainian transliteration
+    ''shch'' is gaining over simplified ''sch''.
 
     '
+  starred: false
 - id: 46
   category: food
   russian: Vareniki
   ukrainian: Varenyky
   enabled: true
   is_control: false
+  starred: false
 - id: 47
   category: food
   russian: Gorilka
   ukrainian: Horilka
   enabled: false
   is_control: false
+  starred: false
 - id: 24
   category: landmarks
   russian: Kiev Pechersk Lavra
   ukrainian: Kyiv Pechersk Lavra
   enabled: true
   is_control: false
+  starred: false
 - id: 25
   category: landmarks
   russian: Saint Sophia Cathedral Kiev
   ukrainian: Saint Sophia Cathedral Kyiv
   enabled: true
   is_control: false
+  starred: false
 - id: 26
   category: landmarks
   russian: Chernobyl Exclusion Zone
   ukrainian: Chornobyl Exclusion Zone
   enabled: true
   is_control: false
+  starred: false
 - id: 54
   category: landmarks
   russian: Babi Yar
   ukrainian: Babyn Yar
   enabled: true
   is_control: false
+  starred: false
 - id: 55
   category: landmarks
   russian: Potemkin Stairs Odessa
   ukrainian: Potemkin Stairs Odesa
   enabled: true
   is_control: false
+  starred: false
 - id: 56
   category: landmarks
   russian: Motherland Monument Kiev
   ukrainian: Motherland Monument Kyiv
   enabled: true
   is_control: false
+  starred: false
 - id: 27
   category: country
   russian: the Ukraine
@@ -331,42 +373,49 @@ pairs:
   events:
   - date: 1991-08
     label: Ukraine declares independence
+  starred: false
 - id: 28
   category: institutional
   russian: Kiev National University
   ukrainian: Kyiv National University
   enabled: true
   is_control: false
+  starred: false
 - id: 29
   category: institutional
   russian: Kharkov University
   ukrainian: Kharkiv University
   enabled: true
   is_control: false
+  starred: false
 - id: 30
   category: institutional
   russian: Kiev Polytechnic
   ukrainian: Kyiv Polytechnic
   enabled: true
   is_control: false
+  starred: false
 - id: 31
   category: institutional
   russian: Kiev Patriarchate
   ukrainian: Kyiv Patriarchate
   enabled: true
   is_control: false
+  starred: false
 - id: 57
   category: institutional
   russian: Lvov Polytechnic
   ukrainian: Lviv Polytechnic
   enabled: true
   is_control: false
+  starred: false
 - id: 58
   category: institutional
   russian: Odessa National University
   ukrainian: Odesa National University
   enabled: true
   is_control: false
+  starred: false
 - id: 32
   category: sports
   russian: Dynamo Kiev
@@ -376,6 +425,7 @@ pairs:
   events:
   - date: 2018-12
     label: UEFA updates to Dynamo Kyiv
+  starred: false
 - id: 33
   category: sports
   russian: Shakhtar Donetsk
@@ -383,30 +433,35 @@ pairs:
   enabled: false
   is_control: true
   notes: Control — same in both languages, no adoption signal
+  starred: false
 - id: 34
   category: sports
   russian: Kiev ballet
   ukrainian: Kyiv ballet
   enabled: true
   is_control: false
+  starred: false
 - id: 51
   category: sports
   russian: Zorya Lugansk
   ukrainian: Zorya Luhansk
   enabled: true
   is_control: false
+  starred: false
 - id: 52
   category: sports
   russian: Metalist Kharkov
   ukrainian: Metalist Kharkiv
   enabled: true
   is_control: false
+  starred: false
 - id: 53
   category: sports
   russian: Karpaty Lvov
   ukrainian: Karpaty Lviv
   enabled: true
   is_control: false
+  starred: false
 - id: 35
   category: historical
   russian: Kievan Rus
@@ -416,12 +471,14 @@ pairs:
   events:
   - date: 2022-02
     label: Russia weaponizes Kievan Rus narrative
+  starred: false
 - id: 36
   category: historical
   russian: Kazak
   ukrainian: Kozak
   enabled: true
   is_control: false
+  starred: false
 - id: 37
   category: historical
   russian: Little Russia
@@ -429,12 +486,14 @@ pairs:
   enabled: false
   is_control: false
   notes: ' [Disabled: insufficient or misleading data]'
+  starred: false
 - id: 48
   category: historical
   russian: Gopak
   ukrainian: Hopak
   enabled: true
   is_control: false
+  starred: false
 - id: 49
   category: historical
   russian: Euromaidan
@@ -442,6 +501,7 @@ pairs:
   enabled: false
   is_control: true
   notes: Control — same in both languages
+  starred: false
 - id: 50
   category: historical
   russian: Holodomor
@@ -449,14 +509,15 @@ pairs:
   enabled: false
   is_control: true
   notes: Control — same in both languages
+  starred: false
 - id: 70
   category: historical
   russian: Vladimir the Great
   ukrainian: Volodymyr the Great
   enabled: true
   is_control: false
-  notes: Prince who Christianized Rus (988). Both Russia and Ukraine claim him as
-    founding figure. Key test of historical identity reclamation.
+  notes: Prince who Christianized Rus (988). Both Russia and Ukraine claim him as founding figure. Key test of historical
+    identity reclamation.
   events:
   - date: 2015-07
     label: Putin unveils Vladimir statue in Moscow
@@ -464,14 +525,16 @@ pairs:
   - date: 2016-11
     label: Poroshenko unveils Volodymyr statue in Kyiv
     color: '#0057B8'
+  starred: true
+  starred_label: Historical identity — Russia claims our past
 - id: 71
   category: historical
   russian: Prince of Kiev
   ukrainian: Prince of Kyiv
   enabled: true
   is_control: false
-  notes: Historical title for rulers of Kyivan Rus. Russian framing dominates English-language
-    scholarship.
+  notes: Historical title for rulers of Kyivan Rus. Russian framing dominates English-language scholarship.
+  starred: false
 - id: 59
   category: historical
   russian: Galicia
@@ -479,6 +542,7 @@ pairs:
   enabled: false
   is_control: false
   notes: ' [Disabled: insufficient or misleading data]'
+  starred: false
 - id: 60
   category: people
   russian: Alexander Usyk
@@ -490,6 +554,7 @@ pairs:
     label: Beats Joshua, undisputed
   - date: 2024-05
     label: Beats Fury, all belts
+  starred: false
 - id: 61
   category: people
   russian: Vladimir Zelensky
@@ -501,6 +566,8 @@ pairs:
     label: Elected president
   - date: 2022-02
     label: Wartime leadership begins
+  starred: true
+  starred_label: Wartime president — first name + last name contested
 - id: 62
   category: people
   russian: Andrei Shevchenko
@@ -508,6 +575,7 @@ pairs:
   enabled: false
   is_control: false
   notes: Insufficient data quality — borderline adoption signal
+  starred: false
 - id: 63
   category: people
   russian: Vitali Klitschko
@@ -515,6 +583,7 @@ pairs:
   enabled: false
   is_control: false
   notes: ' [Disabled: insufficient or misleading data]'
+  starred: false
 - id: 65
   category: food
   russian: Pierogi
@@ -522,6 +591,7 @@ pairs:
   enabled: false
   is_control: false
   notes: Pierogi is Polish; Ukrainian dish is varenyky. Often conflated in English.
+  starred: false
 - id: 66
   category: food
   russian: Pirozhki
@@ -529,6 +599,7 @@ pairs:
   enabled: false
   is_control: false
   notes: ' [Disabled: insufficient or misleading data]'
+  starred: false
 - id: 67
   category: food
   russian: Syrniki
@@ -536,14 +607,15 @@ pairs:
   enabled: false
   is_control: false
   notes: ' [Disabled: insufficient or misleading data]'
+  starred: false
 - id: 68
   category: food
   russian: Holubtsy
   ukrainian: Holubtsi
   enabled: false
   is_control: false
-  notes: 'Russian golubets/golubtsy → Ukrainian holubtsi [Disabled: insufficient or
-    misleading data]'
+  notes: 'Russian golubets/golubtsy → Ukrainian holubtsi [Disabled: insufficient or misleading data]'
+  starred: false
 - id: 69
   category: people
   russian: Sergei Rebrov
@@ -551,6 +623,7 @@ pairs:
   enabled: false
   is_control: false
   notes: Insufficient data quality — too few mentions for reliable adoption signal
+  starred: false
 - id: 80
   category: people
   russian: Mykola Gogol
@@ -558,14 +631,15 @@ pairs:
   enabled: false
   is_control: false
   notes: Controversial — Gogol wrote in Russian. Disabled for now.
+  starred: false
 - id: 81
   category: historical
   russian: Slava Ukraine
   ukrainian: Slava Ukraini
   enabled: false
   is_control: false
-  notes: National salute — trackable on social media. Russian-influenced English drops
-    the -i ending.
+  notes: National salute — trackable on social media. Russian-influenced English drops the -i ending.
+  starred: false
 - id: 72
   category: geographical
   russian: Artemovsk
@@ -580,3 +654,5 @@ pairs:
   - date: 2023-05
     label: Bakhmut falls to Wagner
     color: '#dc2626'
+  starred: true
+  starred_label: Naming as resistance — occupation rename rejected

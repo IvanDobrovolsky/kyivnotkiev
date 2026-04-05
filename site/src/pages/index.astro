@@ -93,7 +93,7 @@ function formatNum(n: number) {
             {cat.pairs.map((pair, pi) => (
               <div class="sidebar-item" data-pair-id={pair.id}>
                 <div class="pair-name">
-                  <span>{[1,3,10,61,70,72].includes(pair.id) ? '★ ' : ''}{pair.ukrainian}</span>
+                  <span>{pair.starred ? '★ ' : ''}{pair.ukrainian}</span>
                   <span class="old">{pair.russian}</span>
                 </div>
                 <span class={`adoption-badge ${adoptionClass(pair.adoption)}`}>
@@ -533,20 +533,13 @@ function formatNum(n: number) {
     }
 
     function renderTop6Cards() {
-      const top6 = [
-        { id: 1, desc: 'Flagship — campaign success story' },
-        { id: 10, desc: 'Disaster brand — impervious to change' },
-        { id: 3, desc: 'Cultural entrenchment — contested' },
-        { id: 61, desc: 'Wartime president — first name + last name contested' },
-        { id: 70, desc: 'Historical identity — Russia claims our past' },
-        { id: 72, desc: 'Naming as resistance — occupation rename rejected' },
-      ];
+      const starredPairs = (pairs as any).pairs.filter((p: any) => p.starred);
       const grid = document.getElementById('top6-grid');
       if (!grid) return;
       grid.innerHTML = '';
-      top6.forEach(({ id, desc }) => {
-        const p = (pairs as any).pairs.find((pp: any) => pp.id === id);
-        if (!p) return;
+      starredPairs.forEach((p: any) => {
+        const id = p.id;
+        const desc = p.starred_label || '';
         const pct = p.adoption;
         const color = pct >= 55 ? '#059669' : pct >= 25 ? '#d97706' : '#dc2626';
         const card = document.createElement('div');
@@ -2063,14 +2056,11 @@ function formatNum(n: number) {
       container.innerHTML = '';
 
       const coll = clCollocations as any;
-      const showPairs = [
-        { id: '10', ru: 'Chernobyl', ua: 'Chornobyl', label: 'Disaster brand vs. real catastrophe' },
-        { id: '1', ru: 'Kiev', ua: 'Kyiv', label: 'Campaign flagship' },
-        { id: '3', ru: 'Odessa', ua: 'Odesa', label: 'Cultural entrenchment' },
-        { id: '61', ru: 'Vladimir Zelensky', ua: 'Volodymyr Zelenskyy', label: 'Wartime president' },
-        { id: '23', ru: 'Borscht', ua: 'Borshch', label: 'Food as identity' },
-        { id: '46', ru: 'Pierogi', ua: 'Varenyky', label: 'Culinary contested' },
-      ];
+      const showPairs = (pairs as any).pairs
+        .filter((p: any) => p.starred)
+        .map((p: any) => ({
+          id: String(p.id), ru: p.russian, ua: p.ukrainian, label: p.starred_label || '',
+        }));
 
       const grid = d3.select(container)
         .style('display', 'grid')
@@ -2079,7 +2069,10 @@ function formatNum(n: number) {
 
       for (const pair of showPairs) {
         const pairData = coll[pair.id];
-        if (!pairData || !pairData.russian?.collocates?.length || !pairData.ukrainian?.collocates?.length) continue;
+        if (!pairData) continue;
+        const hasRu = pairData.russian?.collocates?.length > 0;
+        const hasUa = pairData.ukrainian?.collocates?.length > 0;
+        if (!hasRu && !hasUa) continue;
 
         const card = grid.append('div')
           .style('border', '1px solid var(--border)')
@@ -2098,7 +2091,15 @@ function formatNum(n: number) {
         // Tag clouds side by side
         for (const [variant, color, label] of [['russian', '#dc2626', 'RU'], ['ukrainian', '#2563eb', 'UA']] as const) {
           const words = pairData[variant]?.collocates?.slice(0, 6) || [];
-          if (!words.length) continue;
+          if (!words.length) {
+            const row = card.append('div').style('margin-bottom', '0.35rem');
+            row.append('span').style('font-size', '0.55rem').style('color', color)
+              .style('font-weight', '700').style('text-transform', 'uppercase')
+              .style('letter-spacing', '0.05em').style('margin-right', '0.3rem').text(label);
+            row.append('span').style('font-size', '0.7rem').style('color', 'var(--text-muted)')
+              .style('font-style', 'italic').text('insufficient data');
+            continue;
+          }
 
           const maxCount = Math.max(...words.map((w: any) => w.count));
 
