@@ -146,45 +146,6 @@ Where `x` is the `[CLS]` token representation from the encoder (1024-dim for DeB
 | Label confidence filter | ≥ 0.6 |
 | Train/val/test split | 80/10/10 stratified |
 
-## Pipeline Structure
-
-```
-pipeline/cl/
-├── config.py                  # Constants, model names, label schema
-├── run.py                     # Orchestrator (--step extract|balance|classify|...)
-│
-├── extract/                   # Phase 1: Data extraction
-│   ├── reddit_texts.py        # Reddit titles + bodies from BigQuery
-│   ├── youtube_texts.py       # YouTube titles + descriptions from BigQuery
-│   ├── openalex_texts.py      # Academic paper titles + abstracts (free API)
-│   ├── gdelt_articles.py      # Sequential URL fetcher with trafilatura
-│   └── gdelt_articles_async.py # Async fetcher (aiohttp, 20 concurrent)
-│
-├── balance/                   # Phase 1b: Corpus balancing
-│   └── sampler.py             # Stratified sampling, shortfall documentation
-│
-├── classify/                  # Phase 2: LLM annotation
-│   ├── context.py             # 10-class context classification
-│   ├── sentiment.py           # Positive/neutral/negative sentiment
-│   └── language.py            # Script & language detection
-│
-├── embeddings/                # Phase 4: Analysis
-│   ├── collocations.py        # NPMI-ranked co-occurring words
-│   └── sentence.py            # Sentence embeddings (E5-large)
-│
-├── finetune/                  # Phase 3: Encoder training
-│   ├── train.py               # Multi-model benchmark
-│   └── evaluate.py            # Per-pair/per-source ablation
-│
-├── export/                    # Phase 5: Publishing
-│   ├── hf_dataset.py          # HuggingFace dataset with card
-│   ├── hf_model.py            # HuggingFace model push
-│   └── site_json.py           # Site visualization data
-│
-├── vastai_setup.sh            # GPU instance setup script
-├── vastai_annotate.py         # Sequential annotation (on-instance)
-└── create_bundle.sh           # Package corpus + scripts for upload
-```
 
 ## Usage
 

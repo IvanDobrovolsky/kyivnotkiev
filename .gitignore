@@ -64,3 +64,4 @@ Thumbs.db
 .ipynb_checkpoints/
 
 .claude
+data/raw/screenshots/

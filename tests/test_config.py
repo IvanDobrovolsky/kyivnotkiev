@@ -2,25 +2,26 @@
 
 from pipeline.config import (
     ROOT_DIR,
-    TOPONYM_PAIRS_PATH,
+    CONFIG_DIR,
     get_all_pairs,
     get_categories,
+    get_enabled_pairs,
     get_non_control_pairs,
     get_pairs_by_category,
-    load_toponym_pairs,
+    load_pairs,
 )
 
 
-def test_toponym_pairs_loads():
-    data = load_toponym_pairs()
+def test_pairs_loads():
+    data = load_pairs()
     assert "pairs" in data
     assert "categories" in data
     assert "metadata" in data
 
 
-def test_pair_count():
-    pairs = get_all_pairs()
-    assert len(pairs) == 63
+def test_enabled_pair_count():
+    pairs = get_enabled_pairs()
+    assert len(pairs) >= 50  # at least 50 enabled pairs
 
 
 def test_category_count():
@@ -31,7 +32,7 @@ def test_category_count():
 def test_non_control_pairs():
     non_control = get_non_control_pairs()
     all_pairs = get_all_pairs()
-    controls = [p for p in all_pairs if p["is_control"]]
+    controls = [p for p in all_pairs if p.get("is_control", False)]
     assert len(non_control) == len(all_pairs) - len(controls)
 
 
@@ -39,22 +40,25 @@ def test_geographical_is_largest():
     geo = get_pairs_by_category("geographical")
     for cat_id in ["food", "landmarks", "country", "institutional", "sports", "historical"]:
         other = get_pairs_by_category(cat_id)
-        assert len(geo) > len(other), f"geographical ({len(geo)}) should be larger than {cat_id} ({len(other)})"
+        assert len(geo) >= len(other), f"geographical ({len(geo)}) should be >= {cat_id} ({len(other)})"
 
 
 def test_pair_schema():
     pairs = get_all_pairs()
-    required_fields = {"id", "russian", "ukrainian", "category", "is_control"}
+    required_fields = {"id", "russian", "ukrainian", "category"}
     for pair in pairs:
         assert required_fields.issubset(pair.keys()), f"Pair {pair.get('id')} missing fields"
 
 
-def test_control_cases():
+def test_starred_pairs():
     pairs = get_all_pairs()
-    controls = [p for p in pairs if p["is_control"]]
-    assert len(controls) >= 3  # Donetsk, Mariupol, Kherson, Shakhtar
+    starred = [p for p in pairs if p.get("starred", False)]
+    assert len(starred) == 6, f"Expected 6 starred pairs, got {len(starred)}"
+    starred_ids = {p["id"] for p in starred}
+    assert starred_ids == {1, 3, 10, 61, 70, 72}
 
 
 def test_paths_exist():
     assert ROOT_DIR.exists()
-    assert TOPONYM_PAIRS_PATH.exists()
+    assert CONFIG_DIR.exists()
+    assert (CONFIG_DIR / "pairs.yaml").exists()

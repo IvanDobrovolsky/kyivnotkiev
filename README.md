@@ -100,22 +100,6 @@ make figures         # Generate all charts
 | `make status` | Show watermarks — what's been fetched |
 | `make reproduce` | Full end-to-end reproduction |
 
-## Project Structure
-
-```
-config/             → pairs.yaml, sources.yaml, pipeline.yaml
-infrastructure/     → Terraform (BigQuery, GCS, Dataproc, IAM) — see infrastructure/README.md
-pipeline/           → Data pipeline — see pipeline/README.md
-  ingestion/        → GDELT, Common Crawl, Reddit, Wikipedia, Trends, Ngrams, YouTube
-  analysis/         → adoption, changepoint, categories, holdouts, regression
-  figures/          → crossover, heatmap, choropleth, category curves
-  transform/        → normalize, validate, watermarks
-website/            → kyivnotkiev.org static site
-tests/
-Dockerfile          → Full reproducible environment
-Makefile            → One-command everything
-```
-
 ## Citation
 
 ```bibtex
