@@ -11,3 +11,6 @@ export/model/
 # Keep these for tracking
 !balanced/balance_report.json
 !raw/gdelt_articles/fetch_log.parquet
+!embeddings/collocations.json
+!embeddings/cluster_analysis.json
+!embeddings/temporal_shift.json
