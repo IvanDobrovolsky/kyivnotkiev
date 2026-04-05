@@ -415,7 +415,47 @@ function formatNum(n: number) {
         <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
       </div>
 
+      <div class="chart-container" id="methodology">
+        <h2 style="font-size:1.3rem; margin-bottom:1rem; color:#e2e8f0;">Three Layers of Analysis</h2>
+        <div class="methodology-grid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.2rem; margin-bottom:1.5rem;">
+          <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; border-left:3px solid #f59e0b;">
+            <div style="font-size:0.75rem; text-transform:uppercase; color:#f59e0b; letter-spacing:0.05em; margin-bottom:0.5rem;">Layer 1</div>
+            <div style="font-size:1rem; font-weight:600; color:#e2e8f0; margin-bottom:0.5rem;">Big Data</div>
+            <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">
+              613M+ records from 7 sources. Simple question per record: did they write the Ukrainian or Russian form? Binary regex matching at scale across news, search, social media, books, and academia.
+            </div>
+            <div style="font-size:0.8rem; color:#f59e0b; margin-top:0.7rem; font-style:italic;">Answers: "Did the world switch?"</div>
+          </div>
+          <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; border-left:3px solid #8b5cf6;">
+            <div style="font-size:0.75rem; text-transform:uppercase; color:#8b5cf6; letter-spacing:0.05em; margin-bottom:0.5rem;">Layer 2</div>
+            <div style="font-size:1rem; font-weight:600; color:#e2e8f0; margin-bottom:0.5rem;">Statistical Validation</div>
+            <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">
+              Regression models (R&sup2;=0.87), Kruskal-Wallis tests across categories, Wilcoxon signed-rank for temporal shifts, cross-source Spearman correlations, Wilson confidence intervals. Proves the patterns aren't noise.
+            </div>
+            <div style="font-size:0.8rem; color:#8b5cf6; margin-top:0.7rem; font-style:italic;">Answers: "Is it real?"</div>
+          </div>
+          <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; border-left:3px solid #06b6d4;">
+            <div style="font-size:0.75rem; text-transform:uppercase; color:#06b6d4; letter-spacing:0.05em; margin-bottom:0.5rem;">Layer 3</div>
+            <div style="font-size:1rem; font-weight:600; color:#e2e8f0; margin-bottom:0.5rem;">Computational Linguistics</div>
+            <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">
+              What does the text <em>around</em> each spelling actually say? Transformer-based context classification, sentiment analysis, collocations, and semantic embeddings reveal that spelling variants occupy different discourse worlds.
+            </div>
+            <div style="font-size:0.8rem; color:#06b6d4; margin-top:0.7rem; font-style:italic;">Answers: "Why did some switch and others didn't?"</div>
+          </div>
+        </div>
+        <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; margin-bottom:1rem;">
+          <div style="font-size:0.9rem; font-weight:600; color:#e2e8f0; margin-bottom:0.6rem;">Key CL Finding: Spelling Marks Worldview</div>
+          <div style="font-size:0.85rem; color:#94a3b8; line-height:1.6;">
+            Texts using "Chernobyl" (Russian form) co-occur with <span style="color:#f59e0b;">simulator, gaming, tourism, pop culture</span> — the disaster as entertainment brand.
+            Texts using "Chornobyl" (Ukrainian form) co-occur with <span style="color:#06b6d4;">disaster, nuclear plant, shelter, confinement</span> — the actual catastrophe.
+            The spelling doesn't just reflect old vs. new — it signals which version of reality the writer engages with.
+            The game franchise S.T.A.L.K.E.R. itself switched: "Shadow of <em>Chernobyl</em>" (2007) to "Heart of <em>Chornobyl</em>" (2024).
+          </div>
+        </div>
+      </div>
+
       <div class="chart-container" id="about">
+        <h2 style="font-size:1.3rem; margin-bottom:1rem; color:#e2e8f0;">About This Project</h2>
         <div class="about-text">
           <p>
             In 2018, Ukraine's Ministry of Foreign Affairs launched #KyivNotKiev — a campaign
@@ -429,8 +469,15 @@ function formatNum(n: number) {
             frequency, and web search trends.
           </p>
           <p>
-            Some findings: social media communities adopted Ukrainian spellings 5–9x faster
+            Our computational linguistics layer goes deeper: using transformer models fine-tuned
+            on 30,000+ labeled texts, we classify the <em>context</em> in which each spelling appears.
+            The published model and dataset are available on Hugging Face for other researchers
+            studying language policy adoption worldwide.
+          </p>
+          <p>
+            Some findings: social media communities adopted Ukrainian spellings 5-9x faster
             than traditional media. "Disaster brands" like Chernobyl are nearly immovable.
+            Historical identity terms (Vladimir the Great vs. Volodymyr) barely budged at 5%.
             And food terms like Borshch are fighting a separate battle, championed by chef
             Yevhen Klopotenko's UNESCO campaign.
           </p>
@@ -438,6 +485,7 @@ function formatNum(n: number) {
         <div class="about-links">
           <a href="https://github.com/IvanDobrovolsky/kyivnotkiev">Source Code</a>
           <a href="https://github.com/IvanDobrovolsky/KyivNotKiev-paper">Research Paper</a>
+          <a href="https://huggingface.co/IvanDobrovolsky">Hugging Face</a>
         </div>
       </div>
 
