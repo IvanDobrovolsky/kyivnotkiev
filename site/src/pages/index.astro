@@ -362,6 +362,20 @@ function formatNum(n: number) {
         <div id="cl-collocations-grid"></div>
       </div>
 
+      <!-- CL: Context Distribution by Variant -->
+      <div class="chart-container" id="cl-context-chart">
+        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.3rem;">Context Distribution: Russian vs Ukrainian Forms</div>
+        <div class="chart-subtitle" style="margin-bottom: 1rem;">How texts using each spelling variant distribute across discourse domains (all 55 pairs)</div>
+        <div id="cl-context-bars"></div>
+      </div>
+
+      <!-- CL: Benchmark Table -->
+      <div class="chart-container" id="cl-benchmark">
+        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.3rem;">Encoder Benchmark: Context Classification</div>
+        <div class="chart-subtitle" style="margin-bottom: 1rem;">3 models trained on Llama 70B labels — all converge above 86% F1, proving label robustness</div>
+        <div id="cl-benchmark-table"></div>
+      </div>
+
       <!-- All pairs heatmap -->
       <div class="chart-container">
         <div class="chart-header">
@@ -468,6 +482,7 @@ function formatNum(n: number) {
     import searchAudit from '../data/search_audit.json';
     import domainOrigins from '../data/domain_origins.json';
     import clCollocations from '../data/cl_collocations.json';
+    import clAnalysis from '../data/cl_analysis.json';
 
     // Make cross-lingual data available to drawCrossLingual
     (window as any).__crossLingual = crossLingual;
@@ -584,6 +599,8 @@ function formatNum(n: number) {
       drawHeatmap();
       drawErrorAnalysis();
       drawClCollocations();
+      drawClContextChart();
+      drawClBenchmark();
     }
 
     let activePairId = getPairFromUrl();
@@ -2186,6 +2203,171 @@ function formatNum(n: number) {
             .text(`(${w.count})`);
         }
       }
+    }
+
+    function drawClContextChart() {
+      const container = document.getElementById('cl-context-bars');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const cl = clAnalysis as any;
+      if (!cl.context_distribution) return;
+
+      // Aggregate across all pairs
+      const categories = ['war_conflict', 'academic_science', 'politics', 'travel_tourism',
+        'history', 'general_news', 'sports', 'culture_arts', 'food_cuisine', 'business_economy'];
+      const catLabels: Record<string, string> = {
+        war_conflict: 'War & Conflict', academic_science: 'Academic', politics: 'Politics',
+        travel_tourism: 'Travel', history: 'History', general_news: 'General News',
+        sports: 'Sports', culture_arts: 'Culture & Arts', food_cuisine: 'Food', business_economy: 'Business',
+      };
+
+      // Sum across all pairs
+      const ruTotals: Record<string, number> = {};
+      const uaTotals: Record<string, number> = {};
+      let ruCount = 0, uaCount = 0;
+
+      for (const [pid, pairData] of Object.entries(cl.context_distribution)) {
+        const pd = pairData as any;
+        if (pd.russian) {
+          for (const [cat, val] of Object.entries(pd.russian)) {
+            ruTotals[cat] = (ruTotals[cat] || 0) + (val as number);
+          }
+          ruCount++;
+        }
+        if (pd.ukrainian) {
+          for (const [cat, val] of Object.entries(pd.ukrainian)) {
+            uaTotals[cat] = (uaTotals[cat] || 0) + (val as number);
+          }
+          uaCount++;
+        }
+      }
+
+      // Normalize to percentages
+      const ruSum = Object.values(ruTotals).reduce((a, b) => a + b, 0);
+      const uaSum = Object.values(uaTotals).reduce((a, b) => a + b, 0);
+
+      const margin = { top: 20, right: 80, bottom: 10, left: 110 };
+      const barH = 28;
+      const width = container.getBoundingClientRect().width - margin.left - margin.right;
+      const height = categories.length * barH;
+
+      const svg = d3.select(container)
+        .append('svg')
+        .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
+      const maxVal = Math.max(
+        ...categories.map(c => Math.max((ruTotals[c] || 0) / ruSum, (uaTotals[c] || 0) / uaSum))
+      );
+
+      const x = d3.scaleLinear().domain([0, maxVal * 1.1]).range([0, width]);
+      const y = d3.scaleBand().domain(categories).range([0, height]).padding(0.25);
+
+      categories.forEach(cat => {
+        const ruPct = (ruTotals[cat] || 0) / ruSum;
+        const uaPct = (uaTotals[cat] || 0) / uaSum;
+        const bh = y.bandwidth() / 2 - 1;
+        const yi = y(cat)!;
+
+        // Russian bar
+        svg.append('rect').attr('x', 0).attr('y', yi)
+          .attr('width', x(ruPct)).attr('height', bh)
+          .attr('fill', '#ef4444').attr('opacity', 0.7).attr('rx', 2);
+
+        // Ukrainian bar
+        svg.append('rect').attr('x', 0).attr('y', yi + bh + 2)
+          .attr('width', x(uaPct)).attr('height', bh)
+          .attr('fill', '#3b82f6').attr('opacity', 0.7).attr('rx', 2);
+
+        // Label
+        svg.append('text').attr('x', -6).attr('y', yi + y.bandwidth() / 2 + 4)
+          .attr('text-anchor', 'end').attr('font-size', '11px').attr('fill', 'var(--text)')
+          .text(catLabels[cat] || cat);
+
+        // Percentages
+        const diff = uaPct - ruPct;
+        const diffStr = diff > 0.02 ? `+${(diff*100).toFixed(1)}pp` : diff < -0.02 ? `${(diff*100).toFixed(1)}pp` : '';
+        const diffColor = diff > 0.02 ? '#3b82f6' : diff < -0.02 ? '#ef4444' : '#6b7280';
+
+        svg.append('text').attr('x', Math.max(x(ruPct), x(uaPct)) + 6).attr('y', yi + y.bandwidth() / 2 + 4)
+          .attr('font-size', '10px').attr('fill', diffColor).attr('font-weight', '600')
+          .text(diffStr);
+      });
+
+      // Legend
+      const legend = d3.select(container).append('div')
+        .style('display', 'flex').style('gap', '1.5rem').style('justify-content', 'center')
+        .style('margin-top', '0.5rem');
+
+      legend.append('div').style('display', 'flex').style('align-items', 'center').style('gap', '4px')
+        .style('font-size', '11px').style('color', '#94a3b8')
+        .html('<span style="width:10px;height:10px;background:#ef4444;border-radius:2px;display:inline-block;opacity:0.7"></span>Russian form');
+
+      legend.append('div').style('display', 'flex').style('align-items', 'center').style('gap', '4px')
+        .style('font-size', '11px').style('color', '#94a3b8')
+        .html('<span style="width:10px;height:10px;background:#3b82f6;border-radius:2px;display:inline-block;opacity:0.7"></span>Ukrainian form');
+    }
+
+    function drawClBenchmark() {
+      const container = document.getElementById('cl-benchmark-table');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const cl = clAnalysis as any;
+      if (!cl.benchmark || Object.keys(cl.benchmark).length === 0) return;
+
+      const models = [
+        { key: 'deberta-v3-large', name: 'DeBERTa-v3-large', params: '304M' },
+        { key: 'xlm-roberta-large', name: 'XLM-RoBERTa-large', params: '550M' },
+        { key: 'mdeberta-v3-base', name: 'mDeBERTa-v3-base', params: '86M' },
+      ];
+
+      const table = d3.select(container).append('table')
+        .style('width', '100%').style('border-collapse', 'collapse')
+        .style('font-size', '0.85rem');
+
+      // Header
+      const thead = table.append('thead');
+      const hrow = thead.append('tr');
+      ['Model', 'Params', 'Accuracy', 'F1 (macro)', 'F1 (weighted)'].forEach(h => {
+        hrow.append('th').text(h)
+          .style('text-align', h === 'Model' ? 'left' : 'right')
+          .style('padding', '0.5rem 0.75rem')
+          .style('border-bottom', '2px solid #334155')
+          .style('color', '#94a3b8').style('font-weight', '600');
+      });
+
+      // Rows
+      const tbody = table.append('tbody');
+      const bestF1 = Math.max(...models.map(m => cl.benchmark[m.key]?.f1_macro || 0));
+
+      models.forEach(m => {
+        const data = cl.benchmark[m.key];
+        if (!data) return;
+        const isBest = data.f1_macro === bestF1;
+        const row = tbody.append('tr');
+
+        row.append('td').text(m.name)
+          .style('padding', '0.5rem 0.75rem')
+          .style('border-bottom', '1px solid #1e293b')
+          .style('color', isBest ? '#e2e8f0' : '#94a3b8')
+          .style('font-weight', isBest ? '700' : '400');
+
+        row.append('td').text(m.params)
+          .style('text-align', 'right').style('padding', '0.5rem 0.75rem')
+          .style('border-bottom', '1px solid #1e293b').style('color', '#64748b');
+
+        [data.accuracy, data.f1_macro, data.f1_weighted].forEach(val => {
+          const pct = (val * 100).toFixed(1) + '%';
+          row.append('td').text(pct)
+            .style('text-align', 'right').style('padding', '0.5rem 0.75rem')
+            .style('border-bottom', '1px solid #1e293b')
+            .style('color', isBest ? '#059669' : '#94a3b8')
+            .style('font-weight', isBest ? '700' : '400');
+        });
+      });
     }
   </script>
 </body>
