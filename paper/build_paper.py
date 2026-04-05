@@ -134,11 +134,13 @@ def add_para_mixed(doc, segments, alignment=WD_ALIGN_PARAGRAPH.JUSTIFY, space_af
 # Load pair data
 # ---------------------------------------------------------------------------
 def load_pairs():
-    pairs_path = DATA_DIR / "toponym_pairs.json"
-    if pairs_path.exists():
-        with open(pairs_path) as f:
+    """Load pairs from manifest.json — the single source of truth."""
+    manifest_path = PROJECT_ROOT / "site" / "src" / "data" / "manifest.json"
+    if manifest_path.exists():
+        with open(manifest_path) as f:
             data = json.load(f)
-        return data.get("pairs", []), data.get("categories", [])
+        pairs = [p for p in data.get("pairs", []) if not p.get("is_control", False)]
+        return pairs, data.get("categories", [])
     return [], []
 
 PAIRS, CATEGORIES = load_pairs()
@@ -225,7 +227,7 @@ def build_paper():
         "are being replaced by Ukrainian transliterations (Kyiv, Kharkiv, Odesa) following Ukraine's "
         "#KyivNotKiev campaign launched in October 2018. We analyze over 90 billion records across seven "
         "data sources---GDELT, Wikipedia, Reddit, YouTube, OpenAlex, Google Trends, and Google Ngrams---yielding "
-        "40 million toponym matches spanning 63 transliteration pairs in 8 categories. Our three-tier pipeline "
+        "40 million toponym matches spanning 55 toponym pairs in 8 categories. Our three-tier pipeline "
         "scans massive corpora, extracts matched pairs, and constructs a balanced 29,938-text corpus for "
         "computational linguistic analysis using LLM-based annotation, NPMI collocations, and sentiment scoring. "
         "We identify seven distinct mechanisms governing adoption rates, from cultural fossilization (Chicken Kiev "
@@ -272,7 +274,7 @@ def build_paper():
 
     add_para(doc,
         "This paper presents the first large-scale computational study of this naming transition. We "
-        "track 63 transliteration pairs across 8 categories---from geographical names like Kiev/Kyiv to "
+        "track 55 toponym pairs across 8 categories---from geographical names like Kiev/Kyiv to "
         "food terms like Borscht/Borshch, historical labels like Kievan Rus/Kyivan Rus, and personal "
         "names like Vladimir Zelensky/Volodymyr Zelenskyy---drawing data from seven heterogeneous "
         "sources that collectively represent over 90 billion records. Our analysis addresses three "
@@ -434,6 +436,12 @@ def build_paper():
                "Tier 2 extracts 40M+ toponym matches via regex. Tier 3 constructs a 29,938-text balanced "
                "CL corpus for deep analysis.")
 
+    add_figure(doc, "fig16_full_architecture.png",
+               "Figure 2. Complete data pipeline: from seven source datasets through BigQuery ingestion, "
+               "three analysis layers, to four outputs (website, paper, HuggingFace, GitHub). "
+               "Infrastructure: Google BigQuery for warehousing, async HTTP for article extraction, "
+               "NVIDIA B200 on vast.ai for ML ($14.10 total compute).")
+
     add_para_mixed(doc, [
         ("Tier 1 (Scanned): ", True, False),
         ("Over 90 billion records scanned across seven datasets: GDELT (42 billion event records), "
@@ -488,7 +496,7 @@ def build_paper():
 
     add_heading(doc, "3.2  Pair Selection", level=2)
     add_para(doc,
-        "We selected 63 transliteration pairs across 8 categories (Table 2). Pair selection was guided "
+        "We selected 55 toponym pairs across 8 categories (Table 2). Pair selection was guided "
         "by three criteria: (1) inclusion in Ukraine's official derussification legislation (Verkhovna "
         "Rada, 2015); (2) sufficient data volume across at least three sources to enable cross-source "
         "comparison (minimum thresholds: GDELT >= 10, Trends >= 5, others >= 3); and (3) consultation "
@@ -517,7 +525,7 @@ def build_paper():
         ("Historical", "7", "Kievan Rus, Cossack", "Kyivan Rus, Kozak"),
         ("People", "4", "Vladimir Zelensky", "Volodymyr Zelenskyy"),
         ("Controls", "5", "Donetsk, Mariupol", "(identical forms)"),
-        ("Total", "63", "", ""),
+        ("Total", "55", "", ""),
     ]
     for row_data in cat_data:
         add_table_row(t2, row_data)
@@ -548,17 +556,66 @@ def build_paper():
         "sources. Our thresholds (GDELT >= 10, Trends >= 5, others >= 3) ensure that each source "
         "contributes only when it has meaningful signal for a given pair.")
 
-    add_heading(doc, "3.4  Data Quality", level=2)
+    add_heading(doc, "3.4  Toponym Matching Methodology", level=2)
+    add_para(doc,
+        "For each of the 55 pairs, we construct boundary-sensitive regular expressions that match "
+        "the target toponym in running text. The matching operates differently per source:")
+
+    add_para_mixed(doc, [
+        ("GDELT: ", True, False),
+        ("We query BigQuery's GDELT Global Knowledge Graph, matching toponym variants in the "
+         "source_url and domain metadata fields. Each match yields a URL-level record with date, "
+         "source domain, source country, and matched variant. This produces 39.6M matched records.", False, False),
+    ])
+    add_para_mixed(doc, [
+        ("Wikipedia: ", True, False),
+        ("We query the Wikimedia Pageviews API for both spelling variants of each pair (e.g., both "
+         "the 'Kiev' and 'Kyiv' article pages). Monthly pageview counts serve as a proxy for which "
+         "spelling users search for. This yields 14,952 monthly observations across 573M total pageviews.", False, False),
+    ])
+    add_para_mixed(doc, [
+        ("OpenAlex: ", True, False),
+        ("We search the OpenAlex API (Priem et al., 2022) using title.search for each variant, "
+         "extracting paper IDs, titles, reconstructed abstracts, publication years, and citation counts. "
+         "This free API indexes 250M+ scholarly works.", False, False),
+    ])
+    add_para_mixed(doc, [
+        ("Reddit & YouTube: ", True, False),
+        ("Reddit posts are matched via Arctic Shift API (Baumgartner et al., 2020) with regex on "
+         "titles and bodies. YouTube videos are discovered via yt-dlp search and matched on titles "
+         "and descriptions.", False, False),
+    ])
+    add_para_mixed(doc, [
+        ("Google Trends & Ngrams: ", True, False),
+        ("Trends queries compare search interest for each variant pair. Ngrams (Michel et al., 2011) "
+         "provide historical book frequency from 1900--2019.", False, False),
+    ])
+
+    add_para(doc,
+        "All matched records flow into Google BigQuery as the central warehouse. A manifest.json file "
+        "serves as the single source of truth for all downstream analysis---the website, paper figures, "
+        "and statistical tests all read from this manifest, ensuring consistency across outputs. "
+        "The manifest is regenerated from BigQuery via 'make export-site' and contains per-pair "
+        "adoption rates, per-source record counts, category statistics, and cross-lingual data.")
+
+    add_heading(doc, "3.5  Data Quality", level=2)
     add_para(doc,
         "We implement several quality controls. Regex patterns are designed for high precision, achieving "
-        "99.8% on a manually verified sample of 5,000 matches. For ambiguous pairs (e.g., Odessa, which "
-        "is also a city in Texas), we apply geographic disambiguation where possible. Our analysis of "
-        "the Odessa/Odesa pair reveals a 3.4% contamination rate from Odessa, Texas---significant "
-        "enough to report but insufficient to alter the overall trend. For the the Ukraine/Ukraine "
-        "pair, we use boundary-sensitive regex to avoid matching 'the Ukrainian' while capturing "
-        "genuine instances of the definite article before the country name. Human validation of "
-        "1,000 random annotations from our LLM labeling pipeline shows >98% agreement with manual "
-        "labels, consistent with the findings of Gilardi et al. (2023) on LLM annotation quality.")
+        "99.8% on a manually verified sample of 1,444 GDELT matches. For multi-word pairs (e.g., "
+        "'Vladimir the Great'), we match on individual constituent words within the same text to handle "
+        "word-order variation. For ambiguous pairs (e.g., Odessa, which is also a city in Texas with "
+        "population 115,000), we document the contamination rate: 3.4% of 'Odessa' matches refer to "
+        "the Texas city, identifiable by co-occurring keywords (meteorite, Permian, Midland). For the "
+        "'the Ukraine/Ukraine' pair, we use boundary-sensitive regex to avoid matching 'the Ukrainian' "
+        "while capturing genuine instances of the definite article before the country name.")
+
+    add_para(doc,
+        "Human validation of 1,000 randomly sampled annotations from our LLM labeling pipeline shows "
+        ">98% agreement with manual labels, consistent with the findings of Gilardi et al. (2023) and "
+        "Törnberg (2024) on LLM annotation quality. The GDELT article extraction pipeline achieves "
+        "58% yield from 10,698 sampled URLs (20% dead links, 10% blocked, 8% too short). Chi-squared "
+        "tests confirm that fetch failure rates do not differ significantly between Russian-form and "
+        "Ukrainian-form URLs (p = 0.42), ruling out survivorship bias.")
 
     # ========================================================================
     # 5. ADOPTION ANALYSIS
@@ -617,7 +674,7 @@ def build_paper():
     add_heading(doc, "4.3  The Adoption Spectrum", level=2)
 
     add_figure(doc, "fig2_adoption_spectrum.png",
-               "Figure 5. Adoption spectrum across all 63 pairs, sorted by Ukrainian-form adoption rate. "
+               "Figure 5. Adoption spectrum across all 55 pairs, sorted by Ukrainian-form adoption rate. "
                "Colors indicate category. The spectrum ranges from near-zero (Vladimir the Great, 4.8%) "
                "to near-complete adoption (Bakhmut, 89.6%).")
 
@@ -626,7 +683,7 @@ def build_paper():
         "Bakhmut (89.6%), Kyiv Polytechnic (78%), and Volodymyr Zelenskyy (57.4%) show strong "
         "Ukrainian-form adoption. At the low end, Vladimir the Great (4.8%), Chernobyl (26.8%), "
         "and various historical terms remain dominated by Russian-derived forms. The median "
-        "adoption rate across all 63 pairs is approximately 42%, indicating that the naming "
+        "adoption rate across all 55 pairs is approximately 42%, indicating that the naming "
         "transition is roughly at its midpoint. Category-level analysis reveals a hierarchy: "
         "institutional names and war-context terms show the highest adoption, while historical "
         "and landmark terms show the most resistance.")
@@ -720,7 +777,7 @@ def build_paper():
 
     add_para(doc,
         "The Wilcoxon signed-rank test compares paired pre- and post-invasion adoption rates across "
-        "all 63 pairs. The highly significant result (p < 0.001) confirms that the invasion produced "
+        "all 55 pairs. The highly significant result (p < 0.001) confirms that the invasion produced "
         "a systematic upward shift in adoption, not merely a few high-profile cases. The Kruskal-Wallis "
         "test uses category as the grouping variable and adoption rate as the dependent variable. The "
         "significant result (H = 13.54, p = 0.035) confirms that category membership is a meaningful "
@@ -1322,7 +1379,7 @@ def build_paper():
     add_para(doc,
         "This paper presents the first large-scale computational study of Ukrainian toponym adoption "
         "in English-language media. Analyzing over 90 billion records across seven data sources, we "
-        "track 63 transliteration pairs and identify seven distinct mechanisms governing adoption "
+        "track 55 toponym pairs and identify seven distinct mechanisms governing adoption "
         "rates. Our central findings are threefold. First, adoption is highly uneven: from Bakhmut at "
         "89.6% to Vladimir the Great at 4.8%, the choice between Russian-derived and Ukrainian-derived "
         "forms is shaped by domain-specific forces including cultural fossilization, brand lock-in, "
@@ -1353,7 +1410,7 @@ def build_paper():
         "All data, code, and model weights are available at https://kyivnotkiev.org and the "
         "associated GitHub repository. The three-tier pipeline is implemented in Python and can be "
         "executed with a single Makefile command. The CL corpus (29,938 texts), toponym pair "
-        "definitions (63 pairs), and all figure-generation scripts are included. Encoder training "
+        "definitions (55 pairs), and all figure-generation scripts are included. Encoder training "
         "requires a single GPU with at least 24GB VRAM (the full benchmark on an NVIDIA B200 cost "
         "$14.10 via vast.ai). We encourage researchers to extend the pipeline to additional "
         "languages, sources, and naming disputes.")
@@ -1427,28 +1484,53 @@ def build_paper():
     add_heading(doc, "Appendix A: Full Toponym Pair List", level=1)
 
     add_para(doc,
-        "Table A1 presents all 63 transliteration pairs tracked in this study, organized by category. "
-        "Control pairs (identical in both forms) are marked with an asterisk.",
+        "Table A1 presents all 55 enabled toponym pairs with adoption rates computed over two windows: "
+        "last 12 months (current state) and since October 2018 (campaign lifetime). "
+        "Starred pairs (★) are selected for deep computational linguistic analysis.",
         size=Pt(10))
 
-    add_para(doc, "Table A1. Complete list of 63 toponym pairs by category.", bold=True, size=Pt(10))
-    ta1 = doc.add_table(rows=1, cols=5)
+    # Load timeseries for since-2018 computation
+    ts_path = PROJECT_ROOT / "site" / "src" / "data" / "timeseries.json"
+    manifest_path = PROJECT_ROOT / "site" / "src" / "data" / "manifest.json"
+    ts_data = json.loads(ts_path.read_text()) if ts_path.exists() else {}
+    manifest_data = json.loads(manifest_path.read_text()) if manifest_path.exists() else {"pairs": []}
+
+    add_para(doc, "Table A1. Complete list of 55 toponym pairs with adoption rates.", bold=True, size=Pt(10))
+    ta1 = doc.add_table(rows=1, cols=7)
     ta1.alignment = WD_TABLE_ALIGNMENT.CENTER
     ta1.style = "Table Grid"
-    for i, h in enumerate(["#", "Russian Form", "Ukrainian Form", "Category", "Control"]):
+    for i, h in enumerate(["#", "Russian Form", "Ukrainian Form", "Category", "Last 12m", "Since 2018", "★"]):
         set_cell_text(ta1.rows[0].cells[i], h, bold=True, size=Pt(8))
     style_header_row(ta1)
 
-    for pair in PAIRS:
-        ctrl = "*" if pair.get("is_control", False) else ""
+    for mp in sorted(manifest_data.get("pairs", []), key=lambda x: (x.get("category",""), -x.get("adoption",0))):
+        if mp.get("is_control", False):
+            continue
+        pid = str(mp["id"])
+        # Compute since-2018
+        since_vals = []
+        pair_ts = ts_data.get(pid, {})
+        for src in ['gdelt','trends','wikipedia','reddit','youtube','ngrams','openalex']:
+            series = pair_ts.get(src, [])
+            post = [d for d in series if d['date'] >= '2018-01']
+            if len(post) >= 3:
+                since_vals.append(sum(d['adoption'] for d in post) / len(post))
+        since_2018 = round(sum(since_vals)/len(since_vals), 1) if since_vals else 0
+
         add_table_row(ta1, [
-            str(pair["id"]),
-            pair["russian"],
-            pair["ukrainian"],
-            pair.get("category", ""),
-            ctrl,
+            str(mp["id"]),
+            mp["russian"],
+            mp["ukrainian"],
+            mp.get("category", ""),
+            f"{mp.get('adoption', 0):.1f}%",
+            f"{since_2018:.1f}%",
+            "★" if mp.get("starred", False) else "",
         ])
     doc.add_paragraph()
+    add_para(doc,
+        "Note: Adoption = mean of per-source UA/(UA+RU) ratios, equal-weighted across sources "
+        "with sufficient data (GDELT ≥10, Trends ≥5, others ≥3).",
+        size=Pt(9), italic=True)
 
     # ========================================================================
     # APPENDIX B: ANNOTATION PROMPT
@@ -1526,7 +1608,7 @@ def build_paper():
     add_heading(doc, "Appendix D: Adoption Formula --- Formal Definition", level=1)
 
     add_para(doc,
-        "Let P = {p_1, p_2, ..., p_63} be the set of transliteration pairs. For each pair p, "
+        "Let P = {p_1, p_2, ..., p_55} be the set of transliteration pairs. For each pair p, "
         "let S(p) be the set of sources with data above the minimum threshold (GDELT >= 10, "
         "Trends >= 5, all others >= 3). For each source s in S(p), let n_UA(p,s) be the count "
         "of Ukrainian-form matches and n_RU(p,s) the count of Russian-form matches.",
@@ -1560,7 +1642,7 @@ def build_paper():
         ("GDELT. ", True, False),
         ("The Global Database of Events, Language, and Tone (Leetaru & Schrodt, 2013) monitors "
          "broadcast, print, and web news worldwide. We query the GDELT 2.0 Event Database and "
-         "Global Knowledge Graph for articles mentioning any of our 63 pairs, extracting article "
+         "Global Knowledge Graph for articles mentioning any of our 55 pairs, extracting article "
          "URLs, publication dates, source domains, and tone scores. Matching uses case-insensitive "
          "regex with word boundaries. GDELT's 15-minute update cycle provides near-real-time "
          "temporal resolution.", False, False),
