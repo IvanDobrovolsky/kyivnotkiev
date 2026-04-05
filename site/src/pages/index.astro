@@ -328,7 +328,7 @@ function formatNum(n: number) {
           </div>
           <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
             <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Historical identity</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Kyiv 74% but Vladimir the Great 7% — history still Russian-framed</div>
+            <div style="font-size:0.75rem; color:#6b7280;">Kyiv 60% but Volodymyr the Great 5% — history still Russian-framed</div>
           </div>
           <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
             <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Cross-lingual</div>
@@ -435,7 +435,7 @@ function formatNum(n: number) {
           <p>
             Some findings: social media communities adopted Ukrainian spellings 5-9x faster
             than traditional media. "Disaster brands" like Chernobyl are nearly immovable.
-            Historical identity terms (Vladimir the Great vs. Volodymyr) barely budged at 5%.
+            Historical identity terms (Vladimir the Great vs. Volodymyr) barely budged at under 5%.
             And food terms like Borshch are fighting a separate battle, championed by chef
             Yevhen Klopotenko's UNESCO campaign.
           </p>
@@ -1839,6 +1839,7 @@ function formatNum(n: number) {
       selectPair(activePairId);
     } else {
       showView('landing');
+      renderTop6Cards();
       drawCategoryChart();
       drawHeatmap();
     }
