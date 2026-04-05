@@ -40,13 +40,22 @@ def _get_trafilatura():
     return _trafilatura
 
 
+def _get_config():
+    from trafilatura.settings import use_config
+    config = use_config()
+    config.set("DEFAULT", "USER_AGENTS",
+               "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+               "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
+    return config
+
+
 def sample_urls_from_bq(client, pair_ids, max_per_pair):
     """Sample GDELT URLs from BigQuery, stratified by variant and year."""
     query = f"""
     WITH numbered AS (
         SELECT
             pair_id,
-            url,
+            source_url AS url,
             variant,
             matched_term,
             EXTRACT(YEAR FROM date) AS year,
@@ -63,8 +72,8 @@ def sample_urls_from_bq(client, pair_ids, max_per_pair):
             ) AS rn
         FROM `{BQ_PROJECT}.{BQ_DATASET}.raw_gdelt_url`
         WHERE pair_id IN UNNEST(@pair_ids)
-          AND url IS NOT NULL
-          AND url != ''
+          AND source_url IS NOT NULL
+          AND source_url != ''
     )
     SELECT pair_id, url, variant, matched_term, year, date
     FROM numbered
@@ -94,9 +103,10 @@ def fetch_article(url, timeout=GDELT_FETCH_TIMEOUT):
     fetched, paywall, dead_link, timeout, too_short, extraction_failed, blocked
     """
     traf = _get_trafilatura()
+    config = _get_config()
 
     try:
-        downloaded = traf.fetch_url(url)
+        downloaded = traf.fetch_url(url, config=config)
         if downloaded is None:
             return None, "dead_link"
 
@@ -105,6 +115,7 @@ def fetch_article(url, timeout=GDELT_FETCH_TIMEOUT):
             include_comments=False,
             include_tables=False,
             no_fallback=False,
+            config=config,
         )
 
         if text is None:
