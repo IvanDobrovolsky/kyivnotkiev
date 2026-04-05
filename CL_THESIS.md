@@ -1,4 +1,4 @@
-# Computational Linguistics Thesis: Spelling as Discourse Marker
+# #KyivNotKiev: A Large-Scale Computational Study of Ukrainian Toponym Adoption
 
 ## Core Argument
 

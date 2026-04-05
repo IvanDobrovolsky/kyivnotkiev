@@ -119,7 +119,7 @@ and documented shortfalls.
 
 ```bibtex
 @article{{dobrovolskyi2026kyivnotkiev,
-  title={{Did the World Listen? A Large-Scale Computational Study of Ukrainian Toponym Adoption}},
+  title={{#KyivNotKiev: A Large-Scale Computational Study of Ukrainian Toponym Adoption}},
   author={{Dobrovolskyi, Ivan}},
   year={{2026}}
 }}

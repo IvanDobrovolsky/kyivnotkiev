@@ -5,8 +5,8 @@
 <h1 align="center">KYIV <sub>NOT</sub> <s>KIEV</s></h1>
 
 <p align="center">
-  <strong>Computational analysis of Ukrainian toponym adoption across 601M+ records from 7 sources.</strong><br>
-  Big data pipeline tracking how the world adopts Ukrainian spellings — from Kyiv to Borshch — using Apache Spark on Google Cloud.
+  <strong>#KyivNotKiev: A Large-Scale Computational Study of Ukrainian Toponym Adoption</strong><br>
+  613M+ records, 55 toponym pairs, 7 sources, transformer-based discourse analysis.
 </p>
 
 <p align="center">
@@ -17,10 +17,10 @@
 
 | Metric | Value |
 |--------|-------|
-| Records analyzed | **601M+** (38.7M news articles, 562M page views, 22K posts, 14.5K videos) |
+| Records analyzed | **613M+** (39.6M news articles, 573M page views, 22K posts, 14.5K videos, 379K academic papers) |
 | Data processed | **~1.2 PB** |
-| Toponym pairs | **60** enabled across **8** categories |
-| Data sources | **7** (Google Trends, GDELT, Wikipedia, Reddit, YouTube, Google Books Ngrams, Common Crawl) |
+| Toponym pairs | **55** enabled across **8** categories |
+| Data sources | **7** (Google Trends, GDELT, Wikipedia, Reddit, YouTube, Google Books Ngrams, OpenAlex) |
 | Time span | **2010–2026** (Ngrams: 1900–2019) |
 | Countries | **55** with per-country adoption data |
 | Infrastructure | **GCP** (BigQuery, Dataproc/Spark, GCS, Cloud Run) |
@@ -114,4 +114,14 @@ website/            → kyivnotkiev.org static site
 tests/
 Dockerfile          → Full reproducible environment
 Makefile            → One-command everything
+```
+
+## Citation
+
+```bibtex
+@article{dobrovolskyi2026kyivnotkiev,
+  title={{#KyivNotKiev}: A Large-Scale Computational Study of Ukrainian Toponym Adoption},
+  author={Dobrovolskyi, Ivan},
+  year={2026}
+}
 ```

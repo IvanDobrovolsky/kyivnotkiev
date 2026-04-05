@@ -224,12 +224,3 @@ python -m pipeline.cl.run --step export
 | 9 robustness experiments | NVIDIA B200 183GB | 2 hrs | ~$6.70 |
 | **Total GPU** | | **~3 hrs** | **~$10.60** |
 
-## Citation
-
-```bibtex
-@article{dobrovolskyi2026kyivnotkiev,
-  title={Did the World Listen? A Large-Scale Computational Study of Ukrainian Toponym Adoption},
-  author={Dobrovolskyi, Ivan},
-  year={2026}
-}
-```
