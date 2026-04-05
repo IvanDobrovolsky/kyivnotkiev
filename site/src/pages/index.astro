@@ -583,9 +583,11 @@ function formatNum(n: number) {
       drawCategoryChart();
       drawHeatmap();
       drawErrorAnalysis();
-      drawClCollocations();
-      drawClContextChart();
-      drawClBenchmark();
+      requestAnimationFrame(() => {
+        drawClCollocations();
+        drawClContextChart();
+        drawClBenchmark();
+      });
     }
 
     let activePairId = getPairFromUrl();
@@ -2102,15 +2104,15 @@ function formatNum(n: number) {
             .style('font-weight', '700').style('text-transform', 'uppercase')
             .style('letter-spacing', '0.05em').style('margin-right', '0.3rem').text(label);
 
-          const tags = row.append('span').style('line-height', '1.6');
+          const tags = row.append('span').style('line-height', '1.8');
           words.forEach((w: any, i: number) => {
-            const size = 0.65 + (w.count / maxCount) * 0.4;
-            const opacity = 0.5 + (w.count / maxCount) * 0.5;
+            const size = 0.7 + (w.count / maxCount) * 0.35;
+            const weight = i < 2 ? '700' : '500';
             tags.append('span')
               .style('font-size', `${size}rem`)
               .style('color', color)
-              .style('opacity', String(opacity))
-              .style('margin-right', '0.3rem')
+              .style('font-weight', weight)
+              .style('margin-right', '0.35rem')
               .style('white-space', 'nowrap')
               .text(w.word);
           });
