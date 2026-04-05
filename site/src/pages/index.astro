@@ -404,6 +404,13 @@ function formatNum(n: number) {
         </div>
       </div>
 
+      <!-- CL Insights: Collocations -->
+      <div class="chart-container" id="cl-insights">
+        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.3rem;">Computational Linguistics: What Surrounds Each Spelling?</div>
+        <div class="chart-subtitle" style="margin-bottom: 1rem;">Top co-occurring words (PMI-ranked) reveal different discourse worlds per spelling variant</div>
+        <div id="cl-collocations-grid"></div>
+      </div>
+
       <!-- All pairs heatmap -->
       <div class="chart-container">
         <div class="chart-header">
@@ -509,6 +516,7 @@ function formatNum(n: number) {
     import enforcementData from '../data/enforcement.json';
     import searchAudit from '../data/search_audit.json';
     import domainOrigins from '../data/domain_origins.json';
+    import clCollocations from '../data/cl_collocations.json';
 
     // Make cross-lingual data available to drawCrossLingual
     (window as any).__crossLingual = crossLingual;
@@ -584,6 +592,7 @@ function formatNum(n: number) {
       drawCategoryChart();
       drawHeatmap();
       drawErrorAnalysis();
+      drawClCollocations();
     }
 
     let activePairId = getPairFromUrl();
@@ -2056,6 +2065,143 @@ function formatNum(n: number) {
           .style('display', 'flex').style('align-items', 'center').style('gap', '4px')
           .style('font-size', '11px').style('color', '#6b7280')
           .html(`<span style="width:8px;height:8px;border-radius:50%;background:${sourceColors[src] || '#888'};display:inline-block;"></span>${srcNames[src]}`);
+      }
+    }
+
+    function drawClCollocations() {
+      const container = document.getElementById('cl-collocations-grid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const coll = clCollocations as any;
+      // Show top 6 pairs that have collocation data for both variants
+      const showPairs = [
+        { id: '10', ru: 'Chernobyl', ua: 'Chornobyl', label: 'Disaster brand vs. real catastrophe' },
+        { id: '1', ru: 'Kiev', ua: 'Kyiv', label: 'Campaign flagship' },
+        { id: '3', ru: 'Odessa', ua: 'Odesa', label: 'Cultural entrenchment' },
+        { id: '61', ru: 'Vladimir Zelensky', ua: 'Volodymyr Zelenskyy', label: 'Wartime president' },
+        { id: '23', ru: 'Borscht', ua: 'Borshch', label: 'Food as identity' },
+        { id: '46', ru: 'Pierogi', ua: 'Varenyky', label: 'Culinary contested' },
+      ];
+
+      const grid = d3.select(container)
+        .style('display', 'grid')
+        .style('grid-template-columns', 'repeat(2, 1fr)')
+        .style('gap', '1rem');
+
+      for (const pair of showPairs) {
+        const pairData = coll[pair.id];
+        if (!pairData || !pairData.russian?.collocates?.length || !pairData.ukrainian?.collocates?.length) continue;
+
+        const card = grid.append('div')
+          .style('background', '#1a1a2e')
+          .style('border-radius', '10px')
+          .style('padding', '1rem')
+          .style('cursor', 'pointer')
+          .on('click', () => { selectPair(parseInt(pair.id)); });
+
+        card.append('div')
+          .style('font-size', '0.9rem')
+          .style('font-weight', '600')
+          .style('color', '#e2e8f0')
+          .style('margin-bottom', '0.2rem')
+          .text(`${pair.ru} → ${pair.ua}`);
+
+        card.append('div')
+          .style('font-size', '0.7rem')
+          .style('color', '#64748b')
+          .style('margin-bottom', '0.8rem')
+          .text(pair.label);
+
+        // Two columns: RU words | UA words
+        const cols = card.append('div')
+          .style('display', 'grid')
+          .style('grid-template-columns', '1fr 1fr')
+          .style('gap', '0.5rem');
+
+        // Russian collocates
+        const ruCol = cols.append('div');
+        ruCol.append('div')
+          .style('font-size', '0.7rem')
+          .style('color', '#ef4444')
+          .style('font-weight', '600')
+          .style('margin-bottom', '0.4rem')
+          .style('text-transform', 'uppercase')
+          .style('letter-spacing', '0.05em')
+          .text('Russian form');
+
+        const ruWords = pairData.russian.collocates
+          .filter((c: any) => c.count >= 3)
+          .slice(0, 8);
+        const maxPmi = Math.max(...ruWords.map((c: any) => c.pmi), 1);
+
+        for (const w of ruWords) {
+          const row = ruCol.append('div')
+            .style('display', 'flex')
+            .style('align-items', 'center')
+            .style('gap', '4px')
+            .style('margin-bottom', '2px');
+
+          row.append('div')
+            .style('width', `${Math.max(8, (w.pmi / maxPmi) * 60)}%`)
+            .style('height', '14px')
+            .style('background', 'rgba(239, 68, 68, 0.3)')
+            .style('border-radius', '2px')
+            .style('display', 'flex')
+            .style('align-items', 'center')
+            .style('padding-left', '4px')
+            .style('font-size', '0.7rem')
+            .style('color', '#fca5a5')
+            .style('white-space', 'nowrap')
+            .text(w.word);
+
+          row.append('div')
+            .style('font-size', '0.6rem')
+            .style('color', '#64748b')
+            .text(`(${w.count})`);
+        }
+
+        // Ukrainian collocates
+        const uaCol = cols.append('div');
+        uaCol.append('div')
+          .style('font-size', '0.7rem')
+          .style('color', '#3b82f6')
+          .style('font-weight', '600')
+          .style('margin-bottom', '0.4rem')
+          .style('text-transform', 'uppercase')
+          .style('letter-spacing', '0.05em')
+          .text('Ukrainian form');
+
+        const uaWords = pairData.ukrainian.collocates
+          .filter((c: any) => c.count >= 3)
+          .slice(0, 8);
+        const maxPmiUa = Math.max(...uaWords.map((c: any) => c.pmi), 1);
+
+        for (const w of uaWords) {
+          const row = uaCol.append('div')
+            .style('display', 'flex')
+            .style('align-items', 'center')
+            .style('gap', '4px')
+            .style('margin-bottom', '2px');
+
+          row.append('div')
+            .style('width', `${Math.max(8, (w.pmi / maxPmiUa) * 60)}%`)
+            .style('height', '14px')
+            .style('background', 'rgba(59, 130, 246, 0.3)')
+            .style('border-radius', '2px')
+            .style('display', 'flex')
+            .style('align-items', 'center')
+            .style('padding-left', '4px')
+            .style('font-size', '0.7rem')
+            .style('color', '#93c5fd')
+            .style('white-space', 'nowrap')
+            .text(w.word);
+
+          row.append('div')
+            .style('font-size', '0.6rem')
+            .style('color', '#64748b')
+            .text(`(${w.count})`);
+        }
       }
     }
   </script>
