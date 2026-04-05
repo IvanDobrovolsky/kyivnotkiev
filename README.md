@@ -29,7 +29,7 @@
 | CL corpus | **29,938** texts, DeBERTa-v3-large F1=88.8% |
 | Time span | **2010--2026** (Ngrams: 1900--2019) |
 | Countries | **55** with per-country adoption data |
-| Infrastructure | **GCP** (BigQuery, Dataproc/Spark, GCS, Cloud Run) |
+| Infrastructure | **GCP** (BigQuery, GCS, Cloud Run) + vast.ai GPU |
 | Reproducibility | `make reproduce` -- one command, full pipeline |
 
 ## Architecture
@@ -47,7 +47,7 @@ graph LR
         YT["YouTube<br/>14.5K videos"]
     end
 
-    subgraph Pipeline["Spark + Python Pipeline"]
+    subgraph Pipeline["Python + BigQuery Pipeline"]
         style Pipeline fill:#1a1a2e,stroke:#f59e0b,color:#e2e8f0
         Ingest["Incremental<br/>Ingestion"]
         Transform["Normalize<br/>+ Validate"]
