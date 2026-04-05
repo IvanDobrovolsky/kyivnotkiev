@@ -40,13 +40,34 @@ STOPWORDS = {
 }
 
 WINDOW_SIZE = 5  # Words before/after the target term
-MIN_FREQ = 3
-TOP_N = 30
+MIN_FREQ = 20  # High threshold to filter noise (hashtags, usernames)
+TOP_N = 15
+
+
+# Common English words to verify a word is real English
+# We reject words that don't appear in this basic vocabulary check
+def _is_plausible_english(word):
+    """Filter out hashtags, usernames, URL fragments, and non-English junk."""
+    if len(word) < 3 or len(word) > 20:
+        return False
+    # Reject if contains digits mixed with letters
+    if re.search(r'\d', word):
+        return False
+    # Reject camelCase / internal caps (likely usernames/hashtags)
+    if re.search(r'[a-z][A-Z]', word):
+        return False
+    # Reject if all consonants or all vowels (likely abbreviations)
+    vowels = set('aeiou')
+    chars = set(word.lower())
+    if not chars & vowels:
+        return False
+    return True
 
 
 def tokenize(text):
-    """Simple word tokenization."""
-    return re.findall(r'\b[a-zA-Z]{2,}\b', text.lower())
+    """Word tokenization — Latin alphabet only, filters junk."""
+    words = re.findall(r'\b[a-zA-Z]{3,}\b', text.lower())
+    return [w for w in words if _is_plausible_english(w)]
 
 
 def extract_collocates(texts, target_terms, window=WINDOW_SIZE):
@@ -85,24 +106,29 @@ def extract_collocates(texts, target_terms, window=WINDOW_SIZE):
 
 
 def compute_pmi(collocate_counts, target_count, total_words, word_freqs):
-    """Compute PMI for each collocate."""
+    """Compute NPMI (normalized PMI) for each collocate.
+
+    NPMI normalizes PMI to [-1, 1] range and penalizes rare co-occurrences,
+    preventing junk words from ranking high just because they're rare.
+    """
     results = []
     for word, cooc_count in collocate_counts.items():
         if cooc_count < MIN_FREQ:
             continue
 
         word_freq = word_freqs.get(word, 1)
-        # PMI = log2(P(word,target) / (P(word) * P(target)))
         p_cooc = cooc_count / total_words
         p_word = word_freq / total_words
         p_target = target_count / total_words
 
-        if p_word > 0 and p_target > 0:
+        if p_word > 0 and p_target > 0 and p_cooc > 0:
             pmi = log2(p_cooc / (p_word * p_target))
+            # Normalize: NPMI = PMI / -log2(P(cooc))
+            npmi = pmi / (-log2(p_cooc))
             results.append({
                 "word": word,
                 "count": cooc_count,
-                "pmi": pmi,
+                "pmi": round(npmi, 4),  # Store NPMI as "pmi" for compatibility
                 "frequency": word_freq,
             })
 
@@ -118,7 +144,14 @@ def run_collocations():
         raise FileNotFoundError("Balanced corpus not found.")
 
     df = pd.read_parquet(corpus_path)
-    log.info(f"Extracting collocations from {len(df)} texts")
+
+    # Filter to Latin-script texts only (English primarily)
+    # Cyrillic usernames, hashtags, and foreign fragments pollute PMI rankings
+    if "script" in df.columns:
+        df = df[df["script"] == "latin"].copy()
+        log.info(f"Filtered to Latin-script texts: {len(df)}")
+    else:
+        log.info(f"No script column, using all {len(df)} texts")
 
     # Global word frequencies
     all_words = Counter()
