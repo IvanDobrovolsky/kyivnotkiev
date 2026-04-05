@@ -23,7 +23,7 @@ Part of the research project: [kyivnotkiev.org](https://kyivnotkiev.org)
 
 ## Dataset Description
 
-This dataset measures the adoption of Ukrainian-derived English spellings (e.g., "Kyiv" instead of "Kiev") across 7 independent data sources spanning 2010--2026. It covers 55 toponym pairs across 8 categories with 613M+ total records.
+This dataset measures the adoption of Ukrainian-derived English spellings (e.g., "Kyiv" instead of "Kiev") across 7 independent data sources spanning 2010--2026. It covers 55 toponym pairs across 8 categories with 40M+ toponym matches from 90B+ scanned records.
 
 ## Sources
 

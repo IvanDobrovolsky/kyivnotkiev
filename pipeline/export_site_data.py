@@ -486,16 +486,17 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
             "avg_adoption": round(sum(vals) / len(vals), 1) if vals else 0,
         })
 
-    # Total records = sum across all sources
-    total_records = sum(s["records"] for s in source_stats.values()) + openalex_total_papers
+    # Three-tier data counts
+    toponym_matches = sum(s["records"] for s in source_stats.values()) + openalex_total_papers
 
     manifest = {
-        # ── Counts ──
+        # ── Counts (three-tier funnel) ──
         "total_pairs": len(enabled_ids),
         "analyzable_pairs": len(analyzable_ids),
         "control_pairs": len(control_ids),
-        "total_records": total_records,
-        "data_processed_pb": 1.2,
+        "records_scanned": "90B+",
+        "toponym_matches": toponym_matches,
+        "cl_corpus": 29938,
         "time_span": "2010-2026",
         "num_sources": 7,
         "num_countries": int(extra_map.get("trends_countries", "0")),

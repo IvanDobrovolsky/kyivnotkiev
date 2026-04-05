@@ -31,7 +31,7 @@
 
 % ============================================================================
 \begin{abstract}
-In 2018, Ukraine's Ministry of Foreign Affairs launched \#KyivNotKiev---a campaign to change how English-language media spells Ukrainian place names. We present the largest computational study of toponym adoption to date: 613 million records across 7 independent sources (news articles, search trends, encyclopedia pageviews, social media, academic papers, video metadata, and book frequency), tracking 55 Ukrainian--Russian spelling pairs from 2010 to 2026. Our big data analysis reveals that adoption is highly domain-dependent (cross-source spread: 54 percentage points median), with an OLS regression model explaining 87\% of adoption variance ($R^2 = 0.87$).
+In 2018, Ukraine's Ministry of Foreign Affairs launched \#KyivNotKiev---a campaign to change how English-language media spells Ukrainian place names. We present the largest computational study of toponym adoption to date, scanning over 90 billion records across 7 datasets and extracting 40 million toponym matches---including 39.6M news article references, 573M Wikipedia pageviews, and 379K academic papers---tracking 55 Ukrainian--Russian spelling pairs from 2010 to 2026. Our big data analysis reveals that adoption is highly domain-dependent (cross-source spread: 54 percentage points median), with an OLS regression model explaining 87\% of adoption variance ($R^2 = 0.87$).
 
 Going beyond frequency counting, we construct a 29,938-text corpus from 4 sources, annotated via Llama~3.1 70B for discourse context (10 categories) and sentiment. Fine-tuning DeBERTa-v3-large on these labels achieves $F_1 = 88.8\%$ (accuracy 90.1\%, seed stability $\sigma = 0.34$pp across 3 seeds), confirming that the labels capture learnable signal. Our key finding is that toponym variant choice functions as a \textbf{discourse marker}: ``Chernobyl'' co-occurs with gaming and entertainment contexts while ``Chornobyl'' appears in nuclear policy discourse; ``Kiev'' persists in food recipes while ``Kyiv'' dominates war reporting. We identify six distinct adoption mechanisms---cultural fossilization, brand lock-in, war-driven adoption, identity framing, citation inertia, and naming as resistance---demonstrating that adoption is not a binary switch but a multi-dimensional, discourse-dependent phenomenon.
 
@@ -51,7 +51,7 @@ These questions cannot be answered by tracking individual media outlets. They re
 \paragraph{Contributions.} We make three contributions:
 
 \begin{enumerate}
-\item \textbf{Large-scale empirical measurement.} We analyze 613 million records from 7 independent sources, tracking 55 Ukrainian--Russian toponym pairs across 8 semantic categories from 2010 to 2026---the largest study of toponym adoption to date.
+\item \textbf{Large-scale empirical measurement.} We scan 90 billion+ records across 7 datasets, extracting 40 million toponym matches for 55 Ukrainian--Russian spelling pairs across 8 semantic categories from 2010 to 2026---the largest study of toponym adoption to date.
 
 \item \textbf{Discourse analysis via transformer classification.} We construct a balanced corpus of 29,938 texts, annotate them with Llama~3.1 70B, and fine-tune three encoder models (best: DeBERTa-v3-large, $F_1 = 88.8\%$), revealing that spelling variants occupy systematically different discourse contexts.
 

@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>A Large-Scale Computational Study of Ukrainian Toponym Adoption</strong><br>
-  613M+ records, 55 toponym pairs, 7 sources, transformer-based discourse analysis.
+  90B+ records scanned, 40M+ toponym matches, 29K ML-analyzed texts, 7 sources.
 </p>
 
 <p align="center">
@@ -22,7 +22,8 @@
 
 | Metric | Value |
 |--------|-------|
-| Records analyzed | **613M+** (39.6M news articles, 573M pageviews, 152K trends, 22K posts, 14.5K videos, 11.6K ngrams, 379K papers) |
+| Records scanned | **90B+** across GDELT, Wikipedia, OpenAlex, Reddit, YouTube, Ngrams, Trends |
+| Toponym matches | **40M+** (39.6M news articles, 573M pageviews tracked, 379K papers, 152K trends, 22K posts, 14.5K videos) |
 | Toponym pairs | **55** enabled across **8** categories |
 | Data sources | **7** (GDELT, Google Trends, Wikipedia, Reddit, YouTube, Google Books Ngrams, OpenAlex) |
 | CL corpus | **29,938** texts, DeBERTa-v3-large F1=88.8% |

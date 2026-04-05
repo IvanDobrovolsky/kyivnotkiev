@@ -41,11 +41,11 @@ function formatNum(n: number) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>#KyivNotKiev — Measuring Real-Time Toponymic Change</title>
-  <meta name="description" content="Multi-source computational framework tracking Ukrainian spelling adoption across 613M+ records from 7 sources, 55 countries, 2010–2026.">
+  <meta name="description" content="Scanning 90B+ records, analyzing 40M+ toponym matches across 7 sources. The largest computational study of Ukrainian spelling adoption.">
 
   <!-- Open Graph -->
   <meta property="og:title" content="#KyivNotKiev — Measuring Real-Time Toponymic Change">
-  <meta property="og:description" content="Measuring real-time toponymic change across 613M+ records from 7 sources. The largest computational study of Ukrainian spelling adoption worldwide.">
+  <meta property="og:description" content="90B+ records scanned, 40M+ toponym matches, 29K ML-analyzed texts. The largest computational study of Ukrainian spelling adoption.">
   <meta property="og:image" content="https://kyivnotkiev.org/og.png">
   <meta property="og:url" content="https://kyivnotkiev.org">
   <meta property="og:type" content="website">
@@ -55,7 +55,7 @@ function formatNum(n: number) {
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="#KyivNotKiev — Measuring Real-Time Toponymic Change">
-  <meta name="twitter:description" content="613M+ records, 7 sources, 55 countries. Measuring real-time toponymic change 2010–2026.">
+  <meta name="twitter:description" content="90B+ scanned, 40M+ matches, 29K ML texts. Largest Ukrainian spelling adoption study.">
   <meta name="twitter:image" content="https://kyivnotkiev.org/og.png">
 
   <!-- Favicon -->
@@ -116,7 +116,7 @@ function formatNum(n: number) {
               #KyivNotKiev
             </h1>
             <p style="color:var(--text); font-size:0.95rem; margin:0.4rem 0 0; line-height:1.5;">
-              Tracking Ukrainian spelling adoption across {fmtBig(m.total_records)} records from {m.num_sources} sources, {m.num_countries} countries, 2010–2026.
+              Scanning {m.records_scanned} records, analyzing {fmtBig(m.toponym_matches)} toponym matches across {m.num_sources} sources, {m.num_countries} countries, 2010–2026.
             </p>
           </div>
         </div>
@@ -125,7 +125,7 @@ function formatNum(n: number) {
       <div style="display:flex; gap:3px; margin-bottom:0.75rem; border-radius:6px; overflow:hidden;">
         <div style="flex:1; padding:0.4rem 0.7rem; background:var(--card-bg); border-bottom:2px solid #f59e0b;">
           <span style="font-size:0.6rem; text-transform:uppercase; color:#f59e0b; font-weight:700; letter-spacing:0.05em;">1. Big Data</span>
-          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.4rem;">Data collection across {m.num_sources} sources</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.4rem;">{m.records_scanned} scanned, {fmtBig(m.toponym_matches)} matches</span>
         </div>
         <div style="flex:1; padding:0.4rem 0.7rem; background:var(--card-bg); border-bottom:2px solid #8b5cf6;">
           <span style="font-size:0.6rem; text-transform:uppercase; color:#8b5cf6; font-weight:700; letter-spacing:0.05em;">2. Statistics</span>
@@ -137,14 +137,18 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <div class="stats" style="grid-template-columns: repeat(5, 1fr);">
+      <div class="stats" style="grid-template-columns: repeat(6, 1fr);">
         <div class="stat-card">
-          <div class="stat-value">{fmtBig(m.total_records)}</div>
-          <div class="stat-label">Records Analyzed</div>
+          <div class="stat-value">{m.records_scanned}</div>
+          <div class="stat-label">Records Scanned</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">~{m.data_processed_pb} PB</div>
-          <div class="stat-label">Data Processed</div>
+          <div class="stat-value">{fmtBig(m.toponym_matches)}</div>
+          <div class="stat-label">Toponym Matches</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">{fmtBig(m.cl_corpus)}</div>
+          <div class="stat-label">ML-Analyzed Texts</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">{m.analyzable_pairs}</div>

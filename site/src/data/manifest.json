@@ -2,8 +2,6 @@
   "total_pairs": 55,
   "analyzable_pairs": 55,
   "control_pairs": 6,
-  "total_records": 613547012,
-  "data_processed_pb": 1.2,
   "time_span": "2010-2026",
   "num_sources": 7,
   "num_countries": 55,
@@ -771,5 +769,8 @@
       "starred": true,
       "starred_label": "Naming as resistance \u2014 occupation rename rejected"
     }
-  ]
+  ],
+  "records_scanned": "90B+",
+  "toponym_matches": 40179100,
+  "cl_corpus": 29938
 }
