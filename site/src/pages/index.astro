@@ -368,13 +368,6 @@ function formatNum(n: number) {
         <div id="top6-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;"></div>
       </div>
 
-      <!-- Collocations: Key Pairs -->
-      <div class="chart-container" id="cl-insights" style="margin-bottom:0.75rem;">
-        <div class="chart-title" style="color: var(--text)">Collocations: Key Pairs</div>
-        <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Top co-occurring words reveal different discourse worlds per spelling variant</div>
-        <div id="cl-collocations-grid"></div>
-      </div>
-
       <!-- Context Distribution + Benchmark side by side -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
         <div class="chart-container" id="cl-context-chart" style="margin-bottom:0;">
@@ -542,18 +535,38 @@ function formatNum(n: number) {
         const desc = p.starred_label || '';
         const pct = p.adoption;
         const color = pct >= 55 ? '#059669' : pct >= 25 ? '#d97706' : '#dc2626';
+        const coll = (clCollocations as any)?.[String(id)];
         const card = document.createElement('div');
         card.className = 'top6-card';
         card.dataset.pairId = String(id);
-        card.style.cssText = 'cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;';
-        card.innerHTML = `
+        card.style.cssText = 'cursor:pointer; padding:0.75rem; border:1px solid var(--border); border-radius:8px; transition:all 0.15s;';
+
+        // Header + adoption
+        let html = `
           <div style="display:flex; justify-content:space-between; align-items:baseline;">
             <div style="font-weight:600; color:var(--text);">${p.russian} → ${p.ukrainian}</div>
             <div style="font-size:0.8rem; font-weight:700; color:${color};">${pct}%</div>
           </div>
-          <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">${desc}</div>
-          <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:${pct}%; background:${color}; border-radius:2px;"></div></div>
-        `;
+          <div style="font-size:0.65rem; color:var(--text-muted); margin-top:0.15rem;">${desc}</div>
+          <div style="height:3px; background:#f0f0f0; border-radius:2px; margin-top:0.3rem; margin-bottom:0.4rem;"><div style="height:100%; width:${pct}%; background:${color}; border-radius:2px;"></div></div>`;
+
+        // Collocations inline
+        if (coll) {
+          for (const [variant, vcolor, label] of [['russian', '#dc2626', 'RU'], ['ukrainian', '#2563eb', 'UA']]) {
+            const words = coll[variant]?.collocates?.slice(0, 5) || [];
+            if (!words.length) continue;
+            const maxC = Math.max(...words.map((w: any) => w.count));
+            html += `<div style="margin-bottom:0.2rem;"><span style="font-size:0.55rem;color:${vcolor};font-weight:700;text-transform:uppercase;letter-spacing:0.04em;margin-right:0.25rem;">${label}</span>`;
+            words.forEach((w: any, i: number) => {
+              const sz = 0.68 + (w.count / maxC) * 0.3;
+              const fw = i < 2 ? 700 : 400;
+              html += `<span style="font-size:${sz}rem;color:${vcolor};font-weight:${fw};margin-right:0.25rem;">${w.word}</span>`;
+            });
+            html += `</div>`;
+          }
+        }
+
+        card.innerHTML = html;
         card.addEventListener('click', () => {
           selectPair(id);
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -574,7 +587,6 @@ function formatNum(n: number) {
       drawHeatmap();
       drawErrorAnalysis();
       requestAnimationFrame(() => {
-        drawClCollocations();
         drawClContextChart();
         drawClBenchmark();
       });
@@ -1836,7 +1848,6 @@ function formatNum(n: number) {
       drawCategoryChart();
       drawHeatmap();
       requestAnimationFrame(() => {
-        drawClCollocations();
         drawClContextChart();
         drawClBenchmark();
         drawErrorAnalysis();
