@@ -153,6 +153,22 @@ function formatNum(n: number) {
         ))}
       </div>
 
+      <!-- Three Layers — compact banner -->
+      <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+        <div style="flex:1; padding:0.6rem 0.8rem; background:linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.04)); border:1px solid rgba(245,158,11,0.25); border-radius:6px;">
+          <div style="font-size:0.6rem; text-transform:uppercase; color:#f59e0b; letter-spacing:0.08em; font-weight:700;">Layer 1 — Big Data</div>
+          <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.25rem; line-height:1.4;">{fmtBig(m.total_records)} records, {m.num_sources} sources. Binary regex: Ukrainian or Russian form?</div>
+        </div>
+        <div style="flex:1; padding:0.6rem 0.8rem; background:linear-gradient(135deg, rgba(139,92,246,0.12), rgba(139,92,246,0.04)); border:1px solid rgba(139,92,246,0.25); border-radius:6px;">
+          <div style="font-size:0.6rem; text-transform:uppercase; color:#8b5cf6; letter-spacing:0.08em; font-weight:700;">Layer 2 — Statistical Validation</div>
+          <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.25rem; line-height:1.4;">R&sup2;=0.87, Kruskal-Wallis, Wilcoxon, Spearman. Proves the patterns are real.</div>
+        </div>
+        <div style="flex:1; padding:0.6rem 0.8rem; background:linear-gradient(135deg, rgba(6,182,212,0.12), rgba(6,182,212,0.04)); border:1px solid rgba(6,182,212,0.25); border-radius:6px;">
+          <div style="font-size:0.6rem; text-transform:uppercase; color:#06b6d4; letter-spacing:0.08em; font-weight:700;">Layer 3 — Computational Linguistics</div>
+          <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.25rem; line-height:1.4;">Context classification, sentiment, collocations. Spelling = discourse marker.</div>
+        </div>
+      </div>
+
       </div><!-- end landing-view -->
 
       <!-- ══ PAIR VIEW (visible when pair selected) ══ -->
@@ -289,7 +305,11 @@ function formatNum(n: number) {
         Source availability varies: Trends (2010–2026), GDELT (2015–2026), Wikipedia (2015–2026), Reddit (2007–2026), Ngrams (books, 2000–2019)
       </div>
 
-      <!-- Reference Audit moved to grid above -->
+      <!-- CL: Per-pair context + sentiment -->
+      <div class="chart-container" id="pair-cl-context" style="margin-bottom: 0.75rem;">
+        <div class="chart-title" style="color: var(--text); font-size: 0.95rem; margin-bottom: 0.5rem;">Discourse Context Analysis</div>
+        <div id="pair-cl-body"></div>
+      </div>
 
       </div><!-- end pair-view -->
 
@@ -387,44 +407,7 @@ function formatNum(n: number) {
         <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
       </div>
 
-      <div class="chart-container" id="methodology">
-        <h2 style="font-size:1.3rem; margin-bottom:1rem; color:#e2e8f0;">Three Layers of Analysis</h2>
-        <div class="methodology-grid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.2rem; margin-bottom:1.5rem;">
-          <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; border-left:3px solid #f59e0b;">
-            <div style="font-size:0.75rem; text-transform:uppercase; color:#f59e0b; letter-spacing:0.05em; margin-bottom:0.5rem;">Layer 1</div>
-            <div style="font-size:1rem; font-weight:600; color:#e2e8f0; margin-bottom:0.5rem;">Big Data</div>
-            <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">
-              613M+ records from 7 sources. Simple question per record: did they write the Ukrainian or Russian form? Binary regex matching at scale across news, search, social media, books, and academia.
-            </div>
-            <div style="font-size:0.8rem; color:#f59e0b; margin-top:0.7rem; font-style:italic;">Answers: "Did the world switch?"</div>
-          </div>
-          <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; border-left:3px solid #8b5cf6;">
-            <div style="font-size:0.75rem; text-transform:uppercase; color:#8b5cf6; letter-spacing:0.05em; margin-bottom:0.5rem;">Layer 2</div>
-            <div style="font-size:1rem; font-weight:600; color:#e2e8f0; margin-bottom:0.5rem;">Statistical Validation</div>
-            <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">
-              Regression models (R&sup2;=0.87), Kruskal-Wallis tests across categories, Wilcoxon signed-rank for temporal shifts, cross-source Spearman correlations, Wilson confidence intervals. Proves the patterns aren't noise.
-            </div>
-            <div style="font-size:0.8rem; color:#8b5cf6; margin-top:0.7rem; font-style:italic;">Answers: "Is it real?"</div>
-          </div>
-          <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; border-left:3px solid #06b6d4;">
-            <div style="font-size:0.75rem; text-transform:uppercase; color:#06b6d4; letter-spacing:0.05em; margin-bottom:0.5rem;">Layer 3</div>
-            <div style="font-size:1rem; font-weight:600; color:#e2e8f0; margin-bottom:0.5rem;">Computational Linguistics</div>
-            <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">
-              What does the text <em>around</em> each spelling actually say? Transformer-based context classification, sentiment analysis, collocations, and semantic embeddings reveal that spelling variants occupy different discourse worlds.
-            </div>
-            <div style="font-size:0.8rem; color:#06b6d4; margin-top:0.7rem; font-style:italic;">Answers: "Why did some switch and others didn't?"</div>
-          </div>
-        </div>
-        <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; margin-bottom:1rem;">
-          <div style="font-size:0.9rem; font-weight:600; color:#e2e8f0; margin-bottom:0.6rem;">Key CL Finding: Spelling Marks Worldview</div>
-          <div style="font-size:0.85rem; color:#94a3b8; line-height:1.6;">
-            Texts using "Chernobyl" (Russian form) co-occur with <span style="color:#f59e0b;">simulator, gaming, tourism, pop culture</span> — the disaster as entertainment brand.
-            Texts using "Chornobyl" (Ukrainian form) co-occur with <span style="color:#06b6d4;">disaster, nuclear plant, shelter, confinement</span> — the actual catastrophe.
-            The spelling doesn't just reflect old vs. new — it signals which version of reality the writer engages with.
-            The game franchise S.T.A.L.K.E.R. itself switched: "Shadow of <em>Chernobyl</em>" (2007) to "Heart of <em>Chornobyl</em>" (2024).
-          </div>
-        </div>
-      </div>
+      <!-- Methodology moved to top, below stats -->
 
       <div class="chart-container" id="about">
         <h2 style="font-size:1.3rem; margin-bottom:1rem; color:#e2e8f0;">About This Project</h2>
@@ -1058,6 +1041,7 @@ function formatNum(n: number) {
       drawWorldMap();
       drawHoldoutTable();
       drawSearchPreview();
+      drawPairClContext();
     }
 
     function drawAdoptionCalc() {
@@ -2201,6 +2185,103 @@ function formatNum(n: number) {
             .style('font-size', '0.6rem')
             .style('color', '#64748b')
             .text(`(${w.count})`);
+        }
+      }
+    }
+
+    function drawPairClContext() {
+      const container = document.getElementById('pair-cl-body');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const cl = clAnalysis as any;
+      const pid = String(activePairId);
+      const ctx = cl.context_distribution?.[pid];
+      const sent = cl.sentiment_comparison?.[pid];
+      const coll = (clCollocations as any)?.[pid];
+
+      if (!ctx && !sent && !coll) {
+        container.innerHTML = '<div style="color:#64748b; font-size:0.8rem;">No CL data for this pair</div>';
+        return;
+      }
+
+      const wrapper = d3.select(container);
+
+      // Two columns: context bars + collocations
+      const grid = wrapper.append('div')
+        .style('display', 'grid')
+        .style('grid-template-columns', '1fr 1fr')
+        .style('gap', '1rem');
+
+      // Left: context distribution bars
+      if (ctx) {
+        const left = grid.append('div');
+        left.append('div').style('font-size', '0.75rem').style('font-weight', '600')
+          .style('color', '#94a3b8').style('margin-bottom', '0.5rem').text('Context Distribution');
+
+        const categories = ['war_conflict', 'academic_science', 'politics', 'history',
+          'travel_tourism', 'sports', 'general_news', 'culture_arts', 'food_cuisine', 'business_economy'];
+        const catLabels: Record<string, string> = {
+          war_conflict: 'War', academic_science: 'Academic', politics: 'Politics',
+          history: 'History', travel_tourism: 'Travel', sports: 'Sports',
+          general_news: 'News', culture_arts: 'Culture', food_cuisine: 'Food', business_economy: 'Business',
+        };
+
+        for (const cat of categories) {
+          const ruVal = ctx.russian?.[cat] || 0;
+          const uaVal = ctx.ukrainian?.[cat] || 0;
+          if (ruVal < 0.01 && uaVal < 0.01) continue;
+
+          const row = left.append('div').style('margin-bottom', '3px');
+          row.append('div').style('font-size', '0.65rem').style('color', '#64748b')
+            .style('margin-bottom', '1px').text(catLabels[cat] || cat);
+
+          const barRow = row.append('div').style('display', 'flex').style('gap', '2px').style('height', '10px');
+          barRow.append('div').style('width', `${ruVal * 200}px`).style('max-width', '45%')
+            .style('background', 'rgba(239,68,68,0.5)').style('border-radius', '2px');
+          barRow.append('div').style('width', `${uaVal * 200}px`).style('max-width', '45%')
+            .style('background', 'rgba(59,130,246,0.5)').style('border-radius', '2px');
+
+          const diff = uaVal - ruVal;
+          if (Math.abs(diff) > 0.03) {
+            barRow.append('div').style('font-size', '0.6rem')
+              .style('color', diff > 0 ? '#3b82f6' : '#ef4444')
+              .style('align-self', 'center').style('margin-left', '4px')
+              .text(`${diff > 0 ? '+' : ''}${(diff * 100).toFixed(0)}pp`);
+          }
+        }
+
+        // Sentiment line
+        if (sent) {
+          left.append('div').style('font-size', '0.7rem').style('color', '#64748b')
+            .style('margin-top', '0.5rem').style('border-top', '1px solid #1e293b').style('padding-top', '0.4rem')
+            .html(`Sentiment: <span style="color:#ef4444">RU ${sent.russian?.mean_score?.toFixed(2) || '?'}</span> / <span style="color:#3b82f6">UA ${sent.ukrainian?.mean_score?.toFixed(2) || '?'}</span>`);
+        }
+      }
+
+      // Right: collocations
+      if (coll && (coll.russian?.collocates?.length || coll.ukrainian?.collocates?.length)) {
+        const right = grid.append('div');
+        right.append('div').style('font-size', '0.75rem').style('font-weight', '600')
+          .style('color', '#94a3b8').style('margin-bottom', '0.5rem').text('Top Collocations');
+
+        const cols = right.append('div').style('display', 'grid')
+          .style('grid-template-columns', '1fr 1fr').style('gap', '0.5rem');
+
+        for (const [variant, color, label] of [['russian', '#ef4444', 'RU'], ['ukrainian', '#3b82f6', 'UA']] as const) {
+          const col = cols.append('div');
+          col.append('div').style('font-size', '0.6rem').style('color', color)
+            .style('font-weight', '600').style('margin-bottom', '3px').text(label);
+
+          const words = coll[variant]?.collocates?.slice(0, 6) || [];
+          for (const w of words) {
+            col.append('div').style('font-size', '0.7rem').style('color', '#94a3b8')
+              .style('margin-bottom', '1px')
+              .html(`${w.word} <span style="color:#475569">(${w.count})</span>`);
+          }
+          if (words.length === 0) {
+            col.append('div').style('font-size', '0.7rem').style('color', '#475569').text('—');
+          }
         }
       }
     }
