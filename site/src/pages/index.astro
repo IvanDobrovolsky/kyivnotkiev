@@ -215,6 +215,12 @@ function formatNum(n: number) {
       <!-- Per-pair source stats -->
       <div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(7, 1fr); margin-bottom: 0.75rem;"></div>
 
+      <!-- CL: Per-pair context + collocations -->
+      <div class="chart-container" id="pair-cl-context" style="margin-bottom: 0.75rem; padding:0.75rem 1rem;">
+        <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Discourse Context Analysis</div>
+        <div id="pair-cl-body"></div>
+      </div>
+
       <!-- Adoption + Reference side by side -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
         <div id="adoption-calc" class="chart-container" style="margin-bottom:0; padding:0.75rem 1rem;">
@@ -305,12 +311,6 @@ function formatNum(n: number) {
         Source availability varies: Trends (2010–2026), GDELT (2015–2026), Wikipedia (2015–2026), Reddit (2007–2026), Ngrams (books, 2000–2019)
       </div>
 
-      <!-- CL: Per-pair context + sentiment -->
-      <div class="chart-container" id="pair-cl-context" style="margin-bottom: 0.75rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 0.95rem; margin-bottom: 0.5rem;">Discourse Context Analysis</div>
-        <div id="pair-cl-body"></div>
-      </div>
-
       </div><!-- end pair-view -->
 
       <!-- ══ GLOBAL VIEWS (visible on landing, hidden on pair view) ══ -->
@@ -373,12 +373,6 @@ function formatNum(n: number) {
         <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Key Pairs: Deep Dive</div>
         <div class="chart-subtitle" style="margin-bottom: 1rem;">6 pairs representing the full spectrum — from campaign success to historical resistance</div>
         <div id="top6-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;"></div>
-      </div>
-
-      <!-- ── Layer 3: Computational Linguistics ── -->
-      <div style="border-left:2px solid #06b6d4; padding-left:0.75rem; margin-bottom:0.5rem; margin-top:0.75rem;">
-        <div style="font-size:0.6rem; text-transform:uppercase; color:#06b6d4; font-weight:700; letter-spacing:0.05em;">Layer 3 — Computational Linguistics</div>
-        <div style="font-size:0.7rem; color:var(--text-muted);">Extracting context and collocation patterns with ML</div>
       </div>
 
       <div class="chart-container" id="cl-insights" style="margin-bottom:0.5rem;">
