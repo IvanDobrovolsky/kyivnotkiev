@@ -1,0 +1,37 @@
+{
+  "experiment": "conf_50",
+  "seed": 42,
+  "learning_rate": 2e-05,
+  "confidence_threshold": 0.5,
+  "epochs": 3,
+  "train_size": 23923,
+  "val_size": 2990,
+  "test_size": 2991,
+  "test_accuracy": 0.897,
+  "test_f1_macro": 0.8781,
+  "test_f1_weighted": 0.8971,
+  "epoch_metrics": [
+    {
+      "epoch": 1.0,
+      "val_loss": 0.4872101843357086,
+      "val_accuracy": 0.8518394648829432,
+      "val_f1_macro": 0.8128724742708286,
+      "val_f1_weighted": 0.8528822036494185
+    },
+    {
+      "epoch": 2.0,
+      "val_loss": 0.3791995048522949,
+      "val_accuracy": 0.8842809364548495,
+      "val_f1_macro": 0.8583793502904562,
+      "val_f1_weighted": 0.8852992103857026
+    },
+    {
+      "epoch": 3.0,
+      "val_loss": 0.47794610261917114,
+      "val_accuracy": 0.8976588628762542,
+      "val_f1_macro": 0.8695896381086371,
+      "val_f1_weighted": 0.8971932382217815
+    }
+  ],
+  "train_time_sec": 765.8
+}
