@@ -121,6 +121,22 @@ function formatNum(n: number) {
           </div>
         </div>
 
+      <!-- Three Layers — top strip -->
+      <div style="display:flex; gap:3px; margin-bottom:0.75rem; border-radius:6px; overflow:hidden;">
+        <div style="flex:1; padding:0.4rem 0.7rem; background:var(--card-bg); border-bottom:2px solid #f59e0b;">
+          <span style="font-size:0.6rem; text-transform:uppercase; color:#f59e0b; font-weight:700; letter-spacing:0.05em;">1. Big Data</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.4rem;">Data collection across {m.num_sources} sources</span>
+        </div>
+        <div style="flex:1; padding:0.4rem 0.7rem; background:var(--card-bg); border-bottom:2px solid #8b5cf6;">
+          <span style="font-size:0.6rem; text-transform:uppercase; color:#8b5cf6; font-weight:700; letter-spacing:0.05em;">2. Statistics</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.4rem;">Validating patterns are real</span>
+        </div>
+        <div style="flex:1; padding:0.4rem 0.7rem; background:var(--card-bg); border-bottom:2px solid #06b6d4;">
+          <span style="font-size:0.6rem; text-transform:uppercase; color:#06b6d4; font-weight:700; letter-spacing:0.05em;">3. Computational Linguistics</span>
+          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.4rem;">Extracting context and patterns with ML</span>
+        </div>
+      </div>
+
       <div class="stats" style="grid-template-columns: repeat(5, 1fr);">
         <div class="stat-card">
           <div class="stat-value">{fmtBig(m.total_records)}</div>
@@ -151,22 +167,6 @@ function formatNum(n: number) {
             <div class="stat-source">{s.extra}</div>
           </div>
         ))}
-      </div>
-
-      <!-- Three Layers — compact banner -->
-      <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
-        <div style="flex:1; padding:0.6rem 0.8rem; background:linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.04)); border:1px solid rgba(245,158,11,0.25); border-radius:6px;">
-          <div style="font-size:0.6rem; text-transform:uppercase; color:#f59e0b; letter-spacing:0.08em; font-weight:700;">Layer 1 — Big Data</div>
-          <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.25rem; line-height:1.4;">{fmtBig(m.total_records)} records, {m.num_sources} sources. Binary regex: Ukrainian or Russian form?</div>
-        </div>
-        <div style="flex:1; padding:0.6rem 0.8rem; background:linear-gradient(135deg, rgba(139,92,246,0.12), rgba(139,92,246,0.04)); border:1px solid rgba(139,92,246,0.25); border-radius:6px;">
-          <div style="font-size:0.6rem; text-transform:uppercase; color:#8b5cf6; letter-spacing:0.08em; font-weight:700;">Layer 2 — Statistical Validation</div>
-          <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.25rem; line-height:1.4;">R&sup2;=0.87, Kruskal-Wallis, Wilcoxon, Spearman. Proves the patterns are real.</div>
-        </div>
-        <div style="flex:1; padding:0.6rem 0.8rem; background:linear-gradient(135deg, rgba(6,182,212,0.12), rgba(6,182,212,0.04)); border:1px solid rgba(6,182,212,0.25); border-radius:6px;">
-          <div style="font-size:0.6rem; text-transform:uppercase; color:#06b6d4; letter-spacing:0.08em; font-weight:700;">Layer 3 — Computational Linguistics</div>
-          <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.25rem; line-height:1.4;">Context classification, sentiment, collocations. Spelling = discourse marker.</div>
-        </div>
       </div>
 
       </div><!-- end landing-view -->
@@ -375,25 +375,30 @@ function formatNum(n: number) {
         <div id="top6-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;"></div>
       </div>
 
-      <!-- CL Insights: Collocations -->
-      <div class="chart-container" id="cl-insights">
-        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.3rem;">Computational Linguistics: What Surrounds Each Spelling?</div>
-        <div class="chart-subtitle" style="margin-bottom: 1rem;">Top co-occurring words (PMI-ranked) reveal different discourse worlds per spelling variant</div>
+      <!-- ── Layer 3: Computational Linguistics ── -->
+      <div style="border-left:2px solid #06b6d4; padding-left:0.75rem; margin-bottom:0.5rem; margin-top:0.75rem;">
+        <div style="font-size:0.6rem; text-transform:uppercase; color:#06b6d4; font-weight:700; letter-spacing:0.05em;">Layer 3 — Computational Linguistics</div>
+        <div style="font-size:0.7rem; color:var(--text-muted);">Extracting context and collocation patterns with ML</div>
+      </div>
+
+      <div class="chart-container" id="cl-insights" style="margin-bottom:0.5rem;">
+        <div class="chart-title" style="color: var(--text)">Collocations: Key Pairs</div>
+        <div class="chart-subtitle" style="margin-bottom: 0.75rem;">Top co-occurring words reveal different discourse worlds per spelling variant</div>
         <div id="cl-collocations-grid"></div>
       </div>
 
-      <!-- CL: Context Distribution by Variant -->
-      <div class="chart-container" id="cl-context-chart">
-        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.3rem;">Context Distribution: Russian vs Ukrainian Forms</div>
-        <div class="chart-subtitle" style="margin-bottom: 1rem;">How texts using each spelling variant distribute across discourse domains (all 55 pairs)</div>
-        <div id="cl-context-bars"></div>
-      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-bottom:0.5rem;">
+        <div class="chart-container" id="cl-context-chart" style="margin-bottom:0;">
+          <div class="chart-title" style="color: var(--text)">Context Distribution</div>
+          <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Russian vs Ukrainian form usage across discourse domains</div>
+          <div id="cl-context-bars"></div>
+        </div>
 
-      <!-- CL: Benchmark Table -->
-      <div class="chart-container" id="cl-benchmark">
-        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.3rem;">Encoder Benchmark: Context Classification</div>
-        <div class="chart-subtitle" style="margin-bottom: 1rem;">3 models trained on Llama 70B labels — all converge above 86% F1, proving label robustness</div>
-        <div id="cl-benchmark-table"></div>
+        <div class="chart-container" id="cl-benchmark" style="margin-bottom:0;">
+          <div class="chart-title" style="color: var(--text)">Encoder Benchmark</div>
+          <div class="chart-subtitle" style="margin-bottom: 0.5rem;">3 models trained on Llama 70B labels, 29,938 texts</div>
+          <div id="cl-benchmark-table"></div>
+        </div>
       </div>
 
       <!-- All pairs heatmap -->
@@ -410,7 +415,7 @@ function formatNum(n: number) {
       <!-- Methodology moved to top, below stats -->
 
       <div class="chart-container" id="about">
-        <h2 style="font-size:1.3rem; margin-bottom:1rem; color:#e2e8f0;">About This Project</h2>
+        <h2 style="font-size:1.3rem; margin-bottom:1rem; color:var(--text);">About This Project</h2>
         <div class="about-text">
           <p>
             In 2018, Ukraine's Ministry of Foreign Affairs launched #KyivNotKiev — a campaign
@@ -2078,7 +2083,7 @@ function formatNum(n: number) {
         if (!pairData || !pairData.russian?.collocates?.length || !pairData.ukrainian?.collocates?.length) continue;
 
         const card = grid.append('div')
-          .style('background', '#1a1a2e')
+          .style('background', 'var(--card-bg)')
           .style('border-radius', '10px')
           .style('padding', '1rem')
           .style('cursor', 'pointer')
@@ -2087,13 +2092,13 @@ function formatNum(n: number) {
         card.append('div')
           .style('font-size', '0.9rem')
           .style('font-weight', '600')
-          .style('color', '#e2e8f0')
+          .style('color', 'var(--text)')
           .style('margin-bottom', '0.2rem')
           .text(`${pair.ru} → ${pair.ua}`);
 
         card.append('div')
           .style('font-size', '0.7rem')
-          .style('color', '#64748b')
+          .style('color', 'var(--text-muted)')
           .style('margin-bottom', '0.8rem')
           .text(pair.label);
 
@@ -2135,7 +2140,7 @@ function formatNum(n: number) {
             .style('align-items', 'center')
             .style('padding-left', '4px')
             .style('font-size', '0.7rem')
-            .style('color', '#fca5a5')
+            .style('color', '#dc2626')
             .style('white-space', 'nowrap')
             .text(w.word);
 
@@ -2177,7 +2182,7 @@ function formatNum(n: number) {
             .style('align-items', 'center')
             .style('padding-left', '4px')
             .style('font-size', '0.7rem')
-            .style('color', '#93c5fd')
+            .style('color', '#2563eb')
             .style('white-space', 'nowrap')
             .text(w.word);
 
@@ -2416,8 +2421,8 @@ function formatNum(n: number) {
         hrow.append('th').text(h)
           .style('text-align', h === 'Model' ? 'left' : 'right')
           .style('padding', '0.5rem 0.75rem')
-          .style('border-bottom', '2px solid #334155')
-          .style('color', '#94a3b8').style('font-weight', '600');
+          .style('border-bottom', '2px solid var(--border)')
+          .style('color', 'var(--text-muted)').style('font-weight', '600');
       });
 
       // Rows
@@ -2432,19 +2437,19 @@ function formatNum(n: number) {
 
         row.append('td').text(m.name)
           .style('padding', '0.5rem 0.75rem')
-          .style('border-bottom', '1px solid #1e293b')
-          .style('color', isBest ? '#e2e8f0' : '#94a3b8')
+          .style('border-bottom', '1px solid var(--border)')
+          .style('color', isBest ? 'var(--text)' : 'var(--text-muted)')
           .style('font-weight', isBest ? '700' : '400');
 
         row.append('td').text(m.params)
           .style('text-align', 'right').style('padding', '0.5rem 0.75rem')
-          .style('border-bottom', '1px solid #1e293b').style('color', '#64748b');
+          .style('border-bottom', '1px solid var(--border)').style('color', '#64748b');
 
         [data.accuracy, data.f1_macro, data.f1_weighted].forEach(val => {
           const pct = (val * 100).toFixed(1) + '%';
           row.append('td').text(pct)
             .style('text-align', 'right').style('padding', '0.5rem 0.75rem')
-            .style('border-bottom', '1px solid #1e293b')
+            .style('border-bottom', '1px solid var(--border)')
             .style('color', isBest ? '#059669' : '#94a3b8')
             .style('font-weight', isBest ? '700' : '400');
         });
