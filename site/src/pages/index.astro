@@ -216,19 +216,22 @@ function formatNum(n: number) {
       <div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(7, 1fr); margin-bottom: 0.75rem;"></div>
 
       <!-- CL: Per-pair context + collocations -->
-      <div class="chart-container" id="pair-cl-context" style="margin-bottom: 0.75rem; padding:0.75rem 1rem;">
-        <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Discourse Context Analysis</div>
+      <div class="chart-container" id="pair-cl-context" style="margin-bottom: 0.75rem;">
+        <div class="chart-title" style="color: var(--text)">Discourse Context Analysis</div>
+        <div class="chart-subtitle">How this toponym is used across discourse domains and top co-occurring words</div>
         <div id="pair-cl-body"></div>
       </div>
 
       <!-- Adoption + Reference side by side -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
-        <div id="adoption-calc" class="chart-container" style="margin-bottom:0; padding:0.75rem 1rem;">
-          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Adoption Calculation</div>
+        <div id="adoption-calc" class="chart-container" style="margin-bottom:0;">
+          <div class="chart-title" style="color: var(--text)">Adoption Calculation</div>
+          <div class="chart-subtitle">Mean of per-source UA/(UA+RU) ratios, last 12 months</div>
           <div id="adoption-calc-body" style="font-size:0.75rem; color:var(--text-muted); line-height:1.6;"></div>
         </div>
         <div class="chart-container" id="dict-container" style="margin-bottom:0; padding:0.75rem 1rem;">
-          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Reference Audit</div>
+          <div class="chart-title" style="color: var(--text)">Reference Audit</div>
+          <div class="chart-subtitle">Dictionary and encyclopedia entries for each spelling form</div>
           <div id="search-preview"></div>
         </div>
       </div>
@@ -236,11 +239,13 @@ function formatNum(n: number) {
       <!-- Source Comparison + Cross-Lingual -->
       <div id="comparison-row" style="display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:1rem;">
         <div class="chart-container" style="margin-bottom:0;">
-          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Source Comparison</div>
+          <div class="chart-title" style="color: var(--text)">Source Comparison</div>
+          <div class="chart-subtitle">Adoption rate per data source for this pair</div>
           <div id="pair-source-chart" style="width:100%;"></div>
         </div>
         <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom:0;">
-        <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Cross-Lingual Adoption</div>
+        <div class="chart-title" style="color: var(--text)">Cross-Lingual Adoption</div>
+        <div class="chart-subtitle">Adoption in GDELT news by domain language (.com, .fr, .de, etc.)</div>
         <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Ukrainian spelling adoption by language (GDELT domain TLD)</div>
         <div id="cross-lingual-chart" style="width:100%;"></div>
         </div>
@@ -2153,17 +2158,15 @@ function formatNum(n: number) {
 
       const wrapper = d3.select(container);
 
-      // Two columns: context bars + collocations
+      // Two columns: context bars + collocations (same style as landing)
       const grid = wrapper.append('div')
         .style('display', 'grid')
         .style('grid-template-columns', '1fr 1fr')
         .style('gap', '1rem');
 
-      // Left: context distribution bars
+      // Left: context distribution — same compact bars as landing drawClContextChart
       if (ctx) {
         const left = grid.append('div');
-        left.append('div').style('font-size', '0.75rem').style('font-weight', '600')
-          .style('color', '#94a3b8').style('margin-bottom', '0.5rem').text('Context Distribution');
 
         const categories = ['war_conflict', 'academic_science', 'politics', 'history',
           'travel_tourism', 'sports', 'general_news', 'culture_arts', 'food_cuisine', 'business_economy'];
@@ -2173,61 +2176,82 @@ function formatNum(n: number) {
           general_news: 'News', culture_arts: 'Culture', food_cuisine: 'Food', business_economy: 'Business',
         };
 
+        // Legend
+        left.append('div').style('display', 'flex').style('gap', '0.75rem').style('margin-bottom', '0.4rem')
+          .style('font-size', '0.65rem').style('color', 'var(--text-muted)')
+          .html('<span style="display:inline-flex;align-items:center;gap:3px"><span style="width:7px;height:7px;background:#ef4444;border-radius:2px;opacity:0.7"></span>Russian</span>' +
+                '<span style="display:inline-flex;align-items:center;gap:3px"><span style="width:7px;height:7px;background:#3b82f6;border-radius:2px;opacity:0.7"></span>Ukrainian</span>');
+
+        const maxVal = Math.max(
+          ...categories.map(c => Math.max(ctx.russian?.[c] || 0, ctx.ukrainian?.[c] || 0))
+        ) || 0.3;
+
         for (const cat of categories) {
           const ruVal = ctx.russian?.[cat] || 0;
           const uaVal = ctx.ukrainian?.[cat] || 0;
           if (ruVal < 0.01 && uaVal < 0.01) continue;
-
-          const row = left.append('div').style('margin-bottom', '3px');
-          row.append('div').style('font-size', '0.65rem').style('color', '#64748b')
-            .style('margin-bottom', '1px').text(catLabels[cat] || cat);
-
-          const barRow = row.append('div').style('display', 'flex').style('gap', '2px').style('height', '10px');
-          barRow.append('div').style('width', `${ruVal * 200}px`).style('max-width', '45%')
-            .style('background', 'rgba(239,68,68,0.5)').style('border-radius', '2px');
-          barRow.append('div').style('width', `${uaVal * 200}px`).style('max-width', '45%')
-            .style('background', 'rgba(59,130,246,0.5)').style('border-radius', '2px');
-
           const diff = uaVal - ruVal;
-          if (Math.abs(diff) > 0.03) {
-            barRow.append('div').style('font-size', '0.6rem')
-              .style('color', diff > 0 ? '#3b82f6' : '#ef4444')
-              .style('align-self', 'center').style('margin-left', '4px')
+
+          const row = left.append('div').style('display', 'flex').style('align-items', 'center')
+            .style('gap', '4px').style('margin-bottom', '2px');
+
+          row.append('div').style('width', '50px').style('text-align', 'right')
+            .style('font-size', '0.65rem').style('color', 'var(--text)').style('flex-shrink', '0')
+            .text(catLabels[cat]);
+
+          const bars = row.append('div').style('flex', '1').style('display', 'flex')
+            .style('flex-direction', 'column').style('gap', '1px');
+          bars.append('div').style('height', '7px').style('background', '#ef4444').style('opacity', '0.6')
+            .style('border-radius', '2px').style('width', `${(ruVal / maxVal) * 100}%`);
+          bars.append('div').style('height', '7px').style('background', '#3b82f6').style('opacity', '0.6')
+            .style('border-radius', '2px').style('width', `${(uaVal / maxVal) * 100}%`);
+
+          if (Math.abs(diff) > 0.02) {
+            row.append('div').style('width', '35px').style('font-size', '0.6rem').style('font-weight', '600')
+              .style('color', diff > 0 ? '#3b82f6' : '#ef4444').style('flex-shrink', '0')
               .text(`${diff > 0 ? '+' : ''}${(diff * 100).toFixed(0)}pp`);
+          } else {
+            row.append('div').style('width', '35px');
           }
         }
 
-        // Sentiment line
+        // Sentiment
         if (sent) {
-          left.append('div').style('font-size', '0.7rem').style('color', '#64748b')
-            .style('margin-top', '0.5rem').style('border-top', '1px solid #1e293b').style('padding-top', '0.4rem')
+          left.append('div').style('font-size', '0.65rem').style('color', 'var(--text-muted)')
+            .style('margin-top', '0.4rem').style('border-top', '1px solid var(--border)').style('padding-top', '0.3rem')
             .html(`Sentiment: <span style="color:#ef4444">RU ${sent.russian?.mean_score?.toFixed(2) || '?'}</span> / <span style="color:#3b82f6">UA ${sent.ukrainian?.mean_score?.toFixed(2) || '?'}</span>`);
         }
       }
 
-      // Right: collocations
-      if (coll && (coll.russian?.collocates?.length || coll.ukrainian?.collocates?.length)) {
+      // Right: collocations — tag cloud style matching Deep Dive cards
+      if (coll) {
         const right = grid.append('div');
-        right.append('div').style('font-size', '0.75rem').style('font-weight', '600')
-          .style('color', '#94a3b8').style('margin-bottom', '0.5rem').text('Top Collocations');
 
-        const cols = right.append('div').style('display', 'grid')
-          .style('grid-template-columns', '1fr 1fr').style('gap', '0.5rem');
+        for (const [variant, color, label] of [['russian', '#dc2626', 'RU'], ['ukrainian', '#2563eb', 'UA']] as const) {
+          const words = coll[variant]?.collocates?.slice(0, 8) || [];
+          const row = right.append('div').style('margin-bottom', '0.4rem');
+          row.append('span').style('font-size', '0.55rem').style('color', color)
+            .style('font-weight', '700').style('text-transform', 'uppercase')
+            .style('letter-spacing', '0.04em').style('margin-right', '0.3rem').text(label);
 
-        for (const [variant, color, label] of [['russian', '#ef4444', 'RU'], ['ukrainian', '#3b82f6', 'UA']] as const) {
-          const col = cols.append('div');
-          col.append('div').style('font-size', '0.6rem').style('color', color)
-            .style('font-weight', '600').style('margin-bottom', '3px').text(label);
-
-          const words = coll[variant]?.collocates?.slice(0, 6) || [];
-          for (const w of words) {
-            col.append('div').style('font-size', '0.7rem').style('color', '#94a3b8')
-              .style('margin-bottom', '1px')
-              .html(`${w.word} <span style="color:#475569">(${w.count})</span>`);
+          if (!words.length) {
+            row.append('span').style('font-size', '0.7rem').style('color', 'var(--text-muted)')
+              .style('font-style', 'italic').text('insufficient data');
+            continue;
           }
-          if (words.length === 0) {
-            col.append('div').style('font-size', '0.7rem').style('color', '#475569').text('—');
-          }
+
+          const maxC = Math.max(...words.map((w: any) => w.count));
+          const tags = row.append('span').style('line-height', '1.8');
+          words.forEach((w: any, i: number) => {
+            const sz = 0.68 + (w.count / maxC) * 0.35;
+            const fw = i < 2 ? '700' : '400';
+            tags.append('span')
+              .style('font-size', `${sz}rem`)
+              .style('color', color)
+              .style('font-weight', fw)
+              .style('margin-right', '0.3rem')
+              .text(w.word);
+          });
         }
       }
     }
