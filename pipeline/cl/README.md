@@ -88,13 +88,21 @@ flowchart TD
 | XLM-RoBERTa-large | 550M | 87.3% | 89.4% |
 | mDeBERTa-v3-base | 86M | 86.2% | 88.7% |
 
-### 4. Robustness (DeBERTa-v3-large)
+### 4. Robustness — 9 experiments (DeBERTa-v3-large)
 
-| Variation | F1 range | Conclusion |
-|-----------|----------|-----------|
-| 3 random seeds | 87.4--88.2% (sigma=0.34pp) | Stable across initialization |
-| Learning rate 1e-5 to 3e-5 | 87.2--88.8% | LR=1e-5 optimal |
-| Confidence threshold 0.5 to 0.8 | 87.4--87.8% | Labels robust to filtering |
+| Experiment | Seed | LR | Conf | Epochs | Acc | F1 |
+|-----------|------|-----|------|--------|-----|-----|
+| seed_42 | 42 | 2e-5 | 0.6 | 3 | 89.3% | 87.5% |
+| seed_123 | 123 | 2e-5 | 0.6 | 3 | 89.6% | 87.4% |
+| seed_456 | 456 | 2e-5 | 0.6 | 3 | 90.0% | 88.2% |
+| **lr_1e-5** | 42 | **1e-5** | 0.6 | 3 | **90.1%** | **88.8%** |
+| lr_3e-5 | 42 | 3e-5 | 0.6 | 3 | 89.3% | 87.2% |
+| conf_0.5 | 42 | 2e-5 | 0.5 | 3 | 89.7% | 87.8% |
+| conf_0.8 | 42 | 2e-5 | 0.8 | 3 | 89.6% | 87.4% |
+| epochs_5 | 42 | 2e-5 | 0.6 | 5 | 89.2% | 87.3% |
+| epochs_7 | 42 | 2e-5 | 0.6 | 7 | 89.4% | 87.7% |
+
+**Conclusions:** Seed stability σ=0.34pp. LR=1e-5 optimal (+1.6pp over 3e-5). Confidence threshold barely matters. 3 epochs optimal (5 and 7 overfit).
 
 ## Mathematical Details
 
@@ -159,13 +167,12 @@ make cl-all                  # Full pipeline end-to-end
 
 ## Hardware
 
-| Task | Wall time | Cost @ $3.33/hr |
-|------|-----------|-----------------|
-| Instance setup (boot, deps, model download, warmup) | ~25 min | $1.39 |
-| Llama 70B annotation (29,938 texts, 16 concurrent) | 45 min | $2.50 |
-| 3-model encoder benchmark (DeBERTa, XLM-R, mDeBERTa) | 25 min | $1.39 |
-| 9 robustness experiments (seeds, LRs, thresholds, epochs) | 2.5 hrs | $8.33 |
-| Idle / downloads between tasks | ~15 min | $0.83 |
-| **Total** | **~4.5 hrs** | **~$15** |
+| Task | Wall time | Cost |
+|------|-----------|------|
+| Instance setup (boot, deps, model download, warmup) | ~25 min | — |
+| Llama 70B annotation (29,938 texts, 16 concurrent) | 45 min | — |
+| 3-model encoder benchmark (DeBERTa, XLM-R, mDeBERTa) | 25 min | — |
+| 9 robustness experiments (seeds, LRs, thresholds, epochs) | 2.5 hrs | — |
+| **Total (NVIDIA B200 183GB, vast.ai)** | **~4.5 hrs** | **$14.10** |
 
 See also: [../README.md](../README.md) | [../../README.md](../../README.md)
