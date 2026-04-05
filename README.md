@@ -2,15 +2,20 @@
   <img src="logo.svg" width="80" alt="Kyiv chestnut">
 </p>
 
-<h1 align="center">KYIV <sub>NOT</sub> <s>KIEV</s></h1>
+<h1 align="center">#KyivNotKiev</h1>
 
 <p align="center">
-  <strong>#KyivNotKiev: A Large-Scale Computational Study of Ukrainian Toponym Adoption</strong><br>
+  <strong>A Large-Scale Computational Study of Ukrainian Toponym Adoption</strong><br>
   613M+ records, 55 toponym pairs, 7 sources, transformer-based discourse analysis.
 </p>
 
 <p align="center">
-  <a href="https://kyivnotkiev.org">kyivnotkiev.org</a>
+  <a href="https://kyivnotkiev.org">kyivnotkiev.org</a> ·
+  <a href="pipeline/README.md">Pipeline</a> ·
+  <a href="pipeline/cl/README.md">Computational Linguistics</a> ·
+  <a href="infrastructure/README.md">Infrastructure</a> ·
+  <a href="dataset/README.md">Dataset</a> ·
+  <a href="https://huggingface.co/datasets/KyivNotKiev/corpus">HuggingFace</a>
 </p>
 
 ---
@@ -97,8 +102,6 @@ make reproduce
 | `make cl-all` | Full CL pipeline: extract, balance, classify, finetune, export |
 | `make status` | Show watermarks -- what's been fetched |
 | `make reproduce` | Full end-to-end reproduction |
-
-See also: [pipeline/README.md](pipeline/README.md) | [pipeline/cl/README.md](pipeline/cl/README.md) | [infrastructure/README.md](infrastructure/README.md) | [dataset/README.md](dataset/README.md)
 
 ## Citation
 
