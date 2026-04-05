@@ -352,56 +352,7 @@ function formatNum(n: number) {
       <div class="chart-container" style="margin-bottom: 1rem;">
         <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Key Pairs: Deep Dive</div>
         <div class="chart-subtitle" style="margin-bottom: 1rem;">6 pairs representing the full spectrum — from campaign success to historical resistance</div>
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;">
-          <div class="top6-card" data-pair-id="1" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Kiev → Kyiv</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#059669;">60.3%</div>
-            </div>
-            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Flagship — campaign success story</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:60.3%; background:#059669; border-radius:2px;"></div></div>
-          </div>
-          <div class="top6-card" data-pair-id="10" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Chernobyl → Chornobyl</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#dc2626;">26.8%</div>
-            </div>
-            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Disaster brand — impervious to change</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:26.8%; background:#dc2626; border-radius:2px;"></div></div>
-          </div>
-          <div class="top6-card" data-pair-id="3" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Odessa → Odesa</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#d97706;">43.0%</div>
-            </div>
-            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Cultural entrenchment — contested</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:43%; background:#d97706; border-radius:2px;"></div></div>
-          </div>
-          <div class="top6-card" data-pair-id="61" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Vladimir → Volodymyr Zelenskyy</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#d97706;">49.1%</div>
-            </div>
-            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Wartime president — first name + last name contested</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:49.1%; background:#d97706; border-radius:2px;"></div></div>
-          </div>
-          <div class="top6-card" data-pair-id="70" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Vladimir → Volodymyr the Great</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#dc2626;">4.8%</div>
-            </div>
-            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Historical identity — Russia claims our past</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:4.8%; background:#dc2626; border-radius:2px;"></div></div>
-          </div>
-          <div class="top6-card" data-pair-id="72" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Artemovsk → Bakhmut</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#059669;">89.6%</div>
-            </div>
-            <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Naming as resistance — occupation rename rejected</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:89.6%; background:#059669; border-radius:2px;"></div></div>
-          </div>
-        </div>
+        <div id="top6-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;"></div>
       </div>
 
       <!-- CL Insights: Collocations -->
@@ -584,11 +535,51 @@ function formatNum(n: number) {
       if (main) main.style.opacity = '1';
     }
 
+    function renderTop6Cards() {
+      const top6 = [
+        { id: 1, desc: 'Flagship — campaign success story' },
+        { id: 10, desc: 'Disaster brand — impervious to change' },
+        { id: 3, desc: 'Cultural entrenchment — contested' },
+        { id: 61, desc: 'Wartime president — first name + last name contested' },
+        { id: 70, desc: 'Historical identity — Russia claims our past' },
+        { id: 72, desc: 'Naming as resistance — occupation rename rejected' },
+      ];
+      const grid = document.getElementById('top6-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      top6.forEach(({ id, desc }) => {
+        const p = (pairs as any).pairs.find((pp: any) => pp.id === id);
+        if (!p) return;
+        const pct = p.adoption;
+        const color = pct >= 55 ? '#059669' : pct >= 25 ? '#d97706' : '#dc2626';
+        const card = document.createElement('div');
+        card.className = 'top6-card';
+        card.dataset.pairId = String(id);
+        card.style.cssText = 'cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;';
+        card.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <div style="font-weight:600; color:var(--text);">${p.russian} → ${p.ukrainian}</div>
+            <div style="font-size:0.8rem; font-weight:700; color:${color};">${pct}%</div>
+          </div>
+          <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">${desc}</div>
+          <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:${pct}%; background:${color}; border-radius:2px;"></div></div>
+        `;
+        card.addEventListener('click', () => {
+          selectPair(id);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        card.addEventListener('mouseenter', () => { card.style.borderColor = '#0057B8'; card.style.boxShadow = '0 2px 8px rgba(0,87,184,0.1)'; });
+        card.addEventListener('mouseleave', () => { card.style.borderColor = '#e5e7eb'; card.style.boxShadow = 'none'; });
+        grid.appendChild(card);
+      });
+    }
+
     function showLanding() {
       activePairId = 0;
       updateUrl(0);
       showView('landing');
       document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+      renderTop6Cards();
       drawCategoryChart();
       drawHeatmap();
       drawErrorAnalysis();
@@ -1867,16 +1858,7 @@ function formatNum(n: number) {
       }, 100);
     });
 
-    // Top 6 cards click → navigate to pair
-    document.querySelectorAll('.top6-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const pid = parseInt((card as HTMLElement).dataset.pairId || '1');
-        selectPair(pid);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-      card.addEventListener('mouseenter', () => { (card as HTMLElement).style.borderColor = '#0057B8'; (card as HTMLElement).style.boxShadow = '0 2px 8px rgba(0,87,184,0.1)'; });
-      card.addEventListener('mouseleave', () => { (card as HTMLElement).style.borderColor = '#e5e7eb'; (card as HTMLElement).style.boxShadow = 'none'; });
-    });
+    // Top 6 cards: event listeners are now attached in renderTop6Cards()
 
     window.addEventListener('resize', () => {
       if (activePairId > 0) {
