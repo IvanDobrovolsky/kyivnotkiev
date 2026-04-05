@@ -225,7 +225,7 @@ function formatNum(n: number) {
       <!-- Adoption + Reference side by side -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
         <div id="adoption-calc" class="chart-container" style="margin-bottom:0;">
-          <div class="chart-title" style="color: var(--text)">Adoption Calculation</div>
+          <div class="chart-title" style="color: var(--text)">Adoption Calculation — <span id="adoption-pct-title"></span></div>
           <div class="chart-subtitle">Mean of per-source UA/(UA+RU) ratios, last 12 months</div>
           <div id="adoption-calc-body" style="font-size:0.75rem; color:var(--text-muted); line-height:1.6;"></div>
         </div>
@@ -276,17 +276,20 @@ function formatNum(n: number) {
       <!-- Per-pair: GDELT Analysis (3 pie charts) -->
       <div id="media-origin-container" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
         <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-          <div style="font-size:0.78rem; font-weight:600; color:var(--text); margin-bottom:0.2rem;">Overall Spelling</div>
+          <div class="chart-title" style="color: var(--text)">Overall Spelling</div>
+          <div class="chart-subtitle">UA vs RU form distribution in GDELT</div>
           <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Ukrainian vs Russian (24mo)</div>
           <div id="spelling-pie" style="display:flex; align-items:center; justify-content:center;"></div>
         </div>
         <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-          <div style="font-size:0.78rem; font-weight:600; color:#0057B8; margin-bottom:0.2rem;">Ukrainian Spelling Sources</div>
+          <div class="chart-title" style="color: var(--text)">Ukrainian Form Sources</div>
+          <div class="chart-subtitle">Where the Ukrainian spelling appears</div>
           <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Where do UA-form articles come from?</div>
           <div id="ua-origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
         </div>
         <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-          <div style="font-size:0.78rem; font-weight:600; color:#dc2626; margin-bottom:0.2rem;">Russian Spelling Sources</div>
+          <div class="chart-title" style="color: var(--text)">Russian Form Sources</div>
+          <div class="chart-subtitle">Where the Russian spelling appears</div>
           <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Where do RU-form articles come from?</div>
           <div id="ru-origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
         </div>
@@ -302,10 +305,10 @@ function formatNum(n: number) {
             <div class="chart-subtitle">Domains still using old spelling — click domain to verify in GDELT</div>
           </div>
           <div class="chart-controls">
-            <button class="line-mode" data-holdout="intl">International</button>
             <button class="line-mode active" data-holdout="all">All</button>
-            <button class="line-mode" data-holdout="ru">Show .ru</button>
-            <button class="line-mode" data-holdout="ua">.ua</button>
+            <button class="line-mode" data-holdout="intl">Only International</button>
+            <button class="line-mode" data-holdout="ru">Only .ru</button>
+            <button class="line-mode" data-holdout="ua">Only .ua</button>
           </div>
         </div>
         <div id="holdout-table" style="max-height: 500px; overflow-y: auto;"></div>
@@ -1068,11 +1071,11 @@ function formatNum(n: number) {
       const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
       const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
 
-      // Big number at top
-      let html = `<div style="display:flex; align-items:baseline; gap:0.5rem; margin-bottom:0.5rem;">`;
-      html += `<span style="font-size:1.8rem; font-weight:800; color:#0057B8;">${pair.adoption}%</span>`;
-      html += `<span style="font-size:0.7rem; color:var(--text-muted);">mean across ${srcOrder.filter(s => pairData[s]?.length > 0).length} sources</span>`;
-      html += `</div>`;
+      // Put adoption % in card title
+      const titleEl = document.getElementById('adoption-pct-title');
+      if (titleEl) titleEl.textContent = `${pair.adoption}%`;
+
+      let html = '';
 
       // Per-source bars
       html += '<div style="display:flex; flex-direction:column; gap:0.3rem;">';
