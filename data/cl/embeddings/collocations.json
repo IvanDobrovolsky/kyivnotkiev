@@ -5553,14 +5553,376 @@
       "target_terms": [
         "Chicken Kiev"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "varun",
+          "count": 5,
+          "pmi": 5.481513332131986,
+          "frequency": 1
+        },
+        {
+          "word": "volaille",
+          "count": 4,
+          "pmi": 5.159585237244624,
+          "frequency": 1
+        },
+        {
+          "word": "adore",
+          "count": 4,
+          "pmi": 5.159585237244624,
+          "frequency": 1
+        },
+        {
+          "word": "luxurious",
+          "count": 4,
+          "pmi": 5.159585237244624,
+          "frequency": 1
+        },
+        {
+          "word": "restaurantstylechickenkieve",
+          "count": 4,
+          "pmi": 5.159585237244624,
+          "frequency": 1
+        },
+        {
+          "word": "knuspriges",
+          "count": 4,
+          "pmi": 5.159585237244624,
+          "frequency": 1
+        },
+        {
+          "word": "shaun",
+          "count": 3,
+          "pmi": 4.74454773796578,
+          "frequency": 1
+        },
+        {
+          "word": "nuggets",
+          "count": 3,
+          "pmi": 4.74454773796578,
+          "frequency": 1
+        },
+        {
+          "word": "foodies",
+          "count": 3,
+          "pmi": 4.74454773796578,
+          "frequency": 1
+        },
+        {
+          "word": "curried",
+          "count": 8,
+          "pmi": 4.574622736523468,
+          "frequency": 3
+        },
+        {
+          "word": "cordon",
+          "count": 5,
+          "pmi": 4.481513332131986,
+          "frequency": 2
+        },
+        {
+          "word": "sag",
+          "count": 4,
+          "pmi": 4.159585237244624,
+          "frequency": 2
+        },
+        {
+          "word": "aloo",
+          "count": 4,
+          "pmi": 4.159585237244624,
+          "frequency": 2
+        },
+        {
+          "word": "baron",
+          "count": 6,
+          "pmi": 4.159585237244624,
+          "frequency": 3
+        },
+        {
+          "word": "wedges",
+          "count": 4,
+          "pmi": 4.159585237244624,
+          "frequency": 2
+        },
+        {
+          "word": "spaghetti",
+          "count": 4,
+          "pmi": 4.159585237244624,
+          "frequency": 2
+        },
+        {
+          "word": "hoops",
+          "count": 4,
+          "pmi": 4.159585237244624,
+          "frequency": 2
+        },
+        {
+          "word": "chickenkievrecipe",
+          "count": 4,
+          "pmi": 4.159585237244624,
+          "frequency": 2
+        },
+        {
+          "word": "filo",
+          "count": 4,
+          "pmi": 4.159585237244624,
+          "frequency": 2
+        },
+        {
+          "word": "bahan",
+          "count": 4,
+          "pmi": 4.159585237244624,
+          "frequency": 2
+        },
+        {
+          "word": "chickenkiev",
+          "count": 13,
+          "pmi": 4.052670033328112,
+          "frequency": 7
+        },
+        {
+          "word": "bleu",
+          "count": 5,
+          "pmi": 3.8965508314108304,
+          "frequency": 3
+        },
+        {
+          "word": "terrine",
+          "count": 9,
+          "pmi": 3.7445477379657803,
+          "frequency": 6
+        },
+        {
+          "word": "defecting",
+          "count": 3,
+          "pmi": 3.74454773796578,
+          "frequency": 2
+        },
+        {
+          "word": "walker",
+          "count": 3,
+          "pmi": 3.74454773796578,
+          "frequency": 2
+        },
+        {
+          "word": "celebrity",
+          "count": 3,
+          "pmi": 3.74454773796578,
+          "frequency": 2
+        },
+        {
+          "word": "breast",
+          "count": 25,
+          "pmi": 3.715978585769009,
+          "frequency": 17
+        },
+        {
+          "word": "chips",
+          "count": 22,
+          "pmi": 3.619016855881921,
+          "frequency": 16
+        },
+        {
+          "word": "creamy",
+          "count": 5,
+          "pmi": 3.4815133321319864,
+          "frequency": 4
+        },
+        {
+          "word": "stuffed",
+          "count": 30,
+          "pmi": 3.4815133321319864,
+          "frequency": 24
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 153,
       "target_terms": [
         "Chicken Kyiv"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "airfryer",
+          "count": 5,
+          "pmi": 5.793444214291805,
+          "frequency": 2
+        },
+        {
+          "word": "sweatshirt",
+          "count": 12,
+          "pmi": 5.471516119404442,
+          "frequency": 6
+        },
+        {
+          "word": "dials",
+          "count": 12,
+          "pmi": 5.471516119404442,
+          "frequency": 6
+        },
+        {
+          "word": "yogurt",
+          "count": 4,
+          "pmi": 5.471516119404442,
+          "frequency": 2
+        },
+        {
+          "word": "coles",
+          "count": 4,
+          "pmi": 5.471516119404442,
+          "frequency": 2
+        },
+        {
+          "word": "youfoodz",
+          "count": 4,
+          "pmi": 5.471516119404442,
+          "frequency": 2
+        },
+        {
+          "word": "multix",
+          "count": 4,
+          "pmi": 5.471516119404442,
+          "frequency": 2
+        },
+        {
+          "word": "alfoil",
+          "count": 4,
+          "pmi": 5.471516119404442,
+          "frequency": 2
+        },
+        {
+          "word": "skyversed",
+          "count": 4,
+          "pmi": 5.471516119404442,
+          "frequency": 2
+        },
+        {
+          "word": "binging",
+          "count": 3,
+          "pmi": 5.056478620125598,
+          "frequency": 2
+        },
+        {
+          "word": "trolling",
+          "count": 12,
+          "pmi": 5.056478620125598,
+          "frequency": 8
+        },
+        {
+          "word": "boneless",
+          "count": 3,
+          "pmi": 5.056478620125598,
+          "frequency": 2
+        },
+        {
+          "word": "chiken",
+          "count": 3,
+          "pmi": 5.056478620125598,
+          "frequency": 2
+        },
+        {
+          "word": "kyivs",
+          "count": 8,
+          "pmi": 4.886553618683286,
+          "frequency": 6
+        },
+        {
+          "word": "ins",
+          "count": 4,
+          "pmi": 4.886553618683286,
+          "frequency": 3
+        },
+        {
+          "word": "takeaway",
+          "count": 4,
+          "pmi": 4.886553618683286,
+          "frequency": 3
+        },
+        {
+          "word": "fryer",
+          "count": 6,
+          "pmi": 4.734550525238236,
+          "frequency": 5
+        },
+        {
+          "word": "woolworths",
+          "count": 20,
+          "pmi": 4.623519212849492,
+          "frequency": 18
+        },
+        {
+          "word": "babish",
+          "count": 3,
+          "pmi": 4.471516119404442,
+          "frequency": 3
+        },
+        {
+          "word": "postage",
+          "count": 6,
+          "pmi": 4.471516119404442,
+          "frequency": 6
+        },
+        {
+          "word": "chickenkyiv",
+          "count": 3,
+          "pmi": 4.471516119404442,
+          "frequency": 3
+        },
+        {
+          "word": "stamps",
+          "count": 6,
+          "pmi": 4.249123698067994,
+          "frequency": 7
+        },
+        {
+          "word": "dairy",
+          "count": 4,
+          "pmi": 4.1495880245170795,
+          "frequency": 5
+        },
+        {
+          "word": "presidency",
+          "count": 4,
+          "pmi": 4.1495880245170795,
+          "frequency": 5
+        },
+        {
+          "word": "rename",
+          "count": 7,
+          "pmi": 3.9569429465746837,
+          "frequency": 10
+        },
+        {
+          "word": "renames",
+          "count": 4,
+          "pmi": 3.8865536186832856,
+          "frequency": 6
+        },
+        {
+          "word": "dangers",
+          "count": 6,
+          "pmi": 3.7345505252382356,
+          "frequency": 10
+        },
+        {
+          "word": "pubs",
+          "count": 4,
+          "pmi": 3.664161197346838,
+          "frequency": 7
+        },
+        {
+          "word": "cloves",
+          "count": 3,
+          "pmi": 3.471516119404442,
+          "frequency": 6
+        },
+        {
+          "word": "crispy",
+          "count": 6,
+          "pmi": 3.356038901984506,
+          "frequency": 13
+        }
+      ]
     }
   },
   "22": {
@@ -5569,14 +5931,376 @@
       "target_terms": [
         "Kiev cake"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "bakeries",
+          "count": 3,
+          "pmi": 4.732966883906546,
+          "frequency": 1
+        },
+        {
+          "word": "nye",
+          "count": 3,
+          "pmi": 4.732966883906546,
+          "frequency": 1
+        },
+        {
+          "word": "kievsky",
+          "count": 5,
+          "pmi": 3.884969977351596,
+          "frequency": 3
+        },
+        {
+          "word": "kievskiy",
+          "count": 5,
+          "pmi": 3.4699324780727525,
+          "frequency": 4
+        },
+        {
+          "word": "tort",
+          "count": 6,
+          "pmi": 3.4110387890191842,
+          "frequency": 5
+        },
+        {
+          "word": "russianfood",
+          "count": 4,
+          "pmi": 3.1480043831853903,
+          "frequency": 4
+        },
+        {
+          "word": "momsdish",
+          "count": 6,
+          "pmi": 3.1480043831853903,
+          "frequency": 6
+        },
+        {
+          "word": "walnuts",
+          "count": 4,
+          "pmi": 2.563041882464234,
+          "frequency": 6
+        },
+        {
+          "word": "meringue",
+          "count": 9,
+          "pmi": 2.317929384627703,
+          "frequency": 16
+        },
+        {
+          "word": "dessert",
+          "count": 6,
+          "pmi": 2.0325271657654542,
+          "frequency": 13
+        },
+        {
+          "word": "cakes",
+          "count": 5,
+          "pmi": 1.6625775560151483,
+          "frequency": 14
+        },
+        {
+          "word": "chocolate",
+          "count": 6,
+          "pmi": 1.5630418824642338,
+          "frequency": 18
+        },
+        {
+          "word": "roshen",
+          "count": 4,
+          "pmi": 1.340649461127786,
+          "frequency": 14
+        },
+        {
+          "word": "birthday",
+          "count": 5,
+          "pmi": 0.42553835871429885,
+          "frequency": 33
+        },
+        {
+          "word": "classic",
+          "count": 7,
+          "pmi": 0.1480043831853901,
+          "frequency": 56
+        },
+        {
+          "word": "perfect",
+          "count": 5,
+          "pmi": -0.08465637360488486,
+          "frequency": 47
+        },
+        {
+          "word": "process",
+          "count": 4,
+          "pmi": -0.13739783567685834,
+          "frequency": 39
+        },
+        {
+          "word": "ate",
+          "count": 4,
+          "pmi": -0.17392371170197213,
+          "frequency": 40
+        },
+        {
+          "word": "recipe",
+          "count": 31,
+          "pmi": -0.23318966112165965,
+          "frequency": 323
+        },
+        {
+          "word": "forward",
+          "count": 3,
+          "pmi": -0.2670331160934535,
+          "frequency": 32
+        },
+        {
+          "word": "version",
+          "count": 6,
+          "pmi": -0.31142723545190715,
+          "frequency": 66
+        },
+        {
+          "word": "favorite",
+          "count": 5,
+          "pmi": -0.38804851705481985,
+          "frequency": 58
+        },
+        {
+          "word": "taste",
+          "count": 3,
+          "pmi": -0.4764864817224036,
+          "frequency": 37
+        },
+        {
+          "word": "famous",
+          "count": 7,
+          "pmi": -0.7861076811581528,
+          "frequency": 107
+        },
+        {
+          "word": "butter",
+          "count": 4,
+          "pmi": -1.173923711701972,
+          "frequency": 80
+        },
+        {
+          "word": "easy",
+          "count": 3,
+          "pmi": -1.2443130395933701,
+          "frequency": 63
+        },
+        {
+          "word": "popular",
+          "count": 3,
+          "pmi": -1.3963161330384202,
+          "frequency": 70
+        },
+        {
+          "word": "follow",
+          "count": 3,
+          "pmi": -1.514960629537039,
+          "frequency": 76
+        },
+        {
+          "word": "quot",
+          "count": 11,
+          "pmi": -1.6309687375023914,
+          "frequency": 302
+        },
+        {
+          "word": "makes",
+          "count": 3,
+          "pmi": -1.6932978707955517,
+          "frequency": 86
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 61,
       "target_terms": [
         "Kyiv cake"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "torte",
+          "count": 9,
+          "pmi": 5.558622108542376,
+          "frequency": 2
+        },
+        {
+          "word": "pune",
+          "count": 3,
+          "pmi": 4.97365960782122,
+          "frequency": 1
+        },
+        {
+          "word": "customised",
+          "count": 3,
+          "pmi": 4.97365960782122,
+          "frequency": 1
+        },
+        {
+          "word": "puffpastry",
+          "count": 3,
+          "pmi": 4.97365960782122,
+          "frequency": 1
+        },
+        {
+          "word": "sonya",
+          "count": 5,
+          "pmi": 4.12566270126627,
+          "frequency": 3
+        },
+        {
+          "word": "merengue",
+          "count": 3,
+          "pmi": 3.9736596078212196,
+          "frequency": 2
+        },
+        {
+          "word": "sponge",
+          "count": 3,
+          "pmi": 3.9736596078212196,
+          "frequency": 2
+        },
+        {
+          "word": "milkbar",
+          "count": 3,
+          "pmi": 3.9736596078212196,
+          "frequency": 2
+        },
+        {
+          "word": "hazelnut",
+          "count": 13,
+          "pmi": 3.919211823798843,
+          "frequency": 9
+        },
+        {
+          "word": "napoleon",
+          "count": 7,
+          "pmi": 3.874123934270305,
+          "frequency": 5
+        },
+        {
+          "word": "whites",
+          "count": 4,
+          "pmi": 3.803734606378907,
+          "frequency": 3
+        },
+        {
+          "word": "desserts",
+          "count": 6,
+          "pmi": 3.651731512933857,
+          "frequency": 5
+        },
+        {
+          "word": "sweets",
+          "count": 3,
+          "pmi": 3.388697107100063,
+          "frequency": 3
+        },
+        {
+          "word": "prep",
+          "count": 5,
+          "pmi": 3.1256627012662697,
+          "frequency": 6
+        },
+        {
+          "word": "hazelnuts",
+          "count": 4,
+          "pmi": 3.066769012212701,
+          "frequency": 5
+        },
+        {
+          "word": "tort",
+          "count": 4,
+          "pmi": 3.066769012212701,
+          "frequency": 5
+        },
+        {
+          "word": "meringue",
+          "count": 11,
+          "pmi": 2.848128725737361,
+          "frequency": 16
+        },
+        {
+          "word": "nuts",
+          "count": 5,
+          "pmi": 2.3886971071000636,
+          "frequency": 10
+        },
+        {
+          "word": "layers",
+          "count": 5,
+          "pmi": 2.2511935833501284,
+          "frequency": 11
+        },
+        {
+          "word": "smashing",
+          "count": 3,
+          "pmi": 2.1663046857636155,
+          "frequency": 7
+        },
+        {
+          "word": "dessert",
+          "count": 5,
+          "pmi": 2.0101854838463336,
+          "frequency": 13
+        },
+        {
+          "word": "aka",
+          "count": 7,
+          "pmi": 1.8037346063789073,
+          "frequency": 21
+        },
+        {
+          "word": "birthday",
+          "count": 10,
+          "pmi": 1.6662310826289726,
+          "frequency": 33
+        },
+        {
+          "word": "difficulty",
+          "count": 3,
+          "pmi": 1.651731512933857,
+          "frequency": 10
+        },
+        {
+          "word": "cakes",
+          "count": 4,
+          "pmi": 1.5813421850424594,
+          "frequency": 14
+        },
+        {
+          "word": "baking",
+          "count": 3,
+          "pmi": 1.5142279891839223,
+          "frequency": 11
+        },
+        {
+          "word": "semi",
+          "count": 4,
+          "pmi": 1.301234265849724,
+          "frequency": 17
+        },
+        {
+          "word": "egg",
+          "count": 4,
+          "pmi": 1.218772105657751,
+          "frequency": 18
+        },
+        {
+          "word": "fail",
+          "count": 4,
+          "pmi": 1.1407695936564777,
+          "frequency": 19
+        },
+        {
+          "word": "delivered",
+          "count": 4,
+          "pmi": 1.066769012212701,
+          "frequency": 20
+        }
+      ]
     }
   },
   "23": {
@@ -5963,14 +6687,376 @@
       "target_terms": [
         "Kiev Pechersk Lavra"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "zaval",
+          "count": 4,
+          "pmi": 5.449276660266841,
+          "frequency": 1
+        },
+        {
+          "word": "pratsi",
+          "count": 4,
+          "pmi": 5.449276660266841,
+          "frequency": 1
+        },
+        {
+          "word": "butyshev",
+          "count": 4,
+          "pmi": 5.449276660266841,
+          "frequency": 1
+        },
+        {
+          "word": "kyivo",
+          "count": 4,
+          "pmi": 5.449276660266841,
+          "frequency": 1
+        },
+        {
+          "word": "brethren",
+          "count": 3,
+          "pmi": 5.0342391609879975,
+          "frequency": 1
+        },
+        {
+          "word": "hierodeacon",
+          "count": 3,
+          "pmi": 5.0342391609879975,
+          "frequency": 1
+        },
+        {
+          "word": "pencils",
+          "count": 6,
+          "pmi": 5.0342391609879975,
+          "frequency": 2
+        },
+        {
+          "word": "antiguo",
+          "count": 3,
+          "pmi": 5.0342391609879975,
+          "frequency": 1
+        },
+        {
+          "word": "monasterio",
+          "count": 3,
+          "pmi": 5.0342391609879975,
+          "frequency": 1
+        },
+        {
+          "word": "cupols",
+          "count": 3,
+          "pmi": 5.0342391609879975,
+          "frequency": 1
+        },
+        {
+          "word": "bibleillustrated",
+          "count": 3,
+          "pmi": 5.0342391609879975,
+          "frequency": 1
+        },
+        {
+          "word": "nicene",
+          "count": 6,
+          "pmi": 5.0342391609879975,
+          "frequency": 2
+        },
+        {
+          "word": "yellowoldcloset",
+          "count": 3,
+          "pmi": 5.0342391609879975,
+          "frequency": 1
+        },
+        {
+          "word": "kyivpechersklavra",
+          "count": 3,
+          "pmi": 5.0342391609879975,
+          "frequency": 1
+        },
+        {
+          "word": "kikvidze",
+          "count": 13,
+          "pmi": 4.827788283520571,
+          "frequency": 5
+        },
+        {
+          "word": "gulliver",
+          "count": 11,
+          "pmi": 4.586780184016777,
+          "frequency": 5
+        },
+        {
+          "word": "euroflat",
+          "count": 11,
+          "pmi": 4.586780184016777,
+          "frequency": 5
+        },
+        {
+          "word": "lesi",
+          "count": 8,
+          "pmi": 4.449276660266841,
+          "frequency": 4
+        },
+        {
+          "word": "mykhaila",
+          "count": 6,
+          "pmi": 4.449276660266841,
+          "frequency": 3
+        },
+        {
+          "word": "vokzal",
+          "count": 10,
+          "pmi": 4.449276660266841,
+          "frequency": 5
+        },
+        {
+          "word": "agapit",
+          "count": 6,
+          "pmi": 4.449276660266841,
+          "frequency": 3
+        },
+        {
+          "word": "ropes",
+          "count": 4,
+          "pmi": 4.449276660266841,
+          "frequency": 2
+        },
+        {
+          "word": "reverendos",
+          "count": 4,
+          "pmi": 4.449276660266841,
+          "frequency": 2
+        },
+        {
+          "word": "pechers",
+          "count": 4,
+          "pmi": 4.449276660266841,
+          "frequency": 2
+        },
+        {
+          "word": "creed",
+          "count": 6,
+          "pmi": 4.449276660266841,
+          "frequency": 3
+        },
+        {
+          "word": "preeminent",
+          "count": 4,
+          "pmi": 4.449276660266841,
+          "frequency": 2
+        },
+        {
+          "word": "okipnoi",
+          "count": 10,
+          "pmi": 4.186242254433048,
+          "frequency": 6
+        },
+        {
+          "word": "dragomirova",
+          "count": 8,
+          "pmi": 4.12734856537948,
+          "frequency": 5
+        },
+        {
+          "word": "flagman",
+          "count": 8,
+          "pmi": 4.12734856537948,
+          "frequency": 5
+        },
+        {
+          "word": "microminiatures",
+          "count": 43,
+          "pmi": 4.068186492911336,
+          "frequency": 28
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 134,
       "target_terms": [
         "Kyiv Pechersk Lavra"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "pochaiv",
+          "count": 4,
+          "pmi": 4.9105850791662595,
+          "frequency": 1
+        },
+        {
+          "word": "catherdral",
+          "count": 4,
+          "pmi": 4.9105850791662595,
+          "frequency": 1
+        },
+        {
+          "word": "arhitektura",
+          "count": 4,
+          "pmi": 4.9105850791662595,
+          "frequency": 1
+        },
+        {
+          "word": "refectory",
+          "count": 15,
+          "pmi": 4.4955475798874165,
+          "frequency": 5
+        },
+        {
+          "word": "vicar",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "locum",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "tenens",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "ultrahd",
+          "count": 6,
+          "pmi": 4.495547579887416,
+          "frequency": 2
+        },
+        {
+          "word": "monastry",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "architober",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "koretsky",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "praising",
+          "count": 6,
+          "pmi": 4.495547579887416,
+          "frequency": 2
+        },
+        {
+          "word": "pasha",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "mercedes",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "hangs",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "recommending",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "renew",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "savetheuoc",
+          "count": 6,
+          "pmi": 4.495547579887416,
+          "frequency": 2
+        },
+        {
+          "word": "deacon",
+          "count": 3,
+          "pmi": 4.495547579887416,
+          "frequency": 1
+        },
+        {
+          "word": "yurii",
+          "count": 9,
+          "pmi": 4.080510080608573,
+          "frequency": 4
+        },
+        {
+          "word": "unlawful",
+          "count": 9,
+          "pmi": 4.080510080608573,
+          "frequency": 4
+        },
+        {
+          "word": "dormition",
+          "count": 26,
+          "pmi": 4.026062296586196,
+          "frequency": 12
+        },
+        {
+          "word": "raiding",
+          "count": 6,
+          "pmi": 3.91058507916626,
+          "frequency": 3
+        },
+        {
+          "word": "beware",
+          "count": 6,
+          "pmi": 3.91058507916626,
+          "frequency": 3
+        },
+        {
+          "word": "governments",
+          "count": 4,
+          "pmi": 3.91058507916626,
+          "frequency": 2
+        },
+        {
+          "word": "khymych",
+          "count": 9,
+          "pmi": 3.7585819857212104,
+          "frequency": 5
+        },
+        {
+          "word": "abbot",
+          "count": 12,
+          "pmi": 3.688192657829812,
+          "frequency": 7
+        },
+        {
+          "word": "renewal",
+          "count": 10,
+          "pmi": 3.647550673332466,
+          "frequency": 6
+        },
+        {
+          "word": "probing",
+          "count": 6,
+          "pmi": 3.495547579887416,
+          "frequency": 4
+        },
+        {
+          "word": "premises",
+          "count": 16,
+          "pmi": 3.4511534605289627,
+          "frequency": 11
+        }
+      ]
     }
   },
   "25": {
@@ -5979,14 +7065,376 @@
       "target_terms": [
         "Saint Sophia Cathedral Kiev"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "splendid",
+          "count": 45,
+          "pmi": 4.322905861811193,
+          "frequency": 10
+        },
+        {
+          "word": "mariusz",
+          "count": 4,
+          "pmi": 4.1529808603688805,
+          "frequency": 1
+        },
+        {
+          "word": "crono",
+          "count": 20,
+          "pmi": 4.1529808603688805,
+          "frequency": 5
+        },
+        {
+          "word": "foundations",
+          "count": 4,
+          "pmi": 4.1529808603688805,
+          "frequency": 1
+        },
+        {
+          "word": "aerialview",
+          "count": 4,
+          "pmi": 4.1529808603688805,
+          "frequency": 1
+        },
+        {
+          "word": "metropolits",
+          "count": 7,
+          "pmi": 3.960335782426484,
+          "frequency": 2
+        },
+        {
+          "word": "ringing",
+          "count": 9,
+          "pmi": 3.7379433610900366,
+          "frequency": 3
+        },
+        {
+          "word": "kluzniak",
+          "count": 3,
+          "pmi": 3.737943361090036,
+          "frequency": 1
+        },
+        {
+          "word": "cattedrale",
+          "count": 30,
+          "pmi": 3.737943361090036,
+          "frequency": 10
+        },
+        {
+          "word": "symbolizes",
+          "count": 3,
+          "pmi": 3.737943361090036,
+          "frequency": 1
+        },
+        {
+          "word": "travelsesh",
+          "count": 3,
+          "pmi": 3.737943361090036,
+          "frequency": 1
+        },
+        {
+          "word": "mikhaylovskiy",
+          "count": 12,
+          "pmi": 3.15298086036888,
+          "frequency": 6
+        },
+        {
+          "word": "kievcentre",
+          "count": 8,
+          "pmi": 2.831052765481518,
+          "frequency": 5
+        },
+        {
+          "word": "monastic",
+          "count": 10,
+          "pmi": 2.667554033198638,
+          "frequency": 7
+        },
+        {
+          "word": "bells",
+          "count": 8,
+          "pmi": 2.568018359647724,
+          "frequency": 6
+        },
+        {
+          "word": "saintsophiacathedral",
+          "count": 4,
+          "pmi": 2.568018359647724,
+          "frequency": 3
+        },
+        {
+          "word": "extraordinary",
+          "count": 10,
+          "pmi": 2.15298086036888,
+          "frequency": 10
+        },
+        {
+          "word": "santa",
+          "count": 20,
+          "pmi": 2.15298086036888,
+          "frequency": 20
+        },
+        {
+          "word": "treasures",
+          "count": 3,
+          "pmi": 2.15298086036888,
+          "frequency": 3
+        },
+        {
+          "word": "sanctuary",
+          "count": 4,
+          "pmi": 1.8310527654815176,
+          "frequency": 5
+        },
+        {
+          "word": "marvel",
+          "count": 3,
+          "pmi": 1.737943361090036,
+          "frequency": 4
+        },
+        {
+          "word": "lane",
+          "count": 11,
+          "pmi": 1.705521883397659,
+          "frequency": 15
+        },
+        {
+          "word": "fantastic",
+          "count": 10,
+          "pmi": 1.30498395381393,
+          "frequency": 18
+        },
+        {
+          "word": "accommodation",
+          "count": 16,
+          "pmi": 0.9435274947399304,
+          "frequency": 37
+        },
+        {
+          "word": "catching",
+          "count": 3,
+          "pmi": 0.9305884390324319,
+          "frequency": 7
+        },
+        {
+          "word": "uatv",
+          "count": 6,
+          "pmi": 0.9305884390324319,
+          "frequency": 14
+        },
+        {
+          "word": "sofia",
+          "count": 18,
+          "pmi": 0.7993439057541796,
+          "frequency": 46
+        },
+        {
+          "word": "kpi",
+          "count": 8,
+          "pmi": 0.6935492417315827,
+          "frequency": 22
+        },
+        {
+          "word": "outstanding",
+          "count": 5,
+          "pmi": 0.667554033198638,
+          "frequency": 14
+        },
+        {
+          "word": "splendor",
+          "count": 3,
+          "pmi": 0.5680183596477237,
+          "frequency": 9
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 37,
       "target_terms": [
         "Saint Sophia Cathedral Kyiv"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "winsmedia",
+          "count": 5,
+          "pmi": 4.693120092896995,
+          "frequency": 1
+        },
+        {
+          "word": "pearlemaaney",
+          "count": 5,
+          "pmi": 4.693120092896995,
+          "frequency": 1
+        },
+        {
+          "word": "belltower",
+          "count": 4,
+          "pmi": 4.371191998009633,
+          "frequency": 1
+        },
+        {
+          "word": "sofijski",
+          "count": 4,
+          "pmi": 4.371191998009633,
+          "frequency": 1
+        },
+        {
+          "word": "soloaroundworld",
+          "count": 3,
+          "pmi": 3.956154498730789,
+          "frequency": 1
+        },
+        {
+          "word": "wielkanoc",
+          "count": 3,
+          "pmi": 3.956154498730789,
+          "frequency": 1
+        },
+        {
+          "word": "catholicshrinebasilica",
+          "count": 3,
+          "pmi": 3.956154498730789,
+          "frequency": 1
+        },
+        {
+          "word": "unescoheritage",
+          "count": 3,
+          "pmi": 3.956154498730789,
+          "frequency": 1
+        },
+        {
+          "word": "khymych",
+          "count": 8,
+          "pmi": 3.0492639031222706,
+          "frequency": 5
+        },
+        {
+          "word": "fresco",
+          "count": 6,
+          "pmi": 2.956154498730789,
+          "frequency": 4
+        },
+        {
+          "word": "saintsophiacathedral",
+          "count": 4,
+          "pmi": 2.7862294972884762,
+          "frequency": 3
+        },
+        {
+          "word": "depict",
+          "count": 4,
+          "pmi": 1.7862294972884765,
+          "frequency": 6
+        },
+        {
+          "word": "wisdom",
+          "count": 4,
+          "pmi": 1.7862294972884765,
+          "frequency": 6
+        },
+        {
+          "word": "majestic",
+          "count": 7,
+          "pmi": 1.3711919980096328,
+          "frequency": 14
+        },
+        {
+          "word": "sacred",
+          "count": 4,
+          "pmi": 1.3711919980096325,
+          "frequency": 8
+        },
+        {
+          "word": "yuriy",
+          "count": 8,
+          "pmi": 1.2837291567592932,
+          "frequency": 17
+        },
+        {
+          "word": "easter",
+          "count": 9,
+          "pmi": 0.7862294972884766,
+          "frequency": 27
+        },
+        {
+          "word": "wonders",
+          "count": 5,
+          "pmi": 0.6931200928969952,
+          "frequency": 16
+        },
+        {
+          "word": "connected",
+          "count": 4,
+          "pmi": 0.5638370759520287,
+          "frequency": 14
+        },
+        {
+          "word": "maternity",
+          "count": 3,
+          "pmi": 0.4967228800934915,
+          "frequency": 11
+        },
+        {
+          "word": "survivor",
+          "count": 4,
+          "pmi": 0.4643014024011143,
+          "frequency": 15
+        },
+        {
+          "word": "cool",
+          "count": 10,
+          "pmi": 0.16955813683998208,
+          "frequency": 46
+        },
+        {
+          "word": "stunning",
+          "count": 6,
+          "pmi": 0.0019581883439137022,
+          "frequency": 31
+        },
+        {
+          "word": "appears",
+          "count": 8,
+          "pmi": -0.055072756692465384,
+          "frequency": 43
+        },
+        {
+          "word": "unesco",
+          "count": 14,
+          "pmi": -0.08823962062766455,
+          "frequency": 77
+        },
+        {
+          "word": "virtual",
+          "count": 9,
+          "pmi": -0.1313083425195506,
+          "frequency": 51
+        },
+        {
+          "word": "spiritual",
+          "count": 3,
+          "pmi": -0.36577359615657346,
+          "frequency": 20
+        },
+        {
+          "word": "churches",
+          "count": 4,
+          "pmi": -0.6288080019903673,
+          "frequency": 32
+        },
+        {
+          "word": "background",
+          "count": 3,
+          "pmi": -0.7987330034326796,
+          "frequency": 27
+        },
+        {
+          "word": "wave",
+          "count": 3,
+          "pmi": -0.7987330034326796,
+          "frequency": 27
+        }
+      ]
     }
   },
   "26": {
@@ -5995,14 +7443,376 @@
       "target_terms": [
         "Chernobyl Exclusion Zone"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "recreating",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "leadwerks",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "lynx",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "cosplay",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "scanned",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "misterios",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "wolfs",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "poliske",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "piglet",
+          "count": 6,
+          "pmi": 4.542133528732753,
+          "frequency": 2
+        },
+        {
+          "word": "illintsi",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "starosilia",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "ilford",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "tovstyi",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "tatyana",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "deryabina",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "aurora",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "benivka",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "osinttechnical",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "velizar",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "smrs",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "ladyzhychi",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "chystohalivka",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "stari",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "shepelychi",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "ambient",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "welzel",
+          "count": 3,
+          "pmi": 4.542133528732753,
+          "frequency": 1
+        },
+        {
+          "word": "spike",
+          "count": 4,
+          "pmi": 3.957171028011597,
+          "frequency": 2
+        },
+        {
+          "word": "quantify",
+          "count": 4,
+          "pmi": 3.957171028011597,
+          "frequency": 2
+        },
+        {
+          "word": "videography",
+          "count": 8,
+          "pmi": 3.957171028011597,
+          "frequency": 4
+        },
+        {
+          "word": "travelblogger",
+          "count": 8,
+          "pmi": 3.6352429331242346,
+          "frequency": 5
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 127,
       "target_terms": [
         "Chornobyl Exclusion Zone"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "revitalization",
+          "count": 9,
+          "pmi": 5.493895127867893,
+          "frequency": 2
+        },
+        {
+          "word": "repository",
+          "count": 3,
+          "pmi": 4.908932627146737,
+          "frequency": 1
+        },
+        {
+          "word": "parcel",
+          "count": 3,
+          "pmi": 4.908932627146737,
+          "frequency": 1
+        },
+        {
+          "word": "bonasus",
+          "count": 3,
+          "pmi": 4.908932627146737,
+          "frequency": 1
+        },
+        {
+          "word": "huschschi",
+          "count": 3,
+          "pmi": 4.908932627146737,
+          "frequency": 1
+        },
+        {
+          "word": "localize",
+          "count": 3,
+          "pmi": 4.908932627146737,
+          "frequency": 1
+        },
+        {
+          "word": "pentax",
+          "count": 3,
+          "pmi": 4.908932627146737,
+          "frequency": 1
+        },
+        {
+          "word": "portra",
+          "count": 3,
+          "pmi": 4.908932627146737,
+          "frequency": 1
+        },
+        {
+          "word": "wetlands",
+          "count": 3,
+          "pmi": 4.908932627146737,
+          "frequency": 1
+        },
+        {
+          "word": "zavorotnya",
+          "count": 3,
+          "pmi": 4.908932627146737,
+          "frequency": 1
+        },
+        {
+          "word": "revitalize",
+          "count": 15,
+          "pmi": 4.908932627146737,
+          "frequency": 5
+        },
+        {
+          "word": "gameoneer",
+          "count": 6,
+          "pmi": 4.908932627146737,
+          "frequency": 2
+        },
+        {
+          "word": "uranian",
+          "count": 3,
+          "pmi": 4.908932627146737,
+          "frequency": 1
+        },
+        {
+          "word": "snowless",
+          "count": 3,
+          "pmi": 4.908932627146737,
+          "frequency": 1
+        },
+        {
+          "word": "uprooted",
+          "count": 6,
+          "pmi": 4.908932627146737,
+          "frequency": 2
+        },
+        {
+          "word": "disappearing",
+          "count": 6,
+          "pmi": 4.323970126425581,
+          "frequency": 3
+        },
+        {
+          "word": "gamevlg",
+          "count": 4,
+          "pmi": 4.323970126425581,
+          "frequency": 2
+        },
+        {
+          "word": "chornobylwild",
+          "count": 4,
+          "pmi": 4.323970126425581,
+          "frequency": 2
+        },
+        {
+          "word": "emergencies",
+          "count": 3,
+          "pmi": 3.908932627146737,
+          "frequency": 2
+        },
+        {
+          "word": "restructure",
+          "count": 3,
+          "pmi": 3.908932627146737,
+          "frequency": 2
+        },
+        {
+          "word": "bison",
+          "count": 3,
+          "pmi": 3.908932627146737,
+          "frequency": 2
+        },
+        {
+          "word": "amasses",
+          "count": 3,
+          "pmi": 3.908932627146737,
+          "frequency": 2
+        },
+        {
+          "word": "kupovate",
+          "count": 3,
+          "pmi": 3.908932627146737,
+          "frequency": 2
+        },
+        {
+          "word": "demilitarize",
+          "count": 3,
+          "pmi": 3.908932627146737,
+          "frequency": 2
+        },
+        {
+          "word": "impacted",
+          "count": 3,
+          "pmi": 3.908932627146737,
+          "frequency": 2
+        },
+        {
+          "word": "wildfire",
+          "count": 6,
+          "pmi": 3.587004532259374,
+          "frequency": 5
+        },
+        {
+          "word": "logo",
+          "count": 6,
+          "pmi": 3.587004532259374,
+          "frequency": 5
+        },
+        {
+          "word": "prypyat",
+          "count": 6,
+          "pmi": 3.587004532259374,
+          "frequency": 5
+        },
+        {
+          "word": "extinguished",
+          "count": 7,
+          "pmi": 3.546362547762029,
+          "frequency": 6
+        },
+        {
+          "word": "cabinet",
+          "count": 4,
+          "pmi": 3.323970126425581,
+          "frequency": 4
+        }
+      ]
     }
   },
   "27": {
@@ -6011,7 +7821,188 @@
       "target_terms": [
         "the Ukraine"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "rusification",
+          "count": 3,
+          "pmi": 5.392449193801448,
+          "frequency": 2
+        },
+        {
+          "word": "orel",
+          "count": 4,
+          "pmi": 5.222524192359135,
+          "frequency": 3
+        },
+        {
+          "word": "grinfeld",
+          "count": 4,
+          "pmi": 5.222524192359135,
+          "frequency": 3
+        },
+        {
+          "word": "nytimes",
+          "count": 3,
+          "pmi": 4.070521098914085,
+          "frequency": 5
+        },
+        {
+          "word": "sticky",
+          "count": 4,
+          "pmi": 3.6375616916379787,
+          "frequency": 9
+        },
+        {
+          "word": "crisis",
+          "count": 28,
+          "pmi": 3.107046974939199,
+          "frequency": 91
+        },
+        {
+          "word": "wiped",
+          "count": 3,
+          "pmi": 3.070521098914085,
+          "frequency": 10
+        },
+        {
+          "word": "israel",
+          "count": 7,
+          "pmi": 2.9144018969968037,
+          "frequency": 26
+        },
+        {
+          "word": "unleashed",
+          "count": 5,
+          "pmi": 2.7370973651888937,
+          "frequency": 21
+        },
+        {
+          "word": "committee",
+          "count": 3,
+          "pmi": 2.6920094756603556,
+          "frequency": 13
+        },
+        {
+          "word": "strategy",
+          "count": 3,
+          "pmi": 2.2225241923591352,
+          "frequency": 18
+        },
+        {
+          "word": "delivered",
+          "count": 3,
+          "pmi": 2.070521098914085,
+          "frequency": 20
+        },
+        {
+          "word": "fund",
+          "count": 3,
+          "pmi": 2.0001317710226876,
+          "frequency": 21
+        },
+        {
+          "word": "england",
+          "count": 14,
+          "pmi": 1.9424162731663999,
+          "frequency": 102
+        },
+        {
+          "word": "iran",
+          "count": 7,
+          "pmi": 1.9144018969968035,
+          "frequency": 52
+        },
+        {
+          "word": "billion",
+          "count": 6,
+          "pmi": 1.9005960974717733,
+          "frequency": 45
+        },
+        {
+          "word": "response",
+          "count": 5,
+          "pmi": 1.8440125691054055,
+          "frequency": 39
+        },
+        {
+          "word": "entering",
+          "count": 3,
+          "pmi": 1.748593004026723,
+          "frequency": 25
+        },
+        {
+          "word": "role",
+          "count": 4,
+          "pmi": 1.5980333274513416,
+          "frequency": 37
+        },
+        {
+          "word": "conflict",
+          "count": 14,
+          "pmi": 1.592473802109441,
+          "frequency": 130
+        },
+        {
+          "word": "aid",
+          "count": 9,
+          "pmi": 1.5850942717438439,
+          "frequency": 84
+        },
+        {
+          "word": "sanctions",
+          "count": 6,
+          "pmi": 1.485558598192929,
+          "frequency": 60
+        },
+        {
+          "word": "euros",
+          "count": 3,
+          "pmi": 1.4382528834145727,
+          "frequency": 31
+        },
+        {
+          "word": "devastating",
+          "count": 3,
+          "pmi": 1.3924491938014478,
+          "frequency": 32
+        },
+        {
+          "word": "goes",
+          "count": 3,
+          "pmi": 0.8378603421238103,
+          "frequency": 47
+        },
+        {
+          "word": "something",
+          "count": 13,
+          "pmi": 0.8074866930802915,
+          "frequency": 208
+        },
+        {
+          "word": "nations",
+          "count": 4,
+          "pmi": 0.7851188800518368,
+          "frequency": 65
+        },
+        {
+          "word": "deal",
+          "count": 6,
+          "pmi": 0.7777393496862396,
+          "frequency": 98
+        },
+        {
+          "word": "end",
+          "count": 11,
+          "pmi": 0.7200238518299519,
+          "frequency": 187
+        },
+        {
+          "word": "biggest",
+          "count": 4,
+          "pmi": 0.5980333274513416,
+          "frequency": 74
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 229,
@@ -6208,14 +8199,376 @@
       "target_terms": [
         "Kiev National University"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "univ",
+          "count": 4,
+          "pmi": 5.285136063517727,
+          "frequency": 1
+        },
+        {
+          "word": "markle",
+          "count": 3,
+          "pmi": 4.870098564238883,
+          "frequency": 1
+        },
+        {
+          "word": "adams",
+          "count": 3,
+          "pmi": 4.870098564238883,
+          "frequency": 1
+        },
+        {
+          "word": "biology",
+          "count": 6,
+          "pmi": 4.285136063517727,
+          "frequency": 3
+        },
+        {
+          "word": "gerasymenko",
+          "count": 4,
+          "pmi": 4.285136063517727,
+          "frequency": 2
+        },
+        {
+          "word": "olesia",
+          "count": 3,
+          "pmi": 3.8700985642388823,
+          "frequency": 2
+        },
+        {
+          "word": "otradnova",
+          "count": 3,
+          "pmi": 3.8700985642388823,
+          "frequency": 2
+        },
+        {
+          "word": "knu",
+          "count": 3,
+          "pmi": 3.8700985642388823,
+          "frequency": 2
+        },
+        {
+          "word": "economics",
+          "count": 11,
+          "pmi": 3.7445676821550236,
+          "frequency": 8
+        },
+        {
+          "word": "yevgen",
+          "count": 4,
+          "pmi": 3.7001735627965706,
+          "frequency": 3
+        },
+        {
+          "word": "skype",
+          "count": 6,
+          "pmi": 3.54817046935152,
+          "frequency": 5
+        },
+        {
+          "word": "taras",
+          "count": 104,
+          "pmi": 3.341719591884094,
+          "frequency": 100
+        },
+        {
+          "word": "shevchenko",
+          "count": 112,
+          "pmi": 3.324306660798404,
+          "frequency": 109
+        },
+        {
+          "word": "dean",
+          "count": 4,
+          "pmi": 2.7001735627965706,
+          "frequency": 6
+        },
+        {
+          "word": "sciences",
+          "count": 4,
+          "pmi": 2.7001735627965706,
+          "frequency": 6
+        },
+        {
+          "word": "metres",
+          "count": 3,
+          "pmi": 2.2851360635177267,
+          "frequency": 6
+        },
+        {
+          "word": "rankings",
+          "count": 3,
+          "pmi": 2.2851360635177267,
+          "frequency": 6
+        },
+        {
+          "word": "environmental",
+          "count": 5,
+          "pmi": 2.2851360635177267,
+          "frequency": 10
+        },
+        {
+          "word": "elements",
+          "count": 7,
+          "pmi": 1.922565984133018,
+          "frequency": 18
+        },
+        {
+          "word": "hostels",
+          "count": 6,
+          "pmi": 1.622171050795297,
+          "frequency": 19
+        },
+        {
+          "word": "franko",
+          "count": 3,
+          "pmi": 1.1696588460977901,
+          "frequency": 13
+        },
+        {
+          "word": "ranked",
+          "count": 3,
+          "pmi": 1.1696588460977901,
+          "frequency": 13
+        },
+        {
+          "word": "faculty",
+          "count": 3,
+          "pmi": 1.0627436421812784,
+          "frequency": 14
+        },
+        {
+          "word": "campus",
+          "count": 4,
+          "pmi": 0.6412798737430018,
+          "frequency": 25
+        },
+        {
+          "word": "park",
+          "count": 21,
+          "pmi": 0.1696588460977905,
+          "frequency": 182
+        },
+        {
+          "word": "metro",
+          "count": 5,
+          "pmi": 0.11521106207541391,
+          "frequency": 45
+        },
+        {
+          "word": "trade",
+          "count": 4,
+          "pmi": -0.2067170328119484,
+          "frequency": 45
+        },
+        {
+          "word": "deputy",
+          "count": 3,
+          "pmi": -0.37782894920470295,
+          "frequency": 38
+        },
+        {
+          "word": "hostel",
+          "count": 4,
+          "pmi": -0.4962236500069332,
+          "frequency": 55
+        },
+        {
+          "word": "classic",
+          "count": 4,
+          "pmi": -0.5222188585398776,
+          "frequency": 56
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 54,
       "target_terms": [
         "Kyiv National University"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "sophomore",
+          "count": 3,
+          "pmi": 5.467310912066884,
+          "frequency": 1
+        },
+        {
+          "word": "elebrating",
+          "count": 3,
+          "pmi": 5.467310912066884,
+          "frequency": 1
+        },
+        {
+          "word": "impulse",
+          "count": 3,
+          "pmi": 5.467310912066884,
+          "frequency": 1
+        },
+        {
+          "word": "schevchenko",
+          "count": 6,
+          "pmi": 4.882348411345728,
+          "frequency": 3
+        },
+        {
+          "word": "initiating",
+          "count": 4,
+          "pmi": 4.882348411345728,
+          "frequency": 2
+        },
+        {
+          "word": "bogomolets",
+          "count": 10,
+          "pmi": 4.619314005511933,
+          "frequency": 6
+        },
+        {
+          "word": "mohyla",
+          "count": 13,
+          "pmi": 4.582788129486819,
+          "frequency": 8
+        },
+        {
+          "word": "volodymyrska",
+          "count": 3,
+          "pmi": 4.467310912066884,
+          "frequency": 2
+        },
+        {
+          "word": "linguistic",
+          "count": 14,
+          "pmi": 4.230271714766034,
+          "frequency": 11
+        },
+        {
+          "word": "technologies",
+          "count": 16,
+          "pmi": 4.181908693204635,
+          "frequency": 13
+        },
+        {
+          "word": "colours",
+          "count": 3,
+          "pmi": 3.882348411345727,
+          "frequency": 3
+        },
+        {
+          "word": "taras",
+          "count": 65,
+          "pmi": 3.2608600345994567,
+          "frequency": 100
+        },
+        {
+          "word": "ranked",
+          "count": 8,
+          "pmi": 3.181908693204635,
+          "frequency": 13
+        },
+        {
+          "word": "shevchenko",
+          "count": 66,
+          "pmi": 3.158558205927254,
+          "frequency": 109
+        },
+        {
+          "word": "celebrating",
+          "count": 3,
+          "pmi": 3.1453828171795206,
+          "frequency": 5
+        },
+        {
+          "word": "select",
+          "count": 6,
+          "pmi": 3.1453828171795206,
+          "frequency": 10
+        },
+        {
+          "word": "design",
+          "count": 14,
+          "pmi": 2.9348158312398622,
+          "frequency": 27
+        },
+        {
+          "word": "construction",
+          "count": 10,
+          "pmi": 2.2042765062330893,
+          "frequency": 32
+        },
+        {
+          "word": "apparent",
+          "count": 4,
+          "pmi": 2.181908693204635,
+          "frequency": 13
+        },
+        {
+          "word": "academy",
+          "count": 12,
+          "pmi": 2.181908693204635,
+          "frequency": 39
+        },
+        {
+          "word": "playground",
+          "count": 3,
+          "pmi": 2.1453828171795206,
+          "frequency": 10
+        },
+        {
+          "word": "oldest",
+          "count": 16,
+          "pmi": 1.9754578157372087,
+          "frequency": 60
+        },
+        {
+          "word": "rocked",
+          "count": 3,
+          "pmi": 1.8823484113457272,
+          "frequency": 12
+        },
+        {
+          "word": "contest",
+          "count": 4,
+          "pmi": 1.8823484113457272,
+          "frequency": 16
+        },
+        {
+          "word": "computer",
+          "count": 3,
+          "pmi": 1.6599559900092793,
+          "frequency": 14
+        },
+        {
+          "word": "celebrates",
+          "count": 3,
+          "pmi": 1.560420316458365,
+          "frequency": 15
+        },
+        {
+          "word": "rock",
+          "count": 4,
+          "pmi": 1.1819086932046352,
+          "frequency": 26
+        },
+        {
+          "word": "reduced",
+          "count": 6,
+          "pmi": 1.1453828171795208,
+          "frequency": 40
+        },
+        {
+          "word": "universities",
+          "count": 8,
+          "pmi": 1.0494583971809854,
+          "frequency": 57
+        },
+        {
+          "word": "engineering",
+          "count": 4,
+          "pmi": 0.9281521009588518,
+          "frequency": 31
+        }
+      ]
     }
   },
   "29": {
@@ -6224,14 +8577,310 @@
       "target_terms": [
         "Kharkov University"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "knmu",
+          "count": 21,
+          "pmi": 3.6268520684477767,
+          "frequency": 27
+        },
+        {
+          "word": "karazin",
+          "count": 16,
+          "pmi": 3.404459647111329,
+          "frequency": 24
+        },
+        {
+          "word": "medical",
+          "count": 52,
+          "pmi": 1.5249549392978896,
+          "frequency": 287
+        },
+        {
+          "word": "national",
+          "count": 59,
+          "pmi": 0.5797435643922879,
+          "frequency": 627
+        },
+        {
+          "word": "class",
+          "count": 3,
+          "pmi": 0.529990529195188,
+          "frequency": 33
+        },
+        {
+          "word": "kharkiv",
+          "count": 82,
+          "pmi": 0.344159136843515,
+          "frequency": 1026
+        },
+        {
+          "word": "mbbs",
+          "count": 6,
+          "pmi": 0.09865121758724389,
+          "frequency": 89
+        },
+        {
+          "word": "vladyslav",
+          "count": 3,
+          "pmi": 0.019795796876004263,
+          "frequency": 47
+        },
+        {
+          "word": "hits",
+          "count": 4,
+          "pmi": -0.6687893349193093,
+          "frequency": 101
+        },
+        {
+          "word": "breaking",
+          "count": 3,
+          "pmi": -0.7110175703086068,
+          "frequency": 78
+        },
+        {
+          "word": "force",
+          "count": 3,
+          "pmi": -0.7475434463337209,
+          "frequency": 80
+        },
+        {
+          "word": "students",
+          "count": 3,
+          "pmi": -0.8350062875840603,
+          "frequency": 85
+        },
+        {
+          "word": "drone",
+          "count": 7,
+          "pmi": -1.8031357722970385,
+          "frequency": 388
+        },
+        {
+          "word": "building",
+          "count": 3,
+          "pmi": -2.1260550695874505,
+          "frequency": 208
+        },
+        {
+          "word": "strike",
+          "count": 5,
+          "pmi": -2.562093869795529,
+          "frequency": 469
+        },
+        {
+          "word": "world",
+          "count": 6,
+          "pmi": -2.9274525363486554,
+          "frequency": 725
+        },
+        {
+          "word": "ukraine",
+          "count": 53,
+          "pmi": -3.6819353221132824,
+          "frequency": 10804
+        },
+        {
+          "word": "russian",
+          "count": 10,
+          "pmi": -4.358863394018717,
+          "frequency": 3259
+        },
+        {
+          "word": "ukrainian",
+          "count": 3,
+          "pmi": -6.347828069231807,
+          "frequency": 3881
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 56,
       "target_terms": [
         "Kharkiv University"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "khimu",
+          "count": 13,
+          "pmi": 5.030311703009474,
+          "frequency": 4
+        },
+        {
+          "word": "lecturer",
+          "count": 6,
+          "pmi": 3.9148344855895374,
+          "frequency": 4
+        },
+        {
+          "word": "biomedical",
+          "count": 3,
+          "pmi": 3.9148344855895374,
+          "frequency": 2
+        },
+        {
+          "word": "karazina",
+          "count": 6,
+          "pmi": 3.9148344855895374,
+          "frequency": 4
+        },
+        {
+          "word": "kharkivnationalmedicaluniversity",
+          "count": 3,
+          "pmi": 3.9148344855895374,
+          "frequency": 2
+        },
+        {
+          "word": "pharmacy",
+          "count": 4,
+          "pmi": 3.7449094841472252,
+          "frequency": 3
+        },
+        {
+          "word": "karazin",
+          "count": 27,
+          "pmi": 3.4997969863106935,
+          "frequency": 24
+        },
+        {
+          "word": "bat",
+          "count": 3,
+          "pmi": 3.3298719848683813,
+          "frequency": 3
+        },
+        {
+          "word": "modest",
+          "count": 8,
+          "pmi": 3.3298719848683813,
+          "frequency": 8
+        },
+        {
+          "word": "pharmaceutical",
+          "count": 7,
+          "pmi": 3.3298719848683813,
+          "frequency": 7
+        },
+        {
+          "word": "sociological",
+          "count": 3,
+          "pmi": 3.3298719848683813,
+          "frequency": 3
+        },
+        {
+          "word": "ablaze",
+          "count": 4,
+          "pmi": 3.0079438899810187,
+          "frequency": 5
+        },
+        {
+          "word": "medicine",
+          "count": 6,
+          "pmi": 1.9148344855895376,
+          "frequency": 16
+        },
+        {
+          "word": "knmu",
+          "count": 9,
+          "pmi": 1.744909484147225,
+          "frequency": 27
+        },
+        {
+          "word": "daylight",
+          "count": 3,
+          "pmi": 1.744909484147225,
+          "frequency": 9
+        },
+        {
+          "word": "russias",
+          "count": 4,
+          "pmi": 1.5225170628107767,
+          "frequency": 14
+        },
+        {
+          "word": "medical",
+          "count": 76,
+          "pmi": 1.412892571636279,
+          "frequency": 287
+        },
+        {
+          "word": "ruins",
+          "count": 6,
+          "pmi": 1.3298719848683813,
+          "frequency": 24
+        },
+        {
+          "word": "faculty",
+          "count": 3,
+          "pmi": 1.1074795635319332,
+          "frequency": 14
+        },
+        {
+          "word": "injures",
+          "count": 4,
+          "pmi": 1.0819444714247957,
+          "frequency": 19
+        },
+        {
+          "word": "ukrinform",
+          "count": 5,
+          "pmi": 0.9513603616146518,
+          "frequency": 26
+        },
+        {
+          "word": "rubric",
+          "count": 3,
+          "pmi": 0.666906972145952,
+          "frequency": 19
+        },
+        {
+          "word": "mbbs",
+          "count": 13,
+          "pmi": 0.5545782720430756,
+          "frequency": 89
+        },
+        {
+          "word": "international",
+          "count": 26,
+          "pmi": 0.3368247455101482,
+          "frequency": 207
+        },
+        {
+          "word": "association",
+          "count": 3,
+          "pmi": 0.32987198486838143,
+          "frequency": 24
+        },
+        {
+          "word": "national",
+          "count": 73,
+          "pmi": 0.22737491094635942,
+          "frequency": 627
+        },
+        {
+          "word": "graduated",
+          "count": 3,
+          "pmi": 0.21439476744844532,
+          "frequency": 26
+        },
+        {
+          "word": "abroad",
+          "count": 5,
+          "pmi": 0.1923684611184463,
+          "frequency": 44
+        },
+        {
+          "word": "buildings",
+          "count": 7,
+          "pmi": -0.2550905158527747,
+          "frequency": 84
+        },
+        {
+          "word": "hits",
+          "count": 8,
+          "pmi": -0.32833949788341343,
+          "frequency": 101
+        }
+      ]
     }
   },
   "30": {
@@ -6240,14 +8889,364 @@
       "target_terms": [
         "Kiev Polytechnic"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "freedoms",
+          "count": 14,
+          "pmi": 4.994353436858858,
+          "frequency": 7
+        },
+        {
+          "word": "mechanical",
+          "count": 3,
+          "pmi": 4.579315937580014,
+          "frequency": 2
+        },
+        {
+          "word": "sikorsky",
+          "count": 26,
+          "pmi": 3.3372411503818666,
+          "frequency": 41
+        },
+        {
+          "word": "ideal",
+          "count": 4,
+          "pmi": 2.8244284354165456,
+          "frequency": 9
+        },
+        {
+          "word": "institute",
+          "count": 69,
+          "pmi": 2.7809497987496647,
+          "frequency": 160
+        },
+        {
+          "word": "stock",
+          "count": 10,
+          "pmi": 2.6724253419714956,
+          "frequency": 25
+        },
+        {
+          "word": "kpi",
+          "count": 7,
+          "pmi": 2.3422767402791647,
+          "frequency": 22
+        },
+        {
+          "word": "helicopters",
+          "count": 4,
+          "pmi": 2.1869985148012536,
+          "frequency": 14
+        },
+        {
+          "word": "igor",
+          "count": 23,
+          "pmi": 2.042181961949473,
+          "frequency": 89
+        },
+        {
+          "word": "campus",
+          "count": 6,
+          "pmi": 1.9354597478052895,
+          "frequency": 25
+        },
+        {
+          "word": "rights",
+          "count": 7,
+          "pmi": 1.4441563542983782,
+          "frequency": 41
+        },
+        {
+          "word": "helicopter",
+          "count": 3,
+          "pmi": 1.1198843189427168,
+          "frequency": 22
+        },
+        {
+          "word": "technical",
+          "count": 4,
+          "pmi": 0.56808868215676,
+          "frequency": 43
+        },
+        {
+          "word": "expect",
+          "count": 3,
+          "pmi": 0.024727085902376714,
+          "frequency": 47
+        },
+        {
+          "word": "audio",
+          "count": 3,
+          "pmi": -0.5292085191981549,
+          "frequency": 69
+        },
+        {
+          "word": "study",
+          "count": 5,
+          "pmi": -0.6144558058166659,
+          "frequency": 122
+        },
+        {
+          "word": "situation",
+          "count": 4,
+          "pmi": -1.2724331038360435,
+          "frequency": 154
+        },
+        {
+          "word": "article",
+          "count": 3,
+          "pmi": -1.4430518754484405,
+          "frequency": 130
+        },
+        {
+          "word": "university",
+          "count": 14,
+          "pmi": -1.4790624112141404,
+          "frequency": 622
+        },
+        {
+          "word": "wikipedia",
+          "count": 3,
+          "pmi": -1.6105086213000033,
+          "frequency": 146
+        },
+        {
+          "word": "think",
+          "count": 4,
+          "pmi": -1.9771901170919142,
+          "frequency": 251
+        },
+        {
+          "word": "video",
+          "count": 14,
+          "pmi": -2.0280143761695966,
+          "frequency": 910
+        },
+        {
+          "word": "international",
+          "count": 3,
+          "pmi": -2.1141710199193113,
+          "frequency": 207
+        },
+        {
+          "word": "quot",
+          "count": 4,
+          "pmi": -2.244051302466221,
+          "frequency": 302
+        },
+        {
+          "word": "kyiv",
+          "count": 42,
+          "pmi": -2.3224129529127255,
+          "frequency": 3348
+        },
+        {
+          "word": "big",
+          "count": 4,
+          "pmi": -2.6018363192855523,
+          "frequency": 387
+        },
+        {
+          "word": "national",
+          "count": 3,
+          "pmi": -3.713005695222025,
+          "frequency": 627
+        },
+        {
+          "word": "ukraine",
+          "count": 25,
+          "pmi": -4.761068297875385,
+          "frequency": 10804
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 88,
       "target_terms": [
         "Kyiv Polytechnic"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "factorio",
+          "count": 3,
+          "pmi": 4.713415348827129,
+          "frequency": 3
+        },
+        {
+          "word": "institute",
+          "count": 133,
+          "pmi": 4.4467696894409565,
+          "frequency": 160
+        },
+        {
+          "word": "remarks",
+          "count": 4,
+          "pmi": 4.391487253939767,
+          "frequency": 5
+        },
+        {
+          "word": "sikorsky",
+          "count": 26,
+          "pmi": 4.056303062350137,
+          "frequency": 41
+        },
+        {
+          "word": "blinken",
+          "count": 3,
+          "pmi": 3.9764497546609228,
+          "frequency": 5
+        },
+        {
+          "word": "clinton",
+          "count": 4,
+          "pmi": 3.9060604267695247,
+          "frequency": 7
+        },
+        {
+          "word": "kpi",
+          "count": 10,
+          "pmi": 3.575911825077194,
+          "frequency": 22
+        },
+        {
+          "word": "library",
+          "count": 4,
+          "pmi": 3.5434903473848167,
+          "frequency": 9
+        },
+        {
+          "word": "student",
+          "count": 32,
+          "pmi": 3.270471852978401,
+          "frequency": 87
+        },
+        {
+          "word": "junior",
+          "count": 10,
+          "pmi": 3.128452848105973,
+          "frequency": 30
+        },
+        {
+          "word": "technical",
+          "count": 12,
+          "pmi": 2.872113094846187,
+          "frequency": 43
+        },
+        {
+          "word": "scientific",
+          "count": 4,
+          "pmi": 2.8065247532186106,
+          "frequency": 15
+        },
+        {
+          "word": "igor",
+          "count": 23,
+          "pmi": 2.761243873917744,
+          "frequency": 89
+        },
+        {
+          "word": "moderator",
+          "count": 4,
+          "pmi": 2.713415348827129,
+          "frequency": 16
+        },
+        {
+          "word": "hall",
+          "count": 8,
+          "pmi": 2.5841323318821625,
+          "frequency": 35
+        },
+        {
+          "word": "secretary",
+          "count": 7,
+          "pmi": 2.5665739604978577,
+          "frequency": 31
+        },
+        {
+          "word": "interior",
+          "count": 4,
+          "pmi": 2.5434903473848167,
+          "frequency": 18
+        },
+        {
+          "word": "remote",
+          "count": 4,
+          "pmi": 2.3210979260483686,
+          "frequency": 21
+        },
+        {
+          "word": "speech",
+          "count": 6,
+          "pmi": 2.128452848105973,
+          "frequency": 36
+        },
+        {
+          "word": "professor",
+          "count": 4,
+          "pmi": 1.906060426769525,
+          "frequency": 28
+        },
+        {
+          "word": "position",
+          "count": 5,
+          "pmi": 1.575911825077194,
+          "frequency": 44
+        },
+        {
+          "word": "ihor",
+          "count": 3,
+          "pmi": 1.4403968544207133,
+          "frequency": 29
+        },
+        {
+          "word": "offers",
+          "count": 4,
+          "pmi": 0.9585278466636605,
+          "frequency": 54
+        },
+        {
+          "word": "metro",
+          "count": 3,
+          "pmi": 0.8065247532186105,
+          "frequency": 45
+        },
+        {
+          "word": "case",
+          "count": 6,
+          "pmi": 0.4781988871330975,
+          "frequency": 113
+        },
+        {
+          "word": "study",
+          "count": 6,
+          "pmi": 0.36764051198539904,
+          "frequency": 122
+        },
+        {
+          "word": "quot",
+          "count": 13,
+          "pmi": 0.1754503276431421,
+          "frequency": 302
+        },
+        {
+          "word": "education",
+          "count": 3,
+          "pmi": 0.1690948326033188,
+          "frequency": 70
+        },
+        {
+          "word": "looking",
+          "count": 10,
+          "pmi": 0.06955915905240453,
+          "frequency": 250
+        },
+        {
+          "word": "hey",
+          "count": 3,
+          "pmi": -0.023550245339077135,
+          "frequency": 80
+        }
+      ]
     }
   },
   "31": {
@@ -6256,14 +9255,346 @@
       "target_terms": [
         "Kiev Patriarchate"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "bury",
+          "count": 4,
+          "pmi": 4.50657460203644,
+          "frequency": 8
+        },
+        {
+          "word": "epiphany",
+          "count": 3,
+          "pmi": 4.50657460203644,
+          "frequency": 6
+        },
+        {
+          "word": "ecumenical",
+          "count": 8,
+          "pmi": 4.419111760786101,
+          "frequency": 17
+        },
+        {
+          "word": "votes",
+          "count": 3,
+          "pmi": 4.284182180699992,
+          "frequency": 7
+        },
+        {
+          "word": "landmark",
+          "count": 5,
+          "pmi": 4.243540196202646,
+          "frequency": 12
+        },
+        {
+          "word": "constantinople",
+          "count": 15,
+          "pmi": 4.091537102757597,
+          "frequency": 40
+        },
+        {
+          "word": "jerusalem",
+          "count": 4,
+          "pmi": 4.047142983399143,
+          "frequency": 11
+        },
+        {
+          "word": "christians",
+          "count": 4,
+          "pmi": 3.699219679978836,
+          "frequency": 14
+        },
+        {
+          "word": "refuses",
+          "count": 4,
+          "pmi": 3.3366496005941277,
+          "frequency": 18
+        },
+        {
+          "word": "prepares",
+          "count": 3,
+          "pmi": 3.2841821806999927,
+          "frequency": 14
+        },
+        {
+          "word": "ties",
+          "count": 7,
+          "pmi": 3.1846465071490777,
+          "frequency": 35
+        },
+        {
+          "word": "priests",
+          "count": 3,
+          "pmi": 3.1846465071490777,
+          "frequency": 15
+        },
+        {
+          "word": "metropolitan",
+          "count": 7,
+          "pmi": 3.144004522651732,
+          "frequency": 36
+        },
+        {
+          "word": "presence",
+          "count": 3,
+          "pmi": 2.7696090078702342,
+          "frequency": 20
+        },
+        {
+          "word": "andrew",
+          "count": 3,
+          "pmi": 2.7696090078702342,
+          "frequency": 20
+        },
+        {
+          "word": "boy",
+          "count": 4,
+          "pmi": 2.3772915850914735,
+          "frequency": 35
+        },
+        {
+          "word": "reduced",
+          "count": 4,
+          "pmi": 2.1846465071490777,
+          "frequency": 40
+        },
+        {
+          "word": "seize",
+          "count": 3,
+          "pmi": 2.137340792370721,
+          "frequency": 31
+        },
+        {
+          "word": "bot",
+          "count": 4,
+          "pmi": 2.11425717925768,
+          "frequency": 42
+        },
+        {
+          "word": "church",
+          "count": 39,
+          "pmi": 2.098489863399363,
+          "frequency": 414
+        },
+        {
+          "word": "orthodox",
+          "count": 29,
+          "pmi": 2.056216567024605,
+          "frequency": 317
+        },
+        {
+          "word": "celebrate",
+          "count": 3,
+          "pmi": 1.9622540858126298,
+          "frequency": 35
+        },
+        {
+          "word": "independent",
+          "count": 5,
+          "pmi": 1.5431004780615543,
+          "frequency": 78
+        },
+        {
+          "word": "patriarch",
+          "count": 4,
+          "pmi": 1.419111760786101,
+          "frequency": 68
+        },
+        {
+          "word": "hand",
+          "count": 3,
+          "pmi": 1.3636166481943972,
+          "frequency": 53
+        },
+        {
+          "word": "historic",
+          "count": 4,
+          "pmi": 1.1315351706895158,
+          "frequency": 83
+        },
+        {
+          "word": "served",
+          "count": 3,
+          "pmi": 1.004074261507257,
+          "frequency": 68
+        },
+        {
+          "word": "moscow",
+          "count": 16,
+          "pmi": 0.9253740201114833,
+          "frequency": 383
+        },
+        {
+          "word": "kyivan",
+          "count": 4,
+          "pmi": 0.6485936069088685,
+          "frequency": 116
+        },
+        {
+          "word": "head",
+          "count": 5,
+          "pmi": 0.21379285280859403,
+          "frequency": 196
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 67,
       "target_terms": [
         "Kyiv Patriarchate"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "elects",
+          "count": 6,
+          "pmi": 5.923888671960416,
+          "frequency": 3
+        },
+        {
+          "word": "alarmed",
+          "count": 3,
+          "pmi": 5.508851172681572,
+          "frequency": 2
+        },
+        {
+          "word": "ocu",
+          "count": 4,
+          "pmi": 4.601960577073053,
+          "frequency": 5
+        },
+        {
+          "word": "halych",
+          "count": 3,
+          "pmi": 4.508851172681572,
+          "frequency": 4
+        },
+        {
+          "word": "violation",
+          "count": 3,
+          "pmi": 3.5088511726815717,
+          "frequency": 8
+        },
+        {
+          "word": "ecumenical",
+          "count": 5,
+          "pmi": 3.1583539255974387,
+          "frequency": 17
+        },
+        {
+          "word": "management",
+          "count": 3,
+          "pmi": 2.18692307779421,
+          "frequency": 20
+        },
+        {
+          "word": "orthodox",
+          "count": 45,
+          "pmi": 2.1074027381506832,
+          "frequency": 317
+        },
+        {
+          "word": "patriarch",
+          "count": 9,
+          "pmi": 2.0063508321523886,
+          "frequency": 68
+        },
+        {
+          "word": "church",
+          "count": 44,
+          "pmi": 1.689833333098388,
+          "frequency": 414
+        },
+        {
+          "word": "constantinople",
+          "count": 4,
+          "pmi": 1.6019605770730534,
+          "frequency": 40
+        },
+        {
+          "word": "filaret",
+          "count": 3,
+          "pmi": 1.4644570533231185,
+          "frequency": 33
+        },
+        {
+          "word": "statement",
+          "count": 3,
+          "pmi": 1.4213883314312323,
+          "frequency": 34
+        },
+        {
+          "word": "religious",
+          "count": 3,
+          "pmi": 1.2993978070526222,
+          "frequency": 37
+        },
+        {
+          "word": "rights",
+          "count": 3,
+          "pmi": 1.151299168063488,
+          "frequency": 41
+        },
+        {
+          "word": "moscow",
+          "count": 23,
+          "pmi": 0.8662500460924716,
+          "frequency": 383
+        },
+        {
+          "word": "crimea",
+          "count": 7,
+          "pmi": 0.2155437557339775,
+          "frequency": 183
+        },
+        {
+          "word": "head",
+          "count": 6,
+          "pmi": -0.10585867143363634,
+          "frequency": 196
+        },
+        {
+          "word": "saint",
+          "count": 3,
+          "pmi": -0.7672732325926657,
+          "frequency": 155
+        },
+        {
+          "word": "join",
+          "count": 3,
+          "pmi": -0.9668822582848258,
+          "frequency": 178
+        },
+        {
+          "word": "ukrainians",
+          "count": 4,
+          "pmi": -1.0418956127016714,
+          "frequency": 250
+        },
+        {
+          "word": "ukrainian",
+          "count": 36,
+          "pmi": -1.8283990443827203,
+          "frequency": 3881
+        },
+        {
+          "word": "against",
+          "count": 3,
+          "pmi": -1.9546732005896086,
+          "frequency": 353
+        },
+        {
+          "word": "support",
+          "count": 3,
+          "pmi": -2.0457376789960655,
+          "frequency": 376
+        },
+        {
+          "word": "ukraine",
+          "count": 10,
+          "pmi": -5.153461157661189,
+          "frequency": 10804
+        }
+      ]
     }
   },
   "32": {
@@ -6272,14 +9603,376 @@
       "target_terms": [
         "Dynamo Kiev"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "ciro",
+          "count": 4,
+          "pmi": 5.378671369507521,
+          "frequency": 1
+        },
+        {
+          "word": "himn",
+          "count": 4,
+          "pmi": 5.378671369507521,
+          "frequency": 1
+        },
+        {
+          "word": "liran",
+          "count": 3,
+          "pmi": 4.963633870228677,
+          "frequency": 1
+        },
+        {
+          "word": "liany",
+          "count": 3,
+          "pmi": 4.963633870228677,
+          "frequency": 1
+        },
+        {
+          "word": "immobile",
+          "count": 3,
+          "pmi": 4.963633870228677,
+          "frequency": 1
+        },
+        {
+          "word": "clippituser",
+          "count": 4,
+          "pmi": 4.378671369507521,
+          "frequency": 2
+        },
+        {
+          "word": "vxqwby",
+          "count": 4,
+          "pmi": 4.378671369507521,
+          "frequency": 2
+        },
+        {
+          "word": "chiesa",
+          "count": 6,
+          "pmi": 4.378671369507521,
+          "frequency": 3
+        },
+        {
+          "word": "hlozek",
+          "count": 4,
+          "pmi": 4.378671369507521,
+          "frequency": 2
+        },
+        {
+          "word": "kadar",
+          "count": 10,
+          "pmi": 4.115636963673727,
+          "frequency": 6
+        },
+        {
+          "word": "shovkovskiy",
+          "count": 3,
+          "pmi": 3.963633870228677,
+          "frequency": 2
+        },
+        {
+          "word": "nil",
+          "count": 3,
+          "pmi": 3.963633870228677,
+          "frequency": 2
+        },
+        {
+          "word": "malmo",
+          "count": 7,
+          "pmi": 3.8640981966777623,
+          "frequency": 5
+        },
+        {
+          "word": "ferencvaros",
+          "count": 7,
+          "pmi": 3.8640981966777623,
+          "frequency": 5
+        },
+        {
+          "word": "zouma",
+          "count": 4,
+          "pmi": 3.7937088687863647,
+          "frequency": 3
+        },
+        {
+          "word": "boulaye",
+          "count": 4,
+          "pmi": 3.7937088687863647,
+          "frequency": 3
+        },
+        {
+          "word": "federico",
+          "count": 6,
+          "pmi": 3.6417057753413147,
+          "frequency": 5
+        },
+        {
+          "word": "juventus",
+          "count": 40,
+          "pmi": 3.530674462952571,
+          "frequency": 36
+        },
+        {
+          "word": "donny",
+          "count": 4,
+          "pmi": 3.378671369507521,
+          "frequency": 4
+        },
+        {
+          "word": "tamas",
+          "count": 10,
+          "pmi": 3.378671369507521,
+          "frequency": 10
+        },
+        {
+          "word": "rasmus",
+          "count": 4,
+          "pmi": 3.378671369507521,
+          "frequency": 4
+        },
+        {
+          "word": "gerson",
+          "count": 3,
+          "pmi": 3.378671369507521,
+          "frequency": 3
+        },
+        {
+          "word": "brugge",
+          "count": 26,
+          "pmi": 3.221130092521041,
+          "frequency": 29
+        },
+        {
+          "word": "everton",
+          "count": 39,
+          "pmi": 3.079111087648613,
+          "frequency": 48
+        },
+        {
+          "word": "gent",
+          "count": 8,
+          "pmi": 3.0567432746201586,
+          "frequency": 10
+        },
+        {
+          "word": "dia",
+          "count": 4,
+          "pmi": 3.0567432746201586,
+          "frequency": 5
+        },
+        {
+          "word": "guerrero",
+          "count": 3,
+          "pmi": 2.963633870228677,
+          "frequency": 4
+        },
+        {
+          "word": "chelsea",
+          "count": 67,
+          "pmi": 2.9211986039082807,
+          "frequency": 92
+        },
+        {
+          "word": "kaa",
+          "count": 7,
+          "pmi": 2.8640981966777623,
+          "frequency": 10
+        },
+        {
+          "word": "shaktar",
+          "count": 4,
+          "pmi": 2.7937088687863647,
+          "frequency": 6
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 195,
       "target_terms": [
         "Dynamo Kyiv"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "matchgoers",
+          "count": 5,
+          "pmi": 4.689620606884659,
+          "frequency": 2
+        },
+        {
+          "word": "grupos",
+          "count": 4,
+          "pmi": 4.367692511997296,
+          "frequency": 2
+        },
+        {
+          "word": "rangersfc",
+          "count": 4,
+          "pmi": 4.367692511997296,
+          "frequency": 2
+        },
+        {
+          "word": "scottishfootball",
+          "count": 4,
+          "pmi": 4.367692511997296,
+          "frequency": 2
+        },
+        {
+          "word": "omonia",
+          "count": 6,
+          "pmi": 4.367692511997296,
+          "frequency": 3
+        },
+        {
+          "word": "noah",
+          "count": 8,
+          "pmi": 4.045764417109933,
+          "frequency": 5
+        },
+        {
+          "word": "samsunspor",
+          "count": 24,
+          "pmi": 4.045764417109933,
+          "frequency": 15
+        },
+        {
+          "word": "pafos",
+          "count": 11,
+          "pmi": 4.01976920857699,
+          "frequency": 7
+        },
+        {
+          "word": "rangers",
+          "count": 34,
+          "pmi": 3.8701928525264795,
+          "frequency": 24
+        },
+        {
+          "word": "dynamokyiv",
+          "count": 21,
+          "pmi": 3.8531193391675376,
+          "frequency": 15
+        },
+        {
+          "word": "yeni",
+          "count": 4,
+          "pmi": 3.78273001127614,
+          "frequency": 3
+        },
+        {
+          "word": "mayis",
+          "count": 4,
+          "pmi": 3.78273001127614,
+          "frequency": 3
+        },
+        {
+          "word": "kabayev",
+          "count": 4,
+          "pmi": 3.78273001127614,
+          "frequency": 3
+        },
+        {
+          "word": "fenerbahce",
+          "count": 41,
+          "pmi": 3.680850397256926,
+          "frequency": 33
+        },
+        {
+          "word": "zrinjski",
+          "count": 12,
+          "pmi": 3.63072691783109,
+          "frequency": 10
+        },
+        {
+          "word": "aet",
+          "count": 7,
+          "pmi": 3.5900849333337437,
+          "frequency": 6
+        },
+        {
+          "word": "partizan",
+          "count": 8,
+          "pmi": 3.560337589939692,
+          "frequency": 7
+        },
+        {
+          "word": "mykhavko",
+          "count": 10,
+          "pmi": 3.519695605442346,
+          "frequency": 9
+        },
+        {
+          "word": "alvaro",
+          "count": 4,
+          "pmi": 3.367692511997296,
+          "frequency": 4
+        },
+        {
+          "word": "mostar",
+          "count": 12,
+          "pmi": 3.367692511997296,
+          "frequency": 12
+        },
+        {
+          "word": "artemio",
+          "count": 4,
+          "pmi": 3.367692511997296,
+          "frequency": 4
+        },
+        {
+          "word": "franchi",
+          "count": 4,
+          "pmi": 3.367692511997296,
+          "frequency": 4
+        },
+        {
+          "word": "samsun",
+          "count": 4,
+          "pmi": 3.367692511997296,
+          "frequency": 4
+        },
+        {
+          "word": "jug",
+          "count": 6,
+          "pmi": 3.1453000906608484,
+          "frequency": 7
+        },
+        {
+          "word": "georgiy",
+          "count": 22,
+          "pmi": 3.126684412493501,
+          "frequency": 26
+        },
+        {
+          "word": "crystal",
+          "count": 20,
+          "pmi": 3.104658106163502,
+          "frequency": 24
+        },
+        {
+          "word": "fiorentina",
+          "count": 28,
+          "pmi": 3.08758459280456,
+          "frequency": 34
+        },
+        {
+          "word": "lld",
+          "count": 3,
+          "pmi": 2.9526550127184525,
+          "frequency": 4
+        },
+        {
+          "word": "qualifications",
+          "count": 3,
+          "pmi": 2.9526550127184525,
+          "frequency": 4
+        },
+        {
+          "word": "chanted",
+          "count": 3,
+          "pmi": 2.9526550127184525,
+          "frequency": 4
+        }
+      ]
     }
   },
   "34": {
@@ -6288,14 +9981,376 @@
       "target_terms": [
         "Kiev ballet"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "sheherazade",
+          "count": 3,
+          "pmi": 4.884212536700752,
+          "frequency": 1
+        },
+        {
+          "word": "corsair",
+          "count": 6,
+          "pmi": 4.299250035979596,
+          "frequency": 3
+        },
+        {
+          "word": "khrystyna",
+          "count": 6,
+          "pmi": 4.299250035979596,
+          "frequency": 3
+        },
+        {
+          "word": "paquita",
+          "count": 6,
+          "pmi": 4.299250035979596,
+          "frequency": 3
+        },
+        {
+          "word": "shyshpor",
+          "count": 4,
+          "pmi": 4.299250035979595,
+          "frequency": 2
+        },
+        {
+          "word": "esclave",
+          "count": 4,
+          "pmi": 4.299250035979595,
+          "frequency": 2
+        },
+        {
+          "word": "lozova",
+          "count": 7,
+          "pmi": 4.1066049580372,
+          "frequency": 4
+        },
+        {
+          "word": "kruk",
+          "count": 5,
+          "pmi": 4.036215630145802,
+          "frequency": 3
+        },
+        {
+          "word": "reine",
+          "count": 3,
+          "pmi": 3.8842125367007516,
+          "frequency": 2
+        },
+        {
+          "word": "tania",
+          "count": 6,
+          "pmi": 3.8842125367007516,
+          "frequency": 4
+        },
+        {
+          "word": "gala",
+          "count": 22,
+          "pmi": 3.758681654616893,
+          "frequency": 16
+        },
+        {
+          "word": "gavryshkiv",
+          "count": 6,
+          "pmi": 3.5622844418133894,
+          "frequency": 5
+        },
+        {
+          "word": "quixote",
+          "count": 10,
+          "pmi": 3.1617465122296604,
+          "frequency": 11
+        },
+        {
+          "word": "nacional",
+          "count": 11,
+          "pmi": 3.0582419364758007,
+          "frequency": 13
+        },
+        {
+          "word": "pas",
+          "count": 7,
+          "pmi": 2.9366799565948876,
+          "frequency": 9
+        },
+        {
+          "word": "cisnes",
+          "count": 3,
+          "pmi": 2.8842125367007516,
+          "frequency": 4
+        },
+        {
+          "word": "deux",
+          "count": 5,
+          "pmi": 2.8138232088093535,
+          "frequency": 7
+        },
+        {
+          "word": "lago",
+          "count": 3,
+          "pmi": 2.5622844418133894,
+          "frequency": 5
+        },
+        {
+          "word": "giselle",
+          "count": 6,
+          "pmi": 2.4247809180634547,
+          "frequency": 11
+        },
+        {
+          "word": "swan",
+          "count": 14,
+          "pmi": 2.351717455873731,
+          "frequency": 27
+        },
+        {
+          "word": "deutsch",
+          "count": 3,
+          "pmi": 2.2992500359795955,
+          "frequency": 6
+        },
+        {
+          "word": "italiano",
+          "count": 3,
+          "pmi": 2.2992500359795955,
+          "frequency": 6
+        },
+        {
+          "word": "actors",
+          "count": 3,
+          "pmi": 2.2992500359795955,
+          "frequency": 6
+        },
+        {
+          "word": "nutcracker",
+          "count": 8,
+          "pmi": 2.211787194729256,
+          "frequency": 17
+        },
+        {
+          "word": "andrii",
+          "count": 8,
+          "pmi": 2.211787194729256,
+          "frequency": 17
+        },
+        {
+          "word": "parte",
+          "count": 3,
+          "pmi": 2.0768576146431474,
+          "frequency": 7
+        },
+        {
+          "word": "classical",
+          "count": 3,
+          "pmi": 2.0768576146431474,
+          "frequency": 7
+        },
+        {
+          "word": "presents",
+          "count": 8,
+          "pmi": 2.05132252253601,
+          "frequency": 19
+        },
+        {
+          "word": "grand",
+          "count": 40,
+          "pmi": 1.9773219410922331,
+          "frequency": 100
+        },
+        {
+          "word": "tribute",
+          "count": 4,
+          "pmi": 1.5988103178385034,
+          "frequency": 13
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 61,
       "target_terms": [
         "Kyiv ballet"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "lerner",
+          "count": 4,
+          "pmi": 5.652008385538184,
+          "frequency": 2
+        },
+        {
+          "word": "carmel",
+          "count": 3,
+          "pmi": 5.23697088625934,
+          "frequency": 2
+        },
+        {
+          "word": "striving",
+          "count": 3,
+          "pmi": 5.23697088625934,
+          "frequency": 2
+        },
+        {
+          "word": "touring",
+          "count": 8,
+          "pmi": 4.844653463480579,
+          "frequency": 7
+        },
+        {
+          "word": "tarkington",
+          "count": 4,
+          "pmi": 4.652008385538184,
+          "frequency": 4
+        },
+        {
+          "word": "sulamericana",
+          "count": 3,
+          "pmi": 4.652008385538184,
+          "frequency": 3
+        },
+        {
+          "word": "jolie",
+          "count": 4,
+          "pmi": 4.330080290650821,
+          "frequency": 5
+        },
+        {
+          "word": "residency",
+          "count": 3,
+          "pmi": 4.23697088625934,
+          "frequency": 4
+        },
+        {
+          "word": "stranded",
+          "count": 3,
+          "pmi": 3.9150427913719774,
+          "frequency": 5
+        },
+        {
+          "word": "grand",
+          "count": 57,
+          "pmi": 3.841042209928201,
+          "frequency": 100
+        },
+        {
+          "word": "gala",
+          "count": 7,
+          "pmi": 3.4593633075957877,
+          "frequency": 16
+        },
+        {
+          "word": "presents",
+          "count": 8,
+          "pmi": 3.4040808720945983,
+          "frequency": 19
+        },
+        {
+          "word": "performing",
+          "count": 5,
+          "pmi": 3.38897397970439,
+          "frequency": 12
+        },
+        {
+          "word": "nutcracker",
+          "count": 7,
+          "pmi": 3.371900466345448,
+          "frequency": 17
+        },
+        {
+          "word": "snow",
+          "count": 14,
+          "pmi": 3.289438306153475,
+          "frequency": 36
+        },
+        {
+          "word": "queen",
+          "count": 5,
+          "pmi": 3.273496762284454,
+          "frequency": 13
+        },
+        {
+          "word": "dallas",
+          "count": 5,
+          "pmi": 3.273496762284454,
+          "frequency": 13
+        },
+        {
+          "word": "swan",
+          "count": 9,
+          "pmi": 3.067045884817028,
+          "frequency": 27
+        },
+        {
+          "word": "nacional",
+          "count": 4,
+          "pmi": 2.9515686673970913,
+          "frequency": 13
+        },
+        {
+          "word": "youth",
+          "count": 4,
+          "pmi": 2.8446534634805793,
+          "frequency": 14
+        },
+        {
+          "word": "dancers",
+          "count": 6,
+          "pmi": 2.713408930202327,
+          "frequency": 23
+        },
+        {
+          "word": "theatre",
+          "count": 3,
+          "pmi": 2.429615964201736,
+          "frequency": 14
+        },
+        {
+          "word": "andrew",
+          "count": 4,
+          "pmi": 2.330080290650821,
+          "frequency": 20
+        },
+        {
+          "word": "theater",
+          "count": 4,
+          "pmi": 2.128446429481171,
+          "frequency": 23
+        },
+        {
+          "word": "archive",
+          "count": 4,
+          "pmi": 2.008152195763459,
+          "frequency": 25
+        },
+        {
+          "word": "minute",
+          "count": 4,
+          "pmi": 1.8446534634805796,
+          "frequency": 28
+        },
+        {
+          "word": "production",
+          "count": 4,
+          "pmi": 1.8446534634805796,
+          "frequency": 28
+        },
+        {
+          "word": "lake",
+          "count": 9,
+          "pmi": 1.7995655739520415,
+          "frequency": 65
+        },
+        {
+          "word": "offered",
+          "count": 4,
+          "pmi": 1.7940273904106112,
+          "frequency": 29
+        },
+        {
+          "word": "opera",
+          "count": 5,
+          "pmi": 1.6520083855381837,
+          "frequency": 40
+        }
+      ]
     }
   },
   "35": {
@@ -6304,14 +10359,376 @@
       "target_terms": [
         "Kievan Rus"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "curiosities",
+          "count": 4,
+          "pmi": 4.829614882131881,
+          "frequency": 3
+        },
+        {
+          "word": "knights",
+          "count": 4,
+          "pmi": 4.414577382853037,
+          "frequency": 4
+        },
+        {
+          "word": "legitimize",
+          "count": 4,
+          "pmi": 4.092649287965674,
+          "frequency": 5
+        },
+        {
+          "word": "lasts",
+          "count": 4,
+          "pmi": 3.8296148821318807,
+          "frequency": 6
+        },
+        {
+          "word": "druzhina",
+          "count": 4,
+          "pmi": 3.6072224607954326,
+          "frequency": 7
+        },
+        {
+          "word": "surface",
+          "count": 4,
+          "pmi": 3.092649287965674,
+          "frequency": 10
+        },
+        {
+          "word": "returns",
+          "count": 4,
+          "pmi": 3.092649287965674,
+          "frequency": 10
+        },
+        {
+          "word": "vikings",
+          "count": 10,
+          "pmi": 2.8296148821318807,
+          "frequency": 30
+        },
+        {
+          "word": "mongols",
+          "count": 6,
+          "pmi": 2.7516123701306077,
+          "frequency": 19
+        },
+        {
+          "word": "seconds",
+          "count": 4,
+          "pmi": 2.7141376647119446,
+          "frequency": 13
+        },
+        {
+          "word": "roots",
+          "count": 4,
+          "pmi": 2.3271145416026977,
+          "frequency": 17
+        },
+        {
+          "word": "medieval",
+          "count": 8,
+          "pmi": 1.891015426796024,
+          "frequency": 46
+        },
+        {
+          "word": "timeline",
+          "count": 3,
+          "pmi": 1.8296148821318805,
+          "frequency": 18
+        },
+        {
+          "word": "forever",
+          "count": 4,
+          "pmi": 1.6596898806895684,
+          "frequency": 27
+        },
+        {
+          "word": "defeated",
+          "count": 4,
+          "pmi": 1.6072224607954326,
+          "frequency": 28
+        },
+        {
+          "word": "rise",
+          "count": 6,
+          "pmi": 1.5076867872445183,
+          "frequency": 45
+        },
+        {
+          "word": "fall",
+          "count": 9,
+          "pmi": 1.4347552647906672,
+          "frequency": 71
+        },
+        {
+          "word": "nothing",
+          "count": 6,
+          "pmi": 1.3848300394589848,
+          "frequency": 49
+        },
+        {
+          "word": "foundation",
+          "count": 3,
+          "pmi": 1.1921849615165891,
+          "frequency": 28
+        },
+        {
+          "word": "geography",
+          "count": 4,
+          "pmi": 1.1666498694094514,
+          "frequency": 38
+        },
+        {
+          "word": "territorial",
+          "count": 4,
+          "pmi": 0.9883126281509387,
+          "frequency": 43
+        },
+        {
+          "word": "olga",
+          "count": 4,
+          "pmi": 0.891015426796024,
+          "frequency": 46
+        },
+        {
+          "word": "kyivan",
+          "count": 10,
+          "pmi": 0.8785244826128271,
+          "frequency": 116
+        },
+        {
+          "word": "prince",
+          "count": 4,
+          "pmi": 0.5816873686882951,
+          "frequency": 57
+        },
+        {
+          "word": "level",
+          "count": 3,
+          "pmi": 0.5401082649368958,
+          "frequency": 44
+        },
+        {
+          "word": "battalion",
+          "count": 4,
+          "pmi": 0.3701832634945833,
+          "frequency": 66
+        },
+        {
+          "word": "documentary",
+          "count": 5,
+          "pmi": 0.24465238141072446,
+          "frequency": 90
+        },
+        {
+          "word": "called",
+          "count": 6,
+          "pmi": -0.23886485575088615,
+          "frequency": 151
+        },
+        {
+          "word": "claims",
+          "count": 5,
+          "pmi": -0.26349452225960096,
+          "frequency": 128
+        },
+        {
+          "word": "modern",
+          "count": 5,
+          "pmi": -0.27472177768285505,
+          "frequency": 129
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 169,
       "target_terms": [
         "Kyivan Rus"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "vicki",
+          "count": 4,
+          "pmi": 7.016132241102059,
+          "frequency": 1
+        },
+        {
+          "word": "grove",
+          "count": 4,
+          "pmi": 7.016132241102059,
+          "frequency": 1
+        },
+        {
+          "word": "hijacked",
+          "count": 4,
+          "pmi": 6.016132241102059,
+          "frequency": 2
+        },
+        {
+          "word": "volos",
+          "count": 4,
+          "pmi": 6.016132241102059,
+          "frequency": 2
+        },
+        {
+          "word": "amulets",
+          "count": 4,
+          "pmi": 6.016132241102059,
+          "frequency": 2
+        },
+        {
+          "word": "fabrics",
+          "count": 4,
+          "pmi": 6.016132241102059,
+          "frequency": 2
+        },
+        {
+          "word": "znau",
+          "count": 6,
+          "pmi": 6.016132241102058,
+          "frequency": 3
+        },
+        {
+          "word": "falsifies",
+          "count": 6,
+          "pmi": 5.601094741823215,
+          "frequency": 4
+        },
+        {
+          "word": "cradle",
+          "count": 11,
+          "pmi": 5.475563859739355,
+          "frequency": 8
+        },
+        {
+          "word": "larp",
+          "count": 4,
+          "pmi": 5.431169740380902,
+          "frequency": 3
+        },
+        {
+          "word": "rurikids",
+          "count": 4,
+          "pmi": 5.431169740380902,
+          "frequency": 3
+        },
+        {
+          "word": "derives",
+          "count": 10,
+          "pmi": 5.338060335989421,
+          "frequency": 8
+        },
+        {
+          "word": "shores",
+          "count": 10,
+          "pmi": 5.338060335989421,
+          "frequency": 8
+        },
+        {
+          "word": "undermine",
+          "count": 6,
+          "pmi": 5.2791666469358525,
+          "frequency": 5
+        },
+        {
+          "word": "baptism",
+          "count": 8,
+          "pmi": 5.208777319044454,
+          "frequency": 7
+        },
+        {
+          "word": "northernmost",
+          "count": 15,
+          "pmi": 5.115667914652973,
+          "frequency": 14
+        },
+        {
+          "word": "sian",
+          "count": 5,
+          "pmi": 5.016132241102059,
+          "frequency": 5
+        },
+        {
+          "word": "oath",
+          "count": 4,
+          "pmi": 5.016132241102059,
+          "frequency": 4
+        },
+        {
+          "word": "designates",
+          "count": 5,
+          "pmi": 5.016132241102059,
+          "frequency": 5
+        },
+        {
+          "word": "christianization",
+          "count": 4,
+          "pmi": 5.016132241102059,
+          "frequency": 4
+        },
+        {
+          "word": "druzhina",
+          "count": 6,
+          "pmi": 4.7937398197656105,
+          "frequency": 7
+        },
+        {
+          "word": "ruler",
+          "count": 4,
+          "pmi": 4.694204146214696,
+          "frequency": 5
+        },
+        {
+          "word": "byzantium",
+          "count": 4,
+          "pmi": 4.694204146214696,
+          "frequency": 5
+        },
+        {
+          "word": "naming",
+          "count": 3,
+          "pmi": 4.2791666469358525,
+          "frequency": 5
+        },
+        {
+          "word": "lands",
+          "count": 15,
+          "pmi": 4.016132241102058,
+          "frequency": 30
+        },
+        {
+          "word": "refers",
+          "count": 3,
+          "pmi": 4.016132241102058,
+          "frequency": 6
+        },
+        {
+          "word": "trident",
+          "count": 4,
+          "pmi": 3.846207239659746,
+          "frequency": 9
+        },
+        {
+          "word": "civilization",
+          "count": 5,
+          "pmi": 3.7530978352682647,
+          "frequency": 12
+        },
+        {
+          "word": "islam",
+          "count": 4,
+          "pmi": 3.431169740380902,
+          "frequency": 12
+        },
+        {
+          "word": "settlements",
+          "count": 10,
+          "pmi": 3.383864025602546,
+          "frequency": 31
+        }
+      ]
     }
   },
   "36": {
@@ -9756,14 +14173,376 @@
       "target_terms": [
         "Zorya Lugansk"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "skils",
+          "count": 3,
+          "pmi": 5.952158810747052,
+          "frequency": 1
+        },
+        {
+          "word": "septembre",
+          "count": 4,
+          "pmi": 5.3671963100258955,
+          "frequency": 2
+        },
+        {
+          "word": "chernomorets",
+          "count": 7,
+          "pmi": 5.1745512320835,
+          "frequency": 4
+        },
+        {
+          "word": "orest",
+          "count": 6,
+          "pmi": 4.952158810747052,
+          "frequency": 4
+        },
+        {
+          "word": "yannick",
+          "count": 4,
+          "pmi": 4.3671963100258955,
+          "frequency": 4
+        },
+        {
+          "word": "santini",
+          "count": 3,
+          "pmi": 4.3671963100258955,
+          "frequency": 3
+        },
+        {
+          "word": "boli",
+          "count": 6,
+          "pmi": 3.25171909260596,
+          "frequency": 13
+        },
+        {
+          "word": "kolos",
+          "count": 3,
+          "pmi": 2.6302307158596894,
+          "frequency": 10
+        },
+        {
+          "word": "saves",
+          "count": 3,
+          "pmi": 1.952158810747052,
+          "frequency": 16
+        },
+        {
+          "word": "goalkeeper",
+          "count": 3,
+          "pmi": 1.7042312973034666,
+          "frequency": 19
+        },
+        {
+          "word": "goals",
+          "count": 14,
+          "pmi": 1.6988178011171022,
+          "frequency": 89
+        },
+        {
+          "word": "clash",
+          "count": 3,
+          "pmi": 1.6302307158596896,
+          "frequency": 20
+        },
+        {
+          "word": "arsenal",
+          "count": 7,
+          "pmi": 1.5598413879682915,
+          "frequency": 49
+        },
+        {
+          "word": "track",
+          "count": 4,
+          "pmi": 1.4129999996390206,
+          "frequency": 31
+        },
+        {
+          "word": "dmytro",
+          "count": 4,
+          "pmi": 1.2797334687755562,
+          "frequency": 34
+        },
+        {
+          "word": "leicester",
+          "count": 4,
+          "pmi": 1.045268215138533,
+          "frequency": 40
+        },
+        {
+          "word": "played",
+          "count": 3,
+          "pmi": 0.3374489666318435,
+          "frequency": 49
+        },
+        {
+          "word": "highlights",
+          "count": 5,
+          "pmi": 0.27973346877555616,
+          "frequency": 85
+        },
+        {
+          "word": "shakhtar",
+          "count": 16,
+          "pmi": 0.23276998980496946,
+          "frequency": 281
+        },
+        {
+          "word": "luhansk",
+          "count": 37,
+          "pmi": 0.029755215767208673,
+          "frequency": 748
+        },
+        {
+          "word": "manchester",
+          "count": 5,
+          "pmi": -0.20569335839468544,
+          "frequency": 119
+        },
+        {
+          "word": "united",
+          "count": 4,
+          "pmi": -1.1485035282581468,
+          "frequency": 183
+        },
+        {
+          "word": "final",
+          "count": 3,
+          "pmi": -1.2077125260313377,
+          "frequency": 143
+        },
+        {
+          "word": "europa",
+          "count": 4,
+          "pmi": -1.7360914983861264,
+          "frequency": 275
+        },
+        {
+          "word": "donetsk",
+          "count": 7,
+          "pmi": -1.7502612715222812,
+          "frequency": 486
+        },
+        {
+          "word": "uefa",
+          "count": 4,
+          "pmi": -2.0757471858228325,
+          "frequency": 348
+        },
+        {
+          "word": "premier",
+          "count": 3,
+          "pmi": -2.3099360346231275,
+          "frequency": 307
+        },
+        {
+          "word": "dynamo",
+          "count": 8,
+          "pmi": -2.3943549224185836,
+          "frequency": 868
+        },
+        {
+          "word": "league",
+          "count": 6,
+          "pmi": -2.9874204035676413,
+          "frequency": 982
+        },
+        {
+          "word": "odessa",
+          "count": 6,
+          "pmi": -3.0265516483593053,
+          "frequency": 1009
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 179,
       "target_terms": [
         "Zorya Luhansk"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "bodo",
+          "count": 16,
+          "pmi": 4.966925306327786,
+          "frequency": 7
+        },
+        {
+          "word": "levchenko",
+          "count": 4,
+          "pmi": 4.77428022838539,
+          "frequency": 2
+        },
+        {
+          "word": "vasiljevic",
+          "count": 4,
+          "pmi": 4.77428022838539,
+          "frequency": 2
+        },
+        {
+          "word": "universitatea",
+          "count": 4,
+          "pmi": 4.77428022838539,
+          "frequency": 2
+        },
+        {
+          "word": "craiova",
+          "count": 4,
+          "pmi": 4.77428022838539,
+          "frequency": 2
+        },
+        {
+          "word": "turbaevskyi",
+          "count": 4,
+          "pmi": 4.77428022838539,
+          "frequency": 2
+        },
+        {
+          "word": "brovar",
+          "count": 4,
+          "pmi": 4.77428022838539,
+          "frequency": 2
+        },
+        {
+          "word": "ibrahimovic",
+          "count": 5,
+          "pmi": 4.511245822551596,
+          "frequency": 3
+        },
+        {
+          "word": "epitsentr",
+          "count": 5,
+          "pmi": 4.511245822551596,
+          "frequency": 3
+        },
+        {
+          "word": "imerekov",
+          "count": 8,
+          "pmi": 4.452352133498028,
+          "frequency": 5
+        },
+        {
+          "word": "hertha",
+          "count": 14,
+          "pmi": 4.411710149000682,
+          "frequency": 9
+        },
+        {
+          "word": "evandro",
+          "count": 3,
+          "pmi": 4.359242729106546,
+          "frequency": 2
+        },
+        {
+          "word": "nazariy",
+          "count": 6,
+          "pmi": 4.359242729106546,
+          "frequency": 4
+        },
+        {
+          "word": "pyramid",
+          "count": 6,
+          "pmi": 4.359242729106546,
+          "frequency": 4
+        },
+        {
+          "word": "campeonato",
+          "count": 3,
+          "pmi": 4.359242729106546,
+          "frequency": 2
+        },
+        {
+          "word": "matsapura",
+          "count": 10,
+          "pmi": 4.288853401215149,
+          "frequency": 7
+        },
+        {
+          "word": "wilfred",
+          "count": 4,
+          "pmi": 4.189317727664234,
+          "frequency": 3
+        },
+        {
+          "word": "ndidi",
+          "count": 8,
+          "pmi": 4.189317727664234,
+          "frequency": 6
+        },
+        {
+          "word": "caglar",
+          "count": 4,
+          "pmi": 4.189317727664234,
+          "frequency": 3
+        },
+        {
+          "word": "luis",
+          "count": 4,
+          "pmi": 4.189317727664234,
+          "frequency": 3
+        },
+        {
+          "word": "devils",
+          "count": 4,
+          "pmi": 4.189317727664234,
+          "frequency": 3
+        },
+        {
+          "word": "dunayivtsi",
+          "count": 4,
+          "pmi": 4.189317727664234,
+          "frequency": 3
+        },
+        {
+          "word": "glimt",
+          "count": 18,
+          "pmi": 4.037314634219184,
+          "frequency": 15
+        },
+        {
+          "word": "soyuncu",
+          "count": 6,
+          "pmi": 4.037314634219184,
+          "frequency": 5
+        },
+        {
+          "word": "leicester",
+          "count": 41,
+          "pmi": 3.8099041381161114,
+          "frequency": 40
+        },
+        {
+          "word": "saman",
+          "count": 4,
+          "pmi": 3.7742802283853902,
+          "frequency": 4
+        },
+        {
+          "word": "curtis",
+          "count": 4,
+          "pmi": 3.7742802283853902,
+          "frequency": 4
+        },
+        {
+          "word": "edwards",
+          "count": 4,
+          "pmi": 3.7742802283853902,
+          "frequency": 4
+        },
+        {
+          "word": "romero",
+          "count": 4,
+          "pmi": 3.7742802283853902,
+          "frequency": 4
+        },
+        {
+          "word": "novais",
+          "count": 4,
+          "pmi": 3.7742802283853902,
+          "frequency": 4
+        }
+      ]
     }
   },
   "52": {
@@ -9772,14 +14551,346 @@
       "target_terms": [
         "Metalist Kharkov"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "apartmens",
+          "count": 13,
+          "pmi": 4.990806105946081,
+          "frequency": 5
+        },
+        {
+          "word": "sochaux",
+          "count": 3,
+          "pmi": 4.197256983413507,
+          "frequency": 2
+        },
+        {
+          "word": "marsh",
+          "count": 3,
+          "pmi": 3.197256983413508,
+          "frequency": 4
+        },
+        {
+          "word": "visitors",
+          "count": 3,
+          "pmi": 1.3899020613559039,
+          "frequency": 14
+        },
+        {
+          "word": "unity",
+          "count": 4,
+          "pmi": 1.364366969248766,
+          "frequency": 19
+        },
+        {
+          "word": "ultras",
+          "count": 5,
+          "pmi": 1.179335075416245,
+          "frequency": 27
+        },
+        {
+          "word": "stadium",
+          "count": 22,
+          "pmi": 0.83332136200457,
+          "frequency": 151
+        },
+        {
+          "word": "dnepr",
+          "count": 3,
+          "pmi": 0.2903663878049893,
+          "frequency": 30
+        },
+        {
+          "word": "fans",
+          "count": 6,
+          "pmi": -0.446599206361217,
+          "frequency": 100
+        },
+        {
+          "word": "kpblm",
+          "count": 4,
+          "pmi": -0.9726680180288045,
+          "frequency": 96
+        },
+        {
+          "word": "euro",
+          "count": 3,
+          "pmi": -1.0506705300300778,
+          "frequency": 76
+        },
+        {
+          "word": "kharkiv",
+          "count": 39,
+          "pmi": -1.105118314052454,
+          "frequency": 1026
+        },
+        {
+          "word": "quot",
+          "count": 10,
+          "pmi": -1.3041821617453648,
+          "frequency": 302
+        },
+        {
+          "word": "stage",
+          "count": 3,
+          "pmi": -1.6356330307512337,
+          "frequency": 114
+        },
+        {
+          "word": "near",
+          "count": 12,
+          "pmi": -1.7005884725920037,
+          "frequency": 477
+        },
+        {
+          "word": "info",
+          "count": 4,
+          "pmi": -2.258070236891053,
+          "frequency": 234
+        },
+        {
+          "word": "shakhtar",
+          "count": 4,
+          "pmi": -2.5221318375285744,
+          "frequency": 281
+        },
+        {
+          "word": "uefa",
+          "count": 4,
+          "pmi": -2.8306490131563766,
+          "frequency": 348
+        },
+        {
+          "word": "dynamo",
+          "count": 6,
+          "pmi": -3.5642942490309717,
+          "frequency": 868
+        },
+        {
+          "word": "league",
+          "count": 5,
+          "pmi": -4.005356636734979,
+          "frequency": 982
+        },
+        {
+          "word": "europe",
+          "count": 3,
+          "pmi": -4.2184847848765825,
+          "frequency": 683
+        },
+        {
+          "word": "https",
+          "count": 8,
+          "pmi": -5.017972642334418,
+          "frequency": 3170
+        },
+        {
+          "word": "amp",
+          "count": 6,
+          "pmi": -5.080611562763333,
+          "frequency": 2483
+        },
+        {
+          "word": "kyiv",
+          "count": 5,
+          "pmi": -5.77486123497063,
+          "frequency": 3348
+        },
+        {
+          "word": "ukraine",
+          "count": 11,
+          "pmi": -6.327551823179318,
+          "frequency": 10804
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 174,
       "target_terms": [
         "Metalist Kharkiv"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "kovalika",
+          "count": 4,
+          "pmi": 6.207582685495362,
+          "frequency": 1
+        },
+        {
+          "word": "chorzow",
+          "count": 6,
+          "pmi": 5.792545186216518,
+          "frequency": 2
+        },
+        {
+          "word": "ilichevets",
+          "count": 3,
+          "pmi": 5.792545186216518,
+          "frequency": 1
+        },
+        {
+          "word": "ruch",
+          "count": 8,
+          "pmi": 5.622620184774206,
+          "frequency": 3
+        },
+        {
+          "word": "whitley",
+          "count": 4,
+          "pmi": 5.207582685495362,
+          "frequency": 2
+        },
+        {
+          "word": "jeunes",
+          "count": 4,
+          "pmi": 5.207582685495362,
+          "frequency": 2
+        },
+        {
+          "word": "kadeem",
+          "count": 3,
+          "pmi": 4.792545186216518,
+          "frequency": 2
+        },
+        {
+          "word": "cityscapes",
+          "count": 3,
+          "pmi": 4.792545186216518,
+          "frequency": 2
+        },
+        {
+          "word": "warszawa",
+          "count": 23,
+          "pmi": 4.643681800302035,
+          "frequency": 17
+        },
+        {
+          "word": "aujourd",
+          "count": 4,
+          "pmi": 4.622620184774206,
+          "frequency": 3
+        },
+        {
+          "word": "hui",
+          "count": 4,
+          "pmi": 4.622620184774206,
+          "frequency": 3
+        },
+        {
+          "word": "disqualified",
+          "count": 4,
+          "pmi": 4.622620184774206,
+          "frequency": 3
+        },
+        {
+          "word": "lokeren",
+          "count": 5,
+          "pmi": 4.529510780382724,
+          "frequency": 4
+        },
+        {
+          "word": "ksc",
+          "count": 3,
+          "pmi": 4.207582685495362,
+          "frequency": 3
+        },
+        {
+          "word": "och",
+          "count": 4,
+          "pmi": 4.207582685495362,
+          "frequency": 4
+        },
+        {
+          "word": "doneck",
+          "count": 3,
+          "pmi": 4.207582685495362,
+          "frequency": 3
+        },
+        {
+          "word": "legia",
+          "count": 25,
+          "pmi": 3.9934578801425147,
+          "frequency": 29
+        },
+        {
+          "word": "nufc",
+          "count": 4,
+          "pmi": 3.8856545906079996,
+          "frequency": 5
+        },
+        {
+          "word": "kolejka",
+          "count": 3,
+          "pmi": 3.7925451862165183,
+          "frequency": 4
+        },
+        {
+          "word": "harris",
+          "count": 3,
+          "pmi": 3.7925451862165183,
+          "frequency": 4
+        },
+        {
+          "word": "attendance",
+          "count": 3,
+          "pmi": 3.7925451862165183,
+          "frequency": 4
+        },
+        {
+          "word": "aktobe",
+          "count": 5,
+          "pmi": 3.72215585832512,
+          "frequency": 7
+        },
+        {
+          "word": "sportkomplex",
+          "count": 6,
+          "pmi": 3.622620184774206,
+          "frequency": 9
+        },
+        {
+          "word": "oblasny",
+          "count": 6,
+          "pmi": 3.4706170913291556,
+          "frequency": 10
+        },
+        {
+          "word": "kolos",
+          "count": 6,
+          "pmi": 3.4706170913291556,
+          "frequency": 10
+        },
+        {
+          "word": "trabzonspor",
+          "count": 9,
+          "pmi": 3.2900448456873352,
+          "frequency": 17
+        },
+        {
+          "word": "vynnyky",
+          "count": 6,
+          "pmi": 3.207582685495362,
+          "frequency": 12
+        },
+        {
+          "word": "rukh",
+          "count": 10,
+          "pmi": 3.070079161745427,
+          "frequency": 22
+        },
+        {
+          "word": "newcastle",
+          "count": 16,
+          "pmi": 2.9221804666331135,
+          "frequency": 39
+        },
+        {
+          "word": "halftime",
+          "count": 3,
+          "pmi": 2.7925451862165183,
+          "frequency": 8
+        }
+      ]
     }
   },
   "53": {
@@ -9788,14 +14899,352 @@
       "target_terms": [
         "Karpaty Lvov"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "jejich",
+          "count": 4,
+          "pmi": 5.539158811108031,
+          "frequency": 1
+        },
+        {
+          "word": "kyjev",
+          "count": 6,
+          "pmi": 4.124121311829188,
+          "frequency": 4
+        },
+        {
+          "word": "ontour",
+          "count": 3,
+          "pmi": 4.124121311829188,
+          "frequency": 2
+        },
+        {
+          "word": "taor",
+          "count": 3,
+          "pmi": 3.5391588111080314,
+          "frequency": 3
+        },
+        {
+          "word": "tavria",
+          "count": 4,
+          "pmi": 2.5391588111080314,
+          "frequency": 8
+        },
+        {
+          "word": "resort",
+          "count": 3,
+          "pmi": 2.316766389771583,
+          "frequency": 7
+        },
+        {
+          "word": "ultras",
+          "count": 7,
+          "pmi": 1.591626231002167,
+          "frequency": 27
+        },
+        {
+          "word": "cafe",
+          "count": 5,
+          "pmi": 1.2761244052742375,
+          "frequency": 24
+        },
+        {
+          "word": "ceremony",
+          "count": 5,
+          "pmi": 1.2761244052742375,
+          "frequency": 24
+        },
+        {
+          "word": "stadion",
+          "count": 4,
+          "pmi": 0.632268215499513,
+          "frequency": 30
+        },
+        {
+          "word": "fans",
+          "count": 4,
+          "pmi": -1.1046973786666936,
+          "frequency": 100
+        },
+        {
+          "word": "lviv",
+          "count": 44,
+          "pmi": -1.2457734053751817,
+          "frequency": 1213
+        },
+        {
+          "word": "football",
+          "count": 7,
+          "pmi": -1.4608411888919688,
+          "frequency": 224
+        },
+        {
+          "word": "arena",
+          "count": 3,
+          "pmi": -1.6440630129477392,
+          "frequency": 109
+        },
+        {
+          "word": "goal",
+          "count": 3,
+          "pmi": -1.8645633749429784,
+          "frequency": 127
+        },
+        {
+          "word": "support",
+          "count": 4,
+          "pmi": -3.015430040569606,
+          "frequency": 376
+        },
+        {
+          "word": "dynamo",
+          "count": 9,
+          "pmi": -3.0524674198941355,
+          "frequency": 868
+        },
+        {
+          "word": "region",
+          "count": 5,
+          "pmi": -4.077022420223845,
+          "frequency": 981
+        },
+        {
+          "word": "match",
+          "count": 3,
+          "pmi": -4.369734137411635,
+          "frequency": 721
+        },
+        {
+          "word": "odessa",
+          "count": 4,
+          "pmi": -4.439551647998326,
+          "frequency": 1009
+        },
+        {
+          "word": "dnipro",
+          "count": 4,
+          "pmi": -4.462249383284777,
+          "frequency": 1025
+        },
+        {
+          "word": "league",
+          "count": 3,
+          "pmi": -4.815457902485505,
+          "frequency": 982
+        },
+        {
+          "word": "kiev",
+          "count": 4,
+          "pmi": -5.637637667039567,
+          "frequency": 2315
+        },
+        {
+          "word": "amp",
+          "count": 3,
+          "pmi": -6.153747234347653,
+          "frequency": 2483
+        },
+        {
+          "word": "ukraine",
+          "count": 12,
+          "pmi": -6.27515661267978,
+          "frequency": 10804
+        },
+        {
+          "word": "ukrainian",
+          "count": 4,
+          "pmi": -6.383053906677417,
+          "frequency": 3881
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 131,
       "target_terms": [
         "Karpaty Lviv"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "nachrichten",
+          "count": 16,
+          "pmi": 6.535236096632756,
+          "frequency": 4
+        },
+        {
+          "word": "himno",
+          "count": 3,
+          "pmi": 6.120198597353912,
+          "frequency": 1
+        },
+        {
+          "word": "marchas",
+          "count": 3,
+          "pmi": 6.120198597353912,
+          "frequency": 1
+        },
+        {
+          "word": "kryla",
+          "count": 5,
+          "pmi": 5.272201690798963,
+          "frequency": 3
+        },
+        {
+          "word": "stepova",
+          "count": 3,
+          "pmi": 5.120198597353912,
+          "frequency": 2
+        },
+        {
+          "word": "disappointment",
+          "count": 3,
+          "pmi": 5.120198597353912,
+          "frequency": 2
+        },
+        {
+          "word": "noyok",
+          "count": 4,
+          "pmi": 4.9502735959116,
+          "frequency": 3
+        },
+        {
+          "word": "banderstadt",
+          "count": 4,
+          "pmi": 4.9502735959116,
+          "frequency": 3
+        },
+        {
+          "word": "geo",
+          "count": 5,
+          "pmi": 4.857164191520119,
+          "frequency": 4
+        },
+        {
+          "word": "shved",
+          "count": 6,
+          "pmi": 4.798270502466551,
+          "frequency": 5
+        },
+        {
+          "word": "maryan",
+          "count": 4,
+          "pmi": 4.535236096632756,
+          "frequency": 4
+        },
+        {
+          "word": "batumi",
+          "count": 4,
+          "pmi": 4.535236096632756,
+          "frequency": 4
+        },
+        {
+          "word": "olimpik",
+          "count": 3,
+          "pmi": 4.120198597353912,
+          "frequency": 4
+        },
+        {
+          "word": "epicenter",
+          "count": 11,
+          "pmi": 3.9072048740197145,
+          "frequency": 17
+        },
+        {
+          "word": "rukh",
+          "count": 11,
+          "pmi": 3.5352360966327567,
+          "frequency": 22
+        },
+        {
+          "word": "shirts",
+          "count": 3,
+          "pmi": 3.5352360966327567,
+          "frequency": 6
+        },
+        {
+          "word": "winger",
+          "count": 4,
+          "pmi": 3.5352360966327563,
+          "frequency": 8
+        },
+        {
+          "word": "derby",
+          "count": 4,
+          "pmi": 3.5352360966327563,
+          "frequency": 8
+        },
+        {
+          "word": "oleksandriya",
+          "count": 6,
+          "pmi": 3.4197588792128206,
+          "frequency": 13
+        },
+        {
+          "word": "oleksiy",
+          "count": 4,
+          "pmi": 2.9502735959116007,
+          "frequency": 12
+        },
+        {
+          "word": "ultras",
+          "count": 9,
+          "pmi": 2.9502735959116,
+          "frequency": 27
+        },
+        {
+          "word": "chicago",
+          "count": 5,
+          "pmi": 2.8571641915201185,
+          "frequency": 16
+        },
+        {
+          "word": "emblem",
+          "count": 3,
+          "pmi": 2.4197588792128206,
+          "frequency": 13
+        },
+        {
+          "word": "mixed",
+          "count": 4,
+          "pmi": 2.365311095190444,
+          "frequency": 18
+        },
+        {
+          "word": "goals",
+          "count": 19,
+          "pmi": 2.3074301791099447,
+          "frequency": 89
+        },
+        {
+          "word": "goalkeeper",
+          "count": 4,
+          "pmi": 2.287308583189171,
+          "frequency": 19
+        },
+        {
+          "word": "cafe",
+          "count": 5,
+          "pmi": 2.272201690798963,
+          "frequency": 24
+        },
+        {
+          "word": "yarmolenko",
+          "count": 10,
+          "pmi": 2.2424543474049106,
+          "frequency": 49
+        },
+        {
+          "word": "celtic",
+          "count": 4,
+          "pmi": 2.2133080017453945,
+          "frequency": 20
+        },
+        {
+          "word": "leicester",
+          "count": 8,
+          "pmi": 2.2133080017453945,
+          "frequency": 40
+        }
+      ]
     }
   },
   "54": {
@@ -9804,14 +15253,376 @@
       "target_terms": [
         "Babi Yar"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "unearthing",
+          "count": 6,
+          "pmi": 4.94954994553051,
+          "frequency": 3
+        },
+        {
+          "word": "bushnell",
+          "count": 4,
+          "pmi": 4.94954994553051,
+          "frequency": 2
+        },
+        {
+          "word": "denver",
+          "count": 8,
+          "pmi": 4.6276218506431475,
+          "frequency": 5
+        },
+        {
+          "word": "antenna",
+          "count": 4,
+          "pmi": 4.364587444809354,
+          "frequency": 3
+        },
+        {
+          "word": "ravine",
+          "count": 24,
+          "pmi": 4.142195023472906,
+          "frequency": 21
+        },
+        {
+          "word": "wadi",
+          "count": 4,
+          "pmi": 3.94954994553051,
+          "frequency": 4
+        },
+        {
+          "word": "vigil",
+          "count": 3,
+          "pmi": 3.94954994553051,
+          "frequency": 3
+        },
+        {
+          "word": "backs",
+          "count": 6,
+          "pmi": 3.727157524194062,
+          "frequency": 7
+        },
+        {
+          "word": "symphony",
+          "count": 11,
+          "pmi": 3.708541846026715,
+          "frequency": 13
+        },
+        {
+          "word": "shostakovich",
+          "count": 10,
+          "pmi": 3.6865155396967166,
+          "frequency": 12
+        },
+        {
+          "word": "horrific",
+          "count": 4,
+          "pmi": 3.627621850643148,
+          "frequency": 5
+        },
+        {
+          "word": "arabic",
+          "count": 4,
+          "pmi": 3.3645874448093545,
+          "frequency": 6
+        },
+        {
+          "word": "aaron",
+          "count": 4,
+          "pmi": 3.3645874448093545,
+          "frequency": 6
+        },
+        {
+          "word": "gaza",
+          "count": 5,
+          "pmi": 3.2714780404178727,
+          "frequency": 8
+        },
+        {
+          "word": "massacre",
+          "count": 66,
+          "pmi": 3.135963069761391,
+          "frequency": 116
+        },
+        {
+          "word": "humanity",
+          "count": 8,
+          "pmi": 2.94954994553051,
+          "frequency": 16
+        },
+        {
+          "word": "collaborators",
+          "count": 5,
+          "pmi": 2.94954994553051,
+          "frequency": 10
+        },
+        {
+          "word": "memorial",
+          "count": 44,
+          "pmi": 2.8854196081107943,
+          "frequency": 92
+        },
+        {
+          "word": "rape",
+          "count": 4,
+          "pmi": 2.779624944088198,
+          "frequency": 9
+        },
+        {
+          "word": "marks",
+          "count": 10,
+          "pmi": 2.6865155396967166,
+          "frequency": 24
+        },
+        {
+          "word": "shadow",
+          "count": 4,
+          "pmi": 2.4901183268932128,
+          "frequency": 11
+        },
+        {
+          "word": "survivor",
+          "count": 5,
+          "pmi": 2.3645874448093545,
+          "frequency": 15
+        },
+        {
+          "word": "baby",
+          "count": 7,
+          "pmi": 2.364587444809354,
+          "frequency": 21
+        },
+        {
+          "word": "damages",
+          "count": 4,
+          "pmi": 2.249110227389418,
+          "frequency": 13
+        },
+        {
+          "word": "damaging",
+          "count": 6,
+          "pmi": 2.212584351364304,
+          "frequency": 20
+        },
+        {
+          "word": "murdered",
+          "count": 14,
+          "pmi": 2.171942366866958,
+          "frequency": 48
+        },
+        {
+          "word": "holocaust",
+          "count": 31,
+          "pmi": 2.0963913338597813,
+          "frequency": 112
+        },
+        {
+          "word": "executions",
+          "count": 3,
+          "pmi": 1.9495499455305103,
+          "frequency": 12
+        },
+        {
+          "word": "taught",
+          "count": 4,
+          "pmi": 1.94954994553051,
+          "frequency": 16
+        },
+        {
+          "word": "israel",
+          "count": 6,
+          "pmi": 1.834072728110574,
+          "frequency": 26
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 138,
       "target_terms": [
         "Babyn Yar"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "drobytsky",
+          "count": 3,
+          "pmi": 5.320800548881636,
+          "frequency": 1
+        },
+        {
+          "word": "unflinching",
+          "count": 4,
+          "pmi": 4.73583804816048,
+          "frequency": 2
+        },
+        {
+          "word": "byhmc",
+          "count": 4,
+          "pmi": 4.73583804816048,
+          "frequency": 2
+        },
+        {
+          "word": "memorials",
+          "count": 6,
+          "pmi": 4.320800548881636,
+          "frequency": 4
+        },
+        {
+          "word": "commemorate",
+          "count": 12,
+          "pmi": 3.8613689302443395,
+          "frequency": 11
+        },
+        {
+          "word": "commemorates",
+          "count": 13,
+          "pmi": 3.7358380481604807,
+          "frequency": 13
+        },
+        {
+          "word": "tragedy",
+          "count": 23,
+          "pmi": 3.3052036938306184,
+          "frequency": 31
+        },
+        {
+          "word": "holocaust",
+          "count": 83,
+          "pmi": 3.3035225574498015,
+          "frequency": 112
+        },
+        {
+          "word": "memorial",
+          "count": 68,
+          "pmi": 3.299738933353807,
+          "frequency": 92
+        },
+        {
+          "word": "synagogue",
+          "count": 14,
+          "pmi": 3.2952654567744992,
+          "frequency": 19
+        },
+        {
+          "word": "ravine",
+          "count": 14,
+          "pmi": 3.150875547439324,
+          "frequency": 21
+        },
+        {
+          "word": "graveyard",
+          "count": 4,
+          "pmi": 3.150875547439324,
+          "frequency": 6
+        },
+        {
+          "word": "massacre",
+          "count": 75,
+          "pmi": 3.1066757435287893,
+          "frequency": 116
+        },
+        {
+          "word": "remembering",
+          "count": 6,
+          "pmi": 2.9988724539942746,
+          "frequency": 10
+        },
+        {
+          "word": "bombarded",
+          "count": 3,
+          "pmi": 2.9988724539942746,
+          "frequency": 5
+        },
+        {
+          "word": "pogrom",
+          "count": 4,
+          "pmi": 2.7358380481604807,
+          "frequency": 8
+        },
+        {
+          "word": "bombing",
+          "count": 28,
+          "pmi": 2.6605499208562438,
+          "frequency": 59
+        },
+        {
+          "word": "condemn",
+          "count": 4,
+          "pmi": 2.565913046718168,
+          "frequency": 9
+        },
+        {
+          "word": "executed",
+          "count": 6,
+          "pmi": 2.513445626824033,
+          "frequency": 14
+        },
+        {
+          "word": "survivors",
+          "count": 12,
+          "pmi": 2.3666042384947614,
+          "frequency": 31
+        },
+        {
+          "word": "anger",
+          "count": 6,
+          "pmi": 2.2333377076312972,
+          "frequency": 17
+        },
+        {
+          "word": "damage",
+          "count": 10,
+          "pmi": 2.057766143047843,
+          "frequency": 32
+        },
+        {
+          "word": "massacres",
+          "count": 6,
+          "pmi": 1.9988724539942746,
+          "frequency": 20
+        },
+        {
+          "word": "anniversary",
+          "count": 24,
+          "pmi": 1.9809505459970123,
+          "frequency": 81
+        },
+        {
+          "word": "prayer",
+          "count": 4,
+          "pmi": 1.9284831261028768,
+          "frequency": 14
+        },
+        {
+          "word": "jerusalem",
+          "count": 3,
+          "pmi": 1.8613689302443395,
+          "frequency": 11
+        },
+        {
+          "word": "victims",
+          "count": 23,
+          "pmi": 1.7048111525398562,
+          "frequency": 94
+        },
+        {
+          "word": "buried",
+          "count": 4,
+          "pmi": 1.4879105347168953,
+          "frequency": 19
+        },
+        {
+          "word": "jews",
+          "count": 21,
+          "pmi": 1.400235016376042,
+          "frequency": 106
+        },
+        {
+          "word": "identified",
+          "count": 4,
+          "pmi": 1.3435206253817202,
+          "frequency": 21
+        }
+      ]
     }
   },
   "55": {
@@ -9820,14 +15631,376 @@
       "target_terms": [
         "Potemkin Stairs Odessa"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "rocky",
+          "count": 4,
+          "pmi": 3.8839029350771286,
+          "frequency": 1
+        },
+        {
+          "word": "prewar",
+          "count": 8,
+          "pmi": 3.8839029350771286,
+          "frequency": 2
+        },
+        {
+          "word": "kicks",
+          "count": 3,
+          "pmi": 3.4688654357982847,
+          "frequency": 1
+        },
+        {
+          "word": "deribasovskaya",
+          "count": 3,
+          "pmi": 3.4688654357982847,
+          "frequency": 1
+        },
+        {
+          "word": "stairway",
+          "count": 5,
+          "pmi": 2.6208685292433347,
+          "frequency": 3
+        },
+        {
+          "word": "chainsaw",
+          "count": 3,
+          "pmi": 2.4688654357982847,
+          "frequency": 2
+        },
+        {
+          "word": "funicular",
+          "count": 8,
+          "pmi": 2.0765480130195244,
+          "frequency": 7
+        },
+        {
+          "word": "steps",
+          "count": 33,
+          "pmi": 1.4688654357982847,
+          "frequency": 44
+        },
+        {
+          "word": "eisenstein",
+          "count": 3,
+          "pmi": 1.1469373409109227,
+          "frequency": 5
+        },
+        {
+          "word": "philadelphia",
+          "count": 4,
+          "pmi": 1.0765480130195244,
+          "frequency": 7
+        },
+        {
+          "word": "battleship",
+          "count": 6,
+          "pmi": 0.46886543579828466,
+          "frequency": 16
+        },
+        {
+          "word": "wonder",
+          "count": 4,
+          "pmi": 0.18346321693603654,
+          "frequency": 13
+        },
+        {
+          "word": "monuments",
+          "count": 5,
+          "pmi": -0.11609706492287135,
+          "frequency": 20
+        },
+        {
+          "word": "giant",
+          "count": 4,
+          "pmi": -0.43802515981023354,
+          "frequency": 20
+        },
+        {
+          "word": "sergei",
+          "count": 3,
+          "pmi": -0.8530626590890773,
+          "frequency": 20
+        },
+        {
+          "word": "aka",
+          "count": 3,
+          "pmi": -0.9234519869804754,
+          "frequency": 21
+        },
+        {
+          "word": "legendary",
+          "count": 4,
+          "pmi": -0.9740780600504435,
+          "frequency": 29
+        },
+        {
+          "word": "feb",
+          "count": 3,
+          "pmi": -1.2860220663651838,
+          "frequency": 27
+        },
+        {
+          "word": "ride",
+          "count": 3,
+          "pmi": -1.5755286835601687,
+          "frequency": 33
+        },
+        {
+          "word": "famous",
+          "count": 9,
+          "pmi": -1.6876390498817058,
+          "frequency": 107
+        },
+        {
+          "word": "youtu",
+          "count": 4,
+          "pmi": -1.7010595656440277,
+          "frequency": 48
+        },
+        {
+          "word": "surrounding",
+          "count": 3,
+          "pmi": -1.740587929830665,
+          "frequency": 37
+        },
+        {
+          "word": "street",
+          "count": 6,
+          "pmi": -3.138464877951326,
+          "frequency": 195
+        },
+        {
+          "word": "around",
+          "count": 10,
+          "pmi": -3.5423618196249693,
+          "frequency": 430
+        },
+        {
+          "word": "major",
+          "count": 3,
+          "pmi": -3.9987401142847125,
+          "frequency": 177
+        },
+        {
+          "word": "known",
+          "count": 3,
+          "pmi": -4.006867995168113,
+          "frequency": 178
+        },
+        {
+          "word": "beautiful",
+          "count": 3,
+          "pmi": -4.18934604695351,
+          "frequency": 202
+        },
+        {
+          "word": "walking",
+          "count": 3,
+          "pmi": -4.312494277726375,
+          "frequency": 220
+        },
+        {
+          "word": "travel",
+          "count": 10,
+          "pmi": -4.40149928378512,
+          "frequency": 780
+        },
+        {
+          "word": "top",
+          "count": 3,
+          "pmi": -4.80259759210609,
+          "frequency": 309
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 45,
       "target_terms": [
         "Potemkin Stairs Odesa"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "superia",
+          "count": 3,
+          "pmi": 4.523561956057013,
+          "frequency": 1
+        },
+        {
+          "word": "morsky",
+          "count": 3,
+          "pmi": 4.523561956057013,
+          "frequency": 1
+        },
+        {
+          "word": "derybasivska",
+          "count": 3,
+          "pmi": 4.523561956057013,
+          "frequency": 1
+        },
+        {
+          "word": "vorontsov",
+          "count": 5,
+          "pmi": 4.260527550223219,
+          "frequency": 2
+        },
+        {
+          "word": "stairway",
+          "count": 5,
+          "pmi": 3.675565049502063,
+          "frequency": 3
+        },
+        {
+          "word": "nikkor",
+          "count": 3,
+          "pmi": 3.523561956057013,
+          "frequency": 2
+        },
+        {
+          "word": "stair",
+          "count": 3,
+          "pmi": 3.523561956057013,
+          "frequency": 2
+        },
+        {
+          "word": "richelieu",
+          "count": 4,
+          "pmi": 3.3536369546147005,
+          "frequency": 3
+        },
+        {
+          "word": "battleship",
+          "count": 17,
+          "pmi": 3.026062296586196,
+          "frequency": 16
+        },
+        {
+          "word": "climbing",
+          "count": 5,
+          "pmi": 2.675565049502063,
+          "frequency": 6
+        },
+        {
+          "word": "nikon",
+          "count": 3,
+          "pmi": 2.2016338611696504,
+          "frequency": 5
+        },
+        {
+          "word": "formal",
+          "count": 3,
+          "pmi": 1.9385994553358568,
+          "frequency": 6
+        },
+        {
+          "word": "overlooking",
+          "count": 3,
+          "pmi": 1.7162070339994089,
+          "frequency": 7
+        },
+        {
+          "word": "entrance",
+          "count": 3,
+          "pmi": 1.3536369546147005,
+          "frequency": 9
+        },
+        {
+          "word": "bonus",
+          "count": 3,
+          "pmi": 1.3536369546147005,
+          "frequency": 9
+        },
+        {
+          "word": "steps",
+          "count": 14,
+          "pmi": 1.2865227587561636,
+          "frequency": 44
+        },
+        {
+          "word": "singing",
+          "count": 3,
+          "pmi": 0.9385994553358568,
+          "frequency": 12
+        },
+        {
+          "word": "giant",
+          "count": 4,
+          "pmi": 0.6166713604484945,
+          "frequency": 20
+        },
+        {
+          "word": "greek",
+          "count": 5,
+          "pmi": 0.2605275502232191,
+          "frequency": 32
+        },
+        {
+          "word": "opera",
+          "count": 6,
+          "pmi": 0.2016338611696504,
+          "frequency": 40
+        },
+        {
+          "word": "calm",
+          "count": 3,
+          "pmi": 0.13124453327825242,
+          "frequency": 21
+        },
+        {
+          "word": "palace",
+          "count": 5,
+          "pmi": -0.024874668639029214,
+          "frequency": 39
+        },
+        {
+          "word": "feb",
+          "count": 3,
+          "pmi": -0.23132554610645548,
+          "frequency": 27
+        },
+        {
+          "word": "copy",
+          "count": 3,
+          "pmi": -0.2837929660005911,
+          "frequency": 28
+        },
+        {
+          "word": "port",
+          "count": 9,
+          "pmi": -0.4150374992788438,
+          "frequency": 92
+        },
+        {
+          "word": "famous",
+          "count": 9,
+          "pmi": -0.6329425296229777,
+          "frequency": 107
+        },
+        {
+          "word": "odessa",
+          "count": 69,
+          "pmi": -0.9315865469923318,
+          "frequency": 1009
+        },
+        {
+          "word": "walk",
+          "count": 9,
+          "pmi": -1.5353317329965555,
+          "frequency": 200
+        },
+        {
+          "word": "film",
+          "count": 3,
+          "pmi": -1.8162880468276117,
+          "frequency": 81
+        },
+        {
+          "word": "tour",
+          "count": 10,
+          "pmi": -2.227312483599832,
+          "frequency": 359
+        }
+      ]
     }
   },
   "56": {
@@ -9836,14 +16009,376 @@
       "target_terms": [
         "Motherland Monument Kiev"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "heimat",
+          "count": 3,
+          "pmi": 4.405992359675837,
+          "frequency": 1
+        },
+        {
+          "word": "tremendous",
+          "count": 3,
+          "pmi": 4.405992359675837,
+          "frequency": 1
+        },
+        {
+          "word": "oikotimes",
+          "count": 4,
+          "pmi": 3.8210298589546805,
+          "frequency": 2
+        },
+        {
+          "word": "mutter",
+          "count": 4,
+          "pmi": 3.8210298589546805,
+          "frequency": 2
+        },
+        {
+          "word": "stainless",
+          "count": 4,
+          "pmi": 3.8210298589546805,
+          "frequency": 2
+        },
+        {
+          "word": "climb",
+          "count": 4,
+          "pmi": 3.8210298589546805,
+          "frequency": 2
+        },
+        {
+          "word": "voyacure",
+          "count": 4,
+          "pmi": 3.8210298589546805,
+          "frequency": 2
+        },
+        {
+          "word": "efrem",
+          "count": 3,
+          "pmi": 3.405992359675837,
+          "frequency": 2
+        },
+        {
+          "word": "gopro",
+          "count": 10,
+          "pmi": 3.142957953842043,
+          "frequency": 8
+        },
+        {
+          "word": "rodina",
+          "count": 4,
+          "pmi": 2.8210298589546805,
+          "frequency": 4
+        },
+        {
+          "word": "monumental",
+          "count": 7,
+          "pmi": 2.6283847810122847,
+          "frequency": 8
+        },
+        {
+          "word": "soaring",
+          "count": 3,
+          "pmi": 2.405992359675837,
+          "frequency": 4
+        },
+        {
+          "word": "statue",
+          "count": 31,
+          "pmi": 1.9423361551768141,
+          "frequency": 57
+        },
+        {
+          "word": "emblem",
+          "count": 7,
+          "pmi": 1.9279450628711925,
+          "frequency": 13
+        },
+        {
+          "word": "mat",
+          "count": 5,
+          "pmi": 1.8210298589546807,
+          "frequency": 10
+        },
+        {
+          "word": "towering",
+          "count": 3,
+          "pmi": 1.8210298589546805,
+          "frequency": 6
+        },
+        {
+          "word": "sickle",
+          "count": 6,
+          "pmi": 1.7055526415347448,
+          "frequency": 13
+        },
+        {
+          "word": "romanized",
+          "count": 4,
+          "pmi": 1.6511048575123684,
+          "frequency": 9
+        },
+        {
+          "word": "tall",
+          "count": 3,
+          "pmi": 1.5986374376182328,
+          "frequency": 7
+        },
+        {
+          "word": "tallest",
+          "count": 3,
+          "pmi": 1.405992359675837,
+          "frequency": 8
+        },
+        {
+          "word": "symbol",
+          "count": 8,
+          "pmi": 0.9630488638271085,
+          "frequency": 29
+        },
+        {
+          "word": "steel",
+          "count": 5,
+          "pmi": 0.8950304403984577,
+          "frequency": 19
+        },
+        {
+          "word": "ssr",
+          "count": 6,
+          "pmi": 0.8210298589546806,
+          "frequency": 24
+        },
+        {
+          "word": "liberty",
+          "count": 3,
+          "pmi": 0.3185295184254974,
+          "frequency": 17
+        },
+        {
+          "word": "highest",
+          "count": 4,
+          "pmi": 0.177173669179956,
+          "frequency": 25
+        },
+        {
+          "word": "giant",
+          "count": 3,
+          "pmi": 0.08406426478847455,
+          "frequency": 20
+        },
+        {
+          "word": "standing",
+          "count": 4,
+          "pmi": 0.01367493689707681,
+          "frequency": 28
+        },
+        {
+          "word": "mother",
+          "count": 12,
+          "pmi": -0.45198863545173523,
+          "frequency": 116
+        },
+        {
+          "word": "arrival",
+          "count": 3,
+          "pmi": -0.5008982359326817,
+          "frequency": 30
+        },
+        {
+          "word": "facts",
+          "count": 7,
+          "pmi": -0.6570174378499637,
+          "frequency": 78
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 23,
       "target_terms": [
         "Motherland Monument Kyiv"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "stunt",
+          "count": 3,
+          "pmi": 2.526930379349741,
+          "frequency": 3
+        },
+        {
+          "word": "rodina",
+          "count": 3,
+          "pmi": 2.111892880070897,
+          "frequency": 4
+        },
+        {
+          "word": "rid",
+          "count": 6,
+          "pmi": 1.9419678786285846,
+          "frequency": 9
+        },
+        {
+          "word": "trident",
+          "count": 6,
+          "pmi": 1.9419678786285846,
+          "frequency": 9
+        },
+        {
+          "word": "removes",
+          "count": 5,
+          "pmi": 1.8488584742371033,
+          "frequency": 8
+        },
+        {
+          "word": "symbols",
+          "count": 9,
+          "pmi": 1.7899647851835347,
+          "frequency": 15
+        },
+        {
+          "word": "emblem",
+          "count": 7,
+          "pmi": 1.633845583266253,
+          "frequency": 13
+        },
+        {
+          "word": "depicting",
+          "count": 3,
+          "pmi": 1.526930379349741,
+          "frequency": 6
+        },
+        {
+          "word": "tallest",
+          "count": 3,
+          "pmi": 1.1118928800708971,
+          "frequency": 8
+        },
+        {
+          "word": "replace",
+          "count": 5,
+          "pmi": 1.0415035521794995,
+          "frequency": 14
+        },
+        {
+          "word": "symbol",
+          "count": 9,
+          "pmi": 0.8388743856644814,
+          "frequency": 29
+        },
+        {
+          "word": "mat",
+          "count": 3,
+          "pmi": 0.7899647851835349,
+          "frequency": 10
+        },
+        {
+          "word": "sickle",
+          "count": 3,
+          "pmi": 0.41145316192980497,
+          "frequency": 13
+        },
+        {
+          "word": "replaced",
+          "count": 3,
+          "pmi": 0.3045379580132931,
+          "frequency": 14
+        },
+        {
+          "word": "strength",
+          "count": 3,
+          "pmi": 0.11189288007089712,
+          "frequency": 16
+        },
+        {
+          "word": "raised",
+          "count": 5,
+          "pmi": 0.04150355217949947,
+          "frequency": 28
+        },
+        {
+          "word": "quick",
+          "count": 5,
+          "pmi": -0.28042454270786293,
+          "frequency": 35
+        },
+        {
+          "word": "iconic",
+          "count": 6,
+          "pmi": -0.4116690759861157,
+          "frequency": 46
+        },
+        {
+          "word": "epic",
+          "count": 3,
+          "pmi": -0.4730696206502589,
+          "frequency": 24
+        },
+        {
+          "word": "gets",
+          "count": 4,
+          "pmi": -0.5174637400087124,
+          "frequency": 33
+        },
+        {
+          "word": "era",
+          "count": 5,
+          "pmi": -0.7361040264840529,
+          "frequency": 48
+        },
+        {
+          "word": "workers",
+          "count": 5,
+          "pmi": -0.7361040264840529,
+          "frequency": 48
+        },
+        {
+          "word": "hammer",
+          "count": 4,
+          "pmi": -0.8306216252683427,
+          "frequency": 41
+        },
+        {
+          "word": "worldnews",
+          "count": 3,
+          "pmi": -0.8423034303159779,
+          "frequency": 31
+        },
+        {
+          "word": "removed",
+          "count": 3,
+          "pmi": -0.8423034303159779,
+          "frequency": 31
+        },
+        {
+          "word": "soviet",
+          "count": 35,
+          "pmi": -1.121863733240651,
+          "frequency": 439
+        },
+        {
+          "word": "mother",
+          "count": 8,
+          "pmi": -1.331050615777831,
+          "frequency": 116
+        },
+        {
+          "word": "light",
+          "count": 3,
+          "pmi": -1.5319633097038277,
+          "frequency": 50
+        },
+        {
+          "word": "statue",
+          "count": 3,
+          "pmi": -1.7209971340938446,
+          "frequency": 57
+        },
+        {
+          "word": "created",
+          "count": 3,
+          "pmi": -1.818844457491989,
+          "frequency": 61
+        }
+      ]
     }
   },
   "57": {
@@ -9852,14 +16387,226 @@
       "target_terms": [
         "Lvov Polytechnic"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "university",
+          "count": 14,
+          "pmi": -0.866085534323388,
+          "frequency": 622
+        },
+        {
+          "word": "national",
+          "count": 12,
+          "pmi": -1.100028818331272,
+          "frequency": 627
+        },
+        {
+          "word": "lviv",
+          "count": 18,
+          "pmi": -1.4671085199285872,
+          "frequency": 1213
+        },
+        {
+          "word": "quot",
+          "count": 4,
+          "pmi": -1.6310744255754681,
+          "frequency": 302
+        },
+        {
+          "word": "ukraine",
+          "count": 3,
+          "pmi": -7.2069851100382,
+          "frequency": 10804
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 61,
       "target_terms": [
         "Lviv Polytechnic"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "kolesy",
+          "count": 3,
+          "pmi": 5.553857817944798,
+          "frequency": 1
+        },
+        {
+          "word": "innovators",
+          "count": 3,
+          "pmi": 5.553857817944798,
+          "frequency": 1
+        },
+        {
+          "word": "tverdokhlib",
+          "count": 3,
+          "pmi": 5.553857817944798,
+          "frequency": 1
+        },
+        {
+          "word": "polyclinic",
+          "count": 4,
+          "pmi": 4.968895317223642,
+          "frequency": 2
+        },
+        {
+          "word": "mont",
+          "count": 3,
+          "pmi": 4.553857817944798,
+          "frequency": 2
+        },
+        {
+          "word": "blanc",
+          "count": 3,
+          "pmi": 4.553857817944798,
+          "frequency": 2
+        },
+        {
+          "word": "stepana",
+          "count": 3,
+          "pmi": 4.553857817944798,
+          "frequency": 2
+        },
+        {
+          "word": "franko",
+          "count": 16,
+          "pmi": 4.26845559908255,
+          "frequency": 13
+        },
+        {
+          "word": "bandery",
+          "count": 3,
+          "pmi": 3.9688953172236423,
+          "frequency": 3
+        },
+        {
+          "word": "snake",
+          "count": 4,
+          "pmi": 3.383932816502486,
+          "frequency": 6
+        },
+        {
+          "word": "ngo",
+          "count": 4,
+          "pmi": 2.509463698586345,
+          "frequency": 11
+        },
+        {
+          "word": "scientific",
+          "count": 4,
+          "pmi": 2.0620047216151236,
+          "frequency": 15
+        },
+        {
+          "word": "ivan",
+          "count": 20,
+          "pmi": 2.005421193248756,
+          "frequency": 78
+        },
+        {
+          "word": "producing",
+          "count": 3,
+          "pmi": 1.7465028958871944,
+          "frequency": 14
+        },
+        {
+          "word": "afternoon",
+          "count": 3,
+          "pmi": 1.6469672223362801,
+          "frequency": 15
+        },
+        {
+          "word": "university",
+          "count": 100,
+          "pmi": 1.3319807368677645,
+          "frequency": 622
+        },
+        {
+          "word": "rally",
+          "count": 4,
+          "pmi": 1.2684555990825503,
+          "frequency": 26
+        },
+        {
+          "word": "helps",
+          "count": 3,
+          "pmi": 1.0944261993075013,
+          "frequency": 22
+        },
+        {
+          "word": "national",
+          "count": 82,
+          "pmi": 1.0341256890396873,
+          "frequency": 627
+        },
+        {
+          "word": "students",
+          "count": 7,
+          "pmi": 0.3668593031435449,
+          "frequency": 85
+        },
+        {
+          "word": "research",
+          "count": 6,
+          "pmi": 0.3444044523158488,
+          "frequency": 74
+        },
+        {
+          "word": "hold",
+          "count": 4,
+          "pmi": 0.03815797966075588,
+          "frequency": 61
+        },
+        {
+          "word": "enter",
+          "count": 3,
+          "pmi": -0.00073103373283894,
+          "frequency": 47
+        },
+        {
+          "word": "tomorrow",
+          "count": 3,
+          "pmi": -0.17406263661840066,
+          "frequency": 53
+        },
+        {
+          "word": "project",
+          "count": 4,
+          "pmi": -0.44049561891405925,
+          "frequency": 85
+        },
+        {
+          "word": "important",
+          "count": 3,
+          "pmi": -1.1465819001962936,
+          "frequency": 104
+        },
+        {
+          "word": "tour",
+          "count": 6,
+          "pmi": -1.9339822158782527,
+          "frequency": 359
+        },
+        {
+          "word": "walking",
+          "count": 3,
+          "pmi": -2.227501895579861,
+          "frequency": 220
+        },
+        {
+          "word": "video",
+          "count": 5,
+          "pmi": -3.538899322975054,
+          "frequency": 910
+        },
+        {
+          "word": "europe",
+          "count": 3,
+          "pmi": -3.861883950345292,
+          "frequency": 683
+        }
+      ]
     }
   },
   "58": {
@@ -9868,14 +16615,376 @@
       "target_terms": [
         "Odessa National University"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "overseas",
+          "count": 6,
+          "pmi": 4.673863005310087,
+          "frequency": 1
+        },
+        {
+          "word": "assisi",
+          "count": 5,
+          "pmi": 4.410828599476293,
+          "frequency": 1
+        },
+        {
+          "word": "counsellor",
+          "count": 4,
+          "pmi": 4.08890050458893,
+          "frequency": 1
+        },
+        {
+          "word": "interiors",
+          "count": 4,
+          "pmi": 4.08890050458893,
+          "frequency": 1
+        },
+        {
+          "word": "universtiy",
+          "count": 6,
+          "pmi": 3.673863005310087,
+          "frequency": 2
+        },
+        {
+          "word": "onpu",
+          "count": 3,
+          "pmi": 3.673863005310087,
+          "frequency": 1
+        },
+        {
+          "word": "brochure",
+          "count": 3,
+          "pmi": 3.673863005310087,
+          "frequency": 1
+        },
+        {
+          "word": "unmatched",
+          "count": 3,
+          "pmi": 2.673863005310087,
+          "frequency": 2
+        },
+        {
+          "word": "parent",
+          "count": 3,
+          "pmi": 2.0889005045889304,
+          "frequency": 3
+        },
+        {
+          "word": "mechnikov",
+          "count": 9,
+          "pmi": 1.7993938873939457,
+          "frequency": 11
+        },
+        {
+          "word": "onmedu",
+          "count": 3,
+          "pmi": 1.673863005310087,
+          "frequency": 4
+        },
+        {
+          "word": "library",
+          "count": 6,
+          "pmi": 1.5039380038677745,
+          "frequency": 9
+        },
+        {
+          "word": "odnmu",
+          "count": 4,
+          "pmi": 1.5039380038677745,
+          "frequency": 6
+        },
+        {
+          "word": "medical",
+          "count": 177,
+          "pmi": 1.3915991279962403,
+          "frequency": 287
+        },
+        {
+          "word": "namely",
+          "count": 3,
+          "pmi": 1.3519349104227243,
+          "frequency": 5
+        },
+        {
+          "word": "onmu",
+          "count": 4,
+          "pmi": 1.0889005045889308,
+          "frequency": 8
+        },
+        {
+          "word": "abroad",
+          "count": 21,
+          "pmi": 1.0217863087303938,
+          "frequency": 44
+        },
+        {
+          "word": "maritime",
+          "count": 4,
+          "pmi": 0.9189755031466184,
+          "frequency": 9
+        },
+        {
+          "word": "simulation",
+          "count": 3,
+          "pmi": 0.8665080832524826,
+          "frequency": 7
+        },
+        {
+          "word": "reviews",
+          "count": 6,
+          "pmi": 0.673863005310087,
+          "frequency": 16
+        },
+        {
+          "word": "classes",
+          "count": 3,
+          "pmi": 0.5039380038677744,
+          "frequency": 9
+        },
+        {
+          "word": "presentation",
+          "count": 6,
+          "pmi": 0.5039380038677744,
+          "frequency": 18
+        },
+        {
+          "word": "mbbs",
+          "count": 27,
+          "pmi": 0.36805457578600137,
+          "frequency": 89
+        },
+        {
+          "word": "faculty",
+          "count": 4,
+          "pmi": 0.2815455825313264,
+          "frequency": 14
+        },
+        {
+          "word": "education",
+          "count": 19,
+          "pmi": 0.20754500108754959,
+          "frequency": 70
+        },
+        {
+          "word": "institution",
+          "count": 4,
+          "pmi": 0.0889005045889308,
+          "frequency": 16
+        },
+        {
+          "word": "royal",
+          "count": 3,
+          "pmi": 0.0889005045889305,
+          "frequency": 12
+        },
+        {
+          "word": "ranked",
+          "count": 3,
+          "pmi": -0.02657671283100514,
+          "frequency": 13
+        },
+        {
+          "word": "producing",
+          "count": 3,
+          "pmi": -0.13349191674751743,
+          "frequency": 14
+        },
+        {
+          "word": "students",
+          "count": 17,
+          "pmi": -0.2330275902984316,
+          "frequency": 85
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 44,
       "target_terms": [
         "Odesa National University"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "adapted",
+          "count": 3,
+          "pmi": 4.087462841250339,
+          "frequency": 1
+        },
+        {
+          "word": "humanities",
+          "count": 3,
+          "pmi": 4.087462841250339,
+          "frequency": 1
+        },
+        {
+          "word": "uvarova",
+          "count": 3,
+          "pmi": 4.087462841250339,
+          "frequency": 1
+        },
+        {
+          "word": "mechnikov",
+          "count": 25,
+          "pmi": 3.6869249116666105,
+          "frequency": 11
+        },
+        {
+          "word": "odnmu",
+          "count": 13,
+          "pmi": 3.6179775579491187,
+          "frequency": 6
+        },
+        {
+          "word": "onmedu",
+          "count": 6,
+          "pmi": 3.0874628412503395,
+          "frequency": 4
+        },
+        {
+          "word": "promotes",
+          "count": 3,
+          "pmi": 3.0874628412503395,
+          "frequency": 2
+        },
+        {
+          "word": "onmu",
+          "count": 11,
+          "pmi": 2.9619319591664803,
+          "frequency": 8
+        },
+        {
+          "word": "bogomolets",
+          "count": 5,
+          "pmi": 2.239465934695389,
+          "frequency": 6
+        },
+        {
+          "word": "invites",
+          "count": 5,
+          "pmi": 2.239465934695389,
+          "frequency": 6
+        },
+        {
+          "word": "medical",
+          "count": 148,
+          "pmi": 1.5470467794824452,
+          "frequency": 287
+        },
+        {
+          "word": "welcomes",
+          "count": 5,
+          "pmi": 1.502500340529183,
+          "frequency": 10
+        },
+        {
+          "word": "select",
+          "count": 5,
+          "pmi": 1.502500340529183,
+          "frequency": 10
+        },
+        {
+          "word": "consulting",
+          "count": 4,
+          "pmi": 1.3325753390868709,
+          "frequency": 9
+        },
+        {
+          "word": "inter",
+          "count": 5,
+          "pmi": 1.0170735133589417,
+          "frequency": 14
+        },
+        {
+          "word": "universe",
+          "count": 3,
+          "pmi": 0.9175378398080271,
+          "frequency": 9
+        },
+        {
+          "word": "recognition",
+          "count": 5,
+          "pmi": 0.8244284354165455,
+          "frequency": 16
+        },
+        {
+          "word": "science",
+          "count": 4,
+          "pmi": 0.6951454184715793,
+          "frequency": 14
+        },
+        {
+          "word": "technology",
+          "count": 3,
+          "pmi": 0.6280312226130423,
+          "frequency": 11
+        },
+        {
+          "word": "tradition",
+          "count": 5,
+          "pmi": 0.3008664793595326,
+          "frequency": 23
+        },
+        {
+          "word": "established",
+          "count": 7,
+          "pmi": 0.26546114322833386,
+          "frequency": 33
+        },
+        {
+          "word": "campus",
+          "count": 5,
+          "pmi": 0.18057224564182084,
+          "frequency": 25
+        },
+        {
+          "word": "institution",
+          "count": 3,
+          "pmi": 0.0874628412503394,
+          "frequency": 16
+        },
+        {
+          "word": "mbbs",
+          "count": 16,
+          "pmi": 0.026766909562785223,
+          "frequency": 89
+        },
+        {
+          "word": "olena",
+          "count": 3,
+          "pmi": 0.0,
+          "frequency": 17
+        },
+        {
+          "word": "admission",
+          "count": 5,
+          "pmi": -0.08246216019197299,
+          "frequency": 30
+        },
+        {
+          "word": "powers",
+          "count": 3,
+          "pmi": -0.08246216019197299,
+          "frequency": 18
+        },
+        {
+          "word": "study",
+          "count": 20,
+          "pmi": -0.10630890214634099,
+          "frequency": 122
+        },
+        {
+          "word": "odessa",
+          "count": 147,
+          "pmi": -0.2765377737408098,
+          "frequency": 1009
+        },
+        {
+          "word": "education",
+          "count": 8,
+          "pmi": -0.6267826764157831,
+          "frequency": 70
+        }
+      ]
     }
   },
   "60": {
@@ -9884,14 +16993,376 @@
       "target_terms": [
         "Alexander Usyk"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "muhammadali",
+          "count": 5,
+          "pmi": 5.23607450649868,
+          "frequency": 2
+        },
+        {
+          "word": "orig",
+          "count": 4,
+          "pmi": 4.914146411611318,
+          "frequency": 2
+        },
+        {
+          "word": "miketyson",
+          "count": 4,
+          "pmi": 4.914146411611318,
+          "frequency": 2
+        },
+        {
+          "word": "bellew",
+          "count": 8,
+          "pmi": 4.106791489553713,
+          "frequency": 7
+        },
+        {
+          "word": "rogan",
+          "count": 4,
+          "pmi": 3.914146411611318,
+          "frequency": 4
+        },
+        {
+          "word": "oleksandrusyk",
+          "count": 5,
+          "pmi": 3.9141464116113176,
+          "frequency": 5
+        },
+        {
+          "word": "gloves",
+          "count": 3,
+          "pmi": 3.9141464116113176,
+          "frequency": 3
+        },
+        {
+          "word": "joyce",
+          "count": 3,
+          "pmi": 3.499108912332474,
+          "frequency": 4
+        },
+        {
+          "word": "knockout",
+          "count": 14,
+          "pmi": 3.3995732387815596,
+          "frequency": 20
+        },
+        {
+          "word": "gassiev",
+          "count": 4,
+          "pmi": 3.1067914895537134,
+          "frequency": 7
+        },
+        {
+          "word": "knockouts",
+          "count": 4,
+          "pmi": 3.1067914895537134,
+          "frequency": 7
+        },
+        {
+          "word": "lomachenko",
+          "count": 4,
+          "pmi": 2.914146411611318,
+          "frequency": 8
+        },
+        {
+          "word": "tony",
+          "count": 5,
+          "pmi": 2.9141464116113176,
+          "frequency": 10
+        },
+        {
+          "word": "derek",
+          "count": 3,
+          "pmi": 2.9141464116113176,
+          "frequency": 6
+        },
+        {
+          "word": "belt",
+          "count": 9,
+          "pmi": 2.9141464116113176,
+          "frequency": 18
+        },
+        {
+          "word": "verhoeven",
+          "count": 3,
+          "pmi": 2.9141464116113176,
+          "frequency": 6
+        },
+        {
+          "word": "boxers",
+          "count": 4,
+          "pmi": 2.744221410169005,
+          "frequency": 9
+        },
+        {
+          "word": "dubois",
+          "count": 13,
+          "pmi": 2.6603898193655344,
+          "frequency": 31
+        },
+        {
+          "word": "cruiserweight",
+          "count": 5,
+          "pmi": 2.651112005777524,
+          "frequency": 12
+        },
+        {
+          "word": "chisora",
+          "count": 3,
+          "pmi": 2.499108912332474,
+          "frequency": 8
+        },
+        {
+          "word": "knocked",
+          "count": 6,
+          "pmi": 2.499108912332474,
+          "frequency": 16
+        },
+        {
+          "word": "unification",
+          "count": 3,
+          "pmi": 2.499108912332474,
+          "frequency": 8
+        },
+        {
+          "word": "hunter",
+          "count": 3,
+          "pmi": 2.499108912332474,
+          "frequency": 8
+        },
+        {
+          "word": "boxing",
+          "count": 31,
+          "pmi": 2.3926092910317953,
+          "frequency": 89
+        },
+        {
+          "word": "dazn",
+          "count": 4,
+          "pmi": 2.0072558160027993,
+          "frequency": 15
+        },
+        {
+          "word": "joshua",
+          "count": 13,
+          "pmi": 1.8866656751892108,
+          "frequency": 53
+        },
+        {
+          "word": "tyson",
+          "count": 12,
+          "pmi": 1.7177491988078142,
+          "frequency": 55
+        },
+        {
+          "word": "undisputed",
+          "count": 6,
+          "pmi": 1.6917539902748695,
+          "frequency": 28
+        },
+        {
+          "word": "joe",
+          "count": 4,
+          "pmi": 1.5922183167239552,
+          "frequency": 20
+        },
+        {
+          "word": "fury",
+          "count": 11,
+          "pmi": 1.5662231081910105,
+          "frequency": 56
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 161,
       "target_terms": [
         "Oleksandr Usyk"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "cocky",
+          "count": 3,
+          "pmi": 5.018131161031336,
+          "frequency": 1
+        },
+        {
+          "word": "southpaw",
+          "count": 3,
+          "pmi": 5.018131161031336,
+          "frequency": 1
+        },
+        {
+          "word": "terrance",
+          "count": 4,
+          "pmi": 4.433168660310179,
+          "frequency": 2
+        },
+        {
+          "word": "parker",
+          "count": 5,
+          "pmi": 4.170134254476386,
+          "frequency": 3
+        },
+        {
+          "word": "mchunu",
+          "count": 5,
+          "pmi": 4.170134254476386,
+          "frequency": 3
+        },
+        {
+          "word": "evander",
+          "count": 3,
+          "pmi": 4.018131161031336,
+          "frequency": 2
+        },
+        {
+          "word": "piss",
+          "count": 3,
+          "pmi": 4.018131161031336,
+          "frequency": 2
+        },
+        {
+          "word": "knocks",
+          "count": 4,
+          "pmi": 3.848206159589023,
+          "frequency": 3
+        },
+        {
+          "word": "champ",
+          "count": 9,
+          "pmi": 3.7957387396948876,
+          "frequency": 7
+        },
+        {
+          "word": "vasiliy",
+          "count": 6,
+          "pmi": 3.6962030661439735,
+          "frequency": 5
+        },
+        {
+          "word": "wilder",
+          "count": 6,
+          "pmi": 3.6962030661439735,
+          "frequency": 5
+        },
+        {
+          "word": "spoiler",
+          "count": 9,
+          "pmi": 3.603093661752492,
+          "frequency": 8
+        },
+        {
+          "word": "boxer",
+          "count": 43,
+          "pmi": 3.5740311961500293,
+          "frequency": 39
+        },
+        {
+          "word": "deontay",
+          "count": 4,
+          "pmi": 3.4331686603101796,
+          "frequency": 4
+        },
+        {
+          "word": "johnny",
+          "count": 3,
+          "pmi": 3.4331686603101796,
+          "frequency": 3
+        },
+        {
+          "word": "saber",
+          "count": 3,
+          "pmi": 3.4331686603101796,
+          "frequency": 3
+        },
+        {
+          "word": "tyson",
+          "count": 55,
+          "pmi": 3.433168660310179,
+          "frequency": 55
+        },
+        {
+          "word": "fury",
+          "count": 53,
+          "pmi": 3.3537341928157747,
+          "frequency": 56
+        },
+        {
+          "word": "discusses",
+          "count": 6,
+          "pmi": 3.2107762389737315,
+          "frequency": 7
+        },
+        {
+          "word": "verhoeven",
+          "count": 5,
+          "pmi": 3.1701342544763853,
+          "frequency": 6
+        },
+        {
+          "word": "joshua",
+          "count": 44,
+          "pmi": 3.1646798243842778,
+          "frequency": 53
+        },
+        {
+          "word": "featherweight",
+          "count": 4,
+          "pmi": 3.111240565422817,
+          "frequency": 5
+        },
+        {
+          "word": "lomachenko",
+          "count": 6,
+          "pmi": 3.0181311610313357,
+          "frequency": 8
+        },
+        {
+          "word": "everlast",
+          "count": 3,
+          "pmi": 3.0181311610313357,
+          "frequency": 4
+        },
+        {
+          "word": "dubois",
+          "count": 23,
+          "pmi": 3.002534305980317,
+          "frequency": 31
+        },
+        {
+          "word": "champion",
+          "count": 42,
+          "pmi": 2.992596068924198,
+          "frequency": 57
+        },
+        {
+          "word": "undisputed",
+          "count": 19,
+          "pmi": 2.8737412516961607,
+          "frequency": 28
+        },
+        {
+          "word": "crawford",
+          "count": 4,
+          "pmi": 2.848206159589023,
+          "frequency": 6
+        },
+        {
+          "word": "kos",
+          "count": 8,
+          "pmi": 2.848206159589023,
+          "frequency": 12
+        },
+        {
+          "word": "anthony",
+          "count": 42,
+          "pmi": 2.7380232418386,
+          "frequency": 68
+        }
+      ]
     }
   },
   "61": {
@@ -9900,14 +17371,376 @@
       "target_terms": [
         "Vladimir Zelensky"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "viaja",
+          "count": 4,
+          "pmi": 5.201689468139955,
+          "frequency": 2
+        },
+        {
+          "word": "presidente",
+          "count": 6,
+          "pmi": 4.786651968861111,
+          "frequency": 4
+        },
+        {
+          "word": "pres",
+          "count": 4,
+          "pmi": 4.616726967418799,
+          "frequency": 3
+        },
+        {
+          "word": "hanged",
+          "count": 8,
+          "pmi": 4.616726967418799,
+          "frequency": 6
+        },
+        {
+          "word": "invitation",
+          "count": 12,
+          "pmi": 4.464723873973749,
+          "frequency": 10
+        },
+        {
+          "word": "persuade",
+          "count": 3,
+          "pmi": 4.201689468139955,
+          "frequency": 3
+        },
+        {
+          "word": "buenos",
+          "count": 4,
+          "pmi": 4.201689468139955,
+          "frequency": 4
+        },
+        {
+          "word": "aires",
+          "count": 4,
+          "pmi": 4.201689468139955,
+          "frequency": 4
+        },
+        {
+          "word": "zelenski",
+          "count": 4,
+          "pmi": 3.8797613732525926,
+          "frequency": 5
+        },
+        {
+          "word": "cancel",
+          "count": 8,
+          "pmi": 3.8797613732525926,
+          "frequency": 10
+        },
+        {
+          "word": "unreasonable",
+          "count": 3,
+          "pmi": 3.7866519688611113,
+          "frequency": 4
+        },
+        {
+          "word": "formula",
+          "count": 6,
+          "pmi": 3.7866519688611113,
+          "frequency": 8
+        },
+        {
+          "word": "responded",
+          "count": 3,
+          "pmi": 3.201689468139955,
+          "frequency": 6
+        },
+        {
+          "word": "counterpart",
+          "count": 3,
+          "pmi": 3.201689468139955,
+          "frequency": 6
+        },
+        {
+          "word": "politics",
+          "count": 18,
+          "pmi": 3.1621611039533177,
+          "frequency": 37
+        },
+        {
+          "word": "william",
+          "count": 4,
+          "pmi": 3.0317644666976427,
+          "frequency": 9
+        },
+        {
+          "word": "pocket",
+          "count": 16,
+          "pmi": 3.0317644666976427,
+          "frequency": 36
+        },
+        {
+          "word": "sounded",
+          "count": 3,
+          "pmi": 2.7866519688611113,
+          "frequency": 8
+        },
+        {
+          "word": "afp",
+          "count": 3,
+          "pmi": 2.7866519688611113,
+          "frequency": 8
+        },
+        {
+          "word": "works",
+          "count": 16,
+          "pmi": 2.775424713437857,
+          "frequency": 43
+        },
+        {
+          "word": "upcoming",
+          "count": 8,
+          "pmi": 2.6167269674187987,
+          "frequency": 24
+        },
+        {
+          "word": "cia",
+          "count": 4,
+          "pmi": 2.501249749998863,
+          "frequency": 13
+        },
+        {
+          "word": "musk",
+          "count": 3,
+          "pmi": 2.4647238739737487,
+          "frequency": 10
+        },
+        {
+          "word": "aviv",
+          "count": 5,
+          "pmi": 2.436154721776978,
+          "frequency": 17
+        },
+        {
+          "word": "demands",
+          "count": 6,
+          "pmi": 2.327220350223814,
+          "frequency": 22
+        },
+        {
+          "word": "candidate",
+          "count": 3,
+          "pmi": 2.327220350223814,
+          "frequency": 11
+        },
+        {
+          "word": "donald",
+          "count": 10,
+          "pmi": 2.131300140248557,
+          "frequency": 42
+        },
+        {
+          "word": "given",
+          "count": 16,
+          "pmi": 1.8441374635218712,
+          "frequency": 82
+        },
+        {
+          "word": "ucrania",
+          "count": 4,
+          "pmi": 1.6781275120829422,
+          "frequency": 23
+        },
+        {
+          "word": "meeting",
+          "count": 10,
+          "pmi": 1.6167269674187987,
+          "frequency": 60
+        }
+      ]
     },
     "ukrainian": {
       "n_texts": 154,
       "target_terms": [
         "Volodymyr Zelenskyy"
       ],
-      "collocates": []
+      "collocates": [
+        {
+          "word": "inaugural",
+          "count": 4,
+          "pmi": 4.6551273021097455,
+          "frequency": 2
+        },
+        {
+          "word": "reaffirmed",
+          "count": 4,
+          "pmi": 4.6551273021097455,
+          "frequency": 2
+        },
+        {
+          "word": "dasha",
+          "count": 3,
+          "pmi": 4.2400898028309015,
+          "frequency": 2
+        },
+        {
+          "word": "emir",
+          "count": 3,
+          "pmi": 4.2400898028309015,
+          "frequency": 2
+        },
+        {
+          "word": "defiant",
+          "count": 4,
+          "pmi": 3.655127302109745,
+          "frequency": 4
+        },
+        {
+          "word": "grossly",
+          "count": 3,
+          "pmi": 3.655127302109745,
+          "frequency": 3
+        },
+        {
+          "word": "politico",
+          "count": 3,
+          "pmi": 3.240089802830901,
+          "frequency": 4
+        },
+        {
+          "word": "teenager",
+          "count": 4,
+          "pmi": 3.070164801388589,
+          "frequency": 6
+        },
+        {
+          "word": "accusing",
+          "count": 3,
+          "pmi": 2.918161707943539,
+          "frequency": 5
+        },
+        {
+          "word": "rejected",
+          "count": 4,
+          "pmi": 2.847772380052141,
+          "frequency": 7
+        },
+        {
+          "word": "scott",
+          "count": 4,
+          "pmi": 2.847772380052141,
+          "frequency": 7
+        },
+        {
+          "word": "sits",
+          "count": 4,
+          "pmi": 2.4852023006674324,
+          "frequency": 9
+        },
+        {
+          "word": "president",
+          "count": 188,
+          "pmi": 2.3088493458066335,
+          "frequency": 478
+        },
+        {
+          "word": "addresses",
+          "count": 5,
+          "pmi": 2.276615678856015,
+          "frequency": 13
+        },
+        {
+          "word": "hiding",
+          "count": 4,
+          "pmi": 2.1956956834724477,
+          "frequency": 11
+        },
+        {
+          "word": "churchill",
+          "count": 3,
+          "pmi": 2.070164801388589,
+          "frequency": 9
+        },
+        {
+          "word": "donald",
+          "count": 13,
+          "pmi": 1.963249597472077,
+          "frequency": 42
+        },
+        {
+          "word": "address",
+          "count": 8,
+          "pmi": 1.9546875839686526,
+          "frequency": 26
+        },
+        {
+          "word": "sat",
+          "count": 3,
+          "pmi": 1.780658184193604,
+          "frequency": 11
+        },
+        {
+          "word": "joe",
+          "count": 4,
+          "pmi": 1.3331992072223828,
+          "frequency": 20
+        },
+        {
+          "word": "arabia",
+          "count": 3,
+          "pmi": 1.3331992072223828,
+          "frequency": 15
+        },
+        {
+          "word": "nbc",
+          "count": 3,
+          "pmi": 1.240089802830901,
+          "frequency": 16
+        },
+        {
+          "word": "elections",
+          "count": 5,
+          "pmi": 1.169700474939503,
+          "frequency": 28
+        },
+        {
+          "word": "nov",
+          "count": 7,
+          "pmi": 1.1405541292799868,
+          "frequency": 40
+        },
+        {
+          "word": "speech",
+          "count": 6,
+          "pmi": 1.0701648013885887,
+          "frequency": 36
+        },
+        {
+          "word": "saudi",
+          "count": 3,
+          "pmi": 1.0701648013885887,
+          "frequency": 18
+        },
+        {
+          "word": "estonia",
+          "count": 4,
+          "pmi": 1.0112711123350204,
+          "frequency": 25
+        },
+        {
+          "word": "met",
+          "count": 8,
+          "pmi": 0.9002397999462763,
+          "frequency": 54
+        },
+        {
+          "word": "surprised",
+          "count": 4,
+          "pmi": 0.847772380052141,
+          "frequency": 28
+        },
+        {
+          "word": "trump",
+          "count": 23,
+          "pmi": 0.8299611039356802,
+          "frequency": 163
+        }
+      ]
     }
   },
   "64": {

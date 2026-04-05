@@ -50,8 +50,17 @@ def tokenize(text):
 
 
 def extract_collocates(texts, target_terms, window=WINDOW_SIZE):
-    """Extract collocates within a window around target terms."""
-    target_set = {t.lower() for t in target_terms}
+    """Extract collocates within a window around target terms.
+
+    Handles multi-word terms by matching any word from the term.
+    """
+    # For multi-word terms like "Vladimir Zelensky", match on individual words
+    target_words = set()
+    for term in target_terms:
+        for w in tokenize(term):
+            if w not in STOPWORDS and len(w) > 2:
+                target_words.add(w)
+
     collocate_counts = Counter()
     target_count = 0
     total_words = 0
@@ -61,7 +70,7 @@ def extract_collocates(texts, target_terms, window=WINDOW_SIZE):
         total_words += len(words)
 
         for i, word in enumerate(words):
-            if word in target_set:
+            if word in target_words:
                 target_count += 1
                 # Window
                 start = max(0, i - window)
@@ -69,7 +78,7 @@ def extract_collocates(texts, target_terms, window=WINDOW_SIZE):
                 for j in range(start, end):
                     if j != i:
                         w = words[j]
-                        if w not in STOPWORDS and w not in target_set and len(w) > 2:
+                        if w not in STOPWORDS and w not in target_words and len(w) > 2:
                             collocate_counts[w] += 1
 
     return collocate_counts, target_count, total_words
