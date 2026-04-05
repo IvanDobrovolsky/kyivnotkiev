@@ -1058,14 +1058,14 @@ function formatNum(n: number) {
       drawAdoptionCalc();
       drawSearchPreview();
       drawPairClContext();
-      // Defer width-dependent charts to after reflow
-      requestAnimationFrame(() => {
+      // Double-RAF: first RAF queues after style recalc, second after paint
+      requestAnimationFrame(() => requestAnimationFrame(() => {
         drawPairSourceChart();
         drawMediaOrigin();
         drawCrossLingual();
         drawWorldMap();
         drawHoldoutTable();
-      });
+      }));
     }
 
     function drawAdoptionCalc() {
@@ -1134,7 +1134,9 @@ function formatNum(n: number) {
 
       const margin = {top: 5, right: 50, bottom: 5, left: 110};
       const rowH = 26;
-      const width = container.getBoundingClientRect().width - margin.left - margin.right;
+      const containerWidth = container.getBoundingClientRect().width;
+      // Fallback if container hasn't reflowed yet (display:none → block transition)
+      const width = (containerWidth > 100 ? containerWidth : container.parentElement?.getBoundingClientRect().width || 500) - margin.left - margin.right;
       const height = items.length * rowH;
       const totalH = height + margin.top + margin.bottom;
       const totalW = width + margin.left + margin.right;
