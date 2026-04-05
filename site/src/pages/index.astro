@@ -361,33 +361,27 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Category chart -->
-      <div class="chart-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1.1rem;">Adoption by Category</div>
-        <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Mean adoption (%) per category — equal weight per source</div>
-        <div id="category-chart" style="width:100%; height:260px;"></div>
-      </div>
-
       <!-- Top 6 Deep Dive -->
-      <div class="chart-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Key Pairs: Deep Dive</div>
-        <div class="chart-subtitle" style="margin-bottom: 1rem;">6 pairs representing the full spectrum — from campaign success to historical resistance</div>
+      <div class="chart-container" style="margin-bottom: 0.75rem;">
+        <div class="chart-title" style="color: var(--text)">Key Pairs: Deep Dive</div>
+        <div class="chart-subtitle" style="margin-bottom: 0.75rem;">6 pairs representing the full spectrum — from campaign success to historical resistance</div>
         <div id="top6-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;"></div>
       </div>
 
-      <div class="chart-container" id="cl-insights" style="margin-bottom:0.5rem;">
+      <!-- Collocations: Key Pairs -->
+      <div class="chart-container" id="cl-insights" style="margin-bottom:0.75rem;">
         <div class="chart-title" style="color: var(--text)">Collocations: Key Pairs</div>
-        <div class="chart-subtitle" style="margin-bottom: 0.75rem;">Top co-occurring words reveal different discourse worlds per spelling variant</div>
+        <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Top co-occurring words reveal different discourse worlds per spelling variant</div>
         <div id="cl-collocations-grid"></div>
       </div>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-bottom:0.5rem;">
+      <!-- Context Distribution + Benchmark side by side -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
         <div class="chart-container" id="cl-context-chart" style="margin-bottom:0;">
           <div class="chart-title" style="color: var(--text)">Context Distribution</div>
           <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Russian vs Ukrainian form usage across discourse domains</div>
           <div id="cl-context-bars"></div>
         </div>
-
         <div class="chart-container" id="cl-benchmark" style="margin-bottom:0;">
           <div class="chart-title" style="color: var(--text)">Encoder Benchmark</div>
           <div class="chart-subtitle" style="margin-bottom: 0.5rem;">3 models trained on Llama 70B labels, 29,938 texts</div>
@@ -395,14 +389,17 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- All pairs heatmap -->
-      <div class="chart-container">
-        <div class="chart-header">
-          <div>
-            <div class="chart-title" style="color: var(--text)">All Pairs Overview</div>
-            <div class="chart-subtitle">Current adoption rate — mean across sources, last 12 months</div>
-          </div>
-        </div>
+      <!-- Adoption by Category -->
+      <div class="chart-container" style="margin-bottom: 0.75rem;">
+        <div class="chart-title" style="color: var(--text)">Adoption by Category</div>
+        <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Mean adoption (%) per category — equal weight per source</div>
+        <div id="category-chart" style="width:100%; height:260px;"></div>
+      </div>
+
+      <!-- All Pairs Overview -->
+      <div class="chart-container" style="margin-bottom: 0.75rem;">
+        <div class="chart-title" style="color: var(--text)">All Pairs Overview</div>
+        <div class="chart-subtitle">Current adoption rate — mean across sources, last 12 months</div>
         <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
       </div>
 
@@ -1845,6 +1842,12 @@ function formatNum(n: number) {
       renderTop6Cards();
       drawCategoryChart();
       drawHeatmap();
+      requestAnimationFrame(() => {
+        drawClCollocations();
+        drawClContextChart();
+        drawClBenchmark();
+        drawErrorAnalysis();
+      });
     }
 
     // Logo click → back to landing
