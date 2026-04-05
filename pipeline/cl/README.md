@@ -178,10 +178,12 @@ python -m pipeline.cl.run --step export
 
 ## Hardware
 
-| Task | Hardware | Time | Cost |
-|------|----------|------|------|
-| Llama 70B annotation | NVIDIA B200 183GB | 45 min | ~$2.50 |
-| 3-model benchmark | NVIDIA B200 183GB | 25 min | ~$1.40 |
-| 9 robustness experiments | NVIDIA B200 183GB | 2 hrs | ~$6.70 |
-| **Total GPU** | | **~3 hrs** | **~$10.60** |
+| Task | Wall time | Cost @ $3.33/hr |
+|------|-----------|-----------------|
+| Instance setup (boot, deps, model download, warmup) | ~25 min | $1.39 |
+| Llama 70B annotation (29,938 texts, 16 concurrent) | 45 min | $2.50 |
+| 3-model encoder benchmark (DeBERTa, XLM-R, mDeBERTa) | 25 min | $1.39 |
+| 9 robustness experiments (seeds, LRs, thresholds, epochs) | 2.5 hrs | $8.33 |
+| Idle / downloads between tasks | ~15 min | $0.83 |
+| **Total** | **~4.5 hrs** | **~$14.44** |
 
