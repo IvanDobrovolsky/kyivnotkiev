@@ -100,6 +100,41 @@ audit-dictionaries:  ## Dictionary scraper (Oxford, Cambridge, MW, Britannica)
 analyze-categories:  ## Run Kruskal-Wallis + pairwise tests
 	python -m pipeline.analysis.categories
 
+# ── Computational Linguistics Pipeline ─────────────────────────────────────
+
+cl-extract:  ## CL: Extract texts from BQ (Reddit + YouTube)
+	python -m pipeline.cl.run --step extract
+
+cl-gdelt:  ## CL: Fetch GDELT article bodies (slow, run separately)
+	python -m pipeline.cl.extract.gdelt_articles
+
+cl-balance:  ## CL: Balance corpus (stratified sampling)
+	python -m pipeline.cl.run --step balance
+
+cl-classify:  ## CL: Context + sentiment classification (needs --api-url)
+	python -m pipeline.cl.run --step classify --api-url $(API_URL)
+
+cl-embed:  ## CL: Sentence embeddings + collocations
+	python -m pipeline.cl.run --step embed
+
+cl-finetune:  ## CL: Fine-tune encoder benchmark (3 models)
+	python -m pipeline.cl.run --step finetune
+
+cl-evaluate:  ## CL: Ablation studies on fine-tuned models
+	python -m pipeline.cl.run --step evaluate
+
+cl-export:  ## CL: Export dataset + model to HF, site JSON
+	python -m pipeline.cl.run --step export
+
+cl-all:  ## CL: Full pipeline (extract → balance → classify → embed → finetune → export)
+	python -m pipeline.cl.run --step all --api-url $(API_URL)
+
+publish-cl-dataset:  ## Push CL dataset to Hugging Face
+	python -m pipeline.cl.export.hf_dataset --repo $(HF_REPO)-cl
+
+publish-cl-model:  ## Push fine-tuned model to Hugging Face
+	python -m pipeline.cl.export.hf_model --repo IvanDobrovolsky/toponym-context-classifier
+
 # ── Site ────────────────────────────────────────────────────────────────────
 
 site-build:  ## Build the Astro site
