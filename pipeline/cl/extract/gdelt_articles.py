@@ -70,7 +70,7 @@ def sample_urls_from_bq(client, pair_ids, max_per_pair):
                 END
                 ORDER BY RAND()
             ) AS rn
-        FROM `{BQ_PROJECT}.{BQ_DATASET}.raw_gdelt_url`
+        FROM `{BQ_PROJECT}.{BQ_DATASET}.raw_gdelt`
         WHERE pair_id IN UNNEST(@pair_ids)
           AND source_url IS NOT NULL
           AND source_url != ''

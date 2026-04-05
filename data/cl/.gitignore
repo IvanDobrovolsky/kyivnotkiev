@@ -1,0 +1,13 @@
+# Keep structure but ignore large data files
+raw/gdelt_articles/*.parquet
+raw/reddit/pair_*.parquet
+raw/youtube/pair_*.parquet
+classified/
+embeddings/*.npy
+model/
+export/dataset/*.parquet
+export/model/
+
+# Keep these for tracking
+!balanced/balance_report.json
+!raw/gdelt_articles/fetch_log.parquet
