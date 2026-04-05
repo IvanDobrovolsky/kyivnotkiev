@@ -22,7 +22,7 @@ from pipeline.cl.config import (
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-SOURCES = ["reddit", "youtube", "gdelt_articles"]
+SOURCES = ["reddit", "youtube", "gdelt_articles", "openalex"]
 
 
 def load_raw_texts():

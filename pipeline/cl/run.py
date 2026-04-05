@@ -28,13 +28,15 @@ def run_extract():
 
     from pipeline.cl.extract.reddit_texts import extract_reddit
     from pipeline.cl.extract.youtube_texts import extract_youtube
+    from pipeline.cl.extract.openalex_texts import extract_openalex
 
     extract_reddit()
     extract_youtube()
+    extract_openalex()
 
-    # GDELT is optional and slow — run separately
-    log.info("Note: GDELT article fetching is slow. Run separately:")
-    log.info("  python -m pipeline.cl.extract.gdelt_articles [--pair-ids 1,3,10]")
+    # GDELT is async and slow — run separately with concurrency
+    log.info("Note: GDELT article fetching runs separately (async, ~30 min):")
+    log.info("  python -m pipeline.cl.extract.gdelt_articles_async --concurrency 20")
 
 
 def run_balance():

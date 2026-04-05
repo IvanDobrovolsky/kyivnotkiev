@@ -74,6 +74,7 @@ def ensure_cl_dirs():
               CL_RAW_DIR / "gdelt_articles",
               CL_RAW_DIR / "reddit",
               CL_RAW_DIR / "youtube",
+              CL_RAW_DIR / "openalex",
               CL_EXPORT_DIR / "dataset",
               CL_EXPORT_DIR / "model"]:
         d.mkdir(parents=True, exist_ok=True)

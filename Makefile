@@ -102,11 +102,14 @@ analyze-categories:  ## Run Kruskal-Wallis + pairwise tests
 
 # ── Computational Linguistics Pipeline ─────────────────────────────────────
 
-cl-extract:  ## CL: Extract texts from BQ (Reddit + YouTube)
+cl-extract:  ## CL: Extract texts from BQ (Reddit + YouTube + OpenAlex)
 	python -m pipeline.cl.run --step extract
 
-cl-gdelt:  ## CL: Fetch GDELT article bodies (slow, run separately)
-	python -m pipeline.cl.extract.gdelt_articles
+cl-gdelt:  ## CL: Fetch GDELT article bodies (async, ~30 min)
+	python -m pipeline.cl.extract.gdelt_articles_async --concurrency 20
+
+cl-openalex:  ## CL: Extract OpenAlex paper titles + abstracts
+	python -m pipeline.cl.extract.openalex_texts
 
 cl-balance:  ## CL: Balance corpus (stratified sampling)
 	python -m pipeline.cl.run --step balance
