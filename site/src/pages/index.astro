@@ -2293,101 +2293,63 @@ function formatNum(n: number) {
       const cl = clAnalysis as any;
       if (!cl.context_distribution) return;
 
-      // Aggregate across all pairs
-      const categories = ['war_conflict', 'academic_science', 'politics', 'travel_tourism',
-        'history', 'general_news', 'sports', 'culture_arts', 'food_cuisine', 'business_economy'];
+      const categories = ['war_conflict', 'academic_science', 'politics', 'history',
+        'travel_tourism', 'sports', 'general_news', 'culture_arts', 'food_cuisine', 'business_economy'];
       const catLabels: Record<string, string> = {
-        war_conflict: 'War & Conflict', academic_science: 'Academic', politics: 'Politics',
-        travel_tourism: 'Travel', history: 'History', general_news: 'General News',
-        sports: 'Sports', culture_arts: 'Culture & Arts', food_cuisine: 'Food', business_economy: 'Business',
+        war_conflict: 'War', academic_science: 'Academic', politics: 'Politics',
+        history: 'History', travel_tourism: 'Travel', sports: 'Sports',
+        general_news: 'News', culture_arts: 'Culture', food_cuisine: 'Food', business_economy: 'Business',
       };
 
-      // Sum across all pairs
       const ruTotals: Record<string, number> = {};
       const uaTotals: Record<string, number> = {};
-      let ruCount = 0, uaCount = 0;
-
       for (const [pid, pairData] of Object.entries(cl.context_distribution)) {
         const pd = pairData as any;
-        if (pd.russian) {
-          for (const [cat, val] of Object.entries(pd.russian)) {
-            ruTotals[cat] = (ruTotals[cat] || 0) + (val as number);
-          }
-          ruCount++;
-        }
-        if (pd.ukrainian) {
-          for (const [cat, val] of Object.entries(pd.ukrainian)) {
-            uaTotals[cat] = (uaTotals[cat] || 0) + (val as number);
-          }
-          uaCount++;
-        }
+        if (pd.russian) for (const [cat, val] of Object.entries(pd.russian)) ruTotals[cat] = (ruTotals[cat] || 0) + (val as number);
+        if (pd.ukrainian) for (const [cat, val] of Object.entries(pd.ukrainian)) uaTotals[cat] = (uaTotals[cat] || 0) + (val as number);
       }
-
-      // Normalize to percentages
       const ruSum = Object.values(ruTotals).reduce((a, b) => a + b, 0);
       const uaSum = Object.values(uaTotals).reduce((a, b) => a + b, 0);
 
-      const margin = { top: 20, right: 80, bottom: 10, left: 110 };
-      const barH = 28;
-      const width = container.getBoundingClientRect().width - margin.left - margin.right;
-      const height = categories.length * barH;
+      // Compact horizontal bars using HTML (no SVG whitespace issues)
+      const wrapper = d3.select(container);
 
-      const svg = d3.select(container)
-        .append('svg')
-        .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
-        .append('g')
-        .attr('transform', `translate(${margin.left},${margin.top})`);
+      // Legend first
+      wrapper.append('div').style('display', 'flex').style('gap', '1rem').style('margin-bottom', '0.5rem')
+        .style('font-size', '0.7rem').style('color', 'var(--text-muted)')
+        .html('<span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:#ef4444;border-radius:2px;opacity:0.7"></span>Russian</span>' +
+              '<span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:#3b82f6;border-radius:2px;opacity:0.7"></span>Ukrainian</span>');
 
-      const maxVal = Math.max(
-        ...categories.map(c => Math.max((ruTotals[c] || 0) / ruSum, (uaTotals[c] || 0) / uaSum))
-      );
-
-      const x = d3.scaleLinear().domain([0, maxVal * 1.1]).range([0, width]);
-      const y = d3.scaleBand().domain(categories).range([0, height]).padding(0.25);
+      const maxVal = Math.max(...categories.map(c => Math.max((ruTotals[c] || 0) / ruSum, (uaTotals[c] || 0) / uaSum)));
 
       categories.forEach(cat => {
         const ruPct = (ruTotals[cat] || 0) / ruSum;
         const uaPct = (uaTotals[cat] || 0) / uaSum;
-        const bh = y.bandwidth() / 2 - 1;
-        const yi = y(cat)!;
-
-        // Russian bar
-        svg.append('rect').attr('x', 0).attr('y', yi)
-          .attr('width', x(ruPct)).attr('height', bh)
-          .attr('fill', '#ef4444').attr('opacity', 0.7).attr('rx', 2);
-
-        // Ukrainian bar
-        svg.append('rect').attr('x', 0).attr('y', yi + bh + 2)
-          .attr('width', x(uaPct)).attr('height', bh)
-          .attr('fill', '#3b82f6').attr('opacity', 0.7).attr('rx', 2);
-
-        // Label
-        svg.append('text').attr('x', -6).attr('y', yi + y.bandwidth() / 2 + 4)
-          .attr('text-anchor', 'end').attr('font-size', '11px').attr('fill', 'var(--text)')
-          .text(catLabels[cat] || cat);
-
-        // Percentages
         const diff = uaPct - ruPct;
-        const diffStr = diff > 0.02 ? `+${(diff*100).toFixed(1)}pp` : diff < -0.02 ? `${(diff*100).toFixed(1)}pp` : '';
-        const diffColor = diff > 0.02 ? '#3b82f6' : diff < -0.02 ? '#ef4444' : '#6b7280';
 
-        svg.append('text').attr('x', Math.max(x(ruPct), x(uaPct)) + 6).attr('y', yi + y.bandwidth() / 2 + 4)
-          .attr('font-size', '10px').attr('fill', diffColor).attr('font-weight', '600')
-          .text(diffStr);
+        const row = wrapper.append('div').style('display', 'flex').style('align-items', 'center')
+          .style('gap', '6px').style('margin-bottom', '2px');
+
+        row.append('div').style('width', '55px').style('text-align', 'right')
+          .style('font-size', '0.7rem').style('color', 'var(--text)').style('flex-shrink', '0')
+          .text(catLabels[cat]);
+
+        const bars = row.append('div').style('flex', '1').style('display', 'flex')
+          .style('flex-direction', 'column').style('gap', '1px');
+
+        bars.append('div').style('height', '8px').style('background', '#ef4444').style('opacity', '0.6')
+          .style('border-radius', '2px').style('width', `${(ruPct / maxVal) * 100}%`);
+        bars.append('div').style('height', '8px').style('background', '#3b82f6').style('opacity', '0.6')
+          .style('border-radius', '2px').style('width', `${(uaPct / maxVal) * 100}%`);
+
+        if (Math.abs(diff) > 0.015) {
+          row.append('div').style('width', '40px').style('font-size', '0.65rem').style('font-weight', '600')
+            .style('color', diff > 0 ? '#3b82f6' : '#ef4444').style('flex-shrink', '0')
+            .text(`${diff > 0 ? '+' : ''}${(diff * 100).toFixed(1)}pp`);
+        } else {
+          row.append('div').style('width', '40px');
+        }
       });
-
-      // Legend
-      const legend = d3.select(container).append('div')
-        .style('display', 'flex').style('gap', '1.5rem').style('justify-content', 'center')
-        .style('margin-top', '0.5rem');
-
-      legend.append('div').style('display', 'flex').style('align-items', 'center').style('gap', '4px')
-        .style('font-size', '11px').style('color', '#94a3b8')
-        .html('<span style="width:10px;height:10px;background:#ef4444;border-radius:2px;display:inline-block;opacity:0.7"></span>Russian form');
-
-      legend.append('div').style('display', 'flex').style('align-items', 'center').style('gap', '4px')
-        .style('font-size', '11px').style('color', '#94a3b8')
-        .html('<span style="width:10px;height:10px;background:#3b82f6;border-radius:2px;display:inline-block;opacity:0.7"></span>Ukrainian form');
     }
 
     function drawClBenchmark() {
@@ -2399,54 +2361,49 @@ function formatNum(n: number) {
       if (!cl.benchmark || Object.keys(cl.benchmark).length === 0) return;
 
       const models = [
-        { key: 'deberta-v3-large', name: 'DeBERTa-v3-large', params: '304M' },
-        { key: 'xlm-roberta-large', name: 'XLM-RoBERTa-large', params: '550M' },
-        { key: 'mdeberta-v3-base', name: 'mDeBERTa-v3-base', params: '86M' },
+        { key: 'deberta-v3-large', name: 'DeBERTa-v3-large', params: '304M', desc: 'Best overall' },
+        { key: 'xlm-roberta-large', name: 'XLM-RoBERTa-large', params: '550M', desc: 'Cross-lingual' },
+        { key: 'mdeberta-v3-base', name: 'mDeBERTa-v3-base', params: '86M', desc: 'Lightweight' },
       ];
 
-      const table = d3.select(container).append('table')
-        .style('width', '100%').style('border-collapse', 'collapse')
-        .style('font-size', '0.85rem');
-
-      // Header
-      const thead = table.append('thead');
-      const hrow = thead.append('tr');
-      ['Model', 'Params', 'Accuracy', 'F1 (macro)', 'F1 (weighted)'].forEach(h => {
-        hrow.append('th').text(h)
-          .style('text-align', h === 'Model' ? 'left' : 'right')
-          .style('padding', '0.5rem 0.75rem')
-          .style('border-bottom', '2px solid var(--border)')
-          .style('color', 'var(--text-muted)').style('font-weight', '600');
-      });
-
-      // Rows
-      const tbody = table.append('tbody');
       const bestF1 = Math.max(...models.map(m => cl.benchmark[m.key]?.f1_macro || 0));
+
+      const grid = d3.select(container).style('display', 'flex').style('flex-direction', 'column').style('gap', '0.4rem');
 
       models.forEach(m => {
         const data = cl.benchmark[m.key];
         if (!data) return;
         const isBest = data.f1_macro === bestF1;
-        const row = tbody.append('tr');
+        const f1pct = (data.f1_macro * 100).toFixed(1);
 
-        row.append('td').text(m.name)
+        const card = grid.append('div')
+          .style('display', 'flex').style('align-items', 'center').style('gap', '0.75rem')
           .style('padding', '0.5rem 0.75rem')
-          .style('border-bottom', '1px solid var(--border)')
-          .style('color', isBest ? 'var(--text)' : 'var(--text-muted)')
-          .style('font-weight', isBest ? '700' : '400');
+          .style('border-radius', '6px')
+          .style('border', isBest ? '1px solid #059669' : '1px solid var(--border)')
+          .style('background', isBest ? 'rgba(5,150,105,0.06)' : 'transparent');
 
-        row.append('td').text(m.params)
-          .style('text-align', 'right').style('padding', '0.5rem 0.75rem')
-          .style('border-bottom', '1px solid var(--border)').style('color', '#64748b');
+        // F1 score big number
+        card.append('div')
+          .style('font-size', '1.3rem').style('font-weight', '800').style('min-width', '55px')
+          .style('color', isBest ? '#059669' : 'var(--text-muted)')
+          .text(`${f1pct}%`);
 
-        [data.accuracy, data.f1_macro, data.f1_weighted].forEach(val => {
-          const pct = (val * 100).toFixed(1) + '%';
-          row.append('td').text(pct)
-            .style('text-align', 'right').style('padding', '0.5rem 0.75rem')
-            .style('border-bottom', '1px solid var(--border)')
-            .style('color', isBest ? '#059669' : '#94a3b8')
-            .style('font-weight', isBest ? '700' : '400');
-        });
+        // Model info
+        const info = card.append('div').style('flex', '1');
+        info.append('div').style('font-size', '0.8rem').style('font-weight', isBest ? '700' : '500')
+          .style('color', 'var(--text)').text(m.name);
+        info.append('div').style('font-size', '0.65rem').style('color', 'var(--text-muted)')
+          .text(`${m.params} params — ${m.desc}`);
+
+        // Accuracy bar
+        const accPct = (data.accuracy * 100);
+        card.append('div').style('width', '80px').style('display', 'flex').style('flex-direction', 'column')
+          .style('align-items', 'flex-end').style('gap', '2px')
+          .html(`<div style="font-size:0.65rem;color:var(--text-muted)">Acc ${accPct.toFixed(1)}%</div>
+                 <div style="width:100%;height:4px;background:var(--border);border-radius:2px">
+                   <div style="width:${(accPct - 80) * 5}%;height:100%;background:${isBest ? '#059669' : '#94a3b8'};border-radius:2px"></div>
+                 </div>`);
       });
     }
   </script>
