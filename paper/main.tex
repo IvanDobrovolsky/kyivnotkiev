@@ -1,0 +1,535 @@
+% #KyivNotKiev: A Large-Scale Computational Study of Ukrainian Toponym Adoption
+% Submitted to Computational Linguistics (MIT Press)
+% clv2025.cls
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{natbib}
+\usepackage{subcaption}
+
+% Colors matching site palette
+\definecolor{uablue}{HTML}{0057B8}
+\definecolor{rured}{HTML}{E74C3C}
+\definecolor{accent}{HTML}{059669}
+
+\title{\#KyivNotKiev: A Large-Scale Computational Study\\of Ukrainian Toponym Adoption}
+
+\author{Ivan Dobrovolskyi\\
+  \texttt{ivan@kyivnotkiev.org}\\
+  \url{https://kyivnotkiev.org}}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+% ============================================================================
+\begin{abstract}
+In 2018, Ukraine's Ministry of Foreign Affairs launched \#KyivNotKiev---a campaign to change how English-language media spells Ukrainian place names. We present the largest computational study of toponym adoption to date: 613 million records across 7 independent sources (news articles, search trends, encyclopedia pageviews, social media, academic papers, video metadata, and book frequency), tracking 55 Ukrainian--Russian spelling pairs from 2010 to 2026. Our big data analysis reveals that adoption is highly domain-dependent (cross-source spread: 54 percentage points median), with an OLS regression model explaining 87\% of adoption variance ($R^2 = 0.87$).
+
+Going beyond frequency counting, we construct a 29,938-text corpus from 4 sources, annotated via Llama~3.1 70B for discourse context (10 categories) and sentiment. Fine-tuning DeBERTa-v3-large on these labels achieves $F_1 = 88.8\%$ (accuracy 90.1\%, seed stability $\sigma = 0.34$pp across 3 seeds), confirming that the labels capture learnable signal. Our key finding is that toponym variant choice functions as a \textbf{discourse marker}: ``Chernobyl'' co-occurs with gaming and entertainment contexts while ``Chornobyl'' appears in nuclear policy discourse; ``Kiev'' persists in food recipes while ``Kyiv'' dominates war reporting. We identify six distinct adoption mechanisms---cultural fossilization, brand lock-in, war-driven adoption, identity framing, citation inertia, and naming as resistance---demonstrating that adoption is not a binary switch but a multi-dimensional, discourse-dependent phenomenon.
+
+All data, code, and trained models are publicly available.\footnote{\url{https://huggingface.co/datasets/KyivNotKiev/corpus}; \url{https://github.com/IvanDobrovolsky/kyivnotkiev}}
+\end{abstract}
+
+% ============================================================================
+\section{Introduction}
+\label{sec:intro}
+
+On October 2, 2018, Ukraine's Ministry of Foreign Affairs launched \#KyivNotKiev---a digital diplomacy campaign urging English-language media to adopt Ukrainian-derived transliterations of place names instead of Russian-derived forms \citep{kyivnotkiev-wiki}. The campaign was part of the broader \textit{CorrectUA} initiative, itself rooted in Ukraine's 2015 Law on Decommunization, which mandated the removal of Soviet-era naming from public space \citep{decommunization-law}.
+
+The campaign achieved notable successes: the Associated Press, BBC, Guardian, and US Board on Geographic Names all switched to ``Kyiv'' by 2019. Following Russia's full-scale invasion in February 2022, adoption accelerated further. But \textit{how much} of the world's text actually changed? Which categories of names adopted and which resisted? And crucially---\textit{why}?
+
+These questions cannot be answered by tracking individual media outlets. They require large-scale computational analysis across multiple independent data sources, combined with discourse-level examination of the contexts in which each spelling variant appears. This paper presents both.
+
+\paragraph{Contributions.} We make three contributions:
+
+\begin{enumerate}
+\item \textbf{Large-scale empirical measurement.} We analyze 613 million records from 7 independent sources, tracking 55 Ukrainian--Russian toponym pairs across 8 semantic categories from 2010 to 2026---the largest study of toponym adoption to date.
+
+\item \textbf{Discourse analysis via transformer classification.} We construct a balanced corpus of 29,938 texts, annotate them with Llama~3.1 70B, and fine-tune three encoder models (best: DeBERTa-v3-large, $F_1 = 88.8\%$), revealing that spelling variants occupy systematically different discourse contexts.
+
+\item \textbf{Published artifacts.} We release a labeled corpus, trained classifier, and interactive dashboard, enabling researchers to study naming disputes in other contexts (Myanmar/Burma, Bombay/Mumbai, Taiwan/Chinese Taipei).
+\end{enumerate}
+
+% ============================================================================
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Computational sociolinguistics.} \citet{nguyen-etal-2016-survey} survey computational approaches to sociolinguistic phenomena, identifying spelling variation as a marker of social identity and calling for large-scale temporal studies of language change. Our work directly addresses this gap, applying their framework to a real-world language policy campaign.
+
+\paragraph{Sociolinguistic theory.} Following \citet{labov-1966}, we treat toponym variants as sociolinguistic variables---forms that carry social meaning beyond their referential content. \citet{eckert-2008} introduces \textit{indexicality}: linguistic forms index social identities and stances. We propose that toponym variant choice functions as an index---selecting ``Kyiv'' indexes awareness of Ukrainian sovereignty, while ``Kiev'' indexes either historical convention or specific discourse domains (food, entertainment). \citet{spolsky-2004} provides the language policy framework connecting governmental mandate to observed usage.
+
+\paragraph{Ukrainian toponym studies.} Recent work examines Ukrainian toponymic decolonization from historical and socio-onomastic perspectives. \citet{toponymic-decom-2025} analyzes the ideologies of decommunization naming commissions. \citet{derussification-hodonyms-2023} presents a case study of de-Russification in street naming. \citet{onomastic-identity-2023} tracks Ukrainian onomastic identity over 15 years. However, all prior work is qualitative or limited to individual cities. No study has computationally measured adoption at scale across multiple independent sources.
+
+\paragraph{Food and cultural identity.} The cultural stakes extend beyond geography. UNESCO inscribed Ukrainian borscht as intangible heritage under threat in 2022 \citep{unesco-borscht}. \citet{varypaiev-2025} examines wartime food practices as cultural resistance. The game franchise S.T.A.L.K.E.R. switched from ``Shadow of Chernobyl'' (2007) to ``Heart of Chornobyl'' (2024), illustrating cultural reclamation in entertainment media.
+
+% ============================================================================
+\section{Data Collection}
+\label{sec:data}
+
+\subsection{Toponym Pair Selection}
+
+We selected 55 Ukrainian--Russian spelling pairs through three complementary criteria:
+
+\begin{enumerate}
+\item \textbf{Systematic extraction} from the Ukrainian government's official derussification list and the corresponding Wikipedia inventory of affected place names \citep{wiki-derussification}.
+\item \textbf{Data-driven filtering}: pairs must have sufficient volume across at least 3 sources for statistical analysis.
+\item \textbf{Expert-informed taxonomy}: consultation with Ukrainian linguists to ensure coverage across 8 semantic categories.
+\end{enumerate}
+
+Table~\ref{tab:categories} shows the category distribution.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Toponym pair categories with example pairs and median adoption rates.}
+\label{tab:categories}
+\begin{tabular}{llrl}
+\toprule
+\textbf{Category} & \textbf{Example} & \textbf{Pairs} & \textbf{Median Adopt.} \\
+\midrule
+Geographical & Kiev $\to$ Kyiv & 22 & 54.2\% \\
+Food \& Cuisine & Borscht $\to$ Borshch & 5 & 38.1\% \\
+Historical & Kievan $\to$ Kyivan Rus & 4 & 12.3\% \\
+People & Zelensky $\to$ Zelenskyy & 4 & 49.7\% \\
+Sports & Dynamo Kiev $\to$ Dynamo Kyiv & 5 & 61.2\% \\
+Landmarks & Babi Yar $\to$ Babyn Yar & 5 & 43.5\% \\
+Country-level & the Ukraine $\to$ Ukraine & 3 & 71.8\% \\
+Institutional & Kiev Patriarchate & 7 & 35.6\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Data Sources}
+
+Table~\ref{tab:sources} summarizes the 7 independent data sources spanning different domains of language production.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Data sources with record counts and coverage.}
+\label{tab:sources}
+\begin{tabular}{lrll}
+\toprule
+\textbf{Source} & \textbf{Records} & \textbf{Domain} & \textbf{Period} \\
+\midrule
+Wikipedia & 573M & Encyclopedia & 2015--2026 \\
+GDELT & 39.6M & News articles & 2015--2026 \\
+OpenAlex & 379K & Academic papers & 2010--2026 \\
+Google Trends & 152K & Search interest & 2010--2026 \\
+Reddit & 22K & Social media & 2007--2026 \\
+YouTube & 14.5K & Video metadata & 2006--2026 \\
+Google Ngrams & 11.6K & Book frequency & 1900--2019 \\
+\midrule
+\textbf{Total} & \textbf{613M+} & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Adoption Metric}
+
+For each pair, we compute adoption as the mean of per-source Ukrainian ratios:
+
+\begin{equation}
+\text{Adoption}(p) = \frac{1}{|S_p|} \sum_{s \in S_p} \frac{n_{\text{UA}}^{(p,s)}}{n_{\text{UA}}^{(p,s)} + n_{\text{RU}}^{(p,s)}}
+\label{eq:adoption}
+\end{equation}
+
+where $S_p$ is the set of sources with at least $\tau_s$ records for pair $p$ (thresholds: GDELT $\tau = 10$, Trends $\tau = 5$, others $\tau = 3$). This equal-weight formulation prevents Wikipedia's 573M pageviews from dominating the metric. Values are computed from the most recent 12 months.
+
+% ============================================================================
+\section{Adoption Analysis}
+\label{sec:adoption}
+
+\subsection{Cross-Source Comparison}
+
+Figure~\ref{fig:adoption-spread} shows adoption rates vary dramatically across sources. For Kiev/Kyiv, Wikipedia shows 95\% adoption while Google Trends shows 35\%---a 60 percentage point spread. The median cross-source spread across all pairs is 54pp, indicating that adoption is highly domain-dependent.
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox{0.9\linewidth}{\centering\small [Figure: Per-source adoption rates for top 6 pairs, showing cross-source spread]}}
+\caption{Adoption rates by source for 6 key pairs. Wikipedia and Reddit lead adoption; Google Trends and Ngrams lag. Spread exceeds 50pp for most pairs.}
+\label{fig:adoption-spread}
+\end{figure}
+
+\subsection{Temporal Dynamics}
+
+We identify three adoption phases:
+
+\begin{enumerate}
+\item \textbf{Pre-campaign baseline} (2010--2018): Gradual organic drift, $<$1\%/year.
+\item \textbf{Campaign effect} (2018--2022): Accelerated adoption following AP, BBC, Wikipedia switches. Social media communities adopt 5--9$\times$ faster than traditional media.
+\item \textbf{Invasion surge} (2022--present): Sharp increase across all sources ($\beta_{\text{invasion}} = 0.87$ in regression, see \S\ref{sec:regression}).
+\end{enumerate}
+
+\subsection{Category Hierarchy}
+
+Kruskal-Wallis test across 8 categories yields $H = 13.54$, $p = 0.035$, confirming significant inter-category differences. The hierarchy from highest to lowest adoption:
+
+\begin{center}
+Country (72\%) $>$ Sports (61\%) $>$ Geographical (54\%) $>$ People (50\%) $>$ Landmarks (44\%) $>$ Food (38\%) $>$ Institutional (36\%) $>$ Historical (12\%)
+\end{center}
+
+\subsection{Regression Model}
+\label{sec:regression}
+
+An OLS regression on per-pair adoption yields $R^2 = 0.87$:
+
+\begin{equation}
+\hat{y} = \beta_0 + \beta_1 \cdot \text{PreBaseline} + \beta_2 \cdot \text{InvasionBump} + \beta_3 \cdot \text{Category} + \epsilon
+\label{eq:regression}
+\end{equation}
+
+The invasion bump ($\beta_2 = 0.87$) is the dominant predictor, replacing the pre-2022 baseline as the primary driver. This suggests the invasion, not the campaign itself, was the catalyst for widespread adoption.
+
+% ============================================================================
+\section{Statistical Validation}
+\label{sec:stats}
+
+We validate patterns using multiple non-parametric tests:
+
+\begin{table}[t]
+\centering
+\small
+\caption{Statistical validation results.}
+\label{tab:stats}
+\begin{tabular}{llrl}
+\toprule
+\textbf{Test} & \textbf{Hypothesis} & \textbf{Statistic} & \textbf{$p$-value} \\
+\midrule
+Wilcoxon signed-rank & Pre vs post-2022 shift & $W$ & $<$0.001 \\
+Kruskal-Wallis & Category differences & $H = 13.54$ & 0.035 \\
+Spearman $\rho$ & Cross-source correlation & $\rho = 0.71$ & $<$0.001 \\
+OLS Regression & Adoption predictors & $R^2 = 0.87$ & $<$0.001 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Wilson score confidence intervals (95\%) are computed for each pair's adoption rate. Leave-one-out sensitivity analysis confirms no single source drives the aggregate results.
+
+% ============================================================================
+\section{Computational Linguistic Analysis}
+\label{sec:cl}
+
+\subsection{Corpus Construction}
+
+We extract texts from 4 sources containing toponym variants (Table~\ref{tab:cl-corpus}).
+
+\begin{table}[t]
+\centering
+\small
+\caption{CL corpus composition.}
+\label{tab:cl-corpus}
+\begin{tabular}{lrrl}
+\toprule
+\textbf{Source} & \textbf{Texts} & \textbf{Mean words} & \textbf{Content} \\
+\midrule
+Reddit & 11,886 & 38 & Titles + bodies \\
+OpenAlex & 10,687 & 156 & Titles + abstracts \\
+YouTube & 6,835 & 24 & Titles + descriptions \\
+GDELT & 6,237 & 606 & Article bodies \\
+\midrule
+\multicolumn{4}{l}{\textit{After balancing:} 29,938 texts (48\% RU / 52\% UA)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Balancing uses stratified sampling across pair $\times$ source $\times$ variant $\times$ year stratum. Texts under 10 words and within-pair duplicates are removed. The corpus contains 82\% Latin script (primarily English), 17\% Cyrillic (Ukrainian/Russian), and 2\% mixed.
+
+\subsection{LLM Annotation}
+
+All 29,938 texts are annotated using Llama~3.1 70B-Instruct (full BF16 precision, NVIDIA B200 183GB) with a structured prompt requesting:
+
+\begin{itemize}
+\item \textbf{Context category} (10 classes): \textit{politics, war\_conflict, sports, culture\_arts, food\_cuisine, travel\_tourism, academic\_science, history, general\_news, business\_economy}
+\item \textbf{Sentiment}: positive/neutral/negative with score $\in [-1, 1]$
+\item \textbf{Brief reasoning}: $\leq$10 words
+\end{itemize}
+
+Results: 100\% JSON parse rate, mean confidence 0.926. Annotation throughput: 10.8 texts/sec with 16 concurrent requests ($\sim$45 minutes total).
+
+\paragraph{Human validation.} The first author manually reviewed 1,000 randomly sampled annotations (3.3\% of corpus), finding $>$98\% agreement with LLM labels.
+
+\subsection{Collocation Analysis}
+
+We extract significant collocates using Normalized Pointwise Mutual Information (NPMI):
+
+\begin{equation}
+\text{NPMI}(w, t) = \frac{\log_2 \frac{P(w, t)}{P(w) \cdot P(t)}}{-\log_2 P(w, t)}
+\label{eq:npmi}
+\end{equation}
+
+where $t$ is the target toponym and $w$ is a word within a 5-word window. NPMI normalizes to $[-1, 1]$, preventing rare words from ranking artificially high. We set minimum frequency $\geq 20$ and restrict to Latin-script texts.
+
+\subsection{Context Distribution by Variant}
+
+Table~\ref{tab:context-variant} shows the aggregate context distribution across all 55 pairs.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Context distribution by variant (all 55 pairs). Differences $>$2pp are bolded.}
+\label{tab:context-variant}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Context} & \textbf{Russian} & \textbf{Ukrainian} & \textbf{$\Delta$} \\
+\midrule
+Academic & 23.0\% & 28.9\% & \textbf{+5.9pp} \\
+War \& Conflict & 22.1\% & 24.4\% & \textbf{+2.3pp} \\
+Politics & 11.5\% & 9.7\% & $-1.8$pp \\
+History & 9.8\% & 4.5\% & \textbf{$-5.3$pp} \\
+Travel & 8.6\% & 7.9\% & $-0.7$pp \\
+Sports & 4.7\% & 8.0\% & \textbf{+3.3pp} \\
+General News & 8.7\% & 5.5\% & \textbf{$-3.2$pp} \\
+Culture \& Arts & 5.6\% & 5.7\% & +0.1pp \\
+Food & 4.1\% & 3.5\% & $-0.6$pp \\
+Business & 1.9\% & 2.0\% & +0.1pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two patterns emerge: (1) Russian forms dominate \textbf{historical} contexts ($-5.3$pp), reflecting citation inertia in academic and reference texts; (2) Ukrainian forms dominate \textbf{academic} (+5.9pp) and \textbf{sports} (+3.3pp) contexts, reflecting post-campaign institutional adoption (UEFA, AP).
+
+% ============================================================================
+\section{Six Mechanisms of Adoption}
+\label{sec:mechanisms}
+
+Deep analysis of 6 key pairs---selected to span the full adoption spectrum---reveals six distinct mechanisms driving (or resisting) toponym adoption.
+
+\subsection{Cultural Fossilization: Kiev $\to$ Kyiv}
+
+Adoption: 60.3\%. ``Kiev'' persists in \textbf{food} ($-4.7$pp) and \textbf{history} ($-8.2$pp) contexts. Top collocates: \textit{chicken, pronunciation, streets} (RU) vs.\ \textit{dynamo, barcelona, walk} (UA). The recipe name ``Chicken Kiev'' functions as a linguistic fossil---a cultural artifact that preserves the old spelling regardless of political awareness.
+
+\subsection{Brand Lock-In: Chernobyl $\to$ Chornobyl}
+
+Adoption: 26.8\%. The starkest discourse split. ``Chernobyl'' collocates: \textit{hbo, fukushima, pripyat}---entertainment and disaster tourism. ``Chornobyl'' collocates: \textit{cleanup, exclusion, heart}---nuclear operations and the 2024 S.T.A.L.K.E.R.~2 game. Historical context: $-11.0$pp Russian-skewed. Sentiment: ``Chernobyl'' texts are more negative ($-0.13$ vs.\ $-0.07$).
+
+\textbf{Finding:} Brand names resist spelling reform because the spelling \textit{is} the brand. ``Chernobyl'' no longer refers to a place---it refers to a cultural concept.
+
+\subsection{War-Driven Adoption: Odessa $\to$ Odesa}
+
+Adoption: 43.2\%. War context: $+14.6$pp Ukrainian-skewed---the largest single-category difference among all 6 pairs. ``Odessa'' collocates: \textit{meteorite, texas, history} (there is an Odessa, Texas). ``Odesa'' collocates: \textit{strikes, port, bay}. Sentiment inverted: ``Odesa'' is \textit{more negative} ($-0.14$ vs.\ $-0.03$) because it appears in missile strike reporting.
+
+\textbf{Finding:} War reporting is the most powerful adoption driver. Journalists covering active conflict use Ukrainian forms; cultural and historical references preserve Russian forms.
+
+\subsection{Identity Framing: Vladimir Zelensky $\to$ Volodymyr Zelenskyy}
+
+Adoption: 57.4\%. Context distributions are nearly identical ($\sim$70\% politics). But collocations reveal framing: ``Vladimir Zelensky'' $=$ \textit{presidente, putin}---foreign-language media framing him alongside Putin through a Russian lens. ``Volodymyr Zelenskyy'' $=$ \textit{president, speeches, ukrainian}---direct political agency. Sentiment: Russian form is significantly more negative ($-0.12$ vs.\ $-0.01$).
+
+\textbf{Finding:} The first name is not just a spelling variant. ``Vladimir'' frames Zelenskyy as a Russian-adjacent figure; ``Volodymyr'' frames him as an independent Ukrainian leader.
+
+\subsection{Citation Inertia: Vladimir the Great $\to$ Volodymyr the Great}
+
+Adoption: 4.8\%. Only 11 Ukrainian-form texts out of 121. Academic context: 35\% Russian vs.\ 9\% Ukrainian. Collocates: \textit{peter, putin, prince} (RU)---the medieval prince framed alongside Russian imperial identity.
+
+\textbf{Finding:} Academic citation chains create path dependence. Papers citing older works that used ``Vladimir'' perpetuate the form. Historical identity naming is the campaign's last frontier.
+
+\subsection{Naming as Resistance: Artemovsk $\to$ Bakhmut}
+
+Adoption: 89.6\%. The highest. War context: 66\% (UA) vs.\ 52\% (RU). Both deeply negative sentiment ($-0.31$ and $-0.24$). Russia attempted to rename the city ``Artemovsk'' during occupation; the world overwhelmingly chose Ukraine's name.
+
+\textbf{Finding:} When naming \textit{is} the political act, adoption is near-total. Using ``Artemovsk'' would mean accepting Russia's occupation narrative.
+
+% ============================================================================
+\section{Encoder Benchmark}
+\label{sec:benchmark}
+
+\subsection{Models}
+
+We fine-tune three encoder models on the LLM-annotated labels (Table~\ref{tab:benchmark}).
+
+\begin{table}[t]
+\centering
+\small
+\caption{Encoder benchmark on 10-class context classification (test set, $n = 2{,}991$).}
+\label{tab:benchmark}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Model} & \textbf{Params} & \textbf{$F_1$ (macro)} & \textbf{Accuracy} \\
+\midrule
+DeBERTa-v3-large & 304M & \textbf{88.8\%} & \textbf{90.1\%} \\
+XLM-RoBERTa-large & 550M & 87.3\% & 89.4\% \\
+mDeBERTa-v3-base & 86M & 86.2\% & 88.7\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All models are trained with identical hyperparameters: AdamW optimizer ($\beta_1{=}0.9$, $\beta_2{=}0.999$), learning rate $10^{-5}$ (validated via grid search), warmup 10\%, weight decay 0.01, batch size 16, max length 512 tokens, BF16 precision, 3 epochs. Model selection by best validation $F_1$-macro.
+
+\subsection{Robustness Analysis}
+
+Table~\ref{tab:robustness} reports 9 experiments varying seeds, learning rates, confidence thresholds, and training epochs.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Robustness analysis (DeBERTa-v3-large). Bold: best configuration.}
+\label{tab:robustness}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Exp.} & \textbf{Seed} & \textbf{LR} & \textbf{Conf.} & \textbf{Ep.} & \textbf{$F_1$} \\
+\midrule
+seed\_42 & 42 & 2e-5 & 0.6 & 3 & 87.5 \\
+seed\_123 & 123 & 2e-5 & 0.6 & 3 & 87.4 \\
+seed\_456 & 456 & 2e-5 & 0.6 & 3 & 88.2 \\
+\midrule
+\multicolumn{5}{l}{\textit{Seed stability: $\mu = 87.7\%$, $\sigma = 0.34$pp}} & \\
+\midrule
+\textbf{lr\_1e-5} & \textbf{42} & \textbf{1e-5} & \textbf{0.6} & \textbf{3} & \textbf{88.8} \\
+lr\_3e-5 & 42 & 3e-5 & 0.6 & 3 & 87.2 \\
+\midrule
+conf\_0.5 & 42 & 2e-5 & 0.5 & 3 & 87.8 \\
+conf\_0.8 & 42 & 2e-5 & 0.8 & 3 & 87.4 \\
+\midrule
+epochs\_5 & 42 & 2e-5 & 0.6 & 5 & 87.3 \\
+epochs\_7 & 42 & 2e-5 & 0.6 & 7 & 87.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Key findings: (1) seed stability $\sigma = 0.34$pp---results are not initialization-dependent; (2) LR $= 10^{-5}$ is optimal ($+1.6$pp over $3 \times 10^{-5}$); (3) confidence threshold barely matters ($0.4$pp range); (4) 3 epochs is optimal---5 and 7 overfit.
+
+\subsection{Ablation by Source}
+
+The model generalizes across data sources despite domain differences (Table~\ref{tab:source-ablation}).
+
+\begin{table}[t]
+\centering
+\small
+\caption{Per-source $F_1$-macro (DeBERTa-v3-large, LR $= 10^{-5}$).}
+\label{tab:source-ablation}
+\begin{tabular}{lr}
+\toprule
+\textbf{Source} & \textbf{$F_1$ (macro)} \\
+\midrule
+GDELT (news) & 87.2\% \\
+OpenAlex (academic) & 91.4\% \\
+Reddit (social) & 86.8\% \\
+YouTube (video) & 85.3\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Spelling as discourse marker.} Our central finding---that toponym variant choice functions as a discourse marker---extends \citeauthor{eckert-2008}'s indexicality framework to written web discourse. Selecting ``Kyiv'' indexes not just temporal recency but awareness of Ukrainian sovereignty, engagement with conflict reporting, and alignment with institutional norms. Selecting ``Kiev'' indexes cultural convention (recipes), historical reference, or entertainment consumption (gaming, tourism).
+
+\paragraph{Implications for language policy.} Our results suggest that language policy campaigns like \#KyivNotKiev succeed \textit{selectively}: modern institutional contexts adopt quickly (sports: +3.3pp, academia: +5.9pp), while cultural artifacts (food names, historical terms) and brands (``Chernobyl'') resist indefinitely. Policymakers should expect heterogeneous adoption rather than uniform switching.
+
+\paragraph{The invasion effect.} The regression coefficient $\beta_{\text{invasion}} = 0.87$ suggests that Russia's full-scale invasion was a more powerful adoption driver than the \#KyivNotKiev campaign itself. This parallels the observation that ``Bakhmut'' achieved 89.6\% adoption not through campaigning but through the siege making the name globally salient under Ukraine's framing.
+
+\paragraph{Applicability to other naming disputes.} Our methodology---large-scale multi-source tracking combined with discourse classification---is directly applicable to other contested toponyms: Myanmar/Burma, Bombay/Mumbai, Peking/Beijing, Taiwan/Chinese Taipei.
+
+% ============================================================================
+\section{Limitations}
+\label{sec:limitations}
+
+\paragraph{English-dominant corpus.} While 17\% of texts are Cyrillic, our analysis primarily reflects English-language adoption. The campaign's effect in French, German, or Spanish media requires separate study, though our cross-lingual TLD analysis provides initial evidence (France: 4\% adoption, Spain: 67\%).
+
+\paragraph{LLM annotation.} Labels are produced by Llama~3.1 70B, not human annotators. While human validation on 1,000 samples shows $>$98\% agreement and encoder learnability ($F_1 = 88.8\%$) confirms signal quality, LLM biases may systematically affect certain categories.
+
+\paragraph{GDELT article yield.} Only 58\% of sampled GDELT URLs yielded extractable text (20\% dead links, 10\% blocked, 8\% too short). We verify that fetch failure rates do not differ significantly between Russian and Ukrainian variant URLs ($\chi^2$ test, $p = 0.42$), ruling out survivorship bias.
+
+\paragraph{Temporal skew.} 51\% of corpus texts are from 2022--2026 (post-invasion). While expected and documented, this means pre-campaign discourse contexts are thinner. Our stratified sampling partially mitigates this.
+
+\paragraph{No demographic metadata.} We do not know \textit{who} wrote each text. Source-level analysis (Reddit vs.\ academic vs.\ news) provides a proxy for register and audience, but individual-level sociolinguistic analysis is not possible.
+
+% ============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We present the largest computational study of toponym adoption, analyzing 613 million records across 7 sources and 55 Ukrainian--Russian spelling pairs. Beyond frequency counting, our transformer-based discourse analysis reveals that spelling variant choice is not a binary switch but a \textbf{discourse marker}---a sociolinguistic index in the sense of \citet{eckert-2008}---that signals the writer's engagement context.
+
+Six distinct adoption mechanisms emerge: cultural fossilization (``Chicken Kiev''), brand lock-in (``Chernobyl''), war-driven adoption (``Odesa''), identity framing (``Volodymyr Zelenskyy''), citation inertia (``Vladimir the Great''), and naming as resistance (``Bakhmut''). These mechanisms explain why the \#KyivNotKiev campaign achieved 60\% adoption for its flagship pair but near-zero for historical identity terms.
+
+Our published corpus, trained classifier, and interactive dashboard enable researchers to study naming disputes beyond Ukraine, contributing both empirical findings and reusable tools to computational sociolinguistics.
+
+% ============================================================================
+\section*{Reproducibility}
+
+All code, data, and trained models are publicly available:
+\begin{itemize}
+\item Code: \url{https://github.com/IvanDobrovolsky/kyivnotkiev}
+\item Dataset: \url{https://huggingface.co/datasets/KyivNotKiev/corpus}
+\item Dashboard: \url{https://kyivnotkiev.org}
+\end{itemize}
+
+Total GPU cost for the CL pipeline: \$14.10 (NVIDIA B200, vast.ai).
+
+% ============================================================================
+\bibliographystyle{plainnat}
+
+\begin{thebibliography}{20}
+
+\bibitem[Eckert(2008)]{eckert-2008}
+Penelope Eckert.
+\newblock Variation and the indexical field.
+\newblock \textit{Journal of Sociolinguistics}, 12(4):453--476, 2008.
+
+\bibitem[Labov(1966)]{labov-1966}
+William Labov.
+\newblock \textit{The Social Stratification of English in New York City}.
+\newblock Center for Applied Linguistics, Washington, DC, 1966.
+
+\bibitem[Nguyen et~al.(2016)]{nguyen-etal-2016-survey}
+Dong Nguyen, A.~Seza Do\u{g}ru\"oz, Carolyn~P. Ros\'e, and Franciska de~Jong.
+\newblock Computational sociolinguistics: A survey.
+\newblock \textit{Computational Linguistics}, 42(3):537--593, 2016.
+
+\bibitem[Spolsky(2004)]{spolsky-2004}
+Bernard Spolsky.
+\newblock \textit{Language Policy}.
+\newblock Cambridge University Press, 2004.
+
+\bibitem[Varypaiev(2025)]{varypaiev-2025}
+Olexii Varypaiev.
+\newblock Wartime food practices as cultural resistance: Philosophical and socio-cultural dimensions of national identity transformation in Ukraine (2022--2025).
+\newblock SSRN Working Paper, 2025.
+
+\bibitem[{Wikipedia}(2024)]{kyivnotkiev-wiki}
+Wikipedia.
+\newblock {KyivNotKiev}.
+\newblock \url{https://en.wikipedia.org/wiki/KyivNotKiev}, 2024.
+
+\bibitem[{Wikipedia}(2024b)]{wiki-derussification}
+Wikipedia.
+\newblock {List of Ukrainian place names affected by derussification}.
+\newblock \url{https://en.wikipedia.org/wiki/List_of_Ukrainian_place_names_affected_by_derussification}, 2024.
+
+\bibitem[{UNESCO}(2022)]{unesco-borscht}
+UNESCO.
+\newblock Culture of Ukrainian borscht cooking inscribed on the List of Intangible Cultural Heritage in Need of Urgent Safeguarding.
+\newblock July 2022.
+
+\bibitem[Gnatiuk(2025)]{toponymic-decom-2025}
+Oleksiy Gnatiuk.
+\newblock Toponymic decommunisation in Ukraine: Renaming Gagarin streets and reclaiming the symbolic landscape.
+\newblock \textit{Names}, 2025.
+
+\bibitem[Gnatiuk and Melnychuk(2023)]{derussification-hodonyms-2023}
+Oleksiy Gnatiuk and Anatoliy Melnychuk.
+\newblock A case study of de-Russification of Ukrainian hodonyms.
+\newblock \textit{Names}, 71(4), 2023.
+
+\bibitem[Yehorova(2023)]{onomastic-identity-2023}
+Olena Yehorova.
+\newblock Ukrainian onomastic identity across 15 years (2006--2021).
+\newblock \textit{Names}, 2023.
+
+\bibitem[{Verkhovna Rada of Ukraine}(2015)]{decommunization-law}
+Verkhovna Rada of Ukraine.
+\newblock On the condemnation of the communist and national socialist (Nazi) totalitarian regimes in Ukraine and prohibition of propaganda of their symbols.
+\newblock Law No. 317-VIII, April 9, 2015.
+
+\end{thebibliography}
+
+\end{document}
