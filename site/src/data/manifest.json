@@ -27,7 +27,7 @@
       "pairs": 62,
       "label": "Page Views",
       "unit": "pageviews",
-      "extra": "monthly",
+      "extra": "573M pageviews",
       "color": "#636466"
     },
     "reddit": {
@@ -46,14 +46,6 @@
       "extra": "4187 channels",
       "color": "#FF0000"
     },
-    "ngrams": {
-      "records": 11640,
-      "pairs": 54,
-      "label": "Book Records",
-      "unit": "records",
-      "extra": "8M+ volumes",
-      "color": "#7c3aed"
-    },
     "openalex": {
       "records": 378689,
       "pairs": 52,
@@ -61,6 +53,14 @@
       "unit": "papers",
       "extra": "250M+ works indexed",
       "color": "#06b6d4"
+    },
+    "ngrams": {
+      "records": 11640,
+      "pairs": 46,
+      "label": "Google Ngrams",
+      "unit": "book frequency",
+      "extra": "2010-2019",
+      "color": "#f59e0b"
     }
   },
   "categories": [
@@ -771,6 +771,6 @@
     }
   ],
   "records_scanned": "90B+",
-  "toponym_matches": 40179100,
+  "toponym_matches": 40183990,
   "cl_corpus": 29938
 }
