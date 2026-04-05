@@ -215,23 +215,30 @@ function formatNum(n: number) {
       <!-- Per-pair source stats -->
       <div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(7, 1fr); margin-bottom: 0.75rem;"></div>
 
-      <!-- CL: Per-pair context + collocations -->
-      <div class="chart-container" id="pair-cl-context" style="margin-bottom: 0.75rem;">
-        <div class="chart-title" style="color: var(--text)">Discourse Context Analysis</div>
-        <div class="chart-subtitle">How this toponym is used across discourse domains and top co-occurring words</div>
-        <div id="pair-cl-body"></div>
+      <!-- CL: Context + Collocations side by side -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
+        <div class="chart-container" id="pair-cl-context" style="margin-bottom:0;">
+          <div class="chart-title" style="color: var(--text)">Discourse Context</div>
+          <div class="chart-subtitle" style="margin-bottom:0.5rem;">Distribution across discourse domains for each spelling variant</div>
+          <div id="pair-cl-body"></div>
+        </div>
+        <div class="chart-container" id="pair-cl-collocations" style="margin-bottom:0;">
+          <div class="chart-title" style="color: var(--text)">Collocations</div>
+          <div class="chart-subtitle" style="margin-bottom:0.5rem;">Top co-occurring words reveal different discourse worlds</div>
+          <div id="pair-cl-coll-body"></div>
+        </div>
       </div>
 
       <!-- Adoption + Reference side by side -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
         <div id="adoption-calc" class="chart-container" style="margin-bottom:0;">
           <div class="chart-title" style="color: var(--text)">Adoption Calculation — <span id="adoption-pct-title"></span></div>
-          <div class="chart-subtitle">Mean of per-source UA/(UA+RU) ratios, last 12 months</div>
+          <div class="chart-subtitle" style="margin-bottom:0.5rem;">Mean of per-source UA/(UA+RU) ratios, last 12 months</div>
           <div id="adoption-calc-body" style="font-size:0.75rem; color:var(--text-muted); line-height:1.6;"></div>
         </div>
         <div class="chart-container" id="dict-container" style="margin-bottom:0; padding:0.75rem 1rem;">
           <div class="chart-title" style="color: var(--text)">Reference Audit</div>
-          <div class="chart-subtitle">Dictionary and encyclopedia entries for each spelling form</div>
+          <div class="chart-subtitle" style="margin-bottom:0.5rem;">Dictionary and encyclopedia entries for each spelling form</div>
           <div id="search-preview"></div>
         </div>
       </div>
@@ -240,7 +247,7 @@ function formatNum(n: number) {
       <div id="comparison-row" style="display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:1rem;">
         <div class="chart-container" style="margin-bottom:0;">
           <div class="chart-title" style="color: var(--text)">Source Comparison</div>
-          <div class="chart-subtitle">Adoption rate per data source for this pair</div>
+          <div class="chart-subtitle" style="margin-bottom:0.5rem;">Adoption rate per data source for this pair</div>
           <div id="pair-source-chart" style="width:100%;"></div>
         </div>
         <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom:0;">
@@ -1049,13 +1056,16 @@ function formatNum(n: number) {
       drawChart();
       drawPairStats();
       drawAdoptionCalc();
-      drawPairSourceChart();
-      drawMediaOrigin();
-      drawCrossLingual();
-      drawWorldMap();
-      drawHoldoutTable();
       drawSearchPreview();
       drawPairClContext();
+      // Defer width-dependent charts to after reflow
+      requestAnimationFrame(() => {
+        drawPairSourceChart();
+        drawMediaOrigin();
+        drawCrossLingual();
+        drawWorldMap();
+        drawHoldoutTable();
+      });
     }
 
     function drawAdoptionCalc() {
@@ -2144,9 +2154,13 @@ function formatNum(n: number) {
     }
 
     function drawPairClContext() {
-      const container = document.getElementById('pair-cl-body');
-      if (!container) return;
-      container.innerHTML = '';
+      // Left card: context distribution
+      const ctxContainer = document.getElementById('pair-cl-body');
+      // Right card: collocations
+      const collContainer = document.getElementById('pair-cl-coll-body');
+
+      if (ctxContainer) ctxContainer.innerHTML = '';
+      if (collContainer) collContainer.innerHTML = '';
 
       const cl = clAnalysis as any;
       const pid = String(activePairId);
@@ -2154,22 +2168,9 @@ function formatNum(n: number) {
       const sent = cl.sentiment_comparison?.[pid];
       const coll = (clCollocations as any)?.[pid];
 
-      if (!ctx && !sent && !coll) {
-        container.innerHTML = '<div style="color:#64748b; font-size:0.8rem;">No CL data for this pair</div>';
-        return;
-      }
-
-      const wrapper = d3.select(container);
-
-      // Two columns: context bars + collocations (same style as landing)
-      const grid = wrapper.append('div')
-        .style('display', 'grid')
-        .style('grid-template-columns', '1fr 1fr')
-        .style('gap', '1rem');
-
-      // Left: context distribution — same compact bars as landing drawClContextChart
-      if (ctx) {
-        const left = grid.append('div');
+      // Left: context bars
+      if (ctxContainer && ctx) {
+        const left = d3.select(ctxContainer);
 
         const categories = ['war_conflict', 'academic_science', 'politics', 'history',
           'travel_tourism', 'sports', 'general_news', 'culture_arts', 'food_cuisine', 'business_economy'];
@@ -2179,7 +2180,6 @@ function formatNum(n: number) {
           general_news: 'News', culture_arts: 'Culture', food_cuisine: 'Food', business_economy: 'Business',
         };
 
-        // Legend
         left.append('div').style('display', 'flex').style('gap', '0.75rem').style('margin-bottom', '0.4rem')
           .style('font-size', '0.65rem').style('color', 'var(--text-muted)')
           .html('<span style="display:inline-flex;align-items:center;gap:3px"><span style="width:7px;height:7px;background:#ef4444;border-radius:2px;opacity:0.7"></span>Russian</span>' +
@@ -2197,18 +2197,15 @@ function formatNum(n: number) {
 
           const row = left.append('div').style('display', 'flex').style('align-items', 'center')
             .style('gap', '4px').style('margin-bottom', '2px');
-
           row.append('div').style('width', '50px').style('text-align', 'right')
             .style('font-size', '0.65rem').style('color', 'var(--text)').style('flex-shrink', '0')
             .text(catLabels[cat]);
-
           const bars = row.append('div').style('flex', '1').style('display', 'flex')
             .style('flex-direction', 'column').style('gap', '1px');
           bars.append('div').style('height', '7px').style('background', '#ef4444').style('opacity', '0.6')
             .style('border-radius', '2px').style('width', `${(ruVal / maxVal) * 100}%`);
           bars.append('div').style('height', '7px').style('background', '#3b82f6').style('opacity', '0.6')
             .style('border-radius', '2px').style('width', `${(uaVal / maxVal) * 100}%`);
-
           if (Math.abs(diff) > 0.02) {
             row.append('div').style('width', '35px').style('font-size', '0.6rem').style('font-weight', '600')
               .style('color', diff > 0 ? '#3b82f6' : '#ef4444').style('flex-shrink', '0')
@@ -2218,44 +2215,47 @@ function formatNum(n: number) {
           }
         }
 
-        // Sentiment
         if (sent) {
           left.append('div').style('font-size', '0.65rem').style('color', 'var(--text-muted)')
             .style('margin-top', '0.4rem').style('border-top', '1px solid var(--border)').style('padding-top', '0.3rem')
             .html(`Sentiment: <span style="color:#ef4444">RU ${sent.russian?.mean_score?.toFixed(2) || '?'}</span> / <span style="color:#3b82f6">UA ${sent.ukrainian?.mean_score?.toFixed(2) || '?'}</span>`);
         }
+      } else if (ctxContainer) {
+        ctxContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.75rem;">No context data</div>';
       }
 
-      // Right: collocations — tag cloud style matching Deep Dive cards
-      if (coll) {
-        const right = grid.append('div');
+      // Right: collocations — more words, tag cloud
+      if (collContainer && coll) {
+        const right = d3.select(collContainer);
 
-        for (const [variant, color, label] of [['russian', '#dc2626', 'RU'], ['ukrainian', '#2563eb', 'UA']] as const) {
-          const words = coll[variant]?.collocates?.slice(0, 8) || [];
-          const row = right.append('div').style('margin-bottom', '0.4rem');
-          row.append('span').style('font-size', '0.55rem').style('color', color)
+        for (const [variant, color, label] of [['russian', '#dc2626', 'Russian form'], ['ukrainian', '#2563eb', 'Ukrainian form']] as const) {
+          const words = coll[variant]?.collocates?.slice(0, 12) || [];
+          const section = right.append('div').style('margin-bottom', '0.6rem');
+          section.append('div').style('font-size', '0.6rem').style('color', color)
             .style('font-weight', '700').style('text-transform', 'uppercase')
-            .style('letter-spacing', '0.04em').style('margin-right', '0.3rem').text(label);
+            .style('letter-spacing', '0.04em').style('margin-bottom', '0.25rem').text(label);
 
           if (!words.length) {
-            row.append('span').style('font-size', '0.7rem').style('color', 'var(--text-muted)')
+            section.append('div').style('font-size', '0.7rem').style('color', 'var(--text-muted)')
               .style('font-style', 'italic').text('insufficient data');
             continue;
           }
 
           const maxC = Math.max(...words.map((w: any) => w.count));
-          const tags = row.append('span').style('line-height', '1.8');
+          const tags = section.append('div').style('line-height', '2');
           words.forEach((w: any, i: number) => {
-            const sz = 0.68 + (w.count / maxC) * 0.35;
-            const fw = i < 2 ? '700' : '400';
+            const sz = 0.7 + (w.count / maxC) * 0.45;
+            const fw = i < 3 ? '700' : '400';
             tags.append('span')
               .style('font-size', `${sz}rem`)
               .style('color', color)
               .style('font-weight', fw)
-              .style('margin-right', '0.3rem')
+              .style('margin-right', '0.35rem')
               .text(w.word);
           });
         }
+      } else if (collContainer) {
+        collContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.75rem;">No collocation data</div>';
       }
     }
 
