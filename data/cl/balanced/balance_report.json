@@ -1,95 +1,95 @@
 {
-  "total_texts": 41524,
-  "timestamp": "2026-04-05T10:43:30.830402",
+  "total_texts": 43212,
+  "timestamp": "2026-04-06T00:12:28.819838",
   "by_source": {
-    "gdelt": 6323,
-    "openalex": 16480,
-    "reddit": 11886,
-    "youtube": 6835
+    "gdelt": 6318,
+    "openalex": 18185,
+    "reddit": 11877,
+    "youtube": 6832
   },
   "by_variant": {
-    "russian": 20028,
-    "ukrainian": 21496
+    "russian": 21106,
+    "ukrainian": 22106
   },
   "by_pair": {
     "1": {
-      "total": 2061,
+      "total": 2526,
       "by_variant": {
-        "russian": 1099,
-        "ukrainian": 962
+        "russian": 1348,
+        "ukrainian": 1178
       },
       "by_source": {
         "gdelt": 243,
-        "openalex": 785,
+        "openalex": 1250,
         "reddit": 728,
         "youtube": 305
       },
       "by_year_stratum": {
-        "2010-2013": 166,
-        "2014-2017": 436,
-        "2018-2021": 558,
-        "2022-2026": 727,
-        "unknown": 174
+        "2010-2013": 325,
+        "2014-2017": 498,
+        "2018-2021": 600,
+        "2022-2026": 846,
+        "unknown": 257
       }
     },
     "2": {
-      "total": 1749,
+      "total": 2092,
       "by_variant": {
-        "russian": 904,
-        "ukrainian": 845
+        "russian": 1022,
+        "ukrainian": 1070
       },
       "by_source": {
         "gdelt": 221,
-        "openalex": 727,
+        "openalex": 1070,
         "reddit": 489,
         "youtube": 312
       },
       "by_year_stratum": {
-        "2010-2013": 108,
-        "2014-2017": 340,
-        "2018-2021": 391,
-        "2022-2026": 756,
-        "unknown": 154
+        "2010-2013": 216,
+        "2014-2017": 429,
+        "2018-2021": 425,
+        "2022-2026": 783,
+        "unknown": 239
       }
     },
     "3": {
-      "total": 1818,
+      "total": 2049,
       "by_variant": {
-        "russian": 1058,
-        "ukrainian": 760
+        "russian": 1256,
+        "ukrainian": 793
       },
       "by_source": {
-        "gdelt": 219,
-        "openalex": 742,
-        "reddit": 521,
-        "youtube": 336
+        "gdelt": 214,
+        "openalex": 990,
+        "reddit": 512,
+        "youtube": 333
       },
       "by_year_stratum": {
-        "2010-2013": 92,
-        "2014-2017": 343,
-        "2018-2021": 474,
-        "2022-2026": 753,
-        "unknown": 156
+        "2010-2013": 167,
+        "2014-2017": 405,
+        "2018-2021": 465,
+        "2022-2026": 849,
+        "unknown": 163
       }
     },
     "4": {
-      "total": 1725,
+      "total": 1973,
       "by_variant": {
-        "russian": 788,
-        "ukrainian": 937
+        "russian": 816,
+        "ukrainian": 1157
       },
       "by_source": {
         "gdelt": 194,
-        "openalex": 772,
+        "openalex": 1020,
         "reddit": 446,
         "youtube": 313
       },
       "by_year_stratum": {
-        "2010-2013": 86,
-        "2014-2017": 352,
-        "2018-2021": 399,
-        "2022-2026": 731,
-        "unknown": 157
+        "2010-2013": 183,
+        "2014-2017": 399,
+        "2018-2021": 407,
+        "2022-2026": 733,
+        "unknown": 251
       }
     },
     "5": {
@@ -133,23 +133,23 @@
       }
     },
     "7": {
-      "total": 1502,
+      "total": 1572,
       "by_variant": {
         "russian": 699,
-        "ukrainian": 803
+        "ukrainian": 873
       },
       "by_source": {
         "gdelt": 229,
-        "openalex": 539,
+        "openalex": 609,
         "reddit": 375,
         "youtube": 359
       },
       "by_year_stratum": {
-        "2010-2013": 48,
-        "2014-2017": 274,
+        "2010-2013": 61,
+        "2014-2017": 319,
         "2018-2021": 347,
         "2022-2026": 699,
-        "unknown": 134
+        "unknown": 146
       }
     },
     "8": {
@@ -193,23 +193,23 @@
       }
     },
     "10": {
-      "total": 1673,
+      "total": 2167,
       "by_variant": {
-        "russian": 878,
-        "ukrainian": 795
+        "russian": 1294,
+        "ukrainian": 873
       },
       "by_source": {
         "gdelt": 195,
-        "openalex": 677,
+        "openalex": 1171,
         "reddit": 578,
         "youtube": 223
       },
       "by_year_stratum": {
-        "2010-2013": 132,
-        "2014-2017": 308,
-        "2018-2021": 376,
-        "2022-2026": 628,
-        "unknown": 229
+        "2010-2013": 235,
+        "2014-2017": 437,
+        "2018-2021": 491,
+        "2022-2026": 751,
+        "unknown": 253
       }
     },
     "11": {
@@ -233,63 +233,63 @@
       }
     },
     "15": {
-      "total": 1379,
+      "total": 1615,
       "by_variant": {
-        "russian": 723,
-        "ukrainian": 656
+        "russian": 889,
+        "ukrainian": 726
       },
       "by_source": {
         "gdelt": 225,
-        "openalex": 763,
+        "openalex": 999,
         "reddit": 94,
         "youtube": 297
       },
       "by_year_stratum": {
-        "2010-2013": 56,
-        "2014-2017": 205,
+        "2010-2013": 124,
+        "2014-2017": 293,
         "2018-2021": 397,
-        "2022-2026": 576,
-        "unknown": 145
+        "2022-2026": 644,
+        "unknown": 157
       }
     },
     "16": {
-      "total": 1245,
+      "total": 1300,
       "by_variant": {
-        "russian": 819,
+        "russian": 874,
         "ukrainian": 426
       },
       "by_source": {
         "gdelt": 184,
-        "openalex": 581,
+        "openalex": 636,
         "reddit": 256,
         "youtube": 224
       },
       "by_year_stratum": {
-        "2010-2013": 56,
-        "2014-2017": 197,
+        "2010-2013": 64,
+        "2014-2017": 222,
         "2018-2021": 312,
         "2022-2026": 601,
-        "unknown": 79
+        "unknown": 101
       }
     },
     "17": {
-      "total": 1688,
+      "total": 1853,
       "by_variant": {
-        "russian": 935,
-        "ukrainian": 753
+        "russian": 1013,
+        "ukrainian": 840
       },
       "by_source": {
         "gdelt": 232,
-        "openalex": 879,
+        "openalex": 1044,
         "reddit": 513,
         "youtube": 64
       },
       "by_year_stratum": {
-        "2010-2013": 40,
-        "2014-2017": 380,
+        "2010-2013": 69,
+        "2014-2017": 444,
         "2018-2021": 452,
-        "2022-2026": 633,
-        "unknown": 183
+        "2022-2026": 653,
+        "unknown": 235
       }
     },
     "19": {
@@ -313,21 +313,21 @@
       }
     },
     "20": {
-      "total": 507,
+      "total": 508,
       "by_variant": {
         "russian": 161,
-        "ukrainian": 346
+        "ukrainian": 347
       },
       "by_source": {
         "gdelt": 119,
-        "openalex": 272,
+        "openalex": 273,
         "reddit": 17,
         "youtube": 99
       },
       "by_year_stratum": {
         "2010-2013": 26,
         "2014-2017": 80,
-        "2018-2021": 160,
+        "2018-2021": 161,
         "2022-2026": 231,
         "unknown": 10
       }
@@ -445,22 +445,21 @@
       }
     },
     "27": {
-      "total": 1411,
+      "total": 537,
       "by_variant": {
-        "russian": 745,
-        "ukrainian": 666
+        "russian": 308,
+        "ukrainian": 229
       },
       "by_source": {
-        "openalex": 874,
         "reddit": 442,
         "youtube": 95
       },
       "by_year_stratum": {
-        "2010-2013": 106,
-        "2014-2017": 284,
-        "2018-2021": 186,
-        "2022-2026": 584,
-        "unknown": 251
+        "2010-2013": 25,
+        "2014-2017": 86,
+        "2018-2021": 80,
+        "2022-2026": 345,
+        "unknown": 1
       }
     },
     "28": {
@@ -595,21 +594,21 @@
       }
     },
     "36": {
-      "total": 1068,
+      "total": 1239,
       "by_variant": {
-        "russian": 527,
-        "ukrainian": 541
+        "russian": 697,
+        "ukrainian": 542
       },
       "by_source": {
-        "openalex": 834,
+        "openalex": 1005,
         "reddit": 134,
         "youtube": 100
       },
       "by_year_stratum": {
-        "2010-2013": 131,
-        "2014-2017": 185,
-        "2018-2021": 158,
-        "2022-2026": 344,
+        "2010-2013": 183,
+        "2014-2017": 207,
+        "2018-2021": 192,
+        "2022-2026": 407,
         "unknown": 250
       }
     },
@@ -654,23 +653,23 @@
       }
     },
     "40": {
-      "total": 1023,
+      "total": 1065,
       "by_variant": {
         "russian": 365,
-        "ukrainian": 658
+        "ukrainian": 700
       },
       "by_source": {
         "gdelt": 258,
-        "openalex": 439,
+        "openalex": 481,
         "reddit": 246,
         "youtube": 80
       },
       "by_year_stratum": {
-        "2010-2013": 32,
-        "2014-2017": 188,
+        "2010-2013": 39,
+        "2014-2017": 207,
         "2018-2021": 253,
         "2022-2026": 494,
-        "unknown": 56
+        "unknown": 72
       }
     },
     "41": {
@@ -754,20 +753,20 @@
       }
     },
     "45": {
-      "total": 834,
+      "total": 838,
       "by_variant": {
         "russian": 199,
-        "ukrainian": 635
+        "ukrainian": 639
       },
       "by_source": {
         "gdelt": 258,
-        "openalex": 396,
+        "openalex": 400,
         "reddit": 121,
         "youtube": 59
       },
       "by_year_stratum": {
-        "2010-2013": 16,
-        "2014-2017": 136,
+        "2010-2013": 18,
+        "2014-2017": 138,
         "2018-2021": 236,
         "2022-2026": 385,
         "unknown": 61
@@ -993,40 +992,40 @@
       }
     },
     "64": {
-      "total": 782,
+      "total": 818,
       "by_variant": {
-        "russian": 484,
+        "russian": 520,
         "ukrainian": 298
       },
       "by_source": {
         "gdelt": 213,
-        "openalex": 160,
+        "openalex": 196,
         "reddit": 345,
         "youtube": 64
       },
       "by_year_stratum": {
-        "2010-2013": 6,
-        "2014-2017": 71,
-        "2018-2021": 170,
+        "2010-2013": 8,
+        "2014-2017": 72,
+        "2018-2021": 180,
         "2022-2026": 528,
-        "unknown": 7
+        "unknown": 30
       }
     },
     "70": {
-      "total": 132,
+      "total": 133,
       "by_variant": {
-        "russian": 117,
+        "russian": 118,
         "ukrainian": 15
       },
       "by_source": {
         "gdelt": 18,
-        "openalex": 114
+        "openalex": 115
       },
       "by_year_stratum": {
         "2010-2013": 5,
         "2014-2017": 22,
         "2018-2021": 51,
-        "2022-2026": 37,
+        "2022-2026": 38,
         "unknown": 17
       }
     },
@@ -1120,78 +1119,6 @@
       "target": 125,
       "available": 45,
       "shortfall": 80
-    },
-    {
-      "pair_id": 1,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2010-2013",
-      "target": 125,
-      "available": 61,
-      "shortfall": 64
-    },
-    {
-      "pair_id": 1,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 94,
-      "shortfall": 31
-    },
-    {
-      "pair_id": 1,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2018-2021",
-      "target": 125,
-      "available": 83,
-      "shortfall": 42
-    },
-    {
-      "pair_id": 1,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2022-2026",
-      "target": 125,
-      "available": 13,
-      "shortfall": 112
-    },
-    {
-      "pair_id": 1,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2010-2013",
-      "target": 125,
-      "available": 30,
-      "shortfall": 95
-    },
-    {
-      "pair_id": 1,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 94,
-      "shortfall": 31
-    },
-    {
-      "pair_id": 1,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2022-2026",
-      "target": 125,
-      "available": 118,
-      "shortfall": 7
-    },
-    {
-      "pair_id": 1,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "unknown",
-      "target": 125,
-      "available": 42,
-      "shortfall": 83
     },
     {
       "pair_id": 1,
@@ -1361,15 +1288,6 @@
       "variant": "russian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 38,
-      "shortfall": 87
-    },
-    {
-      "pair_id": 2,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2014-2017",
-      "target": 125,
       "available": 67,
       "shortfall": 58
     },
@@ -1377,10 +1295,10 @@
       "pair_id": 2,
       "source": "openalex",
       "variant": "russian",
-      "year_stratum": "2018-2021",
+      "year_stratum": "2014-2017",
       "target": 125,
-      "available": 91,
-      "shortfall": 34
+      "available": 97,
+      "shortfall": 28
     },
     {
       "pair_id": 2,
@@ -1388,8 +1306,8 @@
       "variant": "russian",
       "year_stratum": "2022-2026",
       "target": 125,
-      "available": 34,
-      "shortfall": 91
+      "available": 59,
+      "shortfall": 66
     },
     {
       "pair_id": 2,
@@ -1397,26 +1315,8 @@
       "variant": "ukrainian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 32,
-      "shortfall": 93
-    },
-    {
-      "pair_id": 2,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 66,
-      "shortfall": 59
-    },
-    {
-      "pair_id": 2,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2022-2026",
-      "target": 125,
-      "available": 123,
-      "shortfall": 2
+      "available": 111,
+      "shortfall": 14
     },
     {
       "pair_id": 2,
@@ -1424,8 +1324,8 @@
       "variant": "ukrainian",
       "year_stratum": "unknown",
       "target": 125,
-      "available": 26,
-      "shortfall": 99
+      "available": 111,
+      "shortfall": 14
     },
     {
       "pair_id": 2,
@@ -1559,8 +1459,8 @@
       "variant": "russian",
       "year_stratum": "2014-2017",
       "target": 125,
-      "available": 20,
-      "shortfall": 105
+      "available": 19,
+      "shortfall": 106
     },
     {
       "pair_id": 3,
@@ -1568,8 +1468,8 @@
       "variant": "russian",
       "year_stratum": "2018-2021",
       "target": 125,
-      "available": 32,
-      "shortfall": 93
+      "available": 29,
+      "shortfall": 96
     },
     {
       "pair_id": 3,
@@ -1604,35 +1504,8 @@
       "variant": "ukrainian",
       "year_stratum": "2022-2026",
       "target": 125,
-      "available": 45,
-      "shortfall": 80
-    },
-    {
-      "pair_id": 3,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2010-2013",
-      "target": 125,
-      "available": 49,
-      "shortfall": 76
-    },
-    {
-      "pair_id": 3,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 84,
-      "shortfall": 41
-    },
-    {
-      "pair_id": 3,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2022-2026",
-      "target": 125,
-      "available": 28,
-      "shortfall": 97
+      "available": 44,
+      "shortfall": 81
     },
     {
       "pair_id": 3,
@@ -1640,8 +1513,8 @@
       "variant": "ukrainian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 6,
-      "shortfall": 119
+      "available": 9,
+      "shortfall": 116
     },
     {
       "pair_id": 3,
@@ -1649,17 +1522,8 @@
       "variant": "ukrainian",
       "year_stratum": "2014-2017",
       "target": 125,
-      "available": 48,
-      "shortfall": 77
-    },
-    {
-      "pair_id": 3,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2018-2021",
-      "target": 125,
-      "available": 124,
-      "shortfall": 1
+      "available": 71,
+      "shortfall": 54
     },
     {
       "pair_id": 3,
@@ -1667,8 +1531,8 @@
       "variant": "ukrainian",
       "year_stratum": "unknown",
       "target": 125,
-      "available": 28,
-      "shortfall": 97
+      "available": 35,
+      "shortfall": 90
     },
     {
       "pair_id": 3,
@@ -1676,8 +1540,8 @@
       "variant": "russian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 24,
-      "shortfall": 101
+      "available": 21,
+      "shortfall": 104
     },
     {
       "pair_id": 3,
@@ -1685,8 +1549,8 @@
       "variant": "russian",
       "year_stratum": "2018-2021",
       "target": 125,
-      "available": 86,
-      "shortfall": 39
+      "available": 80,
+      "shortfall": 45
     },
     {
       "pair_id": 3,
@@ -1730,8 +1594,8 @@
       "variant": "russian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 4,
-      "shortfall": 121
+      "available": 3,
+      "shortfall": 122
     },
     {
       "pair_id": 3,
@@ -1739,8 +1603,8 @@
       "variant": "russian",
       "year_stratum": "2014-2017",
       "target": 125,
-      "available": 12,
-      "shortfall": 113
+      "available": 11,
+      "shortfall": 114
     },
     {
       "pair_id": 3,
@@ -1748,8 +1612,8 @@
       "variant": "russian",
       "year_stratum": "2018-2021",
       "target": 125,
-      "available": 36,
-      "shortfall": 89
+      "available": 35,
+      "shortfall": 90
     },
     {
       "pair_id": 3,
@@ -1847,8 +1711,8 @@
       "variant": "russian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 29,
-      "shortfall": 96
+      "available": 36,
+      "shortfall": 89
     },
     {
       "pair_id": 4,
@@ -1856,8 +1720,8 @@
       "variant": "russian",
       "year_stratum": "2014-2017",
       "target": 125,
-      "available": 90,
-      "shortfall": 35
+      "available": 101,
+      "shortfall": 24
     },
     {
       "pair_id": 4,
@@ -1865,8 +1729,8 @@
       "variant": "russian",
       "year_stratum": "2018-2021",
       "target": 125,
-      "available": 74,
-      "shortfall": 51
+      "available": 82,
+      "shortfall": 43
     },
     {
       "pair_id": 4,
@@ -1874,35 +1738,8 @@
       "variant": "russian",
       "year_stratum": "2022-2026",
       "target": 125,
-      "available": 49,
-      "shortfall": 76
-    },
-    {
-      "pair_id": 4,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2010-2013",
-      "target": 125,
-      "available": 35,
-      "shortfall": 90
-    },
-    {
-      "pair_id": 4,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 89,
-      "shortfall": 36
-    },
-    {
-      "pair_id": 4,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "unknown",
-      "target": 125,
-      "available": 31,
-      "shortfall": 94
+      "available": 51,
+      "shortfall": 74
     },
     {
       "pair_id": 4,
@@ -2603,8 +2440,8 @@
       "variant": "ukrainian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 5,
-      "shortfall": 120
+      "available": 18,
+      "shortfall": 107
     },
     {
       "pair_id": 7,
@@ -2612,8 +2449,8 @@
       "variant": "ukrainian",
       "year_stratum": "2014-2017",
       "target": 125,
-      "available": 52,
-      "shortfall": 73
+      "available": 97,
+      "shortfall": 28
     },
     {
       "pair_id": 7,
@@ -2621,8 +2458,8 @@
       "variant": "ukrainian",
       "year_stratum": "unknown",
       "target": 125,
-      "available": 20,
-      "shortfall": 105
+      "available": 32,
+      "shortfall": 93
     },
     {
       "pair_id": 7,
@@ -3266,65 +3103,11 @@
     {
       "pair_id": 10,
       "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2010-2013",
-      "target": 125,
-      "available": 43,
-      "shortfall": 82
-    },
-    {
-      "pair_id": 10,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 29,
-      "shortfall": 96
-    },
-    {
-      "pair_id": 10,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2018-2021",
-      "target": 125,
-      "available": 10,
-      "shortfall": 115
-    },
-    {
-      "pair_id": 10,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2022-2026",
-      "target": 125,
-      "available": 2,
-      "shortfall": 123
-    },
-    {
-      "pair_id": 10,
-      "source": "openalex",
       "variant": "ukrainian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 25,
-      "shortfall": 100
-    },
-    {
-      "pair_id": 10,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 92,
-      "shortfall": 33
-    },
-    {
-      "pair_id": 10,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "unknown",
-      "target": 125,
-      "available": 101,
-      "shortfall": 24
+      "available": 46,
+      "shortfall": 79
     },
     {
       "pair_id": 10,
@@ -3719,26 +3502,8 @@
       "variant": "russian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 47,
-      "shortfall": 78
-    },
-    {
-      "pair_id": 15,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 82,
-      "shortfall": 43
-    },
-    {
-      "pair_id": 15,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2022-2026",
-      "target": 125,
-      "available": 57,
-      "shortfall": 68
+      "available": 102,
+      "shortfall": 23
     },
     {
       "pair_id": 15,
@@ -3746,8 +3511,8 @@
       "variant": "ukrainian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 5,
-      "shortfall": 120
+      "available": 18,
+      "shortfall": 107
     },
     {
       "pair_id": 15,
@@ -3755,8 +3520,8 @@
       "variant": "ukrainian",
       "year_stratum": "2014-2017",
       "target": 125,
-      "available": 52,
-      "shortfall": 73
+      "available": 97,
+      "shortfall": 28
     },
     {
       "pair_id": 15,
@@ -3764,8 +3529,8 @@
       "variant": "ukrainian",
       "year_stratum": "unknown",
       "target": 125,
-      "available": 20,
-      "shortfall": 105
+      "available": 32,
+      "shortfall": 93
     },
     {
       "pair_id": 15,
@@ -3944,8 +3709,8 @@
       "variant": "russian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 41,
-      "shortfall": 84
+      "available": 49,
+      "shortfall": 76
     },
     {
       "pair_id": 16,
@@ -3953,8 +3718,8 @@
       "variant": "russian",
       "year_stratum": "2014-2017",
       "target": 125,
-      "available": 82,
-      "shortfall": 43
+      "available": 107,
+      "shortfall": 18
     },
     {
       "pair_id": 16,
@@ -3962,8 +3727,8 @@
       "variant": "russian",
       "year_stratum": "unknown",
       "target": 125,
-      "available": 61,
-      "shortfall": 64
+      "available": 83,
+      "shortfall": 42
     },
     {
       "pair_id": 16,
@@ -4196,26 +3961,8 @@
       "variant": "russian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 20,
-      "shortfall": 105
-    },
-    {
-      "pair_id": 17,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 87,
-      "shortfall": 38
-    },
-    {
-      "pair_id": 17,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2022-2026",
-      "target": 125,
-      "available": 105,
-      "shortfall": 20
+      "available": 40,
+      "shortfall": 85
     },
     {
       "pair_id": 17,
@@ -4223,17 +3970,8 @@
       "variant": "ukrainian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 10,
-      "shortfall": 115
-    },
-    {
-      "pair_id": 17,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 99,
-      "shortfall": 26
+      "available": 19,
+      "shortfall": 106
     },
     {
       "pair_id": 17,
@@ -4241,8 +3979,8 @@
       "variant": "ukrainian",
       "year_stratum": "unknown",
       "target": 125,
-      "available": 58,
-      "shortfall": 67
+      "available": 110,
+      "shortfall": 15
     },
     {
       "pair_id": 17,
@@ -4628,8 +4366,8 @@
       "variant": "ukrainian",
       "year_stratum": "2018-2021",
       "target": 125,
-      "available": 87,
-      "shortfall": 38
+      "available": 88,
+      "shortfall": 37
     },
     {
       "pair_id": 20,
@@ -5773,78 +5511,6 @@
       "target": 125,
       "available": 17,
       "shortfall": 108
-    },
-    {
-      "pair_id": 27,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2010-2013",
-      "target": 125,
-      "available": 41,
-      "shortfall": 84
-    },
-    {
-      "pair_id": 27,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 99,
-      "shortfall": 26
-    },
-    {
-      "pair_id": 27,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2018-2021",
-      "target": 125,
-      "available": 53,
-      "shortfall": 72
-    },
-    {
-      "pair_id": 27,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2022-2026",
-      "target": 125,
-      "available": 119,
-      "shortfall": 6
-    },
-    {
-      "pair_id": 27,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2010-2013",
-      "target": 125,
-      "available": 40,
-      "shortfall": 85
-    },
-    {
-      "pair_id": 27,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 99,
-      "shortfall": 26
-    },
-    {
-      "pair_id": 27,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2018-2021",
-      "target": 125,
-      "available": 53,
-      "shortfall": 72
-    },
-    {
-      "pair_id": 27,
-      "source": "openalex",
-      "variant": "ukrainian",
-      "year_stratum": "2022-2026",
-      "target": 125,
-      "available": 120,
-      "shortfall": 5
     },
     {
       "pair_id": 27,
@@ -7091,42 +6757,6 @@
     {
       "pair_id": 36,
       "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2010-2013",
-      "target": 125,
-      "available": 73,
-      "shortfall": 52
-    },
-    {
-      "pair_id": 36,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2014-2017",
-      "target": 125,
-      "available": 103,
-      "shortfall": 22
-    },
-    {
-      "pair_id": 36,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2018-2021",
-      "target": 125,
-      "available": 92,
-      "shortfall": 33
-    },
-    {
-      "pair_id": 36,
-      "source": "openalex",
-      "variant": "russian",
-      "year_stratum": "2022-2026",
-      "target": 125,
-      "available": 62,
-      "shortfall": 63
-    },
-    {
-      "pair_id": 36,
-      "source": "openalex",
       "variant": "ukrainian",
       "year_stratum": "2010-2013",
       "target": 125,
@@ -7148,8 +6778,8 @@
       "variant": "ukrainian",
       "year_stratum": "2018-2021",
       "target": 125,
-      "available": 47,
-      "shortfall": 78
+      "available": 48,
+      "shortfall": 77
     },
     {
       "pair_id": 36,
@@ -7841,8 +7471,8 @@
       "variant": "ukrainian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 18,
-      "shortfall": 107
+      "available": 25,
+      "shortfall": 100
     },
     {
       "pair_id": 40,
@@ -7850,8 +7480,8 @@
       "variant": "ukrainian",
       "year_stratum": "2014-2017",
       "target": 125,
-      "available": 74,
-      "shortfall": 51
+      "available": 93,
+      "shortfall": 32
     },
     {
       "pair_id": 40,
@@ -7859,8 +7489,8 @@
       "variant": "ukrainian",
       "year_stratum": "unknown",
       "target": 125,
-      "available": 10,
-      "shortfall": 115
+      "available": 26,
+      "shortfall": 99
     },
     {
       "pair_id": 40,
@@ -9011,8 +8641,8 @@
       "variant": "ukrainian",
       "year_stratum": "2010-2013",
       "target": 125,
-      "available": 16,
-      "shortfall": 109
+      "available": 18,
+      "shortfall": 107
     },
     {
       "pair_id": 45,
@@ -9020,8 +8650,8 @@
       "variant": "ukrainian",
       "year_stratum": "2014-2017",
       "target": 125,
-      "available": 57,
-      "shortfall": 68
+      "available": 59,
+      "shortfall": 66
     },
     {
       "pair_id": 45,
@@ -10899,7 +10529,7 @@
       "pair_id": 64,
       "source": "openalex",
       "variant": "russian",
-      "year_stratum": "2014-2017",
+      "year_stratum": "2010-2013",
       "target": 125,
       "available": 2,
       "shortfall": 123
@@ -10908,10 +10538,19 @@
       "pair_id": 64,
       "source": "openalex",
       "variant": "russian",
+      "year_stratum": "2014-2017",
+      "target": 125,
+      "available": 3,
+      "shortfall": 122
+    },
+    {
+      "pair_id": 64,
+      "source": "openalex",
+      "variant": "russian",
       "year_stratum": "2018-2021",
       "target": 125,
-      "available": 10,
-      "shortfall": 115
+      "available": 20,
+      "shortfall": 105
     },
     {
       "pair_id": 64,
@@ -10919,8 +10558,8 @@
       "variant": "russian",
       "year_stratum": "unknown",
       "target": 125,
-      "available": 6,
-      "shortfall": 119
+      "available": 29,
+      "shortfall": 96
     },
     {
       "pair_id": 64,
@@ -11144,8 +10783,8 @@
       "variant": "russian",
       "year_stratum": "2022-2026",
       "target": 125,
-      "available": 33,
-      "shortfall": 92
+      "available": 34,
+      "shortfall": 91
     },
     {
       "pair_id": 70,
@@ -11392,10 +11031,10 @@
     }
   ],
   "year_distribution": {
-    "2010-2013": 1784,
-    "2014-2017": 6749,
-    "2018-2021": 9909,
-    "2022-2026": 19905,
-    "unknown": 3177
+    "2010-2013": 2426,
+    "2014-2017": 7206,
+    "2018-2021": 10038,
+    "2022-2026": 20185,
+    "unknown": 3357
   }
 }
