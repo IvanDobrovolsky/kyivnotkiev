@@ -366,9 +366,9 @@ pairs:
   category: country
   russian: the Ukraine
   ukrainian: Ukraine
-  enabled: true
+  enabled: false
   is_control: false
-  notes: Requires negative lookahead for 'the Ukraine war' etc.
+  notes: 'Removed: not a toponym, grammatical article construction'
   filter_pattern: \bthe Ukraine\b(?!\s+(war|crisis|conflict|invasion|situation|government|military|army|front|offensive|defense|aid|support|scandal|story|deal|peace|grain|question|issue|debate|border|region|territory|people|side|thing|part|trip|visit|attack|strike|response|policy|strategy|effort|update|news|report|angle|perspective|context|dimension|topic|narrative))
   events:
   - date: 1991-08
