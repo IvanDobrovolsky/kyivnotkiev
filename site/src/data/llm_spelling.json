@@ -1,0 +1,146 @@
+[
+  {
+    "model": "gemma2-27b",
+    "tier": "mid",
+    "russian": 8,
+    "ukrainian": 43,
+    "other": 3,
+    "adoption": 84.3
+  },
+  {
+    "model": "gemma2-2b",
+    "tier": "tiny",
+    "russian": 8,
+    "ukrainian": 40,
+    "other": 6,
+    "adoption": 83.3
+  },
+  {
+    "model": "gemma3-12b",
+    "tier": "mid",
+    "russian": 7,
+    "ukrainian": 42,
+    "other": 5,
+    "adoption": 85.7
+  },
+  {
+    "model": "gemma3-1b",
+    "tier": "tiny",
+    "russian": 6,
+    "ukrainian": 38,
+    "other": 10,
+    "adoption": 86.4
+  },
+  {
+    "model": "gemma3-27b",
+    "tier": "mid",
+    "russian": 6,
+    "ukrainian": 45,
+    "other": 3,
+    "adoption": 88.2
+  },
+  {
+    "model": "gemma3-4b",
+    "tier": "small",
+    "russian": 5,
+    "ukrainian": 44,
+    "other": 5,
+    "adoption": 89.8
+  },
+  {
+    "model": "gemma4-26b",
+    "tier": "mid",
+    "russian": 3,
+    "ukrainian": 15,
+    "other": 36,
+    "adoption": 83.3
+  },
+  {
+    "model": "gemma4-31b",
+    "tier": "mid",
+    "russian": 3,
+    "ukrainian": 33,
+    "other": 18,
+    "adoption": 91.7
+  },
+  {
+    "model": "gemma4-e2b",
+    "tier": "tiny",
+    "russian": 5,
+    "ukrainian": 5,
+    "other": 44,
+    "adoption": 50.0
+  },
+  {
+    "model": "gemma4-e4b",
+    "tier": "small",
+    "russian": 6,
+    "ukrainian": 20,
+    "other": 28,
+    "adoption": 76.9
+  },
+  {
+    "model": "llama3.2-1b",
+    "tier": "tiny",
+    "russian": 14,
+    "ukrainian": 26,
+    "other": 14,
+    "adoption": 65.0
+  },
+  {
+    "model": "llama3.2-3b",
+    "tier": "small",
+    "russian": 7,
+    "ukrainian": 39,
+    "other": 8,
+    "adoption": 84.8
+  },
+  {
+    "model": "llama3.3-70b",
+    "tier": "large",
+    "russian": 8,
+    "ukrainian": 42,
+    "other": 4,
+    "adoption": 84.0
+  },
+  {
+    "model": "phi3-mini",
+    "tier": "small",
+    "russian": 15,
+    "ukrainian": 28,
+    "other": 11,
+    "adoption": 65.1
+  },
+  {
+    "model": "qwen2.5-14b",
+    "tier": "mid",
+    "russian": 7,
+    "ukrainian": 42,
+    "other": 5,
+    "adoption": 85.7
+  },
+  {
+    "model": "qwen2.5-32b",
+    "tier": "mid",
+    "russian": 10,
+    "ukrainian": 38,
+    "other": 6,
+    "adoption": 79.2
+  },
+  {
+    "model": "qwen2.5-3b",
+    "tier": "small",
+    "russian": 7,
+    "ukrainian": 40,
+    "other": 7,
+    "adoption": 85.1
+  },
+  {
+    "model": "qwen2.5-72b",
+    "tier": "large",
+    "russian": 10,
+    "ukrainian": 40,
+    "other": 4,
+    "adoption": 80.0
+  }
+]

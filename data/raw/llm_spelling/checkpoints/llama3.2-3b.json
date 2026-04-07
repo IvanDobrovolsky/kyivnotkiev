@@ -1,0 +1,502 @@
+{
+  "model": "llama3.2-3b",
+  "tier": "small",
+  "provider": "ollama",
+  "full_model": "llama3.2:3b",
+  "pairs": [
+    {
+      "pair_id": 1,
+      "russian": "Kiev",
+      "ukrainian": "Kyiv",
+      "category": "geographical",
+      "prompt": "How do you spell the capital city of Ukraine in English? Answer with just the name, nothing else.",
+      "response": "Kiev",
+      "classified": "russian"
+    },
+    {
+      "pair_id": 2,
+      "russian": "Kharkov",
+      "ukrainian": "Kharkiv",
+      "category": "geographical",
+      "prompt": "How do you spell the second-largest city in Ukraine, in the northeast in English? Answer with just the name, nothing else.",
+      "response": "Kharkiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 3,
+      "russian": "Odessa",
+      "ukrainian": "Odesa",
+      "category": "geographical",
+      "prompt": "How do you spell the Ukrainian port city on the Black Sea, famous for its steps in English? Answer with just the name, nothing else.",
+      "response": "Odessa",
+      "classified": "russian"
+    },
+    {
+      "pair_id": 4,
+      "russian": "Lvov",
+      "ukrainian": "Lviv",
+      "category": "geographical",
+      "prompt": "How do you spell the major city in western Ukraine, known for its architecture in English? Answer with just the name, nothing else.",
+      "response": "Lviv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 5,
+      "russian": "Zaporozhye",
+      "ukrainian": "Zaporizhzhia",
+      "category": "geographical",
+      "prompt": "How do you spell the Ukrainian city on the Dnieper, home to a large nuclear power plant in English? Answer with just the name, nothing else.",
+      "response": "Chernobyl",
+      "classified": "other"
+    },
+    {
+      "pair_id": 6,
+      "russian": "Nikolaev",
+      "ukrainian": "Mykolaiv",
+      "category": "geographical",
+      "prompt": "How do you spell the Ukrainian port city in the south, near the Bug river in English? Answer with just the name, nothing else.",
+      "response": "Odessa",
+      "classified": "other"
+    },
+    {
+      "pair_id": 7,
+      "russian": "Dnepropetrovsk",
+      "ukrainian": "Dnipro",
+      "category": "geographical",
+      "prompt": "How do you spell the large Ukrainian city on the Dnieper, formerly known as Yekaterinoslav in English? Answer with just the name, nothing else.",
+      "response": "Dnipro",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 8,
+      "russian": "Vinnitsa",
+      "ukrainian": "Vinnytsia",
+      "category": "geographical",
+      "prompt": "How do you spell the Ukrainian city in the west-central region, a regional capital in English? Answer with just the name, nothing else.",
+      "response": "Kiev",
+      "classified": "other"
+    },
+    {
+      "pair_id": 9,
+      "russian": "Rovno",
+      "ukrainian": "Rivne",
+      "category": "geographical",
+      "prompt": "How do you spell the Ukrainian city in the northwest, a regional capital in Volhynia in English? Answer with just the name, nothing else.",
+      "response": "Lutsk",
+      "classified": "other"
+    },
+    {
+      "pair_id": 10,
+      "russian": "Chernobyl",
+      "ukrainian": "Chornobyl",
+      "category": "geographical",
+      "prompt": "How do you spell the site of the 1986 nuclear disaster in Ukraine in English? Answer with just the name, nothing else.",
+      "response": "Chernobyl.",
+      "classified": "russian"
+    },
+    {
+      "pair_id": 11,
+      "russian": "Lugansk",
+      "ukrainian": "Luhansk",
+      "category": "geographical",
+      "prompt": "How do you spell the city in eastern Ukraine, capital of one of the separatist regions in English? Answer with just the name, nothing else.",
+      "response": "Donetsk",
+      "classified": "other"
+    },
+    {
+      "pair_id": 15,
+      "russian": "Dnieper",
+      "ukrainian": "Dnipro",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Dnieper' or 'Dnipro'? Answer with just the spelling.",
+      "response": "Dnipro",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 16,
+      "russian": "Dniester",
+      "ukrainian": "Dnister",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Dniester' or 'Dnister'? Answer with just the spelling.",
+      "response": "Dniester",
+      "classified": "russian"
+    },
+    {
+      "pair_id": 17,
+      "russian": "Donbass",
+      "ukrainian": "Donbas",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Donbass' or 'Donbas'? Answer with just the spelling.",
+      "response": "Donbas",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 19,
+      "russian": "Zakarpatye",
+      "ukrainian": "Zakarpattia",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Zakarpatye' or 'Zakarpattia'? Answer with just the spelling.",
+      "response": "Zakarpattia",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 20,
+      "russian": "Podolye",
+      "ukrainian": "Podillia",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Podolye' or 'Podillia'? Answer with just the spelling.",
+      "response": "Podillya",
+      "classified": "other"
+    },
+    {
+      "pair_id": 38,
+      "russian": "Chernigov",
+      "ukrainian": "Chernihiv",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Chernigov' or 'Chernihiv'? Answer with just the spelling.",
+      "response": "Chernihiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 39,
+      "russian": "Chernovtsy",
+      "ukrainian": "Chernivtsi",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Chernovtsy' or 'Chernivtsi'? Answer with just the spelling.",
+      "response": "Chernivtsi",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 40,
+      "russian": "Zhitomir",
+      "ukrainian": "Zhytomyr",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Zhitomir' or 'Zhytomyr'? Answer with just the spelling.",
+      "response": "Zhytomyr",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 41,
+      "russian": "Cherkassy",
+      "ukrainian": "Cherkasy",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Cherkassy' or 'Cherkasy'? Answer with just the spelling.",
+      "response": "Cherkasy",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 42,
+      "russian": "Uzhgorod",
+      "ukrainian": "Uzhhorod",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Uzhgorod' or 'Uzhhorod'? Answer with just the spelling.",
+      "response": "Uzhhorod",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 43,
+      "russian": "Kremenchug",
+      "ukrainian": "Kremenchuk",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Kremenchug' or 'Kremenchuk'? Answer with just the spelling.",
+      "response": "Kremenchuk",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 44,
+      "russian": "Kirovograd",
+      "ukrainian": "Kropyvnytskyi",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Kirovograd' or 'Kropyvnytskyi'? Answer with just the spelling.",
+      "response": "Kropyvnytskyi",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 45,
+      "russian": "Ternopol",
+      "ukrainian": "Ternopil",
+      "category": "geographical",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Ternopol' or 'Ternopil'? Answer with just the spelling.",
+      "response": "Ternopil",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 21,
+      "russian": "Chicken Kiev",
+      "ukrainian": "Chicken Kyiv",
+      "category": "food",
+      "prompt": "Which spelling is standard in English: 'Chicken Kiev' or 'Chicken Kyiv'? Answer with just the spelling.",
+      "response": "Kyiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 22,
+      "russian": "Kiev cake",
+      "ukrainian": "Kyiv cake",
+      "category": "food",
+      "prompt": "Which spelling is standard in English: 'Kiev cake' or 'Kyiv cake'? Answer with just the spelling.",
+      "response": "Kyiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 23,
+      "russian": "Borscht",
+      "ukrainian": "Borshch",
+      "category": "food",
+      "prompt": "Which spelling is standard in English: 'Borscht' or 'Borshch'? Answer with just the spelling.",
+      "response": "Borscht",
+      "classified": "russian"
+    },
+    {
+      "pair_id": 64,
+      "russian": "Borsch",
+      "ukrainian": "Borshch",
+      "category": "food",
+      "prompt": "Which spelling is standard in English: 'Borsch' or 'Borshch'? Answer with just the spelling.",
+      "response": "Borshch",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 46,
+      "russian": "Vareniki",
+      "ukrainian": "Varenyky",
+      "category": "food",
+      "prompt": "Which spelling is standard in English: 'Vareniki' or 'Varenyky'? Answer with just the spelling.",
+      "response": "Varenyky",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 24,
+      "russian": "Kiev Pechersk Lavra",
+      "ukrainian": "Kyiv Pechersk Lavra",
+      "category": "landmarks",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Kiev Pechersk Lavra' or 'Kyiv Pechersk Lavra'? Answer with just the spelling.",
+      "response": "Kyiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 25,
+      "russian": "Saint Sophia Cathedral Kiev",
+      "ukrainian": "Saint Sophia Cathedral Kyiv",
+      "category": "landmarks",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Saint Sophia Cathedral Kiev' or 'Saint Sophia Cathedral Kyiv'? Answer with just the spelling.",
+      "response": "Kyiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 26,
+      "russian": "Chernobyl Exclusion Zone",
+      "ukrainian": "Chornobyl Exclusion Zone",
+      "category": "landmarks",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Chernobyl Exclusion Zone' or 'Chornobyl Exclusion Zone'? Answer with just the spelling.",
+      "response": "Chornobyl",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 54,
+      "russian": "Babi Yar",
+      "ukrainian": "Babyn Yar",
+      "category": "landmarks",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Babi Yar' or 'Babyn Yar'? Answer with just the spelling.",
+      "response": "'Babyn Yar'",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 55,
+      "russian": "Potemkin Stairs Odessa",
+      "ukrainian": "Potemkin Stairs Odesa",
+      "category": "landmarks",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Potemkin Stairs Odessa' or 'Potemkin Stairs Odesa'? Answer with just the spelling.",
+      "response": "Odesa",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 56,
+      "russian": "Motherland Monument Kiev",
+      "ukrainian": "Motherland Monument Kyiv",
+      "category": "landmarks",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Motherland Monument Kiev' or 'Motherland Monument Kyiv'? Answer with just the spelling.",
+      "response": "Kyiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 28,
+      "russian": "Kiev National University",
+      "ukrainian": "Kyiv National University",
+      "category": "institutional",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Kiev National University' or 'Kyiv National University'? Answer with just the spelling.",
+      "response": "Kyiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 29,
+      "russian": "Kharkov University",
+      "ukrainian": "Kharkiv University",
+      "category": "institutional",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Kharkov University' or 'Kharkiv University'? Answer with just the spelling.",
+      "response": "Kharkiv.",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 30,
+      "russian": "Kiev Polytechnic",
+      "ukrainian": "Kyiv Polytechnic",
+      "category": "institutional",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Kiev Polytechnic' or 'Kyiv Polytechnic'? Answer with just the spelling.",
+      "response": "Kyiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 31,
+      "russian": "Kiev Patriarchate",
+      "ukrainian": "Kyiv Patriarchate",
+      "category": "institutional",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Kiev Patriarchate' or 'Kyiv Patriarchate'? Answer with just the spelling.",
+      "response": "Kyiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 57,
+      "russian": "Lvov Polytechnic",
+      "ukrainian": "Lviv Polytechnic",
+      "category": "institutional",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Lvov Polytechnic' or 'Lviv Polytechnic'? Answer with just the spelling.",
+      "response": "Lviv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 58,
+      "russian": "Odessa National University",
+      "ukrainian": "Odesa National University",
+      "category": "institutional",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Odessa National University' or 'Odesa National University'? Answer with just the spelling.",
+      "response": "Odesa",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 32,
+      "russian": "Dynamo Kiev",
+      "ukrainian": "Dynamo Kyiv",
+      "category": "sports",
+      "prompt": "Which spelling is standard in English: 'Dynamo Kiev' or 'Dynamo Kyiv'? Answer with just the name.",
+      "response": "Kyiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 34,
+      "russian": "Kiev ballet",
+      "ukrainian": "Kyiv ballet",
+      "category": "sports",
+      "prompt": "Which spelling is standard in English: 'Kiev ballet' or 'Kyiv ballet'? Answer with just the name.",
+      "response": "Kyiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 51,
+      "russian": "Zorya Lugansk",
+      "ukrainian": "Zorya Luhansk",
+      "category": "sports",
+      "prompt": "Which spelling is standard in English: 'Zorya Lugansk' or 'Zorya Luhansk'? Answer with just the name.",
+      "response": "Luhansk",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 52,
+      "russian": "Metalist Kharkov",
+      "ukrainian": "Metalist Kharkiv",
+      "category": "sports",
+      "prompt": "Which spelling is standard in English: 'Metalist Kharkov' or 'Metalist Kharkiv'? Answer with just the name.",
+      "response": "Metalist Kharkiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 53,
+      "russian": "Karpaty Lvov",
+      "ukrainian": "Karpaty Lviv",
+      "category": "sports",
+      "prompt": "Which spelling is standard in English: 'Karpaty Lvov' or 'Karpaty Lviv'? Answer with just the name.",
+      "response": "Karpaty Lviv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 35,
+      "russian": "Kievan Rus",
+      "ukrainian": "Kyivan Rus",
+      "category": "historical",
+      "prompt": "Which spelling is standard in English: 'Kievan Rus' or 'Kyivan Rus'? Answer with just the spelling.",
+      "response": "Kyivan Rus'",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 36,
+      "russian": "Kazak",
+      "ukrainian": "Kozak",
+      "category": "historical",
+      "prompt": "Which spelling is standard in English: 'Kazak' or 'Kozak'? Answer with just the spelling.",
+      "response": "Kazak",
+      "classified": "russian"
+    },
+    {
+      "pair_id": 48,
+      "russian": "Gopak",
+      "ukrainian": "Hopak",
+      "category": "historical",
+      "prompt": "Which spelling is standard in English: 'Gopak' or 'Hopak'? Answer with just the spelling.",
+      "response": "Hopak",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 70,
+      "russian": "Vladimir the Great",
+      "ukrainian": "Volodymyr the Great",
+      "category": "historical",
+      "prompt": "How do you spell the medieval prince who Christianized Rus in 988 AD (English name) in English? Answer with just the name, nothing else.",
+      "response": "Vladimir",
+      "classified": "russian"
+    },
+    {
+      "pair_id": 71,
+      "russian": "Prince of Kiev",
+      "ukrainian": "Prince of Kyiv",
+      "category": "historical",
+      "prompt": "Which spelling is standard in English: 'Prince of Kiev' or 'Prince of Kyiv'? Answer with just the spelling.",
+      "response": "Kyiv",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 60,
+      "russian": "Alexander Usyk",
+      "ukrainian": "Oleksandr Usyk",
+      "category": "people",
+      "prompt": "Which English spelling is standard for the Ukrainian place: 'Alexander Usyk' or 'Oleksandr Usyk'? Answer with just the spelling.",
+      "response": "Oleksandr",
+      "classified": "ukrainian"
+    },
+    {
+      "pair_id": 61,
+      "russian": "Vladimir Zelensky",
+      "ukrainian": "Volodymyr Zelenskyy",
+      "category": "people",
+      "prompt": "How do you spell Ukraine's current president (full name, first and last) in English? Answer with just the name, nothing else.",
+      "response": "Volodymyr Zelensky",
+      "classified": "other"
+    },
+    {
+      "pair_id": 72,
+      "russian": "Artemovsk",
+      "ukrainian": "Bakhmut",
+      "category": "geographical",
+      "prompt": "How do you spell the Ukrainian city that was the site of the longest battle in 2022-2023 in English? Answer with just the name, nothing else.",
+      "response": "Bakhchysarai",
+      "classified": "other"
+    }
+  ],
+  "timestamp": "2026-04-07T03:09:42.363968+00:00",
+  "summary": {
+    "russian": 7,
+    "ukrainian": 39,
+    "other": 8,
+    "total": 54,
+    "adoption": 84.8
+  }
+}
