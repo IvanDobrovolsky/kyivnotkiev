@@ -40,7 +40,7 @@ STOPWORDS = {
 }
 
 WINDOW_SIZE = 5  # Words before/after the target term
-MIN_FREQ = 20  # High threshold to filter noise (hashtags, usernames)
+MIN_FREQ = 30  # High threshold to filter noise (foreign words, hashtags, usernames)
 TOP_N = 15
 
 

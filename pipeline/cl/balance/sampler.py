@@ -44,6 +44,23 @@ def load_raw_texts():
 
     combined = pd.concat(frames, ignore_index=True)
     log.info(f"Total raw texts: {len(combined)}")
+
+    # Filter to Latin-script texts only
+    # Cyrillic/other-script texts confound English-language collocation and context analysis
+    import re
+    def is_latin_majority(text):
+        if not text or len(str(text)) < 10:
+            return False
+        t = str(text)
+        latin = len(re.findall(r'[a-zA-Z]', t))
+        total_alpha = latin + len(re.findall(r'[\u0400-\u04FF\u4e00-\u9fff\u0600-\u06FF]', t))
+        return latin > total_alpha * 0.5 if total_alpha > 0 else False
+
+    before = len(combined)
+    combined = combined[combined["text"].apply(is_latin_majority)].copy()
+    removed = before - len(combined)
+    log.info(f"Latin-script filter: {before} → {len(combined)} (removed {removed}, {removed/before*100:.1f}%)")
+
     return combined
 
 

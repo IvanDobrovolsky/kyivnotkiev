@@ -489,6 +489,19 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     # Three-tier data counts
     toponym_matches = sum(s["records"] for s in source_stats.values()) + openalex_total_papers
 
+    # Open Library book data (loaded from local JSON if available)
+    ol_path = ROOT_DIR / "data" / "raw" / "openlibrary" / "openlibrary_results.json"
+    ol_records = 0
+    ol_mentions = 0
+    ol_pairs = 0
+    if ol_path.exists():
+        import json as _json
+        ol_data = _json.loads(ol_path.read_text())
+        ol_records = len(ol_data)
+        ol_mentions = sum(r.get("book_count", 0) for r in ol_data)
+        ol_pairs = len(set(r["pair_id"] for r in ol_data))
+        toponym_matches += ol_records
+
     manifest = {
         # ── Counts (three-tier funnel) ──
         "total_pairs": len(enabled_ids),
@@ -496,9 +509,9 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         "control_pairs": len(control_ids),
         "records_scanned": "90B+",
         "toponym_matches": toponym_matches,
-        "cl_corpus": 29938,
+        "cl_corpus": 43212,
         "time_span": "2010-2026",
-        "num_sources": 7,
+        "num_sources": 8,
         "num_countries": int(extra_map.get("trends_countries", "0")),
 
         # ── Per-source stats ──
@@ -559,6 +572,14 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
                 "extra": "250M+ works indexed",
                 "color": "#06b6d4",
             },
+            "openlibrary": {
+                "records": ol_records,
+                "pairs": ol_pairs,
+                "label": "Book Titles",
+                "unit": "editions",
+                "extra": f"{ol_mentions:,} mentions",
+                "color": "#059669",
+            },
         },
 
         # ── Pairs & categories ──
@@ -568,7 +589,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     }
 
     log.info(f"  Manifest: {manifest['analyzable_pairs']} analyzable pairs, "
-             f"{manifest['total_records']:,} total records")
+             f"{manifest['toponym_matches']:,} toponym matches")
     return manifest
 
 

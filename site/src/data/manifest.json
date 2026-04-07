@@ -1,9 +1,9 @@
 {
-  "total_pairs": 55,
-  "analyzable_pairs": 55,
+  "total_pairs": 54,
+  "analyzable_pairs": 54,
   "control_pairs": 6,
   "time_span": "2010-2026",
-  "num_sources": 7,
+  "num_sources": 8,
   "num_countries": 55,
   "sources": {
     "trends": {
@@ -23,15 +23,15 @@
       "color": "#1e3a5f"
     },
     "wikipedia": {
-      "records": 573377974,
+      "records": 14952,
       "pairs": 62,
       "label": "Page Views",
       "unit": "pageviews",
-      "extra": "573M pageviews",
+      "extra": "573,377,974 pageviews",
       "color": "#636466"
     },
     "reddit": {
-      "records": 22556,
+      "records": 31846,
       "pairs": 60,
       "label": "Posts",
       "unit": "posts",
@@ -39,7 +39,7 @@
       "color": "#FF4500"
     },
     "youtube": {
-      "records": 14515,
+      "records": 33885,
       "pairs": 55,
       "label": "Videos",
       "unit": "videos",
@@ -47,7 +47,7 @@
       "color": "#FF0000"
     },
     "openalex": {
-      "records": 378689,
+      "records": 43758,
       "pairs": 52,
       "label": "Academic Papers",
       "unit": "papers",
@@ -61,6 +61,14 @@
       "unit": "book frequency",
       "extra": "2010-2019",
       "color": "#f59e0b"
+    },
+    "openlibrary": {
+      "records": 1728,
+      "pairs": 54,
+      "label": "Book Titles",
+      "unit": "editions",
+      "extra": "666,121 mentions",
+      "color": "#059669"
     }
   },
   "categories": [
@@ -402,17 +410,6 @@
       "ukrainian": "Chornobyl Exclusion Zone",
       "adoption": 21.9,
       "total": 4218622,
-      "is_control": false,
-      "starred": false,
-      "starred_label": ""
-    },
-    {
-      "id": 27,
-      "category": "country",
-      "russian": "the Ukraine",
-      "ukrainian": "Ukraine",
-      "adoption": 63.9,
-      "total": 131856336,
       "is_control": false,
       "starred": false,
       "starred_label": ""
@@ -771,6 +768,6 @@
     }
   ],
   "records_scanned": "90B+",
-  "toponym_matches": 40183990,
-  "cl_corpus": 29938
+  "toponym_matches": 39879447,
+  "cl_corpus": 43212
 }
