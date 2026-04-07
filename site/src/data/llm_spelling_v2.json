@@ -1,0 +1,47 @@
+[
+  {
+    "model": "claude-haiku-4-5",
+    "family": "Anthropic Claude",
+    "tas_mean": 82.4,
+    "ci_mean": 0.965,
+    "ua_pct_open": 75.0,
+    "ua_pct_forced_ru_first": 83.0,
+    "ua_pct_forced_ua_first": 86.3,
+    "position_bias": 51.6,
+    "other_rate": 11.1,
+    "weights": {
+      "w1_forced": 0.4,
+      "w2_open": 0.6
+    }
+  },
+  {
+    "model": "claude-opus-4-6",
+    "family": "Anthropic Claude",
+    "tas_mean": 84.8,
+    "ci_mean": 0.943,
+    "ua_pct_open": 69.0,
+    "ua_pct_forced_ru_first": 96.2,
+    "ua_pct_forced_ua_first": 100.0,
+    "position_bias": 51.9,
+    "other_rate": 10.5,
+    "weights": {
+      "w1_forced": 0.4,
+      "w2_open": 0.6
+    }
+  },
+  {
+    "model": "claude-sonnet-4-6",
+    "family": "Anthropic Claude",
+    "tas_mean": 80.9,
+    "ci_mean": 0.941,
+    "ua_pct_open": 72.7,
+    "ua_pct_forced_ru_first": 94.4,
+    "ua_pct_forced_ua_first": 79.2,
+    "position_bias": 42.4,
+    "other_rate": 6.8,
+    "weights": {
+      "w1_forced": 0.4,
+      "w2_open": 0.6
+    }
+  }
+]
