@@ -1,0 +1,6354 @@
+[
+  {
+    "model": "gemma4-31b",
+    "tier": "frontier",
+    "family": "Google Gemma",
+    "provider": "ollama",
+    "full_model": "gemma4:31b",
+    "n_trials": 3,
+    "pairs": [
+      {
+        "pair_id": 1,
+        "russian": "Kiev",
+        "ukrainian": "Kyiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev or Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv or Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev or Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 2,
+        "russian": "Kharkov",
+        "ukrainian": "Kharkiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kharkov or Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kharkiv or Kharkov? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kharkov or Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 3,
+        "russian": "Odessa",
+        "ukrainian": "Odesa",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Odessa or Odesa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Odesa or Odessa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Odessa or Odesa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 4,
+        "russian": "Lvov",
+        "ukrainian": "Lviv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lvov or Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Lviv or Lvov? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lvov or Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 5,
+        "russian": "Zaporozhye",
+        "ukrainian": "Zaporizhzhia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zaporozhye or Zaporizhzhia? Answer with one word.",
+            "response": "Zaporizhzhia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zaporizhzhia or Zaporozhye? Answer with one word.",
+            "response": "Zaporizhzhia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zaporozhye or Zaporizhzhia? Answer with one word.",
+            "response": "Zaporizhzhia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 6,
+        "russian": "Nikolaev",
+        "ukrainian": "Mykolaiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Nikolaev or Mykolaiv? Answer with one word.",
+            "response": "Mykolaiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Mykolaiv or Nikolaev? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Nikolaev or Mykolaiv? Answer with one word.",
+            "response": "Mykolaiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 7,
+        "russian": "Dnepropetrovsk",
+        "ukrainian": "Dnipro",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dnepropetrovsk or Dnipro? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnipro or Dnepropetrovsk? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dnepropetrovsk or Dnipro? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 8,
+        "russian": "Vinnitsa",
+        "ukrainian": "Vinnytsia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vinnitsa or Vinnytsia? Answer with one word.",
+            "response": "Vinnytsia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Vinnytsia or Vinnitsa? Answer with one word.",
+            "response": "Vinnytsia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vinnitsa or Vinnytsia? Answer with one word.",
+            "response": "Vinnytsia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 9,
+        "russian": "Rovno",
+        "ukrainian": "Rivne",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Rovno or Rivne? Answer with one word.",
+            "response": "Rivne",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Rivne or Rovno? Answer with one word.",
+            "response": "Rivne",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Rovno or Rivne? Answer with one word.",
+            "response": "Rivne",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 10,
+        "russian": "Chernobyl",
+        "ukrainian": "Chornobyl",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernobyl or Chornobyl? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chornobyl or Chernobyl? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernobyl or Chornobyl? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 11,
+        "russian": "Lugansk",
+        "ukrainian": "Luhansk",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lugansk or Luhansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Luhansk or Lugansk? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lugansk or Luhansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 15,
+        "russian": "Dnieper",
+        "ukrainian": "Dnipro",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dnieper or Dnipro? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnipro or Dnieper? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dnieper or Dnipro? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 16,
+        "russian": "Dniester",
+        "ukrainian": "Dnister",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dniester or Dnister? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnister or Dniester? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dniester or Dnister? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 17,
+        "russian": "Donbass",
+        "ukrainian": "Donbas",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Donbass or Donbas? Answer with one word.",
+            "response": "Donbas",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Donbas or Donbass? Answer with one word.",
+            "response": "Donbas",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Donbass or Donbas? Answer with one word.",
+            "response": "Donbas",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 19,
+        "russian": "Zakarpatye",
+        "ukrainian": "Zakarpattia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zakarpatye or Zakarpattia? Answer with one word.",
+            "response": "Zakarpattia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zakarpattia or Zakarpatye? Answer with one word.",
+            "response": "Zakarpattia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zakarpatye or Zakarpattia? Answer with one word.",
+            "response": "Zakarpattia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 20,
+        "russian": "Podolye",
+        "ukrainian": "Podillia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Podolye or Podillia? Answer with one word.",
+            "response": "Podillia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Podillia or Podolye? Answer with one word.",
+            "response": "Podillia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Podolye or Podillia? Answer with one word.",
+            "response": "Podillia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 38,
+        "russian": "Chernigov",
+        "ukrainian": "Chernihiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernigov or Chernihiv? Answer with one word.",
+            "response": "Chernihiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chernihiv or Chernigov? Answer with one word.",
+            "response": "Chernihiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernigov or Chernihiv? Answer with one word.",
+            "response": "Chernihiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 39,
+        "russian": "Chernovtsy",
+        "ukrainian": "Chernivtsi",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernovtsy or Chernivtsi? Answer with one word.",
+            "response": "Chernivtsi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chernivtsi or Chernovtsy? Answer with one word.",
+            "response": "Chernivtsi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernovtsy or Chernivtsi? Answer with one word.",
+            "response": "Chernivtsi",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 40,
+        "russian": "Zhitomir",
+        "ukrainian": "Zhytomyr",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zhitomir or Zhytomyr? Answer with one word.",
+            "response": "Zhytomyr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zhytomyr or Zhitomir? Answer with one word.",
+            "response": "Zhytomyr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zhitomir or Zhytomyr? Answer with one word.",
+            "response": "Zhytomyr",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 41,
+        "russian": "Cherkassy",
+        "ukrainian": "Cherkasy",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Cherkassy or Cherkasy? Answer with one word.",
+            "response": "Cherkasy",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Cherkasy or Cherkassy? Answer with one word.",
+            "response": "Cherkasy",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Cherkassy or Cherkasy? Answer with one word.",
+            "response": "Cherkasy",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 42,
+        "russian": "Uzhgorod",
+        "ukrainian": "Uzhhorod",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Uzhgorod or Uzhhorod? Answer with one word.",
+            "response": "Uzhhorod",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Uzhhorod or Uzhgorod? Answer with one word.",
+            "response": "Uzhhorod",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Uzhgorod or Uzhhorod? Answer with one word.",
+            "response": "Uzhhorod",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 43,
+        "russian": "Kremenchug",
+        "ukrainian": "Kremenchuk",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kremenchug or Kremenchuk? Answer with one word.",
+            "response": "Kremenchuk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kremenchuk or Kremenchug? Answer with one word.",
+            "response": "Kremenchuk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kremenchug or Kremenchuk? Answer with one word.",
+            "response": "Kremenchuk",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 44,
+        "russian": "Kirovograd",
+        "ukrainian": "Kropyvnytskyi",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kirovograd or Kropyvnytskyi? Answer with one word.",
+            "response": "Kropyvnytskyi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kropyvnytskyi or Kirovograd? Answer with one word.",
+            "response": "Kropyvnytskyi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kirovograd or Kropyvnytskyi? Answer with one word.",
+            "response": "Kropyvnytskyi",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 45,
+        "russian": "Ternopol",
+        "ukrainian": "Ternopil",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Ternopol or Ternopil? Answer with one word.",
+            "response": "Ternopil",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Ternopil or Ternopol? Answer with one word.",
+            "response": "Ternopil",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Ternopol or Ternopil? Answer with one word.",
+            "response": "Ternopil",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 21,
+        "russian": "Chicken Kiev",
+        "ukrainian": "Chicken Kyiv",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chicken Kiev or Chicken Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chicken Kyiv or Chicken Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chicken Kiev or Chicken Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 22,
+        "russian": "Kiev cake",
+        "ukrainian": "Kyiv cake",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev cake or Kyiv cake? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv cake or Kiev cake? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev cake or Kyiv cake? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 23,
+        "russian": "Borscht",
+        "ukrainian": "Borshch",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Borscht or Borshch? Answer with one word.",
+            "response": "Borscht",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Borshch or Borscht? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Borscht or Borshch? Answer with one word.",
+            "response": "Borscht",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 64,
+        "russian": "Borsch",
+        "ukrainian": "Borshch",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Borsch or Borshch? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Borshch or Borsch? Answer with one word.",
+            "response": "Borshch",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Borsch or Borshch? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 46,
+        "russian": "Vareniki",
+        "ukrainian": "Varenyky",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vareniki or Varenyky? Answer with one word.",
+            "response": "Varenyky",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Varenyky or Vareniki? Answer with one word.",
+            "response": "Varenyky",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vareniki or Varenyky? Answer with one word.",
+            "response": "Varenyky",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 24,
+        "russian": "Kiev Pechersk Lavra",
+        "ukrainian": "Kyiv Pechersk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Pechersk Lavra or Kyiv Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Pechersk Lavra or Kiev Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Pechersk Lavra or Kyiv Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 25,
+        "russian": "Saint Sophia Cathedral Kiev",
+        "ukrainian": "Saint Sophia Cathedral Kyiv",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Saint Sophia Cathedral Kiev or Saint Sophia Cathedral Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Saint Sophia Cathedral Kyiv or Saint Sophia Cathedral Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Saint Sophia Cathedral Kiev or Saint Sophia Cathedral Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 26,
+        "russian": "Chernobyl Exclusion Zone",
+        "ukrainian": "Chornobyl Exclusion Zone",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernobyl Exclusion Zone or Chornobyl Exclusion Zone? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chornobyl Exclusion Zone or Chernobyl Exclusion Zone? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernobyl Exclusion Zone or Chornobyl Exclusion Zone? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 54,
+        "russian": "Babi Yar",
+        "ukrainian": "Babyn Yar",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Babi Yar or Babyn Yar? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Babyn Yar or Babi Yar? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Babi Yar or Babyn Yar? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 55,
+        "russian": "Potemkin Stairs Odessa",
+        "ukrainian": "Potemkin Stairs Odesa",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Potemkin Stairs Odesa or Potemkin Stairs Odessa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 56,
+        "russian": "Motherland Monument Kiev",
+        "ukrainian": "Motherland Monument Kyiv",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Motherland Monument Kyiv or Motherland Monument Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 28,
+        "russian": "Kiev National University",
+        "ukrainian": "Kyiv National University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev National University or Kyiv National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv National University or Kiev National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev National University or Kyiv National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 29,
+        "russian": "Kharkov University",
+        "ukrainian": "Kharkiv University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kharkov University or Kharkiv University? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kharkiv University or Kharkov University? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kharkov University or Kharkiv University? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 30,
+        "russian": "Kiev Polytechnic",
+        "ukrainian": "Kyiv Polytechnic",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Polytechnic or Kiev Polytechnic? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 31,
+        "russian": "Kiev Patriarchate",
+        "ukrainian": "Kyiv Patriarchate",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Patriarchate or Kiev Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 57,
+        "russian": "Lvov Polytechnic",
+        "ukrainian": "Lviv Polytechnic",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lvov Polytechnic or Lviv Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Lviv Polytechnic or Lvov Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lvov Polytechnic or Lviv Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 58,
+        "russian": "Odessa National University",
+        "ukrainian": "Odesa National University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Odessa National University or Odesa National University? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Odesa National University or Odessa National University? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Odessa National University or Odesa National University? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 32,
+        "russian": "Dynamo Kiev",
+        "ukrainian": "Dynamo Kyiv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dynamo Kiev or Dynamo Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dynamo Kyiv or Dynamo Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dynamo Kiev or Dynamo Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 34,
+        "russian": "Kiev ballet",
+        "ukrainian": "Kyiv ballet",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev ballet or Kyiv ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv ballet or Kiev ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev ballet or Kyiv ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 51,
+        "russian": "Zorya Lugansk",
+        "ukrainian": "Zorya Luhansk",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zorya Lugansk or Zorya Luhansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zorya Luhansk or Zorya Lugansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zorya Lugansk or Zorya Luhansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 52,
+        "russian": "Metalist Kharkov",
+        "ukrainian": "Metalist Kharkiv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Metalist Kharkov or Metalist Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Metalist Kharkiv or Metalist Kharkov? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Metalist Kharkov or Metalist Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 53,
+        "russian": "Karpaty Lvov",
+        "ukrainian": "Karpaty Lviv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Karpaty Lvov or Karpaty Lviv? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Karpaty Lviv or Karpaty Lvov? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Karpaty Lvov or Karpaty Lviv? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 35,
+        "russian": "Kievan Rus",
+        "ukrainian": "Kyivan Rus",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kievan Rus or Kyivan Rus? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyivan Rus or Kievan Rus? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kievan Rus or Kyivan Rus? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 36,
+        "russian": "Kazak",
+        "ukrainian": "Kozak",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kazak or Kozak? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kozak or Kazak? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kazak or Kozak? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 48,
+        "russian": "Gopak",
+        "ukrainian": "Hopak",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Gopak or Hopak? Answer with one word.",
+            "response": "Hopak",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Hopak or Gopak? Answer with one word.",
+            "response": "Hopak",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Gopak or Hopak? Answer with one word.",
+            "response": "Hopak",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 70,
+        "russian": "Vladimir the Great",
+        "ukrainian": "Volodymyr the Great",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vladimir the Great or Volodymyr the Great? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Volodymyr the Great or Vladimir the Great? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vladimir the Great or Volodymyr the Great? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 71,
+        "russian": "Prince of Kiev",
+        "ukrainian": "Prince of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Prince of Kiev or Prince of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Prince of Kyiv or Prince of Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Prince of Kiev or Prince of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 60,
+        "russian": "Alexander Usyk",
+        "ukrainian": "Oleksandr Usyk",
+        "category": "people",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Alexander Usyk or Oleksandr Usyk? Answer with one word.",
+            "response": "Oleksandr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Oleksandr Usyk or Alexander Usyk? Answer with one word.",
+            "response": "Oleksandr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Alexander Usyk or Oleksandr Usyk? Answer with one word.",
+            "response": "Oleksandr",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 61,
+        "russian": "Vladimir Zelensky",
+        "ukrainian": "Volodymyr Zelenskyy",
+        "category": "people",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Volodymyr Zelenskyy or Vladimir Zelensky? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 72,
+        "russian": "Artemovsk",
+        "ukrainian": "Bakhmut",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Artemovsk or Bakhmut? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Bakhmut or Artemovsk? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Artemovsk or Bakhmut? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      }
+    ],
+    "timestamp": "2026-04-07T06:38:56.492127+00:00",
+    "summary": {
+      "n_pairs": 54,
+      "n_trials_total": 162,
+      "ua": 121,
+      "ru": 2,
+      "other": 39,
+      "ua_pct": 98.4,
+      "other_rate": 24.1,
+      "position_bias": 51.2,
+      "consistency_pct": 81.5
+    }
+  },
+  {
+    "model": "llama4-scout",
+    "tier": "frontier",
+    "family": "Meta Llama",
+    "provider": "ollama",
+    "full_model": "llama4:scout",
+    "n_trials": 3,
+    "pairs": [
+      {
+        "pair_id": 1,
+        "russian": "Kiev",
+        "ukrainian": "Kyiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev or Kyiv? Answer with one word.",
+            "response": "Kyiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv or Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev or Kyiv? Answer with one word.",
+            "response": "Kyiv.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 2,
+        "russian": "Kharkov",
+        "ukrainian": "Kharkiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kharkov or Kharkiv? Answer with one word.",
+            "response": "Kharkiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kharkiv or Kharkov? Answer with one word.",
+            "response": "Kharkiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kharkov or Kharkiv? Answer with one word.",
+            "response": "Kharkiv.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 3,
+        "russian": "Odessa",
+        "ukrainian": "Odesa",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Odessa or Odesa? Answer with one word.",
+            "response": "Odesa.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Odesa or Odessa? Answer with one word.",
+            "response": "Odessa.",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Odessa or Odesa? Answer with one word.",
+            "response": "Odesa.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 4,
+        "russian": "Lvov",
+        "ukrainian": "Lviv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lvov or Lviv? Answer with one word.",
+            "response": "Lviv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Lviv or Lvov? Answer with one word.",
+            "response": "Lviv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lvov or Lviv? Answer with one word.",
+            "response": "Lviv.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 5,
+        "russian": "Zaporozhye",
+        "ukrainian": "Zaporizhzhia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zaporozhye or Zaporizhzhia? Answer with one word.",
+            "response": "Zaporizhzhia.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zaporizhzhia or Zaporozhye? Answer with one word.",
+            "response": "Zaporizhzhia.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zaporozhye or Zaporizhzhia? Answer with one word.",
+            "response": "Zaporizhzhia.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 6,
+        "russian": "Nikolaev",
+        "ukrainian": "Mykolaiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Nikolaev or Mykolaiv? Answer with one word.",
+            "response": "Nikolaev.",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Mykolaiv or Nikolaev? Answer with one word.",
+            "response": "Mykolaiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Nikolaev or Mykolaiv? Answer with one word.",
+            "response": "Nikolaev.",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 7,
+        "russian": "Dnepropetrovsk",
+        "ukrainian": "Dnipro",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dnepropetrovsk or Dnipro? Answer with one word.",
+            "response": "Dnipro.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnipro or Dnepropetrovsk? Answer with one word.",
+            "response": "Dnipro.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dnepropetrovsk or Dnipro? Answer with one word.",
+            "response": "Dnipro.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 8,
+        "russian": "Vinnitsa",
+        "ukrainian": "Vinnytsia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vinnitsa or Vinnytsia? Answer with one word.",
+            "response": "Vinnytsia.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Vinnytsia or Vinnitsa? Answer with one word.",
+            "response": "Vinnytsia.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vinnitsa or Vinnytsia? Answer with one word.",
+            "response": "Vinnytsia.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 9,
+        "russian": "Rovno",
+        "ukrainian": "Rivne",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Rovno or Rivne? Answer with one word.",
+            "response": "Rivne.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Rivne or Rovno? Answer with one word.",
+            "response": "Rivne.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Rovno or Rivne? Answer with one word.",
+            "response": "Rivne.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 10,
+        "russian": "Chernobyl",
+        "ukrainian": "Chornobyl",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernobyl or Chornobyl? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chornobyl or Chernobyl? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernobyl or Chornobyl? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 11,
+        "russian": "Lugansk",
+        "ukrainian": "Luhansk",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lugansk or Luhansk? Answer with one word.",
+            "response": "Luhansk.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Luhansk or Lugansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lugansk or Luhansk? Answer with one word.",
+            "response": "Luhansk.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 15,
+        "russian": "Dnieper",
+        "ukrainian": "Dnipro",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dnieper or Dnipro? Answer with one word.",
+            "response": "Dnipro.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnipro or Dnieper? Answer with one word.",
+            "response": "Dnieper.",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dnieper or Dnipro? Answer with one word.",
+            "response": "Dnipro.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 16,
+        "russian": "Dniester",
+        "ukrainian": "Dnister",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dniester or Dnister? Answer with one word.",
+            "response": "Dnister.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnister or Dniester? Answer with one word.",
+            "response": "Dniester.",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dniester or Dnister? Answer with one word.",
+            "response": "Dnister.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 17,
+        "russian": "Donbass",
+        "ukrainian": "Donbas",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Donbass or Donbas? Answer with one word.",
+            "response": "Donbas.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Donbas or Donbass? Answer with one word.",
+            "response": "Donbass.",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Donbass or Donbas? Answer with one word.",
+            "response": "Donbas.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 19,
+        "russian": "Zakarpatye",
+        "ukrainian": "Zakarpattia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zakarpatye or Zakarpattia? Answer with one word.",
+            "response": "Zakarpattia.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zakarpattia or Zakarpatye? Answer with one word.",
+            "response": "Zakarpattia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zakarpatye or Zakarpattia? Answer with one word.",
+            "response": "Zakarpattia.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 20,
+        "russian": "Podolye",
+        "ukrainian": "Podillia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Podolye or Podillia? Answer with one word.",
+            "response": "Podillia.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Podillia or Podolye? Answer with one word.",
+            "response": "Podillya.",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Podolye or Podillia? Answer with one word.",
+            "response": "Podillia.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 38,
+        "russian": "Chernigov",
+        "ukrainian": "Chernihiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernigov or Chernihiv? Answer with one word.",
+            "response": "Chernihiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chernihiv or Chernigov? Answer with one word.",
+            "response": "Chernigov.",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernigov or Chernihiv? Answer with one word.",
+            "response": "Chernihiv.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 39,
+        "russian": "Chernovtsy",
+        "ukrainian": "Chernivtsi",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernovtsy or Chernivtsi? Answer with one word.",
+            "response": "Chernivtsi.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chernivtsi or Chernovtsy? Answer with one word.",
+            "response": "Chernivtsi.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernovtsy or Chernivtsi? Answer with one word.",
+            "response": "Chernivtsi.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 40,
+        "russian": "Zhitomir",
+        "ukrainian": "Zhytomyr",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zhitomir or Zhytomyr? Answer with one word.",
+            "response": "Zhytomyr.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zhytomyr or Zhitomir? Answer with one word.",
+            "response": "Zhitomir.",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zhitomir or Zhytomyr? Answer with one word.",
+            "response": "Zhytomyr.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 41,
+        "russian": "Cherkassy",
+        "ukrainian": "Cherkasy",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Cherkassy or Cherkasy? Answer with one word.",
+            "response": "Cherkasy.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Cherkasy or Cherkassy? Answer with one word.",
+            "response": "Cherkassy.",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Cherkassy or Cherkasy? Answer with one word.",
+            "response": "Cherkasy.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 42,
+        "russian": "Uzhgorod",
+        "ukrainian": "Uzhhorod",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Uzhgorod or Uzhhorod? Answer with one word.",
+            "response": "Uzhhorod.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Uzhhorod or Uzhgorod? Answer with one word.",
+            "response": "Uzhhorod.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Uzhgorod or Uzhhorod? Answer with one word.",
+            "response": "Uzhhorod.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 43,
+        "russian": "Kremenchug",
+        "ukrainian": "Kremenchuk",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kremenchug or Kremenchuk? Answer with one word.",
+            "response": "Kremenchuk.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kremenchuk or Kremenchug? Answer with one word.",
+            "response": "Kremenchuk.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kremenchug or Kremenchuk? Answer with one word.",
+            "response": "Kremenchuk.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 44,
+        "russian": "Kirovograd",
+        "ukrainian": "Kropyvnytskyi",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kirovograd or Kropyvnytskyi? Answer with one word.",
+            "response": "Kropyvnytskyi.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kropyvnytskyi or Kirovograd? Answer with one word.",
+            "response": "Kropyvnytskyi.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kirovograd or Kropyvnytskyi? Answer with one word.",
+            "response": "Kropyvnytskyi.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 45,
+        "russian": "Ternopol",
+        "ukrainian": "Ternopil",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Ternopol or Ternopil? Answer with one word.",
+            "response": "Ternopil.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Ternopil or Ternopol? Answer with one word.",
+            "response": "Ternopil.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Ternopol or Ternopil? Answer with one word.",
+            "response": "Ternopil.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 21,
+        "russian": "Chicken Kiev",
+        "ukrainian": "Chicken Kyiv",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chicken Kiev or Chicken Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chicken Kyiv or Chicken Kiev? Answer with one word.",
+            "response": "Kiev",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chicken Kiev or Chicken Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 22,
+        "russian": "Kiev cake",
+        "ukrainian": "Kyiv cake",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev cake or Kyiv cake? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv cake or Kiev cake? Answer with one word.",
+            "response": "Kyiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev cake or Kyiv cake? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 23,
+        "russian": "Borscht",
+        "ukrainian": "Borshch",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Borscht or Borshch? Answer with one word.",
+            "response": "Borscht.",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Borshch or Borscht? Answer with one word.",
+            "response": "Borscht.",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Borscht or Borshch? Answer with one word.",
+            "response": "Borscht.",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 64,
+        "russian": "Borsch",
+        "ukrainian": "Borshch",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Borsch or Borshch? Answer with one word.",
+            "response": "Borshch.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Borshch or Borsch? Answer with one word.",
+            "response": "Borshch",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Borsch or Borshch? Answer with one word.",
+            "response": "Borshch.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 46,
+        "russian": "Vareniki",
+        "ukrainian": "Varenyky",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vareniki or Varenyky? Answer with one word.",
+            "response": "Varenyky.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Varenyky or Vareniki? Answer with one word.",
+            "response": "Varenyky.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vareniki or Varenyky? Answer with one word.",
+            "response": "Varenyky.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 24,
+        "russian": "Kiev Pechersk Lavra",
+        "ukrainian": "Kyiv Pechersk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Pechersk Lavra or Kyiv Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Pechersk Lavra or Kiev Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Pechersk Lavra or Kyiv Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 25,
+        "russian": "Saint Sophia Cathedral Kiev",
+        "ukrainian": "Saint Sophia Cathedral Kyiv",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Saint Sophia Cathedral Kiev or Saint Sophia Cathedral Kyiv? Answer with one word.",
+            "response": "Kyiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Saint Sophia Cathedral Kyiv or Saint Sophia Cathedral Kiev? Answer with one word.",
+            "response": "Kyiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Saint Sophia Cathedral Kiev or Saint Sophia Cathedral Kyiv? Answer with one word.",
+            "response": "Kyiv.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 26,
+        "russian": "Chernobyl Exclusion Zone",
+        "ukrainian": "Chornobyl Exclusion Zone",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernobyl Exclusion Zone or Chornobyl Exclusion Zone? Answer with one word.",
+            "response": "Chernobyl.",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chornobyl Exclusion Zone or Chernobyl Exclusion Zone? Answer with one word.",
+            "response": "Chornobyl.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernobyl Exclusion Zone or Chornobyl Exclusion Zone? Answer with one word.",
+            "response": "Chernobyl.",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 54,
+        "russian": "Babi Yar",
+        "ukrainian": "Babyn Yar",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Babi Yar or Babyn Yar? Answer with one word.",
+            "response": "Babi Yar.",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Babyn Yar or Babi Yar? Answer with one word.",
+            "response": "Babi",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Babi Yar or Babyn Yar? Answer with one word.",
+            "response": "Babi Yar.",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 55,
+        "russian": "Potemkin Stairs Odessa",
+        "ukrainian": "Potemkin Stairs Odesa",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.",
+            "response": "Odessa.",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Potemkin Stairs Odesa or Potemkin Stairs Odessa? Answer with one word.",
+            "response": "Odessa.",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.",
+            "response": "Odessa.",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 56,
+        "russian": "Motherland Monument Kiev",
+        "ukrainian": "Motherland Monument Kyiv",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Motherland Monument Kyiv or Motherland Monument Kiev? Answer with one word.",
+            "response": "Kyiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 28,
+        "russian": "Kiev National University",
+        "ukrainian": "Kyiv National University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev National University or Kyiv National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv National University or Kiev National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev National University or Kyiv National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 29,
+        "russian": "Kharkov University",
+        "ukrainian": "Kharkiv University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kharkov University or Kharkiv University? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kharkiv University or Kharkov University? Answer with one word.",
+            "response": "Kharkiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kharkov University or Kharkiv University? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 30,
+        "russian": "Kiev Polytechnic",
+        "ukrainian": "Kyiv Polytechnic",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Polytechnic or Kiev Polytechnic? Answer with one word.",
+            "response": "Kyiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 31,
+        "russian": "Kiev Patriarchate",
+        "ukrainian": "Kyiv Patriarchate",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Patriarchate or Kiev Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 57,
+        "russian": "Lvov Polytechnic",
+        "ukrainian": "Lviv Polytechnic",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lvov Polytechnic or Lviv Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Lviv Polytechnic or Lvov Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lvov Polytechnic or Lviv Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 58,
+        "russian": "Odessa National University",
+        "ukrainian": "Odesa National University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Odessa National University or Odesa National University? Answer with one word.",
+            "response": "Odesa.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Odesa National University or Odessa National University? Answer with one word.",
+            "response": "Odessa.",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Odessa National University or Odesa National University? Answer with one word.",
+            "response": "Odesa.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 32,
+        "russian": "Dynamo Kiev",
+        "ukrainian": "Dynamo Kyiv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dynamo Kiev or Dynamo Kyiv? Answer with one word.",
+            "response": "Kyiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dynamo Kyiv or Dynamo Kiev? Answer with one word.",
+            "response": "Dynamo Kyiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dynamo Kiev or Dynamo Kyiv? Answer with one word.",
+            "response": "Kyiv.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 34,
+        "russian": "Kiev ballet",
+        "ukrainian": "Kyiv ballet",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev ballet or Kyiv ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv ballet or Kiev ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev ballet or Kyiv ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 51,
+        "russian": "Zorya Lugansk",
+        "ukrainian": "Zorya Luhansk",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zorya Lugansk or Zorya Luhansk? Answer with one word.",
+            "response": "Luhansk.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zorya Luhansk or Zorya Lugansk? Answer with one word.",
+            "response": "Luhansk.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zorya Lugansk or Zorya Luhansk? Answer with one word.",
+            "response": "Luhansk.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 52,
+        "russian": "Metalist Kharkov",
+        "ukrainian": "Metalist Kharkiv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Metalist Kharkov or Metalist Kharkiv? Answer with one word.",
+            "response": "Kharkiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Metalist Kharkiv or Metalist Kharkov? Answer with one word.",
+            "response": "Kharkiv.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Metalist Kharkov or Metalist Kharkiv? Answer with one word.",
+            "response": "Kharkiv.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 53,
+        "russian": "Karpaty Lvov",
+        "ukrainian": "Karpaty Lviv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Karpaty Lvov or Karpaty Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Karpaty Lviv or Karpaty Lvov? Answer with one word.",
+            "response": "Lvov is the Russian name for Lviv, which is the Ukrainian name. So, the correct answer is: Lviv.",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Karpaty Lvov or Karpaty Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 35,
+        "russian": "Kievan Rus",
+        "ukrainian": "Kyivan Rus",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kievan Rus or Kyivan Rus? Answer with one word.",
+            "response": "Kyivan.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyivan Rus or Kievan Rus? Answer with one word.",
+            "response": "Kievan",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kievan Rus or Kyivan Rus? Answer with one word.",
+            "response": "Kyivan.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 36,
+        "russian": "Kazak",
+        "ukrainian": "Kozak",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kazak or Kozak? Answer with one word.",
+            "response": "Kazak.",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kozak or Kazak? Answer with one word.",
+            "response": "Kozak.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kazak or Kozak? Answer with one word.",
+            "response": "Kazak.",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 48,
+        "russian": "Gopak",
+        "ukrainian": "Hopak",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Gopak or Hopak? Answer with one word.",
+            "response": "Hopak.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Hopak or Gopak? Answer with one word.",
+            "response": "Hopak.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Gopak or Hopak? Answer with one word.",
+            "response": "Hopak.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 70,
+        "russian": "Vladimir the Great",
+        "ukrainian": "Volodymyr the Great",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vladimir the Great or Volodymyr the Great? Answer with one word.",
+            "response": "Volodymyr.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Volodymyr the Great or Vladimir the Great? Answer with one word.",
+            "response": "Volodymyr.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vladimir the Great or Volodymyr the Great? Answer with one word.",
+            "response": "Volodymyr.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 71,
+        "russian": "Prince of Kiev",
+        "ukrainian": "Prince of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Prince of Kiev or Prince of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Prince of Kyiv or Prince of Kiev? Answer with one word.",
+            "response": "Kiev",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Prince of Kiev or Prince of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 60,
+        "russian": "Alexander Usyk",
+        "ukrainian": "Oleksandr Usyk",
+        "category": "people",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Alexander Usyk or Oleksandr Usyk? Answer with one word.",
+            "response": "Oleksandr.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Oleksandr Usyk or Alexander Usyk? Answer with one word.",
+            "response": "Oleksandr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Alexander Usyk or Oleksandr Usyk? Answer with one word.",
+            "response": "Oleksandr.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 61,
+        "russian": "Vladimir Zelensky",
+        "ukrainian": "Volodymyr Zelenskyy",
+        "category": "people",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.",
+            "response": "Zelenskyy.",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Volodymyr Zelenskyy or Vladimir Zelensky? Answer with one word.",
+            "response": "Volodymyr.",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.",
+            "response": "Zelenskyy.",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 72,
+        "russian": "Artemovsk",
+        "ukrainian": "Bakhmut",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Artemovsk or Bakhmut? Answer with one word.",
+            "response": "Bakhmut.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Bakhmut or Artemovsk? Answer with one word.",
+            "response": "Bakhmut.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Artemovsk or Bakhmut? Answer with one word.",
+            "response": "Bakhmut.",
+            "classified": "ukrainian"
+          }
+        ]
+      }
+    ],
+    "timestamp": "2026-04-07T07:15:26.697631+00:00",
+    "summary": {
+      "n_pairs": 54,
+      "n_trials_total": 162,
+      "ua": 128,
+      "ru": 30,
+      "other": 4,
+      "ua_pct": 81.0,
+      "other_rate": 2.5,
+      "position_bias": 41.2,
+      "consistency_pct": 70.4
+    }
+  },
+  {
+    "model": "mistral-large",
+    "tier": "frontier",
+    "family": "Mistral",
+    "provider": "ollama",
+    "full_model": "mistral-large:123b",
+    "n_trials": 3,
+    "pairs": [
+      {
+        "pair_id": 1,
+        "russian": "Kiev",
+        "ukrainian": "Kyiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev or Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv or Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev or Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 2,
+        "russian": "Kharkov",
+        "ukrainian": "Kharkiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kharkov or Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kharkiv or Kharkov? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kharkov or Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 3,
+        "russian": "Odessa",
+        "ukrainian": "Odesa",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Odessa or Odesa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Odesa or Odessa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Odessa or Odesa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 4,
+        "russian": "Lvov",
+        "ukrainian": "Lviv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lvov or Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Lviv or Lvov? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lvov or Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 5,
+        "russian": "Zaporozhye",
+        "ukrainian": "Zaporizhzhia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zaporozhye or Zaporizhzhia? Answer with one word.",
+            "response": "Zaporizhzhia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zaporizhzhia or Zaporozhye? Answer with one word.",
+            "response": "Zaporizhzhia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zaporozhye or Zaporizhzhia? Answer with one word.",
+            "response": "Zaporizhzhia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 6,
+        "russian": "Nikolaev",
+        "ukrainian": "Mykolaiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Nikolaev or Mykolaiv? Answer with one word.",
+            "response": "Mykolaiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Mykolaiv or Nikolaev? Answer with one word.",
+            "response": "Mykolaiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Nikolaev or Mykolaiv? Answer with one word.",
+            "response": "Mykolaiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 7,
+        "russian": "Dnepropetrovsk",
+        "ukrainian": "Dnipro",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dnepropetrovsk or Dnipro? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnipro or Dnepropetrovsk? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dnepropetrovsk or Dnipro? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 8,
+        "russian": "Vinnitsa",
+        "ukrainian": "Vinnytsia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vinnitsa or Vinnytsia? Answer with one word.",
+            "response": "Vinnytsia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Vinnytsia or Vinnitsa? Answer with one word.",
+            "response": "Vinnytsia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vinnitsa or Vinnytsia? Answer with one word.",
+            "response": "Vinnytsia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 9,
+        "russian": "Rovno",
+        "ukrainian": "Rivne",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Rovno or Rivne? Answer with one word.",
+            "response": "Rivne",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Rivne or Rovno? Answer with one word.",
+            "response": "Rivne",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Rovno or Rivne? Answer with one word.",
+            "response": "Rivne",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 10,
+        "russian": "Chernobyl",
+        "ukrainian": "Chornobyl",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernobyl or Chornobyl? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chornobyl or Chernobyl? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernobyl or Chornobyl? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 11,
+        "russian": "Lugansk",
+        "ukrainian": "Luhansk",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lugansk or Luhansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Luhansk or Lugansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lugansk or Luhansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 15,
+        "russian": "Dnieper",
+        "ukrainian": "Dnipro",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dnieper or Dnipro? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnipro or Dnieper? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dnieper or Dnipro? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 16,
+        "russian": "Dniester",
+        "ukrainian": "Dnister",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dniester or Dnister? Answer with one word.",
+            "response": "Dniester",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnister or Dniester? Answer with one word.",
+            "response": "Dniester",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dniester or Dnister? Answer with one word.",
+            "response": "Dniester",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 17,
+        "russian": "Donbass",
+        "ukrainian": "Donbas",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Donbass or Donbas? Answer with one word.",
+            "response": "Donbas",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Donbas or Donbass? Answer with one word.",
+            "response": "Donbas",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Donbass or Donbas? Answer with one word.",
+            "response": "Donbas",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 19,
+        "russian": "Zakarpatye",
+        "ukrainian": "Zakarpattia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zakarpatye or Zakarpattia? Answer with one word.",
+            "response": "Zakarpattia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zakarpattia or Zakarpatye? Answer with one word.",
+            "response": "Zakarpattia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zakarpatye or Zakarpattia? Answer with one word.",
+            "response": "Zakarpattia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 20,
+        "russian": "Podolye",
+        "ukrainian": "Podillia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Podolye or Podillia? Answer with one word.",
+            "response": "Podillia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Podillia or Podolye? Answer with one word.",
+            "response": "The correct term is \"Podolia.\"",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Podolye or Podillia? Answer with one word.",
+            "response": "Podillia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 38,
+        "russian": "Chernigov",
+        "ukrainian": "Chernihiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernigov or Chernihiv? Answer with one word.",
+            "response": "Chernihiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chernihiv or Chernigov? Answer with one word.",
+            "response": "Chernihiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernigov or Chernihiv? Answer with one word.",
+            "response": "Chernihiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 39,
+        "russian": "Chernovtsy",
+        "ukrainian": "Chernivtsi",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernovtsy or Chernivtsi? Answer with one word.",
+            "response": "Chernivtsi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chernivtsi or Chernovtsy? Answer with one word.",
+            "response": "Chernivtsi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernovtsy or Chernivtsi? Answer with one word.",
+            "response": "Chernivtsi",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 40,
+        "russian": "Zhitomir",
+        "ukrainian": "Zhytomyr",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zhitomir or Zhytomyr? Answer with one word.",
+            "response": "Zhytomyr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zhytomyr or Zhitomir? Answer with one word.",
+            "response": "Zhytomyr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zhitomir or Zhytomyr? Answer with one word.",
+            "response": "Zhytomyr",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 41,
+        "russian": "Cherkassy",
+        "ukrainian": "Cherkasy",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Cherkassy or Cherkasy? Answer with one word.",
+            "response": "Cherkasy",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Cherkasy or Cherkassy? Answer with one word.",
+            "response": "Cherkasy",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Cherkassy or Cherkasy? Answer with one word.",
+            "response": "Cherkasy",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 42,
+        "russian": "Uzhgorod",
+        "ukrainian": "Uzhhorod",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Uzhgorod or Uzhhorod? Answer with one word.",
+            "response": "Uzhhorod",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Uzhhorod or Uzhgorod? Answer with one word.",
+            "response": "Uzhhorod",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Uzhgorod or Uzhhorod? Answer with one word.",
+            "response": "Uzhhorod",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 43,
+        "russian": "Kremenchug",
+        "ukrainian": "Kremenchuk",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kremenchug or Kremenchuk? Answer with one word.",
+            "response": "Kremenchuk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kremenchuk or Kremenchug? Answer with one word.",
+            "response": "Kremenchuk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kremenchug or Kremenchuk? Answer with one word.",
+            "response": "Kremenchuk",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 44,
+        "russian": "Kirovograd",
+        "ukrainian": "Kropyvnytskyi",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kirovograd or Kropyvnytskyi? Answer with one word.",
+            "response": "Kropyvnytskyi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kropyvnytskyi or Kirovograd? Answer with one word.",
+            "response": "Kropyvnytskyi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kirovograd or Kropyvnytskyi? Answer with one word.",
+            "response": "Kropyvnytskyi",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 45,
+        "russian": "Ternopol",
+        "ukrainian": "Ternopil",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Ternopol or Ternopil? Answer with one word.",
+            "response": "Ternopil",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Ternopil or Ternopol? Answer with one word.",
+            "response": "Ternopil",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Ternopol or Ternopil? Answer with one word.",
+            "response": "Ternopil",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 21,
+        "russian": "Chicken Kiev",
+        "ukrainian": "Chicken Kyiv",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chicken Kiev or Chicken Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chicken Kyiv or Chicken Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chicken Kiev or Chicken Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 22,
+        "russian": "Kiev cake",
+        "ukrainian": "Kyiv cake",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev cake or Kyiv cake? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv cake or Kiev cake? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev cake or Kyiv cake? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 23,
+        "russian": "Borscht",
+        "ukrainian": "Borshch",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Borscht or Borshch? Answer with one word.",
+            "response": "Borscht",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Borshch or Borscht? Answer with one word.",
+            "response": "Both \"borshch\" and \"borscht\" are acceptable spellings for the beet soup, but \"borscht\" is more commonly used in English. So, the answer is:\n\nBorscht",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Borscht or Borshch? Answer with one word.",
+            "response": "Borscht",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 64,
+        "russian": "Borsch",
+        "ukrainian": "Borshch",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Borsch or Borshch? Answer with one word.",
+            "response": "Borscht",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Borshch or Borsch? Answer with one word.",
+            "response": "Borscht",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Borsch or Borshch? Answer with one word.",
+            "response": "Borscht",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 46,
+        "russian": "Vareniki",
+        "ukrainian": "Varenyky",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vareniki or Varenyky? Answer with one word.",
+            "response": "Varenyky",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Varenyky or Vareniki? Answer with one word.",
+            "response": "Varenyky",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vareniki or Varenyky? Answer with one word.",
+            "response": "Varenyky",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 24,
+        "russian": "Kiev Pechersk Lavra",
+        "ukrainian": "Kyiv Pechersk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Pechersk Lavra or Kyiv Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Pechersk Lavra or Kiev Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Pechersk Lavra or Kyiv Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 25,
+        "russian": "Saint Sophia Cathedral Kiev",
+        "ukrainian": "Saint Sophia Cathedral Kyiv",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Saint Sophia Cathedral Kiev or Saint Sophia Cathedral Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Saint Sophia Cathedral Kyiv or Saint Sophia Cathedral Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Saint Sophia Cathedral Kiev or Saint Sophia Cathedral Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 26,
+        "russian": "Chernobyl Exclusion Zone",
+        "ukrainian": "Chornobyl Exclusion Zone",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernobyl Exclusion Zone or Chornobyl Exclusion Zone? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chornobyl Exclusion Zone or Chernobyl Exclusion Zone? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernobyl Exclusion Zone or Chornobyl Exclusion Zone? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 54,
+        "russian": "Babi Yar",
+        "ukrainian": "Babyn Yar",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Babi Yar or Babyn Yar? Answer with one word.",
+            "response": "Babyn",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Babyn Yar or Babi Yar? Answer with one word.",
+            "response": "Babi",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Babi Yar or Babyn Yar? Answer with one word.",
+            "response": "Babyn",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 55,
+        "russian": "Potemkin Stairs Odessa",
+        "ukrainian": "Potemkin Stairs Odesa",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.",
+            "response": "Odessa",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Potemkin Stairs Odesa or Potemkin Stairs Odessa? Answer with one word.",
+            "response": "Odessa",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.",
+            "response": "Odessa",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 56,
+        "russian": "Motherland Monument Kiev",
+        "ukrainian": "Motherland Monument Kyiv",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Motherland Monument Kyiv or Motherland Monument Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 28,
+        "russian": "Kiev National University",
+        "ukrainian": "Kyiv National University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev National University or Kyiv National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv National University or Kiev National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev National University or Kyiv National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 29,
+        "russian": "Kharkov University",
+        "ukrainian": "Kharkiv University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kharkov University or Kharkiv University? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kharkiv University or Kharkov University? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kharkov University or Kharkiv University? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 30,
+        "russian": "Kiev Polytechnic",
+        "ukrainian": "Kyiv Polytechnic",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Polytechnic or Kiev Polytechnic? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 31,
+        "russian": "Kiev Patriarchate",
+        "ukrainian": "Kyiv Patriarchate",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Patriarchate or Kiev Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 57,
+        "russian": "Lvov Polytechnic",
+        "ukrainian": "Lviv Polytechnic",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lvov Polytechnic or Lviv Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Lviv Polytechnic or Lvov Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lvov Polytechnic or Lviv Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 58,
+        "russian": "Odessa National University",
+        "ukrainian": "Odesa National University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Odessa National University or Odesa National University? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Odesa National University or Odessa National University? Answer with one word.",
+            "response": "Odessa",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Odessa National University or Odesa National University? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 32,
+        "russian": "Dynamo Kiev",
+        "ukrainian": "Dynamo Kyiv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dynamo Kiev or Dynamo Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dynamo Kyiv or Dynamo Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dynamo Kiev or Dynamo Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 34,
+        "russian": "Kiev ballet",
+        "ukrainian": "Kyiv ballet",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev ballet or Kyiv ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv ballet or Kiev ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev ballet or Kyiv ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 51,
+        "russian": "Zorya Lugansk",
+        "ukrainian": "Zorya Luhansk",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zorya Lugansk or Zorya Luhansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zorya Luhansk or Zorya Lugansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zorya Lugansk or Zorya Luhansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 52,
+        "russian": "Metalist Kharkov",
+        "ukrainian": "Metalist Kharkiv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Metalist Kharkov or Metalist Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Metalist Kharkiv or Metalist Kharkov? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Metalist Kharkov or Metalist Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 53,
+        "russian": "Karpaty Lvov",
+        "ukrainian": "Karpaty Lviv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Karpaty Lvov or Karpaty Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Karpaty Lviv or Karpaty Lvov? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Karpaty Lvov or Karpaty Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 35,
+        "russian": "Kievan Rus",
+        "ukrainian": "Kyivan Rus",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kievan Rus or Kyivan Rus? Answer with one word.",
+            "response": "Kyivan",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyivan Rus or Kievan Rus? Answer with one word.",
+            "response": "Kyivan",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kievan Rus or Kyivan Rus? Answer with one word.",
+            "response": "Kyivan",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 36,
+        "russian": "Kazak",
+        "ukrainian": "Kozak",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kazak or Kozak? Answer with one word.",
+            "response": "Cossack",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kozak or Kazak? Answer with one word.",
+            "response": "The correct spelling is \"Cossack.\"",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kazak or Kozak? Answer with one word.",
+            "response": "Cossack",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 48,
+        "russian": "Gopak",
+        "ukrainian": "Hopak",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Gopak or Hopak? Answer with one word.",
+            "response": "Hopak",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Hopak or Gopak? Answer with one word.",
+            "response": "The correct spelling is \"Hopak.\"",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Gopak or Hopak? Answer with one word.",
+            "response": "Hopak",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 70,
+        "russian": "Vladimir the Great",
+        "ukrainian": "Volodymyr the Great",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vladimir the Great or Volodymyr the Great? Answer with one word.",
+            "response": "Volodymyr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Volodymyr the Great or Vladimir the Great? Answer with one word.",
+            "response": "Vladimir",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vladimir the Great or Volodymyr the Great? Answer with one word.",
+            "response": "Volodymyr",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 71,
+        "russian": "Prince of Kiev",
+        "ukrainian": "Prince of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Prince of Kiev or Prince of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Prince of Kyiv or Prince of Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Prince of Kiev or Prince of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 60,
+        "russian": "Alexander Usyk",
+        "ukrainian": "Oleksandr Usyk",
+        "category": "people",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Alexander Usyk or Oleksandr Usyk? Answer with one word.",
+            "response": "Oleksandr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Oleksandr Usyk or Alexander Usyk? Answer with one word.",
+            "response": "Oleksandr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Alexander Usyk or Oleksandr Usyk? Answer with one word.",
+            "response": "Oleksandr",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 61,
+        "russian": "Vladimir Zelensky",
+        "ukrainian": "Volodymyr Zelenskyy",
+        "category": "people",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.",
+            "response": "Volodymyr",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Volodymyr Zelenskyy or Vladimir Zelensky? Answer with one word.",
+            "response": "Volodymyr",
+            "classified": "other"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.",
+            "response": "Volodymyr",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 72,
+        "russian": "Artemovsk",
+        "ukrainian": "Bakhmut",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Artemovsk or Bakhmut? Answer with one word.",
+            "response": "Bakhmut",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Bakhmut or Artemovsk? Answer with one word.",
+            "response": "Bakhmut",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Artemovsk or Bakhmut? Answer with one word.",
+            "response": "Bakhmut",
+            "classified": "ukrainian"
+          }
+        ]
+      }
+    ],
+    "timestamp": "2026-04-07T07:21:24.016757+00:00",
+    "summary": {
+      "n_pairs": 54,
+      "n_trials_total": 162,
+      "ua": 135,
+      "ru": 20,
+      "other": 7,
+      "ua_pct": 87.1,
+      "other_rate": 4.3,
+      "position_bias": 47.9,
+      "consistency_pct": 88.9
+    }
+  },
+  {
+    "model": "qwen3-32b",
+    "tier": "frontier",
+    "family": "Alibaba Qwen",
+    "provider": "ollama",
+    "full_model": "qwen3:32b",
+    "n_trials": 3,
+    "pairs": [
+      {
+        "pair_id": 1,
+        "russian": "Kiev",
+        "ukrainian": "Kyiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev or Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv or Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev or Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 2,
+        "russian": "Kharkov",
+        "ukrainian": "Kharkiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kharkov or Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kharkiv or Kharkov? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kharkov or Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 3,
+        "russian": "Odessa",
+        "ukrainian": "Odesa",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Odessa or Odesa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Odesa or Odessa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Odessa or Odesa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 4,
+        "russian": "Lvov",
+        "ukrainian": "Lviv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lvov or Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Lviv or Lvov? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lvov or Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 5,
+        "russian": "Zaporozhye",
+        "ukrainian": "Zaporizhzhia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zaporozhye or Zaporizhzhia? Answer with one word.",
+            "response": "Zaporizhzhia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zaporizhzhia or Zaporozhye? Answer with one word.",
+            "response": "Zaporizhzhia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zaporozhye or Zaporizhzhia? Answer with one word.",
+            "response": "Zaporizhzhia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 6,
+        "russian": "Nikolaev",
+        "ukrainian": "Mykolaiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Nikolaev or Mykolaiv? Answer with one word.",
+            "response": "Mykolaiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Mykolaiv or Nikolaev? Answer with one word.",
+            "response": "Mykolaiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Nikolaev or Mykolaiv? Answer with one word.",
+            "response": "Mykolaiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 7,
+        "russian": "Dnepropetrovsk",
+        "ukrainian": "Dnipro",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dnepropetrovsk or Dnipro? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnipro or Dnepropetrovsk? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dnepropetrovsk or Dnipro? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 8,
+        "russian": "Vinnitsa",
+        "ukrainian": "Vinnytsia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vinnitsa or Vinnytsia? Answer with one word.",
+            "response": "Vinnytsia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Vinnytsia or Vinnitsa? Answer with one word.",
+            "response": "Vinnytsia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vinnitsa or Vinnytsia? Answer with one word.",
+            "response": "Vinnytsia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 9,
+        "russian": "Rovno",
+        "ukrainian": "Rivne",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Rovno or Rivne? Answer with one word.",
+            "response": "Rivne",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Rivne or Rovno? Answer with one word.",
+            "response": "Rivne",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Rovno or Rivne? Answer with one word.",
+            "response": "Rivne",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 10,
+        "russian": "Chernobyl",
+        "ukrainian": "Chornobyl",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernobyl or Chornobyl? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chornobyl or Chernobyl? Answer with one word.",
+            "response": "Chornobyl",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernobyl or Chornobyl? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 11,
+        "russian": "Lugansk",
+        "ukrainian": "Luhansk",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lugansk or Luhansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Luhansk or Lugansk? Answer with one word.",
+            "response": "Lugansk",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lugansk or Luhansk? Answer with one word.",
+            "response": "Luhansk",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 15,
+        "russian": "Dnieper",
+        "ukrainian": "Dnipro",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dnieper or Dnipro? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnipro or Dnieper? Answer with one word.",
+            "response": "Dnieper",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dnieper or Dnipro? Answer with one word.",
+            "response": "Dnipro",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 16,
+        "russian": "Dniester",
+        "ukrainian": "Dnister",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dniester or Dnister? Answer with one word.",
+            "response": "Dniester",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dnister or Dniester? Answer with one word.",
+            "response": "Dniester",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dniester or Dnister? Answer with one word.",
+            "response": "Dniester",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 17,
+        "russian": "Donbass",
+        "ukrainian": "Donbas",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Donbass or Donbas? Answer with one word.",
+            "response": "Donbas",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Donbas or Donbass? Answer with one word.",
+            "response": "Donbas",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Donbass or Donbas? Answer with one word.",
+            "response": "Donbas",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 19,
+        "russian": "Zakarpatye",
+        "ukrainian": "Zakarpattia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zakarpatye or Zakarpattia? Answer with one word.",
+            "response": "Zakarpattia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zakarpattia or Zakarpatye? Answer with one word.",
+            "response": "Zakarpattia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zakarpatye or Zakarpattia? Answer with one word.",
+            "response": "Zakarpattia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 20,
+        "russian": "Podolye",
+        "ukrainian": "Podillia",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Podolye or Podillia? Answer with one word.",
+            "response": "Podillia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Podillia or Podolye? Answer with one word.",
+            "response": "Podillia",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Podolye or Podillia? Answer with one word.",
+            "response": "Podillia",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 38,
+        "russian": "Chernigov",
+        "ukrainian": "Chernihiv",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernigov or Chernihiv? Answer with one word.",
+            "response": "Chernihiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chernihiv or Chernigov? Answer with one word.",
+            "response": "Chernihiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernigov or Chernihiv? Answer with one word.",
+            "response": "Chernihiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 39,
+        "russian": "Chernovtsy",
+        "ukrainian": "Chernivtsi",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernovtsy or Chernivtsi? Answer with one word.",
+            "response": "Chernivtsi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chernivtsi or Chernovtsy? Answer with one word.",
+            "response": "Chernivtsi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernovtsy or Chernivtsi? Answer with one word.",
+            "response": "Chernivtsi",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 40,
+        "russian": "Zhitomir",
+        "ukrainian": "Zhytomyr",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zhitomir or Zhytomyr? Answer with one word.",
+            "response": "Zhytomyr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zhytomyr or Zhitomir? Answer with one word.",
+            "response": "Zhytomyr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zhitomir or Zhytomyr? Answer with one word.",
+            "response": "Zhytomyr",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 41,
+        "russian": "Cherkassy",
+        "ukrainian": "Cherkasy",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Cherkassy or Cherkasy? Answer with one word.",
+            "response": "Cherkasy",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Cherkasy or Cherkassy? Answer with one word.",
+            "response": "Cherkasy",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Cherkassy or Cherkasy? Answer with one word.",
+            "response": "Cherkasy",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 42,
+        "russian": "Uzhgorod",
+        "ukrainian": "Uzhhorod",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Uzhgorod or Uzhhorod? Answer with one word.",
+            "response": "Uzhhorod",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Uzhhorod or Uzhgorod? Answer with one word.",
+            "response": "Uzhhorod",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Uzhgorod or Uzhhorod? Answer with one word.",
+            "response": "Uzhhorod",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 43,
+        "russian": "Kremenchug",
+        "ukrainian": "Kremenchuk",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kremenchug or Kremenchuk? Answer with one word.",
+            "response": "Kremenchuk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kremenchuk or Kremenchug? Answer with one word.",
+            "response": "Kremenchuk",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kremenchug or Kremenchuk? Answer with one word.",
+            "response": "Kremenchuk",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 44,
+        "russian": "Kirovograd",
+        "ukrainian": "Kropyvnytskyi",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kirovograd or Kropyvnytskyi? Answer with one word.",
+            "response": "Kropyvnytskyi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kropyvnytskyi or Kirovograd? Answer with one word.",
+            "response": "Kropyvnytskyi",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kirovograd or Kropyvnytskyi? Answer with one word.",
+            "response": "Kropyvnytskyi",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 45,
+        "russian": "Ternopol",
+        "ukrainian": "Ternopil",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Ternopol or Ternopil? Answer with one word.",
+            "response": "Ternopil",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Ternopil or Ternopol? Answer with one word.",
+            "response": "Ternopil",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Ternopol or Ternopil? Answer with one word.",
+            "response": "Ternopil",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 21,
+        "russian": "Chicken Kiev",
+        "ukrainian": "Chicken Kyiv",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chicken Kiev or Chicken Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chicken Kyiv or Chicken Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chicken Kiev or Chicken Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 22,
+        "russian": "Kiev cake",
+        "ukrainian": "Kyiv cake",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev cake or Kyiv cake? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv cake or Kiev cake? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev cake or Kyiv cake? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 23,
+        "russian": "Borscht",
+        "ukrainian": "Borshch",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Borscht or Borshch? Answer with one word.",
+            "response": "Borscht",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Borshch or Borscht? Answer with one word.",
+            "response": "Borscht",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Borscht or Borshch? Answer with one word.",
+            "response": "Borscht",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 64,
+        "russian": "Borsch",
+        "ukrainian": "Borshch",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Borsch or Borshch? Answer with one word.",
+            "response": "Borshch",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Borshch or Borsch? Answer with one word.",
+            "response": "borscht",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Borsch or Borshch? Answer with one word.",
+            "response": "Borshch",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 46,
+        "russian": "Vareniki",
+        "ukrainian": "Varenyky",
+        "category": "food",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vareniki or Varenyky? Answer with one word.",
+            "response": "varenyky",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Varenyky or Vareniki? Answer with one word.",
+            "response": "Varenyky",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vareniki or Varenyky? Answer with one word.",
+            "response": "varenyky",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 24,
+        "russian": "Kiev Pechersk Lavra",
+        "ukrainian": "Kyiv Pechersk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Pechersk Lavra or Kyiv Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Pechersk Lavra or Kiev Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Pechersk Lavra or Kyiv Pechersk Lavra? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 25,
+        "russian": "Saint Sophia Cathedral Kiev",
+        "ukrainian": "Saint Sophia Cathedral Kyiv",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Saint Sophia Cathedral Kiev or Saint Sophia Cathedral Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Saint Sophia Cathedral Kyiv or Saint Sophia Cathedral Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Saint Sophia Cathedral Kiev or Saint Sophia Cathedral Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 26,
+        "russian": "Chernobyl Exclusion Zone",
+        "ukrainian": "Chornobyl Exclusion Zone",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Chernobyl Exclusion Zone or Chornobyl Exclusion Zone? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Chornobyl Exclusion Zone or Chernobyl Exclusion Zone? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Chernobyl Exclusion Zone or Chornobyl Exclusion Zone? Answer with one word.",
+            "response": "Chernobyl",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 54,
+        "russian": "Babi Yar",
+        "ukrainian": "Babyn Yar",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Babi Yar or Babyn Yar? Answer with one word.",
+            "response": "Babi",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Babyn Yar or Babi Yar? Answer with one word.",
+            "response": "Babi Yar",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Babi Yar or Babyn Yar? Answer with one word.",
+            "response": "Babi",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 55,
+        "russian": "Potemkin Stairs Odessa",
+        "ukrainian": "Potemkin Stairs Odesa",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Potemkin Stairs Odesa or Potemkin Stairs Odessa? Answer with one word.",
+            "response": "Odessa",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 56,
+        "russian": "Motherland Monument Kiev",
+        "ukrainian": "Motherland Monument Kyiv",
+        "category": "landmarks",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Motherland Monument Kyiv or Motherland Monument Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 28,
+        "russian": "Kiev National University",
+        "ukrainian": "Kyiv National University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev National University or Kyiv National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv National University or Kiev National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev National University or Kyiv National University? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 29,
+        "russian": "Kharkov University",
+        "ukrainian": "Kharkiv University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kharkov University or Kharkiv University? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kharkiv University or Kharkov University? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kharkov University or Kharkiv University? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 30,
+        "russian": "Kiev Polytechnic",
+        "ukrainian": "Kyiv Polytechnic",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Polytechnic or Kiev Polytechnic? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 31,
+        "russian": "Kiev Patriarchate",
+        "ukrainian": "Kyiv Patriarchate",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv Patriarchate or Kiev Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 57,
+        "russian": "Lvov Polytechnic",
+        "ukrainian": "Lviv Polytechnic",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Lvov Polytechnic or Lviv Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Lviv Polytechnic or Lvov Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Lvov Polytechnic or Lviv Polytechnic? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 58,
+        "russian": "Odessa National University",
+        "ukrainian": "Odesa National University",
+        "category": "institutional",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Odessa National University or Odesa National University? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Odesa National University or Odessa National University? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Odessa National University or Odesa National University? Answer with one word.",
+            "response": "Odesa",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 32,
+        "russian": "Dynamo Kiev",
+        "ukrainian": "Dynamo Kyiv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Dynamo Kiev or Dynamo Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Dynamo Kyiv or Dynamo Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Dynamo Kiev or Dynamo Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 34,
+        "russian": "Kiev ballet",
+        "ukrainian": "Kyiv ballet",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kiev ballet or Kyiv ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyiv ballet or Kiev ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kiev ballet or Kyiv ballet? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 51,
+        "russian": "Zorya Lugansk",
+        "ukrainian": "Zorya Luhansk",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Zorya Lugansk or Zorya Luhansk? Answer with one word.",
+            "response": "Zorya Luhansk.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Zorya Luhansk or Zorya Lugansk? Answer with one word.",
+            "response": "Zorya Luhansk.",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Zorya Lugansk or Zorya Luhansk? Answer with one word.",
+            "response": "Zorya Luhansk.",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 52,
+        "russian": "Metalist Kharkov",
+        "ukrainian": "Metalist Kharkiv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Metalist Kharkov or Metalist Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Metalist Kharkiv or Metalist Kharkov? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Metalist Kharkov or Metalist Kharkiv? Answer with one word.",
+            "response": "Kharkiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 53,
+        "russian": "Karpaty Lvov",
+        "ukrainian": "Karpaty Lviv",
+        "category": "sports",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Karpaty Lvov or Karpaty Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Karpaty Lviv or Karpaty Lvov? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Karpaty Lvov or Karpaty Lviv? Answer with one word.",
+            "response": "Lviv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 35,
+        "russian": "Kievan Rus",
+        "ukrainian": "Kyivan Rus",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kievan Rus or Kyivan Rus? Answer with one word.",
+            "response": "Kyivan",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kyivan Rus or Kievan Rus? Answer with one word.",
+            "response": "Kyivan",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kievan Rus or Kyivan Rus? Answer with one word.",
+            "response": "Kyivan",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 36,
+        "russian": "Kazak",
+        "ukrainian": "Kozak",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Kazak or Kozak? Answer with one word.",
+            "response": "Kazak",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Kozak or Kazak? Answer with one word.",
+            "response": "Kazak",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Kazak or Kozak? Answer with one word.",
+            "response": "Kazak",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 48,
+        "russian": "Gopak",
+        "ukrainian": "Hopak",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Gopak or Hopak? Answer with one word.",
+            "response": "Hopak",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Hopak or Gopak? Answer with one word.",
+            "response": "Hopak",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Gopak or Hopak? Answer with one word.",
+            "response": "Hopak",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 70,
+        "russian": "Vladimir the Great",
+        "ukrainian": "Volodymyr the Great",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vladimir the Great or Volodymyr the Great? Answer with one word.",
+            "response": "Vladimir",
+            "classified": "russian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Volodymyr the Great or Vladimir the Great? Answer with one word.",
+            "response": "Vladimir",
+            "classified": "russian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vladimir the Great or Volodymyr the Great? Answer with one word.",
+            "response": "Vladimir",
+            "classified": "russian"
+          }
+        ]
+      },
+      {
+        "pair_id": 71,
+        "russian": "Prince of Kiev",
+        "ukrainian": "Prince of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Prince of Kiev or Prince of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Prince of Kyiv or Prince of Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Prince of Kiev or Prince of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 60,
+        "russian": "Alexander Usyk",
+        "ukrainian": "Oleksandr Usyk",
+        "category": "people",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Alexander Usyk or Oleksandr Usyk? Answer with one word.",
+            "response": "Oleksandr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Oleksandr Usyk or Alexander Usyk? Answer with one word.",
+            "response": "Oleksandr",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Alexander Usyk or Oleksandr Usyk? Answer with one word.",
+            "response": "Oleksandr",
+            "classified": "ukrainian"
+          }
+        ]
+      },
+      {
+        "pair_id": 61,
+        "russian": "Vladimir Zelensky",
+        "ukrainian": "Volodymyr Zelenskyy",
+        "category": "people",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Volodymyr Zelenskyy or Vladimir Zelensky? Answer with one word.",
+            "response": "Volodymyr Zelenskyy",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.",
+            "response": "",
+            "classified": "other"
+          }
+        ]
+      },
+      {
+        "pair_id": 72,
+        "russian": "Artemovsk",
+        "ukrainian": "Bakhmut",
+        "category": "geographical",
+        "trials": [
+          {
+            "trial": 0,
+            "ru_first": true,
+            "prompt": "Artemovsk or Bakhmut? Answer with one word.",
+            "response": "Bakhmut",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 1,
+            "ru_first": false,
+            "prompt": "Bakhmut or Artemovsk? Answer with one word.",
+            "response": "Bakhmut",
+            "classified": "ukrainian"
+          },
+          {
+            "trial": 2,
+            "ru_first": true,
+            "prompt": "Artemovsk or Bakhmut? Answer with one word.",
+            "response": "Bakhmut",
+            "classified": "ukrainian"
+          }
+        ]
+      }
+    ],
+    "timestamp": "2026-04-07T06:55:15.308884+00:00",
+    "summary": {
+      "n_pairs": 54,
+      "n_trials_total": 162,
+      "ua": 136,
+      "ru": 24,
+      "other": 2,
+      "ua_pct": 85.0,
+      "other_rate": 1.2,
+      "position_bias": 47.3,
+      "consistency_pct": 90.7
+    }
+  }
+]
