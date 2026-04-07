@@ -1,0 +1,509 @@
+pair_id,russian,ukrainian,category,model,family,test,prompt,response,x
+1,Kiev,Kyiv,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kiev or Kyiv? Answer with one word.,Kyiv,1
+1,Kiev,Kyiv,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kyiv or Kiev? Answer with one word.,Kyiv,1
+1,Kiev,Kyiv,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the capital of Ukraine called in English? Answer with one word.,Kyiv,1
+2,Kharkov,Kharkiv,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kharkov or Kharkiv? Answer with one word.,Kharkiv.,1
+2,Kharkov,Kharkiv,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kharkiv or Kharkov? Answer with one word.,Kharkiv,1
+2,Kharkov,Kharkiv,geographical,claude-haiku-4-5,Anthropic Claude,open,"What is the second-largest city in Ukraine, in the northeast of the country, called in English? Answer with one word.",Kharkiv,1
+3,Odessa,Odesa,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Odessa or Odesa? Answer with one word.,Odesa,1
+3,Odessa,Odesa,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Odesa or Odessa? Answer with one word.,Odesa,1
+3,Odessa,Odesa,geographical,claude-haiku-4-5,Anthropic Claude,open,"What is the famous Ukrainian Black Sea port city, known for its grand monumental staircase, called in English? Answer with one word.",Odesa,1
+4,Lvov,Lviv,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Lvov or Lviv? Answer with one word.,Lviv,1
+4,Lvov,Lviv,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Lviv or Lvov? Answer with one word.,Lviv,1
+4,Lvov,Lviv,geographical,claude-haiku-4-5,Anthropic Claude,open,"What is the largest city in western Ukraine, known for its UNESCO-listed historic old town, called in English? Answer with one word.",Lviv,1
+5,Zaporozhye,Zaporizhzhia,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Zaporozhye or Zaporizhzhia? Answer with one word.,Zaporizhzhia,1
+5,Zaporozhye,Zaporizhzhia,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Zaporizhzhia or Zaporozhye? Answer with one word.,Zaporizhzhia,1
+5,Zaporozhye,Zaporizhzhia,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the southeastern Ukrainian city home to one of Europe's largest nuclear power plants called in English? Answer with one word.,Zaporizhzhia,1
+6,Nikolaev,Mykolaiv,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Nikolaev or Mykolaiv? Answer with one word.,Mykolaiv,1
+6,Nikolaev,Mykolaiv,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Mykolaiv or Nikolaev? Answer with one word.,Mykolaiv,1
+6,Nikolaev,Mykolaiv,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the southern Ukrainian shipbuilding port city near the Southern Bug river called in English? Answer with one word.,Mykolaiv,1
+7,Dnepropetrovsk,Dnipro,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Dnepropetrovsk or Dnipro? Answer with one word.,Dnipro,1
+7,Dnepropetrovsk,Dnipro,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Dnipro or Dnepropetrovsk? Answer with one word.,Dnipro,1
+7,Dnepropetrovsk,Dnipro,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the Ukrainian city on the Dnieper river formerly named Yekaterinoslav called in English today? Answer with one word.,Dnipro,1
+8,Vinnitsa,Vinnytsia,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Vinnitsa or Vinnytsia? Answer with one word.,Vinnytsia,1
+8,Vinnitsa,Vinnytsia,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Vinnytsia or Vinnitsa? Answer with one word.,Vinnytsia,1
+8,Vinnitsa,Vinnytsia,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the west-central Ukrainian regional capital famous for its synchronized fountain show called in English? Answer with one word.,Vinnytsia,1
+9,Rovno,Rivne,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Rovno or Rivne? Answer with one word.,Rivne,1
+9,Rovno,Rivne,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Rivne or Rovno? Answer with one word.,Rivne,1
+9,Rovno,Rivne,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the northwestern Ukrainian regional capital in the Volhynia region called in English? Answer with one word.,Lutsk,
+10,Chernobyl,Chornobyl,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Chernobyl or Chornobyl? Answer with one word.,Chernobyl,0
+10,Chernobyl,Chornobyl,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Chornobyl or Chernobyl? Answer with one word.,Chornobyl,1
+10,Chernobyl,Chornobyl,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the site of the 1986 nuclear disaster in northern Ukraine called in English? Answer with one word.,Chernobyl,0
+11,Lugansk,Luhansk,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Lugansk or Luhansk? Answer with one word.,Luhansk,1
+11,Lugansk,Luhansk,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Luhansk or Lugansk? Answer with one word.,Luhansk,1
+11,Lugansk,Luhansk,geographical,claude-haiku-4-5,Anthropic Claude,open,"What is the eastern Ukrainian city, capital of one of the Russian-backed separatist regions, called in English? Answer with one word.",Donetsk,
+15,Dnieper,Dnipro,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Dnieper or Dnipro? Answer with one word.,Dnipro,1
+15,Dnieper,Dnipro,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Dnipro or Dnieper? Answer with one word.,Dnieper,0
+15,Dnieper,Dnipro,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the major river that flows through the capital of Ukraine into the Black Sea called in English? Answer with one word.,Dnieper,0
+16,Dniester,Dnister,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Dniester or Dnister? Answer with one word.,Dniester,0
+16,Dniester,Dnister,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Dnister or Dniester? Answer with one word.,Dniester,0
+16,Dniester,Dnister,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the river that forms much of the border between Ukraine and Moldova called in English? Answer with one word.,Dniester,0
+17,Donbass,Donbas,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Donbass or Donbas? Answer with one word.,Donbass,0
+17,Donbass,Donbas,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Donbas or Donbass? Answer with one word.,Donbas,1
+17,Donbass,Donbas,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the eastern Ukrainian heavy-industry and coal-mining region called in English? Answer with one word.,Donbas,1
+19,Zakarpatye,Zakarpattia,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Zakarpatye or Zakarpattia? Answer with one word.,Zakarpattia,1
+19,Zakarpatye,Zakarpattia,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Zakarpattia or Zakarpatye? Answer with one word.,Zakarpattia,1
+19,Zakarpatye,Zakarpattia,geographical,claude-haiku-4-5,Anthropic Claude,open,"What is the westernmost Ukrainian region, beyond the Carpathian mountains, called in English? Answer with one word.",Galicia,
+20,Podolye,Podillia,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Podolye or Podillia? Answer with one word.,Podillia,1
+20,Podolye,Podillia,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Podillia or Podolye? Answer with one word.,Podolia,
+20,Podolye,Podillia,geographical,claude-haiku-4-5,Anthropic Claude,open,"What is the historical region of west-central Ukraine, known for its black soil and traditional villages, called in English? Answer with one word.",Podolia,
+38,Chernigov,Chernihiv,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Chernigov or Chernihiv? Answer with one word.,Chernihiv,1
+38,Chernigov,Chernihiv,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Chernihiv or Chernigov? Answer with one word.,Chernihiv,1
+38,Chernigov,Chernihiv,geographical,claude-haiku-4-5,Anthropic Claude,open,"What is the northern Ukrainian regional capital, one of the oldest medieval East Slavic cities, called in English? Answer with one word.",Novgorod,
+39,Chernovtsy,Chernivtsi,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Chernovtsy or Chernivtsi? Answer with one word.,Chernivtsi,1
+39,Chernovtsy,Chernivtsi,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Chernivtsi or Chernovtsy? Answer with one word.,Chernivtsi,1
+39,Chernovtsy,Chernivtsi,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the southwestern Ukrainian regional capital in the historical Bukovina region called in English? Answer with one word.,Chernivtsi,1
+40,Zhitomir,Zhytomyr,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Zhitomir or Zhytomyr? Answer with one word.,Zhytomyr,1
+40,Zhitomir,Zhytomyr,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Zhytomyr or Zhitomir? Answer with one word.,Zhytomyr,1
+40,Zhitomir,Zhytomyr,geographical,claude-haiku-4-5,Anthropic Claude,open,"What is the northwestern-central Ukrainian regional capital, an old Polish-Lithuanian center, called in English? Answer with one word.",Lviv,
+41,Cherkassy,Cherkasy,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Cherkassy or Cherkasy? Answer with one word.,Cherkasy,1
+41,Cherkassy,Cherkasy,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Cherkasy or Cherkassy? Answer with one word.,Cherkasy,1
+41,Cherkassy,Cherkasy,geographical,claude-haiku-4-5,Anthropic Claude,open,"What is the central Ukrainian regional capital on the Dnieper river, near the homeland of Taras Shevchenko, called in English? Answer with one word.",Cherkasy,1
+42,Uzhgorod,Uzhhorod,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Uzhgorod or Uzhhorod? Answer with one word.,Uzhhorod,1
+42,Uzhgorod,Uzhhorod,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Uzhhorod or Uzhgorod? Answer with one word.,Uzhhorod,1
+42,Uzhgorod,Uzhhorod,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the far western Ukrainian city near the Slovak and Hungarian borders called in English? Answer with one word.,Uzhhorod,1
+43,Kremenchug,Kremenchuk,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kremenchug or Kremenchuk? Answer with one word.,Kremenchuk,1
+43,Kremenchug,Kremenchuk,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kremenchuk or Kremenchug? Answer with one word.,Kremenchuk,1
+43,Kremenchug,Kremenchuk,geographical,claude-haiku-4-5,Anthropic Claude,open,"What is the central Ukrainian industrial city on the Dnieper, with a major hydroelectric dam, called in English? Answer with one word.",Dnipro,
+44,Kirovograd,Kropyvnytskyi,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kirovograd or Kropyvnytskyi? Answer with one word.,Kropyvnytskyi,1
+44,Kirovograd,Kropyvnytskyi,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kropyvnytskyi or Kirovograd? Answer with one word.,Kropyvnytskyi,1
+44,Kirovograd,Kropyvnytskyi,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the central Ukrainian regional capital that was renamed in 2016 from its Soviet-era name called today in English? Answer with one word.,Dnipro,
+45,Ternopol,Ternopil,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Ternopol or Ternopil? Answer with one word.,Ternopil,1
+45,Ternopol,Ternopil,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Ternopil or Ternopol? Answer with one word.,Ternopil,1
+45,Ternopol,Ternopil,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the western Ukrainian regional capital in eastern Galicia called in English? Answer with one word.,Lviv,
+21,Chicken Kiev,Chicken Kyiv,food,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Chicken Kiev or Chicken Kyiv? Answer with one word.,Kyiv.,1
+21,Chicken Kiev,Chicken Kyiv,food,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Chicken Kyiv or Chicken Kiev? Answer with one word.,Kyiv,1
+21,Chicken Kiev,Chicken Kyiv,food,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The famous chicken dish stuffed with herb butter is called Chicken ___.' Answer with the missing word only.,Kiev,0
+22,Kiev cake,Kyiv cake,food,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kiev cake or Kyiv cake? Answer with one word.,Kyiv.,1
+22,Kiev cake,Kyiv cake,food,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kyiv cake or Kiev cake? Answer with one word.,Kyiv,1
+22,Kiev cake,Kyiv cake,food,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The famous Ukrainian meringue and hazelnut cake is called ___ cake.' Answer with the missing word only.,Kyiv,1
+23,Borscht,Borshch,food,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Borscht or Borshch? Answer with one word.,Borscht.,0
+23,Borscht,Borshch,food,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Borshch or Borscht? Answer with one word.,Borscht,0
+23,Borscht,Borshch,food,claude-haiku-4-5,Anthropic Claude,open,"How is the Ukrainian beetroot soup, recognized by UNESCO in 2022, spelled in English? Answer with one word.",Borscht,0
+64,Borsch,Borshch,food,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Borsch or Borshch? Answer with one word.,Borscht.,0
+64,Borsch,Borshch,food,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Borshch or Borsch? Answer with one word.,Borsch.,0
+64,Borsch,Borshch,food,claude-haiku-4-5,Anthropic Claude,open,"How is the Ukrainian beetroot soup, recognized by UNESCO in 2022, spelled in English? Answer with one word.",Borscht,0
+46,Vareniki,Varenyky,food,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Vareniki or Varenyky? Answer with one word.,Varenyky,1
+46,Vareniki,Varenyky,food,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Varenyky or Vareniki? Answer with one word.,Varenyky,1
+46,Vareniki,Varenyky,food,claude-haiku-4-5,Anthropic Claude,open,How are Ukrainian filled dumplings (similar to Polish pierogi) spelled in English? Answer with one word.,Varenyky,1
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kiev Pechersk Lavra or Kyiv Pechersk Lavra? Answer with one word.,Kyiv,1
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kyiv Pechersk Lavra or Kiev Pechersk Lavra? Answer with one word.,Kyiv,1
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The famous medieval Orthodox cave monastery in the capital of Ukraine is called ___ Pechersk Lavra.' Answer with the missing word only.,Kyiv,1
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Saint Sophia Cathedral Kiev or Saint Sophia Cathedral Kyiv? Answer with one word.,Kyiv,1
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Saint Sophia Cathedral Kyiv or Saint Sophia Cathedral Kiev? Answer with one word.,Kyiv,1
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The 11th-century cathedral named after Saint Sophia in the Ukrainian capital is called Saint Sophia Cathedral ___.' Answer with the missing word only.,Kyiv,1
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Chernobyl Exclusion Zone or Chornobyl Exclusion Zone? Answer with one word.,Chernobyl,0
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Chornobyl Exclusion Zone or Chernobyl Exclusion Zone? Answer with one word.,Chernobyl,0
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The contaminated area around the 1986 Ukrainian nuclear disaster is called the ___ Exclusion Zone.' Answer with the missing word only.,Chernobyl,0
+54,Babi Yar,Babyn Yar,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Babi Yar or Babyn Yar? Answer with one word.,Babi Yar,0
+54,Babi Yar,Babyn Yar,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Babyn Yar or Babi Yar? Answer with one word.,Babi Yar,0
+54,Babi Yar,Babyn Yar,landmarks,claude-haiku-4-5,Anthropic Claude,open,"Complete: 'The ravine in the capital of Ukraine where Nazis killed about 33,000 Jews in September 1941 is called ___ Yar.' Answer with the missing word only.",Babi,0
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.,Odessa,0
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Potemkin Stairs Odesa or Potemkin Stairs Odessa? Answer with one word.,Odesa,1
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The famous monumental staircase in the Ukrainian Black Sea port city is called the Potemkin Stairs of ___.' Answer with the missing word only.,Odesa,1
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.,Kyiv,1
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Motherland Monument Kyiv or Motherland Monument Kiev? Answer with one word.,Kyiv,1
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The colossal Soviet-era stainless-steel statue in the capital of Ukraine is called the Motherland Monument ___.' Answer with the missing word only.,Monument,
+28,Kiev National University,Kyiv National University,institutional,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kiev National University or Kyiv National University? Answer with one word.,Kyiv,1
+28,Kiev National University,Kyiv National University,institutional,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kyiv National University or Kiev National University? Answer with one word.,Kyiv,1
+28,Kiev National University,Kyiv National University,institutional,claude-haiku-4-5,Anthropic Claude,open,"Complete: 'The main public university in the capital of Ukraine, founded in 1834, is called ___ National University.' Answer with the missing word only.",Taras Shevchenko,
+29,Kharkov University,Kharkiv University,institutional,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kharkov University or Kharkiv University? Answer with one word.,Kharkiv,1
+29,Kharkov University,Kharkiv University,institutional,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kharkiv University or Kharkov University? Answer with one word.,Kharkiv,1
+29,Kharkov University,Kharkiv University,institutional,claude-haiku-4-5,Anthropic Claude,open,"Complete: 'The oldest university in the second-largest city of Ukraine, founded in 1804, is called ___ University.' Answer with the missing word only.",Kharkiv,1
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.,Kyiv,1
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kyiv Polytechnic or Kiev Polytechnic? Answer with one word.,Kyiv,1
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The main technical university in the capital of Ukraine is called the ___ Polytechnic Institute.' Answer with the missing word only.,"National Technical University of Ukraine (NTUU) or Igor Sikorsky
+
+The answer is: **Igor Sikorsky** (or NTUU ""KPI"")",
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.,Kyiv,1
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kyiv Patriarchate or Kiev Patriarchate? Answer with one word.,Kyiv,1
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The autocephalous Orthodox church based in the capital of Ukraine is called the ___ Patriarchate.' Answer with the missing word only.,Ukrainian,
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Lvov Polytechnic or Lviv Polytechnic? Answer with one word.,Lviv,1
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Lviv Polytechnic or Lvov Polytechnic? Answer with one word.,Lviv,1
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The main technical university in the largest western Ukrainian city is called the ___ Polytechnic.' Answer with the missing word only.,Lviv,1
+58,Odessa National University,Odesa National University,institutional,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Odessa National University or Odesa National University? Answer with one word.,Odesa,1
+58,Odessa National University,Odesa National University,institutional,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Odesa National University or Odessa National University? Answer with one word.,Odesa,1
+58,Odessa National University,Odesa National University,institutional,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The main university in the Ukrainian Black Sea port city is called ___ National University.' Answer with the missing word only.,Odesa,1
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Dynamo Kiev or Dynamo Kyiv? Answer with one word.,Kyiv,1
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Dynamo Kyiv or Dynamo Kiev? Answer with one word.,Kyiv,1
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-haiku-4-5,Anthropic Claude,open,"Complete: 'The most successful Ukrainian football club, based in the capital, is called Dynamo ___.' Answer with the missing word only.",Kyiv,1
+34,Kiev ballet,Kyiv ballet,sports,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kiev ballet or Kyiv ballet? Answer with one word.,Kyiv,1
+34,Kiev ballet,Kyiv ballet,sports,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kyiv ballet or Kiev ballet? Answer with one word.,Kyiv,1
+34,Kiev ballet,Kyiv ballet,sports,claude-haiku-4-5,Anthropic Claude,open,"Complete: 'The national ballet company of Ukraine, based in the capital, is called the ___ Ballet.' Answer with the missing word only.",Kyiv,1
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Zorya Lugansk or Zorya Luhansk? Answer with one word.,Luhansk,1
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Zorya Luhansk or Zorya Lugansk? Answer with one word.,Luhansk,1
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The Ukrainian football club originally based in the eastern city that is the capital of one of the separatist regions is called Zorya ___.' Answer with the missing word only.,Luhansk,1
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Metalist Kharkov or Metalist Kharkiv? Answer with one word.,Kharkiv.,1
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Metalist Kharkiv or Metalist Kharkov? Answer with one word.,Kharkiv,1
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-haiku-4-5,Anthropic Claude,open,"Complete: 'The Ukrainian football club from the second-largest city of Ukraine, in the northeast, is called Metalist ___.' Answer with the missing word only.",Kharkiv,1
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Karpaty Lvov or Karpaty Lviv? Answer with one word.,Lviv,1
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Karpaty Lviv or Karpaty Lvov? Answer with one word.,Lviv,1
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The Ukrainian football club from the largest western city of Ukraine is called Karpaty ___.' Answer with the missing word only.,Lviv,1
+35,Kievan Rus,Kyivan Rus,historical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kievan Rus or Kyivan Rus? Answer with one word.,Kyivan,1
+35,Kievan Rus,Kyivan Rus,historical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kyivan Rus or Kievan Rus? Answer with one word.,Kyivan,1
+35,Kievan Rus,Kyivan Rus,historical,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The medieval East Slavic federation centered around the capital of modern Ukraine is called ___ Rus.' Answer with the missing word only.,Kyivan,1
+36,Kazak,Kozak,historical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Kazak or Kozak? Answer with one word.,Kazak,0
+36,Kazak,Kozak,historical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Kozak or Kazak? Answer with one word.,Kozak,1
+36,Kazak,Kozak,historical,claude-haiku-4-5,Anthropic Claude,open,How is the term for the historical Ukrainian frontier warriors (the founders of the Sich) spelled in English transliteration of Ukrainian? Answer with one word.,Cossacks,
+48,Gopak,Hopak,historical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Gopak or Hopak? Answer with one word.,Hopak,1
+48,Gopak,Hopak,historical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Hopak or Gopak? Answer with one word.,Hopak,1
+48,Gopak,Hopak,historical,claude-haiku-4-5,Anthropic Claude,open,How is the fast-paced traditional Ukrainian folk dance spelled in English transliteration of Ukrainian? Answer with one word.,Hopak,1
+70,Vladimir the Great,Volodymyr the Great,historical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Vladimir the Great or Volodymyr the Great? Answer with one word.,Volodymyr,1
+70,Vladimir the Great,Volodymyr the Great,historical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Volodymyr the Great or Vladimir the Great? Answer with one word.,Vladimir.,0
+70,Vladimir the Great,Volodymyr the Great,historical,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The medieval prince who Christianized the East Slavs in 988 AD is known in modern English as ___ the Great.' Answer with the missing word only.,Vladimir,0
+71,Prince of Kiev,Prince of Kyiv,historical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Prince of Kiev or Prince of Kyiv? Answer with one word.,Kyiv,1
+71,Prince of Kiev,Prince of Kyiv,historical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Prince of Kyiv or Prince of Kiev? Answer with one word.,Kyiv,1
+71,Prince of Kiev,Prince of Kyiv,historical,claude-haiku-4-5,Anthropic Claude,open,Complete: 'The medieval rulers of the East Slavic capital of modern Ukraine were called Prince of ___.' Answer with the missing word only.,Kiev,0
+60,Alexander Usyk,Oleksandr Usyk,people,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Alexander Usyk or Oleksandr Usyk? Answer with one word.,Oleksandr,1
+60,Alexander Usyk,Oleksandr Usyk,people,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Oleksandr Usyk or Alexander Usyk? Answer with one word.,Usyk,
+60,Alexander Usyk,Oleksandr Usyk,people,claude-haiku-4-5,Anthropic Claude,open,What is the first name of the Ukrainian heavyweight boxing world champion (last name Usyk) in modern English usage? Answer with one word.,Oleksandr,1
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.,Zelenskyy,
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Volodymyr Zelenskyy or Vladimir Zelensky? Answer with one word.,Zelenskyy,
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-haiku-4-5,Anthropic Claude,open,What is the full English name (first and last) of the current president of Ukraine? Answer with two words only.,Volodymyr Zelenskyy,1
+72,Artemovsk,Bakhmut,geographical,claude-haiku-4-5,Anthropic Claude,forced_ru_first,Artemovsk or Bakhmut? Answer with one word.,Bakhmut,1
+72,Artemovsk,Bakhmut,geographical,claude-haiku-4-5,Anthropic Claude,forced_ua_first,Bakhmut or Artemovsk? Answer with one word.,Bakhmut,1
+72,Artemovsk,Bakhmut,geographical,claude-haiku-4-5,Anthropic Claude,open,What is the eastern Ukrainian city in the Donbas region that was the site of the longest battle of 2022-2023 called in English today? Answer with one word.,Bakhmut,1
+1,Kiev,Kyiv,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kiev or Kyiv? Answer with one word.,Kyiv,1
+1,Kiev,Kyiv,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kyiv or Kiev? Answer with one word.,Kyiv,1
+1,Kiev,Kyiv,geographical,claude-opus-4-6,Anthropic Claude,open,What is the capital of Ukraine called in English? Answer with one word.,Kyiv,1
+2,Kharkov,Kharkiv,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kharkov or Kharkiv? Answer with one word.,Kharkiv,1
+2,Kharkov,Kharkiv,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kharkiv or Kharkov? Answer with one word.,Kharkiv,1
+2,Kharkov,Kharkiv,geographical,claude-opus-4-6,Anthropic Claude,open,"What is the second-largest city in Ukraine, in the northeast of the country, called in English? Answer with one word.",Kharkiv,1
+3,Odessa,Odesa,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Odessa or Odesa? Answer with one word.,Odesa,1
+3,Odessa,Odesa,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Odesa or Odessa? Answer with one word.,Odesa,1
+3,Odessa,Odesa,geographical,claude-opus-4-6,Anthropic Claude,open,"What is the famous Ukrainian Black Sea port city, known for its grand monumental staircase, called in English? Answer with one word.",Odessa,0
+4,Lvov,Lviv,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Lvov or Lviv? Answer with one word.,Lviv,1
+4,Lvov,Lviv,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Lviv or Lvov? Answer with one word.,Lviv,1
+4,Lvov,Lviv,geographical,claude-opus-4-6,Anthropic Claude,open,"What is the largest city in western Ukraine, known for its UNESCO-listed historic old town, called in English? Answer with one word.",Lviv,1
+5,Zaporozhye,Zaporizhzhia,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Zaporozhye or Zaporizhzhia? Answer with one word.,Zaporizhzhia,1
+5,Zaporozhye,Zaporizhzhia,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Zaporizhzhia or Zaporozhye? Answer with one word.,Zaporizhzhia,1
+5,Zaporozhye,Zaporizhzhia,geographical,claude-opus-4-6,Anthropic Claude,open,What is the southeastern Ukrainian city home to one of Europe's largest nuclear power plants called in English? Answer with one word.,Enerhodar,
+6,Nikolaev,Mykolaiv,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Nikolaev or Mykolaiv? Answer with one word.,Mykolaiv,1
+6,Nikolaev,Mykolaiv,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Mykolaiv or Nikolaev? Answer with one word.,Mykolaiv,1
+6,Nikolaev,Mykolaiv,geographical,claude-opus-4-6,Anthropic Claude,open,What is the southern Ukrainian shipbuilding port city near the Southern Bug river called in English? Answer with one word.,Mykolaiv,1
+7,Dnepropetrovsk,Dnipro,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Dnepropetrovsk or Dnipro? Answer with one word.,Dnipro,1
+7,Dnepropetrovsk,Dnipro,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Dnipro or Dnepropetrovsk? Answer with one word.,Dnipro,1
+7,Dnepropetrovsk,Dnipro,geographical,claude-opus-4-6,Anthropic Claude,open,What is the Ukrainian city on the Dnieper river formerly named Yekaterinoslav called in English today? Answer with one word.,Dnipro,1
+8,Vinnitsa,Vinnytsia,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Vinnitsa or Vinnytsia? Answer with one word.,Vinnytsia,1
+8,Vinnitsa,Vinnytsia,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Vinnytsia or Vinnitsa? Answer with one word.,Vinnytsia,1
+8,Vinnitsa,Vinnytsia,geographical,claude-opus-4-6,Anthropic Claude,open,What is the west-central Ukrainian regional capital famous for its synchronized fountain show called in English? Answer with one word.,Vinnytsia,1
+9,Rovno,Rivne,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Rovno or Rivne? Answer with one word.,Rivne,1
+9,Rovno,Rivne,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Rivne or Rovno? Answer with one word.,Rivne,1
+9,Rovno,Rivne,geographical,claude-opus-4-6,Anthropic Claude,open,What is the northwestern Ukrainian regional capital in the Volhynia region called in English? Answer with one word.,Lutsk,
+10,Chernobyl,Chornobyl,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Chernobyl or Chornobyl? Answer with one word.,Chornobyl,1
+10,Chernobyl,Chornobyl,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Chornobyl or Chernobyl? Answer with one word.,Chornobyl,1
+10,Chernobyl,Chornobyl,geographical,claude-opus-4-6,Anthropic Claude,open,What is the site of the 1986 nuclear disaster in northern Ukraine called in English? Answer with one word.,Chernobyl,0
+11,Lugansk,Luhansk,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Lugansk or Luhansk? Answer with one word.,Luhansk,1
+11,Lugansk,Luhansk,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Luhansk or Lugansk? Answer with one word.,Luhansk,1
+11,Lugansk,Luhansk,geographical,claude-opus-4-6,Anthropic Claude,open,"What is the eastern Ukrainian city, capital of one of the Russian-backed separatist regions, called in English? Answer with one word.",Donetsk,
+15,Dnieper,Dnipro,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Dnieper or Dnipro? Answer with one word.,Dnipro,1
+15,Dnieper,Dnipro,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Dnipro or Dnieper? Answer with one word.,Dnipro,1
+15,Dnieper,Dnipro,geographical,claude-opus-4-6,Anthropic Claude,open,What is the major river that flows through the capital of Ukraine into the Black Sea called in English? Answer with one word.,Dnieper,0
+16,Dniester,Dnister,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Dniester or Dnister? Answer with one word.,Dniester,0
+16,Dniester,Dnister,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Dnister or Dniester? Answer with one word.,Dnister,1
+16,Dniester,Dnister,geographical,claude-opus-4-6,Anthropic Claude,open,What is the river that forms much of the border between Ukraine and Moldova called in English? Answer with one word.,Dniester,0
+17,Donbass,Donbas,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Donbass or Donbas? Answer with one word.,Donbas,1
+17,Donbass,Donbas,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Donbas or Donbass? Answer with one word.,Donbas,1
+17,Donbass,Donbas,geographical,claude-opus-4-6,Anthropic Claude,open,What is the eastern Ukrainian heavy-industry and coal-mining region called in English? Answer with one word.,Donbas,1
+19,Zakarpatye,Zakarpattia,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Zakarpatye or Zakarpattia? Answer with one word.,Zakarpattia,1
+19,Zakarpatye,Zakarpattia,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Zakarpattia or Zakarpatye? Answer with one word.,Zakarpattia,1
+19,Zakarpatye,Zakarpattia,geographical,claude-opus-4-6,Anthropic Claude,open,"What is the westernmost Ukrainian region, beyond the Carpathian mountains, called in English? Answer with one word.",Transcarpathia,
+20,Podolye,Podillia,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Podolye or Podillia? Answer with one word.,Podillia,1
+20,Podolye,Podillia,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Podillia or Podolye? Answer with one word.,Podillia,1
+20,Podolye,Podillia,geographical,claude-opus-4-6,Anthropic Claude,open,"What is the historical region of west-central Ukraine, known for its black soil and traditional villages, called in English? Answer with one word.",Podolia,
+38,Chernigov,Chernihiv,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Chernigov or Chernihiv? Answer with one word.,Chernihiv,1
+38,Chernigov,Chernihiv,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Chernihiv or Chernigov? Answer with one word.,Chernihiv,1
+38,Chernigov,Chernihiv,geographical,claude-opus-4-6,Anthropic Claude,open,"What is the northern Ukrainian regional capital, one of the oldest medieval East Slavic cities, called in English? Answer with one word.",Chernihiv,1
+39,Chernovtsy,Chernivtsi,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Chernovtsy or Chernivtsi? Answer with one word.,Chernivtsi,1
+39,Chernovtsy,Chernivtsi,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Chernivtsi or Chernovtsy? Answer with one word.,Chernivtsi,1
+39,Chernovtsy,Chernivtsi,geographical,claude-opus-4-6,Anthropic Claude,open,What is the southwestern Ukrainian regional capital in the historical Bukovina region called in English? Answer with one word.,Chernivtsi,1
+40,Zhitomir,Zhytomyr,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Zhitomir or Zhytomyr? Answer with one word.,Zhytomyr,1
+40,Zhitomir,Zhytomyr,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Zhytomyr or Zhitomir? Answer with one word.,Zhytomyr,1
+40,Zhitomir,Zhytomyr,geographical,claude-opus-4-6,Anthropic Claude,open,"What is the northwestern-central Ukrainian regional capital, an old Polish-Lithuanian center, called in English? Answer with one word.",The answer is **Lutsk**.,
+41,Cherkassy,Cherkasy,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Cherkassy or Cherkasy? Answer with one word.,Cherkasy,1
+41,Cherkassy,Cherkasy,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Cherkasy or Cherkassy? Answer with one word.,Cherkasy,1
+41,Cherkassy,Cherkasy,geographical,claude-opus-4-6,Anthropic Claude,open,"What is the central Ukrainian regional capital on the Dnieper river, near the homeland of Taras Shevchenko, called in English? Answer with one word.","The central Ukrainian regional capital on the Dnieper river, near the homeland of Taras Shevchenko (who was born in the village of Moryntsi in what is now Cherkasy Oblast), is:
+
+**Cherkasy**",1
+42,Uzhgorod,Uzhhorod,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Uzhgorod or Uzhhorod? Answer with one word.,Uzhhorod,1
+42,Uzhgorod,Uzhhorod,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Uzhhorod or Uzhgorod? Answer with one word.,Uzhhorod,1
+42,Uzhgorod,Uzhhorod,geographical,claude-opus-4-6,Anthropic Claude,open,What is the far western Ukrainian city near the Slovak and Hungarian borders called in English? Answer with one word.,Uzhhorod,1
+43,Kremenchug,Kremenchuk,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kremenchug or Kremenchuk? Answer with one word.,Kremenchuk,1
+43,Kremenchug,Kremenchuk,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kremenchuk or Kremenchug? Answer with one word.,Kremenchuk,1
+43,Kremenchug,Kremenchuk,geographical,claude-opus-4-6,Anthropic Claude,open,"What is the central Ukrainian industrial city on the Dnieper, with a major hydroelectric dam, called in English? Answer with one word.",Zaporizhzhia,
+44,Kirovograd,Kropyvnytskyi,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kirovograd or Kropyvnytskyi? Answer with one word.,Kropyvnytskyi,1
+44,Kirovograd,Kropyvnytskyi,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kropyvnytskyi or Kirovograd? Answer with one word.,Kropyvnytskyi,1
+44,Kirovograd,Kropyvnytskyi,geographical,claude-opus-4-6,Anthropic Claude,open,What is the central Ukrainian regional capital that was renamed in 2016 from its Soviet-era name called today in English? Answer with one word.,Dnipro,
+45,Ternopol,Ternopil,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Ternopol or Ternopil? Answer with one word.,Ternopil,1
+45,Ternopol,Ternopil,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Ternopil or Ternopol? Answer with one word.,Ternopil,1
+45,Ternopol,Ternopil,geographical,claude-opus-4-6,Anthropic Claude,open,What is the western Ukrainian regional capital in eastern Galicia called in English? Answer with one word.,Lviv,
+21,Chicken Kiev,Chicken Kyiv,food,claude-opus-4-6,Anthropic Claude,forced_ru_first,Chicken Kiev or Chicken Kyiv? Answer with one word.,Kyiv,1
+21,Chicken Kiev,Chicken Kyiv,food,claude-opus-4-6,Anthropic Claude,forced_ua_first,Chicken Kyiv or Chicken Kiev? Answer with one word.,Kyiv,1
+21,Chicken Kiev,Chicken Kyiv,food,claude-opus-4-6,Anthropic Claude,open,Complete: 'The famous chicken dish stuffed with herb butter is called Chicken ___.' Answer with the missing word only.,Kiev,0
+22,Kiev cake,Kyiv cake,food,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kiev cake or Kyiv cake? Answer with one word.,Kyiv,1
+22,Kiev cake,Kyiv cake,food,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kyiv cake or Kiev cake? Answer with one word.,Kyiv,1
+22,Kiev cake,Kyiv cake,food,claude-opus-4-6,Anthropic Claude,open,Complete: 'The famous Ukrainian meringue and hazelnut cake is called ___ cake.' Answer with the missing word only.,Kyiv,1
+23,Borscht,Borshch,food,claude-opus-4-6,Anthropic Claude,forced_ru_first,Borscht or Borshch? Answer with one word.,Borshch,1
+23,Borscht,Borshch,food,claude-opus-4-6,Anthropic Claude,forced_ua_first,Borshch or Borscht? Answer with one word.,Borshch,1
+23,Borscht,Borshch,food,claude-opus-4-6,Anthropic Claude,open,"How is the Ukrainian beetroot soup, recognized by UNESCO in 2022, spelled in English? Answer with one word.",Borscht,0
+64,Borsch,Borshch,food,claude-opus-4-6,Anthropic Claude,forced_ru_first,Borsch or Borshch? Answer with one word.,Borscht,0
+64,Borsch,Borshch,food,claude-opus-4-6,Anthropic Claude,forced_ua_first,Borshch or Borsch? Answer with one word.,Borshch,1
+64,Borsch,Borshch,food,claude-opus-4-6,Anthropic Claude,open,"How is the Ukrainian beetroot soup, recognized by UNESCO in 2022, spelled in English? Answer with one word.",Borscht,0
+46,Vareniki,Varenyky,food,claude-opus-4-6,Anthropic Claude,forced_ru_first,Vareniki or Varenyky? Answer with one word.,Varenyky,1
+46,Vareniki,Varenyky,food,claude-opus-4-6,Anthropic Claude,forced_ua_first,Varenyky or Vareniki? Answer with one word.,Varenyky,1
+46,Vareniki,Varenyky,food,claude-opus-4-6,Anthropic Claude,open,How are Ukrainian filled dumplings (similar to Polish pierogi) spelled in English? Answer with one word.,Varenyky,1
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kiev Pechersk Lavra or Kyiv Pechersk Lavra? Answer with one word.,Kyiv,1
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kyiv Pechersk Lavra or Kiev Pechersk Lavra? Answer with one word.,Kyiv,1
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-opus-4-6,Anthropic Claude,open,Complete: 'The famous medieval Orthodox cave monastery in the capital of Ukraine is called ___ Pechersk Lavra.' Answer with the missing word only.,Kyiv,1
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-opus-4-6,Anthropic Claude,forced_ru_first,Saint Sophia Cathedral Kiev or Saint Sophia Cathedral Kyiv? Answer with one word.,Kyiv,1
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-opus-4-6,Anthropic Claude,forced_ua_first,Saint Sophia Cathedral Kyiv or Saint Sophia Cathedral Kiev? Answer with one word.,Kyiv,1
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-opus-4-6,Anthropic Claude,open,Complete: 'The 11th-century cathedral named after Saint Sophia in the Ukrainian capital is called Saint Sophia Cathedral ___.' Answer with the missing word only.,Kyiv,1
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-opus-4-6,Anthropic Claude,forced_ru_first,Chernobyl Exclusion Zone or Chornobyl Exclusion Zone? Answer with one word.,Chornobyl,1
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-opus-4-6,Anthropic Claude,forced_ua_first,Chornobyl Exclusion Zone or Chernobyl Exclusion Zone? Answer with one word.,Chornobyl,1
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-opus-4-6,Anthropic Claude,open,Complete: 'The contaminated area around the 1986 Ukrainian nuclear disaster is called the ___ Exclusion Zone.' Answer with the missing word only.,Chernobyl,0
+54,Babi Yar,Babyn Yar,landmarks,claude-opus-4-6,Anthropic Claude,forced_ru_first,Babi Yar or Babyn Yar? Answer with one word.,"Both are correct, but **Babyn** Yar is the Ukrainian transliteration, while **Babi** Yar is the Russian transliteration. Given current conventions favoring Ukrainian names, the preferred form is:
+
+**B",1
+54,Babi Yar,Babyn Yar,landmarks,claude-opus-4-6,Anthropic Claude,forced_ua_first,Babyn Yar or Babi Yar? Answer with one word.,"Both forms are widely used, but the historically and linguistically preferred Ukrainian transliteration is **Babyn Yar**.",1
+54,Babi Yar,Babyn Yar,landmarks,claude-opus-4-6,Anthropic Claude,open,"Complete: 'The ravine in the capital of Ukraine where Nazis killed about 33,000 Jews in September 1941 is called ___ Yar.' Answer with the missing word only.",Babi,0
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-opus-4-6,Anthropic Claude,forced_ru_first,Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.,Odesa,1
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-opus-4-6,Anthropic Claude,forced_ua_first,Potemkin Stairs Odesa or Potemkin Stairs Odessa? Answer with one word.,Odesa,1
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-opus-4-6,Anthropic Claude,open,Complete: 'The famous monumental staircase in the Ukrainian Black Sea port city is called the Potemkin Stairs of ___.' Answer with the missing word only.,Odessa,0
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-opus-4-6,Anthropic Claude,forced_ru_first,Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.,Kyiv,1
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-opus-4-6,Anthropic Claude,forced_ua_first,Motherland Monument Kyiv or Motherland Monument Kiev? Answer with one word.,Kyiv,1
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-opus-4-6,Anthropic Claude,open,Complete: 'The colossal Soviet-era stainless-steel statue in the capital of Ukraine is called the Motherland Monument ___.' Answer with the missing word only.,statue,
+28,Kiev National University,Kyiv National University,institutional,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kiev National University or Kyiv National University? Answer with one word.,Kyiv,1
+28,Kiev National University,Kyiv National University,institutional,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kyiv National University or Kiev National University? Answer with one word.,Kyiv,1
+28,Kiev National University,Kyiv National University,institutional,claude-opus-4-6,Anthropic Claude,open,"Complete: 'The main public university in the capital of Ukraine, founded in 1834, is called ___ National University.' Answer with the missing word only.",Taras Shevchenko,
+29,Kharkov University,Kharkiv University,institutional,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kharkov University or Kharkiv University? Answer with one word.,Kharkiv,1
+29,Kharkov University,Kharkiv University,institutional,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kharkiv University or Kharkov University? Answer with one word.,Both,
+29,Kharkov University,Kharkiv University,institutional,claude-opus-4-6,Anthropic Claude,open,"Complete: 'The oldest university in the second-largest city of Ukraine, founded in 1804, is called ___ University.' Answer with the missing word only.",Karazin,
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.,Kyiv,1
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kyiv Polytechnic or Kiev Polytechnic? Answer with one word.,Kyiv,1
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-opus-4-6,Anthropic Claude,open,Complete: 'The main technical university in the capital of Ukraine is called the ___ Polytechnic Institute.' Answer with the missing word only.,Kyiv,1
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.,Kyiv,1
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kyiv Patriarchate or Kiev Patriarchate? Answer with one word.,Kyiv,1
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-opus-4-6,Anthropic Claude,open,Complete: 'The autocephalous Orthodox church based in the capital of Ukraine is called the ___ Patriarchate.' Answer with the missing word only.,Kyiv,1
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-opus-4-6,Anthropic Claude,forced_ru_first,Lvov Polytechnic or Lviv Polytechnic? Answer with one word.,Lviv,1
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-opus-4-6,Anthropic Claude,forced_ua_first,Lviv Polytechnic or Lvov Polytechnic? Answer with one word.,Lviv,1
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-opus-4-6,Anthropic Claude,open,Complete: 'The main technical university in the largest western Ukrainian city is called the ___ Polytechnic.' Answer with the missing word only.,Lviv,1
+58,Odessa National University,Odesa National University,institutional,claude-opus-4-6,Anthropic Claude,forced_ru_first,Odessa National University or Odesa National University? Answer with one word.,Odesa,1
+58,Odessa National University,Odesa National University,institutional,claude-opus-4-6,Anthropic Claude,forced_ua_first,Odesa National University or Odessa National University? Answer with one word.,Odesa,1
+58,Odessa National University,Odesa National University,institutional,claude-opus-4-6,Anthropic Claude,open,Complete: 'The main university in the Ukrainian Black Sea port city is called ___ National University.' Answer with the missing word only.,Odesa,1
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-opus-4-6,Anthropic Claude,forced_ru_first,Dynamo Kiev or Dynamo Kyiv? Answer with one word.,Kyiv,1
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-opus-4-6,Anthropic Claude,forced_ua_first,Dynamo Kyiv or Dynamo Kiev? Answer with one word.,Kyiv,1
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-opus-4-6,Anthropic Claude,open,"Complete: 'The most successful Ukrainian football club, based in the capital, is called Dynamo ___.' Answer with the missing word only.",Kyiv,1
+34,Kiev ballet,Kyiv ballet,sports,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kiev ballet or Kyiv ballet? Answer with one word.,Kyiv,1
+34,Kiev ballet,Kyiv ballet,sports,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kyiv ballet or Kiev ballet? Answer with one word.,Kyiv,1
+34,Kiev ballet,Kyiv ballet,sports,claude-opus-4-6,Anthropic Claude,open,"Complete: 'The national ballet company of Ukraine, based in the capital, is called the ___ Ballet.' Answer with the missing word only.",Kyiv,1
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-opus-4-6,Anthropic Claude,forced_ru_first,Zorya Lugansk or Zorya Luhansk? Answer with one word.,"Both spellings are used, but the more common modern English transliteration based on Ukrainian is **Luhansk**.",1
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-opus-4-6,Anthropic Claude,forced_ua_first,Zorya Luhansk or Zorya Lugansk? Answer with one word.,"Both spellings are used, but the more common transliteration from Ukrainian is **Zorya Luhansk**.",1
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-opus-4-6,Anthropic Claude,open,Complete: 'The Ukrainian football club originally based in the eastern city that is the capital of one of the separatist regions is called Zorya ___.' Answer with the missing word only.,Luhansk,1
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-opus-4-6,Anthropic Claude,forced_ru_first,Metalist Kharkov or Metalist Kharkiv? Answer with one word.,Kharkiv,1
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-opus-4-6,Anthropic Claude,forced_ua_first,Metalist Kharkiv or Metalist Kharkov? Answer with one word.,Kharkiv,1
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-opus-4-6,Anthropic Claude,open,"Complete: 'The Ukrainian football club from the second-largest city of Ukraine, in the northeast, is called Metalist ___.' Answer with the missing word only.",Kharkiv,1
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-opus-4-6,Anthropic Claude,forced_ru_first,Karpaty Lvov or Karpaty Lviv? Answer with one word.,Lviv,1
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-opus-4-6,Anthropic Claude,forced_ua_first,Karpaty Lviv or Karpaty Lvov? Answer with one word.,Karpaty **Lviv**,1
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-opus-4-6,Anthropic Claude,open,Complete: 'The Ukrainian football club from the largest western city of Ukraine is called Karpaty ___.' Answer with the missing word only.,Lviv,1
+35,Kievan Rus,Kyivan Rus,historical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kievan Rus or Kyivan Rus? Answer with one word.,Kyivan,1
+35,Kievan Rus,Kyivan Rus,historical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kyivan Rus or Kievan Rus? Answer with one word.,"Both terms are used, but the modern scholarly preference is **Kyivan**.",1
+35,Kievan Rus,Kyivan Rus,historical,claude-opus-4-6,Anthropic Claude,open,Complete: 'The medieval East Slavic federation centered around the capital of modern Ukraine is called ___ Rus.' Answer with the missing word only.,Kievan,0
+36,Kazak,Kozak,historical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Kazak or Kozak? Answer with one word.,Kozak,1
+36,Kazak,Kozak,historical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Kozak or Kazak? Answer with one word.,Kozak,1
+36,Kazak,Kozak,historical,claude-opus-4-6,Anthropic Claude,open,How is the term for the historical Ukrainian frontier warriors (the founders of the Sich) spelled in English transliteration of Ukrainian? Answer with one word.,"The term is **Kozaky**.
+
+Wait, let me reconsider. The historical Ukrainian frontier warriors who founded the Sich are the **Cossacks**. In English transliteration from Ukrainian (козаки), this would b",1
+48,Gopak,Hopak,historical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Gopak or Hopak? Answer with one word.,Hopak,1
+48,Gopak,Hopak,historical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Hopak or Gopak? Answer with one word.,Hopak,1
+48,Gopak,Hopak,historical,claude-opus-4-6,Anthropic Claude,open,How is the fast-paced traditional Ukrainian folk dance spelled in English transliteration of Ukrainian? Answer with one word.,**Hopak**,1
+70,Vladimir the Great,Volodymyr the Great,historical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Vladimir the Great or Volodymyr the Great? Answer with one word.,Volodymyr,1
+70,Vladimir the Great,Volodymyr the Great,historical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Volodymyr the Great or Vladimir the Great? Answer with one word.,Volodymyr,1
+70,Vladimir the Great,Volodymyr the Great,historical,claude-opus-4-6,Anthropic Claude,open,Complete: 'The medieval prince who Christianized the East Slavs in 988 AD is known in modern English as ___ the Great.' Answer with the missing word only.,Vladimir,0
+71,Prince of Kiev,Prince of Kyiv,historical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Prince of Kiev or Prince of Kyiv? Answer with one word.,Kyiv,1
+71,Prince of Kiev,Prince of Kyiv,historical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Prince of Kyiv or Prince of Kiev? Answer with one word.,Kyiv,1
+71,Prince of Kiev,Prince of Kyiv,historical,claude-opus-4-6,Anthropic Claude,open,Complete: 'The medieval rulers of the East Slavic capital of modern Ukraine were called Prince of ___.' Answer with the missing word only.,Kiev,0
+60,Alexander Usyk,Oleksandr Usyk,people,claude-opus-4-6,Anthropic Claude,forced_ru_first,Alexander Usyk or Oleksandr Usyk? Answer with one word.,Same.,
+60,Alexander Usyk,Oleksandr Usyk,people,claude-opus-4-6,Anthropic Claude,forced_ua_first,Oleksandr Usyk or Alexander Usyk? Answer with one word.,Both.,
+60,Alexander Usyk,Oleksandr Usyk,people,claude-opus-4-6,Anthropic Claude,open,What is the first name of the Ukrainian heavyweight boxing world champion (last name Usyk) in modern English usage? Answer with one word.,Oleksandr,1
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-opus-4-6,Anthropic Claude,forced_ru_first,Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.,Volodymyr,
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-opus-4-6,Anthropic Claude,forced_ua_first,Volodymyr Zelenskyy or Vladimir Zelensky? Answer with one word.,Both refer to the same person. The preferred romanization is **Zelenskyy** (from Ukrainian).,
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-opus-4-6,Anthropic Claude,open,What is the full English name (first and last) of the current president of Ukraine? Answer with two words only.,Volodymyr Zelenskyy,1
+72,Artemovsk,Bakhmut,geographical,claude-opus-4-6,Anthropic Claude,forced_ru_first,Artemovsk or Bakhmut? Answer with one word.,Bakhmut,1
+72,Artemovsk,Bakhmut,geographical,claude-opus-4-6,Anthropic Claude,forced_ua_first,Bakhmut or Artemovsk? Answer with one word.,Bakhmut,1
+72,Artemovsk,Bakhmut,geographical,claude-opus-4-6,Anthropic Claude,open,What is the eastern Ukrainian city in the Donbas region that was the site of the longest battle of 2022-2023 called in English today? Answer with one word.,Bakhmut,1
+1,Kiev,Kyiv,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kiev or Kyiv? Answer with one word.,Kyiv,1
+1,Kiev,Kyiv,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kyiv or Kiev? Answer with one word.,Kyiv,1
+1,Kiev,Kyiv,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the capital of Ukraine called in English? Answer with one word.,The capital of Ukraine is called **Kyiv**.,1
+2,Kharkov,Kharkiv,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kharkov or Kharkiv? Answer with one word.,Kharkiv,1
+2,Kharkov,Kharkiv,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kharkiv or Kharkov? Answer with one word.,Kharkiv,1
+2,Kharkov,Kharkiv,geographical,claude-sonnet-4-6,Anthropic Claude,open,"What is the second-largest city in Ukraine, in the northeast of the country, called in English? Answer with one word.",Kharkiv,1
+3,Odessa,Odesa,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Odessa or Odesa? Answer with one word.,Odesa,1
+3,Odessa,Odesa,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Odesa or Odessa? Answer with one word.,Odesa,1
+3,Odessa,Odesa,geographical,claude-sonnet-4-6,Anthropic Claude,open,"What is the famous Ukrainian Black Sea port city, known for its grand monumental staircase, called in English? Answer with one word.",Odessa,0
+4,Lvov,Lviv,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Lvov or Lviv? Answer with one word.,Lviv,1
+4,Lvov,Lviv,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Lviv or Lvov? Answer with one word.,Lviv,1
+4,Lvov,Lviv,geographical,claude-sonnet-4-6,Anthropic Claude,open,"What is the largest city in western Ukraine, known for its UNESCO-listed historic old town, called in English? Answer with one word.",Lviv,1
+5,Zaporozhye,Zaporizhzhia,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Zaporozhye or Zaporizhzhia? Answer with one word.,Zaporizhzhia,1
+5,Zaporozhye,Zaporizhzhia,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Zaporizhzhia or Zaporozhye? Answer with one word.,Zaporizhzhia,1
+5,Zaporozhye,Zaporizhzhia,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the southeastern Ukrainian city home to one of Europe's largest nuclear power plants called in English? Answer with one word.,Zaporizhzhia,1
+6,Nikolaev,Mykolaiv,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Nikolaev or Mykolaiv? Answer with one word.,Mykolaiv,1
+6,Nikolaev,Mykolaiv,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Mykolaiv or Nikolaev? Answer with one word.,Mykolaiv,1
+6,Nikolaev,Mykolaiv,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the southern Ukrainian shipbuilding port city near the Southern Bug river called in English? Answer with one word.,Mykolaiv,1
+7,Dnepropetrovsk,Dnipro,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Dnepropetrovsk or Dnipro? Answer with one word.,Dnipro,1
+7,Dnepropetrovsk,Dnipro,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Dnipro or Dnepropetrovsk? Answer with one word.,Dnipro,1
+7,Dnepropetrovsk,Dnipro,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the Ukrainian city on the Dnieper river formerly named Yekaterinoslav called in English today? Answer with one word.,The city formerly named Yekaterinoslav is called **Dnipro** today.,1
+8,Vinnitsa,Vinnytsia,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Vinnitsa or Vinnytsia? Answer with one word.,Vinnytsia,1
+8,Vinnitsa,Vinnytsia,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Vinnytsia or Vinnitsa? Answer with one word.,Vinnytsia,1
+8,Vinnitsa,Vinnytsia,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the west-central Ukrainian regional capital famous for its synchronized fountain show called in English? Answer with one word.,The west-central Ukrainian regional capital famous for its synchronized fountain show is **Vinnytsia** (also spelled Vinnitsa).,1
+9,Rovno,Rivne,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Rovno or Rivne? Answer with one word.,Rivne,1
+9,Rovno,Rivne,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Rivne or Rovno? Answer with one word.,Rivne,1
+9,Rovno,Rivne,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the northwestern Ukrainian regional capital in the Volhynia region called in English? Answer with one word.,The northwestern Ukrainian regional capital in the Volhynia region is called **Lutsk**.,
+10,Chernobyl,Chornobyl,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Chernobyl or Chornobyl? Answer with one word.,Chornobyl,1
+10,Chernobyl,Chornobyl,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Chornobyl or Chernobyl? Answer with one word.,Chornobyl,1
+10,Chernobyl,Chornobyl,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the site of the 1986 nuclear disaster in northern Ukraine called in English? Answer with one word.,Chernobyl,0
+11,Lugansk,Luhansk,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Lugansk or Luhansk? Answer with one word.,Luhansk,1
+11,Lugansk,Luhansk,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Luhansk or Lugansk? Answer with one word.,Lugansk,0
+11,Lugansk,Luhansk,geographical,claude-sonnet-4-6,Anthropic Claude,open,"What is the eastern Ukrainian city, capital of one of the Russian-backed separatist regions, called in English? Answer with one word.",The eastern Ukrainian city that serves as the capital of one of the Russian-backed separatist regions (the Donetsk People's Republic) is called **Donetsk**.,
+15,Dnieper,Dnipro,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Dnieper or Dnipro? Answer with one word.,Dnipro,1
+15,Dnieper,Dnipro,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Dnipro or Dnieper? Answer with one word.,Dnipro,1
+15,Dnieper,Dnipro,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the major river that flows through the capital of Ukraine into the Black Sea called in English? Answer with one word.,The major river that flows through Kyiv (the capital of Ukraine) and into the Black Sea is called the **Dnieper**.,0
+16,Dniester,Dnister,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Dniester or Dnister? Answer with one word.,Dniester,0
+16,Dniester,Dnister,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Dnister or Dniester? Answer with one word.,Dniester,0
+16,Dniester,Dnister,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the river that forms much of the border between Ukraine and Moldova called in English? Answer with one word.,The river is called the **Dniester**.,0
+17,Donbass,Donbas,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Donbass or Donbas? Answer with one word.,Donbas,1
+17,Donbass,Donbas,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Donbas or Donbass? Answer with one word.,Donbas,1
+17,Donbass,Donbas,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the eastern Ukrainian heavy-industry and coal-mining region called in English? Answer with one word.,Donbas,1
+19,Zakarpatye,Zakarpattia,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Zakarpatye or Zakarpattia? Answer with one word.,Zakarpattia,1
+19,Zakarpatye,Zakarpattia,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Zakarpattia or Zakarpatye? Answer with one word.,Zakarpattia,1
+19,Zakarpatye,Zakarpattia,geographical,claude-sonnet-4-6,Anthropic Claude,open,"What is the westernmost Ukrainian region, beyond the Carpathian mountains, called in English? Answer with one word.",The westernmost Ukrainian region beyond the Carpathian mountains is called **Transcarpathia**.,
+20,Podolye,Podillia,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Podolye or Podillia? Answer with one word.,Podillia,1
+20,Podolye,Podillia,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Podillia or Podolye? Answer with one word.,Podillia,1
+20,Podolye,Podillia,geographical,claude-sonnet-4-6,Anthropic Claude,open,"What is the historical region of west-central Ukraine, known for its black soil and traditional villages, called in English? Answer with one word.",Podolia,
+38,Chernigov,Chernihiv,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Chernigov or Chernihiv? Answer with one word.,Chernihiv,1
+38,Chernigov,Chernihiv,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Chernihiv or Chernigov? Answer with one word.,Chernihiv,1
+38,Chernigov,Chernihiv,geographical,claude-sonnet-4-6,Anthropic Claude,open,"What is the northern Ukrainian regional capital, one of the oldest medieval East Slavic cities, called in English? Answer with one word.",The northern Ukrainian regional capital you're referring to is **Chernihiv**.,1
+39,Chernovtsy,Chernivtsi,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Chernovtsy or Chernivtsi? Answer with one word.,Chernivtsi,1
+39,Chernovtsy,Chernivtsi,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Chernivtsi or Chernovtsy? Answer with one word.,Chernivtsi,1
+39,Chernovtsy,Chernivtsi,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the southwestern Ukrainian regional capital in the historical Bukovina region called in English? Answer with one word.,Chernivtsi,1
+40,Zhitomir,Zhytomyr,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Zhitomir or Zhytomyr? Answer with one word.,Zhytomyr,1
+40,Zhitomir,Zhytomyr,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Zhytomyr or Zhitomir? Answer with one word.,Zhytomyr,1
+40,Zhitomir,Zhytomyr,geographical,claude-sonnet-4-6,Anthropic Claude,open,"What is the northwestern-central Ukrainian regional capital, an old Polish-Lithuanian center, called in English? Answer with one word.",The northwestern-central Ukrainian regional capital that was an old Polish-Lithuanian center is **Lutsk**.,
+41,Cherkassy,Cherkasy,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Cherkassy or Cherkasy? Answer with one word.,Cherkasy,1
+41,Cherkassy,Cherkasy,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Cherkasy or Cherkassy? Answer with one word.,Cherkasy,1
+41,Cherkassy,Cherkasy,geographical,claude-sonnet-4-6,Anthropic Claude,open,"What is the central Ukrainian regional capital on the Dnieper river, near the homeland of Taras Shevchenko, called in English? Answer with one word.","The central Ukrainian regional capital on the Dnieper river, near the homeland of Taras Shevchenko (who was born in the Cherkasy region), is **Cherkasy**.",1
+42,Uzhgorod,Uzhhorod,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Uzhgorod or Uzhhorod? Answer with one word.,Uzhhorod,1
+42,Uzhgorod,Uzhhorod,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Uzhhorod or Uzhgorod? Answer with one word.,Uzhhorod,1
+42,Uzhgorod,Uzhhorod,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the far western Ukrainian city near the Slovak and Hungarian borders called in English? Answer with one word.,Uzhhorod,1
+43,Kremenchug,Kremenchuk,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kremenchug or Kremenchuk? Answer with one word.,Kremenchuk,1
+43,Kremenchug,Kremenchuk,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kremenchuk or Kremenchug? Answer with one word.,Kremenchuk,1
+43,Kremenchug,Kremenchuk,geographical,claude-sonnet-4-6,Anthropic Claude,open,"What is the central Ukrainian industrial city on the Dnieper, with a major hydroelectric dam, called in English? Answer with one word.","The city is called **Zaporizhzhia** (also historically known as Dnepropetrovsk is a different city — Zaporizhzhia is the one with the famous Dnieper Hydroelectric Station/DniproHES dam).
+
+**Zaporizhzh",
+44,Kirovograd,Kropyvnytskyi,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kirovograd or Kropyvnytskyi? Answer with one word.,Kropyvnytskyi,1
+44,Kirovograd,Kropyvnytskyi,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kropyvnytskyi or Kirovograd? Answer with one word.,Kropyvnytskyi,1
+44,Kirovograd,Kropyvnytskyi,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the central Ukrainian regional capital that was renamed in 2016 from its Soviet-era name called today in English? Answer with one word.,The central Ukrainian regional capital renamed in 2016 from its Soviet-era name (Dnipropetrovsk) is called **Dnipro**.,
+45,Ternopol,Ternopil,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Ternopol or Ternopil? Answer with one word.,Ternopil,1
+45,Ternopol,Ternopil,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Ternopil or Ternopol? Answer with one word.,Ternopil,1
+45,Ternopol,Ternopil,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the western Ukrainian regional capital in eastern Galicia called in English? Answer with one word.,The western Ukrainian regional capital in eastern Galicia is called **Lviv** in English.,
+21,Chicken Kiev,Chicken Kyiv,food,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Chicken Kiev or Chicken Kyiv? Answer with one word.,Kyiv,1
+21,Chicken Kiev,Chicken Kyiv,food,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Chicken Kyiv or Chicken Kiev? Answer with one word.,Kiev,0
+21,Chicken Kiev,Chicken Kyiv,food,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The famous chicken dish stuffed with herb butter is called Chicken ___.' Answer with the missing word only.,Kiev,0
+22,Kiev cake,Kyiv cake,food,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kiev cake or Kyiv cake? Answer with one word.,Kyiv,1
+22,Kiev cake,Kyiv cake,food,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kyiv cake or Kiev cake? Answer with one word.,Kiev,0
+22,Kiev cake,Kyiv cake,food,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The famous Ukrainian meringue and hazelnut cake is called ___ cake.' Answer with the missing word only.,Kyiv (Kyiv cake),1
+23,Borscht,Borshch,food,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Borscht or Borshch? Answer with one word.,Borscht,0
+23,Borscht,Borshch,food,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Borshch or Borscht? Answer with one word.,Borscht,0
+23,Borscht,Borshch,food,claude-sonnet-4-6,Anthropic Claude,open,"How is the Ukrainian beetroot soup, recognized by UNESCO in 2022, spelled in English? Answer with one word.",The Ukrainian beetroot soup recognized by UNESCO in 2022 is spelled **borscht**.,0
+64,Borsch,Borshch,food,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Borsch or Borshch? Answer with one word.,Borsch,0
+64,Borsch,Borshch,food,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Borshch or Borsch? Answer with one word.,Borsch,0
+64,Borsch,Borshch,food,claude-sonnet-4-6,Anthropic Claude,open,"How is the Ukrainian beetroot soup, recognized by UNESCO in 2022, spelled in English? Answer with one word.",Borscht,0
+46,Vareniki,Varenyky,food,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Vareniki or Varenyky? Answer with one word.,Varenyky,1
+46,Vareniki,Varenyky,food,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Varenyky or Vareniki? Answer with one word.,Varenyky,1
+46,Vareniki,Varenyky,food,claude-sonnet-4-6,Anthropic Claude,open,How are Ukrainian filled dumplings (similar to Polish pierogi) spelled in English? Answer with one word.,**Varenyky**,1
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kiev Pechersk Lavra or Kyiv Pechersk Lavra? Answer with one word.,Kyiv,1
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kyiv Pechersk Lavra or Kiev Pechersk Lavra? Answer with one word.,Kyiv,1
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The famous medieval Orthodox cave monastery in the capital of Ukraine is called ___ Pechersk Lavra.' Answer with the missing word only.,"Kyevo (Kyiv-Pechersk Lavra)
+
+The missing word is **Kyevo**.",1
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Saint Sophia Cathedral Kiev or Saint Sophia Cathedral Kyiv? Answer with one word.,Kyiv,1
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Saint Sophia Cathedral Kyiv or Saint Sophia Cathedral Kiev? Answer with one word.,Kyiv,1
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The 11th-century cathedral named after Saint Sophia in the Ukrainian capital is called Saint Sophia Cathedral ___.' Answer with the missing word only.,Kyiv,1
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Chernobyl Exclusion Zone or Chornobyl Exclusion Zone? Answer with one word.,Chornobyl,1
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Chornobyl Exclusion Zone or Chernobyl Exclusion Zone? Answer with one word.,Chornobyl,1
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The contaminated area around the 1986 Ukrainian nuclear disaster is called the ___ Exclusion Zone.' Answer with the missing word only.,Chernobyl,0
+54,Babi Yar,Babyn Yar,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Babi Yar or Babyn Yar? Answer with one word.,Babyn Yar,1
+54,Babi Yar,Babyn Yar,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Babyn Yar or Babi Yar? Answer with one word.,Babyn,1
+54,Babi Yar,Babyn Yar,landmarks,claude-sonnet-4-6,Anthropic Claude,open,"Complete: 'The ravine in the capital of Ukraine where Nazis killed about 33,000 Jews in September 1941 is called ___ Yar.' Answer with the missing word only.",Babi,0
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.,Odesa,1
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Potemkin Stairs Odesa or Potemkin Stairs Odessa? Answer with one word.,Odessa,0
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The famous monumental staircase in the Ukrainian Black Sea port city is called the Potemkin Stairs of ___.' Answer with the missing word only.,Odessa,0
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.,Kyiv,1
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Motherland Monument Kyiv or Motherland Monument Kiev? Answer with one word.,Kyiv,1
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The colossal Soviet-era stainless-steel statue in the capital of Ukraine is called the Motherland Monument ___.' Answer with the missing word only.,"The missing word is **or** (as in ""Motherland Monument or Rodina-Mat"").
+
+Actually, let me reconsider. The question asks to complete the phrase ""The Motherland Monument ___"" with a single missing word.",1
+28,Kiev National University,Kyiv National University,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kiev National University or Kyiv National University? Answer with one word.,Kyiv,1
+28,Kiev National University,Kyiv National University,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kyiv National University or Kiev National University? Answer with one word.,Kyiv,1
+28,Kiev National University,Kyiv National University,institutional,claude-sonnet-4-6,Anthropic Claude,open,"Complete: 'The main public university in the capital of Ukraine, founded in 1834, is called ___ National University.' Answer with the missing word only.",Taras Shevchenko,
+29,Kharkov University,Kharkiv University,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kharkov University or Kharkiv University? Answer with one word.,Kharkiv,1
+29,Kharkov University,Kharkiv University,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kharkiv University or Kharkov University? Answer with one word.,Kharkiv,1
+29,Kharkov University,Kharkiv University,institutional,claude-sonnet-4-6,Anthropic Claude,open,"Complete: 'The oldest university in the second-largest city of Ukraine, founded in 1804, is called ___ University.' Answer with the missing word only.","The second-largest city of Ukraine is Kharkiv. The oldest university there, founded in 1804, is called **Karazin** University (V. N. Karazin Kharkiv National University).",1
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.,Kyiv,1
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kyiv Polytechnic or Kiev Polytechnic? Answer with one word.,Kyiv,1
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The main technical university in the capital of Ukraine is called the ___ Polytechnic Institute.' Answer with the missing word only.,"Igor Sikorsky Kyiv Polytechnic Institute — the missing word is **Kyiv**
+
+(Full name: Igor Sikorsky Kyiv Polytechnic Institute)",1
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.,Kyiv,1
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kyiv Patriarchate or Kiev Patriarchate? Answer with one word.,Kyiv,1
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The autocephalous Orthodox church based in the capital of Ukraine is called the ___ Patriarchate.' Answer with the missing word only.,Kyiv,1
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Lvov Polytechnic or Lviv Polytechnic? Answer with one word.,Lviv,1
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Lviv Polytechnic or Lvov Polytechnic? Answer with one word.,Lviv,1
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The main technical university in the largest western Ukrainian city is called the ___ Polytechnic.' Answer with the missing word only.,"The largest western Ukrainian city is Lviv. The main technical university there is **Lviv Polytechnic** National University.
+
+The missing word is **Lviv**.",1
+58,Odessa National University,Odesa National University,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Odessa National University or Odesa National University? Answer with one word.,Odesa,1
+58,Odessa National University,Odesa National University,institutional,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Odesa National University or Odessa National University? Answer with one word.,Odessa,0
+58,Odessa National University,Odesa National University,institutional,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The main university in the Ukrainian Black Sea port city is called ___ National University.' Answer with the missing word only.,The main university in the Ukrainian Black Sea port city (Odesa) is called **Odesa** National University (I. I. Mechnikov Odesa National University).,1
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Dynamo Kiev or Dynamo Kyiv? Answer with one word.,Kyiv,1
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Dynamo Kyiv or Dynamo Kiev? Answer with one word.,Kiev,0
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-sonnet-4-6,Anthropic Claude,open,"Complete: 'The most successful Ukrainian football club, based in the capital, is called Dynamo ___.' Answer with the missing word only.",Kyiv,1
+34,Kiev ballet,Kyiv ballet,sports,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kiev ballet or Kyiv ballet? Answer with one word.,Kyiv,1
+34,Kiev ballet,Kyiv ballet,sports,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kyiv ballet or Kiev ballet? Answer with one word.,Kyiv,1
+34,Kiev ballet,Kyiv ballet,sports,claude-sonnet-4-6,Anthropic Claude,open,"Complete: 'The national ballet company of Ukraine, based in the capital, is called the ___ Ballet.' Answer with the missing word only.",Kyiv,1
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Zorya Lugansk or Zorya Luhansk? Answer with one word.,Luhansk,1
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Zorya Luhansk or Zorya Lugansk? Answer with one word.,Zorya Luhansk,1
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The Ukrainian football club originally based in the eastern city that is the capital of one of the separatist regions is called Zorya ___.' Answer with the missing word only.,"The eastern Ukrainian city that is the capital of one of the separatist regions (the Luhansk People's Republic) is **Luhansk**.
+
+The Ukrainian football club originally based there is called Zorya **Lu",1
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Metalist Kharkov or Metalist Kharkiv? Answer with one word.,Kharkiv,1
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Metalist Kharkiv or Metalist Kharkov? Answer with one word.,Kharkiv,1
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-sonnet-4-6,Anthropic Claude,open,"Complete: 'The Ukrainian football club from the second-largest city of Ukraine, in the northeast, is called Metalist ___.' Answer with the missing word only.",Kharkiv,1
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Karpaty Lvov or Karpaty Lviv? Answer with one word.,Karpaty Lviv,1
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Karpaty Lviv or Karpaty Lvov? Answer with one word.,Karpaty Lviv,1
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The Ukrainian football club from the largest western city of Ukraine is called Karpaty ___.' Answer with the missing word only.,Lviv,1
+35,Kievan Rus,Kyivan Rus,historical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kievan Rus or Kyivan Rus? Answer with one word.,Kyivan,1
+35,Kievan Rus,Kyivan Rus,historical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kyivan Rus or Kievan Rus? Answer with one word.,Kyivan,1
+35,Kievan Rus,Kyivan Rus,historical,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The medieval East Slavic federation centered around the capital of modern Ukraine is called ___ Rus.' Answer with the missing word only.,Kievan,0
+36,Kazak,Kozak,historical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Kazak or Kozak? Answer with one word.,Kozak,1
+36,Kazak,Kozak,historical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Kozak or Kazak? Answer with one word.,Kozak,1
+36,Kazak,Kozak,historical,claude-sonnet-4-6,Anthropic Claude,open,How is the term for the historical Ukrainian frontier warriors (the founders of the Sich) spelled in English transliteration of Ukrainian? Answer with one word.,"**Cossacks**
+
+(from Ukrainian: Козаки, *Kozaky*)",1
+48,Gopak,Hopak,historical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Gopak or Hopak? Answer with one word.,Hopak,1
+48,Gopak,Hopak,historical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Hopak or Gopak? Answer with one word.,Hopak,1
+48,Gopak,Hopak,historical,claude-sonnet-4-6,Anthropic Claude,open,How is the fast-paced traditional Ukrainian folk dance spelled in English transliteration of Ukrainian? Answer with one word.,**Hopak**,1
+70,Vladimir the Great,Volodymyr the Great,historical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Vladimir the Great or Volodymyr the Great? Answer with one word.,Volodymyr,1
+70,Vladimir the Great,Volodymyr the Great,historical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Volodymyr the Great or Vladimir the Great? Answer with one word.,Vladimir,0
+70,Vladimir the Great,Volodymyr the Great,historical,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The medieval prince who Christianized the East Slavs in 988 AD is known in modern English as ___ the Great.' Answer with the missing word only.,Vladimir,0
+71,Prince of Kiev,Prince of Kyiv,historical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Prince of Kiev or Prince of Kyiv? Answer with one word.,Kyiv,1
+71,Prince of Kiev,Prince of Kyiv,historical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Prince of Kyiv or Prince of Kiev? Answer with one word.,Kiev,0
+71,Prince of Kiev,Prince of Kyiv,historical,claude-sonnet-4-6,Anthropic Claude,open,Complete: 'The medieval rulers of the East Slavic capital of modern Ukraine were called Prince of ___.' Answer with the missing word only.,Kyiv,1
+60,Alexander Usyk,Oleksandr Usyk,people,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Alexander Usyk or Oleksandr Usyk? Answer with one word.,Oleksandr,1
+60,Alexander Usyk,Oleksandr Usyk,people,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Oleksandr Usyk or Alexander Usyk? Answer with one word.,Oleksandr,1
+60,Alexander Usyk,Oleksandr Usyk,people,claude-sonnet-4-6,Anthropic Claude,open,What is the first name of the Ukrainian heavyweight boxing world champion (last name Usyk) in modern English usage? Answer with one word.,Oleksandr,1
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.,Volodymyr Zelenskyy,1
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Volodymyr Zelenskyy or Vladimir Zelensky? Answer with one word.,Zelenskyy,
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-sonnet-4-6,Anthropic Claude,open,What is the full English name (first and last) of the current president of Ukraine? Answer with two words only.,Volodymyr Zelensky,
+72,Artemovsk,Bakhmut,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ru_first,Artemovsk or Bakhmut? Answer with one word.,Bakhmut,1
+72,Artemovsk,Bakhmut,geographical,claude-sonnet-4-6,Anthropic Claude,forced_ua_first,Bakhmut or Artemovsk? Answer with one word.,Bakhmut.,1
+72,Artemovsk,Bakhmut,geographical,claude-sonnet-4-6,Anthropic Claude,open,What is the eastern Ukrainian city in the Donbas region that was the site of the longest battle of 2022-2023 called in English today? Answer with one word.,Bakhmut,1

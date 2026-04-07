@@ -1,0 +1,163 @@
+pair_id,russian,ukrainian,category,model,family,x_forced_ru_first,x_forced_ua_first,x_open,tas,ci,n_other
+1,Kiev,Kyiv,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+2,Kharkov,Kharkiv,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+3,Odessa,Odesa,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+4,Lvov,Lviv,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+5,Zaporozhye,Zaporizhzhia,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+6,Nikolaev,Mykolaiv,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+7,Dnepropetrovsk,Dnipro,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+8,Vinnitsa,Vinnytsia,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+9,Rovno,Rivne,geographical,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+10,Chernobyl,Chornobyl,geographical,claude-haiku-4-5,Anthropic Claude,0,1,0,0.2,0.7777777777777778,0
+11,Lugansk,Luhansk,geographical,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+15,Dnieper,Dnipro,geographical,claude-haiku-4-5,Anthropic Claude,1,0,0,0.2,0.7777777777777778,0
+16,Dniester,Dnister,geographical,claude-haiku-4-5,Anthropic Claude,0,0,0,0.0,1.0,0
+17,Donbass,Donbas,geographical,claude-haiku-4-5,Anthropic Claude,0,1,1,0.8,0.7777777777777778,0
+19,Zakarpatye,Zakarpattia,geographical,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+20,Podolye,Podillia,geographical,claude-haiku-4-5,Anthropic Claude,1,,,1.0,,2
+38,Chernigov,Chernihiv,geographical,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+39,Chernovtsy,Chernivtsi,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+40,Zhitomir,Zhytomyr,geographical,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+41,Cherkassy,Cherkasy,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+42,Uzhgorod,Uzhhorod,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+43,Kremenchug,Kremenchuk,geographical,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+44,Kirovograd,Kropyvnytskyi,geographical,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+45,Ternopol,Ternopil,geographical,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+21,Chicken Kiev,Chicken Kyiv,food,claude-haiku-4-5,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+22,Kiev cake,Kyiv cake,food,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+23,Borscht,Borshch,food,claude-haiku-4-5,Anthropic Claude,0,0,0,0.0,1.0,0
+64,Borsch,Borshch,food,claude-haiku-4-5,Anthropic Claude,0,0,0,0.0,1.0,0
+46,Vareniki,Varenyky,food,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-haiku-4-5,Anthropic Claude,0,0,0,0.0,1.0,0
+54,Babi Yar,Babyn Yar,landmarks,claude-haiku-4-5,Anthropic Claude,0,0,0,0.0,1.0,0
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-haiku-4-5,Anthropic Claude,0,1,1,0.8,0.7777777777777778,0
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+28,Kiev National University,Kyiv National University,institutional,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+29,Kharkov University,Kharkiv University,institutional,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-haiku-4-5,Anthropic Claude,1,1,,1.0,1.0,1
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+58,Odessa National University,Odesa National University,institutional,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+34,Kiev ballet,Kyiv ballet,sports,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+35,Kievan Rus,Kyivan Rus,historical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+36,Kazak,Kozak,historical,claude-haiku-4-5,Anthropic Claude,0,1,,0.5,0.75,1
+48,Gopak,Hopak,historical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+70,Vladimir the Great,Volodymyr the Great,historical,claude-haiku-4-5,Anthropic Claude,1,0,0,0.2,0.7777777777777778,0
+71,Prince of Kiev,Prince of Kyiv,historical,claude-haiku-4-5,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+60,Alexander Usyk,Oleksandr Usyk,people,claude-haiku-4-5,Anthropic Claude,1,,1,1.0,1.0,1
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-haiku-4-5,Anthropic Claude,,,1,1.0,,2
+72,Artemovsk,Bakhmut,geographical,claude-haiku-4-5,Anthropic Claude,1,1,1,1.0,1.0,0
+1,Kiev,Kyiv,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+2,Kharkov,Kharkiv,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+3,Odessa,Odesa,geographical,claude-opus-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+4,Lvov,Lviv,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+5,Zaporozhye,Zaporizhzhia,geographical,claude-opus-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+6,Nikolaev,Mykolaiv,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+7,Dnepropetrovsk,Dnipro,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+8,Vinnitsa,Vinnytsia,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+9,Rovno,Rivne,geographical,claude-opus-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+10,Chernobyl,Chornobyl,geographical,claude-opus-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+11,Lugansk,Luhansk,geographical,claude-opus-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+15,Dnieper,Dnipro,geographical,claude-opus-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+16,Dniester,Dnister,geographical,claude-opus-4-6,Anthropic Claude,0,1,0,0.2,0.7777777777777778,0
+17,Donbass,Donbas,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+19,Zakarpatye,Zakarpattia,geographical,claude-opus-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+20,Podolye,Podillia,geographical,claude-opus-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+38,Chernigov,Chernihiv,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+39,Chernovtsy,Chernivtsi,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+40,Zhitomir,Zhytomyr,geographical,claude-opus-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+41,Cherkassy,Cherkasy,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+42,Uzhgorod,Uzhhorod,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+43,Kremenchug,Kremenchuk,geographical,claude-opus-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+44,Kirovograd,Kropyvnytskyi,geographical,claude-opus-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+45,Ternopol,Ternopil,geographical,claude-opus-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+21,Chicken Kiev,Chicken Kyiv,food,claude-opus-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+22,Kiev cake,Kyiv cake,food,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+23,Borscht,Borshch,food,claude-opus-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+64,Borsch,Borshch,food,claude-opus-4-6,Anthropic Claude,0,1,0,0.2,0.7777777777777778,0
+46,Vareniki,Varenyky,food,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-opus-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+54,Babi Yar,Babyn Yar,landmarks,claude-opus-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-opus-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-opus-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+28,Kiev National University,Kyiv National University,institutional,claude-opus-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+29,Kharkov University,Kharkiv University,institutional,claude-opus-4-6,Anthropic Claude,1,,,1.0,,2
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+58,Odessa National University,Odesa National University,institutional,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+34,Kiev ballet,Kyiv ballet,sports,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+35,Kievan Rus,Kyivan Rus,historical,claude-opus-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+36,Kazak,Kozak,historical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+48,Gopak,Hopak,historical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+70,Vladimir the Great,Volodymyr the Great,historical,claude-opus-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+71,Prince of Kiev,Prince of Kyiv,historical,claude-opus-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+60,Alexander Usyk,Oleksandr Usyk,people,claude-opus-4-6,Anthropic Claude,,,1,1.0,,2
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-opus-4-6,Anthropic Claude,,,1,1.0,,2
+72,Artemovsk,Bakhmut,geographical,claude-opus-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+1,Kiev,Kyiv,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+2,Kharkov,Kharkiv,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+3,Odessa,Odesa,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+4,Lvov,Lviv,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+5,Zaporozhye,Zaporizhzhia,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+6,Nikolaev,Mykolaiv,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+7,Dnepropetrovsk,Dnipro,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+8,Vinnitsa,Vinnytsia,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+9,Rovno,Rivne,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+10,Chernobyl,Chornobyl,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+11,Lugansk,Luhansk,geographical,claude-sonnet-4-6,Anthropic Claude,1,0,,0.5,0.75,1
+15,Dnieper,Dnipro,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+16,Dniester,Dnister,geographical,claude-sonnet-4-6,Anthropic Claude,0,0,0,0.0,1.0,0
+17,Donbass,Donbas,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+19,Zakarpatye,Zakarpattia,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+20,Podolye,Podillia,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+38,Chernigov,Chernihiv,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+39,Chernovtsy,Chernivtsi,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+40,Zhitomir,Zhytomyr,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+41,Cherkassy,Cherkasy,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+42,Uzhgorod,Uzhhorod,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+43,Kremenchug,Kremenchuk,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+44,Kirovograd,Kropyvnytskyi,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+45,Ternopol,Ternopil,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+21,Chicken Kiev,Chicken Kyiv,food,claude-sonnet-4-6,Anthropic Claude,1,0,0,0.2,0.7777777777777778,0
+22,Kiev cake,Kyiv cake,food,claude-sonnet-4-6,Anthropic Claude,1,0,1,0.8,0.7777777777777778,0
+23,Borscht,Borshch,food,claude-sonnet-4-6,Anthropic Claude,0,0,0,0.0,1.0,0
+64,Borsch,Borshch,food,claude-sonnet-4-6,Anthropic Claude,0,0,0,0.0,1.0,0
+46,Vareniki,Varenyky,food,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+24,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,landmarks,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+25,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,landmarks,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+26,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,landmarks,claude-sonnet-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+54,Babi Yar,Babyn Yar,landmarks,claude-sonnet-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+55,Potemkin Stairs Odessa,Potemkin Stairs Odesa,landmarks,claude-sonnet-4-6,Anthropic Claude,1,0,0,0.2,0.7777777777777778,0
+56,Motherland Monument Kiev,Motherland Monument Kyiv,landmarks,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+28,Kiev National University,Kyiv National University,institutional,claude-sonnet-4-6,Anthropic Claude,1,1,,1.0,1.0,1
+29,Kharkov University,Kharkiv University,institutional,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+30,Kiev Polytechnic,Kyiv Polytechnic,institutional,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+31,Kiev Patriarchate,Kyiv Patriarchate,institutional,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+57,Lvov Polytechnic,Lviv Polytechnic,institutional,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+58,Odessa National University,Odesa National University,institutional,claude-sonnet-4-6,Anthropic Claude,1,0,1,0.8,0.7777777777777778,0
+32,Dynamo Kiev,Dynamo Kyiv,sports,claude-sonnet-4-6,Anthropic Claude,1,0,1,0.8,0.7777777777777778,0
+34,Kiev ballet,Kyiv ballet,sports,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+51,Zorya Lugansk,Zorya Luhansk,sports,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+52,Metalist Kharkov,Metalist Kharkiv,sports,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+53,Karpaty Lvov,Karpaty Lviv,sports,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+35,Kievan Rus,Kyivan Rus,historical,claude-sonnet-4-6,Anthropic Claude,1,1,0,0.4,0.7777777777777778,0
+36,Kazak,Kozak,historical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+48,Gopak,Hopak,historical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+70,Vladimir the Great,Volodymyr the Great,historical,claude-sonnet-4-6,Anthropic Claude,1,0,0,0.2,0.7777777777777778,0
+71,Prince of Kiev,Prince of Kyiv,historical,claude-sonnet-4-6,Anthropic Claude,1,0,1,0.8,0.7777777777777778,0
+60,Alexander Usyk,Oleksandr Usyk,people,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
+61,Vladimir Zelensky,Volodymyr Zelenskyy,people,claude-sonnet-4-6,Anthropic Claude,1,,,1.0,,2
+72,Artemovsk,Bakhmut,geographical,claude-sonnet-4-6,Anthropic Claude,1,1,1,1.0,1.0,0
