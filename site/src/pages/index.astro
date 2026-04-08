@@ -203,6 +203,7 @@ function formatNum(n: number) {
               <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000"><span class="source-dot"></span>YouTube</button>
               <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed"><span class="source-dot"></span>Ngrams</button>
               <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4"><span class="source-dot"></span>Academic</button>
+              <button class="source-toggle" data-source="openlibrary" style="--source-color: #059669"><span class="source-dot"></span>Books</button>
             </div>
             <div class="chart-controls" style="margin:0;">
               <button class="chart-mode active" data-chart="volume" id="volume-btn">Volume</button>
@@ -334,7 +335,7 @@ function formatNum(n: number) {
 
       <!-- Data source availability note -->
       <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem; padding: 0.5rem 0.75rem; background: #f8f9fb; border-radius: 4px; border-left: 3px solid var(--border);">
-        Source availability varies: Trends (2010–2026), GDELT (2015–2026), Wikipedia (2015–2026), Reddit (2007–2026), Ngrams (books, 2000–2019)
+        Source availability varies: Trends (2010–2026), GDELT (2015–2026), Wikipedia (2015–2026), Reddit (2007–2026), Ngrams (books, 1900–2022, English All 2022 corpus), Open Library (book editions, 2010–2025)
       </div>
 
       </div><!-- end pair-view -->
@@ -1022,6 +1023,7 @@ function formatNum(n: number) {
       youtube: '#FF0000',
       ngrams: '#7c3aed',
       openalex: '#06b6d4',
+      openlibrary: '#059669',
     };
 
     const sourceLabels: Record<string, string> = {
@@ -1032,6 +1034,7 @@ function formatNum(n: number) {
       youtube: 'YouTube',
       ngrams: 'Google Books',
       openalex: 'Academic Papers',
+      openlibrary: 'Open Library Books',
     };
 
     let activeSource = 'gdelt';  // GDELT first — news coverage is most precise
@@ -1232,8 +1235,9 @@ function formatNum(n: number) {
         wikipedia: 'Pageviews API',
         reddit: 'Reddit posts, annual',
         youtube: 'Video title matches, annual',
-        ngrams: 'Google Books corpus',
+        ngrams: 'Google Books corpus (English All 2022, 1900–2022)',
         openalex: 'OpenAlex academic papers',
+        openlibrary: 'Open Library book editions (Internet Archive, by first publish year)',
       };
       const startYear = dataMinDate.getFullYear();
       const endYear = dataMaxDate.getFullYear();
@@ -1612,7 +1616,7 @@ function formatNum(n: number) {
       const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
       if (!pair) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'openlibrary'];
       const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
 
       // Put adoption % in card title
@@ -1654,7 +1658,7 @@ function formatNum(n: number) {
       const pairData = (timeseriesData as any)[String(activePairId)];
       if (!pairData) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'openlibrary'];
       const items: {src: string; adoption: number; n: number}[] = [];
 
       for (const src of srcOrder) {
