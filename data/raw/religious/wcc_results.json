@@ -1,0 +1,455 @@
+[
+  {
+    "pair_id": 1,
+    "russian_term": "Kiev",
+    "ukrainian_term": "Kyiv",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2020,
+        "russian_count": 16,
+        "ukrainian_count": 7,
+        "n_pages": 11,
+        "total": 23
+      },
+      {
+        "year": 2022,
+        "russian_count": 4,
+        "ukrainian_count": 15,
+        "n_pages": 12,
+        "total": 19
+      },
+      {
+        "year": 2023,
+        "russian_count": 5,
+        "ukrainian_count": 31,
+        "n_pages": 14,
+        "total": 36
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 20,
+        "n_pages": 13,
+        "total": 21
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 19,
+        "n_pages": 9,
+        "total": 19
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "n_pages": 2,
+        "total": 3
+      }
+    ],
+    "total_russian": 26,
+    "total_ukrainian": 95
+  },
+  {
+    "pair_id": 2,
+    "russian_term": "Kharkov",
+    "ukrainian_term": "Kharkiv",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 6,
+        "n_pages": 2,
+        "total": 6
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 11
+  },
+  {
+    "pair_id": 3,
+    "russian_term": "Odessa",
+    "ukrainian_term": "Odesa",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 1,
+        "total": 2
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 2
+  },
+  {
+    "pair_id": 4,
+    "russian_term": "Lvov",
+    "ukrainian_term": "Lviv",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2020,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "n_pages": 3,
+        "total": 7
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "n_pages": 2,
+        "total": 4
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "n_pages": 2,
+        "total": 3
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 16
+  },
+  {
+    "pair_id": 5,
+    "russian_term": "Zaporozhye",
+    "ukrainian_term": "Zaporizhzhia",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "n_pages": 3,
+        "total": 3
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 3
+  },
+  {
+    "pair_id": 7,
+    "russian_term": "Dnepropetrovsk",
+    "ukrainian_term": "Dnipro",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 3
+  },
+  {
+    "pair_id": 10,
+    "russian_term": "Chernobyl",
+    "ukrainian_term": "Chornobyl",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2020,
+        "russian_count": 38,
+        "ukrainian_count": 0,
+        "n_pages": 12,
+        "total": 38
+      }
+    ],
+    "total_russian": 38,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 11,
+    "russian_term": "Lugansk",
+    "ukrainian_term": "Luhansk",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 1,
+        "total": 2
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 1,
+        "total": 2
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 4
+  },
+  {
+    "pair_id": 15,
+    "russian_term": "Dnieper",
+    "ukrainian_term": "Dnipro",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 3
+  },
+  {
+    "pair_id": 17,
+    "russian_term": "Donbass",
+    "ukrainian_term": "Donbas",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "n_pages": 2,
+        "total": 7
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "n_pages": 3,
+        "total": 4
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 1,
+        "total": 2
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 13
+  },
+  {
+    "pair_id": 38,
+    "russian_term": "Chernigov",
+    "ukrainian_term": "Chernihiv",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 11,
+        "n_pages": 5,
+        "total": 11
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "n_pages": 3,
+        "total": 3
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 14
+  },
+  {
+    "pair_id": 39,
+    "russian_term": "Chernovtsy",
+    "ukrainian_term": "Chernivtsi",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 17,
+        "n_pages": 9,
+        "total": 17
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "n_pages": 4,
+        "total": 4
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 23
+  },
+  {
+    "pair_id": 24,
+    "russian_term": "Kiev Pechersk Lavra",
+    "ukrainian_term": "Kyiv Pechersk Lavra",
+    "category": "landmarks",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 1
+  },
+  {
+    "pair_id": 31,
+    "russian_term": "Kiev Patriarchate",
+    "ukrainian_term": "Kyiv Patriarchate",
+    "category": "institutional",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2020,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 3
+      }
+    ],
+    "total_russian": 3,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 35,
+    "russian_term": "Kievan Rus",
+    "ukrainian_term": "Kyivan Rus",
+    "category": "historical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2020,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 1
+  },
+  {
+    "pair_id": 61,
+    "russian_term": "Vladimir Zelensky",
+    "ukrainian_term": "Volodymyr Zelenskyy",
+    "category": "people",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 1,
+        "total": 2
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 1,
+        "total": 2
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 4
+  },
+  {
+    "pair_id": 72,
+    "russian_term": "Artemovsk",
+    "ukrainian_term": "Bakhmut",
+    "category": "geographical",
+    "source": "wcc",
+    "yearly": [
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 1,
+        "total": 2
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 2
+  }
+]

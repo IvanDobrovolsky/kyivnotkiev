@@ -71,9 +71,9 @@ DENOMINATIONS = {
         "name": "World Council of Churches",
         "short": "WCC",
         "url": "https://www.oikoumene.org/",
-        "stance": "TBD — to be filled in once data is collected",
-        "stance_event": None,
-        "color": "#888888",
+        "stance": "Ecumenical Geneva-based body of 350+ Christian denominations. Moderately Ukrainian-leaning in English news (~74% Kyiv across 17 toponym pairs); shifted clearly after the 2022 invasion",
+        "stance_event": "post-2022",
+        "color": "#A0A0A0",
     },
     "patriarchia": {
         "name": "Russian Orthodox Church (patriarchia.ru)",

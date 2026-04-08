@@ -9,3 +9,55 @@ constantinople,35,historical,Kievan Rus,Kyivan Rus,2014,1,0,1,1,0.0
 constantinople,35,historical,Kievan Rus,Kyivan Rus,2020,7,0,4,7,0.0
 constantinople,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2021,0,1,1,1,1.0
 constantinople,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2025,0,2,2,2,1.0
+vatican,1,geographical,Kiev,Kyiv,2014,0,1,1,1,1.0
+vatican,1,geographical,Kiev,Kyiv,2022,0,2,2,2,1.0
+vatican,1,geographical,Kiev,Kyiv,2023,1,0,1,1,0.0
+vatican,1,geographical,Kiev,Kyiv,2024,0,1,1,1,1.0
+vatican,1,geographical,Kiev,Kyiv,2025,0,2,2,2,1.0
+vatican,2,geographical,Kharkov,Kharkiv,2022,0,1,1,1,1.0
+vatican,2,geographical,Kharkov,Kharkiv,2024,0,1,1,1,1.0
+vatican,3,geographical,Odessa,Odesa,2022,1,0,1,1,0.0
+vatican,3,geographical,Odessa,Odesa,2023,1,0,1,1,0.0
+vatican,4,geographical,Lvov,Lviv,2023,0,1,1,1,1.0
+vatican,5,geographical,Zaporozhye,Zaporizhzhia,2022,0,1,1,1,1.0
+vatican,10,geographical,Chernobyl,Chornobyl,2015,1,0,1,1,0.0
+vatican,17,geographical,Donbass,Donbas,2020,1,0,1,1,0.0
+vatican,43,geographical,Kremenchug,Kremenchuk,2022,0,1,1,1,1.0
+wcc,1,geographical,Kiev,Kyiv,2020,16,7,11,23,0.3043
+wcc,1,geographical,Kiev,Kyiv,2022,4,15,12,19,0.7895
+wcc,1,geographical,Kiev,Kyiv,2023,5,31,14,36,0.8611
+wcc,1,geographical,Kiev,Kyiv,2024,1,20,13,21,0.9524
+wcc,1,geographical,Kiev,Kyiv,2025,0,19,9,19,1.0
+wcc,1,geographical,Kiev,Kyiv,2026,0,3,2,3,1.0
+wcc,2,geographical,Kharkov,Kharkiv,2022,0,2,2,2,1.0
+wcc,2,geographical,Kharkov,Kharkiv,2023,0,2,2,2,1.0
+wcc,2,geographical,Kharkov,Kharkiv,2024,0,6,2,6,1.0
+wcc,2,geographical,Kharkov,Kharkiv,2025,0,1,1,1,1.0
+wcc,3,geographical,Odessa,Odesa,2024,0,2,1,2,1.0
+wcc,4,geographical,Lvov,Lviv,2020,0,7,3,7,1.0
+wcc,4,geographical,Lvov,Lviv,2022,0,4,2,4,1.0
+wcc,4,geographical,Lvov,Lviv,2023,0,1,1,1,1.0
+wcc,4,geographical,Lvov,Lviv,2024,0,3,2,3,1.0
+wcc,4,geographical,Lvov,Lviv,2025,0,1,1,1,1.0
+wcc,5,geographical,Zaporozhye,Zaporizhzhia,2022,0,3,3,3,1.0
+wcc,7,geographical,Dnepropetrovsk,Dnipro,2023,0,2,2,2,1.0
+wcc,7,geographical,Dnepropetrovsk,Dnipro,2024,0,1,1,1,1.0
+wcc,10,geographical,Chernobyl,Chornobyl,2020,38,0,12,38,0.0
+wcc,11,geographical,Lugansk,Luhansk,2022,0,2,1,2,1.0
+wcc,11,geographical,Lugansk,Luhansk,2023,0,2,1,2,1.0
+wcc,15,geographical,Dnieper,Dnipro,2023,0,2,2,2,1.0
+wcc,15,geographical,Dnieper,Dnipro,2024,0,1,1,1,1.0
+wcc,17,geographical,Donbass,Donbas,2022,0,7,2,7,1.0
+wcc,17,geographical,Donbass,Donbas,2025,0,4,3,4,1.0
+wcc,17,geographical,Donbass,Donbas,2026,0,2,1,2,1.0
+wcc,38,geographical,Chernigov,Chernihiv,2022,0,11,5,11,1.0
+wcc,38,geographical,Chernigov,Chernihiv,2023,0,3,3,3,1.0
+wcc,39,geographical,Chernovtsy,Chernivtsi,2022,0,17,9,17,1.0
+wcc,39,geographical,Chernovtsy,Chernivtsi,2023,0,2,2,2,1.0
+wcc,39,geographical,Chernovtsy,Chernivtsi,2025,0,4,4,4,1.0
+wcc,24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,2023,0,1,1,1,1.0
+wcc,31,institutional,Kiev Patriarchate,Kyiv Patriarchate,2020,3,0,1,3,0.0
+wcc,35,historical,Kievan Rus,Kyivan Rus,2020,0,1,1,1,1.0
+wcc,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2025,0,2,1,2,1.0
+wcc,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2026,0,2,1,2,1.0
+wcc,72,geographical,Artemovsk,Bakhmut,2026,0,2,1,2,1.0

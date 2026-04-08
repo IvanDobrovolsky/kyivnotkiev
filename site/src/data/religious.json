@@ -1,6 +1,215 @@
 {
   "denominations": [
     {
+      "id": "wcc",
+      "name": "World Council of Churches",
+      "short": "WCC",
+      "url": "https://www.oikoumene.org/",
+      "stance": "Ecumenical Geneva-based body of 350+ Christian denominations. Moderately Ukrainian-leaning in English news (~74% Kyiv across 17 toponym pairs); shifted clearly after the 2022 invasion",
+      "stance_event": "post-2022",
+      "color": "#A0A0A0",
+      "switch_year": 2022,
+      "totals": {
+        "ru": 67,
+        "ua": 195
+      },
+      "ua_pct": 74.4,
+      "n_pairs_with_mentions": 17,
+      "yearly": [
+        {
+          "year": 2020,
+          "ru": 57,
+          "ua": 15,
+          "pages": 28
+        },
+        {
+          "year": 2022,
+          "ru": 4,
+          "ua": 61,
+          "pages": 36
+        },
+        {
+          "year": 2023,
+          "ru": 5,
+          "ua": 46,
+          "pages": 28
+        },
+        {
+          "year": 2024,
+          "ru": 1,
+          "ua": 33,
+          "pages": 20
+        },
+        {
+          "year": 2025,
+          "ru": 0,
+          "ua": 31,
+          "pages": 19
+        },
+        {
+          "year": 2026,
+          "ru": 0,
+          "ua": 9,
+          "pages": 5
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "ru_term": "Kiev",
+          "ua_term": "Kyiv",
+          "category": "geographical",
+          "ru": 26,
+          "ua": 95,
+          "ua_pct": 78.5
+        },
+        {
+          "pair_id": 10,
+          "ru_term": "Chernobyl",
+          "ua_term": "Chornobyl",
+          "category": "geographical",
+          "ru": 38,
+          "ua": 0,
+          "ua_pct": 0.0
+        },
+        {
+          "pair_id": 39,
+          "ru_term": "Chernovtsy",
+          "ua_term": "Chernivtsi",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 23,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 4,
+          "ru_term": "Lvov",
+          "ua_term": "Lviv",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 16,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 38,
+          "ru_term": "Chernigov",
+          "ua_term": "Chernihiv",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 14,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 17,
+          "ru_term": "Donbass",
+          "ua_term": "Donbas",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 13,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 2,
+          "ru_term": "Kharkov",
+          "ua_term": "Kharkiv",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 11,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 11,
+          "ru_term": "Lugansk",
+          "ua_term": "Luhansk",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 4,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 61,
+          "ru_term": "Vladimir Zelensky",
+          "ua_term": "Volodymyr Zelenskyy",
+          "category": "people",
+          "ru": 0,
+          "ua": 4,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 5,
+          "ru_term": "Zaporozhye",
+          "ua_term": "Zaporizhzhia",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 3,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 7,
+          "ru_term": "Dnepropetrovsk",
+          "ua_term": "Dnipro",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 3,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 15,
+          "ru_term": "Dnieper",
+          "ua_term": "Dnipro",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 3,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 31,
+          "ru_term": "Kiev Patriarchate",
+          "ua_term": "Kyiv Patriarchate",
+          "category": "institutional",
+          "ru": 3,
+          "ua": 0,
+          "ua_pct": 0.0
+        },
+        {
+          "pair_id": 3,
+          "ru_term": "Odessa",
+          "ua_term": "Odesa",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 2,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 72,
+          "ru_term": "Artemovsk",
+          "ua_term": "Bakhmut",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 2,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 24,
+          "ru_term": "Kiev Pechersk Lavra",
+          "ua_term": "Kyiv Pechersk Lavra",
+          "category": "landmarks",
+          "ru": 0,
+          "ua": 1,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 35,
+          "ru_term": "Kievan Rus",
+          "ua_term": "Kyivan Rus",
+          "category": "historical",
+          "ru": 0,
+          "ua": 1,
+          "ua_pct": 100.0
+        }
+      ]
+    },
+    {
       "id": "constantinople",
       "name": "Ecumenical Patriarchate of Constantinople",
       "short": "Constantinople",
@@ -237,26 +446,8 @@
       "n_pairs_with_mentions": 0,
       "yearly": [],
       "pairs": []
-    },
-    {
-      "id": "wcc",
-      "name": "World Council of Churches",
-      "short": "WCC",
-      "url": "https://www.oikoumene.org/",
-      "stance": "TBD \u2014 to be filled in once data is collected",
-      "stance_event": null,
-      "color": "#888888",
-      "switch_year": null,
-      "totals": {
-        "ru": 0,
-        "ua": 0
-      },
-      "ua_pct": null,
-      "n_pairs_with_mentions": 0,
-      "yearly": [],
-      "pairs": []
     }
   ],
   "n_denominations": 4,
-  "total_mentions": 84
+  "total_mentions": 346
 }
