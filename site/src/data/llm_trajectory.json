@@ -103,6 +103,57 @@
       "other_rate": 13.6
     },
     {
+      "key": "gemma-3-1b-api",
+      "label": "g3-1b-api",
+      "family": "Google Gemma",
+      "tier": "tiny",
+      "release_date": "2025-03",
+      "tas": 56.9,
+      "open": 69.2,
+      "forced_ru_first": 58.0,
+      "forced_ua_first": 51.0,
+      "forced": 54.5,
+      "gap": -14.7,
+      "ci": 0.876,
+      "position_bias": 46.5,
+      "consistency_pct": null,
+      "other_rate": 30.9
+    },
+    {
+      "key": "gemma-3-27b-api",
+      "label": "g3-27b-api",
+      "family": "Google Gemma",
+      "tier": "mid",
+      "release_date": "2025-03",
+      "tas": 84.8,
+      "open": 75.0,
+      "forced_ru_first": 96.1,
+      "forced_ua_first": 88.2,
+      "forced": 92.2,
+      "gap": 17.2,
+      "ci": 0.952,
+      "position_bias": 46.1,
+      "consistency_pct": null,
+      "other_rate": 12.3
+    },
+    {
+      "key": "gemma-3-4b-api",
+      "label": "g3-4b-api",
+      "family": "Google Gemma",
+      "tier": "small",
+      "release_date": "2025-03",
+      "tas": 77.6,
+      "open": 85.2,
+      "forced_ru_first": 90.4,
+      "forced_ua_first": 60.0,
+      "forced": 75.2,
+      "gap": -10.0,
+      "ci": 0.897,
+      "position_bias": 34.8,
+      "consistency_pct": null,
+      "other_rate": 20.4
+    },
+    {
       "key": "o3-2025-04",
       "label": "o3-2025-04",
       "family": "OpenAI GPT",
@@ -169,6 +220,40 @@
       "position_bias": 50.0,
       "consistency_pct": null,
       "other_rate": 9.3
+    },
+    {
+      "key": "gemma-3n-e2b-api",
+      "label": "g3n-e2b-api",
+      "family": "Google Gemma",
+      "tier": "tiny",
+      "release_date": "2025-06",
+      "tas": 75.2,
+      "open": 73.3,
+      "forced_ru_first": 71.2,
+      "forced_ua_first": 80.4,
+      "forced": 75.8,
+      "gap": 2.5,
+      "ci": 0.927,
+      "position_bias": 54.6,
+      "consistency_pct": null,
+      "other_rate": 17.9
+    },
+    {
+      "key": "gemma-3n-e4b-api",
+      "label": "g3n-e4b-api",
+      "family": "Google Gemma",
+      "tier": "small",
+      "release_date": "2025-06",
+      "tas": 82.2,
+      "open": 80.0,
+      "forced_ru_first": 90.2,
+      "forced_ua_first": 75.0,
+      "forced": 82.6,
+      "gap": 2.6,
+      "ci": 0.932,
+      "position_bias": 42.4,
+      "consistency_pct": null,
+      "other_rate": 14.8
     },
     {
       "key": "gemini-2.5-flash-lite",
@@ -375,6 +460,40 @@
       "other_rate": 6.8
     },
     {
+      "key": "grok-4-1-fast-non-reasoning",
+      "label": "4-1-fast-non-reasoning",
+      "family": "xAI Grok",
+      "tier": "frontier",
+      "release_date": "2025-12",
+      "tas": 78.3,
+      "open": 62.5,
+      "forced_ru_first": 92.3,
+      "forced_ua_first": 84.6,
+      "forced": 88.4,
+      "gap": 25.9,
+      "ci": 0.941,
+      "position_bias": 46.2,
+      "consistency_pct": null,
+      "other_rate": 11.1
+    },
+    {
+      "key": "grok-4-1-fast-reasoning",
+      "label": "4-1-fast-reasoning",
+      "family": "xAI Grok",
+      "tier": "frontier",
+      "release_date": "2025-12",
+      "tas": 80.7,
+      "open": 66.7,
+      "forced_ru_first": 94.3,
+      "forced_ua_first": 87.0,
+      "forced": 90.7,
+      "gap": 24.0,
+      "ci": 0.942,
+      "position_bias": 46.3,
+      "consistency_pct": null,
+      "other_rate": 8.0
+    },
+    {
       "key": "gemini-3.1-flash-lite",
       "label": "3.1-flash-lite",
       "family": "Google Gemini",
@@ -424,6 +543,23 @@
       "position_bias": 42.4,
       "consistency_pct": null,
       "other_rate": 6.8
+    },
+    {
+      "key": "gemini-3.1-pro",
+      "label": "3.1-pro",
+      "family": "Google Gemini",
+      "tier": "frontier",
+      "release_date": "2026-02",
+      "tas": 85.6,
+      "open": 76.6,
+      "forced_ru_first": 96.1,
+      "forced_ua_first": 96.1,
+      "forced": 96.1,
+      "gap": 19.5,
+      "ci": 0.966,
+      "position_bias": 50.0,
+      "consistency_pct": null,
+      "other_rate": 8.0
     },
     {
       "key": "gpt-5.4-2026-03",
@@ -526,6 +662,23 @@
       "position_bias": 49.0,
       "consistency_pct": null,
       "other_rate": 13.0
+    },
+    {
+      "key": "gemma-4-31b-api",
+      "label": "g4-31b-api",
+      "family": "Google Gemma",
+      "tier": "mid",
+      "release_date": "2026-04",
+      "tas": 82.2,
+      "open": 72.1,
+      "forced_ru_first": 94.1,
+      "forced_ua_first": 90.0,
+      "forced": 92.0,
+      "gap": 19.9,
+      "ci": 0.956,
+      "position_bias": 47.9,
+      "consistency_pct": null,
+      "other_rate": 11.1
     }
   ],
   "families": {
@@ -535,11 +688,11 @@
     },
     "Google Gemini": {
       "color": "#4285F4",
-      "n_models": 6
+      "n_models": 7
     },
     "Google Gemma": {
       "color": "#34A853",
-      "n_models": 2
+      "n_models": 8
     },
     "OpenAI GPT": {
       "color": "#10A37F",
@@ -547,18 +700,18 @@
     },
     "xAI Grok": {
       "color": "#000000",
-      "n_models": 7
+      "n_models": 9
     }
   },
   "summary": {
-    "n_models": 31,
-    "tas_min": 75.6,
+    "n_models": 40,
+    "tas_min": 56.9,
     "tas_max": 86.3,
     "open_min": 60.6,
-    "open_max": 77.8,
-    "forced_min": 80.2,
+    "open_max": 85.2,
+    "forced_min": 54.5,
     "forced_max": 98.1,
-    "gap_min": 9.5,
+    "gap_min": -14.7,
     "gap_max": 32.1,
     "release_min": "2024-07",
     "release_max": "2026-04"
