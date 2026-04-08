@@ -3,6 +3,7 @@ import '../styles/global.css';
 import m from '../data/manifest.json';
 import religious from '../data/religious.json';
 import religiousProp from '../data/religious_propagation.json';
+import llmTraj from '../data/llm_trajectory.json';
 
 // manifest.json is the single source of truth — all stats, pairs, categories
 const grouped = m.categories.map(cat => ({
@@ -415,6 +416,206 @@ function formatNum(n: number) {
         <div class="chart-title" style="color: var(--text)">All Pairs Overview</div>
         <div class="chart-subtitle">Current adoption rate — mean across sources, last 12 months</div>
         <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
+      </div>
+
+      <!-- ══ AI Search: what 31 frontier LLMs tell you about Ukraine ══ -->
+      <div class="chart-container" style="margin-bottom: 0.75rem;">
+        <div class="chart-title" style="color: var(--text)">What AI Tells You About Ukraine</div>
+        <div class="chart-subtitle" style="margin-bottom: 0.75rem;">
+          Search is being replaced by chat. Google AI Overviews answer queries directly,
+          ChatGPT and Claude have become how millions of people first learn about a place.
+          We asked <strong>{(llmTraj as any).summary.n_models} frontier models</strong> from
+          {Object.keys((llmTraj as any).families).length} labs to spell Ukrainian places —
+          three different ways each — to see how the answer changes between recognition and
+          free recall.
+        </div>
+
+        {/* Methodology blurb */}
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.5rem; margin-bottom:1rem; font-size:0.65rem;">
+          <div style="padding:0.5rem 0.6rem; background:rgba(0,87,184,0.05); border-left:2px solid #0057B8; border-radius:3px;">
+            <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">Test 1 · Forced choice (RU first)</div>
+            <div style="color:var(--text-muted); font-family:monospace;">"Kiev or Kyiv? Answer with one word."</div>
+          </div>
+          <div style="padding:0.5rem 0.6rem; background:rgba(0,87,184,0.05); border-left:2px solid #0057B8; border-radius:3px;">
+            <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">Test 2 · Forced choice (UA first)</div>
+            <div style="color:var(--text-muted); font-family:monospace;">"Kyiv or Kiev? Answer with one word."</div>
+          </div>
+          <div style="padding:0.5rem 0.6rem; background:rgba(213,43,30,0.05); border-left:2px solid #D52B1E; border-radius:3px;">
+            <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">Test 3 · Free recall</div>
+            <div style="color:var(--text-muted); font-family:monospace;">"What is the capital of Ukraine? One word."</div>
+          </div>
+        </div>
+
+        {/* The trajectory chart: per-model recognition-recall gap over time */}
+        {(() => {
+          const traj = llmTraj;
+          const models = traj.models.filter(m => m.release_date && m.open != null && m.forced != null);
+
+          // Sort by release_date for display
+          models.sort((a, b) => (a.release_date || '').localeCompare(b.release_date || ''));
+
+          // Compute layout
+          const W = 900;
+          const H = 360;
+          const PAD_L = 50;
+          const PAD_R = 20;
+          const PAD_T = 30;
+          const PAD_B = 60;
+          const innerW = W - PAD_L - PAD_R;
+          const innerH = H - PAD_T - PAD_B;
+
+          // Y axis: 50% to 100%
+          const yMin = 50;
+          const yMax = 100;
+          const y = (v: number) => PAD_T + (1 - (v - yMin) / (yMax - yMin)) * innerH;
+
+          // X axis: distribute models evenly along their release-date order
+          const releaseDates = [...new Set(models.map(m => m.release_date))].sort();
+          const dateIdx = Object.fromEntries(releaseDates.map((d, i) => [d, i]));
+          const xSlot = (rd) => {
+            const idx = dateIdx[rd];
+            const slotW = innerW / releaseDates.length;
+            return PAD_L + slotW * idx + slotW / 2;
+          };
+          // Within a release-date slot, jitter horizontally so models at the same date don't overlap
+          const slotMembers = {};
+          models.forEach(m => {
+            (slotMembers[m.release_date] = slotMembers[m.release_date] || []).push(m);
+          });
+          const slotW = innerW / releaseDates.length;
+          const positionedModels = models.map(m => {
+            const peers = slotMembers[m.release_date];
+            const idx = peers.indexOf(m);
+            const offset = (idx - (peers.length - 1) / 2) * Math.min(14, (slotW - 8) / Math.max(1, peers.length));
+            return {...m, x: xSlot(m.release_date) + offset};
+          });
+
+          // Y gridlines
+          const ygrid = [50, 60, 70, 80, 90, 100];
+
+          return (
+            <div style="overflow-x:auto; margin-bottom:1rem;">
+              <svg width={W} height={H} style="display:block; min-width:100%;">
+                {/* Grid */}
+                {ygrid.map(g => (
+                  <g>
+                    <line x1={PAD_L} x2={W - PAD_R} y1={y(g)} y2={y(g)}
+                      stroke="#e5e7eb" strokeWidth="1" strokeDasharray={g === 100 ? "" : "2,3"} />
+                    <text x={PAD_L - 8} y={y(g) + 3} textAnchor="end" fontSize="9" fill="#6b7280">{g}%</text>
+                  </g>
+                ))}
+
+                {/* Y axis label */}
+                <text x={12} y={H / 2} textAnchor="middle" fontSize="10" fill="#6b7280"
+                  transform={`rotate(-90 12 ${H / 2})`}>% Kyiv (vs Kiev)</text>
+
+                {/* X axis: release-date labels */}
+                {releaseDates.map((rd, i) => {
+                  const x = xSlot(rd);
+                  return (
+                    <g>
+                      <line x1={x} x2={x} y1={PAD_T + innerH} y2={PAD_T + innerH + 4}
+                        stroke="#6b7280" strokeWidth="1" />
+                      <text x={x} y={PAD_T + innerH + 16} textAnchor="middle" fontSize="9" fill="#6b7280"
+                        transform={`rotate(-30 ${x} ${PAD_T + innerH + 16})`}>{rd}</text>
+                    </g>
+                  );
+                })}
+
+                {/* Per-model: vertical line from open recall to forced */}
+                {positionedModels.map(m => {
+                  const color = traj.families[m.family]?.color || '#888';
+                  const yo = y(m.open);
+                  const yf = y(m.forced);
+                  return (
+                    <g>
+                      {/* Connector line */}
+                      <line x1={m.x} x2={m.x} y1={yo} y2={yf}
+                        stroke={color} strokeWidth="1.5" strokeOpacity="0.4" />
+                      {/* Open recall (lower dot, hollow) */}
+                      <circle cx={m.x} cy={yo} r="3.5" fill="white" stroke={color} strokeWidth="1.6" />
+                      {/* Forced choice (upper dot, filled) */}
+                      <circle cx={m.x} cy={yf} r="3.5" fill={color} />
+                      {/* Hover title */}
+                      <title>{`${m.key}\nForced choice: ${m.forced}%\nOpen recall: ${m.open}%\nGap: ${m.gap}pp\nReleased: ${m.release_date}`}</title>
+                    </g>
+                  );
+                })}
+
+                {/* Legend top right */}
+                <g transform={`translate(${PAD_L + 10}, ${PAD_T + 8})`}>
+                  <text x={0} y={0} fontSize="9" fontWeight="700" fill="#6b7280">Each model:</text>
+                  <circle cx={75} cy={-3} r="3.5" fill="#666" />
+                  <text x={82} y={0} fontSize="9" fill="#6b7280">forced choice (recognition)</text>
+                  <circle cx={205} cy={-3} r="3.5" fill="white" stroke="#666" strokeWidth="1.6" />
+                  <text x={212} y={0} fontSize="9" fill="#6b7280">free recall (generation)</text>
+                </g>
+              </svg>
+            </div>
+          );
+        })()}
+
+        {/* Family legend + summary stats */}
+        <div style="display:grid; grid-template-columns:auto 1fr; gap:0.75rem; align-items:start;">
+          <div style="display:flex; flex-direction:column; gap:0.3rem; min-width:140px;">
+            {Object.entries((llmTraj as any).families).sort((a, b) => (b[1] as any).n_models - (a[1] as any).n_models).map(([fam, info]) => (
+              <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.7rem;">
+                <span style={`display:inline-block; width:12px; height:12px; border-radius:2px; background:${(info as any).color};`}></span>
+                <span style="color:var(--text);">{fam}</span>
+                <span style="color:var(--text-muted); font-family:monospace;">({(info as any).n_models})</span>
+              </div>
+            ))}
+          </div>
+          <div style="font-size:0.7rem; color:var(--text); line-height:1.6; padding-left:1rem; border-left:2px solid rgba(0,87,184,0.15);">
+            <strong>The story.</strong> Every single model has a gap between forced-choice (recognition) and free
+            recall (generation) — the filled dot is always above the hollow dot. Forced-choice runs from
+            <strong> {(llmTraj as any).summary.forced_min}% to {(llmTraj as any).summary.forced_max}% Kyiv</strong>;
+            free recall is much lower at <strong>{(llmTraj as any).summary.open_min}% to {(llmTraj as any).summary.open_max}%</strong>.
+            That gap is the size of the alignment correction layer — models trained to <em>pick</em> Kyiv when shown both,
+            but still <em>generate</em> Kiev a third of the time. Largest gaps come from heavily-aligned reasoning models
+            (Claude Opus, gpt-5-nano, o1, o3) — exactly the models that have had the most post-training. xAI Grok and
+            small Haiku variants have the smallest gaps because they're closer to base-model behavior.
+          </div>
+        </div>
+
+        {/* Top + bottom 5 table */}
+        <div style="margin-top:1rem; display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div>
+            <div style="font-size:0.7rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">
+              Most Ukrainian-leaning (highest TAS)
+            </div>
+            <div style="font-size:0.65rem; font-family:monospace; color:var(--text);">
+              {(llmTraj as any).models.slice().sort((a, b) => (b.tas || 0) - (a.tas || 0)).slice(0, 5).map(m => (
+                <div style="display:grid; grid-template-columns:1fr auto auto; gap:0.5rem; padding:0.2rem 0; border-bottom:1px solid rgba(0,0,0,0.04);">
+                  <span style={`color:${(llmTraj as any).families[m.family]?.color || '#666'}; font-weight:600;`}>{m.key}</span>
+                  <span style="color:var(--text-muted);">{m.tas}%</span>
+                  <span style="color:var(--text-muted);">gap {m.gap}pp</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div style="font-size:0.7rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">
+              Most Russian-leaning (lowest TAS)
+            </div>
+            <div style="font-size:0.65rem; font-family:monospace; color:var(--text);">
+              {(llmTraj as any).models.slice().sort((a, b) => (a.tas || 0) - (b.tas || 0)).slice(0, 5).map(m => (
+                <div style="display:grid; grid-template-columns:1fr auto auto; gap:0.5rem; padding:0.2rem 0; border-bottom:1px solid rgba(0,0,0,0.04);">
+                  <span style={`color:${(llmTraj as any).families[m.family]?.color || '#666'}; font-weight:600;`}>{m.key}</span>
+                  <span style="color:var(--text-muted);">{m.tas}%</span>
+                  <span style="color:var(--text-muted);">gap {m.gap}pp</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:0.75rem; padding:0.5rem 0.75rem; background:rgba(0,87,184,0.04); border-radius:4px; font-size:0.65rem; color:var(--text-muted);">
+          <strong style="color:var(--text);">Toponymic Alignment Score (TAS) = 0.4 × (forced₁ + forced₂)/2 + 0.6 × open</strong> —
+          weights favor free recall because it measures parametric memory rather than instruction-following.
+          {(llmTraj as any).summary.n_models} hosted-API models tested, {(llmTraj as any).summary.release_min}–{(llmTraj as any).summary.release_max}.
+          Open-weight Llama, Gemma, Qwen, Mistral version archaeology pending tomorrow's GPU run.
+        </div>
       </div>
 
       <!-- Religious Institutions: policy not population -->
