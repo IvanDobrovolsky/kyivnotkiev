@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import m from '../data/manifest.json';
+import religious from '../data/religious.json';
 
 // manifest.json is the single source of truth — all stats, pairs, categories
 const grouped = m.categories.map(cat => ({
@@ -413,6 +414,121 @@ function formatNum(n: number) {
         <div class="chart-title" style="color: var(--text)">All Pairs Overview</div>
         <div class="chart-subtitle">Current adoption rate — mean across sources, last 12 months</div>
         <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
+      </div>
+
+      <!-- Religious Institutions: policy not population -->
+      <div class="chart-container" style="margin-bottom: 0.75rem;">
+        <div class="chart-title" style="color: var(--text)">Institutional Voices: Policy, Not Population</div>
+        <div class="chart-subtitle" style="margin-bottom: 0.75rem;">
+          The 8 corpus sources above measure populations of writers — millions of independent
+          choices that drift with culture. Major religious bodies are different: each one has a
+          single editorial policy decided by a small group at the top. When their English
+          publications shift from "Kiev" to "Kyiv", it's a discrete political decision tied to
+          a specific event. The contrasts are the story.
+        </div>
+
+        {/* Hero: switch-date timeline */}
+        <div style="margin: 1rem 0 1.25rem 0;">
+          {(() => {
+            const denoms = (religious as any).denominations.filter((d: any) => d.totals.ru + d.totals.ua > 0);
+            const minYear = 2010;
+            const maxYear = 2026;
+            const yearWidth = 100 / (maxYear - minYear);
+            return (
+              <div>
+                <div style="display:flex; justify-content:space-between; font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem; padding:0 4px;">
+                  <span>{minYear}</span>
+                  <span>2014 Maidan</span>
+                  <span>2019 OCU</span>
+                  <span>2022 invasion</span>
+                  <span>{maxYear}</span>
+                </div>
+                {denoms.map((d: any) => {
+                  const switchPct = d.switch_year ? ((d.switch_year - minYear) / (maxYear - minYear)) * 100 : null;
+                  const labelText = d.switch_year
+                    ? `switched ${d.switch_year} — ${d.stance_event}`
+                    : `${d.ua_pct ?? 0}% Kyiv lifetime`;
+                  return (
+                    <div style="display:grid; grid-template-columns:160px 1fr 200px; gap:0.5rem; align-items:center; margin-bottom:0.5rem;">
+                      <div style="font-size:0.75rem; font-weight:600; color:var(--text); text-align:right;">
+                        {d.short}
+                      </div>
+                      <div style="position:relative; height:24px; background:linear-gradient(90deg,#fde6e6 0%,#fde6e6 100%); border-radius:4px; overflow:hidden;">
+                        {switchPct !== null && (
+                          <div style={`position:absolute; left:${switchPct}%; top:0; width:${100 - switchPct}%; height:100%; background:linear-gradient(90deg,#dceaff,#0057B8);`}></div>
+                        )}
+                        {[2014, 2019, 2022].map(yr => (
+                          <div style={`position:absolute; left:${((yr - minYear) / (maxYear - minYear)) * 100}%; top:0; bottom:0; width:1px; background:rgba(0,0,0,0.15);`}></div>
+                        ))}
+                        {switchPct !== null && (
+                          <div style={`position:absolute; left:${switchPct}%; top:-2px; bottom:-2px; width:2px; background:#0057B8;`}></div>
+                        )}
+                      </div>
+                      <div style="font-size:0.7rem; color:var(--text-muted);">
+                        {labelText}
+                      </div>
+                    </div>
+                  );
+                })}
+                <div style="margin-top:0.5rem; padding:0.5rem 0.75rem; background:rgba(213,43,30,0.05); border-left:3px solid #D52B1E; font-size:0.7rem; color:var(--text-muted);">
+                  <strong style="color:var(--text);">Reading the chart:</strong> red = institution still uses "Kiev" in
+                  English publications; blue = switched to "Kyiv". Vertical markers show 2014 (Maidan), 2019
+                  (Constantinople grants Ukrainian autocephaly), 2022 (Russian invasion).
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* Stacked bars: volume + ratio */}
+        <div style="margin-top:1.25rem;">
+          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.5rem;">
+            Volume and ratio across all toponym pairs
+          </div>
+          {(religious as any).denominations.filter((d: any) => d.totals.ru + d.totals.ua > 0).map((d: any) => {
+            const total = d.totals.ru + d.totals.ua;
+            const uaPct = (d.totals.ua / total) * 100;
+            return (
+              <div style="display:grid; grid-template-columns:160px 1fr 100px; gap:0.5rem; align-items:center; margin-bottom:0.4rem;">
+                <div style="font-size:0.7rem; color:var(--text); text-align:right;">{d.short}</div>
+                <div style="display:flex; height:18px; border-radius:3px; overflow:hidden; background:#f0f0f0;">
+                  <div style={`width:${uaPct}%; background:#0057B8;`} title={`${d.totals.ua} Ukrainian`}></div>
+                  <div style={`width:${100 - uaPct}%; background:#D52B1E;`} title={`${d.totals.ru} Russian`}></div>
+                </div>
+                <div style="font-size:0.65rem; color:var(--text-muted); font-family:monospace;">
+                  {d.totals.ua}/{total} ({d.ua_pct}%)
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Per-denomination key findings */}
+        <div style="margin-top:1.25rem; display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          {(religious as any).denominations.filter((d: any) => d.totals.ru + d.totals.ua > 0).map((d: any) => (
+            <div style="padding:0.6rem 0.75rem; background:rgba(0,87,184,0.03); border:1px solid rgba(0,87,184,0.1); border-radius:4px;">
+              <div style="font-size:0.75rem; font-weight:600; color:var(--text);">
+                <a href={d.url} target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">
+                  {d.name} ↗
+                </a>
+              </div>
+              <div style="font-size:0.65rem; color:var(--text-muted); margin-top:0.3rem; line-height:1.5;">
+                {d.stance}
+              </div>
+              {d.pairs.length > 0 && (
+                <div style="font-size:0.6rem; color:var(--text-muted); margin-top:0.4rem; font-family:monospace;">
+                  Top pairs: {d.pairs.slice(0, 3).map((p: any) => `${p.ru_term}/${p.ua_term} (${p.ua_pct}%)`).join(' · ')}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div style="margin-top:0.75rem; font-size:0.65rem; color:var(--text-muted);">
+          Sources: ec-patr.org (Constantinople, {religious.denominations.find((d: any) => d.id === 'constantinople')?.totals.ru + religious.denominations.find((d: any) => d.id === 'constantinople')?.totals.ua || 0} mentions),
+          vatican.va (Vatican, {religious.denominations.find((d: any) => d.id === 'vatican')?.totals.ru + religious.denominations.find((d: any) => d.id === 'vatican')?.totals.ua || 0} mentions).
+          Moscow Patriarchate (mospat.ru) and World Council of Churches (oikoumene.org) crawls in progress.
+        </div>
       </div>
 
       <!-- Methodology moved to top, below stats -->

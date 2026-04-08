@@ -1,0 +1,262 @@
+{
+  "denominations": [
+    {
+      "id": "constantinople",
+      "name": "Ecumenical Patriarchate of Constantinople",
+      "short": "Constantinople",
+      "url": "https://ec-patr.org/",
+      "stance": "Granted autocephaly to the Orthodox Church of Ukraine in January 2019, breaking with Moscow's claim over Ukrainian Orthodoxy",
+      "stance_event": "OCU autocephaly",
+      "color": "#0057B8",
+      "switch_year": 2020,
+      "totals": {
+        "ru": 29,
+        "ua": 39
+      },
+      "ua_pct": 57.4,
+      "n_pairs_with_mentions": 4,
+      "yearly": [
+        {
+          "year": 2014,
+          "ru": 4,
+          "ua": 0,
+          "pages": 2
+        },
+        {
+          "year": 2018,
+          "ru": 5,
+          "ua": 0,
+          "pages": 2
+        },
+        {
+          "year": 2020,
+          "ru": 17,
+          "ua": 21,
+          "pages": 14
+        },
+        {
+          "year": 2021,
+          "ru": 1,
+          "ua": 6,
+          "pages": 4
+        },
+        {
+          "year": 2025,
+          "ru": 2,
+          "ua": 12,
+          "pages": 5
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "ru_term": "Kiev",
+          "ua_term": "Kyiv",
+          "category": "geographical",
+          "ru": 18,
+          "ua": 28,
+          "ua_pct": 60.9
+        },
+        {
+          "pair_id": 10,
+          "ru_term": "Chernobyl",
+          "ua_term": "Chornobyl",
+          "category": "geographical",
+          "ru": 3,
+          "ua": 8,
+          "ua_pct": 72.7
+        },
+        {
+          "pair_id": 35,
+          "ru_term": "Kievan Rus",
+          "ua_term": "Kyivan Rus",
+          "category": "historical",
+          "ru": 8,
+          "ua": 0,
+          "ua_pct": 0.0
+        },
+        {
+          "pair_id": 61,
+          "ru_term": "Vladimir Zelensky",
+          "ua_term": "Volodymyr Zelenskyy",
+          "category": "people",
+          "ru": 0,
+          "ua": 3,
+          "ua_pct": 100.0
+        }
+      ]
+    },
+    {
+      "id": "vatican",
+      "name": "Holy See / Vatican",
+      "short": "Vatican",
+      "url": "https://www.vatican.va/",
+      "stance": "Pope Francis used 'Kyiv' in addresses since at least 2014; rare mentions overall but consistently Ukrainian after 2022",
+      "stance_event": "early adopter (~2014)",
+      "color": "#FFD700",
+      "switch_year": 2014,
+      "totals": {
+        "ru": 5,
+        "ua": 11
+      },
+      "ua_pct": 68.8,
+      "n_pairs_with_mentions": 8,
+      "yearly": [
+        {
+          "year": 2014,
+          "ru": 0,
+          "ua": 1,
+          "pages": 1
+        },
+        {
+          "year": 2015,
+          "ru": 1,
+          "ua": 0,
+          "pages": 1
+        },
+        {
+          "year": 2020,
+          "ru": 1,
+          "ua": 0,
+          "pages": 1
+        },
+        {
+          "year": 2022,
+          "ru": 1,
+          "ua": 5,
+          "pages": 6
+        },
+        {
+          "year": 2023,
+          "ru": 2,
+          "ua": 1,
+          "pages": 3
+        },
+        {
+          "year": 2024,
+          "ru": 0,
+          "ua": 2,
+          "pages": 2
+        },
+        {
+          "year": 2025,
+          "ru": 0,
+          "ua": 2,
+          "pages": 2
+        }
+      ],
+      "pairs": [
+        {
+          "pair_id": 1,
+          "ru_term": "Kiev",
+          "ua_term": "Kyiv",
+          "category": "geographical",
+          "ru": 1,
+          "ua": 6,
+          "ua_pct": 85.7
+        },
+        {
+          "pair_id": 2,
+          "ru_term": "Kharkov",
+          "ua_term": "Kharkiv",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 2,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 3,
+          "ru_term": "Odessa",
+          "ua_term": "Odesa",
+          "category": "geographical",
+          "ru": 2,
+          "ua": 0,
+          "ua_pct": 0.0
+        },
+        {
+          "pair_id": 4,
+          "ru_term": "Lvov",
+          "ua_term": "Lviv",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 1,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 5,
+          "ru_term": "Zaporozhye",
+          "ua_term": "Zaporizhzhia",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 1,
+          "ua_pct": 100.0
+        },
+        {
+          "pair_id": 10,
+          "ru_term": "Chernobyl",
+          "ua_term": "Chornobyl",
+          "category": "geographical",
+          "ru": 1,
+          "ua": 0,
+          "ua_pct": 0.0
+        },
+        {
+          "pair_id": 17,
+          "ru_term": "Donbass",
+          "ua_term": "Donbas",
+          "category": "geographical",
+          "ru": 1,
+          "ua": 0,
+          "ua_pct": 0.0
+        },
+        {
+          "pair_id": 43,
+          "ru_term": "Kremenchug",
+          "ua_term": "Kremenchuk",
+          "category": "geographical",
+          "ru": 0,
+          "ua": 1,
+          "ua_pct": 100.0
+        }
+      ]
+    },
+    {
+      "id": "patriarchia",
+      "name": "Russian Orthodox Church (patriarchia.ru)",
+      "short": "ROC general site",
+      "url": "https://www.patriarchia.ru/en/",
+      "stance": "TBD",
+      "stance_event": null,
+      "color": "#A52A2A",
+      "switch_year": null,
+      "totals": {
+        "ru": 0,
+        "ua": 0
+      },
+      "ua_pct": null,
+      "n_pairs_with_mentions": 0,
+      "yearly": [],
+      "pairs": []
+    },
+    {
+      "id": "wcc",
+      "name": "World Council of Churches",
+      "short": "WCC",
+      "url": "https://www.oikoumene.org/",
+      "stance": "TBD \u2014 to be filled in once data is collected",
+      "stance_event": null,
+      "color": "#888888",
+      "switch_year": null,
+      "totals": {
+        "ru": 0,
+        "ua": 0
+      },
+      "ua_pct": null,
+      "n_pairs_with_mentions": 0,
+      "yearly": [],
+      "pairs": []
+    }
+  ],
+  "n_denominations": 4,
+  "total_mentions": 84
+}
