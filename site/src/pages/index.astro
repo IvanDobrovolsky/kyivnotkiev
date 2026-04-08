@@ -4,6 +4,7 @@ import m from '../data/manifest.json';
 import religious from '../data/religious.json';
 import religiousProp from '../data/religious_propagation.json';
 import llmTraj from '../data/llm_trajectory.json';
+import llmPerPair from '../data/llm_per_pair.json';
 
 // manifest.json is the single source of truth — all stats, pairs, categories
 const grouped = m.categories.map(cat => ({
@@ -257,6 +258,15 @@ function formatNum(n: number) {
           <div class="chart-subtitle" style="margin-bottom:0.5rem;">Adoption rate per data source for this pair</div>
           <div id="pair-source-chart" style="width:100%; min-height:200px;"></div>
         </div>
+      </div>
+
+      <!-- Per-pair AI / LLM scan: 31 models × 3 tests for THIS pair -->
+      <div class="chart-container" id="pair-llm-container" style="margin-bottom:1rem;">
+        <div class="chart-title" style="color: var(--text)">What AI says about <span id="pair-llm-pair-name">this pair</span></div>
+        <div class="chart-subtitle" style="margin-bottom:0.5rem;" id="pair-llm-subtitle">
+          31 frontier LLMs from 5 labs, 3 prompt variants each — what they answer for this specific pair.
+        </div>
+        <div id="pair-llm-body"></div>
       </div>
 
       <!-- Per-pair world map (GDELT only) -->
@@ -1586,6 +1596,7 @@ function formatNum(n: number) {
       setTimeout(() => {
         drawPairSourceChart();
         drawMediaOrigin();
+        drawPairLLM();
         drawWorldMap();
         drawHoldoutTable();
       }, 50);
@@ -1691,6 +1702,129 @@ function formatNum(n: number) {
           .attr('font-size', '11px').attr('font-weight', '600').attr('fill', sourceColors[item.src])
           .text(`${item.adoption}%`);
       });
+    }
+
+    // ── Per-pair LLM scan: 31 frontier models × 3 prompt variants for THIS pair ──
+    function drawPairLLM() {
+      const container = document.getElementById('pair-llm-container');
+      const body = document.getElementById('pair-llm-body');
+      const nameEl = document.getElementById('pair-llm-pair-name');
+      if (!container || !body) return;
+
+      const pid = String(activePairId);
+      const pp = (llmPerPair as any).pairs?.[pid];
+      if (!pp || !pp.models) {
+        container.style.display = 'none';
+        return;
+      }
+      container.style.display = '';
+
+      const families = (llmPerPair as any).families || {};
+      const modelLabel = (key: string) => key
+        .replace('claude-', '')
+        .replace('gemini-', '')
+        .replace('gemma-', 'g')
+        .replace('gpt-', '')
+        .replace('grok-', '');
+
+      // Header label
+      if (nameEl) nameEl.textContent = `${pp.russian} / ${pp.ukrainian}`;
+
+      // Build the table HTML manually for max control
+      const sum = pp.summary;
+      const fmt = (v: any) => v == null ? '—' : (typeof v === 'number' ? v.toFixed(0) + '%' : String(v));
+
+      // Sort models by tas descending
+      const models = [...pp.models].sort((a, b) => (b.tas ?? -1) - (a.tas ?? -1));
+
+      // Group by family for the per-family rollup row
+      const familyOrder = Object.keys(sum.by_family || {}).sort((a, b) => sum.by_family[b].n - sum.by_family[a].n);
+
+      let html = '';
+
+      // Top: 3 big numbers (open / forced / TAS)
+      html += `
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.5rem; margin-bottom:0.75rem;">
+          <div style="padding:0.6rem 0.75rem; background:rgba(213,43,30,0.05); border-left:3px solid #D52B1E; border-radius:3px;">
+            <div style="font-size:0.6rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Free recall</div>
+            <div style="font-size:1.4rem; font-weight:700; color:var(--text);">${fmt(sum.open_pct)}</div>
+            <div style="font-size:0.6rem; color:var(--text-muted);">of models pick "${pp.ukrainian}" when generating</div>
+          </div>
+          <div style="padding:0.6rem 0.75rem; background:rgba(0,87,184,0.05); border-left:3px solid #0057B8; border-radius:3px;">
+            <div style="font-size:0.6rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Forced choice (avg)</div>
+            <div style="font-size:1.4rem; font-weight:700; color:var(--text);">${fmt(((sum.forced_ru_pct || 0) + (sum.forced_ua_pct || 0)) / 2)}</div>
+            <div style="font-size:0.6rem; color:var(--text-muted);">when shown both spellings</div>
+          </div>
+          <div style="padding:0.6rem 0.75rem; background:rgba(0,87,184,0.03); border-left:3px solid var(--text-muted); border-radius:3px;">
+            <div style="font-size:0.6rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">TAS (weighted)</div>
+            <div style="font-size:1.4rem; font-weight:700; color:var(--text);">${fmt(sum.tas_mean)}</div>
+            <div style="font-size:0.6rem; color:var(--text-muted);">across ${sum.n_models} frontier models</div>
+          </div>
+        </div>
+      `;
+
+      // Per-family rollup mini-bars
+      html += `<div style="font-size:0.7rem; font-weight:700; color:var(--text); margin:0.75rem 0 0.4rem;">By family</div>`;
+      for (const fam of familyOrder) {
+        const f = sum.by_family[fam];
+        const color = families[fam]?.color || '#666';
+        const opPct = f.open_pct ?? 0;
+        const fcPct = f.forced_pct ?? 0;
+        html += `
+          <div style="display:grid; grid-template-columns:160px 1fr 1fr 60px; gap:0.5rem; align-items:center; margin-bottom:0.3rem; font-size:0.7rem;">
+            <div style="color:var(--text); display:flex; align-items:center; gap:0.4rem;">
+              <span style="display:inline-block; width:10px; height:10px; border-radius:2px; background:${color};"></span>
+              ${fam}
+              <span style="color:var(--text-muted); font-family:monospace;">×${f.n}</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <div style="flex:1; height:14px; background:#f0f0f0; border-radius:2px; overflow:hidden;">
+                <div style="width:${opPct}%; height:100%; background:#D52B1E; opacity:0.85;"></div>
+              </div>
+              <span style="font-family:monospace; color:var(--text-muted); width:38px; text-align:right;">${opPct.toFixed(0)}%</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <div style="flex:1; height:14px; background:#f0f0f0; border-radius:2px; overflow:hidden;">
+                <div style="width:${fcPct}%; height:100%; background:#0057B8; opacity:0.85;"></div>
+              </div>
+              <span style="font-family:monospace; color:var(--text-muted); width:38px; text-align:right;">${fcPct.toFixed(0)}%</span>
+            </div>
+            <div style="font-family:monospace; color:var(--text); font-weight:600; text-align:right;">${(f.tas_mean ?? 0).toFixed(0)}%</div>
+          </div>
+        `;
+      }
+      html += `
+        <div style="display:grid; grid-template-columns:160px 1fr 1fr 60px; gap:0.5rem; font-size:0.6rem; color:var(--text-muted); margin-top:0.5rem; padding-top:0.4rem; border-top:1px solid rgba(0,0,0,0.06);">
+          <div></div>
+          <div style="display:flex; align-items:center; gap:0.3rem;"><span style="width:8px; height:8px; background:#D52B1E; display:inline-block; border-radius:1px;"></span>free recall</div>
+          <div style="display:flex; align-items:center; gap:0.3rem;"><span style="width:8px; height:8px; background:#0057B8; display:inline-block; border-radius:1px;"></span>forced choice (avg of two orders)</div>
+          <div style="text-align:right;">TAS</div>
+        </div>
+      `;
+
+      // Per-model grid: small dots showing each test result
+      html += `<div style="font-size:0.7rem; font-weight:700; color:var(--text); margin:1rem 0 0.4rem;">Per-model results (${models.length} frontier models)</div>`;
+      html += `<div style="font-size:0.6rem; color:var(--text-muted); margin-bottom:0.4rem;">3 dots per model: <strong>O</strong> = free recall · <strong>R</strong> = forced "${pp.russian} or ${pp.ukrainian}?" · <strong>U</strong> = forced "${pp.ukrainian} or ${pp.russian}?". Blue = picked Ukrainian, red = picked Russian, gray = neither/refused.</div>`;
+      html += `<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:0.3rem 0.5rem;">`;
+      for (const m of models) {
+        const color = families[m.family]?.color || '#666';
+        const dotColor = (x: any) => x == null ? '#ddd' : (x === 1 ? '#0057B8' : '#D52B1E');
+        const dotLabel = (x: any) => x == null ? '?' : (x === 1 ? 'U' : 'R');
+        html += `
+          <div style="display:flex; align-items:center; gap:0.4rem; padding:0.15rem 0.3rem; border-radius:2px;">
+            <div style="display:flex; gap:2px; flex-shrink:0;">
+              <span title="open recall: ${dotLabel(m.x_open)}" style="display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:50%; background:${dotColor(m.x_open)}; color:white; font-size:8px; font-weight:700;">O</span>
+              <span title="forced RU first: ${dotLabel(m.x_forced_ru_first)}" style="display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:50%; background:${dotColor(m.x_forced_ru_first)}; color:white; font-size:8px; font-weight:700;">R</span>
+              <span title="forced UA first: ${dotLabel(m.x_forced_ua_first)}" style="display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:50%; background:${dotColor(m.x_forced_ua_first)}; color:white; font-size:8px; font-weight:700;">U</span>
+            </div>
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:${color}; flex-shrink:0;"></span>
+            <span style="font-size:0.6rem; font-family:monospace; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${modelLabel(m.key)}</span>
+          </div>
+        `;
+      }
+      html += `</div>`;
+
+      body.innerHTML = html;
     }
 
     function drawMediaOrigin() {
