@@ -1,0 +1,116 @@
+[
+  {
+    "pair_id": 1,
+    "russian_term": "Kiev",
+    "ukrainian_term": "Kyiv",
+    "category": "geographical",
+    "source": "constantinople",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 3
+      },
+      {
+        "year": 2018,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 5
+      },
+      {
+        "year": 2020,
+        "russian_count": 7,
+        "ukrainian_count": 13,
+        "n_pages": 7,
+        "total": 20
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 5,
+        "n_pages": 3,
+        "total": 6
+      },
+      {
+        "year": 2025,
+        "russian_count": 2,
+        "ukrainian_count": 10,
+        "n_pages": 3,
+        "total": 12
+      }
+    ],
+    "total_russian": 18,
+    "total_ukrainian": 28
+  },
+  {
+    "pair_id": 10,
+    "russian_term": "Chernobyl",
+    "ukrainian_term": "Chornobyl",
+    "category": "geographical",
+    "source": "constantinople",
+    "yearly": [
+      {
+        "year": 2020,
+        "russian_count": 3,
+        "ukrainian_count": 8,
+        "n_pages": 3,
+        "total": 11
+      }
+    ],
+    "total_russian": 3,
+    "total_ukrainian": 8
+  },
+  {
+    "pair_id": 35,
+    "russian_term": "Kievan Rus",
+    "ukrainian_term": "Kyivan Rus",
+    "category": "historical",
+    "source": "constantinople",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2020,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "n_pages": 4,
+        "total": 7
+      }
+    ],
+    "total_russian": 8,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 61,
+    "russian_term": "Vladimir Zelensky",
+    "ukrainian_term": "Volodymyr Zelenskyy",
+    "category": "people",
+    "source": "constantinople",
+    "yearly": [
+      {
+        "year": 2021,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "n_pages": 2,
+        "total": 2
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 3
+  }
+]

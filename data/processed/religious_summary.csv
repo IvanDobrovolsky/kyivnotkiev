@@ -1,0 +1,11 @@
+source,pair_id,category,russian_term,ukrainian_term,year,russian_count,ukrainian_count,n_pages,total,adoption_ratio
+constantinople,1,geographical,Kiev,Kyiv,2014,3,0,1,3,0.0
+constantinople,1,geographical,Kiev,Kyiv,2018,5,0,2,5,0.0
+constantinople,1,geographical,Kiev,Kyiv,2020,7,13,7,20,0.65
+constantinople,1,geographical,Kiev,Kyiv,2021,1,5,3,6,0.8333
+constantinople,1,geographical,Kiev,Kyiv,2025,2,10,3,12,0.8333
+constantinople,10,geographical,Chernobyl,Chornobyl,2020,3,8,3,11,0.7273
+constantinople,35,historical,Kievan Rus,Kyivan Rus,2014,1,0,1,1,0.0
+constantinople,35,historical,Kievan Rus,Kyivan Rus,2020,7,0,4,7,0.0
+constantinople,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2021,0,1,1,1,1.0
+constantinople,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2025,0,2,2,2,1.0
