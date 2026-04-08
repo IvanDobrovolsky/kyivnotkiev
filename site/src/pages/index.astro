@@ -250,18 +250,12 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Source Comparison + Cross-Lingual -->
+      <!-- Source Comparison -->
       <div id="comparison-row" style="display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:1rem;">
         <div class="chart-container" style="margin-bottom:0;">
           <div class="chart-title" style="color: var(--text)">Source Comparison</div>
           <div class="chart-subtitle" style="margin-bottom:0.5rem;">Adoption rate per data source for this pair</div>
           <div id="pair-source-chart" style="width:100%; min-height:200px;"></div>
-        </div>
-        <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom:0;">
-        <div class="chart-title" style="color: var(--text)">Cross-Lingual Adoption</div>
-        <div class="chart-subtitle">Adoption in GDELT news by domain language (.com, .fr, .de, etc.)</div>
-        <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Ukrainian spelling adoption by language (GDELT domain TLD)</div>
-        <div id="cross-lingual-chart" style="width:100%;"></div>
         </div>
       </div>
 
@@ -373,12 +367,12 @@ function formatNum(n: number) {
             <div style="font-size:0.75rem; color:#6b7280;">Kyiv 60% but Volodymyr the Great 5% — history still Russian-framed</div>
           </div>
           <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Cross-lingual</div>
-            <div style="font-size:0.75rem; color:#6b7280;">US 47% → FR 4% → IT 2% — campaign barely reached beyond English</div>
-          </div>
-          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
             <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Disaster brand</div>
             <div style="font-size:0.75rem; color:#6b7280;">Chernobyl: 1% in Trends, 0% in Wikipedia — impervious to change</div>
+          </div>
+          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
+            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Recognition vs recall</div>
+            <div style="font-size:0.75rem; color:#6b7280;">31 LLMs: 90%+ Kyiv when shown both, but only 65–78% when generating freely</div>
           </div>
         </div>
       </div>
@@ -959,6 +953,21 @@ function formatNum(n: number) {
             And food terms like Borshch are fighting a separate battle, championed by chef
             Yevhen Klopotenko's UNESCO campaign.
           </p>
+          <p style="border-left:3px solid rgba(0,87,184,0.25); padding:0.5rem 0.9rem; background:rgba(0,87,184,0.03); border-radius:0 4px 4px 0; font-size:0.85rem;">
+            <strong>A note on what's not here.</strong>
+            The original pipeline included a cross-lingual track — measuring Ukrainian-toponym
+            adoption in non-English news (French, German, Spanish, Italian, Polish) via GDELT
+            domain TLDs. We removed it from the published study because honest measurement
+            in those languages requires per-language transliteration rules: French uses
+            <em>Kiev</em> by tradition but writes <em>Kyïv</em> in some style guides;
+            Spanish guidelines after 2022 prefer <em>Kiev</em> with no diacritic; German uses
+            <em>Kiew</em>; Polish has its own forms (<em>Kijów</em>); and each pair requires
+            its own per-language mapping. The complexity of building a defensible
+            transliteration table for ~50 pairs across 6+ languages exceeded the scope of
+            this paper. The cross-lingual angle is real — and the propagation graph in the
+            religious section makes the structural argument that non-English audiences
+            matter — but the rigorous quantitative version is a follow-up study of its own.
+          </p>
         </div>
         <div class="about-links">
           <a href="https://github.com/IvanDobrovolsky/kyivnotkiev">Source Code</a>
@@ -982,16 +991,12 @@ function formatNum(n: number) {
     import pairEvents from '../data/pair_events.json';
     import trendsCountries from '../data/trends_countries.json';
     import errorAnalysis from '../data/error_analysis.json';
-    import crossLingual from '../data/cross_lingual.json';
     import dictCombined from '../data/dictionary_combined.json';
     import enforcementData from '../data/enforcement.json';
     import searchAudit from '../data/search_audit.json';
     import domainOrigins from '../data/domain_origins.json';
     import clCollocations from '../data/cl_collocations.json';
     import clAnalysis from '../data/cl_analysis.json';
-
-    // Make cross-lingual data available to drawCrossLingual
-    (window as any).__crossLingual = crossLingual;
 
     // Use manifest as the single pairs source
     const pairs = { categories: manifest.categories, pairs: manifest.pairs };
@@ -1581,7 +1586,6 @@ function formatNum(n: number) {
       setTimeout(() => {
         drawPairSourceChart();
         drawMediaOrigin();
-        drawCrossLingual();
         drawWorldMap();
         drawHoldoutTable();
       }, 50);
@@ -1821,91 +1825,6 @@ function formatNum(n: number) {
         }
         container.appendChild(card);
       }
-    }
-
-    function drawCrossLingual() {
-      const container = document.getElementById('cross-lingual-container');
-      const chartEl = document.getElementById('cross-lingual-chart');
-      if (!container || !chartEl) return;
-
-      const cl = (window as any).__crossLingual;
-      if (!cl) return;
-
-      const pid = String(activePairId);
-      const gdeltData = cl.gdelt?.[pid];
-      const trendsData = cl.trends?.[pid];
-
-      const compRow = document.getElementById('comparison-row');
-      if (!gdeltData && !trendsData) {
-        container.style.display = 'none';
-        if (compRow) compRow.style.gridTemplateColumns = '1fr';
-        return;
-      }
-
-      container.style.display = 'block';
-      if (compRow) compRow.style.gridTemplateColumns = '1fr 1fr';
-      chartEl.innerHTML = '';
-
-      // Merge GDELT + Trends data
-      const langs = ['us', 'gb', 'fr', 'de', 'es', 'it', 'pl'];
-      const langNames: Record<string, string> = {
-        us: 'English (.com)', gb: 'English (.co.uk)', fr: 'French (.fr)', de: 'German (.de)',
-        es: 'Spanish (.es)', it: 'Italian (.it)', pl: 'Polish (.pl)',
-      };
-
-      const items = langs.map(geo => ({
-        geo,
-        name: langNames[geo],
-        gdelt: gdeltData?.[geo === 'us' ? 'com' : geo] ?? null,
-      })).filter(d => d.gdelt !== null);
-
-      if (items.length === 0) {
-        container.style.display = 'none';
-        return;
-      }
-
-      const margin = { top: 20, right: 20, bottom: 10, left: 120 };
-      const width = chartEl.getBoundingClientRect().width - margin.left - margin.right;
-      const rowH = 32;
-      const height = items.length * rowH;
-
-      const svg = d3.select('#cross-lingual-chart')
-        .append('svg')
-        .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
-        .append('g')
-        .attr('transform', `translate(${margin.left},${margin.top})`);
-
-      const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
-      const y = d3.scaleBand().domain(items.map(d => d.geo)).range([0, height]).padding(0.3);
-
-      // 50% line
-      svg.append('line').attr('x1', x(50)).attr('x2', x(50)).attr('y1', 0).attr('y2', height)
-        .attr('stroke', '#e5e7eb').attr('stroke-dasharray', '3,3');
-
-      // Header
-      svg.append('text').attr('x', x(0)).attr('y', -6).text('0%').attr('font-size', '10px').attr('fill', '#9ca3af');
-      svg.append('text').attr('x', x(100)).attr('y', -6).text('100%').attr('font-size', '10px').attr('fill', '#9ca3af').attr('text-anchor', 'end');
-
-      items.forEach(item => {
-        const yi = y(item.geo)!;
-        const h = y.bandwidth();
-
-        // Country label
-        svg.append('text').attr('x', -8).attr('y', yi + h/2 + 4)
-          .attr('text-anchor', 'end').attr('font-size', '12px').attr('fill', 'var(--text)')
-          .text(item.name);
-
-        // GDELT bar only
-        if (item.gdelt !== null) {
-          svg.append('rect')
-            .attr('x', x(0)).attr('y', yi + h * 0.15)
-            .attr('width', Math.max(2, x(item.gdelt))).attr('height', h * 0.7)
-            .attr('fill', '#1e3a5f').attr('rx', 3).attr('opacity', 0.85);
-          svg.append('text').attr('x', x(item.gdelt) + 6).attr('y', yi + h/2 + 4)
-            .attr('font-size', '11px').attr('fill', '#1e3a5f').attr('font-weight', '600')
-            .text(item.gdelt.toFixed(0) + '%');
-        }
-      });
     }
 
     document.querySelectorAll('.sidebar-item').forEach(item => {

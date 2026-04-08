@@ -211,16 +211,11 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Source Comparison + Cross-Lingual -->
+      <!-- Source Comparison -->
       <div id="comparison-row" style="display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:1rem;">
         <div class="chart-container" style="margin-bottom:0;">
           <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Порівняння джерел</div>
           <div id="pair-source-chart" style="width:100%;"></div>
-        </div>
-        <div class="chart-container" id="cross-lingual-container" style="display:none; margin-bottom:0;">
-        <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Міжмовна адопція</div>
-        <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Прийняття українського правопису за мовами (TLD домену GDELT)</div>
-        <div id="cross-lingual-chart" style="width:100%;"></div>
         </div>
       </div>
 
@@ -511,15 +506,11 @@ function formatNum(n: number) {
     import pairEvents from '../../data/pair_events.json';
     import trendsCountries from '../../data/trends_countries.json';
     import errorAnalysis from '../../data/error_analysis.json';
-    import crossLingual from '../../data/cross_lingual.json';
     import dictCombined from '../../data/dictionary_combined.json';
     import enforcementData from '../../data/enforcement.json';
     import searchAudit from '../../data/search_audit.json';
     import domainOrigins from '../../data/domain_origins.json';
     import clCollocations from '../../data/cl_collocations.json';
-
-    // Make cross-lingual data available to drawCrossLingual
-    (window as any).__crossLingual = crossLingual;
 
     // Use manifest as the single pairs source
     const pairs = { categories: manifest.categories, pairs: manifest.pairs };
@@ -1046,7 +1037,6 @@ function formatNum(n: number) {
       drawAdoptionCalc();
       drawPairSourceChart();
       drawMediaOrigin();
-      drawCrossLingual();
       drawWorldMap();
       drawHoldoutTable();
       drawSearchPreview();
@@ -1287,91 +1277,6 @@ function formatNum(n: number) {
         }
         container.appendChild(card);
       }
-    }
-
-    function drawCrossLingual() {
-      const container = document.getElementById('cross-lingual-container');
-      const chartEl = document.getElementById('cross-lingual-chart');
-      if (!container || !chartEl) return;
-
-      const cl = (window as any).__crossLingual;
-      if (!cl) return;
-
-      const pid = String(activePairId);
-      const gdeltData = cl.gdelt?.[pid];
-      const trendsData = cl.trends?.[pid];
-
-      const compRow = document.getElementById('comparison-row');
-      if (!gdeltData && !trendsData) {
-        container.style.display = 'none';
-        if (compRow) compRow.style.gridTemplateColumns = '1fr';
-        return;
-      }
-
-      container.style.display = 'block';
-      if (compRow) compRow.style.gridTemplateColumns = '1fr 1fr';
-      chartEl.innerHTML = '';
-
-      // Merge GDELT + Trends data
-      const langs = ['us', 'gb', 'fr', 'de', 'es', 'it', 'pl'];
-      const langNames: Record<string, string> = {
-        us: 'Англійська (.com)', gb: 'Англійська (.co.uk)', fr: 'Французька (.fr)', de: 'Німецька (.de)',
-        es: 'Іспанська (.es)', it: 'Італійська (.it)', pl: 'Польська (.pl)',
-      };
-
-      const items = langs.map(geo => ({
-        geo,
-        name: langNames[geo],
-        gdelt: gdeltData?.[geo === 'us' ? 'com' : geo] ?? null,
-      })).filter(d => d.gdelt !== null);
-
-      if (items.length === 0) {
-        container.style.display = 'none';
-        return;
-      }
-
-      const margin = { top: 20, right: 20, bottom: 10, left: 120 };
-      const width = chartEl.getBoundingClientRect().width - margin.left - margin.right;
-      const rowH = 32;
-      const height = items.length * rowH;
-
-      const svg = d3.select('#cross-lingual-chart')
-        .append('svg')
-        .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
-        .append('g')
-        .attr('transform', `translate(${margin.left},${margin.top})`);
-
-      const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
-      const y = d3.scaleBand().domain(items.map(d => d.geo)).range([0, height]).padding(0.3);
-
-      // 50% line
-      svg.append('line').attr('x1', x(50)).attr('x2', x(50)).attr('y1', 0).attr('y2', height)
-        .attr('stroke', '#e5e7eb').attr('stroke-dasharray', '3,3');
-
-      // Header
-      svg.append('text').attr('x', x(0)).attr('y', -6).text('0%').attr('font-size', '10px').attr('fill', '#9ca3af');
-      svg.append('text').attr('x', x(100)).attr('y', -6).text('100%').attr('font-size', '10px').attr('fill', '#9ca3af').attr('text-anchor', 'end');
-
-      items.forEach(item => {
-        const yi = y(item.geo)!;
-        const h = y.bandwidth();
-
-        // Country label
-        svg.append('text').attr('x', -8).attr('y', yi + h/2 + 4)
-          .attr('text-anchor', 'end').attr('font-size', '12px').attr('fill', 'var(--text)')
-          .text(item.name);
-
-        // GDELT bar only
-        if (item.gdelt !== null) {
-          svg.append('rect')
-            .attr('x', x(0)).attr('y', yi + h * 0.15)
-            .attr('width', Math.max(2, x(item.gdelt))).attr('height', h * 0.7)
-            .attr('fill', '#1e3a5f').attr('rx', 3).attr('opacity', 0.85);
-          svg.append('text').attr('x', x(item.gdelt) + 6).attr('y', yi + h/2 + 4)
-            .attr('font-size', '11px').attr('fill', '#1e3a5f').attr('font-weight', '600')
-            .text(item.gdelt.toFixed(0) + '%');
-        }
-      });
     }
 
     document.querySelectorAll('.sidebar-item').forEach(item => {
