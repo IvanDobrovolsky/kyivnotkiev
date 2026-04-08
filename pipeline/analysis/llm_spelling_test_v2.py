@@ -263,19 +263,72 @@ def query_ollama(prompt, model):
 # ── Model registry (best of family + Claude) ──
 
 MODELS = {
-    # Best of each family that fits on a single 96 GB GPU box
-    "llama4-scout":    {"provider": "ollama",    "model": "llama4:scout",      "tier": "frontier", "family": "Meta Llama"},
-    "qwen3-32b":       {"provider": "ollama",    "model": "qwen3:32b",         "tier": "frontier", "family": "Alibaba Qwen"},
-    "gemma4-31b":      {"provider": "ollama",    "model": "gemma4:31b",        "tier": "frontier", "family": "Google Gemma"},
-    "mistral-large":   {"provider": "ollama",    "model": "mistral-large:123b","tier": "frontier", "family": "Mistral"},
-    # DeepSeek skipped: real V3/V2.5 don't fit on this box's 137 GB disk;
-    # the deepseek-r1:70b "distill" is just Llama 3.3 70B fine-tuned.
+    # ── Anthropic Claude (latest 3 only) ──
+    # Anthropic only exposes ~9 months of Claude snapshots via API and earlier
+    # versions are deprecated, so a Claude time-series isn't useful for the
+    # version-archaeology angle. Keep just the current Opus/Sonnet/Haiku as
+    # representative frontier-API data points.
+    "claude-opus-4-6":   {"provider": "anthropic", "model": "claude-opus-4-6",          "tier": "frontier", "family": "Anthropic Claude", "release_date": "2026-02"},
+    "claude-sonnet-4-6": {"provider": "anthropic", "model": "claude-sonnet-4-6",        "tier": "frontier", "family": "Anthropic Claude", "release_date": "2026-02"},
+    "claude-haiku-4-5":  {"provider": "anthropic", "model": "claude-haiku-4-5-20251001","tier": "small",    "family": "Anthropic Claude", "release_date": "2025-10"},
 
-    # Anthropic Claude 4.x family (API)
-    "claude-opus-4-6":   {"provider": "anthropic", "model": "claude-opus-4-6",          "tier": "frontier", "family": "Anthropic Claude"},
-    "claude-sonnet-4-6": {"provider": "anthropic", "model": "claude-sonnet-4-6",        "tier": "frontier", "family": "Anthropic Claude"},
-    "claude-haiku-4-5":  {"provider": "anthropic", "model": "claude-haiku-4-5-20251001","tier": "small",    "family": "Anthropic Claude"},
+    # ── Open-weight version archaeology (run on GPU box) ──
+    # Each family is sampled across multiple historical releases so we can
+    # plot per-family Kyiv-adoption trajectories vs release date. The 2022
+    # Kiev→Kyiv inflection in the human web corpora should propagate into
+    # successive LLM versions with a ~1-year lag if our hypothesis holds.
+
+    # Meta Llama: 2.5 years across the 2022 inflection
+    "llama2-7b":       {"provider": "ollama", "model": "llama2:7b",         "tier": "small",    "family": "Meta Llama", "release_date": "2023-07"},
+    "llama2-13b":      {"provider": "ollama", "model": "llama2:13b",        "tier": "mid",      "family": "Meta Llama", "release_date": "2023-07"},
+    "llama2-70b":      {"provider": "ollama", "model": "llama2:70b",        "tier": "large",    "family": "Meta Llama", "release_date": "2023-07"},
+    "llama3-8b":       {"provider": "ollama", "model": "llama3:8b",         "tier": "small",    "family": "Meta Llama", "release_date": "2024-04"},
+    "llama3-70b":      {"provider": "ollama", "model": "llama3:70b",        "tier": "large",    "family": "Meta Llama", "release_date": "2024-04"},
+    "llama3.1-8b":     {"provider": "ollama", "model": "llama3.1:8b",       "tier": "small",    "family": "Meta Llama", "release_date": "2024-07"},
+    "llama3.1-70b":    {"provider": "ollama", "model": "llama3.1:70b",      "tier": "large",    "family": "Meta Llama", "release_date": "2024-07"},
+    "llama3.2-1b":     {"provider": "ollama", "model": "llama3.2:1b",       "tier": "tiny",     "family": "Meta Llama", "release_date": "2024-09"},
+    "llama3.2-3b":     {"provider": "ollama", "model": "llama3.2:3b",       "tier": "small",    "family": "Meta Llama", "release_date": "2024-09"},
+    "llama3.3-70b":    {"provider": "ollama", "model": "llama3.3:70b",      "tier": "large",    "family": "Meta Llama", "release_date": "2024-12"},
+    "llama4-scout":    {"provider": "ollama", "model": "llama4:scout",      "tier": "frontier", "family": "Meta Llama", "release_date": "2025-04"},
+
+    # Google Gemma: 2 years
+    "gemma-7b":        {"provider": "ollama", "model": "gemma:7b",          "tier": "small",    "family": "Google Gemma", "release_date": "2024-02"},
+    "gemma2-2b":       {"provider": "ollama", "model": "gemma2:2b",         "tier": "tiny",     "family": "Google Gemma", "release_date": "2024-06"},
+    "gemma2-9b":       {"provider": "ollama", "model": "gemma2:9b",         "tier": "small",    "family": "Google Gemma", "release_date": "2024-06"},
+    "gemma2-27b":      {"provider": "ollama", "model": "gemma2:27b",        "tier": "mid",      "family": "Google Gemma", "release_date": "2024-06"},
+    "gemma3-1b":       {"provider": "ollama", "model": "gemma3:1b",         "tier": "tiny",     "family": "Google Gemma", "release_date": "2025-03"},
+    "gemma3-4b":       {"provider": "ollama", "model": "gemma3:4b",         "tier": "small",    "family": "Google Gemma", "release_date": "2025-03"},
+    "gemma3-12b":      {"provider": "ollama", "model": "gemma3:12b",        "tier": "mid",      "family": "Google Gemma", "release_date": "2025-03"},
+    "gemma3-27b":      {"provider": "ollama", "model": "gemma3:27b",        "tier": "mid",      "family": "Google Gemma", "release_date": "2025-03"},
+    "gemma4-31b":      {"provider": "ollama", "model": "gemma4:31b",        "tier": "frontier", "family": "Google Gemma", "release_date": "2026-04"},
+
+    # Alibaba Qwen: 1.5 years
+    "qwen2-7b":        {"provider": "ollama", "model": "qwen2:7b",          "tier": "small",    "family": "Alibaba Qwen", "release_date": "2024-06"},
+    "qwen2-72b":       {"provider": "ollama", "model": "qwen2:72b",         "tier": "large",    "family": "Alibaba Qwen", "release_date": "2024-06"},
+    "qwen2.5-3b":      {"provider": "ollama", "model": "qwen2.5:3b",        "tier": "small",    "family": "Alibaba Qwen", "release_date": "2024-09"},
+    "qwen2.5-7b":      {"provider": "ollama", "model": "qwen2.5:7b",        "tier": "small",    "family": "Alibaba Qwen", "release_date": "2024-09"},
+    "qwen2.5-14b":     {"provider": "ollama", "model": "qwen2.5:14b",       "tier": "mid",      "family": "Alibaba Qwen", "release_date": "2024-09"},
+    "qwen2.5-32b":     {"provider": "ollama", "model": "qwen2.5:32b",       "tier": "mid",      "family": "Alibaba Qwen", "release_date": "2024-09"},
+    "qwen2.5-72b":     {"provider": "ollama", "model": "qwen2.5:72b",       "tier": "large",    "family": "Alibaba Qwen", "release_date": "2024-09"},
+    "qwen3-32b":       {"provider": "ollama", "model": "qwen3:32b",         "tier": "frontier", "family": "Alibaba Qwen", "release_date": "2025-04"},
+
+    # Mistral: 2 years
+    "mistral-7b-v0.1": {"provider": "ollama", "model": "mistral:7b-instruct-v0.1","tier":"small","family": "Mistral", "release_date": "2023-09"},
+    "mistral-7b-v0.2": {"provider": "ollama", "model": "mistral:7b-instruct-v0.2","tier":"small","family": "Mistral", "release_date": "2024-03"},
+    "mistral-7b-v0.3": {"provider": "ollama", "model": "mistral:7b-instruct-v0.3","tier":"small","family": "Mistral", "release_date": "2024-05"},
+    "mixtral-8x7b":    {"provider": "ollama", "model": "mixtral:8x7b",          "tier": "mid",  "family": "Mistral", "release_date": "2023-12"},
+    "mistral-small-22b": {"provider": "ollama","model": "mistral-small:22b",    "tier": "mid",  "family": "Mistral", "release_date": "2024-09"},
+    "mistral-small-24b": {"provider": "ollama","model": "mistral-small:24b",    "tier": "mid",  "family": "Mistral", "release_date": "2025-01"},
+    "mistral-large":   {"provider": "ollama", "model": "mistral-large:123b",     "tier": "frontier","family":"Mistral", "release_date": "2024-11"},
 }
+
+# Subset shortcuts
+CLAUDE_API = [k for k, v in MODELS.items() if v["family"] == "Anthropic Claude"]
+LLAMA = [k for k, v in MODELS.items() if v["family"] == "Meta Llama"]
+GEMMA = [k for k, v in MODELS.items() if v["family"] == "Google Gemma"]
+QWEN = [k for k, v in MODELS.items() if v["family"] == "Alibaba Qwen"]
+MISTRAL = [k for k, v in MODELS.items() if v["family"] == "Mistral"]
+OPEN_WEIGHT = LLAMA + GEMMA + QWEN + MISTRAL
 
 BEST_OF_FAMILY = list(MODELS.keys())
 
