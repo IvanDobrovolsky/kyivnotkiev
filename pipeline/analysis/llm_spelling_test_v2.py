@@ -237,6 +237,82 @@ def query_anthropic(prompt, model):
         return None
 
 
+_openai_client = None
+_openai_model_uses_completion_tokens: dict[str, bool] = {}
+def query_openai(prompt, model):
+    """Query an OpenAI model. Reads OPENAI_API_KEY from env.
+
+    Newer reasoning + gpt-5.x models require `max_completion_tokens`
+    while older models still take `max_tokens`. We try `max_tokens`
+    first and switch to `max_completion_tokens` on the unsupported-
+    parameter error, then cache the choice per model.
+    """
+    global _openai_client
+    if _openai_client is None:
+        from openai import OpenAI
+        api_key = _env("OPENAI_API_KEY")
+        if not api_key:
+            log.warning(f"OpenAI {model}: no OPENAI_API_KEY in env")
+            return None
+        _openai_client = OpenAI(api_key=api_key)
+
+    use_completion_tokens = _openai_model_uses_completion_tokens.get(model, False)
+
+    def _call(use_new):
+        kwargs = {
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+        }
+        # Reasoning models also reject `temperature`; only set it for older models
+        if not use_new:
+            kwargs["max_tokens"] = 80
+            kwargs["temperature"] = 0
+        else:
+            kwargs["max_completion_tokens"] = 800  # reasoning models need more tokens for hidden reasoning
+        return _openai_client.chat.completions.create(**kwargs)
+
+    try:
+        msg = _call(use_completion_tokens)
+    except Exception as e:
+        # Detect the param mismatch and retry once
+        err = str(e)
+        if not use_completion_tokens and "max_completion_tokens" in err:
+            _openai_model_uses_completion_tokens[model] = True
+            try:
+                msg = _call(True)
+            except Exception as e2:
+                log.warning(f"OpenAI {model}: {e2}")
+                return None
+        else:
+            log.warning(f"OpenAI {model}: {e}")
+            return None
+    return (msg.choices[0].message.content or "").strip()
+
+
+_xai_client = None
+def query_xai(prompt, model):
+    """Query an xAI Grok model via the OpenAI-compatible API."""
+    global _xai_client
+    if _xai_client is None:
+        from openai import OpenAI
+        api_key = _env("XAI_API_KEY") or _env("GROK_API_KEY")
+        if not api_key:
+            log.warning(f"xAI {model}: no XAI_API_KEY in env")
+            return None
+        _xai_client = OpenAI(api_key=api_key, base_url="https://api.x.ai/v1")
+    try:
+        msg = _xai_client.chat.completions.create(
+            model=model,
+            max_tokens=80,
+            temperature=0,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        return (msg.choices[0].message.content or "").strip()
+    except Exception as e:
+        log.warning(f"xAI {model}: {e}")
+        return None
+
+
 _gemini_client = None
 def query_gemini(prompt, model):
     """Query a Google Gemini or Gemma model via the Gemini API.
@@ -290,6 +366,42 @@ def query_ollama(prompt, model):
 # ── Model registry (best of family + Claude) ──
 
 MODELS = {
+    # ── OpenAI (dated text snapshots, ~2 years of evolution) ──
+    # OpenAI keeps explicit dated snapshots much longer than Anthropic and
+    # Google, so this is the best lab time-series we have. Older gpt-4-*
+    # snapshots (0314/0613/turbo/etc.) have been deprecated, so the
+    # accessible window starts at gpt-4o-mini Jul 2024.
+    "gpt-4o-mini-2024-07":  {"provider": "openai", "model": "gpt-4o-mini-2024-07-18",   "tier": "small",    "family": "OpenAI GPT", "release_date": "2024-07"},
+    "o1-2024-12":           {"provider": "openai", "model": "o1-2024-12-17",            "tier": "frontier", "family": "OpenAI GPT", "release_date": "2024-12"},
+    "o3-mini-2025-01":      {"provider": "openai", "model": "o3-mini-2025-01-31",       "tier": "small",    "family": "OpenAI GPT", "release_date": "2025-01"},
+    "o3-2025-04":           {"provider": "openai", "model": "o3-2025-04-16",            "tier": "frontier", "family": "OpenAI GPT", "release_date": "2025-04"},
+    "o4-mini-2025-04":      {"provider": "openai", "model": "o4-mini-2025-04-16",       "tier": "small",    "family": "OpenAI GPT", "release_date": "2025-04"},
+    "gpt-5-2025-08":        {"provider": "openai", "model": "gpt-5-2025-08-07",         "tier": "frontier", "family": "OpenAI GPT", "release_date": "2025-08"},
+    "gpt-5-mini-2025-08":   {"provider": "openai", "model": "gpt-5-mini-2025-08-07",    "tier": "small",    "family": "OpenAI GPT", "release_date": "2025-08"},
+    "gpt-5-nano-2025-08":   {"provider": "openai", "model": "gpt-5-nano-2025-08-07",    "tier": "tiny",     "family": "OpenAI GPT", "release_date": "2025-08"},
+    "gpt-5-pro-2025-10":    {"provider": "openai", "model": "gpt-5-pro-2025-10-06",     "tier": "frontier", "family": "OpenAI GPT", "release_date": "2025-10"},
+    "gpt-5.1-2025-11":      {"provider": "openai", "model": "gpt-5.1-2025-11-13",       "tier": "frontier", "family": "OpenAI GPT", "release_date": "2025-11"},
+    "gpt-5.2-2025-12":      {"provider": "openai", "model": "gpt-5.2-2025-12-11",       "tier": "frontier", "family": "OpenAI GPT", "release_date": "2025-12"},
+    "gpt-5.2-pro-2025-12":  {"provider": "openai", "model": "gpt-5.2-pro-2025-12-11",   "tier": "frontier", "family": "OpenAI GPT", "release_date": "2025-12"},
+    "gpt-5.4-2026-03":      {"provider": "openai", "model": "gpt-5.4-2026-03-05",       "tier": "frontier", "family": "OpenAI GPT", "release_date": "2026-03"},
+    "gpt-5.4-mini-2026-03": {"provider": "openai", "model": "gpt-5.4-mini-2026-03-17",  "tier": "small",    "family": "OpenAI GPT", "release_date": "2026-03"},
+    "gpt-5.4-nano-2026-03": {"provider": "openai", "model": "gpt-5.4-nano-2026-03-17",  "tier": "tiny",     "family": "OpenAI GPT", "release_date": "2026-03"},
+    "gpt-5.4-pro-2026-03":  {"provider": "openai", "model": "gpt-5.4-pro-2026-03-05",   "tier": "frontier", "family": "OpenAI GPT", "release_date": "2026-03"},
+
+    # ── xAI Grok ──
+    # x.ai exposes Grok 3 → 4.20. Each tier has reasoning + non-reasoning
+    # variants; we test both because the reasoning-mode "alignment correction
+    # layer" may differ from the base model.
+    "grok-3":                       {"provider": "xai", "model": "grok-3",                       "tier": "frontier", "family": "xAI Grok", "release_date": "2025-02"},
+    "grok-3-mini":                  {"provider": "xai", "model": "grok-3-mini",                  "tier": "small",    "family": "xAI Grok", "release_date": "2025-02"},
+    "grok-4-0709":                  {"provider": "xai", "model": "grok-4-0709",                  "tier": "frontier", "family": "xAI Grok", "release_date": "2025-07"},
+    "grok-4-fast-non-reasoning":    {"provider": "xai", "model": "grok-4-fast-non-reasoning",    "tier": "frontier", "family": "xAI Grok", "release_date": "2025-09"},
+    "grok-4-fast-reasoning":        {"provider": "xai", "model": "grok-4-fast-reasoning",        "tier": "frontier", "family": "xAI Grok", "release_date": "2025-09"},
+    "grok-4-1-fast-non-reasoning":  {"provider": "xai", "model": "grok-4-1-fast-non-reasoning",  "tier": "frontier", "family": "xAI Grok", "release_date": "2025-12"},
+    "grok-4-1-fast-reasoning":      {"provider": "xai", "model": "grok-4-1-fast-reasoning",      "tier": "frontier", "family": "xAI Grok", "release_date": "2025-12"},
+    "grok-4.20-0309-non-reasoning": {"provider": "xai", "model": "grok-4.20-0309-non-reasoning", "tier": "frontier", "family": "xAI Grok", "release_date": "2026-03"},
+    "grok-4.20-0309-reasoning":     {"provider": "xai", "model": "grok-4.20-0309-reasoning",     "tier": "frontier", "family": "xAI Grok", "release_date": "2026-03"},
+
     # ── Anthropic Claude (latest 3 only) ──
     # Anthropic only exposes ~9 months of Claude snapshots via API and earlier
     # versions are deprecated, so a Claude time-series isn't useful for the
@@ -380,12 +492,14 @@ MODELS = {
 CLAUDE_API = [k for k, v in MODELS.items() if v["family"] == "Anthropic Claude"]
 GEMINI_API = [k for k, v in MODELS.items() if v["family"] == "Google Gemini"]
 GEMMA_API  = [k for k, v in MODELS.items() if v["family"] == "Google Gemma" and v["provider"] == "gemini"]
+OPENAI_API = [k for k, v in MODELS.items() if v["family"] == "OpenAI GPT"]
+GROK_API   = [k for k, v in MODELS.items() if v["family"] == "xAI Grok"]
 LLAMA   = [k for k, v in MODELS.items() if v["family"] == "Meta Llama"]
 GEMMA   = [k for k, v in MODELS.items() if v["family"] == "Google Gemma" and v["provider"] == "ollama"]
 QWEN    = [k for k, v in MODELS.items() if v["family"] == "Alibaba Qwen"]
 MISTRAL = [k for k, v in MODELS.items() if v["family"] == "Mistral"]
 OPEN_WEIGHT = LLAMA + GEMMA + QWEN + MISTRAL
-HOSTED_HISTORICAL = CLAUDE_API + GEMINI_API + GEMMA_API
+HOSTED_HISTORICAL = CLAUDE_API + GEMINI_API + GEMMA_API + OPENAI_API + GROK_API
 
 BEST_OF_FAMILY = list(MODELS.keys())
 
@@ -401,6 +515,10 @@ def query_model(model_key, prompt):
         return query_anthropic(prompt, info["model"])
     if info["provider"] == "gemini":
         return query_gemini(prompt, info["model"])
+    if info["provider"] == "openai":
+        return query_openai(prompt, info["model"])
+    if info["provider"] == "xai":
+        return query_xai(prompt, info["model"])
     return None
 
 
@@ -646,9 +764,9 @@ def run(model_keys, force=False):
         cp = _summarize(cp)
         _save_checkpoint(cp)
         s = cp["summary"]
-        log.info(f"    TAS={s['tas_mean']}%  open={s['ua_pct_open']}%  "
-                 f"forced(ru1st)={s['ua_pct_forced_ru_first']}%  forced(ua1st)={s['ua_pct_forced_ua_first']}%  "
-                 f"pos_bias={s['position_bias']}%  CI={s['ci_mean']}  other={s['other_rate']}%")
+        log.info(f"    TAS={s.get('tas_mean')}%  open={s.get('ua_pct_open')}%  "
+                 f"forced(ru1st)={s.get('ua_pct_forced_ru_first')}%  forced(ua1st)={s.get('ua_pct_forced_ua_first')}%  "
+                 f"pos_bias={s.get('position_bias')}%  CI={s.get('ci_mean')}  other={s.get('other_rate')}%")
 
     write_aggregate()
 
@@ -670,14 +788,28 @@ def write_aggregate(w1=DEFAULT_W1, w2=DEFAULT_W2):
         json.dump(all_results, f, indent=2)
     log.info(f"\nSaved: {out_path}  ({len(all_results)} models, weights w1={w1}, w2={w2})")
 
-    log.info(f"\n{'Model':18s} {'Family':18s} {'TAS':>6} {'open':>6} {'forced':>8} {'pos_b':>7} {'CI':>5} {'other':>7}")
-    log.info("-" * 90)
-    for r in sorted(all_results, key=lambda x: x["summary"]["tas_mean"] or 0):
+    log.info(f"\n{'Model':22s} {'Family':18s} {'TAS':>6} {'open':>6} {'forced':>8} {'pos_b':>7} {'CI':>5} {'other':>7}")
+    log.info("-" * 95)
+
+    def _fmt(v, suffix="", w=5, prec=1):
+        if v is None:
+            return f"{'—':>{w}s}{suffix}"
+        return f"{v:>{w}.{prec}f}{suffix}"
+
+    for r in sorted(all_results, key=lambda x: (x["summary"].get("tas_mean") or -1)):
         s = r["summary"]
-        forced = f"{((s['ua_pct_forced_ru_first'] or 0) + (s['ua_pct_forced_ua_first'] or 0))/2:.1f}"
-        log.info(f"{r['model']:18s} {r.get('family',''):18s} "
-                 f"{s['tas_mean']:>5.1f}% {s['ua_pct_open']:>5.1f}% {forced:>7}% "
-                 f"{s['position_bias']:>6.1f}% {s['ci_mean']:>5.3f} {s['other_rate']:>6.1f}%")
+        forced_avg = None
+        if s.get("ua_pct_forced_ru_first") is not None and s.get("ua_pct_forced_ua_first") is not None:
+            forced_avg = (s["ua_pct_forced_ru_first"] + s["ua_pct_forced_ua_first"]) / 2
+        log.info(
+            f"{r['model']:22s} {r.get('family',''):18s} "
+            f"{_fmt(s.get('tas_mean'), '%')} "
+            f"{_fmt(s.get('ua_pct_open'), '%')} "
+            f"{_fmt(forced_avg, '%', w=7)} "
+            f"{_fmt(s.get('position_bias'), '%', w=6)} "
+            f"{_fmt(s.get('ci_mean'), '', w=5, prec=3)} "
+            f"{_fmt(s.get('other_rate'), '%')}"
+        )
 
     site_data = [{
         "model": r["model"], "family": r.get("family", ""),
