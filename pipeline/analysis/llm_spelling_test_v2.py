@@ -36,6 +36,7 @@ import argparse
 import json
 import logging
 import os
+import re
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -320,6 +321,10 @@ def query_gemini(prompt, model):
     Reads GEMINI_API_KEY (or GOOGLE_API_KEY) from env. The new
     `google.genai` package handles both Gemini and the hosted Gemma
     versions through the same endpoint.
+
+    Gemma models hosted on the Gemini API are rate-limited to 30
+    req/min — when we hit the limit (429 RESOURCE_EXHAUSTED), wait
+    out the retry delay specified in the error response and try again.
     """
     global _gemini_client
     if _gemini_client is None:
@@ -329,15 +334,28 @@ def query_gemini(prompt, model):
             log.warning(f"Gemini {model}: no GEMINI_API_KEY in env")
             return None
         _gemini_client = genai.Client(api_key=api_key)
-    try:
-        resp = _gemini_client.models.generate_content(
-            model=model,
-            contents=prompt,
-        )
-        return (resp.text or "").strip()
-    except Exception as e:
-        log.warning(f"Gemini {model}: {e}")
-        return None
+
+    for attempt in range(3):
+        try:
+            resp = _gemini_client.models.generate_content(
+                model=model,
+                contents=prompt,
+            )
+            return (resp.text or "").strip()
+        except Exception as e:
+            err = str(e)
+            if "429" in err or "RESOURCE_EXHAUSTED" in err:
+                # Parse retry delay if present, default to 30s
+                m = re.search(r"retry in ([0-9.]+)s", err) or re.search(r"retryDelay':\s*'([0-9.]+)s", err)
+                wait = float(m.group(1)) if m else 30
+                wait = min(wait + 1, 65)  # cap at ~1 min
+                log.info(f"  Gemini {model}: 429 rate-limit, waiting {wait:.0f}s (attempt {attempt + 1}/3)")
+                time.sleep(wait)
+                continue
+            log.warning(f"Gemini {model}: {e}")
+            return None
+    log.warning(f"Gemini {model}: 3 retries exhausted")
+    return None
 
 
 def query_ollama(prompt, model):
@@ -379,14 +397,14 @@ MODELS = {
     "gpt-5-2025-08":        {"provider": "openai", "model": "gpt-5-2025-08-07",         "tier": "frontier", "family": "OpenAI GPT", "release_date": "2025-08"},
     "gpt-5-mini-2025-08":   {"provider": "openai", "model": "gpt-5-mini-2025-08-07",    "tier": "small",    "family": "OpenAI GPT", "release_date": "2025-08"},
     "gpt-5-nano-2025-08":   {"provider": "openai", "model": "gpt-5-nano-2025-08-07",    "tier": "tiny",     "family": "OpenAI GPT", "release_date": "2025-08"},
-    "gpt-5-pro-2025-10":    {"provider": "openai", "model": "gpt-5-pro-2025-10-06",     "tier": "frontier", "family": "OpenAI GPT", "release_date": "2025-10"},
+    # gpt-5-pro-2025-10: not a chat model, requires /v1/responses endpoint — skipped
     "gpt-5.1-2025-11":      {"provider": "openai", "model": "gpt-5.1-2025-11-13",       "tier": "frontier", "family": "OpenAI GPT", "release_date": "2025-11"},
     "gpt-5.2-2025-12":      {"provider": "openai", "model": "gpt-5.2-2025-12-11",       "tier": "frontier", "family": "OpenAI GPT", "release_date": "2025-12"},
-    "gpt-5.2-pro-2025-12":  {"provider": "openai", "model": "gpt-5.2-pro-2025-12-11",   "tier": "frontier", "family": "OpenAI GPT", "release_date": "2025-12"},
+    # gpt-5.2-pro-2025-12: not a chat model, requires /v1/responses endpoint — skipped
     "gpt-5.4-2026-03":      {"provider": "openai", "model": "gpt-5.4-2026-03-05",       "tier": "frontier", "family": "OpenAI GPT", "release_date": "2026-03"},
     "gpt-5.4-mini-2026-03": {"provider": "openai", "model": "gpt-5.4-mini-2026-03-17",  "tier": "small",    "family": "OpenAI GPT", "release_date": "2026-03"},
     "gpt-5.4-nano-2026-03": {"provider": "openai", "model": "gpt-5.4-nano-2026-03-17",  "tier": "tiny",     "family": "OpenAI GPT", "release_date": "2026-03"},
-    "gpt-5.4-pro-2026-03":  {"provider": "openai", "model": "gpt-5.4-pro-2026-03-05",   "tier": "frontier", "family": "OpenAI GPT", "release_date": "2026-03"},
+    # gpt-5.4-pro-2026-03: not a chat model, requires /v1/responses endpoint — skipped
 
     # ── xAI Grok ──
     # x.ai exposes Grok 3 → 4.20. Each tier has reasoning + non-reasoning

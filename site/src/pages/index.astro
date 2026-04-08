@@ -722,9 +722,9 @@ function formatNum(n: number) {
           {/* Custom Sankey-like flow chart */}
           {(() => {
             const prop = religiousProp;
-            const COL_W = 220;
-            const COL_GAP = 60;
-            const ROW_H = 56;
+            const COL_W = 260;
+            const COL_GAP = 50;
+            const ROW_H = 64;
             const ROW_GAP = 8;
             const tiers = prop.tiers;
             const maxRows = Math.max(1, ...tiers.map(t => t.nodes.length));
@@ -820,18 +820,18 @@ function formatNum(n: number) {
                       y={nodePos[prop.source.id].y + 22}
                       textAnchor="middle"
                       fill="white"
-                      fontSize="11"
+                      fontSize="10"
                       fontWeight="700"
                     >
                       {prop.source.label}
                     </text>
                     <text
                       x={nodePos[prop.source.id].x + nodePos[prop.source.id].w / 2}
-                      y={nodePos[prop.source.id].y + 38}
+                      y={nodePos[prop.source.id].y + 36}
                       textAnchor="middle"
                       fill="white"
                       fillOpacity="0.85"
-                      fontSize="9"
+                      fontSize="8"
                     >
                       DECR · 6,000+ English articles
                     </text>
@@ -841,7 +841,7 @@ function formatNum(n: number) {
                       textAnchor="middle"
                       fill="white"
                       fillOpacity="0.7"
-                      fontSize="9"
+                      fontSize="8"
                     >
                       since 2015
                     </text>
@@ -864,13 +864,13 @@ function formatNum(n: number) {
                               fill={fill}
                               fillOpacity="0.92"
                             />
-                            <text x={p.x + 10} y={p.y + 18} fill="white" fontSize="11" fontWeight="700">
+                            <text x={p.x + 10} y={p.y + 18} fill="white" fontSize="10" fontWeight="700">
                               {n.label}
                             </text>
-                            <text x={p.x + 10} y={p.y + 32} fill="white" fillOpacity="0.85" fontSize="9">
+                            <text x={p.x + 10} y={p.y + 34} fill="white" fillOpacity="0.85" fontSize="8">
                               {n.metric}
                             </text>
-                            <text x={p.x + 10} y={p.y + 46} fill="white" fillOpacity="0.7" fontSize="9">
+                            <text x={p.x + 10} y={p.y + 50} fill="white" fillOpacity="0.7" fontSize="8">
                               {n.since}
                             </text>
                           </g>
@@ -883,7 +883,7 @@ function formatNum(n: number) {
                   {tiers.map((tier, ti) => {
                     const x = sourceX + (COL_W + COL_GAP) * (ti + 1);
                     return (
-                      <text x={x + COL_W / 2} y={14} textAnchor="middle" fontSize="10" fontWeight="700" fill={tierColors[tier.id]}>
+                      <text x={x + COL_W / 2} y={14} textAnchor="middle" fontSize="9" fontWeight="700" fill={tierColors[tier.id]}>
                         {tier.title.split('·')[0].trim()} · {tier.title.split('·')[1].trim()}
                       </text>
                     );
