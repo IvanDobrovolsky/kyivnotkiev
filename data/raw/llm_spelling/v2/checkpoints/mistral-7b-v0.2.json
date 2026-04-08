@@ -1,0 +1,40 @@
+{
+  "model": "mistral-7b-v0.2",
+  "tier": "small",
+  "family": "Mistral",
+  "provider": "ollama",
+  "full_model": "mistral:7b-instruct-v0.2",
+  "pairs": [
+    {
+      "pair_id": 1,
+      "russian": "Kiev",
+      "ukrainian": "Kyiv",
+      "category": "geographical",
+      "trials": []
+    },
+    {
+      "pair_id": 2,
+      "russian": "Kharkov",
+      "ukrainian": "Kharkiv",
+      "category": "geographical",
+      "trials": []
+    }
+  ],
+  "timestamp": "2026-04-08T08:51:12.484464+00:00",
+  "summary": {
+    "weights": {
+      "w1_forced": 0.4,
+      "w2_open": 0.6
+    },
+    "n_pairs": 2,
+    "n_pairs_complete": 0,
+    "tas_mean": null,
+    "ci_mean": null,
+    "ua_pct_forced_ru_first": null,
+    "ua_pct_forced_ua_first": null,
+    "ua_pct_open": null,
+    "position_bias": null,
+    "other_total": 6,
+    "other_rate": 100.0
+  }
+}
