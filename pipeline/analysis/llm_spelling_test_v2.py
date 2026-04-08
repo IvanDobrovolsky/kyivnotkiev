@@ -237,6 +237,33 @@ def query_anthropic(prompt, model):
         return None
 
 
+_gemini_client = None
+def query_gemini(prompt, model):
+    """Query a Google Gemini or Gemma model via the Gemini API.
+
+    Reads GEMINI_API_KEY (or GOOGLE_API_KEY) from env. The new
+    `google.genai` package handles both Gemini and the hosted Gemma
+    versions through the same endpoint.
+    """
+    global _gemini_client
+    if _gemini_client is None:
+        from google import genai
+        api_key = _env("GEMINI_API_KEY") or _env("GOOGLE_API_KEY")
+        if not api_key:
+            log.warning(f"Gemini {model}: no GEMINI_API_KEY in env")
+            return None
+        _gemini_client = genai.Client(api_key=api_key)
+    try:
+        resp = _gemini_client.models.generate_content(
+            model=model,
+            contents=prompt,
+        )
+        return (resp.text or "").strip()
+    except Exception as e:
+        log.warning(f"Gemini {model}: {e}")
+        return None
+
+
 def query_ollama(prompt, model):
     base = _env("OLLAMA_BASE_URL") or "http://localhost:11434"
     url = f"{base.rstrip('/')}/api/generate"
@@ -312,6 +339,33 @@ MODELS = {
     "qwen2.5-72b":     {"provider": "ollama", "model": "qwen2.5:72b",       "tier": "large",    "family": "Alibaba Qwen", "release_date": "2024-09"},
     "qwen3-32b":       {"provider": "ollama", "model": "qwen3:32b",         "tier": "frontier", "family": "Alibaba Qwen", "release_date": "2025-04"},
 
+    # ── Google Gemini API (hosted, dated snapshots) ──
+    # Google deprecated Gemini 1.5 and the dated 2.0 snapshots from the
+    # API by mid-2026, so the accessible time series only goes back to
+    # ~mid-2025. Same problem as the Anthropic API.
+    # gemini-2.0-flash-001 and gemini-2.0-flash-lite-001 returned 404 on
+    # generateContent at probe time despite appearing in list_models.
+    "gemini-2.5-flash":            {"provider": "gemini", "model": "models/gemini-2.5-flash",           "tier": "frontier", "family": "Google Gemini", "release_date": "2025-06"},
+    "gemini-2.5-pro":              {"provider": "gemini", "model": "models/gemini-2.5-pro",             "tier": "frontier", "family": "Google Gemini", "release_date": "2025-06"},
+    "gemini-2.5-flash-lite":       {"provider": "gemini", "model": "models/gemini-2.5-flash-lite",      "tier": "small",    "family": "Google Gemini", "release_date": "2025-07"},
+    "gemini-3-flash-preview":      {"provider": "gemini", "model": "models/gemini-3-flash-preview",     "tier": "frontier", "family": "Google Gemini", "release_date": "2025-12"},
+    "gemini-3-pro-preview":        {"provider": "gemini", "model": "models/gemini-3-pro-preview",       "tier": "frontier", "family": "Google Gemini", "release_date": "2025-12"},
+    "gemini-3.1-flash-lite":       {"provider": "gemini", "model": "models/gemini-3.1-flash-lite-preview","tier":"small",   "family": "Google Gemini", "release_date": "2026-01"},
+    "gemini-3.1-pro":              {"provider": "gemini", "model": "models/gemini-3.1-pro-preview",     "tier": "frontier", "family": "Google Gemini", "release_date": "2026-02"},
+
+    # ── Gemma 3/4 hosted via the Gemini API ──
+    # Cross-validation against the open-weight ollama runs we'll do
+    # tomorrow on GPU. If hosted Gemma 3 27b agrees with ollama Gemma 3
+    # 27b, we know our methodology is solid.
+    "gemma-3-1b-api":   {"provider": "gemini", "model": "models/gemma-3-1b-it",   "tier": "tiny",  "family": "Google Gemma", "release_date": "2025-03"},
+    "gemma-3-4b-api":   {"provider": "gemini", "model": "models/gemma-3-4b-it",   "tier": "small", "family": "Google Gemma", "release_date": "2025-03"},
+    "gemma-3-12b-api":  {"provider": "gemini", "model": "models/gemma-3-12b-it",  "tier": "mid",   "family": "Google Gemma", "release_date": "2025-03"},
+    "gemma-3-27b-api":  {"provider": "gemini", "model": "models/gemma-3-27b-it",  "tier": "mid",   "family": "Google Gemma", "release_date": "2025-03"},
+    "gemma-3n-e2b-api": {"provider": "gemini", "model": "models/gemma-3n-e2b-it", "tier": "tiny",  "family": "Google Gemma", "release_date": "2025-06"},
+    "gemma-3n-e4b-api": {"provider": "gemini", "model": "models/gemma-3n-e4b-it", "tier": "small", "family": "Google Gemma", "release_date": "2025-06"},
+    "gemma-4-26b-api":  {"provider": "gemini", "model": "models/gemma-4-26b-a4b-it","tier": "mid", "family": "Google Gemma", "release_date": "2026-04"},
+    "gemma-4-31b-api":  {"provider": "gemini", "model": "models/gemma-4-31b-it",  "tier": "mid",   "family": "Google Gemma", "release_date": "2026-04"},
+
     # Mistral: 2 years
     "mistral-7b-v0.1": {"provider": "ollama", "model": "mistral:7b-instruct-v0.1","tier":"small","family": "Mistral", "release_date": "2023-09"},
     "mistral-7b-v0.2": {"provider": "ollama", "model": "mistral:7b-instruct-v0.2","tier":"small","family": "Mistral", "release_date": "2024-03"},
@@ -324,11 +378,14 @@ MODELS = {
 
 # Subset shortcuts
 CLAUDE_API = [k for k, v in MODELS.items() if v["family"] == "Anthropic Claude"]
-LLAMA = [k for k, v in MODELS.items() if v["family"] == "Meta Llama"]
-GEMMA = [k for k, v in MODELS.items() if v["family"] == "Google Gemma"]
-QWEN = [k for k, v in MODELS.items() if v["family"] == "Alibaba Qwen"]
+GEMINI_API = [k for k, v in MODELS.items() if v["family"] == "Google Gemini"]
+GEMMA_API  = [k for k, v in MODELS.items() if v["family"] == "Google Gemma" and v["provider"] == "gemini"]
+LLAMA   = [k for k, v in MODELS.items() if v["family"] == "Meta Llama"]
+GEMMA   = [k for k, v in MODELS.items() if v["family"] == "Google Gemma" and v["provider"] == "ollama"]
+QWEN    = [k for k, v in MODELS.items() if v["family"] == "Alibaba Qwen"]
 MISTRAL = [k for k, v in MODELS.items() if v["family"] == "Mistral"]
 OPEN_WEIGHT = LLAMA + GEMMA + QWEN + MISTRAL
+HOSTED_HISTORICAL = CLAUDE_API + GEMINI_API + GEMMA_API
 
 BEST_OF_FAMILY = list(MODELS.keys())
 
@@ -342,6 +399,8 @@ def query_model(model_key, prompt):
         return query_ollama(prompt, info["model"])
     if info["provider"] == "anthropic":
         return query_anthropic(prompt, info["model"])
+    if info["provider"] == "gemini":
+        return query_gemini(prompt, info["model"])
     return None
 
 
@@ -558,9 +617,10 @@ def run(model_keys, force=False):
                     log.warning(f"    pair {pair['id']} {test_name}: no response")
                     consecutive_failures += 1
                     if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
-                        log.error(f"    {MAX_CONSECUTIVE_FAILURES} consecutive failures — aborting {model_key}")
+                        log.error(f"    {MAX_CONSECUTIVE_FAILURES} consecutive failures — skipping rest of {model_key}")
                         _save_checkpoint(_summarize(cp))
-                        return
+                        consecutive_failures = -1  # sentinel; checked outside
+                        break
                     continue
                 consecutive_failures = 0
 
@@ -573,6 +633,15 @@ def run(model_keys, force=False):
                 })
                 _save_checkpoint(cp)
                 time.sleep(0.05)
+
+            # End of test loop. If sentinel was set, also break the pair loop
+            # so we move on to the next model instead of returning from run().
+            if consecutive_failures == -1:
+                break
+
+        if consecutive_failures == -1:
+            log.info(f"    moving on to next model")
+            continue
 
         cp = _summarize(cp)
         _save_checkpoint(cp)
