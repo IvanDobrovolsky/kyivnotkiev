@@ -1,0 +1,1879 @@
+[
+  {
+    "pair_id": 1,
+    "russian_term": "Kiev",
+    "ukrainian_term": "Kyiv",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2013,
+        "russian_count": 9,
+        "ukrainian_count": 0,
+        "n_pages": 9,
+        "total": 9
+      },
+      {
+        "year": 2014,
+        "russian_count": 166,
+        "ukrainian_count": 0,
+        "n_pages": 66,
+        "total": 166
+      },
+      {
+        "year": 2015,
+        "russian_count": 113,
+        "ukrainian_count": 3,
+        "n_pages": 48,
+        "total": 116
+      },
+      {
+        "year": 2016,
+        "russian_count": 54,
+        "ukrainian_count": 0,
+        "n_pages": 30,
+        "total": 54
+      },
+      {
+        "year": 2017,
+        "russian_count": 108,
+        "ukrainian_count": 0,
+        "n_pages": 43,
+        "total": 108
+      },
+      {
+        "year": 2018,
+        "russian_count": 331,
+        "ukrainian_count": 0,
+        "n_pages": 94,
+        "total": 331
+      },
+      {
+        "year": 2019,
+        "russian_count": 255,
+        "ukrainian_count": 5,
+        "n_pages": 90,
+        "total": 260
+      },
+      {
+        "year": 2020,
+        "russian_count": 83,
+        "ukrainian_count": 0,
+        "n_pages": 34,
+        "total": 83
+      },
+      {
+        "year": 2021,
+        "russian_count": 211,
+        "ukrainian_count": 8,
+        "n_pages": 73,
+        "total": 219
+      },
+      {
+        "year": 2022,
+        "russian_count": 16,
+        "ukrainian_count": 3,
+        "n_pages": 9,
+        "total": 19
+      },
+      {
+        "year": 2023,
+        "russian_count": 359,
+        "ukrainian_count": 12,
+        "n_pages": 96,
+        "total": 371
+      },
+      {
+        "year": 2024,
+        "russian_count": 50,
+        "ukrainian_count": 19,
+        "n_pages": 30,
+        "total": 69
+      },
+      {
+        "year": 2025,
+        "russian_count": 29,
+        "ukrainian_count": 13,
+        "n_pages": 20,
+        "total": 42
+      },
+      {
+        "year": 2026,
+        "russian_count": 11,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 11
+      }
+    ],
+    "total_russian": 1795,
+    "total_ukrainian": 63
+  },
+  {
+    "pair_id": 2,
+    "russian_term": "Kharkov",
+    "ukrainian_term": "Kharkiv",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2013,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2014,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 5
+      },
+      {
+        "year": 2015,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 2
+      },
+      {
+        "year": 2016,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2017,
+        "russian_count": 11,
+        "ukrainian_count": 0,
+        "n_pages": 4,
+        "total": 11
+      },
+      {
+        "year": 2018,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 3
+      },
+      {
+        "year": 2019,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 3
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 3
+      },
+      {
+        "year": 2022,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 4
+      },
+      {
+        "year": 2024,
+        "russian_count": 14,
+        "ukrainian_count": 3,
+        "n_pages": 17,
+        "total": 17
+      },
+      {
+        "year": 2025,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "n_pages": 7,
+        "total": 7
+      }
+    ],
+    "total_russian": 58,
+    "total_ukrainian": 3
+  },
+  {
+    "pair_id": 3,
+    "russian_term": "Odessa",
+    "ukrainian_term": "Odesa",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 27,
+        "ukrainian_count": 0,
+        "n_pages": 8,
+        "total": 27
+      },
+      {
+        "year": 2015,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "n_pages": 5,
+        "total": 5
+      },
+      {
+        "year": 2016,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 3
+      },
+      {
+        "year": 2017,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 4
+      },
+      {
+        "year": 2018,
+        "russian_count": 27,
+        "ukrainian_count": 1,
+        "n_pages": 9,
+        "total": 28
+      },
+      {
+        "year": 2019,
+        "russian_count": 12,
+        "ukrainian_count": 0,
+        "n_pages": 7,
+        "total": 12
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 18,
+        "ukrainian_count": 0,
+        "n_pages": 9,
+        "total": 18
+      },
+      {
+        "year": 2022,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 9,
+        "ukrainian_count": 0,
+        "n_pages": 5,
+        "total": 9
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2026,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 110,
+    "total_ukrainian": 1
+  },
+  {
+    "pair_id": 4,
+    "russian_term": "Lvov",
+    "ukrainian_term": "Lviv",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2013,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2014,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2015,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 2
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2017,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "n_pages": 4,
+        "total": 4
+      },
+      {
+        "year": 2018,
+        "russian_count": 28,
+        "ukrainian_count": 0,
+        "n_pages": 4,
+        "total": 28
+      },
+      {
+        "year": 2019,
+        "russian_count": 5,
+        "ukrainian_count": 5,
+        "n_pages": 5,
+        "total": 10
+      },
+      {
+        "year": 2020,
+        "russian_count": 6,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 6
+      },
+      {
+        "year": 2021,
+        "russian_count": 5,
+        "ukrainian_count": 2,
+        "n_pages": 5,
+        "total": 7
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "n_pages": 1,
+        "total": 3
+      },
+      {
+        "year": 2023,
+        "russian_count": 13,
+        "ukrainian_count": 7,
+        "n_pages": 5,
+        "total": 20
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "n_pages": 1,
+        "total": 4
+      }
+    ],
+    "total_russian": 68,
+    "total_ukrainian": 21
+  },
+  {
+    "pair_id": 5,
+    "russian_term": "Zaporozhye",
+    "ukrainian_term": "Zaporizhzhia",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 7
+      },
+      {
+        "year": 2017,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2018,
+        "russian_count": 8,
+        "ukrainian_count": 0,
+        "n_pages": 4,
+        "total": 8
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 3,
+        "ukrainian_count": 2,
+        "n_pages": 4,
+        "total": 5
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "n_pages": 3,
+        "total": 9
+      }
+    ],
+    "total_russian": 20,
+    "total_ukrainian": 12
+  },
+  {
+    "pair_id": 6,
+    "russian_term": "Nikolaev",
+    "ukrainian_term": "Mykolaiv",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2019,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 4,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 7,
+    "russian_term": "Dnepropetrovsk",
+    "ukrainian_term": "Dnipro",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 17,
+        "ukrainian_count": 0,
+        "n_pages": 4,
+        "total": 17
+      },
+      {
+        "year": 2017,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 23,
+    "total_ukrainian": 1
+  },
+  {
+    "pair_id": 8,
+    "russian_term": "Vinnitsa",
+    "ukrainian_term": "Vinnytsia",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2018,
+        "russian_count": 21,
+        "ukrainian_count": 0,
+        "n_pages": 6,
+        "total": 21
+      },
+      {
+        "year": 2019,
+        "russian_count": 20,
+        "ukrainian_count": 0,
+        "n_pages": 5,
+        "total": 20
+      },
+      {
+        "year": 2020,
+        "russian_count": 8,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 8
+      },
+      {
+        "year": 2021,
+        "russian_count": 38,
+        "ukrainian_count": 0,
+        "n_pages": 9,
+        "total": 38
+      },
+      {
+        "year": 2023,
+        "russian_count": 5,
+        "ukrainian_count": 6,
+        "n_pages": 8,
+        "total": 11
+      },
+      {
+        "year": 2024,
+        "russian_count": 3,
+        "ukrainian_count": 6,
+        "n_pages": 4,
+        "total": 9
+      }
+    ],
+    "total_russian": 95,
+    "total_ukrainian": 12
+  },
+  {
+    "pair_id": 9,
+    "russian_term": "Rovno",
+    "ukrainian_term": "Rivne",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 3
+      },
+      {
+        "year": 2015,
+        "russian_count": 8,
+        "ukrainian_count": 0,
+        "n_pages": 5,
+        "total": 8
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2017,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 5
+      },
+      {
+        "year": 2018,
+        "russian_count": 8,
+        "ukrainian_count": 0,
+        "n_pages": 5,
+        "total": 8
+      },
+      {
+        "year": 2019,
+        "russian_count": 22,
+        "ukrainian_count": 1,
+        "n_pages": 11,
+        "total": 23
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 24,
+        "ukrainian_count": 1,
+        "n_pages": 10,
+        "total": 25
+      },
+      {
+        "year": 2023,
+        "russian_count": 1,
+        "ukrainian_count": 9,
+        "n_pages": 4,
+        "total": 10
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 74,
+    "total_ukrainian": 11
+  },
+  {
+    "pair_id": 10,
+    "russian_term": "Chernobyl",
+    "ukrainian_term": "Chornobyl",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2017,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2019,
+        "russian_count": 9,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 9
+      },
+      {
+        "year": 2020,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2021,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "n_pages": 4,
+        "total": 5
+      },
+      {
+        "year": 2022,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 18,
+        "ukrainian_count": 0,
+        "n_pages": 11,
+        "total": 18
+      },
+      {
+        "year": 2024,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 43,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 11,
+    "russian_term": "Lugansk",
+    "ukrainian_term": "Luhansk",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 17,
+        "ukrainian_count": 0,
+        "n_pages": 9,
+        "total": 17
+      },
+      {
+        "year": 2015,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 3
+      },
+      {
+        "year": 2016,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 3
+      },
+      {
+        "year": 2017,
+        "russian_count": 8,
+        "ukrainian_count": 0,
+        "n_pages": 5,
+        "total": 8
+      },
+      {
+        "year": 2019,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2020,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2021,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 7
+      },
+      {
+        "year": 2022,
+        "russian_count": 14,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 14
+      },
+      {
+        "year": 2023,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 3
+      },
+      {
+        "year": 2024,
+        "russian_count": 10,
+        "ukrainian_count": 4,
+        "n_pages": 14,
+        "total": 14
+      },
+      {
+        "year": 2025,
+        "russian_count": 6,
+        "ukrainian_count": 3,
+        "n_pages": 8,
+        "total": 9
+      }
+    ],
+    "total_russian": 74,
+    "total_ukrainian": 7
+  },
+  {
+    "pair_id": 15,
+    "russian_term": "Dnieper",
+    "ukrainian_term": "Dnipro",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2013,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2015,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2018,
+        "russian_count": 8,
+        "ukrainian_count": 0,
+        "n_pages": 6,
+        "total": 8
+      },
+      {
+        "year": 2019,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 3
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "n_pages": 2,
+        "total": 2
+      }
+    ],
+    "total_russian": 21,
+    "total_ukrainian": 1
+  },
+  {
+    "pair_id": 16,
+    "russian_term": "Dniester",
+    "ukrainian_term": "Dnister",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2013,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2015,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2017,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 3
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 8,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 17,
+    "russian_term": "Donbass",
+    "ukrainian_term": "Donbas",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2015,
+        "russian_count": 3,
+        "ukrainian_count": 5,
+        "n_pages": 4,
+        "total": 8
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2017,
+        "russian_count": 1,
+        "ukrainian_count": 3,
+        "n_pages": 3,
+        "total": 4
+      },
+      {
+        "year": 2018,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "n_pages": 4,
+        "total": 4
+      },
+      {
+        "year": 2019,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "n_pages": 4,
+        "total": 4
+      },
+      {
+        "year": 2020,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2022,
+        "russian_count": 7,
+        "ukrainian_count": 3,
+        "n_pages": 7,
+        "total": 10
+      },
+      {
+        "year": 2023,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "n_pages": 4,
+        "total": 4
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 19,
+    "total_ukrainian": 21
+  },
+  {
+    "pair_id": 19,
+    "russian_term": "Zakarpatye",
+    "ukrainian_term": "Zakarpattia",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2021,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "n_pages": 2,
+        "total": 4
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "n_pages": 1,
+        "total": 4
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 8
+  },
+  {
+    "pair_id": 38,
+    "russian_term": "Chernigov",
+    "ukrainian_term": "Chernihiv",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2015,
+        "russian_count": 8,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 8
+      },
+      {
+        "year": 2017,
+        "russian_count": 13,
+        "ukrainian_count": 0,
+        "n_pages": 4,
+        "total": 13
+      },
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2019,
+        "russian_count": 14,
+        "ukrainian_count": 0,
+        "n_pages": 9,
+        "total": 14
+      },
+      {
+        "year": 2021,
+        "russian_count": 12,
+        "ukrainian_count": 0,
+        "n_pages": 6,
+        "total": 12
+      },
+      {
+        "year": 2023,
+        "russian_count": 25,
+        "ukrainian_count": 4,
+        "n_pages": 9,
+        "total": 29
+      },
+      {
+        "year": 2024,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 7
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 82,
+    "total_ukrainian": 4
+  },
+  {
+    "pair_id": 39,
+    "russian_term": "Chernovtsy",
+    "ukrainian_term": "Chernivtsi",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 31,
+        "ukrainian_count": 0,
+        "n_pages": 16,
+        "total": 31
+      },
+      {
+        "year": 2015,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2016,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 3
+      },
+      {
+        "year": 2017,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2019,
+        "russian_count": 10,
+        "ukrainian_count": 0,
+        "n_pages": 5,
+        "total": 10
+      },
+      {
+        "year": 2020,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "n_pages": 5,
+        "total": 7
+      },
+      {
+        "year": 2021,
+        "russian_count": 13,
+        "ukrainian_count": 0,
+        "n_pages": 8,
+        "total": 13
+      },
+      {
+        "year": 2023,
+        "russian_count": 2,
+        "ukrainian_count": 9,
+        "n_pages": 3,
+        "total": 11
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 9,
+        "n_pages": 4,
+        "total": 10
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 13,
+        "n_pages": 6,
+        "total": 13
+      }
+    ],
+    "total_russian": 69,
+    "total_ukrainian": 31
+  },
+  {
+    "pair_id": 40,
+    "russian_term": "Zhitomir",
+    "ukrainian_term": "Zhytomyr",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2017,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2018,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2019,
+        "russian_count": 17,
+        "ukrainian_count": 0,
+        "n_pages": 12,
+        "total": 17
+      },
+      {
+        "year": 2021,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 4
+      },
+      {
+        "year": 2023,
+        "russian_count": 2,
+        "ukrainian_count": 7,
+        "n_pages": 4,
+        "total": 9
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 6,
+        "n_pages": 2,
+        "total": 6
+      }
+    ],
+    "total_russian": 26,
+    "total_ukrainian": 13
+  },
+  {
+    "pair_id": 41,
+    "russian_term": "Cherkassy",
+    "ukrainian_term": "Cherkasy",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2015,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2017,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 7,
+        "ukrainian_count": 2,
+        "n_pages": 3,
+        "total": 9
+      },
+      {
+        "year": 2022,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 7
+      },
+      {
+        "year": 2023,
+        "russian_count": 14,
+        "ukrainian_count": 17,
+        "n_pages": 9,
+        "total": 31
+      },
+      {
+        "year": 2024,
+        "russian_count": 38,
+        "ukrainian_count": 29,
+        "n_pages": 19,
+        "total": 67
+      },
+      {
+        "year": 2025,
+        "russian_count": 4,
+        "ukrainian_count": 8,
+        "n_pages": 7,
+        "total": 12
+      }
+    ],
+    "total_russian": 72,
+    "total_ukrainian": 56
+  },
+  {
+    "pair_id": 42,
+    "russian_term": "Uzhgorod",
+    "ukrainian_term": "Uzhhorod",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 2
+      },
+      {
+        "year": 2015,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2018,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2019,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 3
+      },
+      {
+        "year": 2023,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 9,
+    "total_ukrainian": 1
+  },
+  {
+    "pair_id": 43,
+    "russian_term": "Kremenchug",
+    "ukrainian_term": "Kremenchuk",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2021,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 2
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "n_pages": 1,
+        "total": 3
+      }
+    ],
+    "total_russian": 2,
+    "total_ukrainian": 3
+  },
+  {
+    "pair_id": 44,
+    "russian_term": "Kirovograd",
+    "ukrainian_term": "Kropyvnytskyi",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2017,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "n_pages": 5,
+        "total": 5
+      },
+      {
+        "year": 2019,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 2
+      },
+      {
+        "year": 2023,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 4
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 12,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 45,
+    "russian_term": "Ternopol",
+    "ukrainian_term": "Ternopil",
+    "category": "geographical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2013,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2015,
+        "russian_count": 6,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 6
+      },
+      {
+        "year": 2016,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2017,
+        "russian_count": 9,
+        "ukrainian_count": 1,
+        "n_pages": 6,
+        "total": 10
+      },
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2019,
+        "russian_count": 7,
+        "ukrainian_count": 6,
+        "n_pages": 5,
+        "total": 13
+      },
+      {
+        "year": 2021,
+        "russian_count": 8,
+        "ukrainian_count": 1,
+        "n_pages": 6,
+        "total": 9
+      },
+      {
+        "year": 2023,
+        "russian_count": 7,
+        "ukrainian_count": 2,
+        "n_pages": 5,
+        "total": 9
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 42,
+    "total_ukrainian": 11
+  },
+  {
+    "pair_id": 24,
+    "russian_term": "Kiev Pechersk Lavra",
+    "ukrainian_term": "Kyiv Pechersk Lavra",
+    "category": "landmarks",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2021,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 2
+      },
+      {
+        "year": 2023,
+        "russian_count": 65,
+        "ukrainian_count": 1,
+        "n_pages": 18,
+        "total": 66
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 68,
+    "total_ukrainian": 1
+  },
+  {
+    "pair_id": 29,
+    "russian_term": "Kharkov University",
+    "ukrainian_term": "Kharkiv University",
+    "category": "institutional",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2023,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 1,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 31,
+    "russian_term": "Kiev Patriarchate",
+    "ukrainian_term": "Kyiv Patriarchate",
+    "category": "institutional",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "n_pages": 5,
+        "total": 7
+      },
+      {
+        "year": 2015,
+        "russian_count": 7,
+        "ukrainian_count": 3,
+        "n_pages": 6,
+        "total": 10
+      },
+      {
+        "year": 2016,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2017,
+        "russian_count": 13,
+        "ukrainian_count": 0,
+        "n_pages": 6,
+        "total": 13
+      },
+      {
+        "year": 2018,
+        "russian_count": 32,
+        "ukrainian_count": 0,
+        "n_pages": 13,
+        "total": 32
+      },
+      {
+        "year": 2019,
+        "russian_count": 20,
+        "ukrainian_count": 0,
+        "n_pages": 11,
+        "total": 20
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 4
+      },
+      {
+        "year": 2023,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 2
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 88,
+    "total_ukrainian": 4
+  },
+  {
+    "pair_id": 35,
+    "russian_term": "Kievan Rus",
+    "ukrainian_term": "Kyivan Rus",
+    "category": "historical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 3
+      },
+      {
+        "year": 2018,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 3
+      },
+      {
+        "year": 2019,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 2
+      },
+      {
+        "year": 2023,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "n_pages": 5,
+        "total": 5
+      },
+      {
+        "year": 2024,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "n_pages": 3,
+        "total": 3
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 20,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 36,
+    "russian_term": "Kazak",
+    "ukrainian_term": "Kozak",
+    "category": "historical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 1
+  },
+  {
+    "pair_id": 71,
+    "russian_term": "Prince of Kiev",
+    "ukrainian_term": "Prince of Kyiv",
+    "category": "historical",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2015,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "n_pages": 2,
+        "total": 2
+      },
+      {
+        "year": 2019,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 3,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 61,
+    "russian_term": "Vladimir Zelensky",
+    "ukrainian_term": "Volodymyr Zelenskyy",
+    "category": "people",
+    "source": "mospat",
+    "yearly": [
+      {
+        "year": 2019,
+        "russian_count": 6,
+        "ukrainian_count": 0,
+        "n_pages": 4,
+        "total": 6
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 11,
+        "ukrainian_count": 0,
+        "n_pages": 10,
+        "total": 11
+      },
+      {
+        "year": 2022,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "n_pages": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 20,
+    "total_ukrainian": 0
+  }
+]

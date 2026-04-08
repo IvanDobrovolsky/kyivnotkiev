@@ -63,8 +63,8 @@ DENOMINATIONS = {
         "name": "Moscow Patriarchate, Department for External Church Relations",
         "short": "Moscow Patriarchate",
         "url": "https://mospat.ru/en/",
-        "stance": "TBD — to be filled in once data is collected",
-        "stance_event": None,
+        "stance": "Refuses to switch. 91% Russian spellings across 3,212 mentions in English-language news (Kiev 96%, Odessa 99%, Chernobyl 100%, Kiev Pechersk Lavra 99%). Wrote about Ukraine 9× more than the other religious sources combined yet uses the inverse ratio. The deliberate institutional holdout against Western style guides — and the upstream node of an entire Spanish/Portuguese/African media propagation chain (see propagation graph).",
+        "stance_event": "refused (post-2022)",
         "color": "#D52B1E",
     },
     "wcc": {

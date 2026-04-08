@@ -61,3 +61,224 @@ wcc,35,historical,Kievan Rus,Kyivan Rus,2020,0,1,1,1,1.0
 wcc,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2025,0,2,1,2,1.0
 wcc,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2026,0,2,1,2,1.0
 wcc,72,geographical,Artemovsk,Bakhmut,2026,0,2,1,2,1.0
+mospat,1,geographical,Kiev,Kyiv,2013,9,0,9,9,0.0
+mospat,1,geographical,Kiev,Kyiv,2014,166,0,66,166,0.0
+mospat,1,geographical,Kiev,Kyiv,2015,113,3,48,116,0.0259
+mospat,1,geographical,Kiev,Kyiv,2016,54,0,30,54,0.0
+mospat,1,geographical,Kiev,Kyiv,2017,108,0,43,108,0.0
+mospat,1,geographical,Kiev,Kyiv,2018,331,0,94,331,0.0
+mospat,1,geographical,Kiev,Kyiv,2019,255,5,90,260,0.0192
+mospat,1,geographical,Kiev,Kyiv,2020,83,0,34,83,0.0
+mospat,1,geographical,Kiev,Kyiv,2021,211,8,73,219,0.0365
+mospat,1,geographical,Kiev,Kyiv,2022,16,3,9,19,0.1579
+mospat,1,geographical,Kiev,Kyiv,2023,359,12,96,371,0.0323
+mospat,1,geographical,Kiev,Kyiv,2024,50,19,30,69,0.2754
+mospat,1,geographical,Kiev,Kyiv,2025,29,13,20,42,0.3095
+mospat,1,geographical,Kiev,Kyiv,2026,11,0,2,11,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2013,2,0,2,2,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2014,5,0,2,5,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2015,2,0,1,2,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2016,2,0,2,2,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2017,11,0,4,11,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2018,3,0,2,3,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2019,3,0,1,3,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2020,1,0,1,1,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2021,3,0,2,3,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2022,1,0,1,1,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2023,4,0,3,4,0.0
+mospat,2,geographical,Kharkov,Kharkiv,2024,14,3,17,17,0.1765
+mospat,2,geographical,Kharkov,Kharkiv,2025,7,0,7,7,0.0
+mospat,3,geographical,Odessa,Odesa,2014,27,0,8,27,0.0
+mospat,3,geographical,Odessa,Odesa,2015,5,0,5,5,0.0
+mospat,3,geographical,Odessa,Odesa,2016,3,0,2,3,0.0
+mospat,3,geographical,Odessa,Odesa,2017,4,0,2,4,0.0
+mospat,3,geographical,Odessa,Odesa,2018,27,1,9,28,0.0357
+mospat,3,geographical,Odessa,Odesa,2019,12,0,7,12,0.0
+mospat,3,geographical,Odessa,Odesa,2020,1,0,1,1,0.0
+mospat,3,geographical,Odessa,Odesa,2021,18,0,9,18,0.0
+mospat,3,geographical,Odessa,Odesa,2022,1,0,1,1,0.0
+mospat,3,geographical,Odessa,Odesa,2023,9,0,5,9,0.0
+mospat,3,geographical,Odessa,Odesa,2024,1,0,1,1,0.0
+mospat,3,geographical,Odessa,Odesa,2025,1,0,1,1,0.0
+mospat,3,geographical,Odessa,Odesa,2026,1,0,1,1,0.0
+mospat,4,geographical,Lvov,Lviv,2013,1,0,1,1,0.0
+mospat,4,geographical,Lvov,Lviv,2014,2,0,2,2,0.0
+mospat,4,geographical,Lvov,Lviv,2015,2,0,1,2,0.0
+mospat,4,geographical,Lvov,Lviv,2016,1,0,1,1,0.0
+mospat,4,geographical,Lvov,Lviv,2017,4,0,4,4,0.0
+mospat,4,geographical,Lvov,Lviv,2018,28,0,4,28,0.0
+mospat,4,geographical,Lvov,Lviv,2019,5,5,5,10,0.5
+mospat,4,geographical,Lvov,Lviv,2020,6,0,3,6,0.0
+mospat,4,geographical,Lvov,Lviv,2021,5,2,5,7,0.2857
+mospat,4,geographical,Lvov,Lviv,2022,0,3,1,3,1.0
+mospat,4,geographical,Lvov,Lviv,2023,13,7,5,20,0.35
+mospat,4,geographical,Lvov,Lviv,2024,1,0,1,1,0.0
+mospat,4,geographical,Lvov,Lviv,2025,0,4,1,4,1.0
+mospat,5,geographical,Zaporozhye,Zaporizhzhia,2014,7,0,1,7,0.0
+mospat,5,geographical,Zaporozhye,Zaporizhzhia,2017,1,0,1,1,0.0
+mospat,5,geographical,Zaporozhye,Zaporizhzhia,2018,8,0,4,8,0.0
+mospat,5,geographical,Zaporozhye,Zaporizhzhia,2020,1,0,1,1,0.0
+mospat,5,geographical,Zaporozhye,Zaporizhzhia,2022,0,1,1,1,1.0
+mospat,5,geographical,Zaporozhye,Zaporizhzhia,2023,3,2,4,5,0.4
+mospat,5,geographical,Zaporozhye,Zaporizhzhia,2024,0,9,3,9,1.0
+mospat,6,geographical,Nikolaev,Mykolaiv,2018,1,0,1,1,0.0
+mospat,6,geographical,Nikolaev,Mykolaiv,2019,2,0,2,2,0.0
+mospat,6,geographical,Nikolaev,Mykolaiv,2021,1,0,1,1,0.0
+mospat,7,geographical,Dnepropetrovsk,Dnipro,2014,17,0,4,17,0.0
+mospat,7,geographical,Dnepropetrovsk,Dnipro,2017,1,0,1,1,0.0
+mospat,7,geographical,Dnepropetrovsk,Dnipro,2018,1,0,1,1,0.0
+mospat,7,geographical,Dnepropetrovsk,Dnipro,2020,1,0,1,1,0.0
+mospat,7,geographical,Dnepropetrovsk,Dnipro,2021,1,0,1,1,0.0
+mospat,7,geographical,Dnepropetrovsk,Dnipro,2023,1,0,1,1,0.0
+mospat,7,geographical,Dnepropetrovsk,Dnipro,2024,1,0,1,1,0.0
+mospat,7,geographical,Dnepropetrovsk,Dnipro,2025,0,1,1,1,1.0
+mospat,8,geographical,Vinnitsa,Vinnytsia,2018,21,0,6,21,0.0
+mospat,8,geographical,Vinnitsa,Vinnytsia,2019,20,0,5,20,0.0
+mospat,8,geographical,Vinnitsa,Vinnytsia,2020,8,0,3,8,0.0
+mospat,8,geographical,Vinnitsa,Vinnytsia,2021,38,0,9,38,0.0
+mospat,8,geographical,Vinnitsa,Vinnytsia,2023,5,6,8,11,0.5455
+mospat,8,geographical,Vinnitsa,Vinnytsia,2024,3,6,4,9,0.6667
+mospat,9,geographical,Rovno,Rivne,2014,3,0,2,3,0.0
+mospat,9,geographical,Rovno,Rivne,2015,8,0,5,8,0.0
+mospat,9,geographical,Rovno,Rivne,2016,1,0,1,1,0.0
+mospat,9,geographical,Rovno,Rivne,2017,5,0,3,5,0.0
+mospat,9,geographical,Rovno,Rivne,2018,8,0,5,8,0.0
+mospat,9,geographical,Rovno,Rivne,2019,22,1,11,23,0.0435
+mospat,9,geographical,Rovno,Rivne,2020,1,0,1,1,0.0
+mospat,9,geographical,Rovno,Rivne,2021,24,1,10,25,0.04
+mospat,9,geographical,Rovno,Rivne,2023,1,9,4,10,0.9
+mospat,9,geographical,Rovno,Rivne,2024,1,0,1,1,0.0
+mospat,10,geographical,Chernobyl,Chornobyl,2014,1,0,1,1,0.0
+mospat,10,geographical,Chernobyl,Chornobyl,2016,1,0,1,1,0.0
+mospat,10,geographical,Chernobyl,Chornobyl,2017,2,0,2,2,0.0
+mospat,10,geographical,Chernobyl,Chornobyl,2018,1,0,1,1,0.0
+mospat,10,geographical,Chernobyl,Chornobyl,2019,9,0,1,9,0.0
+mospat,10,geographical,Chernobyl,Chornobyl,2020,2,0,2,2,0.0
+mospat,10,geographical,Chernobyl,Chornobyl,2021,5,0,4,5,0.0
+mospat,10,geographical,Chernobyl,Chornobyl,2022,1,0,1,1,0.0
+mospat,10,geographical,Chernobyl,Chornobyl,2023,18,0,11,18,0.0
+mospat,10,geographical,Chernobyl,Chornobyl,2024,2,0,2,2,0.0
+mospat,10,geographical,Chernobyl,Chornobyl,2025,1,0,1,1,0.0
+mospat,11,geographical,Lugansk,Luhansk,2014,17,0,9,17,0.0
+mospat,11,geographical,Lugansk,Luhansk,2015,3,0,3,3,0.0
+mospat,11,geographical,Lugansk,Luhansk,2016,3,0,3,3,0.0
+mospat,11,geographical,Lugansk,Luhansk,2017,8,0,5,8,0.0
+mospat,11,geographical,Lugansk,Luhansk,2019,1,0,1,1,0.0
+mospat,11,geographical,Lugansk,Luhansk,2020,2,0,2,2,0.0
+mospat,11,geographical,Lugansk,Luhansk,2021,7,0,3,7,0.0
+mospat,11,geographical,Lugansk,Luhansk,2022,14,0,3,14,0.0
+mospat,11,geographical,Lugansk,Luhansk,2023,3,0,2,3,0.0
+mospat,11,geographical,Lugansk,Luhansk,2024,10,4,14,14,0.2857
+mospat,11,geographical,Lugansk,Luhansk,2025,6,3,8,9,0.3333
+mospat,15,geographical,Dnieper,Dnipro,2013,2,0,2,2,0.0
+mospat,15,geographical,Dnieper,Dnipro,2015,2,0,2,2,0.0
+mospat,15,geographical,Dnieper,Dnipro,2016,1,0,1,1,0.0
+mospat,15,geographical,Dnieper,Dnipro,2018,8,0,6,8,0.0
+mospat,15,geographical,Dnieper,Dnipro,2019,2,0,2,2,0.0
+mospat,15,geographical,Dnieper,Dnipro,2021,1,0,1,1,0.0
+mospat,15,geographical,Dnieper,Dnipro,2023,3,0,3,3,0.0
+mospat,15,geographical,Dnieper,Dnipro,2024,1,0,1,1,0.0
+mospat,15,geographical,Dnieper,Dnipro,2025,1,1,2,2,0.5
+mospat,16,geographical,Dniester,Dnister,2013,1,0,1,1,0.0
+mospat,16,geographical,Dniester,Dnister,2014,1,0,1,1,0.0
+mospat,16,geographical,Dniester,Dnister,2015,2,0,2,2,0.0
+mospat,16,geographical,Dniester,Dnister,2017,3,0,2,3,0.0
+mospat,16,geographical,Dniester,Dnister,2021,1,0,1,1,0.0
+mospat,17,geographical,Donbass,Donbas,2015,3,5,4,8,0.625
+mospat,17,geographical,Donbass,Donbas,2016,1,1,2,2,0.5
+mospat,17,geographical,Donbass,Donbas,2017,1,3,3,4,0.75
+mospat,17,geographical,Donbass,Donbas,2018,0,4,4,4,1.0
+mospat,17,geographical,Donbass,Donbas,2019,0,4,4,4,1.0
+mospat,17,geographical,Donbass,Donbas,2020,0,1,1,1,1.0
+mospat,17,geographical,Donbass,Donbas,2021,1,0,1,1,0.0
+mospat,17,geographical,Donbass,Donbas,2022,7,3,7,10,0.3
+mospat,17,geographical,Donbass,Donbas,2023,4,0,4,4,0.0
+mospat,17,geographical,Donbass,Donbas,2024,1,0,1,1,0.0
+mospat,17,geographical,Donbass,Donbas,2025,1,0,1,1,0.0
+mospat,19,geographical,Zakarpatye,Zakarpattia,2021,0,4,2,4,1.0
+mospat,19,geographical,Zakarpatye,Zakarpattia,2023,0,4,1,4,1.0
+mospat,38,geographical,Chernigov,Chernihiv,2014,1,0,1,1,0.0
+mospat,38,geographical,Chernigov,Chernihiv,2015,8,0,2,8,0.0
+mospat,38,geographical,Chernigov,Chernihiv,2017,13,0,4,13,0.0
+mospat,38,geographical,Chernigov,Chernihiv,2018,1,0,1,1,0.0
+mospat,38,geographical,Chernigov,Chernihiv,2019,14,0,9,14,0.0
+mospat,38,geographical,Chernigov,Chernihiv,2021,12,0,6,12,0.0
+mospat,38,geographical,Chernigov,Chernihiv,2023,25,4,9,29,0.1379
+mospat,38,geographical,Chernigov,Chernihiv,2024,7,0,3,7,0.0
+mospat,38,geographical,Chernigov,Chernihiv,2025,1,0,1,1,0.0
+mospat,39,geographical,Chernovtsy,Chernivtsi,2014,31,0,16,31,0.0
+mospat,39,geographical,Chernovtsy,Chernivtsi,2015,1,0,1,1,0.0
+mospat,39,geographical,Chernovtsy,Chernivtsi,2016,3,0,3,3,0.0
+mospat,39,geographical,Chernovtsy,Chernivtsi,2017,1,0,1,1,0.0
+mospat,39,geographical,Chernovtsy,Chernivtsi,2019,10,0,5,10,0.0
+mospat,39,geographical,Chernovtsy,Chernivtsi,2020,7,0,5,7,0.0
+mospat,39,geographical,Chernovtsy,Chernivtsi,2021,13,0,8,13,0.0
+mospat,39,geographical,Chernovtsy,Chernivtsi,2023,2,9,3,11,0.8182
+mospat,39,geographical,Chernovtsy,Chernivtsi,2024,1,9,4,10,0.9
+mospat,39,geographical,Chernovtsy,Chernivtsi,2025,0,13,6,13,1.0
+mospat,40,geographical,Zhitomir,Zhytomyr,2017,1,0,1,1,0.0
+mospat,40,geographical,Zhitomir,Zhytomyr,2018,2,0,2,2,0.0
+mospat,40,geographical,Zhitomir,Zhytomyr,2019,17,0,12,17,0.0
+mospat,40,geographical,Zhitomir,Zhytomyr,2021,4,0,3,4,0.0
+mospat,40,geographical,Zhitomir,Zhytomyr,2023,2,7,4,9,0.7778
+mospat,40,geographical,Zhitomir,Zhytomyr,2024,0,6,2,6,1.0
+mospat,41,geographical,Cherkassy,Cherkasy,2015,1,0,1,1,0.0
+mospat,41,geographical,Cherkassy,Cherkasy,2017,1,0,1,1,0.0
+mospat,41,geographical,Cherkassy,Cherkasy,2021,7,2,3,9,0.2222
+mospat,41,geographical,Cherkassy,Cherkasy,2022,7,0,1,7,0.0
+mospat,41,geographical,Cherkassy,Cherkasy,2023,14,17,9,31,0.5484
+mospat,41,geographical,Cherkassy,Cherkasy,2024,38,29,19,67,0.4328
+mospat,41,geographical,Cherkassy,Cherkasy,2025,4,8,7,12,0.6667
+mospat,42,geographical,Uzhgorod,Uzhhorod,2014,2,0,1,2,0.0
+mospat,42,geographical,Uzhgorod,Uzhhorod,2015,1,0,1,1,0.0
+mospat,42,geographical,Uzhgorod,Uzhhorod,2016,1,0,1,1,0.0
+mospat,42,geographical,Uzhgorod,Uzhhorod,2018,0,1,1,1,1.0
+mospat,42,geographical,Uzhgorod,Uzhhorod,2019,1,0,1,1,0.0
+mospat,42,geographical,Uzhgorod,Uzhhorod,2021,3,0,3,3,0.0
+mospat,42,geographical,Uzhgorod,Uzhhorod,2023,1,0,1,1,0.0
+mospat,43,geographical,Kremenchug,Kremenchuk,2021,2,0,1,2,0.0
+mospat,43,geographical,Kremenchug,Kremenchuk,2025,0,3,1,3,1.0
+mospat,44,geographical,Kirovograd,Kropyvnytskyi,2017,5,0,5,5,0.0
+mospat,44,geographical,Kirovograd,Kropyvnytskyi,2019,2,0,1,2,0.0
+mospat,44,geographical,Kirovograd,Kropyvnytskyi,2023,4,0,2,4,0.0
+mospat,44,geographical,Kirovograd,Kropyvnytskyi,2024,1,0,1,1,0.0
+mospat,45,geographical,Ternopol,Ternopil,2013,0,1,1,1,1.0
+mospat,45,geographical,Ternopol,Ternopil,2014,1,0,1,1,0.0
+mospat,45,geographical,Ternopol,Ternopil,2015,6,0,3,6,0.0
+mospat,45,geographical,Ternopol,Ternopil,2016,2,0,2,2,0.0
+mospat,45,geographical,Ternopol,Ternopil,2017,9,1,6,10,0.1
+mospat,45,geographical,Ternopol,Ternopil,2018,1,0,1,1,0.0
+mospat,45,geographical,Ternopol,Ternopil,2019,7,6,5,13,0.4615
+mospat,45,geographical,Ternopol,Ternopil,2021,8,1,6,9,0.1111
+mospat,45,geographical,Ternopol,Ternopil,2023,7,2,5,9,0.2222
+mospat,45,geographical,Ternopol,Ternopil,2024,1,0,1,1,0.0
+mospat,24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,2021,2,0,1,2,0.0
+mospat,24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,2023,65,1,18,66,0.0152
+mospat,24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,2024,1,0,1,1,0.0
+mospat,29,institutional,Kharkov University,Kharkiv University,2023,1,0,1,1,0.0
+mospat,31,institutional,Kiev Patriarchate,Kyiv Patriarchate,2014,7,0,5,7,0.0
+mospat,31,institutional,Kiev Patriarchate,Kyiv Patriarchate,2015,7,3,6,10,0.3
+mospat,31,institutional,Kiev Patriarchate,Kyiv Patriarchate,2016,2,0,2,2,0.0
+mospat,31,institutional,Kiev Patriarchate,Kyiv Patriarchate,2017,13,0,6,13,0.0
+mospat,31,institutional,Kiev Patriarchate,Kyiv Patriarchate,2018,32,0,13,32,0.0
+mospat,31,institutional,Kiev Patriarchate,Kyiv Patriarchate,2019,20,0,11,20,0.0
+mospat,31,institutional,Kiev Patriarchate,Kyiv Patriarchate,2020,1,0,1,1,0.0
+mospat,31,institutional,Kiev Patriarchate,Kyiv Patriarchate,2021,4,0,3,4,0.0
+mospat,31,institutional,Kiev Patriarchate,Kyiv Patriarchate,2023,2,0,1,2,0.0
+mospat,31,institutional,Kiev Patriarchate,Kyiv Patriarchate,2025,0,1,1,1,1.0
+mospat,35,historical,Kievan Rus,Kyivan Rus,2014,3,0,3,3,0.0
+mospat,35,historical,Kievan Rus,Kyivan Rus,2018,3,0,3,3,0.0
+mospat,35,historical,Kievan Rus,Kyivan Rus,2019,2,0,2,2,0.0
+mospat,35,historical,Kievan Rus,Kyivan Rus,2020,1,0,1,1,0.0
+mospat,35,historical,Kievan Rus,Kyivan Rus,2021,2,0,1,2,0.0
+mospat,35,historical,Kievan Rus,Kyivan Rus,2023,5,0,5,5,0.0
+mospat,35,historical,Kievan Rus,Kyivan Rus,2024,3,0,3,3,0.0
+mospat,35,historical,Kievan Rus,Kyivan Rus,2025,1,0,1,1,0.0
+mospat,36,historical,Kazak,Kozak,2025,0,1,1,1,1.0
+mospat,71,historical,Prince of Kiev,Prince of Kyiv,2015,2,0,2,2,0.0
+mospat,71,historical,Prince of Kiev,Prince of Kyiv,2019,1,0,1,1,0.0
+mospat,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2019,6,0,4,6,0.0
+mospat,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2020,1,0,1,1,0.0
+mospat,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2021,11,0,10,11,0.0
+mospat,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2022,1,0,1,1,0.0
+mospat,61,people,Vladimir Zelensky,Volodymyr Zelenskyy,2023,1,0,1,1,0.0
