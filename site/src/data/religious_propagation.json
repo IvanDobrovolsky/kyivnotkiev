@@ -1,0 +1,162 @@
+{
+  "title": "How a Moscow Patriarchate spelling decision propagates to half a billion non-English speakers",
+  "subtitle": "An editorial choice on mospat.ru flows through five amplification layers into Spanish, Portuguese, and African media networks invisible to English-language corpora — and from there into LLM training data.",
+  "source": {
+    "id": "mospat",
+    "label": "Moscow Patriarchate (mospat.ru)",
+    "sublabel": "Department for External Church Relations\n6,000+ English articles since 2015",
+    "color": "#D52B1E"
+  },
+  "tiers": [
+    {
+      "id": "direct",
+      "title": "Tier 1 · Direct ROC structures",
+      "subtitle": "Russian Orthodox Church bodies that take editorial cues from Moscow",
+      "nodes": [
+        {
+          "id": "africa",
+          "label": "Patriarchal Exarchate of Africa",
+          "metric": "350 parishes · 34 countries · 259 priests",
+          "since": "Dec 2021",
+          "weight": 350,
+          "note": "Created in 2021 in direct rivalry with the Constantinople-aligned Patriarchate of Alexandria; one of the fastest-growing ROC structures in history"
+        },
+        {
+          "id": "rocor_sa",
+          "label": "ROCOR Diocese of Caracas & South America",
+          "metric": "2 dioceses · 34 parishes · Brazil 7 + Argentina 3",
+          "since": "1934",
+          "weight": 34,
+          "note": "Headquartered at the Holy Trinity Cathedral in Buenos Aires; covers all of South America"
+        },
+        {
+          "id": "iglesiarusa",
+          "label": "iglesiarusa.info",
+          "metric": "Official Spanish-language ROCOR SA site",
+          "since": "Active",
+          "weight": 50,
+          "note": "Where Moscow Patriarchate decisions reach the Spanish web first"
+        }
+      ]
+    },
+    {
+      "id": "state",
+      "title": "Tier 2 · Russian state media in Spanish/Portuguese",
+      "subtitle": "Ideologically aligned amplifiers with massive social reach",
+      "nodes": [
+        {
+          "id": "rt_es",
+          "label": "RT en Español",
+          "metric": "18 M Facebook followers",
+          "since": "2009",
+          "weight": 18000000,
+          "note": "3rd most-shared domain on Twitter for Spanish posts about the Ukraine war (after YouTube and El País)"
+        },
+        {
+          "id": "sputnik_mundo",
+          "label": "Sputnik Mundo",
+          "metric": "8 M+ Spanish/Portuguese followers",
+          "since": "2014",
+          "weight": 8000000,
+          "note": "Top-15 most-shared on Spanish Twitter for war coverage"
+        },
+        {
+          "id": "latamnews",
+          "label": "LatamNews.lat",
+          "metric": "650 K monthly visitors",
+          "since": "Spring 2024",
+          "weight": 650000,
+          "note": "Launched in 2024 to circumvent Western sanctions on Sputnik. Sputnik mirror with new domain"
+        },
+        {
+          "id": "russkiy_mir",
+          "label": "Russkiy Mir Foundation",
+          "metric": "10 cultural centers across LATAM",
+          "since": "2007",
+          "weight": 10,
+          "note": "Putin-decreed soft-power agency. Centers in Argentina (×2), Brazil, Peru, Ecuador, Costa Rica, Guatemala, Nicaragua, Cuba, Mexico"
+        }
+      ]
+    },
+    {
+      "id": "republication",
+      "title": "Tier 3 · Spanish-language Catholic media that cover ROC news",
+      "subtitle": "Influential Spanish/Portuguese Catholic outlets that publish stories about Patriarch Kirill, the ROC, and the Ukraine war",
+      "nodes": [
+        {
+          "id": "aciprensa",
+          "label": "ACI Prensa",
+          "metric": "23+ tagged ROC articles",
+          "since": "1980",
+          "weight": 23,
+          "note": "Largest Spanish-language Catholic news agency (EWTN-affiliated). Dedicated 'Iglesia Ortodoxa Rusa' topic page"
+        },
+        {
+          "id": "religiondigital",
+          "label": "Religión Digital",
+          "metric": "Dedicated 'Papa e Iglesia ortodoxa rusa' topic",
+          "since": "1996",
+          "weight": 50,
+          "note": "Major Spanish Catholic news site. Multiple Kirill exposés (KGB ties, war support, arrest warrant)"
+        },
+        {
+          "id": "cnn_es",
+          "label": "CNN en Español",
+          "metric": "Latin America's largest English-origin news network",
+          "since": "1997",
+          "weight": 100,
+          "note": "Reproduces religion-and-war coverage in Spanish across LATAM"
+        }
+      ]
+    },
+    {
+      "id": "audience",
+      "title": "Tier 4 · Audience exposed (none in our 8 corpus sources)",
+      "subtitle": "Populations downstream of the propagation chain who get their information about Ukraine in Spanish, Portuguese, or via Orthodox channels",
+      "nodes": [
+        {
+          "id": "latam_catholics",
+          "label": "Latin American Catholics",
+          "metric": "~480 million",
+          "since": "Always",
+          "weight": 480000000,
+          "note": "The largest Catholic population on earth. Catholic news in Spanish/Portuguese is their primary source for religion-related current affairs"
+        },
+        {
+          "id": "africa_christians",
+          "label": "African Christians in ROC-active countries",
+          "metric": "~tens of millions across 34 countries",
+          "since": "Since 2021",
+          "weight": 30000000,
+          "note": "Estimate: ROC presence is concentrated in countries with large Christian populations (Nigeria, DRC, Uganda, Kenya, etc.)"
+        },
+        {
+          "id": "es_pt_wikipedia",
+          "label": "Spanish + Portuguese Wikipedia",
+          "metric": "Both languages cite Spanish Catholic media as sources",
+          "since": "Always",
+          "weight": 1000000,
+          "note": "Wikipedia citations propagate non-English framings into LLM training data via Common Crawl"
+        },
+        {
+          "id": "llm_training",
+          "label": "LLM training corpora (Common Crawl, FineWeb, RefinedWeb)",
+          "metric": "Multilingual scrape of the open web",
+          "since": "Always",
+          "weight": 100,
+          "note": "Spanish/Portuguese Catholic news sites are crawled and end up in LLM training data, contaminating spelling preferences with pre-2022 forms"
+        }
+      ]
+    }
+  ],
+  "key_finding": "Even if we found no Catholic Latin American outlet that copy-pastes mospat.ru directly, the structural pipeline is in place: Russia's Spanish-language state media (RT en Español alone has 18 M followers — almost twice Constantinople's entire English readership) coordinates editorially with the Moscow Patriarchate. Catholic outlets like ACI Prensa and Religión Digital report on ROC positions because Kirill is a major religious newsmaker. The reach asymmetry is the story: a single editorial choice on mospat.ru can be amplified to ~500 million Spanish/Portuguese speakers — roughly the entire English-speaking world — while our 8 corpus sources see none of it.",
+  "sources": [
+    {"label": "Patriarchal Exarchate of Africa parish counts", "url": "https://en.wikipedia.org/wiki/Patriarchal_Exarchate_of_Africa"},
+    {"label": "ROCOR South America Diocese", "url": "https://www.rocorstudies.org/2020/02/14/history-of-the-russian-orthodox-church-outside-russia-from-its-beginning-to-the-present-part-iv-chapter-1-6/"},
+    {"label": "RT en Español + Sputnik Mundo reach", "url": "https://reutersinstitute.politics.ox.ac.uk/news/despite-western-bans-putins-propaganda-flourishes-spanish-tv-and-social-media"},
+    {"label": "LatamNews.lat", "url": "https://insightnews.media/spanish-edition-of-russias-sputnik-launched-on-new-domain-noticiaslatam-lat/"},
+    {"label": "Russkiy Mir Foundation in LATAM", "url": "https://regard-est.com/the-successful-gamble-of-russian-soft-power-in-latin-america"},
+    {"label": "ACI Prensa Russian Orthodox Church coverage", "url": "https://www.aciprensa.com/tags/3290/iglesia-ortodoxa-rusa"},
+    {"label": "Religión Digital Russian Orthodox Church coverage", "url": "https://www.religiondigital.org/temas/papa-e-iglesia-ortodoxa-rusa/"}
+  ]
+}
