@@ -1,17 +1,16 @@
 """Collect Google Books Ngram data for toponym pairs.
 
 Downloads ngram frequency data for each spelling variant from the
-Google Books Ngram Viewer (English 2019 corpus, 1900-2019).
+Google Books Ngram Viewer.
 
-Important: Google Ngrams data ENDS AT 2019. Google's last corpus release
-was June 2020 and only covers through 2019. The Ngrams URL accepts
-year_end=2022 but returns padding zeros for 2020+ — that data does not
-exist on the open web (HathiTrust Bookworm has the same problem; their
-2022 slice contains only ~10 books due to digitization lag).
+History: this script originally used corpus 26 (English 2019) which is
+hard-capped at 2019. In April 2026 we discovered Google had quietly
+shipped corpus 37 (English 2022) which extends through 2022 — the
+Ngrams Viewer URL accepts it and returns real per-year data. We
+verified this directly: Kiev/Kyiv crosses over in 2022 in this corpus.
 
-For post-2019 books-style data, use Open Library instead — it's a
-catalog/metadata source rather than a full-text ngram, but it has real
-mention counts through 2024.
+Corpus 37 = English All 2022. Corpus 38 = English Fiction 2022.
+We use 37 for the broadest coverage.
 
 Usage:
     python -m pipeline.ingestion.collect_ngrams [--pair-ids 1,2,3]
@@ -35,8 +34,8 @@ log = logging.getLogger(__name__)
 
 NGRAM_URL = "https://books.google.com/ngrams/json"
 NGRAM_START_YEAR = 1900
-NGRAM_END_YEAR = 2019      # hard cap: Google has no real data past 2019
-NGRAM_CORPUS = 26          # English (2019 corpus)
+NGRAM_END_YEAR = 2022      # English 2022 corpus (corpus id 37) extends through 2022
+NGRAM_CORPUS = 37          # English All 2022 — replaces previous corpus 26 (English 2019)
 NGRAM_SMOOTHING = 0
 
 
