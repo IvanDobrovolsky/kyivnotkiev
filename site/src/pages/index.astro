@@ -772,64 +772,49 @@ function formatNum(n: number) {
             {(religiousProp as any).subtitle}
           </div>
 
-          {/* Pure HTML/CSS vertical flow — text uses real rem units and never
-              scales with viewBox. Connectors are simple vertical lines. */}
-          {(() => {
-            const prop = religiousProp;
-            const tiers = prop.tiers;
-            const tierColors = {
-              direct: "#D52B1E",
-              state: "#FF6B35",
-              republication: "#B45309",
-              audience: "#0057B8",
-            };
-
-            const NodeBox = ({color, label, metric, since}: any) => (
-              <div style={`background:${color}; border-radius:6px; padding:0.5rem 0.65rem; color:white; min-width:0;`}>
-                <div style="font-size:0.72rem; font-weight:700; line-height:1.25; overflow:hidden; text-overflow:ellipsis;">{label}</div>
-                <div style="font-size:0.62rem; opacity:0.88; margin-top:0.2rem; line-height:1.3;">{metric}</div>
-                <div style="font-size:0.6rem; opacity:0.7; margin-top:0.15rem;">{since}</div>
+          {/* Pure HTML/CSS vertical flow — text uses real rem units. */}
+          <div style="width:100%; display:flex; flex-direction:column; align-items:stretch; gap:0.85rem;">
+            {/* Source row */}
+            <div style="display:flex; justify-content:center;">
+              <div style={`max-width:340px; width:100%; background:${(religiousProp as any).source.color}; border-radius:6px; padding:0.5rem 0.65rem; color:white;`}>
+                <div style="font-size:0.72rem; font-weight:700; line-height:1.25;">Moscow Patriarchate</div>
+                <div style="font-size:0.62rem; opacity:0.88; margin-top:0.2rem; line-height:1.3;">mospat.ru · 6,000+ EN articles</div>
+                <div style="font-size:0.6rem; opacity:0.7; margin-top:0.15rem;">since 2015</div>
               </div>
-            );
+            </div>
 
-            return (
-              <div style="width:100%; display:flex; flex-direction:column; align-items:stretch; gap:0.85rem;">
-                {/* Source row */}
-                <div style="display:flex; justify-content:center;">
-                  <div style="max-width:340px; width:100%;">
-                    <NodeBox
-                      color={prop.source.color}
-                      label="Moscow Patriarchate"
-                      metric="mospat.ru · 6,000+ EN articles"
-                      since="since 2015"
-                    />
+            {/* Vertical connector */}
+            <div style="display:flex; justify-content:center;">
+              <div style="width:1px; height:14px; background:rgba(0,0,0,0.15);"></div>
+            </div>
+
+            {/* Tier rows */}
+            {(religiousProp as any).tiers.map((tier: any) => {
+              const tierColors = {
+                direct: "#D52B1E",
+                state: "#FF6B35",
+                republication: "#B45309",
+                audience: "#0057B8",
+              };
+              const fill = tierColors[tier.id] || "#888";
+              return (
+                <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                  <div style={`font-size:0.7rem; font-weight:700; color:${fill}; text-align:center;`}>
+                    {tier.title}
+                  </div>
+                  <div style={`display:grid; grid-template-columns:repeat(${tier.nodes.length}, minmax(0, 1fr)); gap:0.5rem;`}>
+                    {tier.nodes.map((n: any) => (
+                      <div style={`background:${fill}; border-radius:6px; padding:0.5rem 0.65rem; color:white; min-width:0;`}>
+                        <div style="font-size:0.72rem; font-weight:700; line-height:1.25; overflow:hidden; text-overflow:ellipsis;">{n.label}</div>
+                        <div style="font-size:0.62rem; opacity:0.88; margin-top:0.2rem; line-height:1.3;">{n.metric}</div>
+                        <div style="font-size:0.6rem; opacity:0.7; margin-top:0.15rem;">{n.since}</div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-
-                {/* Vertical connector */}
-                <div style="display:flex; justify-content:center;">
-                  <div style="width:1px; height:14px; background:rgba(0,0,0,0.15);"></div>
-                </div>
-
-                {/* Tier rows */}
-                {tiers.map((tier) => {
-                  const fill = tierColors[tier.id] || "#888";
-                  return (
-                    <div style="display:flex; flex-direction:column; gap:0.4rem;">
-                      <div style={`font-size:0.7rem; font-weight:700; color:${fill}; text-align:center;`}>
-                        {tier.title}
-                      </div>
-                      <div style={`display:grid; grid-template-columns:repeat(${tier.nodes.length}, minmax(0, 1fr)); gap:0.5rem;`}>
-                        {tier.nodes.map((n) => (
-                          <NodeBox color={fill} label={n.label} metric={n.metric} since={n.since} />
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })()}
+              );
+            })}
+          </div>
 
           <div style="margin-top:0.75rem; padding:0.75rem 1rem; background:rgba(213,43,30,0.06); border-left:3px solid #D52B1E; font-size:0.7rem; color:var(--text); line-height:1.6;">
             <strong>Key finding.</strong> {(religiousProp as any).key_finding}
