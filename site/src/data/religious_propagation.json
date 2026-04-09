@@ -15,16 +15,16 @@
       "nodes": [
         {
           "id": "africa",
-          "label": "Patriarchal Exarchate of Africa",
-          "metric": "350 parishes · 34 countries · 259 priests",
+          "label": "Exarchate of Africa",
+          "metric": "350 parishes · 34 countries",
           "since": "Dec 2021",
           "weight": 350,
           "note": "Created in 2021 in direct rivalry with the Constantinople-aligned Patriarchate of Alexandria; one of the fastest-growing ROC structures in history"
         },
         {
           "id": "rocor_sa",
-          "label": "ROCOR Diocese of Caracas & South America",
-          "metric": "2 dioceses · 34 parishes · Brazil 7 + Argentina 3",
+          "label": "ROCOR Diocese · Caracas",
+          "metric": "34 parishes · Brazil + Argentina",
           "since": "1934",
           "weight": 34,
           "note": "Headquartered at the Holy Trinity Cathedral in Buenos Aires; covers all of South America"
@@ -32,7 +32,7 @@
         {
           "id": "iglesiarusa",
           "label": "iglesiarusa.info",
-          "metric": "Official Spanish-language ROCOR SA site",
+          "metric": "Official Spanish ROCOR site",
           "since": "Active",
           "weight": 50,
           "note": "Where Moscow Patriarchate decisions reach the Spanish web first"
@@ -55,7 +55,7 @@
         {
           "id": "sputnik_mundo",
           "label": "Sputnik Mundo",
-          "metric": "8 M+ Spanish/Portuguese followers",
+          "metric": "8 M+ ES/PT followers",
           "since": "2014",
           "weight": 8000000,
           "note": "Top-15 most-shared on Spanish Twitter for war coverage"
@@ -71,7 +71,7 @@
         {
           "id": "russkiy_mir",
           "label": "Russkiy Mir Foundation",
-          "metric": "10 cultural centers across LATAM",
+          "metric": "10 cultural centers in LATAM",
           "since": "2007",
           "weight": 10,
           "note": "Putin-decreed soft-power agency. Centers in Argentina (×2), Brazil, Peru, Ecuador, Costa Rica, Guatemala, Nicaragua, Cuba, Mexico"
@@ -94,7 +94,7 @@
         {
           "id": "religiondigital",
           "label": "Religión Digital",
-          "metric": "Dedicated 'Papa e Iglesia ortodoxa rusa' topic",
+          "metric": "'Papa e Iglesia ortodoxa rusa' topic",
           "since": "1996",
           "weight": 50,
           "note": "Major Spanish Catholic news site. Multiple Kirill exposés (KGB ties, war support, arrest warrant)"
@@ -102,7 +102,7 @@
         {
           "id": "cnn_es",
           "label": "CNN en Español",
-          "metric": "Latin America's largest English-origin news network",
+          "metric": "Latin America's largest US-origin net",
           "since": "1997",
           "weight": 100,
           "note": "Reproduces religion-and-war coverage in Spanish across LATAM"
@@ -124,8 +124,8 @@
         },
         {
           "id": "africa_christians",
-          "label": "African Christians in ROC-active countries",
-          "metric": "~tens of millions across 34 countries",
+          "label": "African Christians (ROC zones)",
+          "metric": "~tens of millions · 34 countries",
           "since": "Since 2021",
           "weight": 30000000,
           "note": "Estimate: ROC presence is concentrated in countries with large Christian populations (Nigeria, DRC, Uganda, Kenya, etc.)"
@@ -133,15 +133,15 @@
         {
           "id": "es_pt_wikipedia",
           "label": "Spanish + Portuguese Wikipedia",
-          "metric": "Both languages cite Spanish Catholic media as sources",
+          "metric": "Cite Spanish Catholic media",
           "since": "Always",
           "weight": 1000000,
           "note": "Wikipedia citations propagate non-English framings into LLM training data via Common Crawl"
         },
         {
           "id": "llm_training",
-          "label": "LLM training corpora (Common Crawl, FineWeb, RefinedWeb)",
-          "metric": "Multilingual scrape of the open web",
+          "label": "LLM training corpora",
+          "metric": "Common Crawl · FineWeb · RefinedWeb",
           "since": "Always",
           "weight": 100,
           "note": "Spanish/Portuguese Catholic news sites are crawled and end up in LLM training data, contaminating spelling preferences with pre-2022 forms"
