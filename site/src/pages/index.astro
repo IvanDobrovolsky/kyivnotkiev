@@ -523,14 +523,15 @@ function formatNum(n: number) {
             c.models.push(m);
           }
 
-          // Layout — compact, sized in real pixels (no viewBox upscaling)
-          const ROW_H = 26;
-          const LABEL_W = 170;
-          const CELL_W = 56;
-          const HEADER_H = 22;
-          const PAD = 8;
+          // Layout — designed at a wide natural size (~1300px) so the viewBox
+          // scales to ~1.0 inside a typical container (no font zoom).
+          const ROW_H = 32;
+          const LABEL_W = 200;
+          const CELL_W = 78;
+          const HEADER_H = 28;
+          const PAD = 12;
           const W = LABEL_W + CELL_W * quarters.length + PAD * 2;
-          const H = HEADER_H + ROW_H * famList.length + PAD * 2 + 40;
+          const H = HEADER_H + ROW_H * famList.length + PAD * 2 + 50;
 
           // TAS color scale: lower → red, higher → blue (Ukrainian flag direction)
           const tasColor = (v) => {
@@ -555,13 +556,13 @@ function formatNum(n: number) {
           };
 
           return (
-            <div style="overflow-x:auto; margin-bottom:0.75rem;">
-              <svg width={W} height={H} style="display:block; max-width:100%; height:auto;">
+            <div style="width:100%; margin-bottom:0.75rem;">
+              <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" style="display:block; width:100%; height:auto;">
                 {/* Quarter headers */}
                 {quarters.map((q, i) => {
                   const cx = PAD + LABEL_W + CELL_W * i + CELL_W / 2;
                   return (
-                    <text x={cx} y={PAD + HEADER_H - 10} textAnchor="middle" fontSize="10" fontWeight="600" fill="#6b7280">
+                    <text x={cx} y={PAD + HEADER_H - 10} textAnchor="middle" fontSize="13" fontWeight="600" fill="#6b7280">
                       {qLabel(q)}
                     </text>
                   );
@@ -574,11 +575,11 @@ function formatNum(n: number) {
                   return (
                     <g>
                       {/* family label with color swatch */}
-                      <rect x={PAD} y={ry + 6} width={4} height={ROW_H - 12} fill={fcolor} rx="2" />
-                      <text x={PAD + 12} y={ry + ROW_H / 2 + 4} fontSize="11" fontWeight="600" fill="#374151">
+                      <rect x={PAD} y={ry + 8} width={5} height={ROW_H - 16} fill={fcolor} rx="2" />
+                      <text x={PAD + 14} y={ry + ROW_H / 2 + 5} fontSize="14" fontWeight="600" fill="#374151">
                         {fam}
                       </text>
-                      <text x={PAD + LABEL_W - 8} y={ry + ROW_H / 2 + 4} textAnchor="end" fontSize="9" fill="#9ca3af">
+                      <text x={PAD + LABEL_W - 10} y={ry + ROW_H / 2 + 5} textAnchor="end" fontSize="12" fill="#9ca3af">
                         {`×${(families[fam] || {}).n_models || 0}`}
                       </text>
 
@@ -604,8 +605,8 @@ function formatNum(n: number) {
                               fill={fill} stroke="#d1d5db" strokeWidth="0.5" rx="2">
                               <title>{`${fam} · ${qLabel(q)}\n${cell.n} model${cell.n === 1 ? '' : 's'}\nTAS avg: ${tas.toFixed(1)}%\nFree recall avg: ${open.toFixed(1)}%\nForced choice avg: ${forced.toFixed(1)}%\nModels: ${cell.models.map(m => m.key).join(', ')}`}</title>
                             </rect>
-                            <text x={cx + CELL_W / 2} y={ry + ROW_H / 2 + 4}
-                              textAnchor="middle" fontSize="10" fontWeight="600"
+                            <text x={cx + CELL_W / 2} y={ry + ROW_H / 2 + 5}
+                              textAnchor="middle" fontSize="14" fontWeight="600"
                               fill={textColor} pointerEvents="none">
                               {tas.toFixed(0)}
                             </text>
@@ -617,12 +618,12 @@ function formatNum(n: number) {
                 })}
 
                 {/* Color scale legend at bottom */}
-                <g transform={`translate(${PAD + LABEL_W}, ${PAD + HEADER_H + ROW_H * famList.length + 14})`}>
-                  <text x={0} y={-2} fontSize="9" fontWeight="600" fill="#6b7280">TAS legend (% Kyiv)</text>
+                <g transform={`translate(${PAD + LABEL_W}, ${PAD + HEADER_H + ROW_H * famList.length + 18})`}>
+                  <text x={0} y={-2} fontSize="12" fontWeight="600" fill="#6b7280">TAS legend (% Kyiv)</text>
                   {[40, 50, 60, 70, 80, 90, 100].map((v, i) => (
                     <g>
-                      <rect x={i * 32} y={4} width={28} height={14} fill={tasColor(v)} stroke="#d1d5db" strokeWidth="0.5" rx="2" />
-                      <text x={i * 32 + 14} y={28} textAnchor="middle" fontSize="9" fill="#6b7280">{v}</text>
+                      <rect x={i * 44} y={6} width={36} height={16} fill={tasColor(v)} stroke="#d1d5db" strokeWidth="0.5" rx="2" />
+                      <text x={i * 44 + 18} y={34} textAnchor="middle" fontSize="11" fill="#6b7280">{v}</text>
                     </g>
                   ))}
                 </g>
@@ -809,15 +810,15 @@ function formatNum(n: number) {
               audience: "#0057B8",
             };
 
-            const PAD_X = 16;
-            const PAD_TOP = 12;
-            const BOX_W = 220;
-            const BOX_H = 62;
-            const H_GAP = 16;
-            const SOURCE_GAP = 28; // gap below source row
-            const HEADER_GAP = 8;  // gap between header text and its tier row
-            const TIER_GAP = 26;   // gap between consecutive tier rows
-            const HEADER_H = 14;   // header text height
+            const PAD_X = 24;
+            const PAD_TOP = 16;
+            const BOX_W = 280;
+            const BOX_H = 78;
+            const H_GAP = 22;
+            const SOURCE_GAP = 36; // gap below source row
+            const HEADER_GAP = 10; // gap between header text and its tier row
+            const TIER_GAP = 32;   // gap between consecutive tier rows
+            const HEADER_H = 18;   // header text height
 
             const maxCols = Math.max(1, ...tiers.map(t => t.nodes.length));
             const chartW = PAD_X * 2 + maxCols * BOX_W + (maxCols - 1) * H_GAP;
@@ -904,13 +905,13 @@ function formatNum(n: number) {
                   {/* Source node */}
                   <g>
                     <rect x={sourcePos.x} y={sourcePos.y} width={sourcePos.w} height={sourcePos.h} rx="6" fill={prop.source.color} fillOpacity="0.95" />
-                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 19} textAnchor="middle" fill="white" fontSize="9.5" fontWeight="700">
+                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 26} textAnchor="middle" fill="white" fontSize="14" fontWeight="700">
                       Moscow Patriarchate
                     </text>
-                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 33} textAnchor="middle" fill="white" fillOpacity="0.85" fontSize="7.5">
+                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 44} textAnchor="middle" fill="white" fillOpacity="0.88" fontSize="11">
                       mospat.ru · 6,000+ EN articles
                     </text>
-                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 46} textAnchor="middle" fill="white" fillOpacity="0.7" fontSize="7.5">
+                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 60} textAnchor="middle" fill="white" fillOpacity="0.72" fontSize="11">
                       since 2015
                     </text>
                   </g>
@@ -921,21 +922,21 @@ function formatNum(n: number) {
                     const fill = tierColors[tier.id] || "#888";
                     return (
                       <g>
-                        <text x={chartW / 2} y={headerY} textAnchor="middle" fontSize="11" fontWeight="700" fill={fill}>
+                        <text x={chartW / 2} y={headerY} textAnchor="middle" fontSize="14" fontWeight="700" fill={fill}>
                           {tier.title}
                         </text>
                         {tier.nodes.map((n) => {
                           const p = tierPositions[`${tier.id}:${n.id}`];
                           return (
                             <g>
-                              <rect x={p.x} y={p.y} width={p.w} height={p.h} rx="5" fill={fill} fillOpacity="0.95" />
-                              <text x={p.x + 9} y={p.y + 16} fill="white" fontSize="9" fontWeight="700">
+                              <rect x={p.x} y={p.y} width={p.w} height={p.h} rx="6" fill={fill} fillOpacity="0.95" />
+                              <text x={p.x + 12} y={p.y + 22} fill="white" fontSize="13" fontWeight="700">
                                 {n.label}
                               </text>
-                              <text x={p.x + 9} y={p.y + 30} fill="white" fillOpacity="0.88" fontSize="7.5">
+                              <text x={p.x + 12} y={p.y + 42} fill="white" fillOpacity="0.88" fontSize="11">
                                 {n.metric}
                               </text>
-                              <text x={p.x + 9} y={p.y + 44} fill="white" fillOpacity="0.72" fontSize="7.5">
+                              <text x={p.x + 12} y={p.y + 60} fill="white" fillOpacity="0.72" fontSize="11">
                                 {n.since}
                               </text>
                             </g>
