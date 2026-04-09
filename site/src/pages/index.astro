@@ -261,11 +261,11 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Per-pair AI / LLM scan: 31 models × 3 tests for THIS pair -->
+      <!-- Per-pair AI / LLM scan: 71 models × 3 tests for THIS pair -->
       <div class="chart-container" id="pair-llm-container" style="margin-bottom:1rem;">
         <div class="chart-title" style="color: var(--text)">What AI says about <span id="pair-llm-pair-name">this pair</span></div>
         <div class="chart-subtitle" style="margin-bottom:0.5rem;" id="pair-llm-subtitle">
-          31 frontier LLMs from 5 labs, 3 prompt variants each — what they answer for this specific pair.
+          71 LLMs from 8 labs (Anthropic, Google Gemini, Google Gemma, OpenAI, xAI, Meta, Alibaba, Mistral), 3 prompt variants each — what they answer for this specific pair.
         </div>
         <div id="pair-llm-body"></div>
       </div>
@@ -456,15 +456,17 @@ function formatNum(n: number) {
           const traj = llmTraj;
           const models = traj.models.filter(m => m.release_date && m.tas != null);
 
-          // Layout
-          const W = 920;
-          const H = 380;
-          const PAD_L = 56;
-          const PAD_R = 14;
+          // Layout — wider canvas, smaller left/right padding
+          const W = 1000;
+          const H = 400;
+          const PAD_L = 42;
+          const PAD_R = 18;
           const PAD_T = 28;
-          const PAD_B = 56;
+          const PAD_B = 60;
           const innerW = W - PAD_L - PAD_R;
           const innerH = H - PAD_T - PAD_B;
+          const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          const fmtMonth = (m) => `${MONTH_NAMES[m % 12]} ${Math.floor(m / 12)}`;
 
           // Y: full 0-100 with explicit ticks every 10
           const yMin = 30;
@@ -481,13 +483,11 @@ function formatNum(n: number) {
           const xMax = Math.max(...models.map(m => dateToMonths(m.release_date)));
           const x = (mon) => PAD_L + ((mon - xMin) / Math.max(1, xMax - xMin)) * innerW;
 
-          // X tick: every 3 months — avoid `<=` which Astro JSX parses as a tag
+          // X ticks: only quarter-starts (Jan, Apr, Jul, Oct) → ~12 ticks
+          // Format: "May 2024" (no leading zeros, full year)
           const xticks = Array.from({length: xMax - xMin + 1}, (_, i) => xMin + i)
-            .filter(m => {
-              const mo = (m % 12) + 1;
-              return mo === 1 || mo === 4 || mo === 7 || mo === 10;
-            })
-            .map(m => ({label: `${Math.floor(m / 12)}-${String((m % 12) + 1).padStart(2, '0')}`, mon: m}));
+            .filter(m => [0, 3, 6, 9].indexOf(m % 12) !== -1)
+            .map(m => ({label: fmtMonth(m), mon: m}));
 
           // Group by family, then by month for line aggregation
           const families = traj.families;
@@ -538,51 +538,35 @@ function formatNum(n: number) {
           return (
             <div style="overflow-x:auto; margin-bottom:0.75rem;">
               <svg width={W} height={H} style="display:block; min-width:100%;">
-                {/* Y gridlines + labels */}
+                {/* Y gridlines + labels — small numbers, tight to axis */}
                 {ygrid.map(g => (
                   <g>
                     <line x1={PAD_L} x2={W - PAD_R} y1={y(g)} y2={y(g)}
                       stroke="#e5e7eb" strokeWidth="1" strokeDasharray={g === 100 ? "" : "2,3"} />
-                    <text x={PAD_L - 8} y={y(g) + 3} textAnchor="end" fontSize="10" fill="#6b7280">{g}%</text>
+                    <text x={PAD_L - 4} y={y(g) + 3} textAnchor="end" fontSize="9" fill="#6b7280">{g}</text>
                   </g>
                 ))}
                 {/* Reference line at corpus value (~85% Kyiv) */}
                 <line x1={PAD_L} x2={W - PAD_R} y1={y(85)} y2={y(85)}
-                  stroke="#0057B8" strokeWidth="1" strokeDasharray="4,4" strokeOpacity="0.4" />
-                <text x={W - PAD_R - 4} y={y(85) - 4} textAnchor="end" fontSize="9" fill="#0057B8">corpus average ≈ 85%</text>
-
-                {/* Y axis title */}
-                <text x={14} y={H / 2} textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151"
-                  transform={`rotate(-90 14 ${H / 2})`}>TAS (% Kyiv)</text>
+                  stroke="#0057B8" strokeWidth="1" strokeDasharray="4,4" strokeOpacity="0.5" />
+                <text x={W - PAD_R - 4} y={y(85) - 4} textAnchor="end" fontSize="9" fill="#0057B8" fontWeight="600">corpus ≈ 85%</text>
 
                 {/* X axis ticks + labels */}
                 {xticks.map(t => (
                   <g>
                     <line x1={x(t.mon)} x2={x(t.mon)} y1={PAD_T + innerH} y2={PAD_T + innerH + 4}
                       stroke="#6b7280" strokeWidth="1" />
-                    <text x={x(t.mon)} y={PAD_T + innerH + 16} textAnchor="middle" fontSize="10" fill="#6b7280">{t.label}</text>
+                    <text x={x(t.mon)} y={PAD_T + innerH + 18} textAnchor="middle" fontSize="10" fill="#6b7280">{t.label}</text>
                   </g>
                 ))}
-                <text x={PAD_L + innerW / 2} y={H - 8} textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151">model release date</text>
 
-                {/* Faded scatter: every individual model */}
-                {models.map(m => {
-                  const c = families[m.family]?.color || '#888';
-                  return (
-                    <circle cx={x(dateToMonths(m.release_date))} cy={y(m.tas)} r={2.5}
-                      fill={c} fillOpacity="0.4">
-                      <title>{`${m.key}\nTAS=${m.tas}%  open=${m.open}%  forced=${m.forced}%  released ${m.release_date}`}</title>
-                    </circle>
-                  );
-                })}
-
-                {/* Per-family line + dots at each month */}
+                {/* Per-family line + dots at each month — no faded scatter, just clean lines */}
                 {familyLines.map(fl => (
                   <g>
-                    <path d={pathFor(fl.points)} fill="none" stroke={fl.color} strokeWidth="2.5" strokeOpacity="0.85" />
+                    <path d={pathFor(fl.points)} fill="none" stroke={fl.color} strokeWidth="2.5" strokeOpacity="0.9" />
                     {fl.points.map(p => (
                       <circle cx={x(p.mon)} cy={y(p.tas)} r={4} fill={fl.color} stroke="white" strokeWidth="1.5">
-                        <title>{`${fl.family}\nMonth: ${Math.floor(p.mon / 12)}-${String((p.mon % 12) + 1).padStart(2, '0')}\nTAS: ${p.tas.toFixed(1)}%`}</title>
+                        <title>{`${fl.family}\n${fmtMonth(p.mon)}\nTAS: ${p.tas.toFixed(1)}%`}</title>
                       </circle>
                     ))}
                   </g>
@@ -1752,17 +1736,20 @@ function formatNum(n: number) {
       });
     }
 
-    // ── Per-pair LLM scan: 31 frontier models × 3 prompt variants for THIS pair ──
+    // ── Per-pair LLM scan: 71 frontier models × 3 prompt variants for THIS pair ──
     function drawPairLLM() {
       const container = document.getElementById('pair-llm-container');
       const body = document.getElementById('pair-llm-body');
       const nameEl = document.getElementById('pair-llm-pair-name');
-      if (!container || !body) return;
+      if (!container || !body) {
+        console.warn('[drawPairLLM] container or body missing', {container, body});
+        return;
+      }
 
       const pid = String(activePairId);
       const pp = (llmPerPair as any).pairs?.[pid];
       if (!pp || !pp.models) {
-        container.style.display = 'none';
+        body.innerHTML = `<div style="font-size:0.7rem; color:var(--text-muted); padding:0.5rem 0;">No LLM data for pair ${pid}.</div>`;
         return;
       }
       container.style.display = '';
