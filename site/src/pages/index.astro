@@ -796,18 +796,10 @@ function formatNum(n: number) {
             {(religiousProp as any).subtitle}
           </div>
 
-          {/* Custom Sankey-like flow chart */}
+          {/* Vertical flow: source at top, tiers stack downward */}
           {(() => {
             const prop = religiousProp;
-            const COL_W = 210;
-            const COL_GAP = 38;
-            const ROW_H = 60;
-            const ROW_GAP = 8;
             const tiers = prop.tiers;
-            const maxRows = Math.max(1, ...tiers.map(t => t.nodes.length));
-            const totalRows = maxRows;
-            const chartW = (COL_W + COL_GAP) * (tiers.length + 1) - COL_GAP + 40;
-            const chartH = totalRows * (ROW_H + ROW_GAP) + 40;
             const tierColors = {
               direct: "#D52B1E",
               state: "#FF6B35",
@@ -815,32 +807,51 @@ function formatNum(n: number) {
               audience: "#0057B8",
             };
 
-            const sourceX = 20;
-            const sourceY = chartH / 2 - ROW_H / 2;
+            const PAD_X = 20;
+            const PAD_TOP = 14;
+            const BOX_W = 190;
+            const BOX_H = 58;
+            const H_GAP = 16;
+            const HEADER_H = 18;
+            const ROW_GAP = 24;
 
-            // Position each tier's nodes vertically centered
-            const nodePos = {};
-            nodePos[prop.source.id] = {x: sourceX, y: sourceY, w: COL_W, h: ROW_H};
+            const maxCols = Math.max(1, ...tiers.map(t => t.nodes.length));
+            const chartW = PAD_X * 2 + maxCols * BOX_W + (maxCols - 1) * H_GAP;
+            // Source row + N tier rows
+            const rowHeight = HEADER_H + BOX_H + ROW_GAP;
+            const chartH = PAD_TOP + BOX_H + ROW_GAP + tiers.length * rowHeight + 6;
 
+            const innerLeft = PAD_X;
+            const innerWidth = chartW - PAD_X * 2;
+
+            // Layout helper: center N boxes horizontally inside innerWidth
+            const layoutRow = (n, yTop) => {
+              const totalW = n * BOX_W + (n - 1) * H_GAP;
+              const startX = innerLeft + (innerWidth - totalW) / 2;
+              const out = [];
+              for (let i = 0; i < n; i++) {
+                out.push({x: startX + i * (BOX_W + H_GAP), y: yTop, w: BOX_W, h: BOX_H});
+              }
+              return out;
+            };
+
+            // Source position (single centered box)
+            const sourcePos = layoutRow(1, PAD_TOP)[0];
+
+            // Tier positions
+            const tierPositions = {};
             tiers.forEach((tier, ti) => {
-              const colX = sourceX + (COL_W + COL_GAP) * (ti + 1);
-              const nRows = tier.nodes.length;
-              const totalH = nRows * ROW_H + (nRows - 1) * ROW_GAP;
-              const startY = (chartH - totalH) / 2;
+              const yTop = PAD_TOP + BOX_H + ROW_GAP + ti * rowHeight + HEADER_H;
+              const positions = layoutRow(tier.nodes.length, yTop);
               tier.nodes.forEach((n, ni) => {
-                nodePos[`${tier.id}:${n.id}`] = {
-                  x: colX,
-                  y: startY + ni * (ROW_H + ROW_GAP),
-                  w: COL_W,
-                  h: ROW_H,
-                };
+                tierPositions[`${tier.id}:${n.id}`] = positions[ni];
               });
             });
 
-            // Build edges: source → tier 1, then each tier → next
+            // Build edges between consecutive tiers (vertical: bottom of from → top of to)
             const edges = [];
             tiers[0].nodes.forEach(n => {
-              edges.push({from: prop.source.id, to: `${tiers[0].id}:${n.id}`, color: tierColors[tiers[0].id]});
+              edges.push({from: 'SOURCE', to: `${tiers[0].id}:${n.id}`, color: tierColors[tiers[0].id]});
             });
             for (let ti = 0; ti < tiers.length - 1; ti++) {
               const cur = tiers[ti];
@@ -856,26 +867,28 @@ function formatNum(n: number) {
               });
             }
 
+            const lookup = (id) => id === 'SOURCE' ? sourcePos : tierPositions[id];
+
             return (
               <div style="overflow-x:auto;">
                 <svg width={chartW} height={chartH} style="display:block; min-width:100%;">
                   {/* Edges first so they draw under nodes */}
-                  {edges.map((e, i) => {
-                    const a = nodePos[e.from];
-                    const b = nodePos[e.to];
+                  {edges.map((e) => {
+                    const a = lookup(e.from);
+                    const b = lookup(e.to);
                     if (!a || !b) return null;
-                    const x1 = a.x + a.w;
-                    const y1 = a.y + a.h / 2;
-                    const x2 = b.x;
-                    const y2 = b.y + b.h / 2;
-                    const cx1 = x1 + (x2 - x1) * 0.5;
-                    const cx2 = x1 + (x2 - x1) * 0.5;
+                    const x1 = a.x + a.w / 2;
+                    const y1 = a.y + a.h;
+                    const x2 = b.x + b.w / 2;
+                    const y2 = b.y;
+                    const cy1 = y1 + (y2 - y1) * 0.5;
+                    const cy2 = y1 + (y2 - y1) * 0.5;
                     return (
                       <path
-                        d={`M ${x1} ${y1} C ${cx1} ${y1}, ${cx2} ${y2}, ${x2} ${y2}`}
+                        d={`M ${x1} ${y1} C ${x1} ${cy1}, ${x2} ${cy2}, ${x2} ${y2}`}
                         stroke={e.color}
                         strokeWidth="1.2"
-                        strokeOpacity="0.18"
+                        strokeOpacity="0.2"
                         fill="none"
                       />
                     );
@@ -883,86 +896,45 @@ function formatNum(n: number) {
 
                   {/* Source node */}
                   <g>
-                    <rect
-                      x={nodePos[prop.source.id].x}
-                      y={nodePos[prop.source.id].y}
-                      width={nodePos[prop.source.id].w}
-                      height={nodePos[prop.source.id].h}
-                      rx="6"
-                      fill={prop.source.color}
-                      fillOpacity="0.95"
-                    />
-                    <text
-                      x={nodePos[prop.source.id].x + nodePos[prop.source.id].w / 2}
-                      y={nodePos[prop.source.id].y + 20}
-                      textAnchor="middle"
-                      fill="white"
-                      fontSize="9"
-                      fontWeight="700"
-                    >
-                      {prop.source.label}
+                    <rect x={sourcePos.x} y={sourcePos.y} width={sourcePos.w} height={sourcePos.h} rx="6" fill={prop.source.color} fillOpacity="0.95" />
+                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 19} textAnchor="middle" fill="white" fontSize="9.5" fontWeight="700">
+                      Moscow Patriarchate
                     </text>
-                    <text
-                      x={nodePos[prop.source.id].x + nodePos[prop.source.id].w / 2}
-                      y={nodePos[prop.source.id].y + 33}
-                      textAnchor="middle"
-                      fill="white"
-                      fillOpacity="0.85"
-                      fontSize="7.5"
-                    >
-                      DECR · 6,000+ English articles
+                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 33} textAnchor="middle" fill="white" fillOpacity="0.85" fontSize="7.5">
+                      mospat.ru · 6,000+ EN articles
                     </text>
-                    <text
-                      x={nodePos[prop.source.id].x + nodePos[prop.source.id].w / 2}
-                      y={nodePos[prop.source.id].y + 46}
-                      textAnchor="middle"
-                      fill="white"
-                      fillOpacity="0.7"
-                      fontSize="7.5"
-                    >
+                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 46} textAnchor="middle" fill="white" fillOpacity="0.7" fontSize="7.5">
                       since 2015
                     </text>
                   </g>
 
-                  {/* Tier nodes */}
-                  {tiers.map((tier) => (
-                    <g>
-                      {tier.nodes.map((n) => {
-                        const p = nodePos[`${tier.id}:${n.id}`];
-                        const fill = tierColors[tier.id] || "#888";
-                        return (
-                          <g>
-                            <rect
-                              x={p.x}
-                              y={p.y}
-                              width={p.w}
-                              height={p.h}
-                              rx="5"
-                              fill={fill}
-                              fillOpacity="0.95"
-                            />
-                            <text x={p.x + 9} y={p.y + 16} fill="white" fontSize="9" fontWeight="700">
-                              {n.label}
-                            </text>
-                            <text x={p.x + 9} y={p.y + 30} fill="white" fillOpacity="0.88" fontSize="7.5">
-                              {n.metric}
-                            </text>
-                            <text x={p.x + 9} y={p.y + 44} fill="white" fillOpacity="0.72" fontSize="7.5">
-                              {n.since}
-                            </text>
-                          </g>
-                        );
-                      })}
-                    </g>
-                  ))}
-
-                  {/* Tier headers */}
+                  {/* Tier rows */}
                   {tiers.map((tier, ti) => {
-                    const x = sourceX + (COL_W + COL_GAP) * (ti + 1);
+                    const headerY = PAD_TOP + BOX_H + ROW_GAP + ti * rowHeight + 12;
+                    const fill = tierColors[tier.id] || "#888";
                     return (
-                      <text x={x + COL_W / 2} y={12} textAnchor="middle" fontSize="8" fontWeight="700" fill={tierColors[tier.id]}>
-                        {tier.title.split('·')[0].trim()} · {tier.title.split('·')[1].trim()}
-                      </text>
+                      <g>
+                        <text x={chartW / 2} y={headerY} textAnchor="middle" fontSize="9" fontWeight="700" fill={fill}>
+                          {tier.title}
+                        </text>
+                        {tier.nodes.map((n) => {
+                          const p = tierPositions[`${tier.id}:${n.id}`];
+                          return (
+                            <g>
+                              <rect x={p.x} y={p.y} width={p.w} height={p.h} rx="5" fill={fill} fillOpacity="0.95" />
+                              <text x={p.x + 9} y={p.y + 16} fill="white" fontSize="9" fontWeight="700">
+                                {n.label}
+                              </text>
+                              <text x={p.x + 9} y={p.y + 30} fill="white" fillOpacity="0.88" fontSize="7.5">
+                                {n.metric}
+                              </text>
+                              <text x={p.x + 9} y={p.y + 44} fill="white" fillOpacity="0.72" fontSize="7.5">
+                                {n.since}
+                              </text>
+                            </g>
+                          );
+                        })}
+                      </g>
                     );
                   })}
                 </svg>
@@ -974,11 +946,11 @@ function formatNum(n: number) {
             <strong>Key finding.</strong> {(religiousProp as any).key_finding}
           </div>
 
-          <div style="margin-top:0.5rem; font-size:0.6rem; color:var(--text-muted);">
+          <div style="margin-top:0.4rem; font-size:0.55rem; color:var(--text-muted); line-height:1.5;">
             Sources: {(religiousProp as any).sources.map((s: any, i: number) => (
               <span>
                 {i > 0 && " · "}
-                <a href={s.url} target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">{s.label}</a>
+                <a href={s.url} target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">{s.short || s.label}</a>
               </span>
             ))}
           </div>
@@ -1040,21 +1012,6 @@ function formatNum(n: number) {
             Historical identity terms (Vladimir the Great vs. Volodymyr) barely budged at under 5%.
             And food terms like Borshch are fighting a separate battle, championed by chef
             Yevhen Klopotenko's UNESCO campaign.
-          </p>
-          <p style="border-left:3px solid rgba(0,87,184,0.25); padding:0.5rem 0.9rem; background:rgba(0,87,184,0.03); border-radius:0 4px 4px 0; font-size:0.85rem;">
-            <strong>A note on what's not here.</strong>
-            The original pipeline included a cross-lingual track — measuring Ukrainian-toponym
-            adoption in non-English news (French, German, Spanish, Italian, Polish) via GDELT
-            domain TLDs. We removed it from the published study because honest measurement
-            in those languages requires per-language transliteration rules: French uses
-            <em>Kiev</em> by tradition but writes <em>Kyïv</em> in some style guides;
-            Spanish guidelines after 2022 prefer <em>Kiev</em> with no diacritic; German uses
-            <em>Kiew</em>; Polish has its own forms (<em>Kijów</em>); and each pair requires
-            its own per-language mapping. The complexity of building a defensible
-            transliteration table for ~50 pairs across 6+ languages exceeded the scope of
-            this paper. The cross-lingual angle is real — and the propagation graph in the
-            religious section makes the structural argument that non-English audiences
-            matter — but the rigorous quantitative version is a follow-up study of its own.
           </p>
         </div>
         <div class="about-links">
