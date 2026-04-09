@@ -523,24 +523,11 @@ function formatNum(n: number) {
             c.models.push(m);
           }
 
-          // Layout — designed at a wide natural size (~1300px) so the viewBox
-          // scales to ~1.0 inside a typical container (no font zoom).
-          const ROW_H = 32;
-          const LABEL_W = 200;
-          const CELL_W = 78;
-          const HEADER_H = 28;
-          const PAD = 12;
-          const W = LABEL_W + CELL_W * quarters.length + PAD * 2;
-          const H = HEADER_H + ROW_H * famList.length + PAD * 2 + 50;
-
-          // TAS color scale: lower → red, higher → blue (Ukrainian flag direction)
+          // TAS color scale: lower → red, higher → blue
           const tasColor = (v) => {
             if (v == null || isNaN(v)) return '#f8f9fb';
-            // 50 = neutral gray, 100 = strong blue, 0 = strong red
             const t = Math.max(0, Math.min(1, (v - 40) / 60));
-            // interpolate red → light → blue
             if (t < 0.5) {
-              // red to white
               const u = t * 2;
               const r = 220 - Math.round(u * 60);
               const g = 60 + Math.round(u * 180);
@@ -555,80 +542,66 @@ function formatNum(n: number) {
             }
           };
 
+          // Pure HTML/CSS grid heatmap so text uses real rem units and never
+          // scales with viewBox. Always 100% container width.
+          const gridCols = `minmax(140px, 180px) repeat(${quarters.length}, minmax(0, 1fr))`;
+
           return (
             <div style="width:100%; margin-bottom:0.75rem;">
-              <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" style="display:block; width:100%; height:auto;">
-                {/* Quarter headers */}
-                {quarters.map((q, i) => {
-                  const cx = PAD + LABEL_W + CELL_W * i + CELL_W / 2;
-                  return (
-                    <text x={cx} y={PAD + HEADER_H - 10} textAnchor="middle" fontSize="13" fontWeight="600" fill="#6b7280">
-                      {qLabel(q)}
-                    </text>
-                  );
-                })}
+              <div style={`display:grid; grid-template-columns:${gridCols}; gap:3px; align-items:stretch;`}>
+                {/* Header row */}
+                <div></div>
+                {quarters.map((q) => (
+                  <div style="text-align:center; font-size:0.65rem; font-weight:600; color:var(--text-muted); padding:0.2rem 0;">
+                    {qLabel(q)}
+                  </div>
+                ))}
 
                 {/* Family rows */}
-                {famList.map((fam, ri) => {
-                  const ry = PAD + HEADER_H + ROW_H * ri;
+                {famList.map((fam) => {
                   const fcolor = families[fam]?.color || '#888';
-                  return (
-                    <g>
-                      {/* family label with color swatch */}
-                      <rect x={PAD} y={ry + 8} width={5} height={ROW_H - 16} fill={fcolor} rx="2" />
-                      <text x={PAD + 14} y={ry + ROW_H / 2 + 5} fontSize="14" fontWeight="600" fill="#374151">
-                        {fam}
-                      </text>
-                      <text x={PAD + LABEL_W - 10} y={ry + ROW_H / 2 + 5} textAnchor="end" fontSize="12" fill="#9ca3af">
-                        {`×${(families[fam] || {}).n_models || 0}`}
-                      </text>
-
-                      {/* Cells */}
-                      {quarters.map((q, ci) => {
-                        const cx = PAD + LABEL_W + CELL_W * ci;
-                        const cell = cells[fam][q];
-                        if (!cell || cell.n === 0) {
-                          return (
-                            <rect x={cx + 2} y={ry + 3} width={CELL_W - 4} height={ROW_H - 6}
-                              fill="#f9fafb" stroke="#e5e7eb" strokeWidth="1" rx="2" />
-                          );
-                        }
-                        const tas = cell.tasSum / cell.n;
-                        const open = cell.openSum / cell.n;
-                        const forced = cell.forcedSum / cell.n;
-                        const fill = tasColor(tas);
-                        // text color: dark on light bg, white on dark bg
-                        const textColor = tas < 60 || tas > 90 ? 'white' : '#111827';
+                  const nFam = (families[fam] || {}).n_models || 0;
+                  return [
+                    <div style="display:flex; align-items:center; gap:0.4rem; padding:0.2rem 0.3rem; min-width:0;">
+                      <span style={`flex:0 0 4px; height:14px; border-radius:2px; background:${fcolor};`}></span>
+                      <span style="font-size:0.72rem; font-weight:600; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{fam}</span>
+                      <span style="font-size:0.62rem; color:var(--text-muted); margin-left:auto; font-family:monospace;">×{nFam}</span>
+                    </div>,
+                    ...quarters.map((q) => {
+                      const cell = cells[fam][q];
+                      if (!cell || cell.n === 0) {
                         return (
-                          <g>
-                            <rect x={cx + 2} y={ry + 3} width={CELL_W - 4} height={ROW_H - 6}
-                              fill={fill} stroke="#d1d5db" strokeWidth="0.5" rx="2">
-                              <title>{`${fam} · ${qLabel(q)}\n${cell.n} model${cell.n === 1 ? '' : 's'}\nTAS avg: ${tas.toFixed(1)}%\nFree recall avg: ${open.toFixed(1)}%\nForced choice avg: ${forced.toFixed(1)}%\nModels: ${cell.models.map(m => m.key).join(', ')}`}</title>
-                            </rect>
-                            <text x={cx + CELL_W / 2} y={ry + ROW_H / 2 + 5}
-                              textAnchor="middle" fontSize="14" fontWeight="600"
-                              fill={textColor} pointerEvents="none">
-                              {tas.toFixed(0)}
-                            </text>
-                          </g>
+                          <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:3px; min-height:24px;"></div>
                         );
-                      })}
-                    </g>
-                  );
+                      }
+                      const tas = cell.tasSum / cell.n;
+                      const open = cell.openSum / cell.n;
+                      const forced = cell.forcedSum / cell.n;
+                      const fill = tasColor(tas);
+                      const textColor = tas < 60 || tas > 90 ? 'white' : '#111827';
+                      const tip = `${fam} · ${qLabel(q)}\n${cell.n} model${cell.n === 1 ? '' : 's'}\nTAS avg: ${tas.toFixed(1)}%\nFree recall avg: ${open.toFixed(1)}%\nForced choice avg: ${forced.toFixed(1)}%\nModels: ${cell.models.map(m => m.key).join(', ')}`;
+                      return (
+                        <div title={tip} style={`background:${fill}; border:1px solid #d1d5db; border-radius:3px; min-height:24px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:600; color:${textColor};`}>
+                          {tas.toFixed(0)}
+                        </div>
+                      );
+                    }),
+                  ];
                 })}
+              </div>
 
-                {/* Color scale legend at bottom */}
-                <g transform={`translate(${PAD + LABEL_W}, ${PAD + HEADER_H + ROW_H * famList.length + 18})`}>
-                  <text x={0} y={-2} fontSize="12" fontWeight="600" fill="#6b7280">TAS legend (% Kyiv)</text>
-                  {[40, 50, 60, 70, 80, 90, 100].map((v, i) => (
-                    <g>
-                      <rect x={i * 44} y={6} width={36} height={16} fill={tasColor(v)} stroke="#d1d5db" strokeWidth="0.5" rx="2" />
-                      <text x={i * 44 + 18} y={34} textAnchor="middle" fontSize="11" fill="#6b7280">{v}</text>
-                    </g>
-                  ))}
-                </g>
-              </svg>
-              <div style="font-size:0.65rem; color:var(--text-muted); padding:0.4rem 0.5rem; line-height:1.6;">
+              {/* Color scale legend */}
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.6rem; padding:0.2rem 0.3rem; flex-wrap:wrap;">
+                <span style="font-size:0.65rem; font-weight:600; color:var(--text-muted);">TAS legend (% Kyiv)</span>
+                {[40, 50, 60, 70, 80, 90, 100].map((v) => (
+                  <div style="display:flex; flex-direction:column; align-items:center; gap:0.1rem;">
+                    <div style={`width:28px; height:12px; background:${tasColor(v)}; border:1px solid #d1d5db; border-radius:2px;`}></div>
+                    <span style="font-size:0.6rem; color:var(--text-muted);">{v}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div style="font-size:0.65rem; color:var(--text-muted); padding:0.5rem 0.3rem 0; line-height:1.6;">
                 <strong>How to read.</strong> Rows are model families, columns are calendar quarters. Each cell shows the
                 <em> average TAS</em> across all models that family released that quarter (color and number).
                 Empty cells = no models released. Hover any cell for the list of models, average free recall
@@ -799,7 +772,8 @@ function formatNum(n: number) {
             {(religiousProp as any).subtitle}
           </div>
 
-          {/* Vertical flow: source at top, tiers stack downward */}
+          {/* Pure HTML/CSS vertical flow — text uses real rem units and never
+              scales with viewBox. Connectors are simple vertical lines. */}
           {(() => {
             const prop = religiousProp;
             const tiers = prop.tiers;
@@ -810,142 +784,49 @@ function formatNum(n: number) {
               audience: "#0057B8",
             };
 
-            const PAD_X = 24;
-            const PAD_TOP = 16;
-            const BOX_W = 280;
-            const BOX_H = 78;
-            const H_GAP = 22;
-            const SOURCE_GAP = 36; // gap below source row
-            const HEADER_GAP = 10; // gap between header text and its tier row
-            const TIER_GAP = 32;   // gap between consecutive tier rows
-            const HEADER_H = 18;   // header text height
-
-            const maxCols = Math.max(1, ...tiers.map(t => t.nodes.length));
-            const chartW = PAD_X * 2 + maxCols * BOX_W + (maxCols - 1) * H_GAP;
-            // Source row + N tier rows (each: header + box) with gaps
-            const rowFullH = HEADER_H + HEADER_GAP + BOX_H + TIER_GAP;
-            const chartH = PAD_TOP + BOX_H + SOURCE_GAP + tiers.length * rowFullH - TIER_GAP + PAD_TOP;
-
-            const innerLeft = PAD_X;
-            const innerWidth = chartW - PAD_X * 2;
-
-            // Layout helper: center N boxes horizontally inside innerWidth
-            const layoutRow = (n, yTop) => {
-              const totalW = n * BOX_W + (n - 1) * H_GAP;
-              const startX = innerLeft + (innerWidth - totalW) / 2;
-              const out = [];
-              for (let i = 0; i < n; i++) {
-                out.push({x: startX + i * (BOX_W + H_GAP), y: yTop, w: BOX_W, h: BOX_H});
-              }
-              return out;
-            };
-
-            // Source position (single centered box)
-            const sourcePos = layoutRow(1, PAD_TOP)[0];
-
-            // Tier positions
-            const tierPositions = {};
-            const tierHeaderY = {};
-            tiers.forEach((tier, ti) => {
-              const rowTop = PAD_TOP + BOX_H + SOURCE_GAP + ti * rowFullH;
-              tierHeaderY[tier.id] = rowTop + HEADER_H - 2; // text baseline
-              const yTop = rowTop + HEADER_H + HEADER_GAP;
-              const positions = layoutRow(tier.nodes.length, yTop);
-              tier.nodes.forEach((n, ni) => {
-                tierPositions[`${tier.id}:${n.id}`] = positions[ni];
-              });
-            });
-
-            // Build edges between consecutive tiers (vertical: bottom of from → top of to)
-            const edges = [];
-            tiers[0].nodes.forEach(n => {
-              edges.push({from: 'SOURCE', to: `${tiers[0].id}:${n.id}`, color: tierColors[tiers[0].id]});
-            });
-            for (let ti = 0; ti < tiers.length - 1; ti++) {
-              const cur = tiers[ti];
-              const nxt = tiers[ti + 1];
-              cur.nodes.forEach(from => {
-                nxt.nodes.forEach(to => {
-                  edges.push({
-                    from: `${cur.id}:${from.id}`,
-                    to: `${nxt.id}:${to.id}`,
-                    color: tierColors[nxt.id],
-                  });
-                });
-              });
-            }
-
-            const lookup = (id) => id === 'SOURCE' ? sourcePos : tierPositions[id];
+            const NodeBox = ({color, label, metric, since}: any) => (
+              <div style={`background:${color}; border-radius:6px; padding:0.5rem 0.65rem; color:white; min-width:0;`}>
+                <div style="font-size:0.72rem; font-weight:700; line-height:1.25; overflow:hidden; text-overflow:ellipsis;">{label}</div>
+                <div style="font-size:0.62rem; opacity:0.88; margin-top:0.2rem; line-height:1.3;">{metric}</div>
+                <div style="font-size:0.6rem; opacity:0.7; margin-top:0.15rem;">{since}</div>
+              </div>
+            );
 
             return (
-              <div style="width:100%;">
-                <svg viewBox={`0 0 ${chartW} ${chartH}`} preserveAspectRatio="xMidYMid meet" style="display:block; width:100%; height:auto;">
-                  {/* Edges first so they draw under nodes */}
-                  {edges.map((e) => {
-                    const a = lookup(e.from);
-                    const b = lookup(e.to);
-                    if (!a || !b) return null;
-                    const x1 = a.x + a.w / 2;
-                    const y1 = a.y + a.h;
-                    const x2 = b.x + b.w / 2;
-                    const y2 = b.y;
-                    const cy1 = y1 + (y2 - y1) * 0.5;
-                    const cy2 = y1 + (y2 - y1) * 0.5;
-                    return (
-                      <path
-                        d={`M ${x1} ${y1} C ${x1} ${cy1}, ${x2} ${cy2}, ${x2} ${y2}`}
-                        stroke={e.color}
-                        strokeWidth="1.2"
-                        strokeOpacity="0.2"
-                        fill="none"
-                      />
-                    );
-                  })}
+              <div style="width:100%; display:flex; flex-direction:column; align-items:stretch; gap:0.85rem;">
+                {/* Source row */}
+                <div style="display:flex; justify-content:center;">
+                  <div style="max-width:340px; width:100%;">
+                    <NodeBox
+                      color={prop.source.color}
+                      label="Moscow Patriarchate"
+                      metric="mospat.ru · 6,000+ EN articles"
+                      since="since 2015"
+                    />
+                  </div>
+                </div>
 
-                  {/* Source node */}
-                  <g>
-                    <rect x={sourcePos.x} y={sourcePos.y} width={sourcePos.w} height={sourcePos.h} rx="6" fill={prop.source.color} fillOpacity="0.95" />
-                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 26} textAnchor="middle" fill="white" fontSize="14" fontWeight="700">
-                      Moscow Patriarchate
-                    </text>
-                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 44} textAnchor="middle" fill="white" fillOpacity="0.88" fontSize="11">
-                      mospat.ru · 6,000+ EN articles
-                    </text>
-                    <text x={sourcePos.x + sourcePos.w / 2} y={sourcePos.y + 60} textAnchor="middle" fill="white" fillOpacity="0.72" fontSize="11">
-                      since 2015
-                    </text>
-                  </g>
+                {/* Vertical connector */}
+                <div style="display:flex; justify-content:center;">
+                  <div style="width:1px; height:14px; background:rgba(0,0,0,0.15);"></div>
+                </div>
 
-                  {/* Tier rows */}
-                  {tiers.map((tier, ti) => {
-                    const headerY = tierHeaderY[tier.id];
-                    const fill = tierColors[tier.id] || "#888";
-                    return (
-                      <g>
-                        <text x={chartW / 2} y={headerY} textAnchor="middle" fontSize="14" fontWeight="700" fill={fill}>
-                          {tier.title}
-                        </text>
-                        {tier.nodes.map((n) => {
-                          const p = tierPositions[`${tier.id}:${n.id}`];
-                          return (
-                            <g>
-                              <rect x={p.x} y={p.y} width={p.w} height={p.h} rx="6" fill={fill} fillOpacity="0.95" />
-                              <text x={p.x + 12} y={p.y + 22} fill="white" fontSize="13" fontWeight="700">
-                                {n.label}
-                              </text>
-                              <text x={p.x + 12} y={p.y + 42} fill="white" fillOpacity="0.88" fontSize="11">
-                                {n.metric}
-                              </text>
-                              <text x={p.x + 12} y={p.y + 60} fill="white" fillOpacity="0.72" fontSize="11">
-                                {n.since}
-                              </text>
-                            </g>
-                          );
-                        })}
-                      </g>
-                    );
-                  })}
-                </svg>
+                {/* Tier rows */}
+                {tiers.map((tier) => {
+                  const fill = tierColors[tier.id] || "#888";
+                  return (
+                    <div style="display:flex; flex-direction:column; gap:0.4rem;">
+                      <div style={`font-size:0.7rem; font-weight:700; color:${fill}; text-align:center;`}>
+                        {tier.title}
+                      </div>
+                      <div style={`display:grid; grid-template-columns:repeat(${tier.nodes.length}, minmax(0, 1fr)); gap:0.5rem;`}>
+                        {tier.nodes.map((n) => (
+                          <NodeBox color={fill} label={n.label} metric={n.metric} since={n.since} />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             );
           })()}
