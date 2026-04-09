@@ -1484,11 +1484,22 @@ function formatNum(n: number) {
 
         if (chartMode === 'volume') {
           // ── VOLUME MODE: stacked bar chart ──
-          // Bar width based on data density: fewer points = wider bars
-          const timeSpanMs = (x.domain()[1] as any) - (x.domain()[0] as any);
-          const avgGapMs = series.length > 1 ? timeSpanMs / series.length : timeSpanMs;
-          const gapPx = Math.abs(x(new Date((x.domain()[0] as any).getTime() + avgGapMs)) - x(x.domain()[0] as any));
-          const barWidth = Math.max(2, Math.min(gapPx * 0.7, 25));
+          // Bar width based on the *minimum* gap between consecutive points,
+          // so dense regions don't overlap when the series has uneven spacing.
+          let minGapMs = Infinity;
+          for (let i = 1; i < series.length; i++) {
+            const da = parseDate(series[i - 1].date);
+            const db = parseDate(series[i].date);
+            if (!da || !db) continue;
+            const gap = (db as any) - (da as any);
+            if (gap > 0 && gap < minGapMs) minGapMs = gap;
+          }
+          if (!isFinite(minGapMs)) {
+            const timeSpanMs = (x.domain()[1] as any) - (x.domain()[0] as any);
+            minGapMs = series.length > 1 ? timeSpanMs / series.length : timeSpanMs;
+          }
+          const minGapPx = Math.abs(x(new Date((x.domain()[0] as any).getTime() + minGapMs)) - x(x.domain()[0] as any));
+          const barWidth = Math.max(2, Math.min(minGapPx * 0.85, 25));
 
           series.forEach((d: any) => {
             const date = parseDate(d.date);
@@ -1995,46 +2006,123 @@ function formatNum(n: number) {
         </div>
       `;
 
-      // Compact per-model table — sortable on click would be nice but for now
-      // sort once by TAS desc and show as a clean grid table.
-      html += `<div style="font-size:0.7rem; font-weight:700; color:var(--text); margin:1rem 0 0.4rem;">All ${models.length} models, sorted by TAS</div>`;
-      html += `<div style="font-size:0.6rem; color:var(--text-muted); margin-bottom:0.4rem;">For each model: free recall (what it generates spontaneously), forced choice with RU shown first / UA shown first, and the resulting TAS. <span style="color:#0057B8;">●</span> = picked Ukrainian · <span style="color:#D52B1E;">●</span> = picked Russian · <span style="color:#9ca3af;">○</span> = no decisive answer.</div>`;
-      const cell = (x: any) => {
-        if (x === 1) return '<span style="color:#0057B8; font-size:11px;">●</span>';
-        if (x === 0) return '<span style="color:#D52B1E; font-size:11px;">●</span>';
-        return '<span style="color:#9ca3af; font-size:11px;">○</span>';
-      };
-      html += `
-        <div style="border:1px solid #e5e7eb; border-radius:4px; overflow:hidden;">
-          <div style="display:grid; grid-template-columns:1fr 100px 50px 50px 50px 60px; gap:0; background:#f8f9fb; font-size:0.6rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">
-            <div style="padding:0.4rem 0.6rem;">Model</div>
-            <div style="padding:0.4rem 0.6rem;">Family</div>
-            <div style="padding:0.4rem 0.4rem; text-align:center;" title="Free recall — neutral question, no spellings shown">Recall</div>
-            <div style="padding:0.4rem 0.4rem; text-align:center;" title="Forced choice with RU spelling shown first">RU 1st</div>
-            <div style="padding:0.4rem 0.4rem; text-align:center;" title="Forced choice with UA spelling shown first">UA 1st</div>
-            <div style="padding:0.4rem 0.6rem; text-align:right;">TAS</div>
-          </div>
-      `;
-      for (const m of models) {
-        const color = families[m.family]?.color || '#666';
-        const tasStr = m.tas != null ? `${(m.tas * 100).toFixed(0)}%` : '—';
-        html += `
-          <div style="display:grid; grid-template-columns:1fr 100px 50px 50px 50px 60px; gap:0; font-size:0.65rem; border-top:1px solid #f3f4f6; align-items:center;">
-            <div style="padding:0.35rem 0.6rem; display:flex; align-items:center; gap:0.4rem;">
-              <span style="display:inline-block; width:8px; height:8px; border-radius:2px; background:${color}; flex-shrink:0;"></span>
-              <span style="font-family:monospace; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${m.key}</span>
-            </div>
-            <div style="padding:0.35rem 0.6rem; color:var(--text-muted); font-size:0.6rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${m.family}</div>
-            <div style="padding:0.35rem 0.4rem; text-align:center;">${cell(m.x_open)}</div>
-            <div style="padding:0.35rem 0.4rem; text-align:center;">${cell(m.x_forced_ru_first)}</div>
-            <div style="padding:0.35rem 0.4rem; text-align:center;">${cell(m.x_forced_ua_first)}</div>
-            <div style="padding:0.35rem 0.6rem; text-align:right; font-family:monospace; color:var(--text);">${tasStr}</div>
-          </div>
-        `;
-      }
-      html += `</div>`;
+      // Per-model scatter plot — one circle per model, grouped by family on X,
+      // TAS on Y. Replaces the giant table; hover shows model + TAS.
+      html += `<div style="font-size:0.7rem; font-weight:700; color:var(--text); margin:1rem 0 0.25rem;">All ${models.length} models · TAS by family</div>`;
+      html += `<div style="font-size:0.6rem; color:var(--text-muted); margin-bottom:0.4rem;">Each dot is one model. Y axis is TAS (0–100%). Hover for the model name and its three trial outcomes.</div>`;
+      html += `<div id="pair-llm-scatter" style="width:100%; height:240px;"></div>`;
 
       body.innerHTML = html;
+
+      // ── render the scatter into #pair-llm-scatter ──
+      const scatterEl = document.getElementById('pair-llm-scatter');
+      if (!scatterEl) return;
+      const sw = scatterEl.clientWidth || 600;
+      const sh = 240;
+      const sm = {top: 12, right: 12, bottom: 44, left: 32};
+      const innerW = sw - sm.left - sm.right;
+      const innerH = sh - sm.top - sm.bottom;
+
+      const svgScatter = d3.select('#pair-llm-scatter')
+        .append('svg')
+        .attr('width', sw)
+        .attr('height', sh);
+      const gScatter = svgScatter.append('g').attr('transform', `translate(${sm.left},${sm.top})`);
+
+      const xScatter = d3.scaleBand<string>()
+        .domain(familyOrder)
+        .range([0, innerW])
+        .padding(0.15);
+      const yScatter = d3.scaleLinear().domain([0, 100]).range([innerH, 0]);
+
+      // Y gridlines + axis labels
+      [0, 25, 50, 75, 100].forEach((v) => {
+        gScatter.append('line')
+          .attr('x1', 0).attr('x2', innerW)
+          .attr('y1', yScatter(v)).attr('y2', yScatter(v))
+          .attr('stroke', '#eef0f3').attr('stroke-width', 1);
+        gScatter.append('text')
+          .attr('x', -6).attr('y', yScatter(v))
+          .attr('text-anchor', 'end').attr('dominant-baseline', 'middle')
+          .style('font-size', '9px').style('fill', '#9ca3af')
+          .text(v + '%');
+      });
+
+      // X axis: family labels (rotated)
+      familyOrder.forEach((fam: string) => {
+        const cx = (xScatter(fam) || 0) + xScatter.bandwidth() / 2;
+        gScatter.append('text')
+          .attr('x', cx).attr('y', innerH + 14)
+          .attr('text-anchor', 'end')
+          .attr('transform', `rotate(-30, ${cx}, ${innerH + 14})`)
+          .style('font-size', '9px').style('fill', 'var(--text-muted)')
+          .text(fam);
+      });
+
+      // Tooltip
+      const tip = d3.select('#pair-llm-scatter').append('div')
+        .attr('id', 'pair-llm-scatter-tip')
+        .style('position', 'absolute')
+        .style('pointer-events', 'none')
+        .style('background', 'rgba(17,24,39,0.95)')
+        .style('color', '#fff')
+        .style('padding', '5px 8px')
+        .style('border-radius', '3px')
+        .style('font-size', '10px')
+        .style('font-family', 'monospace')
+        .style('opacity', 0)
+        .style('white-space', 'nowrap')
+        .style('z-index', '10');
+      scatterEl.style.position = 'relative';
+
+      const trialChar = (v: any) => v === 1 ? 'UA' : (v === 0 ? 'RU' : '–');
+
+      // Group dots per family and lay them out with simple jitter
+      const byFam: Record<string, any[]> = {};
+      for (const mdl of models) {
+        if (mdl.tas == null) continue;
+        if (!byFam[mdl.family]) byFam[mdl.family] = [];
+        byFam[mdl.family].push(mdl);
+      }
+      const r = 4;
+      familyOrder.forEach((fam: string) => {
+        const list = byFam[fam] || [];
+        const bandX = (xScatter(fam) || 0);
+        const bw = xScatter.bandwidth();
+        const color = families[fam]?.color || '#666';
+        // simple beeswarm-ish: sort by tas, alternate left/right of center
+        list.sort((a, b) => (b.tas ?? 0) - (a.tas ?? 0));
+        list.forEach((mdl: any, i: number) => {
+          // Deterministic jitter within band
+          const t = list.length === 1 ? 0.5 : (i / (list.length - 1));
+          // alternate around center for visual spread
+          const offset = ((i % 2 === 0 ? 1 : -1) * (Math.floor(i / 2) + 1) * 5) % (bw / 2);
+          const cx = bandX + bw / 2 + offset;
+          const cy = yScatter((mdl.tas ?? 0) * 100);
+          gScatter.append('circle')
+            .attr('cx', cx).attr('cy', cy).attr('r', r)
+            .attr('fill', color).attr('fill-opacity', 0.75)
+            .attr('stroke', '#fff').attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(this: any, ev: any) {
+              d3.select(this).attr('r', r + 2).attr('fill-opacity', 1);
+              const pct = (mdl.tas * 100).toFixed(0);
+              tip.html(
+                `<b>${mdl.key}</b><br>` +
+                `TAS ${pct}% · recall ${trialChar(mdl.x_open)} · RU-1st ${trialChar(mdl.x_forced_ru_first)} · UA-1st ${trialChar(mdl.x_forced_ua_first)}`
+              ).style('opacity', 1);
+            })
+            .on('mousemove', function(ev: any) {
+              const rect = (scatterEl as any).getBoundingClientRect();
+              tip.style('left', (ev.clientX - rect.left + 10) + 'px')
+                 .style('top', (ev.clientY - rect.top + 10) + 'px');
+            })
+            .on('mouseout', function(this: any) {
+              d3.select(this).attr('r', r).attr('fill-opacity', 0.75);
+              tip.style('opacity', 0);
+            });
+        });
+      });
     }
 
     function drawMediaOrigin() {
@@ -2143,7 +2231,7 @@ function formatNum(n: number) {
       const pairData = (timeseriesData as any)[String(activePairId)];
       if (!pairData) return;
 
-      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'openlibrary'];
       for (const src of srcOrder) {
         const series = pairData[src];
         const card = document.createElement('div');
@@ -3115,13 +3203,28 @@ function formatNum(n: number) {
       const cl = clAnalysis as any;
       if (!cl.benchmark || Object.keys(cl.benchmark).length === 0) return;
 
-      const models = [
-        { key: 'deberta-v3-large', name: 'DeBERTa-v3-large', params: '304M', desc: 'Best overall' },
-        { key: 'xlm-roberta-large', name: 'XLM-RoBERTa-large', params: '550M', desc: 'Cross-lingual' },
-        { key: 'mdeberta-v3-base', name: 'mDeBERTa-v3-base', params: '86M', desc: 'Lightweight' },
-      ];
+      // Read model list directly from the benchmark data, not hardcoded.
+      // Sort by f1_macro descending so the best model is at the top.
+      // Display name and metadata are derived from the JSON key.
+      const niceNameMap: Record<string, string> = {
+        'deberta-v3-large': 'DeBERTa-v3-large',
+        'xlm-roberta-large': 'XLM-RoBERTa-large',
+        'mdeberta-v3-base': 'mDeBERTa-v3-base',
+      };
+      const models = Object.keys(cl.benchmark)
+        .map(k => {
+          const e = cl.benchmark[k];
+          return {
+            key: k,
+            name: e.name || niceNameMap[k] || k,
+            params: e.params || '',
+            desc: e.description || e.desc || '',
+            data: e,
+          };
+        })
+        .sort((a, b) => (b.data.f1_macro || 0) - (a.data.f1_macro || 0));
 
-      const bestF1 = Math.max(...models.map(m => cl.benchmark[m.key]?.f1_macro || 0));
+      const bestF1 = Math.max(...models.map(m => m.data.f1_macro || 0));
 
       const grid = d3.select(container).style('display', 'flex').style('flex-direction', 'column').style('gap', '0.4rem');
 
