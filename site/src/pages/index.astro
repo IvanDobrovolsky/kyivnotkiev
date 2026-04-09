@@ -454,143 +454,178 @@ function formatNum(n: number) {
           </div>
         </div>
 
-        {/* Grouped column chart: each release-month is a group of bars (one bar per model). */}
+        {/* Heatmap: rows = lab/family, columns = quarter (release date),
+            cell color intensity = average TAS for that family in that quarter.
+            Cell numbers show actual TAS for direct readability. */}
         {(() => {
           const traj = llmTraj;
           const models = traj.models.filter(m => m.release_date && m.tas != null);
+          const families = traj.families;
 
           const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-          const fmtMonth = (m) => `${MONTH_NAMES[m % 12]} ${Math.floor(m / 12)}`;
-
-          // Bucket models by release month
           const dateToMonths = (d) => {
             const [yr, mo] = d.split('-').map(Number);
             return yr * 12 + (mo - 1);
           };
-          const byMon = {};
-          for (const m of models) {
-            const k = dateToMonths(m.release_date);
-            (byMon[k] = byMon[k] || []).push(m);
-          }
-          // Sort each month's models by family then TAS so columns are stable
-          for (const k of Object.keys(byMon)) {
-            byMon[k].sort((a, b) => a.family.localeCompare(b.family) || (b.tas - a.tas));
-          }
-          const monthKeys = Object.keys(byMon).map(Number).sort((a, b) => a - b);
+          // Bucket models by quarter for cleaner columns
+          const monToQuarter = (m) => {
+            const yr = Math.floor(m / 12);
+            const mo = m % 12;
+            const q = Math.floor(mo / 3);
+            return yr * 4 + q;
+          };
+          const qLabel = (q) => {
+            const yr = Math.floor(q / 4);
+            const qi = q % 4;
+            return `Q${qi + 1} ${String(yr).slice(-2)}`;
+          };
 
-          // Layout. Use natural width + horizontal scroll so labels stay
-          // readable. Each month group must be wide enough for its rotated
-          // label (~70px for "Jul 2023 / 3 models" at -35°).
-          const PAD_L = 38;
-          const PAD_R = 18;
-          const PAD_T = 16;
-          const PAD_B = 88;       // room for rotated labels
-          const colW = 20;        // wider bars
-          const colGap = 2;
-          const groupGap = 32;    // generous space between months
-          const minGroupW = 80;   // ensures even single-model groups have label space
-          // Compute group widths (max of model-bars-width vs minimum for label)
-          const groupWidths = monthKeys.map(k => Math.max(minGroupW, byMon[k].length * (colW + colGap) - colGap));
-          const innerW = groupWidths.reduce((a, b) => a + b, 0) + groupGap * (monthKeys.length + 1);
-          const W = PAD_L + innerW + PAD_R;
-          const H = 420;
-          const innerH = H - PAD_T - PAD_B;
-
-          // Y axis: 0-100
-          const yMin = 0;
-          const yMax = 100;
-          const y = (v) => PAD_T + (1 - (v - yMin) / (yMax - yMin)) * innerH;
-          const ygrid = [0, 25, 50, 75, 85, 100];
-
-          // Compute column x positions — center bars within their (potentially wider) group
-          const families = traj.families;
-          const columns = [];
-          const groupCenters = [];
-          let cursorX = PAD_L + groupGap;
-          monthKeys.forEach((k, gi) => {
-            const grp = byMon[k];
-            const barsW = grp.length * (colW + colGap) - colGap;
-            const groupW = groupWidths[gi];
-            const startX = cursorX + (groupW - barsW) / 2;
-            grp.forEach((m, i) => {
-              columns.push({
-                model: m,
-                x: startX + i * (colW + colGap),
-                mon: k,
-              });
-            });
-            groupCenters.push({mon: k, cx: cursorX + groupW / 2, x1: cursorX, x2: cursorX + groupW});
-            cursorX += groupW + groupGap;
+          // family list ordered by total TAS desc
+          const famList = Object.keys(families).sort((a, b) => {
+            const ta = models.filter(m => m.family === a).map(m => m.tas);
+            const tb = models.filter(m => m.family === b).map(m => m.tas);
+            const ma = ta.length ? ta.reduce((x, y) => x + y, 0) / ta.length : 0;
+            const mb = tb.length ? tb.reduce((x, y) => x + y, 0) / tb.length : 0;
+            return mb - ma;
           });
 
+          // Quarter range
+          const qs = models.map(m => monToQuarter(dateToMonths(m.release_date)));
+          const qMin = Math.min(...qs);
+          const qMax = Math.max(...qs);
+          const quarters = Array.from({length: qMax - qMin + 1}, (_, i) => qMin + i);
+
+          // Build cells: cells[fam][q] = {tas, n, models}
+          const cells = {};
+          for (const fam of famList) {
+            cells[fam] = {};
+            for (const q of quarters) {
+              cells[fam][q] = {tasSum: 0, openSum: 0, forcedSum: 0, n: 0, models: []};
+            }
+          }
+          for (const m of models) {
+            const q = monToQuarter(dateToMonths(m.release_date));
+            const c = cells[m.family]?.[q];
+            if (!c) continue;
+            c.tasSum += m.tas;
+            c.openSum += m.open || 0;
+            c.forcedSum += m.forced || 0;
+            c.n += 1;
+            c.models.push(m);
+          }
+
+          // Layout
+          const ROW_H = 30;
+          const LABEL_W = 142;
+          const CELL_W = 56;
+          const HEADER_H = 30;
+          const PAD = 8;
+          const W = LABEL_W + CELL_W * quarters.length + PAD * 2;
+          const H = HEADER_H + ROW_H * famList.length + PAD * 2 + 40;
+
+          // TAS color scale: lower → red, higher → blue (Ukrainian flag direction)
+          const tasColor = (v) => {
+            if (v == null || isNaN(v)) return '#f8f9fb';
+            // 50 = neutral gray, 100 = strong blue, 0 = strong red
+            const t = Math.max(0, Math.min(1, (v - 40) / 60));
+            // interpolate red → light → blue
+            if (t < 0.5) {
+              // red to white
+              const u = t * 2;
+              const r = 220 - Math.round(u * 60);
+              const g = 60 + Math.round(u * 180);
+              const b = 60 + Math.round(u * 180);
+              return `rgb(${r}, ${g}, ${b})`;
+            } else {
+              const u = (t - 0.5) * 2;
+              const r = 160 - Math.round(u * 130);
+              const g = 240 - Math.round(u * 100);
+              const b = 240 - Math.round(u * 56);
+              return `rgb(${r}, ${g}, ${b})`;
+            }
+          };
+
           return (
-            <div style="overflow-x:auto; margin-bottom:0.75rem; padding-bottom:4px;">
-              <svg width={W} height={H} style="display:block; min-width:100%;">
-                {/* Y gridlines + labels */}
-                {ygrid.map(g => (
-                  <g>
-                    <line x1={PAD_L} x2={W - PAD_R} y1={y(g)} y2={y(g)}
-                      stroke={g === 85 ? '#0057B8' : '#e5e7eb'}
-                      strokeWidth="1"
-                      strokeOpacity={g === 85 ? '0.55' : '1'}
-                      strokeDasharray={g === 85 ? '4,4' : (g === 100 || g === 0 ? '' : '2,3')} />
-                    <text x={PAD_L - 4} y={y(g) + 3} textAnchor="end" fontSize="9"
-                      fill={g === 85 ? '#0057B8' : '#6b7280'}
-                      fontWeight={g === 85 ? '600' : '400'}>{g}</text>
-                  </g>
-                ))}
-                <text x={W - PAD_R - 6} y={y(85) - 4} textAnchor="end" fontSize="9" fill="#0057B8" fontWeight="600">corpus ≈ 85%</text>
+            <div style="overflow-x:auto; margin-bottom:0.75rem;">
+              <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMinYMid meet"
+                style="display:block; width:100%; height:auto; min-width:520px;">
+                {/* Quarter headers */}
+                {quarters.map((q, i) => {
+                  const cx = PAD + LABEL_W + CELL_W * i + CELL_W / 2;
+                  return (
+                    <text x={cx} y={PAD + HEADER_H - 10} textAnchor="middle" fontSize="10" fontWeight="600" fill="#6b7280">
+                      {qLabel(q)}
+                    </text>
+                  );
+                })}
 
-                {/* Per-month group label — rotated 35° so they don't overlap */}
-                {groupCenters.map(g => {
-                  const grp = byMon[g.mon];
-                  const labelY = PAD_T + innerH + 14;
+                {/* Family rows */}
+                {famList.map((fam, ri) => {
+                  const ry = PAD + HEADER_H + ROW_H * ri;
+                  const fcolor = families[fam]?.color || '#888';
                   return (
                     <g>
-                      {/* group bracket line under bars */}
-                      <line x1={g.x1 + 4} x2={g.x2 - 4} y1={PAD_T + innerH + 2} y2={PAD_T + innerH + 2}
-                        stroke="#9ca3af" strokeWidth="1" />
-                      {/* tiny tick at center */}
-                      <line x1={g.cx} x2={g.cx} y1={PAD_T + innerH + 2} y2={PAD_T + innerH + 6}
-                        stroke="#9ca3af" strokeWidth="1" />
-                      <text x={g.cx} y={labelY}
-                        textAnchor="end"
-                        fontSize="11"
-                        fill="#374151"
-                        fontWeight="600"
-                        transform={`rotate(-35 ${g.cx} ${labelY})`}>
-                        {fmtMonth(g.mon)} · {grp.length}
+                      {/* family label with color swatch */}
+                      <rect x={PAD} y={ry + 6} width={4} height={ROW_H - 12} fill={fcolor} rx="2" />
+                      <text x={PAD + 12} y={ry + ROW_H / 2 + 4} fontSize="11" fontWeight="600" fill="#374151">
+                        {fam}
                       </text>
+                      <text x={PAD + LABEL_W - 8} y={ry + ROW_H / 2 + 4} textAnchor="end" fontSize="9" fill="#9ca3af">
+                        {`×${(families[fam] || {}).n_models || 0}`}
+                      </text>
+
+                      {/* Cells */}
+                      {quarters.map((q, ci) => {
+                        const cx = PAD + LABEL_W + CELL_W * ci;
+                        const cell = cells[fam][q];
+                        if (!cell || cell.n === 0) {
+                          return (
+                            <rect x={cx + 2} y={ry + 3} width={CELL_W - 4} height={ROW_H - 6}
+                              fill="#f9fafb" stroke="#e5e7eb" strokeWidth="1" rx="2" />
+                          );
+                        }
+                        const tas = cell.tasSum / cell.n;
+                        const open = cell.openSum / cell.n;
+                        const forced = cell.forcedSum / cell.n;
+                        const fill = tasColor(tas);
+                        // text color: dark on light bg, white on dark bg
+                        const textColor = tas < 60 || tas > 90 ? 'white' : '#111827';
+                        return (
+                          <g>
+                            <rect x={cx + 2} y={ry + 3} width={CELL_W - 4} height={ROW_H - 6}
+                              fill={fill} stroke="#d1d5db" strokeWidth="0.5" rx="2">
+                              <title>{`${fam} · ${qLabel(q)}\n${cell.n} model${cell.n === 1 ? '' : 's'}\nTAS avg: ${tas.toFixed(1)}%\nFree recall avg: ${open.toFixed(1)}%\nForced choice avg: ${forced.toFixed(1)}%\nModels: ${cell.models.map(m => m.key).join(', ')}`}</title>
+                            </rect>
+                            <text x={cx + CELL_W / 2} y={ry + ROW_H / 2 + 4}
+                              textAnchor="middle" fontSize="10" fontWeight="600"
+                              fill={textColor} pointerEvents="none">
+                              {tas.toFixed(0)}
+                            </text>
+                          </g>
+                        );
+                      })}
                     </g>
                   );
                 })}
 
-                {/* Columns */}
-                {columns.map(c => {
-                  const m = c.model;
-                  const color = families[m.family]?.color || '#888';
-                  const yTop = y(m.tas);
-                  const h = (PAD_T + innerH) - yTop;
-                  return (
+                {/* Color scale legend at bottom */}
+                <g transform={`translate(${PAD + LABEL_W}, ${PAD + HEADER_H + ROW_H * famList.length + 14})`}>
+                  <text x={0} y={-2} fontSize="9" fontWeight="600" fill="#6b7280">TAS legend (% Kyiv)</text>
+                  {[40, 50, 60, 70, 80, 90, 100].map((v, i) => (
                     <g>
-                      <rect x={c.x} y={yTop} width={colW} height={h}
-                        fill={color} fillOpacity="0.92" rx="1.5">
-                        <title>{`${m.key}
-${m.family}
-TAS: ${m.tas}%
-Free recall: ${m.open}%
-Forced choice: ${m.forced}%
-Released: ${m.release_date}`}</title>
-                      </rect>
+                      <rect x={i * 32} y={4} width={28} height={14} fill={tasColor(v)} stroke="#d1d5db" strokeWidth="0.5" rx="2" />
+                      <text x={i * 32 + 14} y={28} textAnchor="middle" fontSize="9" fill="#6b7280">{v}</text>
                     </g>
-                  );
-                })}
+                  ))}
+                </g>
               </svg>
               <div style="font-size:0.65rem; color:var(--text-muted); padding:0.4rem 0.5rem; line-height:1.6;">
-                <strong>How to read.</strong> Each column is one model — bar height = TAS (% Kyiv). Columns are
-                grouped by release month (oldest left, newest right). Color = lab. Hover any bar for the model
-                name + free-recall / forced-choice scores. The dashed blue line at 85% is where the human-web
-                corpus actually sits. <strong>Most labs plateau below it; only Meta Llama climbs across versions.</strong>
+                <strong>How to read.</strong> Rows are model families, columns are calendar quarters. Each cell shows the
+                <em> average TAS</em> across all models that family released that quarter (color and number).
+                Empty cells = no models released. Hover any cell for the list of models, average free recall
+                and forced choice. Read left to right within a row to see whether that lab's models are getting
+                more Ukrainian-leaning over time. <strong>Meta Llama is the only family whose row visibly
+                lightens (gets more pro-Kyiv) from left to right.</strong>
               </div>
             </div>
           );
@@ -758,9 +793,9 @@ Released: ${m.release_date}`}</title>
           {/* Custom Sankey-like flow chart */}
           {(() => {
             const prop = religiousProp;
-            const COL_W = 260;
-            const COL_GAP = 50;
-            const ROW_H = 64;
+            const COL_W = 210;
+            const COL_GAP = 38;
+            const ROW_H = 60;
             const ROW_GAP = 8;
             const tiers = prop.tiers;
             const maxRows = Math.max(1, ...tiers.map(t => t.nodes.length));
@@ -770,7 +805,7 @@ Released: ${m.release_date}`}</title>
             const tierColors = {
               direct: "#D52B1E",
               state: "#FF6B35",
-              republication: "#FFD700",
+              republication: "#B45309",
               audience: "#0057B8",
             };
 
@@ -853,31 +888,31 @@ Released: ${m.release_date}`}</title>
                     />
                     <text
                       x={nodePos[prop.source.id].x + nodePos[prop.source.id].w / 2}
-                      y={nodePos[prop.source.id].y + 22}
+                      y={nodePos[prop.source.id].y + 20}
                       textAnchor="middle"
                       fill="white"
-                      fontSize="10"
+                      fontSize="9"
                       fontWeight="700"
                     >
                       {prop.source.label}
                     </text>
                     <text
                       x={nodePos[prop.source.id].x + nodePos[prop.source.id].w / 2}
-                      y={nodePos[prop.source.id].y + 36}
+                      y={nodePos[prop.source.id].y + 33}
                       textAnchor="middle"
                       fill="white"
                       fillOpacity="0.85"
-                      fontSize="8"
+                      fontSize="7.5"
                     >
                       DECR · 6,000+ English articles
                     </text>
                     <text
                       x={nodePos[prop.source.id].x + nodePos[prop.source.id].w / 2}
-                      y={nodePos[prop.source.id].y + 50}
+                      y={nodePos[prop.source.id].y + 46}
                       textAnchor="middle"
                       fill="white"
                       fillOpacity="0.7"
-                      fontSize="8"
+                      fontSize="7.5"
                     >
                       since 2015
                     </text>
@@ -898,15 +933,15 @@ Released: ${m.release_date}`}</title>
                               height={p.h}
                               rx="5"
                               fill={fill}
-                              fillOpacity="0.92"
+                              fillOpacity="0.95"
                             />
-                            <text x={p.x + 10} y={p.y + 18} fill="white" fontSize="10" fontWeight="700">
+                            <text x={p.x + 9} y={p.y + 16} fill="white" fontSize="9" fontWeight="700">
                               {n.label}
                             </text>
-                            <text x={p.x + 10} y={p.y + 34} fill="white" fillOpacity="0.85" fontSize="8">
+                            <text x={p.x + 9} y={p.y + 30} fill="white" fillOpacity="0.88" fontSize="7.5">
                               {n.metric}
                             </text>
-                            <text x={p.x + 10} y={p.y + 50} fill="white" fillOpacity="0.7" fontSize="8">
+                            <text x={p.x + 9} y={p.y + 44} fill="white" fillOpacity="0.72" fontSize="7.5">
                               {n.since}
                             </text>
                           </g>
@@ -919,7 +954,7 @@ Released: ${m.release_date}`}</title>
                   {tiers.map((tier, ti) => {
                     const x = sourceX + (COL_W + COL_GAP) * (ti + 1);
                     return (
-                      <text x={x + COL_W / 2} y={14} textAnchor="middle" fontSize="9" fontWeight="700" fill={tierColors[tier.id]}>
+                      <text x={x + COL_W / 2} y={12} textAnchor="middle" fontSize="8" fontWeight="700" fill={tierColors[tier.id]}>
                         {tier.title.split('·')[0].trim()} · {tier.title.split('·')[1].trim()}
                       </text>
                     );
@@ -1873,23 +1908,40 @@ Released: ${m.release_date}`}</title>
         </div>
       `;
 
-      // Per-model grid: small dots showing each test result
-      html += `<div style="font-size:0.7rem; font-weight:700; color:var(--text); margin:1rem 0 0.4rem;">Per-model results (${models.length} frontier models)</div>`;
-      html += `<div style="font-size:0.6rem; color:var(--text-muted); margin-bottom:0.4rem;">3 dots per model: <strong>O</strong> = free recall · <strong>R</strong> = forced "${pp.russian} or ${pp.ukrainian}?" · <strong>U</strong> = forced "${pp.ukrainian} or ${pp.russian}?". Blue = picked Ukrainian, red = picked Russian, gray = neither/refused.</div>`;
-      html += `<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:0.3rem 0.5rem;">`;
+      // Compact per-model table — sortable on click would be nice but for now
+      // sort once by TAS desc and show as a clean grid table.
+      html += `<div style="font-size:0.7rem; font-weight:700; color:var(--text); margin:1rem 0 0.4rem;">All ${models.length} models, sorted by TAS</div>`;
+      html += `<div style="font-size:0.6rem; color:var(--text-muted); margin-bottom:0.4rem;">For each model: free recall (what it generates spontaneously), forced choice with RU shown first / UA shown first, and the resulting TAS. <span style="color:#0057B8;">●</span> = picked Ukrainian · <span style="color:#D52B1E;">●</span> = picked Russian · <span style="color:#9ca3af;">○</span> = no decisive answer.</div>`;
+      const cell = (x: any) => {
+        if (x === 1) return '<span style="color:#0057B8; font-size:11px;">●</span>';
+        if (x === 0) return '<span style="color:#D52B1E; font-size:11px;">●</span>';
+        return '<span style="color:#9ca3af; font-size:11px;">○</span>';
+      };
+      html += `
+        <div style="border:1px solid #e5e7eb; border-radius:4px; overflow:hidden;">
+          <div style="display:grid; grid-template-columns:1fr 100px 50px 50px 50px 60px; gap:0; background:#f8f9fb; font-size:0.6rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">
+            <div style="padding:0.4rem 0.6rem;">Model</div>
+            <div style="padding:0.4rem 0.6rem;">Family</div>
+            <div style="padding:0.4rem 0.4rem; text-align:center;" title="Free recall — neutral question, no spellings shown">Recall</div>
+            <div style="padding:0.4rem 0.4rem; text-align:center;" title="Forced choice with RU spelling shown first">RU 1st</div>
+            <div style="padding:0.4rem 0.4rem; text-align:center;" title="Forced choice with UA spelling shown first">UA 1st</div>
+            <div style="padding:0.4rem 0.6rem; text-align:right;">TAS</div>
+          </div>
+      `;
       for (const m of models) {
         const color = families[m.family]?.color || '#666';
-        const dotColor = (x: any) => x == null ? '#ddd' : (x === 1 ? '#0057B8' : '#D52B1E');
-        const dotLabel = (x: any) => x == null ? '?' : (x === 1 ? 'U' : 'R');
+        const tasStr = m.tas != null ? `${(m.tas * 100).toFixed(0)}%` : '—';
         html += `
-          <div style="display:flex; align-items:center; gap:0.4rem; padding:0.15rem 0.3rem; border-radius:2px;">
-            <div style="display:flex; gap:2px; flex-shrink:0;">
-              <span title="open recall: ${dotLabel(m.x_open)}" style="display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:50%; background:${dotColor(m.x_open)}; color:white; font-size:8px; font-weight:700;">O</span>
-              <span title="forced RU first: ${dotLabel(m.x_forced_ru_first)}" style="display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:50%; background:${dotColor(m.x_forced_ru_first)}; color:white; font-size:8px; font-weight:700;">R</span>
-              <span title="forced UA first: ${dotLabel(m.x_forced_ua_first)}" style="display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:50%; background:${dotColor(m.x_forced_ua_first)}; color:white; font-size:8px; font-weight:700;">U</span>
+          <div style="display:grid; grid-template-columns:1fr 100px 50px 50px 50px 60px; gap:0; font-size:0.65rem; border-top:1px solid #f3f4f6; align-items:center;">
+            <div style="padding:0.35rem 0.6rem; display:flex; align-items:center; gap:0.4rem;">
+              <span style="display:inline-block; width:8px; height:8px; border-radius:2px; background:${color}; flex-shrink:0;"></span>
+              <span style="font-family:monospace; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${m.key}</span>
             </div>
-            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:${color}; flex-shrink:0;"></span>
-            <span style="font-size:0.6rem; font-family:monospace; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${modelLabel(m.key)}</span>
+            <div style="padding:0.35rem 0.6rem; color:var(--text-muted); font-size:0.6rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${m.family}</div>
+            <div style="padding:0.35rem 0.4rem; text-align:center;">${cell(m.x_open)}</div>
+            <div style="padding:0.35rem 0.4rem; text-align:center;">${cell(m.x_forced_ru_first)}</div>
+            <div style="padding:0.35rem 0.4rem; text-align:center;">${cell(m.x_forced_ua_first)}</div>
+            <div style="padding:0.35rem 0.6rem; text-align:right; font-family:monospace; color:var(--text);">${tasStr}</div>
           </div>
         `;
       }
