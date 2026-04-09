@@ -151,12 +151,40 @@
   ],
   "key_finding": "Even if we found no Catholic Latin American outlet that copy-pastes mospat.ru directly, the structural pipeline is in place: Russia's Spanish-language state media (RT en Español alone has 18 M followers — almost twice Constantinople's entire English readership) coordinates editorially with the Moscow Patriarchate. Catholic outlets like ACI Prensa and Religión Digital report on ROC positions because Kirill is a major religious newsmaker. The reach asymmetry is the story: a single editorial choice on mospat.ru can be amplified to ~500 million Spanish/Portuguese speakers — roughly the entire English-speaking world — while our 8 corpus sources see none of it.",
   "sources": [
-    {"label": "Patriarchal Exarchate of Africa parish counts", "url": "https://en.wikipedia.org/wiki/Patriarchal_Exarchate_of_Africa"},
-    {"label": "ROCOR South America Diocese", "url": "https://www.rocorstudies.org/2020/02/14/history-of-the-russian-orthodox-church-outside-russia-from-its-beginning-to-the-present-part-iv-chapter-1-6/"},
-    {"label": "RT en Español + Sputnik Mundo reach", "url": "https://reutersinstitute.politics.ox.ac.uk/news/despite-western-bans-putins-propaganda-flourishes-spanish-tv-and-social-media"},
-    {"label": "LatamNews.lat", "url": "https://insightnews.media/spanish-edition-of-russias-sputnik-launched-on-new-domain-noticiaslatam-lat/"},
-    {"label": "Russkiy Mir Foundation in LATAM", "url": "https://regard-est.com/the-successful-gamble-of-russian-soft-power-in-latin-america"},
-    {"label": "ACI Prensa Russian Orthodox Church coverage", "url": "https://www.aciprensa.com/tags/3290/iglesia-ortodoxa-rusa"},
-    {"label": "Religión Digital Russian Orthodox Church coverage", "url": "https://www.religiondigital.org/temas/papa-e-iglesia-ortodoxa-rusa/"}
+    {
+      "label": "Patriarchal Exarchate of Africa parish counts",
+      "url": "https://en.wikipedia.org/wiki/Patriarchal_Exarchate_of_Africa",
+      "short": "Exarchate of Africa"
+    },
+    {
+      "label": "ROCOR South America Diocese",
+      "url": "https://www.rocorstudies.org/2020/02/14/history-of-the-russian-orthodox-church-outside-russia-from-its-beginning-to-the-present-part-iv-chapter-1-6/",
+      "short": "ROCOR S. America"
+    },
+    {
+      "label": "RT en Español + Sputnik Mundo reach",
+      "url": "https://reutersinstitute.politics.ox.ac.uk/news/despite-western-bans-putins-propaganda-flourishes-spanish-tv-and-social-media",
+      "short": "RT/Sputnik reach"
+    },
+    {
+      "label": "LatamNews.lat",
+      "url": "https://insightnews.media/spanish-edition-of-russias-sputnik-launched-on-new-domain-noticiaslatam-lat/",
+      "short": "LatamNews.lat"
+    },
+    {
+      "label": "Russkiy Mir Foundation in LATAM",
+      "url": "https://regard-est.com/the-successful-gamble-of-russian-soft-power-in-latin-america",
+      "short": "Russkiy Mir LATAM"
+    },
+    {
+      "label": "ACI Prensa Russian Orthodox Church coverage",
+      "url": "https://www.aciprensa.com/tags/3290/iglesia-ortodoxa-rusa",
+      "short": "ACI Prensa"
+    },
+    {
+      "label": "Religión Digital Russian Orthodox Church coverage",
+      "url": "https://www.religiondigital.org/temas/papa-e-iglesia-ortodoxa-rusa/",
+      "short": "Religión Digital"
+    }
   ]
 }
