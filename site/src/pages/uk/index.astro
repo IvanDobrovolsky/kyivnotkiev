@@ -116,14 +116,14 @@ function formatNum(n: number) {
               #KyivNotKiev
             </h1>
             <p style="color:var(--text); font-size:0.95rem; margin:0.4rem 0 0; line-height:1.5;">
-              Відстеження прийняття українського правопису у {fmtBig(m.total_records)} записах з {m.num_sources} джерел, {m.num_countries} країн, 2010–2026.
+              Відстеження прийняття українського правопису у {fmtBig(m.toponym_matches)} записах з {m.num_sources} джерел, {m.num_countries} країн, 2010–2026.
             </p>
           </div>
         </div>
 
       <div class="stats" style="grid-template-columns: repeat(5, 1fr);">
         <div class="stat-card">
-          <div class="stat-value">{fmtBig(m.total_records)}</div>
+          <div class="stat-value">{fmtBig(m.toponym_matches)}</div>
           <div class="stat-label">Записів проаналізовано</div>
         </div>
         <div class="stat-card">
