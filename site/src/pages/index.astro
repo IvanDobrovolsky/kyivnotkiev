@@ -451,111 +451,150 @@ function formatNum(n: number) {
           </div>
         </div>
 
-        {/* The trajectory chart: per-model recognition-recall gap over time */}
+        {/* Per-family trajectory chart: TAS over time, one line per lab + scatter dots per model */}
         {(() => {
           const traj = llmTraj;
-          const models = traj.models.filter(m => m.release_date && m.open != null && m.forced != null);
+          const models = traj.models.filter(m => m.release_date && m.tas != null);
 
-          // Sort by release_date for display
-          models.sort((a, b) => (a.release_date || '').localeCompare(b.release_date || ''));
-
-          // Compute layout
-          const W = 900;
-          const H = 360;
-          const PAD_L = 50;
-          const PAD_R = 20;
-          const PAD_T = 30;
-          const PAD_B = 60;
+          // Layout
+          const W = 920;
+          const H = 380;
+          const PAD_L = 56;
+          const PAD_R = 14;
+          const PAD_T = 28;
+          const PAD_B = 56;
           const innerW = W - PAD_L - PAD_R;
           const innerH = H - PAD_T - PAD_B;
 
-          // Y axis: 50% to 100%
-          const yMin = 50;
+          // Y: full 0-100 with explicit ticks every 10
+          const yMin = 30;
           const yMax = 100;
-          const y = (v: number) => PAD_T + (1 - (v - yMin) / (yMax - yMin)) * innerH;
+          const y = (v) => PAD_T + (1 - (v - yMin) / (yMax - yMin)) * innerH;
+          const ygrid = [30, 40, 50, 60, 70, 80, 90, 100];
 
-          // X axis: distribute models evenly along their release-date order
-          const releaseDates = [...new Set(models.map(m => m.release_date))].sort();
-          const dateIdx = Object.fromEntries(releaseDates.map((d, i) => [d, i]));
-          const xSlot = (rd) => {
-            const idx = dateIdx[rd];
-            const slotW = innerW / releaseDates.length;
-            return PAD_L + slotW * idx + slotW / 2;
+          // X: continuous month axis from earliest to latest release
+          const dateToMonths = (d) => {
+            const [yr, mo] = d.split('-').map(Number);
+            return yr * 12 + (mo - 1);
           };
-          // Within a release-date slot, jitter horizontally so models at the same date don't overlap
-          const slotMembers = {};
-          models.forEach(m => {
-            (slotMembers[m.release_date] = slotMembers[m.release_date] || []).push(m);
-          });
-          const slotW = innerW / releaseDates.length;
-          const positionedModels = models.map(m => {
-            const peers = slotMembers[m.release_date];
-            const idx = peers.indexOf(m);
-            const offset = (idx - (peers.length - 1) / 2) * Math.min(14, (slotW - 8) / Math.max(1, peers.length));
-            return {...m, x: xSlot(m.release_date) + offset};
-          });
+          const xMin = Math.min(...models.map(m => dateToMonths(m.release_date)));
+          const xMax = Math.max(...models.map(m => dateToMonths(m.release_date)));
+          const x = (mon) => PAD_L + ((mon - xMin) / Math.max(1, xMax - xMin)) * innerW;
 
-          // Y gridlines
-          const ygrid = [50, 60, 70, 80, 90, 100];
+          // X tick: every 3 months — avoid `<=` which Astro JSX parses as a tag
+          const xticks = Array.from({length: xMax - xMin + 1}, (_, i) => xMin + i)
+            .filter(m => {
+              const mo = (m % 12) + 1;
+              return mo === 1 || mo === 4 || mo === 7 || mo === 10;
+            })
+            .map(m => ({label: `${Math.floor(m / 12)}-${String((m % 12) + 1).padStart(2, '0')}`, mon: m}));
+
+          // Group by family, then by month for line aggregation
+          const families = traj.families;
+          const byFamily = {};
+          for (const m of models) {
+            (byFamily[m.family] = byFamily[m.family] || []).push({
+              ...m,
+              mon: dateToMonths(m.release_date),
+            });
+          }
+          // Sort each family by date and compute monthly average
+          const familyLines = [];
+          for (const fam of Object.keys(byFamily)) {
+            const arr = byFamily[fam];
+            arr.sort((a, b) => a.mon - b.mon);
+            const byMon = {};
+            for (const m of arr) {
+              if (!byMon[m.mon]) byMon[m.mon] = {tas: [], open: [], forced: []};
+              if (m.tas != null) byMon[m.mon].tas.push(m.tas);
+              if (m.open != null) byMon[m.mon].open.push(m.open);
+              if (m.forced != null) byMon[m.mon].forced.push(m.forced);
+            }
+            const points = Object.keys(byMon).map(mon => {
+              const vs = byMon[mon];
+              return {
+                mon: Number(mon),
+                tas: vs.tas.length ? vs.tas.reduce((a, b) => a + b, 0) / vs.tas.length : 0,
+                open: vs.open.length ? vs.open.reduce((a, b) => a + b, 0) / vs.open.length : 0,
+                forced: vs.forced.length ? vs.forced.reduce((a, b) => a + b, 0) / vs.forced.length : 0,
+              };
+            }).sort((a, b) => a.mon - b.mon);
+            familyLines.push({family: fam, color: families[fam]?.color || '#888', points});
+          }
+
+          // Path generator (linear)
+          const pathFor = (pts) => {
+            if (pts.length === 0) return '';
+            return pts.map((p, i) => `${i === 0 ? 'M' : 'L'} ${x(p.mon).toFixed(1)} ${y(p.tas).toFixed(1)}`).join(' ');
+          };
+
+          // Order families by latest TAS so the legend matches the chart top-to-bottom
+          familyLines.sort((a, b) => {
+            const av = a.points[a.points.length - 1]?.tas || 0;
+            const bv = b.points[b.points.length - 1]?.tas || 0;
+            return bv - av;
+          });
 
           return (
-            <div style="overflow-x:auto; margin-bottom:1rem;">
+            <div style="overflow-x:auto; margin-bottom:0.75rem;">
               <svg width={W} height={H} style="display:block; min-width:100%;">
-                {/* Grid */}
+                {/* Y gridlines + labels */}
                 {ygrid.map(g => (
                   <g>
                     <line x1={PAD_L} x2={W - PAD_R} y1={y(g)} y2={y(g)}
                       stroke="#e5e7eb" strokeWidth="1" strokeDasharray={g === 100 ? "" : "2,3"} />
-                    <text x={PAD_L - 8} y={y(g) + 3} textAnchor="end" fontSize="9" fill="#6b7280">{g}%</text>
+                    <text x={PAD_L - 8} y={y(g) + 3} textAnchor="end" fontSize="10" fill="#6b7280">{g}%</text>
                   </g>
                 ))}
+                {/* Reference line at corpus value (~85% Kyiv) */}
+                <line x1={PAD_L} x2={W - PAD_R} y1={y(85)} y2={y(85)}
+                  stroke="#0057B8" strokeWidth="1" strokeDasharray="4,4" strokeOpacity="0.4" />
+                <text x={W - PAD_R - 4} y={y(85) - 4} textAnchor="end" fontSize="9" fill="#0057B8">corpus average ≈ 85%</text>
 
-                {/* Y axis label */}
-                <text x={12} y={H / 2} textAnchor="middle" fontSize="10" fill="#6b7280"
-                  transform={`rotate(-90 12 ${H / 2})`}>% Kyiv (vs Kiev)</text>
+                {/* Y axis title */}
+                <text x={14} y={H / 2} textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151"
+                  transform={`rotate(-90 14 ${H / 2})`}>TAS (% Kyiv)</text>
 
-                {/* X axis: release-date labels */}
-                {releaseDates.map((rd, i) => {
-                  const x = xSlot(rd);
+                {/* X axis ticks + labels */}
+                {xticks.map(t => (
+                  <g>
+                    <line x1={x(t.mon)} x2={x(t.mon)} y1={PAD_T + innerH} y2={PAD_T + innerH + 4}
+                      stroke="#6b7280" strokeWidth="1" />
+                    <text x={x(t.mon)} y={PAD_T + innerH + 16} textAnchor="middle" fontSize="10" fill="#6b7280">{t.label}</text>
+                  </g>
+                ))}
+                <text x={PAD_L + innerW / 2} y={H - 8} textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151">model release date</text>
+
+                {/* Faded scatter: every individual model */}
+                {models.map(m => {
+                  const c = families[m.family]?.color || '#888';
                   return (
-                    <g>
-                      <line x1={x} x2={x} y1={PAD_T + innerH} y2={PAD_T + innerH + 4}
-                        stroke="#6b7280" strokeWidth="1" />
-                      <text x={x} y={PAD_T + innerH + 16} textAnchor="middle" fontSize="9" fill="#6b7280"
-                        transform={`rotate(-30 ${x} ${PAD_T + innerH + 16})`}>{rd}</text>
-                    </g>
+                    <circle cx={x(dateToMonths(m.release_date))} cy={y(m.tas)} r={2.5}
+                      fill={c} fillOpacity="0.4">
+                      <title>{`${m.key}\nTAS=${m.tas}%  open=${m.open}%  forced=${m.forced}%  released ${m.release_date}`}</title>
+                    </circle>
                   );
                 })}
 
-                {/* Per-model: vertical line from open recall to forced */}
-                {positionedModels.map(m => {
-                  const color = traj.families[m.family]?.color || '#888';
-                  const yo = y(m.open);
-                  const yf = y(m.forced);
-                  return (
-                    <g>
-                      {/* Connector line */}
-                      <line x1={m.x} x2={m.x} y1={yo} y2={yf}
-                        stroke={color} strokeWidth="1.5" strokeOpacity="0.4" />
-                      {/* Open recall (lower dot, hollow) */}
-                      <circle cx={m.x} cy={yo} r="3.5" fill="white" stroke={color} strokeWidth="1.6" />
-                      {/* Forced choice (upper dot, filled) */}
-                      <circle cx={m.x} cy={yf} r="3.5" fill={color} />
-                      {/* Hover title */}
-                      <title>{`${m.key}\nForced choice: ${m.forced}%\nOpen recall: ${m.open}%\nGap: ${m.gap}pp\nReleased: ${m.release_date}`}</title>
-                    </g>
-                  );
-                })}
-
-                {/* Legend top right */}
-                <g transform={`translate(${PAD_L + 10}, ${PAD_T + 8})`}>
-                  <text x={0} y={0} fontSize="9" fontWeight="700" fill="#6b7280">Each model:</text>
-                  <circle cx={75} cy={-3} r="3.5" fill="#666" />
-                  <text x={82} y={0} fontSize="9" fill="#6b7280">forced choice (recognition)</text>
-                  <circle cx={205} cy={-3} r="3.5" fill="white" stroke="#666" strokeWidth="1.6" />
-                  <text x={212} y={0} fontSize="9" fill="#6b7280">free recall (generation)</text>
-                </g>
+                {/* Per-family line + dots at each month */}
+                {familyLines.map(fl => (
+                  <g>
+                    <path d={pathFor(fl.points)} fill="none" stroke={fl.color} strokeWidth="2.5" strokeOpacity="0.85" />
+                    {fl.points.map(p => (
+                      <circle cx={x(p.mon)} cy={y(p.tas)} r={4} fill={fl.color} stroke="white" strokeWidth="1.5">
+                        <title>{`${fl.family}\nMonth: ${Math.floor(p.mon / 12)}-${String((p.mon % 12) + 1).padStart(2, '0')}\nTAS: ${p.tas.toFixed(1)}%`}</title>
+                      </circle>
+                    ))}
+                  </g>
+                ))}
               </svg>
+              <div style="font-size:0.65rem; color:var(--text-muted); padding:0.4rem 0.5rem; line-height:1.6;">
+                <strong>How to read.</strong> Each colored line is one lab's per-month average TAS across all its
+                models released that month. Faded dots in the background are individual models. The dashed blue
+                horizontal line at 85% marks where the human-web corpus actually sits — most LLM families plateau
+                <em> below</em> this line and don't catch up across versions. <strong>Meta Llama (the steepest line)
+                is the only family that shows the textbook adoption trajectory we hypothesised.</strong>
+              </div>
             </div>
           );
         })()}
@@ -1596,13 +1635,18 @@ function formatNum(n: number) {
       drawAdoptionCalc();
       drawSearchPreview();
       drawPairClContext();
-      // setTimeout ensures browser has fully laid out pair-view before measuring widths
+      // setTimeout ensures browser has fully laid out pair-view before measuring widths.
+      // Each draw is wrapped so a single failure doesn't cascade and leave later
+      // panels (e.g. world map, holdouts) empty when an earlier panel throws.
       setTimeout(() => {
-        drawPairSourceChart();
-        drawMediaOrigin();
-        drawPairLLM();
-        drawWorldMap();
-        drawHoldoutTable();
+        const safeDraw = (name: string, fn: () => void) => {
+          try { fn(); } catch (e) { console.error(`[${name}] failed:`, e); }
+        };
+        safeDraw('drawPairSourceChart', drawPairSourceChart);
+        safeDraw('drawMediaOrigin', drawMediaOrigin);
+        safeDraw('drawPairLLM', drawPairLLM);
+        safeDraw('drawWorldMap', drawWorldMap);
+        safeDraw('drawHoldoutTable', drawHoldoutTable);
       }, 50);
     }
 
@@ -1769,11 +1813,13 @@ function formatNum(n: number) {
 
       // Per-family rollup mini-bars
       html += `<div style="font-size:0.7rem; font-weight:700; color:var(--text); margin:0.75rem 0 0.4rem;">By family</div>`;
+      const safePct = (v: any) => (typeof v === 'number' ? v : 0);
       for (const fam of familyOrder) {
         const f = sum.by_family[fam];
         const color = families[fam]?.color || '#666';
-        const opPct = f.open_pct ?? 0;
-        const fcPct = f.forced_pct ?? 0;
+        const opPct = safePct(f.open_pct);
+        const fcPct = safePct(f.forced_pct);
+        const tasPct = safePct(f.tas_mean);
         html += `
           <div style="display:grid; grid-template-columns:160px 1fr 1fr 60px; gap:0.5rem; align-items:center; margin-bottom:0.3rem; font-size:0.7rem;">
             <div style="color:var(--text); display:flex; align-items:center; gap:0.4rem;">
@@ -1793,7 +1839,7 @@ function formatNum(n: number) {
               </div>
               <span style="font-family:monospace; color:var(--text-muted); width:38px; text-align:right;">${fcPct.toFixed(0)}%</span>
             </div>
-            <div style="font-family:monospace; color:var(--text); font-weight:600; text-align:right;">${(f.tas_mean ?? 0).toFixed(0)}%</div>
+            <div style="font-family:monospace; color:var(--text); font-weight:600; text-align:right;">${tasPct.toFixed(0)}%</div>
           </div>
         `;
       }
