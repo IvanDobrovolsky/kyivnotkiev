@@ -1,6 +1,7 @@
 ---
 import '../../styles/global.css';
 import m from '../../data/manifest.json';
+import toolsPerPair from '../../data/tools_per_pair.json';
 
 // manifest.json is the single source of truth — all stats, pairs, categories
 const grouped = m.categories.map(cat => ({
@@ -208,6 +209,7 @@ function formatNum(n: number) {
         <div class="chart-container" id="dict-container" style="margin-bottom:0; padding:0.75rem 1rem;">
           <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Аудит посилань</div>
           <div id="search-preview"></div>
+          <script type="application/json" id="tools-per-pair-data" set:html={JSON.stringify(toolsPerPair)} />
         </div>
       </div>
 
@@ -1834,13 +1836,45 @@ function formatNum(n: number) {
         }
       }
 
-      // Enforcement row
+      // Enforcement row — read per-pair from injected JSON
+      let toolsData: any = null;
+      try {
+        const tEl = document.getElementById('tools-per-pair-data');
+        if (tEl && tEl.textContent) {
+          toolsData = JSON.parse(tEl.textContent).pairs[String(activePairId)];
+        }
+      } catch (e) {
+        console.error('[drawSearchPreview] tools data parse failed:', e);
+      }
+
       html += '<div style="padding:0.4rem 0.5rem; font-weight:500; display:flex; align-items:center; gap:0.3rem;"><span style="font-size:0.85rem;">🔧</span>Інструменти</div>';
       html += '<div style="padding:0.4rem 0.5rem; grid-column: span 2; display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">';
-      html += badge('Grammarly', '#059669', '✓');
-      html += badge('AP/BBC', '#059669', '✓');
-      html += badge('Hunspell', '#dc2626', '✗');
-      html += badge('Word', '#9ca3af', '—');
+      if (toolsData) {
+        const hunRu = toolsData.hunspell.russian;
+        const hunUa = toolsData.hunspell.ukrainian;
+        const ruIcon = hunRu.accepted ? '✓' : '✗';
+        const uaIcon = hunUa.accepted ? '✓' : '✗';
+        const ruColor = hunRu.accepted ? '#059669' : '#dc2626';
+        const uaColor = hunUa.accepted ? '#059669' : '#dc2626';
+        const ruTitle = hunRu.accepted
+          ? `hunspell en_US приймає "${hunRu.word_checked}"`
+          : `hunspell en_US відхиляє "${hunRu.word_checked}"${hunRu.suggestions.length ? ` (пропонує: ${hunRu.suggestions.join(', ')})` : ''}`;
+        const uaTitle = hunUa.accepted
+          ? `hunspell en_US приймає "${hunUa.word_checked}"`
+          : `hunspell en_US відхиляє "${hunUa.word_checked}"${hunUa.suggestions.length ? ` (пропонує: ${hunUa.suggestions.join(', ')})` : ''}`;
+        html += `<span title="${ruTitle}">${badge(`Hunspell · ${pair.russian.split(' ')[0]}`, ruColor, ruIcon)}</span>`;
+        html += `<span title="${uaTitle}">${badge(`Hunspell · ${pair.ukrainian.split(' ')[0]}`, uaColor, uaIcon)}</span>`;
+        const apDoc = toolsData.ap_stylebook.documented;
+        const bbcDoc = toolsData.bbc_style_guide.documented;
+        html += `<span title="${apDoc ? 'AP Stylebook фіксує українську форму для цієї пари' : 'Не у записах AP Stylebook'}">`
+          + badge('AP Stylebook', apDoc ? '#059669' : '#9ca3af', apDoc ? '✓' : '—')
+          + '</span>';
+        html += `<span title="${bbcDoc ? 'BBC News Style Guide фіксує українську форму для цієї пари' : 'Не у записах BBC News Style Guide'}">`
+          + badge('BBC', bbcDoc ? '#059669' : '#9ca3af', bbcDoc ? '✓' : '—')
+          + '</span>';
+      } else {
+        html += '<span style="font-size:0.65rem; color:#9ca3af;">дані недоступні</span>';
+      }
       html += '</div>';
 
       html += '</div>';

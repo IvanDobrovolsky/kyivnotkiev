@@ -5,6 +5,7 @@ import religious from '../data/religious.json';
 import religiousProp from '../data/religious_propagation.json';
 import llmTraj from '../data/llm_trajectory.json';
 import llmPerPair from '../data/llm_per_pair.json';
+import toolsPerPair from '../data/tools_per_pair.json';
 
 // manifest.json is the single source of truth — all stats, pairs, categories
 const grouped = m.categories.map(cat => ({
@@ -249,6 +250,8 @@ function formatNum(n: number) {
           <div class="chart-title" style="color: var(--text)">Reference Audit</div>
           <div class="chart-subtitle" style="margin-bottom:0.5rem;">Dictionary and encyclopedia entries for each spelling form</div>
           <div id="search-preview"></div>
+          {/* Per-pair tools verification data — injected as JSON for the client */}
+          <script type="application/json" id="tools-per-pair-data" set:html={JSON.stringify(toolsPerPair)} />
         </div>
       </div>
 
@@ -2770,13 +2773,54 @@ function formatNum(n: number) {
         }
       }
 
-      // Enforcement row
+      // Enforcement row — read per-pair from injected JSON
+      // Hunspell: actually checked via pyenchant en_US per pair (script:
+      // pipeline/analysis/verify_tools_per_pair.py). AP/BBC: only marked
+      // when documented in their public stylebook entries. Grammarly and
+      // Microsoft Word are intentionally omitted because they cannot be
+      // verified per-pair without manual interaction with closed services.
+      let toolsData: any = null;
+      try {
+        const tEl = document.getElementById('tools-per-pair-data');
+        if (tEl && tEl.textContent) {
+          toolsData = JSON.parse(tEl.textContent).pairs[String(activePairId)];
+        }
+      } catch (e) {
+        console.error('[drawSearchPreview] tools data parse failed:', e);
+      }
+
       html += '<div style="padding:0.4rem 0.5rem; font-weight:500; display:flex; align-items:center; gap:0.3rem;"><span style="font-size:0.85rem;">🔧</span>Tools</div>';
       html += '<div style="padding:0.4rem 0.5rem; grid-column: span 2; display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">';
-      html += badge('Grammarly', '#059669', '✓');
-      html += badge('AP/BBC', '#059669', '✓');
-      html += badge('Hunspell', '#dc2626', '✗');
-      html += badge('Word', '#9ca3af', '—');
+
+      if (toolsData) {
+        // Hunspell — show RU vs UA verdict explicitly so the asymmetry is visible
+        const hunRu = toolsData.hunspell.russian;
+        const hunUa = toolsData.hunspell.ukrainian;
+        const ruIcon = hunRu.accepted ? '✓' : '✗';
+        const uaIcon = hunUa.accepted ? '✓' : '✗';
+        const ruColor = hunRu.accepted ? '#059669' : '#dc2626';
+        const uaColor = hunUa.accepted ? '#059669' : '#dc2626';
+        const ruTitle = hunRu.accepted
+          ? `hunspell en_US accepts "${hunRu.word_checked}"`
+          : `hunspell en_US rejects "${hunRu.word_checked}"${hunRu.suggestions.length ? ` (suggests: ${hunRu.suggestions.join(', ')})` : ''}`;
+        const uaTitle = hunUa.accepted
+          ? `hunspell en_US accepts "${hunUa.word_checked}"`
+          : `hunspell en_US rejects "${hunUa.word_checked}"${hunUa.suggestions.length ? ` (suggests: ${hunUa.suggestions.join(', ')})` : ''}`;
+        html += `<span title="${ruTitle}">${badge(`Hunspell · ${pair.russian.split(' ')[0]}`, ruColor, ruIcon)}</span>`;
+        html += `<span title="${uaTitle}">${badge(`Hunspell · ${pair.ukrainian.split(' ')[0]}`, uaColor, uaIcon)}</span>`;
+
+        // AP / BBC — only show ✓ for documented entries; otherwise show "—"
+        const apDoc = toolsData.ap_stylebook.documented;
+        const bbcDoc = toolsData.bbc_style_guide.documented;
+        html += `<span title="${apDoc ? 'AP Stylebook documents the Ukrainian form for this pair' : 'Not in AP Stylebook entries'}">`
+          + badge('AP Stylebook', apDoc ? '#059669' : '#9ca3af', apDoc ? '✓' : '—')
+          + '</span>';
+        html += `<span title="${bbcDoc ? 'BBC News Style Guide documents the Ukrainian form for this pair' : 'Not in BBC News Style Guide entries'}">`
+          + badge('BBC', bbcDoc ? '#059669' : '#9ca3af', bbcDoc ? '✓' : '—')
+          + '</span>';
+      } else {
+        html += '<span style="font-size:0.65rem; color:#9ca3af;">tool data unavailable</span>';
+      }
       html += '</div>';
 
       html += '</div>';
