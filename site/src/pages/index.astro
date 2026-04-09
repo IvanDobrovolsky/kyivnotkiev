@@ -252,12 +252,18 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <!-- Source Comparison -->
-      <div id="comparison-row" style="display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:1rem;">
+      <!-- Source Comparison + Religious side by side -->
+      <div id="comparison-row" style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
         <div class="chart-container" style="margin-bottom:0;">
           <div class="chart-title" style="color: var(--text)">Source Comparison</div>
           <div class="chart-subtitle" style="margin-bottom:0.5rem;">Adoption rate per data source for this pair</div>
-          <div id="pair-source-chart" style="width:100%; min-height:200px;"></div>
+          <div id="pair-source-chart" style="width:100%;"></div>
+        </div>
+        <div class="chart-container" id="pair-religious-container" style="margin-bottom:0;">
+          <div class="chart-title" style="color: var(--text)">Religious Institutions</div>
+          <div class="chart-subtitle" style="margin-bottom:0.5rem;">How major religious bodies refer to this pair in English</div>
+          <div id="pair-religious-body"></div>
+          <script type="application/json" id="religious-per-pair-data" set:html={JSON.stringify(religious)} />
         </div>
       </div>
 
@@ -514,14 +520,14 @@ function formatNum(n: number) {
             c.models.push(m);
           }
 
-          // Layout
-          const ROW_H = 30;
-          const LABEL_W = 142;
-          const CELL_W = 56;
-          const HEADER_H = 30;
-          const PAD = 8;
+          // Layout — compact
+          const ROW_H = 24;
+          const LABEL_W = 130;
+          const CELL_W = 44;
+          const HEADER_H = 22;
+          const PAD = 6;
           const W = LABEL_W + CELL_W * quarters.length + PAD * 2;
-          const H = HEADER_H + ROW_H * famList.length + PAD * 2 + 40;
+          const H = HEADER_H + ROW_H * famList.length + PAD * 2 + 36;
 
           // TAS color scale: lower → red, higher → blue (Ukrainian flag direction)
           const tasColor = (v) => {
@@ -1675,6 +1681,7 @@ function formatNum(n: number) {
           try { fn(); } catch (e) { console.error(`[${name}] failed:`, e); }
         };
         safeDraw('drawPairSourceChart', drawPairSourceChart);
+        safeDraw('drawPairReligious', drawPairReligious);
         safeDraw('drawMediaOrigin', drawMediaOrigin);
         safeDraw('drawPairLLM', drawPairLLM);
         safeDraw('drawWorldMap', drawWorldMap);
@@ -1784,6 +1791,73 @@ function formatNum(n: number) {
       });
     }
 
+    // ── Per-pair religious panel ──
+    // Religious data is global per-source not per-pair-per-year, but each
+    // source has a list of pairs it has mentions for. Show only the
+    // denominations that have data for THIS pair.
+    let _religiousCache: any = null;
+    function getReligiousData() {
+      if (_religiousCache !== null) return _religiousCache;
+      const el = document.getElementById('religious-per-pair-data');
+      if (!el || !el.textContent) { _religiousCache = {}; return _religiousCache; }
+      try {
+        _religiousCache = JSON.parse(el.textContent);
+      } catch (e) {
+        console.error('[drawPairReligious] failed to parse religious data:', e);
+        _religiousCache = {};
+      }
+      return _religiousCache;
+    }
+
+    function drawPairReligious() {
+      const container = document.getElementById('pair-religious-container');
+      const body = document.getElementById('pair-religious-body');
+      if (!container || !body) return;
+
+      const rel = getReligiousData();
+      const pid = activePairId;
+      // For each denomination, find this pair's stats
+      const rows = (rel.denominations || [])
+        .map((d: any) => {
+          const pp = (d.pairs || []).find((p: any) => p.pair_id === pid);
+          return pp ? {...d, pair: pp} : null;
+        })
+        .filter(Boolean);
+
+      if (rows.length === 0) {
+        body.innerHTML = `<div style="font-size:0.7rem; color:var(--text-muted); padding:0.5rem 0;">No religious-press mentions for this pair across the 4 tracked institutions.</div>`;
+        return;
+      }
+
+      // Sort by total mentions desc
+      rows.sort((a: any, b: any) => (b.pair.ru + b.pair.ua) - (a.pair.ru + a.pair.ua));
+
+      let html = '';
+      html += `<div style="display:flex; flex-direction:column; gap:0.4rem;">`;
+      for (const r of rows) {
+        const pp = r.pair;
+        const total = pp.ru + pp.ua;
+        const uaPct = total > 0 ? (pp.ua / total * 100) : 0;
+        html += `
+          <div style="display:grid; grid-template-columns:140px 1fr 90px; gap:0.5rem; align-items:center; font-size:0.7rem;">
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <span style="display:inline-block; width:8px; height:8px; border-radius:2px; background:${r.color}; flex-shrink:0;"></span>
+              <span style="color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${r.short}</span>
+            </div>
+            <div style="display:flex; height:14px; border-radius:2px; overflow:hidden; background:#f0f0f0;">
+              <div style="width:${uaPct}%; background:#0057B8;"></div>
+              <div style="width:${100 - uaPct}%; background:#D52B1E;"></div>
+            </div>
+            <div style="font-family:monospace; font-size:0.6rem; color:var(--text-muted); text-align:right;">${pp.ua}/${total} (${uaPct.toFixed(0)}%)</div>
+          </div>
+        `;
+      }
+      html += `</div>`;
+      html += `<div style="margin-top:0.6rem; font-size:0.6rem; color:var(--text-muted);"><span style="color:#0057B8;">●</span> Ukrainian spelling · <span style="color:#D52B1E;">●</span> Russian spelling</div>`;
+
+      body.innerHTML = html;
+    }
+
     // ── Per-pair LLM scan: 71 frontier models × 3 prompt variants for THIS pair ──
     // Astro doesn't bundle JSON imports into client scripts (works only in
     // server-side JSX expressions). Read the data from the inline JSON script
@@ -1868,43 +1942,56 @@ function formatNum(n: number) {
       `;
 
       // Per-family rollup mini-bars
+      // Show concrete counts (e.g. "3/3" or "17/17") in addition to %
+      // because "100%" with N=3 looks identical to "100%" with N=71 and
+      // misleads users into thinking small samples are universal truths.
       html += `<div style="font-size:0.7rem; font-weight:700; color:var(--text); margin:0.75rem 0 0.4rem;">By family</div>`;
       const safePct = (v: any) => (typeof v === 'number' ? v : 0);
+      // Per-family raw counts: walk pp.models and tally
+      const famCounts: Record<string, {open_ua: number, open_n: number, forced_ua: number, forced_n: number}> = {};
+      for (const m of pp.models) {
+        const k = m.family;
+        if (!famCounts[k]) famCounts[k] = {open_ua: 0, open_n: 0, forced_ua: 0, forced_n: 0};
+        if (m.x_open === 1) famCounts[k].open_ua++;
+        if (m.x_open != null) famCounts[k].open_n++;
+        for (const v of [m.x_forced_ru_first, m.x_forced_ua_first]) {
+          if (v === 1) famCounts[k].forced_ua++;
+          if (v != null) famCounts[k].forced_n++;
+        }
+      }
       for (const fam of familyOrder) {
         const f = sum.by_family[fam];
+        const counts = famCounts[fam] || {open_ua: 0, open_n: 0, forced_ua: 0, forced_n: 0};
         const color = families[fam]?.color || '#666';
         const opPct = safePct(f.open_pct);
         const fcPct = safePct(f.forced_pct);
-        const tasPct = safePct(f.tas_mean);
         html += `
-          <div style="display:grid; grid-template-columns:160px 1fr 1fr 60px; gap:0.5rem; align-items:center; margin-bottom:0.3rem; font-size:0.7rem;">
-            <div style="color:var(--text); display:flex; align-items:center; gap:0.4rem;">
-              <span style="display:inline-block; width:10px; height:10px; border-radius:2px; background:${color};"></span>
-              ${fam}
-              <span style="color:var(--text-muted); font-family:monospace;">×${f.n}</span>
+          <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0.5rem; align-items:center; margin-bottom:0.3rem; font-size:0.65rem;">
+            <div style="color:var(--text); display:flex; align-items:center; gap:0.35rem; min-width:0;">
+              <span style="display:inline-block; width:8px; height:8px; border-radius:2px; background:${color}; flex-shrink:0;"></span>
+              <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${fam}</span>
+              <span style="color:var(--text-muted); font-family:monospace; flex-shrink:0;">×${f.n}</span>
             </div>
             <div style="display:flex; align-items:center; gap:0.4rem;">
-              <div style="flex:1; height:14px; background:#f0f0f0; border-radius:2px; overflow:hidden;">
+              <div style="flex:1; height:12px; background:#f0f0f0; border-radius:2px; overflow:hidden;">
                 <div style="width:${opPct}%; height:100%; background:#D52B1E; opacity:0.85;"></div>
               </div>
-              <span style="font-family:monospace; color:var(--text-muted); width:38px; text-align:right;">${opPct.toFixed(0)}%</span>
+              <span style="font-family:monospace; color:var(--text-muted); font-size:0.6rem; width:36px; text-align:right;">${counts.open_ua}/${counts.open_n}</span>
             </div>
             <div style="display:flex; align-items:center; gap:0.4rem;">
-              <div style="flex:1; height:14px; background:#f0f0f0; border-radius:2px; overflow:hidden;">
+              <div style="flex:1; height:12px; background:#f0f0f0; border-radius:2px; overflow:hidden;">
                 <div style="width:${fcPct}%; height:100%; background:#0057B8; opacity:0.85;"></div>
               </div>
-              <span style="font-family:monospace; color:var(--text-muted); width:38px; text-align:right;">${fcPct.toFixed(0)}%</span>
+              <span style="font-family:monospace; color:var(--text-muted); font-size:0.6rem; width:42px; text-align:right;">${counts.forced_ua}/${counts.forced_n}</span>
             </div>
-            <div style="font-family:monospace; color:var(--text); font-weight:600; text-align:right;">${tasPct.toFixed(0)}%</div>
           </div>
         `;
       }
       html += `
-        <div style="display:grid; grid-template-columns:160px 1fr 1fr 60px; gap:0.5rem; font-size:0.6rem; color:var(--text-muted); margin-top:0.5rem; padding-top:0.4rem; border-top:1px solid rgba(0,0,0,0.06);">
+        <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0.5rem; font-size:0.55rem; color:var(--text-muted); margin-top:0.5rem; padding-top:0.4rem; border-top:1px solid rgba(0,0,0,0.06);">
           <div></div>
-          <div style="display:flex; align-items:center; gap:0.3rem;"><span style="width:8px; height:8px; background:#D52B1E; display:inline-block; border-radius:1px;"></span>free recall</div>
-          <div style="display:flex; align-items:center; gap:0.3rem;"><span style="width:8px; height:8px; background:#0057B8; display:inline-block; border-radius:1px;"></span>forced choice (avg of two orders)</div>
-          <div style="text-align:right;">TAS</div>
+          <div style="display:flex; align-items:center; gap:0.3rem;"><span style="width:8px; height:8px; background:#D52B1E; display:inline-block; border-radius:1px;"></span>free recall — UA picks / total decisive</div>
+          <div style="display:flex; align-items:center; gap:0.3rem;"><span style="width:8px; height:8px; background:#0057B8; display:inline-block; border-radius:1px;"></span>forced choice — UA picks / 2 trials per model</div>
         </div>
       `;
 
