@@ -520,14 +520,14 @@ function formatNum(n: number) {
             c.models.push(m);
           }
 
-          // Layout — compact
-          const ROW_H = 24;
-          const LABEL_W = 130;
-          const CELL_W = 44;
+          // Layout — compact, sized in real pixels (no viewBox upscaling)
+          const ROW_H = 26;
+          const LABEL_W = 170;
+          const CELL_W = 56;
           const HEADER_H = 22;
-          const PAD = 6;
+          const PAD = 8;
           const W = LABEL_W + CELL_W * quarters.length + PAD * 2;
-          const H = HEADER_H + ROW_H * famList.length + PAD * 2 + 36;
+          const H = HEADER_H + ROW_H * famList.length + PAD * 2 + 40;
 
           // TAS color scale: lower → red, higher → blue (Ukrainian flag direction)
           const tasColor = (v) => {
@@ -553,8 +553,7 @@ function formatNum(n: number) {
 
           return (
             <div style="overflow-x:auto; margin-bottom:0.75rem;">
-              <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMinYMid meet"
-                style="display:block; width:100%; height:auto; min-width:520px;">
+              <svg width={W} height={H} style="display:block; max-width:100%; height:auto;">
                 {/* Quarter headers */}
                 {quarters.map((q, i) => {
                   const cx = PAD + LABEL_W + CELL_W * i + CELL_W / 2;
@@ -807,19 +806,21 @@ function formatNum(n: number) {
               audience: "#0057B8",
             };
 
-            const PAD_X = 20;
-            const PAD_TOP = 14;
-            const BOX_W = 190;
-            const BOX_H = 58;
+            const PAD_X = 16;
+            const PAD_TOP = 12;
+            const BOX_W = 220;
+            const BOX_H = 62;
             const H_GAP = 16;
-            const HEADER_H = 18;
-            const ROW_GAP = 24;
+            const SOURCE_GAP = 28; // gap below source row
+            const HEADER_GAP = 8;  // gap between header text and its tier row
+            const TIER_GAP = 26;   // gap between consecutive tier rows
+            const HEADER_H = 14;   // header text height
 
             const maxCols = Math.max(1, ...tiers.map(t => t.nodes.length));
             const chartW = PAD_X * 2 + maxCols * BOX_W + (maxCols - 1) * H_GAP;
-            // Source row + N tier rows
-            const rowHeight = HEADER_H + BOX_H + ROW_GAP;
-            const chartH = PAD_TOP + BOX_H + ROW_GAP + tiers.length * rowHeight + 6;
+            // Source row + N tier rows (each: header + box) with gaps
+            const rowFullH = HEADER_H + HEADER_GAP + BOX_H + TIER_GAP;
+            const chartH = PAD_TOP + BOX_H + SOURCE_GAP + tiers.length * rowFullH - TIER_GAP + PAD_TOP;
 
             const innerLeft = PAD_X;
             const innerWidth = chartW - PAD_X * 2;
@@ -840,8 +841,11 @@ function formatNum(n: number) {
 
             // Tier positions
             const tierPositions = {};
+            const tierHeaderY = {};
             tiers.forEach((tier, ti) => {
-              const yTop = PAD_TOP + BOX_H + ROW_GAP + ti * rowHeight + HEADER_H;
+              const rowTop = PAD_TOP + BOX_H + SOURCE_GAP + ti * rowFullH;
+              tierHeaderY[tier.id] = rowTop + HEADER_H - 2; // text baseline
+              const yTop = rowTop + HEADER_H + HEADER_GAP;
               const positions = layoutRow(tier.nodes.length, yTop);
               tier.nodes.forEach((n, ni) => {
                 tierPositions[`${tier.id}:${n.id}`] = positions[ni];
@@ -870,8 +874,8 @@ function formatNum(n: number) {
             const lookup = (id) => id === 'SOURCE' ? sourcePos : tierPositions[id];
 
             return (
-              <div style="overflow-x:auto;">
-                <svg width={chartW} height={chartH} style="display:block; min-width:100%;">
+              <div style="width:100%;">
+                <svg viewBox={`0 0 ${chartW} ${chartH}`} preserveAspectRatio="xMidYMid meet" style="display:block; width:100%; height:auto;">
                   {/* Edges first so they draw under nodes */}
                   {edges.map((e) => {
                     const a = lookup(e.from);
@@ -910,11 +914,11 @@ function formatNum(n: number) {
 
                   {/* Tier rows */}
                   {tiers.map((tier, ti) => {
-                    const headerY = PAD_TOP + BOX_H + ROW_GAP + ti * rowHeight + 12;
+                    const headerY = tierHeaderY[tier.id];
                     const fill = tierColors[tier.id] || "#888";
                     return (
                       <g>
-                        <text x={chartW / 2} y={headerY} textAnchor="middle" fontSize="9" fontWeight="700" fill={fill}>
+                        <text x={chartW / 2} y={headerY} textAnchor="middle" fontSize="11" fontWeight="700" fill={fill}>
                           {tier.title}
                         </text>
                         {tier.nodes.map((n) => {
