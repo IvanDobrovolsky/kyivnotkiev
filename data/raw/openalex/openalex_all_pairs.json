@@ -1,5 +1,4841 @@
 [
   {
+    "pair_id": 1,
+    "russian_term": "Kiev",
+    "ukrainian_term": "Kyiv",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 46,
+        "ukrainian_count": 38,
+        "total": 84
+      },
+      {
+        "year": 2011,
+        "russian_count": 54,
+        "ukrainian_count": 38,
+        "total": 92
+      },
+      {
+        "year": 2012,
+        "russian_count": 47,
+        "ukrainian_count": 59,
+        "total": 106
+      },
+      {
+        "year": 2013,
+        "russian_count": 71,
+        "ukrainian_count": 64,
+        "total": 135
+      },
+      {
+        "year": 2014,
+        "russian_count": 111,
+        "ukrainian_count": 118,
+        "total": 229
+      },
+      {
+        "year": 2015,
+        "russian_count": 80,
+        "ukrainian_count": 116,
+        "total": 196
+      },
+      {
+        "year": 2016,
+        "russian_count": 137,
+        "ukrainian_count": 172,
+        "total": 309
+      },
+      {
+        "year": 2017,
+        "russian_count": 114,
+        "ukrainian_count": 189,
+        "total": 303
+      },
+      {
+        "year": 2018,
+        "russian_count": 94,
+        "ukrainian_count": 248,
+        "total": 342
+      },
+      {
+        "year": 2019,
+        "russian_count": 136,
+        "ukrainian_count": 368,
+        "total": 504
+      },
+      {
+        "year": 2020,
+        "russian_count": 185,
+        "ukrainian_count": 358,
+        "total": 543
+      },
+      {
+        "year": 2021,
+        "russian_count": 95,
+        "ukrainian_count": 455,
+        "total": 550
+      },
+      {
+        "year": 2022,
+        "russian_count": 61,
+        "ukrainian_count": 438,
+        "total": 499
+      },
+      {
+        "year": 2023,
+        "russian_count": 58,
+        "ukrainian_count": 485,
+        "total": 543
+      },
+      {
+        "year": 2024,
+        "russian_count": 39,
+        "ukrainian_count": 492,
+        "total": 531
+      },
+      {
+        "year": 2025,
+        "russian_count": 37,
+        "ukrainian_count": 712,
+        "total": 749
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 76,
+        "total": 76
+      }
+    ],
+    "total_russian": 1365,
+    "total_ukrainian": 4426
+  },
+  {
+    "pair_id": 2,
+    "russian_term": "Kharkov",
+    "ukrainian_term": "Kharkiv",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 17,
+        "ukrainian_count": 18,
+        "total": 35
+      },
+      {
+        "year": 2011,
+        "russian_count": 11,
+        "ukrainian_count": 21,
+        "total": 32
+      },
+      {
+        "year": 2012,
+        "russian_count": 16,
+        "ukrainian_count": 29,
+        "total": 45
+      },
+      {
+        "year": 2013,
+        "russian_count": 23,
+        "ukrainian_count": 43,
+        "total": 66
+      },
+      {
+        "year": 2014,
+        "russian_count": 24,
+        "ukrainian_count": 47,
+        "total": 71
+      },
+      {
+        "year": 2015,
+        "russian_count": 22,
+        "ukrainian_count": 49,
+        "total": 71
+      },
+      {
+        "year": 2016,
+        "russian_count": 15,
+        "ukrainian_count": 84,
+        "total": 99
+      },
+      {
+        "year": 2017,
+        "russian_count": 36,
+        "ukrainian_count": 86,
+        "total": 122
+      },
+      {
+        "year": 2018,
+        "russian_count": 43,
+        "ukrainian_count": 154,
+        "total": 197
+      },
+      {
+        "year": 2019,
+        "russian_count": 43,
+        "ukrainian_count": 211,
+        "total": 254
+      },
+      {
+        "year": 2020,
+        "russian_count": 22,
+        "ukrainian_count": 222,
+        "total": 244
+      },
+      {
+        "year": 2021,
+        "russian_count": 29,
+        "ukrainian_count": 221,
+        "total": 250
+      },
+      {
+        "year": 2022,
+        "russian_count": 28,
+        "ukrainian_count": 176,
+        "total": 204
+      },
+      {
+        "year": 2023,
+        "russian_count": 12,
+        "ukrainian_count": 211,
+        "total": 223
+      },
+      {
+        "year": 2024,
+        "russian_count": 11,
+        "ukrainian_count": 230,
+        "total": 241
+      },
+      {
+        "year": 2025,
+        "russian_count": 7,
+        "ukrainian_count": 259,
+        "total": 266
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 40,
+        "total": 40
+      }
+    ],
+    "total_russian": 359,
+    "total_ukrainian": 2101
+  },
+  {
+    "pair_id": 3,
+    "russian_term": "Odessa",
+    "ukrainian_term": "Odesa",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 53,
+        "ukrainian_count": 2,
+        "total": 55
+      },
+      {
+        "year": 2011,
+        "russian_count": 39,
+        "ukrainian_count": 2,
+        "total": 41
+      },
+      {
+        "year": 2012,
+        "russian_count": 39,
+        "ukrainian_count": 1,
+        "total": 40
+      },
+      {
+        "year": 2013,
+        "russian_count": 59,
+        "ukrainian_count": 4,
+        "total": 63
+      },
+      {
+        "year": 2014,
+        "russian_count": 57,
+        "ukrainian_count": 9,
+        "total": 66
+      },
+      {
+        "year": 2015,
+        "russian_count": 85,
+        "ukrainian_count": 24,
+        "total": 109
+      },
+      {
+        "year": 2016,
+        "russian_count": 103,
+        "ukrainian_count": 12,
+        "total": 115
+      },
+      {
+        "year": 2017,
+        "russian_count": 131,
+        "ukrainian_count": 24,
+        "total": 155
+      },
+      {
+        "year": 2018,
+        "russian_count": 156,
+        "ukrainian_count": 49,
+        "total": 205
+      },
+      {
+        "year": 2019,
+        "russian_count": 199,
+        "ukrainian_count": 52,
+        "total": 251
+      },
+      {
+        "year": 2020,
+        "russian_count": 162,
+        "ukrainian_count": 45,
+        "total": 207
+      },
+      {
+        "year": 2021,
+        "russian_count": 126,
+        "ukrainian_count": 49,
+        "total": 175
+      },
+      {
+        "year": 2022,
+        "russian_count": 86,
+        "ukrainian_count": 89,
+        "total": 175
+      },
+      {
+        "year": 2023,
+        "russian_count": 91,
+        "ukrainian_count": 126,
+        "total": 217
+      },
+      {
+        "year": 2024,
+        "russian_count": 41,
+        "ukrainian_count": 117,
+        "total": 158
+      },
+      {
+        "year": 2025,
+        "russian_count": 77,
+        "ukrainian_count": 129,
+        "total": 206
+      },
+      {
+        "year": 2026,
+        "russian_count": 18,
+        "ukrainian_count": 11,
+        "total": 29
+      }
+    ],
+    "total_russian": 1522,
+    "total_ukrainian": 745
+  },
+  {
+    "pair_id": 4,
+    "russian_term": "Lvov",
+    "ukrainian_term": "Lviv",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 11,
+        "ukrainian_count": 34,
+        "total": 45
+      },
+      {
+        "year": 2011,
+        "russian_count": 11,
+        "ukrainian_count": 45,
+        "total": 56
+      },
+      {
+        "year": 2012,
+        "russian_count": 9,
+        "ukrainian_count": 60,
+        "total": 69
+      },
+      {
+        "year": 2013,
+        "russian_count": 5,
+        "ukrainian_count": 107,
+        "total": 112
+      },
+      {
+        "year": 2014,
+        "russian_count": 37,
+        "ukrainian_count": 100,
+        "total": 137
+      },
+      {
+        "year": 2015,
+        "russian_count": 12,
+        "ukrainian_count": 90,
+        "total": 102
+      },
+      {
+        "year": 2016,
+        "russian_count": 25,
+        "ukrainian_count": 161,
+        "total": 186
+      },
+      {
+        "year": 2017,
+        "russian_count": 27,
+        "ukrainian_count": 170,
+        "total": 197
+      },
+      {
+        "year": 2018,
+        "russian_count": 11,
+        "ukrainian_count": 231,
+        "total": 242
+      },
+      {
+        "year": 2019,
+        "russian_count": 21,
+        "ukrainian_count": 307,
+        "total": 328
+      },
+      {
+        "year": 2020,
+        "russian_count": 27,
+        "ukrainian_count": 296,
+        "total": 323
+      },
+      {
+        "year": 2021,
+        "russian_count": 23,
+        "ukrainian_count": 320,
+        "total": 343
+      },
+      {
+        "year": 2022,
+        "russian_count": 22,
+        "ukrainian_count": 354,
+        "total": 376
+      },
+      {
+        "year": 2023,
+        "russian_count": 12,
+        "ukrainian_count": 273,
+        "total": 285
+      },
+      {
+        "year": 2024,
+        "russian_count": 8,
+        "ukrainian_count": 316,
+        "total": 324
+      },
+      {
+        "year": 2025,
+        "russian_count": 7,
+        "ukrainian_count": 328,
+        "total": 335
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 31,
+        "total": 31
+      }
+    ],
+    "total_russian": 268,
+    "total_ukrainian": 3223
+  },
+  {
+    "pair_id": 5,
+    "russian_term": "Zaporozhye",
+    "ukrainian_term": "Zaporizhzhia",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2011,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2012,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "total": 4
+      },
+      {
+        "year": 2013,
+        "russian_count": 6,
+        "ukrainian_count": 2,
+        "total": 8
+      },
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      },
+      {
+        "year": 2015,
+        "russian_count": 3,
+        "ukrainian_count": 3,
+        "total": 6
+      },
+      {
+        "year": 2016,
+        "russian_count": 5,
+        "ukrainian_count": 6,
+        "total": 11
+      },
+      {
+        "year": 2017,
+        "russian_count": 8,
+        "ukrainian_count": 15,
+        "total": 23
+      },
+      {
+        "year": 2018,
+        "russian_count": 9,
+        "ukrainian_count": 21,
+        "total": 30
+      },
+      {
+        "year": 2019,
+        "russian_count": 6,
+        "ukrainian_count": 35,
+        "total": 41
+      },
+      {
+        "year": 2020,
+        "russian_count": 7,
+        "ukrainian_count": 36,
+        "total": 43
+      },
+      {
+        "year": 2021,
+        "russian_count": 6,
+        "ukrainian_count": 40,
+        "total": 46
+      },
+      {
+        "year": 2022,
+        "russian_count": 5,
+        "ukrainian_count": 45,
+        "total": 50
+      },
+      {
+        "year": 2023,
+        "russian_count": 4,
+        "ukrainian_count": 40,
+        "total": 44
+      },
+      {
+        "year": 2024,
+        "russian_count": 10,
+        "ukrainian_count": 52,
+        "total": 62
+      },
+      {
+        "year": 2025,
+        "russian_count": 2,
+        "ukrainian_count": 38,
+        "total": 40
+      },
+      {
+        "year": 2026,
+        "russian_count": 2,
+        "ukrainian_count": 4,
+        "total": 6
+      }
+    ],
+    "total_russian": 81,
+    "total_ukrainian": 338
+  },
+  {
+    "pair_id": 6,
+    "russian_term": "Nikolaev",
+    "ukrainian_term": "Mykolaiv",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "total": 7
+      },
+      {
+        "year": 2011,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "total": 7
+      },
+      {
+        "year": 2012,
+        "russian_count": 12,
+        "ukrainian_count": 5,
+        "total": 17
+      },
+      {
+        "year": 2013,
+        "russian_count": 8,
+        "ukrainian_count": 4,
+        "total": 12
+      },
+      {
+        "year": 2014,
+        "russian_count": 6,
+        "ukrainian_count": 2,
+        "total": 8
+      },
+      {
+        "year": 2015,
+        "russian_count": 8,
+        "ukrainian_count": 7,
+        "total": 15
+      },
+      {
+        "year": 2016,
+        "russian_count": 12,
+        "ukrainian_count": 3,
+        "total": 15
+      },
+      {
+        "year": 2017,
+        "russian_count": 9,
+        "ukrainian_count": 9,
+        "total": 18
+      },
+      {
+        "year": 2018,
+        "russian_count": 6,
+        "ukrainian_count": 7,
+        "total": 13
+      },
+      {
+        "year": 2019,
+        "russian_count": 20,
+        "ukrainian_count": 32,
+        "total": 52
+      },
+      {
+        "year": 2020,
+        "russian_count": 17,
+        "ukrainian_count": 32,
+        "total": 49
+      },
+      {
+        "year": 2021,
+        "russian_count": 12,
+        "ukrainian_count": 12,
+        "total": 24
+      },
+      {
+        "year": 2022,
+        "russian_count": 10,
+        "ukrainian_count": 13,
+        "total": 23
+      },
+      {
+        "year": 2023,
+        "russian_count": 7,
+        "ukrainian_count": 31,
+        "total": 38
+      },
+      {
+        "year": 2024,
+        "russian_count": 17,
+        "ukrainian_count": 38,
+        "total": 55
+      },
+      {
+        "year": 2025,
+        "russian_count": 6,
+        "ukrainian_count": 48,
+        "total": 54
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 16,
+        "total": 16
+      }
+    ],
+    "total_russian": 164,
+    "total_ukrainian": 259
+  },
+  {
+    "pair_id": 7,
+    "russian_term": "Dnepropetrovsk",
+    "ukrainian_term": "Dnipro",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 2,
+        "ukrainian_count": 7,
+        "total": 9
+      },
+      {
+        "year": 2011,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2012,
+        "russian_count": 10,
+        "ukrainian_count": 5,
+        "total": 15
+      },
+      {
+        "year": 2013,
+        "russian_count": 10,
+        "ukrainian_count": 5,
+        "total": 15
+      },
+      {
+        "year": 2014,
+        "russian_count": 4,
+        "ukrainian_count": 9,
+        "total": 13
+      },
+      {
+        "year": 2015,
+        "russian_count": 10,
+        "ukrainian_count": 9,
+        "total": 19
+      },
+      {
+        "year": 2016,
+        "russian_count": 9,
+        "ukrainian_count": 35,
+        "total": 44
+      },
+      {
+        "year": 2017,
+        "russian_count": 12,
+        "ukrainian_count": 44,
+        "total": 56
+      },
+      {
+        "year": 2018,
+        "russian_count": 6,
+        "ukrainian_count": 79,
+        "total": 85
+      },
+      {
+        "year": 2019,
+        "russian_count": 3,
+        "ukrainian_count": 74,
+        "total": 77
+      },
+      {
+        "year": 2020,
+        "russian_count": 19,
+        "ukrainian_count": 70,
+        "total": 89
+      },
+      {
+        "year": 2021,
+        "russian_count": 6,
+        "ukrainian_count": 84,
+        "total": 90
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 97,
+        "total": 97
+      },
+      {
+        "year": 2023,
+        "russian_count": 2,
+        "ukrainian_count": 122,
+        "total": 124
+      },
+      {
+        "year": 2024,
+        "russian_count": 2,
+        "ukrainian_count": 128,
+        "total": 130
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 162,
+        "total": 162
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 28,
+        "total": 28
+      }
+    ],
+    "total_russian": 97,
+    "total_ukrainian": 959
+  },
+  {
+    "pair_id": 8,
+    "russian_term": "Vinnitsa",
+    "ukrainian_term": "Vinnytsia",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2011,
+        "russian_count": 3,
+        "ukrainian_count": 1,
+        "total": 4
+      },
+      {
+        "year": 2012,
+        "russian_count": 2,
+        "ukrainian_count": 2,
+        "total": 4
+      },
+      {
+        "year": 2013,
+        "russian_count": 3,
+        "ukrainian_count": 5,
+        "total": 8
+      },
+      {
+        "year": 2014,
+        "russian_count": 2,
+        "ukrainian_count": 11,
+        "total": 13
+      },
+      {
+        "year": 2015,
+        "russian_count": 9,
+        "ukrainian_count": 9,
+        "total": 18
+      },
+      {
+        "year": 2016,
+        "russian_count": 7,
+        "ukrainian_count": 16,
+        "total": 23
+      },
+      {
+        "year": 2017,
+        "russian_count": 3,
+        "ukrainian_count": 16,
+        "total": 19
+      },
+      {
+        "year": 2018,
+        "russian_count": 5,
+        "ukrainian_count": 20,
+        "total": 25
+      },
+      {
+        "year": 2019,
+        "russian_count": 9,
+        "ukrainian_count": 37,
+        "total": 46
+      },
+      {
+        "year": 2020,
+        "russian_count": 13,
+        "ukrainian_count": 54,
+        "total": 67
+      },
+      {
+        "year": 2021,
+        "russian_count": 14,
+        "ukrainian_count": 34,
+        "total": 48
+      },
+      {
+        "year": 2022,
+        "russian_count": 7,
+        "ukrainian_count": 37,
+        "total": 44
+      },
+      {
+        "year": 2023,
+        "russian_count": 3,
+        "ukrainian_count": 44,
+        "total": 47
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 37,
+        "total": 37
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 40,
+        "total": 40
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 5,
+        "total": 5
+      }
+    ],
+    "total_russian": 80,
+    "total_ukrainian": 368
+  },
+  {
+    "pair_id": 9,
+    "russian_term": "Rovno",
+    "ukrainian_term": "Rivne",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 10,
+        "ukrainian_count": 8,
+        "total": 18
+      },
+      {
+        "year": 2011,
+        "russian_count": 14,
+        "ukrainian_count": 5,
+        "total": 19
+      },
+      {
+        "year": 2012,
+        "russian_count": 15,
+        "ukrainian_count": 7,
+        "total": 22
+      },
+      {
+        "year": 2013,
+        "russian_count": 18,
+        "ukrainian_count": 8,
+        "total": 26
+      },
+      {
+        "year": 2014,
+        "russian_count": 9,
+        "ukrainian_count": 18,
+        "total": 27
+      },
+      {
+        "year": 2015,
+        "russian_count": 11,
+        "ukrainian_count": 25,
+        "total": 36
+      },
+      {
+        "year": 2016,
+        "russian_count": 11,
+        "ukrainian_count": 15,
+        "total": 26
+      },
+      {
+        "year": 2017,
+        "russian_count": 5,
+        "ukrainian_count": 16,
+        "total": 21
+      },
+      {
+        "year": 2018,
+        "russian_count": 17,
+        "ukrainian_count": 31,
+        "total": 48
+      },
+      {
+        "year": 2019,
+        "russian_count": 13,
+        "ukrainian_count": 32,
+        "total": 45
+      },
+      {
+        "year": 2020,
+        "russian_count": 15,
+        "ukrainian_count": 43,
+        "total": 58
+      },
+      {
+        "year": 2021,
+        "russian_count": 37,
+        "ukrainian_count": 21,
+        "total": 58
+      },
+      {
+        "year": 2022,
+        "russian_count": 27,
+        "ukrainian_count": 31,
+        "total": 58
+      },
+      {
+        "year": 2023,
+        "russian_count": 15,
+        "ukrainian_count": 41,
+        "total": 56
+      },
+      {
+        "year": 2024,
+        "russian_count": 24,
+        "ukrainian_count": 27,
+        "total": 51
+      },
+      {
+        "year": 2025,
+        "russian_count": 63,
+        "ukrainian_count": 32,
+        "total": 95
+      },
+      {
+        "year": 2026,
+        "russian_count": 76,
+        "ukrainian_count": 5,
+        "total": 81
+      }
+    ],
+    "total_russian": 380,
+    "total_ukrainian": 365
+  },
+  {
+    "pair_id": 10,
+    "russian_term": "Chernobyl",
+    "ukrainian_term": "Chornobyl",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 135,
+        "ukrainian_count": 8,
+        "total": 143
+      },
+      {
+        "year": 2011,
+        "russian_count": 280,
+        "ukrainian_count": 11,
+        "total": 291
+      },
+      {
+        "year": 2012,
+        "russian_count": 212,
+        "ukrainian_count": 5,
+        "total": 217
+      },
+      {
+        "year": 2013,
+        "russian_count": 199,
+        "ukrainian_count": 22,
+        "total": 221
+      },
+      {
+        "year": 2014,
+        "russian_count": 168,
+        "ukrainian_count": 31,
+        "total": 199
+      },
+      {
+        "year": 2015,
+        "russian_count": 201,
+        "ukrainian_count": 21,
+        "total": 222
+      },
+      {
+        "year": 2016,
+        "russian_count": 317,
+        "ukrainian_count": 53,
+        "total": 370
+      },
+      {
+        "year": 2017,
+        "russian_count": 206,
+        "ukrainian_count": 28,
+        "total": 234
+      },
+      {
+        "year": 2018,
+        "russian_count": 190,
+        "ukrainian_count": 44,
+        "total": 234
+      },
+      {
+        "year": 2019,
+        "russian_count": 256,
+        "ukrainian_count": 61,
+        "total": 317
+      },
+      {
+        "year": 2020,
+        "russian_count": 297,
+        "ukrainian_count": 64,
+        "total": 361
+      },
+      {
+        "year": 2021,
+        "russian_count": 269,
+        "ukrainian_count": 54,
+        "total": 323
+      },
+      {
+        "year": 2022,
+        "russian_count": 186,
+        "ukrainian_count": 70,
+        "total": 256
+      },
+      {
+        "year": 2023,
+        "russian_count": 149,
+        "ukrainian_count": 73,
+        "total": 222
+      },
+      {
+        "year": 2024,
+        "russian_count": 168,
+        "ukrainian_count": 98,
+        "total": 266
+      },
+      {
+        "year": 2025,
+        "russian_count": 172,
+        "ukrainian_count": 89,
+        "total": 261
+      },
+      {
+        "year": 2026,
+        "russian_count": 47,
+        "ukrainian_count": 13,
+        "total": 60
+      }
+    ],
+    "total_russian": 3452,
+    "total_ukrainian": 745
+  },
+  {
+    "pair_id": 11,
+    "russian_term": "Lugansk",
+    "ukrainian_term": "Luhansk",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2011,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2012,
+        "russian_count": 5,
+        "ukrainian_count": 1,
+        "total": 6
+      },
+      {
+        "year": 2013,
+        "russian_count": 6,
+        "ukrainian_count": 6,
+        "total": 12
+      },
+      {
+        "year": 2014,
+        "russian_count": 4,
+        "ukrainian_count": 6,
+        "total": 10
+      },
+      {
+        "year": 2015,
+        "russian_count": 7,
+        "ukrainian_count": 5,
+        "total": 12
+      },
+      {
+        "year": 2016,
+        "russian_count": 6,
+        "ukrainian_count": 5,
+        "total": 11
+      },
+      {
+        "year": 2017,
+        "russian_count": 4,
+        "ukrainian_count": 13,
+        "total": 17
+      },
+      {
+        "year": 2018,
+        "russian_count": 6,
+        "ukrainian_count": 17,
+        "total": 23
+      },
+      {
+        "year": 2019,
+        "russian_count": 10,
+        "ukrainian_count": 25,
+        "total": 35
+      },
+      {
+        "year": 2020,
+        "russian_count": 10,
+        "ukrainian_count": 38,
+        "total": 48
+      },
+      {
+        "year": 2021,
+        "russian_count": 11,
+        "ukrainian_count": 46,
+        "total": 57
+      },
+      {
+        "year": 2022,
+        "russian_count": 18,
+        "ukrainian_count": 41,
+        "total": 59
+      },
+      {
+        "year": 2023,
+        "russian_count": 12,
+        "ukrainian_count": 36,
+        "total": 48
+      },
+      {
+        "year": 2024,
+        "russian_count": 17,
+        "ukrainian_count": 24,
+        "total": 41
+      },
+      {
+        "year": 2025,
+        "russian_count": 15,
+        "ukrainian_count": 24,
+        "total": 39
+      },
+      {
+        "year": 2026,
+        "russian_count": 5,
+        "ukrainian_count": 9,
+        "total": 14
+      }
+    ],
+    "total_russian": 138,
+    "total_ukrainian": 296
+  },
+  {
+    "pair_id": 16,
+    "russian_term": "Dniester",
+    "ukrainian_term": "Dnister",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 10,
+        "ukrainian_count": 2,
+        "total": 12
+      },
+      {
+        "year": 2011,
+        "russian_count": 8,
+        "ukrainian_count": 2,
+        "total": 10
+      },
+      {
+        "year": 2012,
+        "russian_count": 12,
+        "ukrainian_count": 3,
+        "total": 15
+      },
+      {
+        "year": 2013,
+        "russian_count": 19,
+        "ukrainian_count": 1,
+        "total": 20
+      },
+      {
+        "year": 2014,
+        "russian_count": 23,
+        "ukrainian_count": 1,
+        "total": 24
+      },
+      {
+        "year": 2015,
+        "russian_count": 20,
+        "ukrainian_count": 2,
+        "total": 22
+      },
+      {
+        "year": 2016,
+        "russian_count": 25,
+        "ukrainian_count": 3,
+        "total": 28
+      },
+      {
+        "year": 2017,
+        "russian_count": 39,
+        "ukrainian_count": 7,
+        "total": 46
+      },
+      {
+        "year": 2018,
+        "russian_count": 54,
+        "ukrainian_count": 13,
+        "total": 67
+      },
+      {
+        "year": 2019,
+        "russian_count": 42,
+        "ukrainian_count": 14,
+        "total": 56
+      },
+      {
+        "year": 2020,
+        "russian_count": 56,
+        "ukrainian_count": 18,
+        "total": 74
+      },
+      {
+        "year": 2021,
+        "russian_count": 75,
+        "ukrainian_count": 20,
+        "total": 95
+      },
+      {
+        "year": 2022,
+        "russian_count": 50,
+        "ukrainian_count": 11,
+        "total": 61
+      },
+      {
+        "year": 2023,
+        "russian_count": 44,
+        "ukrainian_count": 16,
+        "total": 60
+      },
+      {
+        "year": 2024,
+        "russian_count": 111,
+        "ukrainian_count": 9,
+        "total": 120
+      },
+      {
+        "year": 2025,
+        "russian_count": 57,
+        "ukrainian_count": 9,
+        "total": 66
+      },
+      {
+        "year": 2026,
+        "russian_count": 8,
+        "ukrainian_count": 0,
+        "total": 8
+      }
+    ],
+    "total_russian": 653,
+    "total_ukrainian": 131
+  },
+  {
+    "pair_id": 17,
+    "russian_term": "Donbass",
+    "ukrainian_term": "Donbas",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 10,
+        "ukrainian_count": 5,
+        "total": 15
+      },
+      {
+        "year": 2011,
+        "russian_count": 10,
+        "ukrainian_count": 6,
+        "total": 16
+      },
+      {
+        "year": 2012,
+        "russian_count": 5,
+        "ukrainian_count": 6,
+        "total": 11
+      },
+      {
+        "year": 2013,
+        "russian_count": 15,
+        "ukrainian_count": 2,
+        "total": 17
+      },
+      {
+        "year": 2014,
+        "russian_count": 23,
+        "ukrainian_count": 20,
+        "total": 43
+      },
+      {
+        "year": 2015,
+        "russian_count": 38,
+        "ukrainian_count": 57,
+        "total": 95
+      },
+      {
+        "year": 2016,
+        "russian_count": 54,
+        "ukrainian_count": 31,
+        "total": 85
+      },
+      {
+        "year": 2017,
+        "russian_count": 52,
+        "ukrainian_count": 43,
+        "total": 95
+      },
+      {
+        "year": 2018,
+        "russian_count": 49,
+        "ukrainian_count": 59,
+        "total": 108
+      },
+      {
+        "year": 2019,
+        "russian_count": 75,
+        "ukrainian_count": 82,
+        "total": 157
+      },
+      {
+        "year": 2020,
+        "russian_count": 63,
+        "ukrainian_count": 86,
+        "total": 149
+      },
+      {
+        "year": 2021,
+        "russian_count": 77,
+        "ukrainian_count": 85,
+        "total": 162
+      },
+      {
+        "year": 2022,
+        "russian_count": 56,
+        "ukrainian_count": 68,
+        "total": 124
+      },
+      {
+        "year": 2023,
+        "russian_count": 62,
+        "ukrainian_count": 71,
+        "total": 133
+      },
+      {
+        "year": 2024,
+        "russian_count": 59,
+        "ukrainian_count": 56,
+        "total": 115
+      },
+      {
+        "year": 2025,
+        "russian_count": 62,
+        "ukrainian_count": 63,
+        "total": 125
+      },
+      {
+        "year": 2026,
+        "russian_count": 14,
+        "ukrainian_count": 10,
+        "total": 24
+      }
+    ],
+    "total_russian": 724,
+    "total_ukrainian": 750
+  },
+  {
+    "pair_id": 19,
+    "russian_term": "Zakarpatye",
+    "ukrainian_term": "Zakarpattia",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2011,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2012,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2013,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2014,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "total": 4
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "total": 4
+      },
+      {
+        "year": 2016,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2017,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2018,
+        "russian_count": 0,
+        "ukrainian_count": 8,
+        "total": 8
+      },
+      {
+        "year": 2019,
+        "russian_count": 0,
+        "ukrainian_count": 8,
+        "total": 8
+      },
+      {
+        "year": 2020,
+        "russian_count": 0,
+        "ukrainian_count": 14,
+        "total": 14
+      },
+      {
+        "year": 2021,
+        "russian_count": 0,
+        "ukrainian_count": 12,
+        "total": 12
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "total": 9
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 12,
+        "total": 12
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 19,
+        "total": 19
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 45,
+        "total": 45
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "total": 7
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 153
+  },
+  {
+    "pair_id": 20,
+    "russian_term": "Podolye",
+    "ukrainian_term": "Podillia",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "total": 4
+      },
+      {
+        "year": 2011,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "total": 4
+      },
+      {
+        "year": 2012,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2013,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "total": 9
+      },
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 2,
+        "total": 3
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "total": 4
+      },
+      {
+        "year": 2016,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "total": 9
+      },
+      {
+        "year": 2017,
+        "russian_count": 0,
+        "ukrainian_count": 12,
+        "total": 12
+      },
+      {
+        "year": 2018,
+        "russian_count": 0,
+        "ukrainian_count": 15,
+        "total": 15
+      },
+      {
+        "year": 2019,
+        "russian_count": 1,
+        "ukrainian_count": 20,
+        "total": 21
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 18,
+        "total": 19
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 34,
+        "total": 35
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 39,
+        "total": 39
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 38,
+        "total": 38
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 38,
+        "total": 38
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 40,
+        "total": 40
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 6,
+        "total": 6
+      }
+    ],
+    "total_russian": 4,
+    "total_ukrainian": 295
+  },
+  {
+    "pair_id": 38,
+    "russian_term": "Chernigov",
+    "ukrainian_term": "Chernihiv",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2012,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2013,
+        "russian_count": 2,
+        "ukrainian_count": 8,
+        "total": 10
+      },
+      {
+        "year": 2014,
+        "russian_count": 5,
+        "ukrainian_count": 9,
+        "total": 14
+      },
+      {
+        "year": 2015,
+        "russian_count": 3,
+        "ukrainian_count": 9,
+        "total": 12
+      },
+      {
+        "year": 2016,
+        "russian_count": 6,
+        "ukrainian_count": 18,
+        "total": 24
+      },
+      {
+        "year": 2017,
+        "russian_count": 5,
+        "ukrainian_count": 12,
+        "total": 17
+      },
+      {
+        "year": 2018,
+        "russian_count": 5,
+        "ukrainian_count": 22,
+        "total": 27
+      },
+      {
+        "year": 2019,
+        "russian_count": 8,
+        "ukrainian_count": 37,
+        "total": 45
+      },
+      {
+        "year": 2020,
+        "russian_count": 5,
+        "ukrainian_count": 59,
+        "total": 64
+      },
+      {
+        "year": 2021,
+        "russian_count": 5,
+        "ukrainian_count": 51,
+        "total": 56
+      },
+      {
+        "year": 2022,
+        "russian_count": 5,
+        "ukrainian_count": 26,
+        "total": 31
+      },
+      {
+        "year": 2023,
+        "russian_count": 6,
+        "ukrainian_count": 50,
+        "total": 56
+      },
+      {
+        "year": 2024,
+        "russian_count": 6,
+        "ukrainian_count": 51,
+        "total": 57
+      },
+      {
+        "year": 2025,
+        "russian_count": 2,
+        "ukrainian_count": 47,
+        "total": 49
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 11,
+        "total": 11
+      }
+    ],
+    "total_russian": 63,
+    "total_ukrainian": 412
+  },
+  {
+    "pair_id": 39,
+    "russian_term": "Chernovtsy",
+    "ukrainian_term": "Chernivtsi",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "total": 7
+      },
+      {
+        "year": 2011,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "total": 4
+      },
+      {
+        "year": 2012,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "total": 7
+      },
+      {
+        "year": 2013,
+        "russian_count": 0,
+        "ukrainian_count": 14,
+        "total": 14
+      },
+      {
+        "year": 2014,
+        "russian_count": 0,
+        "ukrainian_count": 27,
+        "total": 27
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 14,
+        "total": 14
+      },
+      {
+        "year": 2016,
+        "russian_count": 0,
+        "ukrainian_count": 25,
+        "total": 25
+      },
+      {
+        "year": 2017,
+        "russian_count": 0,
+        "ukrainian_count": 32,
+        "total": 32
+      },
+      {
+        "year": 2018,
+        "russian_count": 0,
+        "ukrainian_count": 31,
+        "total": 31
+      },
+      {
+        "year": 2019,
+        "russian_count": 0,
+        "ukrainian_count": 45,
+        "total": 45
+      },
+      {
+        "year": 2020,
+        "russian_count": 2,
+        "ukrainian_count": 46,
+        "total": 48
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 35,
+        "total": 36
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 45,
+        "total": 45
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 34,
+        "total": 34
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 44,
+        "total": 44
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 47,
+        "total": 47
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "total": 7
+      }
+    ],
+    "total_russian": 3,
+    "total_ukrainian": 464
+  },
+  {
+    "pair_id": 40,
+    "russian_term": "Zhitomir",
+    "ukrainian_term": "Zhytomyr",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 1,
+        "ukrainian_count": 4,
+        "total": 5
+      },
+      {
+        "year": 2011,
+        "russian_count": 3,
+        "ukrainian_count": 4,
+        "total": 7
+      },
+      {
+        "year": 2012,
+        "russian_count": 7,
+        "ukrainian_count": 8,
+        "total": 15
+      },
+      {
+        "year": 2013,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "total": 9
+      },
+      {
+        "year": 2014,
+        "russian_count": 4,
+        "ukrainian_count": 18,
+        "total": 22
+      },
+      {
+        "year": 2015,
+        "russian_count": 4,
+        "ukrainian_count": 8,
+        "total": 12
+      },
+      {
+        "year": 2016,
+        "russian_count": 3,
+        "ukrainian_count": 40,
+        "total": 43
+      },
+      {
+        "year": 2017,
+        "russian_count": 5,
+        "ukrainian_count": 27,
+        "total": 32
+      },
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 48,
+        "total": 49
+      },
+      {
+        "year": 2019,
+        "russian_count": 5,
+        "ukrainian_count": 48,
+        "total": 53
+      },
+      {
+        "year": 2020,
+        "russian_count": 4,
+        "ukrainian_count": 49,
+        "total": 53
+      },
+      {
+        "year": 2021,
+        "russian_count": 2,
+        "ukrainian_count": 64,
+        "total": 66
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 48,
+        "total": 48
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 56,
+        "total": 56
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 65,
+        "total": 65
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 91,
+        "total": 92
+      },
+      {
+        "year": 2026,
+        "russian_count": 1,
+        "ukrainian_count": 12,
+        "total": 13
+      }
+    ],
+    "total_russian": 41,
+    "total_ukrainian": 599
+  },
+  {
+    "pair_id": 41,
+    "russian_term": "Cherkassy",
+    "ukrainian_term": "Cherkasy",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 1,
+        "ukrainian_count": 2,
+        "total": 3
+      },
+      {
+        "year": 2011,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2012,
+        "russian_count": 2,
+        "ukrainian_count": 3,
+        "total": 5
+      },
+      {
+        "year": 2013,
+        "russian_count": 1,
+        "ukrainian_count": 3,
+        "total": 4
+      },
+      {
+        "year": 2014,
+        "russian_count": 2,
+        "ukrainian_count": 5,
+        "total": 7
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "total": 4
+      },
+      {
+        "year": 2016,
+        "russian_count": 6,
+        "ukrainian_count": 7,
+        "total": 13
+      },
+      {
+        "year": 2017,
+        "russian_count": 3,
+        "ukrainian_count": 10,
+        "total": 13
+      },
+      {
+        "year": 2018,
+        "russian_count": 6,
+        "ukrainian_count": 15,
+        "total": 21
+      },
+      {
+        "year": 2019,
+        "russian_count": 5,
+        "ukrainian_count": 31,
+        "total": 36
+      },
+      {
+        "year": 2020,
+        "russian_count": 3,
+        "ukrainian_count": 27,
+        "total": 30
+      },
+      {
+        "year": 2021,
+        "russian_count": 4,
+        "ukrainian_count": 33,
+        "total": 37
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 27,
+        "total": 27
+      },
+      {
+        "year": 2023,
+        "russian_count": 2,
+        "ukrainian_count": 30,
+        "total": 32
+      },
+      {
+        "year": 2024,
+        "russian_count": 3,
+        "ukrainian_count": 44,
+        "total": 47
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 44,
+        "total": 45
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 5,
+        "total": 5
+      }
+    ],
+    "total_russian": 39,
+    "total_ukrainian": 293
+  },
+  {
+    "pair_id": 42,
+    "russian_term": "Uzhgorod",
+    "ukrainian_term": "Uzhhorod",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2011,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2013,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      },
+      {
+        "year": 2015,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2016,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2017,
+        "russian_count": 3,
+        "ukrainian_count": 3,
+        "total": 6
+      },
+      {
+        "year": 2018,
+        "russian_count": 11,
+        "ukrainian_count": 7,
+        "total": 18
+      },
+      {
+        "year": 2019,
+        "russian_count": 6,
+        "ukrainian_count": 9,
+        "total": 15
+      },
+      {
+        "year": 2020,
+        "russian_count": 3,
+        "ukrainian_count": 13,
+        "total": 16
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 7,
+        "total": 8
+      },
+      {
+        "year": 2022,
+        "russian_count": 4,
+        "ukrainian_count": 16,
+        "total": 20
+      },
+      {
+        "year": 2023,
+        "russian_count": 8,
+        "ukrainian_count": 22,
+        "total": 30
+      },
+      {
+        "year": 2024,
+        "russian_count": 8,
+        "ukrainian_count": 22,
+        "total": 30
+      },
+      {
+        "year": 2025,
+        "russian_count": 2,
+        "ukrainian_count": 19,
+        "total": 21
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 49,
+    "total_ukrainian": 126
+  },
+  {
+    "pair_id": 43,
+    "russian_term": "Kremenchug",
+    "ukrainian_term": "Kremenchuk",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2012,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      },
+      {
+        "year": 2013,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2014,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2015,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2016,
+        "russian_count": 8,
+        "ukrainian_count": 1,
+        "total": 9
+      },
+      {
+        "year": 2017,
+        "russian_count": 7,
+        "ukrainian_count": 1,
+        "total": 8
+      },
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 2,
+        "total": 3
+      },
+      {
+        "year": 2019,
+        "russian_count": 2,
+        "ukrainian_count": 6,
+        "total": 8
+      },
+      {
+        "year": 2020,
+        "russian_count": 3,
+        "ukrainian_count": 6,
+        "total": 9
+      },
+      {
+        "year": 2021,
+        "russian_count": 2,
+        "ukrainian_count": 12,
+        "total": 14
+      },
+      {
+        "year": 2022,
+        "russian_count": 2,
+        "ukrainian_count": 8,
+        "total": 10
+      },
+      {
+        "year": 2023,
+        "russian_count": 1,
+        "ukrainian_count": 8,
+        "total": 9
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 13,
+        "total": 14
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 8,
+        "total": 9
+      },
+      {
+        "year": 2026,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      }
+    ],
+    "total_russian": 36,
+    "total_ukrainian": 70
+  },
+  {
+    "pair_id": 44,
+    "russian_term": "Kirovograd",
+    "ukrainian_term": "Kropyvnytskyi",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2011,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "total": 5
+      },
+      {
+        "year": 2012,
+        "russian_count": 6,
+        "ukrainian_count": 0,
+        "total": 6
+      },
+      {
+        "year": 2013,
+        "russian_count": 6,
+        "ukrainian_count": 0,
+        "total": 6
+      },
+      {
+        "year": 2014,
+        "russian_count": 6,
+        "ukrainian_count": 0,
+        "total": 6
+      },
+      {
+        "year": 2016,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2017,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2018,
+        "russian_count": 8,
+        "ukrainian_count": 1,
+        "total": 9
+      },
+      {
+        "year": 2019,
+        "russian_count": 10,
+        "ukrainian_count": 2,
+        "total": 12
+      },
+      {
+        "year": 2020,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "total": 4
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 6,
+        "total": 7
+      },
+      {
+        "year": 2022,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2023,
+        "russian_count": 4,
+        "ukrainian_count": 2,
+        "total": 6
+      },
+      {
+        "year": 2024,
+        "russian_count": 4,
+        "ukrainian_count": 6,
+        "total": 10
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 7,
+        "total": 8
+      },
+      {
+        "year": 2026,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "total": 4
+      }
+    ],
+    "total_russian": 69,
+    "total_ukrainian": 24
+  },
+  {
+    "pair_id": 45,
+    "russian_term": "Ternopol",
+    "ukrainian_term": "Ternopil",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2011,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2012,
+        "russian_count": 0,
+        "ukrainian_count": 5,
+        "total": 5
+      },
+      {
+        "year": 2013,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "total": 9
+      },
+      {
+        "year": 2014,
+        "russian_count": 0,
+        "ukrainian_count": 10,
+        "total": 10
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 5,
+        "total": 5
+      },
+      {
+        "year": 2016,
+        "russian_count": 0,
+        "ukrainian_count": 14,
+        "total": 14
+      },
+      {
+        "year": 2017,
+        "russian_count": 0,
+        "ukrainian_count": 30,
+        "total": 30
+      },
+      {
+        "year": 2018,
+        "russian_count": 0,
+        "ukrainian_count": 29,
+        "total": 29
+      },
+      {
+        "year": 2019,
+        "russian_count": 0,
+        "ukrainian_count": 54,
+        "total": 54
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 41,
+        "total": 42
+      },
+      {
+        "year": 2021,
+        "russian_count": 2,
+        "ukrainian_count": 53,
+        "total": 55
+      },
+      {
+        "year": 2022,
+        "russian_count": 2,
+        "ukrainian_count": 54,
+        "total": 56
+      },
+      {
+        "year": 2023,
+        "russian_count": 3,
+        "ukrainian_count": 56,
+        "total": 59
+      },
+      {
+        "year": 2024,
+        "russian_count": 4,
+        "ukrainian_count": 58,
+        "total": 62
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 58,
+        "total": 58
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 8,
+        "total": 8
+      }
+    ],
+    "total_russian": 12,
+    "total_ukrainian": 488
+  },
+  {
+    "pair_id": 21,
+    "russian_term": "Chicken Kiev",
+    "ukrainian_term": "Chicken Kyiv",
+    "category": "food",
+    "yearly": [
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 2
+  },
+  {
+    "pair_id": 64,
+    "russian_term": "Borsch",
+    "ukrainian_term": "Borshch",
+    "category": "food",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2013,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2016,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2018,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2019,
+        "russian_count": 5,
+        "ukrainian_count": 1,
+        "total": 6
+      },
+      {
+        "year": 2020,
+        "russian_count": 10,
+        "ukrainian_count": 1,
+        "total": 11
+      },
+      {
+        "year": 2021,
+        "russian_count": 2,
+        "ukrainian_count": 2,
+        "total": 4
+      },
+      {
+        "year": 2022,
+        "russian_count": 3,
+        "ukrainian_count": 1,
+        "total": 4
+      },
+      {
+        "year": 2023,
+        "russian_count": 3,
+        "ukrainian_count": 1,
+        "total": 4
+      },
+      {
+        "year": 2024,
+        "russian_count": 4,
+        "ukrainian_count": 1,
+        "total": 5
+      },
+      {
+        "year": 2025,
+        "russian_count": 1661,
+        "ukrainian_count": 1,
+        "total": 1662
+      },
+      {
+        "year": 2026,
+        "russian_count": 463,
+        "ukrainian_count": 7,
+        "total": 470
+      }
+    ],
+    "total_russian": 2159,
+    "total_ukrainian": 16
+  },
+  {
+    "pair_id": 46,
+    "russian_term": "Vareniki",
+    "ukrainian_term": "Varenyky",
+    "category": "food",
+    "yearly": [
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 2
+  },
+  {
+    "pair_id": 24,
+    "russian_term": "Kiev Pechersk Lavra",
+    "ukrainian_term": "Kyiv Pechersk Lavra",
+    "category": "landmarks",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2015,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      },
+      {
+        "year": 2016,
+        "russian_count": 2,
+        "ukrainian_count": 3,
+        "total": 5
+      },
+      {
+        "year": 2017,
+        "russian_count": 1,
+        "ukrainian_count": 3,
+        "total": 4
+      },
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 6,
+        "total": 7
+      },
+      {
+        "year": 2019,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "total": 7
+      },
+      {
+        "year": 2020,
+        "russian_count": 2,
+        "ukrainian_count": 6,
+        "total": 8
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 7,
+        "total": 8
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "total": 7
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "total": 7
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 13,
+        "total": 13
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "total": 9
+      }
+    ],
+    "total_russian": 10,
+    "total_ukrainian": 70
+  },
+  {
+    "pair_id": 25,
+    "russian_term": "Saint Sophia Cathedral Kiev",
+    "ukrainian_term": "Saint Sophia Cathedral Kyiv",
+    "category": "landmarks",
+    "yearly": [
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 1,
+    "total_ukrainian": 4
+  },
+  {
+    "pair_id": 26,
+    "russian_term": "Chernobyl Exclusion Zone",
+    "ukrainian_term": "Chornobyl Exclusion Zone",
+    "category": "landmarks",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 8,
+        "ukrainian_count": 1,
+        "total": 9
+      },
+      {
+        "year": 2011,
+        "russian_count": 25,
+        "ukrainian_count": 2,
+        "total": 27
+      },
+      {
+        "year": 2012,
+        "russian_count": 10,
+        "ukrainian_count": 0,
+        "total": 10
+      },
+      {
+        "year": 2013,
+        "russian_count": 12,
+        "ukrainian_count": 4,
+        "total": 16
+      },
+      {
+        "year": 2014,
+        "russian_count": 9,
+        "ukrainian_count": 1,
+        "total": 10
+      },
+      {
+        "year": 2015,
+        "russian_count": 8,
+        "ukrainian_count": 3,
+        "total": 11
+      },
+      {
+        "year": 2016,
+        "russian_count": 16,
+        "ukrainian_count": 6,
+        "total": 22
+      },
+      {
+        "year": 2017,
+        "russian_count": 21,
+        "ukrainian_count": 4,
+        "total": 25
+      },
+      {
+        "year": 2018,
+        "russian_count": 17,
+        "ukrainian_count": 4,
+        "total": 21
+      },
+      {
+        "year": 2019,
+        "russian_count": 30,
+        "ukrainian_count": 8,
+        "total": 38
+      },
+      {
+        "year": 2020,
+        "russian_count": 36,
+        "ukrainian_count": 10,
+        "total": 46
+      },
+      {
+        "year": 2021,
+        "russian_count": 23,
+        "ukrainian_count": 12,
+        "total": 35
+      },
+      {
+        "year": 2022,
+        "russian_count": 32,
+        "ukrainian_count": 14,
+        "total": 46
+      },
+      {
+        "year": 2023,
+        "russian_count": 19,
+        "ukrainian_count": 21,
+        "total": 40
+      },
+      {
+        "year": 2024,
+        "russian_count": 15,
+        "ukrainian_count": 20,
+        "total": 35
+      },
+      {
+        "year": 2025,
+        "russian_count": 17,
+        "ukrainian_count": 14,
+        "total": 31
+      },
+      {
+        "year": 2026,
+        "russian_count": 5,
+        "ukrainian_count": 3,
+        "total": 8
+      }
+    ],
+    "total_russian": 303,
+    "total_ukrainian": 127
+  },
+  {
+    "pair_id": 54,
+    "russian_term": "Babi Yar",
+    "ukrainian_term": "Babyn Yar",
+    "category": "landmarks",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2011,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2012,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2013,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2014,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2015,
+        "russian_count": 13,
+        "ukrainian_count": 0,
+        "total": 13
+      },
+      {
+        "year": 2016,
+        "russian_count": 7,
+        "ukrainian_count": 3,
+        "total": 10
+      },
+      {
+        "year": 2017,
+        "russian_count": 7,
+        "ukrainian_count": 2,
+        "total": 9
+      },
+      {
+        "year": 2018,
+        "russian_count": 10,
+        "ukrainian_count": 1,
+        "total": 11
+      },
+      {
+        "year": 2019,
+        "russian_count": 1,
+        "ukrainian_count": 2,
+        "total": 3
+      },
+      {
+        "year": 2020,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "total": 4
+      },
+      {
+        "year": 2021,
+        "russian_count": 4,
+        "ukrainian_count": 4,
+        "total": 8
+      },
+      {
+        "year": 2022,
+        "russian_count": 12,
+        "ukrainian_count": 10,
+        "total": 22
+      },
+      {
+        "year": 2023,
+        "russian_count": 7,
+        "ukrainian_count": 30,
+        "total": 37
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "total": 9
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 22,
+        "total": 23
+      },
+      {
+        "year": 2026,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      }
+    ],
+    "total_russian": 77,
+    "total_ukrainian": 83
+  },
+  {
+    "pair_id": 55,
+    "russian_term": "Potemkin Stairs Odessa",
+    "ukrainian_term": "Potemkin Stairs Odesa",
+    "category": "landmarks",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      }
+    ],
+    "total_russian": 1,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 56,
+    "russian_term": "Motherland Monument Kiev",
+    "ukrainian_term": "Motherland Monument Kyiv",
+    "category": "landmarks",
+    "yearly": [
+      {
+        "year": 2022,
+        "russian_count": 2,
+        "ukrainian_count": 2,
+        "total": 4
+      }
+    ],
+    "total_russian": 2,
+    "total_ukrainian": 2
+  },
+  {
+    "pair_id": 27,
+    "russian_term": "the Ukraine",
+    "ukrainian_term": "Ukraine",
+    "category": "country",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 1982,
+        "ukrainian_count": 1982,
+        "total": 3964
+      },
+      {
+        "year": 2011,
+        "russian_count": 2097,
+        "ukrainian_count": 2097,
+        "total": 4194
+      },
+      {
+        "year": 2012,
+        "russian_count": 2645,
+        "ukrainian_count": 2645,
+        "total": 5290
+      },
+      {
+        "year": 2013,
+        "russian_count": 3703,
+        "ukrainian_count": 3703,
+        "total": 7406
+      },
+      {
+        "year": 2014,
+        "russian_count": 4808,
+        "ukrainian_count": 4808,
+        "total": 9616
+      },
+      {
+        "year": 2015,
+        "russian_count": 5385,
+        "ukrainian_count": 5385,
+        "total": 10770
+      },
+      {
+        "year": 2016,
+        "russian_count": 6248,
+        "ukrainian_count": 6248,
+        "total": 12496
+      },
+      {
+        "year": 2017,
+        "russian_count": 6955,
+        "ukrainian_count": 6955,
+        "total": 13910
+      },
+      {
+        "year": 2018,
+        "russian_count": 9601,
+        "ukrainian_count": 9601,
+        "total": 19202
+      },
+      {
+        "year": 2019,
+        "russian_count": 14189,
+        "ukrainian_count": 14189,
+        "total": 28378
+      },
+      {
+        "year": 2020,
+        "russian_count": 15144,
+        "ukrainian_count": 15144,
+        "total": 30288
+      },
+      {
+        "year": 2021,
+        "russian_count": 14529,
+        "ukrainian_count": 14529,
+        "total": 29058
+      },
+      {
+        "year": 2022,
+        "russian_count": 18528,
+        "ukrainian_count": 18528,
+        "total": 37056
+      },
+      {
+        "year": 2023,
+        "russian_count": 20942,
+        "ukrainian_count": 20942,
+        "total": 41884
+      },
+      {
+        "year": 2024,
+        "russian_count": 20283,
+        "ukrainian_count": 20283,
+        "total": 40566
+      },
+      {
+        "year": 2025,
+        "russian_count": 21079,
+        "ukrainian_count": 21079,
+        "total": 42158
+      },
+      {
+        "year": 2026,
+        "russian_count": 3823,
+        "ukrainian_count": 3823,
+        "total": 7646
+      }
+    ],
+    "total_russian": 171941,
+    "total_ukrainian": 171941
+  },
+  {
+    "pair_id": 28,
+    "russian_term": "Kiev National University",
+    "ukrainian_term": "Kyiv National University",
+    "category": "institutional",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2011,
+        "russian_count": 1,
+        "ukrainian_count": 3,
+        "total": 4
+      },
+      {
+        "year": 2012,
+        "russian_count": 2,
+        "ukrainian_count": 5,
+        "total": 7
+      },
+      {
+        "year": 2013,
+        "russian_count": 3,
+        "ukrainian_count": 2,
+        "total": 5
+      },
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 6,
+        "total": 7
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 8,
+        "total": 8
+      },
+      {
+        "year": 2016,
+        "russian_count": 0,
+        "ukrainian_count": 14,
+        "total": 14
+      },
+      {
+        "year": 2017,
+        "russian_count": 0,
+        "ukrainian_count": 13,
+        "total": 13
+      },
+      {
+        "year": 2018,
+        "russian_count": 0,
+        "ukrainian_count": 12,
+        "total": 12
+      },
+      {
+        "year": 2019,
+        "russian_count": 2,
+        "ukrainian_count": 31,
+        "total": 33
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 23,
+        "total": 24
+      },
+      {
+        "year": 2021,
+        "russian_count": 4,
+        "ukrainian_count": 31,
+        "total": 35
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "total": 7
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 22,
+        "total": 22
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 22,
+        "total": 22
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 15,
+        "total": 15
+      }
+    ],
+    "total_russian": 16,
+    "total_ukrainian": 215
+  },
+  {
+    "pair_id": 29,
+    "russian_term": "Kharkov University",
+    "ukrainian_term": "Kharkiv University",
+    "category": "institutional",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2012,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2013,
+        "russian_count": 1,
+        "ukrainian_count": 5,
+        "total": 6
+      },
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 4,
+        "total": 5
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 9,
+        "total": 10
+      },
+      {
+        "year": 2017,
+        "russian_count": 1,
+        "ukrainian_count": 8,
+        "total": 9
+      },
+      {
+        "year": 2018,
+        "russian_count": 5,
+        "ukrainian_count": 23,
+        "total": 28
+      },
+      {
+        "year": 2019,
+        "russian_count": 4,
+        "ukrainian_count": 46,
+        "total": 50
+      },
+      {
+        "year": 2020,
+        "russian_count": 3,
+        "ukrainian_count": 34,
+        "total": 37
+      },
+      {
+        "year": 2021,
+        "russian_count": 2,
+        "ukrainian_count": 34,
+        "total": 36
+      },
+      {
+        "year": 2022,
+        "russian_count": 4,
+        "ukrainian_count": 21,
+        "total": 25
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 22,
+        "total": 22
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 26,
+        "total": 27
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 35,
+        "total": 35
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 13,
+        "total": 13
+      }
+    ],
+    "total_russian": 25,
+    "total_ukrainian": 285
+  },
+  {
+    "pair_id": 30,
+    "russian_term": "Kiev Polytechnic",
+    "ukrainian_term": "Kyiv Polytechnic",
+    "category": "institutional",
+    "yearly": [
+      {
+        "year": 2011,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2013,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2014,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 2,
+        "total": 3
+      },
+      {
+        "year": 2017,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2019,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "total": 4
+      },
+      {
+        "year": 2020,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2021,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "total": 9
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "total": 4
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 10,
+        "total": 10
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 5,
+        "total": 5
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "total": 7
+      }
+    ],
+    "total_russian": 1,
+    "total_ukrainian": 52
+  },
+  {
+    "pair_id": 31,
+    "russian_term": "Kiev Patriarchate",
+    "ukrainian_term": "Kyiv Patriarchate",
+    "category": "institutional",
+    "yearly": [
+      {
+        "year": 2017,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2018,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2019,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 8
+  },
+  {
+    "pair_id": 57,
+    "russian_term": "Lvov Polytechnic",
+    "ukrainian_term": "Lviv Polytechnic",
+    "category": "institutional",
+    "yearly": [
+      {
+        "year": 2011,
+        "russian_count": 1,
+        "ukrainian_count": 2,
+        "total": 3
+      },
+      {
+        "year": 2013,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2014,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2017,
+        "russian_count": 0,
+        "ukrainian_count": 11,
+        "total": 11
+      },
+      {
+        "year": 2018,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2019,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "total": 9
+      },
+      {
+        "year": 2020,
+        "russian_count": 0,
+        "ukrainian_count": 4,
+        "total": 4
+      },
+      {
+        "year": 2021,
+        "russian_count": 0,
+        "ukrainian_count": 13,
+        "total": 13
+      },
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 14,
+        "total": 14
+      },
+      {
+        "year": 2023,
+        "russian_count": 1,
+        "ukrainian_count": 11,
+        "total": 12
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 5,
+        "total": 5
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 5,
+        "total": 5
+      }
+    ],
+    "total_russian": 4,
+    "total_ukrainian": 81
+  },
+  {
+    "pair_id": 58,
+    "russian_term": "Odessa National University",
+    "ukrainian_term": "Odesa National University",
+    "category": "institutional",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2012,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2013,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2014,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2015,
+        "russian_count": 3,
+        "ukrainian_count": 11,
+        "total": 14
+      },
+      {
+        "year": 2016,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "total": 5
+      },
+      {
+        "year": 2017,
+        "russian_count": 7,
+        "ukrainian_count": 4,
+        "total": 11
+      },
+      {
+        "year": 2018,
+        "russian_count": 22,
+        "ukrainian_count": 10,
+        "total": 32
+      },
+      {
+        "year": 2019,
+        "russian_count": 33,
+        "ukrainian_count": 5,
+        "total": 38
+      },
+      {
+        "year": 2020,
+        "russian_count": 6,
+        "ukrainian_count": 4,
+        "total": 10
+      },
+      {
+        "year": 2021,
+        "russian_count": 9,
+        "ukrainian_count": 4,
+        "total": 13
+      },
+      {
+        "year": 2022,
+        "russian_count": 1,
+        "ukrainian_count": 6,
+        "total": 7
+      },
+      {
+        "year": 2023,
+        "russian_count": 3,
+        "ukrainian_count": 8,
+        "total": 11
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 6,
+        "total": 7
+      },
+      {
+        "year": 2025,
+        "russian_count": 6,
+        "ukrainian_count": 6,
+        "total": 12
+      },
+      {
+        "year": 2026,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      }
+    ],
+    "total_russian": 103,
+    "total_ukrainian": 66
+  },
+  {
+    "pair_id": 32,
+    "russian_term": "Dynamo Kiev",
+    "ukrainian_term": "Dynamo Kyiv",
+    "category": "sports",
+    "yearly": [
+      {
+        "year": 2011,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      }
+    ],
+    "total_russian": 1,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 34,
+    "russian_term": "Kiev ballet",
+    "ukrainian_term": "Kyiv ballet",
+    "category": "sports",
+    "yearly": [
+      {
+        "year": 2016,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2019,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2020,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2021,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 3,
+        "total": 4
+      }
+    ],
+    "total_russian": 3,
+    "total_ukrainian": 10
+  },
+  {
+    "pair_id": 53,
+    "russian_term": "Karpaty Lvov",
+    "ukrainian_term": "Karpaty Lviv",
+    "category": "sports",
+    "yearly": [
+      {
+        "year": 2022,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 2
+  },
+  {
+    "pair_id": 35,
+    "russian_term": "Kievan Rus",
+    "ukrainian_term": "Kyivan Rus",
+    "category": "historical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 4,
+        "ukrainian_count": 1,
+        "total": 5
+      },
+      {
+        "year": 2011,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2012,
+        "russian_count": 8,
+        "ukrainian_count": 1,
+        "total": 9
+      },
+      {
+        "year": 2013,
+        "russian_count": 16,
+        "ukrainian_count": 2,
+        "total": 18
+      },
+      {
+        "year": 2014,
+        "russian_count": 15,
+        "ukrainian_count": 0,
+        "total": 15
+      },
+      {
+        "year": 2015,
+        "russian_count": 11,
+        "ukrainian_count": 4,
+        "total": 15
+      },
+      {
+        "year": 2016,
+        "russian_count": 16,
+        "ukrainian_count": 4,
+        "total": 20
+      },
+      {
+        "year": 2017,
+        "russian_count": 11,
+        "ukrainian_count": 4,
+        "total": 15
+      },
+      {
+        "year": 2018,
+        "russian_count": 17,
+        "ukrainian_count": 12,
+        "total": 29
+      },
+      {
+        "year": 2019,
+        "russian_count": 23,
+        "ukrainian_count": 4,
+        "total": 27
+      },
+      {
+        "year": 2020,
+        "russian_count": 16,
+        "ukrainian_count": 7,
+        "total": 23
+      },
+      {
+        "year": 2021,
+        "russian_count": 13,
+        "ukrainian_count": 14,
+        "total": 27
+      },
+      {
+        "year": 2022,
+        "russian_count": 12,
+        "ukrainian_count": 9,
+        "total": 21
+      },
+      {
+        "year": 2023,
+        "russian_count": 9,
+        "ukrainian_count": 17,
+        "total": 26
+      },
+      {
+        "year": 2024,
+        "russian_count": 15,
+        "ukrainian_count": 15,
+        "total": 30
+      },
+      {
+        "year": 2025,
+        "russian_count": 5,
+        "ukrainian_count": 23,
+        "total": 28
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 193,
+    "total_ukrainian": 118
+  },
+  {
+    "pair_id": 48,
+    "russian_term": "Gopak",
+    "ukrainian_term": "Hopak",
+    "category": "historical",
+    "yearly": [
+      {
+        "year": 2014,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2016,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2020,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2021,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2022,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      },
+      {
+        "year": 2023,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2026,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      }
+    ],
+    "total_russian": 3,
+    "total_ukrainian": 10
+  },
+  {
+    "pair_id": 70,
+    "russian_term": "Vladimir the Great",
+    "ukrainian_term": "Volodymyr the Great",
+    "category": "historical",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2011,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2013,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2014,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2015,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      },
+      {
+        "year": 2017,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "total": 7
+      },
+      {
+        "year": 2018,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "total": 5
+      },
+      {
+        "year": 2019,
+        "russian_count": 12,
+        "ukrainian_count": 1,
+        "total": 13
+      },
+      {
+        "year": 2020,
+        "russian_count": 9,
+        "ukrainian_count": 3,
+        "total": 12
+      },
+      {
+        "year": 2021,
+        "russian_count": 12,
+        "ukrainian_count": 0,
+        "total": 12
+      },
+      {
+        "year": 2022,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "total": 7
+      },
+      {
+        "year": 2023,
+        "russian_count": 9,
+        "ukrainian_count": 0,
+        "total": 9
+      },
+      {
+        "year": 2024,
+        "russian_count": 10,
+        "ukrainian_count": 1,
+        "total": 11
+      },
+      {
+        "year": 2025,
+        "russian_count": 5,
+        "ukrainian_count": 1,
+        "total": 6
+      },
+      {
+        "year": 2026,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      }
+    ],
+    "total_russian": 90,
+    "total_ukrainian": 7
+  },
+  {
+    "pair_id": 71,
+    "russian_term": "Prince of Kiev",
+    "ukrainian_term": "Prince of Kyiv",
+    "category": "historical",
+    "yearly": [
+      {
+        "year": 2013,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2015,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2017,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2019,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2020,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      },
+      {
+        "year": 2022,
+        "russian_count": 1,
+        "ukrainian_count": 2,
+        "total": 3
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2026,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      }
+    ],
+    "total_russian": 10,
+    "total_ukrainian": 9
+  },
+  {
+    "pair_id": 60,
+    "russian_term": "Alexander Usyk",
+    "ukrainian_term": "Oleksandr Usyk",
+    "category": "people",
+    "yearly": [
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 2
+  },
+  {
+    "pair_id": 61,
+    "russian_term": "Vladimir Zelensky",
+    "ukrainian_term": "Volodymyr Zelenskyy",
+    "category": "people",
+    "yearly": [
+      {
+        "year": 2019,
+        "russian_count": 3,
+        "ukrainian_count": 1,
+        "total": 4
+      },
+      {
+        "year": 2020,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2022,
+        "russian_count": 1,
+        "ukrainian_count": 6,
+        "total": 7
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 7,
+        "total": 7
+      },
+      {
+        "year": 2024,
+        "russian_count": 2,
+        "ukrainian_count": 2,
+        "total": 4
+      },
+      {
+        "year": 2025,
+        "russian_count": 1,
+        "ukrainian_count": 6,
+        "total": 7
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      }
+    ],
+    "total_russian": 8,
+    "total_ukrainian": 25
+  },
+  {
+    "pair_id": 72,
+    "russian_term": "Artemovsk",
+    "ukrainian_term": "Bakhmut",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2012,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2013,
+        "russian_count": 0,
+        "ukrainian_count": 5,
+        "total": 5
+      },
+      {
+        "year": 2014,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2016,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2018,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2019,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      },
+      {
+        "year": 2021,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 2,
+        "ukrainian_count": 8,
+        "total": 10
+      },
+      {
+        "year": 2024,
+        "russian_count": 0,
+        "ukrainian_count": 3,
+        "total": 3
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 9,
+        "total": 9
+      },
+      {
+        "year": 2026,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      }
+    ],
+    "total_russian": 6,
+    "total_ukrainian": 39
+  },
+  {
+    "pair_id": 62,
+    "russian_term": "Andrey Shevchenko",
+    "ukrainian_term": "Andrii Shevchenko",
+    "category": "people",
+    "yearly": [
+      {
+        "year": 2021,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 0,
+    "total_ukrainian": 1
+  },
+  {
+    "pair_id": 80,
+    "russian_term": "Nikolai Gogol",
+    "ukrainian_term": "Mykola Hohol",
+    "category": "people",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "total": 4
+      },
+      {
+        "year": 2012,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "total": 4
+      },
+      {
+        "year": 2013,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2014,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "total": 7
+      },
+      {
+        "year": 2015,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "total": 5
+      },
+      {
+        "year": 2016,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "total": 7
+      },
+      {
+        "year": 2018,
+        "russian_count": 5,
+        "ukrainian_count": 1,
+        "total": 6
+      },
+      {
+        "year": 2019,
+        "russian_count": 12,
+        "ukrainian_count": 2,
+        "total": 14
+      },
+      {
+        "year": 2020,
+        "russian_count": 14,
+        "ukrainian_count": 1,
+        "total": 15
+      },
+      {
+        "year": 2021,
+        "russian_count": 15,
+        "ukrainian_count": 1,
+        "total": 16
+      },
+      {
+        "year": 2022,
+        "russian_count": 15,
+        "ukrainian_count": 0,
+        "total": 15
+      },
+      {
+        "year": 2023,
+        "russian_count": 4,
+        "ukrainian_count": 1,
+        "total": 5
+      },
+      {
+        "year": 2024,
+        "russian_count": 17,
+        "ukrainian_count": 1,
+        "total": 18
+      },
+      {
+        "year": 2025,
+        "russian_count": 10,
+        "ukrainian_count": 1,
+        "total": 11
+      }
+    ],
+    "total_russian": 122,
+    "total_ukrainian": 8
+  },
+  {
+    "pair_id": 82,
+    "russian_term": "Feodosiya",
+    "ukrainian_term": "Feodosiia",
+    "category": "geographical",
+    "yearly": [
+      {
+        "year": 2011,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2012,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2014,
+        "russian_count": 1,
+        "ukrainian_count": 1,
+        "total": 2
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2019,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2020,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2026,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      }
+    ],
+    "total_russian": 10,
+    "total_ukrainian": 2
+  },
+  {
+    "pair_id": 83,
+    "russian_term": "Olga of Kiev",
+    "ukrainian_term": "Olha of Kyiv",
+    "category": "historical",
+    "yearly": [
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2018,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2020,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2021,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2022,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 2,
+        "total": 2
+      }
+    ],
+    "total_russian": 7,
+    "total_ukrainian": 3
+  },
+  {
+    "pair_id": 84,
+    "russian_term": "Igor Sikorsky",
+    "ukrainian_term": "Ihor Sikorsky",
+    "category": "people",
+    "yearly": [
+      {
+        "year": 2010,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2011,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2013,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2016,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2017,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "total": 5
+      },
+      {
+        "year": 2019,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2020,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2021,
+        "russian_count": 9,
+        "ukrainian_count": 0,
+        "total": 9
+      },
+      {
+        "year": 2022,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2023,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "total": 5
+      },
+      {
+        "year": 2024,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2025,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "total": 7
+      }
+    ],
+    "total_russian": 43,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 85,
+    "russian_term": "Sergei Korolev",
+    "ukrainian_term": "Serhii Korolyov",
+    "category": "people",
+    "yearly": [
+      {
+        "year": 2011,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2013,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2021,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2025,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      }
+    ],
+    "total_russian": 8,
+    "total_ukrainian": 0
+  },
+  {
+    "pair_id": 86,
+    "russian_term": "Bogdan Khmelnitsky",
+    "ukrainian_term": "Bohdan Khmelnytskyi",
+    "category": "historical",
+    "yearly": [
+      {
+        "year": 2012,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2013,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2015,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2016,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2017,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2018,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      },
+      {
+        "year": 2020,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2023,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      },
+      {
+        "year": 2024,
+        "russian_count": 1,
+        "ukrainian_count": 0,
+        "total": 1
+      },
+      {
+        "year": 2025,
+        "russian_count": 0,
+        "ukrainian_count": 1,
+        "total": 1
+      }
+    ],
+    "total_russian": 6,
+    "total_ukrainian": 6
+  },
+  {
+    "pair_id": 87,
+    "russian_term": "Kazimir Malevich",
+    "ukrainian_term": "Kazymyr Malevych",
+    "category": "people",
+    "yearly": [
+      {
+        "year": 2011,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2012,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2013,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2014,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "total": 4
+      },
+      {
+        "year": 2015,
+        "russian_count": 10,
+        "ukrainian_count": 0,
+        "total": 10
+      },
+      {
+        "year": 2016,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "total": 4
+      },
+      {
+        "year": 2017,
+        "russian_count": 7,
+        "ukrainian_count": 0,
+        "total": 7
+      },
+      {
+        "year": 2018,
+        "russian_count": 10,
+        "ukrainian_count": 0,
+        "total": 10
+      },
+      {
+        "year": 2019,
+        "russian_count": 5,
+        "ukrainian_count": 0,
+        "total": 5
+      },
+      {
+        "year": 2020,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "total": 4
+      },
+      {
+        "year": 2021,
+        "russian_count": 12,
+        "ukrainian_count": 0,
+        "total": 12
+      },
+      {
+        "year": 2022,
+        "russian_count": 2,
+        "ukrainian_count": 0,
+        "total": 2
+      },
+      {
+        "year": 2023,
+        "russian_count": 3,
+        "ukrainian_count": 0,
+        "total": 3
+      },
+      {
+        "year": 2024,
+        "russian_count": 4,
+        "ukrainian_count": 0,
+        "total": 4
+      },
+      {
+        "year": 2025,
+        "russian_count": 2,
+        "ukrainian_count": 1,
+        "total": 3
+      }
+    ],
+    "total_russian": 73,
+    "total_ukrainian": 1
+  },
+  {
     "pair_id": 15,
     "russian_term": "Dnieper River",
     "ukrainian_term": "Dnipro River",
