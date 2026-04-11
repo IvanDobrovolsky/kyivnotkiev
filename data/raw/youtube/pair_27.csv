@@ -1,35 +1,35 @@
 pair_id,variant,term,year,search_results,title_matches,source
-27,russian,"""the Ukraine""",2010,20,6,youtube_invidious
-27,ukrainian,Ukraine,2010,20,18,youtube_invidious
-27,russian,"""the Ukraine""",2011,20,12,youtube_invidious
-27,ukrainian,Ukraine,2011,20,20,youtube_invidious
-27,russian,"""the Ukraine""",2012,20,6,youtube_invidious
-27,ukrainian,Ukraine,2012,20,20,youtube_invidious
-27,russian,"""the Ukraine""",2013,20,10,youtube_invidious
-27,ukrainian,Ukraine,2013,20,20,youtube_invidious
-27,russian,"""the Ukraine""",2014,20,2,youtube_invidious
-27,ukrainian,Ukraine,2014,20,18,youtube_invidious
-27,russian,"""the Ukraine""",2015,20,9,youtube_invidious
-27,ukrainian,Ukraine,2015,20,20,youtube_invidious
-27,russian,"""the Ukraine""",2016,20,7,youtube_invidious
-27,ukrainian,Ukraine,2016,20,20,youtube_invidious
-27,russian,"""the Ukraine""",2017,20,7,youtube_invidious
-27,ukrainian,Ukraine,2017,20,19,youtube_invidious
-27,russian,"""the Ukraine""",2018,20,3,youtube_invidious
-27,ukrainian,Ukraine,2018,20,20,youtube_invidious
-27,russian,"""the Ukraine""",2019,20,7,youtube_invidious
-27,ukrainian,Ukraine,2019,20,20,youtube_invidious
-27,russian,"""the Ukraine""",2020,20,6,youtube_invidious
-27,ukrainian,Ukraine,2020,20,20,youtube_invidious
-27,russian,"""the Ukraine""",2021,20,4,youtube_invidious
-27,ukrainian,Ukraine,2021,20,18,youtube_invidious
-27,russian,"""the Ukraine""",2022,20,3,youtube_invidious
-27,ukrainian,Ukraine,2022,20,17,youtube_invidious
-27,russian,"""the Ukraine""",2023,20,16,youtube_invidious
-27,ukrainian,Ukraine,2023,20,20,youtube_invidious
-27,russian,"""the Ukraine""",2024,20,8,youtube_invidious
-27,ukrainian,Ukraine,2024,20,19,youtube_invidious
-27,russian,"""the Ukraine""",2025,20,2,youtube_invidious
-27,ukrainian,Ukraine,2025,20,16,youtube_invidious
-27,russian,"""the Ukraine""",2026,20,0,youtube_invidious
-27,ukrainian,Ukraine,2026,20,18,youtube_invidious
+27,russian,"""the Ukraine""",2010,50,23,youtube_invidious
+27,ukrainian,Ukraine,2010,50,47,youtube_invidious
+27,russian,"""the Ukraine""",2011,50,27,youtube_invidious
+27,ukrainian,Ukraine,2011,50,50,youtube_invidious
+27,russian,"""the Ukraine""",2012,50,21,youtube_invidious
+27,ukrainian,Ukraine,2012,50,50,youtube_invidious
+27,russian,"""the Ukraine""",2013,50,27,youtube_invidious
+27,ukrainian,Ukraine,2013,50,50,youtube_invidious
+27,russian,"""the Ukraine""",2014,50,7,youtube_invidious
+27,ukrainian,Ukraine,2014,50,47,youtube_invidious
+27,russian,"""the Ukraine""",2015,50,23,youtube_invidious
+27,ukrainian,Ukraine,2015,50,42,youtube_invidious
+27,russian,"""the Ukraine""",2016,50,26,youtube_invidious
+27,ukrainian,Ukraine,2016,50,47,youtube_invidious
+27,russian,"""the Ukraine""",2017,50,24,youtube_invidious
+27,ukrainian,Ukraine,2017,50,49,youtube_invidious
+27,russian,"""the Ukraine""",2018,50,33,youtube_invidious
+27,ukrainian,Ukraine,2018,50,50,youtube_invidious
+27,russian,"""the Ukraine""",2019,50,27,youtube_invidious
+27,ukrainian,Ukraine,2019,50,50,youtube_invidious
+27,russian,"""the Ukraine""",2020,50,25,youtube_invidious
+27,ukrainian,Ukraine,2020,50,49,youtube_invidious
+27,russian,"""the Ukraine""",2021,50,10,youtube_invidious
+27,ukrainian,Ukraine,2021,50,48,youtube_invidious
+27,russian,"""the Ukraine""",2022,50,21,youtube_invidious
+27,ukrainian,Ukraine,2022,50,45,youtube_invidious
+27,russian,"""the Ukraine""",2023,50,42,youtube_invidious
+27,ukrainian,Ukraine,2023,50,45,youtube_invidious
+27,russian,"""the Ukraine""",2024,50,28,youtube_invidious
+27,ukrainian,Ukraine,2024,50,50,youtube_invidious
+27,russian,"""the Ukraine""",2025,50,2,youtube_invidious
+27,ukrainian,Ukraine,2025,50,44,youtube_invidious
+27,russian,"""the Ukraine""",2026,50,0,youtube_invidious
+27,ukrainian,Ukraine,2026,50,46,youtube_invidious
