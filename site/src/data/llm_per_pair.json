@@ -1,6 +1,6 @@
 {
   "n_pairs": 63,
-  "n_models": 71,
+  "n_models": 72,
   "families": {
     "Alibaba Qwen": {
       "color": "#9333EA",
@@ -20,7 +20,7 @@
     },
     "Meta Llama": {
       "color": "#0866FF",
-      "n_models": 10
+      "n_models": 11
     },
     "Mistral": {
       "color": "#FA500F",
@@ -592,6 +592,16 @@
           "tas": 0.4
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -753,11 +763,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 90.4,
-        "open_pct": 87.3,
+        "n_models": 72,
+        "tas_mean": 90.6,
+        "open_pct": 87.5,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 89.9,
+        "forced_ua_pct": 90.0,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -790,10 +800,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
-            "open_pct": 30.0,
-            "forced_pct": 88.9,
-            "tas_mean": 54.0
+            "n": 11,
+            "open_pct": 36.4,
+            "forced_pct": 90.0,
+            "tas_mean": 58.2
           },
           "Mistral": {
             "n": 4,
@@ -1366,6 +1376,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -1527,8 +1547,8 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 96.3,
+        "n_models": 72,
+        "tas_mean": 96.4,
         "open_pct": 98.5,
         "forced_ru_pct": 97.1,
         "forced_ua_pct": 97.1,
@@ -1564,7 +1584,7 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -2140,6 +2160,16 @@
           "tas": 0.4
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -2301,11 +2331,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 46.1,
-        "open_pct": 24.6,
+        "n_models": 72,
+        "tas_mean": 45.7,
+        "open_pct": 24.3,
         "forced_ru_pct": 94.4,
-        "forced_ua_pct": 62.0,
+        "forced_ua_pct": 61.1,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -2338,10 +2368,10 @@
             "tas_mean": 44.4
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
-            "forced_pct": 60.0,
-            "tas_mean": 24.0
+            "forced_pct": 59.1,
+            "tas_mean": 23.6
           },
           "Mistral": {
             "n": 4,
@@ -2914,6 +2944,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -3075,7 +3115,7 @@
         }
       ],
       "summary": {
-        "n_models": 71,
+        "n_models": 72,
         "tas_mean": 100.0,
         "open_pct": 100.0,
         "forced_ru_pct": 100.0,
@@ -3112,7 +3152,7 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -3688,6 +3728,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -3849,11 +3899,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 93.1,
+        "n_models": 72,
+        "tas_mean": 93.2,
         "open_pct": 100.0,
-        "forced_ru_pct": 91.2,
-        "forced_ua_pct": 91.0,
+        "forced_ru_pct": 91.3,
+        "forced_ua_pct": 91.2,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -3886,10 +3936,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 85.7,
-            "tas_mean": 88.9
+            "forced_pct": 87.5,
+            "tas_mean": 90.0
           },
           "Mistral": {
             "n": 4,
@@ -4462,6 +4512,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 1,
+          "tas": 0.8
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -4623,11 +4683,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 87.0,
-        "open_pct": 96.5,
-        "forced_ru_pct": 94.2,
-        "forced_ua_pct": 75.7,
+        "n_models": 72,
+        "tas_mean": 86.9,
+        "open_pct": 96.6,
+        "forced_ru_pct": 92.9,
+        "forced_ua_pct": 76.1,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -4660,10 +4720,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 64.7,
-            "tas_mean": 71.0
+            "forced_pct": 63.2,
+            "tas_mean": 71.8
           },
           "Mistral": {
             "n": 4,
@@ -5236,6 +5296,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -5397,7 +5467,7 @@
         }
       ],
       "summary": {
-        "n_models": 71,
+        "n_models": 72,
         "tas_mean": 99.0,
         "open_pct": 100.0,
         "forced_ru_pct": 100.0,
@@ -5434,10 +5504,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 95.0,
-            "tas_mean": 98.0
+            "forced_pct": 95.5,
+            "tas_mean": 98.2
           },
           "Mistral": {
             "n": 4,
@@ -6010,6 +6080,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -6171,11 +6251,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 88.7,
+        "n_models": 72,
+        "tas_mean": 88.9,
         "open_pct": 100.0,
-        "forced_ru_pct": 94.3,
-        "forced_ua_pct": 85.7,
+        "forced_ru_pct": 94.4,
+        "forced_ua_pct": 85.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -6208,10 +6288,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 73.7,
-            "tas_mean": 70.0
+            "forced_pct": 76.2,
+            "tas_mean": 72.7
           },
           "Mistral": {
             "n": 4,
@@ -6784,6 +6864,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -6945,7 +7035,7 @@
         }
       ],
       "summary": {
-        "n_models": 71,
+        "n_models": 72,
         "tas_mean": 99.3,
         "open_pct": 100.0,
         "forced_ru_pct": 98.6,
@@ -6982,10 +7072,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": null,
-            "forced_pct": 94.7,
-            "tas_mean": 95.0
+            "forced_pct": 95.2,
+            "tas_mean": 95.5
           },
           "Mistral": {
             "n": 4,
@@ -7558,6 +7648,16 @@
           "tas": 0.2
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -7719,11 +7819,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 20.7,
+        "n_models": 72,
+        "tas_mean": 20.4,
         "open_pct": 0.0,
-        "forced_ru_pct": 80.3,
-        "forced_ua_pct": 24.6,
+        "forced_ru_pct": 79.1,
+        "forced_ua_pct": 24.3,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -7756,10 +7856,10 @@
             "tas_mean": 17.8
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
-            "forced_pct": 38.9,
-            "tas_mean": 17.0
+            "forced_pct": 35.0,
+            "tas_mean": 15.5
           },
           "Mistral": {
             "n": 4,
@@ -8332,6 +8432,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -8493,11 +8603,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 84.1,
+        "n_models": 72,
+        "tas_mean": 84.3,
         "open_pct": 60.0,
-        "forced_ru_pct": 92.9,
-        "forced_ua_pct": 75.7,
+        "forced_ru_pct": 93.0,
+        "forced_ua_pct": 76.1,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -8530,10 +8640,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": null,
-            "forced_pct": 83.3,
-            "tas_mean": 85.0
+            "forced_pct": 85.0,
+            "tas_mean": 86.4
           },
           "Mistral": {
             "n": 4,
@@ -9106,6 +9216,16 @@
           "tas": 0.2
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -9267,11 +9387,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 34.4,
-        "open_pct": 11.3,
-        "forced_ru_pct": 92.5,
-        "forced_ua_pct": 48.5,
+        "n_models": 72,
+        "tas_mean": 34.2,
+        "open_pct": 11.1,
+        "forced_ru_pct": 92.6,
+        "forced_ua_pct": 47.8,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -9304,10 +9424,10 @@
             "tas_mean": 33.3
           },
           "Meta Llama": {
-            "n": 10,
-            "open_pct": 10.0,
-            "forced_pct": 30.8,
-            "tas_mean": 18.0
+            "n": 11,
+            "open_pct": 9.1,
+            "forced_pct": 33.3,
+            "tas_mean": 18.2
           },
           "Mistral": {
             "n": 4,
@@ -9880,6 +10000,16 @@
           "tas": 0.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -10041,11 +10171,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 5.8,
+        "n_models": 72,
+        "tas_mean": 6.0,
         "open_pct": 0.0,
-        "forced_ru_pct": 24.3,
-        "forced_ua_pct": 2.9,
+        "forced_ru_pct": 25.4,
+        "forced_ua_pct": 2.8,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -10078,10 +10208,10 @@
             "tas_mean": 6.7
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
-            "forced_pct": 5.6,
-            "tas_mean": 2.0
+            "forced_pct": 10.0,
+            "tas_mean": 3.6
           },
           "Mistral": {
             "n": 4,
@@ -10654,6 +10784,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.8
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -10815,11 +10955,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 92.0,
-        "open_pct": 98.5,
-        "forced_ru_pct": 89.7,
-        "forced_ua_pct": 82.1,
+        "n_models": 72,
+        "tas_mean": 91.8,
+        "open_pct": 98.6,
+        "forced_ru_pct": 89.9,
+        "forced_ua_pct": 80.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -10852,9 +10992,9 @@
             "tas_mean": 97.8
           },
           "Meta Llama": {
-            "n": 10,
-            "open_pct": 90.0,
-            "forced_pct": 66.7,
+            "n": 11,
+            "open_pct": 90.9,
+            "forced_pct": 64.7,
             "tas_mean": 80.0
           },
           "Mistral": {
@@ -11428,6 +11568,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -11589,11 +11739,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 96.0,
+        "n_models": 72,
+        "tas_mean": 96.1,
         "open_pct": 100.0,
         "forced_ru_pct": 97.1,
-        "forced_ua_pct": 93.8,
+        "forced_ua_pct": 93.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -11626,10 +11776,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 92.3,
-            "tas_mean": 93.8
+            "forced_pct": 93.3,
+            "tas_mean": 94.4
           },
           "Mistral": {
             "n": 4,
@@ -12202,6 +12352,16 @@
           "tas": null
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": null,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -12363,10 +12523,10 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 91.8,
+        "n_models": 72,
+        "tas_mean": 91.9,
         "open_pct": null,
-        "forced_ru_pct": 94.7,
+        "forced_ru_pct": 94.8,
         "forced_ua_pct": 87.0,
         "by_family": {
           "Anthropic Claude": {
@@ -12400,10 +12560,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": null,
-            "forced_pct": 25.0,
-            "tas_mean": 25.0
+            "forced_pct": 40.0,
+            "tas_mean": 50.0
           },
           "Mistral": {
             "n": 4,
@@ -12976,6 +13136,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.8
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -13137,11 +13307,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 97.2,
-        "open_pct": 97.9,
+        "n_models": 72,
+        "tas_mean": 96.9,
+        "open_pct": 98.0,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 94.2,
+        "forced_ua_pct": 92.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -13174,10 +13344,10 @@
             "tas_mean": 93.3
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 100.0,
-            "tas_mean": 100.0
+            "forced_pct": 94.7,
+            "tas_mean": 98.2
           },
           "Mistral": {
             "n": 4,
@@ -13750,6 +13920,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -13911,7 +14091,7 @@
         }
       ],
       "summary": {
-        "n_models": 71,
+        "n_models": 72,
         "tas_mean": 99.7,
         "open_pct": 100.0,
         "forced_ru_pct": 100.0,
@@ -13948,7 +14128,7 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -14524,6 +14704,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.8
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -14685,11 +14875,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 94.7,
+        "n_models": 72,
+        "tas_mean": 94.5,
         "open_pct": 100.0,
         "forced_ru_pct": 98.6,
-        "forced_ua_pct": 89.7,
+        "forced_ua_pct": 88.4,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -14722,10 +14912,10 @@
             "tas_mean": 94.4
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 86.7,
-            "tas_mean": 88.9
+            "forced_pct": 82.4,
+            "tas_mean": 88.0
           },
           "Mistral": {
             "n": 4,
@@ -15298,6 +15488,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.5
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -15459,11 +15659,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 98.3,
+        "n_models": 72,
+        "tas_mean": 97.6,
         "open_pct": 100.0,
         "forced_ru_pct": 98.6,
-        "forced_ua_pct": 97.2,
+        "forced_ua_pct": 95.8,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -15496,10 +15696,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 100.0,
-            "tas_mean": 100.0
+            "forced_pct": 95.2,
+            "tas_mean": 95.5
           },
           "Mistral": {
             "n": 4,
@@ -16072,6 +16272,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -16233,11 +16443,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 97.3,
+        "n_models": 72,
+        "tas_mean": 97.4,
         "open_pct": 100.0,
         "forced_ru_pct": 97.1,
-        "forced_ua_pct": 95.6,
+        "forced_ua_pct": 95.7,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -16270,10 +16480,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 78.6,
-            "tas_mean": 85.0
+            "forced_pct": 81.2,
+            "tas_mean": 86.4
           },
           "Mistral": {
             "n": 4,
@@ -16846,6 +17056,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -17007,11 +17227,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 93.0,
+        "n_models": 72,
+        "tas_mean": 93.1,
         "open_pct": 100.0,
         "forced_ru_pct": 95.8,
-        "forced_ua_pct": 89.9,
+        "forced_ua_pct": 90.0,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -17044,10 +17264,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": null,
-            "forced_pct": 94.4,
-            "tas_mean": 95.0
+            "forced_pct": 95.0,
+            "tas_mean": 95.5
           },
           "Mistral": {
             "n": 4,
@@ -17620,6 +17840,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -17781,10 +18011,10 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 93.7,
+        "n_models": 72,
+        "tas_mean": 93.8,
         "open_pct": 100.0,
-        "forced_ru_pct": 93.0,
+        "forced_ru_pct": 93.1,
         "forced_ua_pct": 94.4,
         "by_family": {
           "Anthropic Claude": {
@@ -17818,10 +18048,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 90.0,
-            "tas_mean": 90.0
+            "forced_pct": 90.9,
+            "tas_mean": 90.9
           },
           "Mistral": {
             "n": 4,
@@ -18394,6 +18624,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -18555,10 +18795,10 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 95.5,
+        "n_models": 72,
+        "tas_mean": 95.6,
         "open_pct": 100.0,
-        "forced_ru_pct": 91.5,
+        "forced_ru_pct": 91.7,
         "forced_ua_pct": 98.6,
         "by_family": {
           "Anthropic Claude": {
@@ -18592,10 +18832,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 90.0,
-            "tas_mean": 93.0
+            "forced_pct": 90.9,
+            "tas_mean": 93.6
           },
           "Mistral": {
             "n": 4,
@@ -19168,6 +19408,16 @@
           "tas": 0.5
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.5
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -19329,11 +19579,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 45.8,
+        "n_models": 72,
+        "tas_mean": 45.9,
         "open_pct": 0.0,
-        "forced_ru_pct": 86.8,
-        "forced_ua_pct": 63.8,
+        "forced_ru_pct": 87.0,
+        "forced_ua_pct": 62.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -19366,10 +19616,10 @@
             "tas_mean": 28.9
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": null,
-            "forced_pct": 56.2,
-            "tas_mean": 56.2
+            "forced_pct": 55.6,
+            "tas_mean": 55.6
           },
           "Mistral": {
             "n": 4,
@@ -19942,6 +20192,16 @@
           "tas": 0.8
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 0.4
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -20103,11 +20363,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 75.4,
-        "open_pct": 79.5,
+        "n_models": 72,
+        "tas_mean": 74.9,
+        "open_pct": 77.8,
         "forced_ru_pct": 95.7,
-        "forced_ua_pct": 66.2,
+        "forced_ua_pct": 66.7,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -20140,10 +20400,10 @@
             "tas_mean": 66.7
           },
           "Meta Llama": {
-            "n": 10,
-            "open_pct": 75.0,
-            "forced_pct": 50.0,
-            "tas_mean": 45.0
+            "n": 11,
+            "open_pct": 60.0,
+            "forced_pct": 55.0,
+            "tas_mean": 44.5
           },
           "Mistral": {
             "n": 4,
@@ -20716,6 +20976,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -20877,11 +21147,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 46.9,
-        "open_pct": 41.9,
-        "forced_ru_pct": 42.4,
-        "forced_ua_pct": 53.0,
+        "n_models": 72,
+        "tas_mean": 47.6,
+        "open_pct": 42.9,
+        "forced_ru_pct": 43.3,
+        "forced_ua_pct": 53.7,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -20914,7 +21184,7 @@
             "tas_mean": 2.2
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -21936,6 +22206,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -22097,11 +22377,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 88.5,
+        "n_models": 72,
+        "tas_mean": 88.6,
         "open_pct": 98.4,
-        "forced_ru_pct": 82.8,
-        "forced_ua_pct": 88.1,
+        "forced_ru_pct": 83.1,
+        "forced_ua_pct": 88.2,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -22134,10 +22414,10 @@
             "tas_mean": 97.8
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 78.6,
-            "tas_mean": 88.0
+            "forced_pct": 81.2,
+            "tas_mean": 89.1
           },
           "Mistral": {
             "n": 4,
@@ -22710,6 +22990,16 @@
           "tas": 0.4
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -22871,11 +23161,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 82.5,
-        "open_pct": 79.7,
-        "forced_ru_pct": 96.8,
-        "forced_ua_pct": 86.9,
+        "n_models": 72,
+        "tas_mean": 82.7,
+        "open_pct": 80.0,
+        "forced_ru_pct": 96.9,
+        "forced_ua_pct": 87.1,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -22908,10 +23198,10 @@
             "tas_mean": 73.3
           },
           "Meta Llama": {
-            "n": 10,
-            "open_pct": 37.5,
-            "forced_pct": 72.7,
-            "tas_mean": 47.0
+            "n": 11,
+            "open_pct": 44.4,
+            "forced_pct": 76.9,
+            "tas_mean": 51.8
           },
           "Mistral": {
             "n": 4,
@@ -23484,6 +23774,16 @@
           "tas": 0.4
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -23645,11 +23945,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 93.0,
-        "open_pct": 90.9,
+        "n_models": 72,
+        "tas_mean": 93.1,
+        "open_pct": 91.0,
         "forced_ru_pct": 98.5,
-        "forced_ua_pct": 97.0,
+        "forced_ua_pct": 97.1,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -23682,10 +23982,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
-            "open_pct": 40.0,
-            "forced_pct": 88.2,
-            "tas_mean": 56.0
+            "n": 11,
+            "open_pct": 45.5,
+            "forced_pct": 89.5,
+            "tas_mean": 60.0
           },
           "Mistral": {
             "n": 4,
@@ -24258,6 +24558,16 @@
           "tas": 0.2
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 1,
+          "tas": 0.2
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -24419,11 +24729,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
+        "n_models": 72,
         "tas_mean": 23.0,
         "open_pct": 1.5,
-        "forced_ru_pct": 77.4,
-        "forced_ua_pct": 31.7,
+        "forced_ru_pct": 76.2,
+        "forced_ua_pct": 32.8,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -24456,10 +24766,10 @@
             "tas_mean": 24.4
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
-            "forced_pct": 54.5,
-            "tas_mean": 15.6
+            "forced_pct": 53.8,
+            "tas_mean": 16.0
           },
           "Mistral": {
             "n": 4,
@@ -25032,6 +25342,16 @@
           "tas": 0.4
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -25193,11 +25513,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 27.6,
-        "open_pct": 4.6,
-        "forced_ru_pct": 72.7,
-        "forced_ua_pct": 52.4,
+        "n_models": 72,
+        "tas_mean": 27.2,
+        "open_pct": 4.5,
+        "forced_ru_pct": 71.6,
+        "forced_ua_pct": 51.6,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -25230,10 +25550,10 @@
             "tas_mean": 20.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
-            "forced_pct": 75.0,
-            "tas_mean": 36.0
+            "forced_pct": 68.2,
+            "tas_mean": 32.7
           },
           "Mistral": {
             "n": 4,
@@ -25806,6 +26126,16 @@
           "tas": 0.4
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -25967,11 +26297,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 32.8,
-        "open_pct": 9.2,
-        "forced_ru_pct": 73.2,
-        "forced_ua_pct": 55.1,
+        "n_models": 72,
+        "tas_mean": 32.4,
+        "open_pct": 9.1,
+        "forced_ru_pct": 72.2,
+        "forced_ua_pct": 54.3,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -26004,10 +26334,10 @@
             "tas_mean": 24.4
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
-            "forced_pct": 45.0,
-            "tas_mean": 24.0
+            "forced_pct": 40.9,
+            "tas_mean": 21.8
           },
           "Mistral": {
             "n": 4,
@@ -26580,6 +26910,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -26741,10 +27081,10 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 94.9,
+        "n_models": 72,
+        "tas_mean": 95.0,
         "open_pct": 92.9,
-        "forced_ru_pct": 97.1,
+        "forced_ru_pct": 97.2,
         "forced_ua_pct": 94.4,
         "by_family": {
           "Anthropic Claude": {
@@ -26778,10 +27118,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": null,
-            "forced_pct": 78.9,
-            "tas_mean": 80.0
+            "forced_pct": 81.0,
+            "tas_mean": 81.8
           },
           "Mistral": {
             "n": 4,
@@ -27354,6 +27694,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -27515,10 +27865,10 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 95.5,
+        "n_models": 72,
+        "tas_mean": 95.6,
         "open_pct": 87.0,
-        "forced_ru_pct": 95.7,
+        "forced_ru_pct": 95.8,
         "forced_ua_pct": 94.4,
         "by_family": {
           "Anthropic Claude": {
@@ -27552,10 +27902,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 60.0,
-            "forced_pct": 78.9,
-            "tas_mean": 80.0
+            "forced_pct": 81.0,
+            "tas_mean": 81.8
           },
           "Mistral": {
             "n": 4,
@@ -28128,6 +28478,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -28289,7 +28649,7 @@
         }
       ],
       "summary": {
-        "n_models": 71,
+        "n_models": 72,
         "tas_mean": 97.2,
         "open_pct": 100.0,
         "forced_ru_pct": 97.1,
@@ -28326,7 +28686,7 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -28902,6 +29262,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -29063,11 +29433,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 90.7,
-        "open_pct": 84.7,
-        "forced_ru_pct": 97.1,
-        "forced_ua_pct": 93.9,
+        "n_models": 72,
+        "tas_mean": 90.8,
+        "open_pct": 85.0,
+        "forced_ru_pct": 97.2,
+        "forced_ua_pct": 94.0,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -29100,10 +29470,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
-            "open_pct": 57.1,
-            "forced_pct": 82.4,
-            "tas_mean": 76.0
+            "n": 11,
+            "open_pct": 62.5,
+            "forced_pct": 84.2,
+            "tas_mean": 78.2
           },
           "Mistral": {
             "n": 4,
@@ -29676,6 +30046,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -29837,11 +30217,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 89.6,
-        "open_pct": 88.7,
-        "forced_ru_pct": 97.1,
-        "forced_ua_pct": 83.8,
+        "n_models": 72,
+        "tas_mean": 89.7,
+        "open_pct": 88.9,
+        "forced_ru_pct": 97.2,
+        "forced_ua_pct": 84.1,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -29874,10 +30254,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
-            "open_pct": 70.0,
-            "forced_pct": 81.2,
-            "tas_mean": 70.0
+            "n": 11,
+            "open_pct": 72.7,
+            "forced_pct": 83.3,
+            "tas_mean": 72.7
           },
           "Mistral": {
             "n": 4,
@@ -30450,6 +30830,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -30611,7 +31001,7 @@
         }
       ],
       "summary": {
-        "n_models": 71,
+        "n_models": 72,
         "tas_mean": 97.6,
         "open_pct": 100.0,
         "forced_ru_pct": 97.1,
@@ -30648,7 +31038,7 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -31224,6 +31614,16 @@
           "tas": 0.2
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -31385,11 +31785,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 67.3,
-        "open_pct": 60.3,
-        "forced_ru_pct": 85.3,
-        "forced_ua_pct": 65.2,
+        "n_models": 72,
+        "tas_mean": 66.7,
+        "open_pct": 59.3,
+        "forced_ru_pct": 85.5,
+        "forced_ua_pct": 64.2,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -31422,10 +31822,10 @@
             "tas_mean": 71.1
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
             "forced_pct": 50.0,
-            "tas_mean": 26.0
+            "tas_mean": 25.5
           },
           "Mistral": {
             "n": 4,
@@ -31998,6 +32398,16 @@
           "tas": 0.4
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -32159,11 +32569,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 93.9,
-        "open_pct": 95.7,
+        "n_models": 72,
+        "tas_mean": 94.0,
+        "open_pct": 95.8,
         "forced_ru_pct": 98.6,
-        "forced_ua_pct": 85.3,
+        "forced_ua_pct": 85.5,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -32196,10 +32606,10 @@
             "tas_mean": 97.8
           },
           "Meta Llama": {
-            "n": 10,
-            "open_pct": 70.0,
-            "forced_pct": 82.4,
-            "tas_mean": 76.0
+            "n": 11,
+            "open_pct": 72.7,
+            "forced_pct": 84.2,
+            "tas_mean": 78.2
           },
           "Mistral": {
             "n": 4,
@@ -32772,6 +33182,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -32933,11 +33353,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 92.8,
-        "open_pct": 88.9,
+        "n_models": 72,
+        "tas_mean": 92.9,
+        "open_pct": 89.1,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 93.0,
+        "forced_ua_pct": 93.1,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -32970,10 +33390,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
-            "open_pct": 50.0,
-            "forced_pct": 84.2,
-            "tas_mean": 62.0
+            "n": 11,
+            "open_pct": 55.6,
+            "forced_pct": 85.7,
+            "tas_mean": 65.5
           },
           "Mistral": {
             "n": 4,
@@ -33992,6 +34412,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -34153,11 +34583,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
+        "n_models": 72,
         "tas_mean": 95.1,
         "open_pct": 100.0,
-        "forced_ru_pct": 92.8,
-        "forced_ua_pct": 93.5,
+        "forced_ru_pct": 92.9,
+        "forced_ua_pct": 93.7,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -34190,10 +34620,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 90.0,
-            "tas_mean": 96.0
+            "forced_pct": 90.9,
+            "tas_mean": 96.4
           },
           "Mistral": {
             "n": 4,
@@ -35212,6 +35642,16 @@
           "tas": 0.2
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -35373,11 +35813,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 43.5,
-        "open_pct": 21.5,
-        "forced_ru_pct": 91.2,
-        "forced_ua_pct": 54.5,
+        "n_models": 72,
+        "tas_mean": 43.2,
+        "open_pct": 21.2,
+        "forced_ru_pct": 91.3,
+        "forced_ua_pct": 53.7,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -35410,10 +35850,10 @@
             "tas_mean": 46.7
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
-            "forced_pct": 52.9,
-            "tas_mean": 21.0
+            "forced_pct": 52.6,
+            "tas_mean": 20.9
           },
           "Mistral": {
             "n": 4,
@@ -35986,6 +36426,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -36147,11 +36597,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 79.6,
+        "n_models": 72,
+        "tas_mean": 79.9,
         "open_pct": 100.0,
-        "forced_ru_pct": 70.3,
-        "forced_ua_pct": 63.9,
+        "forced_ru_pct": 70.8,
+        "forced_ua_pct": 64.5,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -36184,10 +36634,10 @@
             "tas_mean": 73.3
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 70.6,
-            "tas_mean": 90.0
+            "forced_pct": 73.7,
+            "tas_mean": 90.9
           },
           "Mistral": {
             "n": 4,
@@ -36760,6 +37210,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -36921,11 +37381,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 93.9,
+        "n_models": 72,
+        "tas_mean": 94.0,
         "open_pct": 100.0,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 80.3,
+        "forced_ua_pct": 80.6,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -36958,10 +37418,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 65.0,
-            "tas_mean": 83.0
+            "forced_pct": 68.2,
+            "tas_mean": 84.5
           },
           "Mistral": {
             "n": 4,
@@ -37534,6 +37994,16 @@
           "tas": 0.2
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 0.4
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -37695,11 +38165,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 24.1,
+        "n_models": 72,
+        "tas_mean": 24.3,
         "open_pct": 0.0,
-        "forced_ru_pct": 83.9,
-        "forced_ua_pct": 43.5,
+        "forced_ru_pct": 84.1,
+        "forced_ua_pct": 44.4,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -37732,10 +38202,10 @@
             "tas_mean": 22.2
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
-            "forced_pct": 50.0,
-            "tas_mean": 16.0
+            "forced_pct": 56.2,
+            "tas_mean": 18.2
           },
           "Mistral": {
             "n": 4,
@@ -38308,6 +38778,16 @@
           "tas": 0.2
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.8
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -38469,11 +38949,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
-        "tas_mean": 57.7,
-        "open_pct": 40.6,
+        "n_models": 72,
+        "tas_mean": 58.1,
+        "open_pct": 41.4,
         "forced_ru_pct": 95.8,
-        "forced_ua_pct": 70.4,
+        "forced_ua_pct": 69.4,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -38506,10 +38986,10 @@
             "tas_mean": 40.0
           },
           "Meta Llama": {
-            "n": 10,
-            "open_pct": 10.0,
-            "forced_pct": 55.0,
-            "tas_mean": 28.0
+            "n": 11,
+            "open_pct": 18.2,
+            "forced_pct": 54.5,
+            "tas_mean": 32.7
           },
           "Mistral": {
             "n": 4,
@@ -39082,6 +39562,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -39243,11 +39733,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
+        "n_models": 72,
         "tas_mean": 97.3,
-        "open_pct": 96.8,
+        "open_pct": 96.9,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 94.5,
+        "forced_ua_pct": 94.6,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -39280,7 +39770,7 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -39856,6 +40346,16 @@
           "tas": null
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -40017,7 +40517,7 @@
         }
       ],
       "summary": {
-        "n_models": 71,
+        "n_models": 72,
         "tas_mean": 100.0,
         "open_pct": 100.0,
         "forced_ru_pct": 100.0,
@@ -40054,7 +40554,7 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
             "forced_pct": null,
             "tas_mean": 100.0
@@ -40630,6 +41130,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -40791,11 +41301,11 @@
         }
       ],
       "summary": {
-        "n_models": 71,
+        "n_models": 72,
         "tas_mean": 95.8,
         "open_pct": 100.0,
-        "forced_ru_pct": 97.0,
-        "forced_ua_pct": 85.9,
+        "forced_ru_pct": 97.1,
+        "forced_ua_pct": 86.2,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -40828,10 +41338,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 83.3,
-            "tas_mean": 89.0
+            "forced_pct": 85.0,
+            "tas_mean": 90.0
           },
           "Mistral": {
             "n": 4,
@@ -41164,6 +41674,26 @@
           "tas": null
         },
         {
+          "key": "gpt-5.1-2025-11",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-11",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5.2-2025-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
           "key": "gpt-5.4-2026-03",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -41384,6 +41914,16 @@
           "tas": null
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": null,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -41418,6 +41958,46 @@
           "family": "Mistral",
           "tier": "mid",
           "release_date": "2023-12",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "o1-2024-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2024-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "o3-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "o3-mini-2025-01",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-01",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "o4-mini-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-04",
           "x_open": null,
           "x_forced_ru_first": 1,
           "x_forced_ua_first": 1,
@@ -41505,11 +42085,11 @@
         }
       ],
       "summary": {
-        "n_models": 65,
-        "tas_mean": 90.0,
+        "n_models": 72,
+        "tas_mean": 91.1,
         "open_pct": null,
-        "forced_ru_pct": 89.5,
-        "forced_ua_pct": 87.0,
+        "forced_ru_pct": 90.9,
+        "forced_ua_pct": 88.0,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -41530,10 +42110,10 @@
             "tas_mean": 91.7
           },
           "OpenAI GPT": {
-            "n": 7,
+            "n": 13,
             "open_pct": null,
-            "forced_pct": 83.3,
-            "tas_mean": 83.3
+            "forced_pct": 90.0,
+            "tas_mean": 90.0
           },
           "xAI Grok": {
             "n": 9,
@@ -41542,10 +42122,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": null,
-            "forced_pct": 75.0,
-            "tas_mean": 83.3
+            "forced_pct": 80.0,
+            "tas_mean": 87.5
           },
           "Mistral": {
             "n": 4,
@@ -41878,6 +42458,26 @@
           "tas": 0.0
         },
         {
+          "key": "gpt-5.1-2025-11",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-11",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.2-2025-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "gpt-5.4-2026-03",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -42098,6 +42698,16 @@
           "tas": 0.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -42136,6 +42746,46 @@
           "x_forced_ru_first": 0,
           "x_forced_ua_first": 1,
           "tas": 0.2
+        },
+        {
+          "key": "o1-2024-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2024-12",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "o3-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "o3-mini-2025-01",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-01",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "o4-mini-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
         },
         {
           "key": "qwen2-72b",
@@ -42219,8 +42869,8 @@
         }
       ],
       "summary": {
-        "n_models": 65,
-        "tas_mean": 1.5,
+        "n_models": 72,
+        "tas_mean": 1.3,
         "open_pct": 0.0,
         "forced_ru_pct": 0.0,
         "forced_ua_pct": 100.0,
@@ -42244,10 +42894,10 @@
             "tas_mean": 0.0
           },
           "OpenAI GPT": {
-            "n": 7,
+            "n": 13,
             "open_pct": 0.0,
             "forced_pct": 100.0,
-            "tas_mean": 5.7
+            "tas_mean": 3.1
           },
           "xAI Grok": {
             "n": 9,
@@ -42256,7 +42906,7 @@
             "tas_mean": 0.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
             "forced_pct": null,
             "tas_mean": 0.0
@@ -42442,6 +43092,26 @@
           "tas": null
         },
         {
+          "key": "gpt-5.1-2025-11",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-11",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5.2-2025-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": null,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 1,
+          "tas": 0.5
+        },
+        {
           "key": "gpt-5.4-2026-03",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -42602,6 +43272,16 @@
           "tas": 0.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -42640,6 +43320,46 @@
           "x_forced_ru_first": 0,
           "x_forced_ua_first": 1,
           "tas": 0.2
+        },
+        {
+          "key": "o1-2024-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2024-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "o3-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "o3-mini-2025-01",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-01",
+          "x_open": null,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "o4-mini-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 1,
+          "tas": 0.5
         },
         {
           "key": "qwen2-72b",
@@ -42723,11 +43443,11 @@
         }
       ],
       "summary": {
-        "n_models": 44,
-        "tas_mean": 20.2,
+        "n_models": 51,
+        "tas_mean": 22.3,
         "open_pct": 0.0,
-        "forced_ru_pct": 23.7,
-        "forced_ua_pct": 28.6,
+        "forced_ru_pct": 23.3,
+        "forced_ua_pct": 33.3,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -42742,9 +43462,9 @@
             "tas_mean": 16.7
           },
           "OpenAI GPT": {
-            "n": 7,
+            "n": 13,
             "open_pct": null,
-            "forced_pct": 50.0,
+            "forced_pct": 52.6,
             "tas_mean": 50.0
           },
           "xAI Grok": {
@@ -42754,10 +43474,10 @@
             "tas_mean": 0.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
-            "forced_pct": 29.4,
-            "tas_mean": 16.0
+            "forced_pct": 26.3,
+            "tas_mean": 14.5
           },
           "Mistral": {
             "n": 4,
@@ -42940,6 +43660,26 @@
           "tas": 0.0
         },
         {
+          "key": "gpt-5.1-2025-11",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-11",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.2-2025-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "gpt-5.4-2026-03",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -43100,6 +43840,16 @@
           "tas": null
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -43134,6 +43884,46 @@
           "family": "Mistral",
           "tier": "mid",
           "release_date": "2023-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "o1-2024-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2024-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "o3-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "o3-mini-2025-01",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-01",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "o4-mini-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-04",
           "x_open": null,
           "x_forced_ru_first": null,
           "x_forced_ua_first": null,
@@ -43221,7 +44011,7 @@
         }
       ],
       "summary": {
-        "n_models": 44,
+        "n_models": 51,
         "tas_mean": 0.0,
         "open_pct": 0.0,
         "forced_ru_pct": null,
@@ -43240,7 +44030,7 @@
             "tas_mean": 0.0
           },
           "OpenAI GPT": {
-            "n": 7,
+            "n": 13,
             "open_pct": 0.0,
             "forced_pct": null,
             "tas_mean": 0.0
@@ -43252,7 +44042,7 @@
             "tas_mean": 0.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": null,
             "forced_pct": null,
             "tas_mean": null
@@ -43438,6 +44228,26 @@
           "tas": 0.0
         },
         {
+          "key": "gpt-5.1-2025-11",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-11",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 1,
+          "tas": 0.2
+        },
+        {
+          "key": "gpt-5.2-2025-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
           "key": "gpt-5.4-2026-03",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -43598,6 +44408,16 @@
           "tas": 0.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -43636,6 +44456,46 @@
           "x_forced_ru_first": 0,
           "x_forced_ua_first": 1,
           "tas": 0.5
+        },
+        {
+          "key": "o1-2024-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2024-12",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
+          "key": "o3-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
+          "key": "o3-mini-2025-01",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-01",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
+          "key": "o4-mini-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
         },
         {
           "key": "qwen2-72b",
@@ -43719,11 +44579,11 @@
         }
       ],
       "summary": {
-        "n_models": 44,
-        "tas_mean": 13.5,
+        "n_models": 51,
+        "tas_mean": 12.0,
         "open_pct": 0.0,
-        "forced_ru_pct": 51.4,
-        "forced_ua_pct": 7.5,
+        "forced_ru_pct": 43.2,
+        "forced_ua_pct": 8.5,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -43738,10 +44598,10 @@
             "tas_mean": 14.4
           },
           "OpenAI GPT": {
-            "n": 7,
+            "n": 13,
             "open_pct": 0.0,
-            "forced_pct": 14.3,
-            "tas_mean": 5.7
+            "forced_pct": 11.5,
+            "tas_mean": 4.6
           },
           "xAI Grok": {
             "n": 3,
@@ -43750,10 +44610,10 @@
             "tas_mean": 0.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
-            "forced_pct": 33.3,
-            "tas_mean": 11.1
+            "forced_pct": 29.4,
+            "tas_mean": 10.0
           },
           "Mistral": {
             "n": 4,
@@ -43936,6 +44796,26 @@
           "tas": 0.0
         },
         {
+          "key": "gpt-5.1-2025-11",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-11",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.2-2025-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "gpt-5.4-2026-03",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -44096,6 +44976,16 @@
           "tas": 0.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -44133,6 +45023,46 @@
           "x_open": 0,
           "x_forced_ru_first": null,
           "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
+          "key": "o1-2024-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2024-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "o3-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "o3-mini-2025-01",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-01",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "o4-mini-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
           "tas": 0.0
         },
         {
@@ -44217,7 +45147,7 @@
         }
       ],
       "summary": {
-        "n_models": 44,
+        "n_models": 51,
         "tas_mean": 0.0,
         "open_pct": 0.0,
         "forced_ru_pct": 0.0,
@@ -44236,7 +45166,7 @@
             "tas_mean": 0.0
           },
           "OpenAI GPT": {
-            "n": 7,
+            "n": 13,
             "open_pct": 0.0,
             "forced_pct": null,
             "tas_mean": 0.0
@@ -44248,7 +45178,7 @@
             "tas_mean": 0.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
             "forced_pct": 0.0,
             "tas_mean": 0.0
@@ -44434,6 +45364,26 @@
           "tas": null
         },
         {
+          "key": "gpt-5.1-2025-11",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-11",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5.2-2025-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
           "key": "gpt-5.4-2026-03",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -44594,6 +45544,16 @@
           "tas": null
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -44630,6 +45590,46 @@
           "release_date": "2023-12",
           "x_open": null,
           "x_forced_ru_first": null,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "o1-2024-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2024-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "o3-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "o3-mini-2025-01",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-01",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "o4-mini-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-04",
+          "x_open": null,
+          "x_forced_ru_first": 1,
           "x_forced_ua_first": 1,
           "tas": 1.0
         },
@@ -44715,10 +45715,10 @@
         }
       ],
       "summary": {
-        "n_models": 44,
-        "tas_mean": 81.2,
+        "n_models": 51,
+        "tas_mean": 83.3,
         "open_pct": 66.7,
-        "forced_ru_pct": 50.0,
+        "forced_ru_pct": 66.7,
         "forced_ua_pct": 100.0,
         "by_family": {
           "Anthropic Claude": {
@@ -44734,7 +45734,7 @@
             "tas_mean": 100.0
           },
           "OpenAI GPT": {
-            "n": 7,
+            "n": 13,
             "open_pct": null,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -44746,7 +45746,7 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": null,
             "forced_pct": 50.0,
             "tas_mean": 50.0
@@ -44932,6 +45932,26 @@
           "tas": 0.0
         },
         {
+          "key": "gpt-5.1-2025-11",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-11",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.2-2025-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "gpt-5.4-2026-03",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -45092,6 +46112,16 @@
           "tas": 0.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -45128,6 +46158,46 @@
           "release_date": "2023-12",
           "x_open": 0,
           "x_forced_ru_first": 0,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "o1-2024-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2024-12",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "o3-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "o3-mini-2025-01",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-01",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "o4-mini-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-04",
+          "x_open": 0,
+          "x_forced_ru_first": null,
           "x_forced_ua_first": null,
           "tas": 0.0
         },
@@ -45213,7 +46283,7 @@
         }
       ],
       "summary": {
-        "n_models": 44,
+        "n_models": 51,
         "tas_mean": 0.0,
         "open_pct": 0.0,
         "forced_ru_pct": 0.0,
@@ -45232,7 +46302,7 @@
             "tas_mean": 0.0
           },
           "OpenAI GPT": {
-            "n": 7,
+            "n": 13,
             "open_pct": 0.0,
             "forced_pct": null,
             "tas_mean": 0.0
@@ -45244,7 +46314,7 @@
             "tas_mean": 0.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 0.0,
             "forced_pct": 0.0,
             "tas_mean": 0.0
@@ -45430,6 +46500,26 @@
           "tas": 1.0
         },
         {
+          "key": "gpt-5.1-2025-11",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-11",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5.2-2025-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "gpt-5.4-2026-03",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -45590,6 +46680,16 @@
           "tas": 1.0
         },
         {
+          "key": "llama4-scout",
+          "family": "Meta Llama",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.8
+        },
+        {
           "key": "mistral-large",
           "family": "Mistral",
           "tier": "frontier",
@@ -45625,6 +46725,46 @@
           "tier": "mid",
           "release_date": "2023-12",
           "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "o1-2024-12",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2024-12",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "o3-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-04",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "o3-mini-2025-01",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-01",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "o4-mini-2025-04",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-04",
+          "x_open": 1,
           "x_forced_ru_first": 1,
           "x_forced_ua_first": 1,
           "tas": 1.0
@@ -45711,11 +46851,11 @@
         }
       ],
       "summary": {
-        "n_models": 44,
-        "tas_mean": 86.9,
+        "n_models": 51,
+        "tas_mean": 88.4,
         "open_pct": 100.0,
-        "forced_ru_pct": 85.4,
-        "forced_ua_pct": 80.0,
+        "forced_ru_pct": 87.5,
+        "forced_ua_pct": 80.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -45730,10 +46870,10 @@
             "tas_mean": 85.0
           },
           "OpenAI GPT": {
-            "n": 7,
+            "n": 13,
             "open_pct": 100.0,
-            "forced_pct": 92.3,
-            "tas_mean": 97.1
+            "forced_pct": 96.0,
+            "tas_mean": 98.5
           },
           "xAI Grok": {
             "n": 3,
@@ -45742,10 +46882,10 @@
             "tas_mean": 100.0
           },
           "Meta Llama": {
-            "n": 10,
+            "n": 11,
             "open_pct": 100.0,
-            "forced_pct": 64.7,
-            "tas_mean": 73.3
+            "forced_pct": 63.2,
+            "tas_mean": 74.0
           },
           "Mistral": {
             "n": 4,
