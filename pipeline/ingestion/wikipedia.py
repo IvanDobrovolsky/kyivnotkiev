@@ -111,6 +111,45 @@ REDIRECT_PAIRS = {
         ("Kievan_Rus%27", "Kievan Rus'"),
         ("Kyivan_Rus%27", "Kyivan Rus'"),
     ],
+    # People — new pairs
+    62: [
+        ("Andriy_Shevchenko", "Andriy Shevchenko"),
+        ("Andrei_Shevchenko", "Andrei Shevchenko"),
+    ],
+    80: [
+        ("Nikolai_Gogol", "Nikolai Gogol"),
+        ("Mykola_Hohol", "Mykola Hohol"),
+    ],
+    83: [
+        ("Olga_of_Kiev", "Olga of Kiev"),
+        ("Olha_of_Kyiv", "Olha of Kyiv"),
+    ],
+    84: [
+        ("Igor_Sikorsky", "Igor Sikorsky"),
+        ("Ihor_Sikorsky", "Ihor Sikorsky"),
+    ],
+    85: [
+        ("Sergei_Korolev", "Sergei Korolev"),
+        ("Serhii_Korolyov", "Serhii Korolyov"),
+    ],
+    86: [
+        ("Bohdan_Khmelnytsky", "Bohdan Khmelnytsky"),
+        ("Bogdan_Khmelnitsky", "Bogdan Khmelnitsky"),
+    ],
+    87: [
+        ("Kazimir_Malevich", "Kazimir Malevich"),
+        ("Kazymyr_Malevych", "Kazymyr Malevych"),
+    ],
+    # Geographical — new
+    82: [
+        ("Feodosia", "Feodosia"),
+        ("Feodosiia", "Feodosiia"),
+    ],
+    # Landmarks — new
+    89: [
+        ("Sviatohirsk_Lavra", "Sviatohirsk Lavra"),
+        ("Sviatogorsk_Lavra", "Sviatogorsk Lavra"),
+    ],
 }
 
 

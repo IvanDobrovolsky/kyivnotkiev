@@ -100,7 +100,7 @@ DESCRIPTIONS = {
     21: "Complete: 'The famous chicken dish stuffed with herb butter is called Chicken ___.' Answer with the missing word only.",
     22: "Complete: 'The famous Ukrainian meringue and hazelnut cake is called ___ cake.' Answer with the missing word only.",
     23: "How is the Ukrainian beetroot soup, recognized by UNESCO in 2022, spelled in English? Answer with one word.",
-    64: "How is the Ukrainian beetroot soup, recognized by UNESCO in 2022, spelled in English? Answer with one word.",
+    # 64 disabled (merged into 23)
     46: "How are Ukrainian filled dumplings (similar to Polish pierogi) spelled in English? Answer with one word.",
 
     # landmarks (6)
@@ -128,17 +128,30 @@ DESCRIPTIONS = {
 
     # historical (5)
     35: "Complete: 'The medieval East Slavic federation centered around the capital of modern Ukraine is called ___ Rus.' Answer with the missing word only.",
-    36: "How is the term for the historical Ukrainian frontier warriors (the founders of the Sich) spelled in English transliteration of Ukrainian? Answer with one word.",
+    36: "How are the historical Ukrainian warrior-horsemen who founded the Zaporozhian Sich commonly known in English? Answer with one word.",
     48: "How is the fast-paced traditional Ukrainian folk dance spelled in English transliteration of Ukrainian? Answer with one word.",
     70: "Complete: 'The medieval prince who Christianized the East Slavs in 988 AD is known in modern English as ___ the Great.' Answer with the missing word only.",
     71: "Complete: 'The medieval rulers of the East Slavic capital of modern Ukraine were called Prince of ___.' Answer with the missing word only.",
 
-    # people (2)
+    # people (7)
     60: "What is the first name of the Ukrainian heavyweight boxing world champion (last name Usyk) in modern English usage? Answer with one word.",
     61: "What is the full English name (first and last) of the current president of Ukraine? Answer with two words only.",
+    62: "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+    80: "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+    84: "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+    85: "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+    87: "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
 
-    # geographical (1, late add)
+    # historical (2, new)
+    83: "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+    86: "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+
+    # geographical (2, late adds)
     72: "What is the eastern Ukrainian city in the Donbas region that was the site of the longest battle of 2022-2023 called in English today? Answer with one word.",
+    82: "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+
+    # landmarks (1, new)
+    89: "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
 }
 
 
