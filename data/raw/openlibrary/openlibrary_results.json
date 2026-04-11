@@ -18,7 +18,7 @@
     "year": 2012,
     "term": "Kiev",
     "variant": "russian",
-    "book_count": 117
+    "book_count": 118
   },
   {
     "pair_id": 1,
@@ -39,7 +39,7 @@
     "year": 2015,
     "term": "Kiev",
     "variant": "russian",
-    "book_count": 78
+    "book_count": 0
   },
   {
     "pair_id": 1,
@@ -53,7 +53,7 @@
     "year": 2017,
     "term": "Kiev",
     "variant": "russian",
-    "book_count": 68
+    "book_count": 69
   },
   {
     "pair_id": 1,
@@ -88,7 +88,7 @@
     "year": 2022,
     "term": "Kiev",
     "variant": "russian",
-    "book_count": 20
+    "book_count": 21
   },
   {
     "pair_id": 1,
@@ -151,7 +151,7 @@
     "year": 2015,
     "term": "Kyiv",
     "variant": "ukrainian",
-    "book_count": 42
+    "book_count": 43
   },
   {
     "pair_id": 1,
@@ -284,7 +284,7 @@
     "year": 2018,
     "term": "Kharkov",
     "variant": "russian",
-    "book_count": 1
+    "book_count": 2
   },
   {
     "pair_id": 2,
@@ -333,7 +333,7 @@
     "year": 2025,
     "term": "Kharkov",
     "variant": "russian",
-    "book_count": 1
+    "book_count": 0
   },
   {
     "pair_id": 2,
@@ -347,7 +347,7 @@
     "year": 2011,
     "term": "Kharkiv",
     "variant": "ukrainian",
-    "book_count": 26
+    "book_count": 0
   },
   {
     "pair_id": 2,
@@ -515,7 +515,7 @@
     "year": 2019,
     "term": "Odessa",
     "variant": "russian",
-    "book_count": 31
+    "book_count": 33
   },
   {
     "pair_id": 3,
@@ -823,7 +823,7 @@
     "year": 2015,
     "term": "Lviv",
     "variant": "ukrainian",
-    "book_count": 51
+    "book_count": 52
   },
   {
     "pair_id": 4,
@@ -858,7 +858,7 @@
     "year": 2020,
     "term": "Lviv",
     "variant": "ukrainian",
-    "book_count": 25
+    "book_count": 26
   },
   {
     "pair_id": 4,
@@ -2069,7 +2069,7 @@
     "year": 2017,
     "term": "Chernobyl",
     "variant": "russian",
-    "book_count": 29
+    "book_count": 30
   },
   {
     "pair_id": 10,
@@ -2466,224 +2466,224 @@
   {
     "pair_id": 15,
     "year": 2010,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
-    "book_count": 3
+    "book_count": 1
   },
   {
     "pair_id": 15,
     "year": 2011,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
-    "book_count": 9
+    "book_count": 1
   },
   {
     "pair_id": 15,
     "year": 2012,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
-    "book_count": 4
+    "book_count": 1
   },
   {
     "pair_id": 15,
     "year": 2013,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
-    "book_count": 5
+    "book_count": 1
   },
   {
     "pair_id": 15,
     "year": 2014,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
-    "book_count": 5
+    "book_count": 2
   },
   {
     "pair_id": 15,
     "year": 2015,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
     "book_count": 0
   },
   {
     "pair_id": 15,
     "year": 2016,
-    "term": "Dnieper",
-    "variant": "russian",
-    "book_count": 3
-  },
-  {
-    "pair_id": 15,
-    "year": 2017,
-    "term": "Dnieper",
-    "variant": "russian",
-    "book_count": 3
-  },
-  {
-    "pair_id": 15,
-    "year": 2018,
-    "term": "Dnieper",
-    "variant": "russian",
-    "book_count": 11
-  },
-  {
-    "pair_id": 15,
-    "year": 2019,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
     "book_count": 1
   },
   {
     "pair_id": 15,
+    "year": 2017,
+    "term": "Dnieper River",
+    "variant": "russian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 15,
+    "year": 2018,
+    "term": "Dnieper River",
+    "variant": "russian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 15,
+    "year": 2019,
+    "term": "Dnieper River",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 15,
     "year": 2020,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
     "book_count": 1
   },
   {
     "pair_id": 15,
     "year": 2021,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
     "book_count": 0
   },
   {
     "pair_id": 15,
     "year": 2022,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
-    "book_count": 1
+    "book_count": 0
   },
   {
     "pair_id": 15,
     "year": 2023,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
     "book_count": 1
   },
   {
     "pair_id": 15,
     "year": 2024,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
     "book_count": 0
   },
   {
     "pair_id": 15,
     "year": 2025,
-    "term": "Dnieper",
+    "term": "Dnieper River",
     "variant": "russian",
     "book_count": 0
   },
   {
     "pair_id": 15,
     "year": 2010,
-    "term": "Dnipro",
+    "term": "Dnipro River",
     "variant": "ukrainian",
-    "book_count": 6
+    "book_count": 0
   },
   {
     "pair_id": 15,
     "year": 2011,
-    "term": "Dnipro",
-    "variant": "ukrainian",
-    "book_count": 3
-  },
-  {
-    "pair_id": 15,
-    "year": 2012,
-    "term": "Dnipro",
-    "variant": "ukrainian",
-    "book_count": 6
-  },
-  {
-    "pair_id": 15,
-    "year": 2013,
-    "term": "Dnipro",
-    "variant": "ukrainian",
-    "book_count": 5
-  },
-  {
-    "pair_id": 15,
-    "year": 2014,
-    "term": "Dnipro",
-    "variant": "ukrainian",
-    "book_count": 3
-  },
-  {
-    "pair_id": 15,
-    "year": 2015,
-    "term": "Dnipro",
-    "variant": "ukrainian",
-    "book_count": 3
-  },
-  {
-    "pair_id": 15,
-    "year": 2016,
-    "term": "Dnipro",
-    "variant": "ukrainian",
-    "book_count": 6
-  },
-  {
-    "pair_id": 15,
-    "year": 2017,
-    "term": "Dnipro",
-    "variant": "ukrainian",
-    "book_count": 4
-  },
-  {
-    "pair_id": 15,
-    "year": 2018,
-    "term": "Dnipro",
-    "variant": "ukrainian",
-    "book_count": 7
-  },
-  {
-    "pair_id": 15,
-    "year": 2019,
-    "term": "Dnipro",
-    "variant": "ukrainian",
-    "book_count": 5
-  },
-  {
-    "pair_id": 15,
-    "year": 2020,
-    "term": "Dnipro",
-    "variant": "ukrainian",
-    "book_count": 2
-  },
-  {
-    "pair_id": 15,
-    "year": 2021,
-    "term": "Dnipro",
-    "variant": "ukrainian",
-    "book_count": 2
-  },
-  {
-    "pair_id": 15,
-    "year": 2022,
-    "term": "Dnipro",
+    "term": "Dnipro River",
     "variant": "ukrainian",
     "book_count": 1
   },
   {
     "pair_id": 15,
+    "year": 2012,
+    "term": "Dnipro River",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 15,
+    "year": 2013,
+    "term": "Dnipro River",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 15,
+    "year": 2014,
+    "term": "Dnipro River",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 15,
+    "year": 2015,
+    "term": "Dnipro River",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 15,
+    "year": 2016,
+    "term": "Dnipro River",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 15,
+    "year": 2017,
+    "term": "Dnipro River",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 15,
+    "year": 2018,
+    "term": "Dnipro River",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 15,
+    "year": 2019,
+    "term": "Dnipro River",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 15,
+    "year": 2020,
+    "term": "Dnipro River",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 15,
+    "year": 2021,
+    "term": "Dnipro River",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 15,
+    "year": 2022,
+    "term": "Dnipro River",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 15,
     "year": 2023,
-    "term": "Dnipro",
+    "term": "Dnipro River",
     "variant": "ukrainian",
     "book_count": 2
   },
   {
     "pair_id": 15,
     "year": 2024,
-    "term": "Dnipro",
+    "term": "Dnipro River",
     "variant": "ukrainian",
     "book_count": 0
   },
   {
     "pair_id": 15,
     "year": 2025,
-    "term": "Dnipro",
+    "term": "Dnipro River",
     "variant": "ukrainian",
     "book_count": 0
   },
@@ -3063,7 +3063,7 @@
     "year": 2015,
     "term": "Donbas",
     "variant": "ukrainian",
-    "book_count": 6
+    "book_count": 5
   },
   {
     "pair_id": 17,
@@ -3924,7 +3924,7 @@
     "year": 2010,
     "term": "Chernivtsi",
     "variant": "ukrainian",
-    "book_count": 0
+    "book_count": 14
   },
   {
     "pair_id": 39,
@@ -5826,450 +5826,226 @@
   {
     "pair_id": 23,
     "year": 2010,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 2
-  },
-  {
-    "pair_id": 23,
-    "year": 2011,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2012,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 2
-  },
-  {
-    "pair_id": 23,
-    "year": 2013,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 23,
-    "year": 2014,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2015,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2016,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2017,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2018,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2019,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2020,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2021,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 4
-  },
-  {
-    "pair_id": 23,
-    "year": 2022,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 2
-  },
-  {
-    "pair_id": 23,
-    "year": 2023,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2024,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 2
-  },
-  {
-    "pair_id": 23,
-    "year": 2025,
-    "term": "Borscht",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 23,
-    "year": 2010,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2011,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 23,
-    "year": 2012,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2013,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2014,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2015,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2016,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2017,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 23,
-    "year": 2018,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2019,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 23,
-    "year": 2020,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 23,
-    "year": 2021,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 23,
-    "year": 2022,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 23,
-    "year": 2023,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 23,
-    "year": 2024,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 23,
-    "year": 2025,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 1
-  },
-  {
-    "pair_id": 64,
-    "year": 2010,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 10
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2011,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 3
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2012,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 5
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2013,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 8
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2014,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 4
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2015,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 3
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2016,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 10
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2017,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 5
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2018,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 6
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2019,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 16
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2020,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 3
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2021,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 3
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2022,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 3
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2023,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 3
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2024,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 1
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2025,
     "term": "Borsch",
     "variant": "russian",
     "book_count": 1
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2010,
-    "term": "Borshch",
+    "term": "Borscht",
     "variant": "ukrainian",
-    "book_count": 1
+    "book_count": 2
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2011,
-    "term": "Borshch",
+    "term": "Borscht",
     "variant": "ukrainian",
-    "book_count": 0
+    "book_count": 1
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2012,
-    "term": "Borshch",
+    "term": "Borscht",
     "variant": "ukrainian",
-    "book_count": 1
+    "book_count": 2
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2013,
-    "term": "Borshch",
+    "term": "Borscht",
     "variant": "ukrainian",
-    "book_count": 1
+    "book_count": 0
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2014,
-    "term": "Borshch",
+    "term": "Borscht",
     "variant": "ukrainian",
     "book_count": 1
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2015,
-    "term": "Borshch",
+    "term": "Borscht",
     "variant": "ukrainian",
     "book_count": 1
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2016,
-    "term": "Borshch",
+    "term": "Borscht",
     "variant": "ukrainian",
     "book_count": 1
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2017,
-    "term": "Borshch",
+    "term": "Borscht",
     "variant": "ukrainian",
-    "book_count": 0
+    "book_count": 1
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2018,
-    "term": "Borshch",
+    "term": "Borscht",
     "variant": "ukrainian",
     "book_count": 1
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2019,
-    "term": "Borshch",
+    "term": "Borscht",
     "variant": "ukrainian",
     "book_count": 1
   },
   {
-    "pair_id": 64,
+    "pair_id": 23,
     "year": 2020,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 64,
-    "year": 2021,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 64,
-    "year": 2022,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 64,
-    "year": 2023,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 64,
-    "year": 2024,
-    "term": "Borshch",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 64,
-    "year": 2025,
-    "term": "Borshch",
+    "term": "Borscht",
     "variant": "ukrainian",
     "book_count": 1
+  },
+  {
+    "pair_id": 23,
+    "year": 2021,
+    "term": "Borscht",
+    "variant": "ukrainian",
+    "book_count": 4
+  },
+  {
+    "pair_id": 23,
+    "year": 2022,
+    "term": "Borscht",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 23,
+    "year": 2023,
+    "term": "Borscht",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 23,
+    "year": 2024,
+    "term": "Borscht",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 23,
+    "year": 2025,
+    "term": "Borscht",
+    "variant": "ukrainian",
+    "book_count": 0
   },
   {
     "pair_id": 46,
@@ -7928,7 +7704,7 @@
     "year": 2022,
     "term": "Kiev National University",
     "variant": "russian",
-    "book_count": 0
+    "book_count": 1
   },
   {
     "pair_id": 28,
@@ -9632,230 +9408,6 @@
     "book_count": 0
   },
   {
-    "pair_id": 51,
-    "year": 2010,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2011,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2012,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2013,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2014,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2015,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2016,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2017,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2018,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2019,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2020,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2021,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2022,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2023,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2024,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2025,
-    "term": "Zorya Lugansk",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2010,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2011,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2012,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2013,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2014,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2015,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2016,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2017,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2018,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2019,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2020,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2021,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2022,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2023,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2024,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 51,
-    "year": 2025,
-    "term": "Zorya Luhansk",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
     "pair_id": 52,
     "year": 2010,
     "term": "Metalist Kharkov",
@@ -10076,230 +9628,6 @@
     "pair_id": 52,
     "year": 2025,
     "term": "Metalist Kharkiv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2010,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2011,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2012,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2013,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2014,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2015,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2016,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2017,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2018,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2019,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2020,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2021,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2022,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2023,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2024,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2025,
-    "term": "Karpaty Lvov",
-    "variant": "russian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2010,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2011,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2012,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2013,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2014,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2015,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2016,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2017,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2018,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2019,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2020,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2021,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2022,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2023,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2024,
-    "term": "Karpaty Lviv",
-    "variant": "ukrainian",
-    "book_count": 0
-  },
-  {
-    "pair_id": 53,
-    "year": 2025,
-    "term": "Karpaty Lviv",
     "variant": "ukrainian",
     "book_count": 0
   },
@@ -10642,114 +9970,114 @@
   {
     "pair_id": 36,
     "year": 2010,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 29
+    "book_count": 88
   },
   {
     "pair_id": 36,
     "year": 2011,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 37
+    "book_count": 68
   },
   {
     "pair_id": 36,
     "year": 2012,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 33
+    "book_count": 96
   },
   {
     "pair_id": 36,
     "year": 2013,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 45
+    "book_count": 60
   },
   {
     "pair_id": 36,
     "year": 2014,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 32
+    "book_count": 71
   },
   {
     "pair_id": 36,
     "year": 2015,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 33
+    "book_count": 47
   },
   {
     "pair_id": 36,
     "year": 2016,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 36
+    "book_count": 52
   },
   {
     "pair_id": 36,
     "year": 2017,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 31
+    "book_count": 56
   },
   {
     "pair_id": 36,
     "year": 2018,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 24
+    "book_count": 60
   },
   {
     "pair_id": 36,
     "year": 2019,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 26
+    "book_count": 35
   },
   {
     "pair_id": 36,
     "year": 2020,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 18
+    "book_count": 35
   },
   {
     "pair_id": 36,
     "year": 2021,
-    "term": "Kozak",
+    "term": "Cossack",
+    "variant": "ukrainian",
+    "book_count": 38
+  },
+  {
+    "pair_id": 36,
+    "year": 2022,
+    "term": "Cossack",
     "variant": "ukrainian",
     "book_count": 11
   },
   {
     "pair_id": 36,
-    "year": 2022,
-    "term": "Kozak",
-    "variant": "ukrainian",
-    "book_count": 12
-  },
-  {
-    "pair_id": 36,
     "year": 2023,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 20
+    "book_count": 7
   },
   {
     "pair_id": 36,
     "year": 2024,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 8
+    "book_count": 3
   },
   {
     "pair_id": 36,
     "year": 2025,
-    "term": "Kozak",
+    "term": "Cossack",
     "variant": "ukrainian",
-    "book_count": 4
+    "book_count": 1
   },
   {
     "pair_id": 48,
@@ -11029,7 +10357,7 @@
     "year": 2017,
     "term": "Vladimir the Great",
     "variant": "russian",
-    "book_count": 3
+    "book_count": 5
   },
   {
     "pair_id": 70,
@@ -11868,6 +11196,2022 @@
     "pair_id": 61,
     "year": 2025,
     "term": "Volodymyr Zelenskyy",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2010,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2011,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2012,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2013,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2014,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 62,
+    "year": 2015,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2016,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2017,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2018,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2019,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2020,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2021,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2022,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2023,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2024,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2025,
+    "term": "Andrey Shevchenko",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2010,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 62,
+    "year": 2011,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2012,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 62,
+    "year": 2013,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 62,
+    "year": 2014,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 62,
+    "year": 2015,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 62,
+    "year": 2016,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2017,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2018,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2019,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2020,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2021,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2022,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2023,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 62,
+    "year": 2024,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 62,
+    "year": 2025,
+    "term": "Andrii Shevchenko",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 80,
+    "year": 2010,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 43
+  },
+  {
+    "pair_id": 80,
+    "year": 2011,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 40
+  },
+  {
+    "pair_id": 80,
+    "year": 2012,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 41
+  },
+  {
+    "pair_id": 80,
+    "year": 2013,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 35
+  },
+  {
+    "pair_id": 80,
+    "year": 2014,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 59
+  },
+  {
+    "pair_id": 80,
+    "year": 2015,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 53
+  },
+  {
+    "pair_id": 80,
+    "year": 2016,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 78
+  },
+  {
+    "pair_id": 80,
+    "year": 2017,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 100
+  },
+  {
+    "pair_id": 80,
+    "year": 2018,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 71
+  },
+  {
+    "pair_id": 80,
+    "year": 2019,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 48
+  },
+  {
+    "pair_id": 80,
+    "year": 2020,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 82
+  },
+  {
+    "pair_id": 80,
+    "year": 2021,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 107
+  },
+  {
+    "pair_id": 80,
+    "year": 2022,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 32
+  },
+  {
+    "pair_id": 80,
+    "year": 2023,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 5
+  },
+  {
+    "pair_id": 80,
+    "year": 2024,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 5
+  },
+  {
+    "pair_id": 80,
+    "year": 2025,
+    "term": "Nikolai Gogol",
+    "variant": "russian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 80,
+    "year": 2010,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 80,
+    "year": 2011,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 80,
+    "year": 2012,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 80,
+    "year": 2013,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 80,
+    "year": 2014,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 80,
+    "year": 2015,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 80,
+    "year": 2016,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 80,
+    "year": 2017,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 80,
+    "year": 2018,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 80,
+    "year": 2019,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 80,
+    "year": 2020,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 80,
+    "year": 2021,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 80,
+    "year": 2022,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 80,
+    "year": 2023,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 80,
+    "year": 2024,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 80,
+    "year": 2025,
+    "term": "Mykola Hohol",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2010,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2011,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2012,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2013,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2014,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2015,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2016,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2017,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 82,
+    "year": 2018,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2019,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 82,
+    "year": 2020,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2021,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2022,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2023,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2024,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2025,
+    "term": "Feodosiya",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2010,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 3
+  },
+  {
+    "pair_id": 82,
+    "year": 2011,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 4
+  },
+  {
+    "pair_id": 82,
+    "year": 2012,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 82,
+    "year": 2013,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 82,
+    "year": 2014,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 82,
+    "year": 2015,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 82,
+    "year": 2016,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 82,
+    "year": 2017,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 82,
+    "year": 2018,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 4
+  },
+  {
+    "pair_id": 82,
+    "year": 2019,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2020,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 82,
+    "year": 2021,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 82,
+    "year": 2022,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2023,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2024,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 82,
+    "year": 2025,
+    "term": "Feodosiia",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2010,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2011,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 83,
+    "year": 2012,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2013,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2014,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 83,
+    "year": 2015,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2016,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2017,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 83,
+    "year": 2018,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 83,
+    "year": 2019,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2020,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2021,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2022,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2023,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2024,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2025,
+    "term": "Olga of Kiev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2010,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2011,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2012,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2013,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2014,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2015,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2016,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2017,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 83,
+    "year": 2018,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2019,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2020,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2021,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2022,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 83,
+    "year": 2023,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 83,
+    "year": 2024,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 83,
+    "year": 2025,
+    "term": "Olha of Kyiv",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2010,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 4
+  },
+  {
+    "pair_id": 84,
+    "year": 2011,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2012,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 84,
+    "year": 2013,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2014,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 4
+  },
+  {
+    "pair_id": 84,
+    "year": 2015,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 84,
+    "year": 2016,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2017,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2018,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 84,
+    "year": 2019,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2020,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2021,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 84,
+    "year": 2022,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 84,
+    "year": 2023,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2024,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 84,
+    "year": 2025,
+    "term": "Igor Sikorsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2010,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2011,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2012,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2013,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2014,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 84,
+    "year": 2015,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2016,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2017,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2018,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2019,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2020,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2021,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2022,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2023,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2024,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 84,
+    "year": 2025,
+    "term": "Ihor Sikorsky",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2010,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 85,
+    "year": 2011,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 3
+  },
+  {
+    "pair_id": 85,
+    "year": 2012,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 85,
+    "year": 2013,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 85,
+    "year": 2014,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2015,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2016,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2017,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 3
+  },
+  {
+    "pair_id": 85,
+    "year": 2018,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2019,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2020,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2021,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2022,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2023,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2024,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2025,
+    "term": "Sergei Korolev",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2010,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2011,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2012,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2013,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2014,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2015,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2016,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2017,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2018,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2019,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2020,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2021,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2022,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2023,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2024,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 85,
+    "year": 2025,
+    "term": "Serhii Korolyov",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2010,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2011,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2012,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2013,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2014,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2015,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2016,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2017,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2018,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2019,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2020,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2021,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2022,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2023,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2024,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2025,
+    "term": "Bogdan Khmelnitsky",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2010,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 3
+  },
+  {
+    "pair_id": 86,
+    "year": 2011,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 86,
+    "year": 2012,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 86,
+    "year": 2013,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 4
+  },
+  {
+    "pair_id": 86,
+    "year": 2014,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2015,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 86,
+    "year": 2016,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 86,
+    "year": 2017,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 3
+  },
+  {
+    "pair_id": 86,
+    "year": 2018,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 86,
+    "year": 2019,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 86,
+    "year": 2020,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2021,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 86,
+    "year": 2022,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2023,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2024,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 86,
+    "year": 2025,
+    "term": "Bohdan Khmelnytskyi",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2010,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 3
+  },
+  {
+    "pair_id": 87,
+    "year": 2011,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 7
+  },
+  {
+    "pair_id": 87,
+    "year": 2012,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 4
+  },
+  {
+    "pair_id": 87,
+    "year": 2013,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 8
+  },
+  {
+    "pair_id": 87,
+    "year": 2014,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 11
+  },
+  {
+    "pair_id": 87,
+    "year": 2015,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 7
+  },
+  {
+    "pair_id": 87,
+    "year": 2016,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 4
+  },
+  {
+    "pair_id": 87,
+    "year": 2017,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 6
+  },
+  {
+    "pair_id": 87,
+    "year": 2018,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 11
+  },
+  {
+    "pair_id": 87,
+    "year": 2019,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 10
+  },
+  {
+    "pair_id": 87,
+    "year": 2020,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 4
+  },
+  {
+    "pair_id": 87,
+    "year": 2021,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 7
+  },
+  {
+    "pair_id": 87,
+    "year": 2022,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 87,
+    "year": 2023,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2024,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2025,
+    "term": "Kazimir Malevich",
+    "variant": "russian",
+    "book_count": 2
+  },
+  {
+    "pair_id": 87,
+    "year": 2010,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2011,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2012,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2013,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2014,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2015,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2016,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 87,
+    "year": 2017,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 87,
+    "year": 2018,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2019,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 1
+  },
+  {
+    "pair_id": 87,
+    "year": 2020,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2021,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2022,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2023,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2024,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 87,
+    "year": 2025,
+    "term": "Kazymyr Malevych",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2010,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2011,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2012,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2013,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2014,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2015,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2016,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2017,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2018,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2019,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2020,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2021,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2022,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2023,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2024,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2025,
+    "term": "Sviatogorsk Lavra",
+    "variant": "russian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2010,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2011,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2012,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2013,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2014,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2015,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2016,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2017,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2018,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2019,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2020,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2021,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2022,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2023,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2024,
+    "term": "Sviatohirsk Lavra",
+    "variant": "ukrainian",
+    "book_count": 0
+  },
+  {
+    "pair_id": 89,
+    "year": 2025,
+    "term": "Sviatohirsk Lavra",
     "variant": "ukrainian",
     "book_count": 0
   },

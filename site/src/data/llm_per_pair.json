@@ -1,5 +1,5 @@
 {
-  "n_pairs": 54,
+  "n_pairs": 63,
   "n_models": 71,
   "families": {
     "Alibaba Qwen": {
@@ -41828,6 +41828,1516 @@
             "open_pct": 100.0,
             "forced_pct": 75.0,
             "tas_mean": 86.2
+          }
+        }
+      }
+    },
+    "62": {
+      "russian": "Andrey Shevchenko",
+      "ukrainian": "Andrii Shevchenko",
+      "category": "people",
+      "models": [
+        {
+          "key": "claude-opus-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "claude-sonnet-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": null,
+          "tas": 1.0
+        },
+        {
+          "key": "gemini-2.5-flash-lite",
+          "family": "Google Gemini",
+          "tier": "small",
+          "release_date": "2025-07",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-2.5-flash",
+          "family": "Google Gemini",
+          "tier": "frontier",
+          "release_date": "2025-06",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-2.5-pro",
+          "family": "Google Gemini",
+          "tier": "frontier",
+          "release_date": "2025-06",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-3-flash-preview",
+          "family": "Google Gemini",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-3-pro-preview",
+          "family": "Google Gemini",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-3.1-flash-lite",
+          "family": "Google Gemini",
+          "tier": "small",
+          "release_date": "2026-01",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-3.1-pro",
+          "family": "Google Gemini",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3-12b-api",
+          "family": "Google Gemma",
+          "tier": "mid",
+          "release_date": "2025-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3-1b-api",
+          "family": "Google Gemma",
+          "tier": "tiny",
+          "release_date": "2025-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3-27b-api",
+          "family": "Google Gemma",
+          "tier": "mid",
+          "release_date": "2025-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3-4b-api",
+          "family": "Google Gemma",
+          "tier": "small",
+          "release_date": "2025-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3n-e2b-api",
+          "family": "Google Gemma",
+          "tier": "tiny",
+          "release_date": "2025-06",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3n-e4b-api",
+          "family": "Google Gemma",
+          "tier": "small",
+          "release_date": "2025-06",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-4-26b-api",
+          "family": "Google Gemma",
+          "tier": "mid",
+          "release_date": "2026-04",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-4-31b-api",
+          "family": "Google Gemma",
+          "tier": "mid",
+          "release_date": "2026-04",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-4o-mini-2024-07",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2024-07",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-08",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5-mini-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-08",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5-nano-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2025-08",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5.4-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5.4-mini-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 1,
+          "tas": 0.5
+        },
+        {
+          "key": "gpt-5.4-nano-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "grok-3",
+          "family": "xAI Grok",
+          "tier": "frontier",
+          "release_date": "2025-02",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        }
+      ],
+      "summary": {
+        "n_models": 25,
+        "tas_mean": 87.5,
+        "open_pct": null,
+        "forced_ru_pct": 75.0,
+        "forced_ua_pct": 100.0,
+        "by_family": {
+          "Anthropic Claude": {
+            "n": 2,
+            "open_pct": null,
+            "forced_pct": 100.0,
+            "tas_mean": 100.0
+          },
+          "Google Gemini": {
+            "n": 7,
+            "open_pct": null,
+            "forced_pct": null,
+            "tas_mean": null
+          },
+          "Google Gemma": {
+            "n": 8,
+            "open_pct": null,
+            "forced_pct": null,
+            "tas_mean": null
+          },
+          "OpenAI GPT": {
+            "n": 7,
+            "open_pct": null,
+            "forced_pct": 83.3,
+            "tas_mean": 83.3
+          },
+          "xAI Grok": {
+            "n": 1,
+            "open_pct": null,
+            "forced_pct": null,
+            "tas_mean": null
+          }
+        }
+      }
+    },
+    "80": {
+      "russian": "Nikolai Gogol",
+      "ukrainian": "Mykola Hohol",
+      "category": "people",
+      "models": [
+        {
+          "key": "claude-opus-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "claude-sonnet-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gemini-2.5-flash-lite",
+          "family": "Google Gemini",
+          "tier": "small",
+          "release_date": "2025-07",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-2.5-flash",
+          "family": "Google Gemini",
+          "tier": "frontier",
+          "release_date": "2025-06",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-2.5-pro",
+          "family": "Google Gemini",
+          "tier": "frontier",
+          "release_date": "2025-06",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-3-flash-preview",
+          "family": "Google Gemini",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-3-pro-preview",
+          "family": "Google Gemini",
+          "tier": "frontier",
+          "release_date": "2025-12",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-3.1-flash-lite",
+          "family": "Google Gemini",
+          "tier": "small",
+          "release_date": "2026-01",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemini-3.1-pro",
+          "family": "Google Gemini",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3-12b-api",
+          "family": "Google Gemma",
+          "tier": "mid",
+          "release_date": "2025-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3-1b-api",
+          "family": "Google Gemma",
+          "tier": "tiny",
+          "release_date": "2025-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3-27b-api",
+          "family": "Google Gemma",
+          "tier": "mid",
+          "release_date": "2025-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3-4b-api",
+          "family": "Google Gemma",
+          "tier": "small",
+          "release_date": "2025-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3n-e2b-api",
+          "family": "Google Gemma",
+          "tier": "tiny",
+          "release_date": "2025-06",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-3n-e4b-api",
+          "family": "Google Gemma",
+          "tier": "small",
+          "release_date": "2025-06",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-4-26b-api",
+          "family": "Google Gemma",
+          "tier": "mid",
+          "release_date": "2026-04",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gemma-4-31b-api",
+          "family": "Google Gemma",
+          "tier": "mid",
+          "release_date": "2026-04",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-4o-mini-2024-07",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2024-07",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-mini-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-nano-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-mini-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-nano-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": 1,
+          "tas": 0.4
+        },
+        {
+          "key": "grok-3",
+          "family": "xAI Grok",
+          "tier": "frontier",
+          "release_date": "2025-02",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        }
+      ],
+      "summary": {
+        "n_models": 25,
+        "tas_mean": 4.0,
+        "open_pct": 0.0,
+        "forced_ru_pct": null,
+        "forced_ua_pct": 100.0,
+        "by_family": {
+          "Anthropic Claude": {
+            "n": 2,
+            "open_pct": 0.0,
+            "forced_pct": null,
+            "tas_mean": 0.0
+          },
+          "Google Gemini": {
+            "n": 7,
+            "open_pct": null,
+            "forced_pct": null,
+            "tas_mean": null
+          },
+          "Google Gemma": {
+            "n": 8,
+            "open_pct": null,
+            "forced_pct": null,
+            "tas_mean": null
+          },
+          "OpenAI GPT": {
+            "n": 7,
+            "open_pct": 0.0,
+            "forced_pct": 100.0,
+            "tas_mean": 5.7
+          },
+          "xAI Grok": {
+            "n": 1,
+            "open_pct": 0.0,
+            "forced_pct": null,
+            "tas_mean": 0.0
+          }
+        }
+      }
+    },
+    "82": {
+      "russian": "Feodosiya",
+      "ukrainian": "Feodosiia",
+      "category": "geographical",
+      "models": [
+        {
+          "key": "claude-opus-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.5
+        },
+        {
+          "key": "claude-sonnet-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.5
+        },
+        {
+          "key": "gpt-4o-mini-2024-07",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2024-07",
+          "x_open": null,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-08",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5-mini-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-08",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5-nano-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2025-08",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5.4-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 1,
+          "tas": 0.5
+        },
+        {
+          "key": "gpt-5.4-mini-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-nano-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 1,
+          "tas": 0.5
+        },
+        {
+          "key": "grok-3",
+          "family": "xAI Grok",
+          "tier": "frontier",
+          "release_date": "2025-02",
+          "x_open": null,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        }
+      ],
+      "summary": {
+        "n_models": 10,
+        "tas_mean": 44.4,
+        "open_pct": null,
+        "forced_ru_pct": 44.4,
+        "forced_ua_pct": 44.4,
+        "by_family": {
+          "Anthropic Claude": {
+            "n": 2,
+            "open_pct": null,
+            "forced_pct": 50.0,
+            "tas_mean": 50.0
+          },
+          "OpenAI GPT": {
+            "n": 7,
+            "open_pct": null,
+            "forced_pct": 50.0,
+            "tas_mean": 50.0
+          },
+          "xAI Grok": {
+            "n": 1,
+            "open_pct": null,
+            "forced_pct": 0.0,
+            "tas_mean": 0.0
+          }
+        }
+      }
+    },
+    "83": {
+      "russian": "Olga of Kiev",
+      "ukrainian": "Olha of Kyiv",
+      "category": "historical",
+      "models": [
+        {
+          "key": "claude-opus-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "claude-sonnet-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-4o-mini-2024-07",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2024-07",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-mini-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-nano-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5.4-mini-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5.4-nano-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "grok-3",
+          "family": "xAI Grok",
+          "tier": "frontier",
+          "release_date": "2025-02",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        }
+      ],
+      "summary": {
+        "n_models": 10,
+        "tas_mean": 0.0,
+        "open_pct": 0.0,
+        "forced_ru_pct": null,
+        "forced_ua_pct": null,
+        "by_family": {
+          "Anthropic Claude": {
+            "n": 2,
+            "open_pct": null,
+            "forced_pct": null,
+            "tas_mean": null
+          },
+          "OpenAI GPT": {
+            "n": 7,
+            "open_pct": 0.0,
+            "forced_pct": null,
+            "tas_mean": 0.0
+          },
+          "xAI Grok": {
+            "n": 1,
+            "open_pct": null,
+            "forced_pct": null,
+            "tas_mean": null
+          }
+        }
+      }
+    },
+    "84": {
+      "russian": "Igor Sikorsky",
+      "ukrainian": "Ihor Sikorsky",
+      "category": "people",
+      "models": [
+        {
+          "key": "claude-opus-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "claude-sonnet-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
+          "key": "gpt-4o-mini-2024-07",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2024-07",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-mini-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-nano-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 1,
+          "tas": 0.2
+        },
+        {
+          "key": "gpt-5.4-mini-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
+          "key": "gpt-5.4-nano-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
+          "key": "grok-3",
+          "family": "xAI Grok",
+          "tier": "frontier",
+          "release_date": "2025-02",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        }
+      ],
+      "summary": {
+        "n_models": 10,
+        "tas_mean": 6.0,
+        "open_pct": 0.0,
+        "forced_ru_pct": 20.0,
+        "forced_ua_pct": 11.1,
+        "by_family": {
+          "Anthropic Claude": {
+            "n": 2,
+            "open_pct": 0.0,
+            "forced_pct": 33.3,
+            "tas_mean": 10.0
+          },
+          "OpenAI GPT": {
+            "n": 7,
+            "open_pct": 0.0,
+            "forced_pct": 14.3,
+            "tas_mean": 5.7
+          },
+          "xAI Grok": {
+            "n": 1,
+            "open_pct": 0.0,
+            "forced_pct": 0.0,
+            "tas_mean": 0.0
+          }
+        }
+      }
+    },
+    "85": {
+      "russian": "Sergei Korolev",
+      "ukrainian": "Serhii Korolyov",
+      "category": "people",
+      "models": [
+        {
+          "key": "claude-opus-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "claude-sonnet-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-4o-mini-2024-07",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2024-07",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-mini-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-nano-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-mini-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-nano-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "grok-3",
+          "family": "xAI Grok",
+          "tier": "frontier",
+          "release_date": "2025-02",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        }
+      ],
+      "summary": {
+        "n_models": 10,
+        "tas_mean": 0.0,
+        "open_pct": 0.0,
+        "forced_ru_pct": null,
+        "forced_ua_pct": null,
+        "by_family": {
+          "Anthropic Claude": {
+            "n": 2,
+            "open_pct": 0.0,
+            "forced_pct": null,
+            "tas_mean": 0.0
+          },
+          "OpenAI GPT": {
+            "n": 7,
+            "open_pct": 0.0,
+            "forced_pct": null,
+            "tas_mean": 0.0
+          },
+          "xAI Grok": {
+            "n": 1,
+            "open_pct": 0.0,
+            "forced_pct": null,
+            "tas_mean": 0.0
+          }
+        }
+      }
+    },
+    "86": {
+      "russian": "Bogdan Khmelnitsky",
+      "ukrainian": "Bohdan Khmelnytskyi",
+      "category": "historical",
+      "models": [
+        {
+          "key": "claude-opus-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "claude-sonnet-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-4o-mini-2024-07",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2024-07",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-08",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5-mini-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-08",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5-nano-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2025-08",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5.4-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5.4-mini-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "gpt-5.4-nano-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2026-03",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
+          "key": "grok-3",
+          "family": "xAI Grok",
+          "tier": "frontier",
+          "release_date": "2025-02",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        }
+      ],
+      "summary": {
+        "n_models": 10,
+        "tas_mean": 100.0,
+        "open_pct": null,
+        "forced_ru_pct": null,
+        "forced_ua_pct": 100.0,
+        "by_family": {
+          "Anthropic Claude": {
+            "n": 2,
+            "open_pct": null,
+            "forced_pct": null,
+            "tas_mean": null
+          },
+          "OpenAI GPT": {
+            "n": 7,
+            "open_pct": null,
+            "forced_pct": 100.0,
+            "tas_mean": 100.0
+          },
+          "xAI Grok": {
+            "n": 1,
+            "open_pct": null,
+            "forced_pct": null,
+            "tas_mean": null
+          }
+        }
+      }
+    },
+    "87": {
+      "russian": "Kazimir Malevich",
+      "ukrainian": "Kazymyr Malevych",
+      "category": "people",
+      "models": [
+        {
+          "key": "claude-opus-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-4o-mini-2024-07",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2024-07",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-mini-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5-nano-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2025-08",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-mini-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "gpt-5.4-nano-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2026-03",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
+          "key": "grok-3",
+          "family": "xAI Grok",
+          "tier": "frontier",
+          "release_date": "2025-02",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        }
+      ],
+      "summary": {
+        "n_models": 9,
+        "tas_mean": 0.0,
+        "open_pct": 0.0,
+        "forced_ru_pct": null,
+        "forced_ua_pct": null,
+        "by_family": {
+          "Anthropic Claude": {
+            "n": 1,
+            "open_pct": 0.0,
+            "forced_pct": null,
+            "tas_mean": 0.0
+          },
+          "OpenAI GPT": {
+            "n": 7,
+            "open_pct": 0.0,
+            "forced_pct": null,
+            "tas_mean": 0.0
+          },
+          "xAI Grok": {
+            "n": 1,
+            "open_pct": 0.0,
+            "forced_pct": null,
+            "tas_mean": 0.0
+          }
+        }
+      }
+    },
+    "89": {
+      "russian": "Sviatogorsk Lavra",
+      "ukrainian": "Sviatohirsk Lavra",
+      "category": "landmarks",
+      "models": [
+        {
+          "key": "claude-opus-4-6",
+          "family": "Anthropic Claude",
+          "tier": "frontier",
+          "release_date": "2026-02",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-4o-mini-2024-07",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2024-07",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2025-08",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5-mini-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2025-08",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5-nano-2025-08",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2025-08",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5.4-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "frontier",
+          "release_date": "2026-03",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5.4-mini-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "small",
+          "release_date": "2026-03",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
+          "key": "gpt-5.4-nano-2026-03",
+          "family": "OpenAI GPT",
+          "tier": "tiny",
+          "release_date": "2026-03",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.8
+        },
+        {
+          "key": "grok-3",
+          "family": "xAI Grok",
+          "tier": "frontier",
+          "release_date": "2025-02",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        }
+      ],
+      "summary": {
+        "n_models": 9,
+        "tas_mean": 97.8,
+        "open_pct": 100.0,
+        "forced_ru_pct": 100.0,
+        "forced_ua_pct": 88.9,
+        "by_family": {
+          "Anthropic Claude": {
+            "n": 1,
+            "open_pct": 100.0,
+            "forced_pct": 100.0,
+            "tas_mean": 100.0
+          },
+          "OpenAI GPT": {
+            "n": 7,
+            "open_pct": 100.0,
+            "forced_pct": 92.3,
+            "tas_mean": 97.1
+          },
+          "xAI Grok": {
+            "n": 1,
+            "open_pct": 100.0,
+            "forced_pct": 100.0,
+            "tas_mean": 100.0
           }
         }
       }

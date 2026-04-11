@@ -244,16 +244,16 @@
       "family": "OpenAI GPT",
       "tier": "small",
       "release_date": "2024-07",
-      "tas": 83.3,
-      "open": 68.4,
-      "forced_ru_first": 96.2,
-      "forced_ua_first": 86.8,
-      "forced": 91.5,
-      "gap": 23.1,
-      "ci": 0.954,
-      "position_bias": 45.3,
+      "tas": 76.7,
+      "open": 62.8,
+      "forced_ru_first": 92.9,
+      "forced_ua_first": 83.9,
+      "forced": 88.4,
+      "gap": 25.6,
+      "ci": 0.956,
+      "position_bias": 45.5,
       "consistency_pct": null,
-      "other_rate": 11.1
+      "other_rate": 18.0
     },
     {
       "key": "qwen2.5-14b",
@@ -482,16 +482,16 @@
       "family": "xAI Grok",
       "tier": "frontier",
       "release_date": "2025-02",
-      "tas": 80.4,
-      "open": 74.4,
-      "forced_ru_first": 86.8,
-      "forced_ua_first": 81.1,
-      "forced": 83.9,
-      "gap": 9.5,
-      "ci": 0.966,
-      "position_bias": 47.2,
+      "tas": 74.0,
+      "open": 68.8,
+      "forced_ru_first": 83.9,
+      "forced_ua_first": 78.6,
+      "forced": 81.2,
+      "gap": 12.4,
+      "ci": 0.968,
+      "position_bias": 47.3,
       "consistency_pct": null,
-      "other_rate": 8.0
+      "other_rate": 15.3
     },
     {
       "key": "grok-3-mini",
@@ -525,7 +525,7 @@
       "ci": 0.93,
       "position_bias": 42.0,
       "consistency_pct": null,
-      "other_rate": 13.6
+      "other_rate": 16.7
     },
     {
       "key": "gemma-3-1b-api",
@@ -542,7 +542,7 @@
       "ci": 0.876,
       "position_bias": 46.5,
       "consistency_pct": null,
-      "other_rate": 30.9
+      "other_rate": 33.3
     },
     {
       "key": "gemma-3-27b-api",
@@ -559,7 +559,7 @@
       "ci": 0.952,
       "position_bias": 46.1,
       "consistency_pct": null,
-      "other_rate": 12.3
+      "other_rate": 15.5
     },
     {
       "key": "gemma-3-4b-api",
@@ -576,7 +576,7 @@
       "ci": 0.897,
       "position_bias": 34.8,
       "consistency_pct": null,
-      "other_rate": 20.4
+      "other_rate": 23.2
     },
     {
       "key": "gemma3-12b",
@@ -712,7 +712,7 @@
       "ci": 0.958,
       "position_bias": 47.2,
       "consistency_pct": null,
-      "other_rate": 6.8
+      "other_rate": 10.1
     },
     {
       "key": "gemini-2.5-pro",
@@ -729,7 +729,7 @@
       "ci": 0.962,
       "position_bias": 50.0,
       "consistency_pct": null,
-      "other_rate": 9.3
+      "other_rate": 12.5
     },
     {
       "key": "gemma-3n-e2b-api",
@@ -746,7 +746,7 @@
       "ci": 0.927,
       "position_bias": 54.6,
       "consistency_pct": null,
-      "other_rate": 17.9
+      "other_rate": 20.8
     },
     {
       "key": "gemma-3n-e4b-api",
@@ -763,7 +763,7 @@
       "ci": 0.932,
       "position_bias": 42.4,
       "consistency_pct": null,
-      "other_rate": 14.8
+      "other_rate": 17.9
     },
     {
       "key": "gemini-2.5-flash-lite",
@@ -780,7 +780,7 @@
       "ci": 0.964,
       "position_bias": 48.2,
       "consistency_pct": null,
-      "other_rate": 12.3
+      "other_rate": 15.5
     },
     {
       "key": "grok-4-0709",
@@ -805,16 +805,16 @@
       "family": "OpenAI GPT",
       "tier": "frontier",
       "release_date": "2025-08",
-      "tas": 81.9,
-      "open": 73.2,
-      "forced_ru_first": 92.3,
-      "forced_ua_first": 90.2,
-      "forced": 91.2,
-      "gap": 18.0,
-      "ci": 0.97,
-      "position_bias": 48.9,
+      "tas": 76.1,
+      "open": 66.0,
+      "forced_ru_first": 91.1,
+      "forced_ua_first": 89.1,
+      "forced": 90.1,
+      "gap": 24.1,
+      "ci": 0.972,
+      "position_bias": 49.0,
       "consistency_pct": null,
-      "other_rate": 11.1
+      "other_rate": 16.4
     },
     {
       "key": "gpt-5-mini-2025-08",
@@ -822,16 +822,16 @@
       "family": "OpenAI GPT",
       "tier": "small",
       "release_date": "2025-08",
-      "tas": 83.0,
-      "open": 71.4,
-      "forced_ru_first": 90.4,
-      "forced_ua_first": 94.2,
-      "forced": 92.3,
-      "gap": 20.9,
-      "ci": 0.966,
-      "position_bias": 51.9,
+      "tas": 77.5,
+      "open": 64.6,
+      "forced_ru_first": 89.3,
+      "forced_ua_first": 93.0,
+      "forced": 91.2,
+      "gap": 26.6,
+      "ci": 0.968,
+      "position_bias": 51.8,
       "consistency_pct": null,
-      "other_rate": 9.9
+      "other_rate": 14.8
     },
     {
       "key": "gpt-5-nano-2025-08",
@@ -839,16 +839,16 @@
       "family": "OpenAI GPT",
       "tier": "tiny",
       "release_date": "2025-08",
-      "tas": 79.6,
-      "open": 60.6,
-      "forced_ru_first": 95.7,
-      "forced_ua_first": 89.6,
-      "forced": 92.7,
-      "gap": 32.1,
-      "ci": 0.962,
-      "position_bias": 47.0,
+      "tas": 73.1,
+      "open": 52.6,
+      "forced_ru_first": 93.6,
+      "forced_ua_first": 88.0,
+      "forced": 90.8,
+      "gap": 38.2,
+      "ci": 0.963,
+      "position_bias": 47.2,
       "consistency_pct": null,
-      "other_rate": 21.6
+      "other_rate": 28.6
     },
     {
       "key": "grok-4-fast-non-reasoning",
@@ -933,7 +933,7 @@
       "ci": 0.953,
       "position_bias": 49.0,
       "consistency_pct": null,
-      "other_rate": 8.0
+      "other_rate": 11.3
     },
     {
       "key": "gemini-3-pro-preview",
@@ -950,7 +950,7 @@
       "ci": 0.962,
       "position_bias": 49.9,
       "consistency_pct": null,
-      "other_rate": 8.0
+      "other_rate": 11.3
     },
     {
       "key": "gpt-5.2-2025-12",
@@ -1018,7 +1018,7 @@
       "ci": 0.961,
       "position_bias": 48.9,
       "consistency_pct": null,
-      "other_rate": 13.0
+      "other_rate": 16.1
     },
     {
       "key": "claude-opus-4-6",
@@ -1026,16 +1026,16 @@
       "family": "Anthropic Claude",
       "tier": "frontier",
       "release_date": "2026-02",
-      "tas": 84.8,
-      "open": 69.0,
-      "forced_ru_first": 96.2,
-      "forced_ua_first": 100.0,
-      "forced": 98.1,
-      "gap": 29.1,
-      "ci": 0.943,
-      "position_bias": 51.9,
+      "tas": 78.8,
+      "open": 63.8,
+      "forced_ru_first": 94.5,
+      "forced_ua_first": 98.1,
+      "forced": 96.3,
+      "gap": 32.5,
+      "ci": 0.942,
+      "position_bias": 51.8,
       "consistency_pct": null,
-      "other_rate": 10.5
+      "other_rate": 18.0
     },
     {
       "key": "claude-sonnet-4-6",
@@ -1069,7 +1069,7 @@
       "ci": 0.966,
       "position_bias": 50.0,
       "consistency_pct": null,
-      "other_rate": 8.0
+      "other_rate": 11.3
     },
     {
       "key": "gpt-5.4-2026-03",
@@ -1077,16 +1077,16 @@
       "family": "OpenAI GPT",
       "tier": "frontier",
       "release_date": "2026-03",
-      "tas": 85.4,
-      "open": 73.2,
-      "forced_ru_first": 96.2,
-      "forced_ua_first": 94.3,
-      "forced": 95.2,
-      "gap": 22.0,
-      "ci": 0.945,
-      "position_bias": 49.1,
+      "tas": 79.7,
+      "open": 67.4,
+      "forced_ru_first": 92.9,
+      "forced_ua_first": 94.6,
+      "forced": 93.8,
+      "gap": 26.4,
+      "ci": 0.939,
+      "position_bias": 50.9,
       "consistency_pct": null,
-      "other_rate": 9.3
+      "other_rate": 16.4
     },
     {
       "key": "gpt-5.4-mini-2026-03",
@@ -1094,16 +1094,16 @@
       "family": "OpenAI GPT",
       "tier": "small",
       "release_date": "2026-03",
-      "tas": 81.9,
-      "open": 65.0,
-      "forced_ru_first": 94.3,
-      "forced_ua_first": 92.2,
-      "forced": 93.2,
-      "gap": 28.2,
-      "ci": 0.945,
+      "tas": 75.2,
+      "open": 60.0,
+      "forced_ru_first": 91.2,
+      "forced_ua_first": 89.1,
+      "forced": 90.2,
+      "gap": 30.2,
+      "ci": 0.941,
       "position_bias": 48.9,
       "consistency_pct": null,
-      "other_rate": 11.1
+      "other_rate": 16.9
     },
     {
       "key": "gpt-5.4-nano-2026-03",
@@ -1111,16 +1111,16 @@
       "family": "OpenAI GPT",
       "tier": "tiny",
       "release_date": "2026-03",
-      "tas": 75.6,
-      "open": 66.7,
-      "forced_ru_first": 77.4,
-      "forced_ua_first": 83.0,
-      "forced": 80.2,
-      "gap": 13.5,
-      "ci": 0.927,
-      "position_bias": 52.8,
+      "tas": 70.2,
+      "open": 61.4,
+      "forced_ru_first": 75.0,
+      "forced_ua_first": 80.7,
+      "forced": 77.8,
+      "gap": 16.4,
+      "ci": 0.919,
+      "position_bias": 52.9,
       "consistency_pct": null,
-      "other_rate": 10.5
+      "other_rate": 16.9
     },
     {
       "key": "grok-4.20-0309-non-reasoning",
@@ -1171,7 +1171,7 @@
       "ci": 0.965,
       "position_bias": 49.0,
       "consistency_pct": null,
-      "other_rate": 13.0
+      "other_rate": 16.1
     },
     {
       "key": "gemma-4-31b-api",
@@ -1188,7 +1188,7 @@
       "ci": 0.956,
       "position_bias": 47.9,
       "consistency_pct": null,
-      "other_rate": 11.1
+      "other_rate": 14.3
     },
     {
       "key": "gemma4-31b",
@@ -1249,9 +1249,9 @@
     "open_min": 43.3,
     "open_max": 85.2,
     "forced_min": 47.2,
-    "forced_max": 98.1,
+    "forced_max": 97.2,
     "gap_min": -25.5,
-    "gap_max": 32.1,
+    "gap_max": 38.2,
     "release_min": "2023-07",
     "release_max": "2026-04"
   }

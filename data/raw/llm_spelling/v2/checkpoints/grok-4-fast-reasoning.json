@@ -1408,6 +1408,20 @@
           "x": 1
         }
       ]
+    },
+    {
+      "pair_id": 62,
+      "russian": "Andrey Shevchenko",
+      "ukrainian": "Andrii Shevchenko",
+      "category": "people",
+      "trials": []
+    },
+    {
+      "pair_id": 80,
+      "russian": "Nikolai Gogol",
+      "ukrainian": "Mykola Hohol",
+      "category": "people",
+      "trials": []
     }
   ],
   "timestamp": "2026-04-08T04:35:16.000884+00:00",
@@ -1416,7 +1430,7 @@
       "w1_forced": 0.4,
       "w2_open": 0.6
     },
-    "n_pairs": 54,
+    "n_pairs": 56,
     "n_pairs_complete": 41,
     "tas_mean": 80.4,
     "ci_mean": 0.954,
@@ -1424,7 +1438,7 @@
     "ua_pct_forced_ua_first": 88.7,
     "ua_pct_open": 69.0,
     "position_bias": 49.1,
-    "other_total": 14,
-    "other_rate": 8.6
+    "other_total": 20,
+    "other_rate": 11.9
   }
 }

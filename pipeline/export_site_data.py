@@ -490,7 +490,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     toponym_matches = sum(s["records"] for s in source_stats.values()) + openalex_total_papers
 
     # Open Library book data (loaded from local JSON if available)
-    ol_path = ROOT_DIR / "data" / "raw" / "openlibrary" / "openlibrary_results.json"
+    ol_path = Path(__file__).resolve().parent.parent / "data" / "raw" / "openlibrary" / "openlibrary_results.json"
     ol_records = 0
     ol_mentions = 0
     ol_pairs = 0

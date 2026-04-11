@@ -1,106 +1,1101 @@
 pair_id,category,russian_term,ukrainian_term,time_filter,russian_count,ukrainian_count,adoption_ratio,source
 1,geographical,Kiev,Kyiv,all,300,300,0.5,reddit
-1,geographical,Kiev,Kyiv,year,43,300,0.8746355685131195,reddit
-1,geographical,Kiev,Kyiv,month,1,132,0.9924812030075187,reddit
-1,geographical,Kiev,Kyiv,year_2015,0,0,,reddit
-1,geographical,Kiev,Kyiv,year_2016,0,0,,reddit
-1,geographical,Kiev,Kyiv,year_2017,0,0,,reddit
-1,geographical,Kiev,Kyiv,year_2018,0,0,,reddit
-1,geographical,Kiev,Kyiv,year_2019,0,0,,reddit
-1,geographical,Kiev,Kyiv,year_2020,0,0,,reddit
-1,geographical,Kiev,Kyiv,year_2021,0,0,,reddit
-1,geographical,Kiev,Kyiv,year_2022,0,0,,reddit
-1,geographical,Kiev,Kyiv,year_2023,0,0,,reddit
-1,geographical,Kiev,Kyiv,year_2024,0,0,,reddit
-1,geographical,Kiev,Kyiv,year_2025,0,0,,reddit
-1,geographical,Kiev,Kyiv,year_2026,0,0,,reddit
+1,geographical,Kiev,Kyiv,year,44,300,0.872093023255814,reddit
+1,geographical,Kiev,Kyiv,month,1,126,0.9921259842519685,reddit
+1,geographical,Kiev,Kyiv,year_2010,6,3,0.3333333333333333,reddit
+1,geographical,Kiev,Kyiv,year_2011,100,5,0.047619047619047616,reddit
+1,geographical,Kiev,Kyiv,year_2012,137,23,0.14375,reddit
+1,geographical,Kiev,Kyiv,year_2013,228,56,0.19718309859154928,reddit
+1,geographical,Kiev,Kyiv,year_2014,400,251,0.38556067588325654,reddit
+1,geographical,Kiev,Kyiv,year_2015,340,119,0.25925925925925924,reddit
+1,geographical,Kiev,Kyiv,year_2016,245,127,0.34139784946236557,reddit
+1,geographical,Kiev,Kyiv,year_2017,301,176,0.3689727463312369,reddit
+1,geographical,Kiev,Kyiv,year_2018,273,180,0.3973509933774834,reddit
+1,geographical,Kiev,Kyiv,year_2019,200,197,0.49622166246851385,reddit
+1,geographical,Kiev,Kyiv,year_2020,157,197,0.556497175141243,reddit
+1,geographical,Kiev,Kyiv,year_2021,172,222,0.5634517766497462,reddit
+1,geographical,Kiev,Kyiv,year_2022,330,400,0.547945205479452,reddit
+1,geographical,Kiev,Kyiv,year_2023,129,400,0.7561436672967864,reddit
+1,geographical,Kiev,Kyiv,year_2024,48,378,0.8873239436619719,reddit
+1,geographical,Kiev,Kyiv,year_2025,33,400,0.9237875288683602,reddit
+1,geographical,Kiev,Kyiv,year_2026,5,277,0.9822695035460993,reddit
+2,geographical,Kharkov,Kharkiv,all,140,300,0.6818181818181818,reddit
+2,geographical,Kharkov,Kharkiv,year,2,243,0.9918367346938776,reddit
+2,geographical,Kharkov,Kharkiv,month,0,111,1.0,reddit
+2,geographical,Kharkov,Kharkiv,year_2010,0,0,,reddit
+2,geographical,Kharkov,Kharkiv,year_2011,0,1,1.0,reddit
+2,geographical,Kharkov,Kharkiv,year_2012,4,9,0.6923076923076923,reddit
+2,geographical,Kharkov,Kharkiv,year_2013,2,3,0.6,reddit
+2,geographical,Kharkov,Kharkiv,year_2014,65,116,0.6408839779005525,reddit
+2,geographical,Kharkov,Kharkiv,year_2015,11,38,0.7755102040816326,reddit
+2,geographical,Kharkov,Kharkiv,year_2016,3,6,0.6666666666666666,reddit
+2,geographical,Kharkov,Kharkiv,year_2017,10,31,0.7560975609756098,reddit
+2,geographical,Kharkov,Kharkiv,year_2018,5,30,0.8571428571428571,reddit
+2,geographical,Kharkov,Kharkiv,year_2019,7,35,0.8333333333333334,reddit
+2,geographical,Kharkov,Kharkiv,year_2020,7,36,0.8372093023255814,reddit
+2,geographical,Kharkov,Kharkiv,year_2021,3,73,0.9605263157894737,reddit
+2,geographical,Kharkov,Kharkiv,year_2022,131,400,0.7532956685499058,reddit
+2,geographical,Kharkov,Kharkiv,year_2023,8,232,0.9666666666666667,reddit
+2,geographical,Kharkov,Kharkiv,year_2024,7,326,0.978978978978979,reddit
+2,geographical,Kharkov,Kharkiv,year_2025,6,244,0.976,reddit
+2,geographical,Kharkov,Kharkiv,year_2026,0,170,1.0,reddit
 3,geographical,Odessa,Odesa,all,300,300,0.5,reddit
-3,geographical,Odessa,Odesa,year,10,150,0.9375,reddit
-3,geographical,Odessa,Odesa,month,0,9,1.0,reddit
-3,geographical,Odessa,Odesa,year_2015,0,0,,reddit
-3,geographical,Odessa,Odesa,year_2016,0,0,,reddit
-3,geographical,Odessa,Odesa,year_2017,0,0,,reddit
-3,geographical,Odessa,Odesa,year_2018,0,0,,reddit
-3,geographical,Odessa,Odesa,year_2019,0,0,,reddit
-3,geographical,Odessa,Odesa,year_2020,0,0,,reddit
-3,geographical,Odessa,Odesa,year_2021,0,0,,reddit
-3,geographical,Odessa,Odesa,year_2022,0,0,,reddit
-3,geographical,Odessa,Odesa,year_2023,0,0,,reddit
-3,geographical,Odessa,Odesa,year_2024,0,0,,reddit
-3,geographical,Odessa,Odesa,year_2025,0,0,,reddit
-3,geographical,Odessa,Odesa,year_2026,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,all,300,159,0.3464052287581699,reddit
-10,geographical,Chernobyl,Chornobyl,year,46,67,0.5929203539823009,reddit
-10,geographical,Chernobyl,Chornobyl,month,3,3,0.5,reddit
-10,geographical,Chernobyl,Chornobyl,year_2015,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,year_2016,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,year_2017,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,year_2018,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,year_2019,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,year_2020,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,year_2021,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,year_2022,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,year_2023,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,year_2024,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,year_2025,0,0,,reddit
-10,geographical,Chernobyl,Chornobyl,year_2026,0,0,,reddit
+3,geographical,Odessa,Odesa,year,11,151,0.9320987654320988,reddit
+3,geographical,Odessa,Odesa,month,1,15,0.9375,reddit
+3,geographical,Odessa,Odesa,year_2010,0,0,,reddit
+3,geographical,Odessa,Odesa,year_2011,8,1,0.1111111111111111,reddit
+3,geographical,Odessa,Odesa,year_2012,13,0,0.0,reddit
+3,geographical,Odessa,Odesa,year_2013,19,0,0.0,reddit
+3,geographical,Odessa,Odesa,year_2014,231,12,0.04938271604938271,reddit
+3,geographical,Odessa,Odesa,year_2015,136,18,0.11688311688311688,reddit
+3,geographical,Odessa,Odesa,year_2016,49,11,0.18333333333333332,reddit
+3,geographical,Odessa,Odesa,year_2017,59,7,0.10606060606060606,reddit
+3,geographical,Odessa,Odesa,year_2018,76,9,0.10588235294117647,reddit
+3,geographical,Odessa,Odesa,year_2019,171,18,0.09523809523809523,reddit
+3,geographical,Odessa,Odesa,year_2020,62,15,0.19480519480519481,reddit
+3,geographical,Odessa,Odesa,year_2021,97,24,0.19834710743801653,reddit
+3,geographical,Odessa,Odesa,year_2022,267,313,0.5396551724137931,reddit
+3,geographical,Odessa,Odesa,year_2023,102,251,0.7110481586402266,reddit
+3,geographical,Odessa,Odesa,year_2024,35,194,0.8471615720524017,reddit
+3,geographical,Odessa,Odesa,year_2025,21,185,0.8980582524271845,reddit
+3,geographical,Odessa,Odesa,year_2026,1,33,0.9705882352941176,reddit
+4,geographical,Lvov,Lviv,all,24,300,0.9259259259259259,reddit
+4,geographical,Lvov,Lviv,year,1,130,0.9923664122137404,reddit
+4,geographical,Lvov,Lviv,month,0,19,1.0,reddit
+4,geographical,Lvov,Lviv,year_2010,0,1,1.0,reddit
+4,geographical,Lvov,Lviv,year_2011,1,3,0.75,reddit
+4,geographical,Lvov,Lviv,year_2012,0,16,1.0,reddit
+4,geographical,Lvov,Lviv,year_2013,1,10,0.9090909090909091,reddit
+4,geographical,Lvov,Lviv,year_2014,7,62,0.8985507246376812,reddit
+4,geographical,Lvov,Lviv,year_2015,0,40,1.0,reddit
+4,geographical,Lvov,Lviv,year_2016,3,52,0.9454545454545454,reddit
+4,geographical,Lvov,Lviv,year_2017,2,80,0.975609756097561,reddit
+4,geographical,Lvov,Lviv,year_2018,0,73,1.0,reddit
+4,geographical,Lvov,Lviv,year_2019,2,103,0.9809523809523809,reddit
+4,geographical,Lvov,Lviv,year_2020,0,99,1.0,reddit
+4,geographical,Lvov,Lviv,year_2021,2,126,0.984375,reddit
+4,geographical,Lvov,Lviv,year_2022,12,268,0.9571428571428572,reddit
+4,geographical,Lvov,Lviv,year_2023,0,132,1.0,reddit
+4,geographical,Lvov,Lviv,year_2024,3,147,0.98,reddit
+4,geographical,Lvov,Lviv,year_2025,0,151,1.0,reddit
+4,geographical,Lvov,Lviv,year_2026,0,61,1.0,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,all,77,285,0.787292817679558,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year,3,160,0.9815950920245399,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,month,0,24,1.0,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2010,0,0,,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2011,0,0,,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2012,1,0,0.0,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2013,1,0,0.0,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2014,2,0,0.0,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2015,2,1,0.3333333333333333,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2016,0,0,,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2017,1,0,0.0,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2018,2,0,0.0,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2019,0,2,1.0,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2020,0,5,1.0,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2021,4,4,0.5,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2022,110,379,0.7750511247443763,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2023,17,267,0.9401408450704225,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2024,9,187,0.9540816326530612,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2025,3,187,0.9842105263157894,reddit
+5,geographical,Zaporozhye,Zaporizhzhia,year_2026,0,64,1.0,reddit
+6,geographical,Nikolaev,Mykolaiv,all,77,174,0.6932270916334662,reddit
+6,geographical,Nikolaev,Mykolaiv,year,1,51,0.9807692307692307,reddit
+6,geographical,Nikolaev,Mykolaiv,month,0,6,1.0,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2010,1,0,0.0,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2011,0,0,,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2012,1,0,0.0,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2013,0,0,,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2014,10,7,0.4117647058823529,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2015,0,1,1.0,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2016,2,0,0.0,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2017,1,0,0.0,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2018,9,1,0.1,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2019,1,0,0.0,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2020,0,1,1.0,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2021,1,5,0.8333333333333334,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2022,107,224,0.676737160120846,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2023,3,117,0.975,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2024,3,52,0.9454545454545454,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2025,0,33,1.0,reddit
+6,geographical,Nikolaev,Mykolaiv,year_2026,0,5,1.0,reddit
+7,geographical,Dnepropetrovsk,Dnipro,all,33,239,0.8786764705882353,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year,0,118,1.0,reddit
+7,geographical,Dnepropetrovsk,Dnipro,month,0,10,1.0,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2010,0,0,,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2011,0,0,,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2012,6,0,0.0,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2013,2,1,0.3333333333333333,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2014,13,7,0.35,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2015,3,8,0.7272727272727273,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2016,6,12,0.6666666666666666,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2017,3,11,0.7857142857142857,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2018,1,7,0.875,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2019,1,10,0.9090909090909091,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2020,1,18,0.9473684210526315,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2021,4,23,0.8518518518518519,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2022,8,169,0.9548022598870056,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2023,3,268,0.988929889298893,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2024,3,157,0.98125,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2025,2,123,0.984,reddit
+7,geographical,Dnepropetrovsk,Dnipro,year_2026,0,19,1.0,reddit
+8,geographical,Vinnitsa,Vinnytsia,all,18,126,0.875,reddit
+8,geographical,Vinnitsa,Vinnytsia,year,2,36,0.9473684210526315,reddit
+8,geographical,Vinnitsa,Vinnytsia,month,0,2,1.0,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2010,0,0,,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2011,0,0,,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2012,0,0,,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2013,0,0,,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2014,5,4,0.4444444444444444,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2015,1,0,0.0,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2016,0,0,,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2017,1,4,0.8,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2018,1,4,0.8,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2019,1,4,0.8,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2020,0,6,1.0,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2021,3,7,0.7,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2022,28,138,0.8313253012048193,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2023,4,15,0.7894736842105263,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2024,1,15,0.9375,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2025,4,12,0.75,reddit
+8,geographical,Vinnitsa,Vinnytsia,year_2026,0,2,1.0,reddit
+9,geographical,Rovno,Rivne,all,6,111,0.9487179487179487,reddit
+9,geographical,Rovno,Rivne,year,0,39,1.0,reddit
+9,geographical,Rovno,Rivne,month,0,3,1.0,reddit
+9,geographical,Rovno,Rivne,year_2010,0,0,,reddit
+9,geographical,Rovno,Rivne,year_2011,0,0,,reddit
+9,geographical,Rovno,Rivne,year_2012,0,1,1.0,reddit
+9,geographical,Rovno,Rivne,year_2013,0,0,,reddit
+9,geographical,Rovno,Rivne,year_2014,7,3,0.3,reddit
+9,geographical,Rovno,Rivne,year_2015,0,0,,reddit
+9,geographical,Rovno,Rivne,year_2016,0,0,,reddit
+9,geographical,Rovno,Rivne,year_2017,0,3,1.0,reddit
+9,geographical,Rovno,Rivne,year_2018,0,1,1.0,reddit
+9,geographical,Rovno,Rivne,year_2019,0,3,1.0,reddit
+9,geographical,Rovno,Rivne,year_2020,1,4,0.8,reddit
+9,geographical,Rovno,Rivne,year_2021,0,11,1.0,reddit
+9,geographical,Rovno,Rivne,year_2022,0,41,1.0,reddit
+9,geographical,Rovno,Rivne,year_2023,0,13,1.0,reddit
+9,geographical,Rovno,Rivne,year_2024,0,10,1.0,reddit
+9,geographical,Rovno,Rivne,year_2025,0,9,1.0,reddit
+9,geographical,Rovno,Rivne,year_2026,0,1,1.0,reddit
+10,geographical,Chernobyl,Chornobyl,all,300,160,0.34782608695652173,reddit
+10,geographical,Chernobyl,Chornobyl,year,42,68,0.6181818181818182,reddit
+10,geographical,Chernobyl,Chornobyl,month,1,2,0.6666666666666666,reddit
+10,geographical,Chernobyl,Chornobyl,year_2010,67,1,0.014705882352941176,reddit
+10,geographical,Chernobyl,Chornobyl,year_2011,136,3,0.02158273381294964,reddit
+10,geographical,Chernobyl,Chornobyl,year_2012,65,0,0.0,reddit
+10,geographical,Chernobyl,Chornobyl,year_2013,68,0,0.0,reddit
+10,geographical,Chernobyl,Chornobyl,year_2014,75,0,0.0,reddit
+10,geographical,Chernobyl,Chornobyl,year_2015,104,2,0.018867924528301886,reddit
+10,geographical,Chernobyl,Chornobyl,year_2016,162,15,0.0847457627118644,reddit
+10,geographical,Chernobyl,Chornobyl,year_2017,79,1,0.0125,reddit
+10,geographical,Chernobyl,Chornobyl,year_2018,82,2,0.023809523809523808,reddit
+10,geographical,Chernobyl,Chornobyl,year_2019,270,3,0.01098901098901099,reddit
+10,geographical,Chernobyl,Chornobyl,year_2020,253,12,0.045283018867924525,reddit
+10,geographical,Chernobyl,Chornobyl,year_2021,150,9,0.05660377358490566,reddit
+10,geographical,Chernobyl,Chornobyl,year_2022,333,124,0.2713347921225383,reddit
+10,geographical,Chernobyl,Chornobyl,year_2023,55,33,0.375,reddit
+10,geographical,Chernobyl,Chornobyl,year_2024,28,54,0.6585365853658537,reddit
+10,geographical,Chernobyl,Chornobyl,year_2025,96,93,0.49206349206349204,reddit
+10,geographical,Chernobyl,Chornobyl,year_2026,4,7,0.6363636363636364,reddit
+11,geographical,Lugansk,Luhansk,all,152,300,0.6637168141592921,reddit
+11,geographical,Lugansk,Luhansk,year,2,121,0.983739837398374,reddit
+11,geographical,Lugansk,Luhansk,month,0,19,1.0,reddit
+11,geographical,Lugansk,Luhansk,year_2010,0,0,,reddit
+11,geographical,Lugansk,Luhansk,year_2011,3,0,0.0,reddit
+11,geographical,Lugansk,Luhansk,year_2012,0,0,,reddit
+11,geographical,Lugansk,Luhansk,year_2013,2,1,0.3333333333333333,reddit
+11,geographical,Lugansk,Luhansk,year_2014,163,181,0.5261627906976745,reddit
+11,geographical,Lugansk,Luhansk,year_2015,26,40,0.6060606060606061,reddit
+11,geographical,Lugansk,Luhansk,year_2016,14,11,0.44,reddit
+11,geographical,Lugansk,Luhansk,year_2017,8,18,0.6923076923076923,reddit
+11,geographical,Lugansk,Luhansk,year_2018,1,3,0.75,reddit
+11,geographical,Lugansk,Luhansk,year_2019,6,18,0.75,reddit
+11,geographical,Lugansk,Luhansk,year_2020,7,15,0.6818181818181818,reddit
+11,geographical,Lugansk,Luhansk,year_2021,4,21,0.84,reddit
+11,geographical,Lugansk,Luhansk,year_2022,101,304,0.7506172839506173,reddit
+11,geographical,Lugansk,Luhansk,year_2023,6,151,0.9617834394904459,reddit
+11,geographical,Lugansk,Luhansk,year_2024,4,118,0.9672131147540983,reddit
+11,geographical,Lugansk,Luhansk,year_2025,2,75,0.974025974025974,reddit
+11,geographical,Lugansk,Luhansk,year_2026,0,24,1.0,reddit
+15,geographical,Dnieper River,Dnipro River,all,133,239,0.6424731182795699,reddit
+15,geographical,Dnieper River,Dnipro River,year,5,118,0.959349593495935,reddit
+15,geographical,Dnieper River,Dnipro River,month,0,10,1.0,reddit
+15,geographical,Dnieper River,Dnipro River,year_2010,0,0,,reddit
+15,geographical,Dnieper River,Dnipro River,year_2011,1,0,0.0,reddit
+15,geographical,Dnieper River,Dnipro River,year_2012,0,0,,reddit
+15,geographical,Dnieper River,Dnipro River,year_2013,0,1,1.0,reddit
+15,geographical,Dnieper River,Dnipro River,year_2014,1,7,0.875,reddit
+15,geographical,Dnieper River,Dnipro River,year_2015,0,8,1.0,reddit
+15,geographical,Dnieper River,Dnipro River,year_2016,3,12,0.8,reddit
+15,geographical,Dnieper River,Dnipro River,year_2017,4,11,0.7333333333333333,reddit
+15,geographical,Dnieper River,Dnipro River,year_2018,3,7,0.7,reddit
+15,geographical,Dnieper River,Dnipro River,year_2019,2,10,0.8333333333333334,reddit
+15,geographical,Dnieper River,Dnipro River,year_2020,3,18,0.8571428571428571,reddit
+15,geographical,Dnieper River,Dnipro River,year_2021,5,23,0.8214285714285714,reddit
+15,geographical,Dnieper River,Dnipro River,year_2022,69,169,0.7100840336134454,reddit
+15,geographical,Dnieper River,Dnipro River,year_2023,62,268,0.8121212121212121,reddit
+15,geographical,Dnieper River,Dnipro River,year_2024,2,157,0.9874213836477987,reddit
+15,geographical,Dnieper River,Dnipro River,year_2025,7,123,0.9461538461538461,reddit
+15,geographical,Dnieper River,Dnipro River,year_2026,0,19,1.0,reddit
+16,geographical,Dniester,Dnister,all,34,13,0.2765957446808511,reddit
+16,geographical,Dniester,Dnister,year,1,0,0.0,reddit
+16,geographical,Dniester,Dnister,month,0,0,,reddit
+16,geographical,Dniester,Dnister,year_2010,0,0,,reddit
+16,geographical,Dniester,Dnister,year_2011,0,0,,reddit
+16,geographical,Dniester,Dnister,year_2012,0,0,,reddit
+16,geographical,Dniester,Dnister,year_2013,0,0,,reddit
+16,geographical,Dniester,Dnister,year_2014,8,0,0.0,reddit
+16,geographical,Dniester,Dnister,year_2015,2,0,0.0,reddit
+16,geographical,Dniester,Dnister,year_2016,0,0,,reddit
+16,geographical,Dniester,Dnister,year_2017,3,0,0.0,reddit
+16,geographical,Dniester,Dnister,year_2018,1,0,0.0,reddit
+16,geographical,Dniester,Dnister,year_2019,0,0,,reddit
+16,geographical,Dniester,Dnister,year_2020,1,1,0.5,reddit
+16,geographical,Dniester,Dnister,year_2021,2,1,0.3333333333333333,reddit
+16,geographical,Dniester,Dnister,year_2022,10,0,0.0,reddit
+16,geographical,Dniester,Dnister,year_2023,6,0,0.0,reddit
+16,geographical,Dniester,Dnister,year_2024,2,0,0.0,reddit
+16,geographical,Dniester,Dnister,year_2025,1,0,0.0,reddit
+16,geographical,Dniester,Dnister,year_2026,1,0,0.0,reddit
+17,geographical,Donbass,Donbas,all,200,300,0.6,reddit
+17,geographical,Donbass,Donbas,year,7,157,0.9573170731707317,reddit
+17,geographical,Donbass,Donbas,month,1,15,0.9375,reddit
+17,geographical,Donbass,Donbas,year_2010,0,0,,reddit
+17,geographical,Donbass,Donbas,year_2011,0,0,,reddit
+17,geographical,Donbass,Donbas,year_2012,0,0,,reddit
+17,geographical,Donbass,Donbas,year_2013,0,0,,reddit
+17,geographical,Donbass,Donbas,year_2014,84,62,0.4246575342465753,reddit
+17,geographical,Donbass,Donbas,year_2015,87,73,0.45625,reddit
+17,geographical,Donbass,Donbas,year_2016,43,56,0.5656565656565656,reddit
+17,geographical,Donbass,Donbas,year_2017,51,58,0.5321100917431193,reddit
+17,geographical,Donbass,Donbas,year_2018,28,78,0.7358490566037735,reddit
+17,geographical,Donbass,Donbas,year_2019,55,121,0.6875,reddit
+17,geographical,Donbass,Donbas,year_2020,16,62,0.7948717948717948,reddit
+17,geographical,Donbass,Donbas,year_2021,77,63,0.45,reddit
+17,geographical,Donbass,Donbas,year_2022,241,364,0.6016528925619835,reddit
+17,geographical,Donbass,Donbas,year_2023,49,152,0.7562189054726368,reddit
+17,geographical,Donbass,Donbas,year_2024,21,91,0.8125,reddit
+17,geographical,Donbass,Donbas,year_2025,11,156,0.9341317365269461,reddit
+17,geographical,Donbass,Donbas,year_2026,0,54,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,all,0,108,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year,0,36,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,month,0,4,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2010,0,0,,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2011,0,0,,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2012,0,2,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2013,0,0,,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2014,0,0,,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2015,0,1,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2016,0,3,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2017,0,6,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2018,0,2,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2019,0,2,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2020,0,1,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2021,0,3,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2022,0,12,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2023,1,11,0.9166666666666666,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2024,0,17,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2025,0,20,1.0,reddit
+19,geographical,Zakarpatye,Zakarpattia,year_2026,0,6,1.0,reddit
+20,geographical,Podolye,Podillia,all,0,18,1.0,reddit
+20,geographical,Podolye,Podillia,year,0,3,1.0,reddit
+20,geographical,Podolye,Podillia,month,0,1,1.0,reddit
+20,geographical,Podolye,Podillia,year_2010,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2011,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2012,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2013,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2014,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2015,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2016,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2017,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2018,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2019,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2020,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2021,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2022,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2023,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2024,0,2,1.0,reddit
+20,geographical,Podolye,Podillia,year_2025,0,0,,reddit
+20,geographical,Podolye,Podillia,year_2026,0,0,,reddit
 21,food,Chicken Kiev,Chicken Kyiv,all,11,88,0.8888888888888888,reddit
 21,food,Chicken Kiev,Chicken Kyiv,year,0,2,1.0,reddit
 21,food,Chicken Kiev,Chicken Kyiv,month,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2010,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2011,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2012,1,0,0.0,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2013,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2014,6,0,0.0,reddit
 21,food,Chicken Kiev,Chicken Kyiv,year_2015,0,0,,reddit
 21,food,Chicken Kiev,Chicken Kyiv,year_2016,0,0,,reddit
 21,food,Chicken Kiev,Chicken Kyiv,year_2017,0,0,,reddit
-21,food,Chicken Kiev,Chicken Kyiv,year_2018,0,0,,reddit
-21,food,Chicken Kiev,Chicken Kyiv,year_2019,0,0,,reddit
-21,food,Chicken Kiev,Chicken Kyiv,year_2020,0,0,,reddit
-21,food,Chicken Kiev,Chicken Kyiv,year_2021,0,0,,reddit
-21,food,Chicken Kiev,Chicken Kyiv,year_2022,0,0,,reddit
-21,food,Chicken Kiev,Chicken Kyiv,year_2023,0,0,,reddit
-21,food,Chicken Kiev,Chicken Kyiv,year_2024,0,0,,reddit
-21,food,Chicken Kiev,Chicken Kyiv,year_2025,0,0,,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2018,3,0,0.0,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2019,2,0,0.0,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2020,2,2,0.5,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2021,1,3,0.75,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2022,10,10,0.5,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2023,0,6,1.0,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2024,2,4,0.6666666666666666,reddit
+21,food,Chicken Kiev,Chicken Kyiv,year_2025,0,4,1.0,reddit
 21,food,Chicken Kiev,Chicken Kyiv,year_2026,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,all,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,year,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,month,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,year_2010,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,year_2011,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,year_2012,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,year_2013,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,year_2014,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,year_2015,1,0,0.0,reddit
+22,food,Kiev cake,Kyiv cake,year_2016,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,year_2017,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,year_2018,0,1,1.0,reddit
+22,food,Kiev cake,Kyiv cake,year_2019,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,year_2020,0,1,1.0,reddit
+22,food,Kiev cake,Kyiv cake,year_2021,0,1,1.0,reddit
+22,food,Kiev cake,Kyiv cake,year_2022,1,4,0.8,reddit
+22,food,Kiev cake,Kyiv cake,year_2023,0,3,1.0,reddit
+22,food,Kiev cake,Kyiv cake,year_2024,0,1,1.0,reddit
+22,food,Kiev cake,Kyiv cake,year_2025,0,0,,reddit
+22,food,Kiev cake,Kyiv cake,year_2026,0,0,,reddit
+23,food,Borsch,Borscht,all,204,105,0.33980582524271846,reddit
+23,food,Borsch,Borscht,year,23,2,0.08,reddit
+23,food,Borsch,Borscht,month,2,0,0.0,reddit
+23,food,Borsch,Borscht,year_2010,0,0,,reddit
+23,food,Borsch,Borscht,year_2011,0,0,,reddit
+23,food,Borsch,Borscht,year_2012,0,0,,reddit
+23,food,Borsch,Borscht,year_2013,2,0,0.0,reddit
+23,food,Borsch,Borscht,year_2014,5,3,0.375,reddit
+23,food,Borsch,Borscht,year_2015,2,0,0.0,reddit
+23,food,Borsch,Borscht,year_2016,4,0,0.0,reddit
+23,food,Borsch,Borscht,year_2017,8,1,0.1111111111111111,reddit
+23,food,Borsch,Borscht,year_2018,3,0,0.0,reddit
+23,food,Borsch,Borscht,year_2019,3,0,0.0,reddit
+23,food,Borsch,Borscht,year_2020,13,3,0.1875,reddit
+23,food,Borsch,Borscht,year_2021,10,6,0.375,reddit
+23,food,Borsch,Borscht,year_2022,49,14,0.2222222222222222,reddit
+23,food,Borsch,Borscht,year_2023,16,15,0.4838709677419355,reddit
+23,food,Borsch,Borscht,year_2024,13,8,0.38095238095238093,reddit
+23,food,Borsch,Borscht,year_2025,12,0,0.0,reddit
+23,food,Borsch,Borscht,year_2026,3,0,0.0,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,all,4,41,0.9111111111111111,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year,0,1,1.0,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,month,0,0,,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2010,0,0,,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2011,0,0,,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2012,0,0,,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2013,0,0,,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2014,2,0,0.0,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2015,0,0,,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2016,0,0,,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2017,1,0,0.0,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2018,0,0,,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2019,0,2,1.0,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2020,0,3,1.0,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2021,0,1,1.0,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2022,3,15,0.8333333333333334,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2023,4,23,0.8518518518518519,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2024,0,0,,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2025,0,2,1.0,reddit
+24,landmarks,Kiev Pechersk Lavra,Kyiv Pechersk Lavra,year_2026,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,all,0,6,1.0,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,month,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2010,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2011,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2012,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2013,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2014,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2015,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2016,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2017,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2018,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2019,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2020,1,0,0.0,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2021,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2022,0,3,1.0,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2023,0,4,1.0,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2024,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2025,0,0,,reddit
+25,landmarks,Saint Sophia Cathedral Kiev,Saint Sophia Cathedral Kyiv,year_2026,0,0,,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,all,33,20,0.37735849056603776,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year,0,2,1.0,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,month,0,0,,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2010,0,0,,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2011,4,0,0.0,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2012,0,0,,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2013,3,0,0.0,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2014,3,0,0.0,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2015,16,0,0.0,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2016,10,0,0.0,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2017,5,1,0.16666666666666666,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2018,5,0,0.0,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2019,13,0,0.0,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2020,26,3,0.10344827586206896,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2021,4,1,0.2,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2022,32,9,0.21951219512195122,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2023,3,2,0.4,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2024,3,6,0.6666666666666666,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2025,3,1,0.25,reddit
+26,landmarks,Chernobyl Exclusion Zone,Chornobyl Exclusion Zone,year_2026,0,0,,reddit
 27,country,the Ukraine,Ukraine,all,300,300,0.5,reddit
-27,country,the Ukraine,Ukraine,year,60,300,0.8333333333333334,reddit
-27,country,the Ukraine,Ukraine,month,5,300,0.9836065573770492,reddit
-27,country,the Ukraine,Ukraine,year_2015,0,0,,reddit
-27,country,the Ukraine,Ukraine,year_2016,0,0,,reddit
-27,country,the Ukraine,Ukraine,year_2017,0,0,,reddit
-27,country,the Ukraine,Ukraine,year_2018,0,0,,reddit
-27,country,the Ukraine,Ukraine,year_2019,0,0,,reddit
-27,country,the Ukraine,Ukraine,year_2020,0,0,,reddit
-27,country,the Ukraine,Ukraine,year_2021,0,0,,reddit
-27,country,the Ukraine,Ukraine,year_2022,0,0,,reddit
-27,country,the Ukraine,Ukraine,year_2023,0,0,,reddit
-27,country,the Ukraine,Ukraine,year_2024,0,0,,reddit
-27,country,the Ukraine,Ukraine,year_2025,0,0,,reddit
-27,country,the Ukraine,Ukraine,year_2026,0,0,,reddit
+27,country,the Ukraine,Ukraine,year,55,200,0.7843137254901961,reddit
+27,country,the Ukraine,Ukraine,month,3,297,0.99,reddit
+27,country,the Ukraine,Ukraine,year_2010,53,122,0.6971428571428572,reddit
+27,country,the Ukraine,Ukraine,year_2011,49,135,0.7336956521739131,reddit
+27,country,the Ukraine,Ukraine,year_2012,103,244,0.7031700288184438,reddit
+27,country,the Ukraine,Ukraine,year_2013,236,400,0.6289308176100629,reddit
+27,country,the Ukraine,Ukraine,year_2014,400,400,0.5,reddit
+27,country,the Ukraine,Ukraine,year_2015,400,400,0.5,reddit
+27,country,the Ukraine,Ukraine,year_2016,341,400,0.5398110661268556,reddit
+27,country,the Ukraine,Ukraine,year_2017,369,400,0.5201560468140443,reddit
+27,country,the Ukraine,Ukraine,year_2018,344,400,0.5376344086021505,reddit
+27,country,the Ukraine,Ukraine,year_2019,400,400,0.5,reddit
+27,country,the Ukraine,Ukraine,year_2020,357,400,0.5284015852047557,reddit
+27,country,the Ukraine,Ukraine,year_2021,371,400,0.5188067444876784,reddit
+27,country,the Ukraine,Ukraine,year_2022,400,400,0.5,reddit
+27,country,the Ukraine,Ukraine,year_2023,400,400,0.5,reddit
+27,country,the Ukraine,Ukraine,year_2024,400,400,0.5,reddit
+27,country,the Ukraine,Ukraine,year_2025,400,400,0.5,reddit
+27,country,the Ukraine,Ukraine,year_2026,317,400,0.5578800557880056,reddit
+28,institutional,Kiev National University,Kyiv National University,all,0,4,1.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year,0,0,,reddit
+28,institutional,Kiev National University,Kyiv National University,month,0,0,,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2010,0,0,,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2011,0,0,,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2012,0,0,,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2013,0,1,1.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2014,0,1,1.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2015,1,0,0.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2016,0,1,1.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2017,0,1,1.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2018,0,0,,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2019,0,0,,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2020,0,3,1.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2021,0,2,1.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2022,0,4,1.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2023,0,2,1.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2024,0,4,1.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2025,0,3,1.0,reddit
+28,institutional,Kiev National University,Kyiv National University,year_2026,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,all,0,4,1.0,reddit
+29,institutional,Kharkov University,Kharkiv University,year,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,month,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2010,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2011,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2012,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2013,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2014,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2015,0,1,1.0,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2016,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2017,0,5,1.0,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2018,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2019,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2020,0,1,1.0,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2021,0,0,,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2022,0,11,1.0,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2023,0,2,1.0,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2024,0,4,1.0,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2025,0,6,1.0,reddit
+29,institutional,Kharkov University,Kharkiv University,year_2026,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,all,0,4,1.0,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,month,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2010,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2011,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2012,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2013,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2014,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2015,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2016,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2017,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2018,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2019,0,1,1.0,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2020,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2021,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2022,0,6,1.0,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2023,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2024,0,1,1.0,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2025,0,0,,reddit
+30,institutional,Kiev Polytechnic,Kyiv Polytechnic,year_2026,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,all,4,0,0.0,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,month,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2010,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2011,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2012,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2013,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2014,1,1,0.5,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2015,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2016,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2017,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2018,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2019,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2020,1,1,0.5,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2021,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2022,0,7,1.0,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2023,1,12,0.9230769230769231,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2024,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2025,0,0,,reddit
+31,institutional,Kiev Patriarchate,Kyiv Patriarchate,year_2026,0,0,,reddit
 32,sports,Dynamo Kiev,Dynamo Kyiv,all,6,16,0.7272727272727273,reddit
 32,sports,Dynamo Kiev,Dynamo Kyiv,year,0,1,1.0,reddit
 32,sports,Dynamo Kiev,Dynamo Kyiv,month,0,0,,reddit
-32,sports,Dynamo Kiev,Dynamo Kyiv,year_2015,0,0,,reddit
-32,sports,Dynamo Kiev,Dynamo Kyiv,year_2016,0,0,,reddit
-32,sports,Dynamo Kiev,Dynamo Kyiv,year_2017,0,0,,reddit
-32,sports,Dynamo Kiev,Dynamo Kyiv,year_2018,0,0,,reddit
-32,sports,Dynamo Kiev,Dynamo Kyiv,year_2019,0,0,,reddit
-32,sports,Dynamo Kiev,Dynamo Kyiv,year_2020,0,0,,reddit
-32,sports,Dynamo Kiev,Dynamo Kyiv,year_2021,0,0,,reddit
-32,sports,Dynamo Kiev,Dynamo Kyiv,year_2022,0,0,,reddit
-32,sports,Dynamo Kiev,Dynamo Kyiv,year_2023,0,0,,reddit
-32,sports,Dynamo Kiev,Dynamo Kyiv,year_2024,0,0,,reddit
-32,sports,Dynamo Kiev,Dynamo Kyiv,year_2025,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2010,0,0,,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2011,1,0,0.0,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2012,1,2,0.6666666666666666,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2013,3,1,0.25,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2014,2,0,0.0,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2015,4,1,0.2,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2016,3,2,0.4,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2017,1,1,0.5,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2018,4,3,0.42857142857142855,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2019,7,2,0.2222222222222222,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2020,10,5,0.3333333333333333,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2021,0,2,1.0,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2022,6,19,0.76,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2023,0,5,1.0,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2024,0,5,1.0,reddit
+32,sports,Dynamo Kiev,Dynamo Kyiv,year_2025,0,2,1.0,reddit
 32,sports,Dynamo Kiev,Dynamo Kyiv,year_2026,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,all,0,3,1.0,reddit
+34,sports,Kiev ballet,Kyiv ballet,year,0,1,1.0,reddit
+34,sports,Kiev ballet,Kyiv ballet,month,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2010,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2011,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2012,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2013,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2014,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2015,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2016,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2017,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2018,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2019,0,1,1.0,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2020,0,0,,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2021,1,0,0.0,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2022,0,4,1.0,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2023,0,4,1.0,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2024,0,2,1.0,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2025,0,2,1.0,reddit
+34,sports,Kiev ballet,Kyiv ballet,year_2026,0,0,,reddit
 35,historical,Kievan Rus,Kyivan Rus,all,30,102,0.7727272727272727,reddit
 35,historical,Kievan Rus,Kyivan Rus,year,1,5,0.8333333333333334,reddit
 35,historical,Kievan Rus,Kyivan Rus,month,0,0,,reddit
-35,historical,Kievan Rus,Kyivan Rus,year_2015,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2010,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2011,1,0,0.0,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2012,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2013,0,1,1.0,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2014,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2015,1,0,0.0,reddit
 35,historical,Kievan Rus,Kyivan Rus,year_2016,0,0,,reddit
-35,historical,Kievan Rus,Kyivan Rus,year_2017,0,0,,reddit
-35,historical,Kievan Rus,Kyivan Rus,year_2018,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2017,1,0,0.0,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2018,2,3,0.6,reddit
 35,historical,Kievan Rus,Kyivan Rus,year_2019,0,0,,reddit
-35,historical,Kievan Rus,Kyivan Rus,year_2020,0,0,,reddit
-35,historical,Kievan Rus,Kyivan Rus,year_2021,0,0,,reddit
-35,historical,Kievan Rus,Kyivan Rus,year_2022,0,0,,reddit
-35,historical,Kievan Rus,Kyivan Rus,year_2023,0,0,,reddit
-35,historical,Kievan Rus,Kyivan Rus,year_2024,0,0,,reddit
-35,historical,Kievan Rus,Kyivan Rus,year_2025,0,0,,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2020,3,1,0.25,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2021,5,2,0.2857142857142857,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2022,16,16,0.5,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2023,2,5,0.7142857142857143,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2024,2,6,0.75,reddit
+35,historical,Kievan Rus,Kyivan Rus,year_2025,1,3,0.75,reddit
 35,historical,Kievan Rus,Kyivan Rus,year_2026,0,0,,reddit
+36,historical,Kazak,Cossack,all,15,110,0.88,reddit
+36,historical,Kazak,Cossack,year,1,52,0.9811320754716981,reddit
+36,historical,Kazak,Cossack,month,0,2,1.0,reddit
+36,historical,Kazak,Cossack,year_2010,0,0,,reddit
+36,historical,Kazak,Cossack,year_2011,0,0,,reddit
+36,historical,Kazak,Cossack,year_2012,1,0,0.0,reddit
+36,historical,Kazak,Cossack,year_2013,1,1,0.5,reddit
+36,historical,Kazak,Cossack,year_2014,1,2,0.6666666666666666,reddit
+36,historical,Kazak,Cossack,year_2015,0,2,1.0,reddit
+36,historical,Kazak,Cossack,year_2016,0,0,,reddit
+36,historical,Kazak,Cossack,year_2017,3,1,0.25,reddit
+36,historical,Kazak,Cossack,year_2018,0,0,,reddit
+36,historical,Kazak,Cossack,year_2019,0,4,1.0,reddit
+36,historical,Kazak,Cossack,year_2020,0,1,1.0,reddit
+36,historical,Kazak,Cossack,year_2021,1,3,0.75,reddit
+36,historical,Kazak,Cossack,year_2022,1,17,0.9444444444444444,reddit
+36,historical,Kazak,Cossack,year_2023,0,23,1.0,reddit
+36,historical,Kazak,Cossack,year_2024,0,12,1.0,reddit
+36,historical,Kazak,Cossack,year_2025,0,13,1.0,reddit
+36,historical,Kazak,Cossack,year_2026,0,2,1.0,reddit
+38,geographical,Chernigov,Chernihiv,all,19,172,0.900523560209424,reddit
+38,geographical,Chernigov,Chernihiv,year,0,81,1.0,reddit
+38,geographical,Chernigov,Chernihiv,month,0,5,1.0,reddit
+38,geographical,Chernigov,Chernihiv,year_2010,0,1,1.0,reddit
+38,geographical,Chernigov,Chernihiv,year_2011,0,1,1.0,reddit
+38,geographical,Chernigov,Chernihiv,year_2012,0,0,,reddit
+38,geographical,Chernigov,Chernihiv,year_2013,0,0,,reddit
+38,geographical,Chernigov,Chernihiv,year_2014,0,3,1.0,reddit
+38,geographical,Chernigov,Chernihiv,year_2015,0,4,1.0,reddit
+38,geographical,Chernigov,Chernihiv,year_2016,0,1,1.0,reddit
+38,geographical,Chernigov,Chernihiv,year_2017,0,3,1.0,reddit
+38,geographical,Chernigov,Chernihiv,year_2018,2,7,0.7777777777777778,reddit
+38,geographical,Chernigov,Chernihiv,year_2019,0,0,,reddit
+38,geographical,Chernigov,Chernihiv,year_2020,2,4,0.6666666666666666,reddit
+38,geographical,Chernigov,Chernihiv,year_2021,2,7,0.7777777777777778,reddit
+38,geographical,Chernigov,Chernihiv,year_2022,16,213,0.9301310043668122,reddit
+38,geographical,Chernigov,Chernihiv,year_2023,0,110,1.0,reddit
+38,geographical,Chernigov,Chernihiv,year_2024,0,54,1.0,reddit
+38,geographical,Chernigov,Chernihiv,year_2025,0,51,1.0,reddit
+38,geographical,Chernigov,Chernihiv,year_2026,0,9,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,all,1,115,0.9913793103448276,reddit
+39,geographical,Chernovtsy,Chernivtsi,year,0,29,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,month,0,2,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2010,0,0,,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2011,0,0,,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2012,0,0,,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2013,0,0,,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2014,0,1,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2015,0,2,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2016,0,1,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2017,0,4,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2018,0,5,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2019,0,5,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2020,0,9,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2021,0,8,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2022,0,48,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2023,0,17,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2024,0,15,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2025,0,16,1.0,reddit
+39,geographical,Chernovtsy,Chernivtsi,year_2026,0,0,,reddit
+40,geographical,Zhitomir,Zhytomyr,all,6,122,0.953125,reddit
+40,geographical,Zhitomir,Zhytomyr,year,0,32,1.0,reddit
+40,geographical,Zhitomir,Zhytomyr,month,0,3,1.0,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2010,0,0,,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2011,0,0,,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2012,0,0,,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2013,0,0,,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2014,1,1,0.5,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2015,0,0,,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2016,1,2,0.6666666666666666,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2017,0,2,1.0,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2018,0,6,1.0,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2019,0,1,1.0,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2020,0,7,1.0,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2021,1,4,0.8,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2022,9,117,0.9285714285714286,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2023,1,20,0.9523809523809523,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2024,0,13,1.0,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2025,0,15,1.0,reddit
+40,geographical,Zhitomir,Zhytomyr,year_2026,0,0,,reddit
+41,geographical,Cherkassy,Cherkasy,all,8,114,0.9344262295081968,reddit
+41,geographical,Cherkassy,Cherkasy,year,0,34,1.0,reddit
+41,geographical,Cherkassy,Cherkasy,month,0,2,1.0,reddit
+41,geographical,Cherkassy,Cherkasy,year_2010,0,0,,reddit
+41,geographical,Cherkassy,Cherkasy,year_2011,0,0,,reddit
+41,geographical,Cherkassy,Cherkasy,year_2012,0,0,,reddit
+41,geographical,Cherkassy,Cherkasy,year_2013,0,0,,reddit
+41,geographical,Cherkassy,Cherkasy,year_2014,0,7,1.0,reddit
+41,geographical,Cherkassy,Cherkasy,year_2015,0,1,1.0,reddit
+41,geographical,Cherkassy,Cherkasy,year_2016,0,3,1.0,reddit
+41,geographical,Cherkassy,Cherkasy,year_2017,0,0,,reddit
+41,geographical,Cherkassy,Cherkasy,year_2018,1,0,0.0,reddit
+41,geographical,Cherkassy,Cherkasy,year_2019,0,2,1.0,reddit
+41,geographical,Cherkassy,Cherkasy,year_2020,0,4,1.0,reddit
+41,geographical,Cherkassy,Cherkasy,year_2021,0,8,1.0,reddit
+41,geographical,Cherkassy,Cherkasy,year_2022,5,66,0.9295774647887324,reddit
+41,geographical,Cherkassy,Cherkasy,year_2023,2,20,0.9090909090909091,reddit
+41,geographical,Cherkassy,Cherkasy,year_2024,0,14,1.0,reddit
+41,geographical,Cherkassy,Cherkasy,year_2025,0,6,1.0,reddit
+41,geographical,Cherkassy,Cherkasy,year_2026,0,0,,reddit
+42,geographical,Uzhgorod,Uzhhorod,all,32,99,0.7557251908396947,reddit
+42,geographical,Uzhgorod,Uzhhorod,year,3,11,0.7857142857142857,reddit
+42,geographical,Uzhgorod,Uzhhorod,month,0,0,,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2010,0,0,,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2011,0,0,,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2012,0,0,,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2013,0,0,,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2014,0,0,,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2015,0,2,1.0,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2016,0,0,,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2017,0,2,1.0,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2018,2,3,0.6,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2019,2,1,0.3333333333333333,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2020,0,0,,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2021,2,6,0.75,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2022,15,28,0.6511627906976745,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2023,1,17,0.9444444444444444,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2024,2,6,0.75,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2025,0,12,1.0,reddit
+42,geographical,Uzhgorod,Uzhhorod,year_2026,0,1,1.0,reddit
+43,geographical,Kremenchug,Kremenchuk,all,7,79,0.9186046511627907,reddit
+43,geographical,Kremenchug,Kremenchuk,year,0,5,1.0,reddit
+43,geographical,Kremenchug,Kremenchuk,month,0,0,,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2010,0,0,,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2011,0,0,,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2012,0,0,,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2013,0,0,,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2014,0,0,,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2015,2,0,0.0,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2016,1,0,0.0,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2017,1,0,0.0,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2018,0,1,1.0,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2019,0,0,,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2020,0,1,1.0,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2021,0,5,1.0,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2022,20,137,0.8726114649681529,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2023,0,12,1.0,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2024,0,7,1.0,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2025,0,6,1.0,reddit
+43,geographical,Kremenchug,Kremenchuk,year_2026,0,0,,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,all,4,27,0.8709677419354839,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year,0,6,1.0,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,month,0,0,,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2010,0,0,,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2011,0,0,,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2012,0,0,,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2013,0,0,,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2014,0,0,,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2015,0,0,,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2016,1,0,0.0,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2017,0,0,,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2018,0,1,1.0,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2019,0,0,,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2020,1,0,0.0,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2021,0,1,1.0,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2022,1,12,0.9230769230769231,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2023,0,0,,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2024,0,3,1.0,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2025,0,4,1.0,reddit
+44,geographical,Kirovograd,Kropyvnytskyi,year_2026,0,0,,reddit
+45,geographical,Ternopol,Ternopil,all,4,115,0.9663865546218487,reddit
+45,geographical,Ternopol,Ternopil,year,1,67,0.9852941176470589,reddit
+45,geographical,Ternopol,Ternopil,month,0,2,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2010,0,0,,reddit
+45,geographical,Ternopol,Ternopil,year_2011,0,0,,reddit
+45,geographical,Ternopol,Ternopil,year_2012,0,1,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2013,0,0,,reddit
+45,geographical,Ternopol,Ternopil,year_2014,2,2,0.5,reddit
+45,geographical,Ternopol,Ternopil,year_2015,0,2,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2016,0,2,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2017,0,3,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2018,0,4,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2019,0,9,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2020,0,20,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2021,0,14,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2022,2,31,0.9393939393939394,reddit
+45,geographical,Ternopol,Ternopil,year_2023,0,21,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2024,0,6,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2025,0,51,1.0,reddit
+45,geographical,Ternopol,Ternopil,year_2026,0,1,1.0,reddit
+46,food,Vareniki,Varenyky,all,16,106,0.8688524590163934,reddit
+46,food,Vareniki,Varenyky,year,1,3,0.75,reddit
+46,food,Vareniki,Varenyky,month,0,0,,reddit
+46,food,Vareniki,Varenyky,year_2010,0,0,,reddit
+46,food,Vareniki,Varenyky,year_2011,0,0,,reddit
+46,food,Vareniki,Varenyky,year_2012,0,0,,reddit
+46,food,Vareniki,Varenyky,year_2013,0,0,,reddit
+46,food,Vareniki,Varenyky,year_2014,7,0,0.0,reddit
+46,food,Vareniki,Varenyky,year_2015,0,0,,reddit
+46,food,Vareniki,Varenyky,year_2016,0,0,,reddit
+46,food,Vareniki,Varenyky,year_2017,0,3,1.0,reddit
+46,food,Vareniki,Varenyky,year_2018,0,1,1.0,reddit
+46,food,Vareniki,Varenyky,year_2019,1,0,0.0,reddit
+46,food,Vareniki,Varenyky,year_2020,0,6,1.0,reddit
+46,food,Vareniki,Varenyky,year_2021,4,0,0.0,reddit
+46,food,Vareniki,Varenyky,year_2022,1,6,0.8571428571428571,reddit
+46,food,Vareniki,Varenyky,year_2023,1,8,0.8888888888888888,reddit
+46,food,Vareniki,Varenyky,year_2024,0,5,1.0,reddit
+46,food,Vareniki,Varenyky,year_2025,1,0,0.0,reddit
+46,food,Vareniki,Varenyky,year_2026,0,0,,reddit
+48,historical,Gopak,Hopak,all,4,29,0.8787878787878788,reddit
+48,historical,Gopak,Hopak,year,0,2,1.0,reddit
+48,historical,Gopak,Hopak,month,0,0,,reddit
+48,historical,Gopak,Hopak,year_2010,0,0,,reddit
+48,historical,Gopak,Hopak,year_2011,0,1,1.0,reddit
+48,historical,Gopak,Hopak,year_2012,0,0,,reddit
+48,historical,Gopak,Hopak,year_2013,0,0,,reddit
+48,historical,Gopak,Hopak,year_2014,0,0,,reddit
+48,historical,Gopak,Hopak,year_2015,0,3,1.0,reddit
+48,historical,Gopak,Hopak,year_2016,0,0,,reddit
+48,historical,Gopak,Hopak,year_2017,0,0,,reddit
+48,historical,Gopak,Hopak,year_2018,0,0,,reddit
+48,historical,Gopak,Hopak,year_2019,2,5,0.7142857142857143,reddit
+48,historical,Gopak,Hopak,year_2020,0,3,1.0,reddit
+48,historical,Gopak,Hopak,year_2021,2,2,0.5,reddit
+48,historical,Gopak,Hopak,year_2022,1,6,0.8571428571428571,reddit
+48,historical,Gopak,Hopak,year_2023,0,3,1.0,reddit
+48,historical,Gopak,Hopak,year_2024,0,6,1.0,reddit
+48,historical,Gopak,Hopak,year_2025,0,3,1.0,reddit
+48,historical,Gopak,Hopak,year_2026,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,all,0,1,1.0,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,month,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2010,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2011,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2012,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2013,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2014,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2015,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2016,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2017,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2018,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2019,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2020,1,2,0.6666666666666666,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2021,0,4,1.0,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2022,0,1,1.0,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2023,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2024,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2025,0,0,,reddit
+51,sports,Zorya Lugansk,Zorya Luhansk,year_2026,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,all,0,1,1.0,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,month,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2010,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2011,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2012,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2013,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2014,1,1,0.5,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2015,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2016,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2017,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2018,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2019,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2020,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2021,0,1,1.0,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2022,0,1,1.0,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2023,0,2,1.0,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2024,0,0,,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2025,0,1,1.0,reddit
+52,sports,Metalist Kharkov,Metalist Kharkiv,year_2026,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,all,0,1,1.0,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,month,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2010,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2011,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2012,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2013,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2014,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2015,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2016,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2017,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2018,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2019,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2020,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2021,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2022,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2023,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2024,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2025,0,0,,reddit
+53,sports,Karpaty Lvov,Karpaty Lviv,year_2026,0,0,,reddit
+54,landmarks,Babi Yar,Babyn Yar,all,24,31,0.5636363636363636,reddit
+54,landmarks,Babi Yar,Babyn Yar,year,0,1,1.0,reddit
+54,landmarks,Babi Yar,Babyn Yar,month,0,0,,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2010,0,0,,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2011,0,0,,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2012,0,0,,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2013,0,0,,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2014,1,0,0.0,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2015,2,0,0.0,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2016,3,2,0.4,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2017,0,0,,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2018,0,0,,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2019,2,0,0.0,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2020,1,3,0.75,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2021,13,5,0.2777777777777778,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2022,28,36,0.5625,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2023,2,11,0.8461538461538461,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2024,1,6,0.8571428571428571,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2025,0,1,1.0,reddit
+54,landmarks,Babi Yar,Babyn Yar,year_2026,0,2,1.0,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,all,1,0,0.0,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,month,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2010,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2011,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2012,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2013,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2014,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2015,1,0,0.0,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2016,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2017,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2018,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2019,1,0,0.0,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2020,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2021,1,0,0.0,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2022,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2023,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2024,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2025,0,0,,reddit
+55,landmarks,Potemkin Stairs Odessa,Potemkin Stairs Odesa,year_2026,0,0,,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,all,0,1,1.0,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year,0,0,,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,month,0,0,,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2010,0,0,,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2011,0,0,,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2012,0,0,,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2013,0,0,,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2014,0,0,,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2015,0,0,,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2016,0,0,,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2017,1,1,0.5,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2018,0,1,1.0,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2019,0,1,1.0,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2020,1,3,0.75,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2021,0,1,1.0,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2022,1,14,0.9333333333333333,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2023,0,14,1.0,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2024,0,0,,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2025,1,2,0.6666666666666666,reddit
+56,landmarks,Motherland Monument Kiev,Motherland Monument Kyiv,year_2026,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,all,0,3,1.0,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,month,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2010,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2011,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2012,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2013,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2014,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2015,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2016,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2017,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2018,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2019,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2020,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2021,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2022,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2023,0,1,1.0,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2024,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2025,0,0,,reddit
+57,institutional,Lvov Polytechnic,Lviv Polytechnic,year_2026,0,1,1.0,reddit
+58,institutional,Odessa National University,Odesa National University,all,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,month,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2010,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2011,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2012,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2013,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2014,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2015,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2016,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2017,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2018,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2019,0,1,1.0,reddit
+58,institutional,Odessa National University,Odesa National University,year_2020,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2021,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2022,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2023,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2024,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2025,0,0,,reddit
+58,institutional,Odessa National University,Odesa National University,year_2026,0,0,,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,all,0,56,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year,0,12,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,month,0,1,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2010,0,0,,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2011,0,0,,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2012,0,0,,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2013,0,0,,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2014,0,0,,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2015,0,1,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2016,0,0,,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2017,0,1,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2018,0,19,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2019,0,1,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2020,0,7,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2021,0,14,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2022,2,35,0.9459459459459459,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2023,0,23,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2024,0,48,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2025,0,17,1.0,reddit
+60,people,Alexander Usyk,Oleksandr Usyk,year_2026,0,2,1.0,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,all,11,210,0.9502262443438914,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year,3,75,0.9615384615384616,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,month,0,4,1.0,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2010,0,0,,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2011,0,0,,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2012,0,0,,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2013,0,0,,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2014,0,0,,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2015,0,0,,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2016,0,0,,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2017,0,0,,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2018,0,0,,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2019,5,0,0.0,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2020,1,6,0.8571428571428571,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2021,3,3,0.5,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2022,60,269,0.817629179331307,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2023,11,175,0.9408602150537635,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2024,4,108,0.9642857142857143,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2025,14,94,0.8703703703703703,reddit
+61,people,Vladimir Zelensky,Volodymyr Zelenskyy,year_2026,2,26,0.9285714285714286,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,all,1,15,0.9375,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year,0,0,,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,month,0,0,,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2010,0,0,,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2011,0,0,,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2012,0,3,1.0,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2013,0,0,,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2014,0,0,,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2015,0,0,,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2016,0,1,1.0,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2017,0,0,,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2018,0,3,1.0,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2019,0,0,,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2020,0,1,1.0,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2021,0,1,1.0,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2022,1,5,0.8333333333333334,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2023,0,7,1.0,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2024,0,3,1.0,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2025,0,1,1.0,reddit
+62,people,Andrey Shevchenko,Andrii Shevchenko,year_2026,0,0,,reddit
+64,food,Borsch,Borshch,all,98,105,0.5172413793103449,reddit
+64,food,Borsch,Borshch,year,6,2,0.25,reddit
+64,food,Borsch,Borshch,month,2,0,0.0,reddit
+64,food,Borsch,Borshch,year_2010,0,0,,reddit
+64,food,Borsch,Borshch,year_2011,0,0,,reddit
+64,food,Borsch,Borshch,year_2012,0,0,,reddit
+64,food,Borsch,Borshch,year_2013,3,0,0.0,reddit
+64,food,Borsch,Borshch,year_2014,1,3,0.75,reddit
+64,food,Borsch,Borshch,year_2015,1,0,0.0,reddit
+64,food,Borsch,Borshch,year_2016,0,0,,reddit
+64,food,Borsch,Borshch,year_2017,1,1,0.5,reddit
+64,food,Borsch,Borshch,year_2018,0,0,,reddit
+64,food,Borsch,Borshch,year_2019,2,0,0.0,reddit
+64,food,Borsch,Borshch,year_2020,8,3,0.2727272727272727,reddit
+64,food,Borsch,Borshch,year_2021,4,6,0.6,reddit
+64,food,Borsch,Borshch,year_2022,13,14,0.5185185185185185,reddit
+64,food,Borsch,Borshch,year_2023,13,15,0.5357142857142857,reddit
+64,food,Borsch,Borshch,year_2024,4,8,0.6666666666666666,reddit
+64,food,Borsch,Borshch,year_2025,1,0,0.0,reddit
+64,food,Borsch,Borshch,year_2026,2,0,0.0,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,all,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,month,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2010,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2011,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2012,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2013,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2014,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2015,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2016,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2017,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2018,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2019,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2020,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2021,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2022,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2023,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2024,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2025,0,0,,reddit
+69,people,Sergei Rebrov,Serhiy Rebrov,year_2026,0,0,,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,all,3,21,0.875,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year,0,0,,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,month,0,0,,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2010,0,0,,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2011,0,0,,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2012,0,0,,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2013,0,0,,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2014,5,0,0.0,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2015,2,0,0.0,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2016,2,0,0.0,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2017,1,0,0.0,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2018,1,0,0.0,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2019,1,0,0.0,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2020,0,0,,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2021,0,0,,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2022,16,5,0.23809523809523808,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2023,0,0,,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2024,2,0,0.0,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2025,0,0,,reddit
+70,historical,Vladimir the Great,Volodymyr the Great,year_2026,0,0,,reddit

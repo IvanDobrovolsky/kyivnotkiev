@@ -2,13 +2,13 @@
   {
     "model": "claude-haiku-4-5",
     "family": "Anthropic Claude",
-    "tas_mean": 82.4,
-    "ci_mean": 0.965,
-    "ua_pct_open": 75.0,
-    "ua_pct_forced_ru_first": 83.0,
-    "ua_pct_forced_ua_first": 86.3,
-    "position_bias": 51.6,
-    "other_rate": 11.1,
+    "tas_mean": 76.2,
+    "ci_mean": 0.958,
+    "ua_pct_open": 68.9,
+    "ua_pct_forced_ru_first": 83.6,
+    "ua_pct_forced_ua_first": 81.8,
+    "position_bias": 49.1,
+    "other_rate": 18.0,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -17,13 +17,13 @@
   {
     "model": "claude-opus-4-6",
     "family": "Anthropic Claude",
-    "tas_mean": 84.8,
-    "ci_mean": 0.943,
-    "ua_pct_open": 69.0,
-    "ua_pct_forced_ru_first": 96.2,
-    "ua_pct_forced_ua_first": 100.0,
-    "position_bias": 51.9,
-    "other_rate": 10.5,
+    "tas_mean": 78.8,
+    "ci_mean": 0.942,
+    "ua_pct_open": 63.8,
+    "ua_pct_forced_ru_first": 94.5,
+    "ua_pct_forced_ua_first": 98.1,
+    "position_bias": 51.8,
+    "other_rate": 18.0,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -32,13 +32,13 @@
   {
     "model": "claude-sonnet-4-6",
     "family": "Anthropic Claude",
-    "tas_mean": 80.9,
-    "ci_mean": 0.941,
-    "ua_pct_open": 72.7,
-    "ua_pct_forced_ru_first": 94.4,
-    "ua_pct_forced_ua_first": 79.2,
-    "position_bias": 42.4,
-    "other_rate": 6.8,
+    "tas_mean": 76.1,
+    "ci_mean": 0.936,
+    "ua_pct_open": 67.3,
+    "ua_pct_forced_ru_first": 94.8,
+    "ua_pct_forced_ua_first": 76.8,
+    "position_bias": 41.0,
+    "other_rate": 13.8,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -542,13 +542,13 @@
   {
     "model": "grok-3-mini",
     "family": "xAI Grok",
-    "tas_mean": 79.6,
-    "ci_mean": 0.962,
-    "ua_pct_open": 67.5,
-    "ua_pct_forced_ru_first": 90.6,
-    "ua_pct_forced_ua_first": 84.9,
-    "position_bias": 47.2,
-    "other_rate": 9.9,
+    "tas_mean": 73.8,
+    "ci_mean": 0.965,
+    "ua_pct_open": 62.2,
+    "ua_pct_forced_ru_first": 87.7,
+    "ua_pct_forced_ua_first": 82.5,
+    "position_bias": 47.4,
+    "other_rate": 15.9,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -557,13 +557,13 @@
   {
     "model": "grok-3",
     "family": "xAI Grok",
-    "tas_mean": 80.4,
-    "ci_mean": 0.966,
-    "ua_pct_open": 74.4,
-    "ua_pct_forced_ru_first": 86.8,
-    "ua_pct_forced_ua_first": 81.1,
-    "position_bias": 47.2,
-    "other_rate": 8.0,
+    "tas_mean": 74.0,
+    "ci_mean": 0.968,
+    "ua_pct_open": 68.8,
+    "ua_pct_forced_ru_first": 83.9,
+    "ua_pct_forced_ua_first": 78.6,
+    "position_bias": 47.3,
+    "other_rate": 15.3,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -572,13 +572,13 @@
   {
     "model": "grok-4-0709",
     "family": "xAI Grok",
-    "tas_mean": 83.7,
-    "ci_mean": 0.954,
-    "ua_pct_open": 71.7,
-    "ua_pct_forced_ru_first": 96.2,
-    "ua_pct_forced_ua_first": 94.3,
+    "tas_mean": 76.5,
+    "ci_mean": 0.957,
+    "ua_pct_open": 64.7,
+    "ua_pct_forced_ru_first": 93.0,
+    "ua_pct_forced_ua_first": 91.2,
     "position_bias": 49.1,
-    "other_rate": 6.8,
+    "other_rate": 12.7,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -593,7 +593,7 @@
     "ua_pct_forced_ru_first": 92.3,
     "ua_pct_forced_ua_first": 84.6,
     "position_bias": 46.2,
-    "other_rate": 11.1,
+    "other_rate": 14.3,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -608,7 +608,7 @@
     "ua_pct_forced_ru_first": 94.3,
     "ua_pct_forced_ua_first": 87.0,
     "position_bias": 46.3,
-    "other_rate": 8.0,
+    "other_rate": 11.3,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -623,7 +623,7 @@
     "ua_pct_forced_ru_first": 90.6,
     "ua_pct_forced_ua_first": 84.6,
     "position_bias": 47.0,
-    "other_rate": 10.5,
+    "other_rate": 13.7,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -638,7 +638,7 @@
     "ua_pct_forced_ru_first": 90.6,
     "ua_pct_forced_ua_first": 88.7,
     "position_bias": 49.1,
-    "other_rate": 8.6,
+    "other_rate": 11.9,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -653,7 +653,7 @@
     "ua_pct_forced_ru_first": 98.1,
     "ua_pct_forced_ua_first": 75.0,
     "position_bias": 38.4,
-    "other_rate": 8.6,
+    "other_rate": 11.9,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -668,7 +668,7 @@
     "ua_pct_forced_ru_first": 92.5,
     "ua_pct_forced_ua_first": 98.1,
     "position_bias": 52.8,
-    "other_rate": 3.7,
+    "other_rate": 7.1,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
