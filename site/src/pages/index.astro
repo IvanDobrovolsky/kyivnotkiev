@@ -2079,14 +2079,45 @@ function formatNum(n: number) {
             <div class="stat-source">${series.length} data points</div>
           `;
         } else {
+          // Determine why data is missing — expected vs gap
+          const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+          const cat = pair?.category || '';
+          const pid = activePairId;
+          const isNewPair = pid >= 80;
+          // Sources that don't cover certain categories
+          const gdeltNoData = ['food','landmarks','institutional','sports'].includes(cat) || ['people','historical'].includes(cat);
+          const ngramsNoData = ['sports','institutional','landmarks'].includes(cat) || pid >= 60; // recent pairs
+          const reason =
+            isNewPair ? 'Data collection in progress' :
+            (src === 'gdelt' && gdeltNoData) ? 'Not in news URLs' :
+            (src === 'ngrams' && ngramsNoData) ? 'Not in book corpus' :
+            (src === 'openlibrary' && ['sports','landmarks','institutional'].includes(cat)) ? 'Not in book titles' :
+            (src === 'openalex' && ['food','sports','landmarks'].includes(cat)) ? 'Not in academic papers' :
+            'No mentions found';
           card.innerHTML = `
             <div class="stat-value" style="color:#d1d5db;">—</div>
             <div class="stat-label">${sourceLabels[src]}</div>
-            <div class="stat-source">No data</div>
+            <div class="stat-source" title="${reason}">${reason}</div>
           `;
           card.style.opacity = '0.4';
         }
         container.appendChild(card);
+      }
+
+      // If most sources are empty, add a note
+      const filledCount = srcOrder.filter(s => {
+        const d = pairData[s];
+        return d && d.length > 0 && d.reduce((t: number, r: any) => t + (r.ukr || 0) + (r.rus || 0), 0) > 0;
+      }).length;
+      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      const isNewPair = activePairId >= 80;
+      if (filledCount <= 3) {
+        const note = document.createElement('div');
+        note.style.cssText = 'grid-column: 1 / -1; font-size:0.65rem; color:var(--text-muted); padding:0.5rem 0.3rem; line-height:1.5; border-top:1px solid rgba(0,0,0,0.06); margin-top:0.3rem;';
+        note.innerHTML = isNewPair
+          ? `<strong>New pair.</strong> Data collection is in progress for this pair. Most sources are being scraped and will appear shortly.`
+          : `<strong>Limited coverage.</strong> This pair (${pair?.category || ''}) has sparse data because it appears primarily in ${filledCount <= 1 ? 'a single source' : filledCount + ' sources'}. ${pair?.category === 'people' ? 'Person names appear mainly in Wikipedia and Google Trends, not in news-URL databases or book corpora.' : pair?.category === 'landmarks' || pair?.category === 'institutional' ? 'Institutional and landmark names rarely appear as standalone search terms in news databases.' : 'Niche pairs naturally have fewer data points across sources.'}`;
+        container.appendChild(note);
       }
     }
 
