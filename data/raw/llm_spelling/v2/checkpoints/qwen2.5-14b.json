@@ -1408,6 +1408,162 @@
           "x": 0
         }
       ]
+    },
+    {
+      "pair_id": 84,
+      "russian": "Igor Sikorsky",
+      "ukrainian": "Ihor Sikorsky",
+      "category": "people",
+      "trials": [
+        {
+          "test": "forced_ru_first",
+          "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+          "response": "Ihor",
+          "x": 1
+        },
+        {
+          "test": "forced_ua_first",
+          "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+          "response": "Igor",
+          "x": 0
+        },
+        {
+          "test": "open",
+          "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+          "response": "Igor",
+          "x": 0
+        }
+      ]
+    },
+    {
+      "pair_id": 85,
+      "russian": "Sergei Korolev",
+      "ukrainian": "Serhii Korolyov",
+      "category": "people",
+      "trials": [
+        {
+          "test": "forced_ru_first",
+          "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+          "response": "Korolev",
+          "x": null
+        },
+        {
+          "test": "forced_ua_first",
+          "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+          "response": "Sergei",
+          "x": null
+        },
+        {
+          "test": "open",
+          "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+          "response": "Sergei Korolev",
+          "x": 0
+        }
+      ]
+    },
+    {
+      "pair_id": 86,
+      "russian": "Bogdan Khmelnitsky",
+      "ukrainian": "Bohdan Khmelnytskyi",
+      "category": "historical",
+      "trials": [
+        {
+          "test": "forced_ru_first",
+          "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+          "response": "Bohdan",
+          "x": null
+        },
+        {
+          "test": "forced_ua_first",
+          "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+          "response": "Khmelnytskyi",
+          "x": null
+        },
+        {
+          "test": "open",
+          "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+          "response": "Bohdan Zyn\u0441\u044cky",
+          "x": null
+        }
+      ]
+    },
+    {
+      "pair_id": 87,
+      "russian": "Kazimir Malevich",
+      "ukrainian": "Kazymyr Malevych",
+      "category": "people",
+      "trials": [
+        {
+          "test": "forced_ru_first",
+          "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+          "response": "Malevich",
+          "x": null
+        },
+        {
+          "test": "forced_ua_first",
+          "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+          "response": "Malevich",
+          "x": null
+        },
+        {
+          "test": "open",
+          "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+          "response": "Kazimir Malevich",
+          "x": 0
+        }
+      ]
+    },
+    {
+      "pair_id": 89,
+      "russian": "Sviatogorsk Lavra",
+      "ukrainian": "Sviatohirsk Lavra",
+      "category": "landmarks",
+      "trials": [
+        {
+          "test": "forced_ru_first",
+          "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+          "response": "Sviatohirsk",
+          "x": 1
+        },
+        {
+          "test": "forced_ua_first",
+          "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+          "response": "Sviatogorsk",
+          "x": 0
+        },
+        {
+          "test": "open",
+          "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+          "response": "Svyato-Hirievska",
+          "x": null
+        }
+      ]
+    },
+    {
+      "pair_id": 72,
+      "russian": "Artemovsk",
+      "ukrainian": "Bakhmut",
+      "category": "geographical",
+      "trials": [
+        {
+          "test": "forced_ru_first",
+          "prompt": "Artemovsk or Bakhmut? Answer with one word.",
+          "response": "Bakhmut",
+          "x": 1
+        },
+        {
+          "test": "forced_ua_first",
+          "prompt": "Bakhmut or Artemovsk? Answer with one word.",
+          "response": "Artemovsk",
+          "x": 0
+        },
+        {
+          "test": "open",
+          "prompt": "What is the eastern Ukrainian city in the Donbas region that was the site of the longest battle of 2022-2023 called in English today? Answer with one word.",
+          "response": "Bakhmut",
+          "x": 1
+        }
+      ]
     }
   ],
   "timestamp": "2026-04-11T20:38:53.548332+00:00",
@@ -1416,15 +1572,15 @@
       "w1_forced": 0.4,
       "w2_open": 0.6
     },
-    "n_pairs": 54,
-    "n_pairs_complete": 38,
-    "tas_mean": 62.6,
-    "ci_mean": 0.882,
-    "ua_pct_forced_ru_first": 98.0,
-    "ua_pct_forced_ua_first": 50.0,
-    "ua_pct_open": 51.2,
-    "position_bias": 26.0,
-    "other_total": 21,
-    "other_rate": 13.0
+    "n_pairs": 60,
+    "n_pairs_complete": 40,
+    "tas_mean": 59.8,
+    "ci_mean": 0.876,
+    "ua_pct_forced_ru_first": 98.1,
+    "ua_pct_forced_ua_first": 47.2,
+    "ua_pct_open": 48.9,
+    "position_bias": 24.5,
+    "other_total": 29,
+    "other_rate": 16.1
   }
 }

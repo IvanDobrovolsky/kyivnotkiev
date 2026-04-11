@@ -293,21 +293,21 @@
     },
     {
       "pair_id": 15,
-      "russian": "Dnieper",
-      "ukrainian": "Dnipro",
+      "russian": "Dnieper River",
+      "ukrainian": "Dnipro River",
       "category": "geographical",
       "trials": [
         {
           "test": "forced_ru_first",
-          "prompt": "Dnieper or Dnipro? Answer with one word.",
+          "prompt": "Dnieper River or Dnipro River? Answer with one word.",
           "response": "Dnipro",
           "x": 1
         },
         {
           "test": "forced_ua_first",
-          "prompt": "Dnipro or Dnieper? Answer with one word.",
-          "response": "Dnieper",
-          "x": 0
+          "prompt": "Dnipro River or Dnieper River? Answer with one word.",
+          "response": "Dnipro",
+          "x": 1
         },
         {
           "test": "open",
@@ -683,53 +683,27 @@
     },
     {
       "pair_id": 23,
-      "russian": "Borscht",
-      "ukrainian": "Borshch",
-      "category": "food",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Borscht or Borshch? Answer with one word.",
-          "response": "Borscht",
-          "x": 0
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Borshch or Borscht? Answer with one word.",
-          "response": "Borscht",
-          "x": 0
-        },
-        {
-          "test": "open",
-          "prompt": "How is the Ukrainian beetroot soup, recognized by UNESCO in 2022, spelled in English? Answer with one word.",
-          "response": "borscht",
-          "x": 0
-        }
-      ]
-    },
-    {
-      "pair_id": 64,
       "russian": "Borsch",
-      "ukrainian": "Borshch",
+      "ukrainian": "Borscht",
       "category": "food",
       "trials": [
         {
           "test": "forced_ru_first",
-          "prompt": "Borsch or Borshch? Answer with one word.",
-          "response": "Borshch",
+          "prompt": "Borsch or Borscht? Answer with one word.",
+          "response": "Borscht",
           "x": 1
         },
         {
           "test": "forced_ua_first",
-          "prompt": "Borshch or Borsch? Answer with one word.",
+          "prompt": "Borscht or Borsch? Answer with one word.",
           "response": "borscht",
-          "x": 0
+          "x": 1
         },
         {
           "test": "open",
           "prompt": "How is the Ukrainian beetroot soup, recognized by UNESCO in 2022, spelled in English? Answer with one word.",
           "response": "borscht",
-          "x": 0
+          "x": 1
         }
       ]
     },
@@ -836,595 +810,23 @@
           "x": 0
         }
       ]
-    },
-    {
-      "pair_id": 54,
-      "russian": "Babi Yar",
-      "ukrainian": "Babyn Yar",
-      "category": "landmarks",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Babi Yar or Babyn Yar? Answer with one word.",
-          "response": "Babi",
-          "x": 0
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Babyn Yar or Babi Yar? Answer with one word.",
-          "response": "Babi Yar",
-          "x": 0
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The ravine in the capital of Ukraine where Nazis killed about 33,000 Jews in September 1941 is called ___ Yar.' Answer with the missing word only.",
-          "response": "Babi",
-          "x": 0
-        }
-      ]
-    },
-    {
-      "pair_id": 55,
-      "russian": "Potemkin Stairs Odessa",
-      "ukrainian": "Potemkin Stairs Odesa",
-      "category": "landmarks",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Potemkin Stairs Odessa or Potemkin Stairs Odesa? Answer with one word.",
-          "response": "Odesa",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Potemkin Stairs Odesa or Potemkin Stairs Odessa? Answer with one word.",
-          "response": "Odessa",
-          "x": 0
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The famous monumental staircase in the Ukrainian Black Sea port city is called the Potemkin Stairs of ___.' Answer with the missing word only.",
-          "response": "Odessa",
-          "x": 0
-        }
-      ]
-    },
-    {
-      "pair_id": 56,
-      "russian": "Motherland Monument Kiev",
-      "ukrainian": "Motherland Monument Kyiv",
-      "category": "landmarks",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Motherland Monument Kiev or Motherland Monument Kyiv? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Motherland Monument Kyiv or Motherland Monument Kiev? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The colossal Soviet-era stainless-steel statue in the capital of Ukraine is called the Motherland Monument ___.' Answer with the missing word only.",
-          "response": "Calls",
-          "x": null
-        }
-      ]
-    },
-    {
-      "pair_id": 28,
-      "russian": "Kiev National University",
-      "ukrainian": "Kyiv National University",
-      "category": "institutional",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Kiev National University or Kyiv National University? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Kyiv National University or Kiev National University? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The main public university in the capital of Ukraine, founded in 1834, is called ___ National University.' Answer with the missing word only.",
-          "response": "Kyiv",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 29,
-      "russian": "Kharkov University",
-      "ukrainian": "Kharkiv University",
-      "category": "institutional",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Kharkov University or Kharkiv University? Answer with one word.",
-          "response": "Kharkiv",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Kharkiv University or Kharkov University? Answer with one word.",
-          "response": "Kharkiv",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The oldest university in the second-largest city of Ukraine, founded in 1804, is called ___ University.' Answer with the missing word only.",
-          "response": "Kharkiv National",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 30,
-      "russian": "Kiev Polytechnic",
-      "ukrainian": "Kyiv Polytechnic",
-      "category": "institutional",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Kiev Polytechnic or Kyiv Polytechnic? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Kyiv Polytechnic or Kiev Polytechnic? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The main technical university in the capital of Ukraine is called the ___ Polytechnic Institute.' Answer with the missing word only.",
-          "response": "Kyiv",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 31,
-      "russian": "Kiev Patriarchate",
-      "ukrainian": "Kyiv Patriarchate",
-      "category": "institutional",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Kiev Patriarchate or Kyiv Patriarchate? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Kyiv Patriarchate or Kiev Patriarchate? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The autocephalous Orthodox church based in the capital of Ukraine is called the ___ Patriarchate.' Answer with the missing word only.",
-          "response": "Kyivan",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 57,
-      "russian": "Lvov Polytechnic",
-      "ukrainian": "Lviv Polytechnic",
-      "category": "institutional",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Lvov Polytechnic or Lviv Polytechnic? Answer with one word.",
-          "response": "Lviv",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Lviv Polytechnic or Lvov Polytechnic? Answer with one word.",
-          "response": "Lviv",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The main technical university in the largest western Ukrainian city is called the ___ Polytechnic.' Answer with the missing word only.",
-          "response": "Lviv",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 58,
-      "russian": "Odessa National University",
-      "ukrainian": "Odesa National University",
-      "category": "institutional",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Odessa National University or Odesa National University? Answer with one word.",
-          "response": "Odesa",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Odesa National University or Odessa National University? Answer with one word.",
-          "response": "Odesa",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The main university in the Ukrainian Black Sea port city is called ___ National University.' Answer with the missing word only.",
-          "response": "Odesa",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 32,
-      "russian": "Dynamo Kiev",
-      "ukrainian": "Dynamo Kyiv",
-      "category": "sports",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Dynamo Kiev or Dynamo Kyiv? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Dynamo Kyiv or Dynamo Kiev? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The most successful Ukrainian football club, based in the capital, is called Dynamo ___.' Answer with the missing word only.",
-          "response": "Kyiv",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 34,
-      "russian": "Kiev ballet",
-      "ukrainian": "Kyiv ballet",
-      "category": "sports",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Kiev ballet or Kyiv ballet? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Kyiv ballet or Kiev ballet? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The national ballet company of Ukraine, based in the capital, is called the ___ Ballet.' Answer with the missing word only.",
-          "response": "Kyiv",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 51,
-      "russian": "Zorya Lugansk",
-      "ukrainian": "Zorya Luhansk",
-      "category": "sports",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Zorya Lugansk or Zorya Luhansk? Answer with one word.",
-          "response": "Zorya Luhansk.",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Zorya Luhansk or Zorya Lugansk? Answer with one word.",
-          "response": "Zorya Luhansk.",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The Ukrainian football club originally based in the eastern city that is the capital of one of the separatist regions is called Zorya ___.' Answer with the missing word only.",
-          "response": "Luhansk",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 52,
-      "russian": "Metalist Kharkov",
-      "ukrainian": "Metalist Kharkiv",
-      "category": "sports",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Metalist Kharkov or Metalist Kharkiv? Answer with one word.",
-          "response": "Kharkiv",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Metalist Kharkiv or Metalist Kharkov? Answer with one word.",
-          "response": "Kharkiv",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The Ukrainian football club from the second-largest city of Ukraine, in the northeast, is called Metalist ___.' Answer with the missing word only.",
-          "response": "Kharkiv",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 53,
-      "russian": "Karpaty Lvov",
-      "ukrainian": "Karpaty Lviv",
-      "category": "sports",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Karpaty Lvov or Karpaty Lviv? Answer with one word.",
-          "response": "Lviv",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Karpaty Lviv or Karpaty Lvov? Answer with one word.",
-          "response": "Lviv",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The Ukrainian football club from the largest western city of Ukraine is called Karpaty ___.' Answer with the missing word only.",
-          "response": "Lviv",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 35,
-      "russian": "Kievan Rus",
-      "ukrainian": "Kyivan Rus",
-      "category": "historical",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Kievan Rus or Kyivan Rus? Answer with one word.",
-          "response": "Kyivan",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Kyivan Rus or Kievan Rus? Answer with one word.",
-          "response": "Kyivan",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The medieval East Slavic federation centered around the capital of modern Ukraine is called ___ Rus.' Answer with the missing word only.",
-          "response": "Kievan",
-          "x": 0
-        }
-      ]
-    },
-    {
-      "pair_id": 36,
-      "russian": "Kazak",
-      "ukrainian": "Kozak",
-      "category": "historical",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Kazak or Kozak? Answer with one word.",
-          "response": "Kazak",
-          "x": 0
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Kozak or Kazak? Answer with one word.",
-          "response": "Kazak",
-          "x": 0
-        },
-        {
-          "test": "open",
-          "prompt": "How is the term for the historical Ukrainian frontier warriors (the founders of the Sich) spelled in English transliteration of Ukrainian? Answer with one word.",
-          "response": "Kozak",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 48,
-      "russian": "Gopak",
-      "ukrainian": "Hopak",
-      "category": "historical",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Gopak or Hopak? Answer with one word.",
-          "response": "Hopak",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Hopak or Gopak? Answer with one word.",
-          "response": "Hopak",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "How is the fast-paced traditional Ukrainian folk dance spelled in English transliteration of Ukrainian? Answer with one word.",
-          "response": "Hopak",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 70,
-      "russian": "Vladimir the Great",
-      "ukrainian": "Volodymyr the Great",
-      "category": "historical",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Vladimir the Great or Volodymyr the Great? Answer with one word.",
-          "response": "Vladimir",
-          "x": 0
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Volodymyr the Great or Vladimir the Great? Answer with one word.",
-          "response": "Vladimir",
-          "x": 0
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The medieval prince who Christianized the East Slavs in 988 AD is known in modern English as ___ the Great.' Answer with the missing word only.",
-          "response": "Vladimir",
-          "x": 0
-        }
-      ]
-    },
-    {
-      "pair_id": 71,
-      "russian": "Prince of Kiev",
-      "ukrainian": "Prince of Kyiv",
-      "category": "historical",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Prince of Kiev or Prince of Kyiv? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Prince of Kyiv or Prince of Kiev? Answer with one word.",
-          "response": "Kyiv",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "Complete: 'The medieval rulers of the East Slavic capital of modern Ukraine were called Prince of ___.' Answer with the missing word only.",
-          "response": "Kyiv",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 60,
-      "russian": "Alexander Usyk",
-      "ukrainian": "Oleksandr Usyk",
-      "category": "people",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Alexander Usyk or Oleksandr Usyk? Answer with one word.",
-          "response": "Oleksandr",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Oleksandr Usyk or Alexander Usyk? Answer with one word.",
-          "response": "Oleksandr",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "What is the first name of the Ukrainian heavyweight boxing world champion (last name Usyk) in modern English usage? Answer with one word.",
-          "response": "Oleksandr",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 61,
-      "russian": "Vladimir Zelensky",
-      "ukrainian": "Volodymyr Zelenskyy",
-      "category": "people",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Vladimir Zelensky or Volodymyr Zelenskyy? Answer with one word.",
-          "response": "",
-          "x": null
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Volodymyr Zelenskyy or Vladimir Zelensky? Answer with one word.",
-          "response": "Volodymyr Zelenskyy",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "What is the full English name (first and last) of the current president of Ukraine? Answer with two words only.",
-          "response": "Volodymyr Zelenskyy",
-          "x": 1
-        }
-      ]
-    },
-    {
-      "pair_id": 72,
-      "russian": "Artemovsk",
-      "ukrainian": "Bakhmut",
-      "category": "geographical",
-      "trials": [
-        {
-          "test": "forced_ru_first",
-          "prompt": "Artemovsk or Bakhmut? Answer with one word.",
-          "response": "Bakhmut",
-          "x": 1
-        },
-        {
-          "test": "forced_ua_first",
-          "prompt": "Bakhmut or Artemovsk? Answer with one word.",
-          "response": "Bakhmut",
-          "x": 1
-        },
-        {
-          "test": "open",
-          "prompt": "What is the eastern Ukrainian city in the Donbas region that was the site of the longest battle of 2022-2023 called in English today? Answer with one word.",
-          "response": "Bakhmut",
-          "x": 1
-        }
-      ]
     }
   ],
-  "timestamp": "2026-04-08T09:20:39.953362+00:00",
+  "timestamp": "2026-04-11T20:44:01.889222+00:00",
   "summary": {
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
     },
-    "n_pairs": 54,
-    "n_pairs_complete": 40,
-    "tas_mean": 82.0,
-    "ci_mean": 0.967,
-    "ua_pct_forced_ru_first": 86.8,
-    "ua_pct_forced_ua_first": 81.5,
-    "ua_pct_open": 75.6,
-    "position_bias": 47.3,
-    "other_total": 14,
-    "other_rate": 8.6
+    "n_pairs": 31,
+    "n_pairs_complete": 19,
+    "tas_mean": 87.4,
+    "ci_mean": 0.978,
+    "ua_pct_forced_ru_first": 90.3,
+    "ua_pct_forced_ua_first": 90.3,
+    "ua_pct_open": 78.9,
+    "position_bias": 50.0,
+    "other_total": 12,
+    "other_rate": 12.9
   }
 }

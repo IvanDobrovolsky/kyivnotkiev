@@ -1037,13 +1037,13 @@
   {
     "model": "qwen2.5-14b",
     "family": "Alibaba Qwen",
-    "tas_mean": 62.6,
-    "ci_mean": 0.882,
-    "ua_pct_open": 51.2,
-    "ua_pct_forced_ru_first": 98.0,
-    "ua_pct_forced_ua_first": 50.0,
-    "position_bias": 26.0,
-    "other_rate": 13.0,
+    "tas_mean": 59.8,
+    "ci_mean": 0.876,
+    "ua_pct_open": 48.9,
+    "ua_pct_forced_ru_first": 98.1,
+    "ua_pct_forced_ua_first": 47.2,
+    "position_bias": 24.5,
+    "other_rate": 16.1,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -1052,13 +1052,13 @@
   {
     "model": "qwen2.5-32b",
     "family": "Alibaba Qwen",
-    "tas_mean": 75.7,
-    "ci_mean": 0.917,
-    "ua_pct_open": 62.2,
-    "ua_pct_forced_ru_first": 96.2,
-    "ua_pct_forced_ua_first": 69.2,
-    "position_bias": 36.5,
-    "other_rate": 12.3,
+    "tas_mean": 73.2,
+    "ci_mean": 0.927,
+    "ua_pct_open": 59.0,
+    "ua_pct_forced_ru_first": 96.3,
+    "ua_pct_forced_ua_first": 69.8,
+    "position_bias": 36.8,
+    "other_rate": 18.9,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -1112,13 +1112,13 @@
   {
     "model": "qwen3-32b",
     "family": "Alibaba Qwen",
-    "tas_mean": 82.0,
-    "ci_mean": 0.967,
-    "ua_pct_open": 75.6,
-    "ua_pct_forced_ru_first": 86.8,
-    "ua_pct_forced_ua_first": 81.5,
-    "position_bias": 47.3,
-    "other_rate": 8.6,
+    "tas_mean": 87.4,
+    "ci_mean": 0.978,
+    "ua_pct_open": 78.9,
+    "ua_pct_forced_ru_first": 90.3,
+    "ua_pct_forced_ua_first": 90.3,
+    "position_bias": 50.0,
+    "other_rate": 12.9,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6

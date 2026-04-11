@@ -261,16 +261,16 @@
       "family": "Alibaba Qwen",
       "tier": "mid",
       "release_date": "2024-09",
-      "tas": 62.6,
-      "open": 51.2,
-      "forced_ru_first": 98.0,
-      "forced_ua_first": 50.0,
-      "forced": 74.0,
-      "gap": 22.8,
-      "ci": 0.882,
-      "position_bias": 26.0,
+      "tas": 59.8,
+      "open": 48.9,
+      "forced_ru_first": 98.1,
+      "forced_ua_first": 47.2,
+      "forced": 72.7,
+      "gap": 23.8,
+      "ci": 0.876,
+      "position_bias": 24.5,
       "consistency_pct": null,
-      "other_rate": 13.0
+      "other_rate": 16.1
     },
     {
       "key": "qwen2.5-32b",
@@ -278,16 +278,16 @@
       "family": "Alibaba Qwen",
       "tier": "mid",
       "release_date": "2024-09",
-      "tas": 75.7,
-      "open": 62.2,
-      "forced_ru_first": 96.2,
-      "forced_ua_first": 69.2,
-      "forced": 82.7,
-      "gap": 20.5,
-      "ci": 0.917,
-      "position_bias": 36.5,
+      "tas": 73.2,
+      "open": 59.0,
+      "forced_ru_first": 96.3,
+      "forced_ua_first": 69.8,
+      "forced": 83.0,
+      "gap": 24.0,
+      "ci": 0.927,
+      "position_bias": 36.8,
       "consistency_pct": null,
-      "other_rate": 12.3
+      "other_rate": 18.9
     },
     {
       "key": "qwen2.5-3b",
@@ -645,23 +645,6 @@
       "position_bias": 30.5,
       "consistency_pct": null,
       "other_rate": 28.3
-    },
-    {
-      "key": "qwen3-32b",
-      "label": "qwen3-32b",
-      "family": "Alibaba Qwen",
-      "tier": "frontier",
-      "release_date": "2025-04",
-      "tas": 82.0,
-      "open": 75.6,
-      "forced_ru_first": 86.8,
-      "forced_ua_first": 81.5,
-      "forced": 84.2,
-      "gap": 8.6,
-      "ci": 0.967,
-      "position_bias": 47.3,
-      "consistency_pct": null,
-      "other_rate": 8.6
     },
     {
       "key": "o3-2025-04",
@@ -1211,7 +1194,7 @@
   "families": {
     "Alibaba Qwen": {
       "color": "#9333EA",
-      "n_models": 8
+      "n_models": 7
     },
     "Anthropic Claude": {
       "color": "#C97B47",
@@ -1243,7 +1226,7 @@
     }
   },
   "summary": {
-    "n_models": 71,
+    "n_models": 70,
     "tas_min": 51.5,
     "tas_max": 86.3,
     "open_min": 43.2,
