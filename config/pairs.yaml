@@ -167,11 +167,11 @@ pairs:
   starred: false
 - id: 15
   category: geographical
-  russian: Dnieper
-  ukrainian: Dnipro
+  russian: Dnieper River
+  ukrainian: Dnipro River
   enabled: true
   is_control: false
-  notes: River name
+  notes: River name. Qualified with "River" to disambiguate from the city (pair 7, Dnepropetrovsk→Dnipro).
   starred: false
 - id: 16
   category: geographical
@@ -282,29 +282,23 @@ pairs:
   starred: false
 - id: 23
   category: food
-  russian: Borscht
-  ukrainian: Borshch
+  russian: Borsch
+  ukrainian: Borscht
   enabled: true
   is_control: false
-  notes: '''Borsch without a t'' — Klopotenko''s UNESCO campaign (2018-2022) parallels #KyivNotKiev. UNESCO inscribed Ukrainian
-    borscht July 2022. Washington Post, NPR, AP all covered the ''t'' debate. Yiddish etymology makes this a distinct but
-    complementary case to decolonial renaming.
-
-    '
+  notes: 'UNESCO inscribed ''Culture of Ukrainian borscht cooking'' in July 2022, using ''borscht'' as the international form. Russian-derived ''borsch'' (without t) tests whether English adopts the UNESCO/Ukrainian standard.'
   events:
   - date: 2022-07
     label: UNESCO inscribes Ukrainian borscht
-  starred: false
+  starred: true
+  starred_label: UNESCO cultural heritage — dish as identity marker
 - id: 64
   category: food
   russian: Borsch
   ukrainian: Borshch
-  enabled: true
+  enabled: false
   is_control: false
-  notes: 'Secondary variant: ''Borsch'' vs ''Borshch'' (both without ''t''). Tracks whether the Ukrainian transliteration
-    ''shch'' is gaining over simplified ''sch''.
-
-    '
+  notes: 'Disabled: merged into pair 23 (Borsch→Borscht). UNESCO uses borscht as the international standard.'
   starred: false
 - id: 46
   category: food
@@ -445,8 +439,9 @@ pairs:
   category: sports
   russian: Zorya Lugansk
   ukrainian: Zorya Luhansk
-  enabled: true
+  enabled: false
   is_control: false
+  notes: 'Disabled: displaced from Luhansk since 2014, limited data.'
   starred: false
 - id: 52
   category: sports
@@ -459,8 +454,9 @@ pairs:
   category: sports
   russian: Karpaty Lvov
   ukrainian: Karpaty Lviv
-  enabled: true
+  enabled: false
   is_control: false
+  notes: 'Disabled: club dissolved 2021, insufficient recent data.'
   starred: false
 - id: 35
   category: historical
@@ -475,9 +471,10 @@ pairs:
 - id: 36
   category: historical
   russian: Kazak
-  ukrainian: Kozak
+  ukrainian: Cossack
   enabled: true
   is_control: false
+  notes: Cossack is the universal English form — aligned with English usage. Tests whether Kazak (Russian transliteration) ever appears vs the established Cossack.
   starred: false
 - id: 37
   category: historical
@@ -570,11 +567,11 @@ pairs:
   starred_label: Wartime president — first name + last name contested
 - id: 62
   category: people
-  russian: Andrei Shevchenko
-  ukrainian: Andriy Shevchenko
-  enabled: false
+  russian: Andrey Shevchenko
+  ukrainian: Andrii Shevchenko
+  enabled: true
   is_control: false
-  notes: Insufficient data quality — borderline adoption signal
+  notes: Global football icon (Андрій Шевченко). Tests Й→ii per CMU rules (Andrii vs Andrey/Andrei).
   starred: false
 - id: 63
   category: people
@@ -626,11 +623,11 @@ pairs:
   starred: false
 - id: 80
   category: people
-  russian: Mykola Gogol
+  russian: Nikolai Gogol
   ukrainian: Mykola Hohol
-  enabled: false
+  enabled: true
   is_control: false
-  notes: Controversial — Gogol wrote in Russian. Disabled for now.
+  notes: Ukrainian-born writer (Миколa Гоголь). Tests Г→H and Микола→Mykola vs Nikolai.
   starred: false
 - id: 81
   category: historical
@@ -639,6 +636,63 @@ pairs:
   enabled: false
   is_control: false
   notes: National salute — trackable on social media. Russian-influenced English drops the -i ending.
+  starred: false
+- id: 82
+  category: geographical
+  russian: Feodosiya
+  ukrainian: Feodosiia
+  enabled: true
+  is_control: false
+  notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms Ukraine's territorial integrity.
+  starred: false
+- id: 83
+  category: historical
+  russian: Olga of Kiev
+  ukrainian: Olha of Kyiv
+  enabled: true
+  is_control: false
+  notes: Princess of Kyivan Rus (княгиня Ольга). Tests Г→H in first name + Kiev→Kyiv.
+  starred: false
+- id: 84
+  category: people
+  russian: Igor Sikorsky
+  ukrainian: Ihor Sikorsky
+  enabled: true
+  is_control: false
+  notes: Aviation pioneer (Ігор Сікорський). Tests І→I and Г→H (Igor vs Ihor).
+  starred: false
+- id: 85
+  category: people
+  russian: Sergei Korolev
+  ukrainian: Serhii Korolyov
+  enabled: true
+  is_control: false
+  notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of the most consequential cases of Ukrainian identity erasure in global science history.
+  starred: true
+  starred_label: Erased Ukrainian — the father of space exploration
+- id: 86
+  category: historical
+  russian: Bogdan Khmelnitsky
+  ukrainian: Bohdan Khmelnytskyi
+  enabled: true
+  is_control: false
+  notes: Hetman (Богдан Хмельницький). Tests Г→H (Bogdan vs Bohdan) and suffix (-itsky vs -ytskyi).
+  starred: false
+- id: 87
+  category: people
+  russian: Kazimir Malevich
+  ukrainian: Kazymyr Malevych
+  enabled: true
+  is_control: false
+  notes: Suprematist artist (Казимир Малевич). Tests И→Y and Ч→Ch (Malevich vs Malevych).
+  starred: false
+- id: 89
+  category: landmarks
+  russian: Sviatogorsk Lavra
+  ukrainian: Sviatohirsk Lavra
+  enabled: true
+  is_control: false
+  notes: Holy Dormition Monastery (Свято-Успенська Святогірська Лавра). Tests Г→H (горськ vs хірськ).
   starred: false
 - id: 72
   category: geographical
