@@ -57,14 +57,14 @@ SEARCH_TERMS = {
     9: {"russian": "Rovno", "ukrainian": "Rivne"},
     10: {"russian": "Chernobyl", "ukrainian": "Chornobyl"},
     11: {"russian": "Lugansk", "ukrainian": "Luhansk"},
-    15: {"russian": "Dnieper", "ukrainian": "Dnipro"},
+    15: {"russian": "Dnieper River", "ukrainian": "Dnipro River"},
     16: {"russian": "Dniester", "ukrainian": "Dnister"},
     17: {"russian": "Donbass", "ukrainian": "Donbas"},
     19: {"russian": "Zakarpatye", "ukrainian": "Zakarpattia"},
     20: {"russian": "Podolye", "ukrainian": "Podillia"},
     21: {"russian": "Chicken Kiev", "ukrainian": "Chicken Kyiv"},
     22: {"russian": "Kiev cake", "ukrainian": "Kyiv cake"},
-    23: {"russian": "Borscht", "ukrainian": "Borshch"},
+    23: {"russian": "Borsch", "ukrainian": "Borscht"},
     24: {"russian": "Kiev Pechersk Lavra", "ukrainian": "Kyiv Pechersk Lavra"},
     25: {"russian": "Saint Sophia Cathedral Kiev", "ukrainian": "Saint Sophia Cathedral Kyiv"},
     26: {"russian": "Chernobyl Exclusion Zone", "ukrainian": "Chornobyl Exclusion Zone"},
@@ -76,7 +76,7 @@ SEARCH_TERMS = {
     32: {"russian": "Dynamo Kiev", "ukrainian": "Dynamo Kyiv"},
     34: {"russian": "Kiev ballet", "ukrainian": "Kyiv ballet"},
     35: {"russian": "Kievan Rus", "ukrainian": "Kyivan Rus"},
-    36: {"russian": "Kazak", "ukrainian": "Kozak"},
+    36: {"russian": "Kazak", "ukrainian": "Cossack"},
     38: {"russian": "Chernigov", "ukrainian": "Chernihiv"},
     39: {"russian": "Chernovtsy", "ukrainian": "Chernivtsi"},
     40: {"russian": "Zhitomir", "ukrainian": "Zhytomyr"},
@@ -97,10 +97,19 @@ SEARCH_TERMS = {
     58: {"russian": "Odessa National University", "ukrainian": "Odesa National University"},
     60: {"russian": "Alexander Usyk", "ukrainian": "Oleksandr Usyk"},
     61: {"russian": "Vladimir Zelensky", "ukrainian": "Volodymyr Zelenskyy"},
-    62: {"russian": "Andrei Shevchenko", "ukrainian": "Andriy Shevchenko"},
-    64: {"russian": "Borsch", "ukrainian": "Borshch"},
+    62: {"russian": "Andrey Shevchenko", "ukrainian": "Andrii Shevchenko"},
     69: {"russian": "Sergei Rebrov", "ukrainian": "Serhiy Rebrov"},
     70: {"russian": "Vladimir the Great", "ukrainian": "Volodymyr the Great"},
+    71: {"russian": "Prince of Kiev", "ukrainian": "Prince of Kyiv"},
+    72: {"russian": "Artemovsk", "ukrainian": "Bakhmut"},
+    80: {"russian": "Nikolai Gogol", "ukrainian": "Mykola Hohol"},
+    82: {"russian": "Feodosiya", "ukrainian": "Feodosiia"},
+    83: {"russian": "Olga of Kiev", "ukrainian": "Olha of Kyiv"},
+    84: {"russian": "Igor Sikorsky", "ukrainian": "Ihor Sikorsky"},
+    85: {"russian": "Sergei Korolev", "ukrainian": "Serhii Korolyov"},
+    86: {"russian": "Bogdan Khmelnitsky", "ukrainian": "Bohdan Khmelnytskyi"},
+    87: {"russian": "Kazimir Malevich", "ukrainian": "Kazymyr Malevych"},
+    89: {"russian": "Sviatogorsk Lavra", "ukrainian": "Sviatohirsk Lavra"},
 }
 
 
@@ -228,7 +237,9 @@ def collect_pair_reddit(pair_id: int) -> pd.DataFrame | None:
                 time.sleep(REQUEST_DELAY)
 
     # Method 2: Arctic Shift for historical yearly data (2010-2026)
-    arctic_subreddits = ["worldnews", "ukraine", "europe", "news"]
+    arctic_subreddits = ["worldnews", "ukraine", "europe", "news", "UkrainianConflict",
+                         "geopolitics", "RussiaUkraineWar2022", "UkraineWarVideoReport",
+                         "history", "AskHistorians", "soccer", "football"]
     for variant, term in [("russian", russian), ("ukrainian", ukrainian)]:
         for year in range(2010, 2027):
             after = f"{year}-01-01"
@@ -237,7 +248,7 @@ def collect_pair_reddit(pair_id: int) -> pd.DataFrame | None:
             for sub in arctic_subreddits:
                 results = search_arctic_shift(
                     term, subreddit=sub, after=after, before=before,
-                    search_type="posts", limit=100,
+                    search_type="posts", limit=500,
                 )
                 total_count += len(results)
                 time.sleep(REQUEST_DELAY)

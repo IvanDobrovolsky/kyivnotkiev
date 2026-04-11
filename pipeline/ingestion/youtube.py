@@ -53,7 +53,7 @@ SEARCH_TERMS = {
     20: {"russian": "Podolye Ukraine", "ukrainian": "Podillia Ukraine"},
     21: {"russian": "Chicken Kiev", "ukrainian": "Chicken Kyiv"},
     22: {"russian": "Kiev cake", "ukrainian": "Kyiv cake"},
-    23: {"russian": "Borscht", "ukrainian": "Borshch"},
+    23: {"russian": "Borsch", "ukrainian": "Borscht"},
     24: {"russian": "Pechersk Lavra Kiev", "ukrainian": "Pechersk Lavra Kyiv"},
     25: {"russian": "Saint Sophia Kiev", "ukrainian": "Saint Sophia Kyiv"},
     26: {"russian": "Chernobyl Exclusion Zone", "ukrainian": "Chornobyl Exclusion Zone"},
@@ -65,7 +65,7 @@ SEARCH_TERMS = {
     32: {"russian": "Dynamo Kiev", "ukrainian": "Dynamo Kyiv"},
     34: {"russian": "Kiev ballet", "ukrainian": "Kyiv ballet"},
     35: {"russian": "Kievan Rus", "ukrainian": "Kyivan Rus"},
-    36: {"russian": "Kazak Ukraine", "ukrainian": "Kozak Ukraine"},
+    36: {"russian": "Kazak Ukraine", "ukrainian": "Cossack Ukraine"},
     38: {"russian": "Chernigov", "ukrainian": "Chernihiv"},
     39: {"russian": "Chernovtsy", "ukrainian": "Chernivtsi"},
     40: {"russian": "Zhitomir", "ukrainian": "Zhytomyr"},
@@ -86,10 +86,19 @@ SEARCH_TERMS = {
     58: {"russian": "Odessa National University", "ukrainian": "Odesa National University"},
     60: {"russian": "Alexander Usyk", "ukrainian": "Oleksandr Usyk"},
     61: {"russian": "Vladimir Zelensky", "ukrainian": "Volodymyr Zelenskyy"},
-    62: {"russian": "Andrei Shevchenko", "ukrainian": "Andriy Shevchenko"},
-    64: {"russian": "Borsch", "ukrainian": "Borshch"},
+    62: {"russian": "Andrey Shevchenko", "ukrainian": "Andrii Shevchenko"},
     69: {"russian": "Sergei Rebrov", "ukrainian": "Serhiy Rebrov"},
     70: {"russian": "Vladimir the Great prince", "ukrainian": "Volodymyr the Great prince"},
+    71: {"russian": "Prince of Kiev", "ukrainian": "Prince of Kyiv"},
+    72: {"russian": "Artemovsk Bakhmut", "ukrainian": "Bakhmut"},
+    80: {"russian": "Nikolai Gogol", "ukrainian": "Mykola Hohol"},
+    82: {"russian": "Feodosiya Crimea", "ukrainian": "Feodosiia Crimea"},
+    83: {"russian": "Olga of Kiev", "ukrainian": "Olha of Kyiv"},
+    84: {"russian": "Igor Sikorsky", "ukrainian": "Ihor Sikorsky"},
+    85: {"russian": "Sergei Korolev", "ukrainian": "Serhii Korolyov"},
+    86: {"russian": "Bogdan Khmelnitsky", "ukrainian": "Bohdan Khmelnytskyi"},
+    87: {"russian": "Kazimir Malevich", "ukrainian": "Kazymyr Malevych"},
+    89: {"russian": "Sviatogorsk Lavra", "ukrainian": "Sviatohirsk Lavra"},
 }
 
 
@@ -124,7 +133,7 @@ def search_youtube_api(
         return []
 
 
-def search_youtube_noapi(query: str, max_results: int = 20) -> list[dict]:
+def search_youtube_noapi(query: str, max_results: int = 50) -> list[dict]:
     """Search YouTube without API key using yt-dlp or Invidious."""
     # Method 1: yt-dlp (most reliable, no API key needed)
     results = _search_ytdlp(query, max_results)
