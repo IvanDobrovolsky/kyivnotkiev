@@ -887,13 +887,13 @@
   {
     "model": "mistral-large",
     "family": "Mistral",
-    "tas_mean": 80.4,
-    "ci_mean": 0.961,
-    "ua_pct_open": 69.8,
-    "ua_pct_forced_ru_first": 88.5,
-    "ua_pct_forced_ua_first": 84.3,
-    "position_bias": 47.9,
-    "other_rate": 9.9,
+    "tas_mean": 75.4,
+    "ci_mean": 0.965,
+    "ua_pct_open": 65.2,
+    "ua_pct_forced_ru_first": 90.2,
+    "ua_pct_forced_ua_first": 82.4,
+    "position_bias": 46.1,
+    "other_rate": 17.8,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6
@@ -1082,13 +1082,13 @@
   {
     "model": "qwen2.5-72b",
     "family": "Alibaba Qwen",
-    "tas_mean": 78.0,
-    "ci_mean": 0.945,
-    "ua_pct_open": 66.7,
-    "ua_pct_forced_ru_first": 93.5,
-    "ua_pct_forced_ua_first": 71.1,
-    "position_bias": 38.8,
-    "other_rate": 12.1,
+    "tas_mean": 69.8,
+    "ci_mean": 0.932,
+    "ua_pct_open": 57.1,
+    "ua_pct_forced_ru_first": 92.5,
+    "ua_pct_forced_ua_first": 64.2,
+    "position_bias": 35.8,
+    "other_rate": 17.8,
     "weights": {
       "w1_forced": 0.4,
       "w2_open": 0.6

@@ -152459,105 +152459,93 @@
     "youtube": [
       {
         "date": "2010-01",
-        "adoption": 94.1,
-        "ukr": 16,
+        "adoption": 0.0,
+        "ukr": 0,
         "rus": 1
       },
       {
         "date": "2011-01",
-        "adoption": 93.8,
-        "ukr": 15,
-        "rus": 1
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 3
       },
       {
         "date": "2012-01",
-        "adoption": 82.4,
-        "ukr": 14,
+        "adoption": 40.0,
+        "ukr": 2,
         "rus": 3
       },
       {
         "date": "2013-01",
-        "adoption": 94.1,
-        "ukr": 16,
-        "rus": 1
-      },
-      {
-        "date": "2014-01",
-        "adoption": 94.4,
-        "ukr": 17,
+        "adoption": 0.0,
+        "ukr": 0,
         "rus": 1
       },
       {
         "date": "2015-01",
-        "adoption": 100.0,
-        "ukr": 14,
-        "rus": 0
+        "adoption": 25.0,
+        "ukr": 1,
+        "rus": 3
       },
       {
         "date": "2016-01",
-        "adoption": 90.0,
-        "ukr": 18,
-        "rus": 2
+        "adoption": 81.2,
+        "ukr": 13,
+        "rus": 3
       },
       {
         "date": "2017-01",
-        "adoption": 100.0,
-        "ukr": 16,
-        "rus": 0
+        "adoption": 66.7,
+        "ukr": 2,
+        "rus": 1
       },
       {
         "date": "2018-01",
-        "adoption": 94.4,
-        "ukr": 17,
+        "adoption": 66.7,
+        "ukr": 2,
         "rus": 1
       },
       {
         "date": "2019-01",
-        "adoption": 90.0,
-        "ukr": 18,
-        "rus": 2
+        "adoption": 62.5,
+        "ukr": 5,
+        "rus": 3
       },
       {
         "date": "2020-01",
-        "adoption": 95.0,
-        "ukr": 19,
+        "adoption": 75.0,
+        "ukr": 3,
         "rus": 1
       },
       {
         "date": "2021-01",
-        "adoption": 88.9,
-        "ukr": 16,
-        "rus": 2
+        "adoption": 70.0,
+        "ukr": 7,
+        "rus": 3
       },
       {
         "date": "2022-01",
-        "adoption": 64.2,
-        "ukr": 34,
+        "adoption": 45.7,
+        "ukr": 16,
         "rus": 19
       },
       {
         "date": "2023-01",
-        "adoption": 79.3,
-        "ukr": 23,
-        "rus": 6
-      },
-      {
-        "date": "2024-01",
-        "adoption": 72.0,
-        "ukr": 18,
+        "adoption": 61.1,
+        "ukr": 11,
         "rus": 7
       },
       {
-        "date": "2025-01",
-        "adoption": 68.6,
-        "ukr": 24,
-        "rus": 11
+        "date": "2024-01",
+        "adoption": 50.0,
+        "ukr": 8,
+        "rus": 8
       },
       {
-        "date": "2026-01",
-        "adoption": 100.0,
+        "date": "2025-01",
+        "adoption": 50.0,
         "ukr": 12,
-        "rus": 0
+        "rus": 12
       }
     ],
     "ngrams": [
@@ -157162,10 +157150,94 @@
     ],
     "youtube": [
       {
+        "date": "2010-01",
+        "adoption": 50.0,
+        "ukr": 1,
+        "rus": 1
+      },
+      {
+        "date": "2013-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2014-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 2
+      },
+      {
+        "date": "2015-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 2
+      },
+      {
+        "date": "2016-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 2
+      },
+      {
+        "date": "2017-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2018-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2019-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 2
+      },
+      {
+        "date": "2020-01",
+        "adoption": 33.3,
+        "ukr": 1,
+        "rus": 2
+      },
+      {
+        "date": "2021-01",
+        "adoption": 25.0,
+        "ukr": 1,
+        "rus": 3
+      },
+      {
+        "date": "2022-01",
+        "adoption": 50.0,
+        "ukr": 1,
+        "rus": 1
+      },
+      {
         "date": "2023-01",
-        "adoption": 19.1,
-        "ukr": 52,
-        "rus": 220
+        "adoption": 20.5,
+        "ukr": 57,
+        "rus": 221
+      },
+      {
+        "date": "2024-01",
+        "adoption": 100.0,
+        "ukr": 12,
+        "rus": 0
+      },
+      {
+        "date": "2025-01",
+        "adoption": 100.0,
+        "ukr": 2,
+        "rus": 0
+      },
+      {
+        "date": "2026-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
       }
     ],
     "openalex": [
@@ -160088,10 +160160,106 @@
     ],
     "youtube": [
       {
+        "date": "2010-01",
+        "adoption": 100.0,
+        "ukr": 35,
+        "rus": 0
+      },
+      {
+        "date": "2011-01",
+        "adoption": 100.0,
+        "ukr": 46,
+        "rus": 0
+      },
+      {
+        "date": "2012-01",
+        "adoption": 100.0,
+        "ukr": 47,
+        "rus": 0
+      },
+      {
+        "date": "2013-01",
+        "adoption": 100.0,
+        "ukr": 49,
+        "rus": 0
+      },
+      {
+        "date": "2014-01",
+        "adoption": 100.0,
+        "ukr": 42,
+        "rus": 0
+      },
+      {
+        "date": "2015-01",
+        "adoption": 100.0,
+        "ukr": 43,
+        "rus": 0
+      },
+      {
+        "date": "2016-01",
+        "adoption": 100.0,
+        "ukr": 50,
+        "rus": 0
+      },
+      {
+        "date": "2017-01",
+        "adoption": 100.0,
+        "ukr": 50,
+        "rus": 0
+      },
+      {
+        "date": "2018-01",
+        "adoption": 100.0,
+        "ukr": 50,
+        "rus": 0
+      },
+      {
+        "date": "2019-01",
+        "adoption": 100.0,
+        "ukr": 50,
+        "rus": 0
+      },
+      {
+        "date": "2020-01",
+        "adoption": 100.0,
+        "ukr": 50,
+        "rus": 0
+      },
+      {
+        "date": "2021-01",
+        "adoption": 100.0,
+        "ukr": 50,
+        "rus": 0
+      },
+      {
+        "date": "2022-01",
+        "adoption": 100.0,
+        "ukr": 49,
+        "rus": 0
+      },
+      {
         "date": "2023-01",
-        "adoption": 53.4,
-        "ukr": 404,
+        "adoption": 56.3,
+        "ukr": 454,
         "rus": 352
+      },
+      {
+        "date": "2024-01",
+        "adoption": 100.0,
+        "ukr": 48,
+        "rus": 0
+      },
+      {
+        "date": "2025-01",
+        "adoption": 100.0,
+        "ukr": 35,
+        "rus": 0
+      },
+      {
+        "date": "2026-01",
+        "adoption": 100.0,
+        "ukr": 35,
+        "rus": 0
       }
     ],
     "openalex": [
@@ -160960,6 +161128,98 @@
         "rus": 28
       }
     ],
+    "youtube": [
+      {
+        "date": "2010-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2011-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 5
+      },
+      {
+        "date": "2012-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2013-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 5
+      },
+      {
+        "date": "2014-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2015-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2016-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 2
+      },
+      {
+        "date": "2017-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 4
+      },
+      {
+        "date": "2018-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2019-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2020-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2021-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2022-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 2
+      },
+      {
+        "date": "2023-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2026-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      }
+    ],
     "openalex": [
       {
         "date": "2011-01",
@@ -161092,6 +161352,110 @@
     ]
   },
   "80": {
+    "youtube": [
+      {
+        "date": "2010-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 12
+      },
+      {
+        "date": "2011-01",
+        "adoption": 5.3,
+        "ukr": 1,
+        "rus": 18
+      },
+      {
+        "date": "2012-01",
+        "adoption": 9.1,
+        "ukr": 1,
+        "rus": 10
+      },
+      {
+        "date": "2013-01",
+        "adoption": 7.1,
+        "ukr": 1,
+        "rus": 13
+      },
+      {
+        "date": "2014-01",
+        "adoption": 5.0,
+        "ukr": 1,
+        "rus": 19
+      },
+      {
+        "date": "2015-01",
+        "adoption": 3.6,
+        "ukr": 1,
+        "rus": 27
+      },
+      {
+        "date": "2016-01",
+        "adoption": 5.3,
+        "ukr": 1,
+        "rus": 18
+      },
+      {
+        "date": "2017-01",
+        "adoption": 4.3,
+        "ukr": 1,
+        "rus": 22
+      },
+      {
+        "date": "2018-01",
+        "adoption": 10.5,
+        "ukr": 2,
+        "rus": 17
+      },
+      {
+        "date": "2019-01",
+        "adoption": 8.8,
+        "ukr": 3,
+        "rus": 31
+      },
+      {
+        "date": "2020-01",
+        "adoption": 2.3,
+        "ukr": 1,
+        "rus": 43
+      },
+      {
+        "date": "2021-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 41
+      },
+      {
+        "date": "2022-01",
+        "adoption": 5.4,
+        "ukr": 2,
+        "rus": 35
+      },
+      {
+        "date": "2023-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 48
+      },
+      {
+        "date": "2024-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 44
+      },
+      {
+        "date": "2025-01",
+        "adoption": 2.7,
+        "ukr": 1,
+        "rus": 36
+      },
+      {
+        "date": "2026-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 46
+      }
+    ],
     "openalex": [
       {
         "date": "2010-01",
@@ -161278,6 +161642,104 @@
     ]
   },
   "83": {
+    "youtube": [
+      {
+        "date": "2011-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2012-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 1
+      },
+      {
+        "date": "2013-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 3
+      },
+      {
+        "date": "2014-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 2
+      },
+      {
+        "date": "2015-01",
+        "adoption": 20.0,
+        "ukr": 1,
+        "rus": 4
+      },
+      {
+        "date": "2016-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 9
+      },
+      {
+        "date": "2017-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 10
+      },
+      {
+        "date": "2018-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 7
+      },
+      {
+        "date": "2019-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 7
+      },
+      {
+        "date": "2020-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 11
+      },
+      {
+        "date": "2021-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 16
+      },
+      {
+        "date": "2022-01",
+        "adoption": 4.8,
+        "ukr": 1,
+        "rus": 20
+      },
+      {
+        "date": "2023-01",
+        "adoption": 4.2,
+        "ukr": 1,
+        "rus": 23
+      },
+      {
+        "date": "2024-01",
+        "adoption": 9.1,
+        "ukr": 2,
+        "rus": 20
+      },
+      {
+        "date": "2025-01",
+        "adoption": 3.3,
+        "ukr": 1,
+        "rus": 29
+      },
+      {
+        "date": "2026-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 21
+      }
+    ],
     "openalex": [
       {
         "date": "2016-01",
@@ -161362,6 +161824,110 @@
     ]
   },
   "84": {
+    "youtube": [
+      {
+        "date": "2010-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 7
+      },
+      {
+        "date": "2011-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 7
+      },
+      {
+        "date": "2012-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 5
+      },
+      {
+        "date": "2013-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 13
+      },
+      {
+        "date": "2014-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 9
+      },
+      {
+        "date": "2015-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 9
+      },
+      {
+        "date": "2016-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 14
+      },
+      {
+        "date": "2017-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 9
+      },
+      {
+        "date": "2018-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 8
+      },
+      {
+        "date": "2019-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 20
+      },
+      {
+        "date": "2020-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 22
+      },
+      {
+        "date": "2021-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 19
+      },
+      {
+        "date": "2022-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 27
+      },
+      {
+        "date": "2023-01",
+        "adoption": 5.0,
+        "ukr": 1,
+        "rus": 19
+      },
+      {
+        "date": "2024-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 23
+      },
+      {
+        "date": "2025-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 9
+      },
+      {
+        "date": "2026-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 12
+      }
+    ],
     "openalex": [
       {
         "date": "2010-01",
@@ -161488,6 +162054,110 @@
     ]
   },
   "85": {
+    "youtube": [
+      {
+        "date": "2010-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 3
+      },
+      {
+        "date": "2011-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 4
+      },
+      {
+        "date": "2012-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 13
+      },
+      {
+        "date": "2013-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 8
+      },
+      {
+        "date": "2014-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 4
+      },
+      {
+        "date": "2015-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 8
+      },
+      {
+        "date": "2016-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 12
+      },
+      {
+        "date": "2017-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 14
+      },
+      {
+        "date": "2018-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 6
+      },
+      {
+        "date": "2019-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 3
+      },
+      {
+        "date": "2020-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 5
+      },
+      {
+        "date": "2021-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 4
+      },
+      {
+        "date": "2022-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 11
+      },
+      {
+        "date": "2023-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 8
+      },
+      {
+        "date": "2024-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 8
+      },
+      {
+        "date": "2025-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 36
+      },
+      {
+        "date": "2026-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 4
+      }
+    ],
     "openalex": [
       {
         "date": "2011-01",
@@ -161548,6 +162218,110 @@
     ]
   },
   "86": {
+    "youtube": [
+      {
+        "date": "2010-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 4
+      },
+      {
+        "date": "2011-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 5
+      },
+      {
+        "date": "2012-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 4
+      },
+      {
+        "date": "2013-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 9
+      },
+      {
+        "date": "2014-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 8
+      },
+      {
+        "date": "2015-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 7
+      },
+      {
+        "date": "2016-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 5
+      },
+      {
+        "date": "2017-01",
+        "adoption": 20.0,
+        "ukr": 1,
+        "rus": 4
+      },
+      {
+        "date": "2018-01",
+        "adoption": 12.5,
+        "ukr": 1,
+        "rus": 7
+      },
+      {
+        "date": "2019-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 6
+      },
+      {
+        "date": "2020-01",
+        "adoption": 6.2,
+        "ukr": 1,
+        "rus": 15
+      },
+      {
+        "date": "2021-01",
+        "adoption": 27.3,
+        "ukr": 3,
+        "rus": 8
+      },
+      {
+        "date": "2022-01",
+        "adoption": 18.8,
+        "ukr": 3,
+        "rus": 13
+      },
+      {
+        "date": "2023-01",
+        "adoption": 18.2,
+        "ukr": 2,
+        "rus": 9
+      },
+      {
+        "date": "2024-01",
+        "adoption": 72.7,
+        "ukr": 8,
+        "rus": 3
+      },
+      {
+        "date": "2025-01",
+        "adoption": 60.0,
+        "ukr": 3,
+        "rus": 2
+      },
+      {
+        "date": "2026-01",
+        "adoption": 60.0,
+        "ukr": 3,
+        "rus": 2
+      }
+    ],
     "openalex": [
       {
         "date": "2012-01",
@@ -161674,6 +162448,110 @@
     ]
   },
   "87": {
+    "youtube": [
+      {
+        "date": "2010-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 15
+      },
+      {
+        "date": "2011-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 8
+      },
+      {
+        "date": "2012-01",
+        "adoption": 5.3,
+        "ukr": 1,
+        "rus": 18
+      },
+      {
+        "date": "2013-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 11
+      },
+      {
+        "date": "2014-01",
+        "adoption": 6.2,
+        "ukr": 1,
+        "rus": 15
+      },
+      {
+        "date": "2015-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 14
+      },
+      {
+        "date": "2016-01",
+        "adoption": 11.5,
+        "ukr": 3,
+        "rus": 23
+      },
+      {
+        "date": "2017-01",
+        "adoption": 4.3,
+        "ukr": 1,
+        "rus": 22
+      },
+      {
+        "date": "2018-01",
+        "adoption": 7.7,
+        "ukr": 1,
+        "rus": 12
+      },
+      {
+        "date": "2019-01",
+        "adoption": 4.8,
+        "ukr": 1,
+        "rus": 20
+      },
+      {
+        "date": "2020-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 24
+      },
+      {
+        "date": "2021-01",
+        "adoption": 3.8,
+        "ukr": 1,
+        "rus": 25
+      },
+      {
+        "date": "2022-01",
+        "adoption": 7.7,
+        "ukr": 2,
+        "rus": 24
+      },
+      {
+        "date": "2023-01",
+        "adoption": 3.3,
+        "ukr": 1,
+        "rus": 29
+      },
+      {
+        "date": "2024-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 16
+      },
+      {
+        "date": "2025-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 21
+      },
+      {
+        "date": "2026-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 5
+      }
+    ],
     "openalex": [
       {
         "date": "2011-01",
@@ -161850,6 +162728,94 @@
         "adoption": 0.0,
         "ukr": 0,
         "rus": 2
+      }
+    ]
+  },
+  "89": {
+    "youtube": [
+      {
+        "date": "2010-01",
+        "adoption": 100.0,
+        "ukr": 2,
+        "rus": 0
+      },
+      {
+        "date": "2011-01",
+        "adoption": 100.0,
+        "ukr": 1,
+        "rus": 0
+      },
+      {
+        "date": "2012-01",
+        "adoption": 90.9,
+        "ukr": 10,
+        "rus": 1
+      },
+      {
+        "date": "2013-01",
+        "adoption": 80.0,
+        "ukr": 4,
+        "rus": 1
+      },
+      {
+        "date": "2014-01",
+        "adoption": 50.0,
+        "ukr": 1,
+        "rus": 1
+      },
+      {
+        "date": "2016-01",
+        "adoption": 100.0,
+        "ukr": 3,
+        "rus": 0
+      },
+      {
+        "date": "2017-01",
+        "adoption": 50.0,
+        "ukr": 1,
+        "rus": 1
+      },
+      {
+        "date": "2018-01",
+        "adoption": 100.0,
+        "ukr": 1,
+        "rus": 0
+      },
+      {
+        "date": "2019-01",
+        "adoption": 100.0,
+        "ukr": 6,
+        "rus": 0
+      },
+      {
+        "date": "2020-01",
+        "adoption": 100.0,
+        "ukr": 6,
+        "rus": 0
+      },
+      {
+        "date": "2021-01",
+        "adoption": 100.0,
+        "ukr": 6,
+        "rus": 0
+      },
+      {
+        "date": "2022-01",
+        "adoption": 100.0,
+        "ukr": 9,
+        "rus": 0
+      },
+      {
+        "date": "2023-01",
+        "adoption": 100.0,
+        "ukr": 3,
+        "rus": 0
+      },
+      {
+        "date": "2024-01",
+        "adoption": 100.0,
+        "ukr": 3,
+        "rus": 0
       }
     ]
   }

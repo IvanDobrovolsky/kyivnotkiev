@@ -1,10 +1,10 @@
 {
   "n_pairs": 63,
-  "n_models": 70,
+  "n_models": 71,
   "families": {
     "Alibaba Qwen": {
       "color": "#9333EA",
-      "n_models": 7
+      "n_models": 8
     },
     "Anthropic Claude": {
       "color": "#C97B47",
@@ -722,6 +722,16 @@
           "tas": 0.8
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -743,11 +753,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 90.3,
-        "open_pct": 87.1,
+        "n_models": 71,
+        "tas_mean": 90.4,
+        "open_pct": 87.3,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 89.7,
+        "forced_ua_pct": 89.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -792,10 +802,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 71.4,
-            "forced_pct": 85.7,
-            "tas_mean": 77.1
+            "n": 8,
+            "open_pct": 75.0,
+            "forced_pct": 87.5,
+            "tas_mean": 80.0
           }
         }
       }
@@ -1486,6 +1496,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -1507,9 +1527,9 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 96.3,
-        "open_pct": 98.4,
+        "open_pct": 98.5,
         "forced_ru_pct": 97.1,
         "forced_ua_pct": 97.1,
         "by_family": {
@@ -1556,7 +1576,7 @@
             "tas_mean": 85.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -2250,6 +2270,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -2271,11 +2301,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 46.4,
-        "open_pct": 25.0,
-        "forced_ru_pct": 94.3,
-        "forced_ua_pct": 62.9,
+        "n_models": 71,
+        "tas_mean": 46.1,
+        "open_pct": 24.6,
+        "forced_ru_pct": 94.4,
+        "forced_ua_pct": 62.0,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -2320,10 +2350,10 @@
             "tas_mean": 30.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
-            "forced_pct": 64.3,
-            "tas_mean": 30.0
+            "forced_pct": 62.5,
+            "tas_mean": 28.7
           }
         }
       }
@@ -3014,6 +3044,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -3035,7 +3075,7 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 100.0,
         "open_pct": 100.0,
         "forced_ru_pct": 100.0,
@@ -3084,7 +3124,7 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -3778,6 +3818,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -3799,11 +3849,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 93.0,
+        "n_models": 71,
+        "tas_mean": 93.1,
         "open_pct": 100.0,
-        "forced_ru_pct": 91.0,
-        "forced_ua_pct": 90.9,
+        "forced_ru_pct": 91.2,
+        "forced_ua_pct": 91.0,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -3848,10 +3898,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 78.6,
-            "tas_mean": 87.1
+            "forced_pct": 81.2,
+            "tas_mean": 88.8
           }
         }
       }
@@ -4542,6 +4592,16 @@
           "tas": 0.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -4563,11 +4623,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 88.0,
-        "open_pct": 98.2,
-        "forced_ru_pct": 94.1,
-        "forced_ua_pct": 76.8,
+        "n_models": 71,
+        "tas_mean": 87.0,
+        "open_pct": 96.5,
+        "forced_ru_pct": 94.2,
+        "forced_ua_pct": 75.7,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -4612,10 +4672,10 @@
             "tas_mean": 90.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 100.0,
-            "forced_pct": 64.3,
-            "tas_mean": 72.9
+            "n": 8,
+            "open_pct": 75.0,
+            "forced_pct": 62.5,
+            "tas_mean": 66.3
           }
         }
       }
@@ -5306,6 +5366,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -5327,11 +5397,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 99.0,
         "open_pct": 100.0,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 97.1,
+        "forced_ua_pct": 97.2,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -5376,7 +5446,7 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -6070,6 +6140,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -6091,11 +6171,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 88.6,
+        "n_models": 71,
+        "tas_mean": 88.7,
         "open_pct": 100.0,
-        "forced_ru_pct": 94.2,
-        "forced_ua_pct": 85.5,
+        "forced_ru_pct": 94.3,
+        "forced_ua_pct": 85.7,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -6140,10 +6220,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": null,
-            "forced_pct": 76.9,
-            "tas_mean": 71.4
+            "n": 8,
+            "open_pct": 100.0,
+            "forced_pct": 80.0,
+            "tas_mean": 75.0
           }
         }
       }
@@ -6834,6 +6914,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -6855,7 +6945,7 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 99.3,
         "open_pct": 100.0,
         "forced_ru_pct": 98.6,
@@ -6904,7 +6994,7 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": null,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -7598,6 +7688,16 @@
           "tas": 0.2
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -7619,11 +7719,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 21.0,
+        "n_models": 71,
+        "tas_mean": 20.7,
         "open_pct": 0.0,
-        "forced_ru_pct": 81.5,
-        "forced_ua_pct": 25.0,
+        "forced_ru_pct": 80.3,
+        "forced_ua_pct": 24.6,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -7668,10 +7768,10 @@
             "tas_mean": 20.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
-            "forced_pct": 35.7,
-            "tas_mean": 14.3
+            "forced_pct": 31.2,
+            "tas_mean": 12.5
           }
         }
       }
@@ -8362,6 +8462,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -8383,11 +8493,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 83.9,
+        "n_models": 71,
+        "tas_mean": 84.1,
         "open_pct": 60.0,
-        "forced_ru_pct": 92.8,
-        "forced_ua_pct": 75.4,
+        "forced_ru_pct": 92.9,
+        "forced_ua_pct": 75.7,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -8432,10 +8542,10 @@
             "tas_mean": 87.5
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 50.0,
-            "forced_pct": 71.4,
-            "tas_mean": 67.1
+            "forced_pct": 75.0,
+            "tas_mean": 71.2
           }
         }
       }
@@ -9002,8 +9112,8 @@
           "release_date": "2024-11",
           "x_open": 0,
           "x_forced_ru_first": 1,
-          "x_forced_ua_first": 1,
-          "tas": 0.4
+          "x_forced_ua_first": 0,
+          "tas": 0.2
         },
         {
           "key": "mistral-small-22b",
@@ -9126,6 +9236,16 @@
           "tas": 0.8
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -9147,11 +9267,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 34.9,
-        "open_pct": 11.4,
-        "forced_ru_pct": 92.4,
-        "forced_ua_pct": 50.8,
+        "n_models": 71,
+        "tas_mean": 34.4,
+        "open_pct": 11.3,
+        "forced_ru_pct": 92.5,
+        "forced_ua_pct": 48.5,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -9192,14 +9312,14 @@
           "Mistral": {
             "n": 4,
             "open_pct": 0.0,
-            "forced_pct": 50.0,
-            "tas_mean": 20.0
+            "forced_pct": 37.5,
+            "tas_mean": 15.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 28.6,
+            "n": 8,
+            "open_pct": 25.0,
             "forced_pct": 50.0,
-            "tas_mean": 37.1
+            "tas_mean": 35.0
           }
         }
       }
@@ -9890,6 +10010,16 @@
           "tas": 0.2
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -9911,10 +10041,10 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 5.9,
+        "n_models": 71,
+        "tas_mean": 5.8,
         "open_pct": 0.0,
-        "forced_ru_pct": 24.6,
+        "forced_ru_pct": 24.3,
         "forced_ua_pct": 2.9,
         "by_family": {
           "Anthropic Claude": {
@@ -9960,10 +10090,10 @@
             "tas_mean": 0.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
-            "forced_pct": 14.3,
-            "tas_mean": 5.7
+            "forced_pct": 12.5,
+            "tas_mean": 5.0
           }
         }
       }
@@ -10654,6 +10784,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.8
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -10675,11 +10815,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 92.1,
+        "n_models": 71,
+        "tas_mean": 92.0,
         "open_pct": 98.5,
-        "forced_ru_pct": 89.6,
-        "forced_ua_pct": 83.3,
+        "forced_ru_pct": 89.7,
+        "forced_ua_pct": 82.1,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -10724,10 +10864,10 @@
             "tas_mean": 90.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 85.7,
-            "tas_mean": 94.3
+            "forced_pct": 81.2,
+            "tas_mean": 92.5
           }
         }
       }
@@ -11418,6 +11558,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -11439,10 +11589,10 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 96.0,
         "open_pct": 100.0,
-        "forced_ru_pct": 97.0,
+        "forced_ru_pct": 97.1,
         "forced_ua_pct": 93.8,
         "by_family": {
           "Anthropic Claude": {
@@ -11488,10 +11638,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 92.9,
-            "tas_mean": 92.9
+            "forced_pct": 93.8,
+            "tas_mean": 93.8
           }
         }
       }
@@ -12182,6 +12332,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -12203,7 +12363,7 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 91.8,
         "open_pct": null,
         "forced_ru_pct": 94.7,
@@ -12252,7 +12412,7 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": null,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -12946,6 +13106,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -12967,11 +13137,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 97.1,
+        "n_models": 71,
+        "tas_mean": 97.2,
         "open_pct": 97.9,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 94.1,
+        "forced_ua_pct": 94.2,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -13016,7 +13186,7 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -13710,6 +13880,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -13731,11 +13911,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 99.7,
         "open_pct": 100.0,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 98.5,
+        "forced_ua_pct": 98.6,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -13780,7 +13960,7 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -14474,6 +14654,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -14495,11 +14685,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 94.6,
+        "n_models": 71,
+        "tas_mean": 94.7,
         "open_pct": 100.0,
-        "forced_ru_pct": 98.5,
-        "forced_ua_pct": 89.6,
+        "forced_ru_pct": 98.6,
+        "forced_ua_pct": 89.7,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -14544,10 +14734,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 92.9,
-            "tas_mean": 97.1
+            "forced_pct": 93.8,
+            "tas_mean": 97.5
           }
         }
       }
@@ -15238,6 +15428,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -15259,11 +15459,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 98.3,
         "open_pct": 100.0,
         "forced_ru_pct": 98.6,
-        "forced_ua_pct": 97.1,
+        "forced_ua_pct": 97.2,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -15308,10 +15508,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 92.9,
-            "tas_mean": 92.9
+            "forced_pct": 93.8,
+            "tas_mean": 93.8
           }
         }
       }
@@ -16002,6 +16202,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -16023,11 +16233,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 97.3,
         "open_pct": 100.0,
-        "forced_ru_pct": 97.0,
-        "forced_ua_pct": 95.5,
+        "forced_ru_pct": 97.1,
+        "forced_ua_pct": 95.6,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -16072,10 +16282,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 92.9,
-            "tas_mean": 97.1
+            "forced_pct": 93.8,
+            "tas_mean": 97.5
           }
         }
       }
@@ -16766,6 +16976,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -16787,11 +17007,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 92.9,
+        "n_models": 71,
+        "tas_mean": 93.0,
         "open_pct": 100.0,
-        "forced_ru_pct": 95.7,
-        "forced_ua_pct": 89.7,
+        "forced_ru_pct": 95.8,
+        "forced_ua_pct": 89.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -16836,10 +17056,10 @@
             "tas_mean": 87.5
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": null,
-            "forced_pct": 92.9,
-            "tas_mean": 92.9
+            "forced_pct": 93.8,
+            "tas_mean": 93.8
           }
         }
       }
@@ -17530,6 +17750,16 @@
           "tas": 0.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -17551,11 +17781,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 93.6,
+        "n_models": 71,
+        "tas_mean": 93.7,
         "open_pct": 100.0,
-        "forced_ru_pct": 92.9,
-        "forced_ua_pct": 94.3,
+        "forced_ru_pct": 93.0,
+        "forced_ua_pct": 94.4,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -17600,10 +17830,10 @@
             "tas_mean": 75.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 85.7,
-            "tas_mean": 85.7
+            "forced_pct": 87.5,
+            "tas_mean": 87.5
           }
         }
       }
@@ -18294,6 +18524,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -18315,10 +18555,10 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 95.4,
+        "n_models": 71,
+        "tas_mean": 95.5,
         "open_pct": 100.0,
-        "forced_ru_pct": 91.4,
+        "forced_ru_pct": 91.5,
         "forced_ua_pct": 98.6,
         "by_family": {
           "Anthropic Claude": {
@@ -18364,7 +18604,7 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": null,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -19058,6 +19298,16 @@
           "tas": 0.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -19079,11 +19329,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 45.0,
+        "n_models": 71,
+        "tas_mean": 45.8,
         "open_pct": 0.0,
-        "forced_ru_pct": 86.6,
-        "forced_ua_pct": 63.2,
+        "forced_ru_pct": 86.8,
+        "forced_ua_pct": 63.8,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -19128,10 +19378,10 @@
             "tas_mean": 27.5
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": null,
-            "forced_pct": 57.1,
-            "tas_mean": 57.1
+            "forced_pct": 62.5,
+            "tas_mean": 62.5
           }
         }
       }
@@ -19822,6 +20072,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.5
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -19843,11 +20103,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 75.7,
+        "n_models": 71,
+        "tas_mean": 75.4,
         "open_pct": 79.5,
-        "forced_ru_pct": 95.6,
-        "forced_ua_pct": 67.1,
+        "forced_ru_pct": 95.7,
+        "forced_ua_pct": 66.2,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -19892,10 +20152,10 @@
             "tas_mean": 75.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
-            "forced_pct": 71.4,
-            "tas_mean": 62.9
+            "forced_pct": 68.8,
+            "tas_mean": 61.3
           }
         }
       }
@@ -20460,10 +20720,10 @@
           "family": "Mistral",
           "tier": "frontier",
           "release_date": "2024-11",
-          "x_open": 0,
-          "x_forced_ru_first": 0,
+          "x_open": 1,
+          "x_forced_ru_first": null,
           "x_forced_ua_first": 1,
-          "tas": 0.2
+          "tas": 1.0
         },
         {
           "key": "mistral-small-22b",
@@ -20586,6 +20846,16 @@
           "tas": 0.4
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -20607,11 +20877,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 45.0,
-        "open_pct": 39.3,
-        "forced_ru_pct": 40.9,
-        "forced_ua_pct": 52.3,
+        "n_models": 71,
+        "tas_mean": 46.9,
+        "open_pct": 41.9,
+        "forced_ru_pct": 42.4,
+        "forced_ua_pct": 53.0,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -20651,15 +20921,15 @@
           },
           "Mistral": {
             "n": 4,
-            "open_pct": 75.0,
-            "forced_pct": 71.4,
-            "tas_mean": 70.0
+            "open_pct": 100.0,
+            "forced_pct": 83.3,
+            "tas_mean": 90.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 85.7,
-            "forced_pct": 92.9,
-            "tas_mean": 88.6
+            "n": 8,
+            "open_pct": 87.5,
+            "forced_pct": 93.8,
+            "tas_mean": 90.0
           }
         }
       }
@@ -21030,16 +21300,6 @@
           "tas": 0.4
         },
         {
-          "key": "mistral-large",
-          "family": "Mistral",
-          "tier": "frontier",
-          "release_date": "2024-11",
-          "x_open": 0,
-          "x_forced_ru_first": 0,
-          "x_forced_ua_first": 0,
-          "tas": 0.0
-        },
-        {
           "key": "o1-2024-12",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -21081,11 +21341,11 @@
         }
       ],
       "summary": {
-        "n_models": 41,
-        "tas_mean": 33.4,
-        "open_pct": 7.7,
-        "forced_ru_pct": 65.9,
-        "forced_ua_pct": 74.4,
+        "n_models": 40,
+        "tas_mean": 34.2,
+        "open_pct": 7.9,
+        "forced_ru_pct": 67.5,
+        "forced_ua_pct": 76.3,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -21116,12 +21376,6 @@
             "open_pct": 0.0,
             "forced_pct": 94.4,
             "tas_mean": 37.8
-          },
-          "Mistral": {
-            "n": 1,
-            "open_pct": 0.0,
-            "forced_pct": 0.0,
-            "tas_mean": 0.0
           }
         }
       }
@@ -21812,6 +22066,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -21833,11 +22097,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 88.3,
-        "open_pct": 98.3,
-        "forced_ru_pct": 82.5,
-        "forced_ua_pct": 87.9,
+        "n_models": 71,
+        "tas_mean": 88.5,
+        "open_pct": 98.4,
+        "forced_ru_pct": 82.8,
+        "forced_ua_pct": 88.1,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -21882,10 +22146,10 @@
             "tas_mean": 90.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 80.0,
-            "forced_pct": 69.2,
-            "tas_mean": 71.4
+            "n": 8,
+            "open_pct": 83.3,
+            "forced_pct": 73.3,
+            "tas_mean": 75.0
           }
         }
       }
@@ -22576,6 +22840,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -22597,11 +22871,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 82.2,
-        "open_pct": 79.4,
+        "n_models": 71,
+        "tas_mean": 82.5,
+        "open_pct": 79.7,
         "forced_ru_pct": 96.8,
-        "forced_ua_pct": 86.7,
+        "forced_ua_pct": 86.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -22646,10 +22920,10 @@
             "tas_mean": 80.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 60.0,
-            "forced_pct": 78.6,
-            "tas_mean": 70.0
+            "n": 8,
+            "open_pct": 66.7,
+            "forced_pct": 81.2,
+            "tas_mean": 73.8
           }
         }
       }
@@ -23340,6 +23614,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -23361,9 +23645,9 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 92.9,
-        "open_pct": 90.8,
+        "n_models": 71,
+        "tas_mean": 93.0,
+        "open_pct": 90.9,
         "forced_ru_pct": 98.5,
         "forced_ua_pct": 97.0,
         "by_family": {
@@ -23410,10 +23694,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 92.9,
-            "tas_mean": 92.9
+            "forced_pct": 93.8,
+            "tas_mean": 93.8
           }
         }
       }
@@ -24104,6 +24388,16 @@
           "tas": 0.4
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -24125,11 +24419,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 23.3,
+        "n_models": 71,
+        "tas_mean": 23.0,
         "open_pct": 1.5,
-        "forced_ru_pct": 78.7,
-        "forced_ua_pct": 32.3,
+        "forced_ru_pct": 77.4,
+        "forced_ua_pct": 31.7,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -24174,10 +24468,10 @@
             "tas_mean": 20.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
-            "forced_pct": 38.5,
-            "tas_mean": 18.6
+            "forced_pct": 33.3,
+            "tas_mean": 16.2
           }
         }
       }
@@ -24868,6 +25162,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -24889,11 +25193,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 27.7,
-        "open_pct": 4.7,
-        "forced_ru_pct": 72.3,
-        "forced_ua_pct": 53.2,
+        "n_models": 71,
+        "tas_mean": 27.6,
+        "open_pct": 4.6,
+        "forced_ru_pct": 72.7,
+        "forced_ua_pct": 52.4,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -24938,10 +25242,10 @@
             "tas_mean": 45.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
-            "forced_pct": 35.7,
-            "tas_mean": 18.6
+            "forced_pct": 37.5,
+            "tas_mean": 18.8
           }
         }
       }
@@ -25632,6 +25936,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -25653,11 +25967,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 33.0,
-        "open_pct": 9.4,
-        "forced_ru_pct": 72.9,
-        "forced_ua_pct": 55.9,
+        "n_models": 71,
+        "tas_mean": 32.8,
+        "open_pct": 9.2,
+        "forced_ru_pct": 73.2,
+        "forced_ua_pct": 55.1,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -25702,10 +26016,10 @@
             "tas_mean": 35.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
             "forced_pct": 50.0,
-            "tas_mean": 28.6
+            "tas_mean": 27.5
           }
         }
       }
@@ -26396,6 +26710,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -26417,11 +26741,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 94.9,
         "open_pct": 92.9,
         "forced_ru_pct": 97.1,
-        "forced_ua_pct": 94.3,
+        "forced_ua_pct": 94.4,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -26466,10 +26790,10 @@
             "tas_mean": 85.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 92.9,
-            "tas_mean": 92.9
+            "forced_pct": 93.8,
+            "tas_mean": 93.8
           }
         }
       }
@@ -27160,6 +27484,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -27181,11 +27515,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 95.4,
-        "open_pct": 86.4,
+        "n_models": 71,
+        "tas_mean": 95.5,
+        "open_pct": 87.0,
         "forced_ru_pct": 95.7,
-        "forced_ua_pct": 94.3,
+        "forced_ua_pct": 94.4,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -27230,10 +27564,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 80.0,
-            "forced_pct": 92.9,
-            "tas_mean": 88.6
+            "n": 8,
+            "open_pct": 83.3,
+            "forced_pct": 93.8,
+            "tas_mean": 90.0
           }
         }
       }
@@ -27924,6 +28258,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -27945,11 +28289,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 97.1,
+        "n_models": 71,
+        "tas_mean": 97.2,
         "open_pct": 100.0,
         "forced_ru_pct": 97.1,
-        "forced_ua_pct": 96.9,
+        "forced_ua_pct": 97.0,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -27994,7 +28338,7 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -28688,6 +29032,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.8
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -28709,11 +29063,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 90.9,
-        "open_pct": 84.5,
+        "n_models": 71,
+        "tas_mean": 90.7,
+        "open_pct": 84.7,
         "forced_ru_pct": 97.1,
-        "forced_ua_pct": 95.4,
+        "forced_ua_pct": 93.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -28758,10 +29112,10 @@
             "tas_mean": 85.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 57.1,
-            "forced_pct": 85.7,
-            "tas_mean": 68.6
+            "n": 8,
+            "open_pct": 62.5,
+            "forced_pct": 81.2,
+            "tas_mean": 70.0
           }
         }
       }
@@ -29452,6 +29806,16 @@
           "tas": 0.8
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -29473,11 +29837,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 89.4,
-        "open_pct": 88.5,
+        "n_models": 71,
+        "tas_mean": 89.6,
+        "open_pct": 88.7,
         "forced_ru_pct": 97.1,
-        "forced_ua_pct": 83.6,
+        "forced_ua_pct": 83.8,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -29522,10 +29886,10 @@
             "tas_mean": 75.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 83.3,
-            "forced_pct": 78.6,
-            "tas_mean": 82.9
+            "n": 8,
+            "open_pct": 85.7,
+            "forced_pct": 81.2,
+            "tas_mean": 85.0
           }
         }
       }
@@ -30216,6 +30580,16 @@
           "tas": 0.8
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -30237,10 +30611,10 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 97.6,
         "open_pct": 100.0,
-        "forced_ru_pct": 97.0,
+        "forced_ru_pct": 97.1,
         "forced_ua_pct": 98.6,
         "by_family": {
           "Anthropic Claude": {
@@ -30286,10 +30660,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 92.9,
-            "tas_mean": 97.1
+            "forced_pct": 93.8,
+            "tas_mean": 97.5
           }
         }
       }
@@ -30980,6 +31354,16 @@
           "tas": 0.2
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -31001,11 +31385,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 68.0,
-        "open_pct": 61.4,
-        "forced_ru_pct": 85.1,
-        "forced_ua_pct": 66.2,
+        "n_models": 71,
+        "tas_mean": 67.3,
+        "open_pct": 60.3,
+        "forced_ru_pct": 85.3,
+        "forced_ua_pct": 65.2,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -31050,10 +31434,10 @@
             "tas_mean": 75.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 57.1,
-            "forced_pct": 66.7,
-            "tas_mean": 57.1
+            "n": 8,
+            "open_pct": 50.0,
+            "forced_pct": 64.3,
+            "tas_mean": 52.5
           }
         }
       }
@@ -31744,6 +32128,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -31765,11 +32159,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 93.9,
         "open_pct": 95.7,
-        "forced_ru_pct": 98.5,
-        "forced_ua_pct": 85.1,
+        "forced_ru_pct": 98.6,
+        "forced_ua_pct": 85.3,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -31814,10 +32208,10 @@
             "tas_mean": 90.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 85.7,
-            "tas_mean": 94.3
+            "forced_pct": 87.5,
+            "tas_mean": 95.0
           }
         }
       }
@@ -32508,6 +32902,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 0.4
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -32529,11 +32933,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 93.6,
-        "open_pct": 90.9,
+        "n_models": 71,
+        "tas_mean": 92.8,
+        "open_pct": 88.9,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 92.9,
+        "forced_ua_pct": 93.0,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -32578,10 +32982,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 100.0,
-            "forced_pct": 85.7,
-            "tas_mean": 90.0
+            "n": 8,
+            "open_pct": 85.7,
+            "forced_pct": 87.5,
+            "tas_mean": 83.8
           }
         }
       }
@@ -32952,16 +33356,6 @@
           "tas": 1.0
         },
         {
-          "key": "mistral-large",
-          "family": "Mistral",
-          "tier": "frontier",
-          "release_date": "2024-11",
-          "x_open": 1,
-          "x_forced_ru_first": 1,
-          "x_forced_ua_first": 1,
-          "tas": 1.0
-        },
-        {
           "key": "o1-2024-12",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -33003,11 +33397,11 @@
         }
       ],
       "summary": {
-        "n_models": 41,
-        "tas_mean": 94.9,
+        "n_models": 40,
+        "tas_mean": 94.8,
         "open_pct": 100.0,
-        "forced_ru_pct": 89.2,
-        "forced_ua_pct": 94.7,
+        "forced_ru_pct": 88.9,
+        "forced_ua_pct": 94.6,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -33035,12 +33429,6 @@
           },
           "xAI Grok": {
             "n": 9,
-            "open_pct": 100.0,
-            "forced_pct": 100.0,
-            "tas_mean": 100.0
-          },
-          "Mistral": {
-            "n": 1,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -33734,6 +34122,16 @@
           "tas": 0.8
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -33755,11 +34153,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 95.0,
+        "n_models": 71,
+        "tas_mean": 95.1,
         "open_pct": 100.0,
-        "forced_ru_pct": 92.6,
-        "forced_ua_pct": 93.4,
+        "forced_ru_pct": 92.8,
+        "forced_ua_pct": 93.5,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -33804,10 +34202,10 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 92.9,
-            "tas_mean": 97.1
+            "forced_pct": 93.8,
+            "tas_mean": 97.5
           }
         }
       }
@@ -34178,16 +34576,6 @@
           "tas": 1.0
         },
         {
-          "key": "mistral-large",
-          "family": "Mistral",
-          "tier": "frontier",
-          "release_date": "2024-11",
-          "x_open": 1,
-          "x_forced_ru_first": 1,
-          "x_forced_ua_first": 1,
-          "tas": 1.0
-        },
-        {
           "key": "o1-2024-12",
           "family": "OpenAI GPT",
           "tier": "frontier",
@@ -34229,7 +34617,7 @@
         }
       ],
       "summary": {
-        "n_models": 41,
+        "n_models": 40,
         "tas_mean": 98.8,
         "open_pct": 100.0,
         "forced_ru_pct": 97.4,
@@ -34261,12 +34649,6 @@
           },
           "xAI Grok": {
             "n": 9,
-            "open_pct": 100.0,
-            "forced_pct": 100.0,
-            "tas_mean": 100.0
-          },
-          "Mistral": {
-            "n": 1,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -34960,6 +35342,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -34981,11 +35373,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 43.9,
-        "open_pct": 21.9,
-        "forced_ru_pct": 91.0,
-        "forced_ua_pct": 55.4,
+        "n_models": 71,
+        "tas_mean": 43.5,
+        "open_pct": 21.5,
+        "forced_ru_pct": 91.2,
+        "forced_ua_pct": 54.5,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -35030,10 +35422,10 @@
             "tas_mean": 25.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
-            "forced_pct": 64.3,
-            "tas_mean": 34.3
+            "forced_pct": 62.5,
+            "tas_mean": 32.5
           }
         }
       }
@@ -35599,8 +35991,8 @@
           "tier": "frontier",
           "release_date": "2024-11",
           "x_open": 1,
-          "x_forced_ru_first": null,
-          "x_forced_ua_first": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
           "tas": 1.0
         },
         {
@@ -35724,6 +36116,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -35745,11 +36147,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 79.3,
+        "n_models": 71,
+        "tas_mean": 79.6,
         "open_pct": 100.0,
-        "forced_ru_pct": 69.4,
-        "forced_ua_pct": 62.7,
+        "forced_ru_pct": 70.3,
+        "forced_ua_pct": 63.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -35790,14 +36192,14 @@
           "Mistral": {
             "n": 4,
             "open_pct": 100.0,
-            "forced_pct": 50.0,
+            "forced_pct": 62.5,
             "tas_mean": 85.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 69.2,
-            "tas_mean": 88.6
+            "forced_pct": 73.3,
+            "tas_mean": 90.0
           }
         }
       }
@@ -36488,6 +36890,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -36509,11 +36921,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 93.9,
         "open_pct": 100.0,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 80.0,
+        "forced_ua_pct": 80.3,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -36558,10 +36970,10 @@
             "tas_mean": 95.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 78.6,
-            "tas_mean": 78.6
+            "forced_pct": 81.2,
+            "tas_mean": 81.2
           }
         }
       }
@@ -37252,6 +37664,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -37273,11 +37695,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 24.1,
         "open_pct": 0.0,
-        "forced_ru_pct": 83.6,
-        "forced_ua_pct": 44.3,
+        "forced_ru_pct": 83.9,
+        "forced_ua_pct": 43.5,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -37322,10 +37744,10 @@
             "tas_mean": 30.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
             "forced_pct": 50.0,
-            "tas_mean": 32.9
+            "tas_mean": 31.2
           }
         }
       }
@@ -38016,6 +38438,16 @@
           "tas": 0.4
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -38037,11 +38469,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 58.3,
-        "open_pct": 41.2,
-        "forced_ru_pct": 95.7,
-        "forced_ua_pct": 71.4,
+        "n_models": 71,
+        "tas_mean": 57.7,
+        "open_pct": 40.6,
+        "forced_ru_pct": 95.8,
+        "forced_ua_pct": 70.4,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -38086,10 +38518,10 @@
             "tas_mean": 30.0
           },
           "Alibaba Qwen": {
-            "n": 7,
-            "open_pct": 57.1,
-            "forced_pct": 71.4,
-            "tas_mean": 62.9
+            "n": 8,
+            "open_pct": 50.0,
+            "forced_pct": 68.8,
+            "tas_mean": 57.5
           }
         }
       }
@@ -38780,6 +39212,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.8
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -38801,11 +39243,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 97.5,
+        "n_models": 71,
+        "tas_mean": 97.3,
         "open_pct": 96.8,
         "forced_ru_pct": 100.0,
-        "forced_ua_pct": 96.3,
+        "forced_ua_pct": 94.5,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -38850,10 +39292,10 @@
             "tas_mean": 70.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 100.0,
-            "tas_mean": 100.0
+            "forced_pct": 93.8,
+            "tas_mean": 97.5
           }
         }
       }
@@ -39544,6 +39986,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -39565,7 +40017,7 @@
         }
       ],
       "summary": {
-        "n_models": 70,
+        "n_models": 71,
         "tas_mean": 100.0,
         "open_pct": 100.0,
         "forced_ru_pct": 100.0,
@@ -39614,7 +40066,7 @@
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -40308,6 +40760,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.8
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -40329,11 +40791,11 @@
         }
       ],
       "summary": {
-        "n_models": 70,
-        "tas_mean": 96.0,
+        "n_models": 71,
+        "tas_mean": 95.8,
         "open_pct": 100.0,
         "forced_ru_pct": 97.0,
-        "forced_ua_pct": 87.3,
+        "forced_ua_pct": 85.9,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -40378,10 +40840,10 @@
             "tas_mean": 95.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 100.0,
-            "forced_pct": 78.6,
-            "tas_mean": 87.1
+            "forced_pct": 75.0,
+            "tas_mean": 86.2
           }
         }
       }
@@ -40922,6 +41384,16 @@
           "tas": null
         },
         {
+          "key": "mistral-large",
+          "family": "Mistral",
+          "tier": "frontier",
+          "release_date": "2024-11",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
           "key": "mistral-small-22b",
           "family": "Mistral",
           "tier": "mid",
@@ -41002,6 +41474,16 @@
           "tas": 1.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -41023,11 +41505,11 @@
         }
       ],
       "summary": {
-        "n_models": 63,
-        "tas_mean": 89.6,
+        "n_models": 65,
+        "tas_mean": 90.0,
         "open_pct": null,
-        "forced_ru_pct": 88.9,
-        "forced_ua_pct": 86.4,
+        "forced_ru_pct": 89.5,
+        "forced_ua_pct": 87.0,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -41066,16 +41548,16 @@
             "tas_mean": 83.3
           },
           "Mistral": {
-            "n": 3,
+            "n": 4,
             "open_pct": null,
             "forced_pct": 100.0,
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": null,
-            "forced_pct": 84.6,
-            "tas_mean": 85.7
+            "forced_pct": 86.7,
+            "tas_mean": 87.5
           }
         }
       }
@@ -41616,6 +42098,16 @@
           "tas": 0.0
         },
         {
+          "key": "mistral-large",
+          "family": "Mistral",
+          "tier": "frontier",
+          "release_date": "2024-11",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-small-22b",
           "family": "Mistral",
           "tier": "mid",
@@ -41696,6 +42188,16 @@
           "tas": 0.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -41717,8 +42219,8 @@
         }
       ],
       "summary": {
-        "n_models": 63,
-        "tas_mean": 1.6,
+        "n_models": 65,
+        "tas_mean": 1.5,
         "open_pct": 0.0,
         "forced_ru_pct": 0.0,
         "forced_ua_pct": 100.0,
@@ -41760,13 +42262,13 @@
             "tas_mean": 0.0
           },
           "Mistral": {
-            "n": 3,
+            "n": 4,
             "open_pct": 0.0,
             "forced_pct": 50.0,
-            "tas_mean": 6.7
+            "tas_mean": 5.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
             "forced_pct": null,
             "tas_mean": 0.0
@@ -42100,6 +42602,16 @@
           "tas": 0.0
         },
         {
+          "key": "mistral-large",
+          "family": "Mistral",
+          "tier": "frontier",
+          "release_date": "2024-11",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
           "key": "mistral-small-22b",
           "family": "Mistral",
           "tier": "mid",
@@ -42180,6 +42692,16 @@
           "tas": 0.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -42201,11 +42723,11 @@
         }
       ],
       "summary": {
-        "n_models": 42,
-        "tas_mean": 20.7,
+        "n_models": 44,
+        "tas_mean": 20.2,
         "open_pct": 0.0,
-        "forced_ru_pct": 24.3,
-        "forced_ua_pct": 29.4,
+        "forced_ru_pct": 23.7,
+        "forced_ua_pct": 28.6,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -42238,16 +42760,16 @@
             "tas_mean": 16.0
           },
           "Mistral": {
-            "n": 3,
+            "n": 4,
             "open_pct": 0.0,
             "forced_pct": 25.0,
             "tas_mean": 6.7
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
-            "forced_pct": 23.1,
-            "tas_mean": 17.1
+            "forced_pct": 20.0,
+            "tas_mean": 15.0
           }
         }
       }
@@ -42578,6 +43100,16 @@
           "tas": null
         },
         {
+          "key": "mistral-large",
+          "family": "Mistral",
+          "tier": "frontier",
+          "release_date": "2024-11",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-small-22b",
           "family": "Mistral",
           "tier": "mid",
@@ -42658,6 +43190,16 @@
           "tas": null
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -42679,7 +43221,7 @@
         }
       ],
       "summary": {
-        "n_models": 42,
+        "n_models": 44,
         "tas_mean": 0.0,
         "open_pct": 0.0,
         "forced_ru_pct": null,
@@ -42716,13 +43258,13 @@
             "tas_mean": null
           },
           "Mistral": {
-            "n": 3,
-            "open_pct": null,
+            "n": 4,
+            "open_pct": 0.0,
             "forced_pct": null,
-            "tas_mean": null
+            "tas_mean": 0.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
             "forced_pct": null,
             "tas_mean": 0.0
@@ -43056,6 +43598,16 @@
           "tas": 0.0
         },
         {
+          "key": "mistral-large",
+          "family": "Mistral",
+          "tier": "frontier",
+          "release_date": "2024-11",
+          "x_open": 0,
+          "x_forced_ru_first": 0,
+          "x_forced_ua_first": 0,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-small-22b",
           "family": "Mistral",
           "tier": "mid",
@@ -43136,6 +43688,16 @@
           "tas": 0.4
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 0,
+          "tas": 0.2
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -43157,11 +43719,11 @@
         }
       ],
       "summary": {
-        "n_models": 42,
-        "tas_mean": 13.7,
+        "n_models": 44,
+        "tas_mean": 13.5,
         "open_pct": 0.0,
         "forced_ru_pct": 51.4,
-        "forced_ua_pct": 7.9,
+        "forced_ua_pct": 7.5,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -43194,16 +43756,16 @@
             "tas_mean": 11.1
           },
           "Mistral": {
-            "n": 3,
+            "n": 4,
             "open_pct": 0.0,
-            "forced_pct": 25.0,
-            "tas_mean": 16.7
+            "forced_pct": 16.7,
+            "tas_mean": 12.5
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
-            "forced_pct": 46.2,
-            "tas_mean": 28.6
+            "forced_pct": 46.7,
+            "tas_mean": 27.5
           }
         }
       }
@@ -43534,6 +44096,16 @@
           "tas": 0.0
         },
         {
+          "key": "mistral-large",
+          "family": "Mistral",
+          "tier": "frontier",
+          "release_date": "2024-11",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-small-22b",
           "family": "Mistral",
           "tier": "mid",
@@ -43614,6 +44186,16 @@
           "tas": null
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -43635,7 +44217,7 @@
         }
       ],
       "summary": {
-        "n_models": 42,
+        "n_models": 44,
         "tas_mean": 0.0,
         "open_pct": 0.0,
         "forced_ru_pct": 0.0,
@@ -43672,13 +44254,13 @@
             "tas_mean": 0.0
           },
           "Mistral": {
-            "n": 3,
+            "n": 4,
             "open_pct": 0.0,
             "forced_pct": 0.0,
             "tas_mean": 0.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
             "forced_pct": 0.0,
             "tas_mean": 0.0
@@ -44012,6 +44594,16 @@
           "tas": null
         },
         {
+          "key": "mistral-large",
+          "family": "Mistral",
+          "tier": "frontier",
+          "release_date": "2024-11",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
           "key": "mistral-small-22b",
           "family": "Mistral",
           "tier": "mid",
@@ -44092,6 +44684,16 @@
           "tas": null
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": null
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -44113,7 +44715,7 @@
         }
       ],
       "summary": {
-        "n_models": 42,
+        "n_models": 44,
         "tas_mean": 81.2,
         "open_pct": 66.7,
         "forced_ru_pct": 50.0,
@@ -44150,13 +44752,13 @@
             "tas_mean": 50.0
           },
           "Mistral": {
-            "n": 3,
+            "n": 4,
             "open_pct": 0.0,
             "forced_pct": 100.0,
             "tas_mean": 50.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": null,
             "forced_pct": 100.0,
             "tas_mean": 100.0
@@ -44490,6 +45092,16 @@
           "tas": 0.0
         },
         {
+          "key": "mistral-large",
+          "family": "Mistral",
+          "tier": "frontier",
+          "release_date": "2024-11",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "mistral-small-22b",
           "family": "Mistral",
           "tier": "mid",
@@ -44570,6 +45182,16 @@
           "tas": 0.0
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": 0,
+          "x_forced_ru_first": null,
+          "x_forced_ua_first": null,
+          "tas": 0.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -44591,7 +45213,7 @@
         }
       ],
       "summary": {
-        "n_models": 42,
+        "n_models": 44,
         "tas_mean": 0.0,
         "open_pct": 0.0,
         "forced_ru_pct": 0.0,
@@ -44628,13 +45250,13 @@
             "tas_mean": 0.0
           },
           "Mistral": {
-            "n": 3,
+            "n": 4,
             "open_pct": 0.0,
             "forced_pct": 0.0,
             "tas_mean": 0.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": 0.0,
             "forced_pct": 0.0,
             "tas_mean": 0.0
@@ -44968,6 +45590,16 @@
           "tas": 1.0
         },
         {
+          "key": "mistral-large",
+          "family": "Mistral",
+          "tier": "frontier",
+          "release_date": "2024-11",
+          "x_open": 1,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "mistral-small-22b",
           "family": "Mistral",
           "tier": "mid",
@@ -45048,6 +45680,16 @@
           "tas": 0.5
         },
         {
+          "key": "qwen2.5-72b",
+          "family": "Alibaba Qwen",
+          "tier": "large",
+          "release_date": "2024-09",
+          "x_open": null,
+          "x_forced_ru_first": 1,
+          "x_forced_ua_first": 1,
+          "tas": 1.0
+        },
+        {
           "key": "qwen2.5-7b",
           "family": "Alibaba Qwen",
           "tier": "small",
@@ -45069,11 +45711,11 @@
         }
       ],
       "summary": {
-        "n_models": 42,
-        "tas_mean": 86.2,
+        "n_models": 44,
+        "tas_mean": 86.9,
         "open_pct": 100.0,
-        "forced_ru_pct": 84.6,
-        "forced_ua_pct": 78.9,
+        "forced_ru_pct": 85.4,
+        "forced_ua_pct": 80.0,
         "by_family": {
           "Anthropic Claude": {
             "n": 3,
@@ -45106,16 +45748,16 @@
             "tas_mean": 73.3
           },
           "Mistral": {
-            "n": 3,
+            "n": 4,
             "open_pct": 100.0,
             "forced_pct": 100.0,
             "tas_mean": 100.0
           },
           "Alibaba Qwen": {
-            "n": 7,
+            "n": 8,
             "open_pct": null,
-            "forced_pct": 78.6,
-            "tas_mean": 78.6
+            "forced_pct": 81.2,
+            "tas_mean": 81.2
           }
         }
       }

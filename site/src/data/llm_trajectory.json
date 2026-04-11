@@ -307,6 +307,23 @@
       "other_rate": 28.3
     },
     {
+      "key": "qwen2.5-72b",
+      "label": "qwen2.5-72b",
+      "family": "Alibaba Qwen",
+      "tier": "large",
+      "release_date": "2024-09",
+      "tas": 69.8,
+      "open": 57.1,
+      "forced_ru_first": 92.5,
+      "forced_ua_first": 64.2,
+      "forced": 78.3,
+      "gap": 21.2,
+      "ci": 0.932,
+      "position_bias": 35.8,
+      "consistency_pct": null,
+      "other_rate": 17.8
+    },
+    {
       "key": "qwen2.5-7b",
       "label": "qwen2.5-7b",
       "family": "Alibaba Qwen",
@@ -380,16 +397,16 @@
       "family": "Mistral",
       "tier": "frontier",
       "release_date": "2024-11",
-      "tas": 80.4,
-      "open": 69.8,
-      "forced_ru_first": 88.5,
-      "forced_ua_first": 84.3,
-      "forced": 86.4,
-      "gap": 16.6,
-      "ci": 0.961,
-      "position_bias": 47.9,
+      "tas": 75.4,
+      "open": 65.2,
+      "forced_ru_first": 90.2,
+      "forced_ua_first": 82.4,
+      "forced": 86.3,
+      "gap": 21.1,
+      "ci": 0.965,
+      "position_bias": 46.1,
       "consistency_pct": null,
-      "other_rate": 9.9
+      "other_rate": 17.8
     },
     {
       "key": "llama3.3-70b",
@@ -1194,7 +1211,7 @@
   "families": {
     "Alibaba Qwen": {
       "color": "#9333EA",
-      "n_models": 7
+      "n_models": 8
     },
     "Anthropic Claude": {
       "color": "#C97B47",
@@ -1226,7 +1243,7 @@
     }
   },
   "summary": {
-    "n_models": 70,
+    "n_models": 71,
     "tas_min": 51.5,
     "tas_max": 86.3,
     "open_min": 43.2,
