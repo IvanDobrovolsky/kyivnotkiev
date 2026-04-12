@@ -25,6 +25,24 @@ SITE_DATA_DIR = Path(__file__).resolve().parent.parent / "site" / "src" / "data"
 client = bigquery.Client(project=PROJECT)
 
 
+def _get_cl_corpus_size():
+    """Get the CL balanced corpus size from the parquet file."""
+    corpus_path = Path(__file__).resolve().parent.parent / "data" / "cl" / "balanced" / "corpus.parquet"
+    if corpus_path.exists():
+        import pandas as _pd
+        return len(_pd.read_parquet(corpus_path, columns=["pair_id"]))
+    # Fallback: count CL raw texts
+    raw_dir = Path(__file__).resolve().parent.parent / "data" / "cl" / "raw"
+    total = 0
+    if raw_dir.exists():
+        for src_dir in raw_dir.iterdir():
+            if src_dir.is_dir():
+                for f in src_dir.glob("*.parquet"):
+                    import pandas as _pd2
+                    total += len(_pd2.read_parquet(f, columns=["pair_id"]))
+    return total if total > 0 else 43212
+
+
 def query(sql: str) -> list[dict]:
     rows = client.query(sql).result()
     return [dict(row) for row in rows]
@@ -529,7 +547,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         "control_pairs": len(control_ids),
         "records_scanned": "90B+",
         "toponym_matches": toponym_matches,
-        "cl_corpus": 43212,
+        "cl_corpus": _get_cl_corpus_size(),
         "time_span": "2010-2026",
         "num_sources": 8,
         "num_countries": int(extra_map.get("trends_countries", "0")),
