@@ -1,0 +1,14 @@
+{
+  "deberta-v3-large_lr2e-05_ep3": {
+    "error": "Using the `Trainer` with `PyTorch` requires `accelerate>=1.1.0`: Please run `pip install transformers[torch]` or `pip install 'accelerate>=1.1.0'`"
+  },
+  "deberta-v3-large_lr3e-05_ep5": {
+    "error": "Using the `Trainer` with `PyTorch` requires `accelerate>=1.1.0`: Please run `pip install transformers[torch]` or `pip install 'accelerate>=1.1.0'`"
+  },
+  "mdeberta-v3-base_lr2e-05_ep3": {
+    "error": "Using the `Trainer` with `PyTorch` requires `accelerate>=1.1.0`: Please run `pip install transformers[torch]` or `pip install 'accelerate>=1.1.0'`"
+  },
+  "mdeberta-v3-base_lr3e-05_ep5": {
+    "error": "Using the `Trainer` with `PyTorch` requires `accelerate>=1.1.0`: Please run `pip install transformers[torch]` or `pip install 'accelerate>=1.1.0'`"
+  }
+}

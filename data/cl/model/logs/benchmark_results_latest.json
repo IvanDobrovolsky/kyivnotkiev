@@ -1,0 +1,727 @@
+{
+  "deberta-v3-large_lr2e-05_ep3": {
+    "model": "deberta-v3-large",
+    "model_path": "microsoft/deberta-v3-large",
+    "lr": 2e-05,
+    "epochs": 3,
+    "batch_size": 16,
+    "accuracy": 0.2154,
+    "f1_macro": 0.0322,
+    "f1_weighted": 0.0764,
+    "train_loss": 1.9994,
+    "classification_report": {
+      "academic": {
+        "precision": 0.21541710665258712,
+        "recall": 1.0,
+        "f1-score": 0.35447437011294525,
+        "support": 1836.0
+      },
+      "culture": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 526.0
+      },
+      "economy": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 123.0
+      },
+      "food": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 310.0
+      },
+      "general": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 353.0
+      },
+      "history": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 1073.0
+      },
+      "politics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 347.0
+      },
+      "religion": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 260.0
+      },
+      "sports": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 391.0
+      },
+      "travel": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 407.0
+      },
+      "war": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 2897.0
+      },
+      "accuracy": 0.21541710665258712,
+      "macro avg": {
+        "precision": 0.019583373332053376,
+        "recall": 0.09090909090909091,
+        "f1-score": 0.03222494273754048,
+        "support": 8523.0
+      },
+      "weighted avg": {
+        "precision": 0.046404529838572094,
+        "recall": 0.21541710665258712,
+        "f1-score": 0.07635984319222897,
+        "support": 8523.0
+      }
+    }
+  },
+  "modernbert-large_lr2e-05_ep3": {
+    "model": "modernbert-large",
+    "model_path": "answerdotai/ModernBERT-large",
+    "lr": 2e-05,
+    "epochs": 3,
+    "accuracy": 0.8685,
+    "f1_macro": 0.8316,
+    "f1_weighted": 0.8677,
+    "classification_report": {
+      "academic": {
+        "precision": 0.8972162740899358,
+        "recall": 0.9128540305010894,
+        "f1-score": 0.9049676025917927,
+        "support": 1836.0
+      },
+      "culture": {
+        "precision": 0.7899628252788105,
+        "recall": 0.8079847908745247,
+        "f1-score": 0.7988721804511278,
+        "support": 526.0
+      },
+      "economy": {
+        "precision": 0.6962962962962963,
+        "recall": 0.7642276422764228,
+        "f1-score": 0.7286821705426356,
+        "support": 123.0
+      },
+      "food": {
+        "precision": 0.9354838709677419,
+        "recall": 0.9354838709677419,
+        "f1-score": 0.9354838709677419,
+        "support": 310.0
+      },
+      "general": {
+        "precision": 0.709480122324159,
+        "recall": 0.6572237960339944,
+        "f1-score": 0.6823529411764706,
+        "support": 353.0
+      },
+      "history": {
+        "precision": 0.8308411214953271,
+        "recall": 0.8285181733457595,
+        "f1-score": 0.8296780214652356,
+        "support": 1073.0
+      },
+      "politics": {
+        "precision": 0.764505119453925,
+        "recall": 0.6455331412103746,
+        "f1-score": 0.7,
+        "support": 347.0
+      },
+      "religion": {
+        "precision": 0.932,
+        "recall": 0.8961538461538462,
+        "f1-score": 0.9137254901960784,
+        "support": 260.0
+      },
+      "sports": {
+        "precision": 0.9187192118226601,
+        "recall": 0.9539641943734015,
+        "f1-score": 0.9360100376411543,
+        "support": 391.0
+      },
+      "travel": {
+        "precision": 0.8077858880778589,
+        "recall": 0.8157248157248157,
+        "f1-score": 0.8117359413202934,
+        "support": 407.0
+      },
+      "war": {
+        "precision": 0.9036020583190395,
+        "recall": 0.9092164307904729,
+        "f1-score": 0.9064005505849966,
+        "support": 2897.0
+      },
+      "accuracy": 0.8684735421799836,
+      "macro avg": {
+        "precision": 0.8350811625568867,
+        "recall": 0.8297167938411311,
+        "f1-score": 0.8316280733579571,
+        "support": 8523.0
+      },
+      "weighted avg": {
+        "precision": 0.8675019927239532,
+        "recall": 0.8684735421799836,
+        "f1-score": 0.8676683999590317,
+        "support": 8523.0
+      }
+    }
+  },
+  "modernbert-large_lr2e-05_ep5": {
+    "model": "modernbert-large",
+    "model_path": "answerdotai/ModernBERT-large",
+    "lr": 2e-05,
+    "epochs": 5,
+    "accuracy": 0.8675,
+    "f1_macro": 0.8291,
+    "f1_weighted": 0.8672,
+    "classification_report": {
+      "academic": {
+        "precision": 0.8871473354231975,
+        "recall": 0.9248366013071896,
+        "f1-score": 0.9056,
+        "support": 1836.0
+      },
+      "culture": {
+        "precision": 0.8096192384769539,
+        "recall": 0.7680608365019012,
+        "f1-score": 0.7882926829268293,
+        "support": 526.0
+      },
+      "economy": {
+        "precision": 0.6791044776119403,
+        "recall": 0.7398373983739838,
+        "f1-score": 0.708171206225681,
+        "support": 123.0
+      },
+      "food": {
+        "precision": 0.9453376205787781,
+        "recall": 0.9483870967741935,
+        "f1-score": 0.9468599033816425,
+        "support": 310.0
+      },
+      "general": {
+        "precision": 0.6505376344086021,
+        "recall": 0.6855524079320113,
+        "f1-score": 0.6675862068965517,
+        "support": 353.0
+      },
+      "history": {
+        "precision": 0.8349146110056926,
+        "recall": 0.8201304753028891,
+        "f1-score": 0.8274565115185708,
+        "support": 1073.0
+      },
+      "politics": {
+        "precision": 0.759075907590759,
+        "recall": 0.6628242074927954,
+        "f1-score": 0.7076923076923077,
+        "support": 347.0
+      },
+      "religion": {
+        "precision": 0.9215686274509803,
+        "recall": 0.9038461538461539,
+        "f1-score": 0.912621359223301,
+        "support": 260.0
+      },
+      "sports": {
+        "precision": 0.9311224489795918,
+        "recall": 0.9335038363171355,
+        "f1-score": 0.9323116219667944,
+        "support": 391.0
+      },
+      "travel": {
+        "precision": 0.8121951219512196,
+        "recall": 0.8181818181818182,
+        "f1-score": 0.8151774785801713,
+        "support": 407.0
+      },
+      "war": {
+        "precision": 0.910732893365752,
+        "recall": 0.9050742147048672,
+        "f1-score": 0.9078947368421053,
+        "support": 2897.0
+      },
+      "accuracy": 0.867534905549689,
+      "macro avg": {
+        "precision": 0.8310323560766789,
+        "recall": 0.8282031860668126,
+        "f1-score": 0.829060365023087,
+        "support": 8523.0
+      },
+      "weighted avg": {
+        "precision": 0.8673920650350699,
+        "recall": 0.867534905549689,
+        "f1-score": 0.8671602560480468,
+        "support": 8523.0
+      }
+    }
+  },
+  "modernbert-large_lr3e-05_ep3": {
+    "model": "modernbert-large",
+    "model_path": "answerdotai/ModernBERT-large",
+    "lr": 3e-05,
+    "epochs": 3,
+    "accuracy": 0.8678,
+    "f1_macro": 0.8327,
+    "f1_weighted": 0.8675,
+    "classification_report": {
+      "academic": {
+        "precision": 0.8972857903139968,
+        "recall": 0.9183006535947712,
+        "f1-score": 0.907671601615074,
+        "support": 1836.0
+      },
+      "culture": {
+        "precision": 0.7830882352941176,
+        "recall": 0.8098859315589354,
+        "f1-score": 0.7962616822429907,
+        "support": 526.0
+      },
+      "economy": {
+        "precision": 0.7416666666666667,
+        "recall": 0.7235772357723578,
+        "f1-score": 0.7325102880658436,
+        "support": 123.0
+      },
+      "food": {
+        "precision": 0.956953642384106,
+        "recall": 0.932258064516129,
+        "f1-score": 0.9444444444444444,
+        "support": 310.0
+      },
+      "general": {
+        "precision": 0.6743515850144092,
+        "recall": 0.6628895184135978,
+        "f1-score": 0.6685714285714286,
+        "support": 353.0
+      },
+      "history": {
+        "precision": 0.8168498168498168,
+        "recall": 0.8313140726933831,
+        "f1-score": 0.8240184757505774,
+        "support": 1073.0
+      },
+      "politics": {
+        "precision": 0.7572815533980582,
+        "recall": 0.6743515850144092,
+        "f1-score": 0.7134146341463414,
+        "support": 347.0
+      },
+      "religion": {
+        "precision": 0.9437751004016064,
+        "recall": 0.9038461538461539,
+        "f1-score": 0.9233791748526523,
+        "support": 260.0
+      },
+      "sports": {
+        "precision": 0.9323308270676691,
+        "recall": 0.9514066496163683,
+        "f1-score": 0.9417721518987342,
+        "support": 391.0
+      },
+      "travel": {
+        "precision": 0.8,
+        "recall": 0.8058968058968059,
+        "f1-score": 0.802937576499388,
+        "support": 407.0
+      },
+      "war": {
+        "precision": 0.9091225626740947,
+        "recall": 0.9012771832930618,
+        "f1-score": 0.9051828739816259,
+        "support": 2897.0
+      },
+      "accuracy": 0.8677695647072627,
+      "macro avg": {
+        "precision": 0.8375187072785946,
+        "recall": 0.8286367140196339,
+        "f1-score": 0.832742212006282,
+        "support": 8523.0
+      },
+      "weighted avg": {
+        "precision": 0.8675062017475152,
+        "recall": 0.8677695647072627,
+        "f1-score": 0.8674585875705674,
+        "support": 8523.0
+      }
+    }
+  },
+  "modernbert-large_lr3e-05_ep5": {
+    "model": "modernbert-large",
+    "model_path": "answerdotai/ModernBERT-large",
+    "lr": 3e-05,
+    "epochs": 5,
+    "accuracy": 0.8687,
+    "f1_macro": 0.8299,
+    "f1_weighted": 0.8683,
+    "classification_report": {
+      "academic": {
+        "precision": 0.8916359810625987,
+        "recall": 0.923202614379085,
+        "f1-score": 0.9071447685309072,
+        "support": 1836.0
+      },
+      "culture": {
+        "precision": 0.7862595419847328,
+        "recall": 0.7832699619771863,
+        "f1-score": 0.7847619047619048,
+        "support": 526.0
+      },
+      "economy": {
+        "precision": 0.6788321167883211,
+        "recall": 0.7560975609756098,
+        "f1-score": 0.7153846153846154,
+        "support": 123.0
+      },
+      "food": {
+        "precision": 0.9381107491856677,
+        "recall": 0.9290322580645162,
+        "f1-score": 0.93354943273906,
+        "support": 310.0
+      },
+      "general": {
+        "precision": 0.6648199445983379,
+        "recall": 0.6798866855524079,
+        "f1-score": 0.6722689075630253,
+        "support": 353.0
+      },
+      "history": {
+        "precision": 0.8463016330451489,
+        "recall": 0.821062441752097,
+        "f1-score": 0.8334910122989593,
+        "support": 1073.0
+      },
+      "politics": {
+        "precision": 0.7549668874172185,
+        "recall": 0.6570605187319885,
+        "f1-score": 0.7026194144838213,
+        "support": 347.0
+      },
+      "religion": {
+        "precision": 0.9115384615384615,
+        "recall": 0.9115384615384615,
+        "f1-score": 0.9115384615384615,
+        "support": 260.0
+      },
+      "sports": {
+        "precision": 0.93,
+        "recall": 0.9514066496163683,
+        "f1-score": 0.9405815423514539,
+        "support": 391.0
+      },
+      "travel": {
+        "precision": 0.8071428571428572,
+        "recall": 0.8329238329238329,
+        "f1-score": 0.8198307134220073,
+        "support": 407.0
+      },
+      "war": {
+        "precision": 0.9125435540069686,
+        "recall": 0.9040386606834656,
+        "f1-score": 0.908271198196636,
+        "support": 2897.0
+      },
+      "accuracy": 0.8687082013375572,
+      "macro avg": {
+        "precision": 0.8292865206154829,
+        "recall": 0.8317745132904562,
+        "f1-score": 0.8299492701155322,
+        "support": 8523.0
+      },
+      "weighted avg": {
+        "precision": 0.8685250832309263,
+        "recall": 0.8687082013375572,
+        "f1-score": 0.8683387364495097,
+        "support": 8523.0
+      }
+    }
+  },
+  "electra-large_lr2e-05_ep3": {
+    "model": "electra-large",
+    "model_path": "google/electra-large-discriminator",
+    "lr": 2e-05,
+    "epochs": 3,
+    "accuracy": 0.8545,
+    "f1_macro": 0.8136,
+    "f1_weighted": 0.8553,
+    "classification_report": {
+      "academic": {
+        "precision": 0.8975054229934925,
+        "recall": 0.9014161220043573,
+        "f1-score": 0.8994565217391305,
+        "support": 1836.0
+      },
+      "culture": {
+        "precision": 0.6466049382716049,
+        "recall": 0.7965779467680608,
+        "f1-score": 0.7137989778534923,
+        "support": 526.0
+      },
+      "economy": {
+        "precision": 0.7083333333333334,
+        "recall": 0.6910569105691057,
+        "f1-score": 0.6995884773662552,
+        "support": 123.0
+      },
+      "food": {
+        "precision": 0.9429530201342282,
+        "recall": 0.9064516129032258,
+        "f1-score": 0.9243421052631579,
+        "support": 310.0
+      },
+      "general": {
+        "precision": 0.7058823529411765,
+        "recall": 0.6458923512747875,
+        "f1-score": 0.6745562130177515,
+        "support": 353.0
+      },
+      "history": {
+        "precision": 0.8033088235294118,
+        "recall": 0.8145386766076421,
+        "f1-score": 0.8088847755668672,
+        "support": 1073.0
+      },
+      "politics": {
+        "precision": 0.7203647416413373,
+        "recall": 0.6829971181556196,
+        "f1-score": 0.7011834319526628,
+        "support": 347.0
+      },
+      "religion": {
+        "precision": 0.9230769230769231,
+        "recall": 0.8769230769230769,
+        "f1-score": 0.8994082840236687,
+        "support": 260.0
+      },
+      "sports": {
+        "precision": 0.9408740359897172,
+        "recall": 0.9360613810741688,
+        "f1-score": 0.9384615384615385,
+        "support": 391.0
+      },
+      "travel": {
+        "precision": 0.7939698492462312,
+        "recall": 0.7764127764127764,
+        "f1-score": 0.7850931677018633,
+        "support": 407.0
+      },
+      "war": {
+        "precision": 0.9137020077492075,
+        "recall": 0.8954090438384535,
+        "f1-score": 0.904463040446304,
+        "support": 2897.0
+      },
+      "accuracy": 0.8545113223043529,
+      "macro avg": {
+        "precision": 0.8178704953551513,
+        "recall": 0.8112488196846613,
+        "f1-score": 0.8135669575811537,
+        "support": 8523.0
+      },
+      "weighted avg": {
+        "precision": 0.8572674160668796,
+        "recall": 0.8545113223043529,
+        "f1-score": 0.8552581476815575,
+        "support": 8523.0
+      }
+    }
+  },
+  "electra-large_lr2e-05_ep5": {
+    "model": "electra-large",
+    "model_path": "google/electra-large-discriminator",
+    "lr": 2e-05,
+    "epochs": 5,
+    "accuracy": 0.2154,
+    "f1_macro": 0.0322,
+    "f1_weighted": 0.0764,
+    "classification_report": {
+      "academic": {
+        "precision": 0.21541710665258712,
+        "recall": 1.0,
+        "f1-score": 0.35447437011294525,
+        "support": 1836.0
+      },
+      "culture": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 526.0
+      },
+      "economy": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 123.0
+      },
+      "food": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 310.0
+      },
+      "general": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 353.0
+      },
+      "history": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 1073.0
+      },
+      "politics": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 347.0
+      },
+      "religion": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 260.0
+      },
+      "sports": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 391.0
+      },
+      "travel": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 407.0
+      },
+      "war": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 2897.0
+      },
+      "accuracy": 0.21541710665258712,
+      "macro avg": {
+        "precision": 0.019583373332053376,
+        "recall": 0.09090909090909091,
+        "f1-score": 0.03222494273754048,
+        "support": 8523.0
+      },
+      "weighted avg": {
+        "precision": 0.046404529838572094,
+        "recall": 0.21541710665258712,
+        "f1-score": 0.07635984319222897,
+        "support": 8523.0
+      }
+    }
+  },
+  "electra-large_lr3e-05_ep3": {
+    "model": "electra-large",
+    "model_path": "google/electra-large-discriminator",
+    "lr": 3e-05,
+    "epochs": 3,
+    "accuracy": 0.8597,
+    "f1_macro": 0.8167,
+    "f1_weighted": 0.8589,
+    "classification_report": {
+      "academic": {
+        "precision": 0.8931782125859333,
+        "recall": 0.9199346405228758,
+        "f1-score": 0.9063590018781862,
+        "support": 1836.0
+      },
+      "culture": {
+        "precision": 0.7561904761904762,
+        "recall": 0.7547528517110266,
+        "f1-score": 0.7554709800190295,
+        "support": 526.0
+      },
+      "economy": {
+        "precision": 0.696,
+        "recall": 0.7073170731707317,
+        "f1-score": 0.7016129032258065,
+        "support": 123.0
+      },
+      "food": {
+        "precision": 0.940983606557377,
+        "recall": 0.9258064516129032,
+        "f1-score": 0.9333333333333333,
+        "support": 310.0
+      },
+      "general": {
+        "precision": 0.7016393442622951,
+        "recall": 0.6062322946175638,
+        "f1-score": 0.6504559270516718,
+        "support": 353.0
+      },
+      "history": {
+        "precision": 0.8032345013477089,
+        "recall": 0.8331780055917987,
+        "f1-score": 0.817932296431839,
+        "support": 1073.0
+      },
+      "politics": {
+        "precision": 0.7333333333333333,
+        "recall": 0.6657060518731989,
+        "f1-score": 0.6978851963746223,
+        "support": 347.0
+      },
+      "religion": {
+        "precision": 0.9196787148594378,
+        "recall": 0.8807692307692307,
+        "f1-score": 0.899803536345776,
+        "support": 260.0
+      },
+      "sports": {
+        "precision": 0.925,
+        "recall": 0.9462915601023018,
+        "f1-score": 0.9355246523388117,
+        "support": 391.0
+      },
+      "travel": {
+        "precision": 0.7610208816705336,
+        "recall": 0.8058968058968059,
+        "f1-score": 0.7828162291169452,
+        "support": 407.0
+      },
+      "war": {
+        "precision": 0.9081703910614525,
+        "recall": 0.8978253365550569,
+        "f1-score": 0.9029682346814789,
+        "support": 2897.0
+      },
+      "accuracy": 0.8596738237709727,
+      "macro avg": {
+        "precision": 0.8216754056244134,
+        "recall": 0.8130645729475904,
+        "f1-score": 0.8167420264361364,
+        "support": 8523.0
+      },
+      "weighted avg": {
+        "precision": 0.8589061210327923,
+        "recall": 0.8596738237709727,
+        "f1-score": 0.8589401950567034,
+        "support": 8523.0
+      }
+    }
+  },
+  "electra-large_lr3e-05_ep5": {
+    "error": "[enforce fail at inline_container.cc:672] . unexpected pos 942237632 vs 942237520"
+  }
+}

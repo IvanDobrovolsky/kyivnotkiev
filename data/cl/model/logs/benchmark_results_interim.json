@@ -1,0 +1,106 @@
+{
+  "deberta-v3-large_lr2e-05_ep3": {
+    "error": "Attempting to unscale FP16 gradients."
+  },
+  "deberta-v3-large_lr2e-05_ep5": {
+    "error": "Attempting to unscale FP16 gradients."
+  },
+  "deberta-v3-large_lr3e-05_ep3": {
+    "error": "Attempting to unscale FP16 gradients."
+  },
+  "deberta-v3-large_lr3e-05_ep5": {
+    "error": "Attempting to unscale FP16 gradients."
+  },
+  "xlm-roberta-large_lr2e-05_ep3": {
+    "model": "xlm-roberta-large",
+    "model_path": "FacebookAI/xlm-roberta-large",
+    "lr": 2e-05,
+    "epochs": 3,
+    "batch_size": 16,
+    "accuracy": 0.8745,
+    "f1_macro": 0.8384,
+    "f1_weighted": 0.8735,
+    "train_loss": 0.4037,
+    "classification_report": {
+      "academic": {
+        "precision": 0.8963893249607535,
+        "recall": 0.9330065359477124,
+        "f1-score": 0.9143314651721377,
+        "support": 1836.0
+      },
+      "culture": {
+        "precision": 0.7919847328244275,
+        "recall": 0.7889733840304183,
+        "f1-score": 0.7904761904761904,
+        "support": 526.0
+      },
+      "economy": {
+        "precision": 0.7355371900826446,
+        "recall": 0.7235772357723578,
+        "f1-score": 0.7295081967213115,
+        "support": 123.0
+      },
+      "food": {
+        "precision": 0.946031746031746,
+        "recall": 0.9612903225806452,
+        "f1-score": 0.9536,
+        "support": 310.0
+      },
+      "general": {
+        "precision": 0.7663230240549829,
+        "recall": 0.6317280453257791,
+        "f1-score": 0.6925465838509317,
+        "support": 353.0
+      },
+      "history": {
+        "precision": 0.822992700729927,
+        "recall": 0.8406337371854613,
+        "f1-score": 0.8317196864914708,
+        "support": 1073.0
+      },
+      "politics": {
+        "precision": 0.7817589576547231,
+        "recall": 0.69164265129683,
+        "f1-score": 0.7339449541284404,
+        "support": 347.0
+      },
+      "religion": {
+        "precision": 0.9137254901960784,
+        "recall": 0.8961538461538462,
+        "f1-score": 0.9048543689320389,
+        "support": 260.0
+      },
+      "sports": {
+        "precision": 0.9201995012468828,
+        "recall": 0.9437340153452686,
+        "f1-score": 0.9318181818181818,
+        "support": 391.0
+      },
+      "travel": {
+        "precision": 0.7937219730941704,
+        "recall": 0.8697788697788698,
+        "f1-score": 0.8300117233294255,
+        "support": 407.0
+      },
+      "war": {
+        "precision": 0.9163165266106442,
+        "recall": 0.9033482913358647,
+        "f1-score": 0.9097861985051278,
+        "support": 2897.0
+      },
+      "accuracy": 0.874457350698111,
+      "macro avg": {
+        "precision": 0.844089197044271,
+        "recall": 0.8348969940684594,
+        "f1-score": 0.8384179590386597,
+        "support": 8523.0
+      },
+      "weighted avg": {
+        "precision": 0.873627794497628,
+        "recall": 0.874457350698111,
+        "f1-score": 0.8734600556973142,
+        "support": 8523.0
+      }
+    }
+  }
+}
