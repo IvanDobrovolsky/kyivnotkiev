@@ -22,22 +22,47 @@ from pipeline.cl.config import (
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-SOURCES = ["reddit", "youtube", "gdelt_articles", "openalex"]
+SOURCES = ["reddit", "youtube", "gdelt_articles", "openalex", "religious"]
 
 
 def load_raw_texts():
-    """Load all raw extracted texts from parquet files."""
+    """Load all raw extracted texts from parquet files.
+
+    Reads both all_pairs.parquet (legacy) and individual pair_XX.parquet
+    files, deduplicating by pair_id + text content.
+    """
     frames = []
     for source_dir in SOURCES:
-        path = CL_RAW_DIR / source_dir / "all_pairs.parquet"
-        if path.exists():
-            df = pd.read_parquet(path)
+        src_path = CL_RAW_DIR / source_dir
+
+        # Legacy single-file format
+        all_path = src_path / "all_pairs.parquet"
+        if all_path.exists():
+            df = pd.read_parquet(all_path)
             if "source" not in df.columns:
                 df["source"] = source_dir.replace("_articles", "")
             frames.append(df)
-            log.info(f"Loaded {len(df)} texts from {source_dir}")
-        else:
-            log.warning(f"No data found at {path}")
+            log.info(f"Loaded {len(df)} texts from {source_dir}/all_pairs.parquet")
+
+        # Per-pair files (new pairs + supplements)
+        per_pair_files = sorted(src_path.glob("pair_*.parquet"))
+        if per_pair_files:
+            pair_frames = []
+            for f in per_pair_files:
+                try:
+                    pdf = pd.read_parquet(f)
+                    if "source" not in pdf.columns:
+                        pdf["source"] = source_dir.replace("_articles", "")
+                    pair_frames.append(pdf)
+                except Exception as e:
+                    log.warning(f"  Error reading {f}: {e}")
+            if pair_frames:
+                combined_pairs = pd.concat(pair_frames, ignore_index=True)
+                frames.append(combined_pairs)
+                log.info(f"Loaded {len(combined_pairs)} texts from {source_dir}/ ({len(per_pair_files)} pair files)")
+
+        if not all_path.exists() and not per_pair_files:
+            log.warning(f"No data found for {source_dir}")
 
     if not frames:
         raise FileNotFoundError("No raw text data found. Run extract scripts first.")
