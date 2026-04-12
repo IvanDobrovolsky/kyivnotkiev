@@ -112,6 +112,19 @@ function formatNum(n: number) {
     </aside>
 
     <main class="main" style="opacity:0; transition:opacity 0.15s;">
+      {/* Mobile pair selector — replaces sidebar on small screens */}
+      <select class="mobile-pair-select" id="mobile-pair-select">
+        <option value="">Select a toponym pair...</option>
+        {grouped.map(cat => (
+          <optgroup label={cat.name}>
+            {cat.pairs.map(p => (
+              <option value={p.id}>
+                {p.starred ? '★ ' : ''}{p.russian} → {p.ukrainian} ({p.adoption}%)
+              </option>
+            ))}
+          </optgroup>
+        ))}
+      </select>
       <!-- ══ LANDING VIEW (visible when no pair selected) ══ -->
       <div id="landing-view" style="display:none;">
         <div style="display:flex; align-items:center; gap:1.5rem; padding:2rem 0.5rem 1.5rem; margin-bottom:1rem;">
@@ -1493,6 +1506,9 @@ function formatNum(n: number) {
       activePairId = pairId;
       updateUrl(pairId);
       showView('pair');
+      // Sync mobile select
+      const ms = document.getElementById('mobile-pair-select') as HTMLSelectElement;
+      if (ms) ms.value = String(pairId);
       document.querySelectorAll('.sidebar-item').forEach(i => {
         const id = parseInt((i as HTMLElement).dataset.pairId || '0');
         i.classList.toggle('active', id === pairId);
@@ -2126,6 +2142,15 @@ function formatNum(n: number) {
         selectPair(parseInt((item as HTMLElement).dataset.pairId || '1'));
       });
     });
+
+    // Mobile pair selector
+    const mobileSelect = document.getElementById('mobile-pair-select') as HTMLSelectElement;
+    if (mobileSelect) {
+      mobileSelect.addEventListener('change', () => {
+        const val = parseInt(mobileSelect.value);
+        if (val) selectPair(val);
+      });
+    }
 
     // Initialize from URL param
     if (activePairId !== 1) {
