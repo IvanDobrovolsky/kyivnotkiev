@@ -1,13 +1,13 @@
 {
   "method": "Hunspell en_US dictionary checked via pyenchant on the first word of each toponym pair. AP Stylebook and BBC News Style Guide entries are sourced from documented public stylebook updates (AP 2019/2022, BBC 2019). Closed-source tools (Microsoft Word, Grammarly) are intentionally NOT verified per-pair as that would require manual interaction with proprietary services.",
   "summary": {
-    "n_pairs": 54,
-    "hunspell_ru_accepted": 28,
-    "hunspell_ua_accepted": 6,
-    "hunspell_only_ru_accepted": 22,
-    "hunspell_only_ua_accepted": 0,
+    "n_pairs": 60,
+    "hunspell_ru_accepted": 31,
+    "hunspell_ua_accepted": 8,
+    "hunspell_only_ru_accepted": 25,
+    "hunspell_only_ua_accepted": 2,
     "hunspell_both_accepted": 6,
-    "hunspell_neither_accepted": 26,
+    "hunspell_neither_accepted": 27,
     "ap_documented": 5,
     "bbc_documented": 4
   },
@@ -367,8 +367,8 @@
       }
     },
     "15": {
-      "russian": "Dnieper",
-      "ukrainian": "Dnipro",
+      "russian": "Dnieper River",
+      "ukrainian": "Dnipro River",
       "hunspell": {
         "russian": {
           "word_checked": "Dnieper",
@@ -595,24 +595,24 @@
       }
     },
     "23": {
-      "russian": "Borscht",
-      "ukrainian": "Borshch",
+      "russian": "Borsch",
+      "ukrainian": "Borscht",
       "hunspell": {
         "russian": {
+          "word_checked": "Borsch",
+          "accepted": false,
+          "suggestions": [
+            "Borscht",
+            "Bosch",
+            "Busch",
+            "Broach",
+            "Birch"
+          ]
+        },
+        "ukrainian": {
           "word_checked": "Borscht",
           "accepted": true,
           "suggestions": []
-        },
-        "ukrainian": {
-          "word_checked": "Borshch",
-          "accepted": false,
-          "suggestions": [
-            "Bosch",
-            "Broach",
-            "Birch",
-            "Botch",
-            "Bosh"
-          ]
         }
       },
       "ap_stylebook": {
@@ -920,7 +920,7 @@
     },
     "36": {
       "russian": "Kazak",
-      "ukrainian": "Kozak",
+      "ukrainian": "Cossack",
       "hunspell": {
         "russian": {
           "word_checked": "Kazak",
@@ -934,15 +934,9 @@
           ]
         },
         "ukrainian": {
-          "word_checked": "Kozak",
-          "accepted": false,
-          "suggestions": [
-            "Kodak",
-            "Kojak",
-            "Kiosk",
-            "Ozark",
-            "Kazakh"
-          ]
+          "word_checked": "Cossack",
+          "accepted": true,
+          "suggestions": []
         }
       },
       "ap_stylebook": {
@@ -1308,42 +1302,6 @@
         "form": null
       }
     },
-    "51": {
-      "russian": "Zorya Lugansk",
-      "ukrainian": "Zorya Luhansk",
-      "hunspell": {
-        "russian": {
-          "word_checked": "Zorya",
-          "accepted": false,
-          "suggestions": [
-            "Surya",
-            "Oriya",
-            "Zara",
-            "Zorro",
-            "Sonya"
-          ]
-        },
-        "ukrainian": {
-          "word_checked": "Zorya",
-          "accepted": false,
-          "suggestions": [
-            "Surya",
-            "Oriya",
-            "Zara",
-            "Zorro",
-            "Sonya"
-          ]
-        }
-      },
-      "ap_stylebook": {
-        "documented": false,
-        "form": null
-      },
-      "bbc_style_guide": {
-        "documented": false,
-        "form": null
-      }
-    },
     "52": {
       "russian": "Metalist Kharkov",
       "ukrainian": "Metalist Kharkiv",
@@ -1368,42 +1326,6 @@
             "Meta list",
             "Meta-list",
             "Mealiest"
-          ]
-        }
-      },
-      "ap_stylebook": {
-        "documented": false,
-        "form": null
-      },
-      "bbc_style_guide": {
-        "documented": false,
-        "form": null
-      }
-    },
-    "53": {
-      "russian": "Karpaty Lvov",
-      "ukrainian": "Karpaty Lviv",
-      "hunspell": {
-        "russian": {
-          "word_checked": "Karpaty",
-          "accepted": false,
-          "suggestions": [
-            "Karat",
-            "Kaput",
-            "Karate",
-            "Carpet",
-            "Kept"
-          ]
-        },
-        "ukrainian": {
-          "word_checked": "Karpaty",
-          "accepted": false,
-          "suggestions": [
-            "Karat",
-            "Kaput",
-            "Karate",
-            "Carpet",
-            "Kept"
           ]
         }
       },
@@ -1620,30 +1542,30 @@
         "form": null
       }
     },
-    "64": {
-      "russian": "Borsch",
-      "ukrainian": "Borshch",
+    "62": {
+      "russian": "Andrey Shevchenko",
+      "ukrainian": "Andrii Shevchenko",
       "hunspell": {
         "russian": {
-          "word_checked": "Borsch",
+          "word_checked": "Andrey",
           "accepted": false,
           "suggestions": [
-            "Borscht",
-            "Bosch",
-            "Busch",
-            "Broach",
-            "Birch"
+            "Andre",
+            "Andrea",
+            "Andrei",
+            "Andrew",
+            "Andres"
           ]
         },
         "ukrainian": {
-          "word_checked": "Borshch",
+          "word_checked": "Andrii",
           "accepted": false,
           "suggestions": [
-            "Bosch",
-            "Broach",
-            "Birch",
-            "Botch",
-            "Bosh"
+            "Andrei",
+            "Andre",
+            "Andrea",
+            "Andrew",
+            "Android"
           ]
         }
       },
@@ -1734,6 +1656,270 @@
             "Backhand",
             "Backbit",
             "Backchat"
+          ]
+        }
+      },
+      "ap_stylebook": {
+        "documented": false,
+        "form": null
+      },
+      "bbc_style_guide": {
+        "documented": false,
+        "form": null
+      }
+    },
+    "80": {
+      "russian": "Nikolai Gogol",
+      "ukrainian": "Mykola Hohol",
+      "hunspell": {
+        "russian": {
+          "word_checked": "Nikolai",
+          "accepted": true,
+          "suggestions": []
+        },
+        "ukrainian": {
+          "word_checked": "Mykola",
+          "accepted": false,
+          "suggestions": [
+            "My kola",
+            "My-kola",
+            "Kola",
+            "Mazola",
+            "Murkily"
+          ]
+        }
+      },
+      "ap_stylebook": {
+        "documented": false,
+        "form": null
+      },
+      "bbc_style_guide": {
+        "documented": false,
+        "form": null
+      }
+    },
+    "82": {
+      "russian": "Feodosiya",
+      "ukrainian": "Feodosiia",
+      "hunspell": {
+        "russian": {
+          "word_checked": "Feodosiya",
+          "accepted": false,
+          "suggestions": [
+            "Foods",
+            "Foodies",
+            "Feds",
+            "Footsies",
+            "Feds's"
+          ]
+        },
+        "ukrainian": {
+          "word_checked": "Feodosiia",
+          "accepted": false,
+          "suggestions": [
+            "Foods",
+            "Foodies",
+            "Feds",
+            "Feds's",
+            "Footsie"
+          ]
+        }
+      },
+      "ap_stylebook": {
+        "documented": false,
+        "form": null
+      },
+      "bbc_style_guide": {
+        "documented": false,
+        "form": null
+      }
+    },
+    "83": {
+      "russian": "Olga of Kiev",
+      "ukrainian": "Olha of Kyiv",
+      "hunspell": {
+        "russian": {
+          "word_checked": "Olga",
+          "accepted": true,
+          "suggestions": []
+        },
+        "ukrainian": {
+          "word_checked": "Olha",
+          "accepted": false,
+          "suggestions": [
+            "Olga",
+            "Ola",
+            "Aloha",
+            "OSHA",
+            "Ila"
+          ]
+        }
+      },
+      "ap_stylebook": {
+        "documented": false,
+        "form": null
+      },
+      "bbc_style_guide": {
+        "documented": false,
+        "form": null
+      }
+    },
+    "84": {
+      "russian": "Igor Sikorsky",
+      "ukrainian": "Ihor Sikorsky",
+      "hunspell": {
+        "russian": {
+          "word_checked": "Igor",
+          "accepted": true,
+          "suggestions": []
+        },
+        "ukrainian": {
+          "word_checked": "Ihor",
+          "accepted": false,
+          "suggestions": [
+            "Igor",
+            "Oho",
+            "Thor",
+            "Ahoy",
+            "Ohio"
+          ]
+        }
+      },
+      "ap_stylebook": {
+        "documented": false,
+        "form": null
+      },
+      "bbc_style_guide": {
+        "documented": false,
+        "form": null
+      }
+    },
+    "85": {
+      "russian": "Sergei Korolev",
+      "ukrainian": "Serhii Korolyov",
+      "hunspell": {
+        "russian": {
+          "word_checked": "Sergei",
+          "accepted": true,
+          "suggestions": []
+        },
+        "ukrainian": {
+          "word_checked": "Serhii",
+          "accepted": false,
+          "suggestions": [
+            "Sergio",
+            "Sergei",
+            "Serbia",
+            "Rehi",
+            "Seth"
+          ]
+        }
+      },
+      "ap_stylebook": {
+        "documented": false,
+        "form": null
+      },
+      "bbc_style_guide": {
+        "documented": false,
+        "form": null
+      }
+    },
+    "86": {
+      "russian": "Bogdan Khmelnitsky",
+      "ukrainian": "Bohdan Khmelnytskyi",
+      "hunspell": {
+        "russian": {
+          "word_checked": "Bogdan",
+          "accepted": false,
+          "suggestions": [
+            "Bogyman",
+            "Began",
+            "Bogon",
+            "Ogden",
+            "Borden"
+          ]
+        },
+        "ukrainian": {
+          "word_checked": "Bohdan",
+          "accepted": false,
+          "suggestions": [
+            "Borden",
+            "Bordon",
+            "Biden",
+            "Boding",
+            "Botany"
+          ]
+        }
+      },
+      "ap_stylebook": {
+        "documented": false,
+        "form": null
+      },
+      "bbc_style_guide": {
+        "documented": false,
+        "form": null
+      }
+    },
+    "87": {
+      "russian": "Kazimir Malevich",
+      "ukrainian": "Kazymyr Malevych",
+      "hunspell": {
+        "russian": {
+          "word_checked": "Kazimir",
+          "accepted": false,
+          "suggestions": [
+            "Kashmir",
+            "Izmir",
+            "Koizumi",
+            "Kaiser",
+            "Gizmo"
+          ]
+        },
+        "ukrainian": {
+          "word_checked": "Kazymyr",
+          "accepted": false,
+          "suggestions": [
+            "Camry",
+            "Gazump",
+            "Zamora",
+            "Koizumi",
+            "Oxymora"
+          ]
+        }
+      },
+      "ap_stylebook": {
+        "documented": false,
+        "form": null
+      },
+      "bbc_style_guide": {
+        "documented": false,
+        "form": null
+      }
+    },
+    "89": {
+      "russian": "Sviatogorsk Lavra",
+      "ukrainian": "Sviatohirsk Lavra",
+      "hunspell": {
+        "russian": {
+          "word_checked": "Sviatogorsk",
+          "accepted": false,
+          "suggestions": [
+            "Stooges",
+            "Stogies",
+            "Storks",
+            "Servitors",
+            "Sikorsky"
+          ]
+        },
+        "ukrainian": {
+          "word_checked": "Sviatohirsk",
+          "accepted": false,
+          "suggestions": [
+            "Servitors",
+            "Sifters",
+            "Servitor's",
+            "Sindhi's",
+            "Softies"
           ]
         }
       },
