@@ -470,11 +470,11 @@ pairs:
   starred: false
 - id: 36
   category: historical
-  russian: Kazak
-  ukrainian: Cossack
-  enabled: true
+  russian: Cossack
+  ukrainian: Kozak
+  enabled: false
   is_control: false
-  notes: Cossack is the universal English form — aligned with English usage. Tests whether Kazak (Russian transliteration) ever appears vs the established Cossack.
+  notes: 'Disabled: Cossack is a shared English exonym used across Ukrainian, Don, and Kuban contexts. "Kazak" contaminates with Kazakhstan. No clean RU/UA transliteration split exists for this term.'
   starred: false
 - id: 37
   category: historical
