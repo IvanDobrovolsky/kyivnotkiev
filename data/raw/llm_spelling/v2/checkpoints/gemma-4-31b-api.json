@@ -1414,14 +1414,92 @@
       "russian": "Andrey Shevchenko",
       "ukrainian": "Andrii Shevchenko",
       "category": "people",
-      "trials": []
+      "trials": [
+        {
+          "test": "forced_ru_first",
+          "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+          "response": "Andrii",
+          "x": 1
+        },
+        {
+          "test": "forced_ua_first",
+          "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+          "response": "Andrii",
+          "x": 1
+        },
+        {
+          "test": "open",
+          "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+          "response": "Andriy",
+          "x": null
+        }
+      ]
     },
     {
       "pair_id": 80,
       "russian": "Nikolai Gogol",
       "ukrainian": "Mykola Hohol",
       "category": "people",
-      "trials": []
+      "trials": [
+        {
+          "test": "forced_ru_first",
+          "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+          "response": "Both",
+          "x": null
+        },
+        {
+          "test": "forced_ua_first",
+          "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+          "response": "Both",
+          "x": null
+        },
+        {
+          "test": "open",
+          "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+          "response": "Nikolai Gogol",
+          "x": 0
+        }
+      ]
+    },
+    {
+      "pair_id": 82,
+      "russian": "Feodosiya",
+      "ukrainian": "Feodosiia",
+      "category": "geographical",
+      "trials": [
+        {
+          "test": "forced_ru_first",
+          "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+          "response": "Feodosiya",
+          "x": 0
+        },
+        {
+          "test": "forced_ua_first",
+          "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+          "response": "Feodosiya",
+          "x": 0
+        },
+        {
+          "test": "open",
+          "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+          "response": "Feodosia",
+          "x": null
+        }
+      ]
+    },
+    {
+      "pair_id": 83,
+      "russian": "Olga of Kiev",
+      "ukrainian": "Olha of Kyiv",
+      "category": "historical",
+      "trials": [
+        {
+          "test": "forced_ru_first",
+          "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+          "response": "Olha",
+          "x": null
+        }
+      ]
     }
   ],
   "timestamp": "2026-04-08T04:00:03.023448+00:00",
