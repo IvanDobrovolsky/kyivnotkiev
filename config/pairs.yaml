@@ -187,7 +187,12 @@ pairs:
   ukrainian: Donbas
   enabled: true
   is_control: false
-  starred: false
+  notes: Politically charged — Russia insists on "Donbass", Ukraine on "Donbas". Part of the 7,800 toponyms renamed across 83 Ukrainian cities since 2022 (Transparent Cities). July 2023 law mandated renaming of Russian imperial toponyms.
+  events:
+  - date: 2023-07
+    label: Ukrainian law mandates toponym decolonization
+  starred: true
+  starred_label: Donbas — imperial naming as political act
 - id: 18
   category: geographical
   russian: Crimea
