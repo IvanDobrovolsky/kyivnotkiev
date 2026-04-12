@@ -171722,6 +171722,26 @@
         "rus": 6749
       }
     ],
+    "reddit": [
+      {
+        "date": "2023-01",
+        "adoption": 33.3,
+        "ukr": 1,
+        "rus": 2
+      },
+      {
+        "date": "2024-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 2
+      },
+      {
+        "date": "2025-01",
+        "adoption": 0.0,
+        "ukr": 0,
+        "rus": 4
+      }
+    ],
     "youtube": [
       {
         "date": "2010-01",
@@ -175666,6 +175686,14 @@
         "adoption": 0.0,
         "ukr": 0,
         "rus": 498
+      }
+    ],
+    "reddit": [
+      {
+        "date": "2022-01",
+        "adoption": 73.3,
+        "ukr": 11,
+        "rus": 4
       }
     ],
     "youtube": [

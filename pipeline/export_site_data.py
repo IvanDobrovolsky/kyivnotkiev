@@ -422,6 +422,24 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
             FROM `{DATASET}.raw_youtube`
             WHERE DATE(published_at) >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH)
             GROUP BY pair_id HAVING COUNT(*) >= 3
+            UNION ALL
+            SELECT pair_id, 'ngrams',
+                SAFE_DIVIDE(SUM(IF(variant='ukrainian', frequency, 0)), SUM(frequency))
+            FROM `{DATASET}.raw_ngrams`
+            WHERE year >= EXTRACT(YEAR FROM DATE_SUB(CURRENT_DATE(), INTERVAL 5 YEAR))
+            GROUP BY pair_id HAVING SUM(frequency) > 0
+            UNION ALL
+            SELECT pair_id, 'openalex',
+                SAFE_DIVIDE(SUM(IF(variant='ukrainian', count, 0)), SUM(count))
+            FROM `{DATASET}.raw_openalex`
+            WHERE year >= EXTRACT(YEAR FROM DATE_SUB(CURRENT_DATE(), INTERVAL 5 YEAR))
+            GROUP BY pair_id HAVING SUM(count) >= 3
+            UNION ALL
+            SELECT pair_id, 'openlibrary',
+                SAFE_DIVIDE(SUM(IF(variant='ukrainian', book_count, 0)), SUM(book_count))
+            FROM `{DATASET}.raw_openlibrary`
+            WHERE year >= EXTRACT(YEAR FROM DATE_SUB(CURRENT_DATE(), INTERVAL 5 YEAR))
+            GROUP BY pair_id HAVING SUM(book_count) >= 3
         )
         SELECT pair_id,
             ROUND(AVG(ratio) * 100, 1) as adoption_pct,
@@ -432,6 +450,8 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     """)
     recent_map = {r["pair_id"]: {"adoption": float(r["adoption_pct"]), "n_sources": r["n_sources"]}
                   for r in recent_rows}
+
+    # OpenAlex and Open Library are now in BQ — included in the query above
 
     # Total mentions per pair
     total_rows = query(f"""
