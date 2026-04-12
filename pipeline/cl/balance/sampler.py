@@ -68,6 +68,20 @@ def load_raw_texts():
         raise FileNotFoundError("No raw text data found. Run extract scripts first.")
 
     combined = pd.concat(frames, ignore_index=True)
+    log.info(f"Total raw texts before dedup: {len(combined)}")
+
+    # Deduplicate: same pair_id + text content = same document
+    before_dedup = len(combined)
+    combined = combined.drop_duplicates(subset=["pair_id", "text"], keep="first")
+    log.info(f"Dedup: {before_dedup} → {len(combined)} (removed {before_dedup - len(combined)})")
+
+    # Filter to enabled pairs only
+    from pipeline.config import get_enabled_pairs
+    enabled_ids = {p["id"] for p in get_enabled_pairs()}
+    before_filter = len(combined)
+    combined = combined[combined["pair_id"].isin(enabled_ids)].copy()
+    log.info(f"Enabled pairs filter: {before_filter} → {len(combined)} (removed {before_filter - len(combined)} disabled pair texts)")
+
     log.info(f"Total raw texts: {len(combined)}")
 
     # Filter to Latin-script texts only
@@ -85,6 +99,20 @@ def load_raw_texts():
     combined = combined[combined["text"].apply(is_latin_majority)].copy()
     removed = before - len(combined)
     log.info(f"Latin-script filter: {before} → {len(combined)} (removed {removed}, {removed/before*100:.1f}%)")
+
+    # Remove very short texts (< 20 chars)
+    before2 = len(combined)
+    combined = combined[combined["text"].str.len() >= 20].copy()
+    log.info(f"Short text filter: {before2} → {len(combined)} (removed {before2 - len(combined)})")
+
+    # Remove Odessa Texas contamination
+    before3 = len(combined)
+    texas_mask = (combined["pair_id"] == 3) & combined["text"].str.contains(
+        r"Texas|Permian Basin|Midland.{0,10}Odessa|Odessa.{0,10}Texas",
+        case=False, na=False, regex=True
+    )
+    combined = combined[~texas_mask].copy()
+    log.info(f"Odessa TX filter: {before3} → {len(combined)} (removed {before3 - len(combined)})")
 
     return combined
 
