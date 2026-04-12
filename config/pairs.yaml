@@ -34,7 +34,7 @@ pairs:
   ukrainian: Kyiv
   enabled: true
   is_control: false
-  notes: Flagship pair, capital city
+  notes: 'Flagship pair, capital city. GDELT excludes "Kievan" URLs (tracked by pair 35 Kievan Rus).'
   events:
   - date: 2018-10
     label: '#KyivNotKiev launch'
@@ -64,6 +64,7 @@ pairs:
   ukrainian: Odesa
   enabled: true
   is_control: false
+  notes: 'GDELT/Reddit exclude Odessa TX sources. Verified: <0.02% Texas contamination in sampled data.'
   events:
   - date: 2022-07
     label: Russian missile strikes

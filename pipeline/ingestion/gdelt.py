@@ -16,18 +16,47 @@ logger = logging.getLogger(__name__)
 
 
 def _build_regex(pair: dict) -> tuple[str, str]:
-    """Build BigQuery regex patterns for Russian and Ukrainian variants."""
+    """Build BigQuery RE2 regex patterns for Russian and Ukrainian variants.
+
+    Uses (?i) for case-insensitive and (^|[^a-zA-Z]) / ($|[^a-zA-Z])
+    for word boundaries since RE2 doesn't support \\b reliably.
+    """
     russian = pair["russian"]
     ukrainian = pair["ukrainian"]
+
+    def _word_boundary_regex(term):
+        """Wrap term in RE2-safe word boundaries."""
+        import re
+        escaped = re.escape(term)
+        return rf"(?i)(^|[^a-zA-Z]){escaped}($|[^a-zA-Z])"
 
     # Special case: "the Ukraine" needs negative lookahead
     if pair.get("filter_pattern"):
         russian_regex = pair["filter_pattern"]
     else:
-        russian_regex = rf"(?i)\b{russian}\b"
+        russian_regex = _word_boundary_regex(russian)
 
-    ukrainian_regex = rf"(?i)\b{ukrainian}\b"
+    ukrainian_regex = _word_boundary_regex(ukrainian)
+
+    # Pair-specific overrides for substring/contamination issues.
+    # RE2 doesn't support lookaheads, so these use explicit char classes.
+    pid = pair.get("id")
     return russian_regex, ukrainian_regex
+
+
+def _pair_exclusion_clause(pair: dict) -> str:
+    """Return extra SQL WHERE conditions to exclude contamination."""
+    pid = pair.get("id")
+    clauses = []
+    if pid == 3:
+        # Odessa: exclude Odessa, Texas sources
+        clauses.append("AND NET.HOST(DocumentIdentifier) NOT LIKE '%texas%'")
+        clauses.append("AND NET.HOST(DocumentIdentifier) NOT LIKE '%permian%'")
+        clauses.append("AND NET.HOST(DocumentIdentifier) NOT LIKE '%midland%'")
+    if pid == 1:
+        # Kiev: exclude URLs that are about "Kievan Rus" (pair 35 tracks that)
+        clauses.append("AND NOT REGEXP_CONTAINS(DocumentIdentifier, r'(?i)kievan')")
+    return "\n              ".join(clauses) if clauses else ""
 
 
 def ingest_pair(pair: dict, client: bigquery.Client, cfg: dict, full_refresh: bool = False):
@@ -44,6 +73,7 @@ def ingest_pair(pair: dict, client: bigquery.Client, cfg: dict, full_refresh: bo
             start_date = wm["last_fetched"].strftime("%Y-%m-%d")
 
     russian_regex, ukrainian_regex = _build_regex(pair)
+    exclusion = _pair_exclusion_clause(pair)
 
     query = f"""
         INSERT INTO `{dest_table}`
@@ -66,6 +96,7 @@ def ingest_pair(pair: dict, client: bigquery.Client, cfg: dict, full_refresh: bo
                          ' ', IFNULL(DocumentIdentifier, '')),
                   r'{russian_regex}'
               )
+              {exclusion}
         ),
         ukrainian AS (
             SELECT
@@ -83,6 +114,7 @@ def ingest_pair(pair: dict, client: bigquery.Client, cfg: dict, full_refresh: bo
                          ' ', IFNULL(DocumentIdentifier, '')),
                   r'{ukrainian_regex}'
               )
+              {exclusion}
         ),
         combined AS (
             SELECT * FROM russian
