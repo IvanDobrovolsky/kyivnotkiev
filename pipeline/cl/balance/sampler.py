@@ -114,6 +114,17 @@ def load_raw_texts():
     combined = combined[~texas_mask].copy()
     log.info(f"Odessa TX filter: {before3} → {len(combined)} (removed {before3 - len(combined)})")
 
+    # English-only filter using langdetect
+    from langdetect import detect, LangDetectException
+    before4 = len(combined)
+    def is_english(text):
+        try:
+            return detect(str(text)[:500]) == "en"
+        except LangDetectException:
+            return False
+    combined = combined[combined["text"].apply(is_english)].copy()
+    log.info(f"English filter: {before4} → {len(combined)} (removed {before4 - len(combined)}, {(before4 - len(combined))/before4*100:.1f}%)")
+
     return combined
 
 
