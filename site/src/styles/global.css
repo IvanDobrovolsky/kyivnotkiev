@@ -407,7 +407,15 @@ body {
 }
 
 /* Responsive */
+/* Responsive grid helper classes */
+.resp-grid-2 { display: grid; }
+.resp-grid-3 { display: grid; }
+.resp-grid-6 { display: grid; }
+
 @media (max-width: 900px) {
+  .resp-grid-2 { grid-template-columns: 1fr !important; }
+  .resp-grid-3 { grid-template-columns: 1fr !important; }
+  .resp-grid-6 { grid-template-columns: repeat(3, 1fr) !important; }
   .app {
     grid-template-columns: 1fr;
     grid-template-rows: 52px auto 1fr;
@@ -417,10 +425,44 @@ body {
     border-bottom: 1px solid var(--border);
     max-height: 40vh;
   }
-  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(2, 1fr) !important; }
   .source-stats { grid-template-columns: repeat(4, 1fr) !important; }
+  .main { padding: 1rem; }
+  .chart-container { padding: 1rem; }
+  .chart-title { font-size: 1.1rem; }
+  /* Stack all 2-col grids on tablet */
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Stack 3-col grids */
+  [style*="grid-template-columns:1fr 1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr 1fr"],
+  [style*="repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 @media (max-width: 600px) {
+  .resp-grid-2 { grid-template-columns: 1fr !important; }
+  .resp-grid-3 { grid-template-columns: 1fr !important; }
+  .resp-grid-6 { grid-template-columns: repeat(2, 1fr) !important; }
   .source-stats { grid-template-columns: repeat(2, 1fr) !important; }
+  .stats { grid-template-columns: 1fr !important; }
+  .stat-value { font-size: 1.1rem; }
+  .chart-title { font-size: 1rem; }
+  .chart-subtitle { font-size: 0.7rem; }
+  .main { padding: 0.75rem 0.5rem; }
+  .chart-container { padding: 0.75rem; margin-bottom: 0.75rem; }
+  /* Stack repeat(4+) grids */
+  [style*="repeat(4, 1fr)"],
+  [style*="repeat(6, 1fr)"],
+  [style*="repeat(8, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  /* Make heatmap scroll horizontally */
+  .chart-container { overflow-x: auto; }
+  /* Smaller fonts for data-dense views */
+  .stat-card.mini .stat-value { font-size: 1rem; }
+  .stat-card.mini .stat-label { font-size: 0.6rem; }
 }

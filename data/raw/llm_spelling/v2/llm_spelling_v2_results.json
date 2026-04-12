@@ -6407,14 +6407,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Hohol",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiia",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olga",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga, Kyiv",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Korolev",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Korolyov",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T02:41:53.155255+00:00",
@@ -6423,16 +6643,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 38,
-      "tas_mean": 82.0,
-      "ci_mean": 0.964,
-      "ua_pct_forced_ru_first": 88.0,
-      "ua_pct_forced_ua_first": 84.3,
-      "ua_pct_open": 73.2,
-      "position_bias": 48.2,
-      "other_total": 26,
-      "other_rate": 15.5
+      "n_pairs": 63,
+      "n_pairs_complete": 40,
+      "tas_mean": 77.5,
+      "ci_mean": 0.966,
+      "ua_pct_forced_ru_first": 86.8,
+      "ua_pct_forced_ua_first": 83.6,
+      "ua_pct_open": 67.4,
+      "position_bias": 48.4,
+      "other_total": 35,
+      "other_rate": 18.5
     }
   },
   {
@@ -7851,14 +8071,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Both.\n\nBoth.",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olga",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga, Kiev",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Korolev",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Latter",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T02:14:25.104322+00:00",
@@ -7867,16 +8307,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 44,
-      "tas_mean": 85.0,
-      "ci_mean": 0.958,
-      "ua_pct_forced_ru_first": 94.3,
-      "ua_pct_forced_ua_first": 88.7,
-      "ua_pct_open": 77.8,
-      "position_bias": 47.2,
-      "other_total": 17,
-      "other_rate": 10.1
+      "n_pairs": 63,
+      "n_pairs_complete": 46,
+      "tas_mean": 78.5,
+      "ci_mean": 0.96,
+      "ua_pct_forced_ru_first": 91.1,
+      "ua_pct_forced_ua_first": 86.0,
+      "ua_pct_open": 72.0,
+      "position_bias": 47.4,
+      "other_total": 26,
+      "other_rate": 13.8
     }
   },
   {
@@ -9295,14 +9735,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "AndriiShevchenko",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga Kyiv",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Latter",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T02:19:17.548239+00:00",
@@ -9311,16 +9971,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 41,
-      "tas_mean": 85.7,
-      "ci_mean": 0.962,
-      "ua_pct_forced_ru_first": 96.2,
-      "ua_pct_forced_ua_first": 96.1,
-      "ua_pct_open": 75.0,
-      "position_bias": 50.0,
-      "other_total": 21,
-      "other_rate": 12.5
+      "n_pairs": 63,
+      "n_pairs_complete": 43,
+      "tas_mean": 79.0,
+      "ci_mean": 0.965,
+      "ua_pct_forced_ru_first": 92.9,
+      "ua_pct_forced_ua_first": 92.7,
+      "ua_pct_open": 69.4,
+      "position_bias": 49.9,
+      "other_total": 29,
+      "other_rate": 15.3
     }
   },
   {
@@ -10739,14 +11399,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga Kiev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "The choice between the two names depends on the linguistic and historical context:\n\n*   **Sergei Korolev** is the transliteration of the Russian version of his name (\u0421\u0435\u0440\u0433\u0435\u0439 \u041a\u043e\u0440\u043e\u043b\u0451\u0432). This is the versi",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Korolev",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T02:42:51.181440+00:00",
@@ -10755,16 +11635,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 43,
-      "tas_mean": 85.9,
-      "ci_mean": 0.953,
-      "ua_pct_forced_ru_first": 98.1,
-      "ua_pct_forced_ua_first": 96.2,
-      "ua_pct_open": 75.6,
-      "position_bias": 49.0,
-      "other_total": 19,
-      "other_rate": 11.3
+      "n_pairs": 63,
+      "n_pairs_complete": 45,
+      "tas_mean": 78.1,
+      "ci_mean": 0.957,
+      "ua_pct_forced_ru_first": 93.0,
+      "ua_pct_forced_ua_first": 92.9,
+      "ua_pct_open": 68.6,
+      "position_bias": 49.9,
+      "other_total": 25,
+      "other_rate": 13.2
     }
   },
   {
@@ -12183,14 +13063,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiia",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga Kiev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Malevich.",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T02:51:38.332817+00:00",
@@ -12199,16 +13299,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 43,
-      "tas_mean": 84.4,
-      "ci_mean": 0.962,
-      "ua_pct_forced_ru_first": 96.2,
-      "ua_pct_forced_ua_first": 96.0,
-      "ua_pct_open": 74.5,
-      "position_bias": 49.9,
-      "other_total": 19,
-      "other_rate": 11.3
+      "n_pairs": 63,
+      "n_pairs_complete": 45,
+      "tas_mean": 77.6,
+      "ci_mean": 0.96,
+      "ua_pct_forced_ru_first": 94.6,
+      "ua_pct_forced_ua_first": 92.6,
+      "ua_pct_open": 67.9,
+      "position_bias": 49.0,
+      "other_total": 26,
+      "other_rate": 13.8
     }
   },
   {
@@ -13627,14 +14727,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olga",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga, Kiev",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Debatable.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Korolev",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Malevych",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T03:07:13.130988+00:00",
@@ -13643,16 +14963,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 35,
-      "tas_mean": 83.5,
-      "ci_mean": 0.961,
-      "ua_pct_forced_ru_first": 94.2,
-      "ua_pct_forced_ua_first": 92.0,
-      "ua_pct_open": 71.8,
-      "position_bias": 48.9,
-      "other_total": 27,
-      "other_rate": 16.1
+      "n_pairs": 63,
+      "n_pairs_complete": 37,
+      "tas_mean": 77.2,
+      "ci_mean": 0.963,
+      "ua_pct_forced_ru_first": 91.1,
+      "ua_pct_forced_ua_first": 88.7,
+      "ua_pct_open": 65.9,
+      "position_bias": 48.8,
+      "other_total": 36,
+      "other_rate": 19.0
     }
   },
   {
@@ -15071,14 +16391,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga Kiev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T03:09:42.187156+00:00",
@@ -15087,16 +16627,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 43,
-      "tas_mean": 85.6,
-      "ci_mean": 0.966,
-      "ua_pct_forced_ru_first": 96.1,
-      "ua_pct_forced_ua_first": 96.1,
-      "ua_pct_open": 76.6,
+      "n_pairs": 63,
+      "n_pairs_complete": 45,
+      "tas_mean": 77.7,
+      "ci_mean": 0.968,
+      "ua_pct_forced_ru_first": 92.7,
+      "ua_pct_forced_ua_first": 92.7,
+      "ua_pct_open": 69.8,
       "position_bias": 50.0,
-      "other_total": 19,
-      "other_rate": 11.3
+      "other_total": 26,
+      "other_rate": 13.8
     }
   },
   {
@@ -16515,14 +18055,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Both.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olga",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga of Kyiv",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Ihor",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Holy",
+            "x": null
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T03:16:14.675116+00:00",
@@ -16531,16 +18291,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 35,
-      "tas_mean": 81.3,
+      "n_pairs": 63,
+      "n_pairs_complete": 36,
+      "tas_mean": 75.6,
       "ci_mean": 0.93,
-      "ua_pct_forced_ru_first": 92.0,
-      "ua_pct_forced_ua_first": 76.0,
-      "ua_pct_open": 72.5,
-      "position_bias": 42.0,
-      "other_total": 28,
-      "other_rate": 16.7
+      "ua_pct_forced_ru_first": 90.7,
+      "ua_pct_forced_ua_first": 73.6,
+      "ua_pct_open": 65.9,
+      "position_bias": 41.4,
+      "other_total": 38,
+      "other_rate": 20.1
     }
   },
   {
@@ -17959,14 +19719,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Hohol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Ivan Shchuzhinsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiia",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Kerch",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Olga",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olga",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Vladimir",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Korolyov",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Serhii",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Yuri Gagarin",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Khrivokrasky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Kazymyr",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Leonid Rudenko",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Volga",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Volga",
+            "x": null
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T03:15:43.095911+00:00",
@@ -17975,16 +19955,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
+      "n_pairs": 63,
       "n_pairs_complete": 11,
-      "tas_mean": 56.9,
-      "ci_mean": 0.876,
-      "ua_pct_forced_ru_first": 58.0,
-      "ua_pct_forced_ua_first": 51.0,
+      "tas_mean": 56.5,
+      "ci_mean": 0.879,
+      "ua_pct_forced_ru_first": 56.6,
+      "ua_pct_forced_ua_first": 51.9,
       "ua_pct_open": 69.2,
-      "position_bias": 46.5,
-      "other_total": 56,
-      "other_rate": 33.3
+      "position_bias": 47.7,
+      "other_total": 71,
+      "other_rate": 37.6
     }
   },
   {
@@ -19403,14 +21383,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Mykola.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Nikolai.",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol.",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olga.",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga of Kyiv",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Ihor",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Sergei.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev.",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Bohdan.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Bogdan",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytskyi",
+            "x": 1
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich.",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk.",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatogorsk.",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohorsk",
+            "x": null
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T03:25:05.424690+00:00",
@@ -19419,16 +21619,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 36,
-      "tas_mean": 84.8,
-      "ci_mean": 0.952,
-      "ua_pct_forced_ru_first": 96.1,
-      "ua_pct_forced_ua_first": 88.2,
-      "ua_pct_open": 75.0,
-      "position_bias": 46.1,
-      "other_total": 26,
-      "other_rate": 15.5
+      "n_pairs": 63,
+      "n_pairs_complete": 37,
+      "tas_mean": 77.9,
+      "ci_mean": 0.946,
+      "ua_pct_forced_ru_first": 94.4,
+      "ua_pct_forced_ua_first": 83.3,
+      "ua_pct_open": 68.9,
+      "position_bias": 44.4,
+      "other_total": 36,
+      "other_rate": 19.0
     }
   },
   {
@@ -20847,14 +23047,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Sevastopol",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olga",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga of Drevina",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Ihor",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Sigfried",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Korolev",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Konstantin Tsiolkovsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Ivan Bohuslav",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatogorsk",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Pechersk",
+            "x": null
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T03:15:55.923047+00:00",
@@ -20863,16 +23283,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
+      "n_pairs": 63,
       "n_pairs_complete": 22,
-      "tas_mean": 77.6,
-      "ci_mean": 0.897,
-      "ua_pct_forced_ru_first": 90.4,
-      "ua_pct_forced_ua_first": 60.0,
-      "ua_pct_open": 85.2,
-      "position_bias": 34.8,
-      "other_total": 39,
-      "other_rate": 23.2
+      "tas_mean": 73.2,
+      "ci_mean": 0.893,
+      "ua_pct_forced_ru_first": 89.1,
+      "ua_pct_forced_ua_first": 57.4,
+      "ua_pct_open": 79.3,
+      "position_bias": 34.2,
+      "other_total": 51,
+      "other_rate": 27.0
     }
   },
   {
@@ -22291,14 +24711,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiia",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Sevastopol",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Olga",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olga",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Vladimir of Kiev.",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Ihor",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Sikorsky",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Serhii",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich.",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatogirsk",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T03:25:32.223462+00:00",
@@ -22307,16 +24947,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
+      "n_pairs": 63,
       "n_pairs_complete": 27,
-      "tas_mean": 75.2,
-      "ci_mean": 0.927,
-      "ua_pct_forced_ru_first": 71.2,
-      "ua_pct_forced_ua_first": 80.4,
-      "ua_pct_open": 73.3,
-      "position_bias": 54.6,
-      "other_total": 35,
-      "other_rate": 20.8
+      "tas_mean": 70.7,
+      "ci_mean": 0.924,
+      "ua_pct_forced_ru_first": 72.7,
+      "ua_pct_forced_ua_first": 79.6,
+      "ua_pct_open": 65.7,
+      "position_bias": 53.5,
+      "other_total": 45,
+      "other_rate": 23.8
     }
   },
   {
@@ -23735,14 +26375,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Hohol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiia",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Sevastopol",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olga",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Sviatoslav of Kiev",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Ihor",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Sikorsky",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev.",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich.",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatogorsk",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Krasnoarmeysk",
+            "x": null
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T03:25:48.744617+00:00",
@@ -23751,16 +26611,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
+      "n_pairs": 63,
       "n_pairs_complete": 33,
-      "tas_mean": 82.2,
-      "ci_mean": 0.932,
-      "ua_pct_forced_ru_first": 90.2,
-      "ua_pct_forced_ua_first": 75.0,
-      "ua_pct_open": 80.0,
-      "position_bias": 42.4,
-      "other_total": 30,
-      "other_rate": 17.9
+      "tas_mean": 76.1,
+      "ci_mean": 0.922,
+      "ua_pct_forced_ru_first": 88.9,
+      "ua_pct_forced_ua_first": 74.5,
+      "ua_pct_open": 71.8,
+      "position_bias": 42.8,
+      "other_total": 41,
+      "other_rate": 21.7
     }
   },
   {
@@ -25179,14 +28039,170 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Both",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Kyiv",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga of Kiev",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Korolev",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Bohdan Khmelnytskyi",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T03:26:10.267364+00:00",
@@ -25195,16 +28211,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 35,
-      "tas_mean": 86.3,
-      "ci_mean": 0.965,
-      "ua_pct_forced_ru_first": 96.1,
-      "ua_pct_forced_ua_first": 94.0,
-      "ua_pct_open": 75.0,
-      "position_bias": 49.0,
-      "other_total": 27,
-      "other_rate": 16.1
+      "n_pairs": 61,
+      "n_pairs_complete": 36,
+      "tas_mean": 81.0,
+      "ci_mean": 0.967,
+      "ua_pct_forced_ru_first": 92.7,
+      "ua_pct_forced_ua_first": 90.6,
+      "ua_pct_open": 69.8,
+      "position_bias": 48.9,
+      "other_total": 32,
+      "other_rate": 17.5
     }
   },
   {
@@ -62291,14 +65307,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Nikolai",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Kyiv",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga of Kiev",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Khmelnytskyi",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatogorsk",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T04:40:32.860791+00:00",
@@ -62307,16 +65543,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 37,
-      "tas_mean": 78.3,
-      "ci_mean": 0.941,
-      "ua_pct_forced_ru_first": 92.3,
-      "ua_pct_forced_ua_first": 84.6,
-      "ua_pct_open": 62.5,
-      "position_bias": 46.2,
-      "other_total": 24,
-      "other_rate": 14.3
+      "n_pairs": 63,
+      "n_pairs_complete": 39,
+      "tas_mean": 71.8,
+      "ci_mean": 0.94,
+      "ua_pct_forced_ru_first": 89.1,
+      "ua_pct_forced_ua_first": 80.0,
+      "ua_pct_open": 57.8,
+      "position_bias": 45.5,
+      "other_total": 34,
+      "other_rate": 18.0
     }
   },
   {
@@ -63735,14 +66971,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "**Olha of Kyiv**\n\nThis is the preferred modern English rendering, aligning with Ukrainian transliteration standards (as used on English Wikipedia and in contemporary scholarship). \"Olha\" reflects the ",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "**Olga of Kiev**",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "**Sergei**",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "**Bohdan**",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "**Bohdan Khmelnytskyi**\n\nThis is the standard modern English transliteration of the Ukrainian name \"\u0411\u043e\u0433\u0434\u0430\u043d \u0425\u043c\u0435\u043b\u044c\u043d\u0438\u0446\u044c\u043a\u0438\u0439\" (Bohdan Khmelnytskyi), used in sources like Wikipedia, Britannica, and academic",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "**Sviatohirsk**",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T04:42:45.405190+00:00",
@@ -63751,16 +67207,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 41,
-      "tas_mean": 80.7,
-      "ci_mean": 0.942,
-      "ua_pct_forced_ru_first": 94.3,
-      "ua_pct_forced_ua_first": 87.0,
-      "ua_pct_open": 66.7,
-      "position_bias": 46.3,
-      "other_total": 19,
-      "other_rate": 11.3
+      "n_pairs": 63,
+      "n_pairs_complete": 43,
+      "tas_mean": 75.2,
+      "ci_mean": 0.946,
+      "ua_pct_forced_ru_first": 91.2,
+      "ua_pct_forced_ua_first": 84.7,
+      "ua_pct_open": 61.7,
+      "position_bias": 46.8,
+      "other_total": 26,
+      "other_rate": 13.8
     }
   },
   {
@@ -65179,14 +68635,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Nikolai",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga Kiev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatogorsk",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T04:34:04.180016+00:00",
@@ -65195,16 +68871,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 38,
-      "tas_mean": 78.0,
-      "ci_mean": 0.945,
-      "ua_pct_forced_ru_first": 90.6,
-      "ua_pct_forced_ua_first": 84.6,
-      "ua_pct_open": 62.5,
-      "position_bias": 47.0,
-      "other_total": 23,
-      "other_rate": 13.7
+      "n_pairs": 63,
+      "n_pairs_complete": 40,
+      "tas_mean": 70.8,
+      "ci_mean": 0.944,
+      "ua_pct_forced_ru_first": 87.7,
+      "ua_pct_forced_ua_first": 80.0,
+      "ua_pct_open": 56.5,
+      "position_bias": 46.1,
+      "other_total": 31,
+      "other_rate": 16.4
     }
   },
   {
@@ -66623,14 +70299,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga Kiev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Sergei",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Kazimir",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T04:35:16.000884+00:00",
@@ -66639,16 +70535,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 41,
-      "tas_mean": 80.4,
-      "ci_mean": 0.954,
-      "ua_pct_forced_ru_first": 90.6,
-      "ua_pct_forced_ua_first": 88.7,
-      "ua_pct_open": 69.0,
-      "position_bias": 49.1,
-      "other_total": 20,
-      "other_rate": 11.9
+      "n_pairs": 63,
+      "n_pairs_complete": 43,
+      "tas_mean": 73.2,
+      "ci_mean": 0.956,
+      "ua_pct_forced_ru_first": 87.5,
+      "ua_pct_forced_ua_first": 86.0,
+      "ua_pct_open": 62.5,
+      "position_bias": 49.2,
+      "other_total": 28,
+      "other_rate": 14.8
     }
   },
   {
@@ -68067,14 +71963,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Hohol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "Olha",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "Olga",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga Kiev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Ihor",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Korolev",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Korolev",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T04:54:02.348082+00:00",
@@ -68083,16 +72199,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 41,
-      "tas_mean": 77.6,
-      "ci_mean": 0.928,
-      "ua_pct_forced_ru_first": 98.1,
-      "ua_pct_forced_ua_first": 75.0,
-      "ua_pct_open": 65.1,
+      "n_pairs": 63,
+      "n_pairs_complete": 43,
+      "tas_mean": 71.1,
+      "ci_mean": 0.929,
+      "ua_pct_forced_ru_first": 96.5,
+      "ua_pct_forced_ua_first": 73.2,
+      "ua_pct_open": 59.2,
       "position_bias": 38.4,
-      "other_total": 20,
-      "other_rate": 11.9
+      "other_total": 27,
+      "other_rate": 14.3
     }
   },
   {
@@ -69511,14 +73627,234 @@
         "russian": "Andrey Shevchenko",
         "ukrainian": "Andrii Shevchenko",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Andrey Shevchenko or Andrii Shevchenko? Answer with one word.",
+            "response": "Andrii",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Andrii Shevchenko or Andrey Shevchenko? Answer with one word.",
+            "response": "Andrii \n\nThe Ukrainian footballer\u2019s name is \u0410\u043d\u0434\u0440\u0456\u0439 \u0428\u0435\u0432\u0447\u0435\u043d\u043a\u043e. The transliteration \u201cAndrii\u201d (or variant Andriy) follows Ukrainian orthography and is the standard used by UEFA, FIFA, and the player himse",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian football legend (last name Shevchenko), Ballon d'Or winner and former AC Milan striker? Answer with one word.",
+            "response": "Andriy\n\n\nThe query asks for the first name only of the player matching all descriptors (Ukrainian international, Ballon d\u2019Or 2004, AC Milan 1999\u20132006 & 2008\u20132009, surname Shevchenko). The canonical sp",
+            "x": null
+          }
+        ]
       },
       {
         "pair_id": 80,
         "russian": "Nikolai Gogol",
         "ukrainian": "Mykola Hohol",
         "category": "people",
-        "trials": []
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Nikolai Gogol or Mykola Hohol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Mykola Hohol or Nikolai Gogol? Answer with one word.",
+            "response": "Gogol",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the author of 'Dead Souls' and 'The Government Inspector', born in Sorochyntsi in the Poltava region of Ukraine? Answer with two words only.",
+            "response": "Nikolai Gogol\n\n\nThe query specifies an author born in Sorochyntsi (Poltava Governorate, then part of the Russian Empire, now Ukraine) who wrote the novel *Dead Souls* (1842) and the play *The Governme",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 82,
+        "russian": "Feodosiya",
+        "ukrainian": "Feodosiia",
+        "category": "geographical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Feodosiya or Feodosiia? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Feodosiia or Feodosiya? Answer with one word.",
+            "response": "Feodosiya",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the Crimean port city on the Black Sea, known in antiquity as Theodosia, called in English today? Answer with one word.",
+            "response": "Feodosia \n\nThe ancient Greek colony of Theodosia (on the southern Crimean peninsula, Black Sea coast) was refounded and renamed multiple times over centuries (including as Caffa/Kaffa under Genoese an",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 83,
+        "russian": "Olga of Kiev",
+        "ukrainian": "Olha of Kyiv",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Olga of Kiev or Olha of Kyiv? Answer with one word.",
+            "response": "**Olha**\n\nThis uses the Ukrainian transliteration (\u041e\u043b\u044c\u0433\u0430 \u2192 Olha, \u041a\u0438\u0457\u0432 \u2192 Kyiv), which is the accurate form for a figure from what is now Ukraine. \"Olga of Kiev\" is the older Russian-English convention.",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Olha of Kyiv or Olga of Kiev? Answer with one word.",
+            "response": "**Olha** \n\n\"Olha of Kyiv\" uses the Ukrainian transliteration for both the personal name and the city. This is the form preferred in contemporary Ukrainian historiography and by major style guides that",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 10th-century princess who was the first ruler of the East Slavs to convert to Christianity is known in English as ___ of ___.' Answer with the two missing words only.",
+            "response": "Olga Kiev \n\nThe query describes a specific historical figure: a female ruler (princess/regent) of Kievan Rus' (the medieval East Slavic state) in the mid-10th century who adopted Christianity decades ",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 84,
+        "russian": "Igor Sikorsky",
+        "ukrainian": "Ihor Sikorsky",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Igor Sikorsky or Ihor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Ihor Sikorsky or Igor Sikorsky? Answer with one word.",
+            "response": "Igor",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the first name of the Ukrainian-born aviation pioneer (last name Sikorsky) who invented the modern helicopter? Answer with one word.",
+            "response": "Igor \n\nThe aviation pioneer in question is Igor Ivanovich Sikorsky (1889\u20131972), born in Kyiv (then part of the Russian Empire, in what is now Ukraine). After emigrating to the United States, he founde",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 85,
+        "russian": "Sergei Korolev",
+        "ukrainian": "Serhii Korolyov",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sergei Korolev or Serhii Korolyov? Answer with one word.",
+            "response": "Sergei\n\n\nThe most common English transliteration (used by Wikipedia, NASA, and most historical sources) is Sergei Korolev for the Soviet rocket scientist born in 1907 in what is now Ukraine. The alter",
+            "x": 0
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Serhii Korolyov or Sergei Korolev? Answer with one word.",
+            "response": "Sergei \n\nThe most common English spelling for the rocket scientist (based on standard references like his Wikipedia page and most historical texts) is Sergei Korolev. The alternative appears to be a U",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born chief designer of the Soviet space program, born in Zhytomyr, who put the first human in space? Answer with two words only.",
+            "response": "Sergei Korolev \n\nThe individual described is the pioneering rocket engineer who led the USSR's space efforts under the title \"Chief Designer\" (his identity was classified until after his death in 1966",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 86,
+        "russian": "Bogdan Khmelnitsky",
+        "ukrainian": "Bohdan Khmelnytskyi",
+        "category": "historical",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Bogdan Khmelnitsky or Bohdan Khmelnytskyi? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Bohdan Khmelnytskyi or Bogdan Khmelnitsky? Answer with one word.",
+            "response": "Bohdan",
+            "x": null
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The 17th-century Cossack hetman who led the 1648 uprising against the Polish-Lithuanian Commonwealth is called ___ ___.' Answer with the missing two words only.",
+            "response": "Bohdan Khmelnytsky \n\nThe query is a fill-in-the-blank for a specific historical figure: the Cossack leader (hetman) of the major 1648\u20131657 uprising (also called the Khmelnytsky Uprising or War of Libe",
+            "x": null
+          }
+        ]
+      },
+      {
+        "pair_id": 87,
+        "russian": "Kazimir Malevich",
+        "ukrainian": "Kazymyr Malevych",
+        "category": "people",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Kazimir Malevich or Kazymyr Malevych? Answer with one word.",
+            "response": "Malevich",
+            "x": null
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Kazymyr Malevych or Kazimir Malevich? Answer with one word.",
+            "response": "Kazimir Malevich \n\nThe standard English transliteration (used by major museums, art histories, and references like Wikipedia) is Kazimir Malevich. The first variant is a modern Ukrainian romanization.",
+            "x": 0
+          },
+          {
+            "test": "open",
+            "prompt": "What is the full name of the Ukrainian-born suprematist artist who created the painting 'Black Square' in 1915? Answer with two words only.",
+            "response": "Kazimir Malevich",
+            "x": 0
+          }
+        ]
+      },
+      {
+        "pair_id": 89,
+        "russian": "Sviatogorsk Lavra",
+        "ukrainian": "Sviatohirsk Lavra",
+        "category": "landmarks",
+        "trials": [
+          {
+            "test": "forced_ru_first",
+            "prompt": "Sviatogorsk Lavra or Sviatohirsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "forced_ua_first",
+            "prompt": "Sviatohirsk Lavra or Sviatogorsk Lavra? Answer with one word.",
+            "response": "Sviatohirsk",
+            "x": 1
+          },
+          {
+            "test": "open",
+            "prompt": "Complete: 'The Orthodox cave monastery in the Donetsk region of Ukraine, on the banks of the Siverskyi Donets river, is called ___ Lavra.' Answer with the missing word only.",
+            "response": "Sviatohirsk \n\nThe query describes the Sviatohirsk Lavra (\u0421\u0432\u044f\u0442\u043e\u0491\u0456\u0440\u0441\u044c\u043a\u0430 \u043b\u0430\u0432\u0440\u0430), an Orthodox monastery complex in Sviatohirsk, Donetsk Oblast. It is situated directly on the chalk cliffs along the Sivers",
+            "x": 1
+          }
+        ]
       }
     ],
     "timestamp": "2026-04-08T04:55:10.426736+00:00",
@@ -69527,16 +73863,16 @@
         "w1_forced": 0.4,
         "w2_open": 0.6
       },
-      "n_pairs": 56,
-      "n_pairs_complete": 49,
-      "tas_mean": 80.4,
-      "ci_mean": 0.937,
-      "ua_pct_forced_ru_first": 92.5,
-      "ua_pct_forced_ua_first": 98.1,
-      "ua_pct_open": 68.0,
-      "position_bias": 52.8,
-      "other_total": 12,
-      "other_rate": 7.1
+      "n_pairs": 63,
+      "n_pairs_complete": 52,
+      "tas_mean": 73.2,
+      "ci_mean": 0.944,
+      "ua_pct_forced_ru_first": 87.9,
+      "ua_pct_forced_ua_first": 91.5,
+      "ua_pct_open": 62.5,
+      "position_bias": 51.8,
+      "other_total": 16,
+      "other_rate": 8.5
     }
   },
   {

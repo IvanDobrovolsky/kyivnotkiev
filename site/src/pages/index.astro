@@ -142,7 +142,7 @@ function formatNum(n: number) {
         </div>
       </div>
 
-      <div class="stats" style="grid-template-columns: repeat(6, 1fr);">
+      <div class="stats resp-grid-6" style="grid-template-columns: repeat(6, 1fr);">
         <div class="stat-card">
           <div class="stat-value">{m.records_scanned}</div>
           <div class="stat-label">Records Scanned</div>
@@ -256,7 +256,7 @@ function formatNum(n: number) {
       </div>
 
       <!-- Source Comparison + Religious side by side -->
-      <div id="comparison-row" style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
+      <div id="comparison-row" class="resp-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
         <div class="chart-container" style="margin-bottom:0;">
           <div class="chart-title" style="color: var(--text)">Source Comparison</div>
           <div class="chart-subtitle" style="margin-bottom:0.5rem;">Adoption rate per data source for this pair</div>
@@ -305,7 +305,7 @@ function formatNum(n: number) {
       </div>
 
       <!-- Per-pair: GDELT Analysis (3 pie charts) -->
-      <div id="media-origin-container" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
+      <div id="media-origin-container" class="resp-grid-3" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
         <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
           <div class="chart-title" style="color: var(--text)">Overall Spelling</div>
           <div class="chart-subtitle">UA vs RU form distribution in GDELT</div>

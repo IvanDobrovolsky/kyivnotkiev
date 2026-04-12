@@ -552,16 +552,16 @@
     ],
     "n_models": 72,
     "spearman_vs_default": {
-      "0.30_vs_0.40": 0.984,
-      "0.50_vs_0.40": 0.985,
-      "0.60_vs_0.40": 0.9549,
-      "0.70_vs_0.40": 0.9136
+      "0.30_vs_0.40": 0.9779,
+      "0.50_vs_0.40": 0.983,
+      "0.60_vs_0.40": 0.9429,
+      "0.70_vs_0.40": 0.8974
     },
     "top5_overlap_with_default": {
-      "0.30": 4,
-      "0.50": 4,
-      "0.60": 4,
-      "0.70": 4
+      "0.30": 3,
+      "0.50": 5,
+      "0.60": 5,
+      "0.70": 3
     },
     "interpretation": "Spearman \u03c1 between the \u03b1=0.40 default ranking and every other \u03b1\u2208[0.30, 0.70] stays at or above 0.92, and the top-5 most-Ukrainian set changes by at most one swap. Headline ranking is robust to the choice of \u03b1 within this range."
   },
@@ -617,65 +617,65 @@
   },
   "llm_release_date_regression": {
     "n": 72,
-    "r2": 0.5342,
+    "r2": 0.4123,
     "reference_family": "Google Gemma",
     "coefficients": [
       {
         "name": "intercept",
-        "beta": 67.9244,
-        "se": 3.3571,
-        "t": 20.233
+        "beta": 68.3352,
+        "se": 3.1635,
+        "t": 21.601
       },
       {
         "name": "release_months",
-        "beta": 0.2776,
-        "se": 0.1165,
-        "t": 2.383
+        "beta": 0.1875,
+        "se": 0.1098,
+        "t": 1.708
       },
       {
         "name": "family[OpenAI GPT]",
-        "beta": -0.7052,
-        "se": 2.1427,
-        "t": -0.329
+        "beta": 1.6223,
+        "se": 2.0192,
+        "t": 0.803
       },
       {
         "name": "family[Meta Llama]",
-        "beta": -7.9609,
-        "se": 2.5105,
-        "t": -3.171
+        "beta": -6.9462,
+        "se": 2.3658,
+        "t": -2.936
       },
       {
         "name": "family[xAI Grok]",
-        "beta": 0.8753,
-        "se": 2.4373,
-        "t": 0.359
+        "beta": -1.0872,
+        "se": 2.2968,
+        "t": -0.473
       },
       {
         "name": "family[Alibaba Qwen]",
-        "beta": -3.0235,
-        "se": 2.535,
-        "t": -1.193
+        "beta": -1.6206,
+        "se": 2.3889,
+        "t": -0.678
       },
       {
         "name": "family[Google Gemini]",
-        "beta": 7.5007,
-        "se": 2.6635,
-        "t": 2.816
+        "beta": 3.421,
+        "se": 2.5099,
+        "t": 1.363
       },
       {
         "name": "family[Mistral]",
-        "beta": -1.6181,
-        "se": 3.2561,
-        "t": -0.497
+        "beta": -0.2941,
+        "se": 3.0684,
+        "t": -0.096
       },
       {
         "name": "family[Anthropic Claude]",
-        "beta": -0.792,
-        "se": 3.7148,
-        "t": -0.213
+        "beta": 2.0115,
+        "se": 3.5006,
+        "t": 0.575
       }
     ],
-    "interpretation": "After controlling for model family, every additional month of release date is associated with a +0.28 pp change in TAS (t = +2.38). Family fixed effects absorb most of the variance (R\u00b2 = 0.5342)."
+    "interpretation": "After controlling for model family, every additional month of release date is associated with a +0.19 pp change in TAS (t = +1.71). Family fixed effects absorb most of the variance (R\u00b2 = 0.4123)."
   },
   "hunspell_multiword": {
     "n_pairs": 59,
