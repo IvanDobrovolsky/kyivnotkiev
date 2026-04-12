@@ -80,13 +80,21 @@ function formatNum(n: number) {
         <span style="font-size:0.9rem; font-weight:800; color:#0057B8;">#KyivNotKiev</span>
       </a>
       <div class="topbar-links">
+        <button class="hamburger" id="hamburger-btn" aria-label="Open pair menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
         <a href="/uk/">UA</a>
         <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
         <a href="/" id="about-link">About</a>
       </div>
     </nav>
 
-    <aside class="sidebar">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <aside class="sidebar" id="sidebar-aside">
       {grouped.map((cat, ci) => (
         <div class="sidebar-section">
           <div class={`sidebar-header ${ci === 0 ? 'open' : ''}`} data-category={cat.id}>
@@ -112,19 +120,6 @@ function formatNum(n: number) {
     </aside>
 
     <main class="main" style="opacity:0; transition:opacity 0.15s;">
-      {/* Mobile pair selector — replaces sidebar on small screens */}
-      <select class="mobile-pair-select" id="mobile-pair-select">
-        <option value="">Select a toponym pair...</option>
-        {grouped.map(cat => (
-          <optgroup label={cat.name}>
-            {cat.pairs.map(p => (
-              <option value={p.id}>
-                {p.starred ? '★ ' : ''}{p.russian} → {p.ukrainian} ({p.adoption}%)
-              </option>
-            ))}
-          </optgroup>
-        ))}
-      </select>
       <!-- ══ LANDING VIEW (visible when no pair selected) ══ -->
       <div id="landing-view" style="display:none;">
         <div style="display:flex; align-items:center; gap:1.5rem; padding:2rem 0.5rem 1.5rem; margin-bottom:1rem;">
@@ -1506,9 +1501,9 @@ function formatNum(n: number) {
       activePairId = pairId;
       updateUrl(pairId);
       showView('pair');
-      // Sync mobile select
-      const ms = document.getElementById('mobile-pair-select') as HTMLSelectElement;
-      if (ms) ms.value = String(pairId);
+      // Close mobile menu on selection
+      document.getElementById('sidebar-aside')?.classList.remove('mobile-open');
+      document.getElementById('sidebar-overlay')?.classList.remove('open');
       document.querySelectorAll('.sidebar-item').forEach(i => {
         const id = parseInt((i as HTMLElement).dataset.pairId || '0');
         i.classList.toggle('active', id === pairId);
@@ -2143,14 +2138,28 @@ function formatNum(n: number) {
       });
     });
 
-    // Mobile pair selector
-    const mobileSelect = document.getElementById('mobile-pair-select') as HTMLSelectElement;
-    if (mobileSelect) {
-      mobileSelect.addEventListener('change', () => {
-        const val = parseInt(mobileSelect.value);
-        if (val) selectPair(val);
-      });
+    // Mobile hamburger menu
+    const hamburger = document.getElementById('hamburger-btn');
+    const sidebarEl = document.getElementById('sidebar-aside');
+    const overlay = document.getElementById('sidebar-overlay');
+    function closeMobileMenu() {
+      sidebarEl?.classList.remove('mobile-open');
+      overlay?.classList.remove('open');
     }
+    hamburger?.addEventListener('click', () => {
+      const isOpen = sidebarEl?.classList.contains('mobile-open');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        sidebarEl?.classList.add('mobile-open');
+        overlay?.classList.add('open');
+      }
+    });
+    overlay?.addEventListener('click', closeMobileMenu);
+    // Close menu when a pair is selected on mobile
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+      item.addEventListener('click', closeMobileMenu);
+    });
 
     // Initialize from URL param
     if (activePairId !== 1) {
