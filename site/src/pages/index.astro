@@ -135,18 +135,18 @@ function formatNum(n: number) {
         </div>
 
       <!-- Three Layers — top strip -->
-      <div style="display:flex; gap:3px; margin-bottom:0.75rem; border-radius:6px; overflow:hidden;">
-        <div style="flex:1; padding:0.4rem 0.7rem; background:var(--card-bg); border-bottom:2px solid #f59e0b;">
-          <span style="font-size:0.6rem; text-transform:uppercase; color:#f59e0b; font-weight:700; letter-spacing:0.05em;">1. Big Data</span>
-          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.4rem;">{m.records_scanned} scanned, {fmtBig(m.toponym_matches)} matches</span>
+      <div class="resp-grid-3" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:3px; margin-bottom:0.75rem;">
+        <div style="padding:0.5rem 0.7rem; background:var(--card-bg); border-bottom:2px solid #f59e0b; border-radius:4px;">
+          <div style="font-size:0.6rem; text-transform:uppercase; color:#f59e0b; font-weight:700; letter-spacing:0.05em;">1. Big Data</div>
+          <div style="font-size:0.65rem; color:var(--text-muted); margin-top:0.15rem;">{m.records_scanned} scanned, {fmtBig(m.toponym_matches)} matches</div>
         </div>
-        <div style="flex:1; padding:0.4rem 0.7rem; background:var(--card-bg); border-bottom:2px solid #8b5cf6;">
-          <span style="font-size:0.6rem; text-transform:uppercase; color:#8b5cf6; font-weight:700; letter-spacing:0.05em;">2. Statistics</span>
-          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.4rem;">Validating patterns are real</span>
+        <div style="padding:0.5rem 0.7rem; background:var(--card-bg); border-bottom:2px solid #8b5cf6; border-radius:4px;">
+          <div style="font-size:0.6rem; text-transform:uppercase; color:#8b5cf6; font-weight:700; letter-spacing:0.05em;">2. Statistics</div>
+          <div style="font-size:0.65rem; color:var(--text-muted); margin-top:0.15rem;">Validating patterns are real</div>
         </div>
-        <div style="flex:1; padding:0.4rem 0.7rem; background:var(--card-bg); border-bottom:2px solid #06b6d4;">
-          <span style="font-size:0.6rem; text-transform:uppercase; color:#06b6d4; font-weight:700; letter-spacing:0.05em;">3. Computational Linguistics</span>
-          <span style="font-size:0.7rem; color:var(--text-muted); margin-left:0.4rem;">Extracting context and patterns with ML</span>
+        <div style="padding:0.5rem 0.7rem; background:var(--card-bg); border-bottom:2px solid #06b6d4; border-radius:4px;">
+          <div style="font-size:0.6rem; text-transform:uppercase; color:#06b6d4; font-weight:700; letter-spacing:0.05em;">3. Computational Linguistics</div>
+          <div style="font-size:0.65rem; color:var(--text-muted); margin-top:0.15rem;">Extracting context and patterns with ML</div>
         </div>
       </div>
 
@@ -412,7 +412,7 @@ function formatNum(n: number) {
       <div class="chart-container" style="margin-bottom: 0.75rem;">
         <div class="chart-title" style="color: var(--text)">Key Pairs: Deep Dive</div>
         <div class="chart-subtitle" style="margin-bottom: 0.75rem;">6 pairs representing the full spectrum — from campaign success to historical resistance</div>
-        <div id="top6-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;"></div>
+        <div id="top6-grid" class="resp-grid-3" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;"></div>
       </div>
 
       <!-- Context Distribution + Benchmark side by side -->
@@ -898,8 +898,7 @@ function formatNum(n: number) {
         </div>
         <div class="about-links">
           <a href="https://github.com/IvanDobrovolsky/kyivnotkiev">Source Code</a>
-          <a href="https://github.com/IvanDobrovolsky/KyivNotKiev-paper">Research Paper</a>
-          <a href="https://huggingface.co/IvanDobrovolsky">Hugging Face</a>
+          <a href="https://huggingface.co/KyivNotKiev">Hugging Face</a>
         </div>
       </div>
 
@@ -1011,9 +1010,9 @@ function formatNum(n: number) {
 
         // Header + adoption
         let html = `
-          <div style="display:flex; justify-content:space-between; align-items:baseline;">
-            <div style="font-weight:600; color:var(--text);">${p.russian} → ${p.ukrainian}</div>
-            <div style="font-size:0.8rem; font-weight:700; color:${color};">${pct}%</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:0.5rem;">
+            <div style="font-weight:600; color:var(--text); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${p.russian} → ${p.ukrainian}</div>
+            <div style="font-size:0.8rem; font-weight:700; color:${color}; flex-shrink:0;">${pct}%</div>
           </div>
           <div style="font-size:0.65rem; color:var(--text-muted); margin-top:0.15rem;">${desc}</div>
           <div style="height:3px; background:#f0f0f0; border-radius:2px; margin-top:0.3rem; margin-bottom:0.4rem;"><div style="height:100%; width:${pct}%; background:${color}; border-radius:2px;"></div></div>`;
