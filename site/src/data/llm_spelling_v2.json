@@ -840,51 +840,6 @@
     }
   },
   {
-    "model": "mistral-7b-v0.1",
-    "family": "Mistral",
-    "tas_mean": null,
-    "ci_mean": null,
-    "ua_pct_open": null,
-    "ua_pct_forced_ru_first": null,
-    "ua_pct_forced_ua_first": null,
-    "position_bias": null,
-    "other_rate": 100.0,
-    "weights": {
-      "w1_forced": 0.4,
-      "w2_open": 0.6
-    }
-  },
-  {
-    "model": "mistral-7b-v0.2",
-    "family": "Mistral",
-    "tas_mean": null,
-    "ci_mean": null,
-    "ua_pct_open": null,
-    "ua_pct_forced_ru_first": null,
-    "ua_pct_forced_ua_first": null,
-    "position_bias": null,
-    "other_rate": 100.0,
-    "weights": {
-      "w1_forced": 0.4,
-      "w2_open": 0.6
-    }
-  },
-  {
-    "model": "mistral-7b-v0.3",
-    "family": "Mistral",
-    "tas_mean": null,
-    "ci_mean": null,
-    "ua_pct_open": null,
-    "ua_pct_forced_ru_first": null,
-    "ua_pct_forced_ua_first": null,
-    "position_bias": null,
-    "other_rate": 100.0,
-    "weights": {
-      "w1_forced": 0.4,
-      "w2_open": 0.6
-    }
-  },
-  {
     "model": "mistral-large",
     "family": "Mistral",
     "tas_mean": 75.4,
