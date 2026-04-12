@@ -1,11 +1,11 @@
 {
   "method": "Hunspell en_US dictionary checked via pyenchant on the first word of each toponym pair. AP Stylebook and BBC News Style Guide entries are sourced from documented public stylebook updates (AP 2019/2022, BBC 2019). Closed-source tools (Microsoft Word, Grammarly) are intentionally NOT verified per-pair as that would require manual interaction with proprietary services.",
   "summary": {
-    "n_pairs": 60,
+    "n_pairs": 59,
     "hunspell_ru_accepted": 31,
-    "hunspell_ua_accepted": 8,
+    "hunspell_ua_accepted": 7,
     "hunspell_only_ru_accepted": 25,
-    "hunspell_only_ua_accepted": 2,
+    "hunspell_only_ua_accepted": 1,
     "hunspell_both_accepted": 6,
     "hunspell_neither_accepted": 27,
     "ap_documented": 5,
@@ -907,36 +907,6 @@
             "Given",
             "Keying"
           ]
-        }
-      },
-      "ap_stylebook": {
-        "documented": false,
-        "form": null
-      },
-      "bbc_style_guide": {
-        "documented": false,
-        "form": null
-      }
-    },
-    "36": {
-      "russian": "Kazak",
-      "ukrainian": "Cossack",
-      "hunspell": {
-        "russian": {
-          "word_checked": "Kazak",
-          "accepted": false,
-          "suggestions": [
-            "Kazakh",
-            "Kazan",
-            "Kayak",
-            "Cask",
-            "Izaak"
-          ]
-        },
-        "ukrainian": {
-          "word_checked": "Cossack",
-          "accepted": true,
-          "suggestions": []
         }
       },
       "ap_stylebook": {

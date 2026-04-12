@@ -262,15 +262,6 @@
       "ru": 909648,
       "ua": 908002
     },
-    "36": {
-      "point": 60.27,
-      "lo": 59.46,
-      "hi": 61.07,
-      "method": "bootstrap",
-      "n": 13384,
-      "ru": 5317,
-      "ua": 8067
-    },
     "38": {
       "point": 84.28,
       "lo": 84.11,
@@ -452,94 +443,103 @@
       "ua": 5401
     },
     "71": {
-      "point": 2.57,
-      "lo": 2.43,
-      "hi": 2.7,
+      "point": 2.61,
+      "lo": 2.47,
+      "hi": 2.74,
       "method": "normal",
-      "n": 54012,
-      "ru": 52625,
-      "ua": 1387
+      "n": 54093,
+      "ru": 52683,
+      "ua": 1410
     },
     "72": {
-      "point": 99.77,
-      "lo": 99.75,
-      "hi": 99.78,
+      "point": 99.75,
+      "lo": 99.74,
+      "hi": 99.77,
       "method": "normal",
-      "n": 509521,
-      "ru": 1195,
-      "ua": 508326
-    },
-    "82": {
-      "point": 11.37,
-      "lo": 8.58,
-      "hi": 14.39,
-      "method": "bootstrap",
-      "n": 431,
-      "ru": 382,
-      "ua": 49
+      "n": 511039,
+      "ru": 1266,
+      "ua": 509773
     },
     "80": {
-      "point": 2.1,
-      "lo": 1.35,
-      "hi": 3.03,
-      "method": "bootstrap",
-      "n": 1189,
-      "ru": 1164,
-      "ua": 25
+      "point": 0.1,
+      "lo": 0.09,
+      "hi": 0.11,
+      "method": "normal",
+      "n": 377001,
+      "ru": 376635,
+      "ua": 366
     },
     "83": {
-      "point": 5.97,
-      "lo": 2.99,
-      "hi": 9.45,
-      "method": "bootstrap",
-      "n": 201,
-      "ru": 189,
-      "ua": 12
+      "point": 0.05,
+      "lo": 0.04,
+      "hi": 0.06,
+      "method": "normal",
+      "n": 461725,
+      "ru": 461496,
+      "ua": 229
     },
     "84": {
-      "point": 0.8,
+      "point": 0.0,
       "lo": 0.0,
-      "hi": 2.0,
-      "method": "bootstrap",
-      "n": 250,
-      "ru": 248,
-      "ua": 2
+      "hi": 0.0,
+      "method": "normal",
+      "n": 208596,
+      "ru": 208592,
+      "ua": 4
     },
     "85": {
       "point": 0.0,
       "lo": 0.0,
       "hi": 0.0,
-      "method": "bootstrap",
-      "n": 136,
-      "ru": 136,
+      "method": "normal",
+      "n": 211174,
+      "ru": 211174,
       "ua": 0
     },
     "86": {
-      "point": 37.41,
-      "lo": 29.5,
-      "hi": 45.32,
-      "method": "bootstrap",
-      "n": 139,
-      "ru": 87,
-      "ua": 52
+      "point": 1.14,
+      "lo": 1.08,
+      "hi": 1.2,
+      "method": "normal",
+      "n": 117733,
+      "ru": 116390,
+      "ua": 1343
     },
     "87": {
-      "point": 3.57,
-      "lo": 1.79,
-      "hi": 5.61,
-      "method": "bootstrap",
-      "n": 392,
-      "ru": 378,
-      "ua": 14
+      "point": 0.06,
+      "lo": 0.04,
+      "hi": 0.07,
+      "method": "normal",
+      "n": 168292,
+      "ru": 168198,
+      "ua": 94
+    },
+    "82": {
+      "point": 0.41,
+      "lo": 0.37,
+      "hi": 0.45,
+      "method": "normal",
+      "n": 95294,
+      "ru": 94903,
+      "ua": 391
     },
     "89": {
-      "point": 92.98,
-      "lo": 85.96,
-      "hi": 98.25,
+      "point": 0.3,
+      "lo": 0.22,
+      "hi": 0.39,
       "method": "bootstrap",
-      "n": 57,
-      "ru": 4,
+      "n": 17470,
+      "ru": 17417,
       "ua": 53
+    },
+    "36": {
+      "point": 66.56,
+      "lo": 62.88,
+      "hi": 70.24,
+      "method": "bootstrap",
+      "n": 625,
+      "ru": 209,
+      "ua": 416
     }
   },
   "tas_alpha_sensitivity": {
@@ -678,19 +678,19 @@
     "interpretation": "After controlling for model family, every additional month of release date is associated with a +0.28 pp change in TAS (t = +2.38). Family fixed effects absorb most of the variance (R\u00b2 = 0.5342)."
   },
   "hunspell_multiword": {
-    "n_pairs": 60,
+    "n_pairs": 59,
     "first_word_only": {
       "ru_accepted": 31,
-      "ua_accepted": 8,
+      "ua_accepted": 7,
       "ru_only": 25,
-      "ua_only": 2,
+      "ua_only": 1,
       "neither": 27
     },
     "all_words": {
       "ru_accepted": 27,
-      "ua_accepted": 2,
+      "ua_accepted": 1,
       "ru_only": 27,
-      "ua_only": 2,
+      "ua_only": 1,
       "neither": 31
     },
     "interpretation": "Both checks (first-word-only and all-words) show the same qualitative pattern: substantially more Russian forms are accepted by hunspell en_US than Ukrainian forms, with zero pairs where only the Ukrainian form is accepted."
