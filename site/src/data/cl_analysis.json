@@ -9868,20 +9868,23 @@
   "embedding_clusters": {},
   "temporal_shift": {},
   "benchmark": {
-    "deberta-v3-large": {
-      "accuracy": 0.898,
-      "f1_macro": 0.8847,
-      "f1_weighted": 0.8978
-    },
     "xlm-roberta-large": {
-      "accuracy": 0.8937,
-      "f1_macro": 0.873,
-      "f1_weighted": 0.8933
+      "name": "XLM-RoBERTa-large",
+      "f1_macro": 0.8384,
+      "accuracy": 0.8745,
+      "f1_weighted": 0.8735
     },
-    "mdeberta-v3-base": {
-      "accuracy": 0.8867,
-      "f1_macro": 0.8617,
-      "f1_weighted": 0.8871
+    "modernbert-large": {
+      "name": "ModernBERT-large",
+      "f1_macro": 0.8327,
+      "accuracy": 0.8678,
+      "f1_weighted": 0.8675
+    },
+    "electra-large": {
+      "name": "ELECTRA-large",
+      "f1_macro": 0.8238,
+      "accuracy": 0.8641,
+      "f1_weighted": 0.8631
     }
   },
   "top_6_pair_ids": [
