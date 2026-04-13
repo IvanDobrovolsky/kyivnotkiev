@@ -47,7 +47,7 @@
 
 ### Implementation:
 - Create `pipeline/ingestion/openlibrary.py`
-- Query all 55 pairs (minus removed ones) for years 2010-2025
+- Query all 59 pairs (minus removed ones) for years 2010-2025
 - Store: pair_id, year, term, variant, book_count
 - Add to BigQuery as `raw_openlibrary`
 - Add to export pipeline and manifest

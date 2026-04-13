@@ -62,7 +62,7 @@ TEST_OPEN = "open"
 TEST_TYPES = [TEST_FORCED_RU_FIRST, TEST_FORCED_UA_FIRST, TEST_OPEN]
 
 
-# ── Cloze descriptions for the 54 pairs ──
+# ── Cloze descriptions for the 59 pairs ──
 #
 # Each description references the entity *without* using either spelling form,
 # so the model has to retrieve the spelling from memory. The "___" marker shows

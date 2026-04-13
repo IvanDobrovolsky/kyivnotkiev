@@ -63,7 +63,7 @@ EMBEDDING_MODEL = "intfloat/multilingual-e5-large"
 # Top 6 pairs for deep CL analysis
 TOP_6_PAIR_IDS = [1, 3, 10, 61, 70, 72]
 
-# All 55 pairs — populated at runtime from config
+# All 59 pairs — populated at runtime from config
 ALL_PAIR_IDS = None  # set by extract scripts
 
 

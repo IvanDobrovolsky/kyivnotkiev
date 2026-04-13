@@ -8,7 +8,7 @@ Incremental data pipeline on GCP. Reads `config/pairs.yaml`, checks watermarks, 
 flowchart TD
     subgraph Config
         style Config fill:#1a1a2e,stroke:#0057B8,color:#e2e8f0
-        pairs["pairs.yaml<br/>55 pairs, 8 categories"]
+        pairs["pairs.yaml<br/>59 pairs, 7 categories"]
     end
 
     subgraph Ingestion

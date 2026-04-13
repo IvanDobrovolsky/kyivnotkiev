@@ -40,7 +40,7 @@ def _get_cl_corpus_size():
                 for f in src_dir.glob("*.parquet"):
                     import pandas as _pd2
                     total += len(_pd2.read_parquet(f, columns=["pair_id"]))
-    return total if total > 0 else 43212
+    return total if total > 0 else 42613
 
 
 def query(sql: str) -> list[dict]:
@@ -253,7 +253,7 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         if total > 0:
             result[pid]["reddit"].append({"date": f"{r['yr']}-01", "adoption": round(r["ukr"] / total * 100, 1), "ukr": r["ukr"], "rus": r["rus"]})
 
-    # YouTube: merge BQ data with local yt-dlp CSVs (local has all 54 pairs, 2010-2026)
+    # YouTube: merge BQ data with local yt-dlp CSVs (local has all 59 pairs, 2010-2026)
     log.info("  YouTube (BQ + local CSVs)...")
     import csv
     from collections import defaultdict
