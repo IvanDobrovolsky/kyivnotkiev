@@ -1,7 +1,165 @@
 {
   "1": {
-    "russian": "Kiev",
-    "ukrainian": "Kyiv",
+    "russian": {
+      "n_texts": 2818,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 6547,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 5236,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 4104,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 3241,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 3107,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 1832,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 1652,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 1180,
+          "pmi": 0
+        },
+        {
+          "word": "holy",
+          "count": 1168,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 1135,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 152,
+          "pmi": 0
+        },
+        {
+          "word": "world",
+          "count": 108,
+          "pmi": 0
+        },
+        {
+          "word": "wcc",
+          "count": 101,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 91,
+          "pmi": 0
+        },
+        {
+          "word": "life",
+          "count": 85,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 2818,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 700,
+          "pmi": 0
+        },
+        {
+          "word": "wcc",
+          "count": 663,
+          "pmi": 0
+        },
+        {
+          "word": "churches",
+          "count": 420,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 337,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 318,
+          "pmi": 0
+        },
+        {
+          "word": "world",
+          "count": 274,
+          "pmi": 0
+        },
+        {
+          "word": "peace",
+          "count": 215,
+          "pmi": 0
+        },
+        {
+          "word": "council",
+          "count": 212,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 176,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 168,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 161,
+          "pmi": 0
+        },
+        {
+          "word": "urban",
+          "count": 149,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 149,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 149,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 139,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 2818,
     "by_context": {
       "history": {
@@ -964,8 +1122,166 @@
     }
   },
   "2": {
-    "russian": "Kharkov",
-    "ukrainian": "Kharkiv",
+    "russian": {
+      "n_texts": 1866,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 656,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 376,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 279,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 261,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 257,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 184,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 174,
+          "pmi": 0
+        },
+        {
+          "word": "kursk",
+          "count": 163,
+          "pmi": 0
+        },
+        {
+          "word": "moscow",
+          "count": 149,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 127,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 124,
+          "pmi": 0
+        },
+        {
+          "word": "holy",
+          "count": 116,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 109,
+          "pmi": 0
+        },
+        {
+          "word": "aid",
+          "count": 95,
+          "pmi": 0
+        },
+        {
+          "word": "families",
+          "count": 95,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 1866,
+      "collocates": [
+        {
+          "word": "development",
+          "count": 322,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 221,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 168,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 160,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 159,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 157,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 156,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 135,
+          "pmi": 0
+        },
+        {
+          "word": "sprite",
+          "count": 122,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 114,
+          "pmi": 0
+        },
+        {
+          "word": "urban",
+          "count": 106,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 99,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 80,
+          "pmi": 0
+        },
+        {
+          "word": "attack",
+          "count": 72,
+          "pmi": 0
+        },
+        {
+          "word": "wcc",
+          "count": 70,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 1866,
     "by_context": {
       "war": {
@@ -1928,8 +2244,166 @@
     }
   },
   "3": {
-    "russian": "Odessa",
-    "ukrainian": "Odesa",
+    "russian": {
+      "n_texts": 1879,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 828,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 712,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 540,
+          "pmi": 0
+        },
+        {
+          "word": "strong",
+          "count": 382,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 370,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 351,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 296,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 274,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 220,
+          "pmi": 0
+        },
+        {
+          "word": "span",
+          "count": 204,
+          "pmi": 0
+        },
+        {
+          "word": "sea",
+          "count": 179,
+          "pmi": 0
+        },
+        {
+          "word": "sprite",
+          "count": 167,
+          "pmi": 0
+        },
+        {
+          "word": "holy",
+          "count": 148,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 146,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 135,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 1879,
+      "collocates": [
+        {
+          "word": "development",
+          "count": 234,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 156,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 140,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 137,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 134,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 117,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 110,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 104,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 102,
+          "pmi": 0
+        },
+        {
+          "word": "cultural",
+          "count": 94,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 90,
+          "pmi": 0
+        },
+        {
+          "word": "sea",
+          "count": 89,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 82,
+          "pmi": 0
+        },
+        {
+          "word": "port",
+          "count": 76,
+          "pmi": 0
+        },
+        {
+          "word": "attack",
+          "count": 75,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 1879,
     "by_context": {
       "politics": {
@@ -2892,8 +3366,166 @@
     }
   },
   "4": {
-    "russian": "Lvov",
-    "ukrainian": "Lviv",
+    "russian": {
+      "n_texts": 1781,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 508,
+          "pmi": 0
+        },
+        {
+          "word": "school",
+          "count": 318,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 284,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 279,
+          "pmi": 0
+        },
+        {
+          "word": "warsaw",
+          "count": 225,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 148,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 148,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 116,
+          "pmi": 0
+        },
+        {
+          "word": "logic",
+          "count": 100,
+          "pmi": 0
+        },
+        {
+          "word": "philosophy",
+          "count": 97,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 72,
+          "pmi": 0
+        },
+        {
+          "word": "twardowski",
+          "count": 71,
+          "pmi": 0
+        },
+        {
+          "word": "relations",
+          "count": 65,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 61,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 60,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 1781,
+      "collocates": [
+        {
+          "word": "development",
+          "count": 298,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 266,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 171,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 170,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 149,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 139,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 138,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 132,
+          "pmi": 0
+        },
+        {
+          "word": "churches",
+          "count": 127,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 127,
+          "pmi": 0
+        },
+        {
+          "word": "polish",
+          "count": 116,
+          "pmi": 0
+        },
+        {
+          "word": "wcc",
+          "count": 112,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 100,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 98,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 97,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 1781,
     "by_context": {
       "history": {
@@ -3856,8 +4488,166 @@
     }
   },
   "5": {
-    "russian": "Zaporozhye",
-    "ukrainian": "Zaporizhzhia",
+    "russian": {
+      "n_texts": 988,
+      "collocates": [
+        {
+          "word": "patriarch",
+          "count": 137,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 132,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 83,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 71,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 71,
+          "pmi": 0
+        },
+        {
+          "word": "nuclear",
+          "count": 63,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 59,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 56,
+          "pmi": 0
+        },
+        {
+          "word": "pronounce",
+          "count": 53,
+          "pmi": 0
+        },
+        {
+          "word": "plant",
+          "count": 52,
+          "pmi": 0
+        },
+        {
+          "word": "power",
+          "count": 47,
+          "pmi": 0
+        },
+        {
+          "word": "forces",
+          "count": 45,
+          "pmi": 0
+        },
+        {
+          "word": "zaporizhia",
+          "count": 39,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 35,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 34,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 988,
+      "collocates": [
+        {
+          "word": "nuclear",
+          "count": 245,
+          "pmi": 0
+        },
+        {
+          "word": "plant",
+          "count": 232,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 199,
+          "pmi": 0
+        },
+        {
+          "word": "power",
+          "count": 147,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 138,
+          "pmi": 0
+        },
+        {
+          "word": "patients",
+          "count": 132,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 124,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 114,
+          "pmi": 0
+        },
+        {
+          "word": "reservoir",
+          "count": 108,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 107,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 101,
+          "pmi": 0
+        },
+        {
+          "word": "methods",
+          "count": 90,
+          "pmi": 0
+        },
+        {
+          "word": "population",
+          "count": 83,
+          "pmi": 0
+        },
+        {
+          "word": "fish",
+          "count": 80,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 75,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 988,
     "by_context": {
       "politics": {
@@ -4779,8 +5569,166 @@
     }
   },
   "6": {
-    "russian": "Nikolaev",
-    "ukrainian": "Mykolaiv",
+    "russian": {
+      "n_texts": 1184,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 122,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 93,
+          "pmi": 0
+        },
+        {
+          "word": "icon",
+          "count": 70,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 67,
+          "pmi": 0
+        },
+        {
+          "word": "observatory",
+          "count": 54,
+          "pmi": 0
+        },
+        {
+          "word": "observations",
+          "count": 54,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 53,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 52,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 51,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 51,
+          "pmi": 0
+        },
+        {
+          "word": "sub",
+          "count": 50,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 47,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 45,
+          "pmi": 0
+        },
+        {
+          "word": "review",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 44,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 1184,
+      "collocates": [
+        {
+          "word": "water",
+          "count": 148,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 125,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 108,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 102,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 92,
+          "pmi": 0
+        },
+        {
+          "word": "forces",
+          "count": 68,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 68,
+          "pmi": 0
+        },
+        {
+          "word": "port",
+          "count": 59,
+          "pmi": 0
+        },
+        {
+          "word": "tourism",
+          "count": 53,
+          "pmi": 0
+        },
+        {
+          "word": "southern",
+          "count": 52,
+          "pmi": 0
+        },
+        {
+          "word": "natural",
+          "count": 51,
+          "pmi": 0
+        },
+        {
+          "word": "air",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "attack",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "data",
+          "count": 42,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 1184,
     "by_context": {
       "war": {
@@ -5661,8 +6609,166 @@
     }
   },
   "7": {
-    "russian": "Dnepropetrovsk",
-    "ukrainian": "Dnipro",
+    "russian": {
+      "n_texts": 1359,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 151,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 123,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 100,
+          "pmi": 0
+        },
+        {
+          "word": "maniacs",
+          "count": 99,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 80,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 74,
+          "pmi": 0
+        },
+        {
+          "word": "dnipropetrovsk",
+          "count": 70,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 59,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 55,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 48,
+          "pmi": 0
+        },
+        {
+          "word": "missile",
+          "count": 47,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 41,
+          "pmi": 0
+        },
+        {
+          "word": "strike",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 37,
+          "pmi": 0
+        },
+        {
+          "word": "attack",
+          "count": 36,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 1359,
+      "collocates": [
+        {
+          "word": "species",
+          "count": 314,
+          "pmi": 0
+        },
+        {
+          "word": "river",
+          "count": 276,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 241,
+          "pmi": 0
+        },
+        {
+          "word": "area",
+          "count": 138,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 135,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 131,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 128,
+          "pmi": 0
+        },
+        {
+          "word": "reservoir",
+          "count": 121,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 115,
+          "pmi": 0
+        },
+        {
+          "word": "fish",
+          "count": 106,
+          "pmi": 0
+        },
+        {
+          "word": "wcc",
+          "count": 102,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 70,
+          "pmi": 0
+        },
+        {
+          "word": "missile",
+          "count": 65,
+          "pmi": 0
+        },
+        {
+          "word": "sprite",
+          "count": 63,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 61,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 1359,
     "by_context": {
       "war": {
@@ -6584,8 +7690,166 @@
     }
   },
   "8": {
-    "russian": "Vinnitsa",
-    "ukrainian": "Vinnytsia",
+    "russian": {
+      "n_texts": 1092,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 589,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 407,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 294,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 243,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 239,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 116,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 114,
+          "pmi": 0
+        },
+        {
+          "word": "holy",
+          "count": 79,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 71,
+          "pmi": 0
+        },
+        {
+          "word": "medical",
+          "count": 60,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 45,
+          "pmi": 0
+        },
+        {
+          "word": "pronounce",
+          "count": 42,
+          "pmi": 0
+        },
+        {
+          "word": "tourist",
+          "count": 42,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 41,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 1092,
+      "collocates": [
+        {
+          "word": "development",
+          "count": 320,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 160,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 134,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 116,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 106,
+          "pmi": 0
+        },
+        {
+          "word": "area",
+          "count": 105,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 99,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 99,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 98,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 96,
+          "pmi": 0
+        },
+        {
+          "word": "conditions",
+          "count": 92,
+          "pmi": 0
+        },
+        {
+          "word": "forest",
+          "count": 85,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 81,
+          "pmi": 0
+        },
+        {
+          "word": "economic",
+          "count": 81,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 59,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 1094,
     "by_context": {
       "war": {
@@ -7461,8 +8725,166 @@
     }
   },
   "9": {
-    "russian": "Rovno",
-    "ukrainian": "Rivne",
+    "russian": {
+      "n_texts": 1259,
+      "collocates": [
+        {
+          "word": "amber",
+          "count": 846,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 725,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 610,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 431,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 429,
+          "pmi": 0
+        },
+        {
+          "word": "eocene",
+          "count": 405,
+          "pmi": 0
+        },
+        {
+          "word": "genus",
+          "count": 307,
+          "pmi": 0
+        },
+        {
+          "word": "nov",
+          "count": 288,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 257,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 248,
+          "pmi": 0
+        },
+        {
+          "word": "described",
+          "count": 241,
+          "pmi": 0
+        },
+        {
+          "word": "fossil",
+          "count": 204,
+          "pmi": 0
+        },
+        {
+          "word": "late",
+          "count": 189,
+          "pmi": 0
+        },
+        {
+          "word": "baltic",
+          "count": 178,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 175,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 1259,
+      "collocates": [
+        {
+          "word": "water",
+          "count": 181,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 175,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 163,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 158,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 143,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 122,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 119,
+          "pmi": 0
+        },
+        {
+          "word": "area",
+          "count": 119,
+          "pmi": 0
+        },
+        {
+          "word": "monitoring",
+          "count": 99,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 94,
+          "pmi": 0
+        },
+        {
+          "word": "soil",
+          "count": 94,
+          "pmi": 0
+        },
+        {
+          "word": "content",
+          "count": 84,
+          "pmi": 0
+        },
+        {
+          "word": "cultural",
+          "count": 68,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 63,
+          "pmi": 0
+        },
+        {
+          "word": "missiles",
+          "count": 52,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 1259,
     "by_context": {
       "politics": {
@@ -8384,8 +9806,166 @@
     }
   },
   "10": {
-    "russian": "Chernobyl",
-    "ukrainian": "Chornobyl",
+    "russian": {
+      "n_texts": 2253,
+      "collocates": [
+        {
+          "word": "nuclear",
+          "count": 940,
+          "pmi": 0
+        },
+        {
+          "word": "radiation",
+          "count": 809,
+          "pmi": 0
+        },
+        {
+          "word": "accident",
+          "count": 706,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 447,
+          "pmi": 0
+        },
+        {
+          "word": "disaster",
+          "count": 401,
+          "pmi": 0
+        },
+        {
+          "word": "plant",
+          "count": 389,
+          "pmi": 0
+        },
+        {
+          "word": "power",
+          "count": 381,
+          "pmi": 0
+        },
+        {
+          "word": "zone",
+          "count": 331,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 330,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 312,
+          "pmi": 0
+        },
+        {
+          "word": "thyroid",
+          "count": 281,
+          "pmi": 0
+        },
+        {
+          "word": "radioactive",
+          "count": 253,
+          "pmi": 0
+        },
+        {
+          "word": "dose",
+          "count": 231,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 206,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 203,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 2253,
+      "collocates": [
+        {
+          "word": "radiation",
+          "count": 747,
+          "pmi": 0
+        },
+        {
+          "word": "nuclear",
+          "count": 734,
+          "pmi": 0
+        },
+        {
+          "word": "accident",
+          "count": 580,
+          "pmi": 0
+        },
+        {
+          "word": "zone",
+          "count": 462,
+          "pmi": 0
+        },
+        {
+          "word": "plant",
+          "count": 407,
+          "pmi": 0
+        },
+        {
+          "word": "power",
+          "count": 352,
+          "pmi": 0
+        },
+        {
+          "word": "exclusion",
+          "count": 285,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 267,
+          "pmi": 0
+        },
+        {
+          "word": "radioactive",
+          "count": 197,
+          "pmi": 0
+        },
+        {
+          "word": "thyroid",
+          "count": 189,
+          "pmi": 0
+        },
+        {
+          "word": "dose",
+          "count": 109,
+          "pmi": 0
+        },
+        {
+          "word": "heart",
+          "count": 84,
+          "pmi": 0
+        },
+        {
+          "word": "exposure",
+          "count": 84,
+          "pmi": 0
+        },
+        {
+          "word": "workers",
+          "count": 81,
+          "pmi": 0
+        },
+        {
+          "word": "clean",
+          "count": 74,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 2253,
     "by_context": {
       "history": {
@@ -9225,8 +10805,166 @@
     }
   },
   "11": {
-    "russian": "Lugansk",
-    "ukrainian": "Luhansk",
+    "russian": {
+      "n_texts": 1245,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 724,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 550,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 344,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 329,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 318,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 282,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 220,
+          "pmi": 0
+        },
+        {
+          "word": "donetsk",
+          "count": 162,
+          "pmi": 0
+        },
+        {
+          "word": "republic",
+          "count": 141,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 141,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 131,
+          "pmi": 0
+        },
+        {
+          "word": "moscow",
+          "count": 124,
+          "pmi": 0
+        },
+        {
+          "word": "forces",
+          "count": 90,
+          "pmi": 0
+        },
+        {
+          "word": "kursk",
+          "count": 84,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 75,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 1245,
+      "collocates": [
+        {
+          "word": "donetsk",
+          "count": 287,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 275,
+          "pmi": 0
+        },
+        {
+          "word": "regions",
+          "count": 175,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 151,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 140,
+          "pmi": 0
+        },
+        {
+          "word": "forces",
+          "count": 139,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 125,
+          "pmi": 0
+        },
+        {
+          "word": "conflict",
+          "count": 116,
+          "pmi": 0
+        },
+        {
+          "word": "territories",
+          "count": 115,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 114,
+          "pmi": 0
+        },
+        {
+          "word": "occupied",
+          "count": 107,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 95,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 87,
+          "pmi": 0
+        },
+        {
+          "word": "economic",
+          "count": 51,
+          "pmi": 0
+        },
+        {
+          "word": "communities",
+          "count": 49,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 1247,
     "by_context": {
       "politics": {
@@ -10102,8 +11840,166 @@
     }
   },
   "15": {
-    "russian": "Dnieper River",
-    "ukrainian": "Dnipro River",
+    "russian": {
+      "n_texts": 1459,
+      "collocates": [
+        {
+          "word": "water",
+          "count": 323,
+          "pmi": 0
+        },
+        {
+          "word": "donets",
+          "count": 255,
+          "pmi": 0
+        },
+        {
+          "word": "basin",
+          "count": 251,
+          "pmi": 0
+        },
+        {
+          "word": "middle",
+          "count": 233,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 224,
+          "pmi": 0
+        },
+        {
+          "word": "gas",
+          "count": 220,
+          "pmi": 0
+        },
+        {
+          "word": "data",
+          "count": 195,
+          "pmi": 0
+        },
+        {
+          "word": "reservoirs",
+          "count": 150,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 142,
+          "pmi": 0
+        },
+        {
+          "word": "within",
+          "count": 142,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 139,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 124,
+          "pmi": 0
+        },
+        {
+          "word": "forces",
+          "count": 114,
+          "pmi": 0
+        },
+        {
+          "word": "makhno",
+          "count": 84,
+          "pmi": 0
+        },
+        {
+          "word": "army",
+          "count": 81,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 1459,
+      "collocates": [
+        {
+          "word": "species",
+          "count": 348,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 289,
+          "pmi": 0
+        },
+        {
+          "word": "area",
+          "count": 169,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 144,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 137,
+          "pmi": 0
+        },
+        {
+          "word": "reservoir",
+          "count": 135,
+          "pmi": 0
+        },
+        {
+          "word": "fish",
+          "count": 133,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 125,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 122,
+          "pmi": 0
+        },
+        {
+          "word": "data",
+          "count": 112,
+          "pmi": 0
+        },
+        {
+          "word": "smm",
+          "count": 76,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 68,
+          "pmi": 0
+        },
+        {
+          "word": "missile",
+          "count": 64,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 48,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 48,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 1459,
     "by_context": {
       "war": {
@@ -10984,8 +12880,166 @@
     }
   },
   "16": {
-    "russian": "Dniester",
-    "ukrainian": "Dnister",
+    "russian": {
+      "n_texts": 1189,
+      "collocates": [
+        {
+          "word": "river",
+          "count": 692,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 361,
+          "pmi": 0
+        },
+        {
+          "word": "moldova",
+          "count": 259,
+          "pmi": 0
+        },
+        {
+          "word": "lower",
+          "count": 157,
+          "pmi": 0
+        },
+        {
+          "word": "basin",
+          "count": 151,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 151,
+          "pmi": 0
+        },
+        {
+          "word": "area",
+          "count": 125,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 118,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 104,
+          "pmi": 0
+        },
+        {
+          "word": "rivers",
+          "count": 100,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 98,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 96,
+          "pmi": 0
+        },
+        {
+          "word": "data",
+          "count": 95,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 87,
+          "pmi": 0
+        },
+        {
+          "word": "transnistria",
+          "count": 81,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 1189,
+      "collocates": [
+        {
+          "word": "river",
+          "count": 267,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 147,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 112,
+          "pmi": 0
+        },
+        {
+          "word": "republic",
+          "count": 110,
+          "pmi": 0
+        },
+        {
+          "word": "basin",
+          "count": 74,
+          "pmi": 0
+        },
+        {
+          "word": "natural",
+          "count": 70,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 67,
+          "pmi": 0
+        },
+        {
+          "word": "conditions",
+          "count": 63,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 62,
+          "pmi": 0
+        },
+        {
+          "word": "trek",
+          "count": 62,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 59,
+          "pmi": 0
+        },
+        {
+          "word": "moldova",
+          "count": 57,
+          "pmi": 0
+        },
+        {
+          "word": "area",
+          "count": 55,
+          "pmi": 0
+        },
+        {
+          "word": "power",
+          "count": 51,
+          "pmi": 0
+        },
+        {
+          "word": "bike",
+          "count": 49,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 1189,
     "by_context": {
       "war": {
@@ -11866,8 +13920,166 @@
     }
   },
   "17": {
-    "russian": "Donbass",
-    "ukrainian": "Donbas",
+    "russian": {
+      "n_texts": 1915,
+      "collocates": [
+        {
+          "word": "war",
+          "count": 289,
+          "pmi": 0
+        },
+        {
+          "word": "coal",
+          "count": 232,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 202,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 181,
+          "pmi": 0
+        },
+        {
+          "word": "conflict",
+          "count": 122,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 114,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 109,
+          "pmi": 0
+        },
+        {
+          "word": "donetsk",
+          "count": 107,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 92,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 83,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 83,
+          "pmi": 0
+        },
+        {
+          "word": "conditions",
+          "count": 82,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 80,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "mine",
+          "count": 72,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 1915,
+      "collocates": [
+        {
+          "word": "war",
+          "count": 493,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 280,
+          "pmi": 0
+        },
+        {
+          "word": "conflict",
+          "count": 270,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 236,
+          "pmi": 0
+        },
+        {
+          "word": "coal",
+          "count": 229,
+          "pmi": 0
+        },
+        {
+          "word": "forces",
+          "count": 202,
+          "pmi": 0
+        },
+        {
+          "word": "putin",
+          "count": 191,
+          "pmi": 0
+        },
+        {
+          "word": "moscow",
+          "count": 175,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 162,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 162,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 142,
+          "pmi": 0
+        },
+        {
+          "word": "donetsk",
+          "count": 132,
+          "pmi": 0
+        },
+        {
+          "word": "president",
+          "count": 128,
+          "pmi": 0
+        },
+        {
+          "word": "kyiv",
+          "count": 125,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 84,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 1921,
     "by_context": {
       "politics": {
@@ -12528,8 +14740,166 @@
     }
   },
   "19": {
-    "russian": "Zakarpatye",
-    "ukrainian": "Zakarpattia",
+    "russian": {
+      "n_texts": 587,
+      "collocates": [
+        {
+          "word": "hungarian",
+          "count": 127,
+          "pmi": 0
+        },
+        {
+          "word": "hungary",
+          "count": 125,
+          "pmi": 0
+        },
+        {
+          "word": "transcarpathia",
+          "count": 112,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 55,
+          "pmi": 0
+        },
+        {
+          "word": "hungarians",
+          "count": 47,
+          "pmi": 0
+        },
+        {
+          "word": "ethnic",
+          "count": 41,
+          "pmi": 0
+        },
+        {
+          "word": "refugees",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "roma",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "romany",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "carpathian",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "minority",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "european",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "rights",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "budapest",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "language",
+          "count": 16,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 587,
+      "collocates": [
+        {
+          "word": "development",
+          "count": 155,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 100,
+          "pmi": 0
+        },
+        {
+          "word": "anaerobic",
+          "count": 86,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "tourism",
+          "count": 69,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 62,
+          "pmi": 0
+        },
+        {
+          "word": "body",
+          "count": 62,
+          "pmi": 0
+        },
+        {
+          "word": "somatotype",
+          "count": 61,
+          "pmi": 0
+        },
+        {
+          "word": "economic",
+          "count": 51,
+          "pmi": 0
+        },
+        {
+          "word": "hungary",
+          "count": 51,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 50,
+          "pmi": 0
+        },
+        {
+          "word": "energy",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "territorial",
+          "count": 42,
+          "pmi": 0
+        },
+        {
+          "word": "hungarian",
+          "count": 41,
+          "pmi": 0
+        },
+        {
+          "word": "level",
+          "count": 41,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 587,
     "by_context": {
       "politics": {
@@ -13328,8 +15698,166 @@
     }
   },
   "20": {
-    "russian": "Podolye",
-    "ukrainian": "Podillia",
+    "russian": {
+      "n_texts": 544,
+      "collocates": [
+        {
+          "word": "hasidism",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "jewish",
+          "count": 33,
+          "pmi": 0
+        },
+        {
+          "word": "muslims",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "hasidic",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "movement",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "klezmer",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "sequim",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "music",
+          "count": 19,
+          "pmi": 0
+        },
+        {
+          "word": "band",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "hasidim",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "poland",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "century",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "jkm",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "crimean",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 14,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 544,
+      "collocates": [
+        {
+          "word": "research",
+          "count": 153,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 153,
+          "pmi": 0
+        },
+        {
+          "word": "conditions",
+          "count": 138,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 112,
+          "pmi": 0
+        },
+        {
+          "word": "use",
+          "count": 101,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 84,
+          "pmi": 0
+        },
+        {
+          "word": "soil",
+          "count": 81,
+          "pmi": 0
+        },
+        {
+          "word": "ecological",
+          "count": 79,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "formation",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 64,
+          "pmi": 0
+        },
+        {
+          "word": "tourism",
+          "count": 62,
+          "pmi": 0
+        },
+        {
+          "word": "historical",
+          "count": 60,
+          "pmi": 0
+        },
+        {
+          "word": "century",
+          "count": 57,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 41,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 544,
     "by_context": {
       "culture": {
@@ -14169,8 +16697,166 @@
     }
   },
   "38": {
-    "russian": "Chernigov",
-    "ukrainian": "Chernihiv",
+    "russian": {
+      "n_texts": 952,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 654,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 444,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 292,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 263,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 250,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 209,
+          "pmi": 0
+        },
+        {
+          "word": "moscow",
+          "count": 146,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 142,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 126,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 118,
+          "pmi": 0
+        },
+        {
+          "word": "prince",
+          "count": 56,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "mikhail",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "kiev",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "missile",
+          "count": 36,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 952,
+      "collocates": [
+        {
+          "word": "strong",
+          "count": 228,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 166,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 157,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 152,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 147,
+          "pmi": 0
+        },
+        {
+          "word": "wcc",
+          "count": 121,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 118,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 113,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 93,
+          "pmi": 0
+        },
+        {
+          "word": "historical",
+          "count": 93,
+          "pmi": 0
+        },
+        {
+          "word": "world",
+          "count": 84,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 80,
+          "pmi": 0
+        },
+        {
+          "word": "churches",
+          "count": 80,
+          "pmi": 0
+        },
+        {
+          "word": "cultural",
+          "count": 77,
+          "pmi": 0
+        },
+        {
+          "word": "local",
+          "count": 72,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 953,
     "by_context": {
       "economy": {
@@ -15046,8 +17732,166 @@
     }
   },
   "39": {
-    "russian": "Chernovtsy",
-    "ukrainian": "Chernivtsi",
+    "russian": {
+      "n_texts": 946,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 797,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 602,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 465,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 397,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 368,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 253,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 188,
+          "pmi": 0
+        },
+        {
+          "word": "holy",
+          "count": 146,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 126,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 118,
+          "pmi": 0
+        },
+        {
+          "word": "power",
+          "count": 85,
+          "pmi": 0
+        },
+        {
+          "word": "ministry",
+          "count": 60,
+          "pmi": 0
+        },
+        {
+          "word": "regions",
+          "count": 47,
+          "pmi": 0
+        },
+        {
+          "word": "lgbtq",
+          "count": 46,
+          "pmi": 0
+        },
+        {
+          "word": "million",
+          "count": 41,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 946,
+      "collocates": [
+        {
+          "word": "development",
+          "count": 386,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 304,
+          "pmi": 0
+        },
+        {
+          "word": "wcc",
+          "count": 218,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 193,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 180,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 148,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 134,
+          "pmi": 0
+        },
+        {
+          "word": "population",
+          "count": 134,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 126,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 125,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 119,
+          "pmi": 0
+        },
+        {
+          "word": "churches",
+          "count": 118,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 117,
+          "pmi": 0
+        },
+        {
+          "word": "tourism",
+          "count": 111,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 110,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 946,
     "by_context": {
       "food": {
@@ -16010,8 +18854,166 @@
     }
   },
   "40": {
-    "russian": "Zhitomir",
-    "ukrainian": "Zhytomyr",
+    "russian": {
+      "n_texts": 936,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 342,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 235,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 191,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 137,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 126,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 93,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 67,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 62,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 60,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 55,
+          "pmi": 0
+        },
+        {
+          "word": "relations",
+          "count": 46,
+          "pmi": 0
+        },
+        {
+          "word": "army",
+          "count": 31,
+          "pmi": 0
+        },
+        {
+          "word": "soviet",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "tank",
+          "count": 24,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 936,
+      "collocates": [
+        {
+          "word": "forest",
+          "count": 222,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 190,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 169,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 164,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 125,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 124,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 122,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 105,
+          "pmi": 0
+        },
+        {
+          "word": "quality",
+          "count": 104,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 103,
+          "pmi": 0
+        },
+        {
+          "word": "conditions",
+          "count": 93,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 69,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 68,
+          "pmi": 0
+        },
+        {
+          "word": "economic",
+          "count": 50,
+          "pmi": 0
+        },
+        {
+          "word": "kyiv",
+          "count": 49,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 936,
     "by_context": {
       "war": {
@@ -16933,8 +19935,166 @@
     }
   },
   "41": {
-    "russian": "Cherkassy",
-    "ukrainian": "Cherkasy",
+    "russian": {
+      "n_texts": 871,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 393,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 287,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 251,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 183,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 165,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 108,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 85,
+          "pmi": 0
+        },
+        {
+          "word": "battle",
+          "count": 81,
+          "pmi": 0
+        },
+        {
+          "word": "cathedral",
+          "count": 69,
+          "pmi": 0
+        },
+        {
+          "word": "rights",
+          "count": 59,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 58,
+          "pmi": 0
+        },
+        {
+          "word": "explosion",
+          "count": 53,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "agricultural",
+          "count": 36,
+          "pmi": 0
+        },
+        {
+          "word": "korsun",
+          "count": 34,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 871,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 329,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 215,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 182,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 178,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 142,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 142,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 137,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 103,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 100,
+          "pmi": 0
+        },
+        {
+          "word": "tourism",
+          "count": 98,
+          "pmi": 0
+        },
+        {
+          "word": "agricultural",
+          "count": 98,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 85,
+          "pmi": 0
+        },
+        {
+          "word": "natural",
+          "count": 84,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 79,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 72,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 873,
     "by_context": {
       "war": {
@@ -17810,8 +20970,166 @@
     }
   },
   "42": {
-    "russian": "Uzhgorod",
-    "ukrainian": "Uzhhorod",
+    "russian": {
+      "n_texts": 764,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 112,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 88,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 86,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 56,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 54,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 51,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 41,
+          "pmi": 0
+        },
+        {
+          "word": "seismic",
+          "count": 40,
+          "pmi": 0
+        },
+        {
+          "word": "names",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 37,
+          "pmi": 0
+        },
+        {
+          "word": "used",
+          "count": 31,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "holy",
+          "count": 28,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 764,
+      "collocates": [
+        {
+          "word": "hungarian",
+          "count": 146,
+          "pmi": 0
+        },
+        {
+          "word": "republic",
+          "count": 132,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 126,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 108,
+          "pmi": 0
+        },
+        {
+          "word": "border",
+          "count": 90,
+          "pmi": 0
+        },
+        {
+          "word": "hungary",
+          "count": 84,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 82,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 78,
+          "pmi": 0
+        },
+        {
+          "word": "government",
+          "count": 75,
+          "pmi": 0
+        },
+        {
+          "word": "smm",
+          "count": 69,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 55,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 53,
+          "pmi": 0
+        },
+        {
+          "word": "kyiv",
+          "count": 53,
+          "pmi": 0
+        },
+        {
+          "word": "president",
+          "count": 52,
+          "pmi": 0
+        },
+        {
+          "word": "biden",
+          "count": 52,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 766,
     "by_context": {
       "culture": {
@@ -18687,8 +22005,166 @@
     }
   },
   "43": {
-    "russian": "Kremenchug",
-    "ukrainian": "Kremenchuk",
+    "russian": {
+      "n_texts": 624,
+      "collocates": [
+        {
+          "word": "reservoir",
+          "count": 86,
+          "pmi": 0
+        },
+        {
+          "word": "shopping",
+          "count": 66,
+          "pmi": 0
+        },
+        {
+          "word": "mall",
+          "count": 63,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 57,
+          "pmi": 0
+        },
+        {
+          "word": "missile",
+          "count": 48,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 37,
+          "pmi": 0
+        },
+        {
+          "word": "center",
+          "count": 32,
+          "pmi": 0
+        },
+        {
+          "word": "strike",
+          "count": 31,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 30,
+          "pmi": 0
+        },
+        {
+          "word": "area",
+          "count": 30,
+          "pmi": 0
+        },
+        {
+          "word": "attack",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "group",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "class",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "hit",
+          "count": 20,
+          "pmi": 0
+        },
+        {
+          "word": "army",
+          "count": 19,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 624,
+      "collocates": [
+        {
+          "word": "reservoir",
+          "count": 132,
+          "pmi": 0
+        },
+        {
+          "word": "missile",
+          "count": 117,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 109,
+          "pmi": 0
+        },
+        {
+          "word": "attack",
+          "count": 96,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 93,
+          "pmi": 0
+        },
+        {
+          "word": "shopping",
+          "count": 92,
+          "pmi": 0
+        },
+        {
+          "word": "mall",
+          "count": 88,
+          "pmi": 0
+        },
+        {
+          "word": "refinery",
+          "count": 87,
+          "pmi": 0
+        },
+        {
+          "word": "missiles",
+          "count": 86,
+          "pmi": 0
+        },
+        {
+          "word": "strike",
+          "count": 86,
+          "pmi": 0
+        },
+        {
+          "word": "hit",
+          "count": 76,
+          "pmi": 0
+        },
+        {
+          "word": "forces",
+          "count": 75,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 63,
+          "pmi": 0
+        },
+        {
+          "word": "million",
+          "count": 47,
+          "pmi": 0
+        },
+        {
+          "word": "complex",
+          "count": 46,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 626,
     "by_context": {
       "war": {
@@ -19523,8 +22999,166 @@
     }
   },
   "44": {
-    "russian": "Kirovograd",
-    "ukrainian": "Kropyvnytskyi",
+    "russian": {
+      "n_texts": 595,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 168,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 156,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 105,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 100,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 82,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 67,
+          "pmi": 0
+        },
+        {
+          "word": "moscow",
+          "count": 42,
+          "pmi": 0
+        },
+        {
+          "word": "kirovohrad",
+          "count": 41,
+          "pmi": 0
+        },
+        {
+          "word": "breeding",
+          "count": 40,
+          "pmi": 0
+        },
+        {
+          "word": "ore",
+          "count": 39,
+          "pmi": 0
+        },
+        {
+          "word": "holy",
+          "count": 39,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 39,
+          "pmi": 0
+        },
+        {
+          "word": "council",
+          "count": 34,
+          "pmi": 0
+        },
+        {
+          "word": "measles",
+          "count": 32,
+          "pmi": 0
+        },
+        {
+          "word": "population",
+          "count": 30,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 595,
+      "collocates": [
+        {
+          "word": "sprite",
+          "count": 71,
+          "pmi": 0
+        },
+        {
+          "word": "attack",
+          "count": 40,
+          "pmi": 0
+        },
+        {
+          "word": "hide",
+          "count": 34,
+          "pmi": 0
+        },
+        {
+          "word": "air",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "today",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "matches",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "kirovohrad",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "timeanddate",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "worldclock",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "fixedtime",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "msg",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "drones",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "iso",
+          "count": 21,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 595,
     "by_context": {
       "war": {
@@ -20446,8 +24080,166 @@
     }
   },
   "45": {
-    "russian": "Ternopol",
-    "ukrainian": "Ternopil",
+    "russian": {
+      "n_texts": 835,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 399,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 368,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 243,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 230,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 219,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 107,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 106,
+          "pmi": 0
+        },
+        {
+          "word": "german",
+          "count": 104,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 103,
+          "pmi": 0
+        },
+        {
+          "word": "jewish",
+          "count": 97,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 90,
+          "pmi": 0
+        },
+        {
+          "word": "alekhine",
+          "count": 80,
+          "pmi": 0
+        },
+        {
+          "word": "jews",
+          "count": 77,
+          "pmi": 0
+        },
+        {
+          "word": "holy",
+          "count": 66,
+          "pmi": 0
+        },
+        {
+          "word": "corps",
+          "count": 65,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 835,
+      "collocates": [
+        {
+          "word": "development",
+          "count": 227,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 200,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 168,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 138,
+          "pmi": 0
+        },
+        {
+          "word": "use",
+          "count": 120,
+          "pmi": 0
+        },
+        {
+          "word": "results",
+          "count": 109,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 107,
+          "pmi": 0
+        },
+        {
+          "word": "territorial",
+          "count": 101,
+          "pmi": 0
+        },
+        {
+          "word": "tourism",
+          "count": 99,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 97,
+          "pmi": 0
+        },
+        {
+          "word": "soil",
+          "count": 93,
+          "pmi": 0
+        },
+        {
+          "word": "communities",
+          "count": 90,
+          "pmi": 0
+        },
+        {
+          "word": "health",
+          "count": 72,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 70,
+          "pmi": 0
+        },
+        {
+          "word": "western",
+          "count": 64,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 835,
     "by_context": {
       "war": {
@@ -21369,8 +25161,166 @@
     }
   },
   "21": {
-    "russian": "Chicken Kiev",
-    "ukrainian": "Chicken Kyiv",
+    "russian": {
+      "n_texts": 528,
+      "collocates": [
+        {
+          "word": "butter",
+          "count": 50,
+          "pmi": 0
+        },
+        {
+          "word": "homemade",
+          "count": 50,
+          "pmi": 0
+        },
+        {
+          "word": "recipe",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "garlic",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "dish",
+          "count": 30,
+          "pmi": 0
+        },
+        {
+          "word": "food",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "make",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "kievs",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "potatoes",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "made",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "foreign",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "policy",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "speech",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "ethnic",
+          "count": 6,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 528,
+      "collocates": [
+        {
+          "word": "sun",
+          "count": 140,
+          "pmi": 0
+        },
+        {
+          "word": "rising",
+          "count": 139,
+          "pmi": 0
+        },
+        {
+          "word": "eest",
+          "count": 109,
+          "pmi": 0
+        },
+        {
+          "word": "comments",
+          "count": 82,
+          "pmi": 0
+        },
+        {
+          "word": "png",
+          "count": 70,
+          "pmi": 0
+        },
+        {
+          "word": "invasion",
+          "count": 62,
+          "pmi": 0
+        },
+        {
+          "word": "full",
+          "count": 45,
+          "pmi": 0
+        },
+        {
+          "word": "series",
+          "count": 45,
+          "pmi": 0
+        },
+        {
+          "word": "scale",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "charities",
+          "count": 36,
+          "pmi": 0
+        },
+        {
+          "word": "recipe",
+          "count": 33,
+          "pmi": 0
+        },
+        {
+          "word": "butter",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "garlic",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "make",
+          "count": 20,
+          "pmi": 0
+        },
+        {
+          "word": "food",
+          "count": 18,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 532,
     "by_context": {
       "politics": {
@@ -21944,8 +25894,166 @@
     }
   },
   "22": {
-    "russian": "Kiev cake",
-    "ukrainian": "Kyiv cake",
+    "russian": {
+      "n_texts": 288,
+      "collocates": [
+        {
+          "word": "recipe",
+          "count": 37,
+          "pmi": 0
+        },
+        {
+          "word": "cakes",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "delicious",
+          "count": 20,
+          "pmi": 0
+        },
+        {
+          "word": "meringue",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "make",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "best",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "chocolate",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "desserts",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "cream",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "nuts",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "president",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "birthday",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "biden",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "visit",
+          "count": 6,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 288,
+      "collocates": [
+        {
+          "word": "recipe",
+          "count": 20,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "birthday",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "johnson",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "make",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "meringue",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "bakery",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "cakes",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "boris",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "hazelnut",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "honey",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "best",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "chocolate",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "cream",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "support",
+          "count": 7,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 290,
     "by_context": {
       "food": {
@@ -22560,8 +26668,166 @@
     }
   },
   "23": {
-    "russian": "Borsch",
-    "ukrainian": "Borscht",
+    "russian": {
+      "n_texts": 829,
+      "collocates": [
+        {
+          "word": "soup",
+          "count": 248,
+          "pmi": 0
+        },
+        {
+          "word": "recipe",
+          "count": 220,
+          "pmi": 0
+        },
+        {
+          "word": "belt",
+          "count": 212,
+          "pmi": 0
+        },
+        {
+          "word": "jewish",
+          "count": 170,
+          "pmi": 0
+        },
+        {
+          "word": "beets",
+          "count": 139,
+          "pmi": 0
+        },
+        {
+          "word": "add",
+          "count": 125,
+          "pmi": 0
+        },
+        {
+          "word": "republic",
+          "count": 109,
+          "pmi": 0
+        },
+        {
+          "word": "food",
+          "count": 106,
+          "pmi": 0
+        },
+        {
+          "word": "make",
+          "count": 105,
+          "pmi": 0
+        },
+        {
+          "word": "catskills",
+          "count": 103,
+          "pmi": 0
+        },
+        {
+          "word": "beef",
+          "count": 97,
+          "pmi": 0
+        },
+        {
+          "word": "film",
+          "count": 95,
+          "pmi": 0
+        },
+        {
+          "word": "miami",
+          "count": 85,
+          "pmi": 0
+        },
+        {
+          "word": "york",
+          "count": 83,
+          "pmi": 0
+        },
+        {
+          "word": "cabbage",
+          "count": 79,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 829,
+      "collocates": [
+        {
+          "word": "borshch",
+          "count": 209,
+          "pmi": 0
+        },
+        {
+          "word": "sun",
+          "count": 172,
+          "pmi": 0
+        },
+        {
+          "word": "rising",
+          "count": 171,
+          "pmi": 0
+        },
+        {
+          "word": "eest",
+          "count": 155,
+          "pmi": 0
+        },
+        {
+          "word": "comments",
+          "count": 115,
+          "pmi": 0
+        },
+        {
+          "word": "soup",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "kyiv",
+          "count": 64,
+          "pmi": 0
+        },
+        {
+          "word": "series",
+          "count": 62,
+          "pmi": 0
+        },
+        {
+          "word": "invasion",
+          "count": 59,
+          "pmi": 0
+        },
+        {
+          "word": "recipe",
+          "count": 56,
+          "pmi": 0
+        },
+        {
+          "word": "cuisine",
+          "count": 52,
+          "pmi": 0
+        },
+        {
+          "word": "charities",
+          "count": 48,
+          "pmi": 0
+        },
+        {
+          "word": "food",
+          "count": 42,
+          "pmi": 0
+        },
+        {
+          "word": "make",
+          "count": 30,
+          "pmi": 0
+        },
+        {
+          "word": "dish",
+          "count": 26,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 831,
     "by_context": {
       "food": {
@@ -23314,8 +27580,166 @@
     }
   },
   "46": {
-    "russian": "Vareniki",
-    "ukrainian": "Varenyky",
+    "russian": {
+      "n_texts": 524,
+      "collocates": [
+        {
+          "word": "dumplings",
+          "count": 122,
+          "pmi": 0
+        },
+        {
+          "word": "cheese",
+          "count": 82,
+          "pmi": 0
+        },
+        {
+          "word": "food",
+          "count": 80,
+          "pmi": 0
+        },
+        {
+          "word": "pierogi",
+          "count": 77,
+          "pmi": 0
+        },
+        {
+          "word": "make",
+          "count": 72,
+          "pmi": 0
+        },
+        {
+          "word": "made",
+          "count": 69,
+          "pmi": 0
+        },
+        {
+          "word": "cream",
+          "count": 64,
+          "pmi": 0
+        },
+        {
+          "word": "recipe",
+          "count": 64,
+          "pmi": 0
+        },
+        {
+          "word": "dough",
+          "count": 63,
+          "pmi": 0
+        },
+        {
+          "word": "potatoes",
+          "count": 62,
+          "pmi": 0
+        },
+        {
+          "word": "cbs",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "soviet",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "trump",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "iran",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "president",
+          "count": 17,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 524,
+      "collocates": [
+        {
+          "word": "rising",
+          "count": 178,
+          "pmi": 0
+        },
+        {
+          "word": "sun",
+          "count": 176,
+          "pmi": 0
+        },
+        {
+          "word": "eest",
+          "count": 157,
+          "pmi": 0
+        },
+        {
+          "word": "dough",
+          "count": 142,
+          "pmi": 0
+        },
+        {
+          "word": "comments",
+          "count": 116,
+          "pmi": 0
+        },
+        {
+          "word": "dumplings",
+          "count": 104,
+          "pmi": 0
+        },
+        {
+          "word": "food",
+          "count": 97,
+          "pmi": 0
+        },
+        {
+          "word": "flour",
+          "count": 76,
+          "pmi": 0
+        },
+        {
+          "word": "kyiv",
+          "count": 75,
+          "pmi": 0
+        },
+        {
+          "word": "add",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "invasion",
+          "count": 67,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 65,
+          "pmi": 0
+        },
+        {
+          "word": "salt",
+          "count": 65,
+          "pmi": 0
+        },
+        {
+          "word": "series",
+          "count": 58,
+          "pmi": 0
+        },
+        {
+          "word": "make",
+          "count": 57,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 528,
     "by_context": {
       "food": {
@@ -23894,8 +28318,166 @@
     }
   },
   "24": {
-    "russian": "Kiev Pechersk Lavra",
-    "ukrainian": "Kyiv Pechersk Lavra",
+    "russian": {
+      "n_texts": 462,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 358,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 252,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 248,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 156,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 154,
+          "pmi": 0
+        },
+        {
+          "word": "monastery",
+          "count": 134,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 88,
+          "pmi": 0
+        },
+        {
+          "word": "apartment",
+          "count": 82,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 69,
+          "pmi": 0
+        },
+        {
+          "word": "kpblm",
+          "count": 64,
+          "pmi": 0
+        },
+        {
+          "word": "info",
+          "count": 64,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 50,
+          "pmi": 0
+        },
+        {
+          "word": "holy",
+          "count": 47,
+          "pmi": 0
+        },
+        {
+          "word": "caves",
+          "count": 42,
+          "pmi": 0
+        },
+        {
+          "word": "preview",
+          "count": 31,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 462,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 142,
+          "pmi": 0
+        },
+        {
+          "word": "monastery",
+          "count": 60,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 50,
+          "pmi": 0
+        },
+        {
+          "word": "cathedral",
+          "count": 49,
+          "pmi": 0
+        },
+        {
+          "word": "caves",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "painting",
+          "count": 33,
+          "pmi": 0
+        },
+        {
+          "word": "wcc",
+          "count": 31,
+          "pmi": 0
+        },
+        {
+          "word": "dormition",
+          "count": 30,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "mural",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "byzantine",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "sacred",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "service",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "objects",
+          "count": 24,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 462,
     "by_context": {
       "culture": {
@@ -24510,8 +29092,166 @@
     }
   },
   "25": {
-    "russian": "Saint Sophia Cathedral Kiev",
-    "ukrainian": "Saint Sophia Cathedral Kyiv",
+    "russian": {
+      "n_texts": 234,
+      "collocates": [
+        {
+          "word": "golden",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "square",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "easter",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "apartment",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "monument",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "harbin",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "capital",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "accommodation",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "domes",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "built",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "christmas",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "zelenskyy",
+          "count": 7,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 234,
+      "collocates": [
+        {
+          "word": "architecture",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "world",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "eest",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "sun",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "rising",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "heritage",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "series",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "comments",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "historical",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "cultural",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "unesco",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "invasion",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "site",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "architectural",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "monument",
+          "count": 6,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 236,
     "by_context": {
       "history": {
@@ -24990,8 +29730,166 @@
     }
   },
   "26": {
-    "russian": "Chernobyl Exclusion Zone",
-    "ukrainian": "Chornobyl Exclusion Zone",
+    "russian": {
+      "n_texts": 951,
+      "collocates": [
+        {
+          "word": "radiation",
+          "count": 291,
+          "pmi": 0
+        },
+        {
+          "word": "sup",
+          "count": 264,
+          "pmi": 0
+        },
+        {
+          "word": "nuclear",
+          "count": 252,
+          "pmi": 0
+        },
+        {
+          "word": "data",
+          "count": 180,
+          "pmi": 0
+        },
+        {
+          "word": "radioactive",
+          "count": 145,
+          "pmi": 0
+        },
+        {
+          "word": "accident",
+          "count": 137,
+          "pmi": 0
+        },
+        {
+          "word": "radionuclides",
+          "count": 128,
+          "pmi": 0
+        },
+        {
+          "word": "forest",
+          "count": 128,
+          "pmi": 0
+        },
+        {
+          "word": "within",
+          "count": 128,
+          "pmi": 0
+        },
+        {
+          "word": "contamination",
+          "count": 125,
+          "pmi": 0
+        },
+        {
+          "word": "exposure",
+          "count": 76,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 72,
+          "pmi": 0
+        },
+        {
+          "word": "cez",
+          "count": 72,
+          "pmi": 0
+        },
+        {
+          "word": "plant",
+          "count": 68,
+          "pmi": 0
+        },
+        {
+          "word": "dose",
+          "count": 64,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 951,
+      "collocates": [
+        {
+          "word": "radiation",
+          "count": 108,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 90,
+          "pmi": 0
+        },
+        {
+          "word": "forest",
+          "count": 78,
+          "pmi": 0
+        },
+        {
+          "word": "radioactive",
+          "count": 60,
+          "pmi": 0
+        },
+        {
+          "word": "nuclear",
+          "count": 57,
+          "pmi": 0
+        },
+        {
+          "word": "fire",
+          "count": 53,
+          "pmi": 0
+        },
+        {
+          "word": "sup",
+          "count": 46,
+          "pmi": 0
+        },
+        {
+          "word": "fires",
+          "count": 42,
+          "pmi": 0
+        },
+        {
+          "word": "area",
+          "count": 42,
+          "pmi": 0
+        },
+        {
+          "word": "contaminated",
+          "count": 41,
+          "pmi": 0
+        },
+        {
+          "word": "dose",
+          "count": 31,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "activity",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "changes",
+          "count": 27,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 953,
     "by_context": {
       "war": {
@@ -25611,8 +30509,166 @@
     }
   },
   "54": {
-    "russian": "Babi Yar",
-    "ukrainian": "Babyn Yar",
+    "russian": {
+      "n_texts": 586,
+      "collocates": [
+        {
+          "word": "massacre",
+          "count": 117,
+          "pmi": 0
+        },
+        {
+          "word": "park",
+          "count": 115,
+          "pmi": 0
+        },
+        {
+          "word": "holocaust",
+          "count": 110,
+          "pmi": 0
+        },
+        {
+          "word": "jews",
+          "count": 102,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 66,
+          "pmi": 0
+        },
+        {
+          "word": "memorial",
+          "count": 65,
+          "pmi": 0
+        },
+        {
+          "word": "denver",
+          "count": 58,
+          "pmi": 0
+        },
+        {
+          "word": "kyiv",
+          "count": 52,
+          "pmi": 0
+        },
+        {
+          "word": "kiev",
+          "count": 49,
+          "pmi": 0
+        },
+        {
+          "word": "ravine",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "nazi",
+          "count": 41,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 36,
+          "pmi": 0
+        },
+        {
+          "word": "ginsburg",
+          "count": 35,
+          "pmi": 0
+        },
+        {
+          "word": "art",
+          "count": 31,
+          "pmi": 0
+        },
+        {
+          "word": "trump",
+          "count": 27,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 586,
+      "collocates": [
+        {
+          "word": "holocaust",
+          "count": 118,
+          "pmi": 0
+        },
+        {
+          "word": "memorial",
+          "count": 87,
+          "pmi": 0
+        },
+        {
+          "word": "kyiv",
+          "count": 68,
+          "pmi": 0
+        },
+        {
+          "word": "memory",
+          "count": 66,
+          "pmi": 0
+        },
+        {
+          "word": "jewish",
+          "count": 55,
+          "pmi": 0
+        },
+        {
+          "word": "jews",
+          "count": 48,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 40,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "massacre",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "victims",
+          "count": 33,
+          "pmi": 0
+        },
+        {
+          "word": "site",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "soviet",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "kin",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "robert",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "paul",
+          "count": 13,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 589,
     "by_context": {
       "culture": {
@@ -26150,8 +31206,166 @@
     }
   },
   "55": {
-    "russian": "Potemkin Stairs Odessa",
-    "ukrainian": "Potemkin Stairs Odesa",
+    "russian": {
+      "n_texts": 216,
+      "collocates": [
+        {
+          "word": "battleship",
+          "count": 104,
+          "pmi": 0
+        },
+        {
+          "word": "steps",
+          "count": 45,
+          "pmi": 0
+        },
+        {
+          "word": "film",
+          "count": 40,
+          "pmi": 0
+        },
+        {
+          "word": "eisenstein",
+          "count": 39,
+          "pmi": 0
+        },
+        {
+          "word": "sergei",
+          "count": 33,
+          "pmi": 0
+        },
+        {
+          "word": "montage",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "silent",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "famous",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "top",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "movie",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "scene",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "travel",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "port",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "black",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "sea",
+          "count": 7,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 216,
+      "collocates": [
+        {
+          "word": "battleship",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "steps",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "tour",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "eisenstein",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "walking",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "port",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "walk",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "famous",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "sergei",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "sea",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "black",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "scene",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "down",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "greek",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "montage",
+          "count": 4,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 216,
     "by_context": {
       "history": {
@@ -26551,8 +31765,166 @@
     }
   },
   "56": {
-    "russian": "Motherland Monument Kiev",
-    "ukrainian": "Motherland Monument Kyiv",
+    "russian": {
+      "n_texts": 205,
+      "collocates": [
+        {
+          "word": "statue",
+          "count": 71,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 34,
+          "pmi": 0
+        },
+        {
+          "word": "soviet",
+          "count": 34,
+          "pmi": 0
+        },
+        {
+          "word": "mother",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "museum",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "second",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "world",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "friendship",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "complex",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "hammer",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "memorial",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "emblem",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "sickle",
+          "count": 8,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 205,
+      "collocates": [
+        {
+          "word": "soviet",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "statue",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "era",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "emblem",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "hammer",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "sickle",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "days",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "mother",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "museum",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "trident",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "coat",
+          "count": 4,
+          "pmi": 0
+        },
+        {
+          "word": "replaced",
+          "count": 4,
+          "pmi": 0
+        },
+        {
+          "word": "drone",
+          "count": 4,
+          "pmi": 0
+        },
+        {
+          "word": "light",
+          "count": 4,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 207,
     "by_context": {
       "history": {
@@ -26906,8 +32278,166 @@
     }
   },
   "28": {
-    "russian": "Kiev National University",
-    "ukrainian": "Kyiv National University",
+    "russian": {
+      "n_texts": 534,
+      "collocates": [
+        {
+          "word": "shevchenko",
+          "count": 100,
+          "pmi": 0
+        },
+        {
+          "word": "taras",
+          "count": 89,
+          "pmi": 0
+        },
+        {
+          "word": "students",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "library",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "education",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "information",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "mbbs",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "mohyla",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "park",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "professor",
+          "count": 8,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 534,
+      "collocates": [
+        {
+          "word": "shevchenko",
+          "count": 304,
+          "pmi": 0
+        },
+        {
+          "word": "taras",
+          "count": 299,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 208,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 184,
+          "pmi": 0
+        },
+        {
+          "word": "education",
+          "count": 141,
+          "pmi": 0
+        },
+        {
+          "word": "students",
+          "count": 134,
+          "pmi": 0
+        },
+        {
+          "word": "educational",
+          "count": 133,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 106,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 95,
+          "pmi": 0
+        },
+        {
+          "word": "law",
+          "count": 83,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "political",
+          "count": 19,
+          "pmi": 0
+        },
+        {
+          "word": "service",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "science",
+          "count": 16,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 538,
     "by_context": {
       "academic": {
@@ -27481,8 +33011,166 @@
     }
   },
   "29": {
-    "russian": "Kharkov University",
-    "ukrainian": "Kharkiv University",
+    "russian": {
+      "n_texts": 600,
+      "collocates": [
+        {
+          "word": "national",
+          "count": 133,
+          "pmi": 0
+        },
+        {
+          "word": "medical",
+          "count": 74,
+          "pmi": 0
+        },
+        {
+          "word": "karazin",
+          "count": 64,
+          "pmi": 0
+        },
+        {
+          "word": "students",
+          "count": 41,
+          "pmi": 0
+        },
+        {
+          "word": "education",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "institute",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "mbbs",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "astronomical",
+          "count": 20,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "decr",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 9,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 600,
+      "collocates": [
+        {
+          "word": "national",
+          "count": 406,
+          "pmi": 0
+        },
+        {
+          "word": "students",
+          "count": 227,
+          "pmi": 0
+        },
+        {
+          "word": "medical",
+          "count": 187,
+          "pmi": 0
+        },
+        {
+          "word": "education",
+          "count": 160,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 156,
+          "pmi": 0
+        },
+        {
+          "word": "karazin",
+          "count": 135,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 127,
+          "pmi": 0
+        },
+        {
+          "word": "educational",
+          "count": 116,
+          "pmi": 0
+        },
+        {
+          "word": "collection",
+          "count": 108,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 103,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 45,
+          "pmi": 0
+        },
+        {
+          "word": "opera",
+          "count": 36,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "drone",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "political",
+          "count": 24,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 602,
     "by_context": {
       "academic": {
@@ -28143,8 +33831,166 @@
     }
   },
   "30": {
-    "russian": "Kiev Polytechnic",
-    "ukrainian": "Kyiv Polytechnic",
+    "russian": {
+      "n_texts": 324,
+      "collocates": [
+        {
+          "word": "institute",
+          "count": 134,
+          "pmi": 0
+        },
+        {
+          "word": "sikorsky",
+          "count": 63,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 62,
+          "pmi": 0
+        },
+        {
+          "word": "igor",
+          "count": 59,
+          "pmi": 0
+        },
+        {
+          "word": "kpi",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "technical",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "education",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "students",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "engineering",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "blinken",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "secretary",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "sykorsky",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "inventor",
+          "count": 8,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 324,
+      "collocates": [
+        {
+          "word": "institute",
+          "count": 161,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 78,
+          "pmi": 0
+        },
+        {
+          "word": "sikorsky",
+          "count": 60,
+          "pmi": 0
+        },
+        {
+          "word": "igor",
+          "count": 58,
+          "pmi": 0
+        },
+        {
+          "word": "energy",
+          "count": 52,
+          "pmi": 0
+        },
+        {
+          "word": "technical",
+          "count": 41,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 34,
+          "pmi": 0
+        },
+        {
+          "word": "professional",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "wildversum",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "apoc",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "cyberpunk",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "adventure",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "comments",
+          "count": 20,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 325,
     "by_context": {
       "academic": {
@@ -28846,8 +34692,166 @@
     }
   },
   "31": {
-    "russian": "Kiev Patriarchate",
-    "ukrainian": "Kyiv Patriarchate",
+    "russian": {
+      "n_texts": 343,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 1137,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 778,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 424,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 228,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 183,
+          "pmi": 0
+        },
+        {
+          "word": "constantinople",
+          "count": 176,
+          "pmi": 0
+        },
+        {
+          "word": "churches",
+          "count": 160,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 152,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 139,
+          "pmi": 0
+        },
+        {
+          "word": "relations",
+          "count": 112,
+          "pmi": 0
+        },
+        {
+          "word": "moscow",
+          "count": 45,
+          "pmi": 0
+        },
+        {
+          "word": "use",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "rights",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "religious",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "meeting",
+          "count": 6,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 343,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 167,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 147,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 56,
+          "pmi": 0
+        },
+        {
+          "word": "moscow",
+          "count": 46,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "churches",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "synod",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "pontic",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "europe",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "american",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "crimea",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "purpose",
+          "count": 5,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 344,
     "by_context": {
       "religion": {
@@ -29288,8 +35292,166 @@
     }
   },
   "57": {
-    "russian": "Lvov Polytechnic",
-    "ukrainian": "Lviv Polytechnic",
+    "russian": {
+      "n_texts": 308,
+      "collocates": [
+        {
+          "word": "university",
+          "count": 107,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 75,
+          "pmi": 0
+        },
+        {
+          "word": "medical",
+          "count": 20,
+          "pmi": 0
+        },
+        {
+          "word": "mbbs",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "bandery",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "stepana",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "bandera",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "stepan",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "walking",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "universities",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "tour",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "visit",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 5,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 308,
+      "collocates": [
+        {
+          "word": "university",
+          "count": 197,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 138,
+          "pmi": 0
+        },
+        {
+          "word": "educational",
+          "count": 93,
+          "pmi": 0
+        },
+        {
+          "word": "students",
+          "count": 62,
+          "pmi": 0
+        },
+        {
+          "word": "education",
+          "count": 61,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 57,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 56,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 50,
+          "pmi": 0
+        },
+        {
+          "word": "information",
+          "count": 40,
+          "pmi": 0
+        },
+        {
+          "word": "design",
+          "count": 37,
+          "pmi": 0
+        },
+        {
+          "word": "technical",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "building",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "school",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "higher",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 12,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 310,
     "by_context": {
       "general": {
@@ -29904,8 +36066,166 @@
     }
   },
   "58": {
-    "russian": "Odessa National University",
-    "ukrainian": "Odesa National University",
+    "russian": {
+      "n_texts": 401,
+      "collocates": [
+        {
+          "word": "medical",
+          "count": 136,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 120,
+          "pmi": 0
+        },
+        {
+          "word": "library",
+          "count": 70,
+          "pmi": 0
+        },
+        {
+          "word": "mechnikov",
+          "count": 63,
+          "pmi": 0
+        },
+        {
+          "word": "students",
+          "count": 60,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 58,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 55,
+          "pmi": 0
+        },
+        {
+          "word": "economic",
+          "count": 48,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "college",
+          "count": 33,
+          "pmi": 0
+        },
+        {
+          "word": "education",
+          "count": 30,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "educational",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "njcaa",
+          "count": 9,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 401,
+      "collocates": [
+        {
+          "word": "medical",
+          "count": 100,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 99,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 76,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 72,
+          "pmi": 0
+        },
+        {
+          "word": "mechnikov",
+          "count": 71,
+          "pmi": 0
+        },
+        {
+          "word": "library",
+          "count": 66,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 65,
+          "pmi": 0
+        },
+        {
+          "word": "educational",
+          "count": 60,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 36,
+          "pmi": 0
+        },
+        {
+          "word": "plants",
+          "count": 32,
+          "pmi": 0
+        },
+        {
+          "word": "port",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "books",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "future",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 8,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 401,
     "by_context": {
       "academic": {
@@ -30566,8 +36886,166 @@
     }
   },
   "32": {
-    "russian": "Dynamo Kiev",
-    "ukrainian": "Dynamo Kyiv",
+    "russian": {
+      "n_texts": 529,
+      "collocates": [
+        {
+          "word": "league",
+          "count": 130,
+          "pmi": 0
+        },
+        {
+          "word": "match",
+          "count": 122,
+          "pmi": 0
+        },
+        {
+          "word": "icon",
+          "count": 86,
+          "pmi": 0
+        },
+        {
+          "word": "champions",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "thread",
+          "count": 58,
+          "pmi": 0
+        },
+        {
+          "word": "bar",
+          "count": 57,
+          "pmi": 0
+        },
+        {
+          "word": "uefa",
+          "count": 55,
+          "pmi": 0
+        },
+        {
+          "word": "chelsea",
+          "count": 54,
+          "pmi": 0
+        },
+        {
+          "word": "comments",
+          "count": 51,
+          "pmi": 0
+        },
+        {
+          "word": "sub",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "football",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "fans",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "club",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "players",
+          "count": 3,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 3,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 529,
+      "collocates": [
+        {
+          "word": "league",
+          "count": 146,
+          "pmi": 0
+        },
+        {
+          "word": "match",
+          "count": 129,
+          "pmi": 0
+        },
+        {
+          "word": "champions",
+          "count": 89,
+          "pmi": 0
+        },
+        {
+          "word": "icon",
+          "count": 74,
+          "pmi": 0
+        },
+        {
+          "word": "barcelona",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "uefa",
+          "count": 72,
+          "pmi": 0
+        },
+        {
+          "word": "thread",
+          "count": 68,
+          "pmi": 0
+        },
+        {
+          "word": "comments",
+          "count": 55,
+          "pmi": 0
+        },
+        {
+          "word": "bar",
+          "count": 49,
+          "pmi": 0
+        },
+        {
+          "word": "sub",
+          "count": 49,
+          "pmi": 0
+        },
+        {
+          "word": "fans",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "project",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "shakhtar",
+          "count": 4,
+          "pmi": 0
+        },
+        {
+          "word": "football",
+          "count": 4,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 534,
     "by_context": {
       "war": {
@@ -30747,8 +37225,166 @@
     }
   },
   "34": {
-    "russian": "Kiev ballet",
-    "ukrainian": "Kyiv ballet",
+    "russian": {
+      "n_texts": 262,
+      "collocates": [
+        {
+          "word": "grand",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 36,
+          "pmi": 0
+        },
+        {
+          "word": "swan",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "lake",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "opera",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "dance",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "shevchenko",
+          "count": 19,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "nutcracker",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "don",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "quixote",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "dancers",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "ballerina",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "company",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "florida",
+          "count": 2,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 262,
+      "collocates": [
+        {
+          "word": "grand",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "dance",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "opera",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "theatre",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "modern",
+          "count": 20,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 19,
+          "pmi": 0
+        },
+        {
+          "word": "weekend",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "swan",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "lake",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "music",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "snow",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "historical",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "theater",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "dancers",
+          "count": 9,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 266,
     "by_context": {
       "culture": {
@@ -31066,8 +37702,166 @@
     }
   },
   "52": {
-    "russian": "Metalist Kharkov",
-    "ukrainian": "Metalist Kharkiv",
+    "russian": {
+      "n_texts": 306,
+      "collocates": [
+        {
+          "word": "football",
+          "count": 46,
+          "pmi": 0
+        },
+        {
+          "word": "league",
+          "count": 40,
+          "pmi": 0
+        },
+        {
+          "word": "match",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "metallist",
+          "count": 20,
+          "pmi": 0
+        },
+        {
+          "word": "highlights",
+          "count": 19,
+          "pmi": 0
+        },
+        {
+          "word": "stadium",
+          "count": 19,
+          "pmi": 0
+        },
+        {
+          "word": "shakhtar",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "cup",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "uefa",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "europa",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "empr",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "media",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "apartmens",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "near",
+          "count": 5,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 306,
+      "collocates": [
+        {
+          "word": "league",
+          "count": 109,
+          "pmi": 0
+        },
+        {
+          "word": "match",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "sprite",
+          "count": 53,
+          "pmi": 0
+        },
+        {
+          "word": "premier",
+          "count": 46,
+          "pmi": 0
+        },
+        {
+          "word": "shakhtar",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "donetsk",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "thread",
+          "count": 31,
+          "pmi": 0
+        },
+        {
+          "word": "teams",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "club",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "europa",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "fixture",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "cheat",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "sheet",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "putin",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "football",
+          "count": 5,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 311,
     "by_context": {
       "sports": {
@@ -31385,8 +38179,166 @@
     }
   },
   "35": {
-    "russian": "Kievan Rus",
-    "ukrainian": "Kyivan Rus",
+    "russian": {
+      "n_texts": 961,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 386,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 230,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 214,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 204,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 116,
+          "pmi": 0
+        },
+        {
+          "word": "century",
+          "count": 96,
+          "pmi": 0
+        },
+        {
+          "word": "europe",
+          "count": 96,
+          "pmi": 0
+        },
+        {
+          "word": "byzantine",
+          "count": 94,
+          "pmi": 0
+        },
+        {
+          "word": "historical",
+          "count": 93,
+          "pmi": 0
+        },
+        {
+          "word": "patriarchal",
+          "count": 90,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 89,
+          "pmi": 0
+        },
+        {
+          "word": "medieval",
+          "count": 88,
+          "pmi": 0
+        },
+        {
+          "word": "holy",
+          "count": 86,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 82,
+          "pmi": 0
+        },
+        {
+          "word": "slavic",
+          "count": 81,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 961,
+      "collocates": [
+        {
+          "word": "kyiv",
+          "count": 186,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 118,
+          "pmi": 0
+        },
+        {
+          "word": "sun",
+          "count": 95,
+          "pmi": 0
+        },
+        {
+          "word": "rising",
+          "count": 95,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 79,
+          "pmi": 0
+        },
+        {
+          "word": "historical",
+          "count": 77,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 66,
+          "pmi": 0
+        },
+        {
+          "word": "eest",
+          "count": 60,
+          "pmi": 0
+        },
+        {
+          "word": "legal",
+          "count": 59,
+          "pmi": 0
+        },
+        {
+          "word": "invasion",
+          "count": 56,
+          "pmi": 0
+        },
+        {
+          "word": "png",
+          "count": 56,
+          "pmi": 0
+        },
+        {
+          "word": "century",
+          "count": 52,
+          "pmi": 0
+        },
+        {
+          "word": "medieval",
+          "count": 45,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "comments",
+          "count": 43,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 962,
     "by_context": {
       "history": {
@@ -31960,8 +38912,166 @@
     }
   },
   "48": {
-    "russian": "Gopak",
-    "ukrainian": "Hopak",
+    "russian": {
+      "n_texts": 436,
+      "collocates": [
+        {
+          "word": "dance",
+          "count": 58,
+          "pmi": 0
+        },
+        {
+          "word": "fair",
+          "count": 31,
+          "pmi": 0
+        },
+        {
+          "word": "mussorgsky",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "folk",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "provided",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "music",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "piano",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "rifle",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "orchestra",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "modest",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "ballet",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "folding",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "sniper",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "down",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "table",
+          "count": 7,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 436,
+      "collocates": [
+        {
+          "word": "dance",
+          "count": 152,
+          "pmi": 0
+        },
+        {
+          "word": "silksong",
+          "count": 94,
+          "pmi": 0
+        },
+        {
+          "word": "until",
+          "count": 81,
+          "pmi": 0
+        },
+        {
+          "word": "comes",
+          "count": 80,
+          "pmi": 0
+        },
+        {
+          "word": "practicing",
+          "count": 78,
+          "pmi": 0
+        },
+        {
+          "word": "festival",
+          "count": 36,
+          "pmi": 0
+        },
+        {
+          "word": "combat",
+          "count": 30,
+          "pmi": 0
+        },
+        {
+          "word": "ensemble",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "hand",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "toronto",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "folk",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "traditional",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "martial",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "sun",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "rising",
+          "count": 17,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 440,
     "by_context": {
       "culture": {
@@ -32494,8 +39604,166 @@
     }
   },
   "70": {
-    "russian": "Vladimir the Great",
-    "ukrainian": "Volodymyr the Great",
+    "russian": {
+      "n_texts": 444,
+      "collocates": [
+        {
+          "word": "putin",
+          "count": 275,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 122,
+          "pmi": 0
+        },
+        {
+          "word": "trump",
+          "count": 82,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "president",
+          "count": 72,
+          "pmi": 0
+        },
+        {
+          "word": "law",
+          "count": 58,
+          "pmi": 0
+        },
+        {
+          "word": "moscow",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "peter",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "prince",
+          "count": 42,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 39,
+          "pmi": 0
+        },
+        {
+          "word": "rus",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "patriotic",
+          "count": 36,
+          "pmi": 0
+        },
+        {
+          "word": "legal",
+          "count": 32,
+          "pmi": 0
+        },
+        {
+          "word": "progress",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "publishers",
+          "count": 27,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 444,
+      "collocates": [
+        {
+          "word": "putin",
+          "count": 52,
+          "pmi": 0
+        },
+        {
+          "word": "president",
+          "count": 51,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 40,
+          "pmi": 0
+        },
+        {
+          "word": "zelenskyy",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "zelensky",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "world",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "kiev",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "invasion",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "kyiv",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "rus",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "sophia",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "prince",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "kara",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "murza",
+          "count": 7,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 447,
     "by_context": {
       "war": {
@@ -33202,8 +40470,166 @@
     }
   },
   "71": {
-    "russian": "Prince of Kiev",
-    "ukrainian": "Prince of Kyiv",
+    "russian": {
+      "n_texts": 204,
+      "collocates": [
+        {
+          "word": "vladimir",
+          "count": 57,
+          "pmi": 0
+        },
+        {
+          "word": "rus",
+          "count": 41,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 32,
+          "pmi": 0
+        },
+        {
+          "word": "grand",
+          "count": 30,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "olga",
+          "count": 20,
+          "pmi": 0
+        },
+        {
+          "word": "roleplay",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "harry",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "capital",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "president",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "power",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "great",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "yaroslav",
+          "count": 12,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 204,
+      "collocates": [
+        {
+          "word": "war",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "rus",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "princess",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "harry",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "volodymyr",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "legends",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "surprise",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "visit",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "princes",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "grand",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "century",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "cities",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "igor",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "wounded",
+          "count": 5,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 205,
     "by_context": {
       "history": {
@@ -33654,8 +41080,166 @@
     }
   },
   "60": {
-    "russian": "Alexander Usyk",
-    "ukrainian": "Oleksandr Usyk",
+    "russian": {
+      "n_texts": 417,
+      "collocates": [
+        {
+          "word": "boxing",
+          "count": 79,
+          "pmi": 0
+        },
+        {
+          "word": "fight",
+          "count": 66,
+          "pmi": 0
+        },
+        {
+          "word": "fury",
+          "count": 47,
+          "pmi": 0
+        },
+        {
+          "word": "heavyweight",
+          "count": 46,
+          "pmi": 0
+        },
+        {
+          "word": "tyson",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "highlights",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "undisputed",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "champion",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "anthony",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "joshua",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "world",
+          "count": 4,
+          "pmi": 0
+        },
+        {
+          "word": "boxer",
+          "count": 3,
+          "pmi": 0
+        },
+        {
+          "word": "powerful",
+          "count": 2,
+          "pmi": 0
+        },
+        {
+          "word": "technical",
+          "count": 2,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 417,
+      "collocates": [
+        {
+          "word": "fight",
+          "count": 121,
+          "pmi": 0
+        },
+        {
+          "word": "boxing",
+          "count": 112,
+          "pmi": 0
+        },
+        {
+          "word": "fury",
+          "count": 100,
+          "pmi": 0
+        },
+        {
+          "word": "joshua",
+          "count": 98,
+          "pmi": 0
+        },
+        {
+          "word": "heavyweight",
+          "count": 97,
+          "pmi": 0
+        },
+        {
+          "word": "anthony",
+          "count": 90,
+          "pmi": 0
+        },
+        {
+          "word": "tyson",
+          "count": 88,
+          "pmi": 0
+        },
+        {
+          "word": "world",
+          "count": 66,
+          "pmi": 0
+        },
+        {
+          "word": "champion",
+          "count": 54,
+          "pmi": 0
+        },
+        {
+          "word": "highlights",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 20,
+          "pmi": 0
+        },
+        {
+          "word": "boxer",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "country",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "order",
+          "count": 2,
+          "pmi": 0
+        },
+        {
+          "word": "wise",
+          "count": 1,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 420,
     "by_context": {
       "sports": {
@@ -33949,8 +41533,166 @@
     }
   },
   "61": {
-    "russian": "Vladimir Zelensky",
-    "ukrainian": "Volodymyr Zelenskyy",
+    "russian": {
+      "n_texts": 598,
+      "collocates": [
+        {
+          "word": "church",
+          "count": 323,
+          "pmi": 0
+        },
+        {
+          "word": "president",
+          "count": 293,
+          "pmi": 0
+        },
+        {
+          "word": "orthodox",
+          "count": 153,
+          "pmi": 0
+        },
+        {
+          "word": "putin",
+          "count": 150,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 130,
+          "pmi": 0
+        },
+        {
+          "word": "patriarch",
+          "count": 125,
+          "pmi": 0
+        },
+        {
+          "word": "trump",
+          "count": 124,
+          "pmi": 0
+        },
+        {
+          "word": "department",
+          "count": 96,
+          "pmi": 0
+        },
+        {
+          "word": "metropolitan",
+          "count": 72,
+          "pmi": 0
+        },
+        {
+          "word": "kirill",
+          "count": 63,
+          "pmi": 0
+        },
+        {
+          "word": "holiness",
+          "count": 57,
+          "pmi": 0
+        },
+        {
+          "word": "peace",
+          "count": 56,
+          "pmi": 0
+        },
+        {
+          "word": "talks",
+          "count": 53,
+          "pmi": 0
+        },
+        {
+          "word": "hilarion",
+          "count": 51,
+          "pmi": 0
+        },
+        {
+          "word": "chairman",
+          "count": 50,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 598,
+      "collocates": [
+        {
+          "word": "president",
+          "count": 421,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 147,
+          "pmi": 0
+        },
+        {
+          "word": "trump",
+          "count": 118,
+          "pmi": 0
+        },
+        {
+          "word": "peace",
+          "count": 80,
+          "pmi": 0
+        },
+        {
+          "word": "biden",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "security",
+          "count": 48,
+          "pmi": 0
+        },
+        {
+          "word": "support",
+          "count": 48,
+          "pmi": 0
+        },
+        {
+          "word": "world",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "kyiv",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "putin",
+          "count": 39,
+          "pmi": 0
+        },
+        {
+          "word": "patriarchal",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "church",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "meeting",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "speech",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "dialogue",
+          "count": 20,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 602,
     "by_context": {
       "politics": {
@@ -34391,8 +42133,166 @@
     }
   },
   "80": {
-    "russian": "Nikolai Gogol",
-    "ukrainian": "Mykola Hohol",
+    "russian": {
+      "n_texts": 106,
+      "collocates": [
+        {
+          "word": "works",
+          "count": 34,
+          "pmi": 0
+        },
+        {
+          "word": "work",
+          "count": 33,
+          "pmi": 0
+        },
+        {
+          "word": "writer",
+          "count": 28,
+          "pmi": 0
+        },
+        {
+          "word": "literary",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "short",
+          "count": 20,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 19,
+          "pmi": 0
+        },
+        {
+          "word": "tales",
+          "count": 19,
+          "pmi": 0
+        },
+        {
+          "word": "author",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "life",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "biography",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "tea",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "artist",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "identity",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "overcoat",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "society",
+          "count": 8,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 106,
+      "collocates": [
+        {
+          "word": "gothic",
+          "count": 39,
+          "pmi": 0
+        },
+        {
+          "word": "digital",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "works",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "horror",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "literature",
+          "count": 14,
+          "pmi": 0
+        },
+        {
+          "word": "identity",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "educational",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "grotesque",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "films",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "european",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "competence",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "teachers",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "ilchuk",
+          "count": 9,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 110,
     "by_context": {
       "academic": {
@@ -34705,8 +42605,166 @@
     }
   },
   "82": {
-    "russian": "Feodosiya",
-    "ukrainian": "Feodosiia",
+    "russian": {
+      "n_texts": 55,
+      "collocates": [
+        {
+          "word": "sea",
+          "count": 50,
+          "pmi": 0
+        },
+        {
+          "word": "crimea",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "black",
+          "count": 40,
+          "pmi": 0
+        },
+        {
+          "word": "water",
+          "count": 31,
+          "pmi": 0
+        },
+        {
+          "word": "area",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "zone",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "crimean",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "berriasian",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "eastern",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "bay",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "plague",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "fleas",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "spread",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 4,
+          "pmi": 0
+        },
+        {
+          "word": "rats",
+          "count": 4,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 55,
+      "collocates": [
+        {
+          "word": "crimea",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "voloshin",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "works",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "historical",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "crimean",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "festival",
+          "count": 10,
+          "pmi": 0
+        },
+        {
+          "word": "festivals",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "cultural",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "rather",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "theater",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "magocsi",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "art",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "literary",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "early",
+          "count": 6,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 60,
     "by_context": {
       "academic": {
@@ -35019,8 +43077,65 @@
     }
   },
   "83": {
-    "russian": "Olga of Kiev",
-    "ukrainian": "Olha of Kyiv",
+    "russian": {
+      "n_texts": 21,
+      "collocates": [
+        {
+          "word": "saint",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "rus",
+          "count": 7,
+          "pmi": 0
+        },
+        {
+          "word": "liturgical",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "princess",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "calendar",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "revenge",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "constantinople",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "son",
+          "count": 5,
+          "pmi": 0
+        },
+        {
+          "word": "christian",
+          "count": 5,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 21,
+      "collocates": []
+    },
     "total": 24,
     "by_context": {
       "history": {
@@ -35072,8 +43187,141 @@
     }
   },
   "84": {
-    "russian": "Igor Sikorsky",
-    "ukrainian": "Ihor Sikorsky",
+    "russian": {
+      "n_texts": 103,
+      "collocates": [
+        {
+          "word": "students",
+          "count": 173,
+          "pmi": 0
+        },
+        {
+          "word": "kyiv",
+          "count": 102,
+          "pmi": 0
+        },
+        {
+          "word": "learning",
+          "count": 90,
+          "pmi": 0
+        },
+        {
+          "word": "institute",
+          "count": 89,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 88,
+          "pmi": 0
+        },
+        {
+          "word": "polytechnic",
+          "count": 83,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 81,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "technical",
+          "count": 70,
+          "pmi": 0
+        },
+        {
+          "word": "esp",
+          "count": 57,
+          "pmi": 0
+        },
+        {
+          "word": "aviation",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "helicopter",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "innovative",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "world",
+          "count": 10,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 103,
+      "collocates": [
+        {
+          "word": "university",
+          "count": 17,
+          "pmi": 0
+        },
+        {
+          "word": "technical",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "students",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "digital",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "institute",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "analysis",
+          "count": 11,
+          "pmi": 0
+        },
+        {
+          "word": "organization",
+          "count": 10,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 109,
     "by_context": {
       "war": {
@@ -35304,8 +43552,90 @@
     }
   },
   "85": {
-    "russian": "Sergei Korolev",
-    "ukrainian": "Serhii Korolyov",
+    "russian": {
+      "n_texts": 42,
+      "collocates": [
+        {
+          "word": "space",
+          "count": 177,
+          "pmi": 0
+        },
+        {
+          "word": "soviet",
+          "count": 122,
+          "pmi": 0
+        },
+        {
+          "word": "rocket",
+          "count": 52,
+          "pmi": 0
+        },
+        {
+          "word": "program",
+          "count": 30,
+          "pmi": 0
+        },
+        {
+          "word": "moon",
+          "count": 27,
+          "pmi": 0
+        },
+        {
+          "word": "sputnik",
+          "count": 24,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "ibid",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "laika",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "race",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "york",
+          "count": 19,
+          "pmi": 0
+        },
+        {
+          "word": "stalin",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "designer",
+          "count": 16,
+          "pmi": 0
+        },
+        {
+          "word": "spaceflight",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "science",
+          "count": 14,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 42,
+      "collocates": []
+    },
     "total": 44,
     "by_context": {
       "academic": {
@@ -35495,8 +43825,166 @@
     }
   },
   "86": {
-    "russian": "Bogdan Khmelnitsky",
-    "ukrainian": "Bohdan Khmelnytskyi",
+    "russian": {
+      "n_texts": 102,
+      "collocates": [
+        {
+          "word": "learning",
+          "count": 65,
+          "pmi": 0
+        },
+        {
+          "word": "university",
+          "count": 49,
+          "pmi": 0
+        },
+        {
+          "word": "education",
+          "count": 44,
+          "pmi": 0
+        },
+        {
+          "word": "training",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "species",
+          "count": 36,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 35,
+          "pmi": 0
+        },
+        {
+          "word": "pedagogical",
+          "count": 34,
+          "pmi": 0
+        },
+        {
+          "word": "future",
+          "count": 33,
+          "pmi": 0
+        },
+        {
+          "word": "melitopol",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "educational",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "order",
+          "count": 8,
+          "pmi": 0
+        },
+        {
+          "word": "soviet",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "orders",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "battle",
+          "count": 6,
+          "pmi": 0
+        },
+        {
+          "word": "lithuanian",
+          "count": 6,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 102,
+      "collocates": [
+        {
+          "word": "border",
+          "count": 147,
+          "pmi": 0
+        },
+        {
+          "word": "state",
+          "count": 104,
+          "pmi": 0
+        },
+        {
+          "word": "guard",
+          "count": 92,
+          "pmi": 0
+        },
+        {
+          "word": "national",
+          "count": 86,
+          "pmi": 0
+        },
+        {
+          "word": "training",
+          "count": 75,
+          "pmi": 0
+        },
+        {
+          "word": "historical",
+          "count": 40,
+          "pmi": 0
+        },
+        {
+          "word": "professional",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 38,
+          "pmi": 0
+        },
+        {
+          "word": "research",
+          "count": 37,
+          "pmi": 0
+        },
+        {
+          "word": "education",
+          "count": 32,
+          "pmi": 0
+        },
+        {
+          "word": "officers",
+          "count": 32,
+          "pmi": 0
+        },
+        {
+          "word": "scientific",
+          "count": 31,
+          "pmi": 0
+        },
+        {
+          "word": "cadets",
+          "count": 31,
+          "pmi": 0
+        },
+        {
+          "word": "service",
+          "count": 29,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 28,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 103,
     "by_context": {
       "academic": {
@@ -35855,8 +44343,141 @@
     }
   },
   "87": {
-    "russian": "Kazimir Malevich",
-    "ukrainian": "Kazymyr Malevych",
+    "russian": {
+      "n_texts": 151,
+      "collocates": [
+        {
+          "word": "art",
+          "count": 261,
+          "pmi": 0
+        },
+        {
+          "word": "suprematism",
+          "count": 86,
+          "pmi": 0
+        },
+        {
+          "word": "avant",
+          "count": 81,
+          "pmi": 0
+        },
+        {
+          "word": "garde",
+          "count": 78,
+          "pmi": 0
+        },
+        {
+          "word": "painting",
+          "count": 70,
+          "pmi": 0
+        },
+        {
+          "word": "artistic",
+          "count": 67,
+          "pmi": 0
+        },
+        {
+          "word": "work",
+          "count": 66,
+          "pmi": 0
+        },
+        {
+          "word": "square",
+          "count": 61,
+          "pmi": 0
+        },
+        {
+          "word": "artist",
+          "count": 59,
+          "pmi": 0
+        },
+        {
+          "word": "artists",
+          "count": 57,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "works",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "study",
+          "count": 15,
+          "pmi": 0
+        },
+        {
+          "word": "theory",
+          "count": 13,
+          "pmi": 0
+        },
+        {
+          "word": "monuments",
+          "count": 13,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 151,
+      "collocates": [
+        {
+          "word": "art",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "world",
+          "count": 4,
+          "pmi": 0
+        },
+        {
+          "word": "project",
+          "count": 4,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 3,
+          "pmi": 0
+        },
+        {
+          "word": "activity",
+          "count": 3,
+          "pmi": 0
+        },
+        {
+          "word": "context",
+          "count": 2,
+          "pmi": 0
+        },
+        {
+          "word": "culture",
+          "count": 2,
+          "pmi": 0
+        },
+        {
+          "word": "contribution",
+          "count": 2,
+          "pmi": 0
+        },
+        {
+          "word": "avant",
+          "count": 2,
+          "pmi": 0
+        },
+        {
+          "word": "garde",
+          "count": 2,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 154,
     "by_context": {
       "culture": {
@@ -36041,8 +44662,166 @@
     }
   },
   "72": {
-    "russian": "Artemovsk",
-    "ukrainian": "Bakhmut",
+    "russian": {
+      "n_texts": 499,
+      "collocates": [
+        {
+          "word": "battle",
+          "count": 65,
+          "pmi": 0
+        },
+        {
+          "word": "trump",
+          "count": 60,
+          "pmi": 0
+        },
+        {
+          "word": "putin",
+          "count": 48,
+          "pmi": 0
+        },
+        {
+          "word": "forces",
+          "count": 45,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 43,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 35,
+          "pmi": 0
+        },
+        {
+          "word": "channel",
+          "count": 33,
+          "pmi": 0
+        },
+        {
+          "word": "educational",
+          "count": 33,
+          "pmi": 0
+        },
+        {
+          "word": "troops",
+          "count": 25,
+          "pmi": 0
+        },
+        {
+          "word": "footage",
+          "count": 23,
+          "pmi": 0
+        },
+        {
+          "word": "fighting",
+          "count": 22,
+          "pmi": 0
+        },
+        {
+          "word": "made",
+          "count": 21,
+          "pmi": 0
+        },
+        {
+          "word": "mueller",
+          "count": 18,
+          "pmi": 0
+        },
+        {
+          "word": "moscow",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "never",
+          "count": 12,
+          "pmi": 0
+        }
+      ]
+    },
+    "ukrainian": {
+      "n_texts": 499,
+      "collocates": [
+        {
+          "word": "forces",
+          "count": 148,
+          "pmi": 0
+        },
+        {
+          "word": "battle",
+          "count": 146,
+          "pmi": 0
+        },
+        {
+          "word": "war",
+          "count": 136,
+          "pmi": 0
+        },
+        {
+          "word": "military",
+          "count": 99,
+          "pmi": 0
+        },
+        {
+          "word": "wagner",
+          "count": 94,
+          "pmi": 0
+        },
+        {
+          "word": "troops",
+          "count": 73,
+          "pmi": 0
+        },
+        {
+          "word": "fighting",
+          "count": 59,
+          "pmi": 0
+        },
+        {
+          "word": "eastern",
+          "count": 58,
+          "pmi": 0
+        },
+        {
+          "word": "president",
+          "count": 58,
+          "pmi": 0
+        },
+        {
+          "word": "donetsk",
+          "count": 53,
+          "pmi": 0
+        },
+        {
+          "word": "gold",
+          "count": 26,
+          "pmi": 0
+        },
+        {
+          "word": "quartz",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "history",
+          "count": 12,
+          "pmi": 0
+        },
+        {
+          "word": "development",
+          "count": 9,
+          "pmi": 0
+        },
+        {
+          "word": "ore",
+          "count": 8,
+          "pmi": 0
+        }
+      ]
+    },
     "total": 500,
     "by_context": {
       "politics": {
