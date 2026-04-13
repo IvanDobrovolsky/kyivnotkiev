@@ -1,95 +1,31 @@
 {
-  "deberta-v3-large_lr2e-05_ep3": {
-    "model": "deberta-v3-large",
-    "model_path": "microsoft/deberta-v3-large",
-    "lr": 2e-05,
-    "epochs": 3,
-    "batch_size": 16,
-    "accuracy": 0.2154,
-    "f1_macro": 0.0322,
-    "f1_weighted": 0.0764,
-    "train_loss": 1.9994,
-    "classification_report": {
-      "academic": {
-        "precision": 0.21541710665258712,
-        "recall": 1.0,
-        "f1-score": 0.35447437011294525,
-        "support": 1836.0
-      },
-      "culture": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 526.0
-      },
-      "economy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 123.0
-      },
-      "food": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 310.0
-      },
-      "general": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 353.0
-      },
-      "history": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 1073.0
-      },
-      "politics": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 347.0
-      },
-      "religion": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 260.0
-      },
-      "sports": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 391.0
-      },
-      "travel": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 407.0
-      },
-      "war": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 2897.0
-      },
-      "accuracy": 0.21541710665258712,
-      "macro avg": {
-        "precision": 0.019583373332053376,
-        "recall": 0.09090909090909091,
-        "f1-score": 0.03222494273754048,
-        "support": 8523.0
-      },
-      "weighted avg": {
-        "precision": 0.046404529838572094,
-        "recall": 0.21541710665258712,
-        "f1-score": 0.07635984319222897,
-        "support": 8523.0
-      }
-    }
+  "xlm-roberta-large_lr2e-05_ep3": {
+    "model": "xlm-roberta-large",
+    "accuracy": 0.8745,
+    "f1_macro": 0.8384,
+    "f1_weighted": 0.8735,
+    "train_loss": 0.4037
+  },
+  "xlm-roberta-large_lr2e-05_ep5": {
+    "model": "xlm-roberta-large",
+    "accuracy": 0.8705,
+    "f1_macro": 0.8325,
+    "f1_weighted": 0.87,
+    "train_loss": 0.28
+  },
+  "xlm-roberta-large_lr3e-05_ep3": {
+    "model": "xlm-roberta-large",
+    "accuracy": 0.8647,
+    "f1_macro": 0.8244,
+    "f1_weighted": 0.864,
+    "train_loss": 0.39
+  },
+  "xlm-roberta-large_lr3e-05_ep5": {
+    "model": "xlm-roberta-large",
+    "accuracy": 0.8665,
+    "f1_macro": 0.8259,
+    "f1_weighted": 0.866,
+    "train_loss": 0.26
   },
   "modernbert-large_lr2e-05_ep3": {
     "model": "modernbert-large",
@@ -723,6 +659,7 @@
     }
   },
   "electra-large_lr3e-05_ep5": {
-    "error": "[enforce fail at inline_container.cc:672] . unexpected pos 942237632 vs 942237520"
+    "error": "CUDA memory corruption on Blackwell GPU during epoch 4+",
+    "note": "Blackwell architecture incompatibility with longer training runs"
   }
 }
