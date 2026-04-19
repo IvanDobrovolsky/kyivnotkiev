@@ -50,6 +50,7 @@ m.categories.forEach((c: any) => { catColors[c.id] = c.color; });
         <details class="pair-details" id={`pair-${pair.id}`} open={i === 0}>
           <summary class="pair-summary">
             <div class="summary-left">
+              <span class="summary-arrow">▶</span>
               <span class="pair-names">
                 <span class="pair-ru">{pair.russian}</span>
                 <span class="pair-arrow">→</span>
@@ -132,14 +133,13 @@ m.categories.forEach((c: any) => { catColors[c.id] = c.color; });
     gap: 1rem;
   }
   .pair-summary::-webkit-details-marker { display: none; }
-  .pair-summary::before {
-    content: '▶';
+  .summary-arrow {
     font-size: 0.6rem;
     color: var(--text-dim);
     transition: transform 0.2s;
     flex-shrink: 0;
   }
-  .pair-details[open] > .pair-summary::before {
+  .pair-details[open] > .pair-summary .summary-arrow {
     transform: rotate(90deg);
   }
   .pair-summary:hover {
