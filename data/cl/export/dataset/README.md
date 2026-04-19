@@ -32,9 +32,9 @@ A balanced, labeled corpus of texts containing Ukrainian and Russian toponym var
 
 ## Dataset Summary
 
-29,938 texts across 55 Ukrainian-Russian toponym pairs from 4 sources
-(Reddit, YouTube, GDELT news articles). Each text is labeled with:
-- **Context category**: politics, war_conflict, sports, culture_arts, food_cuisine, travel_tourism, academic_science, history, business_economy, general_news
+42,613 texts across 59 Ukrainian-Russian toponym pairs from 4 sources
+(Reddit, YouTube, OpenAlex, GDELT news articles). Each text is labeled with:
+- **Context category**: politics, war_conflict, sports, culture_arts, food_cuisine, travel_tourism, academic_science, history, business_economy, general_news, religion
 - **Sentiment**: positive, neutral, negative
 - **Variant**: which toponym form (russian/ukrainian) appears in the text
 
@@ -51,7 +51,7 @@ A balanced, labeled corpus of texts containing Ukrainian and Russian toponym var
 - `pair_id`: Integer ID of the toponym pair
 - `text`: The full text content
 - `variant`: "russian" or "ukrainian" — which spelling form appears
-- `source`: Data source (reddit, youtube, gdelt)
+- `source`: Data source (reddit, youtube, openalex, gdelt)
 - `year`: Publication year
 - `context_label`: Annotated context category
 - `context_confidence`: Annotation confidence (0-1)

@@ -31,19 +31,19 @@ flowchart TD
 
     subgraph Balance["Balancing & Cleaning"]
         style Balance fill:#1a1a2e,stroke:#f59e0b,color:#e2e8f0
-        B["Stratified sampling<br/>pair x source x variant x year<br/>29,938 balanced texts (48% RU / 52% UA)"]
+        B["Stratified sampling<br/>pair x source x variant x year<br/>42,613 balanced texts (48% RU / 52% UA)"]
     end
 
     subgraph Annotate["LLM Annotation"]
         style Annotate fill:#1a1a2e,stroke:#8b5cf6,color:#e2e8f0
-        L["Llama 3.1 70B on B200<br/>10 context classes + sentiment<br/>100% parse rate, conf 0.926"]
+        L["Llama 3.1 70B on B200<br/>11 context classes + sentiment<br/>100% parse rate, conf 0.926"]
     end
 
     subgraph Finetune["Encoder Fine-Tuning"]
         style Finetune fill:#1a1a2e,stroke:#06b6d4,color:#e2e8f0
-        D["DeBERTa-v3-large — F1=88.8%"]
-        X["XLM-RoBERTa-large — F1=87.3%"]
-        M["mDeBERTa-v3-base — F1=86.2%"]
+        X["XLM-RoBERTa-large — F1=83.8%"]
+        D["DeBERTa-v3-large"]
+        M["mDeBERTa-v3-base"]
     end
 
     subgraph Robust["Robustness Validation"]
@@ -57,7 +57,7 @@ flowchart TD
         SJ["Site JSON"]
     end
 
-    R & OA & YT & G --> B --> L --> D & X & M --> RV --> HF & SJ
+    R & OA & YT & G --> B --> L --> X & D & M --> RV --> HF & SJ
 ```
 
 ## Key Findings
@@ -84,9 +84,9 @@ flowchart TD
 
 | Model | Parameters | F1 (macro) | Accuracy |
 |-------|-----------|------------|----------|
-| **DeBERTa-v3-large** | 304M | **88.8%** | **90.1%** |
-| XLM-RoBERTa-large | 550M | 87.3% | 89.4% |
-| mDeBERTa-v3-base | 86M | 86.2% | 88.7% |
+| **XLM-RoBERTa-large** | 550M | **83.8%** | — |
+| DeBERTa-v3-large | 304M | — | — |
+| mDeBERTa-v3-base | 86M | — | — |
 
 ### 4. Robustness — 9 experiments (DeBERTa-v3-large)
 
@@ -120,13 +120,13 @@ NPMI normalizes to [-1, 1], preventing rare words from ranking artificially high
 
 ### Context Classification
 
-10-class multi-class classification via cross-entropy loss:
+11-class multi-class classification via cross-entropy loss:
 
 ```
 L = -sum_i y_i log(softmax(Wx + b)_i)
 ```
 
-Where `x` is the `[CLS]` token representation from the encoder (1024-dim for DeBERTa-large), `W in R^(10x1024)`, and `y` is the one-hot label from Llama annotation.
+Where `x` is the `[CLS]` token representation from the encoder (1024-dim for XLM-RoBERTa-large), `W in R^(11x1024)`, and `y` is the one-hot label from Llama annotation.
 
 ### Training Configuration
 
@@ -163,14 +163,14 @@ make cl-all                  # Full pipeline end-to-end
 | OpenAlex | 10,687 | Academic | Paper titles + reconstructed abstracts |
 | YouTube | 6,835 | Video | Titles + descriptions |
 | GDELT | 6,237 | News | Article bodies via trafilatura (58% fetch yield) |
-| **Total** | **35,645** | | **29,938 after balancing** |
+| **Total** | **35,645** | | **42,613 after balancing** |
 
 ## Hardware
 
 | Task | Wall time | Cost |
 |------|-----------|------|
 | Instance setup (boot, deps, model download, warmup) | ~25 min | — |
-| Llama 70B annotation (29,938 texts, 16 concurrent) | 45 min | — |
+| Llama 70B annotation (42,613 texts, 16 concurrent) | 45 min | — |
 | 3-model encoder benchmark (DeBERTa, XLM-R, mDeBERTa) | 25 min | — |
 | 9 robustness experiments (seeds, LRs, thresholds, epochs) | 2.5 hrs | — |
 | **Total (NVIDIA B200 183GB, vast.ai)** | **~4.5 hrs** | **$14.10** |

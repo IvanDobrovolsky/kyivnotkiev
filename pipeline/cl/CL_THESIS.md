@@ -4,7 +4,7 @@
 
 **Toponym variant choice is not merely a temporal adoption phenomenon — it is a discourse marker that signals the writer's engagement context, awareness level, and relationship to the subject.**
 
-Previous studies of the #KyivNotKiev campaign and similar naming initiatives measured adoption as a binary switching rate: what percentage of sources use the Ukrainian form? We demonstrate that this framing misses the fundamental nature of the phenomenon. Using transformer-based context classification on 29,938 texts across 55 toponym pairs, we show that the Russian and Ukrainian forms of each toponym occupy **systematically different semantic and contextual spaces**.
+Previous studies of the #KyivNotKiev campaign and similar naming initiatives measured adoption as a binary switching rate: what percentage of sources use the Ukrainian form? We demonstrate that this framing misses the fundamental nature of the phenomenon. Using transformer-based context classification on 42,613 texts across 59 toponym pairs, we show that the Russian and Ukrainian forms of each toponym occupy **systematically different semantic and contextual spaces**.
 
 ## Key Findings
 
@@ -61,7 +61,7 @@ Our context classifier enables measurement of WHERE within discourse adoption oc
 
 ### Dataset: KyivNotKiev-CL Corpus
 
-- **29,938 texts** across **55 Ukrainian-Russian toponym pairs**
+- **42,613 texts** across **59 Ukrainian-Russian toponym pairs**
 - **4 sources**: Reddit (social media), YouTube (video), OpenAlex (academic), GDELT (news articles)
 - **Balanced**: 14,339 Russian / 15,599 Ukrainian variants (48/52%)
 - **Multilingual**: 82% Latin script (primarily English), 17% Cyrillic (Ukrainian/Russian), 2% mixed
@@ -70,7 +70,7 @@ Our context classifier enables measurement of WHERE within discourse adoption oc
 ### Annotation Pipeline
 
 1. **Llama 3.1 70B-Instruct** (full BF16 precision) annotates all texts with:
-   - Context category (10 classes: politics, war_conflict, sports, culture_arts, food_cuisine, travel_tourism, academic_science, history, business_economy, general_news)
+   - Context category (11 classes: politics, war_conflict, sports, culture_arts, food_cuisine, travel_tourism, academic_science, history, business_economy, general_news, religion)
    - Sentiment (positive/neutral/negative with -1 to +1 score)
    - Brief reasoning
 
@@ -109,19 +109,19 @@ All three encoders use identical hyperparameters for fair comparison:
 - Random seed: 42 for all splits and model initialization
 - Hardware: NVIDIA B200 183GB, single GPU
 - Software: HuggingFace Transformers, PyTorch with BF16
-- Training time: ~12 minutes per model (3 epochs on 23,922 texts)
+- Training time: ~12 minutes per model (3 epochs on 34,090 texts)
 - All hyperparameters chosen from established defaults, no tuning performed — this is intentional, as hyperparameter optimization would conflate model capability with tuning effort
 
 ### Why This Methodology
 
 - **Why not GPT?** Reproducibility. Llama is open-weights, versioned, deterministic at temperature 0.05. The exact prompt and model are documented.
-- **Why fine-tune encoders?** The LLM is the annotator; the encoder is the publishable artifact. A 304M parameter model that anyone can download and run on a laptop in seconds.
+- **Why fine-tune encoders?** The LLM is the annotator; the encoder is the publishable artifact. A 550M parameter model that anyone can download and run on a laptop in seconds.
 - **Why 3 models?** Proves the labels are robust (if 3 architectures all learn them at F1>0.85, the signal is real, not noise).
 - **Why not just collocations?** Collocations show correlation; the classifier provides causation-adjacent evidence. "Texts about sports tend to use the Russian form" is stronger than "the Russian form co-occurs with 'champion'."
 
 ## Published Artifacts
 
-1. **Dataset**: `IvanDobrovolsky/kyivnotkiev-cl` on Hugging Face — 29,938 labeled texts with full provenance
+1. **Dataset**: `IvanDobrovolsky/kyivnotkiev-cl` on Hugging Face — 42,613 labeled texts with full provenance
 2. **Model**: `IvanDobrovolsky/toponym-context-classifier` — best-performing encoder with benchmark results
 3. **Embeddings**: Precomputed sentence embeddings for variant clustering analysis
 4. **Code**: Full pipeline at github.com/IvanDobrovolsky/kyivnotkiev under `pipeline/cl/`

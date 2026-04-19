@@ -22,6 +22,7 @@ flowchart TD
         ngrams["ngrams.py<br/>Books API"]
         yt["youtube.py<br/>Data API v3"]
         oa["openalex.py<br/>REST API"]
+        ol["openlibrary.py<br/>REST API"]
     end
 
     subgraph Analysis
@@ -37,7 +38,7 @@ flowchart TD
         style CL fill:#1a1a2e,stroke:#06b6d4,color:#e2e8f0
         extract["extract texts"]
         annotate["Llama 3.1 70B annotation"]
-        finetune["DeBERTa-v3-large fine-tuning"]
+        finetune["XLM-RoBERTa-large fine-tuning"]
         export["HF dataset + model"]
     end
 
@@ -51,11 +52,11 @@ flowchart TD
 
     pairs --> orch
     orch --> wm
-    wm -->|stale| gdelt & reddit & wiki & trends & ngrams & yt & oa
+    wm -->|stale| gdelt & reddit & wiki & trends & ngrams & yt & oa & ol
     wm -->|fresh| skip["skip"]
-    gdelt & reddit & wiki & trends & ngrams & yt & oa -->|BigQuery| adopt
+    gdelt & reddit & wiki & trends & ngrams & yt & oa & ol -->|BigQuery| adopt
     adopt --> cp & cat & hold & reg
-    adopt -->|29,938 texts| extract --> annotate --> finetune --> export
+    adopt -->|42,613 texts| extract --> annotate --> finetune --> export
     cp & cat & hold & reg --> cross & heat & choro & modern
 ```
 
@@ -65,13 +66,14 @@ flowchart TD
 
 | Module | Source | Scale | Method |
 |--------|--------|-------|--------|
-| `gdelt.py` | GDELT GKG | 39.6M articles | BQ public -> BQ (SQL) |
-| `reddit.py` | Reddit via Arctic Shift | 22K posts | Spark on zst dumps |
-| `wikipedia.py` | Wikimedia API | 573M pageviews | REST API |
-| `trends.py` | Google Trends | 152K datapoints | pytrends |
-| `ngrams.py` | Google Books | 11.6K, 1900--2019 | REST API |
-| `youtube.py` | YouTube Data API v3 | 14.5K videos | REST API |
-| `openalex.py` | OpenAlex | 379K papers | REST API |
+| `gdelt.py` | GDELT GKG | 38.6M articles | BQ public -> BQ (SQL) |
+| `reddit.py` | Reddit via Arctic Shift | 33K posts | Spark on zst dumps |
+| `wikipedia.py` | Wikimedia API | 589M pageviews | REST API |
+| `trends.py` | Google Trends | 206K datapoints | pytrends |
+| `ngrams.py` | Google Books | 13K, 1900--2019 | REST API |
+| `youtube.py` | YouTube Data API v3 | 33K videos | REST API |
+| `openalex.py` | OpenAlex | 381K papers | REST API |
+| `openlibrary.py` | Open Library | 1.9K titles | REST API |
 | `orchestrator.py` | -- | -- | Coordinates all above |
 | `watermarks.py` | -- | -- | Tracks freshness per (pair, source) |
 
@@ -105,7 +107,7 @@ Transformer-based discourse analysis. See [cl/README.md](cl/README.md).
 
 No data is ever deleted. Disabling a pair just filters it from analysis views.
 
-- Pair added in `pairs.yaml` -> fetched across all 7 sources
+- Pair added in `pairs.yaml` -> fetched across all 8 sources
 - Pair disabled -> excluded from analysis, data preserved in BQ
 - Pair already fresh -> skipped (watermark < 7 days old)
 

@@ -37,13 +37,14 @@ graph TD
 
 | Table | Partitioned | Clustered | Description |
 |-------|------------|-----------|-------------|
-| `raw_gdelt` | DAY (date) | pair_id, variant | News media mentions (39.6M) |
-| `raw_reddit` | MONTH (created_utc) | pair_id, variant, subreddit | Reddit posts/comments (22K) |
-| `raw_wikipedia` | MONTH (date) | pair_id, variant | Pageviews (573M) |
-| `raw_trends` | -- | pair_id, variant | Google Trends interest (152K) |
-| `raw_ngrams` | -- | pair_id, variant | Book frequency 1900--2019 (11.6K) |
-| `raw_youtube` | MONTH (published_at) | pair_id, variant | Video metadata (14.5K) |
-| `raw_openalex` | -- | pair_id, variant | Academic papers (379K) |
+| `raw_gdelt` | DAY (date) | pair_id, variant | News media mentions (38.6M) |
+| `raw_reddit` | MONTH (created_utc) | pair_id, variant, subreddit | Reddit posts/comments (33K) |
+| `raw_wikipedia` | MONTH (date) | pair_id, variant | Pageviews (589M) |
+| `raw_trends` | -- | pair_id, variant | Google Trends interest (206K) |
+| `raw_ngrams` | -- | pair_id, variant | Book frequency 1900--2019 (13K) |
+| `raw_youtube` | MONTH (published_at) | pair_id, variant | Video metadata (33K) |
+| `raw_openalex` | -- | pair_id, variant | Academic papers (381K) |
+| `raw_openlibrary` | -- | pair_id, variant | Open Library titles (1.9K) |
 | `watermarks` | -- | -- | Ingestion state tracking |
 | `analysis_adoption` | -- | pair_id, source | Computed adoption ratios |
 | `analysis_changepoints` | -- | -- | Detected change points |

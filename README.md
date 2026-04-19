@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>A Large-Scale Computational Study of Ukrainian Toponym Adoption</strong><br>
-  90B+ records scanned, 40M+ toponym matches, 29K ML-analyzed texts, 7 sources.
+  90B+ records scanned, 628M+ toponym matches, 42K ML-analyzed texts, 8 sources.
 </p>
 
 <p align="center">
@@ -23,10 +23,10 @@
 | Metric | Value |
 |--------|-------|
 | Records scanned | **90B+** across GDELT, Wikipedia, OpenAlex, Reddit, YouTube, Ngrams, Trends |
-| Toponym matches | **40M+** (39.6M news articles, 573M pageviews tracked, 379K papers, 152K trends, 22K posts, 14.5K videos) |
-| Toponym pairs | **55** enabled across **8** categories |
-| Data sources | **7** (GDELT, Google Trends, Wikipedia, Reddit, YouTube, Google Books Ngrams, OpenAlex) |
-| CL corpus | **29,938** texts, DeBERTa-v3-large F1=88.8% |
+| Toponym matches | **628M+** (38.6M news articles, 589M pageviews tracked, 381K papers, 206K trends, 33K posts, 33K videos, 13K books, 1.9K book titles) |
+| Toponym pairs | **59** enabled across **8** categories |
+| Data sources | **8** (GDELT, Google Trends, Wikipedia, Reddit, YouTube, Google Books Ngrams, OpenAlex, Open Library) |
+| CL corpus | **42,613** texts, XLM-RoBERTa-large F1=83.8% |
 | Time span | **2010--2026** (Ngrams: 1900--2019) |
 | Countries | **55** with per-country adoption data |
 | Infrastructure | **GCP** (BigQuery, GCS, Cloud Run) + vast.ai GPU |
@@ -38,13 +38,14 @@
 graph LR
     subgraph Sources["Data Sources"]
         style Sources fill:#1a1a2e,stroke:#0057B8,color:#e2e8f0
-        GDELT["GDELT<br/>39.6M articles"]
-        OA["OpenAlex<br/>379K papers"]
-        Reddit["Reddit<br/>22K posts"]
-        Wiki["Wikipedia<br/>573M pageviews"]
-        Trends["Google Trends<br/>152K datapoints"]
-        Ngrams["Ngrams<br/>11.6K books 1900-2019"]
-        YT["YouTube<br/>14.5K videos"]
+        GDELT["GDELT<br/>38.6M articles"]
+        OA["OpenAlex<br/>381K papers"]
+        Reddit["Reddit<br/>33K posts"]
+        Wiki["Wikipedia<br/>589M pageviews"]
+        Trends["Google Trends<br/>206K datapoints"]
+        Ngrams["Ngrams<br/>13K books 1900-2019"]
+        YT["YouTube<br/>33K videos"]
+        OL["Open Library<br/>1.9K titles"]
     end
 
     subgraph Pipeline["Python + BigQuery Pipeline"]
@@ -56,9 +57,9 @@ graph LR
 
     subgraph CL["CL Pipeline"]
         style CL fill:#1a1a2e,stroke:#8b5cf6,color:#e2e8f0
-        Extract["Extract<br/>29,938 texts"]
+        Extract["Extract<br/>42,613 texts"]
         Annotate["Llama 3.1 70B<br/>Annotation"]
-        Finetune["DeBERTa-v3-large<br/>F1=88.8%"]
+        Finetune["XLM-RoBERTa-large<br/>F1=83.8%"]
     end
 
     subgraph Storage["GCP"]
@@ -75,7 +76,7 @@ graph LR
         HF["HuggingFace"]
     end
 
-    GDELT & OA & Reddit & Wiki & Trends & Ngrams & YT --> Ingest
+    GDELT & OA & Reddit & Wiki & Trends & Ngrams & YT & OL --> Ingest
     Ingest --> BQ
     Ingest --> GCS
     BQ --> Transform --> Analyze
