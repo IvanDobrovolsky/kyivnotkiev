@@ -1,0 +1,351 @@
+---
+import '../styles/global.css';
+import m from '../data/manifest.json';
+import reports from '../data/pair_reports.json';
+
+const pairs = [...m.pairs]
+  .filter(p => (reports as any)[String(p.id)])
+  .sort((a, b) => {
+    if (a.id === 1) return -1;
+    if (b.id === 1) return 1;
+    return b.total - a.total;
+  });
+
+function fmtBig(n: number) {
+  if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + 'B';
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
+  if (n >= 1_000) return (n / 1_000).toFixed(1) + 'K';
+  return n.toString();
+}
+
+const catColors: Record<string, string> = {};
+m.categories.forEach((c: any) => { catColors[c.id] = c.color; });
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pair Audit Reports — #KyivNotKiev</title>
+  <meta name="description" content="Full audit reports for all 59 Ukrainian toponym pairs. Data-driven analysis, timeseries, LLM audit, and CL analysis.">
+</head>
+<body>
+
+<div class="reports-page">
+  <header class="reports-header">
+    <a href="/" class="back-link">← Back to dashboard</a>
+    <h1>
+      <span class="h1-label">Pair Audit Reports</span>
+      <span class="h1-count">{pairs.length} pairs</span>
+    </h1>
+    <p class="subtitle">Full data-driven analysis for every toponym pair. Each report includes timeseries charts, AI/LLM audit, computational linguistics analysis, and references.</p>
+  </header>
+
+  <div class="pair-list">
+    {pairs.map((pair, i) => {
+      const content = (reports as any)[String(pair.id)];
+      const catColor = catColors[pair.category] || '#6b7280';
+      const adoptionColor = (pair.adoption ?? 0) >= 70 ? '#059669' : (pair.adoption ?? 0) >= 30 ? '#d97706' : '#dc2626';
+      return (
+        <details class="pair-details" id={`pair-${pair.id}`} open={i === 0}>
+          <summary class="pair-summary">
+            <div class="summary-left">
+              <span class="pair-names">
+                <span class="pair-ru">{pair.russian}</span>
+                <span class="pair-arrow">→</span>
+                <span class="pair-ua">{pair.ukrainian}</span>
+              </span>
+              <span class="pair-cat" style={`color: ${catColor}`}>{pair.category}</span>
+              {pair.starred && <span class="pair-star" title={pair.starred_label}>★</span>}
+            </div>
+            <div class="summary-right">
+              <span class="metric" style={`color: ${adoptionColor}`}>{(pair.adoption ?? 0).toFixed(1)}%</span>
+              <span class="metric-label">adoption</span>
+              <span class="metric-sep">·</span>
+              <span class="metric">{fmtBig(pair.total)}</span>
+              <span class="metric-label">mentions</span>
+            </div>
+          </summary>
+          <div class="report-content" set:html={content} />
+        </details>
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  /* ── Page layout ── */
+  .reports-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  .reports-header {
+    margin-bottom: 2rem;
+  }
+  .back-link {
+    font-size: 0.82rem;
+    color: var(--blue-light);
+    text-decoration: none;
+  }
+  .back-link:hover { text-decoration: underline; }
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin: 0.75rem 0 0.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .h1-count {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    max-width: 700px;
+  }
+
+  /* ── Details / Summary ── */
+  .pair-details {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+    background: var(--bg-card);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .pair-details[open] {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  }
+  .pair-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    gap: 1rem;
+  }
+  .pair-summary::-webkit-details-marker { display: none; }
+  .pair-summary::before {
+    content: '▶';
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .pair-details[open] > .pair-summary::before {
+    transform: rotate(90deg);
+  }
+  .pair-summary:hover {
+    background: var(--bg-hover);
+  }
+  .summary-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+  .pair-names {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .pair-ru {
+    color: #D52B1E;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    opacity: 0.6;
+  }
+  .pair-arrow {
+    color: var(--text-dim);
+    font-weight: 300;
+    font-size: 0.9rem;
+  }
+  .pair-ua {
+    color: var(--blue);
+  }
+  .pair-cat {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .pair-star {
+    color: #e6b800;
+    font-size: 0.85rem;
+  }
+  .summary-right {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+  }
+  .metric {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .metric-label {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .metric-sep {
+    color: var(--text-dim);
+    margin: 0 0.2rem;
+  }
+
+  /* ── Report body (injected HTML) ── */
+  .report-content {
+    padding: 0 1.5rem 1.5rem;
+    border-top: 1px solid var(--border);
+    content-visibility: auto;
+  }
+
+  @media (max-width: 768px) {
+    .reports-page { padding: 1rem; }
+    .pair-summary { flex-direction: column; align-items: flex-start; padding: 0.75rem 1rem; }
+    .summary-right { margin-top: 0.25rem; }
+    .report-content { padding: 0 1rem 1rem; }
+  }
+</style>
+
+<!-- Report-specific styles (scoped to .report-content) -->
+<style is:global>
+  .report-content h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #374151;
+    margin: 1.75rem 0 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .report-content .card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .report-content .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  @keyframes borderRotate { 0% { --angle: 0deg } 100% { --angle: 360deg } }
+  @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false }
+  .report-content .analysis-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2rem;
+    color: #374151;
+    box-shadow: 0 4px 24px rgba(99,102,241,0.10), 0 1px 4px rgba(0,0,0,0.06);
+    line-height: 1.85;
+    font-size: 0.88rem;
+    position: relative;
+    overflow: visible;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  .report-content .analysis-box::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 18px;
+    padding: 2px;
+    background: conic-gradient(from var(--angle), #6366f1, #3b82f6, #0ea5e9, #8b5cf6, #6366f1);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: borderRotate 4s linear infinite;
+    pointer-events: none;
+  }
+  .report-content .analysis-box p { position: relative; z-index: 1; }
+  .report-content .ctx-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 1fr 60px;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.8rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #f9fafb;
+  }
+  .report-content table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .report-content th {
+    text-align: left;
+    padding: 0.6rem;
+    border-bottom: 2px solid #e5e7eb;
+    color: #6b7280;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .report-content td { padding: 0.6rem; border-bottom: 1px solid #f3f4f6; }
+  .report-content .ref-section {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .report-content .ref-section h3 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 1.5rem 0 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f3f4f6;
+  }
+  .report-content .ref-section h3:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+  .report-content .ref-section ul { margin-left: 1.25rem; font-size: 0.82rem; color: #374151; line-height: 2; }
+  .report-content .ref-section a { color: #3b82f6; text-decoration: none; }
+  .report-content .ref-section a:hover { text-decoration: underline; }
+  .report-content .source-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .report-content .source-meta { display: flex; gap: 1.5rem; font-size: 0.8rem; flex-wrap: wrap; }
+  .report-content .source-meta span { color: #6b7280; }
+  .report-content .source-meta strong { color: #1f2937; }
+
+  @media (max-width: 768px) {
+    .report-content .grid-2 { grid-template-columns: 1fr; }
+    .report-content .analysis-box { padding: 1.5rem; font-size: 0.82rem; }
+    .report-content .ctx-row { grid-template-columns: 70px 1fr 1fr 45px; font-size: 0.72rem; }
+  }
+</style>
+
+<script>
+  // Auto-open and scroll to a pair when linked via hash (e.g. /report#pair-10)
+  function openFromHash() {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const target = document.querySelector(hash);
+    if (target && target.tagName === 'DETAILS') {
+      (target as HTMLDetailsElement).open = true;
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+</script>
+
+</body>
+</html>

@@ -80,6 +80,7 @@ function formatNum(n: number) {
         <span style="font-size:0.9rem; font-weight:800; color:#0057B8;">#KyivNotKiev</span>
       </a>
       <div class="topbar-links">
+        <a href="/report" id="topbar-report-link">Reports</a>
         <a href="/uk/">UA</a>
         <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
         <a href="/" id="about-link">About</a>
@@ -427,6 +428,11 @@ function formatNum(n: number) {
           <div class="chart-subtitle" style="margin-bottom: 0.5rem;">3 models trained on Gemini Flash Lite annotations, 42,613 texts, 11 categories</div>
           <div id="cl-benchmark-table"></div>
         </div>
+      </div>
+      <div class="chart-container" style="margin-bottom: 0.75rem;">
+        <div class="chart-title" style="color: var(--text)">Confusion Matrix</div>
+        <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Gemini (true) vs XLM-RoBERTa (predicted) — 42,613 texts · 94.6% agreement · macro F1 = 0.932</div>
+        <div id="cl-confusion-matrix" style="display:flex;justify-content:center;"></div>
       </div>
 
       <!-- Adoption by Category -->
@@ -923,6 +929,7 @@ function formatNum(n: number) {
     import domainOrigins from '../data/domain_origins.json';
     import clCollocations from '../data/cl_collocations.json';
     import clAnalysis from '../data/cl_analysis.json';
+    import confusionMatrix from '../data/confusion_matrix.json';
 
     // Use manifest as the single pairs source
     const pairs = { categories: manifest.categories, pairs: manifest.pairs };
@@ -1519,6 +1526,8 @@ function formatNum(n: number) {
       if (pair) {
         document.getElementById('chart-new')!.textContent = pair.ukrainian;
         document.getElementById('chart-old')!.textContent = pair.russian;
+        const reportLink = document.getElementById('topbar-report-link') as HTMLAnchorElement;
+        if (reportLink) reportLink.href = `/report#pair-${pairId}`;
       }
       drawChart();
       drawPairStats();
@@ -2977,13 +2986,27 @@ function formatNum(n: number) {
       if (ctxContainer && ctx) {
         const left = d3.select(ctxContainer);
 
-        const categories = ['war_conflict', 'academic_science', 'politics', 'history',
-          'travel_tourism', 'sports', 'general_news', 'culture_arts', 'food_cuisine', 'business_economy'];
-        const catLabels: Record<string, string> = {
-          war_conflict: 'War', academic_science: 'Academic', politics: 'Politics',
-          history: 'History', travel_tourism: 'Travel', sports: 'Sports',
-          general_news: 'News', culture_arts: 'Culture', food_cuisine: 'Food', business_economy: 'Business',
-        };
+        // Derive categories from data — smart bucketing, max 10, sorted by total
+        const allCats = new Set([
+          ...Object.keys(ctx.russian || {}),
+          ...Object.keys(ctx.ukrainian || {}),
+        ]);
+        const catScored = [...allCats].map(c => ({
+          cat: c,
+          total: (ctx.russian?.[c] || 0) + (ctx.ukrainian?.[c] || 0),
+        })).sort((a, b) => b.total - a.total);
+        let categories: {cat:string,total:number}[] = [];
+        for (const thr of [0.04, 0.02, 0.01, 0]) {
+          categories = catScored.filter(c => c.total > thr);
+          if (categories.length >= 4) break;
+        }
+        categories = categories.slice(0, 10);
+
+        const formatLabel = (s: string) => s.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+          .replace('War Conflict', 'War').replace('Academic Science', 'Academic')
+          .replace('General News', 'News').replace('Travel Tourism', 'Travel')
+          .replace('Culture Arts', 'Culture').replace('Food Cuisine', 'Food')
+          .replace('Business Economy', 'Business');
 
         left.append('div').style('display', 'flex').style('gap', '0.75rem').style('margin-bottom', '0.4rem')
           .style('font-size', '0.65rem').style('color', 'var(--text-muted)')
@@ -2991,20 +3014,20 @@ function formatNum(n: number) {
                 '<span style="display:inline-flex;align-items:center;gap:3px"><span style="width:7px;height:7px;background:#3b82f6;border-radius:2px;opacity:0.7"></span>Ukrainian</span>');
 
         const maxVal = Math.max(
-          ...categories.map(c => Math.max(ctx.russian?.[c] || 0, ctx.ukrainian?.[c] || 0))
+          ...categories.map(c => Math.max(ctx.russian?.[c.cat] || 0, ctx.ukrainian?.[c.cat] || 0))
         ) || 0.3;
 
-        for (const cat of categories) {
+        for (const {cat} of categories) {
           const ruVal = ctx.russian?.[cat] || 0;
           const uaVal = ctx.ukrainian?.[cat] || 0;
-          if (ruVal < 0.01 && uaVal < 0.01) continue;
+          if (ruVal < 0.005 && uaVal < 0.005) continue;
           const diff = uaVal - ruVal;
 
           const row = left.append('div').style('display', 'flex').style('align-items', 'center')
             .style('gap', '4px').style('margin-bottom', '2px');
           row.append('div').style('width', '50px').style('text-align', 'right')
             .style('font-size', '0.65rem').style('color', 'var(--text)').style('flex-shrink', '0')
-            .text(catLabels[cat]);
+            .text(formatLabel(cat));
           const bars = row.append('div').style('flex', '1').style('display', 'flex')
             .style('flex-direction', 'column').style('gap', '1px');
           bars.append('div').style('height', '7px').style('background', '#ef4444').style('opacity', '0.6')
@@ -3072,14 +3095,7 @@ function formatNum(n: number) {
       const cl = clAnalysis as any;
       if (!cl.context_distribution) return;
 
-      const categories = ['war_conflict', 'academic_science', 'politics', 'history',
-        'travel_tourism', 'sports', 'general_news', 'culture_arts', 'food_cuisine', 'business_economy'];
-      const catLabels: Record<string, string> = {
-        war_conflict: 'War', academic_science: 'Academic', politics: 'Politics',
-        history: 'History', travel_tourism: 'Travel', sports: 'Sports',
-        general_news: 'News', culture_arts: 'Culture', food_cuisine: 'Food', business_economy: 'Business',
-      };
-
+      // Aggregate context data from all pairs — derive categories from data
       const ruTotals: Record<string, number> = {};
       const uaTotals: Record<string, number> = {};
       for (const [pid, pairData] of Object.entries(cl.context_distribution)) {
@@ -3087,8 +3103,26 @@ function formatNum(n: number) {
         if (pd.russian) for (const [cat, val] of Object.entries(pd.russian)) ruTotals[cat] = (ruTotals[cat] || 0) + (val as number);
         if (pd.ukrainian) for (const [cat, val] of Object.entries(pd.ukrainian)) uaTotals[cat] = (uaTotals[cat] || 0) + (val as number);
       }
-      const ruSum = Object.values(ruTotals).reduce((a, b) => a + b, 0);
-      const uaSum = Object.values(uaTotals).reduce((a, b) => a + b, 0);
+      const ruSum = Object.values(ruTotals).reduce((a, b) => a + b, 0) || 1;
+      const uaSum = Object.values(uaTotals).reduce((a, b) => a + b, 0) || 1;
+
+      // Smart bucketing: sorted by total, 20%+ first then relax, max 10
+      const aggCats = [...new Set([...Object.keys(ruTotals), ...Object.keys(uaTotals)])]
+        .map(c => ({ cat: c, total: (ruTotals[c] || 0) + (uaTotals[c] || 0) }))
+        .sort((a, b) => b.total - a.total);
+      let categories: string[] = [];
+      for (const thr of [0.04, 0.02, 0.01, 0]) {
+        const totalAll = aggCats.reduce((s, c) => s + c.total, 0) || 1;
+        categories = aggCats.filter(c => c.total / totalAll > thr).map(c => c.cat);
+        if (categories.length >= 4) break;
+      }
+      categories = categories.slice(0, 10);
+
+      const formatLabel = (s: string) => s.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+        .replace('War Conflict', 'War').replace('Academic Science', 'Academic')
+        .replace('General News', 'News').replace('Travel Tourism', 'Travel')
+        .replace('Culture Arts', 'Culture').replace('Food Cuisine', 'Food')
+        .replace('Business Economy', 'Business');
 
       // Compact horizontal bars using HTML (no SVG whitespace issues)
       const wrapper = d3.select(container);
@@ -3111,7 +3145,7 @@ function formatNum(n: number) {
 
         row.append('div').style('width', '55px').style('text-align', 'right')
           .style('font-size', '0.7rem').style('color', 'var(--text)').style('flex-shrink', '0')
-          .text(catLabels[cat]);
+          .text(formatLabel(cat));
 
         const bars = row.append('div').style('flex', '1').style('display', 'flex')
           .style('flex-direction', 'column').style('gap', '1px');
@@ -3200,6 +3234,81 @@ function formatNum(n: number) {
                  </div>`);
       });
     }
+
+    function drawConfusionMatrix() {
+      const container = document.getElementById('cl-confusion-matrix');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const cm = confusionMatrix as any;
+      const labels = cm.labels;
+      const matrix = cm.matrix;
+      const n = labels.length;
+      const short: Record<string,string> = {
+        academic:'Acad', culture:'Cult', economy:'Econ', food:'Food',
+        general:'Gen', history:'Hist', politics:'Pol', religion:'Rel',
+        sports:'Sport', travel:'Trav', war:'War'
+      };
+
+      const cell = 40, padL = 48, padT = 42;
+      const w = padL + n * cell + 10, h = padT + n * cell + 22;
+      const rowSums = matrix.map((r: number[]) => r.reduce((a: number, b: number) => a + b, 0));
+      const maxOff = Math.max(...matrix.flatMap((r: number[], i: number) => r.map((v: number, j: number) => i === j ? 0 : v / (rowSums[i] || 1) * 100)));
+
+      const svg = d3.select(container).append('svg')
+        .attr('viewBox', `0 0 ${w} ${h}`)
+        .style('max-width', '520px').style('width', '100%');
+
+      // Axis labels
+      svg.append('text').attr('x', padL + n*cell/2).attr('y', h - 2)
+        .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af').text('Predicted (XLM-RoBERTa)');
+      svg.append('text').attr('x', 8).attr('y', padT + n*cell/2)
+        .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af')
+        .attr('transform', `rotate(-90,8,${padT + n*cell/2})`).text('True (Gemini)');
+
+      // Headers
+      labels.forEach((l: string, j: number) => {
+        svg.append('text').attr('x', padL + j*cell + cell/2).attr('y', padT - 8)
+          .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#6b7280')
+          .attr('transform', `rotate(-35,${padL + j*cell + cell/2},${padT - 8})`).text(short[l] || l);
+        svg.append('text').attr('x', padL - 4).attr('y', padT + j*cell + cell/2 + 3)
+          .attr('text-anchor', 'end').attr('font-size', 9).attr('fill', '#6b7280').text(short[l] || l);
+      });
+
+      // Cells
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+          const x = padL + j * cell, y = padT + i * cell;
+          const raw = matrix[i][j];
+          const pct = raw / (rowSums[i] || 1) * 100;
+          let fill, textFill;
+          if (i === j) {
+            const t = pct / 100;
+            fill = `rgb(${Math.round(240 - t*190)},${Math.round(240 - t*50)},${Math.round(240 - t*190)})`;
+            textFill = pct > 70 ? '#fff' : '#374151';
+          } else if (raw === 0) {
+            fill = '#fafafa'; textFill = '#d1d5db';
+          } else {
+            const t = Math.min(pct / (maxOff || 1), 1);
+            fill = `rgb(255,${Math.round(255 - t*140)},${Math.round(255 - t*140)})`;
+            textFill = pct > 2 ? '#991b1b' : '#9ca3af';
+          }
+          svg.append('rect').attr('x', x).attr('y', y).attr('width', cell-1).attr('height', cell-1)
+            .attr('fill', fill).attr('rx', 3);
+          if (i === j) {
+            svg.append('text').attr('x', x + cell/2).attr('y', y + cell/2 + 4)
+              .attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', textFill)
+              .attr('font-weight', 700).text(`${pct.toFixed(0)}%`);
+          } else if (raw > 0) {
+            svg.append('text').attr('x', x + cell/2).attr('y', y + cell/2 + 4)
+              .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', textFill).text(raw);
+          }
+        }
+      }
+    }
+
+    // Call it on load
+    drawConfusionMatrix();
   </script>
 </body>
 </html>
