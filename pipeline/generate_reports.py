@@ -526,35 +526,10 @@ def generate_report(pair, timeseries, llm_data, collocations, religious_data, pa
   {ru_cloud}{ua_cloud}
 </div>'''
 
-    # Confusion matrix heatmap (global — same for all pairs)
-    cm_html = ""
-    if cm_svg:
-        cm_data = load_json("confusion_matrix.json")
-        acc = cm_data.get("accuracy", 0)
-        rpt = cm_data.get("report", {})
-        macro_f1 = rpt.get("macro avg", {}).get("f1-score", 0)
-        # Top 3 confusions
-        mat = cm_data.get("matrix", [])
-        lbls = cm_data.get("labels", [])
-        confusions = []
-        for i in range(len(lbls)):
-            for j in range(len(lbls)):
-                if i != j and mat[i][j] > 50:
-                    confusions.append((lbls[i], lbls[j], mat[i][j]))
-        confusions.sort(key=lambda x: -x[2])
-        conf_str = "; ".join(f'{t}→{p} ({c})' for t, p, c in confusions[:3])
-
-        cm_html = f'''<div class="card">
-  <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Classifier Confusion Matrix</div>
-  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.5rem;">Gemini (true) vs XLM-RoBERTa (predicted) · {cm_data["n_total"]:,} texts · {acc:.1%} agreement · macro F1={macro_f1:.3f}</p>
-  {cm_svg}
-  <p style="color:#6b7280;font-size:0.72rem;margin-top:0.4rem;">Top confusions: {conf_str}. Diagonal = recall %. Green = correct, red = misclassified.</p>
-</div>'''
-
     cl_html = ""
-    if ctx_html or coll_html or cm_html:
+    if ctx_html or coll_html:
         top_row = f'<div class="grid-2">\n{ctx_html}\n{coll_html}\n</div>' if ctx_html and coll_html else (ctx_html or coll_html or "")
-        cl_html = f'<h2 id="cl">Computational Analysis</h2>\n{top_row}\n{cm_html}'
+        cl_html = f'<h2 id="cl">Computational Analysis</h2>\n{top_row}'
 
     # ---- LLM Audit — top performer per family, NO scroll ----
     llm_html = ""
