@@ -1,5 +1,10 @@
 """Export the full KyivNotKiev dataset for public release.
 
+NOTE: This script was used during development to export data from BigQuery
+to the HuggingFace parquet format. It requires GCP credentials and the
+BigQuery dataset to be populated. For reproduction, use the pre-exported
+parquet files in dataset/ instead (see: make reproduce).
+
 Creates a publishable dataset package with:
 - Parquet files per source (efficient, typed, standard)
 - metadata.json with dataset card info

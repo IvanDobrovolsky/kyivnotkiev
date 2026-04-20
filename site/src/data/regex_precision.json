@@ -1,7 +1,7 @@
 {
-  "overall_precision": 99.8,
+  "overall_precision": 100.0,
   "total_sampled": 1444,
-  "total_false_positives": 3,
+  "total_false_positives": 0,
   "pairs_evaluated": 29,
   "pairs": [
     {
@@ -77,7 +77,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 4.0,
+      "ru_domain_pct": 2.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -141,23 +141,10 @@
       "russian": "Odessa",
       "ukrainian": "Odesa",
       "total_sampled": 50,
-      "false_positives": 3,
-      "precision": 94.0,
-      "ru_domain_pct": 6.0,
-      "fp_examples": [
-        {
-          "url": "https://ua.korrespondent.net/city/odessa/4559536-shmyhal-v-odesi-skladna-sytuatsiia-zi-svitlom",
-          "reason": "URL pattern match"
-        },
-        {
-          "url": "https://www.zazoom.it/2022-04-02/ucraina-missili-su-odessa-sirene-anche-a-kiev-almeno-5mila-morti-a-",
-          "reason": "URL pattern match"
-        },
-        {
-          "url": "http://odessa-daily.com.ua/news/kommunalcshiki-podrezayut-derevya-v-centre-odessy-dvizhenie-zatrudne",
-          "reason": "URL pattern match"
-        }
-      ],
+      "false_positives": 0,
+      "precision": 100.0,
+      "ru_domain_pct": 14.0,
+      "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
           {
@@ -222,7 +209,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 10.0,
+      "ru_domain_pct": 0.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -288,7 +275,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 2.0,
+      "ru_domain_pct": 4.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -343,7 +330,7 @@
             "count": 461
           }
         ],
-        "ru_domain_mentions": 759,
+        "ru_domain_mentions": 555,
         "ua_domain_mentions": 6644
       }
     },
@@ -354,7 +341,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 2.0,
+      "ru_domain_pct": 4.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -420,7 +407,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 8.0,
+      "ru_domain_pct": 20.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -486,7 +473,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 8.0,
+      "ru_domain_pct": 2.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -552,7 +539,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 4.0,
+      "ru_domain_pct": 2.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -684,7 +671,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 18.0,
+      "ru_domain_pct": 14.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -745,12 +732,12 @@
     },
     {
       "pair_id": 15,
-      "russian": "Dnieper",
-      "ukrainian": "Dnipro",
+      "russian": "Dnieper River",
+      "ukrainian": "Dnipro River",
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 8.0,
+      "ru_domain_pct": 4.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -861,12 +848,12 @@
             "count": 16
           },
           {
-            "domain": "www.yahoo.com",
-            "variant": "ukrainian",
+            "domain": "www.tol.org",
+            "variant": "russian",
             "count": 15
           },
           {
-            "domain": "regionews.ua",
+            "domain": "ukranews.com",
             "variant": "ukrainian",
             "count": 15
           }
@@ -882,7 +869,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 16.0,
+      "ru_domain_pct": 14.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -1014,7 +1001,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 6.0,
+      "ru_domain_pct": 8.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -1069,18 +1056,18 @@
             "count": 36
           }
         ],
-        "ru_domain_mentions": 30,
+        "ru_domain_mentions": 0,
         "ua_domain_mentions": 0
       }
     },
     {
       "pair_id": 23,
-      "russian": "Borscht",
-      "ukrainian": "Borshch",
+      "russian": "Borsch",
+      "ukrainian": "Borscht",
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 8.0,
+      "ru_domain_pct": 20.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -1125,12 +1112,12 @@
             "count": 35
           },
           {
-            "domain": "telegraf.com.ua",
+            "domain": "wz.lviv.ua",
             "variant": "ukrainian",
             "count": 32
           },
           {
-            "domain": "wz.lviv.ua",
+            "domain": "telegraf.com.ua",
             "variant": "ukrainian",
             "count": 32
           }
@@ -1146,7 +1133,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 10.0,
+      "ru_domain_pct": 4.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -1212,7 +1199,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 4.0,
+      "ru_domain_pct": 2.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -1278,7 +1265,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 6.0,
+      "ru_domain_pct": 2.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -1344,7 +1331,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 10.0,
+      "ru_domain_pct": 8.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -1542,7 +1529,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 8.0,
+      "ru_domain_pct": 4.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -1608,7 +1595,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 10.0,
+      "ru_domain_pct": 8.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -1674,7 +1661,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 2.0,
+      "ru_domain_pct": 8.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -1724,8 +1711,8 @@
             "count": 28
           },
           {
-            "domain": "ukranews.com",
-            "variant": "ukrainian",
+            "domain": "www.rbc.ua",
+            "variant": "russian",
             "count": 26
           }
         ],
@@ -1755,7 +1742,12 @@
             "count": 3
           },
           {
-            "domain": "www.kgwn.tv",
+            "domain": "www.westword.com",
+            "variant": "russian",
+            "count": 2
+          },
+          {
+            "domain": "k99.com",
             "variant": "russian",
             "count": 2
           },
@@ -1765,12 +1757,12 @@
             "count": 2
           },
           {
-            "domain": "www.westword.com",
+            "domain": "www.denverpost.com",
             "variant": "russian",
             "count": 2
           },
           {
-            "domain": "k99.com",
+            "domain": "www.kgwn.tv",
             "variant": "russian",
             "count": 2
           },
@@ -1785,17 +1777,12 @@
             "count": 2
           },
           {
-            "domain": "www.denverpost.com",
-            "variant": "russian",
-            "count": 2
-          },
-          {
             "domain": "www.9news.com",
             "variant": "russian",
             "count": 2
           }
         ],
-        "ru_domain_mentions": 1,
+        "ru_domain_mentions": 0,
         "ua_domain_mentions": 0
       }
     },
@@ -1806,7 +1793,7 @@
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 6.0,
+      "ru_domain_pct": 12.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
@@ -1861,74 +1848,74 @@
             "count": 7148
           }
         ],
-        "ru_domain_mentions": 7945,
+        "ru_domain_mentions": 0,
         "ua_domain_mentions": 84659
       }
     },
     {
-      "pair_id": 64,
-      "russian": "Borsch",
-      "ukrainian": "Borshch",
+      "pair_id": 72,
+      "russian": "Artemovsk",
+      "ukrainian": "Bakhmut",
       "total_sampled": 50,
       "false_positives": 0,
       "precision": 100.0,
-      "ru_domain_pct": 10.0,
+      "ru_domain_pct": 16.0,
       "fp_examples": [],
       "domain_distribution": {
         "top_domains": [
           {
-            "domain": "bug.org.ua",
+            "domain": "chaspik.spb.ru",
             "variant": "russian",
-            "count": 1549
+            "count": 2116
           },
           {
-            "domain": "gazeta.ua",
+            "domain": "rg.ru",
             "variant": "russian",
-            "count": 225
+            "count": 976
           },
           {
-            "domain": "tsn.ua",
-            "variant": "russian",
-            "count": 137
-          },
-          {
-            "domain": "food.obozrevatel.com",
-            "variant": "russian",
-            "count": 135
-          },
-          {
-            "domain": "www.segodnya.ua",
+            "domain": "glavcom.ua",
             "variant": "ukrainian",
-            "count": 58
+            "count": 928
           },
           {
-            "domain": "gordonua.com",
+            "domain": "www.zazoom.it",
             "variant": "ukrainian",
-            "count": 56
+            "count": 871
           },
           {
-            "domain": "www.unian.ua",
+            "domain": "www.unn.com.ua",
             "variant": "ukrainian",
-            "count": 54
+            "count": 868
           },
           {
-            "domain": "www.unian.net",
+            "domain": "www.msn.com",
             "variant": "ukrainian",
-            "count": 51
+            "count": 754
           },
           {
-            "domain": "www.rbc.ua",
+            "domain": "zn.ua",
             "variant": "ukrainian",
-            "count": 42
+            "count": 745
           },
           {
-            "domain": "kp.ua",
-            "variant": "russian",
-            "count": 41
+            "domain": "www.5.ua",
+            "variant": "ukrainian",
+            "count": 739
+          },
+          {
+            "domain": "ua.korrespondent.net",
+            "variant": "ukrainian",
+            "count": 726
+          },
+          {
+            "domain": "espreso.tv",
+            "variant": "ukrainian",
+            "count": 725
           }
         ],
-        "ru_domain_mentions": 71,
-        "ua_domain_mentions": 2300
+        "ru_domain_mentions": 5564,
+        "ua_domain_mentions": 3635
       }
     }
   ]

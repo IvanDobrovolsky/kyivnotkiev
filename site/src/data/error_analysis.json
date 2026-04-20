@@ -6,10 +6,10 @@
       "ukrainian": "Kyiv",
       "category": "geographical",
       "sources": {
-        "gdelt": 28.9,
-        "reddit": 71.4,
         "trends": 51.0,
+        "gdelt": 28.9,
         "wikipedia": 87.8,
+        "reddit": 71.4,
         "youtube": 55.2,
         "openalex": 94.4
       },
@@ -27,10 +27,10 @@
       "ukrainian": "Kharkiv",
       "category": "geographical",
       "sources": {
-        "gdelt": 98.2,
-        "reddit": 80.6,
         "trends": 87.4,
+        "gdelt": 98.2,
         "wikipedia": 95.5,
+        "reddit": 80.6,
         "youtube": 51.9,
         "openalex": 96.7
       },
@@ -46,17 +46,17 @@
       "ukrainian": "Odesa",
       "category": "geographical",
       "sources": {
-        "gdelt": 19.8,
-        "reddit": 66.0,
         "trends": 6.6,
+        "gdelt": 19.8,
         "wikipedia": 82.0,
+        "reddit": 66.0,
         "youtube": 41.1,
-        "openalex": 65.5
+        "openalex": 65.4
       },
       "spread_pp": 75.4,
       "outliers": {
-        "gdelt": 19.8,
         "trends": 6.6,
+        "gdelt": 19.8,
         "wikipedia": 82.0
       },
       "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias)"
@@ -67,10 +67,10 @@
       "ukrainian": "Lviv",
       "category": "geographical",
       "sources": {
-        "gdelt": 98.4,
-        "reddit": 75.7,
         "trends": 95.4,
+        "gdelt": 98.4,
         "wikipedia": 98.0,
+        "reddit": 75.7,
         "youtube": 42.2,
         "openalex": 97.8
       },
@@ -86,10 +86,10 @@
       "ukrainian": "Zaporizhzhia",
       "category": "geographical",
       "sources": {
-        "gdelt": 83.5,
-        "reddit": 75.6,
         "trends": 90.3,
+        "gdelt": 83.5,
         "wikipedia": 50.0,
+        "reddit": 75.6,
         "youtube": 51.5,
         "openalex": 87.0
       },
@@ -106,10 +106,10 @@
       "ukrainian": "Mykolaiv",
       "category": "geographical",
       "sources": {
-        "gdelt": 8.2,
-        "reddit": 47.6,
         "trends": 55.2,
+        "gdelt": 8.2,
         "wikipedia": 100.0,
+        "reddit": 47.6,
         "youtube": 43.4,
         "openalex": 81.6
       },
@@ -127,17 +127,17 @@
       "ukrainian": "Dnipro",
       "category": "geographical",
       "sources": {
-        "gdelt": 99.8,
-        "reddit": 65.2,
         "trends": 97.2,
+        "gdelt": 99.8,
         "wikipedia": 50.0,
+        "reddit": 65.2,
         "youtube": 47.2,
         "openalex": 99.4
       },
       "spread_pp": 52.6,
       "outliers": {
-        "gdelt": 99.8,
         "trends": 97.2,
+        "gdelt": 99.8,
         "wikipedia": 50.0,
         "youtube": 47.2,
         "openalex": 99.4
@@ -150,10 +150,10 @@
       "ukrainian": "Vinnytsia",
       "category": "geographical",
       "sources": {
-        "gdelt": 0.7,
-        "reddit": 80.7,
         "trends": 79.6,
+        "gdelt": 0.7,
         "wikipedia": 96.5,
+        "reddit": 80.7,
         "youtube": 45.5,
         "openalex": 100.0
       },
@@ -172,19 +172,19 @@
       "ukrainian": "Rivne",
       "category": "geographical",
       "sources": {
-        "gdelt": 97.0,
-        "reddit": 66.2,
         "trends": 87.2,
+        "gdelt": 97.0,
         "wikipedia": 96.2,
+        "reddit": 66.2,
         "youtube": 40.8,
-        "openalex": 27.9
+        "openalex": 28.2
       },
-      "spread_pp": 69.1,
+      "spread_pp": 68.8,
       "outliers": {
         "gdelt": 97.0,
         "wikipedia": 96.2,
         "youtube": 40.8,
-        "openalex": 27.9
+        "openalex": 28.2
       },
       "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias)"
     },
@@ -194,12 +194,12 @@
       "ukrainian": "Chornobyl",
       "category": "geographical",
       "sources": {
-        "gdelt": 38.6,
-        "reddit": 48.7,
         "trends": 0.8,
+        "gdelt": 38.6,
         "wikipedia": 0.1,
+        "reddit": 48.7,
         "youtube": 51.8,
-        "openalex": 34.2
+        "openalex": 34.1
       },
       "spread_pp": 51.7,
       "outliers": {
@@ -215,37 +215,37 @@
       "ukrainian": "Luhansk",
       "category": "geographical",
       "sources": {
-        "gdelt": 75.2,
-        "reddit": 48.9,
         "trends": 77.9,
+        "gdelt": 75.2,
         "wikipedia": 97.5,
+        "reddit": 48.9,
         "youtube": 59.5,
         "openalex": 60.6
       },
       "spread_pp": 48.6,
       "outliers": {
-        "reddit": 48.9,
-        "wikipedia": 97.5
+        "wikipedia": 97.5,
+        "reddit": 48.9
       },
       "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias)"
     },
     {
       "pair_id": 15,
-      "russian": "Dnieper",
-      "ukrainian": "Dnipro",
+      "russian": "Dnieper River",
+      "ukrainian": "Dnipro River",
       "category": "geographical",
       "sources": {
-        "gdelt": 96.6,
-        "reddit": 64.7,
         "trends": 88.1,
+        "gdelt": 96.6,
         "wikipedia": 0.1,
+        "reddit": 64.7,
         "youtube": 50.2,
-        "openalex": 71.2
+        "openalex": 76.6
       },
       "spread_pp": 96.5,
       "outliers": {
-        "gdelt": 96.6,
         "trends": 88.1,
+        "gdelt": 96.6,
         "wikipedia": 0.1
       },
       "explanation": "Wikipedia redirect from old name inflates Russian variant views"
@@ -256,10 +256,10 @@
       "ukrainian": "Dnister",
       "category": "geographical",
       "sources": {
-        "gdelt": 87.1,
-        "reddit": 43.7,
         "trends": 48.9,
+        "gdelt": 87.1,
         "wikipedia": 1.5,
+        "reddit": 43.7,
         "youtube": 15.2,
         "openalex": 9.3
       },
@@ -277,10 +277,10 @@
       "ukrainian": "Donbas",
       "category": "geographical",
       "sources": {
-        "gdelt": 30.1,
-        "reddit": 66.3,
         "trends": 49.6,
+        "gdelt": 30.1,
         "wikipedia": 50.0,
+        "reddit": 66.3,
         "youtube": 52.2,
         "openalex": 48.9
       },
@@ -294,9 +294,9 @@
       "ukrainian": "Podillia",
       "category": "geographical",
       "sources": {
+        "trends": 94.6,
         "gdelt": 1.7,
         "reddit": 100.0,
-        "trends": 94.6,
         "youtube": 77.8,
         "openalex": 100.0
       },
@@ -314,9 +314,9 @@
       "ukrainian": "Chicken Kyiv",
       "category": "food",
       "sources": {
-        "reddit": 52.1,
         "trends": 9.4,
         "wikipedia": 50.0,
+        "reddit": 52.1,
         "youtube": 57.0,
         "openalex": 100.0
       },
@@ -333,9 +333,9 @@
       "ukrainian": "Kyiv cake",
       "category": "food",
       "sources": {
-        "reddit": 59.1,
         "trends": 62.9,
         "wikipedia": 99.2,
+        "reddit": 59.1,
         "youtube": 47.6
       },
       "spread_pp": 51.6,
@@ -346,23 +346,25 @@
     },
     {
       "pair_id": 23,
-      "russian": "Borscht",
-      "ukrainian": "Borshch",
+      "russian": "Borsch",
+      "ukrainian": "Borscht",
       "category": "food",
       "sources": {
-        "gdelt": 57.6,
-        "reddit": 31.1,
         "trends": 0.7,
+        "gdelt": 57.6,
         "wikipedia": 50.0,
+        "reddit": 31.1,
         "youtube": 52.9,
-        "openalex": 75.0
+        "openalex": 0.1
       },
-      "spread_pp": 74.3,
+      "spread_pp": 57.5,
       "outliers": {
         "trends": 0.7,
-        "openalex": 75.0
+        "gdelt": 57.6,
+        "youtube": 52.9,
+        "openalex": 0.1
       },
-      "explanation": "Public search lags behind news media adoption (media-public gap); Food terms: recipe searches use familiar spelling, media uses updated form"
+      "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias); Public search lags behind news media adoption (media-public gap); Food terms: recipe searches use familiar spelling, media uses updated form"
     },
     {
       "pair_id": 24,
@@ -370,9 +372,9 @@
       "ukrainian": "Kyiv Pechersk Lavra",
       "category": "landmarks",
       "sources": {
-        "reddit": 47.1,
         "trends": 79.9,
         "wikipedia": 89.6,
+        "reddit": 47.1,
         "youtube": 54.1,
         "openalex": 100.0
       },
@@ -390,9 +392,9 @@
       "ukrainian": "Saint Sophia Cathedral Kyiv",
       "category": "landmarks",
       "sources": {
-        "reddit": 100.0,
         "trends": 99.7,
         "wikipedia": 50.0,
+        "reddit": 100.0,
         "youtube": 61.4,
         "openalex": 100.0
       },
@@ -409,9 +411,9 @@
       "ukrainian": "Chornobyl Exclusion Zone",
       "category": "landmarks",
       "sources": {
-        "reddit": 44.7,
         "trends": 1.3,
         "wikipedia": 0.3,
+        "reddit": 44.7,
         "youtube": 52.1,
         "openalex": 50.0
       },
@@ -425,33 +427,14 @@
       "explanation": "Wikipedia redirect from old name inflates Russian variant views"
     },
     {
-      "pair_id": 27,
-      "russian": "the Ukraine",
-      "ukrainian": "Ukraine",
-      "category": "country",
-      "sources": {
-        "reddit": 76.1,
-        "trends": 94.5,
-        "wikipedia": 50.0,
-        "youtube": 33.1,
-        "openalex": 50.0
-      },
-      "spread_pp": 61.4,
-      "outliers": {
-        "trends": 94.5,
-        "youtube": 33.1
-      },
-      "explanation": "Multi-domain adoption varies by audience and editorial control"
-    },
-    {
       "pair_id": 28,
       "russian": "Kiev National University",
       "ukrainian": "Kyiv National University",
       "category": "institutional",
       "sources": {
-        "reddit": 100.0,
         "trends": 96.2,
         "wikipedia": 80.8,
+        "reddit": 100.0,
         "youtube": 50.0,
         "openalex": 100.0
       },
@@ -467,9 +450,9 @@
       "ukrainian": "Kharkiv University",
       "category": "institutional",
       "sources": {
-        "reddit": 55.6,
         "trends": 95.6,
         "wikipedia": 51.5,
+        "reddit": 55.6,
         "youtube": 43.3,
         "openalex": 98.7
       },
@@ -487,9 +470,9 @@
       "ukrainian": "Kyiv Polytechnic",
       "category": "institutional",
       "sources": {
-        "reddit": 97.2,
         "trends": 97.6,
         "wikipedia": 78.4,
+        "reddit": 97.2,
         "youtube": 50.0,
         "openalex": 100.0
       },
@@ -505,9 +488,9 @@
       "ukrainian": "Kyiv Patriarchate",
       "category": "institutional",
       "sources": {
-        "reddit": 66.7,
         "trends": 73.5,
         "wikipedia": 0.0,
+        "reddit": 66.7,
         "youtube": 55.9,
         "openalex": 100.0
       },
@@ -524,9 +507,9 @@
       "ukrainian": "Dynamo Kyiv",
       "category": "sports",
       "sources": {
-        "reddit": 72.4,
         "trends": 58.2,
         "wikipedia": 82.2,
+        "reddit": 72.4,
         "youtube": 50.9
       },
       "spread_pp": 31.3,
@@ -539,15 +522,15 @@
       "ukrainian": "Kyiv ballet",
       "category": "sports",
       "sources": {
-        "reddit": 93.1,
         "trends": 42.9,
+        "reddit": 93.1,
         "youtube": 48.4,
         "openalex": 85.7
       },
       "spread_pp": 50.2,
       "outliers": {
-        "reddit": 93.1,
-        "trends": 42.9
+        "trends": 42.9,
+        "reddit": 93.1
       },
       "explanation": "Multi-domain adoption varies by audience and editorial control"
     },
@@ -557,36 +540,16 @@
       "ukrainian": "Kyivan Rus",
       "category": "historical",
       "sources": {
-        "reddit": 96.4,
         "trends": 8.0,
         "wikipedia": 50.0,
+        "reddit": 96.4,
         "youtube": 44.1,
         "openalex": 66.1
       },
       "spread_pp": 88.4,
       "outliers": {
-        "reddit": 96.4,
-        "trends": 8.0
-      },
-      "explanation": "Historical terms: scholarship preserves traditional naming, public follows media"
-    },
-    {
-      "pair_id": 36,
-      "russian": "Kazak",
-      "ukrainian": "Kozak",
-      "category": "historical",
-      "sources": {
-        "reddit": 89.9,
-        "trends": 26.3,
-        "wikipedia": 56.9,
-        "youtube": 37.0,
-        "openalex": 24.3
-      },
-      "spread_pp": 65.6,
-      "outliers": {
-        "reddit": 89.9,
-        "trends": 26.3,
-        "openalex": 24.3
+        "trends": 8.0,
+        "reddit": 96.4
       },
       "explanation": "Historical terms: scholarship preserves traditional naming, public follows media"
     },
@@ -596,10 +559,10 @@
       "ukrainian": "Chernihiv",
       "category": "geographical",
       "sources": {
-        "gdelt": 80.9,
-        "reddit": 34.0,
         "trends": 85.5,
+        "gdelt": 80.9,
         "wikipedia": 88.3,
+        "reddit": 34.0,
         "youtube": 63.4,
         "openalex": 93.2
       },
@@ -615,10 +578,10 @@
       "ukrainian": "Chernivtsi",
       "category": "geographical",
       "sources": {
-        "gdelt": 99.9,
-        "reddit": 90.9,
         "trends": 97.9,
+        "gdelt": 99.9,
         "wikipedia": 96.6,
+        "reddit": 90.9,
         "youtube": 60.0,
         "openalex": 100.0
       },
@@ -634,10 +597,10 @@
       "ukrainian": "Zhytomyr",
       "category": "geographical",
       "sources": {
-        "gdelt": 48.2,
-        "reddit": 68.0,
         "trends": 92.6,
+        "gdelt": 48.2,
         "wikipedia": 93.3,
+        "reddit": 68.0,
         "youtube": 60.0,
         "openalex": 98.8
       },
@@ -654,10 +617,10 @@
       "ukrainian": "Cherkasy",
       "category": "geographical",
       "sources": {
-        "gdelt": 76.0,
-        "reddit": 74.2,
         "trends": 91.8,
+        "gdelt": 76.0,
         "wikipedia": 95.9,
+        "reddit": 74.2,
         "youtube": 50.0,
         "openalex": 95.9
       },
@@ -673,10 +636,10 @@
       "ukrainian": "Uzhhorod",
       "category": "geographical",
       "sources": {
-        "gdelt": 4.1,
-        "reddit": 72.1,
         "trends": 72.9,
+        "gdelt": 4.1,
         "wikipedia": 98.6,
+        "reddit": 72.1,
         "youtube": 52.9,
         "openalex": 80.8
       },
@@ -693,18 +656,18 @@
       "ukrainian": "Kremenchuk",
       "category": "geographical",
       "sources": {
-        "gdelt": 11.8,
-        "reddit": 69.8,
         "trends": 86.3,
+        "gdelt": 11.8,
         "wikipedia": 91.4,
+        "reddit": 69.8,
         "youtube": 54.8,
-        "openalex": 87.5
+        "openalex": 88.0
       },
       "spread_pp": 79.6,
       "outliers": {
         "gdelt": 11.8,
         "wikipedia": 91.4,
-        "openalex": 87.5
+        "openalex": 88.0
       },
       "explanation": "Wikipedia article under Ukrainian name gets more views (consumption bias); Public search adopts faster than news URLs (URL stickiness)"
     },
@@ -714,10 +677,10 @@
       "ukrainian": "Kropyvnytskyi",
       "category": "geographical",
       "sources": {
-        "gdelt": 0.2,
-        "reddit": 58.2,
         "trends": 70.1,
+        "gdelt": 0.2,
         "wikipedia": 96.0,
+        "reddit": 58.2,
         "youtube": 72.4,
         "openalex": 59.1
       },
@@ -734,12 +697,12 @@
       "ukrainian": "Ternopil",
       "category": "geographical",
       "sources": {
-        "gdelt": 99.9,
-        "reddit": 100.0,
         "trends": 92.0,
+        "gdelt": 99.9,
         "wikipedia": 98.8,
+        "reddit": 100.0,
         "youtube": 47.5,
-        "openalex": 96.8
+        "openalex": 96.9
       },
       "spread_pp": 52.5,
       "outliers": {
@@ -753,17 +716,17 @@
       "ukrainian": "Varenyky",
       "category": "food",
       "sources": {
-        "gdelt": 10.2,
-        "reddit": 64.2,
         "trends": 12.9,
+        "gdelt": 10.2,
         "wikipedia": 82.9,
+        "reddit": 64.2,
         "youtube": 85.1,
         "openalex": 100.0
       },
       "spread_pp": 89.8,
       "outliers": {
-        "gdelt": 10.2,
         "trends": 12.9,
+        "gdelt": 10.2,
         "wikipedia": 82.9,
         "youtube": 85.1,
         "openalex": 100.0
@@ -776,9 +739,9 @@
       "ukrainian": "Hopak",
       "category": "historical",
       "sources": {
-        "reddit": 79.1,
         "trends": 55.5,
         "wikipedia": 98.4,
+        "reddit": 79.1,
         "youtube": 46.7,
         "openalex": 50.0
       },
@@ -794,35 +757,16 @@
       "ukrainian": "Metalist Kharkiv",
       "category": "sports",
       "sources": {
-        "reddit": 100.0,
         "trends": 100.0,
         "wikipedia": 50.0,
+        "reddit": 100.0,
         "youtube": 63.6
       },
       "spread_pp": 50.0,
       "outliers": {
-        "reddit": 100.0,
-        "trends": 100.0,
-        "wikipedia": 50.0
-      },
-      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
-    },
-    {
-      "pair_id": 53,
-      "russian": "Karpaty Lvov",
-      "ukrainian": "Karpaty Lviv",
-      "category": "sports",
-      "sources": {
-        "reddit": 96.6,
         "trends": 100.0,
         "wikipedia": 50.0,
-        "youtube": 57.8,
-        "openalex": 100.0
-      },
-      "spread_pp": 50.0,
-      "outliers": {
-        "wikipedia": 50.0,
-        "youtube": 57.8
+        "reddit": 100.0
       },
       "explanation": "Wikipedia redirect from old name inflates Russian variant views"
     },
@@ -832,17 +776,17 @@
       "ukrainian": "Babyn Yar",
       "category": "landmarks",
       "sources": {
-        "gdelt": 0.0,
-        "reddit": 35.6,
         "trends": 17.0,
+        "gdelt": 0.0,
         "wikipedia": 50.0,
+        "reddit": 35.6,
         "youtube": 38.1,
         "openalex": 93.9
       },
       "spread_pp": 93.9,
       "outliers": {
-        "gdelt": 0.0,
         "trends": 17.0,
+        "gdelt": 0.0,
         "openalex": 93.9
       },
       "explanation": "Multi-domain adoption varies by audience and editorial control"
@@ -853,9 +797,9 @@
       "ukrainian": "Potemkin Stairs Odesa",
       "category": "landmarks",
       "sources": {
-        "reddit": 50.0,
         "trends": 5.6,
         "wikipedia": 50.0,
+        "reddit": 50.0,
         "youtube": 58.5
       },
       "spread_pp": 52.9,
@@ -870,15 +814,15 @@
       "ukrainian": "Motherland Monument Kyiv",
       "category": "landmarks",
       "sources": {
-        "reddit": 0.0,
         "trends": 100.0,
         "wikipedia": 50.0,
+        "reddit": 0.0,
         "youtube": 48.1
       },
       "spread_pp": 100.0,
       "outliers": {
-        "reddit": 0.0,
-        "trends": 100.0
+        "trends": 100.0,
+        "reddit": 0.0
       },
       "explanation": "Multi-domain adoption varies by audience and editorial control"
     },
@@ -888,9 +832,9 @@
       "ukrainian": "Lviv Polytechnic",
       "category": "institutional",
       "sources": {
-        "reddit": 100.0,
         "trends": 100.0,
         "wikipedia": 100.0,
+        "reddit": 100.0,
         "youtube": 25.0,
         "openalex": 100.0
       },
@@ -924,9 +868,9 @@
       "ukrainian": "Oleksandr Usyk",
       "category": "people",
       "sources": {
-        "reddit": 92.5,
         "trends": 93.6,
         "wikipedia": 50.0,
+        "reddit": 92.5,
         "youtube": 49.4,
         "openalex": 100.0
       },
@@ -944,10 +888,10 @@
       "ukrainian": "Volodymyr Zelenskyy",
       "category": "people",
       "sources": {
-        "gdelt": 26.4,
-        "reddit": 84.5,
         "trends": 70.3,
+        "gdelt": 26.4,
         "wikipedia": 50.0,
+        "reddit": 84.5,
         "youtube": 50.5,
         "openalex": 76.9
       },
@@ -959,25 +903,22 @@
       "explanation": "Public search adopts faster than news URLs (URL stickiness)"
     },
     {
-      "pair_id": 64,
-      "russian": "Borsch",
-      "ukrainian": "Borshch",
-      "category": "food",
+      "pair_id": 62,
+      "russian": "Andrey Shevchenko",
+      "ukrainian": "Andrii Shevchenko",
+      "category": "people",
       "sources": {
-        "gdelt": 40.6,
-        "reddit": 46.7,
-        "trends": 6.0,
-        "wikipedia": 25.5,
-        "youtube": 48.0,
-        "openalex": 0.5
+        "trends": 100.0,
+        "wikipedia": 50.0,
+        "reddit": 89.8,
+        "youtube": 54.3
       },
-      "spread_pp": 47.5,
+      "spread_pp": 50.0,
       "outliers": {
-        "trends": 6.0,
-        "youtube": 48.0,
-        "openalex": 0.5
+        "trends": 100.0,
+        "wikipedia": 50.0
       },
-      "explanation": "Public search lags behind news media adoption (media-public gap); Food terms: recipe searches use familiar spelling, media uses updated form"
+      "explanation": "Wikipedia redirect from old name inflates Russian variant views"
     },
     {
       "pair_id": 71,
@@ -1009,11 +950,11 @@
     }
   ],
   "summary": {
-    "pairs_analyzed": 54,
-    "median_spread_pp": 54.2,
+    "pairs_analyzed": 51,
+    "median_spread_pp": 52.9,
     "mean_spread_pp": 62.2,
     "max_spread_pp": 100.0,
-    "n_disagreements": 51,
+    "n_disagreements": 48,
     "n_agreements": 1
   }
 }
