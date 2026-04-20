@@ -91,9 +91,6 @@ ingest-dictionaries:  ## Dictionary audit (Wiktionary + FreeDictionary for all p
 ingest-enforcement:  ## Spellcheck/enforcement audit (Grammarly, Google, hunspell)
 	python -m pipeline.ingestion.spellcheck_audit
 
-audit-search:  ## DuckDuckGo search audit (Wikipedia article framing, all pairs)
-	python -m pipeline.ingestion.playwright_audits.ddg_autocorrect
-
 audit-dictionaries:  ## Dictionary scraper (Oxford, Cambridge, MW, Britannica)
 	python -m pipeline.ingestion.playwright_audits.dictionary_scraper
 
@@ -148,8 +145,11 @@ site-dev:  ## Run site dev server
 
 # ── Full Pipeline ───────────────────────────────────────────────────────────
 
-reproduce: ingest export-site analyze site-build  ## Full end-to-end reproduction
+reproduce: export-site analyze site-build  ## Reproduce analysis from HuggingFace parquets (no API keys needed)
 	@echo "Full reproduction complete"
+
+reproduce-full: ingest export-site analyze site-build  ## Full pipeline including data ingestion (needs API keys)
+	@echo "Full reproduction with fresh data complete"
 
 refresh: export-site site-build  ## Quick refresh: re-export data + rebuild site
 	@echo "Site refreshed"
@@ -160,7 +160,7 @@ status:  ## Show pipeline status (watermarks per pair per source)
 	python -m pipeline.ingestion.orchestrator --status
 
 validate:  ## Run data quality checks
-	python -m pipeline.transform.validate
+	python -m pipeline.analysis.recompute_stats
 
 test:  ## Run tests
 	uv run pytest tests/ -v
@@ -171,10 +171,9 @@ lint:  ## Run linter
 format:  ## Auto-format code
 	uv run ruff format pipeline/ tests/
 
-clean:  ## Remove local processed files
+clean:  ## Remove generated files (preserves dataset/ parquets)
 	rm -rf data/processed/*.csv data/processed/*.parquet
 	rm -rf figures/*.png figures/*.html
-	rm -rf dataset/
 
 help:  ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
