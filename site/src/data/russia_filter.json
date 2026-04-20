@@ -1,14 +1,131 @@
 {
-  "Non-Russia": {
-    "russian": 9940779,
-    "ukrainian": 4396519,
-    "total": 14337298,
-    "adoption_pct": 30.7
+  "method": "EU Council Regulation 833/2014, Article 2f \u2014 domains sanctioned under Decisions 2022/351 through 2025/394",
+  "source": "EUR-Lex (eur-lex.europa.eu)",
+  "tiers": {
+    "eu_sanctioned": {
+      "total": 724938,
+      "russian": 571619,
+      "ukrainian": 153319,
+      "ua_pct": 21.1,
+      "n_domains": 20
+    },
+    "other": {
+      "total": 34328644,
+      "russian": 18031749,
+      "ukrainian": 16296895,
+      "ua_pct": 47.5,
+      "n_domains": 51148
+    },
+    "russian_domain": {
+      "total": 4536084,
+      "russian": 3374041,
+      "ukrainian": 1162043,
+      "ua_pct": 25.6,
+      "n_domains": 2042
+    }
   },
-  "Russia": {
-    "russian": 2262807,
-    "ukrainian": 39399,
-    "total": 2302206,
-    "adoption_pct": 1.7
-  }
+  "sanctioned_domains": [
+    {
+      "domain": "ria.ru",
+      "total": 241573,
+      "ua_pct": 20.4
+    },
+    {
+      "domain": "lenta.ru",
+      "total": 127154,
+      "ua_pct": 21.6
+    },
+    {
+      "domain": "russian.rt.com",
+      "total": 87799,
+      "ua_pct": 21.3
+    },
+    {
+      "domain": "rg.ru",
+      "total": 77117,
+      "ua_pct": 20.8
+    },
+    {
+      "domain": "tvzvezda.ru",
+      "total": 50426,
+      "ua_pct": 23.3
+    },
+    {
+      "domain": "iz.ru",
+      "total": 49396,
+      "ua_pct": 23.2
+    },
+    {
+      "domain": "ren.tv",
+      "total": 32313,
+      "ua_pct": 22.4
+    },
+    {
+      "domain": "sputniknews.com",
+      "total": 19323,
+      "ua_pct": 15.4
+    },
+    {
+      "domain": "sputnikportal.rs",
+      "total": 9791,
+      "ua_pct": 19.1
+    },
+    {
+      "domain": "sputnikglobe.com",
+      "total": 7723,
+      "ua_pct": 5.0
+    },
+    {
+      "domain": "fondsk.ru",
+      "total": 7342,
+      "ua_pct": 32.2
+    },
+    {
+      "domain": "actualidad.rt.com",
+      "total": 7171,
+      "ua_pct": 38.6
+    },
+    {
+      "domain": "arabic.rt.com",
+      "total": 5104,
+      "ua_pct": 11.6
+    },
+    {
+      "domain": "eadaily.com",
+      "total": 1296,
+      "ua_pct": 15.8
+    },
+    {
+      "domain": "rt.com",
+      "total": 923,
+      "ua_pct": 6.4
+    },
+    {
+      "domain": "tsargrad.tv",
+      "total": 289,
+      "ua_pct": 20.8
+    },
+    {
+      "domain": "orientalreview.org",
+      "total": 73,
+      "ua_pct": 27.4
+    },
+    {
+      "domain": "francais.rt.com",
+      "total": 72,
+      "ua_pct": 8.3
+    },
+    {
+      "domain": "katehon.com",
+      "total": 52,
+      "ua_pct": 9.6
+    },
+    {
+      "domain": "redstar.ru",
+      "total": 1,
+      "ua_pct": 0.0
+    }
+  ],
+  "n_sanctioned_domains_in_data": 20,
+  "n_sanctioned_domains_in_list": 46
 }
