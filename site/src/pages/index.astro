@@ -373,46 +373,46 @@ function formatNum(n: number) {
 
       <!-- Statistical Analysis + Confusion Matrix side by side -->
       <div class="resp-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
-        <div class="chart-container" style="margin-bottom:0;">
+        <div class="chart-container" style="margin-bottom:0; display:flex; flex-direction:column; justify-content:space-between;">
           <div class="chart-title" style="color: var(--text);">Statistical Analysis</div>
-          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
-            <div style="padding:0.75rem; background:#f0f9ff; border-radius:6px; text-align:center;">
-              <div style="font-size:1.4rem; font-weight:700; color:#0057B8;">R²=0.87</div>
-              <div style="font-size:0.7rem; color:#6b7280;">Regression model fit</div>
-              <div style="font-size:0.6rem; color:#9ca3af; margin-top:0.15rem;">Invasion bump is #1 predictor</div>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem;">
+            <div style="padding:0.6rem 0.4rem; background:#f0f9ff; border-radius:6px; text-align:center;">
+              <div style="font-size:1.2rem; font-weight:700; color:#0057B8;">R²=0.87</div>
+              <div style="font-size:0.65rem; color:#6b7280;">Regression fit</div>
+              <div style="font-size:0.58rem; color:#9ca3af;">Invasion = #1 predictor</div>
             </div>
-            <div style="padding:0.75rem; background:#fef2f2; border-radius:6px; text-align:center;">
-              <div style="font-size:1.4rem; font-weight:700; color:#dc2626;">p&lt;0.001</div>
-              <div style="font-size:0.7rem; color:#6b7280;">Invasion effect</div>
-              <div style="font-size:0.6rem; color:#9ca3af; margin-top:0.15rem;">Wilcoxon; Reddit d=1.38</div>
+            <div style="padding:0.6rem 0.4rem; background:#fef2f2; border-radius:6px; text-align:center;">
+              <div style="font-size:1.2rem; font-weight:700; color:#dc2626;">p&lt;0.001</div>
+              <div style="font-size:0.65rem; color:#6b7280;">Invasion effect</div>
+              <div style="font-size:0.58rem; color:#9ca3af;">Wilcoxon; d=1.38</div>
             </div>
-            <div style="padding:0.75rem; background:#f0fdf4; border-radius:6px; text-align:center;">
-              <div style="font-size:1.4rem; font-weight:700; color:#059669;">99.8%</div>
-              <div style="font-size:0.7rem; color:#6b7280;">Regex precision</div>
-              <div style="font-size:0.6rem; color:#9ca3af; margin-top:0.15rem;">3 FP / 1,444 sampled</div>
+            <div style="padding:0.6rem 0.4rem; background:#f0fdf4; border-radius:6px; text-align:center;">
+              <div style="font-size:1.2rem; font-weight:700; color:#059669;">99.8%</div>
+              <div style="font-size:0.65rem; color:#6b7280;">Regex precision</div>
+              <div style="font-size:0.58rem; color:#9ca3af;">3 FP / 1,444</div>
             </div>
-            <div style="padding:0.75rem; background:#fefce8; border-radius:6px; text-align:center;">
-              <div style="font-size:1.4rem; font-weight:700; color:#d97706;">p=0.035</div>
-              <div style="font-size:0.7rem; color:#6b7280;">Category test</div>
-              <div style="font-size:0.6rem; color:#9ca3af; margin-top:0.15rem;">Kruskal-Wallis H=13.54</div>
+            <div style="padding:0.6rem 0.4rem; background:#fefce8; border-radius:6px; text-align:center;">
+              <div style="font-size:1.2rem; font-weight:700; color:#d97706;">p=0.035</div>
+              <div style="font-size:0.65rem; color:#6b7280;">Category test</div>
+              <div style="font-size:0.58rem; color:#9ca3af;">H=13.54</div>
             </div>
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-top: 0.5rem;">
-            <div style="padding:0.5rem 0.7rem; background:#f8f9fb; border-radius:6px;">
-              <div style="font-size:0.75rem; font-weight:600; color:var(--text);">Cross-source spread</div>
-              <div style="font-size:0.68rem; color:#6b7280;">Median 54pp — highly domain-dependent</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; margin-top: 0.4rem;">
+            <div style="padding:0.4rem 0.6rem; background:#f8f9fb; border-radius:5px;">
+              <div style="font-size:0.72rem; font-weight:600; color:var(--text);">Cross-source spread</div>
+              <div style="font-size:0.65rem; color:#6b7280;">Median 54pp — highly domain-dependent</div>
             </div>
-            <div style="padding:0.5rem 0.7rem; background:#f8f9fb; border-radius:6px;">
-              <div style="font-size:0.75rem; font-weight:600; color:var(--text);">Historical identity</div>
-              <div style="font-size:0.68rem; color:#6b7280;">Kyiv 60% but Volodymyr the Great 5%</div>
+            <div style="padding:0.4rem 0.6rem; background:#f8f9fb; border-radius:5px;">
+              <div style="font-size:0.72rem; font-weight:600; color:var(--text);">Historical identity</div>
+              <div style="font-size:0.65rem; color:#6b7280;">Kyiv 60% but Volodymyr the Great 5%</div>
             </div>
-            <div style="padding:0.5rem 0.7rem; background:#f8f9fb; border-radius:6px;">
-              <div style="font-size:0.75rem; font-weight:600; color:var(--text);">Disaster brand</div>
-              <div style="font-size:0.68rem; color:#6b7280;">Chernobyl: 1% Trends, 0% Wikipedia</div>
+            <div style="padding:0.4rem 0.6rem; background:#f8f9fb; border-radius:5px;">
+              <div style="font-size:0.72rem; font-weight:600; color:var(--text);">Disaster brand</div>
+              <div style="font-size:0.65rem; color:#6b7280;">Chernobyl: 1% Trends, 0% Wikipedia</div>
             </div>
-            <div style="padding:0.5rem 0.7rem; background:#f8f9fb; border-radius:6px;">
-              <div style="font-size:0.75rem; font-weight:600; color:var(--text);">Recognition vs recall</div>
-              <div style="font-size:0.68rem; color:#6b7280;">72 LLMs: 90%+ forced, 65–78% free</div>
+            <div style="padding:0.4rem 0.6rem; background:#f8f9fb; border-radius:5px;">
+              <div style="font-size:0.72rem; font-weight:600; color:var(--text);">Recognition vs recall</div>
+              <div style="font-size:0.65rem; color:#6b7280;">72 LLMs: 90%+ forced, 65–78% free</div>
             </div>
           </div>
         </div>
