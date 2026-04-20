@@ -66,12 +66,12 @@ flowchart TD
 
 | Module | Source | Scale | Method |
 |--------|--------|-------|--------|
-| `gdelt.py` | GDELT GKG | 38.6M articles | BQ public dataset (SQL) |
-| `reddit.py` | Reddit via Arctic Shift | 33K posts | Spark on zst dumps |
-| `wikipedia.py` | Wikimedia API | 589M pageviews | REST API |
-| `trends.py` | Google Trends | 206K datapoints | pytrends |
-| `ngrams.py` | Google Books | 13K, 1900--2019 | REST API |
-| `youtube.py` | YouTube Data API v3 | 33K videos | REST API |
+| `gdelt.py` | GDELT GKG | 39.6M articles | BQ public dataset (SQL) |
+| `reddit.py` | Reddit via Arctic Shift | 22.6K posts | Spark on zst dumps |
+| `wikipedia.py` | Wikimedia API | 573M pageviews | REST API |
+| `trends.py` | Google Trends | 151K datapoints | pytrends |
+| `ngrams.py` | Google Books | 11.6K, 1900--2019 | REST API |
+| `youtube.py` | YouTube Data API v3 | 14.5K videos | REST API |
 | `openalex.py` | OpenAlex | 381K papers | REST API |
 | `openlibrary.py` | Open Library | 1.9K titles | REST API |
 | `orchestrator.py` | -- | -- | Coordinates all above |

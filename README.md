@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>A Large-Scale Computational Study of Ukrainian Toponym Adoption</strong><br>
-  90B+ records scanned, 628M+ toponym matches, 42K ML-analyzed texts, 8 sources.
+  90B+ records scanned, 614M+ toponym matches, 42K ML-analyzed texts, 8 sources.
 </p>
 
 <p align="center">
@@ -22,8 +22,8 @@
 
 | Metric | Value |
 |--------|-------|
-| Records scanned | **90B+** across GDELT, Wikipedia, OpenAlex, Reddit, YouTube, Ngrams, Trends |
-| Toponym matches | **628M+** (38.6M news articles, 589M pageviews tracked, 381K papers, 206K trends, 33K posts, 33K videos, 13K books, 1.9K book titles) |
+| Records scanned | **90B+** across GDELT, Wikipedia, OpenAlex, Reddit, YouTube, Ngrams, Trends, Open Library |
+| Toponym matches | **614M+** (39.6M news articles, 573M pageviews, 381K papers, 151K trends, 22.6K posts, 14.5K videos, 11.6K books, 1.9K book titles) |
 | Toponym pairs | **59** enabled across **8** categories |
 | Data sources | **8** (GDELT, Google Trends, Wikipedia, Reddit, YouTube, Google Books Ngrams, OpenAlex, Open Library) |
 | CL corpus | **42,613** texts, XLM-RoBERTa-large F1=83.8% |
@@ -38,13 +38,13 @@
 graph LR
     subgraph Sources["Data Sources"]
         style Sources fill:#1a1a2e,stroke:#0057B8,color:#e2e8f0
-        GDELT["GDELT<br/>38.6M articles"]
+        GDELT["GDELT<br/>39.6M articles"]
         OA["OpenAlex<br/>381K papers"]
-        Reddit["Reddit<br/>33K posts"]
-        Wiki["Wikipedia<br/>589M pageviews"]
-        Trends["Google Trends<br/>206K datapoints"]
-        Ngrams["Ngrams<br/>13K books 1900-2019"]
-        YT["YouTube<br/>33K videos"]
+        Reddit["Reddit<br/>22.6K posts"]
+        Wiki["Wikipedia<br/>573M pageviews"]
+        Trends["Google Trends<br/>151K datapoints"]
+        Ngrams["Ngrams<br/>11.6K books 1900-2019"]
+        YT["YouTube<br/>14.5K videos"]
         OL["Open Library<br/>1.9K titles"]
     end
 

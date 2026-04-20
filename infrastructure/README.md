@@ -1,5 +1,10 @@
 # Infrastructure
 
+> **Note:** BigQuery was the development data warehouse. The published dataset is now on
+> [HuggingFace](https://huggingface.co/datasets/KyivNotKiev/corpus) as parquet files.
+> Analysis and site export run from parquets (`make reproduce`). This GCP infrastructure
+> is only needed for fresh data ingestion from source APIs.
+
 GCP infrastructure managed by Terraform. One command deploys everything.
 
 ## Resources
@@ -37,12 +42,12 @@ graph TD
 
 | Table | Partitioned | Clustered | Description |
 |-------|------------|-----------|-------------|
-| `raw_gdelt` | DAY (date) | pair_id, variant | News media mentions (38.6M) |
-| `raw_reddit` | MONTH (created_utc) | pair_id, variant, subreddit | Reddit posts/comments (33K) |
-| `raw_wikipedia` | MONTH (date) | pair_id, variant | Pageviews (589M) |
-| `raw_trends` | -- | pair_id, variant | Google Trends interest (206K) |
-| `raw_ngrams` | -- | pair_id, variant | Book frequency 1900--2019 (13K) |
-| `raw_youtube` | MONTH (published_at) | pair_id, variant | Video metadata (33K) |
+| `raw_gdelt` | DAY (date) | pair_id, variant | News media mentions (39.6M) |
+| `raw_reddit` | MONTH (created_utc) | pair_id, variant, subreddit | Reddit posts/comments (22.6K) |
+| `raw_wikipedia` | MONTH (date) | pair_id, variant | Pageviews (573M) |
+| `raw_trends` | -- | pair_id, variant | Google Trends interest (151K) |
+| `raw_ngrams` | -- | pair_id, variant | Book frequency 1900--2019 (11.6K) |
+| `raw_youtube` | MONTH (published_at) | pair_id, variant | Video metadata (14.5K) |
 | `raw_openalex` | -- | pair_id, variant | Academic papers (381K) |
 | `raw_openlibrary` | -- | pair_id, variant | Open Library titles (1.9K) |
 | `watermarks` | -- | -- | Ingestion state tracking |

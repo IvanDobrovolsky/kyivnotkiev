@@ -23,10 +23,11 @@ Binary regex matching tells us *whether* the world switched from "Kiev" to "Kyiv
 flowchart TD
     subgraph Extract["Data Extraction"]
         style Extract fill:#1a1a2e,stroke:#0057B8,color:#e2e8f0
-        R["Reddit 11.9K"]
-        OA["OpenAlex 10.7K"]
-        YT["YouTube 6.8K"]
-        G["GDELT 6.2K"]
+        R["Reddit 11.3K"]
+        OA["OpenAlex 16.3K"]
+        YT["YouTube 12.6K"]
+        G["GDELT 1.1K"]
+        Rel["Religious 1.3K"]
     end
 
     subgraph Balance["Balancing & Cleaning"]
@@ -48,7 +49,7 @@ flowchart TD
 
     subgraph Robust["Robustness Validation"]
         style Robust fill:#1a1a2e,stroke:#E74C3C,color:#e2e8f0
-        RV["9 experiments: 3 seeds x 3 LRs x 2 thresholds<br/>Seed stability: sigma=0.34pp"]
+        RV["9 ablations: seeds, LRs, thresholds, epochs<br/>Seed stability: sigma=0.41pp"]
     end
 
     subgraph Export["Export"]
@@ -57,7 +58,7 @@ flowchart TD
         SJ["Site JSON"]
     end
 
-    R & OA & YT & G --> B --> L --> X & D & M --> RV --> HF & SJ
+    R & OA & YT & G & Rel --> B --> L --> X & D & M --> RV --> HF & SJ
 ```
 
 ## Key Findings

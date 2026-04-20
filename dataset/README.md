@@ -23,19 +23,19 @@ Part of the research project: [kyivnotkiev.org](https://kyivnotkiev.org)
 
 ## Dataset Description
 
-This dataset measures the adoption of Ukrainian-derived English spellings (e.g., "Kyiv" instead of "Kiev") across 8 independent data sources spanning 2010--2026. It covers 59 toponym pairs across 8 categories with 628M+ toponym matches from 90B+ scanned records.
+This dataset measures the adoption of Ukrainian-derived English spellings (e.g., "Kyiv" instead of "Kiev") across 8 independent data sources spanning 2010--2026. It covers 59 toponym pairs across 8 categories with 614M+ toponym matches from 90B+ scanned records.
 
 ## Sources
 
 | Source | Records | Description | Time Range |
 |--------|---------|-------------|------------|
-| GDELT | 38.6M | News article mentions | 2015--2026 |
-| Wikipedia | 589M | Article pageviews | 2015--2026 |
-| Google Trends | 206K | Search interest (global + 55 countries) | 2010--2026 |
+| GDELT | 39.6M | News article mentions | 2015--2026 |
+| Wikipedia | 573M | Article pageviews | 2015--2026 |
+| Google Trends | 151K | Search interest (global + 55 countries) | 2010--2026 |
 | OpenAlex | 381K | Academic paper mentions | 2010--2026 |
-| Reddit | 33K | Post mentions | 2007--2026 |
-| YouTube | 33K | Video title mentions | 2006--2026 |
-| Google Books Ngrams | 13K | Book frequency | 1900--2019 |
+| Reddit | 22.6K | Post mentions | 2007--2026 |
+| YouTube | 14.5K | Video title mentions | 2006--2026 |
+| Google Books Ngrams | 11.6K | Book frequency | 1900--2019 |
 | Open Library | 1.9K | Book title mentions | 1900--2025 |
 
 ## Files
