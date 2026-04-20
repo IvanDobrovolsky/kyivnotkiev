@@ -45,6 +45,7 @@ infrastructure/terraform.tfstate*
 *.p12
 .env
 .env.*
+!.env.example
 
 # Generated figures (reproduced from pipeline)
 /figures/
