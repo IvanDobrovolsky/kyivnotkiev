@@ -1,5 +1,6 @@
 # Pipeline Configuration
-# Controls scheduling, thresholds, and GCP settings.
+# Controls scheduling, thresholds, and settings.
+# Note: GCP/BigQuery config is legacy — data is now published to HuggingFace.
 
 gcp:
   project_id: "kyivnotkiev-research"

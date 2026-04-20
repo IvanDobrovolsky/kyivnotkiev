@@ -62,14 +62,14 @@ Our context classifier enables measurement of WHERE within discourse adoption oc
 ### Dataset: KyivNotKiev-CL Corpus
 
 - **42,613 texts** across **59 Ukrainian-Russian toponym pairs**
-- **4 sources**: Reddit (social media), YouTube (video), OpenAlex (academic), GDELT (news articles)
-- **Balanced**: 14,339 Russian / 15,599 Ukrainian variants (48/52%)
+- **5 sources**: Reddit (social media), YouTube (video), OpenAlex (academic), GDELT (news articles), Religious institutions
+- **Balanced**: 21,749 Russian / 20,864 Ukrainian variants (51/49%)
 - **Multilingual**: 82% Latin script (primarily English), 17% Cyrillic (Ukrainian/Russian), 2% mixed
 - **Temporal span**: 2006–2026, stratified by 4 periods
 
 ### Annotation Pipeline
 
-1. **Llama 3.1 70B-Instruct** (full BF16 precision) annotates all texts with:
+1. **Llama 3.1 70B-Instruct** (AWQ quantized) annotates all texts with:
    - Context category (11 classes: politics, war_conflict, sports, culture_arts, food_cuisine, travel_tourism, academic_science, history, business_economy, general_news, religion)
    - Sentiment (positive/neutral/negative with -1 to +1 score)
    - Brief reasoning
@@ -99,17 +99,17 @@ All three encoders use identical hyperparameters for fair comparison:
 | Warmup ratio | 0.1 | 10% of steps, prevents early divergence on new classification head |
 | Weight decay | 0.01 | Standard L2 regularization |
 | Max sequence length | 512 tokens | Covers 95th percentile text length (435 words ≈ ~550 tokens) |
-| Precision | BF16 | Native on B200, no quality loss vs FP32 for training |
+| Precision | fp16 | Mixed precision for memory efficiency |
 | Optimizer | AdamW | HuggingFace Trainer default |
 | Model selection | Best val F1-macro across 3 epochs | F1-macro preferred over accuracy due to class imbalance |
-| Label confidence filter | ≥ 0.6 | Removes ~2% lowest-confidence LLM annotations |
+| Label confidence filter | ≥ 0.5 | Removes lowest-confidence LLM annotations |
 | Train/val/test split | 80/10/10 stratified | Preserves label distribution across splits |
 
 **Reproducibility notes:**
 - Random seed: 42 for all splits and model initialization
 - Hardware: NVIDIA B200 183GB, single GPU
 - Software: HuggingFace Transformers, PyTorch with BF16
-- Training time: ~12 minutes per model (3 epochs on 34,090 texts)
+- Training time: ~6-13 minutes per model (3 epochs on ~24K texts after filtering)
 - All hyperparameters chosen from established defaults, no tuning performed — this is intentional, as hyperparameter optimization would conflate model capability with tuning effort
 
 ### Why This Methodology

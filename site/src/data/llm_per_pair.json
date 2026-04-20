@@ -20421,8 +20421,8 @@
       }
     },
     "23": {
-      "russian": "Borscht",
-      "ukrainian": "Borshch",
+      "russian": "Borsch",
+      "ukrainian": "Borscht",
       "category": "food",
       "models": [
         {

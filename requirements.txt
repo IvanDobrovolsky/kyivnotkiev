@@ -1,8 +1,4 @@
 # Core
-pyspark==3.5.0
-google-cloud-bigquery==3.25.0
-google-cloud-storage==2.18.0
-google-cloud-dataproc==5.9.0
 pyyaml==6.0.1
 
 # Data processing
@@ -13,7 +9,6 @@ numpy==1.26.4
 # Web scraping / API
 requests==2.31.0
 pytrends==4.9.2
-warcio==1.7.4
 zstandard==0.22.0
 
 # Analysis
@@ -33,3 +28,11 @@ tenacity==8.2.3
 
 # Document generation
 python-docx==1.1.0
+
+# Optional: GCP ingestion (pip install -r requirements-gcp.txt)
+# pyspark==3.5.0
+# google-cloud-bigquery==3.25.0
+# google-cloud-storage==2.18.0
+# google-cloud-dataproc==5.9.0
+# db-dtypes==1.2.0
+# warcio==1.7.4

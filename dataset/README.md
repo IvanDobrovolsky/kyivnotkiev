@@ -55,14 +55,14 @@ This dataset measures the adoption of Ukrainian-derived English spellings (e.g.,
 
 | Category | Pairs | Example |
 |----------|-------|---------|
-| Geographical | 24 | Kiev -> Kyiv |
-| Food & Cuisine | 5 | Chicken Kiev -> Chicken Kyiv |
-| Landmarks | 6 | Kiev Pechersk Lavra -> Kyiv Pechersk Lavra |
-| Country-Level | 1 | the Ukraine -> Ukraine |
+| Geographical | 26 | Kiev -> Kyiv |
+| Food & Cuisine | 4 | Borsch -> Borscht |
+| Landmarks | 7 | Kiev Pechersk Lavra -> Kyiv Pechersk Lavra |
+| Country-Level | 0 | *(disabled)* |
 | Institutional | 6 | Kiev National University -> Kyiv National University |
-| Sports | 5 | Dynamo Kiev -> Dynamo Kyiv |
+| Sports | 3 | Dynamo Kiev -> Dynamo Kyiv |
 | Historical | 6 | Vladimir the Great -> Volodymyr the Great |
-| People | 2 | Vladimir Zelensky -> Volodymyr Zelenskyy |
+| People | 7 | Vladimir Zelensky -> Volodymyr Zelenskyy |
 
 ## Privacy
 

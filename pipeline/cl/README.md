@@ -10,10 +10,10 @@ Binary regex matching tells us *whether* the world switched from "Kiev" to "Kyiv
 
 | Spelling | Top collocations | Context |
 |----------|-----------------|---------|
-| "Chernobyl" (Russian) | disaster, hbo, nuclear, simulator, fukushima | Pop culture, gaming, tourism -- the disaster as entertainment brand |
-| "Chornobyl" (Ukrainian) | cleanup, accident, exclusion, heart, zone | Actual nuclear site operations, IAEA, radiation biology |
-| "Kiev" (Russian) | streets, chicken, guide, pronunciation, travel | Food recipes, tourism guides, language how-tos |
-| "Kyiv" (Ukrainian) | dynamo, walk, barcelona, champions, uefa | Football (Dynamo Kyiv), travel vlogs, modern city life |
+| "Chernobyl" (Russian) | accident, disaster, fukushima, hbo, nuclear | Disaster narrative, pop culture (HBO series), nuclear history |
+| "Chornobyl" (Ukrainian) | accident, cleanup, clean, workers, disaster | Nuclear site operations, remediation, worker health |
+| "Kiev" (Russian) | scenes, streets, dynamo, travel, chicken | Urban tourism, sports, food recipes |
+| "Kyiv" (Ukrainian) | agglomeration, titled, mohyla, theological, biodiversity | Academic research, university life, institutional naming |
 
 **The spelling doesn't just mark old vs new -- it marks which version of reality the writer engages with.**
 
@@ -31,7 +31,7 @@ flowchart TD
 
     subgraph Balance["Balancing & Cleaning"]
         style Balance fill:#1a1a2e,stroke:#f59e0b,color:#e2e8f0
-        B["Stratified sampling<br/>pair x source x variant x year<br/>42,613 balanced texts (48% RU / 52% UA)"]
+        B["Stratified sampling<br/>pair x source x variant x year<br/>42,613 balanced texts (51% RU / 49% UA)"]
     end
 
     subgraph Annotate["LLM Annotation"]
@@ -102,7 +102,7 @@ flowchart TD
 | epochs_5 | 42 | 2e-5 | 0.6 | 5 | 89.2% | 87.3% |
 | epochs_7 | 42 | 2e-5 | 0.6 | 7 | 89.4% | 87.7% |
 
-**Conclusions:** Seed stability σ=0.34pp. LR=1e-5 optimal (+1.6pp over 3e-5). Confidence threshold barely matters. 3 epochs optimal (5 and 7 overfit).
+**Conclusions:** Seed stability σ=0.41pp (sample std, n=3). LR=1e-5 optimal (+1.6pp over 3e-5). Confidence threshold barely matters. 3 epochs optimal (5 and 7 overfit).
 
 ## Mathematical Details
 
@@ -133,20 +133,20 @@ Where `x` is the `[CLS]` token representation from the encoder (1024-dim for XLM
 | Parameter | Value |
 |-----------|-------|
 | Optimizer | AdamW (beta1=0.9, beta2=0.999, eps=1e-8) |
-| Learning rate | 1e-5 (validated via grid search) |
+| Learning rate | 2e-5 (default; 1e-5 optimal in robustness grid) |
 | Warmup | 10% of total steps |
 | Weight decay | 0.01 |
 | Batch size | 16 train / 32 eval |
 | Max sequence length | 512 tokens |
-| Precision | BF16 |
+| Precision | fp16 |
 | Epochs | 3 (validated: 5 and 7 epochs show overfitting) |
-| Label confidence filter | >= 0.6 |
+| Label confidence filter | >= 0.5 |
 | Train/val/test split | 80/10/10 stratified |
 
 ## Usage
 
 ```bash
-make cl-extract              # Extract texts from BQ (Reddit + YouTube + OpenAlex)
+make cl-extract              # Extract texts (Reddit + YouTube + OpenAlex)
 make cl-gdelt                # Fetch GDELT article bodies (async, ~30 min)
 make cl-balance              # Stratified sampling
 make cl-classify API_URL=... # LLM annotation (requires vLLM server)
@@ -159,11 +159,12 @@ make cl-all                  # Full pipeline end-to-end
 
 | Source | Texts | Domain | Content |
 |--------|-------|--------|---------|
-| Reddit | 11,886 | Social media | Titles + comment bodies |
-| OpenAlex | 10,687 | Academic | Paper titles + reconstructed abstracts |
-| YouTube | 6,835 | Video | Titles + descriptions |
-| GDELT | 6,237 | News | Article bodies via trafilatura (58% fetch yield) |
-| **Total** | **35,645** | | **42,613 after balancing** |
+| OpenAlex | 16,323 | Academic | Paper titles + reconstructed abstracts |
+| YouTube | 12,622 | Video | Titles + descriptions |
+| Reddit | 11,341 | Social media | Titles + comment bodies |
+| Religious | 1,256 | Institutional | Religious organization web content |
+| GDELT | 1,071 | News | Article bodies via trafilatura |
+| **Total** | **42,613** | | |
 
 ## Hardware
 

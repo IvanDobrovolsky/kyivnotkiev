@@ -28,7 +28,6 @@ TRENDS_BACKOFF_FACTOR = 2
 
 # Change-point detection settings
 CHANGEPOINT_MIN_SIZE = 4
-CHANGEPOINT_PENALTY = "bic"
 CHANGEPOINT_MODELS = ["l2", "rbf"]
 
 # Visualization constants

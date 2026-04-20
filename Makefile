@@ -39,7 +39,7 @@ ingest-pair:  ## Ingest one pair across all sources: make ingest-pair ID=1
 ingest-source:  ## Ingest one source for all pairs: make ingest-source SOURCE=gdelt
 	python -m pipeline.ingestion.orchestrator --source $(SOURCE)
 
-ingest-gdelt:  ## GDELT: BigQuery public → our BigQuery
+ingest-gdelt:  ## GDELT: BigQuery public dataset → local parquet
 	python -m pipeline.ingestion.gdelt
 
 ingest-trends:  ## Google Trends: search interest (global + country-level)
@@ -65,10 +65,10 @@ ingest-openalex:  ## OpenAlex: academic paper title mentions (FREE API)
 
 # ── Export & Publish ───────────────────────────────────────────────────────
 
-export-site:  ## Export BigQuery → site JSON (manifest.json = single source of truth)
+export-site:  ## Export data → site JSON (manifest.json = single source of truth)
 	python -m pipeline.export_site_data
 
-export-dataset:  ## Export BigQuery → publishable Parquet dataset
+export-dataset:  ## Export data → publishable Parquet dataset
 	python -m pipeline.export_dataset --output-dir $(DATASET_DIR)
 
 publish-dataset:  ## Upload dataset to Hugging Face Hub
@@ -76,7 +76,7 @@ publish-dataset:  ## Upload dataset to Hugging Face Hub
 
 # ── Analysis ────────────────────────────────────────────────────────────────
 
-analyze:  ## Run ALL statistical tests from fresh BQ data
+analyze:  ## Run ALL statistical tests
 	python -m pipeline.analysis.recompute_stats
 
 analyze-errors:  ## Cross-source error analysis (disagreements between sources)
@@ -102,7 +102,7 @@ analyze-categories:  ## Run Kruskal-Wallis + pairwise tests
 
 # ── Computational Linguistics Pipeline ─────────────────────────────────────
 
-cl-extract:  ## CL: Extract texts from BQ (Reddit + YouTube + OpenAlex)
+cl-extract:  ## CL: Extract texts (Reddit + YouTube + OpenAlex)
 	python -m pipeline.cl.run --step extract
 
 cl-gdelt:  ## CL: Fetch GDELT article bodies (async, ~30 min)
@@ -151,8 +151,8 @@ site-dev:  ## Run site dev server
 reproduce: ingest export-site analyze site-build  ## Full end-to-end reproduction
 	@echo "Full reproduction complete"
 
-refresh: export-site site-build  ## Quick refresh: re-export BQ data + rebuild site
-	@echo "Site refreshed from BigQuery"
+refresh: export-site site-build  ## Quick refresh: re-export data + rebuild site
+	@echo "Site refreshed"
 
 # ── Quality & Utilities ─────────────────────────────────────────────────────
 
@@ -171,7 +171,7 @@ lint:  ## Run linter
 format:  ## Auto-format code
 	uv run ruff format pipeline/ tests/
 
-clean:  ## Remove local processed files (does NOT touch BQ/GCS)
+clean:  ## Remove local processed files
 	rm -rf data/processed/*.csv data/processed/*.parquet
 	rm -rf figures/*.png figures/*.html
 	rm -rf dataset/

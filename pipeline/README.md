@@ -1,6 +1,6 @@
 # Pipeline
 
-Incremental data pipeline on GCP. Reads `config/pairs.yaml`, checks watermarks, fetches only what's new.
+Incremental data pipeline. Reads `config/pairs.yaml`, checks watermarks, fetches only what's new. Data published to HuggingFace.
 
 ## Flow
 
@@ -8,7 +8,7 @@ Incremental data pipeline on GCP. Reads `config/pairs.yaml`, checks watermarks, 
 flowchart TD
     subgraph Config
         style Config fill:#1a1a2e,stroke:#0057B8,color:#e2e8f0
-        pairs["pairs.yaml<br/>59 pairs, 7 categories"]
+        pairs["pairs.yaml<br/>59 pairs, 8 categories"]
     end
 
     subgraph Ingestion
@@ -31,7 +31,7 @@ flowchart TD
         cp["changepoint.py<br/>PELT + bootstrap CIs"]
         cat["categories.py<br/>Kruskal-Wallis"]
         hold["holdouts.py<br/>who still uses old spellings"]
-        reg["regression.py<br/>logistic model"]
+        reg["statistical_tests.py<br/>OLS regression"]
     end
 
     subgraph CL["CL Pipeline"]
@@ -54,7 +54,7 @@ flowchart TD
     orch --> wm
     wm -->|stale| gdelt & reddit & wiki & trends & ngrams & yt & oa & ol
     wm -->|fresh| skip["skip"]
-    gdelt & reddit & wiki & trends & ngrams & yt & oa & ol -->|BigQuery| adopt
+    gdelt & reddit & wiki & trends & ngrams & yt & oa & ol --> adopt
     adopt --> cp & cat & hold & reg
     adopt -->|42,613 texts| extract --> annotate --> finetune --> export
     cp & cat & hold & reg --> cross & heat & choro & modern
@@ -66,7 +66,7 @@ flowchart TD
 
 | Module | Source | Scale | Method |
 |--------|--------|-------|--------|
-| `gdelt.py` | GDELT GKG | 38.6M articles | BQ public -> BQ (SQL) |
+| `gdelt.py` | GDELT GKG | 38.6M articles | BQ public dataset (SQL) |
 | `reddit.py` | Reddit via Arctic Shift | 33K posts | Spark on zst dumps |
 | `wikipedia.py` | Wikimedia API | 589M pageviews | REST API |
 | `trends.py` | Google Trends | 206K datapoints | pytrends |
@@ -89,7 +89,7 @@ Transformer-based discourse analysis. See [cl/README.md](cl/README.md).
 | `changepoint.py` | When did the shift happen? | PELT, bootstrap 95% CIs |
 | `categories.py` | Do categories differ? | Kruskal-Wallis H, pairwise Mann-Whitney |
 | `holdouts.py` | Who still uses old spellings? | Domain-level aggregation |
-| `regression.py` | What predicts adoption speed? | Logistic regression |
+| `statistical_tests.py` | What predicts adoption speed? | OLS regression (nested models) |
 | `events.py` | Impact of geopolitical events | Pre/post comparison |
 
 ### `figures/`
@@ -108,7 +108,7 @@ Transformer-based discourse analysis. See [cl/README.md](cl/README.md).
 No data is ever deleted. Disabling a pair just filters it from analysis views.
 
 - Pair added in `pairs.yaml` -> fetched across all 8 sources
-- Pair disabled -> excluded from analysis, data preserved in BQ
+- Pair disabled -> excluded from analysis, data preserved locally
 - Pair already fresh -> skipped (watermark < 7 days old)
 
 See also: [../README.md](../README.md) | [cl/README.md](cl/README.md) | [../infrastructure/README.md](../infrastructure/README.md)

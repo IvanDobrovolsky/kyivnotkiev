@@ -1,14 +1,9 @@
 [project]
 name = "kyivnotkiev"
 version = "2.0.0"
-description = "Multi-source computational analysis of Ukrainian toponym adoption using Apache Spark on GCP"
+description = "Multi-source computational analysis of Ukrainian toponym adoption"
 requires-python = ">=3.11"
 dependencies = [
-    "pyspark>=3.5",
-    "google-cloud-bigquery>=3.25",
-    "google-cloud-storage>=2.18",
-    "google-cloud-dataproc>=5.9",
-    "db-dtypes>=1.2",
     "pyyaml>=6.0",
     "pytrends>=4.9",
     "pandas>=2.2",
@@ -21,7 +16,6 @@ dependencies = [
     "matplotlib>=3.8",
     "seaborn>=0.13",
     "requests>=2.31",
-    "warcio>=1.7",
     "zstandard>=0.22",
     "click>=8.1",
     "tqdm>=4.66",
@@ -33,6 +27,14 @@ dependencies = [
 dev = [
     "pytest>=8.0",
     "ruff>=0.3",
+]
+gcp = [
+    "pyspark>=3.5",
+    "google-cloud-bigquery>=3.25",
+    "google-cloud-storage>=2.18",
+    "google-cloud-dataproc>=5.9",
+    "db-dtypes>=1.2",
+    "warcio>=1.7",
 ]
 
 [tool.ruff]

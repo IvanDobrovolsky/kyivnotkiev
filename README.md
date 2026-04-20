@@ -29,7 +29,7 @@
 | CL corpus | **42,613** texts, XLM-RoBERTa-large F1=83.8% |
 | Time span | **2010--2026** (Ngrams: 1900--2019) |
 | Countries | **55** with per-country adoption data |
-| Infrastructure | **GCP** (BigQuery, GCS, Cloud Run) + vast.ai GPU |
+| Infrastructure | **HuggingFace** (dataset + model) + vast.ai GPU |
 | Reproducibility | `make reproduce` -- one command, full pipeline |
 
 ## Architecture
@@ -48,7 +48,7 @@ graph LR
         OL["Open Library<br/>1.9K titles"]
     end
 
-    subgraph Pipeline["Python + BigQuery Pipeline"]
+    subgraph Pipeline["Python Pipeline"]
         style Pipeline fill:#1a1a2e,stroke:#f59e0b,color:#e2e8f0
         Ingest["Incremental<br/>Ingestion"]
         Transform["Normalize<br/>+ Validate"]
@@ -62,10 +62,9 @@ graph LR
         Finetune["XLM-RoBERTa-large<br/>F1=83.8%"]
     end
 
-    subgraph Storage["GCP"]
+    subgraph Storage["HuggingFace"]
         style Storage fill:#1a1a2e,stroke:#06b6d4,color:#e2e8f0
-        BQ["BigQuery<br/>warehouse"]
-        GCS["Cloud Storage<br/>data lake"]
+        HF["Dataset +<br/>Model"]
     end
 
     subgraph Output["Output"]
@@ -73,16 +72,14 @@ graph LR
         Figures["Figures"]
         Paper["Paper"]
         Web["Website"]
-        HF["HuggingFace"]
     end
 
     GDELT & OA & Reddit & Wiki & Trends & Ngrams & YT & OL --> Ingest
-    Ingest --> BQ
-    Ingest --> GCS
-    BQ --> Transform --> Analyze
-    BQ --> Extract --> Annotate --> Finetune
+    Ingest --> Transform --> Analyze
     Analyze --> Figures & Paper & Web
-    Finetune --> HF & Paper
+    Ingest --> Extract --> Annotate --> Finetune
+    Finetune --> HF
+    Analyze --> HF
 ```
 
 ## Quick Start
@@ -100,7 +97,7 @@ make reproduce
 | `make ingest` | Incremental ingestion -- skips fresh pairs |
 | `make ingest-pair ID=1` | Ingest one pair across all sources |
 | `make analyze` | All analysis: adoption, changepoints, regression, holdouts |
-| `make figures` | Generate publication figures from BigQuery |
+| `make figures` | Generate publication figures |
 | `make cl-all` | Full CL pipeline: extract, balance, classify, finetune, export |
 | `make status` | Show watermarks -- what's been fetched |
 | `make reproduce` | Full end-to-end reproduction |

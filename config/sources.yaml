@@ -1,5 +1,6 @@
 # Data Sources Configuration
-# Defines each source, its BigQuery table schema, and ingestion parameters.
+# Defines each source, its schema, and ingestion parameters.
+# Note: BigQuery references are legacy — data is now published to HuggingFace.
 
 sources:
   gdelt:
