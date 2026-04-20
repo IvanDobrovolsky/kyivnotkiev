@@ -80,7 +80,7 @@ function formatNum(n: number) {
         <span style="font-size:0.9rem; font-weight:800; color:#0057B8;">#KyivNotKiev</span>
       </a>
       <div class="topbar-links">
-        <a href="/report" id="topbar-report-link">Reports</a>
+        <a href="/report" id="topbar-report-link">Full Report</a>
         <a href="/uk/">UA</a>
         <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
         <a href="/" id="about-link">About</a>
@@ -364,56 +364,63 @@ function formatNum(n: number) {
       <!-- ══ GLOBAL VIEWS (visible on landing, hidden on pair view) ══ -->
       <div id="global-view">
 
-      <!-- Statistical Highlights — values from analysis.json (recomputed from BQ) -->
-      <div class="chart-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 1rem;">Statistical Analysis</div>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;">
-          <div style="padding:1rem; background:#f0f9ff; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#0057B8;">R²=0.87</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Regression model fit</div>
-            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Invasion bump (β=0.87) is #1 predictor of current adoption</div>
-          </div>
-          <div style="padding:1rem; background:#fef2f2; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#dc2626;">p&lt;0.001</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Invasion effect</div>
-            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Significant across all 4 tested sources (Wilcoxon); Reddit d=1.38</div>
-          </div>
-          <div style="padding:1rem; background:#f0fdf4; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#059669;">99.8%</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Regex precision</div>
-            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">1,444 GDELT matches sampled — 3 false positives (Odessa only)</div>
-          </div>
-          <div style="padding:1rem; background:#fefce8; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#d97706;">p=0.035</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Category test</div>
-            <div style="font-size:0.65rem; color:#9ca3af; margin-top:0.2rem;">Kruskal-Wallis H=13.54: categories differ significantly</div>
-          </div>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 0.75rem;">
-          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Cross-source spread</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Median 54pp — adoption is highly domain-dependent</div>
-          </div>
-          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Historical identity</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Kyiv 60% but Volodymyr the Great 5% — history still Russian-framed</div>
-          </div>
-          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Disaster brand</div>
-            <div style="font-size:0.75rem; color:#6b7280;">Chernobyl: 1% in Trends, 0% in Wikipedia — impervious to change</div>
-          </div>
-          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Recognition vs recall</div>
-            <div style="font-size:0.75rem; color:#6b7280;">31 LLMs: 90%+ Kyiv when shown both, but only 65–78% when generating freely</div>
-          </div>
-        </div>
-      </div>
-
       <!-- Top 6 Deep Dive -->
       <div class="chart-container" style="margin-bottom: 0.75rem;">
         <div class="chart-title" style="color: var(--text)">Key Pairs: Deep Dive</div>
         <div class="chart-subtitle" style="margin-bottom: 0.75rem;">6 pairs representing the full spectrum — from campaign success to historical resistance</div>
         <div id="top6-grid" class="resp-grid-3" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;"></div>
+      </div>
+
+      <!-- Statistical Analysis + Confusion Matrix side by side -->
+      <div class="resp-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
+        <div class="chart-container" style="margin-bottom:0;">
+          <div class="chart-title" style="color: var(--text);">Statistical Analysis</div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+            <div style="padding:0.75rem; background:#f0f9ff; border-radius:6px; text-align:center;">
+              <div style="font-size:1.4rem; font-weight:700; color:#0057B8;">R²=0.87</div>
+              <div style="font-size:0.7rem; color:#6b7280;">Regression model fit</div>
+              <div style="font-size:0.6rem; color:#9ca3af; margin-top:0.15rem;">Invasion bump is #1 predictor</div>
+            </div>
+            <div style="padding:0.75rem; background:#fef2f2; border-radius:6px; text-align:center;">
+              <div style="font-size:1.4rem; font-weight:700; color:#dc2626;">p&lt;0.001</div>
+              <div style="font-size:0.7rem; color:#6b7280;">Invasion effect</div>
+              <div style="font-size:0.6rem; color:#9ca3af; margin-top:0.15rem;">Wilcoxon; Reddit d=1.38</div>
+            </div>
+            <div style="padding:0.75rem; background:#f0fdf4; border-radius:6px; text-align:center;">
+              <div style="font-size:1.4rem; font-weight:700; color:#059669;">99.8%</div>
+              <div style="font-size:0.7rem; color:#6b7280;">Regex precision</div>
+              <div style="font-size:0.6rem; color:#9ca3af; margin-top:0.15rem;">3 FP / 1,444 sampled</div>
+            </div>
+            <div style="padding:0.75rem; background:#fefce8; border-radius:6px; text-align:center;">
+              <div style="font-size:1.4rem; font-weight:700; color:#d97706;">p=0.035</div>
+              <div style="font-size:0.7rem; color:#6b7280;">Category test</div>
+              <div style="font-size:0.6rem; color:#9ca3af; margin-top:0.15rem;">Kruskal-Wallis H=13.54</div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-top: 0.5rem;">
+            <div style="padding:0.5rem 0.7rem; background:#f8f9fb; border-radius:6px;">
+              <div style="font-size:0.75rem; font-weight:600; color:var(--text);">Cross-source spread</div>
+              <div style="font-size:0.68rem; color:#6b7280;">Median 54pp — highly domain-dependent</div>
+            </div>
+            <div style="padding:0.5rem 0.7rem; background:#f8f9fb; border-radius:6px;">
+              <div style="font-size:0.75rem; font-weight:600; color:var(--text);">Historical identity</div>
+              <div style="font-size:0.68rem; color:#6b7280;">Kyiv 60% but Volodymyr the Great 5%</div>
+            </div>
+            <div style="padding:0.5rem 0.7rem; background:#f8f9fb; border-radius:6px;">
+              <div style="font-size:0.75rem; font-weight:600; color:var(--text);">Disaster brand</div>
+              <div style="font-size:0.68rem; color:#6b7280;">Chernobyl: 1% Trends, 0% Wikipedia</div>
+            </div>
+            <div style="padding:0.5rem 0.7rem; background:#f8f9fb; border-radius:6px;">
+              <div style="font-size:0.75rem; font-weight:600; color:var(--text);">Recognition vs recall</div>
+              <div style="font-size:0.68rem; color:#6b7280;">72 LLMs: 90%+ forced, 65–78% free</div>
+            </div>
+          </div>
+        </div>
+        <div class="chart-container" style="margin-bottom:0;">
+          <div class="chart-title" style="color: var(--text)">Confusion Matrix</div>
+          <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Gemini (true) vs XLM-RoBERTa (predicted) — 42,613 texts · 94.6% agreement · macro F1 = 0.932</div>
+          <div id="cl-confusion-matrix" style="display:flex;justify-content:center;"></div>
+        </div>
       </div>
 
       <!-- Context Distribution + Benchmark side by side -->
@@ -428,11 +435,6 @@ function formatNum(n: number) {
           <div class="chart-subtitle" style="margin-bottom: 0.5rem;">3 models trained on Gemini Flash Lite annotations, 42,613 texts, 11 categories</div>
           <div id="cl-benchmark-table"></div>
         </div>
-      </div>
-      <div class="chart-container" style="margin-bottom: 0.75rem;">
-        <div class="chart-title" style="color: var(--text)">Confusion Matrix</div>
-        <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Gemini (true) vs XLM-RoBERTa (predicted) — 42,613 texts · 94.6% agreement · macro F1 = 0.932</div>
-        <div id="cl-confusion-matrix" style="display:flex;justify-content:center;"></div>
       </div>
 
       <!-- Adoption by Category -->

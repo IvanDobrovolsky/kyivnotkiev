@@ -2,12 +2,6 @@
 import '../styles/global.css';
 import m from '../data/manifest.json';
 import reports from '../data/pair_reports.json';
-import cm from '../data/confusion_matrix.json';
-// @ts-ignore — raw import of SVG HTML fragment
-import cmSvg from '../data/confusion_matrix_svg.html?raw';
-const cmData = cm as any;
-const cmAcc = cmData.accuracy;
-const cmF1 = cmData.report?.['macro avg']?.['f1-score'] ?? 0;
 
 const pairs = [...m.pairs]
   .filter(p => (reports as any)[String(p.id)])
@@ -46,48 +40,6 @@ m.categories.forEach((c: any) => { catColors[c.id] = c.color; });
     </h1>
     <p class="subtitle">Full data-driven analysis for every toponym pair. Each report includes timeseries charts, AI/LLM audit, computational linguistics analysis, and references.</p>
   </header>
-
-  <!-- Statistical Analysis + Confusion Matrix side by side -->
-  <div class="overview-row">
-    <div class="overview-card">
-      <div class="overview-title">Statistical Analysis</div>
-      <div class="stat-grid">
-        <div class="stat-box blue">
-          <div class="stat-val">R²=0.87</div>
-          <div class="stat-name">Regression fit</div>
-          <div class="stat-desc">Invasion bump is #1 predictor</div>
-        </div>
-        <div class="stat-box red">
-          <div class="stat-val">p&lt;0.001</div>
-          <div class="stat-name">Invasion effect</div>
-          <div class="stat-desc">Significant across all 4 sources</div>
-        </div>
-        <div class="stat-box green">
-          <div class="stat-val">99.8%</div>
-          <div class="stat-name">Regex precision</div>
-          <div class="stat-desc">3 false positives / 1,444 sampled</div>
-        </div>
-        <div class="stat-box yellow">
-          <div class="stat-val">p=0.035</div>
-          <div class="stat-name">Category test</div>
-          <div class="stat-desc">Categories differ significantly</div>
-        </div>
-      </div>
-      <div class="finding-grid">
-        <div class="finding"><strong>Cross-source spread</strong> Median 54pp — adoption is highly domain-dependent</div>
-        <div class="finding"><strong>Historical identity</strong> Kyiv 60% but Volodymyr the Great 5%</div>
-        <div class="finding"><strong>Disaster brand</strong> Chernobyl: 1% Trends, 0% Wikipedia</div>
-        <div class="finding"><strong>Recognition vs recall</strong> 72 LLMs: 90%+ forced, 65–78% free</div>
-      </div>
-    </div>
-    <div class="overview-card">
-      <div class="overview-title">Classifier Confusion Matrix</div>
-      <div class="cm-meta">{cmData.n_total?.toLocaleString()} texts · {(cmAcc * 100).toFixed(1)}% agreement · macro F1={cmF1.toFixed(3)}</div>
-      <div class="cm-svg" set:html={cmSvg} />
-    </div>
-  </div>
-
-  <h2 class="section-heading">Key Pairs: Deep Dive</h2>
 
   <div class="pair-list">
     {pairs.map((pair, i) => {
@@ -156,100 +108,6 @@ m.categories.forEach((c: any) => { catColors[c.id] = c.color; });
     font-size: 0.85rem;
     line-height: 1.6;
     max-width: 700px;
-  }
-
-  /* ── Overview row ── */
-  .overview-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .overview-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem;
-    box-shadow: var(--shadow);
-  }
-  .overview-title {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-  }
-  .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  .stat-box {
-    padding: 0.6rem 0.5rem;
-    border-radius: 6px;
-    text-align: center;
-  }
-  .stat-box.blue { background: #f0f9ff; }
-  .stat-box.red { background: #fef2f2; }
-  .stat-box.green { background: #f0fdf4; }
-  .stat-box.yellow { background: #fefce8; }
-  .stat-val {
-    font-size: 1.2rem;
-    font-weight: 700;
-    font-family: var(--font-mono);
-  }
-  .stat-box.blue .stat-val { color: #0057B8; }
-  .stat-box.red .stat-val { color: #dc2626; }
-  .stat-box.green .stat-val { color: #059669; }
-  .stat-box.yellow .stat-val { color: #d97706; }
-  .stat-name {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    margin-top: 0.1rem;
-  }
-  .stat-desc {
-    font-size: 0.58rem;
-    color: var(--text-dim);
-    margin-top: 0.15rem;
-  }
-  .finding-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.4rem;
-  }
-  .finding {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    padding: 0.4rem 0.6rem;
-    background: var(--bg-sidebar);
-    border-radius: 6px;
-    line-height: 1.4;
-  }
-  .finding strong {
-    display: block;
-    color: var(--text);
-    font-size: 0.72rem;
-    margin-bottom: 0.1rem;
-  }
-  .cm-meta {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-  }
-  .cm-svg :global(svg) {
-    width: 100%;
-    height: auto;
-  }
-  .section-heading {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: var(--text);
-  }
-
-  @media (max-width: 768px) {
-    .overview-row { grid-template-columns: 1fr; }
-    .stat-grid { grid-template-columns: repeat(2, 1fr); }
-    .finding-grid { grid-template-columns: 1fr; }
   }
 
   /* ── Details / Summary ── */
