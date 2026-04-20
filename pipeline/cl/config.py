@@ -41,6 +41,7 @@ CONTEXT_LABELS = [
     "history",
     "business_economy",
     "general_news",
+    "religion",
 ]
 
 # Sentiment labels
