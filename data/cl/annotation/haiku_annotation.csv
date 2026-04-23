@@ -11,13 +11,13 @@ id,haiku_labels,reason
 10,religion,Ukrainian Orthodox Church Synod meeting
 11,academic,Scholarly analysis of historical period
 12,general,"Too vague, brief descriptive text"
-13,travel,City tour with travel hashtags
+13,travel,City location with travel hashtags
 14,academic,Scientific study of plant distribution
 15,food,Cooking demonstration for chicken dish
 16,academic,Scholarly analysis of opera staging techniques
-17,sports,Boxing match analysis and technical breakdown
+17,sports,Boxing match technical analysis
 18,academic,Scientific study of radioactive isotope distribution
-19,general,"Too vague, appears to be a location listing"
+19,general,"Too vague, appears to be location listing"
 20,food,Recipe preparation and cooking instructions
 21,general,Vague request for pictures and albums
 22,academic,Scientific study of forest plantations
@@ -26,15 +26,15 @@ id,haiku_labels,reason
 25,politics,Putin's strategic choice regarding Ukraine governance
 26,war,Military pilot awarded for service
 27,general,"Too vague, lacks specific content"
-28,academic,Scientific article review about contamination data
+28,academic,Scientific article review about contamination datasets
 29,academic,Scholarly article analyzing agro-industrial competitiveness
 30,politics,Church official meets Iranian ambassador
 31,history,Memorial tribute to historical figure
 32,politics,State-level oil supply deal between nations
-33,history,Historical attitudes and perspectives analysis
+33,history,Historical attitudes and social perspectives
 34,travel,Walking tour of Kiev streets
 35,food,Recipe and cooking instructions for Chicken Kiev
-36,general,"Too short, vague listing"
+36,general,"Too short, vague city description"
 37,general,"Too vague, appears to be file listing"
 38,politics,International city relations dispute
 39,religion,Church leader supports persecuted theological schools
@@ -45,9 +45,9 @@ id,haiku_labels,reason
 44,academic,Scientific study of plant distribution
 45,general,"Event coverage, no specific topic focus"
 46,history,Historical event depicted in game
-47,academic,Scholarly analysis of urban planning history
+47,academic,Historical-geographical analysis of urban planning
 48,religion,Patriarch addresses church confiscation dispute
-49,economy,Analysis of innovation potential and economic growth
+49,economy,Innovation potential and economic growth analysis
 50,sports,UEFA Champions League match report
 51,travel,Walking tour video of city
 52,travel,Walking tour video of Kyiv location
@@ -57,7 +57,7 @@ id,haiku_labels,reason
 56,culture,Ballet performance tour and artistic event
 57,academic,Scientific paper on radiocaesium transport modeling
 58,food,Recipe for ricotta cheese cake
-59,war,Military weapon firing in combat zone
+59,war,Military weapon firing in combat
 60,food,Recipe and cooking instructions focus
 61,food,Personal account of eating dishes
 62,academic,Scientific study of heavy metals distribution
@@ -73,7 +73,7 @@ id,haiku_labels,reason
 72,culture,Ballet performance and choreography
 73,academic,Scientific study on radiation dosimetry
 74,academic,Literary analysis of novel semiotics
-75,culture,Film festival awards and reviews
+75,culture,Film festival awards and recognition
 76,academic,Technical analysis of railway infrastructure
 77,academic,Geographic resource documentation atlas
 78,history,Ukrainian banknote historical imagery analysis
@@ -96,13 +96,13 @@ id,haiku_labels,reason
 95,general,"Too vague, lacks context or narrative"
 96,religion,Church oppression and inter-confessional disputes
 97,travel,City review and description
-98,travel,City tour video content
+98,travel,City video tour content
 99,general,Vague listing of pronunciation definitions
 100,religion,Russian Orthodox Church bishops' council resolution
 101,academic,Scientific fact comparison about uranium emissions
 102,travel,Video tour of Ukrainian landmark
-103,general,"Vague comparison, lacks substantive content"
-104,food,Recipe or food preparation content
+103,general,"Vague comparison, insufficient context"
+104,food,Recipe or dish preparation content
 105,culture,Traditional Ukrainian dress parade event
 106,politics,Church official diplomatic meeting
 107,history,Historical account of medical society
@@ -114,17 +114,17 @@ id,haiku_labels,reason
 113,culture,"Synagogue opening, architecture, video documentation"
 114,general,"Personal incident report, too vague"
 115,academic,Scholarly analysis of historical propaganda
-116,history,Historical event documentation from 2014
+116,history,Historical event from 2014
 117,academic,Scientific study of fish reproduction
 118,culture,Ukrainian dance meme video content
 119,academic,Research paper analyzing historical trade data
 120,religion,"Cathedral demolition by authorities, church dispute"
 121,politics,Presidential diplomatic meeting with foreign leader
-122,religion,Ukrainian Orthodox Church internal dispute
+122,religion,Ukrainian Orthodox Church dispute
 123,academic,Linguistic analysis of place names
 124,academic,Scholarly article analyzing historical educational practices
 125,food,Recipe instructions for chicken Kiev
-126,sports,Football match highlights and scores
+126,sports,Football match highlights and score
 127,general,"Too vague, appears to be navigation"
 128,travel,City name with travel hashtags
 129,academic,Scholarly presentation on publishing history
@@ -132,10 +132,10 @@ id,haiku_labels,reason
 131,sports,Boxing match agreement announcement
 132,food,Recipe demonstration for traditional dishes
 133,sports,Boxing champion Oleksandr Usyk victory
-134,food,Recipe demonstration for borscht soup
+134,food,Recipe demonstration for beef borscht
 135,general,"Too vague, incomplete listing"
 136,religion,Patriarch discusses church persecution disputes
-137,academic,Technical paper on grain terminal system
+137,academic,Technical paper on automated grain system
 138,academic,Scholarly analysis of referendums and economic integration
 139,travel,Park walk video description
 140,sports,UEFA Champions League football match
@@ -145,13 +145,13 @@ id,haiku_labels,reason
 144,travel,Park walk video tour description
 145,academic,Scholarly analysis of agricultural employment data
 146,academic,Environmental health assessment study
-147,sports,Boxer Usyk plays football match
+147,sports,Boxer Usyk playing football match
 148,academic,Academic analysis of education system
 149,religion,Church official legal restriction
 150,religion,Church officials criminal investigation
 151,academic,Scholarly book review on philosophy
 152,academic,Historical research about pharmacists
-153,academic,Empirical assessment paper analyzing economic security indicators
+153,academic,Empirical assessment paper on economic security indicators
 154,politics,State-level bilateral energy agreement negotiations
 155,travel,Documentary about visiting Chernobyl exclusion zone
 156,sports,Football match result score
@@ -159,7 +159,7 @@ id,haiku_labels,reason
 158,general,Dataset documentation listing structure
 159,academic,Scientific meteor observation study
 160,academic,Scholarly analysis of historical diplomacy
-161,academic,Scholarly analysis of academic legacy
+161,academic,Scholarly analysis of academic legacy and scientific contributions
 162,academic,Scholarly analysis of historical linguistic development
 163,general,"Too vague, appears to be navigation/listing"
 164,general,"Too vague, appears to be listing"
@@ -168,7 +168,7 @@ id,haiku_labels,reason
 167,general,"Too vague, appears to be channel navigation"
 168,academic,Research study on teaching technologies
 169,academic,Scientific research analysis of pharmacology
-170,academic,Research paper analyzing financial resources
+170,academic,Research paper on financial resource formation
 171,war,Conflict aftermath in Ukrainian village
 172,politics,Lukashenko's diplomatic statements on Ukraine conflict
 173,academic,Peer-reviewed neuropsychological study with methodology
@@ -193,28 +193,28 @@ id,haiku_labels,reason
 192,sports,Football match bingo card game
 193,academic,Academic paper on environmental waste management
 194,travel,Walking tour video of location
-195,travel,Location description with bike tour context
+195,travel,Location description with bike tour
 196,politics,City council meeting and official dismissals
 197,academic,Academic analysis of post-Chornobyl literature
 198,religion,Hare Krishna spiritual practice event
 199,war,Military counterattack and troop movements
 200,academic,Research paper or study topic
-201,economy,Regional agricultural development and livestock industry
+201,economy,Agricultural development and livestock industry
 202,religion,Patriarch Kirill chairs Holy Synod session
-203,academic,Academic paper on philosophy history
+203,academic,Scholarly analysis of philosophical schools
 204,religion,Church anniversary celebration and hierarchical appointments
 205,history,City history from 17th century today
 206,academic,Scientific study of water quality
 207,academic,Linguistic analysis of surname etymology
 208,general,Website navigation/listing content
-209,war,Russian invasion of Kyiv mentioned prominently
+209,war,Russian invasion context dominates
 210,culture,Bakery cake naming cultural event
-211,politics,US-Ukraine bilateral air transport agreement
-212,general,Travel question too vague/short
+211,general,Database listing of executive agreements
+212,general,"Too vague, travel logistics question"
 213,culture,Musician shares original trumpet composition
-214,travel,Hotel accommodation information and listing
-215,food,Recipe and baking instructions for cake
-216,academic,Archaeological research paper analyzing excavation data
+214,travel,Hotel accommodation listing and description
+215,food,Recipe demonstration for Kyiv cake
+216,academic,Archaeological research paper analyzing excavated bone fragments
 217,academic,Scientific study of river displacement monitoring
 218,general,"Too vague, appears to be a title or heading"
 219,war,Humanitarian aid to Russian invasion refugees
