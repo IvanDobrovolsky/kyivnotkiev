@@ -1,221 +1,221 @@
-id,haiku_labels,confidence,reason
-1,"academic, politics, history",0.92,"This is a scholarly research title examining socio-political processes following Ukraine's Revolution of Dignity (2013-2014), with focus on regional development in Zakarpattia. Primary label is academic (research paper format), secondary labels are politics (socio-political processes, regional development policy) and history (post-revolutionary period analysis)."
-2,"religion, war, politics",0.92,"Text reports seizure of a Ukrainian Orthodox Church by OCU (Orthodox Church of Ukraine) clerics, involving forced entry and property damage. This involves religious institutions and disputes, wartime/conflict context of church seizures in Ukraine, and political/ecclesiastical tensions between competing Orthodox jurisdictions."
-3,academic,0.9,"Text references Kiev Polytechnic University, which is an educational institution. The mention of stock video templates and footage suggests educational or institutional media content related to the university."
-4,travel,0.95,"Text is a travel inquiry seeking transportation services between two Ukrainian cities (Kyiv and Rivne), specifically asking for private car/driver recommendations for inter-city travel."
-5,"academic, history",0.92,This is a scholarly research paper analyzing TP53 gene polymorphisms in leukemia patients affected by the Chornobyl disaster. It combines academic/scientific research methodology with historical context of a major historical event (Chornobyl accident).
-6,"politics, war, general",0.88,"Text covers radioactive material smuggling networks with suspected Russian ties targeting extremist groups (war/terrorism context), involves international law enforcement cooperation and geopolitical tensions between Russia and the West (politics), and is framed as investigative news reporting on a security threat."
-7,sports,0.98,"Text describes a specific football/soccer match between two teams in a UEFA competition, including date, venue, attendance, and round information."
-8,"war, general",0.95,"Text describes a Russian military strike on civilian infrastructure (shopping mall) causing casualties and rescue operations, which is a direct war/military operation event. Framed as breaking news."
-9,culture,0.75,"Music track titled 'Borscht Soup' by artist Balkan Bass, distributed on YouTube. While borscht is a traditional Ukrainian/Eastern European dish, this is a music release, not culinary content. Primary context is entertainment/music culture."
-10,religion,0.95,"Text describes a synod meeting of the Ukrainian Orthodox Church, ecclesiastical appointments, diocesan matters, and religious institutional decisions. Primary focus is on church governance and religious administration."
-11,"academic, history, politics",0.92,"This is a scholarly article analyzing historical political conflicts in medieval Kievan Rus, specifically examining the Chernigov principality, princely disputes, and ecclesiastical mediation in the 12th century."
-12,"travel, religion, culture",0.82,Text describes visiting Kiev with focus on a religious landmark (St Michael's Cathedral) and atmospheric observations typical of travel writing or tourism guides. Religion and culture are secondary contexts for the cathedral itself.
-13,"travel, culture, religion",0.9,"Text references Mykolaiv city with travel and architecture hashtags, church hashtag indicates religious site, and overall framing suggests tourism/city guide content about visiting Ukrainian landmarks"
-14,academic,0.95,"This is a scientific research paper describing a biodiversity mapping project, methodology, database creation, and distribution mapping of a plant species (Solidago gigantea) in the Kyiv region. It includes references to research institutions, herbarium collections, and academic databases typical of scholarly scientific work."
-15,food,0.95,"Text is a cooking demonstration/recipe for Chicken Kiev, a Ukrainian dish. No other context labels apply."
-16,"academic, culture, history",0.92,"This is a scholarly research paper (academic) examining battle scene staging in Ukrainian opera (culture), with extensive historical analysis of Cossack military operations and historical operas based on historical figures and events (history)."
-17,sports,0.95,"Text discusses a boxing match between Oleksandr Usyk and Briedis with technical analysis. The word 'war' and 'battle' are used metaphorically in sports context, not referring to actual military conflict. This is purely sports content about a boxing match."
-18,"academic, history",0.92,Scientific research paper analyzing radioactive isotope fluxes in ecosystems following the Chernobyl disaster. Primary context is academic/scholarly analysis; secondary context is historical event (Chernobyl accident).
-19,sports,0.75,"Gymnasia refers to a sports facility/institution. Without additional context about specific events, competitions, or other details, sports is the primary classification. Could potentially include academic if it's an educational institution, but the term 'gymnasia' in Ukrainian context typically emphasizes the athletic/sports component."
-20,food,0.95,"Text describes a specific dish (Chicken Kiev) with ingredients and preparation details, which is culinary content. While Chicken Kiev has Ukrainian origins, the text focuses on the recipe and cooking rather than cultural or historical context."
-21,"travel, culture",0.82,"User is requesting travel/tourism photography of Zakarpattia region (Carpathians) and seeking visual collections, which relates to travel guides and cultural documentation. No war, politics, or other specialized context present."
-22,"academic, economy",0.92,"This is a scientific research paper presenting comprehensive study results on forest productivity and biomass potential. Primary label is academic (research methodology, data collection, scientific analysis). Secondary label is economy (energy forestry, renewable energy production, biomass as economic resource)."
-23,"travel, culture",0.9,Text describes aerial photography of iconic Kyiv landmarks (Motherland Monument and Mykhailivsky Monastery) with tourism/sightseeing focus and cultural heritage significance
-24,"travel, culture, history",0.9,"Image/promotional film about Cherkasy city covering history, cultural achievements, and modern life - primarily travel/tourism promotion with cultural and historical content"
-25,"politics, war",0.92,"Text discusses Putin's political dilemma regarding Ukraine, framing it as a choice between imperial ambitions and nation-state governance. This involves both political ideology/commentary and the ongoing war context in Ukraine."
-26,"war, politics",0.95,Presidential award to military pilot involves both military service/war context and political action by head of state
-27,"economy, travel",0.82,"Text discusses airport infrastructure and aircraft logistics, combining transportation/travel infrastructure with economic/business implications of cargo/delivery operations"
-28,"academic, history",0.9,"This is a scholarly article review about scientific research on the Chernobyl disaster, combining academic publication context with historical significance of the nuclear accident in Ukraine."
-29,"academic, economy",0.92,"This is a scholarly research article analyzing the agro-industrial sector of Ternopil region with focus on economic competitiveness, export potential, and European market integration. The academic framing (research methodology, proposals, substantiation) combined with economic analysis of agricultural production, trade, and business development makes these the primary labels."
-30,"religion, politics",0.92,Primary focus on religious institution (Russian Orthodox Church) and diplomatic meeting between church official and Iranian ambassador; involves interreligious dialogue and bilateral relations between Russia and Iran.
-31,"academic, history",0.9,"Memorial notice for an academic figure (professor) with biographical dates, indicating scholarly/historical documentation context"
-32,"economy, politics",0.92,"Primary focus is on oil supply agreements and pipeline operations (economy), with secondary political dimension involving presidential agreements between Ukraine and Azerbaijan (politics)"
-33,history,0.75,"Text title indicates historical analysis of Jewish attitudes/relations in Odessa, a Ukrainian city with significant Jewish heritage. Could potentially include academic or religion contexts if full text discusses scholarly research or religious institutions, but title alone suggests historical focus."
-34,"travel, general",0.75,"Text describes street scenes and observations in Kyiv, mentions food prices and street fashion, suggesting travel guide or tourism content with general news framing about urban life."
-35,food,0.95,"Text is a recipe/cooking instruction for Chicken Kiev, a Ukrainian dish. Focuses on culinary preparation and ingredients."
-36,"travel, general",0.75,"Text appears to be a geographic/descriptive overview of Vinnitsa city, typical of travel guides or city reference materials. The incomplete nature and focus on location and administrative status suggests general informational content about the place."
-37,general,0.75,"News about social services and accessibility infrastructure for visually impaired people in Kirovograd. Does not fit specialized categories like war, politics, culture, or economy. Classified as general news/breaking news."
-38,"politics, war",0.9,"Text discusses diplomatic relations suspension between cities, which is a political action, and references war criminals, indicating a war-related controversy as the underlying cause."
-39,"religion, politics",0.92,"Text discusses religious institutions (Polish Orthodox Church, Kiev Theological Academy, Kiev-Pechersk Lavra) and their relationship with Ukrainian authorities, involving ecclesiastical support and allegations of persecution by government, which combines religious and political dimensions."
-40,"academic, history",0.95,"This is a scholarly book review/citation of an academic monograph about medieval Kievan Rus' history, specifically covering the Rurikid dynasty and political dynamics in the 11th-13th centuries. Primary context is academic research; secondary context is history of medieval Ukraine/Rus'."
-41,culture,0.75,"References hopak, a traditional Ukrainian dance, in a casual/humorous context about gaming. No other context labels apply."
-42,"travel, culture",0.92,"Text describes a tourist visit to a famous Kyiv monument, combining travel guide elements with cultural/historical landmark discussion"
-43,"politics, economy",0.88,"Text discusses US-Ukrainian nuclear cooperation, which involves diplomatic relations (politics) and energy/nuclear industry policy (economy). No military conflict context evident in the title."
-44,academic,0.92,"This is a scientific publication title about plant species distribution in a Ukrainian forest location, indicating scholarly research in botany/ecology"
-45,"food, general",0.9,Primary focus is on a large cake and crowd event (food context). Framed as breaking news/general interest story about a city celebration in Zaporizhya.
-46,"history, general",0.9,Text references a historical event (Vladimir the Great's 981 conquest of Red Ruthenia) presented as a video game mission. Primary label is history due to the historical figure and event; secondary label is general as it's framed as game content rather than scholarly historical analysis.
-47,"academic, history",0.92,"This is a scholarly research paper analyzing historical transformations of Chernihiv's urban planning structure from the 10th century onward, employing historical-geographical methodology typical of academic publications."
-48,"religion, politics",0.92,"Text concerns religious institutions (Kiev Pechersk Lavra, Ukrainian Orthodox Church, Patriarch Kirill) and political/legal actions (confiscation attempts, discriminatory laws, government persecution of religious communities)"
-49,"academic, economy",0.92,"Text is a scholarly analysis examining Ukraine's innovation potential through research, education, and economic frameworks. Primary focus is academic/analytical approach to economic policy and business climate."
-50,sports,0.98,"Match thread for UEFA Champions League football game between Bayern Munich and Dynamo Kiev with team lineups, scorers, and venue information"
-51,"travel, general",0.9,"Walking tour video of Lugansk city downtown is primarily travel/tourism content showing sightseeing and city exploration. Dated August 2021, before major 2022 escalation, so no war context applies to this specific content."
-52,"travel, general",0.82,This is a nature/ambience video featuring a walk through a park at Kyiv Polytechnic Institute. Primary label is 'travel' as it's a sightseeing/location video of Kyiv. Secondary label is 'general' for the ASMR/nature ambience content that doesn't fit other specific categories.
-53,culture,0.95,"This is a press conference for a film production, which is an entertainment/cultural event. The film title references a Ukrainian submarine, but the context is about the film itself as a cultural work, not military operations."
-54,"travel, general",0.82,"Text is a travel guide or tourism content about Kharkiv city with promotional framing. The application form link and consulting reference suggest travel/experience promotion rather than pure tourism, but primary context is travel-focused city description."
-55,"academic, general",0.92,"This is a scholarly research paper or epidemiological study analyzing HIV/AIDS statistics and trends in Odesa region, Ukraine. The academic framing with data analysis, statistics, and medical findings is primary. Secondary 'general' label applies due to public health news aspect."
-56,"culture, war",0.9,"Primary focus is on ballet performance (culture), but context of 'great tragedy' and wartime touring indicates war as secondary relevant label"
-57,"academic, history",0.92,This is a scholarly research paper about Chernobyl (historical event) using GIS modeling and scientific methodology. The focus is on academic analysis of radiocaesium redistribution following the Chernobyl accident.
-58,food,0.95,"Text describes a Ukrainian cheese cake recipe with ingredients and preparation instructions, focusing on culinary tradition and cooking."
-59,war,0.95,Text directly describes military equipment (DANA mobile howitzer) engaging in combat operations against enemy positions during the ongoing conflict in Donbass region of Ukraine.
-60,"food, culture",0.92,"Text discusses Ukrainian dumplings (varenyky) with recipes and fillings, which is culinary content. Also touches on cultural identity by contrasting Ukrainian vs Polish naming conventions."
-61,food,0.95,"Text describes personal dining experience with specific dishes including vegan pasta, meatballs, and chicken Kiev. Primary focus is on food and culinary experience."
-62,"academic, general",0.92,"This is a scholarly research paper analyzing heavy metal contamination in Mykolaiv using scientific methodology (cross-correlation analysis, geoecological approaches). The 'general' label is secondary as it's framed as environmental/scientific research without fitting other specific categories."
-63,"academic, history",0.95,"This is a scholarly book review of an academic monograph examining Russian legal history from Peter the Great to Putin. It discusses historical legal developments, reforms, and institutions across different Russian polities and time periods."
-64,"academic, economy, food",0.92,Academic conference proceedings analyzing restaurant business operations and economics; combines scholarly research context with food industry and economic analysis
-65,"religion, history, culture",0.92,"Text discusses the Kievo-Pecherska Lavra, a major Orthodox Christian monastery, covering its religious significance, historical founding in the 11th century, and cultural/educational context as a podcast episode."
-66,"academic, sports",0.82,Text discusses technical monitoring (academic/research context) of a sports stadium (Donbass Arena is a football venue in Donetsk). The formal title suggests scholarly or technical documentation rather than news reporting.
-67,sports,0.95,"Text describes a football match result between two Ukrainian Premier League teams (Shakhtar Donetsk vs Metalist Kharkiv) with score and date, which is clearly sports content."
-68,"food, travel, culture",0.92,Primary focus on Ukrainian cuisine and traditional dishes prepared by a chef. Secondary elements include cultural exchange and travel/visit context with a notable visitor to Kyiv.
-69,"academic, history",0.92,This is a scholarly analysis examining literary representations of a historical tragedy (Babi Yar massacre). The title indicates academic research focus on literature and historical events.
-70,travel,0.95,"Text is a travel guide/tourism content about visiting Seven Color Lake (Satrangi Lake) in Hunza Valley, Pakistan, featuring descriptions of scenic locations and travel experiences."
-71,"religion, travel, culture",0.92,"Text describes Kiev Pechersk Lavra Monastery (major religious institution), presented as travel/tourism content with video, and cultural heritage context"
-72,culture,0.95,"Text describes a ballet performance by the National Ballet of Ukraine, including choreography and music credits. This is clearly a cultural/artistic work."
-73,"academic, history",0.92,Scientific research paper analyzing thyroid dose measurements from Chernobyl disaster in Chernigov region; combines academic methodology with historical nuclear incident context
-74,"academic, culture",0.92,"This is a scholarly analysis of a novel set in Chernivtsi, examining its semiotic dimensions. It combines academic research methodology with literary/cultural analysis of a Ukrainian literary work."
-75,"culture, religion",0.92,"Text covers film festival awards (Molodist International Film Festival in Kyiv) judged by an Ecumenical Jury of the World Council of Churches, combining cultural/entertainment content with religious institutional context"
-76,"academic, economy",0.92,"This is a scholarly analysis of railway infrastructure and transportation logistics between Ukrainian cities (Znamyanka and Odessa), examining freight flows, optimization strategies, and capacity planning. It uses academic methodology and technical analysis typical of transportation/infrastructure research papers, with economic implications for port operations and trade."
-77,academic,0.75,"Atlas is a scholarly/research publication documenting land resources of a specific Ukrainian district, fitting academic context despite minimal text provided"
-78,"history, culture",0.9,"Text discusses Ukrainian banknote design featuring historical figure Vladimir the Great and historical imagery, combining numismatic/cultural artifacts with historical content"
-79,"religion, politics",0.92,"Text concerns a court decision regarding dismantling a Ukrainian Orthodox Church building, involving religious institutions and legal/governmental authority over religious property. Primary focus is religious institution (Church of the Tithes), secondary is political/legal action by state authorities (court ruling, National Museum, Ministry of Culture)."
-80,"academic, economy",0.92,"This is a scholarly research article analyzing labor market formation and economic development in Ternopil region, examining demographic factors, employment patterns, and economic consequences."
-81,"politics, history",0.92,"Text covers political upheaval in Ukraine following the 1991 Soviet coup attempt, including Communist Party suspension, government restructuring, and independence declarations. Historical context of Soviet collapse and transition to Ukrainian independence."
-82,"sports, history",0.95,"Text discusses a football club's historical period (2006-2015), combining sports context with historical narrative of the club's trajectory."
-83,food,0.95,"Text asks about pronunciation of a dish name (Chicken Kiev), which is a culinary/food-related question. While Kiev refers to a Ukrainian place, the context is purely about food terminology and pronunciation, not travel, history, or other domains."
-84,"academic, economy",0.92,"This is a scholarly research paper analyzing economic features and cross-border cooperation, with focus on regional development and trade infrastructure in Zakarpattia"
-85,"travel, history, food",0.92,"Primary focus is travel planning and tourism recommendations for Ukrainian cities (Kyiv, Lviv, Odessa) and regional destinations. Secondary interests in history (Chernobyl, pretty buildings) and food are explicitly mentioned. No war, politics, or other contextual elements present in this travel inquiry."
-86,"food, history, culture",0.82,"Text discusses borscht (food/culinary tradition), Ukrainian independence and Soviet history (history), and cultural identity (culture). The 'soup drama' framing suggests cultural/identity discussion rather than current politics or war."
-87,sports,0.9,"Text references an international equestrian competition (Bromont is a jumping height classification) in Odessa in 2024, which is a sporting event."
-88,"culture, academic",0.9,"Text describes a sculpture (culture) located at an academic institution (Kiev Polytechnic Institute's Chemistry Faculty), with focus on the monument and its educational context."
-89,religion,0.95,"Text describes a Bishop's Cathedral Council at Lavra Kyiv Church, focusing on religious institutional governance and clergy (bishops). This is clearly a religious institution event with no other contextual elements present."
-90,sports,0.95,"Text discusses athletic achievement - Dynamo Kyiv's undefeated season and Ukrainian football league title win, with comparative reference to Sheriff Tiraspol's performance in Moldova's league."
-91,"academic, history",0.9,"This is a research paper title about a simulation study (academic context) examining atmospheric transport of radionuclides following the 2020 Chernobyl wildfire, which relates to the historical Chernobyl nuclear disaster and its ongoing environmental consequences."
-92,"academic, history",0.92,"This is a scholarly analysis of linguistic features in translations of a classic literary work by Nikolai Gogol (Mykola Hohol). The focus on comparative vocabulary analysis and translation studies indicates academic research context, while Taras Bulba is a historically significant Ukrainian literary work."
-93,academic,0.95,"This is a scientific research paper about spider species in buildings in Chernivtsi, Ukraine. It describes a scholarly investigation with methodology focused on habitat preference analysis, which is clearly academic research."
-94,"food, culture",0.9,"Text references traditional Ukrainian varenyky (dumplings), a culinary dish with cultural significance. The mention of a video/slideshow maker suggests multimedia content about this traditional food."
-95,economy,0.75,"Text references a factory, which is an economic/industrial entity. Without additional context about the factory's current operations, historical significance, or other details, the primary classification is economic. Could potentially include 'history' if this is a historical overview, but the minimal text suggests a straightforward reference to an industrial business."
-96,"religion, politics",0.92,"Text discusses religious institutions (Ukrainian Orthodox Church, monasteries), clergy, and faith communities, combined with political/diplomatic elements (OSCE monitoring mission, government relations, inter-confessional disputes, alleged rights violations and state actions)."
-97,"travel, general",0.82,Text is a city review/guide about Mykolaiv with travel and tourism focus. 'General' included as secondary label for the informational/reference nature of the content.
-98,"travel, general",0.75,"Video content about Kharkov city presented as a city guide/overview. Classified as travel (city information) with general as secondary label since it's introductory content about a place. No specific war, politics, culture, or other specialized context evident from the fragment."
-99,general,0.72,"Text is a linguistic/reference entry about pronunciation and definition of a Ukrainian place name. Does not fit specialized contexts like war, politics, academic research, history, sports, culture, food, travel, religion, or economy. Classified as general reference material."
-100,"religion, politics",0.92,"Text discusses Russian Orthodox Church ecclesiastical matters (bishops' council, metropolitan, excommunications, church communion) and Ukrainian church schism, which involves both religious institutional governance and geopolitical/political dimensions of church authority and unity in Ukraine."
-101,"economy, general",0.75,Text discusses energy production (coal vs nuclear power plants) and environmental/health implications. Primary relevance is economy/energy sector; framed as general knowledge/news fact.
-102,"travel, religion, culture",0.92,"Text describes Kyiv Pechersk Lavra as a tourist destination (travel guide format), which is a major religious monastery (religion), and cultural/historical landmark (culture). The framing as 'Hidden Marvels' and video channel content indicates tourism/travel focus."
-103,"politics, general",0.75,"Text compares political speeches by US presidents (Trump and Bush), with reference to Kyiv in Ukraine. Primary focus is political commentary on speeches; 'general' included for news/commentary framing. No substantive Ukrainian content beyond the Kyiv reference."
-104,"food, culture",0.9,"Text discusses vareniki, a traditional Ukrainian dumpling dish, with cultural/culinary focus. The playful 'Existential' framing suggests cultural or artistic commentary on traditional food."
-105,"culture, travel",0.9,"Text describes a cultural parade featuring traditional Ukrainian embroidered clothing (вышиванки) in Kremenchug, which is a cultural event. Secondary travel label applies due to the specific location reference and photo album documentation typical of travel/tourism content."
-106,"religion, politics",0.92,"Text describes a meeting between high-ranking Orthodox Church officials (Metropolitan Hilarion and Metropolitan Sawa) discussing pan-Orthodox agenda, cooperation between churches, and inter-Christian relations. Primary focus is religious institutions and clergy (religion), with secondary diplomatic/inter-church relations aspect (politics)."
-107,"academic, history",0.9,"Text references a historical academic institution (Kiev Medical Society), a university professor (G.N. Minkh), and pathological anatomy research, indicating scholarly/academic context with historical documentation of institutional activities"
-108,"culture, history",0.82,Fashion/clothing design series (culture) inspired by the Chornobyl disaster (history). The hashtags confirm focus on fashion creativity and historical event.
-109,academic,0.95,"This is a scientific research paper about tree dimensional and qualitative structure analysis in Kyiv's urban forest, using classical forest estimation methods, regression analysis, and correlation analysis to develop regulatory standards for wood assessment."
-110,"travel, general",0.75,"Text references Uzhhorod (Ukrainian city) with travel hashtag, indicating tourism/travel content. Minimal context provided, so general label included for news/social media framing."
-111,"travel, culture",0.9,"Text is a travel guide or promotional video about Uzhhorod showcasing its charm, beauty, and uniqueness - typical travel and cultural tourism content."
-112,"academic, economy",0.82,Technical research paper analyzing water chemistry in nuclear power plant operations. Primary label is academic (scholarly analysis of technical subject). Secondary label is economy (energy sector infrastructure and industrial operations at Rivne NPP).
-113,"religion, history, culture",0.92,"Text describes a synagogue (religious institution), references Babyn Yar (historically significant Holocaust site), and discusses architecture/opening (cultural/architectural context)"
-114,general,0.75,"Personal account of a police stop in Chernivtsi. No clear connection to war, politics, academic research, history, sports, culture, food, travel, religion, or economy. Fits as general news/miscellaneous incident reporting."
-115,"history, politics, academic",0.92,"This is a scholarly analysis of post-WWII Soviet propaganda and political sentiment in Zaporizhzhia region, combining historical analysis of the postwar period, political ideology and control mechanisms, and academic research methodology."
-116,"politics, war",0.9,"Rally in Odessa on March 30, 2014 (during Crimea annexation and early conflict) indicates pro-Ukrainian political demonstration in context of military/geopolitical crisis"
-117,academic,0.95,"This is a scientific research paper about fish reproduction in a Ukrainian reservoir, presenting methodology, experimental findings, and ecological measures. It contains typical academic elements: research objectives, data analysis, biological classifications, and applied recommendations for resource management."
-118,culture,0.9,Hopak is a traditional Ukrainian folk dance; this appears to be content about a video meme platform featuring or referencing this cultural element
-119,"academic, history, economy",0.92,"This is a scholarly research paper analyzing historical trade in Kievan Rus using academic methodology (historical documents, archaeological data). Primary focus is history (medieval Kievan Rus, Mongol invasions) with significant economic analysis (trade routes, commerce, economic prosperity)."
-120,"religion, politics, war",0.92,"Primary focus is demolition of Orthodox cathedral by authorities (religion, politics). War context implied by military personnel presence, police action, and broader Ukrainian-Russian Orthodox Church tensions during wartime."
-121,"politics, war",0.9,Presidential diplomatic meeting during wartime; Zelenskyy's Gulf visit is war-related diplomacy seeking support/resources for Ukraine's defense against Russian invasion
-122,"religion, politics",0.88,"Text discusses Ukrainian Orthodox religious institutions (monastery, patriarchate, lavra) and their geopolitical alignments with Russia, combining religious institutional context with political/diplomatic dimensions of church affiliation."
-123,"academic, history",0.92,"This is a scholarly research article analyzing place names (oikonimes) in Ukrainian regions from a linguocultural perspective, examining historical naming patterns from the Kievan Rus period onward. The text uses academic terminology and methodology typical of onomastic research papers."
-124,"academic, history",0.92,"This is a scholarly research article analyzing historical teaching practices at Kharkiv University during the 19th-early 20th century, based on academic sources (students' recollections). Primary focus is historical institutional analysis within an academic context."
-125,"food, culture",0.95,"Text is a recipe for Chicken Kiev (Kotlety po-kyivsky), a traditional Ukrainian dish. Primary label is food (recipe, cooking instructions, ingredients). Secondary label is culture as it represents Ukrainian culinary tradition and cultural heritage."
-126,sports,0.95,Text describes a football/soccer match between Valmiera FC and FC Metalist with game highlights and score result. This is purely sports content about a match.
-127,"culture, history",0.9,The Motherland Monument is a cultural landmark and symbol in Kyiv with historical significance as a Soviet-era monument. This references the monument itself as a cultural/historical artifact rather than current events.
-128,travel,0.9,Social media post promoting Uzhhorod as a travel destination with hashtags #travelwithlove and #travelshorts indicating tourism and sightseeing context.
-129,"academic, politics, history",0.92,"This is a scholarly presentation analyzing publishing and print culture in Transnistria, combining academic research methodology with political analysis of a breakaway region and historical context since Soviet independence in 1991."
-130,"travel, culture",0.9,"Text describes a tour of a famous monument in Kyiv with cultural context (Eurovision event), fitting travel guide and cultural tourism categories."
-131,sports,0.95,Text is about a boxing match between two fighters (Tyson Fury and Oleksandr Usyk) and WBA agreement regarding the bout. This is purely sports content focused on athletic competition.
-132,"food, culture",0.95,Text focuses on traditional Ukrainian food recipes (vareniki dumplings and cheese donuts) with cultural/culinary heritage context indicated by 'authentic village recipe' and traditional preparation methods.
-133,sports,0.95,"Text references Oleksandr Usyk, a prominent Ukrainian boxer, with language about upsetting expectations typical of sports commentary about athletic competition and match outcomes."
-134,"food, culture",0.95,"Text is about a traditional Ukrainian borscht recipe with beef, focusing on culinary preparation and cultural food traditions. The mention of 'family recipe' and cultural context supports both food and culture labels."
-135,"economy, travel",0.78,"Text describes a commercial enterprise and business operations (economy), with mention of a specific Ukrainian city that could relate to travel/location guides (travel). The incomplete text suggests business/commercial context as primary focus."
-136,"religion, politics, war",0.92,"Text discusses religious persecution of the Ukrainian Orthodox Church by Ukrainian authorities (religion, politics), framed within the context of war against Orthodoxy. Patriarch Kirill makes political accusations about state ideology targeting religious institutions and clergy."
-137,"academic, economy",0.92,"This is a scholarly technical paper about an automated system for grain logistics at Odesa's maritime terminal, combining academic research methodology with economic/trade infrastructure focus."
-138,"academic, politics, history, economy",0.92,"Scholarly analysis comparing historical referendum (Saarland 1955) with contemporary political situation (Donbass 2014-2021), examining economic reintegration policies and regional economic structures"
-139,"travel, culture",0.9,"Text describes a park in Kyiv with flowers and mentions a cultural landmark (Taras Shevchenko Park, named after the famous Ukrainian poet). Primary context is tourism/sightseeing (travel) with secondary cultural significance due to the historical/cultural figure referenced."
-140,sports,0.98,"Match thread for UEFA Champions League qualifying fixture between Benfica and Dynamo Kyiv with scores, lineups, and game details"
-141,sports,0.95,"Text discusses boxing match between Tyson Fury and Oleksandr Usyk, featuring prominent boxing figures and commentary about the fight."
-142,general,0.75,"Video game patch announcement for S.T.A.L.K.E.R. 2 set in Chornobyl. While it references a Ukrainian place name (Chornobyl), the text is primarily about game development/updates rather than any of the specified context categories. No war, politics, academic, historical, sports, cultural, food, travel, religion, or economic content present."
-143,"culture, history",0.9,"Text discusses children's literature and graphic novels about Soviet history/Cold War era. 'Breaking Stalin's Nose' is a literary work, and 'The Wall' is a graphic novel about life behind the Iron Curtain, making this primarily a culture/literature discussion with historical context about Soviet period."
-144,"travel, culture",0.82,"Text describes a park in Cherkasy city, which is relevant to tourism/travel guides and cultural landmarks. The incomplete nature suggests it's from a travel or cultural reference database about Ukrainian places."
-145,"academic, economy",0.92,"This is a scholarly research article analyzing agricultural development and employment patterns in Odesa region, with economic data analysis and statistical findings about farms and labor productivity."
-146,academic,0.92,"This is a research paper or scholarly study examining environmental and health data for Cherkasy, with technical analysis of atmospheric pollutants (SO2, NO2, CH2O) and cumulative health risks. The format and content indicate academic/scientific publication."
-147,sports,0.95,Text describes a professional athlete (boxer Oleksandr Usyk) making a football debut for a Ukrainian team in a friendly match - clearly sports-focused content about athletic competition.
-148,"academic, economy",0.92,"This is a scholarly research paper analyzing business and economics education in Ukraine using academic methodologies (PEST and SWOT analysis). The focus on educational programs in business and economics, combined with the institutional research framework, makes it primarily academic with secondary economic education focus."
-149,"religion, war",0.78,Religious figure (Metropolitan) and institution (Cherkassy) mentioned; electronic bracelet suggests legal/security measures likely related to wartime conditions or restrictions in Ukraine
-150,"religion, general",0.92,"Primary context is religious institution (Chernivtsi-Bukovina diocese, Metropolitan, Archimandrite). Secondary context is breaking news about criminal allegations. No other labels apply."
-151,academic,0.95,"This is a scholarly publication about Kantian philosophy and anthropology, published by an academic press in Kyiv. It includes a book review format typical of academic contexts."
-152,"academic, history",0.9,Text references university education (academic context) and pre-World War I period (historical context). The registration certificate indicates this is a scholarly or archival document about historical figures.
-153,"academic, economy, war",0.92,"This is a scholarly research article examining economic security indicators of Ukrainian regions affected by armed conflict, combining academic methodology with economic analysis and wartime context"
-154,"economy, politics",0.92,"Text discusses bilateral energy negotiations between Ukraine and Moldova regarding hydropower infrastructure, involving government officials and international agreements on energy operations and trade relations."
-155,"travel, history",0.9,"Text describes a visit/tour to Chernobyl exclusion zone (travel guide/tourism), with historical context about the nuclear disaster site"
-156,sports,0.95,"Match result between Rangers and Dynamo Kyiv with goal scorer and aggregate score, clearly a sports/football context"
-157,"academic, history",0.92,"This is a scholarly analysis comparing nuclear accidents with focus on research methodology, future development paths, and joint research areas. While it discusses Chornobyl (a historical event), the primary framing is academic/analytical rather than historical narrative."
-158,economy,0.95,"Dataset documentation about Kyiv residential real estate market, pricing, and property listings - clearly focused on housing market economics and business data."
-159,academic,0.9,"Text describes a scientific observation project (meteor observation) conducted at a station in Nikolaev, which is a scholarly/research activity"
-160,"academic, history, politics",0.92,"This is a scholarly research article analyzing historical cultural diplomacy during Kyivan Rus period. It combines academic analysis (research paper format, theoretical framework) with history (medieval Kyivan Rus, historical figures like Volodymyr the Great) and politics (diplomacy, international relations, soft power concepts)."
-161,"academic, history",0.92,"Text discusses academician Viktor Glushkov's scholarly legacy and contributions to scientific education at a Ukrainian university, combining academic research context with historical analysis of his influence on cybernetics and computing fields."
-162,"academic, history, culture",0.92,This is a scholarly article analyzing the Kharkiv Romantic School's linguistic and spelling contributions to Ukrainian language development in the 19th century. It combines academic research methodology with historical analysis of a cultural/literary movement and its key figures.
-163,general,0.45,"Minimal context provided - only a city name and date with social media hashtags. Could relate to travel, news, or other contexts, but insufficient information to assign more specific labels. Classified as general due to lack of substantive content."
-164,"geography, general",0.6,"Text mentions two Ukrainian geographical features (Dniester river and Black Sea) but provides no context about activities, events, or specific information related to them. Without additional context, this is general geographical reference."
-165,"travel, culture",0.9,"Text describes beach tourism and summer leisure activities in Odessa, focusing on travel experience and cultural/lifestyle content about a Ukrainian coastal destination."
-166,"politics, war",0.9,"Statement from a political leader (LPR Head) in the context of the Lugansk People's Republic, which is directly related to the ongoing war in Ukraine and political governance of the territory"
-167,general,0.45,"Fragmented text appears to be a YouTube channel intro/call-to-action with vague reference to Crimea and Russia. Lacks substantive content to assign specific context labels. Could relate to politics or war depending on full content, but insufficient information provided."
-168,academic,0.95,"This is a scholarly research article presenting a study on innovative teaching technologies in higher education, conducted at a Ukrainian university with detailed methodology, empirical data collection, and analysis of educational outcomes."
-169,"academic, history",0.9,"Text is a scholarly analysis of a professor's scientific research contributions and pharmacology teaching history in the USSR context. Primary focus is academic/scientific, with historical framing of Soviet-era medical research and institutional development."
-170,"academic, economy, politics",0.92,"This is a scholarly research article analyzing financial resource formation for local communities in Chernivtsi region. Primary label is academic (research paper with methodology and analysis). Secondary labels are economy (financial resources, budgets, revenue/expenditure analysis) and politics (decentralization processes, local governance, territorial administration)."
-171,"war, general",0.9,"Text describes aftermath of conflict in a Ukrainian village with references to destruction, clearly war-related. 'General' included as secondary label due to brief news-style framing of the observation."
-172,"politics, war",0.92,"Text discusses diplomatic statements and political commentary by Belarusian and Ukrainian leaders regarding the Ukrainian conflict, economic cooperation, and peace proposals. Primary focus is political diplomacy (politics) with direct reference to the ongoing military conflict and peace negotiations (war)."
-173,"academic, history",0.92,"This is a peer-reviewed research paper examining neuropsychological outcomes of children evacuated after the Chornobyl disaster. Primary label is academic (scholarly study with methodology, controls, statistical analysis); secondary label is history (examining consequences of a major historical event from 1986)."
-174,sports,0.98,"Match thread for EURO 2012 football tournament between Denmark and Germany, held in Lviv, Ukraine. Contains typical sports match information: kick-off time, venue, referee details, and group standings."
-175,food,0.95,"Text is about a traditional Ukrainian dish (varenyky with mushrooms), focusing on culinary preparation and food comparison."
-176,"travel, culture",0.82,Travel guide format describing a journey through Ukrainian cities (Kyiv to Chernihiv) with cultural interest in a notable local figure ('Tree Man'). The 'wanted' framing appears to be colloquial/humorous rather than legal/military context.
-177,"academic, history, politics",0.92,"This is a scholarly research paper analyzing urban place names (godonyms/hodonyms) in Kropyvnytskyi. It discusses historical events, political renaming trends, and state ideology reflected in street names, including references to the Russian-Ukrainian war."
-178,"travel, general",0.9,Personal travel experience and tourism activity at Pripyat/Chernobyl site. 'General' included as secondary label for casual social media/personal narrative framing.
-179,"politics, war",0.92,"Text covers presidential political commentary on military strikes, involving geopolitical conflict and international relations during wartime context"
-180,"food, culture",0.95,"Text focuses on a traditional Ukrainian borsch recipe and culinary traditions, with cultural/religious context of Lent preparation"
-181,"academic, economy",0.88,"This is a scholarly analysis of waste management systems with policy recommendations for a Ukrainian town. Primary label is academic (research paper format, analytical approach). Secondary label is economy (infrastructure, municipal services, policy implementation, resource management)."
-182,"academic, history",0.92,This is a scholarly research paper title examining historical educational development at a Ukrainian institution during a specific historical period (interwar era). Primary context is academic research with secondary historical focus on institutional and cultural history.
-183,"academic, economy",0.92,"This is a research paper analyzing economic development of Vinnytsia region enterprises, employing scholarly methodology (SWOT analysis, systematic assessment) typical of academic economic research."
-184,"culture, sports",0.9,"Text describes a Photoshop tutorial for creating a sports poster design (matchday/football context with 'Makhnev' reference), combining design/art instruction with sports theme"
-185,"travel, history, general",0.92,Primary focus is travel/tourism guide to Pripyat ghost town. Secondary historical context about Chernobyl disaster. General news framing of the article.
-186,sports,0.95,"Text discusses a football club (FC Hoverla Uzhhorod), player loans, and another football club (Dynamo Kyiv), which are all sports-related topics."
-187,"economy, academic",0.82,Academic research paper examining occupational health issues in coal mining industry in Donbass region; primarily economic/industrial context with scholarly methodology
-188,"academic, war, politics, economy",0.92,This is a scholarly analysis (academic paper) examining economic criminology in the Lugansk and Donetsk People's Republics during the special military operation (war context). It addresses legal/governmental structures (politics) and economic conditions (economy) in these territories.
-189,general,0.75,"This is a straightforward spelling/transliteration question about a Ukrainian city name. It doesn't fit into specialized contexts like war, politics, culture, or travel guides. It's a general reference/informational query."
-190,"travel, culture",0.75,"Text discusses dating and cultural characteristics of Ukrainian women in context of foreign visitors/tourism, combining travel/dating guide elements with cultural commentary about Ukrainian people."
-191,"travel, economy, culture",0.92,"Text discusses tourism potential and economic development of Mykolaiv region through cultural heritage, combining travel/tourism, economic benefits, and cultural preservation aspects."
-192,sports,0.95,"Text references a football match between Galatasaray and Dynamo Kiev (Kyiv), with mention of a bingo card for game events - clearly sports content."
-193,"academic, economy",0.82,This is a scholarly research paper (academic) focused on environmental and waste management issues in a coal mining region (economy/energy sector). The title indicates academic/scientific analysis of industrial environmental concerns.
-194,"travel, general",0.72,"Text describes a recreational activity (evening walk) to a geographical location (Dnieper River). Primary label is travel (tourism/sightseeing content). Secondary label is general due to social media content framing. Note: Smolensk is in Russia, not Ukraine, though the Dnieper River is significant to Ukraine."
-195,"travel, culture",0.9,"Text references Potemkin Stairs (famous Odessa landmark) in travel/tourism context, with bike specifications suggesting recreational cycling/sightseeing activity. Culture label for the architectural/historical landmark significance."
-196,"politics, general",0.82,"Text describes a city council meeting and administrative personnel decisions (firing of city manager and attorney), which are political/governmental matters. Framed as breaking news coverage of a local government event."
-197,"academic, history",0.9,"This is a scholarly work examining literature and discourse in the context of the Chornobyl disaster, combining academic analysis with historical event analysis."
-198,"religion, culture",0.75,"Harinam is a devotional chanting practice in Krishna consciousness (religion/spirituality). The text references Ternopil, Ukraine and expresses cultural/spiritual practice. No other context labels apply."
-199,war,0.95,"Text describes military operations, counterattack, troop movements, and territorial gains - core war context elements"
-200,academic,0.9,Title indicates a research publication about optics with geographic references to Odessa and Moscow. This is scholarly/scientific content without other contextual elements present.
-201,"economy, general",0.72,"Text discusses cattle breeding development in Lviv area, which is primarily an economic/agricultural topic. Classified as economy (agricultural business/production) with general as secondary label due to the informational/news nature of the statement."
-202,"religion, history",0.92,"Text describes a Russian Orthodox Church synod session chaired by Patriarch Kirill, with historical discussion of Metropolitan Sergiy's 1927 declaration and Soviet-era church persecution. Primary focus is religious institutional matters and historical context."
-203,"academic, history, politics",0.92,"This is a scholarly paper title analyzing historical philosophical schools (Lvov-Warsaw School) through the lens of political repression, combining academic research methodology with historical analysis and political context."
-204,religion,0.95,"Text focuses on Ukrainian Orthodox Church religious ceremony, Metropolitan's enthronement anniversary, Divine Liturgy, clergy appointments, and ecclesiastical honors at Kiev-Pechersk Monastery."
-205,"academic, history, politics",0.92,"This is a scholarly book description analyzing Kharkiv's historical development, national identity formation, and political reconfiguration (Euromaidan). It combines academic analysis with historical narrative and political context of Ukrainian-Russian relations."
-206,general,0.75,"Text about water quality/environmental conditions in Zhytomyr. No specific context provided. Could relate to economy (water infrastructure) or general news, but without more content, general is most appropriate."
-207,"academic, history",0.92,This is a scholarly research article analyzing surname etymology and anthroponymy using archival sources from the Holodomor period. It combines academic linguistic/onomastic research methodology with historical context of 1932-1933 Ukraine.
-208,general,0.75,"This is a meta-description of a local news website for Uzhgorod. It contains no specific content about war, politics, culture, economy, or other substantive topics - just a generic description of the site's purpose and scope. Classified as general since it's administrative/informational content that doesn't fit other categories."
-209,"war, food, culture",0.92,"Text frames a Ukrainian cuisine series within wartime context (151st day of invasion), combining military/war references with food/culinary content and cultural heritage documentation"
-210,"culture, general",0.82,Primary context is a cultural/food business story about a bakery naming a cake product. Secondary general label for news framing of this light/miscellaneous story.
-211,"politics, economy",0.9,Document concerns diplomatic agreement between US and Ukraine regarding air transport protocol - falls under both political diplomacy and economic trade/transport policy
-212,"war, travel",0.9,Text discusses curfew restrictions in Lviv (wartime security measure) in the context of travel planning and transportation logistics during the conflict.
-213,culture,0.95,"Text is about a musician from Ukraine creating and sharing a musical composition for trumpet, which is a cultural/artistic activity."
-214,travel,0.95,"Text is a hotel description and travel guide entry for Hotel Uzhgorod, including accommodation details, amenities, location information, and tourism-focused content about a Ukrainian city."
-215,"food, culture",0.95,"Text is about a traditional Ukrainian cake recipe (Kyiv Cake) with baking instructions, which is food content. The reference to holiday tables and cultural significance adds a culture dimension."
-216,"academic, history",0.92,"This is a scholarly research paper analyzing archaeological excavation data from a Kyivan Rus settlement, presenting zoological findings and historical conclusions about medieval animal husbandry practices."
-217,"academic, history",0.92,"This is a scholarly research article analyzing long-term geological and hydrological data of the Dniester River using scientific methodology (GIS analysis, topographic mapping). The 140-year historical monitoring period (1874-2015) provides historical context to the analysis."
-218,academic,0.72,"Reference to a laboratory facility with analytical functions suggests scientific/research context. The formal institutional naming convention indicates academic or research institution documentation. Without additional content details, academic is the primary fit, though 'general' could apply if this is merely an administrative announcement."
-219,"sports, war, general",0.9,"Primary context is a sports/football friendly match (Everton vs Dynamo Kyiv), but the text also mentions war context (Russian invasion, refugees) and frames this as a human interest story combining both elements."
-220,"academic, history",0.75,Academic title suggesting scholarly analysis of Chornobyl's spatial/cultural characteristics; history context due to Chornobyl disaster being a major historical event
+id,haiku_labels,reason
+1,academic,Academic paper on regional development
+2,religion,Church seizure dispute between Orthodox factions
+3,general,"Too vague, just listing/navigation"
+4,general,"Too vague, short listing request"
+5,academic,Scientific study of gene polymorphisms
+6,war,Radioactive material smuggling to extremists
+7,sports,UEFA Europa League football match
+8,war,Russian missile strike on Ukrainian civilian infrastructure
+9,culture,Song titled Borscht Soup
+10,religion,Ukrainian Orthodox Church Synod meeting
+11,academic,Scholarly analysis of historical period
+12,general,"Too vague, brief descriptive text"
+13,travel,City tour with travel hashtags
+14,academic,Scientific study of plant distribution
+15,food,Cooking demonstration for chicken dish
+16,academic,Scholarly analysis of opera staging techniques
+17,sports,Boxing match analysis and technical breakdown
+18,academic,Scientific study of radioactive isotope distribution
+19,general,"Too vague, appears to be a location listing"
+20,food,Recipe preparation and cooking instructions
+21,general,Vague request for pictures and albums
+22,academic,Scientific study of forest plantations
+23,travel,Aerial sightseeing video of Kyiv landmarks
+24,travel,City promotional video content
+25,politics,Putin's strategic choice regarding Ukraine governance
+26,war,Military pilot awarded for service
+27,general,"Too vague, lacks specific content"
+28,academic,Scientific article review about contamination data
+29,academic,Scholarly article analyzing agro-industrial competitiveness
+30,politics,Church official meets Iranian ambassador
+31,history,Memorial tribute to historical figure
+32,politics,State-level oil supply deal between nations
+33,history,Historical attitudes and perspectives analysis
+34,travel,Walking tour of Kiev streets
+35,food,Recipe and cooking instructions for Chicken Kiev
+36,general,"Too short, vague listing"
+37,general,"Too vague, appears to be file listing"
+38,politics,International city relations dispute
+39,religion,Church leader supports persecuted theological schools
+40,academic,Scholarly book about medieval history
+41,general,"Too vague, personal gaming commentary"
+42,travel,Walking tour of Kyiv monument
+43,war,Nuclear cooperation involves military aid
+44,academic,Scientific study of plant distribution
+45,general,"Event coverage, no specific topic focus"
+46,history,Historical event depicted in game
+47,academic,Scholarly analysis of urban planning history
+48,religion,Patriarch addresses church confiscation dispute
+49,economy,Analysis of innovation potential and economic growth
+50,sports,UEFA Champions League match report
+51,travel,Walking tour video of city
+52,travel,Walking tour video of Kyiv location
+53,culture,Film press conference announcement
+54,travel,City description and tourism content
+55,academic,Scientific study of HIV/AIDS epidemiology
+56,culture,Ballet performance tour and artistic event
+57,academic,Scientific paper on radiocaesium transport modeling
+58,food,Recipe for ricotta cheese cake
+59,war,Military weapon firing in combat zone
+60,food,Recipe and cooking instructions focus
+61,food,Personal account of eating dishes
+62,academic,Scientific study of heavy metals distribution
+63,academic,Book review of scholarly legal history work
+64,academic,Academic conference proceedings about restaurant economics
+65,religion,Orthodox Christian podcast about monastery
+66,academic,Technical monitoring study of stadium
+67,sports,Football match highlights and goals
+68,culture,Chef prepares traditional Ukrainian cuisine
+69,academic,Literary analysis scholarly research paper
+70,travel,Solo tour of Pakistani lakes
+71,travel,Video tour of monastery location
+72,culture,Ballet performance and choreography
+73,academic,Scientific study on radiation dosimetry
+74,academic,Literary analysis of novel semiotics
+75,culture,Film festival awards and reviews
+76,academic,Technical analysis of railway infrastructure
+77,academic,Geographic resource documentation atlas
+78,history,Ukrainian banknote historical imagery analysis
+79,religion,Church dismantling dispute and religious conflict
+80,academic,Scholarly analysis of labor market formation
+81,politics,Communist Party dissolution and state power
+82,sports,Football club history and achievements
+83,general,"Too vague, unclear intent"
+84,academic,Research study on economic features
+85,travel,Trip planning advice request
+86,culture,Creative work about borscht identity
+87,sports,Equestrian competition event listing
+88,general,"Too vague, appears to be navigation/listing"
+89,religion,Church council meeting at cathedral
+90,sports,Dynamo Kyiv championship season results
+91,academic,Scientific simulation study on radionuclide transport
+92,academic,Scholarly analysis of linguistic vocabulary
+93,academic,Scientific study of spider species distribution
+94,food,Ukrainian varenyky recipe/preparation content
+95,general,"Too vague, lacks context or narrative"
+96,religion,Church oppression and inter-confessional disputes
+97,travel,City review and description
+98,travel,City tour video content
+99,general,Vague listing of pronunciation definitions
+100,religion,Russian Orthodox Church bishops' council resolution
+101,academic,Scientific fact comparison about uranium emissions
+102,travel,Video tour of Ukrainian landmark
+103,general,"Vague comparison, lacks substantive content"
+104,food,Recipe or food preparation content
+105,culture,Traditional Ukrainian dress parade event
+106,politics,Church official diplomatic meeting
+107,history,Historical account of medical society
+108,culture,Fashion series inspired by historical event
+109,academic,Scientific study of tree characteristics
+110,general,"Too vague, just hashtags listing"
+111,travel,Video tour of Uzhhorod city
+112,academic,Technical analysis of nuclear power station chemistry
+113,culture,"Synagogue opening, architecture, video documentation"
+114,general,"Personal incident report, too vague"
+115,academic,Scholarly analysis of historical propaganda
+116,history,Historical event documentation from 2014
+117,academic,Scientific study of fish reproduction
+118,culture,Ukrainian dance meme video content
+119,academic,Research paper analyzing historical trade data
+120,religion,"Cathedral demolition by authorities, church dispute"
+121,politics,Presidential diplomatic meeting with foreign leader
+122,religion,Ukrainian Orthodox Church internal dispute
+123,academic,Linguistic analysis of place names
+124,academic,Scholarly article analyzing historical educational practices
+125,food,Recipe instructions for chicken Kiev
+126,sports,Football match highlights and scores
+127,general,"Too vague, appears to be navigation"
+128,travel,City name with travel hashtags
+129,academic,Scholarly presentation on publishing history
+130,travel,Tour of Kyiv landmark monument
+131,sports,Boxing match agreement announcement
+132,food,Recipe demonstration for traditional dishes
+133,sports,Boxing champion Oleksandr Usyk victory
+134,food,Recipe demonstration for borscht soup
+135,general,"Too vague, incomplete listing"
+136,religion,Patriarch discusses church persecution disputes
+137,academic,Technical paper on grain terminal system
+138,academic,Scholarly analysis of referendums and economic integration
+139,travel,Park walk video description
+140,sports,UEFA Champions League football match
+141,sports,Boxing match coverage and analysis
+142,general,Video game patch announcement
+143,culture,Book review and literary analysis
+144,travel,Park walk video tour description
+145,academic,Scholarly analysis of agricultural employment data
+146,academic,Environmental health assessment study
+147,sports,Boxer Usyk plays football match
+148,academic,Academic analysis of education system
+149,religion,Church official legal restriction
+150,religion,Church officials criminal investigation
+151,academic,Scholarly book review on philosophy
+152,academic,Historical research about pharmacists
+153,academic,Empirical assessment paper analyzing economic security indicators
+154,politics,State-level bilateral energy agreement negotiations
+155,travel,Documentary about visiting Chernobyl exclusion zone
+156,sports,Football match result score
+157,academic,Scholarly analysis of nuclear accident zones
+158,general,Dataset documentation listing structure
+159,academic,Scientific meteor observation study
+160,academic,Scholarly analysis of historical diplomacy
+161,academic,Scholarly analysis of academic legacy
+162,academic,Scholarly analysis of historical linguistic development
+163,general,"Too vague, appears to be navigation/listing"
+164,general,"Too vague, appears to be listing"
+165,travel,Beach video tour content
+166,politics,Official statement from regional leader
+167,general,"Too vague, appears to be channel navigation"
+168,academic,Research study on teaching technologies
+169,academic,Scientific research analysis of pharmacology
+170,academic,Research paper analyzing financial resources
+171,war,Conflict aftermath in Ukrainian village
+172,politics,Lukashenko's diplomatic statements on Ukraine conflict
+173,academic,Peer-reviewed neuropsychological study with methodology
+174,sports,Football match thread with details
+175,food,Recipe or cooking demonstration for varenyky
+176,travel,Journey through Ukraine travel guide
+177,academic,Scholarly analysis of urban toponymy
+178,travel,Tourist visit to Pripyat with guide
+179,politics,Presidential reaction to international military strikes
+180,food,Recipe and cooking instructions for borscht
+181,academic,Research analysis of waste management systems
+182,academic,Scholarly analysis of historical educational development
+183,academic,Research paper on regional economic development
+184,culture,Photoshop design tutorial content
+185,travel,"Exploring ghost town, exclusion zone visit"
+186,sports,Football club player loan transfers
+187,academic,Research study on occupational health
+188,academic,Academic analysis of economic criminology
+189,general,"Too vague, spelling question only"
+190,general,Vague dating advice content
+191,economy,Regional tourism development financial impact
+192,sports,Football match bingo card game
+193,academic,Academic paper on environmental waste management
+194,travel,Walking tour video of location
+195,travel,Location description with bike tour context
+196,politics,City council meeting and official dismissals
+197,academic,Academic analysis of post-Chornobyl literature
+198,religion,Hare Krishna spiritual practice event
+199,war,Military counterattack and troop movements
+200,academic,Research paper or study topic
+201,economy,Regional agricultural development and livestock industry
+202,religion,Patriarch Kirill chairs Holy Synod session
+203,academic,Academic paper on philosophy history
+204,religion,Church anniversary celebration and hierarchical appointments
+205,history,City history from 17th century today
+206,academic,Scientific study of water quality
+207,academic,Linguistic analysis of surname etymology
+208,general,Website navigation/listing content
+209,war,Russian invasion of Kyiv mentioned prominently
+210,culture,Bakery cake naming cultural event
+211,politics,US-Ukraine bilateral air transport agreement
+212,general,Travel question too vague/short
+213,culture,Musician shares original trumpet composition
+214,travel,Hotel accommodation information and listing
+215,food,Recipe and baking instructions for cake
+216,academic,Archaeological research paper analyzing excavation data
+217,academic,Scientific study of river displacement monitoring
+218,general,"Too vague, appears to be a title or heading"
+219,war,Humanitarian aid to Russian invasion refugees
+220,general,"Too vague, appears to be listing/title"
