@@ -1,50 +1,26 @@
 {
-  "confidence_intervals": {
-    "method": "Wilson score interval, 95%",
-    "total_estimates": 188,
-    "narrow_ci_pct": 74,
-    "wide_ci_pct": 8
-  },
-  "sensitivity": {
-    "full_r2": 0.792,
-    "leave_one_out": {
-      "min": 0.779,
-      "max": 0.864,
-      "mean": 0.794
+  "benchmark": [
+    {
+      "model": "deberta-v3-large",
+      "f1_macro": 0.8566,
+      "f1_std": 0.0132,
+      "accuracy": 0.9013,
+      "n_runs": 3
     },
-    "verdict": "No single pair or category destabilizes the model"
-  },
-  "temporal_lag": {
-    "pair": "Kiev/Kyiv (pair 1)",
-    "common_months": 129,
-    "findings": [
-      {
-        "from": "GDELT (news)",
-        "to": "Trends (search)",
-        "lag_months": 12,
-        "r": 0.674,
-        "interpretation": "News media adopts ~12 months before public search behavior follows"
-      },
-      {
-        "from": "GDELT (news)",
-        "to": "Wikipedia",
-        "lag_months": 12,
-        "r": 0.738,
-        "interpretation": "News media leads Wikipedia pageview shift by ~12 months"
-      },
-      {
-        "from": "Trends (search)",
-        "to": "Wikipedia",
-        "lag_months": 0,
-        "r": 0.819,
-        "interpretation": "Search and Wikipedia move roughly synchronously"
-      }
-    ],
-    "granger_test": {
-      "r": 0.037,
-      "p": 0.679,
-      "significant": false,
-      "interpretation": "Month-to-month prediction is weak \u2014 diffusion is gradual, not causal"
+    {
+      "model": "xlm-roberta-large",
+      "f1_macro": 0.8464,
+      "f1_std": 0.0111,
+      "accuracy": 0.8917,
+      "n_runs": 3
+    },
+    {
+      "model": "mdeberta-v3-base",
+      "f1_macro": 0.807,
+      "f1_std": 0.0067,
+      "accuracy": 0.8637,
+      "n_runs": 3
     }
-  }
+  ],
+  "phase1_winner": "weighted lr=1e-5"
 }
