@@ -368,7 +368,50 @@ def generate_analysis_text(pair, ts_data, llm_summary, coll_data, religious_data
     return "\n  ".join(paragraphs)
 
 
-def generate_report(pair, timeseries, llm_data, collocations, religious_data, pair_events_data, stats, ctx_distributions, cm_svg, chart_annotations, all_pairs):
+def _build_evidence_section(pid, ru, ua, article_examples):
+    """Build Source Evidence section with actual article URLs."""
+    if not article_examples:
+        return ""
+    pair_data = article_examples.get(str(pid))
+    if not pair_data or not pair_data.get("examples"):
+        return ""
+
+    examples = pair_data["examples"]
+    ru_examples = [e for e in examples if e["variant"] == "russian"]
+    ua_examples = [e for e in examples if e["variant"] == "ukrainian"]
+
+    def _row(ex):
+        domain = ex.get("domain", "")
+        url = ex.get("url", "#")
+        origin = ex.get("origin", "")
+        year = ex.get("year")
+        year_str = f' ({year})' if year else ""
+        origin_badge = ""
+        if origin == "ukrainian":
+            origin_badge = '<span style="background:#0057B8;color:white;padding:1px 6px;border-radius:3px;font-size:0.7rem;margin-left:4px;">.ua</span>'
+        elif origin == "state_media":
+            origin_badge = '<span style="background:#dc2626;color:white;padding:1px 6px;border-radius:3px;font-size:0.7rem;margin-left:4px;">state media</span>'
+        return f'<li style="margin-bottom:4px;word-break:break-all;"><a href="{url}" target="_blank" rel="noopener" style="color:#3b82f6;text-decoration:none;font-size:0.85rem;">{domain}{year_str}</a>{origin_badge}</li>'
+
+    html = '<h2 id="evidence">Source Evidence</h2>\n<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">\n'
+
+    if ru_examples:
+        html += f'<div><h3 style="color:#E74C3C;font-size:0.95rem;">Uses "{ru}" (Russian form)</h3>\n<ul style="list-style:none;padding:0;">\n'
+        for ex in ru_examples[:12]:
+            html += _row(ex) + "\n"
+        html += "</ul></div>\n"
+
+    if ua_examples:
+        html += f'<div><h3 style="color:#0057B8;font-size:0.95rem;">Uses "{ua}" (Ukrainian form)</h3>\n<ul style="list-style:none;padding:0;">\n'
+        for ex in ua_examples[:12]:
+            html += _row(ex) + "\n"
+        html += "</ul></div>\n"
+
+    html += "</div>\n"
+    return html
+
+
+def generate_report(pair, timeseries, llm_data, collocations, religious_data, pair_events_data, stats, ctx_distributions, cm_svg, chart_annotations, all_pairs, article_examples=None):
     pid = pair["id"]
     ru, ua = pair["russian"], pair["ukrainian"]
     cat = pair["category"]
@@ -639,6 +682,8 @@ def generate_report(pair, timeseries, llm_data, collocations, religious_data, pa
         toc.append('<a href="#cl">CL Analysis</a>')
     if rel_html:
         toc.append('<a href="#religious">Religious</a>')
+    if article_examples and str(pid) in (article_examples or {}):
+        toc.append('<a href="#evidence">Source Evidence</a>')
     toc.append('<a href="#refs">References</a>')
 
     # ---- Human-friendly TAS label ----
@@ -743,6 +788,8 @@ td{{padding:0.6rem;border-bottom:1px solid #f3f4f6}}
 
 {rel_html}
 
+{_build_evidence_section(pid, ru, ua, article_examples)}
+
 <h2 id="refs">References & Methodology</h2>
 <div class="ref-section">
   <h3>Key Events</h3>
@@ -800,6 +847,11 @@ def main():
     except Exception:
         chart_annotations = {}
 
+    try:
+        article_examples = load_json("article_examples.json")
+    except Exception:
+        article_examples = {}
+
     all_pairs = manifest["pairs"]
 
     if args.pair:
@@ -817,7 +869,7 @@ def main():
         out_file = OUT / f"pair-{pid}.html"
         html = generate_report(
             pair, timeseries, llm_per_pair, collocations,
-            religious, pair_events, stats, ctx_distributions, cm_svg, chart_annotations, all_pairs
+            religious, pair_events, stats, ctx_distributions, cm_svg, chart_annotations, all_pairs, article_examples
         )
         out_file.write_text(html)
         size_kb = len(html) / 1024
