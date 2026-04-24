@@ -51,7 +51,7 @@ def prepare_dataset(df):
 
 
 def train_encoder(model_key, train_df, val_df, test_df, label2id, epochs=3, batch_size=16):
-    """Fine-tune a single encoder model."""
+    """Fine-tune a single encoder model with class-weighted loss."""
     from datasets import Dataset
     from transformers import (
         AutoModelForSequenceClassification,
@@ -60,6 +60,8 @@ def train_encoder(model_key, train_df, val_df, test_df, label2id, epochs=3, batc
         TrainingArguments,
     )
     from sklearn.metrics import classification_report, f1_score
+    from sklearn.utils.class_weight import compute_class_weight
+    import torch
 
     model_name = ENCODER_MODELS[model_key]
     output_dir = CL_MODEL_DIR / model_key
@@ -75,6 +77,12 @@ def train_encoder(model_key, train_df, val_df, test_df, label2id, epochs=3, batc
         id2label=id2label,
         label2id=label2id,
     )
+
+    # Class-weighted loss to handle imbalance (academic_science 37% vs business_economy 0.9%)
+    class_weights = compute_class_weight(
+        "balanced", classes=np.unique(train_df["label"].values), y=train_df["label"].values
+    )
+    class_weights_tensor = torch.tensor(class_weights, dtype=torch.float32)
 
     def tokenize_fn(examples):
         return tokenizer(
@@ -110,7 +118,19 @@ def train_encoder(model_key, train_df, val_df, test_df, label2id, epochs=3, batc
         report_to="none",
     )
 
-    trainer = Trainer(
+    # Custom trainer with class-weighted cross-entropy loss
+    class WeightedTrainer(Trainer):
+        def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
+            labels = inputs.pop("labels")
+            outputs = model(**inputs)
+            logits = outputs.logits
+            loss_fn = torch.nn.CrossEntropyLoss(
+                weight=class_weights_tensor.to(logits.device)
+            )
+            loss = loss_fn(logits, labels)
+            return (loss, outputs) if return_outputs else loss
+
+    trainer = WeightedTrainer(
         model=model,
         args=training_args,
         train_dataset=train_ds,
