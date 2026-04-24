@@ -29,9 +29,8 @@ log = logging.getLogger(__name__)
 
 def prepare_dataset(df):
     """Prepare train/val/test splits from labeled corpus."""
-    # Filter out errors and low-confidence labels
+    # Filter to valid context labels (11 classes including religion)
     df = df[df["context_label"].isin(CONTEXT_LABELS)].copy()
-    df = df[df["context_confidence"] >= 0.5].copy()
 
     # Encode labels
     label2id = {label: i for i, label in enumerate(CONTEXT_LABELS)}
@@ -161,7 +160,10 @@ def train_encoder(model_key, train_df, val_df, test_df, label2id, epochs=3, batc
 def run_training(model_keys=None, epochs=3, batch_size=16):
     ensure_cl_dirs()
 
-    corpus_path = CL_CLASSIFIED_DIR / "corpus_labeled.parquet"
+    # Prefer clean corpus (contaminated texts removed, 11 classes)
+    corpus_path = CL_CLASSIFIED_DIR / "corpus_clean.parquet"
+    if not corpus_path.exists():
+        corpus_path = CL_CLASSIFIED_DIR / "corpus_labeled.parquet"
     if not corpus_path.exists():
         raise FileNotFoundError("Labeled corpus not found.")
 
