@@ -136,7 +136,7 @@ def train_encoder(model_key, train_df, val_df, test_df, label2id, epochs=3, batc
         train_dataset=train_ds,
         eval_dataset=val_ds,
         compute_metrics=compute_metrics,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
     )
 
     trainer.train()

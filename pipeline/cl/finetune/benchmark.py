@@ -158,12 +158,12 @@ def run_single(model_key, train_df, val_df, test_df, label2id,
 
         trainer = WeightedTrainer(
             model=model, args=training_args, train_dataset=train_ds,
-            eval_dataset=val_ds, compute_metrics=compute_metrics, tokenizer=tokenizer,
+            eval_dataset=val_ds, compute_metrics=compute_metrics, processing_class=tokenizer,
         )
     else:
         trainer = Trainer(
             model=model, args=training_args, train_dataset=train_ds,
-            eval_dataset=val_ds, compute_metrics=compute_metrics, tokenizer=tokenizer,
+            eval_dataset=val_ds, compute_metrics=compute_metrics, processing_class=tokenizer,
         )
 
     start_time = time.time()
