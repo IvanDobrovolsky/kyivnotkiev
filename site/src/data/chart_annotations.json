@@ -1,0 +1,233 @@
+{
+  "1": {
+    "wikipedia": [
+      {
+        "date": "2019-09",
+        "label": "Wikipedia RFC moves article",
+        "side": "top"
+      },
+      {
+        "date": "2020-10",
+        "label": "+35pp jump",
+        "side": "top"
+      }
+    ],
+    "reddit": [
+      {
+        "date": "2022-01",
+        "label": "4x war spike",
+        "side": "top"
+      },
+      {
+        "date": "2024-01",
+        "label": "+26pp",
+        "side": "top"
+      }
+    ],
+    "youtube": [
+      {
+        "date": "2023-01",
+        "label": "7x volume spike",
+        "side": "top"
+      }
+    ],
+    "gdelt": [
+      {
+        "date": "2022-02",
+        "label": "3x war surge",
+        "side": "top"
+      }
+    ]
+  },
+  "2": {
+    "reddit": [
+      {
+        "date": "2022-01",
+        "label": "20x Battle of Kharkiv",
+        "side": "top"
+      }
+    ],
+    "youtube": [
+      {
+        "date": "2023-01",
+        "label": "4x counteroffensive",
+        "side": "top"
+      }
+    ],
+    "gdelt": [
+      {
+        "date": "2022-02",
+        "label": "5x news surge",
+        "side": "top"
+      }
+    ],
+    "ngrams": [
+      {
+        "date": "1993-01",
+        "label": "Post-USSR Kharkiv spike",
+        "side": "top"
+      }
+    ]
+  },
+  "3": {
+    "wikipedia": [
+      {
+        "date": "2022-08",
+        "label": "+48pp adoption jump",
+        "side": "top"
+      }
+    ],
+    "reddit": [
+      {
+        "date": "2022-01",
+        "label": "16x war spike",
+        "side": "top"
+      }
+    ],
+    "gdelt": [
+      {
+        "date": "2022-02",
+        "label": "3x volume, +12pp",
+        "side": "top"
+      }
+    ]
+  },
+  "4": {
+    "ngrams": [
+      {
+        "date": "1993-01",
+        "label": "Post-USSR: Lviv +41pp",
+        "side": "top"
+      }
+    ],
+    "youtube": [
+      {
+        "date": "2023-01",
+        "label": "5x volume spike",
+        "side": "top"
+      }
+    ]
+  },
+  "5": {
+    "trends": [
+      {
+        "date": "2022-03",
+        "label": "Nuclear plant seizure +42pp",
+        "side": "top"
+      }
+    ],
+    "reddit": [
+      {
+        "date": "2022-01",
+        "label": "55x spike, +52pp",
+        "side": "top"
+      }
+    ],
+    "gdelt": [
+      {
+        "date": "2022-08",
+        "label": "IAEA crisis peak",
+        "side": "top"
+      }
+    ]
+  },
+  "6": {
+    "reddit": [
+      {
+        "date": "2022-01",
+        "label": "50x bombardment spike",
+        "side": "top"
+      }
+    ],
+    "gdelt": [
+      {
+        "date": "2022-03",
+        "label": "5x news surge, +22pp",
+        "side": "top"
+      }
+    ]
+  },
+  "7": {
+    "reddit": [
+      {
+        "date": "2022-01",
+        "label": "7x war spike",
+        "side": "top"
+      },
+      {
+        "date": "2023-01",
+        "label": "96% peak adoption",
+        "side": "top"
+      }
+    ]
+  },
+  "8": {
+    "gdelt": [
+      {
+        "date": "2022-07",
+        "label": "Missile strike on concert venue",
+        "side": "top"
+      }
+    ],
+    "trends": [
+      {
+        "date": "2022-07",
+        "label": "Vinnytsia attack spike",
+        "side": "top"
+      }
+    ],
+    "reddit": [
+      {
+        "date": "2022-01",
+        "label": "51x spike",
+        "side": "top"
+      }
+    ]
+  },
+  "9": {},
+  "10": {
+    "reddit": [
+      {
+        "date": "2019-01",
+        "label": "HBO series: 5x, only 1% Chornobyl",
+        "side": "top"
+      },
+      {
+        "date": "2022-01",
+        "label": "Plant seizure: 6x, 29%",
+        "side": "top"
+      },
+      {
+        "date": "2024-01",
+        "label": "S.T.A.L.K.E.R. 2: 51%!",
+        "side": "top"
+      }
+    ],
+    "youtube": [
+      {
+        "date": "2023-01",
+        "label": "S.T.A.L.K.E.R. 2 trailers: 6x",
+        "side": "top"
+      },
+      {
+        "date": "2024-01",
+        "label": "Game launch: 50% adoption",
+        "side": "top"
+      }
+    ],
+    "ngrams": [
+      {
+        "date": "1986-01",
+        "label": "Disaster: 7x volume",
+        "side": "top"
+      }
+    ],
+    "wikipedia": [
+      {
+        "date": "2019-05",
+        "label": "HBO: 16x pageviews",
+        "side": "top"
+      }
+    ]
+  }
+}

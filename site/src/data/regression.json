@@ -1,73 +1,8 @@
 {
-  "models": [
-    {
-      "name": "Baseline only",
-      "r2": 0.537,
-      "adj_r2": 0.529
-    },
-    {
-      "name": "+ Category",
-      "r2": 0.646,
-      "adj_r2": 0.583
-    },
-    {
-      "name": "+ Campaign gain",
-      "r2": 0.65,
-      "adj_r2": 0.579
-    },
-    {
-      "name": "+ Invasion bump",
-      "r2": 0.8,
-      "adj_r2": 0.753
-    },
-    {
-      "name": "+ Wiki prominence",
-      "r2": 0.851,
-      "adj_r2": 0.811
-    },
-    {
-      "name": "+ Spelling similarity",
-      "r2": 0.853,
-      "adj_r2": 0.809
-    },
-    {
-      "name": "Full model",
-      "r2": 0.868,
-      "adj_r2": 0.816
-    }
-  ],
-  "best_model": {
-    "r2": 0.868,
-    "adj_r2": 0.816,
-    "n": 54,
-    "k": 15,
-    "top_predictors": [
-      {
-        "name": "invasion_bump",
-        "beta": 0.868,
-        "meaning": "Feb-Dec 2022 adoption spike \u2014 the invasion effect is the #1 predictor"
-      },
-      {
-        "name": "category (food)",
-        "beta": -0.243,
-        "meaning": "Food terms resist adoption (recipe search inertia)"
-      },
-      {
-        "name": "category (historical)",
-        "beta": -0.247,
-        "meaning": "Historical terms deeply entrenched (Russian identity claim)"
-      },
-      {
-        "name": "is_compound",
-        "beta": 0.136,
-        "meaning": "Multi-word terms adopt faster (more editorial control)"
-      },
-      {
-        "name": "campaign_gain",
-        "beta": -0.13,
-        "meaning": "Campaign-era gains partially reversed (regression to mean)"
-      }
-    ]
-  },
-  "key_finding": "The Feb 2022 invasion is the dominant predictor (\u03b2=0.87) \u2014 it reshuffled adoption rankings. Pre-2022 baseline, which explained 54% alone, drops to near-zero when invasion bump is included. Category adds 11pp. Full model: R\u00b2=0.87, adj=0.82."
+  "beta": 0.735,
+  "intercept": 0.365,
+  "r_squared": 0.537,
+  "t_stat": 7.46,
+  "p": 0.0,
+  "n": 50
 }
