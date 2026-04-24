@@ -63,7 +63,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 
 <h2 id="analysis">Summary</h2>
 <div class="analysis-box">
-  {'id': 57, 'russian': 'Lvov Polytechnic', 'ukrainian': 'Lviv Polytechnic', 'category': 'institutional', 'adoption': 79.6, 'total': 198491, 'cl_texts': 263, 'context_distribution': {'academic_science': 0.4373, 'general_news': 0.3688, 'travel_tourism': 0.0837, 'business_economy': 0.0304, 'war_conflict': 0.0228, 'history': 0.019, 'politics': 0.0152, 'culture_arts': 0.0152, 'sports': 0.0038, 'food_cuisine': 0.0038}, 'russian_context': {'general_news': 0.4911, 'academic_science': 0.2857, 'travel_tourism': 0.1339, 'business_economy': 0.0446, 'war_conflict': 0.0179, 'sports': 0.0089, 'politics': 0.0089, 'food_cuisine': 0.0089}, 'ukrainian_context': {'academic_science': 0.5497, 'general_news': 0.2781, 'travel_tourism': 0.0464, 'history': 0.0331, 'war_conflict': 0.0265, 'culture_arts': 0.0265, 'politics': 0.0199, 'business_economy': 0.0199}}
+  <p style="margin-bottom:0.7rem;"><strong>79.6% adoption across 198.5K mentions</strong> (95% CI: [99.4%, 99.6%]). Wikipedia leads at 100%, while YouTube lags at 77%.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> YouTube 2021: -15pp adoption shift (59 mentions); YouTube 2016: 42 mentions (2x volume spike), 76% adoption. These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Collocation analysis (PMI-ranked):</strong> "Lvov Polytechnic" distinctively co-occurs with <em>ukraine</em>, <em>and</em>, <em>the</em>; "Lviv Polytechnic" clusters with <em>web</em>, <em>technical</em>, <em>design</em>, <em>educational</em>; both forms share <em>national, lviv, polytechnic</em>. These patterns reveal how each spelling form lives in distinct discourse communities.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Context matters:</strong> "Lviv Polytechnic" dominates in <em>academic science</em> contexts (66% UA share), while "Lvov Polytechnic" persists strongest in <em>travel tourism</em> (74% RU share). Domain-specific adoption varies by up to 40 percentage points.</p>
+  <p style="margin-bottom:0.7rem;">AI models show 98% alignment (TAS) with 100% spontaneous generation — a 2pp recognition-recall gap indicating pre-training corpus inertia.</p>
+  <p><strong>Recommendation:</strong> Adoption is strong (80%) with mainstream momentum.</p>
 </div>
 
 <h2 id="sources">Data by Source</h2>
@@ -291,6 +296,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 </div>
 
 <h2 id="cl">Computational Analysis</h2>
+<div class="grid-2">
+<div class="card">
+  <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Context Distribution</div>
+  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">XLM-RoBERTa-large · F1=83.8% · 263 texts (112 Lvov Polytechnic + 151 Lviv Polytechnic)</p>
+<div class="ctx-row"><div>Academic</div><div style="display:flex;gap:2px;"><div style="height:10px;width:34%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:66%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">29%</span>/<span style="color:#3b82f6;">55%</span></div><div style="font-size:0.68rem;color:#6b7280;">42%</div></div><div class="ctx-row"><div>News</div><div style="display:flex;gap:2px;"><div style="height:10px;width:64%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:36%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">49%</span>/<span style="color:#3b82f6;">28%</span></div><div style="font-size:0.68rem;color:#6b7280;">38%</div></div><div class="ctx-row"><div>Travel</div><div style="display:flex;gap:2px;"><div style="height:10px;width:74%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:26%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">13%</span>/<span style="color:#3b82f6;">5%</span></div><div style="font-size:0.68rem;color:#6b7280;">9%</div></div><div class="ctx-row"><div>Business</div><div style="display:flex;gap:2px;"><div style="height:10px;width:69%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:31%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">4%</span>/<span style="color:#3b82f6;">2%</span></div><div style="font-size:0.68rem;color:#6b7280;">3%</div></div><div class="ctx-row"><div>War</div><div style="display:flex;gap:2px;"><div style="height:10px;width:40%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:60%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">2%</span>/<span style="color:#3b82f6;">3%</span></div><div style="font-size:0.68rem;color:#6b7280;">2%</div></div>
+</div>
 <div class="card">
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Collocations</div>
   <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">PMI-ranked · 263 texts (112 Lvov Polytechnic + 151 Lviv Polytechnic)</p>
@@ -301,6 +312,7 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
     <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">Lviv Polytechnic form</div>
     <div style="line-height:2;"><span style="font-size:1.40rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">polytechnic</span> <span style="font-size:1.28rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">web</span> <span style="font-size:1.27rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">lviv</span> <span style="font-size:1.24rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">technical</span> <span style="font-size:1.24rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">university</span> <span style="font-size:1.23rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">design</span> <span style="font-size:1.23rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">educational</span> <span style="font-size:1.22rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">architecture</span> <span style="font-size:1.22rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">national</span> <span style="font-size:1.21rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">students</span> </div>
   </div>
+</div>
 </div>
 
 

@@ -63,7 +63,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 
 <h2 id="analysis">Summary</h2>
 <div class="analysis-box">
-  {'id': 84, 'russian': 'Igor Sikorsky', 'ukrainian': 'Ihor Sikorsky', 'category': 'people', 'adoption': 0.0, 'total': 0, 'cl_texts': 111, 'context_distribution': {'academic_science': 0.7027, 'history': 0.2432, 'general_news': 0.027, 'travel_tourism': 0.018, 'business_economy': 0.009}, 'russian_context': {'academic_science': 0.6857, 'history': 0.2571, 'general_news': 0.0286, 'travel_tourism': 0.019, 'business_economy': 0.0095}, 'ukrainian_context': {'academic_science': 1.0}}
+  <p style="margin-bottom:0.7rem;"><strong>0.0% adoption across 0 mentions</strong>. Open Library Books leads at 2%, while OpenAlex Papers lags at 0%.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> YouTube 2019: 20 mentions (2x volume spike), 0% adoption. These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Collocation analysis (PMI-ranked):</strong> "Igor Sikorsky" distinctively co-occurs with <em>sikorsky</em>, <em>igor</em>, <em>esp</em>, <em>learning</em>; "Ihor Sikorsky" clusters with <em>and</em>, <em>the</em>. These patterns reveal how each spelling form lives in distinct discourse communities.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Context matters:</strong> "Ihor Sikorsky" dominates in <em>academic science</em> contexts (59% UA share), while "Igor Sikorsky" persists strongest in <em>history</em> (100% RU share). Domain-specific adoption varies by up to 59 percentage points.</p>
+  <p style="margin-bottom:0.7rem;">AI models show 11% alignment (TAS) with 0% spontaneous generation — a 23pp recognition-recall gap indicating pre-training corpus inertia.</p>
+  <p><strong>Recommendation:</strong> Adoption of "Ihor Sikorsky" remains very low (0%). institutional endorsement and media style guide adoption would be the most effective levers. LLM training data updates would increase AI alignment from current 0% free recall.</p>
 </div>
 
 <h2 id="sources">Data by Source</h2>
@@ -183,6 +188,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 </div>
 
 <h2 id="cl">Computational Analysis</h2>
+<div class="grid-2">
+<div class="card">
+  <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Context Distribution</div>
+  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">XLM-RoBERTa-large · F1=83.8% · 111 texts (105 Igor Sikorsky + 6 Ihor Sikorsky)</p>
+<div class="ctx-row"><div>Academic</div><div style="display:flex;gap:2px;"><div style="height:10px;width:41%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:59%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">69%</span>/<span style="color:#3b82f6;">100%</span></div><div style="font-size:0.68rem;color:#6b7280;">84%</div></div><div class="ctx-row"><div>History</div><div style="display:flex;gap:2px;"><div style="height:10px;width:100%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:0%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">26%</span>/<span style="color:#3b82f6;">0%</span></div><div style="font-size:0.68rem;color:#6b7280;">13%</div></div><div class="ctx-row"><div>News</div><div style="display:flex;gap:2px;"><div style="height:10px;width:100%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:0%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">3%</span>/<span style="color:#3b82f6;">0%</span></div><div style="font-size:0.68rem;color:#6b7280;">1%</div></div><div class="ctx-row"><div>Travel</div><div style="display:flex;gap:2px;"><div style="height:10px;width:100%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:0%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">2%</span>/<span style="color:#3b82f6;">0%</span></div><div style="font-size:0.68rem;color:#6b7280;">1%</div></div>
+</div>
 <div class="card">
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Collocations</div>
   <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">PMI-ranked · 111 texts (105 Igor Sikorsky + 6 Ihor Sikorsky)</p>
@@ -193,6 +204,7 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
     <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">Ihor Sikorsky form</div>
     <div style="line-height:2;"><span style="font-size:1.40rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">and</span> <span style="font-size:1.39rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">the</span> </div>
   </div>
+</div>
 </div>
 
 

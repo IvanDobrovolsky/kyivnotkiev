@@ -63,7 +63,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 
 <h2 id="analysis">Summary</h2>
 <div class="analysis-box">
-  {'id': 58, 'russian': 'Odessa National University', 'ukrainian': 'Odesa National University', 'category': 'institutional', 'adoption': 32.3, 'total': 18359, 'cl_texts': 408, 'context_distribution': {'general_news': 0.5294, 'academic_science': 0.3676, 'travel_tourism': 0.0294, 'war_conflict': 0.0245, 'history': 0.0221, 'culture_arts': 0.0098, 'sports': 0.0098, 'politics': 0.0049, 'business_economy': 0.0025}, 'russian_context': {'general_news': 0.5161, 'academic_science': 0.3831, 'travel_tourism': 0.0242, 'war_conflict': 0.0242, 'history': 0.0202, 'sports': 0.0161, 'culture_arts': 0.0121, 'politics': 0.004}, 'ukrainian_context': {'general_news': 0.55, 'academic_science': 0.3438, 'travel_tourism': 0.0375, 'war_conflict': 0.025, 'history': 0.025, 'business_economy': 0.0062, 'politics': 0.0062, 'culture_arts': 0.0062}}
+  <p style="margin-bottom:0.7rem;"><strong>32.3% adoption across 18.4K mentions</strong> (95% CI: [23.5%, 27.6%]). YouTube leads at 57%, while Google Ngrams lags at 0%.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> YouTube 2021: 57 mentions (4x volume spike), 56% adoption. These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Collocation analysis (PMI-ranked):</strong> "Odessa National University" distinctively co-occurs with <em>bulletin</em>, <em>economic</em>, <em>students</em>; "Odesa National University" clusters with <em>odesa</em>, <em>botanical</em>, <em>collection</em>; both forms share <em>mechnikov, odessa, medical</em>. These patterns reveal how each spelling form lives in distinct discourse communities.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Context matters:</strong> "Odesa National University" dominates in <em>travel tourism</em> contexts (61% UA share), while "Odessa National University" persists strongest in <em>academic science</em> (53% RU share). Domain-specific adoption varies by up to 13 percentage points.</p>
+  <p style="margin-bottom:0.7rem;">AI models show 67% alignment (TAS) with 59% spontaneous generation — a 16pp recognition-recall gap indicating pre-training corpus inertia.</p>
+  <p><strong>Recommendation:</strong> Adoption is progressing but contested (32%). Google Ngrams (0%) represents the biggest opportunity for improvement. LLM training data updates would increase AI alignment from current 59% free recall.</p>
 </div>
 
 <h2 id="sources">Data by Source</h2>
@@ -264,6 +269,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 </div>
 
 <h2 id="cl">Computational Analysis</h2>
+<div class="grid-2">
+<div class="card">
+  <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Context Distribution</div>
+  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">XLM-RoBERTa-large · F1=83.8% · 408 texts (248 Odessa National University + 160 Odesa National University)</p>
+<div class="ctx-row"><div>News</div><div style="display:flex;gap:2px;"><div style="height:10px;width:48%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:52%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">52%</span>/<span style="color:#3b82f6;">55%</span></div><div style="font-size:0.68rem;color:#6b7280;">53%</div></div><div class="ctx-row"><div>Academic</div><div style="display:flex;gap:2px;"><div style="height:10px;width:53%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:47%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">38%</span>/<span style="color:#3b82f6;">34%</span></div><div style="font-size:0.68rem;color:#6b7280;">36%</div></div><div class="ctx-row"><div>Travel</div><div style="display:flex;gap:2px;"><div style="height:10px;width:39%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:61%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">2%</span>/<span style="color:#3b82f6;">4%</span></div><div style="font-size:0.68rem;color:#6b7280;">3%</div></div><div class="ctx-row"><div>War</div><div style="display:flex;gap:2px;"><div style="height:10px;width:49%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:51%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">2%</span>/<span style="color:#3b82f6;">2%</span></div><div style="font-size:0.68rem;color:#6b7280;">2%</div></div><div class="ctx-row"><div>History</div><div style="display:flex;gap:2px;"><div style="height:10px;width:45%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:55%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">2%</span>/<span style="color:#3b82f6;">2%</span></div><div style="font-size:0.68rem;color:#6b7280;">2%</div></div>
+</div>
 <div class="card">
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Collocations</div>
   <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">PMI-ranked · 408 texts (248 Odessa National University + 160 Odesa National University)</p>
@@ -274,6 +285,7 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
     <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">Odesa National University form</div>
     <div style="line-height:2;"><span style="font-size:1.40rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">mechnikov</span> <span style="font-size:1.32rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">university</span> <span style="font-size:1.32rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">odesa</span> <span style="font-size:1.29rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">national</span> <span style="font-size:1.28rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">library</span> <span style="font-size:1.28rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">botanical</span> <span style="font-size:1.27rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">medical</span> <span style="font-size:1.24rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">odessa</span> <span style="font-size:1.23rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">collection</span> <span style="font-size:1.22rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">scientific</span> </div>
   </div>
+</div>
 </div>
 
 

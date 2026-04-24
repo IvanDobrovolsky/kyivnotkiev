@@ -59,11 +59,14 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
   <div class="card stat"><div class="stat-value" style="color:#7c3aed;">94.6%</div><div class="stat-label">AI Alignment</div></div>
 </div>
 
-<nav class="toc"><a href="#analysis">Summary</a><a href="#sources">Sources</a><a href="#ai">LLM Audit</a><a href="#refs">References</a></nav>
+<nav class="toc"><a href="#analysis">Summary</a><a href="#sources">Sources</a><a href="#ai">LLM Audit</a><a href="#cl">CL Analysis</a><a href="#refs">References</a></nav>
 
 <h2 id="analysis">Summary</h2>
 <div class="analysis-box">
-  {'id': 62, 'russian': 'Andrey Shevchenko', 'ukrainian': 'Andrii Shevchenko', 'category': 'people', 'adoption': 74.9, 'total': 14881701, 'cl_texts': 1, 'context_distribution': {'sports': 1.0}, 'ukrainian_context': {'sports': 1.0}}
+  <p style="margin-bottom:0.7rem;"><strong>74.9% adoption across 14.9M mentions</strong> (95% CI: [49.9%, 50.1%]). OpenAlex Papers leads at 100%, while Wikipedia lags at 50%.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> YouTube 2022: 35 mentions (4x volume spike), 46% adoption; Reddit 2020: 15 mentions (2x volume spike), 87% adoption. These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
+  <p style="margin-bottom:0.7rem;">AI models show 95% alignment (TAS) with 0% spontaneous generation — a 93pp recognition-recall gap indicating pre-training corpus inertia.</p>
+  <p><strong>Recommendation:</strong> Adoption is strong (75%) with mainstream momentum. LLM training data updates would increase AI alignment from current 0% free recall.</p>
 </div>
 
 <h2 id="sources">Data by Source</h2>
@@ -290,7 +293,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
   </table>
 </div>
 
-
+<h2 id="cl">Computational Analysis</h2>
+<div class="card">
+  <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Context Distribution</div>
+  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">XLM-RoBERTa-large · F1=83.8% · 0 texts</p>
+<div class="ctx-row"><div>Sports</div><div style="display:flex;gap:2px;"><div style="height:10px;width:0%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:100%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">0%</span>/<span style="color:#3b82f6;">100%</span></div><div style="font-size:0.68rem;color:#6b7280;">50%</div></div>
+</div>
 
 
 

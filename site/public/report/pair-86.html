@@ -63,7 +63,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 
 <h2 id="analysis">Summary</h2>
 <div class="analysis-box">
-  {'id': 86, 'russian': 'Bogdan Khmelnitsky', 'ukrainian': 'Bohdan Khmelnytskyi', 'category': 'historical', 'adoption': 66.7, 'total': 0, 'cl_texts': 103, 'context_distribution': {'academic_science': 0.8058, 'history': 0.1165, 'war_conflict': 0.0388, 'general_news': 0.0097, 'business_economy': 0.0097, 'politics': 0.0097, 'culture_arts': 0.0097}, 'russian_context': {'academic_science': 0.8667, 'history': 0.1, 'general_news': 0.0333}, 'ukrainian_context': {'academic_science': 0.7808, 'history': 0.1233, 'war_conflict': 0.0548, 'business_economy': 0.0137, 'politics': 0.0137, 'culture_arts': 0.0137}}
+  <p style="margin-bottom:0.7rem;"><strong>66.7% adoption across 0 mentions</strong> (95% CI: [29.5%, 45.3%]). Open Library Books leads at 100%, while YouTube lags at 25%.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> YouTube 2020: 16 mentions (3x volume spike), 6% adoption. These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Collocation analysis (PMI-ranked):</strong> "Bogdan Khmelnitsky" distinctively co-occurs with <em>bogdan</em>, <em>khmelnitsky</em>, <em>melitopol</em>, <em>learning</em>; "Bohdan Khmelnytskyi" clusters with <em>bohdan</em>, <em>khmelnytskyi</em>, <em>cadets</em>, <em>guard</em>; both forms share <em>training</em>. These patterns reveal how each spelling form lives in distinct discourse communities.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Context matters:</strong> "Bohdan Khmelnytskyi" dominates in <em>war conflict</em> contexts (100% UA share), while "Bogdan Khmelnitsky" persists strongest in <em>academic science</em> (53% RU share). Domain-specific adoption varies by up to 53 percentage points.</p>
+  <p style="margin-bottom:0.7rem;">AI models show 88% alignment (TAS) with 75% spontaneous generation — a 12pp recognition-recall gap indicating pre-training corpus inertia.</p>
+  <p><strong>Recommendation:</strong> Adoption is strong (67%) with mainstream momentum. remaining holdouts in YouTube likely reflect legacy content rather than active resistance. LLM training data updates would increase AI alignment from current 75% free recall.</p>
 </div>
 
 <h2 id="sources">Data by Source</h2>
@@ -183,6 +188,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 </div>
 
 <h2 id="cl">Computational Analysis</h2>
+<div class="grid-2">
+<div class="card">
+  <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Context Distribution</div>
+  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">XLM-RoBERTa-large · F1=83.8% · 103 texts (30 Bogdan Khmelnitsky + 73 Bohdan Khmelnytskyi)</p>
+<div class="ctx-row"><div>Academic</div><div style="display:flex;gap:2px;"><div style="height:10px;width:53%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:47%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">87%</span>/<span style="color:#3b82f6;">78%</span></div><div style="font-size:0.68rem;color:#6b7280;">82%</div></div><div class="ctx-row"><div>History</div><div style="display:flex;gap:2px;"><div style="height:10px;width:45%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:55%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">10%</span>/<span style="color:#3b82f6;">12%</span></div><div style="font-size:0.68rem;color:#6b7280;">11%</div></div><div class="ctx-row"><div>War</div><div style="display:flex;gap:2px;"><div style="height:10px;width:0%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:100%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">0%</span>/<span style="color:#3b82f6;">5%</span></div><div style="font-size:0.68rem;color:#6b7280;">3%</div></div><div class="ctx-row"><div>News</div><div style="display:flex;gap:2px;"><div style="height:10px;width:100%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:0%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">3%</span>/<span style="color:#3b82f6;">0%</span></div><div style="font-size:0.68rem;color:#6b7280;">2%</div></div>
+</div>
 <div class="card">
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Collocations</div>
   <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">PMI-ranked · 103 texts (30 Bogdan Khmelnitsky + 73 Bohdan Khmelnytskyi)</p>
@@ -193,6 +204,7 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
     <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">Bohdan Khmelnytskyi form</div>
     <div style="line-height:2;"><span style="font-size:1.40rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">bohdan</span> <span style="font-size:1.39rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">khmelnytskyi</span> <span style="font-size:1.39rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">cadets</span> <span style="font-size:1.38rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">guard</span> <span style="font-size:1.34rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">hetman</span> <span style="font-size:1.33rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">border</span> <span style="font-size:1.32rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">cossack</span> <span style="font-size:1.31rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">officers</span> <span style="font-size:1.28rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">training</span> <span style="font-size:1.27rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">professional</span> </div>
   </div>
+</div>
 </div>
 
 

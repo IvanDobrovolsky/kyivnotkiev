@@ -63,7 +63,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 
 <h2 id="analysis">Summary</h2>
 <div class="analysis-box">
-  {'id': 46, 'russian': 'Vareniki', 'ukrainian': 'Varenyky', 'category': 'food', 'adoption': 50.3, 'total': 350890, 'cl_texts': 563, 'context_distribution': {'food_cuisine': 0.8917, 'culture_arts': 0.0444, 'general_news': 0.0409, 'business_economy': 0.0107, 'travel_tourism': 0.0053, 'war_conflict': 0.0036, 'academic_science': 0.0036}, 'russian_context': {'food_cuisine': 0.9278, 'culture_arts': 0.0361, 'general_news': 0.0217, 'travel_tourism': 0.0072, 'war_conflict': 0.0072}, 'ukrainian_context': {'food_cuisine': 0.8566, 'general_news': 0.0594, 'culture_arts': 0.0524, 'business_economy': 0.021, 'academic_science': 0.007, 'travel_tourism': 0.0035}}
+  <p style="margin-bottom:0.7rem;"><strong>50.3% adoption across 350.9K mentions</strong> (95% CI: [82.5%, 83.1%]). OpenAlex Papers leads at 100%, while GDELT News lags at 12%.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> Reddit 2022: 77 mentions (5x volume spike), 65% adoption; YouTube 2011: 65 mentions (5x volume spike), 60% adoption. These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Collocation analysis (PMI-ranked):</strong> "Vareniki" distinctively co-occurs with <em>vareniki</em>, <em>pumpkin</em>, <em>pierogi</em>, <em>cheese</em>; "Varenyky" clusters with <em>varenyky</em>, <em>malware</em>, <em>que</em>, <em>eset</em>; both forms share <em>dumplings, dough</em>. These patterns reveal how each spelling form lives in distinct discourse communities.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Context matters:</strong> "Varenyky" dominates in <em>general news</em> contexts (73% UA share), while "Vareniki" persists strongest in <em>food cuisine</em> (52% RU share). Domain-specific adoption varies by up to 25 percentage points.</p>
+  <p style="margin-bottom:0.7rem;">AI models show 89% alignment (TAS) with 98% spontaneous generation — a 13pp recognition-recall gap indicating pre-training corpus inertia.</p>
+  <p><strong>Recommendation:</strong> Adoption is progressing but contested (50%). GDELT News (12%) represents the biggest opportunity for improvement.</p>
 </div>
 
 <h2 id="sources">Data by Source</h2>
@@ -318,6 +323,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 </div>
 
 <h2 id="cl">Computational Analysis</h2>
+<div class="grid-2">
+<div class="card">
+  <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Context Distribution</div>
+  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">XLM-RoBERTa-large · F1=83.8% · 563 texts (277 Vareniki + 286 Varenyky)</p>
+<div class="ctx-row"><div>Food</div><div style="display:flex;gap:2px;"><div style="height:10px;width:52%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:48%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">93%</span>/<span style="color:#3b82f6;">86%</span></div><div style="font-size:0.68rem;color:#6b7280;">89%</div></div><div class="ctx-row"><div>Culture</div><div style="display:flex;gap:2px;"><div style="height:10px;width:41%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:59%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">4%</span>/<span style="color:#3b82f6;">5%</span></div><div style="font-size:0.68rem;color:#6b7280;">4%</div></div><div class="ctx-row"><div>News</div><div style="display:flex;gap:2px;"><div style="height:10px;width:27%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:73%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">2%</span>/<span style="color:#3b82f6;">6%</span></div><div style="font-size:0.68rem;color:#6b7280;">4%</div></div><div class="ctx-row"><div>Business</div><div style="display:flex;gap:2px;"><div style="height:10px;width:0%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:100%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">0%</span>/<span style="color:#3b82f6;">2%</span></div><div style="font-size:0.68rem;color:#6b7280;">1%</div></div>
+</div>
 <div class="card">
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Collocations</div>
   <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">PMI-ranked · 563 texts (277 Vareniki + 286 Varenyky)</p>
@@ -328,6 +339,7 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
     <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">Varenyky form</div>
     <div style="line-height:2;"><span style="font-size:1.40rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">varenyky</span> <span style="font-size:1.33rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">malware</span> <span style="font-size:1.33rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">dough</span> <span style="font-size:1.31rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">que</span> <span style="font-size:1.30rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">eset</span> <span style="font-size:1.30rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">dumplings</span> <span style="font-size:1.29rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">cherries</span> <span style="font-size:1.29rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">ujdbyy</span> <span style="font-size:1.29rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">flour</span> <span style="font-size:1.29rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">salo</span> </div>
   </div>
+</div>
 </div>
 
 

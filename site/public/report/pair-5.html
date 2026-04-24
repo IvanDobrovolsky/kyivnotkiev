@@ -63,7 +63,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 
 <h2 id="analysis">Summary</h2>
 <div class="analysis-box">
-  {'id': 5, 'russian': 'Zaporozhye', 'ukrainian': 'Zaporizhzhia', 'category': 'geographical', 'adoption': 73.4, 'total': 3637306, 'cl_texts': 2244, 'context_distribution': {'war_conflict': 0.693, 'academic_science': 0.1684, 'general_news': 0.0624, 'travel_tourism': 0.0414, 'history': 0.0107, 'culture_arts': 0.0067, 'religion': 0.0062, 'business_economy': 0.0053, 'politics': 0.0045, 'food_cuisine': 0.0009, 'sports': 0.0004}, 'russian_context': {'war_conflict': 0.5872, 'academic_science': 0.1437, 'general_news': 0.1024, 'travel_tourism': 0.0933, 'history': 0.0229, 'culture_arts': 0.0153, 'religion': 0.0138, 'politics': 0.0107, 'business_economy': 0.0092, 'food_cuisine': 0.0015}, 'ukrainian_context': {'war_conflict': 0.7365, 'academic_science': 0.1786, 'general_news': 0.0459, 'travel_tourism': 0.0201, 'history': 0.0057, 'business_economy': 0.0038, 'culture_arts': 0.0031, 'religion': 0.0031, 'politics': 0.0019, 'sports': 0.0006, 'food_cuisine': 0.0006}}
+  <p style="margin-bottom:0.7rem;"><strong>73.4% adoption across 3.6M mentions</strong> (95% CI: [50.1%, 50.4%]). Open Library Books leads at 92%, while Google Ngrams lags at 21%.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> Reddit 2022: 244 mentions (41x volume spike), 58% adoption; YouTube 2015: -43pp adoption shift (69 mentions). These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Collocation analysis (PMI-ranked):</strong> "Zaporozhye" distinctively co-occurs with <em>zaporozhye</em>, <em>nga</em>, <em>khu</em>, <em>quan</em>; "Zaporizhzhia" clusters with <em>iaea</em>, <em>plant</em>, <em>nuclear</em>, <em>dam</em>; both forms share <em>zaporizhzhia</em>. These patterns reveal how each spelling form lives in distinct discourse communities.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Context matters:</strong> "Zaporizhzhia" dominates in <em>war conflict</em> contexts (56% UA share), while "Zaporozhye" persists strongest in <em>travel tourism</em> (82% RU share). Domain-specific adoption varies by up to 38 percentage points.</p>
+  <p style="margin-bottom:0.7rem;">AI models show 93% alignment (TAS) with 100% spontaneous generation — a 9pp recognition-recall gap indicating pre-training corpus inertia.</p>
+  <p><strong>Recommendation:</strong> Adoption is strong (73%) with mainstream momentum. remaining holdouts in Google Ngrams likely reflect legacy content rather than active resistance.</p>
 </div>
 
 <h2 id="sources">Data by Source</h2>
@@ -318,6 +323,12 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 </div>
 
 <h2 id="cl">Computational Analysis</h2>
+<div class="grid-2">
+<div class="card">
+  <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Context Distribution</div>
+  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">XLM-RoBERTa-large · F1=83.8% · 2244 texts (654 Zaporozhye + 1590 Zaporizhzhia)</p>
+<div class="ctx-row"><div>War</div><div style="display:flex;gap:2px;"><div style="height:10px;width:44%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:56%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">59%</span>/<span style="color:#3b82f6;">74%</span></div><div style="font-size:0.68rem;color:#6b7280;">66%</div></div><div class="ctx-row"><div>Academic</div><div style="display:flex;gap:2px;"><div style="height:10px;width:45%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:55%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">14%</span>/<span style="color:#3b82f6;">18%</span></div><div style="font-size:0.68rem;color:#6b7280;">16%</div></div><div class="ctx-row"><div>News</div><div style="display:flex;gap:2px;"><div style="height:10px;width:69%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:31%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">10%</span>/<span style="color:#3b82f6;">5%</span></div><div style="font-size:0.68rem;color:#6b7280;">7%</div></div><div class="ctx-row"><div>Travel</div><div style="display:flex;gap:2px;"><div style="height:10px;width:82%;background:#ef4444;opacity:0.6;border-radius:3px;"></div><div style="height:10px;width:18%;background:#3b82f6;opacity:0.6;border-radius:3px;"></div></div><div style="font-size:0.68rem;"><span style="color:#ef4444;">9%</span>/<span style="color:#3b82f6;">2%</span></div><div style="font-size:0.68rem;color:#6b7280;">6%</div></div>
+</div>
 <div class="card">
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Collocations</div>
   <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">PMI-ranked · 2244 texts (654 Zaporozhye + 1590 Zaporizhzhia)</p>
@@ -328,6 +339,7 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
     <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">Zaporizhzhia form</div>
     <div style="line-height:2;"><span style="font-size:1.40rem;color:#0057B8;font-weight:700;margin-right:0.4rem;">zaporizhzhia</span> <span style="font-size:1.21rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">iaea</span> <span style="font-size:1.20rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">plant</span> <span style="font-size:1.20rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">nuclear</span> <span style="font-size:1.18rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">dam</span> <span style="font-size:1.17rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">occupied</span> <span style="font-size:1.17rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">shelling</span> <span style="font-size:1.17rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">power</span> <span style="font-size:1.16rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">reservoir</span> <span style="font-size:1.16rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">front</span> </div>
   </div>
+</div>
 </div>
 
 <h2 id="religious">Religious Sources</h2>
