@@ -1,0 +1,4402 @@
+{
+  "1": {
+    "russian": "Kiev",
+    "ukrainian": "Kyiv",
+    "total_articles": 789,
+    "russian_count": 355,
+    "ukrainian_count": 434,
+    "examples": [
+      {
+        "url": "https://www.rador.ro/2021/11/26/calendarul-evenimentelor-26-noiembrie-selectiuni-7/",
+        "domain": "www.rador.ro",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "http://www.5.ua/interview/kiborh-ta-volonter-braty-kuzminykh-iz-435-deputativ-dopomohty-poranenym-biitsiam-ato-zgholosylys-dvoie-115475.html",
+        "domain": "www.5.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "https://www.rador.ro/2021/11/26/calendarul-evenimentelor-26-noiembrie-selectiuni-7/",
+        "domain": "www.rador.ro",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://anna-news.info/svodka-sobytij-v-sirii-i-na-blizhnem-vostoke-za-5-avgusta-2025-g/",
+        "domain": "anna-news.info",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.aktuality.sk/clanok/816805/liveblog-25-august/",
+        "domain": "www.aktuality.sk",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-109247-post-3564492.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-164321-post-3415545.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-109247-post-3564492.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://fakty.ua/266282-v-amerike-pisali-chto-blagodarya-besprecedentnomu-poletu-nad-reaktorom-chaes-ya-stal-millionerom",
+        "domain": "fakty.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://www.scoop.co.nz/stories/HL1901/S00048/top-10-reasons-not-to-love-nato.htm",
+        "domain": "www.scoop.co.nz",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.adn.com/nation-world/2019/12/09/giulianis-dual-roles-as-power-broker-and-shadow-foreign-policy-adviser-alarm-trumps-advisers/",
+        "domain": "www.adn.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.adn.com/nation-world/2019/12/09/giulianis-dual-roles-as-power-broker-and-shadow-foreign-policy-adviser-alarm-trumps-advisers/",
+        "domain": "www.adn.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.mirror.co.uk/news/world-news/live-ukraine-putin-war-russia-26459157",
+        "domain": "www.mirror.co.uk",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.mirror.co.uk/news/world-news/live-ukraine-putin-war-russia-26459157",
+        "domain": "www.mirror.co.uk",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://larouchepub.com/hzl/2022/4925-let_s_win_mission_impossible_o-hzl.html",
+        "domain": "larouchepub.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.nbcphiladelphia.com/news/business/money-report/ukraine-war-live-updates-moscow-remains-silent-on-kyivs-claims-to-have-killed-black-sea-fleet-commander-officers-in-strike/3653931/",
+        "domain": "www.nbcphiladelphia.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.yahoo.com/news/nato-nuclear-weapons-sent-poland-131234574.html",
+        "domain": "www.yahoo.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.yahoo.com/news/nato-nuclear-weapons-sent-poland-131234574.html",
+        "domain": "www.yahoo.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "http://www.volynnews.com/news/society/serhiy-budymka-ia-povernuvsia-do-zhyttia-zavdiaky-molytvam-mytropolyta-n/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://www.volynnews.com/news/society/serhiy-budymka-ia-povernuvsia-do-zhyttia-zavdiaky-molytvam-mytropolyta-n/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      }
+    ]
+  },
+  "2": {
+    "russian": "Kharkov",
+    "ukrainian": "Kharkiv",
+    "total_articles": 792,
+    "russian_count": 402,
+    "ukrainian_count": 390,
+    "examples": [
+      {
+        "url": "https://danviet.vn/ukraine-bat-giam-cuu-lanh-dao-so-an-ninh-kharkov-vi-tinh-nghi-phan-quoc-20220912140914688.htm",
+        "domain": "danviet.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://danviet.vn/ukraine-bat-giam-cuu-lanh-dao-so-an-ninh-kharkov-vi-tinh-nghi-phan-quoc-20220912140914688.htm",
+        "domain": "danviet.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://dozor.kharkov.ua/1001446/1001449/1192873.html",
+        "domain": "dozor.kharkov.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://dozor.kharkov.ua/1001446/1001447/1178072.html",
+        "domain": "dozor.kharkov.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "https://doisongphapluat.com.vn/tong-tu-lenh-ukraine-canh-bao-ve-nhung-tran-chien-khoc-liet-tai-kharkov-a624446.html",
+        "domain": "doisongphapluat.com.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://doisongphapluat.com.vn/tong-tu-lenh-ukraine-canh-bao-ve-nhung-tran-chien-khoc-liet-tai-kharkov-a624446.html",
+        "domain": "doisongphapluat.com.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "http://dozor.kharkov.ua/news/economy/1184067.html",
+        "domain": "dozor.kharkov.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://dozor.kharkov.ua/news/economy/1184067.html",
+        "domain": "dozor.kharkov.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://www.city.kharkov.ua/uk/news/u-miskradi-rozpovili-yak-oformiti-zayavku-na-konkurs-imidzhevikh-proektiv-38697.html",
+        "domain": "www.city.kharkov.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://www.city.kharkov.ua/uk/news/u-miskradi-rozpovili-yak-oformiti-zayavku-na-konkurs-imidzhevikh-proektiv-38697.html",
+        "domain": "www.city.kharkov.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://www.hillsdale.net/story/news/politics/2022/02/24/russia-ukraine-invasion/6920609001/",
+        "domain": "www.hillsdale.net",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.hillsdale.net/story/news/politics/2022/02/24/russia-ukraine-invasion/6920609001/",
+        "domain": "www.hillsdale.net",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.ledauphine.com/defense-guerre-conflit/2022/04/03/guerre-en-ukraine-des-explosions-entendues-a-odessa",
+        "domain": "www.ledauphine.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://sergey-verevkin.livejournal.com/3446736.html",
+        "domain": "sergey-verevkin.livejournal.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://sergey-verevkin.livejournal.com/3446736.html",
+        "domain": "sergey-verevkin.livejournal.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://vgolos.com.ua/news/troh_cholovikiv_zatrymano_za_sprobu_nezakonno_kupyty_avtomaty_278410.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://vgolos.com.ua/news/nabu-vidpovilo-na-zvynuvachennya-lutsenka_997384.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "http://vgolos.com.ua/news/troh_cholovikiv_zatrymano_za_sprobu_nezakonno_kupyty_avtomaty_278410.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://vgolos.com.ua/news/nabu-vidpovilo-na-zvynuvachennya-lutsenka_997384.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "http://www.come-on.de/politik/ukraine-krieg-news-ticker-schwarzes-meer-verluste-putin-drohnen-luftwaffe-front-russland-zr-92883140.html",
+        "domain": "www.come-on.de",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      }
+    ]
+  },
+  "3": {
+    "russian": "Odessa",
+    "ukrainian": "Odesa",
+    "total_articles": 718,
+    "russian_count": 350,
+    "ukrainian_count": 368,
+    "examples": [
+      {
+        "url": "https://fr.timesofisrael.com/la-face-cachee-de-payoneer-la-compagnie-qui-va-enrichir-naftali-bennett/",
+        "domain": "fr.timesofisrael.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.kommersant.ru:443/doc/5252219",
+        "domain": "www.kommersant.ru:443",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://www.from-ua.com/obzor-pressi/355657-stoimost-novoi-ukraini-97-milliardov-dollarov-na-10-let-stroiki.html",
+        "domain": "www.from-ua.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "https://www.alquds.com/ar/posts/696034ea-2d81-4423-a575-4536e809ee40",
+        "domain": "www.alquds.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://www.pronews.gr/istoria/238388_o-fyletikos-hartis-tis-arhaias-elladas",
+        "domain": "www.pronews.gr",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://vgolos.com.ua/news/prykordonnyky_vezly_z_soboyu_tsilyy_arsenal_267895.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://vgolos.com.ua/news/prykordonnyky_vezly_z_soboyu_tsilyy_arsenal_267895.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/vy-vyhraly-300-tysiach-ale-iak-v-ukrayini-pratsiuiut-poshtovi-lokhotrony/",
+        "domain": "www.volynnews.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-54262-post-4009571.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-54262-post-4009571.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://leo-mosk.livejournal.com/3147742.html",
+        "domain": "leo-mosk.livejournal.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://www.globalsecurity.org/military/library/news/2025/07/mil-250724-unbrief01.htm",
+        "domain": "www.globalsecurity.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "http://leo-mosk.livejournal.com/3147742.html",
+        "domain": "leo-mosk.livejournal.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://vesti.uz/posle-500-letnego-gospodstva-zapada/",
+        "domain": "vesti.uz",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://from-ua.com/news/429153-ochen-tochnii-i-samii-drevnii-goroskop-po-date-rozhdeniya.html",
+        "domain": "from-ua.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://from-ua.com/news/429153-ochen-tochnii-i-samii-drevnii-goroskop-po-date-rozhdeniya.html",
+        "domain": "from-ua.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://vgolos.com.ua/news/cherez-negodu-na-odeshhyni-u-pasttsi-opynylosya-25-ditej_1034109.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "http://vgolos.com.ua/news/na_odeshchyni_politsiya_zastosuvala_zbroyu_shchob_ne_dopustyty_samosud_selyan_310432.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://vgolos.com.ua/news/cherez-negodu-na-odeshhyni-u-pasttsi-opynylosya-25-ditej_1034109.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "http://www.botasot.info/bota/813917/deklaratat-qe-bene-jehone-ne-bote-me-2017/",
+        "domain": "www.botasot.info",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      }
+    ]
+  },
+  "4": {
+    "russian": "Lvov",
+    "ukrainian": "Lviv",
+    "total_articles": 723,
+    "russian_count": 358,
+    "ukrainian_count": 365,
+    "examples": [
+      {
+        "url": "https://www.fakt.pl/wydarzenia/swiat/wojna-rosja-ukraina-gdzie-sa-walki-w-piatek-relacja/96kwe0q",
+        "domain": "www.fakt.pl",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.fakt.pl/wydarzenia/swiat/wojna-rosja-ukraina-gdzie-sa-walki-w-piatek-relacja/96kwe0q",
+        "domain": "www.fakt.pl",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.niedziela.pl/artykul/108390/Jakie-byly-najwazniejsze-wydarzenia-w-tym-roku-w-Kosciele",
+        "domain": "www.niedziela.pl",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.niedziela.pl/artykul/108390/Jakie-byly-najwazniejsze-wydarzenia-w-tym-roku-w-Kosciele",
+        "domain": "www.niedziela.pl",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://deon.pl/kosciol/kard-parolin-na-ukrainie---misja-wobec-swiata-humanitrana-i-dyplomatyczna-synteza,2874770",
+        "domain": "deon.pl",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.radioresita.ro/ucraina/ziua-19-de-razboi-armata-rusa-nu-exclude-preluarea-controlului-total-al-marilor-orase-ucrainene",
+        "domain": "www.radioresita.ro",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.alternatives-economiques.fr/1945-grand-demenagement-de-leurope/00103915",
+        "domain": "www.alternatives-economiques.fr",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.alternatives-economiques.fr/1945-grand-demenagement-de-leurope/00103915",
+        "domain": "www.alternatives-economiques.fr",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.nachdenkseiten.de/?p=140937",
+        "domain": "www.nachdenkseiten.de",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.nachdenkseiten.de/?p=140937",
+        "domain": "www.nachdenkseiten.de",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.blesk.cz/clanek/zpravy-valka-na-ukrajine/819767/snazim-se-jen-prezit-lide-z-vychodu-ukrajiny-popsali-zivot-pod-nadvladou-rusu.html",
+        "domain": "www.blesk.cz",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.trojmiasto.pl/wiadomosci/Ukrainska-rodzina-zostaje-w-Polsce-n121270.html",
+        "domain": "www.trojmiasto.pl",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://krytykapolityczna.pl/swiat/paulina-januszewska-wojna-przemoc-gwalt/",
+        "domain": "krytykapolityczna.pl",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://lb.ua/culture/2020/12/29/474169_ukrainskiy_teatr_karantinnomu.html",
+        "domain": "lb.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://lb.ua/culture/2020/12/29/474169_ukrainskiy_teatr_karantinnomu.html",
+        "domain": "lb.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://vv.com.ua/20251013/decentralizovani-zakypivli-droniv-sho-ce-dalo/",
+        "domain": "vv.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2025
+      },
+      {
+        "url": "http://vgolos.com.ua/news/vid_zavtra_u_lvovi_zakryvayut_perehrestya_pr_chervonoi_kalyny__ugorska_shema_obyizdu_230666.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://vgolos.com.ua/news/polyaky_povstaly_proty_zakonnoi_ukrainskoi_vlady__istoryky_pro_zunr_288930.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://vgolos.com.ua/news/turky_vygraly_v_odesytiv_shche_chvert_milyarda_na_sekretnyy_remont_dorogy_na_lvivshchyni_287902.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://vgolos.com.ua/news/vidomyj-reper-napysav-pisnyu-pro-lvivskyh-futbolistiv_1392555.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2021
+      }
+    ]
+  },
+  "5": {
+    "russian": "Zaporozhye",
+    "ukrainian": "Zaporizhzhia",
+    "total_articles": 735,
+    "russian_count": 377,
+    "ukrainian_count": 358,
+    "examples": [
+      {
+        "url": "https://sputniknews.vn/20230709/bqp-nga-quan-doi-nga-gan-zaporozhye-da-pha-huy-kho-dan-cua-llvt-ukraina-24030635.html",
+        "domain": "sputniknews.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://sputniknews.vn/20230709/bqp-nga-quan-doi-nga-gan-zaporozhye-da-pha-huy-kho-dan-cua-llvt-ukraina-24030635.html",
+        "domain": "sputniknews.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://sputniknews.vn/20230827/bqp-nga--khong-quan-nga-ban-ha-truc-thang-mi-8-cua-ukraina-o-vung-zaporozhye-24921322.html",
+        "domain": "sputniknews.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://kevesko.vn/20251224/bo-quoc-phong-nga-quan-doi-nga-da-giai-phong-zarechnoye-tinh-zaporozhye-40404018.html",
+        "domain": "kevesko.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://sputniknews.vn/20230308/quan-chuc-khu-vuc-zaporozhye-neu-ra-cac-yeu-to-de-kiev-quyet-dinh-tan-cong-21644043.html",
+        "domain": "sputniknews.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://sputniknews.vn/20230308/quan-chuc-khu-vuc-zaporozhye-neu-ra-cac-yeu-to-de-kiev-quyet-dinh-tan-cong-21644043.html",
+        "domain": "sputniknews.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.sot.com.al/aktualitet/putini-nuk-mund-te-perballoje-te-terhiqet-nga-zaporozhye-kjo-do-te-th-i532922",
+        "domain": "www.sot.com.al",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.sot.com.al/aktualitet/putini-nuk-mund-te-perballoje-te-terhiqet-nga-zaporozhye-kjo-do-te-th-i532922",
+        "domain": "www.sot.com.al",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://sputniknews.vn/20231004/quan-doi-nga-dam-bao-an-toan-cho-cac-quan-sat-vien-iaea-tai-nha-may-dien-hat-nhan-zaporozhye-25629650.html",
+        "domain": "sputniknews.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://sputniknews.vn/20231004/quan-doi-nga-dam-bao-an-toan-cho-cac-quan-sat-vien-iaea-tai-nha-may-dien-hat-nhan-zaporozhye-25629650.html",
+        "domain": "sputniknews.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.cdt.ch/news/mondo/nuovi-bombardamenti-a-zaporizhzhia-kiev-e-mosca-si-accusano-a-vicenda-290601",
+        "domain": "www.cdt.ch",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.novinite.com/articles/216485/Day+187+of+the+Invasion+of+Ukraine%3A+People+in+Zaporizhzhia+are+Lining+up+for+Iodine+Tablets",
+        "domain": "www.novinite.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.dailymail.co.uk/news/article-11286579/Russian-rockets-slam-apartments-Ukrainian-city-Zaporizhzhia.html",
+        "domain": "www.dailymail.co.uk",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.thesouthafrican.com/news/world-news/un-inspectors-remain-in-zaporizhzhia-nuclear-power-plant/",
+        "domain": "www.thesouthafrican.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.radiosvoboda.org/a/zaporizhzhia-misto-zavod/30017104.html",
+        "domain": "www.radiosvoboda.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.ktvu.com/news/ukraine-russia-war-zaporizhzhia-civilian-evacuees-mariupol-steel-plant",
+        "domain": "www.ktvu.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://www.unn.com.ua/uk/news/1676143-chetvero-zhyteliv-zaporizhzhia-zarazylys-hepatytom-pid-chas-medychnoi-protsedury",
+        "domain": "www.unn.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://www.unn.com.ua/uk/news/1694055-u-tsentri-zaporizhzhia-prohrymiv-vybukh",
+        "domain": "www.unn.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://www.unn.com.ua/uk/news/1676143-chetvero-zhyteliv-zaporizhzhia-zarazylys-hepatytom-pid-chas-medychnoi-protsedury",
+        "domain": "www.unn.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://www.unn.com.ua/uk/news/1694055-u-tsentri-zaporizhzhia-prohrymiv-vybukh",
+        "domain": "www.unn.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      }
+    ]
+  },
+  "6": {
+    "russian": "Nikolaev",
+    "ukrainian": "Mykolaiv",
+    "total_articles": 777,
+    "russian_count": 377,
+    "ukrainian_count": 400,
+    "examples": [
+      {
+        "url": "https://www.dnevnik.bg/sviat/voinata_v_ukraina/2022/03/14/4323585_voinata_den_19_oshte_edin_iadren_samoletonosach_pazi/",
+        "domain": "www.dnevnik.bg",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://lb.ua/news/2017/12/22/385598_gennadiy_zubko_zarplata_rozmiri.html",
+        "domain": "lb.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://www.dnevnik.bg/sviat/voinata_v_ukraina/2022/03/14/4323585_voinata_den_19_oshte_edin_iadren_samoletonosach_pazi/",
+        "domain": "www.dnevnik.bg",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.dw.com/uk/reznikov-anonsuvav-novu-vijskovu-dopomogu-ukraini-vid-ssa/a-63646159",
+        "domain": "www.dw.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://dnes.dir.bg/comments/zavod-za-kosmicheski-raketi-v-kiev-e-unishtozhen-pri-ruskiya-obstrel",
+        "domain": "dnes.dir.bg",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://dnes.dir.bg/comments/zavod-za-kosmicheski-raketi-v-kiev-e-unishtozhen-pri-ruskiya-obstrel",
+        "domain": "dnes.dir.bg",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://ipress.ua/articles/rosiyany_pryzupynyly_prosuvannya_zsu_v_kurskiy_oblasti_30_tysyach_kynuto_na_tsey_napryamok__tom_kuper_361513.html",
+        "domain": "ipress.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2024
+      },
+      {
+        "url": "https://ipress.ua/articles/rosiyany_pryzupynyly_prosuvannya_zsu_v_kurskiy_oblasti_30_tysyach_kynuto_na_tsey_napryamok__tom_kuper_361513.html",
+        "domain": "ipress.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2024
+      },
+      {
+        "url": "http://vgolos.com.ua/news/ukrainskyy_gurt_purpur_gastrolyuie_u_rosii_246382.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://vgolos.com.ua/news/stryyanyn_vdruge_syade_v_tyurmu_za_kradizhku_z_pidvalu_179914.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2015
+      },
+      {
+        "url": "https://www.bankingnews.gr/diethni/articles/620907/oi-rosikes-dynameis-exoun-elegksei-to-80-tou-donbass-kai-to-70-ton-oukranikon-akton-sto-stoxastro-mykolaiv-kai-kherson-monodromos-i-dixotomisi-tis-ou",
+        "domain": "www.bankingnews.gr",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://portal.lviv.ua/news/2019/12/18/festyval-koliady-i-pampukha-khoda-mykolaiv-parad-vertepiv-rizdvo-v-zamku-kalendar-najtsikavishykh-podij-lvivshchyny",
+        "domain": "portal.lviv.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "http://www.thedailybeast.com/mykolaiv-ukraine-a-former-secret-city-thats-still-confidential",
+        "domain": "www.thedailybeast.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.thedailybeast.com/mykolaiv-ukraine-a-former-secret-city-thats-still-confidential",
+        "domain": "www.thedailybeast.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://www.thedailybeast.com/mykolaiv-ukraine-a-former-secret-city-thats-still-confidential",
+        "domain": "www.thedailybeast.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://uatoday.tv/news/ukraine-holds-large-scale-military-exercises-in-southern-region-of-mykolaiv-423730.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://uatoday.tv/society/mykolaiv-battalion-has-returned-from-donbas-to-its-base-796784.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://uatoday.tv/society/interfax-bunge-invests-usd-180-mln-in-launch-of-handling-complex-at-mykolaiv-seaport-673365.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://uatoday.tv/news/ukraine-holds-large-scale-military-exercises-in-southern-region-of-mykolaiv-423730.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://uatoday.tv/society/mykolaiv-battalion-has-returned-from-donbas-to-its-base-796784.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      }
+    ]
+  },
+  "7": {
+    "russian": "Dnepropetrovsk",
+    "ukrainian": "Dnipro",
+    "total_articles": 787,
+    "russian_count": 416,
+    "ukrainian_count": 371,
+    "examples": [
+      {
+        "url": "https://www.zdg.md/stiri/stiri-externe/live-text-atac-cu-drone-iraniene-in-kiev-si-dnepropetrovsk-autoritatile-ucrainene-sustin-ca-nu-au-fost-inregistrate-victime-razboi-in-ucraina-ziua-398/",
+        "domain": "www.zdg.md",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.bankingnews.gr/diethni/articles/774789/tous-teleionoun-oi-rosoi-etoimazoun-epithesi-sok-efthasan-2-xlm-apo-pokrovsk-stoxos-dnepropetrovsk-perikyklosi-zaporizhia",
+        "domain": "www.bankingnews.gr",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.bankingnews.gr/diethni/articles/781512/kataigistikes-ekselikseis-stin-oukrania-vlepoun-oi-ipa-o-syrsky-tha-paradosei-to-dnepropetrovsk-sti-rosia-kai-tha-fygei-apo-to-pokrovsk",
+        "domain": "www.bankingnews.gr",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.bankingnews.gr/diethni/articles/781512/kataigistikes-ekselikseis-stin-oukrania-vlepoun-oi-ipa-o-syrsky-tha-paradosei-to-dnepropetrovsk-sti-rosia-kai-tha-fygei-apo-to-pokrovsk",
+        "domain": "www.bankingnews.gr",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.bankingnews.gr/diethni/articles/803426/sygklonistiko-oi-ipa-epeigontai-gia-ekexeiria-giati-i-oukrania-katarreei-i-rosia-isxyri-stis-synomilies-logo-donetsk-kai-dnepropetrovsk",
+        "domain": "www.bankingnews.gr",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.bankingnews.gr/diethni/articles/803426/sygklonistiko-oi-ipa-epeigontai-gia-ekexeiria-giati-i-oukrania-katarreei-i-rosia-isxyri-stis-synomilies-logo-donetsk-kai-dnepropetrovsk",
+        "domain": "www.bankingnews.gr",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://sputniknews.vn/20231004/bo-quoc-phong-nga-tiem-kich-nga-ha-guc-mig-29-ukraina-o-vung-dnepropetrovsk-25636244.html",
+        "domain": "sputniknews.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://sputniknews.vn/20231004/bo-quoc-phong-nga-tiem-kich-nga-ha-guc-mig-29-ukraina-o-vung-dnepropetrovsk-25636244.html",
+        "domain": "sputniknews.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://sputniknews.vn/20231004/bo-quoc-phong-nga-tiem-kich-nga-ha-guc-mig-29-ukraina-o-vung-dnepropetrovsk-25636244.html",
+        "domain": "sputniknews.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "http://www.profi-forex.org/wiki/dnepropetrovsk.html",
+        "domain": "www.profi-forex.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://glavcom.ua/interviews/volodimir-bondarenko-subsidiji-pryamo-z-byudzhetu-ydut-do-postachalnikiv-gazu-a-hto-ce-shufrich-boyko-351667.html",
+        "domain": "glavcom.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://glavcom.ua/interviews/volodimir-bondarenko-subsidiji-pryamo-z-byudzhetu-ydut-do-postachalnikiv-gazu-a-hto-ce-shufrich-boyko-351667.html",
+        "domain": "glavcom.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "https://www.wiwo.de/politik/ausland/ukraine-krieg-die-lage-am-donnerstag-habeck-putin-verliert-diesen-krieg-auf-dem-schlachtfeld/28116300.html",
+        "domain": "www.wiwo.de",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.wiwo.de/politik/ausland/ukraine-krieg-die-lage-am-donnerstag-habeck-putin-verliert-diesen-krieg-auf-dem-schlachtfeld/28116300.html",
+        "domain": "www.wiwo.de",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.dw.com/uk/bila-rosijskogo-posolstva-v-kabuli-progrimiv-vibuh/a-63017906",
+        "domain": "www.dw.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://vgolos.com.ua/articles/sim_vakansiy_nardepiv_hto_prolize_u_parlament_219802.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://vgolos.com.ua/news/motoprobig_iednosti_baykery_vyrushyly_z_uzhgoroda_do_adminkordonu_z_okupovanym_krymom_326251.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://vgolos.com.ua/articles/sim_vakansiy_nardepiv_hto_prolize_u_parlament_219802.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://vgolos.com.ua/news/motoprobig_iednosti_baykery_vyrushyly_z_uzhgoroda_do_adminkordonu_z_okupovanym_krymom_326251.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-165129-post-3376334.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      }
+    ]
+  },
+  "8": {
+    "russian": "Vinnitsa",
+    "ukrainian": "Vinnytsia",
+    "total_articles": 875,
+    "russian_count": 435,
+    "ukrainian_count": 440,
+    "examples": [
+      {
+        "url": "http://www.volynnews.com/news/authority/holovnyy-mytnyk-volyni-pro-cherhy-na-kordoni-ta-lehalizatsiiu-kontrabandy-interviu/",
+        "domain": "www.volynnews.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://zakarpattya.net.ua/News/175071-Profesor-Belei-Termin-rusyn-treba-zaboronyty-vykorystovuvaty-u-znachenni-neukrainets",
+        "domain": "zakarpattya.net.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://www.minprom.com.ua/digest/236865.html",
+        "domain": "www.minprom.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://www.minprom.com.ua/digest/236865.html",
+        "domain": "www.minprom.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://glavred.info/war/tck-nachali-obhod-kvartir-mobilizaciyu-rezko-usilyat-kogo-prizovut-v-pervuyu-ochered-10751243.html",
+        "domain": "glavred.info",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2026
+      },
+      {
+        "url": "https://gazeta.ua/articles/life/_2700-uchasnikiv-i-2-mln-grn-na-udarni-droni-dlya-hartiyi-yak-prohodiv-blagodijnij-marafon-mhp-run4victory-v-kiyevi/1218367",
+        "domain": "gazeta.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2025
+      },
+      {
+        "url": "https://gazeta.ua/articles/life/_2700-uchasnikiv-i-2-mln-grn-na-udarni-droni-dlya-hartiyi-yak-prohodiv-blagodijnij-marafon-mhp-run4victory-v-kiyevi/1218367",
+        "domain": "gazeta.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2025
+      },
+      {
+        "url": "https://focus.ua/society/369918/",
+        "domain": "focus.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://lb.ua/health/2025/12/14/711727_bachu_svoie_zhittya_yaskravishe.html",
+        "domain": "lb.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2025
+      },
+      {
+        "url": "https://lb.ua/health/2025/12/14/711727_bachu_svoie_zhittya_yaskravishe.html",
+        "domain": "lb.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2025
+      },
+      {
+        "url": "https://www.cdt.ch/news/mondo/nuovi-attacchi-russi-nella-notte-colpita-odessa-e-la-regione-centrale-di-vinnytsia-328617",
+        "domain": "www.cdt.ch",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://vn.20minut.ua/Kult-podii/glavnyie-bayki-vinnytsia-jazzfest-kostyum-garanyana-i-vedro-dlya-igryi-10639673.html",
+        "domain": "vn.20minut.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://vn.20minut.ua/Kult-podii/glavnyie-bayki-vinnytsia-jazzfest-kostyum-garanyana-i-vedro-dlya-igryi-10639673.html",
+        "domain": "vn.20minut.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://freeradio.com.ua/bakhmut-vinnytsia-mykolaiv-uzhhorod-ta-dnipro-sviatkuiut-den-mista-shcho-mizh-nymy-spilnoho-a-shcho-unikalne-dlia-kozhnoho/",
+        "domain": "freeradio.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2025
+      },
+      {
+        "url": "https://freeradio.com.ua/bakhmut-vinnytsia-mykolaiv-uzhhorod-ta-dnipro-sviatkuiut-den-mista-shcho-mizh-nymy-spilnoho-a-shcho-unikalne-dlia-kozhnoho/",
+        "domain": "freeradio.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2025
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/chernivtsi-vinnytsia-ta-lutsk-ocholyly-reytynh-prozorosti-mist-ukrayiny/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/chernivtsi-vinnytsia-ta-lutsk-ocholyly-reytynh-prozorosti-mist-ukrayiny/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "http://uatoday.tv/society/carnivorous-plants-bloom-in-vinnytsia-ukraine-625548.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://www.laprovence.com/article/france-monde/6838973/ukraine-moscou-affirme-avoir-vise-une-reunion-militaire-a-vinnytsia.html",
+        "domain": "www.laprovence.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.laprovence.com/article/france-monde/6838973/ukraine-moscou-affirme-avoir-vise-une-reunion-militaire-a-vinnytsia.html",
+        "domain": "www.laprovence.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      }
+    ]
+  },
+  "9": {
+    "russian": "Rovno",
+    "ukrainian": "Rivne",
+    "total_articles": 774,
+    "russian_count": 380,
+    "ukrainian_count": 394,
+    "examples": [
+      {
+        "url": "https://lb.ua/society/2018/11/27/398557_politicheskie_uzniki_ukrainskie.html",
+        "domain": "lb.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://lb.ua/society/2018/11/27/398557_politicheskie_uzniki_ukrainskie.html",
+        "domain": "lb.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://www.dp.ru:443/a/2023/09/25/vse-mashini-rovno-v-rjad-kakih",
+        "domain": "www.dp.ru:443",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "http://www.world-nuclear-news.org/Articles/Conference-Nuclear-growth-relies-on-good-policies",
+        "domain": "www.world-nuclear-news.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://www.world-nuclear-news.org/Articles/Conference-Nuclear-growth-relies-on-good-policies",
+        "domain": "www.world-nuclear-news.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.world-nuclear-news.org/Articles/Interview-EBRD-nuclear-safety-director-forms-long",
+        "domain": "www.world-nuclear-news.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://ukrnews24.com/society/v-gorode-rovno-obyavlen-karantin-267525.html",
+        "domain": "ukrnews24.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.reflex.cz/clanek/historie/59058/pred-80-lety-nacisticke-nemecko-a-stalinsky-sovetsky-svaz-uskutecnily-ctvrte-deleni-polska.html",
+        "domain": "www.reflex.cz",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.reflex.cz/clanek/historie/59058/pred-80-lety-nacisticke-nemecko-a-stalinsky-sovetsky-svaz-uskutecnily-ctvrte-deleni-polska.html",
+        "domain": "www.reflex.cz",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://dennikn.sk/2966616/invaziu-sme-cakali-z-cvicenia-sme-presli-rovno-do-akcie-vravi-clen-skupiny-ktora-data-z-dronov-posuva-armade/",
+        "domain": "dennikn.sk",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.newyorker.com/magazine/2019/12/23/the-ukrainian-prosecutor-behind-trumps-impeachment",
+        "domain": "www.newyorker.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://vse.rv.ua/article/martirolog-1943-roku-rozstrilnij-spisok-vazniv-rivnenskoi-okruznoi-turmi.html",
+        "domain": "vse.rv.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://vgolos.com.ua/news/dynamo_bez_glyadachiv_ne_vporalosya_iz_veresom_y_vtratylo_pershu_pozytsiyu_283466.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://vgolos.com.ua/news/zorya_zdobula_pershu_peremogu_v_chempionati_277951.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://vgolos.com.ua/news/u-2019-rotsi-aes-ukrayiny-perevykonaly-plan-kabinetu-ministriv_1144690.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://vgolos.com.ua/news/na-rivnenshhyni-tragichno-zagynuv-51-richnyj-cholovik-z-kyyeva_1390604.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2021
+      },
+      {
+        "url": "https://vikna.if.ua/blog/author/10/165902/view",
+        "domain": "vikna.if.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2025
+      },
+      {
+        "url": "https://vikna.if.ua/blog/author/10/165902/view",
+        "domain": "vikna.if.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2025
+      },
+      {
+        "url": "https://sud.ua/ru/news/sud-info/209718-zastosuvannya-pripisiv-zakonu-pri-priynyatti-rishennya-detali",
+        "domain": "sud.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2021
+      },
+      {
+        "url": "https://www.kyivpost.com/article/content/ukraine-politics/at-least-37-soldiers-killed-in-may-in-russias-war-against-ukraine-415337.html",
+        "domain": "www.kyivpost.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      }
+    ]
+  },
+  "10": {
+    "russian": "Chernobyl",
+    "ukrainian": "Chornobyl",
+    "total_articles": 757,
+    "russian_count": 362,
+    "ukrainian_count": 395,
+    "examples": [
+      {
+        "url": "https://www.kenw.org/post/author-pulls-back-iron-curtain-chernobyl-nuclear-disaster",
+        "domain": "www.kenw.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.kenw.org/post/author-pulls-back-iron-curtain-chernobyl-nuclear-disaster",
+        "domain": "www.kenw.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://www.famigliacristiana.it/fotogallery/chernobyl-il-ricordo-dellle-vittime-nell-anniversario-della-strage.aspx",
+        "domain": "www.famigliacristiana.it",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://www.famigliacristiana.it/fotogallery/chernobyl-il-ricordo-dellle-vittime-nell-anniversario-della-strage.aspx",
+        "domain": "www.famigliacristiana.it",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://fox45now.com/news/nation-world/opponents-say-mobile-chernobyl-threatens-mountains",
+        "domain": "fox45now.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://intercontinentalcry.org/chevrons-amazon-chernobyl-case-moves-canada/",
+        "domain": "intercontinentalcry.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://intercontinentalcry.org/chevrons-amazon-chernobyl-case-moves-canada/",
+        "domain": "intercontinentalcry.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://www.getreligion.org/getreligion/2016/4/26/rites-of-mourning-in-kiev-as-well-as-a-chernobyl-reference-in-the-book-of-revelation",
+        "domain": "www.getreligion.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://www.northwestgeorgianews.com/rome/associated_press/news/national/ap-exclusive-test-finds-chernobyl-residue-in-belarus-milk/article_511f99ba-0b0c-11e6-b53e-7358aca6458c.html",
+        "domain": "www.northwestgeorgianews.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://www.northwestgeorgianews.com/rome/associated_press/news/national/ap-exclusive-test-finds-chernobyl-residue-in-belarus-milk/article_511f99ba-0b0c-11e6-b53e-7358aca6458c.html",
+        "domain": "www.northwestgeorgianews.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://www.cairnspost.com.au/news/world/ukraine-russia-conflict-live-updates-putins-threat-to-destroy-as-civilian-targets-hit/news-story/1d63b3cd5b1774a52d4470f70b4f36c3?nk=c28d370ef14b3b80d4c159f4c4",
+        "domain": "www.cairnspost.com.au",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.courierpostonline.com/story/news/politics/2022/02/24/russia-ukraine-invasion/6920609001/",
+        "domain": "www.courierpostonline.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.dailymail.co.uk/news/article-11162893/How-sad-Vlad-Putin-expresses-sympathy-death-Mikhail-Gorbachev-aged-91.html",
+        "domain": "www.dailymail.co.uk",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.cairnspost.com.au/news/world/ukraine-russia-conflict-live-updates-putins-threat-to-destroy-as-civilian-targets-hit/news-story/1d63b3cd5b1774a52d4470f70b4f36c3?nk=c28d370ef14b3b80d4c159f4c4",
+        "domain": "www.cairnspost.com.au",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.courierpostonline.com/story/news/politics/2022/02/24/russia-ukraine-invasion/6920609001/",
+        "domain": "www.courierpostonline.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.dailymail.co.uk/news/article-11162893/How-sad-Vlad-Putin-expresses-sympathy-death-Mikhail-Gorbachev-aged-91.html",
+        "domain": "www.dailymail.co.uk",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/zona-daye-te-shcho-khochesh-markiian-kamysh-pro-chornobyl-stalkeriv-i-burshtynovi-klondayky/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://thestarphoenix.com/life/bridges/bridges-events-10",
+        "domain": "thestarphoenix.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://thestarphoenix.com/life/bridges/bridges-events-10",
+        "domain": "thestarphoenix.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://www.iaea.org/newscenter/statements/iaea-director-generals-introductory-statement-to-the-board-of-governors-9-june-2025",
+        "domain": "www.iaea.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      }
+    ]
+  },
+  "11": {
+    "russian": "Lugansk",
+    "ukrainian": "Luhansk",
+    "total_articles": 716,
+    "russian_count": 339,
+    "ukrainian_count": 377,
+    "examples": [
+      {
+        "url": "https://newpol.org/russia-an-imperialist-power-or-a-non-hegemonic-empire-in-gestation-a-reply-to-the-argentinean-economist-claudio-katz-an-essay-with-8-tables/",
+        "domain": "newpol.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://www.nrhz.de/flyer/beitrag.php?id=23641",
+        "domain": "www.nrhz.de",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.vosgesmatin.fr/defense-guerre-conflit/2022/03/24/guerre-en-ukraine-l-armee-russe-repoussee-de-kiev-et-sur-la-defensive-selon-washington",
+        "domain": "www.vosgesmatin.fr",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://newpol.org/russia-an-imperialist-power-or-a-non-hegemonic-empire-in-gestation-a-reply-to-the-argentinean-economist-claudio-katz-an-essay-with-8-tables/",
+        "domain": "newpol.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://novosti.ua/politics/132933",
+        "domain": "novosti.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://novosti.ua/politics/132933",
+        "domain": "novosti.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "https://www.digi24.ro/stiri/externe/aerodromul-din-orasul-rusesc-kursk-a-fost-atacat-cu-drona-rusii-au-bombardat-regiunea-zaporojie-2174673",
+        "domain": "www.digi24.ro",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.radiosvoboda.org/a/novyny-pryazovya-front-zaporizkyy-napryamok-okupanty-ukriplyuyutsya/32632872.html",
+        "domain": "www.radiosvoboda.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.rbc.ua/rus/news/irina-vereshchuk-vozvrashchatsya-osvobozhdennye-1648749211.html",
+        "domain": "www.rbc.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2022
+      },
+      {
+        "url": "https://www.rbc.ua/rus/news/irina-vereshchuk-vozvrashchatsya-osvobozhdennye-1648749211.html",
+        "domain": "www.rbc.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2022
+      },
+      {
+        "url": "https://www.lrt.lt/naujienos/pasaulyje/6/1660978/rusijos-karas-pries-ukraina-rusai-odesoje-sudave-smugi-kritinei-infrastrukturai-aiskeja-detales-apie-zveriska-rusijos-elgesi-pries-civilius-bucoje",
+        "domain": "www.lrt.lt",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.criticalthreats.org/analysis/russian-offensive-campaign-assessment-december-24-2023",
+        "domain": "www.criticalthreats.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.criticalthreats.org/analysis/russian-offensive-campaign-assessment-december-24-2023",
+        "domain": "www.criticalthreats.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.dw.com/en/ukraine-says-planned-mariupol-evacuations-fell-short-as-it-happened/a-61518521",
+        "domain": "www.dw.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.newsweek.com/ukraine-war-30-moments-shaped-first-300-days-russia-nato-eu-us-1768460",
+        "domain": "www.newsweek.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://vgolos.com.ua/news/doba_v_ato_57_obstriliv_troie_zahysnykiv_poraneno_309592.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://vgolos.com.ua/news/doba_v_ato_57_obstriliv_troie_zahysnykiv_poraneno_309592.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://gazeta.ua/articles/people-and-things-journal/_cerez-nashi-akciyi-mafiya-vtrachala-dva-miljoni-dolariv-na-misyac/863287",
+        "domain": "gazeta.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://gazeta.ua/articles/people-and-things-journal/_cerez-nashi-akciyi-mafiya-vtrachala-dva-miljoni-dolariv-na-misyac/863287",
+        "domain": "gazeta.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://www.ziarulevenimentul.ro/stiri/actualitate/live-razboi-in-ucraina-ziua-25-fortele-ruse-au-distrus-o-coala-unde-se-adaposteau-400-de-oameni-zelenski-acuza-a-teroareaa-ru-ilor--217524002.html",
+        "domain": "www.ziarulevenimentul.ro",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      }
+    ]
+  },
+  "15": {
+    "russian": "Dnieper River",
+    "ukrainian": "Dnipro River",
+    "total_articles": 738,
+    "russian_count": 348,
+    "ukrainian_count": 390,
+    "examples": [
+      {
+        "url": "http://leo-mosk.livejournal.com/3972335.html",
+        "domain": "leo-mosk.livejournal.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.icij.org/investigations/fincen-files/global-banks-defy-u-s-crackdowns-by-serving-oligarchs-criminals-and-terrorists/",
+        "domain": "www.icij.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "https://www.epravda.com.ua/publications/2021/05/12/673753/",
+        "domain": "www.epravda.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2021
+      },
+      {
+        "url": "http://libcom.org/history/nestor-makhno-man-myth",
+        "domain": "libcom.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://biztoc.com/x/14bfa8dae90fe26c",
+        "domain": "biztoc.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "http://leo-mosk.livejournal.com/3972335.html",
+        "domain": "leo-mosk.livejournal.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.icij.org/investigations/fincen-files/global-banks-defy-u-s-crackdowns-by-serving-oligarchs-criminals-and-terrorists/",
+        "domain": "www.icij.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "https://www.epravda.com.ua/publications/2021/05/12/673753/",
+        "domain": "www.epravda.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2021
+      },
+      {
+        "url": "http://libcom.org/history/nestor-makhno-man-myth",
+        "domain": "libcom.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://nos.nl/liveblog/2497657-oekraiens-leger-claimt-herovering-oevers-dnjepr-nachtelijke-droneaanval-op-kyiv",
+        "domain": "nos.nl",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://japantoday.com/category/world/zelenskiy-tells-russians-to-run-for-their-lives-from-ukraine-offensive-in-south3",
+        "domain": "japantoday.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://japantoday.com/category/world/zelenskiy-tells-russians-to-run-for-their-lives-from-ukraine-offensive-in-south3",
+        "domain": "japantoday.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://www.ukrinform.ua/rus/news/dinamo_obigralo_chernomorets_na_stadione_lobanovskogo_1731686",
+        "domain": "www.ukrinform.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2015
+      },
+      {
+        "url": "http://www.osce.org/special-monitoring-mission-to-ukraine/351036",
+        "domain": "www.osce.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://www.osce.org/special-monitoring-mission-to-ukraine/351036",
+        "domain": "www.osce.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://vikna.if.ua/news/category/kl/2016/08/03/58211/view",
+        "domain": "vikna.if.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "https://ura-inform.com/uk/economics/2019/12/11/bjudzhet-odobren-s-chem-vstupaet-strana-v-2020-god",
+        "domain": "ura-inform.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://ura-inform.com/uk/economics/2019/12/11/bjudzhet-odobren-s-chem-vstupaet-strana-v-2020-god",
+        "domain": "ura-inform.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.ukrinform.ua/rubric-technology/3360211-top10-kosmicnih-podij-2021-roku-turisti-na-orbiti-mars-i-ukrainski-dviguni.html",
+        "domain": "www.ukrinform.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2021
+      },
+      {
+        "url": "https://24tv.ua/boyi-za-ostrovi-na-hersonshhini-evakuatsiya-z-pokrovska-intervyu-z-biytsem-sso_n3034157",
+        "domain": "24tv.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2026
+      }
+    ]
+  },
+  "16": {
+    "russian": "Dniester",
+    "ukrainian": "Dnister",
+    "total_articles": 714,
+    "russian_count": 272,
+    "ukrainian_count": 442,
+    "examples": [
+      {
+        "url": "https://www.dw.com/en/russia-says-it-seeks-full-control-of-southern-ukraine-access-to-moldovas-trans-dniester-region-as-it-happened/a-61551869",
+        "domain": "www.dw.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.dw.com/en/russia-says-it-seeks-full-control-of-southern-ukraine-access-to-moldovas-trans-dniester-region-live-updates/a-61551869",
+        "domain": "www.dw.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.dw.com/en/russia-says-it-seeks-full-control-of-southern-ukraine-access-to-moldovas-trans-dniester-region-live-updates/a-61551869",
+        "domain": "www.dw.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.dw.com/en/russia-says-it-seeks-full-control-of-southern-ukraine-access-to-moldovas-trans-dniester-region-as-it-happened/a-61551869",
+        "domain": "www.dw.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.dw.com/en/russia-says-it-seeks-full-control-of-southern-ukraine-access-to-moldovas-trans-dniester-region-as-it-happened/a-61551869",
+        "domain": "www.dw.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.dw.com/en/russia-says-it-seeks-full-control-of-southern-ukraine-access-to-moldovas-trans-dniester-region-live-updates/a-61551869",
+        "domain": "www.dw.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.lahaine.org/mundo.php/pridnestrovia-el-polvorin-del-dniester",
+        "domain": "www.lahaine.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.lahaine.org/mundo.php/pridnestrovia-el-polvorin-del-dniester",
+        "domain": "www.lahaine.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.boston.com/news/cars/2022/05/02/live-updates-l-latvia-urges-citizens-to-leave-trans-dniester/",
+        "domain": "www.boston.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.boston.com/news/russia-ukraine/2022/05/02/live-updates-l-latvia-urges-citizens-to-leave-trans-dniester/",
+        "domain": "www.boston.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://jewishjournal.com/culture/religion/yom_hashoah/218064/my-ancestor-vanished-in-the-holocaust-eighty-years-later-i-went-looking-for-him/",
+        "domain": "jewishjournal.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://jewishjournal.com/culture/religion/yom_hashoah/218064/my-ancestor-vanished-in-the-holocaust-eighty-years-later-i-went-looking-for-him/",
+        "domain": "jewishjournal.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://jewishjournal.com/culture/religion/yom_hashoah/218064/my-ancestor-vanished-in-the-holocaust-eighty-years-later-i-went-looking-for-him/",
+        "domain": "jewishjournal.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.kyivpost.com/ukraine-politics/kremlin-house-ukrainian-empire-of-top-putin-ally.html",
+        "domain": "www.kyivpost.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://www.huffingtonpost.com/adst/moldovas-transnistrian-co_b_11180694.html",
+        "domain": "www.huffingtonpost.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://www.huffingtonpost.com/adst/moldovas-transnistrian-co_b_11180694.html",
+        "domain": "www.huffingtonpost.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://vgolos.com.ua/news/na-lvivshhyni-vidkryly-vazhlyvyj-mist-cherez-dnister-detali_1050208.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "https://www.yahoo.com/news/ukraine-war-latest-ukraine-strikes-202654904.html",
+        "domain": "www.yahoo.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.ukrinform.ua/rubric-regions/2743844-hto-zahistit-dnister-vid-novih-ges.html",
+        "domain": "www.ukrinform.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "https://financialpost.com/news/economy/canadas-unofficial-boycott-catches-up-russian-speaking-businesses",
+        "domain": "financialpost.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      }
+    ]
+  },
+  "17": {
+    "russian": "Donbass",
+    "ukrainian": "Donbas",
+    "total_articles": 749,
+    "russian_count": 336,
+    "ukrainian_count": 413,
+    "examples": [
+      {
+        "url": "https://www.kathimerini.com.cy/gr/kosmos/1-eleythero-pleon-to-xarkobo-anektise-kai-tin-paroxi-fysikoy-aerioy",
+        "domain": "www.kathimerini.com.cy",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.kathimerini.com.cy/gr/kosmos/1-eleythero-pleon-to-xarkobo-anektise-kai-tin-paroxi-fysikoy-aerioy",
+        "domain": "www.kathimerini.com.cy",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.wiwo.de/politik/ausland/ukraine-krieg-die-lage-am-mittwoch-wagner-gruppe-vermeldet-einnahme-von-soledar/28116300.html",
+        "domain": "www.wiwo.de",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.wiwo.de/politik/ausland/ukraine-krieg-die-lage-am-mittwoch-wagner-gruppe-vermeldet-einnahme-von-soledar/28116300.html",
+        "domain": "www.wiwo.de",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://thepointmag.com/2019/politics/the-demon-in-democracy",
+        "domain": "thepointmag.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://thepointmag.com/2019/politics/the-demon-in-democracy",
+        "domain": "thepointmag.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://vgolos.com.ua/news/okupanty-gatyat-na-donbasi-z-kulemetiv-granatometiv-i-striletskoyi-zbroyi_1021864.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "https://vgolos.com.ua/news/oos-okupanty-obstrilyaly-bronebijno-zapalyuvalnymy-boyeprypasamy-okolytsi-berezovogo-vygorilo-6-budynkiv_1112643.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "https://vgolos.com.ua/news/okupanty-gatyat-na-donbasi-z-kulemetiv-granatometiv-i-striletskoyi-zbroyi_1021864.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "https://vgolos.com.ua/news/oos-okupanty-obstrilyaly-bronebijno-zapalyuvalnymy-boyeprypasamy-okolytsi-berezovogo-vygorilo-6-budynkiv_1112643.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "https://edition.cnn.com/europe/live-news/russia-ukraine-war-news-04-22-22/h_5a2314d7f398f9adc60703c2d2140094",
+        "domain": "edition.cnn.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.radiosvoboda.org/a/donbas-russification/33119291.html",
+        "domain": "www.radiosvoboda.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.greanvillepost.com/2021/04/26/what-just-happened-in-the-ukraine/",
+        "domain": "www.greanvillepost.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.greanvillepost.com/2021/04/26/what-just-happened-in-the-ukraine/",
+        "domain": "www.greanvillepost.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.nbcconnecticut.com/news/business/money-report/russia-says-the-west-risks-the-wrath-of-god-if-it-punishes-moscow-over-the-war-heavy-weapons-start-to-have-an-impact/2820688/",
+        "domain": "www.nbcconnecticut.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.nbcconnecticut.com/news/business/money-report/russia-says-the-west-risks-the-wrath-of-god-if-it-punishes-moscow-over-the-war-heavy-weapons-start-to-have-an-impact/2820688/",
+        "domain": "www.nbcconnecticut.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.europalibera.org/a/vasile-botnaru-in-dialog-cu-fostul-ministru-al-apararii-viorel-cibotaru/28635886.html",
+        "domain": "www.europalibera.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.europalibera.org/a/vasile-botnaru-in-dialog-cu-fostul-ministru-al-apararii-viorel-cibotaru/28635886.html",
+        "domain": "www.europalibera.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://spravy.pravda.sk/svet/clanok/634936-online-zelenskyj-ma-recept-pre-eu-vo-vojne-o-plyn-viac-sankcii/",
+        "domain": "spravy.pravda.sk",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.bankingnews.gr/diethni/articles/847708/the-great-collapse-the-chronicle-of-ukraine-s-end-and-the-emergence-of-an-iron-russia",
+        "domain": "www.bankingnews.gr",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2026
+      }
+    ]
+  },
+  "19": {
+    "russian": "Zakarpatye",
+    "ukrainian": "Zakarpattia",
+    "total_articles": 716,
+    "russian_count": 246,
+    "ukrainian_count": 470,
+    "examples": [
+      {
+        "url": "https://www.rferl.org/a/hungary-transcarpathia-roma-ukraine-refugees/32443092.html",
+        "domain": "www.rferl.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.rferl.org/a/hungary-transcarpathia-roma-ukraine-refugees/32443092.html",
+        "domain": "www.rferl.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://dailynewshungary.com/hungarian-businessman-would-buy-transcarpathia-from-ukraine-for-gold/",
+        "domain": "dailynewshungary.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://dailynewshungary.com/hungarian-businessman-would-buy-transcarpathia-from-ukraine-for-gold/",
+        "domain": "dailynewshungary.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://dailynewshungary.com/hungarian-businessman-would-buy-transcarpathia-from-ukraine-for-gold/",
+        "domain": "dailynewshungary.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://lvivexpres.com/hotels-polyana-transcarpathia/",
+        "domain": "lvivexpres.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://weeklyblitz.net/2025/06/06/ukraines-expulsion-of-hungarian-diplomats-over-a-transcarpathia-spy-scandal/",
+        "domain": "weeklyblitz.net",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://weeklyblitz.net/2025/06/06/ukraines-expulsion-of-hungarian-diplomats-over-a-transcarpathia-spy-scandal/",
+        "domain": "weeklyblitz.net",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://weeklyblitz.net/2025/06/06/ukraines-expulsion-of-hungarian-diplomats-over-a-transcarpathia-spy-scandal/",
+        "domain": "weeklyblitz.net",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "http://www.karpatalja.ma/news/from-which-direction-and-how-is-transcarpathia-being-supported/",
+        "domain": "www.karpatalja.ma",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://zakarpattya.net.ua/News/181393-Ekolohy-terytorii-Smarahdovoi-merezhi-Zakarpattia-ne-mozhut-buty-budivelnymy-maidanchykamy",
+        "domain": "zakarpattya.net.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://zakarpattya.net.ua/News/181393-Ekolohy-terytorii-Smarahdovoi-merezhi-Zakarpattia-ne-mozhut-buty-budivelnymy-maidanchykamy",
+        "domain": "zakarpattya.net.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/u-90-rokiv-sama-yizdyla-na-zakarpattia-zbyraty-polunytsiu/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://zakarpattya.net.ua/Blogs/203559-Politychni-transformatsii-Zakarpattia.-Ch.-7",
+        "domain": "zakarpattya.net.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://zakarpattya.net.ua/News/239473-Kolyshnii-prokuror-kindersiurpryz-z-Zakarpattia-Kazak-zvilnyvsia-ta-vyikhav-u-Shvetsiiu",
+        "domain": "zakarpattya.net.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2026
+      },
+      {
+        "url": "https://zakarpattya.net.ua/News/239473-Kolyshnii-prokuror-kindersiurpryz-z-Zakarpattia-Kazak-zvilnyvsia-ta-vyikhav-u-Shvetsiiu",
+        "domain": "zakarpattya.net.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2026
+      },
+      {
+        "url": "http://zakarpattya.net.ua/Blogs/179517-Ukraina-u-chas-viiny-ta-Zakarpattia-iak-polihon-dlia-vorozhykh-spetssluzhb",
+        "domain": "zakarpattya.net.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://zakarpattya.net.ua/Blogs/179517-Ukraina-u-chas-viiny-ta-Zakarpattia-iak-polihon-dlia-vorozhykh-spetssluzhb",
+        "domain": "zakarpattya.net.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://zakarpattya.net.ua/News/175150-Uhorshchyna-znovu-pochala-rozhaniaty-temu-avtonomii-Zakarpattia.-Istoriia-miakoi-okupatsii",
+        "domain": "zakarpattya.net.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://zakarpattya.net.ua/News/175150-Uhorshchyna-znovu-pochala-rozhaniaty-temu-avtonomii-Zakarpattia.-Istoriia-miakoi-okupatsii",
+        "domain": "zakarpattya.net.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      }
+    ]
+  },
+  "20": {
+    "russian": "Podolye",
+    "ukrainian": "Podillia",
+    "total_articles": 471,
+    "russian_count": 394,
+    "ukrainian_count": 77,
+    "examples": [
+      {
+        "url": "http://moldova-suverana.md/article/neamul-intre-ideologii-si-condiia-de-om-i_14404",
+        "domain": "moldova-suverana.md",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://historia.org.pl/2015/08/12/pakt-pilsudski-lenin-czyli-jak-polacy-uratowali-bolszewizm-i-zmarnowali-szanse-na-budowe-imperium-p-zychowicz-recenzja/comment-page-1/",
+        "domain": "historia.org.pl",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.rador.ro/2021/02/18/calendarul-evenimentelor-18-februarie-selectiuni-6/",
+        "domain": "www.rador.ro",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "http://encyclopedia.tfd.com/Tatars",
+        "domain": "encyclopedia.tfd.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://www.ziuaconstanta.ro/stiri/invitati/calatori-straini-prin-dobrogea-clxvii-5-camille-allard-franta-galerie-foto-648540.html",
+        "domain": "www.ziuaconstanta.ro",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://moldova-suverana.md/article/neamul-intre-ideologii-si-condiia-de-om-i_14404",
+        "domain": "moldova-suverana.md",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://historia.org.pl/2015/08/12/pakt-pilsudski-lenin-czyli-jak-polacy-uratowali-bolszewizm-i-zmarnowali-szanse-na-budowe-imperium-p-zychowicz-recenzja/comment-page-1/",
+        "domain": "historia.org.pl",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.rador.ro/2021/02/18/calendarul-evenimentelor-18-februarie-selectiuni-6/",
+        "domain": "www.rador.ro",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.ziarulnational.md/cazimir-tino-dodecalogul-romanilor-basarabeni/",
+        "domain": "www.ziarulnational.md",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://www.legitymizm.org/ukrainskie-swiaty-w-poszukiwaniu",
+        "domain": "www.legitymizm.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://tyzhden.ua/liubyty-vhlyb-podorozhni-notatky-z-podillia/",
+        "domain": "tyzhden.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2023
+      },
+      {
+        "url": "https://tyzhden.ua/liubyty-vhlyb-podorozhni-notatky-z-podillia/",
+        "domain": "tyzhden.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2023
+      },
+      {
+        "url": "https://tyzhden.ua/liubyty-vhlyb-podorozhni-notatky-z-podillia/",
+        "domain": "tyzhden.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2023
+      },
+      {
+        "url": "https://www.5.ua/regiony/yak-robin-hud-iz-podillia-duryv-tsarsku-systemu-shist-utech-ustyma-karmaliuka-226006.html",
+        "domain": "www.5.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://www.5.ua/regiony/yak-robin-hud-iz-podillia-duryv-tsarsku-systemu-shist-utech-ustyma-karmaliuka-226006.html",
+        "domain": "www.5.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://www.5.ua/regiony/yak-robin-hud-iz-podillia-duryv-tsarsku-systemu-shist-utech-ustyma-karmaliuka-226006.html",
+        "domain": "www.5.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/volyn-u-validolniy-seriyi-penalti-peremohla-podillia-ta-vyyshla-d/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/volyn-u-validolniy-seriyi-penalti-peremohla-podillia-ta-vyyshla-d/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/volyn-u-validolniy-seriyi-penalti-peremohla-podillia-ta-vyyshla-d/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/volyn-2-zihraye-debiutnyy-domashniy-poyedynok-proty-podillia-anons-matchu/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2021
+      }
+    ]
+  },
+  "23": {
+    "russian": "Borsch",
+    "ukrainian": "Borscht",
+    "total_articles": 778,
+    "russian_count": 424,
+    "ukrainian_count": 354,
+    "examples": [
+      {
+        "url": "http://filmmakermagazine.com/101893-dont-bring-your-business-card-to-borscht/",
+        "domain": "filmmakermagazine.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://filmmakermagazine.com/101893-dont-bring-your-business-card-to-borscht/",
+        "domain": "filmmakermagazine.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.counterpunch.org/2020/03/12/how-bernie-bros-were-invented-then-smeared-as-sexist-racist-and-unamerican-as-borscht/",
+        "domain": "www.counterpunch.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "https://www.counterpunch.org/2020/03/12/how-bernie-bros-were-invented-then-smeared-as-sexist-racist-and-unamerican-as-borscht/",
+        "domain": "www.counterpunch.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "https://japantoday.com/member/borscht",
+        "domain": "japantoday.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://japantoday.com/member/borscht",
+        "domain": "japantoday.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.theguardian.com/lifeandstyle/2016/jul/09/boris-fishman-russian-soup-soul-food-borscht",
+        "domain": "www.theguardian.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://www.theguardian.com/lifeandstyle/2016/jul/09/boris-fishman-russian-soup-soul-food-borscht",
+        "domain": "www.theguardian.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://ricochet.com/974449/where-have-you-gone-samuil-a-journey-through-identity-and-exile-with-vladislav-khodasevich-borscht-report-9-group-writing/",
+        "domain": "ricochet.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.aish.com/f/r/Borscht-The-Favorite-Jewish-Soup.html",
+        "domain": "www.aish.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "https://themoscowtimes.com/articles/spring-borshch-cooks-shoots-and-leaves-61486",
+        "domain": "themoscowtimes.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://telegraf.com.ua/ukr/recepty/2023-09-04/5807060-borshch-bude-krashchiy-nizh-u-mami-tri-nespodivani-ingredienti-zroblyat-stravu-shaleno-smachnoyu",
+        "domain": "telegraf.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2023
+      },
+      {
+        "url": "https://telegraf.com.ua/ukr/lifestyle/2023-05-28/5793348-ne-spishit-rozbavlyati-peresoleniy-chervoniy-borshch-vryatue-prosta-khitrist",
+        "domain": "telegraf.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2023
+      },
+      {
+        "url": "https://telegraf.com.ua/ukr/recepty/2023-09-04/5807060-borshch-bude-krashchiy-nizh-u-mami-tri-nespodivani-ingredienti-zroblyat-stravu-shaleno-smachnoyu",
+        "domain": "telegraf.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2023
+      },
+      {
+        "url": "https://www.lrt.lt/ru/novosti/17/2374260/kholodnyi-borshch-vyrastit-armiiu-poslushnykh-kak-propaganda-razrushaet-obrazovanie-v-rf",
+        "domain": "www.lrt.lt",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "http://www.volynnews.com/news/economics/u-lutsku-borshch-koshtuye-vzhe-mayzhe-100-hryven/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/borshch-za-35-hryven-skilky-koshtuvatymut-produkty-do-kintsia-2020-roku/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/borshch-za-35-hryven-skilky-koshtuvatymut-produkty-do-kintsia-2020-roku/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "https://glavred.info/recipes/10054148-borshch-ukrainskiy-s-myasom-ili-postnyy-kak-svarit-vkusnyy-borshch.html",
+        "domain": "glavred.info",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.volynnews.com/news/society/dorohyy-borshch-shcho-vplyvaye-na-vartist-ovochiv/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      }
+    ]
+  },
+  "38": {
+    "russian": "Chernigov",
+    "ukrainian": "Chernihiv",
+    "total_articles": 776,
+    "russian_count": 360,
+    "ukrainian_count": 416,
+    "examples": [
+      {
+        "url": "https://www.kommersant.ru:443/doc/5357023",
+        "domain": "www.kommersant.ru:443",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.kommersant.ru:443/doc/5357023",
+        "domain": "www.kommersant.ru:443",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.svoboda.org/a/bezhentsy-i-drugie-v-sssr-kniga-gulag-i-chehoslovakiya-voyna-/33362000.html",
+        "domain": "www.svoboda.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.svoboda.org/a/bezhentsy-i-drugie-v-sssr-kniga-gulag-i-chehoslovakiya-voyna-/33362000.html",
+        "domain": "www.svoboda.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://24tv.ua/ru/vojna-s-rossiej-poslednie-novosti-za-980-den-vojny-vrag-atakoval-shahedami-24-kanal_n2674362",
+        "domain": "24tv.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2024
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-81125-post-3367747.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-179844-post-3696480.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-19380-post-3629052.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-69120-post-3741103.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-177545-post-3684209.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://strana-rossia.blogspot.com/2015/04/blog-post_67.html",
+        "domain": "strana-rossia.blogspot.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "https://24tv.ua/ru/drg-vozle-chernigovskoj-oblasti-i-razval-rossii-intervju-s-mihailom-podoljakom-24-kanal_n2261639",
+        "domain": "24tv.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2023
+      },
+      {
+        "url": "https://24tv.ua/ru/drg-vozle-chernigovskoj-oblasti-i-razval-rossii-intervju-s-mihailom-podoljakom-24-kanal_n2261639",
+        "domain": "24tv.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2023
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/arkheolohichnyy-klondayk-shcho-vidkryly-vody-kakhovskoho-moria-ta-chym-tse-zahrozhuye/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "http://vgolos.com.ua/news/u_2016_rotsi_lyshe_pyat_z_362_habarnykiv_otrymaly_tyuremni_stroky_ta_y_z_tyh_odyn_vtik_252581.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://vgolos.com.ua/news/unikalna_znahidka_v_chernigovi_arheology_znayshly_pich_chasiv_kyivskoi_rusi_ta_koshtovnosti_275258.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://vgolos.com.ua/zhyttya/shhe-odna-religijna-gromada-odeshhyny-ogolosyla-pro-perehid-z-moskovskogo-patriarhatu-do-ukrayinskoyi-tserkvy_918303.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "http://vgolos.com.ua/news/u_2016_rotsi_lyshe_pyat_z_362_habarnykiv_otrymaly_tyuremni_stroky_ta_y_z_tyh_odyn_vtik_252581.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://vgolos.com.ua/news/unikalna_znahidka_v_chernigovi_arheology_znayshly_pich_chasiv_kyivskoi_rusi_ta_koshtovnosti_275258.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://vgolos.com.ua/zhyttya/shhe-odna-religijna-gromada-odeshhyny-ogolosyla-pro-perehid-z-moskovskogo-patriarhatu-do-ukrayinskoyi-tserkvy_918303.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      }
+    ]
+  },
+  "39": {
+    "russian": "Chernovtsy",
+    "ukrainian": "Chernivtsi",
+    "total_articles": 767,
+    "russian_count": 338,
+    "ukrainian_count": 429,
+    "examples": [
+      {
+        "url": "https://www.washingtonblade.com/2026/03/10/ukrainian-supreme-court-recognizes-same-sex-couple-as-a-family/",
+        "domain": "www.washingtonblade.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2026
+      },
+      {
+        "url": "https://www.washingtonblade.com/2026/03/10/ukrainian-supreme-court-recognizes-same-sex-couple-as-a-family/",
+        "domain": "www.washingtonblade.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2026
+      },
+      {
+        "url": "https://www.washingtonblade.com/2026/03/10/ukrainian-supreme-court-recognizes-same-sex-couple-as-a-family/",
+        "domain": "www.washingtonblade.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2026
+      },
+      {
+        "url": "https://bmmagazine.co.uk/business/tamaz-somkhishvili-one-mans-path-to-success/",
+        "domain": "bmmagazine.co.uk",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.svoboda.org/a/ya-umeyu-mir-ya-ne-umeyu-voynu-chernovtsy-kak-ubezhische-/32074263.html",
+        "domain": "www.svoboda.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.greanvillepost.com/2023/01/17/game-changing-russia/",
+        "domain": "www.greanvillepost.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "http://www.operatoday.com/content/2018/06/the_poignancy_o.php",
+        "domain": "www.operatoday.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://www.operatoday.com/content/2018/06/the_poignancy_o.php",
+        "domain": "www.operatoday.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://www.operatoday.com/content/2018/06/the_poignancy_o.php",
+        "domain": "www.operatoday.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.kyivpost.com/ukraine-politics/ukraines-covid-19-testing-capacity-is-behind-most-other-countries.html",
+        "domain": "www.kyivpost.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "https://www.tagesanzeiger.ch/ukraine-krieg-russland-ticker-wichtigste-news-live-65-833065232513",
+        "domain": "www.tagesanzeiger.ch",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "http://ziarulfaclia.ro/marius-nicoara-sa-nu-uitam-de-ziua-bucovinei/",
+        "domain": "ziarulfaclia.ro",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.tagesanzeiger.ch/ukraine-krieg-russland-ticker-wichtigste-news-live-65-833065232513",
+        "domain": "www.tagesanzeiger.ch",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.monitorfg.ro/2023/06/01/maresalul-ion-antonescu-a-fost-executat-la-jilava-la-1-iunie-1946-a-cerut-sa-fie-executat-de-militari-dar-a-fost-refuzat-iar-tie-popor-ingrat-nu-ti-va-ramane-nici-m",
+        "domain": "www.monitorfg.ro",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.monitorfg.ro/2023/06/01/maresalul-ion-antonescu-a-fost-executat-la-jilava-la-1-iunie-1946-a-cerut-sa-fie-executat-de-militari-dar-a-fost-refuzat-iar-tie-popor-ingrat-nu-ti-va-ramane-nici-m",
+        "domain": "www.monitorfg.ro",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://mig.com.ua/berdjansk-avtora-chervonoj-ruty/",
+        "domain": "mig.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "https://mig.com.ua/berdjansk-avtora-chervonoj-ruty/",
+        "domain": "mig.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "https://www.mywanderlust.pl/chernihiv-ukraine/",
+        "domain": "www.mywanderlust.pl",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "https://vgolos.com.ua/news/v-ukrayini-ogolosyly-nadzvychajnyj-riven-pozhezhnoyi-nebezpeky-u-dsns-nazvaly-oblasti-yaki-potrapyly-v-zonu-ryzyku_1285569.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "http://vgolos.com.ua/news/27_ukraintsiv_planuyut_vyihaty_z_ukrainy__opytuvannya_307410.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      }
+    ]
+  },
+  "40": {
+    "russian": "Zhitomir",
+    "ukrainian": "Zhytomyr",
+    "total_articles": 836,
+    "russian_count": 418,
+    "ukrainian_count": 418,
+    "examples": [
+      {
+        "url": "https://24tv.ua/ru/imperii-avakova-otkuda-nachalsja-politicheskij-put-eksglavy-mvd_n1737419",
+        "domain": "24tv.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2021
+      },
+      {
+        "url": "https://24tv.ua/ru/imperii-avakova-otkuda-nachalsja-politicheskij-put-eksglavy-mvd_n1737419",
+        "domain": "24tv.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2021
+      },
+      {
+        "url": "http://vgolos.com.ua/news/u_deyakyh_regionah_ukrainy_sogodni_doshchytyme_312006.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://vgolos.com.ua/articles/protezuvannya_voiniv_ato__v_ukraini_chy_za_kordonom_173979.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2015
+      },
+      {
+        "url": "http://vgolos.com.ua/news/u_deyakyh_regionah_ukrainy_sogodni_doshchytyme_312006.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-167677-post-3408406.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-32732-post-3394686.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-169820-post-3457085.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-97205-post-3819499.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-160004-post-3442728.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://www.lrt.lt/ru/novosti/17/1626903/blitskrig-ne-udalsia-khronika-rossiiskogo-napadeniia-na-ukrainu",
+        "domain": "www.lrt.lt",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://delo.ua/econonomyandpoliticsinukraine/inogda-esli-ne-vzharit-ne-rabotaet-glav-373328/",
+        "domain": "delo.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://delo.ua/econonomyandpoliticsinukraine/inogda-esli-ne-vzharit-ne-rabotaet-glav-373328/",
+        "domain": "delo.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://vgolos.com.ua/news/nazvano-visim-novyh-ochilnykiv-oda_1009274.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "http://vgolos.com.ua/news/znayshly_cholovika_yakyy_vbyv_20richnu_divchynu_328464.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://vgolos.com.ua/news/v-ukrayini-onovyly-epidemichne-zonuvannya-hto-potrapyv-u-chervonu-zonu-2_1327987.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://vgolos.com.ua/news/nazvano-visim-novyh-ochilnykiv-oda_1009274.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "http://vesti-ua.net/ukraina-kriminalnaya/29148-aferist-doktor-pi-i-ego-krysha-v-ukrainskom-politikume-yuschenko-stavniychuk-i-drugie.html",
+        "domain": "vesti-ua.net",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://vesti-ua.net/ukraina-kriminalnaya/29148-aferist-doktor-pi-i-ego-krysha-v-ukrainskom-politikume-yuschenko-stavniychuk-i-drugie.html",
+        "domain": "vesti-ua.net",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://kyiv.comments.ua/ua/article/interview/2022/10870-golovna-cil-rosii-zaraz---zlamati-opir-ukrani-ekspert-rozpoviv-yak-pracyue-rosiyska-dezinformaciyna-mashina-i-yak-mi-mozhemo-iy-protistoyati.ht",
+        "domain": "kyiv.comments.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2025
+      }
+    ]
+  },
+  "41": {
+    "russian": "Cherkassy",
+    "ukrainian": "Cherkasy",
+    "total_articles": 792,
+    "russian_count": 354,
+    "ukrainian_count": 438,
+    "examples": [
+      {
+        "url": "http://vgolos.com.ua/news/cherkashchyna_poterpaie_vid_lvivskogo_smittya__oblrada_zaklykaie_sadovogo_prypynyty_zabrudnennya_ukrainy_261817.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "https://www.minprom.ua/digest/255439.html",
+        "domain": "www.minprom.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "https://www.minprom.ua/digest/255439.html",
+        "domain": "www.minprom.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2019
+      },
+      {
+        "url": "http://minprom.ua/digest/196191.html",
+        "domain": "minprom.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2015
+      },
+      {
+        "url": "http://minprom.ua/digest/196191.html",
+        "domain": "minprom.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2015
+      },
+      {
+        "url": "https://ru.tsn.ua/tourism/levoberezhnaya-ukraina-10-neizvestnyh-mest-dlya-semeynogo-otdyha-na-rekah-i-ozerah-890343.html",
+        "domain": "ru.tsn.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://www.unn.com.ua/ru/exclusive/1578253-reyderstvo-gorilchanogo-zavodu-psuye-ukrayini-imidzh-investitsiyno-privablivoyi-krayini-nardep",
+        "domain": "www.unn.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://www.unn.com.ua/ru/news/1592114-netvereziy-vodiy-zbiv-nasmert-komunalnika-u-kiyevi",
+        "domain": "www.unn.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://www.unn.com.ua/ru/exclusive/1578253-reyderstvo-gorilchanogo-zavodu-psuye-ukrayini-imidzh-investitsiyno-privablivoyi-krayini-nardep",
+        "domain": "www.unn.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://www.unn.com.ua/ru/news/1592114-netvereziy-vodiy-zbiv-nasmert-komunalnika-u-kiyevi",
+        "domain": "www.unn.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "https://from-ua.com/articles/525867-2019-i-farsi-i-drami-uhodyaschego-goda.html",
+        "domain": "from-ua.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://www.apk-inform.com/ru/exclusive/topic/1062553",
+        "domain": "www.apk-inform.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://gazeta.ua/ru/articles/life/_pavel-vishebaba-posle-majdana-obrazovalsya-vakuum-kotoryj-nado-napolnit-novym-soderzhaniem/734393",
+        "domain": "gazeta.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://vgolos.com.ua/news/v_ukraini_cherez_negodu_zalyshayutsya_znestrumlenymy_390_naselenyh_punktiv__dsns_299350.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://vgolos.com.ua/news/u_mcdonalds_zyavylysya_ofitsianty_319217.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-19393-post-3346910.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-77227-post-3766034.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-74305-post-3715583.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-9941-post-3883959.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-93560-post-3866824.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      }
+    ]
+  },
+  "42": {
+    "russian": "Uzhgorod",
+    "ukrainian": "Uzhhorod",
+    "total_articles": 794,
+    "russian_count": 390,
+    "ukrainian_count": 404,
+    "examples": [
+      {
+        "url": "https://www.ukrinform.ua/rubric-culture/3128396-miroslav-docinec-pismennik.html",
+        "domain": "www.ukrinform.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://www.ukrinform.ua/rubric-culture/3128396-miroslav-docinec-pismennik.html",
+        "domain": "www.ukrinform.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "http://zakarpattya.net.ua/News/152206-Na-sluzhbi-u-Putina.-Uhorskyi-natsionalnyi-radykalizm-na-Zakarpatti.-Ch-II",
+        "domain": "zakarpattya.net.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://zakarpattya.net.ua/News/152206-Na-sluzhbi-u-Putina.-Uhorskyi-natsionalnyi-radykalizm-na-Zakarpatti.-Ch-II",
+        "domain": "zakarpattya.net.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://vgolos.com.ua/news/v_uzhgorodi_proyde_yuvileynyy_festyval_erotychnogo_mystetstva_bereznevi_koty_174606.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2015
+      },
+      {
+        "url": "http://www.volynnews.com/news/economics/sezonni-zarobitky-dlia-ukrayintsiv-de-kym-i-za-skilky/",
+        "domain": "www.volynnews.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://www.svoboda.org/a/ukraina-budet-boljshe-ukrainy-/32071326.html",
+        "domain": "www.svoboda.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://www.minprom.com.ua/news/229847.html",
+        "domain": "www.minprom.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://www.minprom.com.ua/news/229847.html",
+        "domain": "www.minprom.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2017
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-171866-post-3626000.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.cnn.com/europe/live-news/russia-ukraine-war-news-05-08-22/h_fb29a4dc3a21b53bbf97f5a657e081ee",
+        "domain": "www.cnn.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://www.kathmanduandbeyond.com/top-reasons-to-visit-ukraine/",
+        "domain": "www.kathmanduandbeyond.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://www.taz.de/Archiv-Suche/!5580571&s=nazi/",
+        "domain": "www.taz.de",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://www.taz.de/Archiv-Suche/!5580571&s=nazi/",
+        "domain": "www.taz.de",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.cnn.com/2024/05/19/europe/life-goes-on-in-kharkiv-cmd-intl/",
+        "domain": "www.cnn.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.osce.org/special-monitoring-mission-to-ukraine/379951",
+        "domain": "www.osce.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.osce.org/special-monitoring-mission-to-ukraine/379951",
+        "domain": "www.osce.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.yahoo.com/news/10-authors-shaping-contemporary-ukrainian-181845607.html",
+        "domain": "www.yahoo.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.kyivpost.com/ukraine-politics/honest-history-heat-hungary-transcarpathias-hungarian-past-set-tumultuous-present.html",
+        "domain": "www.kyivpost.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.kyivpost.com/ukraine-politics/honest-history-heat-hungary-transcarpathias-hungarian-past-set-tumultuous-present.html",
+        "domain": "www.kyivpost.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      }
+    ]
+  },
+  "43": {
+    "russian": "Kremenchug",
+    "ukrainian": "Kremenchuk",
+    "total_articles": 766,
+    "russian_count": 377,
+    "ukrainian_count": 389,
+    "examples": [
+      {
+        "url": "http://gordonua.com/specprojects/khoroshunova2.html",
+        "domain": "gordonua.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "https://texty.org.ua/d/maidan_maps/",
+        "domain": "texty.org.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://www.svoboda.org/a/vozhdj-tragikomediya-o-genrihe-peljhau/33672155.html",
+        "domain": "www.svoboda.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2026
+      },
+      {
+        "url": "http://zib.com.ua/ua/115982-vkks_virishit_chi_vidkrivati_disciplinarni_spravi_schodo_sud.html",
+        "domain": "zib.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2015
+      },
+      {
+        "url": "https://espreso.tv/ekonomika-investitsiyniy-bankir-sergiy-fursa-ukraina-mozhe-buti-mistkom-biznesu-dlya-kompaniy-yaki-khochut-pokrivati-yak-skhidnu-evropu-tak-i-kraini-snd-krim-rosii",
+        "domain": "espreso.tv",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "http://gordonua.com/specprojects/khoroshunova2.html",
+        "domain": "gordonua.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "https://texty.org.ua/d/maidan_maps/",
+        "domain": "texty.org.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://www.svoboda.org/a/vozhdj-tragikomediya-o-genrihe-peljhau/33672155.html",
+        "domain": "www.svoboda.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2026
+      },
+      {
+        "url": "http://vgolos.com.ua/news/u_vinnytsi_rozpochavsya_vseukrainskyy_futbolnyy_turnik_uchasnykiv_ato_311944.html",
+        "domain": "vgolos.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://www.dw.com/uk/zelenskyi-ssha-rozghliadaiut-propozytsiiu-staty-harantom-bezpeky-ukrainy/a-61337443",
+        "domain": "www.dw.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.hellenicshippingnews.com/refinery-news-roundup-maintenance-in-russia-continues-in-oct-to-wind-down-in-nov/",
+        "domain": "www.hellenicshippingnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.hellenicshippingnews.com/refinery-news-roundup-runs-rise-at-russian-plants-as-works-finish/",
+        "domain": "www.hellenicshippingnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.hellenicshippingnews.com/refinery-news-roundup-runs-rise-at-russian-plants-as-works-finish/",
+        "domain": "www.hellenicshippingnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://charter97.org/en/news/2022/3/11/458516/",
+        "domain": "charter97.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://charter97.org/en/news/2022/3/11/458516/",
+        "domain": "charter97.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://calgarysun.com/news/ukraine-war-displaced-permanent-future-calgary/wcm/929dacc4-42f3-4239-a0fe-4dbe0f86f45c",
+        "domain": "calgarysun.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.defenseone.com/threats/2023/11/todays-d-brief-biden-seeks-pause-gaza-ukraine-generals-grim-assessment-us-china-set-nuke-talks-usmcs-smith-stable-hospital-and-bit-more/391717/",
+        "domain": "www.defenseone.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.heraldmailmedia.com/news/nation/a-made-in-miami-money-laundering-saga-develops-even-deeper-ukraine-roots/article_902bc856-d695-59ee-b6c5-657bfb777577.html",
+        "domain": "www.heraldmailmedia.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://oilprice.com/Energy/Energy-General/Global-Intelligence-Report-10th-July-2019.html",
+        "domain": "oilprice.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.032.ua/news/1949103",
+        "domain": "www.032.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      }
+    ]
+  },
+  "44": {
+    "russian": "Kirovograd",
+    "ukrainian": "Kropyvnytskyi",
+    "total_articles": 649,
+    "russian_count": 413,
+    "ukrainian_count": 236,
+    "examples": [
+      {
+        "url": "https://sud.ua/ru/news/publication/127813-kto-pretenduet-v-antikorsud-i-verkhovnyy-sud-dose-kandidatov",
+        "domain": "sud.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://www.6262.com.ua/news/1969525",
+        "domain": "www.6262.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://www.6262.com.ua/news/1969525",
+        "domain": "www.6262.com.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-97205-post-3819030.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-22790-post-3797909.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://hi-fidelity-forum.com/forum/thread-169109-post-3460313.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-97205-post-3819030.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://hi-fidelity-forum.com/forum/thread-22790-post-3797909.html",
+        "domain": "hi-fidelity-forum.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://tsn.ua/ru/tourism/na-kryuchok-kuda-otpravlyatsya-na-rybalku-i-kakuyu-rybu-lovit-v-ukraine-1656233.html",
+        "domain": "tsn.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://lenta.ru/articles/2016/05/21/dnepr/",
+        "domain": "lenta.ru",
+        "variant": "russian",
+        "origin": "state_media",
+        "year": 2016
+      },
+      {
+        "url": "https://www.mediafax.ro/externe/razboiul-din-ucraina-ziua-1009-explozii-auzite-joi-dimineata-in-odesa-si-kropyvnytskyi-sua-indeamna-ucraina-sa-reduca-varsta-de-recrutare-la-18-ani-pe-fondul-lipsei-de-",
+        "domain": "www.mediafax.ro",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.5.ua/regiony/tse-naimenshe-shcho-my-mozhemo-zrobyty-kyivski-kulinary-pryvezly-poranenym-viiskovym-u-kropyvnytskyi-smakolyky-siuzhet-324913.html",
+        "domain": "www.5.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2024
+      },
+      {
+        "url": "https://giaoducthoidai.vn/mua-uav-doi-vao-can-cu-khong-quan-o-kropyvnytskyi-post723884.html",
+        "domain": "giaoducthoidai.vn",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://news.fidelityhouse.eu/esteri/ucraina-orfanotrofio-di-kropyvnytskyi-qui-si-nascondono-i-bimbi-orfani-per-sfuggire-alla-morte-540379.html",
+        "domain": "news.fidelityhouse.eu",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://news.fidelityhouse.eu/esteri/ucraina-orfanotrofio-di-kropyvnytskyi-qui-si-nascondono-i-bimbi-orfani-per-sfuggire-alla-morte-540379.html",
+        "domain": "news.fidelityhouse.eu",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://nikvesti.com/en/news/public/men-poltava-kropyvnytskyi-detained-selling-military-equipment-abroad-2024",
+        "domain": "nikvesti.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://nikvesti.com/en/news/public/men-poltava-kropyvnytskyi-detained-selling-military-equipment-abroad-2024",
+        "domain": "nikvesti.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://nikvesti.com/en/news/public/men-poltava-kropyvnytskyi-detained-selling-military-equipment-abroad-2024",
+        "domain": "nikvesti.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "http://ua.112.ua/mnenie/kirovohrad-pereimenuvaly-na-kropyvnytskyi-reaktsiia-sotsmerezh-324868.html",
+        "domain": "ua.112.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://ua.112.ua/mnenie/kirovohrad-pereimenuvaly-na-kropyvnytskyi-reaktsiia-sotsmerezh-324868.html",
+        "domain": "ua.112.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      }
+    ]
+  },
+  "45": {
+    "russian": "Ternopol",
+    "ukrainian": "Ternopil",
+    "total_articles": 761,
+    "russian_count": 364,
+    "ukrainian_count": 397,
+    "examples": [
+      {
+        "url": "http://aillarionov.livejournal.com/856648.html",
+        "domain": "aillarionov.livejournal.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Battle_of_Brody_(1941)",
+        "domain": "en.wikipedia.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://brewminate.com/enlightenment-jewish-style-the-haskalah-movement-18th-and-19th-century-europe/",
+        "domain": "brewminate.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.wsws.org/en/articles/2017/10/17/lec1-o17.html",
+        "domain": "www.wsws.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.theatlantic.com/magazine/archive/1917/11/kerensky-and-the-revolution/646615/",
+        "domain": "www.theatlantic.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://aillarionov.livejournal.com/856648.html",
+        "domain": "aillarionov.livejournal.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://johnbrownnotesandessays.blogspot.com/2016/01/metaphysical-doubts-concerning.html",
+        "domain": "johnbrownnotesandessays.blogspot.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://encyclopedia.tfd.com/Russian+Revolution",
+        "domain": "encyclopedia.tfd.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://www.wsws.org/en/articles/2017/10/17/lec1-o17.html",
+        "domain": "www.wsws.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://www.wsws.org/de/articles/2018/01/03/rure-j03.html",
+        "domain": "www.wsws.org",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.pravda.com.ua/rus/articles/2020/04/14/7247731/",
+        "domain": "www.pravda.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2020
+      },
+      {
+        "url": "https://www.thisiswiltshire.co.uk/news/national/23520462.live-loreen-wins-eurovision-song-contest-sweden/",
+        "domain": "www.thisiswiltshire.co.uk",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.thisiswiltshire.co.uk/news/national/23520462.live-loreen-wins-eurovision-song-contest-sweden/",
+        "domain": "www.thisiswiltshire.co.uk",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://24tv.ua/ru/togda-u-vseh-nas-vystupili-slezy-kakim-javljaetsja-rozhdestvo-v-semjah-zhurnalistov-24-kanala_n2971110",
+        "domain": "24tv.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2025
+      },
+      {
+        "url": "https://www.lepoint.fr/culture/theatre-quel-spectacle-reserver-ou-eviter-au-mois-de-mai-08-05-2025-2589114_3.php",
+        "domain": "www.lepoint.fr",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.volynnews.com/news/rest/vse-pochalosia-z-velosypediv-Rover-Band-u-lutsku/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.volynnews.com/news/rest/vse-pochalosia-z-velosypediv-Rover-Band-u-lutsku/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "http://kiev.vgorode.ua/news/sobytyia/286789-chto-dumauit-rodytely-heroev-nebesnoi-sotny-o-sytuatsyy-v-strane",
+        "domain": "kiev.vgorode.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://kiev.vgorode.ua/news/sobytyia/286789-chto-dumauit-rodytely-heroev-nebesnoi-sotny-o-sytuatsyy-v-strane",
+        "domain": "kiev.vgorode.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "https://lb.ua/society/2018/06/07/399706_yak_kiievi_shkoli_lusnuli.html",
+        "domain": "lb.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2018
+      }
+    ]
+  },
+  "46": {
+    "russian": "Vareniki",
+    "ukrainian": "Varenyky",
+    "total_articles": 770,
+    "russian_count": 370,
+    "ukrainian_count": 400,
+    "examples": [
+      {
+        "url": "https://washingtoncitypaper.com/article/518901/the-2021-food-issue-rolling-in-dough/",
+        "domain": "washingtoncitypaper.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://washingtoncitypaper.com/article/518901/the-2021-food-issue-rolling-in-dough/",
+        "domain": "washingtoncitypaper.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.rbth.com/russian-kitchen/334397-100-main-russian-dishes",
+        "domain": "www.rbth.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.rbth.com/russian-kitchen/334397-100-main-russian-dishes",
+        "domain": "www.rbth.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.rbth.com/russian-kitchen/334397-100-main-russian-dishes",
+        "domain": "www.rbth.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "http://washington.cbslocal.com/top-lists/best-pierogies-in-washington-dc/",
+        "domain": "washington.cbslocal.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://washington.cbslocal.com/top-lists/best-pierogies-in-washington-dc/",
+        "domain": "washington.cbslocal.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://www.huffingtonpost.com/entry/the-definitive-vegetarians-travel-guide-to-eating_us_59cd2f5ce4b0149549227e22",
+        "domain": "www.huffingtonpost.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2017
+      },
+      {
+        "url": "https://www.rbc.ua/rus/styler/vareniki-tse-nova-pasta-restorator-iz-neapolya-1747395211.html",
+        "domain": "www.rbc.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2025
+      },
+      {
+        "url": "http://www.gazeta.kg/news/important/112622-durnaya-moda-na-vareniki-proshla-darya-pynzar-udalyaet-guby.html",
+        "domain": "www.gazeta.kg",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://laopcion.com.mx/noticia/246104/varenyky-el-virus-que-te-graba-cuando-ves-pornografia-para-extorsionarte",
+        "domain": "laopcion.com.mx",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://laopcion.com.mx/noticia/246104/varenyky-el-virus-que-te-graba-cuando-ves-pornografia-para-extorsionarte",
+        "domain": "laopcion.com.mx",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "http://laopcion.com.mx/noticia/246104/varenyky-el-virus-que-te-graba-cuando-ves-pornografia-para-extorsionarte",
+        "domain": "laopcion.com.mx",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.ziarulprofit.ro/reteta-traditionala-ucraineana-varenyky-cu-cartofi-un-adevarat-deliciu-care-iti-va-incanta-papilele-gustative/",
+        "domain": "www.ziarulprofit.ro",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.ziarulprofit.ro/reteta-traditionala-ucraineana-varenyky-cu-cartofi-un-adevarat-deliciu-care-iti-va-incanta-papilele-gustative/",
+        "domain": "www.ziarulprofit.ro",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.ziarulprofit.ro/reteta-traditionala-ucraineana-varenyky-cu-cartofi-un-adevarat-deliciu-care-iti-va-incanta-papilele-gustative/",
+        "domain": "www.ziarulprofit.ro",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/rohy-do-korovaiu-hrechani-varenyky-shche-6-elementiv-popovnyly-perelik-n/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/rohy-do-korovaiu-hrechani-varenyky-shche-6-elementiv-popovnyly-perelik-n",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/rohy-do-korovaiu-hrechani-varenyky-shche-6-elementiv-popovnyly-perelik-n/",
+        "domain": "www.volynnews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.welivesecurity.com/la-es/2019/08/12/varenyky-spambot-graba-pantalla-victimas-extorsiona/",
+        "domain": "www.welivesecurity.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      }
+    ]
+  },
+  "54": {
+    "russian": "Babi Yar",
+    "ukrainian": "Babyn Yar",
+    "total_articles": 92,
+    "russian_count": 92,
+    "ukrainian_count": 0,
+    "examples": [
+      {
+        "url": "https://www.denverpost.com/2024/05/02/10-beautiful-things-art-summer-denver-boulder-lakewood-arvada/",
+        "domain": "www.denverpost.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.denverpost.com/2024/05/02/10-beautiful-things-art-summer-denver-boulder-lakewood-arvada/",
+        "domain": "www.denverpost.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://www.denverpost.com/2024/05/02/10-beautiful-things-art-summer-denver-boulder-lakewood-arvada/",
+        "domain": "www.denverpost.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      },
+      {
+        "url": "https://denvergazette.com/premium/denver-park-memorializes-wwii-ukraine-tragedy/article_a1368d5a-963e-11ec-bac9-9fa0100efbd9.html",
+        "domain": "denvergazette.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://denvergazette.com/news/local/denver-park-memorializes-wwii-ukraine-tragedy/article_a1368d5a-963e-11ec-bac9-9fa0100efbd9.html",
+        "domain": "denvergazette.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://denvergazette.com/news/local/denver-park-memorializes-wwii-ukraine-tragedy/article_a1368d5a-963e-11ec-bac9-9fa0100efbd9.html",
+        "domain": "denvergazette.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://denvergazette.com/premium/denver-park-memorializes-wwii-ukraine-tragedy/article_a1368d5a-963e-11ec-bac9-9fa0100efbd9.html",
+        "domain": "denvergazette.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://denvergazette.com/premium/denver-park-memorializes-wwii-ukraine-tragedy/article_a1368d5a-963e-11ec-bac9-9fa0100efbd9.html",
+        "domain": "denvergazette.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://denvergazette.com/news/local/denver-park-memorializes-wwii-ukraine-tragedy/article_a1368d5a-963e-11ec-bac9-9fa0100efbd9.html",
+        "domain": "denvergazette.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://coloradosun.com/2024/10/08/israel-october-7-opinion-silverman/",
+        "domain": "coloradosun.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2024
+      }
+    ]
+  },
+  "61": {
+    "russian": "Vladimir Zelensky",
+    "ukrainian": "Volodymyr Zelenskyy",
+    "total_articles": 810,
+    "russian_count": 432,
+    "ukrainian_count": 378,
+    "examples": [
+      {
+        "url": "https://www.ilmessaggero.it/mondo/ucraina_russia_diretta_news_guerra_morti_donne_4_aprile_2022_bucha_cadaveri_odessa_missili_zelensky_putin-6606940.html",
+        "domain": "www.ilmessaggero.it",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://kp.ua/culture/561633-vladymyr-zelenskyi-yz-za-shutok-ochen-perezhyvauit-nashy-rodytely-prykhodytsia-uspokayvat",
+        "domain": "kp.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://kp.ua/culture/561633-vladymyr-zelenskyi-yz-za-shutok-ochen-perezhyvauit-nashy-rodytely-prykhodytsia-uspokayvat",
+        "domain": "kp.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "https://www.stokesentinel.co.uk/news/uk-world-news/president-zelensky-condemns-concentrated-evil-6901149",
+        "domain": "www.stokesentinel.co.uk",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.stokesentinel.co.uk/news/uk-world-news/president-zelensky-condemns-concentrated-evil-6901149",
+        "domain": "www.stokesentinel.co.uk",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "http://kp.ua/politics/523497-y-pust-zelenskyi-zaplachet-nad-svoym-skuchnym-shou",
+        "domain": "kp.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2015
+      },
+      {
+        "url": "http://kp.ua/politics/523497-y-pust-zelenskyi-zaplachet-nad-svoym-skuchnym-shou",
+        "domain": "kp.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2015
+      },
+      {
+        "url": "https://acento.com.do/bbc-news-mundo/putin-dice-que-el-plan-de-tregua-en-ucrania-debe-llevar-a-una-paz-duradera-pero-zelensky-cree-que-rusia-quiere-continuar-con-la-guerra-9469486.html",
+        "domain": "acento.com.do",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://plo.vn/chien-su-nga-ukraine-6-1-giao-tranh-manh-o-kursk-ong-zelensky-de-nghi-ong-trump-dung-300-ti-usd-bi-dong-bang-cua-nga-mua-vu-khi-my-post828662.html",
+        "domain": "plo.vn",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2025
+      },
+      {
+        "url": "https://www.newsweek.com/zelenska-zelensky-ukraine-russia-paris-france-shopping-spree-1768736",
+        "domain": "www.newsweek.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://spravy.pravda.sk/svet/clanok/635214-online-zelenskyj-sa-chysta-pomoct-europe-vyvozom-elektriny/",
+        "domain": "spravy.pravda.sk",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://espreso.tv/article/2019/12/17/putin_tyknuv_zelenskogo_nosom_v_minski_domovlenosti_i_skazav_quotchytay_punkt_9quot_zelenskyy_mav_ne_poboyatys_skazaty_scho_ukrayina_ne_pidpyshe_komyunike",
+        "domain": "espreso.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      },
+      {
+        "url": "https://www.atlanticcouncil.org/blogs/ukrainealert/walking-a-tight-rope-one-year-of-zelenskyys-foreign-policy/",
+        "domain": "www.atlanticcouncil.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "https://www.atlanticcouncil.org/blogs/ukrainealert/walking-a-tight-rope-one-year-of-zelenskyys-foreign-policy/",
+        "domain": "www.atlanticcouncil.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2020
+      },
+      {
+        "url": "https://www.nbcchicago.com/news/business/money-report/ukraine-war-live-updates-massive-overnight-strikes-by-iranian-drones-hit-kyiv-zelenskyy-welcomes-good-result-from-nato-summit/3185636/",
+        "domain": "www.nbcchicago.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "http://vgolos.com.ua/news/zelenskyy_ukraina_nagaduie_aktrysu_z_nimetskogo_filmu_dlya_doroslyh_226817.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://vgolos.com.ua/news/zelenskyy_i_ukrainapornoaktrysa_yak_na_tse_reaguvaty_226883.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://vgolos.com.ua/news/zelenskyy_zayavyv_shcho_leshchenko_vynen_95_kvartalu_mogorych_227456.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://vgolos.com.ua/news/zelenskyy_poprosyv_u_derzhkino_14_mln_gryven_dlya_svogo_kinoshedevru__gerasymyuk_226904.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2016
+      },
+      {
+        "url": "http://vgolos.com.ua/news/zelenskyy_zdyvuvav_akrobatychnym_tryukom_foto_254748.html",
+        "domain": "vgolos.com.ua",
+        "variant": "ukrainian",
+        "origin": "ukrainian",
+        "year": 2017
+      }
+    ]
+  },
+  "70": {
+    "russian": "Vladimir the Great",
+    "ukrainian": "Volodymyr the Great",
+    "total_articles": 75,
+    "russian_count": 56,
+    "ukrainian_count": 19,
+    "examples": [
+      {
+        "url": "https://www.stltoday.com/opinion/columnists/national/eugene-robinson-trump-s-kowtowing-only-strengthens-vladimir-the-great/article_56ece5f8-6669-557e-b84f-02335c48a5d7.html",
+        "domain": "www.stltoday.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.stltoday.com/opinion/columnists/national/eugene-robinson-trump-s-kowtowing-only-strengthens-vladimir-the-great/article_56ece5f8-6669-557e-b84f-02335c48a5d7.html",
+        "domain": "www.stltoday.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.stltoday.com/opinion/columnists/national/eugene-robinson-trump-s-kowtowing-only-strengthens-vladimir-the-great/article_56ece5f8-6669-557e-b84f-02335c48a5d7.html",
+        "domain": "www.stltoday.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.thetimes.co.uk/edition/ireland/corinna-hardgrave-vladimir-the-great-cooks-up-a-revolution-bv70qm0vw",
+        "domain": "www.thetimes.co.uk",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.thetimes.co.uk/edition/ireland/corinna-hardgrave-vladimir-the-great-cooks-up-a-revolution-bv70qm0vw",
+        "domain": "www.thetimes.co.uk",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.thetimes.co.uk/edition/ireland/corinna-hardgrave-vladimir-the-great-cooks-up-a-revolution-bv70qm0vw",
+        "domain": "www.thetimes.co.uk",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://uatoday.tv/society/russian-deputies-dispute-ancestry-of-historical-figure-vladimir-the-great-413935.html",
+        "domain": "uatoday.tv",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://uatoday.tv/society/russian-deputies-dispute-ancestry-of-historical-figure-vladimir-the-great-413935.html",
+        "domain": "uatoday.tv",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://uatoday.tv/society/russian-deputies-dispute-ancestry-of-historical-figure-vladimir-the-great-413935.html",
+        "domain": "uatoday.tv",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://www.theguardian.com/cities/2015/jun/11/moscow-vladimir-the-great-statue-public-outcry",
+        "domain": "www.theguardian.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://uatoday.tv/society/new-kyiv-s-prince-volodymyr-the-great-coin-appears-in-ukraine-462407.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://uatoday.tv/society/palace-of-prince-volodymyr-the-great-found-in-central-kyiv-650504.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://uatoday.tv/society/new-kyiv-s-prince-volodymyr-the-great-coin-appears-in-ukraine-462407.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://uatoday.tv/society/palace-of-prince-volodymyr-the-great-found-in-central-kyiv-650504.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://uatoday.tv/society/new-kyiv-s-prince-volodymyr-the-great-coin-appears-in-ukraine-462407.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2015
+      },
+      {
+        "url": "http://uatoday.tv/society/palace-of-prince-volodymyr-the-great-found-in-central-kyiv-650504.html",
+        "domain": "uatoday.tv",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2016
+      },
+      {
+        "url": "http://www.360cities.net/image/volodymyr-the-great-monument-1",
+        "domain": "www.360cities.net",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://www.360cities.net/image/volodymyr-the-great-monument-1",
+        "domain": "www.360cities.net",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://www.360cities.net/image/volodymyr-the-great-monument-1",
+        "domain": "www.360cities.net",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://www.kyivpost.com/ukraine-politics/ukraine-to-resume-building-volodymyr-the-great-corvette.html",
+        "domain": "www.kyivpost.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2019
+      }
+    ]
+  },
+  "72": {
+    "russian": "Artemovsk",
+    "ukrainian": "Bakhmut",
+    "total_articles": 616,
+    "russian_count": 200,
+    "ukrainian_count": 416,
+    "examples": [
+      {
+        "url": "http://society.lb.ua/war/2015/08/07/312929_mer_artemovska_pri_dnr_gruzili.html",
+        "domain": "society.lb.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2015
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/u-lutsku-na-hulaka-artemovskoho-z-derev-zrizaly-koru/",
+        "domain": "www.volynnews.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/u-lutsku-na-hulaka-artemovskoho-z-derev-zrizaly-koru/",
+        "domain": "www.volynnews.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://www.volynnews.com/news/all/u-lutsku-na-hulaka-artemovskoho-z-derev-zrizaly-koru/",
+        "domain": "www.volynnews.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2021
+      },
+      {
+        "url": "https://espreso.tv/kultura-chomu-yogo-bayki-ne-stariyut-236-rokiv-vid-dnya-narodzhennya-petra-gulaka-artemovskogo",
+        "domain": "espreso.tv",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2026
+      },
+      {
+        "url": "https://gazeta.ua/ru/articles/history-newspaper/_solist-peterburzhskoj-opery-semen-gulakartemovskij-obschalsya-na-ukrainskom-yazyke/831500",
+        "domain": "gazeta.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://gazeta.ua/articles/history-newspaper/_solist-peterburzkoyi-operi-semen-gulakartemovskij-spilkuvavsya-ukrayinskoyu-movoyu/831500",
+        "domain": "gazeta.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "https://gazeta.ua/articles/history-newspaper/_solist-peterburzkoyi-operi-semen-gulakartemovskij-spilkuvavsya-ukrayinskoyu-movoyu/831500",
+        "domain": "gazeta.ua",
+        "variant": "russian",
+        "origin": "ukrainian",
+        "year": 2018
+      },
+      {
+        "url": "http://themoderatevoice.com/trumps-kowtowing-only-strengthens-vladimir-the-great/",
+        "domain": "themoderatevoice.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "http://themoderatevoice.com/trumps-kowtowing-only-strengthens-vladimir-the-great/",
+        "domain": "themoderatevoice.com",
+        "variant": "russian",
+        "origin": "international",
+        "year": 2018
+      },
+      {
+        "url": "https://arabic.euronews.com/2023/05/27/ukraine-russia-war-nuclear-weapons-putin-belarus-e-u-donetsk-bakhmut",
+        "domain": "arabic.euronews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://arabic.euronews.com/2023/05/27/ukraine-russia-war-nuclear-weapons-putin-belarus-e-u-donetsk-bakhmut",
+        "domain": "arabic.euronews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.nbclosangeles.com/news/business/money-report/ukraine-war-live-updates-bakhmut-is-a-slaughter-fest-for-russians-top-general-says-moscow-could-seek-new-army-recruits/3125425/",
+        "domain": "www.nbclosangeles.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.nbclosangeles.com/news/business/money-report/ukraine-war-live-updates-bakhmut-is-a-slaughter-fest-for-russians-top-general-says-moscow-could-seek-new-army-recruits/3125425/",
+        "domain": "www.nbclosangeles.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://www.wxxinews.org/npr-news/npr-news/2023-03-05/meet-the-volunteers-bringing-relief-to-the-residents-of-embattled-bakhmut-ukraine",
+        "domain": "www.wxxinews.org",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://dantri.com.vn/the-gioi/chien-su-ukraine-1412-quan-kiev-lien-tiep-rut-lui-o-bakhmut-va-avdiivka-20231214103153130.htm",
+        "domain": "dantri.com.vn",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "http://arabic.euronews.com/2022/12/20/ukraine-invasion-russia-putin-lukashenko-donbas-bakhmut-kyiv-energy-gas-prices-cap-eu",
+        "domain": "arabic.euronews.com",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://danviet.vn/thu-linh-wagner-tuyen-bo-bao-vay-hoan-toan-bakhmut-keu-goi-tong-thong-ukraine-rut-quan-20230303203010797.htm",
+        "domain": "danviet.vn",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      },
+      {
+        "url": "https://danviet.vn/tran-chien-gianh-bakhmut-co-the-la-cuoc-chien-tan-khoc-dam-mau-nhat-o-ukraine-20221201155308947.htm",
+        "domain": "danviet.vn",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2022
+      },
+      {
+        "url": "https://www.ilmessaggero.it/mondo/guerra_ucraina_russia_putin_wagner_bakhmut_diretta_oggi_cosa_sta_succedendo-7284825.html",
+        "domain": "www.ilmessaggero.it",
+        "variant": "ukrainian",
+        "origin": "international",
+        "year": 2023
+      }
+    ]
+  }
+}
