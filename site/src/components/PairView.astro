@@ -1,0 +1,118 @@
+---
+/**
+ * Pair detail view — shown when a pair is selected from the sidebar.
+ * All content is rendered dynamically by client-side JS via element IDs.
+ * This component provides the HTML skeleton only.
+ */
+interface Props {
+  llmTraj: any;
+  llmPerPair: any;
+  toolsPerPair: any;
+  religious: any;
+}
+
+const { llmTraj, llmPerPair, toolsPerPair, religious } = Astro.props;
+const nModels = llmTraj?.summary?.n_models || 72;
+const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
+---
+
+<div id="pair-view" style="display:none;">
+
+<!-- Main time-series chart -->
+<div class="chart-container">
+  <div class="chart-header" style="flex-direction:column; align-items:stretch; gap:0.3rem;">
+    <div style="display:flex; align-items:baseline; gap:0.5rem; flex-wrap:wrap;">
+      <div class="chart-title" style="margin:0; white-space:nowrap;">
+        <span class="old-name" id="chart-old">Kiev</span>
+        <span class="arrow">→</span>
+        <span class="new-name" id="chart-new">Kyiv</span>
+      </div>
+      <span id="chart-range" style="font-size:0.72rem; color:var(--text-muted);"></span>
+      <span id="chart-info" style="font-size:0.68rem; color:var(--text-dim); font-style:italic;"></span>
+      <span id="chart-adoption-formula" style="font-size:0.68rem; color:var(--text-dim);"></span>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.4rem;">
+      <div class="chart-controls" style="margin:0;">
+        <button class="source-toggle active" data-source="gdelt" style="--source-color: #1e3a5f"><span class="source-dot"></span>GDELT</button>
+        <button class="source-toggle" data-source="trends" style="--source-color: #4285F4"><span class="source-dot"></span>Trends</button>
+        <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466"><span class="source-dot"></span>Wiki</button>
+        <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500"><span class="source-dot"></span>Reddit</button>
+        <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000"><span class="source-dot"></span>YouTube</button>
+        <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed"><span class="source-dot"></span>Ngrams</button>
+        <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4"><span class="source-dot"></span>Academic</button>
+        <button class="source-toggle" data-source="openlibrary" style="--source-color: #059669"><span class="source-dot"></span>Books</button>
+      </div>
+      <div class="chart-controls" style="margin:0;">
+        <button class="chart-mode active" data-chart="volume" id="volume-btn">Volume</button>
+        <button class="chart-mode" data-chart="adoption">Adoption %</button>
+        <span class="toggle-sep"></span>
+        <button class="line-mode active" data-mode="both">All</button>
+        <button class="line-mode" data-mode="ukrainian">UA</button>
+        <button class="line-mode" data-mode="russian">RU</button>
+        <span class="toggle-sep"></span>
+        <button class="event-toggle active" id="events-toggle">Events</button>
+      </div>
+    </div>
+  </div>
+  <div id="chart"></div>
+  <div class="chart-legend" id="chart-legend"></div>
+</div>
+
+<!-- Per-pair source stats -->
+<div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(8, 1fr); margin-bottom: 0.75rem;"></div>
+
+<!-- CL: Context + Collocations -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
+  <div class="chart-container" id="pair-cl-context" style="margin-bottom:0;">
+    <div class="chart-title" style="color: var(--text)">Discourse Context</div>
+    <div class="chart-subtitle" style="margin-bottom:0.5rem;">Distribution across discourse domains for each spelling variant</div>
+    <div id="pair-cl-body"></div>
+  </div>
+  <div class="chart-container" id="pair-cl-collocations" style="margin-bottom:0;">
+    <div class="chart-title" style="color: var(--text)">Collocations</div>
+    <div class="chart-subtitle" style="margin-bottom:0.5rem;">Top co-occurring words reveal different discourse worlds</div>
+    <div id="pair-cl-coll-body"></div>
+  </div>
+</div>
+
+<!-- Adoption + Reference -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+  <div id="adoption-calc" class="chart-container" style="margin-bottom:0;">
+    <div class="chart-title" style="color: var(--text)">Adoption Calculation — <span id="adoption-pct-title"></span></div>
+    <div class="chart-subtitle" style="margin-bottom:0.5rem;">Mean of per-source UA/(UA+RU) ratios, last 12 months</div>
+    <div id="adoption-calc-body" style="font-size:0.75rem; color:var(--text-muted); line-height:1.6;"></div>
+  </div>
+  <div class="chart-container" id="dict-container" style="margin-bottom:0; padding:0.75rem 1rem;">
+    <div class="chart-title" style="color: var(--text)">Reference Audit</div>
+    <div class="chart-subtitle" style="margin-bottom:0.5rem;">Dictionary and encyclopedia entries for each spelling form</div>
+    <div id="search-preview"></div>
+    <script type="application/json" id="tools-per-pair-data" set:html={JSON.stringify(toolsPerPair)} />
+  </div>
+</div>
+
+<!-- Source Comparison + Religious -->
+<div id="comparison-row" class="resp-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
+  <div class="chart-container" style="margin-bottom:0;">
+    <div class="chart-title" style="color: var(--text)">Source Comparison</div>
+    <div class="chart-subtitle" style="margin-bottom:0.5rem;">Adoption rate per data source for this pair</div>
+    <div id="pair-source-chart" style="width:100%;"></div>
+  </div>
+  <div class="chart-container" id="pair-religious-container" style="margin-bottom:0;">
+    <div class="chart-title" style="color: var(--text)">Religious Institutions</div>
+    <div class="chart-subtitle" style="margin-bottom:0.5rem;">How major religious bodies refer to this pair in English</div>
+    <div id="pair-religious-body"></div>
+    <script type="application/json" id="religious-per-pair-data" set:html={JSON.stringify(religious)} />
+  </div>
+</div>
+
+<!-- Per-pair AI / LLM scan -->
+<div class="chart-container" id="pair-llm-container" style="margin-bottom:1rem;">
+  <div class="chart-title" style="color: var(--text)">What AI says about <span id="pair-llm-pair-name">this pair</span></div>
+  <div class="chart-subtitle" style="margin-bottom:0.5rem;" id="pair-llm-subtitle">
+    {nModels} LLMs from {nLabs} labs, 3 prompt variants each — what they answer for this specific pair.
+  </div>
+  <div id="pair-llm-body"></div>
+  <script type="application/json" id="llm-per-pair-data" set:html={JSON.stringify(llmPerPair)} />
+</div>
+
+</div><!-- end pair-view -->
