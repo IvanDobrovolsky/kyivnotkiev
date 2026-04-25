@@ -48,11 +48,11 @@ function formatNum(n: number) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>#KyivNotKiev: A Large-Scale Computational Study of Ukrainian Toponym Adoption</title>
-  <meta name="description" content="Scanning 90B+ records, analyzing 628M+ toponym matches across 8 sources. The largest computational study of Ukrainian spelling adoption.">
+  <meta name="description" content="Scanning 90B+ records, analyzing 614M+ toponym matches across 8 sources. The largest computational study of Ukrainian spelling adoption.">
 
   <!-- Open Graph -->
   <meta property="og:title" content="#KyivNotKiev: A Large-Scale Computational Study of Ukrainian Toponym Adoption">
-  <meta property="og:description" content="90B+ records scanned, 628M+ toponym matches, 42K ML-analyzed texts. The largest computational study of Ukrainian spelling adoption.">
+  <meta property="og:description" content="90B+ records scanned, 614M+ toponym matches, 42K ML-analyzed texts. The largest computational study of Ukrainian spelling adoption.">
   <meta property="og:image" content="https://kyivnotkiev.org/og.png">
   <meta property="og:url" content="https://kyivnotkiev.org">
   <meta property="og:type" content="website">
@@ -62,7 +62,7 @@ function formatNum(n: number) {
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="#KyivNotKiev: A Large-Scale Computational Study of Ukrainian Toponym Adoption">
-  <meta name="twitter:description" content="90B+ scanned, 628M+ matches, 42K ML texts. Largest Ukrainian spelling adoption study.">
+  <meta name="twitter:description" content="90B+ scanned, 614M+ matches, 42K ML texts. Largest Ukrainian spelling adoption study.">
   <meta name="twitter:image" content="https://kyivnotkiev.org/og.png">
 
   <!-- Favicon -->
@@ -309,7 +309,7 @@ function formatNum(n: number) {
         </div>
         <div class="chart-container" id="cl-benchmark" style="margin-bottom:0;">
           <div class="chart-title" style="color: var(--text)">Encoder Benchmark</div>
-          <div class="chart-subtitle" style="margin-bottom: 0.5rem;">3 models trained on Claude Haiku 4.5 annotations, 36,791 texts, 11 categories</div>
+          <div class="chart-subtitle" id="benchmark-subtitle" style="margin-bottom: 0.5rem;"></div>
           <div id="cl-benchmark-table"></div>
         </div>
       </div>
@@ -3053,6 +3053,15 @@ function formatNum(n: number) {
       const cl = clAnalysis as any;
       if (!cl.benchmark || Object.keys(cl.benchmark).length === 0) return;
 
+      // Dynamic subtitle from data
+      const benchSub = document.getElementById('benchmark-subtitle');
+      if (benchSub) {
+        const nModels = Object.keys(cl.benchmark).length;
+        const nClasses = Object.keys(cl.context_distribution?.[Object.keys(cl.context_distribution)[0]]?.russian || {}).length || 11;
+        const corpusSize = (manifest as any).cl_corpus || 0;
+        benchSub.textContent = `${nModels} models trained on Claude Haiku 4.5 annotations, ${corpusSize.toLocaleString()} texts, ${nClasses} categories`;
+      }
+
       // Read model list directly from the benchmark data, not hardcoded.
       // Sort by f1_macro descending so the best model is at the top.
       // Display name and metadata are derived from the JSON key.
@@ -3144,7 +3153,7 @@ function formatNum(n: number) {
         .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af').text(`Predicted (DeBERTa-v3-large) — F1=${((confusionMatrix as any).f1_macro || 0).toFixed(3)}`);
       svg.append('text').attr('x', 8).attr('y', padT + n*cell/2)
         .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af')
-        .attr('transform', `rotate(-90,8,${padT + n*cell/2})`).text('True (Gemini)');
+        .attr('transform', `rotate(-90,8,${padT + n*cell/2})`).text('True (Haiku)');
 
       // Headers
       labels.forEach((l: string, j: number) => {
