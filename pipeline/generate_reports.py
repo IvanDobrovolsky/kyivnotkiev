@@ -368,6 +368,19 @@ def generate_analysis_text(pair, ts_data, llm_summary, coll_data, religious_data
     return "\n  ".join(paragraphs)
 
 
+def _build_findings_section(pid, pair_findings):
+    """Build Research Findings section from curated per-pair notes."""
+    if not pair_findings:
+        return ""
+    finding = pair_findings.get(str(pid))
+    if not finding:
+        return ""
+    return f'''<h2 id="findings">Research Findings</h2>
+<div style="background:#f8f9fb;border-radius:8px;padding:1rem 1.25rem;border-left:3px solid #0057B8;margin-bottom:1rem;">
+  <p style="color:#374151;font-size:0.85rem;line-height:1.7;margin:0;">{finding}</p>
+</div>'''
+
+
 def _build_evidence_section(pid, ru, ua, article_examples):
     """Build Source Evidence section with actual article URLs."""
     if not article_examples:
@@ -411,7 +424,7 @@ def _build_evidence_section(pid, ru, ua, article_examples):
     return html
 
 
-def generate_report(pair, timeseries, llm_data, collocations, religious_data, pair_events_data, stats, ctx_distributions, cm_svg, chart_annotations, all_pairs, article_examples=None):
+def generate_report(pair, timeseries, llm_data, collocations, religious_data, pair_events_data, stats, ctx_distributions, cm_svg, chart_annotations, all_pairs, article_examples=None, pair_findings=None):
     pid = pair["id"]
     ru, ua = pair["russian"], pair["ukrainian"]
     cat = pair["category"]
@@ -684,6 +697,8 @@ def generate_report(pair, timeseries, llm_data, collocations, religious_data, pa
         toc.append('<a href="#religious">Religious</a>')
     if article_examples and str(pid) in (article_examples or {}):
         toc.append('<a href="#evidence">Source Evidence</a>')
+    if pair_findings and str(pid) in (pair_findings or {}):
+        toc.append('<a href="#findings">Research Findings</a>')
     toc.append('<a href="#refs">References</a>')
 
     # ---- Human-friendly TAS label ----
@@ -790,6 +805,8 @@ td{{padding:0.6rem;border-bottom:1px solid #f3f4f6}}
 
 {_build_evidence_section(pid, ru, ua, article_examples)}
 
+{_build_findings_section(pid, pair_findings)}
+
 <h2 id="refs">References & Methodology</h2>
 <div class="ref-section">
   <h3>Key Events</h3>
@@ -851,6 +868,10 @@ def main():
         article_examples = load_json("article_examples.json")
     except Exception:
         article_examples = {}
+    try:
+        pair_findings = load_json("pair_findings.json")
+    except Exception:
+        pair_findings = {}
 
     all_pairs = manifest["pairs"]
 
@@ -869,7 +890,7 @@ def main():
         out_file = OUT / f"pair-{pid}.html"
         html = generate_report(
             pair, timeseries, llm_per_pair, collocations,
-            religious, pair_events, stats, ctx_distributions, cm_svg, chart_annotations, all_pairs, article_examples
+            religious, pair_events, stats, ctx_distributions, cm_svg, chart_annotations, all_pairs, article_examples, pair_findings
         )
         out_file.write_text(html)
         size_kb = len(html) / 1024
