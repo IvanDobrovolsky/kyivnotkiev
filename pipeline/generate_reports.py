@@ -552,7 +552,7 @@ def generate_report(pair, timeseries, llm_data, collocations, religious_data, pa
     if ctx_rows:
         ctx_html = f'''<div class="card">
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Context Distribution</div>
-  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">XLM-RoBERTa-large · F1=83.8% · {coll_label}</p>
+  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">DeBERTa-v3-large · F1=85.7% · {coll_label}</p>
 {"".join(ctx_rows)}
 </div>'''
 
@@ -709,7 +709,7 @@ def generate_report(pair, timeseries, llm_data, collocations, religious_data, pa
         stat_lines.append(f'<li>Bootstrap CI: <strong>{ci_point:.2f}%</strong> (95% CI [{ci_lo:.2f}, {ci_hi:.2f}]), n = {fmt_number(ci_n)}</li>')
     if tas > 0:
         stat_lines.append(f'<li>Toponymic Alignment Score: {tas:.1f}% across {n_models} models</li>')
-    stat_lines.append('<li>CL classifier: <a href="https://huggingface.co/KyivNotKiev/toponym-context-classifier">XLM-RoBERTa-large</a>, F1=83.8%, 11 categories, 42,613 texts</li>')
+    stat_lines.append('<li>CL classifier: <a href="https://huggingface.co/KyivNotKiev/toponym-context-classifier">DeBERTa-v3-large</a>, F1=85.7%, 11 categories, 80,141 texts</li>')
 
     html = f'''<!DOCTYPE html>
 <html lang="en">
