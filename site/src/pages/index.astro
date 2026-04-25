@@ -2611,9 +2611,9 @@ function formatNum(n: number) {
         card.append('div').style('font-size', '0.6rem').style('color', 'var(--text-muted)')
           .style('margin-bottom', '0.5rem').text(pair.label);
 
-        // Tag clouds side by side
-        for (const [variant, color, label] of [['russian', '#dc2626', 'RU'], ['ukrainian', '#2563eb', 'UA']] as const) {
-          const words = pairData[variant]?.collocates?.slice(0, 6) || [];
+        // Contrastive words side by side
+        for (const [variant, color, label] of [['russian', '#dc2626', 'RU-distinctive'], ['ukrainian', '#2563eb', 'UA-distinctive']] as const) {
+          const words = pairData[variant]?.collocates?.slice(0, 5) || [];
           if (!words.length) {
             const row = card.append('div').style('margin-bottom', '0.35rem');
             row.append('span').style('font-size', '0.55rem').style('color', color)
@@ -2624,8 +2624,6 @@ function formatNum(n: number) {
             continue;
           }
 
-          const maxCount = Math.max(...words.map((w: any) => w.count));
-
           const row = card.append('div').style('margin-bottom', '0.35rem');
           row.append('span').style('font-size', '0.55rem').style('color', color)
             .style('font-weight', '700').style('text-transform', 'uppercase')
@@ -2633,13 +2631,12 @@ function formatNum(n: number) {
 
           const tags = row.append('span').style('line-height', '1.8');
           words.forEach((w: any, i: number) => {
-            const size = 0.7 + (w.count / maxCount) * 0.35;
-            const weight = i < 2 ? '700' : '500';
+            const weight = i < 2 ? '700' : '400';
             tags.append('span')
-              .style('font-size', `${size}rem`)
+              .style('font-size', '0.72rem')
               .style('color', color)
               .style('font-weight', weight)
-              .style('margin-right', '0.35rem')
+              .style('margin-right', '0.3rem')
               .style('white-space', 'nowrap')
               .text(w.word);
           });
@@ -2732,16 +2729,22 @@ function formatNum(n: number) {
         ctxContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.75rem;">No context data</div>';
       }
 
-      // Right: collocations — more words, tag cloud
+      // Right: contrastive analysis (log-odds ratio, Monroe et al. 2008)
       if (collContainer && coll) {
         const right = d3.select(collContainer);
+        const method = coll.method === 'log_odds_ratio_dirichlet' ? 'Log-odds ratio (z-score)' : 'Contrastive';
+        right.append('div').style('font-size', '0.55rem').style('color', 'var(--text-dim)')
+          .style('margin-bottom', '0.5rem').text(method);
 
-        for (const [variant, color, label] of [['russian', '#dc2626', 'Russian form'], ['ukrainian', '#2563eb', 'Ukrainian form']] as const) {
-          const words = coll[variant]?.collocates?.slice(0, 12) || [];
-          const section = right.append('div').style('margin-bottom', '0.6rem');
+        for (const [variant, color, label, sign] of [
+          ['russian', '#dc2626', 'Russian-distinctive', '+'],
+          ['ukrainian', '#2563eb', 'Ukrainian-distinctive', '−']
+        ] as const) {
+          const words = coll[variant]?.collocates?.slice(0, 10) || [];
+          const section = right.append('div').style('margin-bottom', '0.5rem');
           section.append('div').style('font-size', '0.6rem').style('color', color)
             .style('font-weight', '700').style('text-transform', 'uppercase')
-            .style('letter-spacing', '0.04em').style('margin-bottom', '0.25rem').text(label);
+            .style('letter-spacing', '0.04em').style('margin-bottom', '0.2rem').text(label);
 
           if (!words.length) {
             section.append('div').style('font-size', '0.7rem').style('color', 'var(--text-muted)')
@@ -2749,21 +2752,26 @@ function formatNum(n: number) {
             continue;
           }
 
-          const maxC = Math.max(...words.map((w: any) => w.count));
-          const tags = section.append('div').style('line-height', '2');
+          const maxZ = Math.max(...words.map((w: any) => Math.abs(w.z || w.pmi || 1)));
           words.forEach((w: any, i: number) => {
-            const sz = 0.7 + (w.count / maxC) * 0.45;
-            const fw = i < 3 ? '700' : '400';
-            tags.append('span')
-              .style('font-size', `${sz}rem`)
-              .style('color', color)
-              .style('font-weight', fw)
-              .style('margin-right', '0.35rem')
-              .text(w.word);
+            const z = Math.abs(w.z || w.pmi || 0);
+            const barW = Math.max(5, (z / maxZ) * 100);
+            const row = section.append('div').style('display', 'flex').style('align-items', 'center')
+              .style('gap', '4px').style('margin-bottom', '1px');
+            row.append('div').style('width', '65px').style('text-align', 'right')
+              .style('font-size', '0.68rem').style('color', 'var(--text)').style('flex-shrink', '0')
+              .style('font-weight', i < 3 ? '700' : '400').text(w.word);
+            row.append('div').style('flex', '1').style('height', '8px').style('background', 'var(--border)')
+              .style('border-radius', '4px').style('overflow', 'hidden')
+              .append('div').style('height', '100%').style('width', `${barW}%`)
+              .style('background', color).style('opacity', '0.7').style('border-radius', '4px');
+            row.append('div').style('width', '30px').style('font-size', '0.55rem')
+              .style('color', 'var(--text-muted)').style('flex-shrink', '0')
+              .text(`z=${z.toFixed(0)}`);
           });
         }
       } else if (collContainer) {
-        collContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.75rem;">No collocation data</div>';
+        collContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.75rem;">No contrastive data</div>';
       }
     }
 
