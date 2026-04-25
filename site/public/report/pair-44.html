@@ -65,7 +65,7 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 <div class="analysis-box">
   <p style="margin-bottom:0.7rem;"><strong>56.7% adoption across 740.6K mentions</strong> (95% CI: [89.5%, 89.9%]). Open Library Books leads at 100%, while GDELT News lags at 0%.</p>
   <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> YouTube 2017: +29pp adoption shift (72 mentions); Reddit 2022: 45 mentions (6x volume spike), 62% adoption. These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
-  <p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> "Kirovograd" distinctively co-occurs with <em>church</em>, <em>region</em>, <em>moscow</em>, <em>population</em>; "Kropyvnytskyi" clusters with <em>ukraine</em>, <em>attack</em>, <em>city</em>, <em>air</em>. These patterns reveal how each spelling form lives in distinct discourse communities.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> "Kirovograd" is most strongly associated with <em>church, region, moscow</em> (z=5); "Kropyvnytskyi" is distinguished by <em>ukraine, attack, city</em>.</p>
   <p style="margin-bottom:0.7rem;"><strong>Context matters:</strong> "Kropyvnytskyi" dominates in <em>war conflict</em> contexts (78% UA share), while "Kirovograd" persists strongest in <em>academic science</em> (78% RU share). Domain-specific adoption varies by up to 56 percentage points.</p>
   <p style="margin-bottom:0.7rem;">AI models show 94% alignment (TAS) with 100% spontaneous generation — a 6pp recognition-recall gap indicating pre-training corpus inertia.</p>
   <p><strong>Recommendation:</strong> Adoption is progressing but contested (57%). GDELT News (0%) represents the biggest opportunity for improvement.</p>
@@ -333,11 +333,131 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Contrastive Analysis</div>
   <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">Log-odds ratio (Monroe et al. 2008) · 561 texts (309 Kirovograd + 252 Kropyvnytskyi)</p>
   <div style="margin-bottom:0.8rem;">
-    <div style="font-size:0.65rem;color:#dc2626;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;"><span style="text-decoration:line-through;opacity:0.6;">Kirovograd</span> form</div>
-    <div style="line-height:2;"><span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">church</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">region</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">moscow</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">population</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">social</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">council</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">holy</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">uranium</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">research</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">natural</span> </div>
+    <div style="font-size:0.65rem;color:#dc2626;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;letter-spacing:0.04em;"><span style="text-decoration:line-through;opacity:0.6;">Kirovograd</span>-distinctive</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">church</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:100%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=5</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">region</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:88%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=4</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">moscow</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:67%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">population</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:62%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">social</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:62%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">council</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:61%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">holy</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:59%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">uranium</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:57%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">research</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:52%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">natural</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:50%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div>
   </div><div style="margin-bottom:0.8rem;">
-    <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">Kropyvnytskyi form</div>
-    <div style="line-height:2;"><span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">ukraine</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">attack</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">city</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">air</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">military</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">buildings</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">urban</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">drones</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">russian</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">reported</span> </div>
+    <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;letter-spacing:0.04em;">Kropyvnytskyi-distinctive</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">ukraine</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:100%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=6</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">attack</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:95%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=6</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">city</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:88%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=6</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">air</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:78%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=5</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">military</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:75%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=5</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">buildings</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:70%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=4</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">urban</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:69%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=4</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">drones</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:67%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=4</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">russian</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:65%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=4</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">reported</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:63%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=4</div>
+    </div>
   </div>
 </div>
 </div>

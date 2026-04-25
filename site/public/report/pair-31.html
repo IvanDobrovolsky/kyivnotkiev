@@ -65,7 +65,7 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 <div class="analysis-box">
   <p style="margin-bottom:0.7rem;"><strong>62.6% adoption across 7.2K mentions</strong> (95% CI: [34.0%, 40.1%]). OpenAlex Papers leads at 100%, while Wikipedia lags at 0%.</p>
   <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> YouTube 2018: 41 mentions (6x volume spike), 54% adoption. These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
-  <p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> "Kiev Patriarchate" distinctively co-occurs with <em>news</em>, <em>department</em>, <em>metropolitan</em>, <em>canonical</em>; "Kyiv Patriarchate" clusters with <em>ukrainian</em>, <em>moscow</em>, <em>historical</em>, <em>article</em>. These patterns reveal how each spelling form lives in distinct discourse communities.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> "Kiev Patriarchate" is most strongly associated with <em>news, department, metropolitan</em> (z=3); "Kyiv Patriarchate" is distinguished by <em>ukrainian, moscow, historical</em>; religious institutional texts (97% of Russian-form corpus) drive the ecclesiastical vocabulary — the Moscow Patriarchate is a major holdout.</p>
   <p style="margin-bottom:0.7rem;"><strong>Context matters:</strong> "Kyiv Patriarchate" dominates in <em>academic science</em> contexts (100% UA share), while "Kiev Patriarchate" persists strongest in <em>religion</em> (54% RU share). Domain-specific adoption varies by up to 54 percentage points.</p>
   <p style="margin-bottom:0.7rem;">AI models show 90% alignment (TAS) with 89% spontaneous generation — a 2pp recognition-recall gap indicating pre-training corpus inertia. Moscow Patriarchate maintains 96% preference for "Kiev Patriarchate" — institutional resistance.</p>
   <p><strong>Recommendation:</strong> Adoption is strong (63%) with mainstream momentum. remaining holdouts in Google Trends, Wikipedia likely reflect legacy content rather than active resistance. LLM training data updates would increase AI alignment from current 89% free recall.</p>
@@ -306,11 +306,131 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Contrastive Analysis</div>
   <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">Log-odds ratio (Monroe et al. 2008) · 177 texts (127 Kiev Patriarchate + 50 Kyiv Patriarchate)</p>
   <div style="margin-bottom:0.8rem;">
-    <div style="font-size:0.65rem;color:#dc2626;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;"><span style="text-decoration:line-through;opacity:0.6;">Kiev Patriarchate</span> form</div>
-    <div style="line-height:2;"><span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">news</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">department</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">metropolitan</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">canonical</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">constantinople</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">external</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">documents</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">chairman</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">latest</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">site</span> </div>
+    <div style="font-size:0.65rem;color:#dc2626;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;letter-spacing:0.04em;"><span style="text-decoration:line-through;opacity:0.6;">Kiev Patriarchate</span>-distinctive</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">news</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:100%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">department</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:82%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">metropolitan</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:69%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">canonical</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:65%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">constantinople</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:64%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">external</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:64%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">documents</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:63%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">chairman</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:63%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">latest</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:62%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">site</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:61%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div>
   </div><div style="margin-bottom:0.8rem;">
-    <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">Kyiv Patriarchate form</div>
-    <div style="line-height:2;"><span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">ukrainian</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">moscow</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">historical</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">article</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">ukrainians</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">religion</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">filaret</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">order</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">uoc</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">work</span> </div>
+    <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;letter-spacing:0.04em;">Kyiv Patriarchate-distinctive</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">ukrainian</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:100%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=8</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">moscow</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:82%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=6</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">historical</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:59%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=5</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">article</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:52%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=4</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">ukrainians</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:49%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=4</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">religion</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:46%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=4</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">filaret</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:43%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">order</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:39%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">uoc</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:38%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">work</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:38%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=3</div>
+    </div>
   </div>
 </div>
 </div>

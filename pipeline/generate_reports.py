@@ -203,16 +203,29 @@ def make_collocation_cloud(collocates, color, label, strikethrough=False):
     if not collocates:
         return ""
     top = collocates[:10]
-    mx = max(c.get("pmi", 1) for c in top) or 1
-    spans = []
+    mx = max(abs(c.get("z", c.get("pmi", 1))) for c in top) or 1
+
+    rows = []
     for c in top:
-        sz = 1.1 + (c.get("pmi", 0) / mx) * 0.3
-        wt = "700" if c.get("pmi", 0) > mx * 0.7 else "400"
-        spans.append(f'<span style="font-size:{sz:.2f}rem;color:{color};font-weight:{wt};margin-right:0.4rem;">{c["word"]}</span> ')
-    lbl = f'<span style="text-decoration:line-through;opacity:0.6;">{label}</span> form' if strikethrough else f'{label} form'
+        z = abs(c.get("z", c.get("pmi", 0)))
+        bar_w = max(5, (z / mx) * 100)
+        ru_rate = c.get("ru_rate", "")
+        ua_rate = c.get("ua_rate", "")
+        rate_str = ""
+        if ru_rate and ua_rate:
+            rate_str = f'<span style="font-size:0.6rem;color:#9ca3af;">({ru_rate}‰ vs {ua_rate}‰)</span>'
+        rows.append(f'''<div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:{color};">{c["word"]}</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:{bar_w:.0f}%;background:{color};opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z={z:.0f}</div>
+    </div>''')
+
+    lbl = f'<span style="text-decoration:line-through;opacity:0.6;">{label}</span>-distinctive' if strikethrough else f'{label}-distinctive'
     return f'''<div style="margin-bottom:0.8rem;">
-    <div style="font-size:0.65rem;color:{color};font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">{lbl}</div>
-    <div style="line-height:2;">{"".join(spans)}</div>
+    <div style="font-size:0.65rem;color:{color};font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;letter-spacing:0.04em;">{lbl}</div>
+    {"".join(rows)}
   </div>'''
 
 
@@ -283,29 +296,28 @@ def generate_analysis_text(pair, ts_data, llm_summary, coll_data, religious_data
                 parts.append(f"{src_name} {year}: {direction}{delta:.0f}pp adoption shift ({curr:,} mentions)")
         paragraphs.append(f'<p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> {"; ".join(parts)}. These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>')
 
-    # --- P3: Collocation analysis (PMI-ranked) ---
+    # --- P3: Contrastive analysis (log-odds ratio, Monroe et al. 2008) ---
     ru_coll = coll_data.get("russian", {}).get("collocates", []) if isinstance(coll_data.get("russian"), dict) else []
     ua_coll = coll_data.get("ukrainian", {}).get("collocates", []) if isinstance(coll_data.get("ukrainian"), dict) else []
 
     if ru_coll and ua_coll:
-        # Find distinctive words (high PMI, not shared)
-        ru_words = {c["word"] for c in ru_coll[:10]}
-        ua_words = {c["word"] for c in ua_coll[:10]}
-        ru_only = [c for c in ru_coll[:10] if c["word"] not in ua_words][:4]
-        ua_only = [c for c in ua_coll[:10] if c["word"] not in ru_words][:4]
-        shared = ru_words & ua_words
+        ru_top3 = [c["word"] for c in ru_coll[:3]]
+        ua_top3 = [c["word"] for c in ua_coll[:3]]
+        ru_z = ru_coll[0].get("z", 0) if ru_coll else 0
 
         parts = []
-        if ru_only:
-            words = ", ".join(f'<em>{c["word"]}</em>' for c in ru_only)
-            parts.append(f'"{ru}" distinctively co-occurs with {words}')
-        if ua_only:
-            words = ", ".join(f'<em>{c["word"]}</em>' for c in ua_only)
-            parts.append(f'"{ua}" clusters with {words}')
-        if shared:
-            parts.append(f'both forms share <em>{", ".join(list(shared)[:3])}</em>')
+        parts.append(f'"{ru}" is most strongly associated with <em>{", ".join(ru_top3)}</em> (z={abs(ru_z):.0f})')
+        parts.append(f'"{ua}" is distinguished by <em>{", ".join(ua_top3)}</em>')
 
-        paragraphs.append(f'<p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> {"; ".join(parts)}. These patterns reveal how each spelling form lives in distinct discourse communities.</p>')
+        # Explain the dominant category if religious/specific
+        by_ctx = coll_data.get("by_context", {})
+        if by_ctx:
+            rel = by_ctx.get("religion", {})
+            ru_rel_share = rel.get("ru", 0) / max(sum(c.get("ru", 0) for c in by_ctx.values()), 1)
+            if ru_rel_share > 0.08:
+                parts.append(f'religious institutional texts ({ru_rel_share*100:.0f}% of Russian-form corpus) drive the ecclesiastical vocabulary — the Moscow Patriarchate is a major holdout')
+
+        paragraphs.append(f'<p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> {"; ".join(parts)}.</p>')
 
     # --- P4: Context distribution ---
     ru_ctx = ctx_dist.get("russian", {})

@@ -65,7 +65,7 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 <div class="analysis-box">
   <p style="margin-bottom:0.7rem;"><strong>68.1% adoption across 511.1K mentions</strong> (95% CI: [96.8%, 97.1%]). Wikipedia leads at 98%, while Google Ngrams lags at 0%.</p>
   <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> YouTube 2020: 45 mentions (5x volume spike), 44% adoption; YouTube 2025: 71 mentions (2x volume spike), 62% adoption. These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
-  <p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> "Kiev cake" distinctively co-occurs with <em>recipe</em>, <em>channel</em>, <em>delicious</em>, <em>cakes</em>; "Kyiv cake" clusters with <em>history</em>, <em>sweet</em>, <em>bakery</em>, <em>support</em>. These patterns reveal how each spelling form lives in distinct discourse communities.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> "Kiev cake" is most strongly associated with <em>recipe, channel, delicious</em> (z=2); "Kyiv cake" is distinguished by <em>history, sweet, bakery</em>.</p>
   <p style="margin-bottom:0.7rem;"><strong>Context matters:</strong> "Kyiv cake" dominates in <em>culture arts</em> contexts (70% UA share), while "Kiev cake" persists strongest in <em>general news</em> (64% RU share). Domain-specific adoption varies by up to 34 percentage points.</p>
   <p style="margin-bottom:0.7rem;">AI models show 75% alignment (TAS) with 78% spontaneous generation — a 3pp recognition-recall gap indicating pre-training corpus inertia.</p>
   <p><strong>Recommendation:</strong> Adoption is strong (68%) with mainstream momentum. remaining holdouts in Google Ngrams likely reflect legacy content rather than active resistance. LLM training data updates would increase AI alignment from current 78% free recall.</p>
@@ -252,11 +252,131 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Contrastive Analysis</div>
   <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">Log-odds ratio (Monroe et al. 2008) · 315 texts (206 Kiev cake + 109 Kyiv cake)</p>
   <div style="margin-bottom:0.8rem;">
-    <div style="font-size:0.65rem;color:#dc2626;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;"><span style="text-decoration:line-through;opacity:0.6;">Kiev cake</span> form</div>
-    <div style="line-height:2;"><span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">recipe</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">channel</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">delicious</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">cakes</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">sugar</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">famous</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">food</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">russia</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">video</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">hazelnuts</span> </div>
+    <div style="font-size:0.65rem;color:#dc2626;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;letter-spacing:0.04em;"><span style="text-decoration:line-through;opacity:0.6;">Kiev cake</span>-distinctive</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">recipe</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:100%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">channel</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:89%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">delicious</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:86%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">cakes</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:83%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">sugar</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:80%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">famous</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:75%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">food</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:72%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">russia</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:71%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">video</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:64%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=1</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">hazelnuts</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:63%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=1</div>
+    </div>
   </div><div style="margin-bottom:0.8rem;">
-    <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">Kyiv cake form</div>
-    <div style="line-height:2;"><span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">history</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">sweet</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">bakery</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">support</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">today</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">easter</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">what</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">ukrainian</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">soviet</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">birthday</span> </div>
+    <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;letter-spacing:0.04em;">Kyiv cake-distinctive</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">history</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:100%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">sweet</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:82%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">bakery</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:76%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">support</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:72%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">today</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:72%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=2</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">easter</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:61%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=1</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">what</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:51%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=1</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">ukrainian</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:47%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=1</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">soviet</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:38%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=1</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">birthday</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:37%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=1</div>
+    </div>
   </div>
 </div>
 </div>

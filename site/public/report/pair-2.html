@@ -65,7 +65,7 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 <div class="analysis-box">
   <p style="margin-bottom:0.7rem;"><strong>79.1% adoption across 7.3M mentions</strong> (95% CI: [95.2%, 95.3%]). GDELT News leads at 98%, while Google Ngrams lags at 28%.</p>
   <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> Reddit 2022: 356 mentions (13x volume spike), 61% adoption; Reddit 2014: 70 mentions (7x volume spike), 14% adoption. These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
-  <p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> "Kharkov" distinctively co-occurs with <em>church</em>, <em>orthodox</em>, <em>kursk</em>, <em>news</em>; "Kharkiv" clusters with <em>study</em>, <em>analysis</em>, <em>art</em>, <em>article</em>. These patterns reveal how each spelling form lives in distinct discourse communities.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> "Kharkov" is most strongly associated with <em>church, orthodox, kursk</em> (z=28); "Kharkiv" is distinguished by <em>study, analysis, art</em>.</p>
   <p style="margin-bottom:0.7rem;"><strong>Context matters:</strong> "Kharkiv" dominates in <em>academic science</em> contexts (62% UA share), while "Kharkov" persists strongest in <em>history</em> (72% RU share). Domain-specific adoption varies by up to 34 percentage points.</p>
   <p style="margin-bottom:0.7rem;">AI models show 96% alignment (TAS) with 98% spontaneous generation — a 1pp recognition-recall gap indicating pre-training corpus inertia. Moscow Patriarchate maintains 95% preference for "Kharkov" — institutional resistance.</p>
   <p><strong>Recommendation:</strong> Adoption is strong (79%) with mainstream momentum. remaining holdouts in Google Ngrams likely reflect legacy content rather than active resistance.</p>
@@ -333,11 +333,131 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Contrastive Analysis</div>
   <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">Log-odds ratio (Monroe et al. 2008) · 5362 texts (1897 Kharkov + 3465 Kharkiv)</p>
   <div style="margin-bottom:0.8rem;">
-    <div style="font-size:0.65rem;color:#dc2626;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;"><span style="text-decoration:line-through;opacity:0.6;">Kharkov</span> form</div>
-    <div style="line-height:2;"><span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">church</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">orthodox</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">kursk</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">news</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">patriarch</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">moscow</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">aid</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">department</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">august</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">battle</span> </div>
+    <div style="font-size:0.65rem;color:#dc2626;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;letter-spacing:0.04em;"><span style="text-decoration:line-through;opacity:0.6;">Kharkov</span>-distinctive</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">church</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:100%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=28</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">orthodox</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:65%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=18</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">kursk</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:64%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=18</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">news</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:61%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=17</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">patriarch</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:60%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=17</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">moscow</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:56%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=16</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">aid</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:53%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=15</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">department</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:50%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=14</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">august</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:50%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=14</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">battle</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:49%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=14</div>
+    </div>
   </div><div style="margin-bottom:0.8rem;">
-    <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">Kharkiv form</div>
-    <div style="line-height:2;"><span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">study</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">analysis</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">art</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">article</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">water</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">development</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">which</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">research</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">patients</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">process</span> </div>
+    <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;letter-spacing:0.04em;">Kharkiv-distinctive</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">study</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:100%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=9</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">analysis</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:96%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=8</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">art</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:90%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=8</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">article</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:90%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=8</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">water</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:88%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=8</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">development</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:85%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=7</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">which</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:78%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=7</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">research</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:78%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=7</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">patients</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:73%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=6</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">process</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:72%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=6</div>
+    </div>
   </div>
 </div>
 </div>

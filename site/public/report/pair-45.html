@@ -65,7 +65,7 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
 <div class="analysis-box">
   <p style="margin-bottom:0.7rem;"><strong>81.4% adoption across 1.4M mentions</strong> (95% CI: [99.2%, 99.2%]). GDELT News leads at 100%, while Google Ngrams lags at 73%.</p>
   <p style="margin-bottom:0.7rem;"><strong>Volume spikes detected:</strong> YouTube 2025: 124 mentions (3x volume spike), 68% adoption; YouTube 2023: -21pp adoption shift (68 mentions). These correlate with major cultural or geopolitical events that drive public discourse and spelling adoption.</p>
-  <p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> "Ternopol" distinctively co-occurs with <em>church</em>, <em>patriarch</em>, <em>orthodox</em>, <em>kirill</em>; "Ternopil" clusters with <em>region</em>, <em>development</em>, <em>study</em>, <em>which</em>. These patterns reveal how each spelling form lives in distinct discourse communities.</p>
+  <p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> "Ternopol" is most strongly associated with <em>church, patriarch, orthodox</em> (z=22); "Ternopil" is distinguished by <em>region, development, study</em>; religious institutional texts (8% of Russian-form corpus) drive the ecclesiastical vocabulary — the Moscow Patriarchate is a major holdout.</p>
   <p style="margin-bottom:0.7rem;"><strong>Context matters:</strong> "Ternopil" dominates in <em>academic science</em> contexts (80% UA share), while "Ternopol" persists strongest in <em>religion</em> (92% RU share). Domain-specific adoption varies by up to 73 percentage points.</p>
   <p style="margin-bottom:0.7rem;">AI models show 96% alignment (TAS) with 100% spontaneous generation — a 5pp recognition-recall gap indicating pre-training corpus inertia.</p>
   <p><strong>Recommendation:</strong> Adoption is strong (81%) with mainstream momentum.</p>
@@ -333,11 +333,131 @@ td{padding:0.6rem;border-bottom:1px solid #f3f4f6}
   <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Contrastive Analysis</div>
   <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">Log-odds ratio (Monroe et al. 2008) · 1055 texts (323 Ternopol + 732 Ternopil)</p>
   <div style="margin-bottom:0.8rem;">
-    <div style="font-size:0.65rem;color:#dc2626;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;"><span style="text-decoration:line-through;opacity:0.6;">Ternopol</span> form</div>
-    <div style="line-height:2;"><span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">church</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">patriarch</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">orthodox</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">kirill</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">holiness</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">news</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">metropolitan</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">department</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">holy</span> <span style="font-size:1.10rem;color:#dc2626;font-weight:400;margin-right:0.4rem;">russian</span> </div>
+    <div style="font-size:0.65rem;color:#dc2626;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;letter-spacing:0.04em;"><span style="text-decoration:line-through;opacity:0.6;">Ternopol</span>-distinctive</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">church</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:100%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=22</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">patriarch</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:86%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=19</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">orthodox</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:78%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=17</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">kirill</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:69%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=15</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">holiness</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:67%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=15</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">news</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:54%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=12</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">metropolitan</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:51%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=11</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">department</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:48%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=11</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">holy</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:43%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=9</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#dc2626;">russian</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:42%;background:#dc2626;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=9</div>
+    </div>
   </div><div style="margin-bottom:0.8rem;">
-    <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.25rem;letter-spacing:0.04em;">Ternopil form</div>
-    <div style="line-height:2;"><span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">region</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">development</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">study</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">which</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">water</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">analysis</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">research</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">article</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">main</span> <span style="font-size:1.10rem;color:#0057B8;font-weight:400;margin-right:0.4rem;">results</span> </div>
+    <div style="font-size:0.65rem;color:#0057B8;font-weight:700;text-transform:uppercase;margin-bottom:0.3rem;letter-spacing:0.04em;">Ternopil-distinctive</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">region</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:100%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=14</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">development</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:62%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=8</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">study</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:53%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=7</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">which</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:52%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=7</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">water</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:51%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=7</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">analysis</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:48%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=6</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">research</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:47%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=6</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">article</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:43%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=6</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">main</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:41%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=6</div>
+    </div><div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:75px;text-align:right;font-size:0.78rem;font-weight:600;color:#0057B8;">results</div>
+      <div style="flex:1;height:10px;background:#f3f4f6;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:41%;background:#0057B8;opacity:0.6;border-radius:4px;"></div>
+      </div>
+      <div style="width:40px;font-size:0.6rem;color:#9ca3af;">z=5</div>
+    </div>
   </div>
 </div>
 </div>
