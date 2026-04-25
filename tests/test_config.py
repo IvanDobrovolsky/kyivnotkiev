@@ -53,9 +53,9 @@ def test_pair_schema():
 def test_starred_pairs():
     pairs = get_all_pairs()
     starred = [p for p in pairs if p.get("starred", False)]
-    assert len(starred) == 6, f"Expected 6 starred pairs, got {len(starred)}"
+    assert len(starred) == 9, f"Expected 9 starred pairs, got {len(starred)}"
     starred_ids = {p["id"] for p in starred}
-    assert starred_ids == {1, 3, 10, 61, 70, 72}
+    assert starred_ids == {1, 3, 10, 17, 23, 61, 70, 72, 85}
 
 
 def test_paths_exist():
