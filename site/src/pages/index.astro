@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Sidebar from '../components/Sidebar.astro';
 import LandingStats from '../components/LandingStats.astro';
 import PairView from '../components/PairView.astro';
+import AboutSection from '../components/AboutSection.astro';
 import m from '../data/manifest.json';
 import religious from '../data/religious.json';
 import religiousProp from '../data/religious_propagation.json';
@@ -105,78 +106,7 @@ function formatNum(n: number) {
         <LandingStats manifest={m} fmtBig={fmtBig} />
       </div><!-- end landing-view -->
 
-      <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} toolsPerPair={toolsPerPair} religious={religious} />
-      </div>
-
-      <!-- Per-pair world map (GDELT only) -->
-      <div class="chart-container" id="map-container">
-        <div class="chart-header">
-          <div>
-            <div class="chart-title" style="color: var(--text)">Adoption Map: <span id="map-pair-name">Kiev → Kyiv</span></div>
-            <div class="chart-subtitle" id="map-subtitle">Country-level adoption (%) — GDELT news corpus 2024–2026</div>
-          </div>
-        </div>
-        <div id="world-map" style="width:100%; height:400px;"></div>
-        <div class="chart-legend" id="map-legend" style="justify-content: center; gap: 0.5rem;">
-          <span style="font-size:0.75rem; color:var(--text-muted)">0%</span>
-          <div style="display:flex; height:12px; width:240px; border-radius:6px; overflow:hidden;">
-            <div style="flex:1; background:#dc2626"></div>
-            <div style="flex:1; background:#f97316"></div>
-            <div style="flex:1; background:#eab308"></div>
-            <div style="flex:1; background:#22c55e"></div>
-            <div style="flex:1; background:#047857"></div>
-          </div>
-          <span style="font-size:0.75rem; color:var(--text-muted)">100%</span>
-        </div>
-      </div>
-
-      <!-- Per-pair: GDELT Analysis (3 pie charts) -->
-      <div id="media-origin-container" class="resp-grid-3" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
-        <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-          <div class="chart-title" style="color: var(--text)">Overall Spelling</div>
-          <div class="chart-subtitle">UA vs RU form distribution in GDELT</div>
-          <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Ukrainian vs Russian (24mo)</div>
-          <div id="spelling-pie" style="display:flex; align-items:center; justify-content:center;"></div>
-        </div>
-        <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-          <div class="chart-title" style="color: var(--text)">Ukrainian Form Sources</div>
-          <div class="chart-subtitle">Where the Ukrainian spelling appears</div>
-          <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Where do UA-form articles come from?</div>
-          <div id="ua-origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
-        </div>
-        <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-          <div class="chart-title" style="color: var(--text)">Russian Form Sources</div>
-          <div class="chart-subtitle">Where the Russian spelling appears</div>
-          <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Where do RU-form articles come from?</div>
-          <div id="ru-origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
-        </div>
-      </div>
-
-      <!-- Source comparison moved to comparison-row above -->
-
-      <!-- Per-pair holdouts (GDELT only) -->
-      <div class="chart-container" id="holdout-container">
-        <div class="chart-header">
-          <div>
-            <div class="chart-title" style="color: var(--text)">Holdouts: <span id="holdout-pair-name">Kiev</span></div>
-            <div class="chart-subtitle">Domains still using old spelling — click domain to verify in GDELT</div>
-          </div>
-          <div class="chart-controls">
-            <button class="line-mode active" data-holdout="all">All</button>
-            <button class="line-mode" data-holdout="intl">Only International</button>
-            <button class="line-mode" data-holdout="ru">Only .ru</button>
-            <button class="line-mode" data-holdout="ua">Only .ua</button>
-          </div>
-        </div>
-        <div id="holdout-table" style="max-height: 500px; overflow-y: auto;"></div>
-      </div>
-
-      <!-- Data source availability note -->
-      <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem; padding: 0.5rem 0.75rem; background: #f8f9fb; border-radius: 4px; border-left: 3px solid var(--border);">
-        Source availability varies by source and pair. Time span: {m.time_span}. Not all pairs have data from every source.
-      </div>
-
-      </div><!-- end pair-view -->
+      <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} toolsPerPair={toolsPerPair} religious={religious} timeSpan={m.time_span} />
 
       <!-- ══ GLOBAL VIEWS (visible on landing, hidden on pair view) ══ -->
       <div id="global-view">
@@ -655,39 +585,7 @@ function formatNum(n: number) {
 
       <!-- Methodology moved to top, below stats -->
 
-      <div class="chart-container" id="about">
-        <h2 style="font-size:1.3rem; margin-bottom:1rem; color:var(--text);">About This Project</h2>
-        <div class="about-text">
-          <p>
-            In 2018, Ukraine's Ministry of Foreign Affairs launched #KyivNotKiev — a campaign
-            to change how the world spells Ukrainian place names. We built a data pipeline to
-            measure whether it actually worked.
-          </p>
-          <p>
-            This dashboard tracks {m.analyzable_pairs} Ukrainian toponym pairs (from city names to dishes to
-            historical terms) across {m.num_sources} independent data sources. Every data point comes from
-            real-world usage — news articles, social media posts, encyclopedia pageviews, book
-            frequency, and web search trends.
-          </p>
-          <p>
-            Our computational linguistics layer goes deeper: using transformer models fine-tuned
-            on {formatNum(m.cl_corpus)} labeled texts, we classify the <em>context</em> in which each spelling appears.
-            The published model and dataset are available on Hugging Face for other researchers
-            studying language policy adoption worldwide.
-          </p>
-          <p>
-            Some findings: social media communities adopted Ukrainian spellings 5-9x faster
-            than traditional media. "Disaster brands" like Chernobyl are nearly immovable.
-            Historical identity terms (Vladimir the Great vs. Volodymyr) barely budged at under 5%.
-            And food terms like Borshch are fighting a separate battle, championed by chef
-            Yevhen Klopotenko's UNESCO campaign.
-          </p>
-        </div>
-        <div class="about-links">
-          <a href="https://github.com/IvanDobrovolsky/kyivnotkiev">Source Code</a>
-          <a href="https://huggingface.co/KyivNotKiev">Hugging Face</a>
-        </div>
-      </div>
+      <AboutSection manifest={m} formatNum={formatNum} />
 
       </div><!-- end global-view -->
     </main>
