@@ -30,18 +30,18 @@ HAND_ANALYSIS = None
 SOURCE_COLORS = {
     "trends": "#f59e0b", "gdelt": "#ef4444", "wikipedia": "#10b981",
     "reddit": "#f97316", "youtube": "#dc2626", "ngrams": "#8b5cf6",
-    "openalex": "#10b981", "openlibrary": "#6366f1",
+    "openalex": "#10b981",
 }
 SOURCE_NAMES = {
     "trends": "Google Trends", "gdelt": "GDELT News", "wikipedia": "Wikipedia",
     "reddit": "Reddit", "youtube": "YouTube", "ngrams": "Google Ngrams",
-    "openalex": "OpenAlex Papers", "openlibrary": "Open Library Books",
+    "openalex": "OpenAlex Papers",
 }
 SOURCE_URLS = {
     "trends": "https://trends.google.com/trends/", "gdelt": "https://blog.gdeltproject.org/",
     "wikipedia": "https://en.wikipedia.org/wiki/", "reddit": "https://arctic-shift.photon-reddit.com/",
     "youtube": "https://www.youtube.com/", "ngrams": "https://books.google.com/ngrams/",
-    "openalex": "https://openalex.org/", "openlibrary": "https://openlibrary.org/",
+    "openalex": "https://openalex.org/",
 }
 EVENTS = [
     (2018 + 10 / 12, "#KyivNotKiev"),
@@ -243,7 +243,7 @@ def generate_analysis_text(pair, ts_data, llm_summary, coll_data, religious_data
 
     # --- P1: Headline + source hierarchy ---
     src_rankings = []
-    for src in ["wikipedia", "openalex", "gdelt", "trends", "reddit", "youtube", "openlibrary", "ngrams"]:
+    for src in ["wikipedia", "openalex", "gdelt", "trends", "reddit", "youtube", "ngrams"]:
         sd = ts_data.get(src, [])
         if not sd:
             continue
@@ -482,7 +482,7 @@ def generate_report(pair, timeseries, llm_data, collocations, religious_data, pa
     # ---- Source charts ----
     p_events = pair_events_data.get(str(pid), [])
     source_charts = []
-    for src in ["trends", "gdelt", "wikipedia", "reddit", "youtube", "ngrams", "openalex", "openlibrary"]:
+    for src in ["trends", "gdelt", "wikipedia", "reddit", "youtube", "ngrams", "openalex"]:
         sd = ts.get(src, [])
         if not sd:
             continue
@@ -834,7 +834,6 @@ td{{padding:0.6rem;border-bottom:1px solid #f3f4f6}}
     <li><a href="https://www.youtube.com/">YouTube</a> — via yt-dlp</li>
     <li><a href="https://books.google.com/ngrams/">Google Books Ngrams</a> — corpus 37, 1900–2022</li>
     <li><a href="https://openalex.org/">OpenAlex</a> — 250M+ academic works</li>
-    <li><a href="https://openlibrary.org/">Open Library</a> — 8M+ book records</li>
   </ul>
   <h3>Links</h3>
   <ul>

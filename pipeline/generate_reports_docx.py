@@ -67,7 +67,7 @@ DARK     = RGBColor(0x1F, 0x29, 0x37)
 LIGHT_BG = RGBColor(0xF4, 0xF5, 0xF7)
 
 SOURCE_ORDER = ["trends", "gdelt", "wikipedia", "reddit",
-                "youtube", "ngrams", "openalex", "openlibrary"]
+                "youtube", "ngrams", "openalex"]
 
 FAM_ORDER = ["Anthropic Claude", "OpenAI GPT", "Google Gemini", "Google Gemma",
              "xAI Grok", "Meta Llama", "Mistral", "Alibaba Qwen"]
@@ -687,7 +687,7 @@ def build_docx():
         run = ref_p2.add_run(
             "Google Trends (55 countries) · GDELT (53K+ domains) · Wikipedia Pageviews · "
             "Reddit (Arctic Shift) · YouTube (yt-dlp) · Google Books Ngrams (corpus 37) · "
-            "OpenAlex (250M+ works) · Open Library (8M+ books)"
+            "OpenAlex (250M+ works)"
         )
         run.font.size = Pt(8)
         run.font.color.rgb = GRAY

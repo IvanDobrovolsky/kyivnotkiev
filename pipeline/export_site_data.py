@@ -357,35 +357,6 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
             result.setdefault(spid, {})
             result[spid]["openalex"] = smooth_series(raw_series, window=3)
 
-    # Open Library (from local JSON)
-    log.info("  Open Library...")
-    ol_path = DATA_DIR / "raw" / "openlibrary" / "openlibrary_results.json"
-    if ol_path.exists():
-        with open(ol_path) as f:
-            ol_data = json.load(f)
-        ol_by_pair = defaultdict(lambda: defaultdict(lambda: {"ukr": 0, "rus": 0}))
-        for r in ol_data:
-            pid = r["pair_id"]
-            if pid not in enabled_ids:
-                continue
-            yr = str(r.get("year", r.get("publish_year", "")))
-            if not yr:
-                continue
-            variant = r.get("variant", "")
-            count = r.get("book_count", 1)
-            if variant == "ukrainian":
-                ol_by_pair[pid][yr]["ukr"] += count
-            else:
-                ol_by_pair[pid][yr]["rus"] += count
-        for pid in sorted(ol_by_pair.keys()):
-            spid = str(pid)
-            result.setdefault(spid, {}).setdefault("openlibrary", [])
-            for yr in sorted(ol_by_pair[pid].keys()):
-                d = ol_by_pair[pid][yr]
-                total = d["ukr"] + d["rus"]
-                if total > 0:
-                    result[spid]["openlibrary"].append({"date": f"{yr}-01", "adoption": round(d["ukr"] / total * 100, 1), "ukr": d["ukr"], "rus": d["rus"]})
-
     pair_count = len([k for k in result if k != "events"])
     log.info(f"  Timeseries: {pair_count} pairs")
     return result
@@ -457,16 +428,6 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         openalex_total_pairs = len(oa_data)
         openalex_total_papers = sum(sum(yr["total"] for yr in p["yearly"]) for p in oa_data)
 
-    # Open Library from local data
-    ol_path = DATA_DIR / "raw" / "openlibrary" / "openlibrary_results.json"
-    ol_records = 0
-    ol_mentions = 0
-    ol_pairs = 0
-    if ol_path.exists():
-        ol_data = json.loads(ol_path.read_text())
-        ol_records = len(ol_data)
-        ol_mentions = sum(r.get("book_count", 0) for r in ol_data)
-        ol_pairs = len(set(r["pair_id"] for r in ol_data))
 
     # ── Per-pair adoption (mean across sources, last 12 months / 5 years) ──
     log.info("  Computing per-pair adoption...")
@@ -525,23 +486,6 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
                 if total >= 3:
                     oa_adopt[p["pair_id"]] = ukr / total
         per_source["openalex"] = oa_adopt
-    # Open Library
-    if ol_path.exists():
-        ol_adopt = defaultdict(lambda: {"ukr": 0, "rus": 0})
-        for r in json.loads(ol_path.read_text()):
-            yr = r.get("year", r.get("publish_year", 0))
-            if yr and yr >= cutoff_5y.year:
-                bc = r.get("book_count", 1)
-                if r.get("variant") == "ukrainian":
-                    ol_adopt[r["pair_id"]]["ukr"] += bc
-                else:
-                    ol_adopt[r["pair_id"]]["rus"] += bc
-        ol_ratios = {}
-        for pid, d in ol_adopt.items():
-            total = d["ukr"] + d["rus"]
-            if total >= 3:
-                ol_ratios[pid] = d["ukr"] / total
-        per_source["openlibrary"] = ol_ratios
 
     # Mean adoption across sources per pair
     recent_map = {}
@@ -603,17 +547,16 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
             "avg_adoption": round(sum(vals) / len(vals), 1) if vals else 0,
         })
 
-    toponym_matches = sum(s["records"] for s in source_stats.values()) + openalex_total_papers + ol_records
+    toponym_matches = sum(s["records"] for s in source_stats.values()) + openalex_total_papers
 
     manifest = {
         "total_pairs": len(enabled_ids),
         "analyzable_pairs": len(analyzable_ids),
-        "control_pairs": len(control_ids),
         "records_scanned": "90B+",
         "toponym_matches": toponym_matches,
         "cl_corpus": _get_cl_corpus_size(),
         "time_span": "2010-2026",
-        "num_sources": 8,
+        "num_sources": 7,
         "num_countries": int(extra_map.get("trends_countries", "0")),
         "sources": {
             "trends": {"records": source_stats.get("trends", {}).get("records", 0), "pairs": source_stats.get("trends", {}).get("pairs", 0), "label": "Search Trends", "unit": "datapoints", "extra": f"{extra_map.get('trends_countries', '55')} countries", "color": "#4285F4"},
@@ -623,7 +566,6 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
             "youtube": {"records": source_stats.get("youtube", {}).get("records", 0), "pairs": source_stats.get("youtube", {}).get("pairs", 0), "label": "Videos", "unit": "videos", "extra": f"{extra_map.get('youtube_channels', '0')} channels", "color": "#FF0000"},
             "ngrams": {"records": source_stats.get("ngrams", {}).get("records", 0), "pairs": source_stats.get("ngrams", {}).get("pairs", 0), "label": "Book Records", "unit": "records", "extra": "8M+ volumes", "color": "#7c3aed"},
             "openalex": {"records": openalex_total_papers, "pairs": openalex_total_pairs, "label": "Academic Papers", "unit": "papers", "extra": "250M+ works indexed", "color": "#06b6d4"},
-            "openlibrary": {"records": ol_records, "pairs": ol_pairs, "label": "Book Titles", "unit": "editions", "extra": f"{ol_mentions:,} mentions", "color": "#059669"},
         },
         "categories": categories,
         "category_stats": sorted(category_list, key=lambda x: -x["avg_adoption"]),

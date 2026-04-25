@@ -22,7 +22,6 @@ flowchart TD
         ngrams["ngrams.py<br/>Books API"]
         yt["youtube.py<br/>Data API v3"]
         oa["openalex.py<br/>REST API"]
-        ol["openlibrary.py<br/>REST API"]
     end
 
     subgraph Analysis
@@ -52,9 +51,9 @@ flowchart TD
 
     pairs --> orch
     orch --> wm
-    wm -->|stale| gdelt & reddit & wiki & trends & ngrams & yt & oa & ol
+    wm -->|stale| gdelt & reddit & wiki & trends & ngrams & yt & oa
     wm -->|fresh| skip["skip"]
-    gdelt & reddit & wiki & trends & ngrams & yt & oa & ol --> adopt
+    gdelt & reddit & wiki & trends & ngrams & yt & oa --> adopt
     adopt --> cp & cat & hold & reg
     adopt -->|80,141 texts| extract --> annotate --> finetune --> export
     cp & cat & hold & reg --> cross & heat & choro & modern
@@ -73,7 +72,6 @@ flowchart TD
 | `ngrams.py` | Google Books | 11.6K, 1900--2019 | REST API |
 | `youtube.py` | YouTube Data API v3 | 14.5K videos | REST API |
 | `openalex.py` | OpenAlex | 381K papers | REST API |
-| `openlibrary.py` | Open Library | 1.9K titles | REST API |
 | `orchestrator.py` | -- | -- | Coordinates all above |
 | `watermarks.py` | -- | -- | Tracks freshness per (pair, source) |
 

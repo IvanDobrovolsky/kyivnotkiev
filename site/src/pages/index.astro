@@ -625,7 +625,6 @@ function formatNum(n: number) {
       youtube: '#FF0000',
       ngrams: '#7c3aed',
       openalex: '#06b6d4',
-      openlibrary: '#059669',
     };
 
     const sourceLabels: Record<string, string> = {
@@ -636,7 +635,6 @@ function formatNum(n: number) {
       youtube: 'YouTube',
       ngrams: 'Google Books',
       openalex: 'Academic Papers',
-      openlibrary: 'Open Library Books',
     };
 
     let activeSource = 'gdelt';  // GDELT first — news coverage is most precise
@@ -839,7 +837,6 @@ function formatNum(n: number) {
         youtube: 'Video title matches, annual',
         ngrams: 'Google Books corpus (English All 2022, 1900–2022)',
         openalex: 'OpenAlex academic papers',
-        openlibrary: 'Open Library book editions (Internet Archive, by first publish year)',
       };
       const startYear = dataMinDate.getFullYear();
       const endYear = dataMaxDate.getFullYear();
@@ -1240,7 +1237,7 @@ function formatNum(n: number) {
       const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
       if (!pair) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'openlibrary'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
       const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
 
       // Put adoption % in card title
@@ -1282,7 +1279,7 @@ function formatNum(n: number) {
       const pairData = (timeseriesData as any)[String(activePairId)];
       if (!pairData) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'openlibrary'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
       const items: {src: string; adoption: number; n: number}[] = [];
 
       for (const src of srcOrder) {
@@ -1761,7 +1758,7 @@ function formatNum(n: number) {
       const pairData = (timeseriesData as any)[String(activePairId)];
       if (!pairData) return;
 
-      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'openlibrary'];
+      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
       for (const src of srcOrder) {
         const series = pairData[src];
         const card = document.createElement('div');
@@ -1790,7 +1787,6 @@ function formatNum(n: number) {
             isNewPair ? 'Data collection in progress' :
             (src === 'gdelt' && gdeltNoData) ? 'Not in news URLs' :
             (src === 'ngrams' && ngramsNoData) ? 'Not in book corpus' :
-            (src === 'openlibrary' && ['sports','landmarks','institutional'].includes(cat)) ? 'Not in book titles' :
             (src === 'openalex' && ['food','sports','landmarks'].includes(cat)) ? 'Not in academic papers' :
             'No mentions found';
           card.innerHTML = `

@@ -49,7 +49,6 @@ graph TD
 | `raw_ngrams` | -- | pair_id, variant | Book frequency 1900--2019 (11.6K) |
 | `raw_youtube` | MONTH (published_at) | pair_id, variant | Video metadata (14.5K) |
 | `raw_openalex` | -- | pair_id, variant | Academic papers (381K) |
-| `raw_openlibrary` | -- | pair_id, variant | Open Library titles (1.9K) |
 | `watermarks` | -- | -- | Ingestion state tracking |
 | `analysis_adoption` | -- | pair_id, source | Computed adoption ratios |
 | `analysis_changepoints` | -- | -- | Detected change points |

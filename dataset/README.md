@@ -36,7 +36,6 @@ This dataset measures the adoption of Ukrainian-derived English spellings (e.g.,
 | Reddit | 22.6K | Post mentions | 2007--2026 |
 | YouTube | 14.5K | Video title mentions | 2006--2026 |
 | Google Books Ngrams | 11.6K | Book frequency | 1900--2019 |
-| Open Library | 1.9K | Book title mentions | 1900--2025 |
 
 ## Files
 

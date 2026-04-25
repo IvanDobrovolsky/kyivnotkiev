@@ -22,10 +22,10 @@
 
 | Metric | Value |
 |--------|-------|
-| Records scanned | **90B+** across GDELT, Wikipedia, OpenAlex, Reddit, YouTube, Ngrams, Trends, Open Library |
+| Records scanned | **90B+** across GDELT, Wikipedia, OpenAlex, Reddit, YouTube, Ngrams, Trends |
 | Toponym matches | **614M+** (39.6M news articles, 573M pageviews, 381K papers, 151K trends, 22.6K posts, 14.5K videos, 11.6K books, 1.9K book titles) |
 | Toponym pairs | **59** enabled across **8** categories |
-| Data sources | **8** (GDELT, Google Trends, Wikipedia, Reddit, YouTube, Google Books Ngrams, OpenAlex, Open Library) |
+| Data sources | **7** (GDELT, Google Trends, Wikipedia, Reddit, YouTube, Google Books Ngrams, OpenAlex) |
 | CL corpus | **80,141** texts, DeBERTa-v3-large F1=85.7% |
 | Time span | **2010--2026** (Ngrams: 1900--2019) |
 | Countries | **55** with per-country adoption data |
@@ -45,7 +45,6 @@ graph LR
         Trends["Google Trends<br/>151K datapoints"]
         Ngrams["Ngrams<br/>11.6K books 1900-2019"]
         YT["YouTube<br/>14.5K videos"]
-        OL["Open Library<br/>1.9K titles"]
     end
 
     subgraph Pipeline["Python Pipeline"]
@@ -74,7 +73,7 @@ graph LR
         Web["Website"]
     end
 
-    GDELT & OA & Reddit & Wiki & Trends & Ngrams & YT & OL --> Ingest
+    GDELT & OA & Reddit & Wiki & Trends & Ngrams & YT --> Ingest
     Ingest --> Transform --> Analyze
     Analyze --> Figures & Paper & Web
     Ingest --> Extract --> Annotate --> Finetune
