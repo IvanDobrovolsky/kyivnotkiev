@@ -375,50 +375,12 @@ function formatNum(n: number) {
       <div class="resp-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
         <div class="chart-container" style="margin-bottom:0; padding:0.75rem 1rem; display:flex; flex-direction:column; justify-content:space-between;">
           <div class="chart-title" style="color: var(--text); margin-bottom:0.4rem;">Statistical Analysis</div>
-          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem;">
-            <div style="padding:0.6rem 0.4rem; background:#f0f9ff; border-radius:6px; text-align:center;">
-              <div style="font-size:1.2rem; font-weight:700; color:#0057B8;">R²=0.87</div>
-              <div style="font-size:0.65rem; color:#6b7280;">Regression fit</div>
-              <div style="font-size:0.58rem; color:#9ca3af;">Invasion = #1 predictor</div>
-            </div>
-            <div style="padding:0.6rem 0.4rem; background:#fef2f2; border-radius:6px; text-align:center;">
-              <div style="font-size:1.2rem; font-weight:700; color:#dc2626;">p&lt;0.001</div>
-              <div style="font-size:0.65rem; color:#6b7280;">Invasion effect</div>
-              <div style="font-size:0.58rem; color:#9ca3af;">Wilcoxon; d=1.38</div>
-            </div>
-            <div style="padding:0.6rem 0.4rem; background:#f0fdf4; border-radius:6px; text-align:center;">
-              <div style="font-size:1.2rem; font-weight:700; color:#059669;">99.8%</div>
-              <div style="font-size:0.65rem; color:#6b7280;">Regex precision</div>
-              <div style="font-size:0.58rem; color:#9ca3af;">3 FP / 1,444</div>
-            </div>
-            <div style="padding:0.6rem 0.4rem; background:#fefce8; border-radius:6px; text-align:center;">
-              <div style="font-size:1.2rem; font-weight:700; color:#d97706;">p=0.035</div>
-              <div style="font-size:0.65rem; color:#6b7280;">Category test</div>
-              <div style="font-size:0.58rem; color:#9ca3af;">H=13.54</div>
-            </div>
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; margin-top: 0.4rem;">
-            <div style="padding:0.4rem 0.6rem; background:#f8f9fb; border-radius:5px;">
-              <div style="font-size:0.72rem; font-weight:600; color:var(--text);">Cross-source spread</div>
-              <div style="font-size:0.65rem; color:#6b7280;">Median 54pp — highly domain-dependent</div>
-            </div>
-            <div style="padding:0.4rem 0.6rem; background:#f8f9fb; border-radius:5px;">
-              <div style="font-size:0.72rem; font-weight:600; color:var(--text);">Historical identity</div>
-              <div style="font-size:0.65rem; color:#6b7280;">Kyiv 60% but Volodymyr the Great 5%</div>
-            </div>
-            <div style="padding:0.4rem 0.6rem; background:#f8f9fb; border-radius:5px;">
-              <div style="font-size:0.72rem; font-weight:600; color:var(--text);">Disaster brand</div>
-              <div style="font-size:0.65rem; color:#6b7280;">Chernobyl: 1% Trends, 0% Wikipedia</div>
-            </div>
-            <div style="padding:0.4rem 0.6rem; background:#f8f9fb; border-radius:5px;">
-              <div style="font-size:0.72rem; font-weight:600; color:var(--text);">Recognition vs recall</div>
-              <div style="font-size:0.65rem; color:#6b7280;">72 LLMs: 90%+ forced, 65–78% free</div>
-            </div>
-          </div>
+          <div id="stat-analysis-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem;"></div>
+          <div id="stat-analysis-findings" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; margin-top: 0.4rem;"></div>
         </div>
         <div class="chart-container" style="margin-bottom:0;">
           <div class="chart-title" style="color: var(--text)">Confusion Matrix</div>
-          <div class="chart-subtitle" style="margin-bottom: 0.5rem;">DeBERTa-v3-large test set — 3,680 texts · 90.1% accuracy · macro F1 = 0.857</div>
+          <div class="chart-subtitle" id="cm-subtitle" style="margin-bottom: 0.5rem;"></div>
           <div id="cl-confusion-matrix" style="display:flex;justify-content:center;"></div>
         </div>
       </div>
@@ -931,6 +893,8 @@ function formatNum(n: number) {
     import clCollocations from '../data/cl_collocations.json';
     import clAnalysis from '../data/cl_analysis.json';
     import confusionMatrix from '../data/confusion_matrix.json';
+    import analysisData from '../data/analysis.json';
+    import regexPrecision from '../data/regex_precision.json';
 
     // Use manifest as the single pairs source
     const pairs = { categories: manifest.categories, pairs: manifest.pairs };
@@ -3262,7 +3226,7 @@ function formatNum(n: number) {
 
       // Axis labels
       svg.append('text').attr('x', padL + n*cell/2).attr('y', h - 2)
-        .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af').text('Predicted (XLM-RoBERTa)');
+        .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af').text(`Predicted (DeBERTa-v3-large) — F1=${((confusionMatrix as any).f1_macro || 0).toFixed(3)}`);
       svg.append('text').attr('x', 8).attr('y', padT + n*cell/2)
         .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af')
         .attr('transform', `rotate(-90,8,${padT + n*cell/2})`).text('True (Gemini)');
@@ -3310,6 +3274,73 @@ function formatNum(n: number) {
 
     // Call it on load
     drawConfusionMatrix();
+    // CM subtitle from data
+    const cmSub = document.getElementById('cm-subtitle');
+    if (cmSub) {
+      const cm = confusionMatrix as any;
+      cmSub.textContent = `DeBERTa-v3-large test set — ${(cm.n_total || 0).toLocaleString()} texts · ${((cm.accuracy || 0) * 100).toFixed(1)}% accuracy · macro F1 = ${(cm.f1_macro || 0).toFixed(3)}`;
+    }
+
+    // Statistical Analysis — rendered from data, not hardcoded
+    (function renderStatAnalysis() {
+      const an = analysisData as any;
+      const rp = regexPrecision as any;
+      const ea = errorAnalysis as any;
+
+      const reg = an.regression || {};
+      const kw = an.kruskal_wallis || {};
+      const inv = an.invasion_effect || {};
+
+      // Best invasion effect (highest Cohen's d)
+      let bestInv = { d: 0, p: 1, src: '' };
+      for (const [src, res] of Object.entries(inv)) {
+        const r = res as any;
+        if (Math.abs(r.cohens_d) > Math.abs(bestInv.d)) {
+          bestInv = { d: r.cohens_d, p: r.p, src };
+        }
+      }
+
+      const grid = document.getElementById('stat-analysis-grid');
+      if (!grid) return;
+
+      const cards = [
+        { value: `R²=${(reg.r_squared || 0).toFixed(2)}`, label: 'Regression fit', sub: `β=${(reg.beta || 0).toFixed(2)}, n=${reg.n || 0}`, bg: '#f0f9ff', color: '#0057B8' },
+        { value: bestInv.p < 0.001 ? 'p<0.001' : `p=${bestInv.p.toFixed(3)}`, label: 'Invasion effect', sub: `Wilcoxon; d=${bestInv.d.toFixed(2)}`, bg: '#fef2f2', color: '#dc2626' },
+        { value: `${rp.overall_precision || 0}%`, label: 'Regex precision', sub: `${rp.total_false_positives || 0} FP / ${(rp.total_sampled || 0).toLocaleString()}`, bg: '#f0fdf4', color: '#059669' },
+        { value: kw.p < 0.001 ? 'p<0.001' : `p=${(kw.p || 0).toFixed(3)}`, label: 'Category test', sub: `H=${(kw.H || 0).toFixed(2)}`, bg: '#fefce8', color: '#d97706' },
+      ];
+
+      grid.innerHTML = cards.map(c => `
+        <div style="padding:0.6rem 0.4rem;background:${c.bg};border-radius:6px;text-align:center;">
+          <div style="font-size:1.2rem;font-weight:700;color:${c.color};">${c.value}</div>
+          <div style="font-size:0.65rem;color:#6b7280;">${c.label}</div>
+          <div style="font-size:0.58rem;color:#9ca3af;">${c.sub}</div>
+        </div>
+      `).join('');
+
+      // Findings row — from data
+      const spread = ea.summary?.median_spread_pp || 54;
+      const p70 = (manifest as any).pairs?.find((p:any) => p.id === 70);
+      const p10 = (manifest as any).pairs?.find((p:any) => p.id === 10);
+      const p1 = (manifest as any).pairs?.find((p:any) => p.id === 1);
+
+      const findings = [
+        { title: 'Cross-source spread', text: `Median ${spread}pp — highly domain-dependent` },
+        { title: 'Historical identity', text: `Kyiv ${(p1?.adoption || 0).toFixed(0)}% but Volodymyr the Great ${(p70?.adoption || 0).toFixed(0)}%` },
+        { title: 'Disaster brand', text: `Chernobyl: ${(p10?.adoption || 0).toFixed(0)}% overall adoption` },
+        { title: 'Recognition vs recall', text: `72 LLMs: 90%+ forced, 65–78% free` },
+      ];
+
+      const findingsEl = document.getElementById('stat-analysis-findings');
+      if (findingsEl) {
+        findingsEl.innerHTML = findings.map(f => `
+          <div style="padding:0.4rem 0.6rem;background:#f8f9fb;border-radius:5px;">
+            <div style="font-size:0.72rem;font-weight:600;color:var(--text);">${f.title}</div>
+            <div style="font-size:0.65rem;color:#6b7280;">${f.text}</div>
+          </div>
+        `).join('');
+      }
+    })();
   </script>
 </body>
 </html>
