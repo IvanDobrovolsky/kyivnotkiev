@@ -74,7 +74,7 @@ Our context classifier enables measurement of WHERE within discourse adoption oc
    - Sentiment (positive/neutral/negative with -1 to +1 score)
    - Brief reasoning
 
-2. **Human validation**: 200 random annotations spot-checked for agreement
+2. **Human validation**: 220 annotations validated by 2 independent human annotators (Cohen κ=0.52, LLM-human κ=0.56-0.69)
 
 3. **Three encoder models fine-tuned** on LLM labels:
    - DeBERTa-v3-large (304M parameters)
@@ -116,7 +116,7 @@ All three encoders use identical hyperparameters for fair comparison:
 
 - **Why not GPT?** Reproducibility. Llama is open-weights, versioned, deterministic at temperature 0.05. The exact prompt and model are documented.
 - **Why fine-tune encoders?** The LLM is the annotator; the encoder is the publishable artifact. A 550M parameter model that anyone can download and run on a laptop in seconds.
-- **Why 3 models?** Proves the labels are robust (if 3 architectures all learn them at F1>0.85, the signal is real, not noise).
+- **Why 3 models?** Proves the labels are robust (if 3 architectures all learn them at F1>0.80, the signal is real, not noise).
 - **Why not just collocations?** Collocations show correlation; the classifier provides causation-adjacent evidence. "Texts about sports tend to use the Russian form" is stronger than "the Russian form co-occurs with 'champion'."
 
 ## Published Artifacts

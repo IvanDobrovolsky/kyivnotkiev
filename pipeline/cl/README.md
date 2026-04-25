@@ -8,7 +8,7 @@ This pipeline goes beyond counting Ukrainian vs Russian spelling forms -- it ana
 
 Binary regex matching tells us *whether* the world switched from "Kiev" to "Kyiv." But it can't explain *why* Chernobyl resists change at 5% adoption while Kyiv succeeded at 60%. The CL pipeline answers this:
 
-| Spelling | Top collocations | Context |
+| Spelling | Top contrastive words | Context |
 |----------|-----------------|---------|
 | "Chernobyl" (Russian) | accident, disaster, fukushima, hbo, nuclear | Disaster narrative, pop culture (HBO series), nuclear history |
 | "Chornobyl" (Ukrainian) | accident, cleanup, clean, workers, disaster | Nuclear site operations, remediation, worker health |
@@ -37,7 +37,7 @@ flowchart TD
 
     subgraph Annotate["LLM Annotation"]
         style Annotate fill:#1a1a2e,stroke:#8b5cf6,color:#e2e8f0
-        L["Llama 3.1 70B on B200<br/>11 context classes + sentiment<br/>100% parse rate, conf 0.926"]
+        L["Claude Haiku 4.5<br/>11 context classes + sentiment<br/>100% parse rate, conf 0.926"]
     end
 
     subgraph Finetune["Encoder Fine-Tuning"]
@@ -109,9 +109,9 @@ flowchart TD
 
 ## Mathematical Details
 
-### NPMI (Normalized Pointwise Mutual Information)
+### Contrastive Analysis (Log-Odds Ratio)
 
-For collocation extraction, we use NPMI to rank co-occurring words:
+For contrastive word analysis, we use the log-odds ratio with informative Dirichlet prior (Monroe et al. 2008):
 
 ```
 PMI(w, target) = log2 P(w, target) / (P(w) * P(target))
@@ -129,7 +129,7 @@ NPMI normalizes to [-1, 1], preventing rare words from ranking artificially high
 L = -sum_i y_i log(softmax(Wx + b)_i)
 ```
 
-Where `x` is the `[CLS]` token representation from the encoder (1024-dim for XLM-RoBERTa-large), `W in R^(11x1024)`, and `y` is the one-hot label from Llama annotation.
+Where `x` is the `[CLS]` token representation from the encoder (1024-dim for XLM-RoBERTa-large), `W in R^(11x1024)`, and `y` is the one-hot label from LLM annotation.
 
 ### Training Configuration
 
@@ -174,7 +174,7 @@ make cl-all                  # Full pipeline end-to-end
 | Task | Wall time | Cost |
 |------|-----------|------|
 | Instance setup (boot, deps, model download, warmup) | ~25 min | — |
-| Haiku annotation (36,791 texts, 16 concurrent) | 45 min | — |
+| Claude Haiku 4.5 annotation (36,791 texts, 20 concurrent) | 45 min | — |
 | 3-model encoder benchmark (DeBERTa, XLM-R, mDeBERTa) | 25 min | — |
 | 9 robustness experiments (seeds, LRs, thresholds, epochs) | 2.5 hrs | — |
 | **Total (NVIDIA B200 183GB, vast.ai)** | **~4.5 hrs** | **$14.10** |

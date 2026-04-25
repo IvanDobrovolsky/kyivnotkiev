@@ -38,7 +38,7 @@ flowchart TD
         style CL fill:#1a1a2e,stroke:#06b6d4,color:#e2e8f0
         extract["extract texts"]
         annotate["Llama 3.1 70B annotation"]
-        finetune["XLM-RoBERTa-large fine-tuning"]
+        finetune["DeBERTa-v3-large fine-tuning"]
         export["HF dataset + model"]
     end
 

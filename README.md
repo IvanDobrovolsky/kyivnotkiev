@@ -26,7 +26,7 @@
 | Toponym matches | **614M+** (39.6M news articles, 573M pageviews, 381K papers, 151K trends, 22.6K posts, 14.5K videos, 11.6K books, 1.9K book titles) |
 | Toponym pairs | **59** enabled across **8** categories |
 | Data sources | **8** (GDELT, Google Trends, Wikipedia, Reddit, YouTube, Google Books Ngrams, OpenAlex, Open Library) |
-| CL corpus | **42,613** texts, XLM-RoBERTa-large F1=83.8% |
+| CL corpus | **80,141** texts, DeBERTa-v3-large F1=85.7% |
 | Time span | **2010--2026** (Ngrams: 1900--2019) |
 | Countries | **55** with per-country adoption data |
 | Infrastructure | **HuggingFace** (dataset + model) + vast.ai GPU |
@@ -57,9 +57,9 @@ graph LR
 
     subgraph CL["CL Pipeline"]
         style CL fill:#1a1a2e,stroke:#8b5cf6,color:#e2e8f0
-        Extract["Extract<br/>42,613 texts"]
-        Annotate["Llama 3.1 70B<br/>Annotation"]
-        Finetune["XLM-RoBERTa-large<br/>F1=83.8%"]
+        Extract["Extract<br/>80,141 texts"]
+        Annotate["Claude Haiku 4.5<br/>Annotation"]
+        Finetune["DeBERTa-v3-large<br/>F1=85.7%"]
     end
 
     subgraph Storage["HuggingFace"]
