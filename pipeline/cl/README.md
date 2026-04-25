@@ -32,7 +32,7 @@ flowchart TD
 
     subgraph Balance["Balancing & Cleaning"]
         style Balance fill:#1a1a2e,stroke:#f59e0b,color:#e2e8f0
-        B["Stratified sampling<br/>pair x source x variant x year<br/>42,613 balanced texts (51% RU / 49% UA)"]
+        B["Stratified sampling<br/>pair x source x variant x year<br/>36,791 balanced texts (51% RU / 49% UA)"]
     end
 
     subgraph Annotate["LLM Annotation"]
@@ -42,7 +42,7 @@ flowchart TD
 
     subgraph Finetune["Encoder Fine-Tuning"]
         style Finetune fill:#1a1a2e,stroke:#06b6d4,color:#e2e8f0
-        X["XLM-RoBERTa-large — F1=83.8%"]
+        X["DeBERTa-v3-large — F1=85.7%"]
         D["DeBERTa-v3-large"]
         M["mDeBERTa-v3-base"]
     end
@@ -85,7 +85,9 @@ flowchart TD
 
 | Model | Parameters | F1 (macro) | Accuracy |
 |-------|-----------|------------|----------|
-| **XLM-RoBERTa-large** | 550M | **83.8%** | — |
+| **DeBERTa-v3-large** | 304M | **85.7%** | — |
+| XLM-RoBERTa-large | 550M | 84.6% | — |
+| mDeBERTa-v3-base | 86M | 80.7% | — |
 | DeBERTa-v3-large | 304M | — | — |
 | mDeBERTa-v3-base | 86M | — | — |
 
@@ -165,14 +167,14 @@ make cl-all                  # Full pipeline end-to-end
 | Reddit | 11,341 | Social media | Titles + comment bodies |
 | Religious | 1,256 | Institutional | Religious organization web content |
 | GDELT | 1,071 | News | Article bodies via trafilatura |
-| **Total** | **42,613** | | |
+| **Total** | **36,791** | | |
 
 ## Hardware
 
 | Task | Wall time | Cost |
 |------|-----------|------|
 | Instance setup (boot, deps, model download, warmup) | ~25 min | — |
-| Llama 70B annotation (42,613 texts, 16 concurrent) | 45 min | — |
+| Haiku annotation (36,791 texts, 16 concurrent) | 45 min | — |
 | 3-model encoder benchmark (DeBERTa, XLM-R, mDeBERTa) | 25 min | — |
 | 9 robustness experiments (seeds, LRs, thresholds, epochs) | 2.5 hrs | — |
 | **Total (NVIDIA B200 183GB, vast.ai)** | **~4.5 hrs** | **$14.10** |

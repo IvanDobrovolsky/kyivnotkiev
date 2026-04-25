@@ -56,7 +56,7 @@ flowchart TD
     wm -->|fresh| skip["skip"]
     gdelt & reddit & wiki & trends & ngrams & yt & oa & ol --> adopt
     adopt --> cp & cat & hold & reg
-    adopt -->|42,613 texts| extract --> annotate --> finetune --> export
+    adopt -->|80,141 texts| extract --> annotate --> finetune --> export
     cp & cat & hold & reg --> cross & heat & choro & modern
 ```
 

@@ -184,7 +184,7 @@ def _get_cl_corpus_size():
             if src_dir.is_dir():
                 for f in src_dir.glob("*.parquet"):
                     total += len(pd.read_parquet(f, columns=["pair_id"]))
-    return total if total > 0 else 42613
+    return total if total > 0 else 80141
 
 
 def _safe_div(a, b):

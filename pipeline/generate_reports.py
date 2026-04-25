@@ -305,7 +305,7 @@ def generate_analysis_text(pair, ts_data, llm_summary, coll_data, religious_data
         if shared:
             parts.append(f'both forms share <em>{", ".join(list(shared)[:3])}</em>')
 
-        paragraphs.append(f'<p style="margin-bottom:0.7rem;"><strong>Collocation analysis (PMI-ranked):</strong> {"; ".join(parts)}. These patterns reveal how each spelling form lives in distinct discourse communities.</p>')
+        paragraphs.append(f'<p style="margin-bottom:0.7rem;"><strong>Contrastive analysis (log-odds ratio):</strong> {"; ".join(parts)}. These patterns reveal how each spelling form lives in distinct discourse communities.</p>')
 
     # --- P4: Context distribution ---
     ru_ctx = ctx_dist.get("russian", {})
@@ -577,8 +577,8 @@ def generate_report(pair, timeseries, llm_data, collocations, religious_data, pa
     coll_html = ""
     if ru_cloud or ua_cloud:
         coll_html = f'''<div class="card">
-  <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Collocations</div>
-  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">PMI-ranked · {coll_label}</p>
+  <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;">Contrastive Analysis</div>
+  <p style="color:#6b7280;font-size:0.72rem;margin-bottom:0.75rem;">Log-odds ratio (Monroe et al. 2008) · {coll_label}</p>
   {ru_cloud}{ua_cloud}
 </div>'''
 

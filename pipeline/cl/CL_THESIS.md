@@ -4,7 +4,7 @@
 
 **Toponym variant choice is not merely a temporal adoption phenomenon — it is a discourse marker that signals the writer's engagement context, awareness level, and relationship to the subject.**
 
-Previous studies of the #KyivNotKiev campaign and similar naming initiatives measured adoption as a binary switching rate: what percentage of sources use the Ukrainian form? We demonstrate that this framing misses the fundamental nature of the phenomenon. Using transformer-based context classification on 42,613 texts across 59 toponym pairs, we show that the Russian and Ukrainian forms of each toponym occupy **systematically different semantic and contextual spaces**.
+Previous studies of the #KyivNotKiev campaign and similar naming initiatives measured adoption as a binary switching rate: what percentage of sources use the Ukrainian form? We demonstrate that this framing misses the fundamental nature of the phenomenon. Using transformer-based context classification on 80,141 texts across 59 toponym pairs, we show that the Russian and Ukrainian forms of each toponym occupy **systematically different semantic and contextual spaces**.
 
 ## Key Findings
 
@@ -61,7 +61,7 @@ Our context classifier enables measurement of WHERE within discourse adoption oc
 
 ### Dataset: KyivNotKiev-CL Corpus
 
-- **42,613 texts** across **59 Ukrainian-Russian toponym pairs**
+- **80,141 texts** (36,791 training + 43,350 inference) across **59 Ukrainian-Russian toponym pairs**
 - **5 sources**: Reddit (social media), YouTube (video), OpenAlex (academic), GDELT (news articles), Religious institutions
 - **Balanced**: 21,749 Russian / 20,864 Ukrainian variants (51/49%)
 - **Multilingual**: 82% Latin script (primarily English), 17% Cyrillic (Ukrainian/Russian), 2% mixed
@@ -121,7 +121,7 @@ All three encoders use identical hyperparameters for fair comparison:
 
 ## Published Artifacts
 
-1. **Dataset**: `IvanDobrovolsky/kyivnotkiev-cl` on Hugging Face — 42,613 labeled texts with full provenance
+1. **Dataset**: `IvanDobrovolsky/kyivnotkiev-cl` on Hugging Face — 80,141 labeled texts with full provenance
 2. **Model**: `IvanDobrovolsky/toponym-context-classifier` — best-performing encoder with benchmark results
 3. **Embeddings**: Precomputed sentence embeddings for variant clustering analysis
 4. **Code**: Full pipeline at github.com/IvanDobrovolsky/kyivnotkiev under `pipeline/cl/`
