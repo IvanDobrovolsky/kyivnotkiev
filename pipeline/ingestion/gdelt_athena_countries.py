@@ -219,6 +219,14 @@ def main():
     df = table.to_pandas()
     log.info(f"Loaded: {len(df):,} rows, {df['pair_id'].nunique()} pairs")
 
+    # Filter to recent data (last 24 months) — matches map subtitle
+    # Using all years would be misleading: legacy URLs contain "kiev" as a slug
+    # artifact, not an editorial choice (e.g., izvestia.kiev.ua, old URL paths)
+    from datetime import date, timedelta
+    cutoff = (date.today() - timedelta(days=24 * 30)).isoformat()[:10]
+    df = df[df["date"] >= cutoff].copy()
+    log.info(f"After 24-month filter (>= {cutoff}): {len(df):,} rows")
+
     # Map domains to countries
     df["country"] = df["source_domain"].apply(domain_to_country)
     mapped = df[df["country"] != ""]
