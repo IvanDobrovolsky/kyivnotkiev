@@ -17,84 +17,87 @@ function adoptionColor(pct: number) {
 }
 
 const pairs = m.pairs.filter((p: any) => !p.is_control).sort((a: any, b: any) => (b.total || 0) - (a.total || 0));
-const categories = m.categories || [];
+const categories = (m.categories || []).filter((c: any) => pairs.some((p: any) => p.category === c.id));
 ---
 
 <Base activeNav="home">
 
 <!-- Hero -->
-<div style="display:flex; align-items:center; gap:1.5rem; padding:1.5rem 0 1rem;">
+<div style="display:flex; align-items:center; gap:1.5rem; padding:1.5rem 0 0.75rem;">
   <img src="/logo.svg" alt="Kyiv chestnut" style="height:80px; width:auto; flex-shrink:0;">
   <div>
     <h1 style="font-size:1.6rem; font-weight:800; margin:0; line-height:1.2; color:#0057B8;">
       #KyivNotKiev
     </h1>
-    <p style="color:var(--text); font-size:0.9rem; margin:0.3rem 0 0; line-height:1.5;">
-      Measuring how the world spells Ukrainian place names — {fmtBig(m.toponym_matches)} matches across {m.num_sources} sources, {m.time_span}.
+    <p style="color:var(--text); font-size:0.9rem; margin:0.3rem 0 0; line-height:1.6;">
+      In 2018, Ukraine's foreign ministry <a href="https://en.wikipedia.org/wiki/KyivNotKiev" target="_blank" style="color:#0057B8;">launched a campaign</a> to change
+      how the world spells Ukrainian place names. We built a data pipeline to measure whether it worked.
     </p>
   </div>
 </div>
 
 <!-- Stats strip -->
-<div class="stats resp-grid-5" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 1rem;">
-  <div class="stat-card">
-    <div class="stat-value">{m.records_scanned}</div>
-    <div class="stat-label">Records Scanned</div>
+<div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:3px; margin-bottom:1rem;">
+  <div class="stat-pill">
+    <span class="stat-pill-value">{m.records_scanned}</span>
+    <span class="stat-pill-label">records scanned</span>
   </div>
-  <div class="stat-card">
-    <div class="stat-value">{fmtBig(m.toponym_matches)}</div>
-    <div class="stat-label">Toponym Matches</div>
+  <div class="stat-pill">
+    <span class="stat-pill-value">{fmtBig(m.toponym_matches)}</span>
+    <span class="stat-pill-label">toponym matches</span>
   </div>
-  <div class="stat-card">
-    <div class="stat-value">{m.analyzable_pairs}</div>
-    <div class="stat-label">Toponym Pairs</div>
+  <div class="stat-pill">
+    <span class="stat-pill-value">{m.analyzable_pairs}</span>
+    <span class="stat-pill-label">pairs tracked</span>
   </div>
-  <div class="stat-card">
-    <div class="stat-value">{m.num_sources}</div>
-    <div class="stat-label">Data Sources</div>
+  <div class="stat-pill">
+    <span class="stat-pill-value">{m.num_sources}</span>
+    <span class="stat-pill-label">data sources</span>
   </div>
-  <div class="stat-card">
-    <div class="stat-value">{m.time_span}</div>
-    <div class="stat-label">Time Span</div>
+  <div class="stat-pill">
+    <span class="stat-pill-value">{m.time_span}</span>
+    <span class="stat-pill-label">time span</span>
   </div>
 </div>
 
-<!-- Filter/sort controls -->
-<div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem; flex-wrap:wrap;">
-  <span style="font-size:0.75rem; color:var(--text-muted);">Sort:</span>
-  <button class="sort-btn active" data-sort="volume">Volume</button>
-  <button class="sort-btn" data-sort="adoption">Adoption %</button>
-  <button class="sort-btn" data-sort="alpha">A-Z</button>
-  <span style="flex:1;"></span>
-  <span style="font-size:0.75rem; color:var(--text-muted);">Filter:</span>
-  <button class="filter-btn active" data-cat="all">All</button>
-  {categories.map((cat: any) => (
-    <button class="filter-btn" data-cat={cat.id} style={`--cat-color: ${cat.color}`}>{cat.name}</button>
-  ))}
+<!-- Sort + Filter -->
+<div class="controls-bar">
+  <div class="controls-group">
+    <span class="controls-label">Sort</span>
+    <button class="ctrl-btn active" data-sort="volume">Volume</button>
+    <button class="ctrl-btn" data-sort="adoption">Adoption</button>
+    <button class="ctrl-btn" data-sort="alpha">A-Z</button>
+  </div>
+  <div class="controls-group">
+    <span class="controls-label">Filter</span>
+    <button class="ctrl-btn active" data-cat="all">All</button>
+    {categories.map((cat: any) => (
+      <button class="ctrl-btn" data-cat={cat.id}>{cat.name}</button>
+    ))}
+  </div>
 </div>
 
-<!-- Pair cards grid -->
-<div id="pair-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:0.6rem;">
+<!-- Pair cards -->
+<div id="pair-grid" class="pair-grid">
   {pairs.map((p: any) => {
     const pct = p.adoption || 0;
     const color = adoptionColor(pct);
     return (
-      <a href={`/pair/${p.id}`} class="pair-card" data-category={p.category} data-adoption={pct} data-total={p.total || 0} data-name={p.ukrainian}
-         style="text-decoration:none; display:block; padding:0.7rem 0.9rem; border:1px solid var(--border); border-radius:8px; background:var(--card-bg); transition:all 0.15s; cursor:pointer;">
-        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:0.5rem;">
-          <div style="min-width:0; overflow:hidden;">
-            <span style="font-size:0.7rem; color:var(--text-muted); text-decoration:line-through;">{p.russian}</span>
-            <span style="font-size:0.7rem; color:var(--text-muted); margin:0 0.2rem;">→</span>
-            <span style="font-size:0.85rem; font-weight:600; color:var(--text);">{p.ukrainian}</span>
+      <a href={`/pair/${p.id}`} class="pair-card" data-category={p.category} data-adoption={pct} data-total={p.total || 0} data-name={p.ukrainian}>
+        <div class="pair-card-top">
+          <div class="pair-card-names">
+            <span class="pair-old">{p.russian}</span>
+            <span class="pair-arrow">→</span>
+            <span class="pair-new">{p.ukrainian}</span>
           </div>
-          <span style={`font-size:0.9rem; font-weight:700; color:${color}; flex-shrink:0;`}>{pct}%</span>
+          <span class="pair-pct" style={`color:${color}`}>{pct}%</span>
         </div>
-        <div style="height:3px; background:#f0f0f0; border-radius:2px; margin-top:0.35rem;">
-          <div style={`height:100%; width:${Math.min(pct, 100)}%; background:${color}; border-radius:2px;`}></div>
+        <div class="pair-card-bar">
+          <div style={`width:${Math.min(pct, 100)}%; background:${color};`}></div>
         </div>
-        <div style="display:flex; justify-content:space-between; margin-top:0.25rem;">
-          <span style="font-size:0.6rem; color:var(--text-dim);">{p.category}</span>
-          <span style="font-size:0.6rem; color:var(--text-dim);">{fmtBig(p.total || 0)} matches</span>
+        <div class="pair-card-meta">
+          <span>{p.category}</span>
+          <span>{fmtBig(p.total || 0)} matches</span>
         </div>
       </a>
     );
@@ -102,26 +105,26 @@ const categories = m.categories || [];
 </div>
 
 <!-- About -->
-<div style="margin-top:1.5rem; padding:1rem; font-size:0.8rem; color:var(--text-muted); line-height:1.6; border-top:1px solid var(--border);">
-  <p style="margin:0 0 0.5rem;">
-    In 2018 Ukraine's MFA launched #KyivNotKiev — a campaign to change how the world spells Ukrainian place names.
-    This project measures whether it worked, tracking {m.analyzable_pairs} toponym pairs across {m.num_sources} independent
-    data sources spanning {m.time_span}.
+<div class="about-footer">
+  <p>
+    This dashboard tracks {m.analyzable_pairs} Ukrainian toponym pairs across {m.num_sources} independent data sources
+    (news, search, encyclopedias, social media, books, and academic papers) from {m.time_span}.
+    Each pair measures a single question: did the author write the Ukrainian or Russian spelling?
   </p>
-  <p style="margin:0;">
-    Built by <a href="https://github.com/IvanDobrovolsky" target="_blank" style="color:#0057B8;">Ivan Dobrovolsky</a>.
-    Dataset and model on <a href="https://huggingface.co/KyivNotKiev" target="_blank" style="color:#0057B8;">Hugging Face</a>.
+  <p>
+    Built by <a href="https://github.com/IvanDobrovolsky" target="_blank">Ivan Dobrovolsky</a>.
+    Dataset and model on <a href="https://huggingface.co/KyivNotKiev" target="_blank">Hugging Face</a>.
+    <a href="https://www.bbc.com/ukrainian/news-45718643" target="_blank">BBC Ukraine coverage</a>.
   </p>
 </div>
 
 <script>
-  // Sort and filter
   const grid = document.getElementById('pair-grid')!;
   const cards = Array.from(grid.querySelectorAll('.pair-card')) as HTMLElement[];
 
-  document.querySelectorAll('.sort-btn').forEach(btn => {
+  document.querySelectorAll('[data-sort]').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('[data-sort]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const mode = (btn as HTMLElement).dataset.sort;
       const sorted = [...cards].sort((a, b) => {
@@ -133,9 +136,9 @@ const categories = m.categories || [];
     });
   });
 
-  document.querySelectorAll('.filter-btn').forEach(btn => {
+  document.querySelectorAll('[data-cat]').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('[data-cat]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const cat = (btn as HTMLElement).dataset.cat;
       cards.forEach(c => {
@@ -146,25 +149,142 @@ const categories = m.categories || [];
 </script>
 
 <style>
-  .sort-btn, .filter-btn {
-    font-size: 0.65rem;
-    padding: 0.2rem 0.5rem;
+  .stat-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    background: var(--card-bg);
+    border-radius: 6px;
     border: 1px solid var(--border);
-    border-radius: 4px;
+  }
+  .stat-pill-value {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .stat-pill-label {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .controls-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .controls-group {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+  }
+  .controls-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-right: 0.2rem;
+  }
+  .ctrl-btn {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
     background: var(--card-bg);
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.15s;
+    font-weight: 500;
   }
-  .sort-btn.active, .filter-btn.active {
+  .ctrl-btn:hover { border-color: #0057B8; color: var(--text); }
+  .ctrl-btn.active {
     background: #0057B8;
     color: white;
     border-color: #0057B8;
   }
-  .pair-card:hover {
-    border-color: #0057B8 !important;
-    box-shadow: 0 2px 8px rgba(0,87,184,0.1);
+
+  .pair-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.6rem;
   }
+  .pair-card {
+    text-decoration: none;
+    display: block;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card-bg);
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+  .pair-card:hover {
+    border-color: #0057B8;
+    box-shadow: 0 2px 8px rgba(0,87,184,0.08);
+  }
+  .pair-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .pair-card-names { min-width: 0; overflow: hidden; }
+  .pair-old {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+  .pair-arrow {
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    margin: 0 0.15rem;
+  }
+  .pair-new {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .pair-pct {
+    font-size: 0.95rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .pair-card-bar {
+    height: 3px;
+    background: #f0f0f0;
+    border-radius: 2px;
+    margin-top: 0.3rem;
+    overflow: hidden;
+  }
+  .pair-card-bar div {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .pair-card-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.2rem;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+  }
+
+  .about-footer {
+    margin-top: 1.5rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .about-footer p { margin: 0 0 0.4rem; }
+  .about-footer a { color: #0057B8; }
 </style>
 
 </Base>

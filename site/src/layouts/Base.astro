@@ -17,10 +17,17 @@ function fmtBig(n: string | number) {
 }
 
 const {
-  title = '#KyivNotKiev: A Large-Scale Computational Study of Ukrainian Toponym Adoption',
-  description = `Scanning ${m.records_scanned} records, analyzing ${fmtBig(m.toponym_matches)}+ toponym matches across ${m.num_sources} sources. The largest computational study of Ukrainian spelling adoption.`,
+  title = '#KyivNotKiev — Measuring Ukrainian Toponym Adoption',
+  description = `In 2018, Ukraine launched a campaign to change how the world spells its place names. We built a data pipeline to measure whether it worked — ${fmtBig(m.toponym_matches)} matches across ${m.num_sources} sources.`,
   activeNav = '',
 } = Astro.props;
+
+const navItems = [
+  { href: '/', id: 'home', label: 'Pairs' },
+  { href: '/llm', id: 'llm', label: 'AI Audit' },
+  { href: '/sources', id: 'sources', label: 'Sources' },
+  { href: '/methodology', id: 'methodology', label: 'Methodology' },
+];
 ---
 
 <html lang="en">
@@ -49,22 +56,81 @@ const {
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <nav class="topbar">
-    <a href="/" class="topbar-logo" style="text-decoration:none;">
-      <img src="/logo.svg" alt="Kyiv chestnut" style="height:28px; width:auto; margin-right:0.4rem;">
-      <span style="font-size:0.9rem; font-weight:800; color:#0057B8;">#KyivNotKiev</span>
-    </a>
-    <div class="topbar-links">
-      <a href="/" class={activeNav === 'home' ? 'active' : ''}>Pairs</a>
-      <a href="/llm" class={activeNav === 'llm' ? 'active' : ''}>AI Audit</a>
-      <a href="/sources" class={activeNav === 'sources' ? 'active' : ''}>Sources</a>
-      <a href="/methodology" class={activeNav === 'methodology' ? 'active' : ''}>Methodology</a>
-      <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/" class="site-nav-logo">
+        <img src="/logo.svg" alt="" style="height:26px; width:auto;">
+        <span>#KyivNotKiev</span>
+      </a>
+      <div class="site-nav-links">
+        {navItems.map(item => (
+          <a href={item.href} class={activeNav === item.id ? 'active' : ''}>{item.label}</a>
+        ))}
+        <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
+      </div>
     </div>
   </nav>
 
-  <main style="max-width: 1200px; margin: 0 auto; padding: 0.75rem 1rem;">
+  <main class="site-main">
     <slot />
   </main>
 </body>
 </html>
+
+<style>
+  .site-nav {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .site-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+  }
+  .site-nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+  }
+  .site-nav-logo span {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #0057B8;
+  }
+  .site-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .site-nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.85rem 1rem;
+    transition: color 0.15s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .site-nav-links a:hover {
+    color: var(--text);
+  }
+  .site-nav-links a.active {
+    color: #0057B8;
+    border-bottom-color: #0057B8;
+    font-weight: 600;
+  }
+  .site-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.75rem 1rem 2rem;
+  }
+</style>
