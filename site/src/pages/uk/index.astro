@@ -42,11 +42,11 @@ function formatNum(n: number) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>#KyivNotKiev — Вимірювання топонімічних змін у реальному часі</title>
-  <meta name="description" content="Мультиджерельна обчислювальна платформа для відстеження прийняття українського правопису у понад 90B+ записів, 614M+ топонімічних збігів з 8 джерел, 2010–2026.">
+  <meta name="description" content={`Мультиджерельна обчислювальна платформа для відстеження прийняття українського правопису у понад ${m.records_scanned} записів, ${fmtBig(m.toponym_matches)}+ топонімічних збігів з ${m.num_sources} джерел, ${m.time_span}.`}>
 
   <!-- Open Graph -->
   <meta property="og:title" content="#KyivNotKiev — Вимірювання топонімічних змін у реальному часі">
-  <meta property="og:description" content="Вимірювання топонімічних змін у реальному часі у понад 90B+ записів, 614M+ збігів. Найбільше обчислювальне дослідження прийняття українського правопису у світі.">
+  <meta property="og:description" content={`Вимірювання топонімічних змін у реальному часі у понад ${m.records_scanned} записів, ${fmtBig(m.toponym_matches)}+ збігів. Найбільше обчислювальне дослідження прийняття українського правопису у світі.`}>
   <meta property="og:image" content="https://kyivnotkiev.org/og.png">
   <meta property="og:url" content="https://kyivnotkiev.org/uk/">
   <meta property="og:type" content="website">
@@ -56,7 +56,7 @@ function formatNum(n: number) {
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="#KyivNotKiev — Вимірювання топонімічних змін у реальному часі">
-  <meta name="twitter:description" content="614M+ записів, 8 джерел, 55 країн. Вимірювання топонімічних змін у реальному часі 2010–2026.">
+  <meta name="twitter:description" content={`${fmtBig(m.toponym_matches)}+ записів, ${m.num_sources} джерел, ${m.num_countries} країн. Вимірювання топонімічних змін у реальному часі ${m.time_span}.`}>
   <meta name="twitter:image" content="https://kyivnotkiev.org/og.png">
 
   <!-- Favicon -->
@@ -426,7 +426,7 @@ function formatNum(n: number) {
             <div style="font-size:0.75rem; text-transform:uppercase; color:#f59e0b; letter-spacing:0.05em; margin-bottom:0.5rem;">Рівень 1</div>
             <div style="font-size:1rem; font-weight:600; color:#e2e8f0; margin-bottom:0.5rem;">Великі дані</div>
             <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">
-              614M+ записів із 8 джерел. Просте запитання для кожного запису: автор написав українську чи російську форму? Бінарний regex-пошук у масштабі новин, пошукових запитів, соцмереж, книжок та наукових праць.
+              {fmtBig(m.toponym_matches)}+ записів із {m.num_sources} джерел. Просте запитання для кожного запису: автор написав українську чи російську форму? Бінарний regex-пошук у масштабі новин, пошукових запитів, соцмереж, книжок та наукових праць.
             </div>
             <div style="font-size:0.8rem; color:#f59e0b; margin-top:0.7rem; font-style:italic;">Відповідає: "Чи змінив світ написання?"</div>
           </div>
@@ -467,14 +467,14 @@ function formatNum(n: number) {
             виміряти, чи це справді спрацювало.
           </p>
           <p>
-            Ця панель відстежує 59 пар українських топонімів (від назв міст до страв і
-            історичних термінів) у 7 незалежних джерелах даних. Кожна точка даних походить з
+            Ця панель відстежує {m.analyzable_pairs} пар українських топонімів (від назв міст до страв і
+            історичних термінів) у {m.num_sources} незалежних джерелах даних. Кожна точка даних походить з
             реального вжитку — новинних статей, дописів у соцмережах, переглядів енциклопедій,
             частотності у книжках та пошукових трендів.
           </p>
           <p>
             Наш рівень комп'ютерної лінгвістики йде глибше: за допомогою трансформерних моделей,
-            навчених на 30 000+ розмічених текстах, ми класифікуємо <em>контекст</em>, у якому з'являється
+            навчених на {fmtBig(m.cl_corpus)}+ розмічених текстах, ми класифікуємо <em>контекст</em>, у якому з'являється
             кожен правопис. Опублікована модель і набір даних доступні на Hugging Face для інших
             дослідників, що вивчають прийняття мовної політики у світі.
           </p>

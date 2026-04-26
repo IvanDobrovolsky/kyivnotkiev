@@ -126,7 +126,8 @@ async def run():
     channel_stats = []
 
     for username, info in sorted(discovered.items(), key=lambda x: -(x[1].get("subscribers") or 0)):
-        log.info(f"\n  @{username} ({info['title']}, {info['subscribers']:,} subs)")
+        subs = info.get('subscribers') or 0
+        log.info(f"\n  @{username} ({info['title']}, {subs:,} subs)")
 
         try:
             count = 0
