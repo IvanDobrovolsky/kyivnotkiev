@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import m from '../data/manifest.json';
+import llmTraj from '../data/llm_trajectory.json';
+
+const nModels = (llmTraj as any)?.summary?.n_models || 72;
+const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
+---
+
+<Base title="AI Audit — #KyivNotKiev" activeNav="llm">
+
+<div style="margin-bottom:1rem;">
+  <h1 style="font-size:1.4rem; font-weight:800; color:var(--text); margin:0;">What AI Says About Ukrainian Place Names</h1>
+  <p style="font-size:0.85rem; color:var(--text-muted); margin:0.3rem 0 0; line-height:1.5;">
+    Search is being replaced by chat. We asked <strong>{nModels} frontier models</strong> from {nLabs} labs to spell Ukrainian
+    places — three different ways each — to see how the answer changes between recognition and free recall.
+  </p>
+</div>
+
+<!-- LLM heatmap will be rendered here by JS -->
+<div class="chart-container" style="margin-bottom:1rem;">
+  <div id="llm-heatmap"></div>
+</div>
+
+<!-- Per-pair LLM scatter will be rendered here -->
+<div class="chart-container" style="margin-bottom:1rem;">
+  <div class="chart-title" style="color:var(--text);">Per-Pair Results</div>
+  <div class="chart-subtitle" style="margin-bottom:0.5rem;">How each pair performs across all models</div>
+  <div id="llm-per-pair-overview"></div>
+</div>
+
+<script>
+  // TODO: Port LLM heatmap rendering from index.astro
+  // The heatmap, scatter, and model ranking functions will be extracted
+  // from the monolithic index.astro in a follow-up commit.
+  import llmTraj from '../data/llm_trajectory.json';
+  const container = document.getElementById('llm-heatmap');
+  if (container) {
+    container.innerHTML = '<p style="color:var(--text-muted); font-size:0.8rem; padding:2rem; text-align:center;">LLM audit visualization — porting in progress</p>';
+  }
+</script>
+
+</Base>

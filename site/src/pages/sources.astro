@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import m from '../data/manifest.json';
+
+function fmtBig(n: string | number) {
+  const v = typeof n === 'string' ? parseInt(n) : n;
+  if (v >= 1_000_000_000) return (v / 1_000_000_000).toFixed(1) + 'B';
+  if (v >= 1_000_000) return (v / 1_000_000).toFixed(1) + 'M';
+  if (v >= 1_000) return (v / 1_000).toFixed(1) + 'K';
+  return v.toString();
+}
+
+const sourceInfo: Record<string, {desc: string; url: string; coverage: string}> = {
+  gdelt: {desc: 'Global news monitoring — every article URL scanned for toponym matches', url: 'https://www.gdeltproject.org/', coverage: '2015-2026'},
+  trends: {desc: 'Google search interest — relative volume of searches for each spelling', url: 'https://trends.google.com/', coverage: '2010-2026'},
+  wikipedia: {desc: 'Page views for spelling-variant redirects — how people find articles', url: 'https://en.wikipedia.org/', coverage: '2015-2026'},
+  reddit: {desc: 'Posts and comments mentioning each spelling form', url: 'https://reddit.com/', coverage: '2007-2026'},
+  youtube: {desc: 'Video titles and descriptions containing each spelling', url: 'https://youtube.com/', coverage: '2010-2026'},
+  ngrams: {desc: 'Google Books corpus — spelling frequency in published books', url: 'https://books.google.com/ngrams', coverage: '2000-2019'},
+  openalex: {desc: 'Academic paper titles — scholarly adoption of spellings', url: 'https://openalex.org/', coverage: '2000-2026'},
+};
+---
+
+<Base title="Data Sources — #KyivNotKiev" activeNav="sources">
+
+<h1 style="font-size:1.4rem; font-weight:800; color:var(--text); margin:0 0 0.3rem;">Data Sources</h1>
+<p style="font-size:0.85rem; color:var(--text-muted); margin:0 0 1rem; line-height:1.5;">
+  {m.num_sources} independent sources, {m.records_scanned} records scanned, {fmtBig(m.toponym_matches)} toponym matches.
+  Each source measures adoption differently — news URLs, search interest, page views, social posts, books, academic papers.
+</p>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:0.75rem; margin-bottom:1.5rem;">
+  {Object.entries((m as any).sources).map(([key, s]: [string, any]) => {
+    const info = sourceInfo[key] || {desc: '', url: '', coverage: ''};
+    return (
+      <div class="chart-container" style="margin-bottom:0; padding:0.75rem 1rem;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:0.5rem;">
+          <div style="font-size:0.9rem; font-weight:700; color:var(--text);">{s.label}</div>
+          <div style="font-size:1.1rem; font-weight:800; color:{s.color};">{fmtBig(s.records)}</div>
+        </div>
+        <div style="font-size:0.7rem; color:var(--text-muted); margin:0.2rem 0 0.4rem;">{s.extra}</div>
+        <p style="font-size:0.72rem; color:var(--text); margin:0 0 0.3rem; line-height:1.5;">{info.desc}</p>
+        <div style="display:flex; justify-content:space-between; font-size:0.6rem; color:var(--text-dim);">
+          <span>{info.coverage}</span>
+          <a href={info.url} target="_blank" style="color:#0057B8;">Source</a>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+<div class="chart-container" style="margin-bottom:1rem;">
+  <div class="chart-title" style="color:var(--text);">Source Comparison</div>
+  <div class="chart-subtitle" style="margin-bottom:0.5rem;">How sources compare across all {m.analyzable_pairs} pairs</div>
+  <div id="source-comparison-chart" style="width:100%; min-height:300px;"></div>
+</div>
+
+<script>
+  // TODO: Port source comparison and category charts from index.astro
+  const container = document.getElementById('source-comparison-chart');
+  if (container) {
+    container.innerHTML = '<p style="color:var(--text-muted); font-size:0.8rem; padding:2rem; text-align:center;">Source comparison chart — porting in progress</p>';
+  }
+</script>
+
+</Base>

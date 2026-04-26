@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import PairView from '../../components/PairView.astro';
+import m from '../../data/manifest.json';
+import llmTraj from '../../data/llm_trajectory.json';
+import llmPerPair from '../../data/llm_per_pair.json';
+import toolsPerPair from '../../data/tools_per_pair.json';
+import religious from '../../data/religious.json';
+
+export function getStaticPaths() {
+  const manifest = m as any;
+  return manifest.pairs
+    .filter((p: any) => !p.is_control)
+    .map((p: any) => ({ params: { id: String(p.id) } }));
+}
+
+const { id } = Astro.params;
+const pair = (m as any).pairs.find((p: any) => String(p.id) === id);
+const title = pair ? `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev` : '#KyivNotKiev';
+---
+
+<Base title={title} activeNav="">
+
+<div style="margin-bottom:0.5rem;">
+  <a href="/" style="font-size:0.75rem; color:#0057B8; text-decoration:none;">← All pairs</a>
+</div>
+
+<div id="pair-detail" data-pair-id={id}>
+  <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} toolsPerPair={toolsPerPair} religious={religious} timeSpan={(m as any).time_span} />
+</div>
+
+<script>
+  import * as d3 from 'd3';
+  import * as topojson from 'topojson-client';
+  import timeseriesData from '../../data/timeseries.json';
+  import manifest from '../../data/manifest.json';
+  import holdoutsData from '../../data/holdouts.json';
+  import holdoutsByPair from '../../data/holdouts_by_pair.json';
+  import countriesByPair from '../../data/countries_by_pair.json';
+  import pairEvents from '../../data/pair_events.json';
+  import trendsCountries from '../../data/trends_countries.json';
+  import dictCombined from '../../data/dictionary_combined.json';
+  import domainOrigins from '../../data/domain_origins.json';
+  import clCollocations from '../../data/cl_collocations.json';
+  import clAnalysis from '../../data/cl_analysis.json';
+
+  const pairs = { categories: (manifest as any).categories, pairs: (manifest as any).pairs };
+  const container = document.getElementById('pair-detail');
+  const pairId = Number(container?.dataset.pairId || 0);
+
+  // Show pair view
+  const pairView = document.getElementById('pair-view');
+  if (pairView) pairView.style.display = 'block';
+
+  // Set pair name in chart titles
+  const pair = (pairs as any).pairs.find((p: any) => p.id === pairId);
+  if (pair) {
+    const oldEl = document.getElementById('chart-old');
+    const newEl = document.getElementById('chart-new');
+    if (oldEl) oldEl.textContent = pair.russian;
+    if (newEl) newEl.textContent = pair.ukrainian;
+  }
+
+  // TODO: Port chart drawing functions from index.astro
+  // For now, this is the skeleton. The full JS will be extracted
+  // into shared modules in a follow-up.
+</script>
+
+</Base>

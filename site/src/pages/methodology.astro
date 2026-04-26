@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import m from '../data/manifest.json';
+
+function fmtBig(n: string | number) {
+  const v = typeof n === 'string' ? parseInt(n) : n;
+  if (v >= 1_000_000_000) return (v / 1_000_000_000).toFixed(1) + 'B';
+  if (v >= 1_000_000) return (v / 1_000_000).toFixed(1) + 'M';
+  if (v >= 1_000) return (v / 1_000).toFixed(1) + 'K';
+  return v.toString();
+}
+---
+
+<Base title="Methodology — #KyivNotKiev" activeNav="methodology">
+
+<h1 style="font-size:1.4rem; font-weight:800; color:var(--text); margin:0 0 0.3rem;">Methodology</h1>
+<p style="font-size:0.85rem; color:var(--text-muted); margin:0 0 1rem; line-height:1.5;">
+  Statistical tests, ML pipeline, model benchmarks, and validation procedures.
+</p>
+
+<!-- Statistical Analysis -->
+<div class="chart-container" style="margin-bottom:0.75rem;">
+  <div class="chart-title" style="color:var(--text);">Statistical Analysis</div>
+  <div class="chart-subtitle" style="margin-bottom:0.5rem;">Kruskal-Wallis, Wilcoxon, Spearman, OLS — validating that patterns are real</div>
+  <div id="stat-analysis-grid" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:0.4rem;"></div>
+  <div id="stat-analysis-findings" style="display:grid; grid-template-columns:1fr 1fr; gap:0.35rem; margin-top:0.4rem;"></div>
+</div>
+
+<!-- Confusion Matrix + Benchmark side by side -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
+  <div class="chart-container" style="margin-bottom:0;">
+    <div class="chart-title" style="color:var(--text);">Confusion Matrix</div>
+    <div class="chart-subtitle" id="cm-subtitle" style="margin-bottom:0.5rem;"></div>
+    <div id="cl-confusion-matrix" style="display:flex; justify-content:center;"></div>
+  </div>
+  <div class="chart-container" id="cl-benchmark" style="margin-bottom:0;">
+    <div class="chart-title" style="color:var(--text);">Encoder Benchmark</div>
+    <div class="chart-subtitle" id="benchmark-subtitle" style="margin-bottom:0.5rem;"></div>
+    <div id="cl-benchmark-table"></div>
+  </div>
+</div>
+
+<!-- Context Distribution -->
+<div class="chart-container" style="margin-bottom:0.75rem;">
+  <div class="chart-title" style="color:var(--text);">Context Distribution</div>
+  <div class="chart-subtitle" style="margin-bottom:0.5rem;">Distribution of {fmtBig(m.cl_corpus)} texts across 11 discourse categories</div>
+  <div id="cl-context-bars"></div>
+</div>
+
+<!-- Error Analysis -->
+<div class="chart-container" style="margin-bottom:0.75rem;">
+  <div class="chart-title" style="color:var(--text);">Error Analysis</div>
+  <div class="chart-subtitle" style="margin-bottom:0.5rem;">Most confused class pairs in the DeBERTa classifier</div>
+  <div id="error-analysis"></div>
+</div>
+
+<!-- Category Chart -->
+<div class="chart-container" style="margin-bottom:0.75rem;">
+  <div class="chart-title" style="color:var(--text);">Adoption by Category</div>
+  <div class="chart-subtitle" style="margin-bottom:0.5rem;">Mean adoption (%) by category — equal weight per source</div>
+  <div id="category-chart" style="width:100%; height:260px;"></div>
+</div>
+
+<!-- Links -->
+<div class="chart-container" style="margin-bottom:1rem; padding:1rem;">
+  <div class="chart-title" style="color:var(--text);">Resources</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-top:0.5rem;">
+    <a href="https://huggingface.co/datasets/KyivNotKiev/ukrainian-toponym-adoption" target="_blank" style="display:block; padding:0.5rem 0.75rem; border:1px solid var(--border); border-radius:6px; text-decoration:none; font-size:0.8rem; color:var(--text);">
+      <strong>Dataset</strong> — Full dataset on Hugging Face
+    </a>
+    <a href="https://huggingface.co/KyivNotKiev/toponym-context-classifier" target="_blank" style="display:block; padding:0.5rem 0.75rem; border:1px solid var(--border); border-radius:6px; text-decoration:none; font-size:0.8rem; color:var(--text);">
+      <strong>Model</strong> — DeBERTa context classifier
+    </a>
+    <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank" style="display:block; padding:0.5rem 0.75rem; border:1px solid var(--border); border-radius:6px; text-decoration:none; font-size:0.8rem; color:var(--text);">
+      <strong>Code</strong> — Full pipeline on GitHub
+    </a>
+    <a href="/sources" style="display:block; padding:0.5rem 0.75rem; border:1px solid var(--border); border-radius:6px; text-decoration:none; font-size:0.8rem; color:var(--text);">
+      <strong>Sources</strong> — Data source details
+    </a>
+  </div>
+</div>
+
+<script>
+  import * as d3 from 'd3';
+  import analysisData from '../data/analysis.json';
+  import confusionMatrix from '../data/confusion_matrix.json';
+  import clAnalysis from '../data/cl_analysis.json';
+  import errorAnalysis from '../data/error_analysis.json';
+  import manifest from '../data/manifest.json';
+  import regexPrecision from '../data/regex_precision.json';
+
+  // TODO: Port statistical analysis, confusion matrix, benchmark,
+  // context distribution, error analysis, and category chart rendering
+  // from index.astro. These are self-contained D3 functions that
+  // will be extracted into shared modules.
+
+  // Placeholder
+  for (const id of ['stat-analysis-grid', 'cl-confusion-matrix', 'cl-benchmark-table', 'cl-context-bars', 'error-analysis', 'category-chart']) {
+    const el = document.getElementById(id);
+    if (el && !el.children.length) {
+      el.innerHTML = '<p style="color:var(--text-muted); font-size:0.8rem; padding:1rem; text-align:center;">Porting in progress</p>';
+    }
+  }
+</script>
+
+</Base>

@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import m from '../data/manifest.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  activeNav?: string;
+}
+
+function fmtBig(n: string | number) {
+  const v = typeof n === 'string' ? parseInt(n) : n;
+  if (v >= 1_000_000_000) return (v / 1_000_000_000).toFixed(1) + 'B';
+  if (v >= 1_000_000) return (v / 1_000_000).toFixed(1) + 'M';
+  if (v >= 1_000) return (v / 1_000).toFixed(1) + 'K';
+  return v.toString();
+}
+
+const {
+  title = '#KyivNotKiev: A Large-Scale Computational Study of Ukrainian Toponym Adoption',
+  description = `Scanning ${m.records_scanned} records, analyzing ${fmtBig(m.toponym_matches)}+ toponym matches across ${m.num_sources} sources. The largest computational study of Ukrainian spelling adoption.`,
+  activeNav = '',
+} = Astro.props;
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content="https://kyivnotkiev.org/og.png">
+  <meta property="og:url" content="https://kyivnotkiev.org">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content="https://kyivnotkiev.org/og.png">
+
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://kyivnotkiev.org/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="topbar">
+    <a href="/" class="topbar-logo" style="text-decoration:none;">
+      <img src="/logo.svg" alt="Kyiv chestnut" style="height:28px; width:auto; margin-right:0.4rem;">
+      <span style="font-size:0.9rem; font-weight:800; color:#0057B8;">#KyivNotKiev</span>
+    </a>
+    <div class="topbar-links">
+      <a href="/" class={activeNav === 'home' ? 'active' : ''}>Pairs</a>
+      <a href="/llm" class={activeNav === 'llm' ? 'active' : ''}>AI Audit</a>
+      <a href="/sources" class={activeNav === 'sources' ? 'active' : ''}>Sources</a>
+      <a href="/methodology" class={activeNav === 'methodology' ? 'active' : ''}>Methodology</a>
+      <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 0.75rem 1rem;">
+    <slot />
+  </main>
+</body>
+</html>
