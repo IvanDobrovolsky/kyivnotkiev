@@ -1,0 +1,21 @@
+---
+/**
+ * Universal card wrapper — replaces all inline chart-container styles.
+ * Supports title, subtitle, and slot content.
+ */
+interface Props {
+  title?: string;
+  subtitle?: string;
+  id?: string;
+  compact?: boolean;
+  class?: string;
+}
+const { title, subtitle, id, compact, class: className } = Astro.props;
+const classes = ['card', compact && 'card-compact', className].filter(Boolean).join(' ');
+---
+
+<div class={classes} id={id}>
+  {title && <div class="card-title">{title}</div>}
+  {subtitle && <div class="card-subtitle">{subtitle}</div>}
+  <slot />
+</div>

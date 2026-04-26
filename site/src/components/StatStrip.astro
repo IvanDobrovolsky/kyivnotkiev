@@ -1,0 +1,26 @@
+---
+/**
+ * Row of stat pills. Pass items as an array of {value, label}.
+ */
+interface Props {
+  items: Array<{ value: string | number; label: string }>;
+}
+const { items } = Astro.props;
+---
+
+<div class="stat-strip">
+  {items.map(item => (
+    <div class="stat-pill">
+      <span class="stat-pill-value">{item.value}</span>
+      <span class="stat-pill-label">{item.label}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 3px;
+  }
+</style>

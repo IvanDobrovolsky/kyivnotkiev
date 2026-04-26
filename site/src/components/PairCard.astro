@@ -1,0 +1,119 @@
+---
+/**
+ * Single pair card for the home grid.
+ */
+interface Props {
+  id: number;
+  russian: string;
+  ukrainian: string;
+  adoption: number;
+  total: number | string;
+  category: string;
+}
+
+function adoptionColor(pct: number) {
+  if (pct >= 70) return 'var(--green)';
+  if (pct >= 40) return 'var(--orange)';
+  return 'var(--red)';
+}
+
+function fmtBig(n: number | string) {
+  const v = typeof n === 'string' ? parseInt(n) : n;
+  if (v >= 1_000_000) return (v / 1_000_000).toFixed(1) + 'M';
+  if (v >= 1_000) return (v / 1_000).toFixed(1) + 'K';
+  return v.toString();
+}
+
+const { id, russian, ukrainian, adoption, total, category } = Astro.props;
+const pct = adoption || 0;
+const color = adoptionColor(pct);
+---
+
+<a href={`/pair/${id}`}
+   class="pair-card"
+   data-category={category}
+   data-adoption={pct}
+   data-total={total || 0}
+   data-name={ukrainian}>
+  <div class="pair-card-top">
+    <div class="pair-card-names">
+      <span class="pair-old">{russian}</span>
+      <span class="pair-arrow">&rarr;</span>
+      <span class="pair-new">{ukrainian}</span>
+    </div>
+    <span class="pair-pct" style={`color:${color}`}>{pct}%</span>
+  </div>
+  <div class="pair-card-bar">
+    <div class="pair-card-bar-fill" style={`width:${Math.min(pct, 100)}%; background:${color};`}></div>
+  </div>
+  <div class="pair-card-meta">
+    <span>{category}</span>
+    <span>{fmtBig(total || 0)} matches</span>
+  </div>
+</a>
+
+<style>
+  .pair-card {
+    text-decoration: none;
+    display: block;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+  .pair-card:hover {
+    border-color: var(--blue);
+    box-shadow: 0 2px 8px rgba(0,87,184,0.08);
+    text-decoration: none;
+  }
+  .pair-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-sm);
+  }
+  .pair-card-names {
+    min-width: 0;
+    overflow: hidden;
+  }
+  .pair-old {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+  .pair-arrow {
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    margin: 0 0.15rem;
+  }
+  .pair-new {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .pair-pct {
+    font-size: 0.95rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .pair-card-bar {
+    height: 3px;
+    background: #f0f0f0;
+    border-radius: 2px;
+    margin-top: 0.3rem;
+    overflow: hidden;
+  }
+  .pair-card-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .pair-card-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.2rem;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+  }
+</style>
