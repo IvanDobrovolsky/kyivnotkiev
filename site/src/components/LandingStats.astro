@@ -62,7 +62,7 @@ const { manifest: m, fmtBig } = Astro.props;
   </div>
 </div>
 
-<div class="stats source-stats" style="grid-template-columns: repeat(8, 1fr);">
+<div class="stats source-stats" style="grid-template-columns: repeat(7, 1fr);">
   {Object.entries(m.sources).map(([key, s]: [string, any]) => (
     <div class="stat-card mini" style={`--accent: ${s.color}`}>
       <div class="stat-value">{fmtBig(s.records)}</div>
