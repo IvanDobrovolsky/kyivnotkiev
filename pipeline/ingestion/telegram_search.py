@@ -159,6 +159,12 @@ async def run():
             })
             log.info(f"    → {count} matched messages")
 
+            # Checkpoint after each channel
+            if results:
+                _df = pd.DataFrame(results).drop_duplicates(subset=["pair_id", "text"])
+                _df.to_parquet(OUT_DIR / "all_channels.parquet", index=False)
+                log.info(f"    checkpoint: {len(_df):,} total messages saved")
+
         except Exception as e:
             log.warning(f"    ERROR: {e}")
 
