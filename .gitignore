@@ -70,3 +70,10 @@ vastai_bundle.tar.gz
 paper/
 data/bq_export/
 data/hf_export/
+
+# CL raw data (large, reproducible from pipeline)
+data/cl/raw/**/*.parquet
+data/cl/raw/**/*.csv
+data/cl/raw/**/*.session
+data/cl/raw/**/*.session-journal
+output/
