@@ -57,7 +57,6 @@ m.categories.forEach((c: any) => { catColors[c.id] = c.color; });
                 <span class="pair-ua">{pair.ukrainian}</span>
               </span>
               <span class="pair-cat" style={`color: ${catColor}`}>{pair.category}</span>
-              {pair.starred && <span class="pair-star" title={pair.starred_label}>★</span>}
             </div>
             <div class="summary-right">
               <span class="metric" style={`color: ${adoptionColor}`}>{(pair.adoption ?? 0).toFixed(1)}%</span>

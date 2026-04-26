@@ -53,9 +53,8 @@ def _pair_exclusion_clause(pair: dict) -> str:
         clauses.append("AND NET.HOST(DocumentIdentifier) NOT LIKE '%texas%'")
         clauses.append("AND NET.HOST(DocumentIdentifier) NOT LIKE '%permian%'")
         clauses.append("AND NET.HOST(DocumentIdentifier) NOT LIKE '%midland%'")
-    if pid == 1:
-        # Kiev: exclude URLs that are about "Kievan Rus" (pair 35 tracks that)
-        clauses.append("AND NOT REGEXP_CONTAINS(DocumentIdentifier, r'(?i)kievan')")
+    # Pair 1 (Kiev/Kyiv) no longer filters cross-pair terms — parent pairs
+    # intentionally capture all uses of the spelling (food, sports, etc.)
     return "\n              ".join(clauses) if clauses else ""
 
 

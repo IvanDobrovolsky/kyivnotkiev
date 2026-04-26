@@ -543,7 +543,6 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
             "russian": p["russian"], "ukrainian": p["ukrainian"],
             "adoption": adoption_pct, "total": total_map.get(pid, 0),
             "is_control": pid in control_ids,
-            "starred": p.get("starred", False), "starred_label": p.get("starred_label", ""),
         })
 
     # Category stats

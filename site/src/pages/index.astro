@@ -113,7 +113,7 @@ function formatNum(n: number) {
 
       <!-- Top 6 Deep Dive -->
       <div class="chart-container" style="margin-bottom: 0.75rem;">
-        <div class="chart-title" style="color: var(--text)">Key Pairs: Deep Dive</div>
+        <div class="chart-title" style="color: var(--text)">Top Pairs by Volume</div>
         <div class="chart-subtitle" style="margin-bottom: 0.75rem;">6 pairs representing the full spectrum — from campaign success to historical resistance</div>
         <div id="top6-grid" class="resp-grid-3" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;"></div>
       </div>
@@ -678,13 +678,16 @@ function formatNum(n: number) {
     }
 
     function renderTop6Cards() {
-      const starredPairs = (pairs as any).pairs.filter((p: any) => p.starred);
+      const topPairs = [...(pairs as any).pairs]
+        .filter((p: any) => !p.is_control)
+        .sort((a: any, b: any) => (b.total || 0) - (a.total || 0))
+        .slice(0, 6);
       const grid = document.getElementById('top6-grid');
       if (!grid) return;
       grid.innerHTML = '';
-      starredPairs.forEach((p: any) => {
+      topPairs.forEach((p: any) => {
         const id = p.id;
-        const desc = p.starred_label || '';
+        const desc = p.category;
         const pct = p.adoption;
         const color = pct >= 55 ? '#059669' : pct >= 25 ? '#d97706' : '#dc2626';
         const coll = (clCollocations as any)?.[String(id)];
@@ -2575,10 +2578,12 @@ function formatNum(n: number) {
       container.innerHTML = '';
 
       const coll = clCollocations as any;
-      const showPairs = (pairs as any).pairs
-        .filter((p: any) => p.starred)
+      const showPairs = [...(pairs as any).pairs]
+        .filter((p: any) => !p.is_control && coll[String(p.id)])
+        .sort((a: any, b: any) => (b.total || 0) - (a.total || 0))
+        .slice(0, 6)
         .map((p: any) => ({
-          id: String(p.id), ru: p.russian, ua: p.ukrainian, label: p.starred_label || '',
+          id: String(p.id), ru: p.russian, ua: p.ukrainian, label: p.category,
         }));
 
       const grid = d3.select(container)

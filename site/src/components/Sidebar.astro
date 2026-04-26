@@ -9,7 +9,6 @@ interface Props {
       russian: string;
       ukrainian: string;
       adoption: number;
-      starred?: boolean;
     }>;
   }>;
 }
@@ -37,7 +36,7 @@ const { grouped } = Astro.props;
         {cat.pairs.map((pair) => (
           <div class="sidebar-item" data-pair-id={pair.id}>
             <div class="pair-name">
-              <span>{pair.starred ? '★ ' : ''}{pair.ukrainian}</span>
+              <span>{pair.ukrainian}</span>
               <span class="old">{pair.russian}</span>
             </div>
             <span class={`adoption-badge ${adoptionClass(pair.adoption)}`}>

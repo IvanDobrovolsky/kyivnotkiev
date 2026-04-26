@@ -43,9 +43,7 @@ SUBREDDITS = [
 
 # Search terms per pair — all enabled non-control pairs
 SEARCH_TERMS = {
-    1: {"russian": "Kiev", "ukrainian": "Kyiv",
-        "exclude": ["Chicken Kiev", "chicken kiev", "Kiev cake", "kiev cake",
-                     "Dynamo Kiev", "dynamo kiev", "Kievan Rus", "kievan rus"]},
+    1: {"russian": "Kiev", "ukrainian": "Kyiv"},
     2: {"russian": "Kharkov", "ukrainian": "Kharkiv"},
     3: {"russian": "Odessa", "ukrainian": "Odesa",
         "exclude": ["Odessa, Texas", "Odessa TX", "Odessa, TX"]},

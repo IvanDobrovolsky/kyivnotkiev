@@ -45,31 +45,23 @@ for pair in _cfg["pairs"]:
     ru = pair["russian"].lower()
     ua = pair["ukrainian"].lower()
 
-    # Build negative patterns for disambiguation
-    # Each pattern excludes known homonym collisions from Wikipedia disambiguation
+    # Disambiguation: only filter genuine homonyms (different entity, same string)
+    # Cross-pair overlaps (Chicken Kiev, Dynamo Kiev, Kievan Rus, etc.) are NOT
+    # filtered — parent pairs intentionally capture all uses of the spelling.
     negatives = []
-    if pid == 1:  # Kiev city — exclude food (pair 21/22), Kievan (pair 35)
-        negatives = ["kievan", "chicken.{0,3}ki[ey]v", "ki[ey]v.{0,3}cake",
-                     "ki[ey]v.{0,3}cutlet", "ki[ey]v.{0,3}recipe"]
-    elif pid == 3:  # Odessa city — exclude US cities, film, actress
+    if pid == 3:  # Odessa — US city (Odessa, TX), band (Odesza)
         negatives = ["texas", "permian", "midland", "odessa.{0,5}fl\\b",
-                     "odessa.{0,5}missouri", "odesza",  # the band
-                     "odessa.{0,5}a.?zion"]  # actress
-    elif pid == 6:  # Nikolaev — surname collision (can't fully filter)
+                     "odessa.{0,5}missouri", "odesza",
+                     "odessa.{0,5}a.?zion"]
+    elif pid == 6:  # Nikolaev — common surname
         negatives = ["nikolaev.{0,10}(born|author|professor|medal|coach|player)"]
-    elif pid == 7:  # Dnipro city — exclude river (pair 15)
-        negatives = ["dnipro.{0,5}river", "river.{0,5}dnipro",
-                     "reservoir", "hydroelectric", "dam.{0,3}dnipro"]
-    elif pid == 15:  # Dnieper river — exclude city (pair 7)
-        negatives = ["dnieper.{0,5}city", "fc.{0,5}dnieper",
-                     "airport", "metro.{0,5}dnieper"]
-    elif pid == 72:  # Artemovsk — exclude composer, champagne
+    elif pid == 72:  # Artemovsk — Hulak-Artemovsky composer, champagne brand
         negatives = ["hulak", "gulak", "artemovsk[ioay]",
                      "champagne", "sparkling", "winery"]
-    elif pid == 38:  # Chernigov — exclude restaurant names
+    elif pid == 38:  # Chernigov — restaurant/bar business names
         negatives = ["restaurant", "bar.{0,5}chernigov", "barcelona"]
-    elif pid == 9:  # Rovno — exclude Slavic adverb usage
-        negatives = ["rovno.{0,5}(v|na|po)\\b"]  # Slavic prepositions after rovno
+    elif pid == 9:  # Rovno — Slavic adverb "exactly"
+        negatives = ["rovno.{0,5}(v|na|po)\\b"]
 
     PAIR_PATTERNS.append({
         "id": pid,
