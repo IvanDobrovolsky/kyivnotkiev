@@ -516,6 +516,19 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     if len(youtube):
         for pid, cnt in youtube.groupby("pair_id").size().items():
             total_map[pid] = total_map.get(pid, 0) + int(cnt)
+    if len(ngrams):
+        for pid, cnt in ngrams.groupby("pair_id")["frequency"].sum().items():
+            total_map[pid] = total_map.get(pid, 0) + int(cnt)
+    # OpenAlex
+    openalex_path2 = DATA_DIR / "raw" / "openalex" / "openalex_all_pairs.json"
+    if openalex_path2.exists():
+        with open(openalex_path2) as f:
+            oa = json.load(f)
+        for pair_data in oa:
+            pid = pair_data.get("pair_id")
+            if pid in enabled_ids:
+                oa_total = sum(yr["total"] for yr in pair_data.get("yearly", []))
+                total_map[pid] = total_map.get(pid, 0) + oa_total
 
     # Build pairs
     pairs_out = []
