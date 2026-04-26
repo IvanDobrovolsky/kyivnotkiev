@@ -24,34 +24,48 @@ log = logging.getLogger(__name__)
 
 OUT_DIR = ROOT_DIR / "data" / "cl" / "raw" / "telegram"
 
-# English-language public channels about Ukraine
+# Public channels — all languages, pair matching is Latin-script only
 CHANNELS = [
-    # Major English-language Ukrainian news
+    # English-language Ukrainian news
     "KyivIndependent",
-    "KyivPost",
-    "NewVoiceUkraine",
-    "EuromaidanPR",
-    "ukraine_world",
     "UkraineNow",
-    # Official government/embassy
-    "ZelenskiyOfficial",
-    "UKinUkraine",
-    "USEmbassyKyiv",
-    "MFA_Ukraine",
-    # War reporting
+    # International news
+    "BBCWorld",
+    "CNN",
+    "guardian",
+    # War reporting / OSINT (English)
     "operativnoZSU",
     "DeepStateUA",
     "GeneralStaffZSU",
-    # International news covering Ukraine
-    "BBCWorld",
-    "Reuters_World",
-    "naboripas",
-    # Ukrainian English media
-    "suspaborigen",
-    "unaborigen",
-    "ukaborigen",
-    # Culture/society
-    "UkraineDAO",
+    "militaryland",
+    "ukraineweapons",
+    "DefMon3",
+    "wartranslated",
+    "NOELreports",
+    "war_monitor",
+    "nexta_live",
+    "nexta_tv",
+    # Official Ukraine government
+    "ZelenskiyOfficial",
+    "USEmbassyKyiv",
+    "UkrainianLandForces",
+    "Ukrainian_Navy",
+    # Ukrainian media (mixed language)
+    "Ukrinform_News",
+    "suspilnenews",
+    "TCH_channel",
+    "ukrainaonlajn",
+    # Analytics / think tanks
+    "ISWresearch",
+    "UnderstandingWar",
+    "UkraineWorld",
+    # Regional
+    "KharkivLifeEng",
+    "OdessaJournal",
+    # Ukrainian government/parliament
+    "V_Zelenskyy",
+    "ukrainenowenglish",
+    "EuromaidanPR",
 ]
 
 # Load pair patterns
@@ -104,20 +118,15 @@ async def scrape_channels():
             log.info(f"  @{channel_name}: {getattr(entity, 'title', channel_name)}")
 
             count = 0
-            async for message in client.iter_messages(entity, limit=5000):
+            async for message in client.iter_messages(entity, limit=10000):
                 if not message.text:
                     continue
 
                 text = message.text
-                if len(text) < 20:
+                if len(text) < 10:
                     continue
 
-                # Latin script check (skip pure Cyrillic)
-                latin = len(re.findall(r'[a-zA-Z]', text))
-                total = latin + len(re.findall(r'[\u0400-\u04FF]', text))
-                if total > 0 and latin / total < 0.3:
-                    continue
-
+                # Match Latin-script pair terms in any language text
                 matches = match_text(text)
                 for pair_id, variant, term in matches:
                     results.append({
