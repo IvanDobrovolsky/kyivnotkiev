@@ -187,7 +187,9 @@ const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
       });
     }
 
-    let activePairId = getPairFromUrl();
+    // On pair detail page, get ID from data attribute (not URL hash)
+    const _pairDetailEl = document.getElementById('pair-detail');
+    let activePairId = Number(_pairDetailEl?.dataset.pairId || 0) || getPairFromUrl();
 
     function drawChart() {
       const container = document.getElementById('chart')!;
@@ -1753,15 +1755,9 @@ const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
     if (activePairId > 0) {
       selectPair(activePairId);
     } else {
-      showView('landing');
-      renderTop6Cards();
-      drawCategoryChart();
-      drawHeatmap();
-      requestAnimationFrame(() => {
-        drawClContextChart();
-        drawClBenchmark();
-        drawErrorAnalysis();
-      });
+      // Landing view — not available on pair detail page
+      const pv = document.getElementById('pair-view');
+      if (pv) pv.style.display = 'none';
     }
 
     // Logo click → back to landing
@@ -1785,9 +1781,6 @@ const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
       if (activePairId > 0) {
         drawChart();
         drawWorldMap();
-      } else {
-        drawCategoryChart();
-        drawHeatmap();
       }
     });
 
@@ -2515,36 +2508,7 @@ const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
       }
     })();
   
-    // === Pair page auto-init ===
-    const pairDetailEl = document.getElementById('pair-detail');
-    const pageActivePairId = Number(pairDetailEl?.dataset.pairId || 0);
-    if (pageActivePairId > 0) {
-      const pv = document.getElementById('pair-view');
-      if (pv) pv.style.display = 'block';
-      activePairId = pageActivePairId;
-      const pair = (pairs as any).pairs.find((p: any) => p.id === pageActivePairId);
-      if (pair) {
-        document.getElementById('chart-new')!.textContent = pair.ukrainian;
-        document.getElementById('chart-old')!.textContent = pair.russian;
-      }
-      drawChart();
-      drawPairStats();
-      drawAdoptionCalc();
-      drawSearchPreview();
-      drawPairClContext();
-      setTimeout(() => {
-        const safeDraw = (name: string, fn: () => void) => {
-          try { fn(); } catch (e) { console.error('[' + name + '] failed:', e); }
-        };
-        safeDraw('drawWorldMap', drawWorldMap);
-        safeDraw('drawHoldoutTable', drawHoldoutTable);
-        safeDraw('drawMediaOrigin', drawMediaOrigin);
-        safeDraw('drawPairSourceChart', drawPairSourceChart);
-        safeDraw('drawPairReligious', drawPairReligious);
-        safeDraw('drawPairLLM', drawPairLLM);
-        safeDraw('drawPairClCollocations', drawClCollocations);
-      }, 50);
-    }
+    // Auto-init handled by main init block above (activePairId set from data-pair-id)
   </script>
 
 
