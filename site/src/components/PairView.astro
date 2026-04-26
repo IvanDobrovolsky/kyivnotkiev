@@ -41,6 +41,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
         <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000"><span class="source-dot"></span>YouTube</button>
         <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed"><span class="source-dot"></span>Ngrams</button>
         <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4"><span class="source-dot"></span>Academic</button>
+        <button class="source-toggle" data-source="telegram" style="--source-color: #26A5E4"><span class="source-dot"></span>Telegram</button>
       </div>
       <div class="chart-controls" style="margin:0;">
         <button class="chart-mode active" data-chart="volume" id="volume-btn">Volume</button>
@@ -59,7 +60,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 </div>
 
 <!-- Per-pair source stats -->
-<div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(7, 1fr); margin-bottom: 0.75rem;"></div>
+<div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(8, 1fr); margin-bottom: 0.75rem;"></div>
 
 <!-- CL: Context + Collocations -->
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">

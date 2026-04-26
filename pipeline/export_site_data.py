@@ -357,6 +357,27 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
             result.setdefault(spid, {})
             result[spid]["openalex"] = smooth_series(raw_series, window=3)
 
+    # Telegram (monthly)
+    log.info("  Telegram...")
+    telegram_path = DATA_DIR / "cl" / "raw" / "telegram" / "all_channels.parquet"
+    if telegram_path.exists():
+        tg = pd.read_parquet(telegram_path)
+        if len(tg) and "date" in tg.columns:
+            tg["month"] = pd.to_datetime(tg["date"]).dt.strftime("%Y-%m")
+            g = tg.groupby(["pair_id", "month", "variant"]).size().reset_index(name="count")
+            p = g.pivot_table(index=["pair_id", "month"], columns="variant", values="count", fill_value=0).reset_index()
+            for pid, grp in p.groupby("pair_id"):
+                if pid not in enabled_ids:
+                    continue
+                spid = str(pid)
+                result.setdefault(spid, {}).setdefault("telegram", [])
+                for _, r in grp.sort_values("month").iterrows():
+                    ukr = int(r.get("ukrainian", 0))
+                    rus = int(r.get("russian", 0))
+                    total = ukr + rus
+                    if total > 0:
+                        result[spid]["telegram"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
+
     pair_count = len([k for k in result if k != "events"])
     log.info(f"  Timeseries: {pair_count} pairs")
     return result
@@ -406,6 +427,13 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     if len(ngrams):
         source_stats["ngrams"] = {"records": len(ngrams), "pairs": int(ngrams["pair_id"].nunique()), "unit": "records"}
 
+    # Telegram
+    telegram_path = DATA_DIR / "cl" / "raw" / "telegram" / "all_channels.parquet"
+    telegram = pd.DataFrame()
+    if telegram_path.exists():
+        telegram = pd.read_parquet(telegram_path)
+        source_stats["telegram"] = {"records": len(telegram), "pairs": int(telegram["pair_id"].nunique()), "unit": "messages"}
+
     # Extra stats
     extra_map = {}
     if len(gdelt):
@@ -414,6 +442,8 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         extra_map["reddit_subreddits"] = str(reddit["subreddit"].nunique())
     if len(youtube):
         extra_map["youtube_channels"] = str(youtube["channel_title"].nunique())
+    if len(telegram):
+        extra_map["telegram_channels"] = str(telegram["channel"].nunique())
     if len(trends):
         geo = trends[(trends["geo"] != "") & (trends["geo"].notna())]
         extra_map["trends_countries"] = str(geo["geo"].nunique())
@@ -486,6 +516,9 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
                 if total >= 3:
                     oa_adopt[p["pair_id"]] = ukr / total
         per_source["openalex"] = oa_adopt
+    # Telegram
+    if len(telegram):
+        per_source["telegram"] = _source_adoption(telegram, None, "date", cutoff_12m, agg_mode="count", min_total=3)
 
     # Mean adoption across sources per pair
     recent_map = {}
@@ -529,6 +562,10 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
             if pid in enabled_ids:
                 oa_total = sum(yr["total"] for yr in pair_data.get("yearly", []))
                 total_map[pid] = total_map.get(pid, 0) + oa_total
+    # Telegram
+    if len(telegram):
+        for pid, cnt in telegram.groupby("pair_id").size().items():
+            total_map[pid] = total_map.get(pid, 0) + int(cnt)
 
     # Build pairs
     pairs_out = []
@@ -568,7 +605,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         "toponym_matches": toponym_matches,
         "cl_corpus": _get_cl_corpus_size(),
         "time_span": "2010-2026",
-        "num_sources": 7,
+        "num_sources": 8,  # counted from sources dict below
         "num_countries": int(extra_map.get("trends_countries", "0")),
         "sources": {
             "trends": {"records": source_stats.get("trends", {}).get("records", 0), "pairs": source_stats.get("trends", {}).get("pairs", 0), "label": "Search Trends", "unit": "datapoints", "extra": f"{extra_map.get('trends_countries', '55')} countries", "color": "#4285F4"},
@@ -578,6 +615,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
             "youtube": {"records": source_stats.get("youtube", {}).get("records", 0), "pairs": source_stats.get("youtube", {}).get("pairs", 0), "label": "Videos", "unit": "videos", "extra": f"{extra_map.get('youtube_channels', '0')} channels", "color": "#FF0000"},
             "ngrams": {"records": source_stats.get("ngrams", {}).get("records", 0), "pairs": source_stats.get("ngrams", {}).get("pairs", 0), "label": "Book Records", "unit": "records", "extra": "8M+ volumes", "color": "#7c3aed"},
             "openalex": {"records": openalex_total_papers, "pairs": openalex_total_pairs, "label": "Academic Papers", "unit": "papers", "extra": "250M+ works indexed", "color": "#06b6d4"},
+            "telegram": {"records": source_stats.get("telegram", {}).get("records", 0), "pairs": source_stats.get("telegram", {}).get("pairs", 0), "label": "Telegram", "unit": "messages", "extra": f"{extra_map.get('telegram_channels', '0')} channels", "color": "#26A5E4"},
         },
         "categories": categories,
         "category_stats": sorted(category_list, key=lambda x: -x["avg_adoption"]),

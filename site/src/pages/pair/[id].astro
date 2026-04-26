@@ -11,14 +11,15 @@ export function getStaticPaths() {
   const manifest = m as any;
   return manifest.pairs
     .filter((p: any) => !p.is_control)
-    .map((p: any) => ({ params: { id: String(p.id) } }));
+    .map((p: any) => ({
+      params: { id: String(p.id) },
+      props: { pair: p },
+    }));
 }
 
-const { id } = Astro.params;
-const pair = (m as any).pairs.find((p: any) => String(p.id) === id);
-const title = pair ? `${pair.russian} \u2192 ${pair.ukrainian} \u2014 #KyivNotKiev` : '#KyivNotKiev';
-const nModels = (llmTraj as any)?.summary?.n_models || 72;
-const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
+const { pair } = Astro.props;
+const id = String(pair.id);
+const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 ---
 
 <Base title={title}>
@@ -27,6 +28,7 @@ const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
   <a href="/" class="link text-sm">&larr; All pairs</a>
 </div>
 
+<script type="application/json" id="pair-route-data" set:html={JSON.stringify({ id: pair.id, russian: pair.russian, ukrainian: pair.ukrainian })} />
 <div id="pair-detail" data-pair-id={id}>
   <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} toolsPerPair={toolsPerPair} religious={religious} timeSpan={(m as any).time_span} />
 </div>
@@ -65,6 +67,7 @@ const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
       youtube: '#FF0000',
       ngrams: '#7c3aed',
       openalex: '#06b6d4',
+      telegram: '#26A5E4',
     };
 
     const sourceLabels: Record<string, string> = {
@@ -75,6 +78,7 @@ const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
       youtube: 'YouTube',
       ngrams: 'Google Books',
       openalex: 'Academic Papers',
+      telegram: 'Telegram',
     };
 
     let activeSource = 'gdelt';  // GDELT first — news coverage is most precise
@@ -187,9 +191,9 @@ const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
       });
     }
 
-    // On pair detail page, get ID from data attribute (not URL hash)
-    const _pairDetailEl = document.getElementById('pair-detail');
-    let activePairId = Number(_pairDetailEl?.dataset.pairId || 0) || getPairFromUrl();
+    // Pair detail page: ID is guaranteed by getStaticPaths
+    const _routeData = JSON.parse(document.getElementById('pair-route-data')!.textContent!);
+    let activePairId = _routeData.id;
 
     function drawChart() {
       const container = document.getElementById('chart')!;
@@ -1751,14 +1755,8 @@ const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
       });
     });
 
-    // Initial load: landing or pair view based on URL
-    if (activePairId > 0) {
-      selectPair(activePairId);
-    } else {
-      // Landing view — not available on pair detail page
-      const pv = document.getElementById('pair-view');
-      if (pv) pv.style.display = 'none';
-    }
+    // Pair is guaranteed by route — always select it
+    selectPair(activePairId);
 
     // Logo click → back to landing
     document.querySelector('.topbar-logo')?.addEventListener('click', (e) => {
@@ -1778,10 +1776,8 @@ const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
     // Top 6 cards: event listeners are now attached in renderTop6Cards()
 
     window.addEventListener('resize', () => {
-      if (activePairId > 0) {
-        drawChart();
-        drawWorldMap();
-      }
+      drawChart();
+      drawWorldMap();
     });
 
     // ── Error Analysis chart ─────────────────────────────────
