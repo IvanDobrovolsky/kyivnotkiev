@@ -1,8 +1,7 @@
 """Query GDELT GKG via Athena for pairs missing from URL-only scan.
 
-These 31 pairs have multi-word terms that don't appear in URLs but DO
-appear in article themes/locations/text. We search the full GKG row
-(URL + themes + locations + persons + organizations) for matches.
+Uses a SINGLE scan with OR conditions instead of UNION ALL to avoid
+scanning the full table 62 times.
 
 Usage:
     python -m pipeline.ingestion.gdelt_athena_missing
@@ -11,6 +10,7 @@ Usage:
 import boto3
 import io
 import logging
+import re
 import time
 from pathlib import Path
 
@@ -29,7 +29,6 @@ OUT_DIR = ROOT_DIR / "data" / "raw" / "gdelt"
 athena = boto3.client("athena", region_name=AWS_REGION)
 s3 = boto3.client("s3", region_name=AWS_REGION)
 
-# Pairs that were NOT found in URL-only scan
 MISSING_PAIR_IDS = {15,20,21,22,24,25,26,28,29,30,31,34,35,52,54,55,56,57,58,
                     60,61,62,70,71,80,83,84,85,86,87,89}
 
@@ -52,24 +51,26 @@ def run_query(sql: str) -> str:
         ResultConfiguration={"OutputLocation": S3_OUTPUT},
     )
     qid = resp["QueryExecutionId"]
-    log.info(f"  Query submitted: {qid}")
+    log.info(f"  Query: {qid}")
 
     while True:
         r = athena.get_query_execution(QueryExecutionId=qid)
         state = r["QueryExecution"]["Status"]["State"]
         if state in ("SUCCEEDED", "FAILED", "CANCELLED"):
             break
-        time.sleep(5)
-
-    if state != "SUCCEEDED":
-        reason = r["QueryExecution"]["Status"].get("StateChangeReason", "")
-        log.error(f"  Query failed: {reason}")
-        return ""
+        time.sleep(10)
 
     stats = r["QueryExecution"]["Statistics"]
     scanned = stats.get("DataScannedInBytes", 0) / 1e9
     runtime = stats.get("EngineExecutionTimeInMillis", 0) / 1000
-    log.info(f"  Done: {scanned:.1f} GB scanned, {runtime:.0f}s runtime")
+    cost = scanned * 5 / 1000
+
+    if state != "SUCCEEDED":
+        reason = r["QueryExecution"]["Status"].get("StateChangeReason", "")
+        log.error(f"  FAILED: {reason} (scanned {scanned:.1f}GB, ~${cost:.0f})")
+        return ""
+
+    log.info(f"  Done: {scanned:.1f} GB, {runtime:.0f}s, ~${cost:.0f}")
     return qid
 
 
@@ -81,8 +82,7 @@ def download_results(qid: str) -> pd.DataFrame:
 
 
 def main():
-    # Ensure table exists
-    log.info("Ensuring GDELT GKG table exists...")
+    log.info("Ensuring table exists...")
     run_query("""
     CREATE EXTERNAL TABLE IF NOT EXISTS gdelt_gkg (
         gkgrecordid STRING, v21date STRING, v2sourcecollectionidentifier STRING,
@@ -100,65 +100,93 @@ def main():
     LOCATION 's3://gdelt-open-data/v2/gkg/'
     """)
 
-    # Build a single query that searches URL + themes + locations + persons
-    # for all missing pairs. Use UNION ALL for each pair.
-    # Search across: v2documentidentifier, v1themes, v2enhancedthemes,
-    # v1locations, v2enhancedlocations, v1persons, v2enhancedpersons,
-    # v1organizations, v2enhancedorganizations, v21allnames
-    log.info(f"Querying {len(PAIRS)} missing pairs across full GKG record...")
-
-    union_parts = []
+    # Single-pass: scan once, extract all matching rows, classify locally
+    # Build a big OR of all terms to match
+    all_terms = set()
     for p in PAIRS:
-        ru = p["russian"].lower().replace("'", "''")
-        ua = p["ukrainian"].lower().replace("'", "''")
-        pid = p["id"]
+        all_terms.add(p["russian"].lower())
+        all_terms.add(p["ukrainian"].lower())
 
-        # Search the concatenation of all text fields
-        search_expr = """LOWER(COALESCE(v2documentidentifier,'') || ' ' ||
-            COALESCE(v1themes,'') || ' ' || COALESCE(v2enhancedthemes,'') || ' ' ||
-            COALESCE(v1locations,'') || ' ' || COALESCE(v2enhancedlocations,'') || ' ' ||
-            COALESCE(v1persons,'') || ' ' || COALESCE(v2enhancedpersons,'') || ' ' ||
-            COALESCE(v21allnames,''))"""
+    # Concat searchable columns into one field, check with OR conditions
+    search_expr = """LOWER(COALESCE(v2documentidentifier,'') || ' ' ||
+        COALESCE(v2enhancedthemes,'') || ' ' ||
+        COALESCE(v2enhancedlocations,'') || ' ' ||
+        COALESCE(v2enhancedpersons,'') || ' ' ||
+        COALESCE(v21allnames,''))"""
 
-        union_parts.append(f"""
-        SELECT {pid} AS pair_id, v2sourcecommonname AS domain,
-               v2documentidentifier AS url, SUBSTR(v21date, 1, 8) AS gkg_date,
-               'russian' AS variant
-        FROM gdelt_gkg
-        WHERE {search_expr} LIKE '%{ru}%'
-        """)
+    # Build WHERE with OR — single scan
+    conditions = []
+    for term in sorted(all_terms):
+        escaped = term.replace("'", "''")
+        conditions.append(f"{search_expr} LIKE '%{escaped}%'")
 
-        union_parts.append(f"""
-        SELECT {pid} AS pair_id, v2sourcecommonname AS domain,
-               v2documentidentifier AS url, SUBSTR(v21date, 1, 8) AS gkg_date,
-               'ukrainian' AS variant
-        FROM gdelt_gkg
-        WHERE {search_expr} LIKE '%{ua}%'
-        """)
+    where = " OR ".join(conditions)
 
-    # This is 62 subqueries but each scans the full table.
-    # Athena will optimize this into a single scan with multiple predicates.
-    full_sql = " UNION ALL ".join(union_parts)
+    sql = f"""
+    SELECT
+        v2sourcecommonname AS domain,
+        v2documentidentifier AS url,
+        SUBSTR(v21date, 1, 8) AS gkg_date,
+        {search_expr} AS searchable
+    FROM gdelt_gkg
+    WHERE {where}
+    """
 
-    log.info(f"  SQL: {len(full_sql):,} chars, {len(union_parts)} UNION parts")
-    qid = run_query(full_sql)
+    log.info(f"Single-pass query for {len(all_terms)} terms ({len(PAIRS)} pairs)...")
+    log.info(f"  SQL: {len(sql):,} chars")
+    qid = run_query(sql)
     if not qid:
-        log.error("Query failed")
         return
 
     df = download_results(qid)
-    log.info(f"Raw results: {len(df):,} rows")
+    log.info(f"Raw rows: {len(df):,}")
 
-    # Save
+    if df.empty:
+        log.info("No results")
+        return
+
+    # Classify each row: which pair(s) does it match?
+    pair_patterns = []
+    for p in PAIRS:
+        pair_patterns.append({
+            "id": p["id"],
+            "russian": p["russian"],
+            "ukrainian": p["ukrainian"],
+            "ru_re": re.compile(r"\b" + re.escape(p["russian"]) + r"\b", re.IGNORECASE),
+            "ua_re": re.compile(r"\b" + re.escape(p["ukrainian"]) + r"\b", re.IGNORECASE),
+        })
+
+    results = []
+    for _, row in df.iterrows():
+        text = str(row.get("searchable", ""))
+        url = str(row.get("url", ""))
+        for pp in pair_patterns:
+            if pp["ru_re"].search(text):
+                results.append({
+                    "pair_id": pp["id"], "url": url, "domain": row.get("domain", ""),
+                    "date": row.get("gkg_date", ""), "variant": "russian",
+                    "matched_term": pp["russian"],
+                })
+            if pp["ua_re"].search(text):
+                results.append({
+                    "pair_id": pp["id"], "url": url, "domain": row.get("domain", ""),
+                    "date": row.get("gkg_date", ""), "variant": "ukrainian",
+                    "matched_term": pp["ukrainian"],
+                })
+
+    if not results:
+        log.info("No pair matches after classification")
+        return
+
+    out_df = pd.DataFrame(results).drop_duplicates(subset=["pair_id", "url", "variant"])
     out_path = OUT_DIR / "gdelt_missing_pairs_urls.csv"
-    df.to_csv(out_path, index=False)
-    log.info(f"Saved: {out_path}")
+    out_df.to_csv(out_path, index=False)
+    log.info(f"Saved: {out_path} ({len(out_df):,} pair-URL matches)")
 
-    # Stats
-    for pid in sorted(df["pair_id"].unique()):
-        sub = df[df["pair_id"] == pid]
+    for pid in sorted(out_df["pair_id"].unique()):
+        sub = out_df[out_df["pair_id"] == pid]
         p = next((p for p in PAIRS if p["id"] == pid), {})
-        log.info(f"  Pair {pid} ({p.get('russian','')}/{p.get('ukrainian','')}): {len(sub):,} URLs")
+        log.info(f"  Pair {pid} ({p.get('russian','')}/{p.get('ukrainian','')}): {len(sub):,}")
 
 
 if __name__ == "__main__":
