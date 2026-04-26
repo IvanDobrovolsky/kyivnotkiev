@@ -23,8 +23,8 @@ const sourceInfo: Record<string, {desc: string; url: string; coverage: string}> 
 
 <Base title="Data Sources — #KyivNotKiev" activeNav="sources">
 
-<h1 style="font-size:1.4rem; font-weight:800; color:var(--text); margin:0 0 0.3rem;">Data Sources</h1>
-<p style="font-size:0.85rem; color:var(--text-muted); margin:0 0 1rem; line-height:1.5;">
+<h1 class="heading-lg" style="margin-bottom:0.3rem;">Data Sources</h1>
+<p class="subtitle mb-lg">
   {m.num_sources} independent sources, {m.records_scanned} records scanned, {fmtBig(m.toponym_matches)} toponym matches.
   Each source measures adoption differently — news URLs, search interest, page views, social posts, books, academic papers.
 </p>
@@ -56,10 +56,73 @@ const sourceInfo: Record<string, {desc: string; url: string; coverage: string}> 
 </div>
 
 <script>
-  // TODO: Port source comparison and category charts from index.astro
+  import * as d3 from 'd3';
+  import manifest from '../data/manifest.json';
+  import timeseriesData from '../data/timeseries.json';
+
   const container = document.getElementById('source-comparison-chart');
   if (container) {
-    container.innerHTML = '<p style="color:var(--text-muted); font-size:0.8rem; padding:2rem; text-align:center;">Source comparison chart — porting in progress</p>';
+    const pairs = (manifest as any).pairs.filter((p: any) => !p.is_control);
+    const ts = timeseriesData as any;
+    const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+    const srcLabels: Record<string, string> = {
+      gdelt: 'GDELT', trends: 'Trends', wikipedia: 'Wikipedia',
+      reddit: 'Reddit', youtube: 'YouTube', ngrams: 'Ngrams', openalex: 'Academic',
+    };
+    const srcColors: Record<string, string> = {
+      gdelt: '#1e3a5f', trends: '#4285F4', wikipedia: '#636466',
+      reddit: '#FF4500', youtube: '#FF0000', ngrams: '#7c3aed', openalex: '#06b6d4',
+    };
+
+    // Count pairs per source
+    const pairsPerSource: Record<string, number> = {};
+    for (const src of srcOrder) {
+      let count = 0;
+      for (const pid of Object.keys(ts)) {
+        if (pid === 'events') continue;
+        const pairTs = ts[pid];
+        if (pairTs[src] && pairTs[src].length > 0) count++;
+      }
+      pairsPerSource[src] = count;
+    }
+
+    const rect = container.getBoundingClientRect();
+    const margin = { top: 10, right: 80, bottom: 20, left: 80 };
+    const width = rect.width - margin.left - margin.right;
+    const height = 220;
+
+    const svg = d3.select(container).append('svg')
+      .attr('viewBox', `0 0 ${rect.width} ${height + margin.top + margin.bottom}`)
+      .append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+    const y = d3.scaleBand().domain(srcOrder).range([0, height]).padding(0.3);
+    const x = d3.scaleLinear().domain([0, 59]).range([0, width]);
+
+    // Background
+    svg.selectAll('.bg').data(srcOrder).enter().append('rect')
+      .attr('x', 0).attr('width', width)
+      .attr('y', d => y(d)!).attr('height', y.bandwidth())
+      .attr('fill', '#f3f4f6').attr('rx', 3);
+
+    // Bars
+    svg.selectAll('.bar').data(srcOrder).enter().append('rect')
+      .attr('x', 0).attr('width', d => x(pairsPerSource[d] || 0))
+      .attr('y', d => y(d)!).attr('height', y.bandwidth())
+      .attr('fill', d => srcColors[d] || '#888').attr('opacity', 0.8).attr('rx', 3);
+
+    // Labels
+    svg.selectAll('.label').data(srcOrder).enter().append('text')
+      .attr('x', -8).attr('y', d => y(d)! + y.bandwidth() / 2 + 4)
+      .attr('text-anchor', 'end').attr('fill', '#374151')
+      .attr('font-size', '12px').attr('font-weight', '500')
+      .text(d => srcLabels[d] || d);
+
+    // Value labels
+    svg.selectAll('.val').data(srcOrder).enter().append('text')
+      .attr('x', d => x(pairsPerSource[d] || 0) + 8)
+      .attr('y', d => y(d)! + y.bandwidth() / 2 + 4)
+      .attr('fill', '#6b7280').attr('font-size', '12px').attr('font-weight', '600')
+      .text(d => `${pairsPerSource[d]}/59 pairs`);
   }
 </script>
 
