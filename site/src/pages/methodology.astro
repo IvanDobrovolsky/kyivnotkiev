@@ -89,18 +89,233 @@ function fmtBig(n: string | number) {
   import manifest from '../data/manifest.json';
   import regexPrecision from '../data/regex_precision.json';
 
-  // TODO: Port statistical analysis, confusion matrix, benchmark,
-  // context distribution, error analysis, and category chart rendering
-  // from index.astro. These are self-contained D3 functions that
-  // will be extracted into shared modules.
+  const pairs = { categories: (manifest as any).categories, pairs: (manifest as any).pairs };
+  const sourceColors: Record<string, string> = {
+    trends: '#4285F4', gdelt: '#1e3a5f', wikipedia: '#636466',
+    reddit: '#FF4500', youtube: '#FF0000', ngrams: '#7c3aed', openalex: '#06b6d4',
+  };
+  const srcNames: Record<string, string> = {
+    trends: 'Trends', gdelt: 'GDELT', wikipedia: 'Wikipedia',
+    reddit: 'Reddit', youtube: 'YouTube', ngrams: 'Ngrams', openalex: 'Academic',
+  };
 
-  // Placeholder
-  for (const id of ['stat-analysis-grid', 'cl-confusion-matrix', 'cl-benchmark-table', 'cl-context-bars', 'error-analysis', 'category-chart']) {
-    const el = document.getElementById(id);
-    if (el && !el.children.length) {
-      el.innerHTML = '<p style="color:var(--text-muted); font-size:0.8rem; padding:1rem; text-align:center;">Porting in progress</p>';
+  // === renderStatAnalysis ===
+  (function renderStatAnalysis() {
+    const an = analysisData as any;
+    const rp = regexPrecision as any;
+    const ea = errorAnalysis as any;
+    const reg = an.regression || {};
+    const kw = an.kruskal_wallis || {};
+    const inv = an.invasion_effect || {};
+
+    let bestInv = { d: 0, p: 1, src: '' };
+    for (const [src, res] of Object.entries(inv)) {
+      const r = res as any;
+      if (Math.abs(r.cohens_d) > Math.abs(bestInv.d)) bestInv = { d: r.cohens_d, p: r.p, src };
     }
-  }
+
+    const grid = document.getElementById('stat-analysis-grid');
+    if (!grid) return;
+    const cards = [
+      { value: `R\u00B2=${(reg.r_squared || 0).toFixed(2)}`, label: 'Regression fit', sub: `\u03B2=${(reg.beta || 0).toFixed(2)}, n=${reg.n || 0}`, bg: '#f0f9ff', color: '#0057B8' },
+      { value: bestInv.p < 0.001 ? 'p<0.001' : `p=${bestInv.p.toFixed(3)}`, label: 'Invasion effect', sub: `Wilcoxon; d=${bestInv.d.toFixed(2)}`, bg: '#fef2f2', color: '#dc2626' },
+      { value: `${rp.overall_precision || 0}%`, label: 'Regex precision', sub: `${rp.total_false_positives || 0} FP / ${(rp.total_sampled || 0).toLocaleString()}`, bg: '#f0fdf4', color: '#059669' },
+      { value: kw.p < 0.001 ? 'p<0.001' : `p=${(kw.p || 0).toFixed(3)}`, label: 'Category test', sub: `H=${(kw.H || 0).toFixed(2)}`, bg: '#fefce8', color: '#d97706' },
+    ];
+    grid.innerHTML = cards.map(c => `
+      <div style="padding:0.6rem 0.4rem;background:${c.bg};border-radius:6px;text-align:center;">
+        <div style="font-size:1.2rem;font-weight:700;color:${c.color};">${c.value}</div>
+        <div style="font-size:0.65rem;color:#6b7280;">${c.label}</div>
+        <div style="font-size:0.58rem;color:#9ca3af;">${c.sub}</div>
+      </div>
+    `).join('');
+
+    const spread = ea.summary?.median_spread_pp || 54;
+    const p70 = (manifest as any).pairs?.find((p:any) => p.id === 70);
+    const p10 = (manifest as any).pairs?.find((p:any) => p.id === 10);
+    const p1 = (manifest as any).pairs?.find((p:any) => p.id === 1);
+    const findings = [
+      { title: 'Cross-source spread', text: `Median ${spread}pp \u2014 highly domain-dependent` },
+      { title: 'Historical identity', text: `Kyiv ${(p1?.adoption || 0).toFixed(0)}% but Volodymyr the Great ${(p70?.adoption || 0).toFixed(0)}%` },
+      { title: 'Disaster brand', text: `Chernobyl: ${(p10?.adoption || 0).toFixed(0)}% overall adoption` },
+      { title: 'Recognition vs recall', text: `72 LLMs: 90%+ forced, 65\u201378% free` },
+    ];
+    const findingsEl = document.getElementById('stat-analysis-findings');
+    if (findingsEl) {
+      findingsEl.innerHTML = findings.map(f => `
+        <div style="padding:0.4rem 0.6rem;background:#f8f9fb;border-radius:5px;">
+          <div style="font-size:0.72rem;font-weight:600;color:var(--text);">${f.title}</div>
+          <div style="font-size:0.65rem;color:#6b7280;">${f.text}</div>
+        </div>
+      `).join('');
+    }
+  })();
+
+  // === drawConfusionMatrix ===
+  (function drawConfusionMatrix() {
+    const container = document.getElementById('cl-confusion-matrix');
+    if (!container) return;
+    container.innerHTML = '';
+    const cm = confusionMatrix as any;
+    const labels = cm.labels;
+    const matrix = cm.matrix;
+    const n = labels.length;
+    const short: Record<string,string> = {
+      academic:'Acad', culture:'Cult', economy:'Econ', food:'Food',
+      general:'Gen', history:'Hist', politics:'Pol', religion:'Rel',
+      sports:'Sport', travel:'Trav', war:'War'
+    };
+    const cell = 40, padL = 48, padT = 42;
+    const w = padL + n * cell + 10, h = padT + n * cell + 22;
+    const rowSums = matrix.map((r: number[]) => r.reduce((a: number, b: number) => a + b, 0));
+    const maxOff = Math.max(...matrix.flatMap((r: number[], i: number) => r.map((v: number, j: number) => i === j ? 0 : v / (rowSums[i] || 1) * 100)));
+    const svg = d3.select(container).append('svg').attr('viewBox', `0 0 ${w} ${h}`).style('max-width', '520px').style('width', '100%');
+    svg.append('text').attr('x', padL + n*cell/2).attr('y', h - 2).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af').text(`Predicted (DeBERTa-v3-large) \u2014 F1=${(cm.f1_macro || 0).toFixed(3)}`);
+    svg.append('text').attr('x', 8).attr('y', padT + n*cell/2).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af').attr('transform', `rotate(-90,8,${padT + n*cell/2})`).text('True (Haiku)');
+    labels.forEach((l: string, j: number) => {
+      svg.append('text').attr('x', padL + j*cell + cell/2).attr('y', padT - 8).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#6b7280').attr('transform', `rotate(-35,${padL + j*cell + cell/2},${padT - 8})`).text(short[l] || l);
+      svg.append('text').attr('x', padL - 4).attr('y', padT + j*cell + cell/2 + 3).attr('text-anchor', 'end').attr('font-size', 9).attr('fill', '#6b7280').text(short[l] || l);
+    });
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        const x = padL + j * cell, y = padT + i * cell;
+        const raw = matrix[i][j];
+        const pct = raw / (rowSums[i] || 1) * 100;
+        let fill: string, textFill: string;
+        if (i === j) {
+          const t = pct / 100;
+          fill = `rgb(${Math.round(240 - t*190)},${Math.round(240 - t*50)},${Math.round(240 - t*190)})`;
+          textFill = pct > 70 ? '#fff' : '#374151';
+        } else if (raw === 0) {
+          fill = '#fafafa'; textFill = '#d1d5db';
+        } else {
+          const t = Math.min(pct / (maxOff || 1), 1);
+          fill = `rgb(255,${Math.round(255 - t*140)},${Math.round(255 - t*140)})`;
+          textFill = pct > 2 ? '#991b1b' : '#9ca3af';
+        }
+        svg.append('rect').attr('x', x).attr('y', y).attr('width', cell-1).attr('height', cell-1).attr('fill', fill).attr('rx', 3);
+        if (i === j) {
+          svg.append('text').attr('x', x + cell/2).attr('y', y + cell/2 + 4).attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', textFill).attr('font-weight', 700).text(`${pct.toFixed(0)}%`);
+        } else if (raw > 0) {
+          svg.append('text').attr('x', x + cell/2).attr('y', y + cell/2 + 4).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', textFill).text(raw);
+        }
+      }
+    }
+    const cmSub = document.getElementById('cm-subtitle');
+    if (cmSub) cmSub.textContent = `DeBERTa-v3-large test set \u2014 ${(cm.n_total || 0).toLocaleString()} texts \u00B7 ${((cm.accuracy || 0) * 100).toFixed(1)}% accuracy \u00B7 macro F1 = ${(cm.f1_macro || 0).toFixed(3)}`;
+  })();
+
+  // === drawClBenchmark ===
+  (function drawClBenchmark() {
+    const container = document.getElementById('cl-benchmark-table');
+    if (!container) return;
+    container.innerHTML = '';
+    const cl = clAnalysis as any;
+    if (!cl.benchmark || Object.keys(cl.benchmark).length === 0) return;
+    const benchSub = document.getElementById('benchmark-subtitle');
+    if (benchSub) {
+      const nModels = Object.keys(cl.benchmark).length;
+      const nClasses = Object.keys(cl.context_distribution?.[Object.keys(cl.context_distribution)[0]]?.russian || {}).length || 11;
+      const corpusSize = (manifest as any).cl_corpus || 0;
+      benchSub.textContent = `${nModels} models trained on Claude Haiku 4.5 annotations, ${corpusSize.toLocaleString()} texts, ${nClasses} categories`;
+    }
+    const niceNameMap: Record<string, string> = {
+      'deberta-v3-large': 'DeBERTa-v3-large', 'xlm-roberta-large': 'XLM-RoBERTa-large', 'mdeberta-v3-base': 'mDeBERTa-v3-base',
+    };
+    const models = Object.keys(cl.benchmark).map(k => {
+      const e = cl.benchmark[k];
+      return { key: k, name: e.name || niceNameMap[k] || k, params: e.params || '', desc: e.description || e.desc || '', data: e };
+    }).sort((a, b) => (b.data.f1_macro || 0) - (a.data.f1_macro || 0));
+    const bestF1 = Math.max(...models.map(m => m.data.f1_macro || 0));
+    const grid = d3.select(container).style('display', 'flex').style('flex-direction', 'column').style('gap', '0.4rem');
+    models.forEach(m => {
+      const data = cl.benchmark[m.key]; if (!data) return;
+      const isBest = data.f1_macro === bestF1;
+      const f1pct = (data.f1_macro * 100).toFixed(1);
+      const card = grid.append('div').style('display', 'flex').style('align-items', 'center').style('gap', '0.75rem')
+        .style('padding', '0.5rem 0.75rem').style('border-radius', '6px')
+        .style('border', isBest ? '1px solid #059669' : '1px solid var(--border)')
+        .style('background', isBest ? 'rgba(5,150,105,0.06)' : 'transparent');
+      card.append('div').style('font-size', '1.3rem').style('font-weight', '800').style('min-width', '55px')
+        .style('color', isBest ? '#059669' : 'var(--text-muted)').text(`${f1pct}%`);
+      const info = card.append('div').style('flex', '1');
+      info.append('div').style('font-size', '0.8rem').style('font-weight', isBest ? '700' : '500').style('color', 'var(--text)').text(m.name);
+      info.append('div').style('font-size', '0.65rem').style('color', 'var(--text-muted)').text(`${m.params} params \u2014 ${m.desc}`);
+      const accPct = (data.accuracy * 100);
+      card.append('div').style('width', '80px').style('display', 'flex').style('flex-direction', 'column').style('align-items', 'flex-end').style('gap', '2px')
+        .html(`<div style="font-size:0.65rem;color:var(--text-muted)">Acc ${accPct.toFixed(1)}%</div>
+               <div style="width:100%;height:4px;background:var(--border);border-radius:2px"><div style="width:${(accPct - 80) * 5}%;height:100%;background:${isBest ? '#059669' : '#94a3b8'};border-radius:2px"></div></div>`);
+    });
+  })();
+
+  // === drawClContextChart ===
+  (function drawClContextChart() {
+    const container = document.getElementById('cl-context-bars');
+    if (!container) return;
+    container.innerHTML = '';
+    const cl = clAnalysis as any;
+    if (!cl.context_distribution) return;
+    const ruTotals: Record<string, number> = {};
+    const uaTotals: Record<string, number> = {};
+    for (const [pid, pairData] of Object.entries(cl.context_distribution)) {
+      const pd = pairData as any;
+      if (pd.russian) for (const [cat, val] of Object.entries(pd.russian)) ruTotals[cat] = (ruTotals[cat] || 0) + (val as number);
+      if (pd.ukrainian) for (const [cat, val] of Object.entries(pd.ukrainian)) uaTotals[cat] = (uaTotals[cat] || 0) + (val as number);
+    }
+    const ruSum = Object.values(ruTotals).reduce((a, b) => a + b, 0) || 1;
+    const uaSum = Object.values(uaTotals).reduce((a, b) => a + b, 0) || 1;
+    const aggCats = [...new Set([...Object.keys(ruTotals), ...Object.keys(uaTotals)])].map(c => ({ cat: c, total: (ruTotals[c] || 0) + (uaTotals[c] || 0) })).sort((a, b) => b.total - a.total);
+    let categories: string[] = [];
+    for (const thr of [0.04, 0.02, 0.01, 0]) {
+      const totalAll = aggCats.reduce((s, c) => s + c.total, 0) || 1;
+      categories = aggCats.filter(c => c.total / totalAll > thr).map(c => c.cat);
+      if (categories.length >= 4) break;
+    }
+    categories = categories.slice(0, 10);
+    const formatLabel = (s: string) => s.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()).replace('War Conflict', 'War').replace('Academic Science', 'Academic').replace('General News', 'News').replace('Travel Tourism', 'Travel').replace('Culture Arts', 'Culture').replace('Food Cuisine', 'Food').replace('Business Economy', 'Business');
+    const wrapper = d3.select(container);
+    wrapper.append('div').style('display', 'flex').style('gap', '1rem').style('margin-bottom', '0.5rem').style('font-size', '0.7rem').style('color', 'var(--text-muted)')
+      .html('<span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:#ef4444;border-radius:2px;opacity:0.7"></span>Russian</span><span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:#3b82f6;border-radius:2px;opacity:0.7"></span>Ukrainian</span>');
+    const maxVal = Math.max(...categories.map(c => Math.max((ruTotals[c] || 0) / ruSum, (uaTotals[c] || 0) / uaSum)));
+    categories.forEach(cat => {
+      const ruPct = (ruTotals[cat] || 0) / ruSum;
+      const uaPct = (uaTotals[cat] || 0) / uaSum;
+      const diff = uaPct - ruPct;
+      const row = wrapper.append('div').style('display', 'flex').style('align-items', 'center').style('gap', '6px').style('margin-bottom', '2px');
+      row.append('div').style('width', '55px').style('text-align', 'right').style('font-size', '0.7rem').style('color', 'var(--text)').style('flex-shrink', '0').text(formatLabel(cat));
+      const bars = row.append('div').style('flex', '1').style('display', 'flex').style('flex-direction', 'column').style('gap', '1px');
+      bars.append('div').style('height', '8px').style('background', '#ef4444').style('opacity', '0.6').style('border-radius', '2px').style('width', `${(ruPct / maxVal) * 100}%`);
+      bars.append('div').style('height', '8px').style('background', '#3b82f6').style('opacity', '0.6').style('border-radius', '2px').style('width', `${(uaPct / maxVal) * 100}%`);
+      if (Math.abs(diff) > 0.015) {
+        row.append('div').style('width', '40px').style('font-size', '0.65rem').style('font-weight', '600').style('color', diff > 0 ? '#3b82f6' : '#ef4444').style('flex-shrink', '0').text(`${diff > 0 ? '+' : ''}${(diff * 100).toFixed(1)}pp`);
+      } else {
+        row.append('div').style('width', '40px');
+      }
+    });
+  })();
+
+  // === drawCategoryChart ===
+  (function drawCategoryChart() {
+    const container = document.getElementById('category-chart')!;
+    if (!container) return;
+    container.innerHTML = '';
+    const rect = container.getBoundingClientRect();
+    const margin = { top: 10, right: 60, bottom: 20, left: 180 };
+    const width = rect.width - margin.left - margin.right;
+    const height = rect.height - margin.top - margin.bottom;
+    const svg = d3.select('#category-chart').append('svg').attr('viewBox', `0 0 ${rect.width} ${rect.height}`).append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+    const catData = pairs.categories.map((cat: any) => {
+      const catPairs = pairs.pairs.filter((p: any) => p.category === cat.id);
+      const avg = catPairs.length ? catPairs.reduce((s: number, p: any) => s + p.adoption, 0) / catPairs.length : 0;
+      return { name: cat.name, avg: Math.round(avg * 10) / 10, color: cat.color, count: catPairs.length };
+    }).filter((d: any) => d.count > 0).sort((a: any, b: any) => b.avg - a.avg);
+    const y = d3.scaleBand().domain(catData.map((d: any) => d.name)).range([0, height]).padding(0.3);
+    const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+    svg.selectAll('.bg-bar').data(catData).enter().append('rect').attr('x', 0).attr('width', width).attr('y', (d: any) => y(d.name)!).attr('height', y.bandwidth()).attr('fill', '#f3f4f6').attr('rx', 3);
+    svg.selectAll('.val-bar').data(catData).enter().append('rect').attr('x', 0).attr('width', (d: any) => x(d.avg)).attr('y', (d: any) => y(d.name)!).attr('height', y.bandwidth()).attr('fill', (d: any) => d.color).attr('opacity', 0.8).attr('rx', 3);
+    svg.selectAll('.cat-label').data(catData).enter().append('text').attr('x', -8).attr('y', (d: any) => y(d.name)! + y.bandwidth() / 2 + 4).attr('text-anchor', 'end').attr('fill', '#374151').attr('font-size', '12px').attr('font-weight', '500').text((d: any) => d.name);
+    svg.selectAll('.val-label').data(catData).enter().append('text').attr('x', (d: any) => x(d.avg) + 8).attr('y', (d: any) => y(d.name)! + y.bandwidth() / 2 + 4).attr('fill', '#6b7280').attr('font-size', '12px').attr('font-weight', '600').text((d: any) => d.avg + '%');
+  })();
 </script>
 
 </Base>
