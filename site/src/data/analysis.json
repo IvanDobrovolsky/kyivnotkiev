@@ -48,147 +48,168 @@
       "cat2": "geographical",
       "U": 10.0,
       "p": 0.0125,
-      "sig": "True"
-    },
-    {
-      "cat1": "food",
-      "cat2": "historical",
-      "U": 8.0,
-      "p": 1.0,
-      "sig": "False"
-    },
-    {
-      "cat1": "food",
-      "cat2": "institutional",
-      "U": 1.0,
-      "p": 0.019,
-      "sig": "True"
-    },
-    {
-      "cat1": "food",
-      "cat2": "landmarks",
-      "U": 7.0,
-      "p": 0.3524,
-      "sig": "False"
-    },
-    {
-      "cat1": "food",
-      "cat2": "people",
-      "U": 0.0,
-      "p": 0.0571,
-      "sig": "False"
-    },
-    {
-      "cat1": "food",
-      "cat2": "sports",
-      "U": 2.0,
-      "p": 0.2286,
-      "sig": "False"
+      "p_adjusted": 0.2619,
+      "sig": false
     },
     {
       "cat1": "geographical",
       "cat2": "historical",
       "U": 89.0,
       "p": 0.0149,
-      "sig": "True"
+      "p_adjusted": 0.2976,
+      "sig": false
     },
     {
-      "cat1": "geographical",
+      "cat1": "food",
       "cat2": "institutional",
-      "U": 52.0,
-      "p": 0.2604,
-      "sig": "False"
-    },
-    {
-      "cat1": "geographical",
-      "cat2": "landmarks",
-      "U": 89.0,
-      "p": 0.4995,
-      "sig": "False"
-    },
-    {
-      "cat1": "geographical",
-      "cat2": "people",
-      "U": 25.0,
-      "p": 0.3725,
-      "sig": "False"
-    },
-    {
-      "cat1": "geographical",
-      "cat2": "sports",
-      "U": 43.0,
-      "p": 0.7102,
-      "sig": "False"
+      "U": 1.0,
+      "p": 0.019,
+      "p_adjusted": 0.3619,
+      "sig": false
     },
     {
       "cat1": "historical",
       "cat2": "institutional",
       "U": 1.0,
       "p": 0.019,
-      "sig": "True"
+      "p_adjusted": 0.3619,
+      "sig": false
     },
     {
-      "cat1": "historical",
-      "cat2": "landmarks",
-      "U": 10.0,
-      "p": 0.7619,
-      "sig": "False"
+      "cat1": "food",
+      "cat2": "people",
+      "U": 0.0,
+      "p": 0.0571,
+      "p_adjusted": 0.9714,
+      "sig": false
     },
     {
       "cat1": "historical",
       "cat2": "people",
       "U": 0.0,
       "p": 0.0571,
-      "sig": "False"
+      "p_adjusted": 0.9714,
+      "sig": false
     },
     {
       "cat1": "historical",
       "cat2": "sports",
       "U": 1.0,
       "p": 0.1143,
-      "sig": "False"
+      "p_adjusted": 1.0,
+      "sig": false
+    },
+    {
+      "cat1": "food",
+      "cat2": "sports",
+      "U": 2.0,
+      "p": 0.2286,
+      "p_adjusted": 1.0,
+      "sig": false
+    },
+    {
+      "cat1": "geographical",
+      "cat2": "institutional",
+      "U": 52.0,
+      "p": 0.2604,
+      "p_adjusted": 1.0,
+      "sig": false
+    },
+    {
+      "cat1": "food",
+      "cat2": "landmarks",
+      "U": 7.0,
+      "p": 0.3524,
+      "p_adjusted": 1.0,
+      "sig": false
+    },
+    {
+      "cat1": "geographical",
+      "cat2": "people",
+      "U": 25.0,
+      "p": 0.3725,
+      "p_adjusted": 1.0,
+      "sig": false
     },
     {
       "cat1": "institutional",
       "cat2": "landmarks",
       "U": 23.5,
       "p": 0.4225,
-      "sig": "False"
-    },
-    {
-      "cat1": "institutional",
-      "cat2": "people",
-      "U": 9.5,
-      "p": 1.0,
-      "sig": "False"
-    },
-    {
-      "cat1": "institutional",
-      "cat2": "sports",
-      "U": 10.5,
-      "p": 0.7954,
-      "sig": "False"
+      "p_adjusted": 1.0,
+      "sig": false
     },
     {
       "cat1": "landmarks",
       "cat2": "people",
       "U": 5.5,
       "p": 0.4367,
-      "sig": "False"
+      "p_adjusted": 1.0,
+      "sig": false
     },
     {
-      "cat1": "landmarks",
-      "cat2": "sports",
-      "U": 6.5,
-      "p": 0.6041,
-      "sig": "False"
+      "cat1": "geographical",
+      "cat2": "landmarks",
+      "U": 89.0,
+      "p": 0.4995,
+      "p_adjusted": 1.0,
+      "sig": false
     },
     {
       "cat1": "people",
       "cat2": "sports",
       "U": 6.5,
       "p": 0.5066,
-      "sig": "False"
+      "p_adjusted": 1.0,
+      "sig": false
+    },
+    {
+      "cat1": "landmarks",
+      "cat2": "sports",
+      "U": 6.5,
+      "p": 0.6041,
+      "p_adjusted": 1.0,
+      "sig": false
+    },
+    {
+      "cat1": "geographical",
+      "cat2": "sports",
+      "U": 43.0,
+      "p": 0.7102,
+      "p_adjusted": 1.0,
+      "sig": false
+    },
+    {
+      "cat1": "historical",
+      "cat2": "landmarks",
+      "U": 10.0,
+      "p": 0.7619,
+      "p_adjusted": 1.0,
+      "sig": false
+    },
+    {
+      "cat1": "institutional",
+      "cat2": "sports",
+      "U": 10.5,
+      "p": 0.7954,
+      "p_adjusted": 1.0,
+      "sig": false
+    },
+    {
+      "cat1": "food",
+      "cat2": "historical",
+      "U": 8.0,
+      "p": 1.0,
+      "p_adjusted": 1.0,
+      "sig": false
+    },
+    {
+      "cat1": "institutional",
+      "cat2": "people",
+      "U": 9.5,
+      "p": 1.0,
+      "p_adjusted": 1.0,
+      "sig": false
     }
   ],
   "invasion_effect": {

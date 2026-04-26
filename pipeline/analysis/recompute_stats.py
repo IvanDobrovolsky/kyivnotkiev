@@ -192,16 +192,30 @@ def main():
         }
         log.info(f"  {cat}: mean={cat_means[cat]['mean']}%, n={cat_means[cat]['n']}")
 
-    # Pairwise Mann-Whitney
+    # Pairwise Mann-Whitney with Holm-Bonferroni correction
     pairwise = []
     cats = list(cat_groups.keys())
     for i, c1 in enumerate(cats):
         for c2 in cats[i + 1:]:
             u, p = scipy_stats.mannwhitneyu(cat_groups[c1], cat_groups[c2], alternative="two-sided")
             pairwise.append({"cat1": c1, "cat2": c2, "U": round(float(u), 1),
-                             "p": round(float(p), 4), "sig": p < 0.05})
+                             "p_raw": float(p)})
+
+    # Holm-Bonferroni step-down: sort by p ascending, enforce monotonicity
+    pairwise.sort(key=lambda x: x["p_raw"])
+    m = len(pairwise)
+    prev_adj = 0.0
+    for i, pw in enumerate(pairwise):
+        adj = min(pw["p_raw"] * (m - i), 1.0)
+        adj = max(adj, prev_adj)  # enforce monotonicity
+        prev_adj = adj
+        pw["p"] = round(pw["p_raw"], 4)
+        pw["p_adjusted"] = round(adj, 4)
+        pw["sig"] = adj < 0.05
+    for pw in pairwise:
+        del pw["p_raw"]
     sig_pairs = [pw for pw in pairwise if pw["sig"]]
-    log.info(f"  Pairwise: {len(sig_pairs)}/{len(pairwise)} significant")
+    log.info(f"  Pairwise (Holm-Bonferroni): {len(sig_pairs)}/{len(pairwise)} significant")
 
     # ── 2. Pre/Post Invasion: Wilcoxon signed-rank ──
     log.info("=" * 60)
