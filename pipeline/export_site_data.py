@@ -746,8 +746,17 @@ def export_domain_origins(enabled_ids: set[int]) -> dict:
 
 
 def export_analysis() -> dict:
-    """Export changepoint analysis from local JSON if available."""
+    """Export analysis data. Prefers recompute_stats output, falls back to dataset."""
     log.info("Exporting analysis...")
+    # recompute_stats.py writes directly to site/src/data/analysis.json — use it if available
+    site_path = SITE_DATA_DIR / "analysis.json"
+    if site_path.exists():
+        with open(site_path) as f:
+            data = json.load(f)
+        if data.get("kruskal_wallis") or data.get("regression"):
+            log.info("  Using existing analysis.json from recompute_stats")
+            return data
+    # Fallback to dataset export
     analysis_path = DATASET_DIR / "analysis.json"
     if analysis_path.exists():
         with open(analysis_path) as f:
