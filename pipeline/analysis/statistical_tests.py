@@ -213,23 +213,56 @@ def ols_with_categorical(rows, family_levels, drop_first=True):
 # ---------- analyses ----------
 
 def pair_bootstrap_cis():
-    """Bootstrap CI on the overall adoption % for every pair using the
-    last 12 months of every source's UA/RU counts."""
+    """Bootstrap CI on adoption % for every pair.
+
+    Uses the same formula as manifest.json: compute per-source adoption
+    ratio over the last 12 calendar months, then average across sources
+    with equal weight. Bootstrap resamples the per-source ratios.
+    """
+    from datetime import date, timedelta
     ts = json.load(open(SITE_DATA / "timeseries.json"))
+    cutoff = (date.today() - timedelta(days=365)).strftime("%Y-%m")
     out = {}
     for pid_str, src_map in ts.items():
         if pid_str == "events":
             continue
+        # Per-source adoption ratios (last 12 months by calendar date)
+        source_ratios = []
         ru_total, ua_total = 0, 0
         for src, rows in src_map.items():
             if not rows:
                 continue
-            for r in rows[-12:]:
-                ru_total += r.get("rus", 0) or 0
-                ua_total += r.get("ukr", 0) or 0
-        ci = bootstrap_pct_ci(ru_total, ua_total)
-        if ci:
-            out[pid_str] = {**ci, "ru": ru_total, "ua": ua_total}
+            # Filter to last 12 months
+            recent = [r for r in rows if r.get("date", "") >= cutoff]
+            if not recent:
+                continue
+            src_ua = sum(r.get("ukr", 0) or 0 for r in recent)
+            src_ru = sum(r.get("rus", 0) or 0 for r in recent)
+            src_total = src_ua + src_ru
+            if src_total >= 3:  # min threshold
+                source_ratios.append(src_ua / src_total)
+                ru_total += src_ru
+                ua_total += src_ua
+        if not source_ratios:
+            continue
+        # Point estimate = mean of per-source ratios (matches manifest)
+        point = sum(source_ratios) / len(source_ratios) * 100
+        # Bootstrap CI on the source ratios
+        n_iter = 4000
+        random.seed(42)
+        boot_means = []
+        for _ in range(n_iter):
+            sample = [source_ratios[random.randint(0, len(source_ratios) - 1)]
+                      for _ in range(len(source_ratios))]
+            boot_means.append(sum(sample) / len(sample) * 100)
+        boot_means.sort()
+        lo = boot_means[int(n_iter * 0.025)]
+        hi = boot_means[int(n_iter * 0.975)]
+        out[pid_str] = {
+            "point": round(point, 2), "lo": round(lo, 2), "hi": round(hi, 2),
+            "method": "bootstrap_source_mean", "n_sources": len(source_ratios),
+            "n": ru_total + ua_total, "ru": ru_total, "ua": ua_total,
+        }
     return out
 
 
