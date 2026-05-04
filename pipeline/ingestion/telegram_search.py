@@ -72,21 +72,26 @@ async def run():
     client = TelegramClient(session_path, api_id, api_hash)
     await client.start()
 
-    # Step 1: discover channels by searching for key terms
-    search_terms = [
-        "Ukraine news", "Kyiv", "Kiev", "Ukrainian war",
-        "Ukraine English", "Kharkiv", "Odessa", "Bakhmut",
-        "Zelenskyy", "Ukraine military", "Ukraine politics",
-    ]
+    # Step 1: discover channels by searching for ALL pair terms
+    # Methodology: search Telegram's public channel index for both the
+    # Russian and Ukrainian form of every enabled pair. This ensures
+    # coverage is systematic and pair-driven, not hand-picked.
+    search_terms = set()
+    for p in PAIRS:
+        search_terms.add(p["russian"])
+        search_terms.add(p["ukrainian"])
+    # Deduplicate terms that appear in multiple pairs (e.g. "Kiev" in pairs 1, 21, 22...)
+    search_terms = sorted(search_terms)
+    log.info(f"Searching {len(search_terms)} terms from {len(PAIRS)} pairs")
 
     discovered = {}  # username -> entity
 
-    for term in search_terms:
-        log.info(f"Searching: '{term}'")
+    for i, term in enumerate(search_terms):
+        log.info(f"[{i+1}/{len(search_terms)}] Searching: '{term}'")
         try:
             result = await client(SearchRequest(q=term, limit=MAX_CHANNELS_PER_SEARCH))
             for chat in result.chats:
-                if isinstance(chat, Channel) and chat.broadcast:  # broadcast = channel
+                if isinstance(chat, Channel) and chat.broadcast:
                     if chat.username and chat.participants_count and chat.participants_count >= MIN_SUBSCRIBERS:
                         if chat.username not in discovered:
                             discovered[chat.username] = {
@@ -97,27 +102,7 @@ async def run():
                             log.info(f"  Found: @{chat.username} ({chat.title}) — {chat.participants_count:,} subs")
         except Exception as e:
             log.warning(f"  Search error: {e}")
-        await asyncio.sleep(2)
-
-    # Also add key channels we know exist (verified working from previous run)
-    known_working = [
-        "KyivIndependent", "ukrainenowenglish", "wartranslated",
-        "BBCWorld", "guardian", "suspilnenews", "Ukrinform_News",
-        "DeepStateUA", "GeneralStaffZSU", "operativnoZSU",
-        "TCH_channel", "UkraineNow", "Ukrainian_Navy",
-    ]
-    for username in known_working:
-        if username not in discovered:
-            try:
-                entity = await client.get_entity(username)
-                if hasattr(entity, "participants_count"):
-                    discovered[username] = {
-                        "title": getattr(entity, "title", username),
-                        "subscribers": getattr(entity, "participants_count", 0),
-                        "entity": entity,
-                    }
-            except:
-                pass
+        await asyncio.sleep(2)  # rate limit
 
     log.info(f"\nTotal channels discovered: {len(discovered)}")
 
