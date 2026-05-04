@@ -44,6 +44,7 @@ pairs:
     label: AP Stylebook adopts Kyiv
   - date: 2019-10
     label: BBC adopts Kyiv
+  match_mode: word_boundary
 - id: 2
   category: geographical
   russian: Kharkov
@@ -55,6 +56,7 @@ pairs:
     label: Battle of Kharkiv
   - date: 2022-09
     label: Kharkiv counteroffensive
+  match_mode: word_boundary
 - id: 3
   category: geographical
   russian: Odessa
@@ -65,12 +67,23 @@ pairs:
   events:
   - date: 2022-07
     label: Russian missile strikes
+  match_mode: word_boundary
+  homonym_filters:
+  - texas
+  - permian
+  - midland
+  - odessa.{0,5}fl\b
+  - odessa.{0,5}missouri
+  - odesza
+  - odessa.{0,5}a.?zion
+  homonym_type: us_city
 - id: 4
   category: geographical
   russian: Lvov
   ukrainian: Lviv
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 5
   category: geographical
   russian: Zaporozhye
@@ -80,12 +93,18 @@ pairs:
   events:
   - date: 2022-03
     label: Russia seizes nuclear plant
+  match_mode: word_boundary
 - id: 6
   category: geographical
   russian: Nikolaev
   ukrainian: Mykolaiv
   enabled: true
   is_control: false
+  match_mode: word_boundary
+  homonym_filters:
+  - nikolaev.{0,10}(born|author|professor|medal|coach|player)
+  homonym_type: surname
+  ner_filter: true
 - id: 7
   category: geographical
   russian: Dnepropetrovsk
@@ -95,18 +114,24 @@ pairs:
   events:
   - date: 2016-05
     label: Officially renamed from Dnipropetrovsk
+  match_mode: word_boundary
 - id: 8
   category: geographical
   russian: Vinnitsa
   ukrainian: Vinnytsia
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 9
   category: geographical
   russian: Rovno
   ukrainian: Rivne
   enabled: true
   is_control: false
+  match_mode: word_boundary
+  homonym_filters:
+  - rovno.{0,5}(v|na|po)\b
+  homonym_type: slavic_adverb
 - id: 10
   category: geographical
   russian: Chernobyl
@@ -119,6 +144,7 @@ pairs:
     label: HBO Chernobyl series
   - date: 2022-02
     label: Russia seizes plant
+  match_mode: word_boundary
 - id: 11
   category: geographical
   russian: Lugansk
@@ -128,6 +154,7 @@ pairs:
   events:
   - date: 2014-04
     label: Separatist conflict begins
+  match_mode: word_boundary
 - id: 12
   category: geographical
   russian: Donetsk
@@ -156,6 +183,7 @@ pairs:
   enabled: true
   is_control: false
   notes: River name. Qualified with "River" to disambiguate from the city (pair 7, Dnepropetrovsk→Dnipro).
+  match_mode: exact_phrase
 - id: 16
   category: geographical
   russian: Dniester
@@ -163,6 +191,7 @@ pairs:
   enabled: true
   is_control: false
   notes: River name
+  match_mode: word_boundary
 - id: 17
   category: geographical
   russian: Donbass
@@ -174,6 +203,7 @@ pairs:
   events:
   - date: 2023-07
     label: Ukrainian law mandates toponym decolonization
+  match_mode: word_boundary
 - id: 18
   category: geographical
   russian: Crimea
@@ -187,72 +217,89 @@ pairs:
   ukrainian: Zakarpattia
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 20
   category: geographical
   russian: Podolye
   ukrainian: Podillia
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 38
   category: geographical
   russian: Chernigov
   ukrainian: Chernihiv
   enabled: true
   is_control: false
+  match_mode: word_boundary
+  homonym_filters:
+  - restaurant
+  - bar.{0,5}chernigov
+  - barcelona
+  homonym_type: business_name
 - id: 39
   category: geographical
   russian: Chernovtsy
   ukrainian: Chernivtsi
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 40
   category: geographical
   russian: Zhitomir
   ukrainian: Zhytomyr
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 41
   category: geographical
   russian: Cherkassy
   ukrainian: Cherkasy
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 42
   category: geographical
   russian: Uzhgorod
   ukrainian: Uzhhorod
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 43
   category: geographical
   russian: Kremenchug
   ukrainian: Kremenchuk
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 44
   category: geographical
   russian: Kirovograd
   ukrainian: Kropyvnytskyi
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 45
   category: geographical
   russian: Ternopol
   ukrainian: Ternopil
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 21
   category: food
   russian: Chicken Kiev
   ukrainian: Chicken Kyiv
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 22
   category: food
   russian: Kiev cake
   ukrainian: Kyiv cake
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 23
   category: food
   russian: Borsch
@@ -264,6 +311,7 @@ pairs:
   events:
   - date: 2022-07
     label: UNESCO inscribes Ukrainian borscht
+  match_mode: word_boundary
 - id: 64
   category: food
   russian: Borsch
@@ -277,6 +325,7 @@ pairs:
   ukrainian: Varenyky
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 47
   category: food
   russian: Gorilka
@@ -289,36 +338,42 @@ pairs:
   ukrainian: Kyiv Pechersk Lavra
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 25
   category: landmarks
   russian: Saint Sophia Cathedral Kiev
   ukrainian: Saint Sophia Cathedral Kyiv
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 26
   category: landmarks
   russian: Chernobyl Exclusion Zone
   ukrainian: Chornobyl Exclusion Zone
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 54
   category: landmarks
   russian: Babi Yar
   ukrainian: Babyn Yar
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 55
   category: landmarks
   russian: Potemkin Stairs Odessa
   ukrainian: Potemkin Stairs Odesa
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 56
   category: landmarks
   russian: Motherland Monument Kiev
   ukrainian: Motherland Monument Kyiv
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 27
   category: country
   russian: the Ukraine
@@ -336,36 +391,42 @@ pairs:
   ukrainian: Kyiv National University
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 29
   category: institutional
   russian: Kharkov University
   ukrainian: Kharkiv University
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 30
   category: institutional
   russian: Kiev Polytechnic
   ukrainian: Kyiv Polytechnic
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 31
   category: institutional
   russian: Kiev Patriarchate
   ukrainian: Kyiv Patriarchate
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 57
   category: institutional
   russian: Lvov Polytechnic
   ukrainian: Lviv Polytechnic
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 58
   category: institutional
   russian: Odessa National University
   ukrainian: Odesa National University
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 32
   category: sports
   russian: Dynamo Kiev
@@ -375,6 +436,7 @@ pairs:
   events:
   - date: 2018-12
     label: UEFA updates to Dynamo Kyiv
+  match_mode: exact_phrase
 - id: 33
   category: sports
   russian: Shakhtar Donetsk
@@ -388,6 +450,7 @@ pairs:
   ukrainian: Kyiv ballet
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 51
   category: sports
   russian: Zorya Lugansk
@@ -401,6 +464,7 @@ pairs:
   ukrainian: Metalist Kharkiv
   enabled: true
   is_control: false
+  match_mode: exact_phrase
 - id: 53
   category: sports
   russian: Karpaty Lvov
@@ -417,6 +481,7 @@ pairs:
   events:
   - date: 2022-02
     label: Russia weaponizes Kievan Rus narrative
+  match_mode: exact_phrase
 - id: 36
   category: historical
   russian: Cossack
@@ -437,6 +502,7 @@ pairs:
   ukrainian: Hopak
   enabled: true
   is_control: false
+  match_mode: word_boundary
 - id: 49
   category: historical
   russian: Euromaidan
@@ -465,6 +531,7 @@ pairs:
   - date: 2016-11
     label: Poroshenko unveils Volodymyr statue in Kyiv
     color: '#0057B8'
+  match_mode: exact_phrase
 - id: 71
   category: historical
   russian: Prince of Kiev
@@ -472,6 +539,7 @@ pairs:
   enabled: true
   is_control: false
   notes: Historical title for rulers of Kyivan Rus. Russian framing dominates English-language scholarship.
+  match_mode: exact_phrase
 - id: 59
   category: historical
   russian: Galicia
@@ -490,6 +558,7 @@ pairs:
     label: Beats Joshua, undisputed
   - date: 2024-05
     label: Beats Fury, all belts
+  match_mode: exact_phrase
 - id: 61
   category: people
   russian: Vladimir Zelensky
@@ -501,6 +570,7 @@ pairs:
     label: Elected president
   - date: 2022-02
     label: Wartime leadership begins
+  match_mode: exact_phrase
 - id: 62
   category: people
   russian: Andrey Shevchenko
@@ -508,6 +578,7 @@ pairs:
   enabled: true
   is_control: false
   notes: Global football icon (Андрій Шевченко). Tests Й→ii per CMU rules (Andrii vs Andrey/Andrei).
+  match_mode: exact_phrase
 - id: 63
   category: people
   russian: Vitali Klitschko
@@ -557,6 +628,7 @@ pairs:
   enabled: true
   is_control: false
   notes: Ukrainian-born writer (Миколa Гоголь). Tests Г→H and Микола→Mykola vs Nikolai.
+  match_mode: exact_phrase
 - id: 81
   category: historical
   russian: Slava Ukraine
@@ -571,6 +643,7 @@ pairs:
   enabled: true
   is_control: false
   notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms Ukraine's territorial integrity.
+  match_mode: word_boundary
 - id: 83
   category: historical
   russian: Olga of Kiev
@@ -578,6 +651,7 @@ pairs:
   enabled: true
   is_control: false
   notes: Princess of Kyivan Rus (княгиня Ольга). Tests Г→H in first name + Kiev→Kyiv.
+  match_mode: exact_phrase
 - id: 84
   category: people
   russian: Igor Sikorsky
@@ -585,6 +659,7 @@ pairs:
   enabled: true
   is_control: false
   notes: Aviation pioneer (Ігор Сікорський). Tests І→I and Г→H (Igor vs Ihor).
+  match_mode: exact_phrase
 - id: 85
   category: people
   russian: Sergei Korolev
@@ -593,6 +668,7 @@ pairs:
   is_control: false
   notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of the most consequential cases of Ukrainian
     identity erasure in global science history.
+  match_mode: exact_phrase
 - id: 86
   category: historical
   russian: Bogdan Khmelnitsky
@@ -600,6 +676,7 @@ pairs:
   enabled: true
   is_control: false
   notes: Hetman (Богдан Хмельницький). Tests Г→H (Bogdan vs Bohdan) and suffix (-itsky vs -ytskyi).
+  match_mode: exact_phrase
 - id: 87
   category: people
   russian: Kazimir Malevich
@@ -607,6 +684,7 @@ pairs:
   enabled: true
   is_control: false
   notes: Suprematist artist (Казимир Малевич). Tests И→Y and Ч→Ch (Malevich vs Malevych).
+  match_mode: exact_phrase
 - id: 89
   category: landmarks
   russian: Sviatogorsk Lavra
@@ -614,6 +692,7 @@ pairs:
   enabled: true
   is_control: false
   notes: Holy Dormition Monastery (Свято-Успенська Святогірська Лавра). Tests Г→H (горськ vs хірськ).
+  match_mode: exact_phrase
 - id: 72
   category: geographical
   russian: Artemovsk
@@ -628,3 +707,12 @@ pairs:
   - date: 2023-05
     label: Bakhmut falls to Wagner
     color: '#dc2626'
+  match_mode: word_boundary
+  homonym_filters:
+  - hulak
+  - gulak
+  - artemovsk[ioay]
+  - champagne
+  - sparkling
+  - winery
+  homonym_type: brand_composer
