@@ -448,11 +448,16 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         geo = trends[(trends["geo"] != "") & (trends["geo"].notna())]
         extra_map["trends_countries"] = str(geo["geo"].nunique())
 
-    # OpenAlex from local data
+    # OpenAlex — prefer parquet (has per-paper counts), fall back to JSON
+    openalex_parquet = DATASET_DIR / "openalex.parquet"
     openalex_path = DATA_DIR / "raw" / "openalex" / "openalex_all_pairs.json"
     openalex_total_papers = 0
     openalex_total_pairs = 0
-    if openalex_path.exists():
+    if openalex_parquet.exists():
+        oa_df = pd.read_parquet(openalex_parquet)
+        openalex_total_papers = int(oa_df["count"].sum()) if "count" in oa_df.columns else len(oa_df)
+        openalex_total_pairs = int(oa_df["pair_id"].nunique())
+    elif openalex_path.exists():
         with open(openalex_path) as f:
             oa_data = json.load(f)
         openalex_total_pairs = len(oa_data)
