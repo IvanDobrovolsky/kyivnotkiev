@@ -39,7 +39,7 @@ REQUEST_DELAY = 0.5  # seconds between requests (API is generous but be polite)
 
 # Start/end for pageview data (available from July 2015)
 START = "20150701"
-END = "20260315"
+END = "20260430"
 
 # Wikipedia article mappings: russian_article, ukrainian_article
 # These map toponym pairs to their actual Wikipedia article titles
@@ -76,6 +76,53 @@ WIKI_ARTICLES = {
     35: {"russian": "Kievan_Rus%27", "ukrainian": "Kievan_Rus%27",
          "note": "Article at Kievan Rus'; Kyivan Rus redirects"},
     36: {"russian": "Cossacks", "ukrainian": "Cossacks"},
+    # Additional pairs — Wikipedia article titles
+    6: {"russian": "Mykolaiv", "ukrainian": "Mykolaiv"},
+    8: {"russian": "Vinnytsia", "ukrainian": "Vinnytsia"},
+    9: {"russian": "Rivne", "ukrainian": "Rivne"},
+    15: {"russian": "Dnieper", "ukrainian": "Dnieper"},
+    16: {"russian": "Dniester", "ukrainian": "Dniester"},
+    17: {"russian": "Donbas", "ukrainian": "Donbas"},
+    19: {"russian": "Zakarpattia_Oblast", "ukrainian": "Zakarpattia_Oblast"},
+    20: {"russian": "Podolia", "ukrainian": "Podolia"},
+    22: {"russian": "Kyiv_cake", "ukrainian": "Kyiv_cake"},
+    25: {"russian": "Saint_Sophia%27s_Cathedral%2C_Kyiv", "ukrainian": "Saint_Sophia%27s_Cathedral%2C_Kyiv"},
+    26: {"russian": "Chernobyl_Exclusion_Zone", "ukrainian": "Chernobyl_Exclusion_Zone"},
+    29: {"russian": "National_University_of_Kharkiv", "ukrainian": "National_University_of_Kharkiv"},
+    30: {"russian": "Igor_Sikorsky_Kyiv_Polytechnic_Institute", "ukrainian": "Igor_Sikorsky_Kyiv_Polytechnic_Institute"},
+    31: {"russian": "Ukrainian_Orthodox_Church_%E2%80%93_Kyiv_Patriarchate", "ukrainian": "Ukrainian_Orthodox_Church_%E2%80%93_Kyiv_Patriarchate"},
+    34: {"russian": "Kyiv_State_Choreographic_School", "ukrainian": "Kyiv_State_Choreographic_School"},
+    38: {"russian": "Chernihiv", "ukrainian": "Chernihiv"},
+    39: {"russian": "Chernivtsi", "ukrainian": "Chernivtsi"},
+    40: {"russian": "Zhytomyr", "ukrainian": "Zhytomyr"},
+    41: {"russian": "Cherkasy", "ukrainian": "Cherkasy"},
+    42: {"russian": "Uzhhorod", "ukrainian": "Uzhhorod"},
+    43: {"russian": "Kremenchuk", "ukrainian": "Kremenchuk"},
+    44: {"russian": "Kropyvnytskyi", "ukrainian": "Kropyvnytskyi"},
+    45: {"russian": "Ternopil", "ukrainian": "Ternopil"},
+    46: {"russian": "Varenyky", "ukrainian": "Varenyky"},
+    48: {"russian": "Hopak", "ukrainian": "Hopak"},
+    52: {"russian": "FC_Metalist_Kharkiv", "ukrainian": "FC_Metalist_Kharkiv"},
+    54: {"russian": "Babi_Yar", "ukrainian": "Babi_Yar"},
+    55: {"russian": "Potemkin_Stairs", "ukrainian": "Potemkin_Stairs"},
+    56: {"russian": "Motherland_Monument", "ukrainian": "Motherland_Monument"},
+    57: {"russian": "Lviv_Polytechnic", "ukrainian": "Lviv_Polytechnic"},
+    58: {"russian": "Odesa_University", "ukrainian": "Odesa_University"},
+    60: {"russian": "Oleksandr_Usyk", "ukrainian": "Oleksandr_Usyk"},
+    61: {"russian": "Volodymyr_Zelenskyy", "ukrainian": "Volodymyr_Zelenskyy"},
+    62: {"russian": "Andriy_Shevchenko", "ukrainian": "Andriy_Shevchenko"},
+    70: {"russian": "Volodymyr_the_Great", "ukrainian": "Volodymyr_the_Great"},
+    71: {"russian": "Volodymyr_the_Great", "ukrainian": "Volodymyr_the_Great",
+         "note": "Same article as pair 70; different conceptual framing"},
+    72: {"russian": "Bakhmut", "ukrainian": "Bakhmut"},
+    80: {"russian": "Nikolai_Gogol", "ukrainian": "Nikolai_Gogol"},
+    82: {"russian": "Feodosia", "ukrainian": "Feodosia"},
+    83: {"russian": "Olga_of_Kiev", "ukrainian": "Olga_of_Kiev"},
+    84: {"russian": "Igor_Sikorsky", "ukrainian": "Igor_Sikorsky"},
+    85: {"russian": "Sergei_Korolev", "ukrainian": "Sergei_Korolev"},
+    86: {"russian": "Bohdan_Khmelnytsky", "ukrainian": "Bohdan_Khmelnytsky"},
+    87: {"russian": "Kazimir_Malevich", "ukrainian": "Kazimir_Malevich"},
+    89: {"russian": "Sviatohirsk_Lavra", "ukrainian": "Sviatohirsk_Lavra"},
 }
 
 # Additional redirect/search tracking: measure how people FIND the article
