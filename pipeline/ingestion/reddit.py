@@ -235,13 +235,12 @@ def collect_pair_reddit(pair_id: int) -> pd.DataFrame | None:
                 time.sleep(REQUEST_DELAY)
 
     # Method 2: Arctic Shift for historical yearly data (2010-2026)
-    arctic_subreddits = ["worldnews", "ukraine", "europe", "news", "UkrainianConflict",
-                         "geopolitics", "RussiaUkraineWar2022", "UkraineWarVideoReport",
-                         "history", "AskHistorians", "soccer", "football"]
+    # Core subreddits only — niche subs (AskHistorians, soccer) add <1% of matches
+    arctic_subreddits = ["worldnews", "ukraine", "europe", "UkrainianConflict"]
     for variant, term in [("russian", russian), ("ukrainian", ukrainian)]:
         for year in range(2010, 2027):
             after = f"{year}-01-01"
-            before = f"{year}-12-31" if year < 2026 else "2026-04-01"
+            before = f"{year}-12-31" if year < 2026 else "2026-05-01"
             total_count = 0
             for sub in arctic_subreddits:
                 results = search_arctic_shift(
@@ -249,7 +248,7 @@ def collect_pair_reddit(pair_id: int) -> pd.DataFrame | None:
                     search_type="posts", limit=500,
                 )
                 total_count += len(results)
-                time.sleep(REQUEST_DELAY)
+                time.sleep(1)  # Arctic Shift is research-friendly, 1s is fine
             rows.append({
                 "pair_id": pair_id,
                 "variant": variant,
