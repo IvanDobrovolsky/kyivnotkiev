@@ -222,9 +222,10 @@ pairs:
   category: geographical
   russian: Podolye
   ukrainian: Podillia
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
+  notes: 'Dropped: 90%+ FP in all sources, term too ambiguous'
 - id: 38
   category: geographical
   russian: Chernigov
@@ -577,7 +578,7 @@ pairs:
   ukrainian: Andrii Shevchenko
   enabled: true
   is_control: false
-  notes: Global football icon (Андрій Шевченко). Tests Й→ii per CMU rules (Andrii vs Andrey/Andrei).
+  notes: Also matches Andriy Shevchenko (most common English spelling)
   match_mode: exact_phrase
 - id: 63
   category: people
