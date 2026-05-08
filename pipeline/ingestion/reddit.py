@@ -234,32 +234,44 @@ def collect_pair_reddit(pair_id: int) -> pd.DataFrame | None:
                 log.info(f"    r/{sub} [{time_filter}] '{term}': {count} posts")
                 time.sleep(REQUEST_DELAY)
 
-    # Method 2: Arctic Shift for historical yearly data (2010-2026)
-    # Core subreddits only — niche subs (AskHistorians, soccer) add <1% of matches
+    # Method 2: Arctic Shift for historical data (all years at once per subreddit)
+    # Single query per subreddit instead of per-year to reduce request count
     arctic_subreddits = ["worldnews", "ukraine", "europe", "UkrainianConflict"]
     for variant, term in [("russian", russian), ("ukrainian", ukrainian)]:
+        all_results = []
+        for sub in arctic_subreddits:
+            results = search_arctic_shift(
+                term, subreddit=sub, after="2010-01-01", before="2026-05-01",
+                search_type="posts", limit=1000,
+            )
+            all_results.extend(results)
+            time.sleep(1)
+
+        # Group by year from created_utc
+        from collections import defaultdict
+        from datetime import datetime
+        yearly = defaultdict(int)
+        for r in all_results:
+            ts = r.get("created_utc", 0)
+            if ts:
+                yr = datetime.utcfromtimestamp(ts).year
+                yearly[yr] += 1
+
         for year in range(2010, 2027):
-            after = f"{year}-01-01"
-            before = f"{year}-12-31" if year < 2026 else "2026-05-01"
-            total_count = 0
-            for sub in arctic_subreddits:
-                results = search_arctic_shift(
-                    term, subreddit=sub, after=after, before=before,
-                    search_type="posts", limit=500,
-                )
-                total_count += len(results)
-                time.sleep(1)  # Arctic Shift is research-friendly, 1s is fine
+            count = yearly.get(year, 0)
             rows.append({
                 "pair_id": pair_id,
                 "variant": variant,
                 "term": term,
                 "subreddit": "multi",
                 "time_filter": f"year_{year}",
-                "count": total_count,
+                "count": count,
                 "source": "arctic_shift",
             })
-            if total_count:
-                log.info(f"    Arctic Shift {year} '{term}': {total_count} posts")
+
+        total = sum(yearly.values())
+        if total:
+            log.info(f"    Arctic Shift '{term}': {total} posts across {len(yearly)} years")
 
     if not rows:
         return None
