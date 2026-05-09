@@ -16,8 +16,10 @@ const sourceInfo: Record<string, {desc: string; url: string; coverage: string}> 
   wikipedia: {desc: 'Page views for spelling-variant redirects — how people find articles', url: 'https://en.wikipedia.org/', coverage: '2015-2026'},
   reddit: {desc: 'Posts and comments mentioning each spelling form', url: 'https://reddit.com/', coverage: '2007-2026'},
   youtube: {desc: 'Video titles and descriptions containing each spelling', url: 'https://youtube.com/', coverage: '2010-2026'},
-  ngrams: {desc: 'Google Books corpus — spelling frequency in published books', url: 'https://books.google.com/ngrams', coverage: '2000-2019'},
+  ngrams: {desc: 'Google Books corpus — spelling frequency in published books', url: 'https://books.google.com/ngrams', coverage: '2000-2022'},
   openalex: {desc: 'Academic paper titles — scholarly adoption of spellings', url: 'https://openalex.org/', coverage: '2000-2026'},
+  telegram: {desc: 'Public channel messages matched against all pair terms', url: 'https://telegram.org/', coverage: '2020-2026'},
+  religious: {desc: 'Articles from Moscow Patriarchate, WCC, Constantinople, Vatican — institutional adoption', url: 'https://mospat.ru/en/', coverage: '2013-2026'},
 };
 ---
 
@@ -26,7 +28,7 @@ const sourceInfo: Record<string, {desc: string; url: string; coverage: string}> 
 <h1 class="heading-lg" style="margin-bottom:0.3rem;">Data Sources</h1>
 <p class="subtitle mb-lg">
   {m.num_sources} independent sources, {m.records_scanned} records scanned, {fmtBig(m.toponym_matches)} toponym matches.
-  Each source measures adoption differently — news URLs, search interest, page views, social posts, books, academic papers.
+  Each source measures adoption differently — news URLs, search interest, page views, social posts, books, academic papers, and institutional press.
 </p>
 
 <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:0.75rem; margin-bottom:1.5rem;">
@@ -42,7 +44,7 @@ const sourceInfo: Record<string, {desc: string; url: string; coverage: string}> 
         <p style="font-size:0.72rem; color:var(--text); margin:0 0 0.3rem; line-height:1.5;">{info.desc}</p>
         <div style="display:flex; justify-content:space-between; font-size:0.6rem; color:var(--text-dim);">
           <span>{info.coverage}</span>
-          <a href={info.url} target="_blank" style="color:#0057B8;">Source</a>
+          {info.url && <a href={info.url} target="_blank" style="color:#0057B8;">Source</a>}
         </div>
       </div>
     );
@@ -52,7 +54,7 @@ const sourceInfo: Record<string, {desc: string; url: string; coverage: string}> 
 <div class="chart-container" style="margin-bottom:1rem;">
   <div class="chart-title" style="color:var(--text);">Source Comparison</div>
   <div class="chart-subtitle" style="margin-bottom:0.5rem;">How sources compare across all {m.analyzable_pairs} pairs</div>
-  <div id="source-comparison-chart" style="width:100%; min-height:300px;"></div>
+  <div id="source-comparison-chart" style="width:100%; min-height:340px;"></div>
 </div>
 
 <script>
@@ -62,67 +64,62 @@ const sourceInfo: Record<string, {desc: string; url: string; coverage: string}> 
 
   const container = document.getElementById('source-comparison-chart');
   if (container) {
-    const pairs = (manifest as any).pairs.filter((p: any) => !p.is_control);
     const ts = timeseriesData as any;
-    const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
-    const srcLabels: Record<string, string> = {
-      gdelt: 'GDELT', trends: 'Trends', wikipedia: 'Wikipedia',
-      reddit: 'Reddit', youtube: 'YouTube', ngrams: 'Ngrams', openalex: 'Academic',
-    };
-    const srcColors: Record<string, string> = {
-      gdelt: '#1e3a5f', trends: '#4285F4', wikipedia: '#636466',
-      reddit: '#FF4500', youtube: '#FF0000', ngrams: '#7c3aed', openalex: '#06b6d4',
-    };
+    const nPairs = (manifest as any).analyzable_pairs;
 
-    // Count pairs per source
+    // Build source list dynamically from manifest
+    const srcOrder = Object.keys((manifest as any).sources);
+    const srcLabels: Record<string, string> = {};
+    const srcColors: Record<string, string> = {};
+    for (const [key, s] of Object.entries((manifest as any).sources) as any) {
+      srcLabels[key] = s.label;
+      srcColors[key] = s.color || '#888';
+    }
+
+    // Count pairs per source from timeseries
     const pairsPerSource: Record<string, number> = {};
     for (const src of srcOrder) {
       let count = 0;
       for (const pid of Object.keys(ts)) {
         if (pid === 'events') continue;
-        const pairTs = ts[pid];
-        if (pairTs[src] && pairTs[src].length > 0) count++;
+        if (ts[pid][src] && ts[pid][src].length > 0) count++;
       }
       pairsPerSource[src] = count;
     }
 
     const rect = container.getBoundingClientRect();
-    const margin = { top: 10, right: 80, bottom: 20, left: 80 };
+    const margin = { top: 10, right: 90, bottom: 20, left: 90 };
     const width = rect.width - margin.left - margin.right;
-    const height = 220;
+    const height = srcOrder.length * 30;
 
     const svg = d3.select(container).append('svg')
       .attr('viewBox', `0 0 ${rect.width} ${height + margin.top + margin.bottom}`)
       .append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-    const y = d3.scaleBand().domain(srcOrder).range([0, height]).padding(0.3);
-    const x = d3.scaleLinear().domain([0, 59]).range([0, width]);
+    const y = d3.scaleBand().domain(srcOrder).range([0, height]).padding(0.25);
+    const x = d3.scaleLinear().domain([0, nPairs]).range([0, width]);
 
-    // Background
     svg.selectAll('.bg').data(srcOrder).enter().append('rect')
       .attr('x', 0).attr('width', width)
       .attr('y', d => y(d)!).attr('height', y.bandwidth())
       .attr('fill', '#f3f4f6').attr('rx', 3);
 
-    // Bars
     svg.selectAll('.bar').data(srcOrder).enter().append('rect')
       .attr('x', 0).attr('width', d => x(pairsPerSource[d] || 0))
       .attr('y', d => y(d)!).attr('height', y.bandwidth())
       .attr('fill', d => srcColors[d] || '#888').attr('opacity', 0.8).attr('rx', 3);
 
-    // Labels
     svg.selectAll('.label').data(srcOrder).enter().append('text')
       .attr('x', -8).attr('y', d => y(d)! + y.bandwidth() / 2 + 4)
       .attr('text-anchor', 'end').attr('fill', '#374151')
-      .attr('font-size', '12px').attr('font-weight', '500')
+      .attr('font-size', '11px').attr('font-weight', '500')
       .text(d => srcLabels[d] || d);
 
-    // Value labels
     svg.selectAll('.val').data(srcOrder).enter().append('text')
       .attr('x', d => x(pairsPerSource[d] || 0) + 8)
       .attr('y', d => y(d)! + y.bandwidth() / 2 + 4)
-      .attr('fill', '#6b7280').attr('font-size', '12px').attr('font-weight', '600')
-      .text(d => `${pairsPerSource[d]}/59 pairs`);
+      .attr('fill', '#6b7280').attr('font-size', '11px').attr('font-weight', '600')
+      .text(d => `${pairsPerSource[d]}/${nPairs} pairs`);
   }
 </script>
 
