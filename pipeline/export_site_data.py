@@ -378,6 +378,27 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
                     if total > 0:
                         result[spid]["telegram"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
 
+    # Religious (yearly from scraped institutional sites)
+    log.info("  Religious...")
+    religious_path = DATASET_DIR / "raw_religious.parquet"
+    if religious_path.exists():
+        rel = pd.read_parquet(religious_path)
+        if len(rel) and "date" in rel.columns:
+            rel["month"] = pd.to_datetime(rel["date"]).dt.strftime("%Y-%m")
+            g = rel.groupby(["pair_id", "month", "variant"])["count"].sum().reset_index()
+            p = g.pivot_table(index=["pair_id", "month"], columns="variant", values="count", fill_value=0).reset_index()
+            for pid, grp in p.groupby("pair_id"):
+                if pid not in enabled_ids:
+                    continue
+                spid = str(pid)
+                result.setdefault(spid, {}).setdefault("religious", [])
+                for _, r in grp.sort_values("month").iterrows():
+                    ukr = int(r.get("ukrainian", 0))
+                    rus = int(r.get("russian", 0))
+                    total = ukr + rus
+                    if total > 0:
+                        result[spid]["religious"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
+
     pair_count = len([k for k in result if k != "events"])
     log.info(f"  Timeseries: {pair_count} pairs")
     return result
@@ -444,6 +465,14 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         extra_map["youtube_channels"] = str(youtube["channel_title"].nunique())
     if len(telegram):
         extra_map["telegram_channels"] = str(telegram["channel"].nunique())
+
+    # Religious
+    religious = pd.DataFrame()
+    religious_path = DATASET_DIR / "raw_religious.parquet"
+    if religious_path.exists():
+        religious = pd.read_parquet(religious_path)
+        source_stats["religious"] = {"records": int(religious["count"].sum()), "pairs": int(religious["pair_id"].nunique()), "unit": "articles"}
+        extra_map["religious_sites"] = str(religious["source_domain"].nunique())
     if len(trends):
         geo = trends[(trends["geo"] != "") & (trends["geo"].notna())]
         extra_map["trends_countries"] = str(geo["geo"].nunique())
@@ -524,6 +553,9 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     # Telegram
     if len(telegram):
         per_source["telegram"] = _source_adoption(telegram, None, "date", cutoff_12m, agg_mode="count", min_total=3)
+    # Religious
+    if len(religious):
+        per_source["religious"] = _source_adoption(religious, "count", "date", cutoff_12m, min_total=3)
 
     # Mean adoption across sources per pair
     recent_map = {}
@@ -571,6 +603,10 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     if len(telegram):
         for pid, cnt in telegram.groupby("pair_id").size().items():
             total_map[pid] = total_map.get(pid, 0) + int(cnt)
+    # Religious
+    if len(religious):
+        for pid, cnt in religious.groupby("pair_id")["count"].sum().items():
+            total_map[pid] = total_map.get(pid, 0) + int(cnt)
 
     # Build pairs
     pairs_out = []
@@ -610,7 +646,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         "toponym_matches": toponym_matches,
         "cl_corpus": _get_cl_corpus_size(),
         "time_span": "2010-2026",
-        "num_sources": 8,  # counted from sources dict below
+        "num_sources": 9,  # 7 standard + telegram + religious
         "num_countries": int(extra_map.get("trends_countries", "0")),
         "sources": {
             "trends": {"records": source_stats.get("trends", {}).get("records", 0), "pairs": source_stats.get("trends", {}).get("pairs", 0), "label": "Search Trends", "unit": "datapoints", "extra": f"{extra_map.get('trends_countries', '55')} countries", "color": "#4285F4"},
@@ -621,6 +657,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
             "ngrams": {"records": source_stats.get("ngrams", {}).get("records", 0), "pairs": source_stats.get("ngrams", {}).get("pairs", 0), "label": "Book Records", "unit": "records", "extra": "8M+ volumes", "color": "#7c3aed"},
             "openalex": {"records": openalex_total_papers, "pairs": openalex_total_pairs, "label": "Academic Papers", "unit": "papers", "extra": "250M+ works indexed", "color": "#06b6d4"},
             "telegram": {"records": source_stats.get("telegram", {}).get("records", 0), "pairs": source_stats.get("telegram", {}).get("pairs", 0), "label": "Telegram", "unit": "messages", "extra": f"{extra_map.get('telegram_channels', '0')} channels", "color": "#26A5E4"},
+            "religious": {"records": source_stats.get("religious", {}).get("records", 0), "pairs": source_stats.get("religious", {}).get("pairs", 0), "label": "Religious Press", "unit": "articles", "extra": f"{extra_map.get('religious_sites', '0')} institutions", "color": "#8B0000"},
         },
         "categories": categories,
         "category_stats": sorted(category_list, key=lambda x: -x["avg_adoption"]),
