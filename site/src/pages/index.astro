@@ -12,7 +12,13 @@ function fmtBig(n: string | number) {
   return v.toString();
 }
 
-const pairs = m.pairs.filter((p: any) => !p.is_control).sort((a: any, b: any) => (b.total || 0) - (a.total || 0));
+// Popular order: flagship cities first, then by volume
+const popularOrder = [1, 10, 3, 4, 2, 17, 11, 7, 5, 61, 60, 72];
+const allPairs = m.pairs.filter((p: any) => !p.is_control);
+const pairs = [
+  ...popularOrder.map(id => allPairs.find((p: any) => p.id === id)).filter(Boolean),
+  ...allPairs.filter((p: any) => !popularOrder.includes(p.id)).sort((a: any, b: any) => (b.total || 0) - (a.total || 0)),
+];
 const categories = (m.categories || []).filter((c: any) => pairs.some((p: any) => p.category === c.id));
 
 const stats = [
@@ -46,7 +52,8 @@ const stats = [
 <div class="controls-bar mb-md">
   <div class="controls-group">
     <span class="controls-label">Sort</span>
-    <button class="ctrl-btn active" data-sort="volume">Volume</button>
+    <button class="ctrl-btn active" data-sort="popular">Popular</button>
+    <button class="ctrl-btn" data-sort="volume">Volume</button>
     <button class="ctrl-btn" data-sort="adoption">Adoption</button>
     <button class="ctrl-btn" data-sort="alpha">A-Z</button>
   </div>
@@ -61,7 +68,7 @@ const stats = [
 
 <!-- Pair cards -->
 <div id="pair-grid" class="grid-auto">
-  {pairs.map((p: any) => (
+  {pairs.map((p: any, i: number) => (
     <PairCard
       id={p.id}
       russian={p.russian}
@@ -69,6 +76,7 @@ const stats = [
       adoption={p.adoption || 0}
       total={p.total || 0}
       category={p.category}
+      popularRank={i}
     />
   ))}
 </div>
@@ -97,6 +105,7 @@ const stats = [
       btn.classList.add('active');
       const mode = (btn as HTMLElement).dataset.sort;
       [...cards].sort((a, b) => {
+        if (mode === 'popular') return (Number(a.dataset.popular) || 0) - (Number(b.dataset.popular) || 0);
         if (mode === 'volume') return (Number(b.dataset.total) || 0) - (Number(a.dataset.total) || 0);
         if (mode === 'adoption') return (Number(b.dataset.adoption) || 0) - (Number(a.dataset.adoption) || 0);
         return (a.dataset.name || '').localeCompare(b.dataset.name || '');

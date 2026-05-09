@@ -9,6 +9,7 @@ interface Props {
   adoption: number;
   total: number | string;
   category: string;
+  popularRank?: number;
 }
 
 function adoptionColor(pct: number) {
@@ -24,7 +25,7 @@ function fmtBig(n: number | string) {
   return v.toString();
 }
 
-const { id, russian, ukrainian, adoption, total, category } = Astro.props;
+const { id, russian, ukrainian, adoption, total, category, popularRank = 999 } = Astro.props;
 const pct = adoption || 0;
 const color = adoptionColor(pct);
 ---
@@ -34,7 +35,8 @@ const color = adoptionColor(pct);
    data-category={category}
    data-adoption={pct}
    data-total={total || 0}
-   data-name={ukrainian}>
+   data-name={ukrainian}
+   data-popular={popularRank}>
   <div class="pair-card-top">
     <div class="pair-card-names">
       <span class="pair-old">{russian}</span>
@@ -79,22 +81,22 @@ const color = adoptionColor(pct);
     overflow: hidden;
   }
   .pair-old {
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
     text-decoration: line-through;
   }
   .pair-arrow {
-    font-size: 0.68rem;
+    font-size: 0.78rem;
     color: var(--text-dim);
-    margin: 0 0.15rem;
+    margin: 0 0.2rem;
   }
   .pair-new {
-    font-size: 0.88rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--text);
   }
   .pair-pct {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     font-weight: 700;
     flex-shrink: 0;
   }
@@ -113,7 +115,7 @@ const color = adoptionColor(pct);
     display: flex;
     justify-content: space-between;
     margin-top: 0.2rem;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     color: var(--text-dim);
   }
 </style>

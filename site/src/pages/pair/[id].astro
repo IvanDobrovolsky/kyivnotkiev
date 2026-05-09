@@ -688,7 +688,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
       if (!pair) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram', 'religious'];
       const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
 
       // Put adoption % in card title
@@ -730,7 +730,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       const pairData = (timeseriesData as any)[String(activePairId)];
       if (!pairData) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram', 'religious'];
       const items: {src: string; adoption: number; n: number}[] = [];
 
       for (const src of srcOrder) {
@@ -1209,7 +1209,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       const pairData = (timeseriesData as any)[String(activePairId)];
       if (!pairData) return;
 
-      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram', 'religious'];
       for (const src of srcOrder) {
         const series = pairData[src];
         const card = document.createElement('div');
@@ -1933,7 +1933,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         .sort((a: any, b: any) => b.spread_pp - a.spread_pp)
         .slice(0, 10);
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'openalex'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram', 'religious'];
 
       const rowH = 36;
       const margin = { top: 25, right: 50, bottom: 10, left: 140 };
