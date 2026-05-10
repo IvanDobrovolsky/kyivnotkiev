@@ -50,8 +50,31 @@ def load_pairs_config():
             if p.get("enabled", True) and not p.get("is_control", False)}
 
 
+def _append_source(frames, df, source_name, value_col, agg_mode, cutoff, date_col="date"):
+    """Helper: compute adoption ratio for one source and append to frames."""
+    if not len(df):
+        return
+    if date_col == "year":
+        d = df[df[date_col].astype(int) >= int(cutoff[:4])].copy()
+    else:
+        d = df[pd.to_datetime(df[date_col]) >= cutoff].copy()
+    if not len(d):
+        return
+    if agg_mode == "count":
+        g = d.groupby(["pair_id", "variant"]).size().reset_index(name="val")
+    else:
+        g = d.groupby(["pair_id", "variant"])[value_col].sum().reset_index(name="val")
+    p = g.pivot_table(index="pair_id", columns="variant", values="val", fill_value=0).reset_index()
+    p["source"] = source_name
+    p["ukr"] = p.get("ukrainian", 0).astype(float)
+    p["rus"] = p.get("russian", 0).astype(float)
+    p["total"] = p["ukr"] + p["rus"]
+    p["adoption_ratio"] = np.where(p["total"] > 0, p["ukr"] / p["total"], 0)
+    frames.append(p[["pair_id", "source", "ukr", "rus", "total", "adoption_ratio"]])
+
+
 def compute_adoption_by_pair_source():
-    """Get recent adoption ratio per pair per source."""
+    """Get recent adoption ratio per pair per source (all 9 sources)."""
     log.info("Computing adoption by pair and source...")
     cutoff = "2024-01-01"
     frames = []
@@ -60,55 +83,40 @@ def compute_adoption_by_pair_source():
     df = _load("trends")
     if len(df):
         t = df[(df["geo"] == "") | (df["geo"].isna())].copy()
-        t["date"] = pd.to_datetime(t["date"])
-        t = t[t["date"] >= cutoff]
-        g = t.groupby(["pair_id", "variant"])["interest"].sum().reset_index()
-        p = g.pivot_table(index="pair_id", columns="variant", values="interest", fill_value=0).reset_index()
-        p["source"] = "trends"
-        p["ukr"] = p.get("ukrainian", 0).astype(float)
-        p["rus"] = p.get("russian", 0).astype(float)
-        p["total"] = p["ukr"] + p["rus"]
-        p["adoption_ratio"] = p["ukr"] / p["total"]
-        frames.append(p[["pair_id", "source", "ukr", "rus", "total", "adoption_ratio"]])
+        _append_source(frames, t, "trends", "interest", "sum", cutoff)
 
     # GDELT
-    df = _load("gdelt")
-    if len(df):
-        d = df[pd.to_datetime(df["date"]) >= cutoff].copy()
-        g = d.groupby(["pair_id", "variant"])["count"].sum().reset_index()
-        p = g.pivot_table(index="pair_id", columns="variant", values="count", fill_value=0).reset_index()
-        p["source"] = "gdelt"
-        p["ukr"] = p.get("ukrainian", 0).astype(float)
-        p["rus"] = p.get("russian", 0).astype(float)
-        p["total"] = p["ukr"] + p["rus"]
-        p["adoption_ratio"] = p["ukr"] / p["total"]
-        frames.append(p[["pair_id", "source", "ukr", "rus", "total", "adoption_ratio"]])
+    _append_source(frames, _load("gdelt"), "gdelt", "count", "sum", cutoff)
 
     # Wikipedia
-    df = _load("wikipedia")
-    if len(df):
-        d = df[pd.to_datetime(df["date"]) >= cutoff].copy()
-        g = d.groupby(["pair_id", "variant"])["pageviews"].sum().reset_index()
-        p = g.pivot_table(index="pair_id", columns="variant", values="pageviews", fill_value=0).reset_index()
-        p["source"] = "wikipedia"
-        p["ukr"] = p.get("ukrainian", 0).astype(float)
-        p["rus"] = p.get("russian", 0).astype(float)
-        p["total"] = p["ukr"] + p["rus"]
-        p["adoption_ratio"] = p["ukr"] / p["total"]
-        frames.append(p[["pair_id", "source", "ukr", "rus", "total", "adoption_ratio"]])
+    _append_source(frames, _load("wikipedia"), "wikipedia", "pageviews", "sum", cutoff)
 
     # Reddit
-    df = _load("reddit")
+    _append_source(frames, _load("reddit"), "reddit", None, "count", cutoff)
+
+    # YouTube
+    _append_source(frames, _load("youtube"), "youtube", None, "count", cutoff)
+
+    # Ngrams (year-based cutoff, frequency column)
+    df = _load("ngrams")
     if len(df):
-        d = df[pd.to_datetime(df["date"]) >= cutoff].copy()
-        g = d.groupby(["pair_id", "variant"]).size().reset_index(name="cnt")
-        p = g.pivot_table(index="pair_id", columns="variant", values="cnt", fill_value=0).reset_index()
-        p["source"] = "reddit"
-        p["ukr"] = p.get("ukrainian", 0).astype(float)
-        p["rus"] = p.get("russian", 0).astype(float)
-        p["total"] = p["ukr"] + p["rus"]
-        p["adoption_ratio"] = p["ukr"] / p["total"]
-        frames.append(p[["pair_id", "source", "ukr", "rus", "total", "adoption_ratio"]])
+        _append_source(frames, df, "ngrams", "frequency", "sum", "2018-01-01", date_col="year")
+
+    # OpenAlex (aggregated yearly)
+    oa = _load("openalex")
+    if len(oa) and "count" in oa.columns:
+        _append_source(frames, oa, "openalex", "count", "sum", "2020-01-01", date_col="year")
+
+    # Telegram
+    telegram_path = ROOT / "data" / "cl" / "raw" / "telegram" / "all_channels.parquet"
+    if telegram_path.exists():
+        tg = pd.read_parquet(telegram_path)
+        _append_source(frames, tg, "telegram", None, "count", cutoff)
+
+    # Religious
+    rel = _load("religious")
+    if len(rel):
+        _append_source(frames, rel, "religious", "count", "sum", cutoff)
 
     if not frames:
         return pd.DataFrame(columns=["pair_id", "source", "ukr", "rus", "total", "adoption_ratio"])
@@ -123,12 +131,19 @@ def compute_pre_post_invasion():
     invasion_date = "2022-02-24"
     frames = []
 
-    for source_name, value_col, agg_mode in [
+    source_configs = [
         ("trends", "interest", "sum"),
         ("gdelt", "count", "sum"),
         ("wikipedia", "pageviews", "sum"),
         ("reddit", None, "count"),
-    ]:
+        ("youtube", None, "count"),
+    ]
+
+    # Load telegram separately (different path)
+    telegram_path = ROOT / "data" / "cl" / "raw" / "telegram" / "all_channels.parquet"
+    telegram_df = pd.read_parquet(telegram_path) if telegram_path.exists() else pd.DataFrame()
+
+    for source_name, value_col, agg_mode in source_configs:
         df = _load(source_name)
         if not len(df):
             continue
@@ -151,6 +166,39 @@ def compute_pre_post_invasion():
         p["adoption_ratio"] = p["ukr"] / p["total"]
         p["source"] = source_name
         frames.append(p[["pair_id", "source", "period", "adoption_ratio"]])
+
+    # Telegram
+    if len(telegram_df):
+        d = telegram_df.copy()
+        d["dt"] = pd.to_datetime(d["date"])
+        d["period"] = np.where(d["dt"] < invasion_date, "pre", "post")
+        g = d.groupby(["pair_id", "period", "variant"]).size().reset_index(name="val")
+        p = g.pivot_table(index=["pair_id", "period"], columns="variant", values="val", fill_value=0).reset_index()
+        p["ukr"] = p.get("ukrainian", 0).astype(float)
+        p["rus"] = p.get("russian", 0).astype(float)
+        p["total"] = p["ukr"] + p["rus"]
+        p = p[p["total"] > 10]
+        if len(p):
+            p["adoption_ratio"] = p["ukr"] / p["total"]
+            p["source"] = "telegram"
+            frames.append(p[["pair_id", "source", "period", "adoption_ratio"]])
+
+    # Religious
+    rel = _load("religious")
+    if len(rel):
+        d = rel.copy()
+        d["dt"] = pd.to_datetime(d["date"])
+        d["period"] = np.where(d["dt"] < invasion_date, "pre", "post")
+        g = d.groupby(["pair_id", "period", "variant"])["count"].sum().reset_index(name="val")
+        p = g.pivot_table(index=["pair_id", "period"], columns="variant", values="val", fill_value=0).reset_index()
+        p["ukr"] = p.get("ukrainian", 0).astype(float)
+        p["rus"] = p.get("russian", 0).astype(float)
+        p["total"] = p["ukr"] + p["rus"]
+        p = p[p["total"] > 10]
+        if len(p):
+            p["adoption_ratio"] = p["ukr"] / p["total"]
+            p["source"] = "religious"
+            frames.append(p[["pair_id", "source", "period", "adoption_ratio"]])
 
     if not frames:
         return pd.DataFrame(columns=["pair_id", "source", "period", "adoption_ratio"])
@@ -225,7 +273,7 @@ def main():
     invasion_df = compute_pre_post_invasion()
     invasion_results = {}
 
-    for source in ["trends", "gdelt", "wikipedia", "reddit"]:
+    for source in invasion_df["source"].unique():
         src_df = invasion_df[invasion_df["source"] == source]
         pre = src_df[src_df["period"] == "pre"].set_index("pair_id")["adoption_ratio"]
         post = src_df[src_df["period"] == "post"].set_index("pair_id")["adoption_ratio"]
@@ -262,7 +310,7 @@ def main():
 
     pivot = adoption_df.pivot_table(index="pair_id", columns="source", values="adoption_ratio")
     correlations = {}
-    sources = [s for s in ["trends", "gdelt", "wikipedia", "reddit"] if s in pivot.columns]
+    sources = sorted([s for s in pivot.columns if s in adoption_df["source"].unique()])
     for i, s1 in enumerate(sources):
         for s2 in sources[i + 1:]:
             valid = pivot[[s1, s2]].dropna()

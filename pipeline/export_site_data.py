@@ -174,17 +174,14 @@ GEO_NAMES = {
 
 
 def _get_cl_corpus_size():
-    corpus_path = DATA_DIR / "cl" / "balanced" / "corpus.parquet"
+    corpus_path = DATA_DIR / "corpus" / "toponyms-corpus.parquet"
     if corpus_path.exists():
         return len(pd.read_parquet(corpus_path, columns=["pair_id"]))
-    raw_dir = DATA_DIR / "cl" / "raw"
-    total = 0
-    if raw_dir.exists():
-        for src_dir in raw_dir.iterdir():
-            if src_dir.is_dir():
-                for f in src_dir.glob("*.parquet"):
-                    total += len(pd.read_parquet(f, columns=["pair_id"]))
-    return total if total > 0 else 80141
+    # Fallback: old location
+    old_path = DATA_DIR / "cl" / "balanced" / "corpus.parquet"
+    if old_path.exists():
+        return len(pd.read_parquet(old_path, columns=["pair_id"]))
+    return 0
 
 
 def _safe_div(a, b):
