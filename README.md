@@ -45,65 +45,44 @@ All source data is on HuggingFace: [`KyivNotKiev/toponym-adoption-data`](https:/
 
 ## Pipeline
 
-```
-pairs.yaml (58 pairs, matching rules)
-    ↓
-Ingestion scripts (pipeline/ingestion/)
-    ↓
-Post-filter (pipeline/analysis/post_filter.py — homonym + NER disambiguation)
-    ↓
-Export (pipeline/export_site_data.py → site/src/data/*.json)
-    ↓
-Statistical tests (pipeline/analysis/recompute_stats.py)
-    ↓
-Site (Astro static build → Cloudflare Pages)
-```
+```mermaid
+graph LR
+    subgraph Sources["9 Data Sources"]
+        style Sources fill:#f8f9fb,stroke:#0057B8,color:#1a1a2e
+        GDELT["News<br/>38.5M"]
+        Trends["Trends<br/>180K"]
+        Wiki["Wiki<br/>320M"]
+        Reddit["Reddit<br/>21.7K"]
+        YT["YouTube<br/>21.7K"]
+        Ngrams["Books<br/>12.2K"]
+        OA["Academic<br/>381K"]
+        TG["Telegram<br/>38.7K"]
+        Rel["Religious<br/>3.6K"]
+    end
 
-### Key Scripts
+    subgraph Config["Configuration"]
+        style Config fill:#f8f9fb,stroke:#d97706,color:#1a1a2e
+        Pairs["pairs.yaml<br/>58 pairs + matching rules"]
+    end
 
-| Script | Purpose |
-|--------|---------|
-| `pipeline/ingestion/gdelt_stream.py` | GDELT GKG URL scanning |
-| `pipeline/ingestion/gdelt_fetch_articles.py` | Article body extraction via trafilatura |
-| `pipeline/ingestion/gdelt_athena_countries.py` | Per-country adoption from GDELT domains |
-| `pipeline/ingestion/trends.py` | Google Trends collection |
-| `pipeline/ingestion/wikipedia.py` | Wikipedia pageview tracking |
-| `pipeline/ingestion/reddit.py` | Reddit search + Arctic Shift historical |
-| `pipeline/ingestion/youtube_ytdlp.py` | YouTube via yt-dlp (no API key) |
-| `pipeline/ingestion/ngrams.py` | Google Books Ngrams |
-| `pipeline/ingestion/telegram_search.py` | Systematic Telegram channel discovery |
-| `pipeline/ingestion/religious.py` | Religious institution scraping |
-| `pipeline/analysis/post_filter.py` | Unified disambiguation (regex + NER) |
-| `pipeline/analysis/recompute_stats.py` | Statistical tests (KW, Wilcoxon, OLS) |
-| `pipeline/analysis/statistical_tests.py` | Bootstrap CIs, Pettitt changepoints |
-| `pipeline/export_site_data.py` | Generate site JSON from parquets |
-| `pipeline/colab/fetch_youtube_transcripts.ipynb` | Colab notebook for YouTube transcripts |
+    subgraph Processing["Processing"]
+        style Processing fill:#f8f9fb,stroke:#059669,color:#1a1a2e
+        PostFilter["post_filter.py<br/>Homonym + NER"]
+        Export["export_site_data.py<br/>→ JSON"]
+        Stats["recompute_stats.py<br/>KW · Wilcoxon · OLS"]
+    end
 
-## Site
+    subgraph Output["Output"]
+        style Output fill:#f8f9fb,stroke:#0057B8,color:#1a1a2e
+        HF["HuggingFace<br/>9 parquets"]
+        Site["kyivnotkiev.org<br/>Astro + Cloudflare"]
+    end
 
-4 pages built with Astro, deployed on Cloudflare Pages:
-- `/` — Pair card grid with sort/filter
-- `/pair/:id` — Per-pair detail with 9-source charts
-- `/llm` — AI audit (72 LLMs, TAS heatmap)
-- `/sources` — Data source descriptions
-- `/methodology` — Statistical analysis, confusion matrix, benchmarks
-
-## Reproducibility
-
-Source data is on HuggingFace (9 parquets). The pipeline reads from local `dataset/` parquets which mirror HF. To reproduce:
-
-```bash
-# Download data from HuggingFace
-python -c "
-from huggingface_hub import snapshot_download
-snapshot_download('KyivNotKiev/toponym-adoption-data', repo_type='dataset', local_dir='dataset/')
-"
-
-# Generate site data
-python -m pipeline.export_site_data
-
-# Build site
-cd site && npm install && npm run build
+    GDELT & Trends & Wiki & Reddit & YT & Ngrams & OA & TG & Rel --> PostFilter
+    Pairs --> PostFilter
+    PostFilter --> Export --> Site
+    PostFilter --> Stats --> Site
+    PostFilter --> HF
 ```
 
 ## Citation
