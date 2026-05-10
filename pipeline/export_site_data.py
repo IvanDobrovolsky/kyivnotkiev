@@ -621,7 +621,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         "records_scanned": "90B+",
         "toponym_matches": toponym_matches,
         "cl_corpus": _get_cl_corpus_size(),
-        "time_span": "2010-2026",
+        "time_span": "2010-2025",
         "num_sources": 9,  # 7 standard + telegram + religious
         "num_countries": int(extra_map.get("trends_countries", "0")),
         "sources": {

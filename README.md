@@ -20,10 +20,10 @@
 | Metric | Value |
 |--------|-------|
 | Records scanned | **90B+** |
-| Toponym matches | **359M** |
+| Toponym matches | **351M** |
 | Toponym pairs | **58** |
 | Data sources | **9** (News, Trends, Wiki, Reddit, YouTube, Books, Academic, Telegram, Religious) |
-| Time span | **2010–2026** (Books: 2000–2022) |
+| Time span | **2010–2025** (Books: 2000–2022) |
 | FP rate | **0.9%** (verified on 19,250 samples) |
 | CL corpus | **93K** verified English texts |
 
@@ -31,15 +31,15 @@
 
 | Source | Records | Description |
 |--------|---------|-------------|
-| News (GDELT) | 38.5M | URL-level toponym matching in global news articles |
-| Trends | 180K | Google search interest across 55 countries |
-| Wiki | 320M | Wikipedia pageviews for spelling-variant redirects |
-| Reddit | 21.7K | Posts and comments from r/ukraine, r/worldnews, r/europe |
-| YouTube | 21.7K | Video titles and descriptions |
+| News (GDELT) | 37.9M | URL-level toponym matching in global news articles |
+| Trends | 174K | Google search interest across 55 countries |
+| Wiki | 312M | Wikipedia pageviews for spelling-variant redirects |
+| Reddit | 20.1K | Posts and comments from r/ukraine, r/worldnews, r/europe |
+| YouTube | 21.0K | Video titles and descriptions |
 | Books (Ngrams) | 12.2K | Google Books corpus 37 (English 2022) |
-| Academic (OpenAlex) | 381K | Scholarly paper titles and abstracts |
-| Telegram | 38.7K | Public channel messages (177 channels, 118-term systematic search) |
-| Religious | 3.6K | Moscow Patriarchate, WCC, Constantinople, Vatican press |
+| Academic (OpenAlex) | 372K | Scholarly paper titles and abstracts |
+| Telegram | 25.7K | Public channel messages (125 channels, 118-term systematic search) |
+| Religious | 3.5K | Moscow Patriarchate, WCC, Constantinople, Vatican press |
 
 All source data is on HuggingFace: [`KyivNotKiev/toponym-adoption-data`](https://huggingface.co/datasets/KyivNotKiev/toponym-adoption-data)
 
@@ -49,15 +49,15 @@ All source data is on HuggingFace: [`KyivNotKiev/toponym-adoption-data`](https:/
 graph LR
     subgraph Sources["9 Data Sources"]
         style Sources fill:#f8f9fb,stroke:#0057B8,color:#1a1a2e
-        GDELT["News<br/>38.5M"]
-        Trends["Trends<br/>180K"]
-        Wiki["Wiki<br/>320M"]
-        Reddit["Reddit<br/>21.7K"]
-        YT["YouTube<br/>21.7K"]
+        GDELT["News<br/>37.9M"]
+        Trends["Trends<br/>174K"]
+        Wiki["Wiki<br/>312M"]
+        Reddit["Reddit<br/>20.1K"]
+        YT["YouTube<br/>21.0K"]
         Ngrams["Books<br/>12.2K"]
-        OA["Academic<br/>381K"]
-        TG["Telegram<br/>38.7K"]
-        Rel["Religious<br/>3.6K"]
+        OA["Academic<br/>372K"]
+        TG["Telegram<br/>25.7K"]
+        Rel["Religious<br/>3.5K"]
     end
 
     subgraph Config["Configuration"]
