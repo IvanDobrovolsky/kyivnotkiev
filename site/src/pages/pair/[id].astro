@@ -463,7 +463,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
             const ukrLine = d3.line<any>()
               .x((d: any) => x(parseDate(d.date)!))
               .y((d: any) => y(d.ukr || 0))
-              .curve(d3.curveBasis);
+              .curve(d3.curveMonotoneX);
             svg.append('path')
               .datum(series)
               .attr('fill', 'none')
@@ -475,7 +475,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
             const rusLine = d3.line<any>()
               .x((d: any) => x(parseDate(d.date)!))
               .y((d: any) => y(d.rus || 0))
-              .curve(d3.curveBasis);
+              .curve(d3.curveMonotoneX);
             svg.append('path')
               .datum(series)
               .attr('fill', 'none')
@@ -490,7 +490,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           const line = d3.line<any>()
             .x((d: any) => x(parseDate(d.date)!))
             .y((d: any) => y(d.adoption))
-            .curve(d3.curveBasis);
+            .curve(d3.curveMonotoneX);
 
           if (lineMode !== 'russian') {
             svg.append('path')
@@ -505,7 +505,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
             const russianLine = d3.line<any>()
               .x((d: any) => x(parseDate(d.date)!))
               .y((d: any) => y(100 - d.adoption))
-              .curve(d3.curveBasis);
+              .curve(d3.curveMonotoneX);
 
             svg.append('path')
               .datum(series)
