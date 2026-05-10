@@ -79,6 +79,8 @@ data/cl/raw/**/*.session-journal
 output/
 
 # All data (source of truth is HuggingFace)
-data/
-output/
-dataset/
+/data/
+/output/
+/dataset/
+# Keep site data JSON (generated, needed for build)
+!site/src/data/
