@@ -458,58 +458,33 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         allSeriesData[src] = series;
 
         if (chartMode === 'volume') {
-          // ── VOLUME MODE: stacked bar chart ──
-          // Bar width based on the *minimum* gap between consecutive points,
-          // so dense regions don't overlap when the series has uneven spacing.
-          let minGapMs = Infinity;
-          for (let i = 1; i < series.length; i++) {
-            const da = parseDate(series[i - 1].date);
-            const db = parseDate(series[i].date);
-            if (!da || !db) continue;
-            const gap = (db as any) - (da as any);
-            if (gap > 0 && gap < minGapMs) minGapMs = gap;
+          // ── VOLUME MODE: lines for UA / RU counts ──
+          if (lineMode !== 'russian') {
+            const ukrLine = d3.line<any>()
+              .x((d: any) => x(parseDate(d.date)!))
+              .y((d: any) => y(d.ukr || 0))
+              .curve(d3.curveBasis);
+            svg.append('path')
+              .datum(series)
+              .attr('fill', 'none')
+              .attr('stroke', sourceColors[src])
+              .attr('stroke-width', 3)
+              .attr('d', ukrLine);
           }
-          if (!isFinite(minGapMs)) {
-            const timeSpanMs = (x.domain()[1] as any) - (x.domain()[0] as any);
-            minGapMs = series.length > 1 ? timeSpanMs / series.length : timeSpanMs;
+          if (lineMode !== 'ukrainian') {
+            const rusLine = d3.line<any>()
+              .x((d: any) => x(parseDate(d.date)!))
+              .y((d: any) => y(d.rus || 0))
+              .curve(d3.curveBasis);
+            svg.append('path')
+              .datum(series)
+              .attr('fill', 'none')
+              .attr('stroke', '#dc2626')
+              .attr('stroke-width', lineMode === 'russian' ? 3 : 1.5)
+              .attr('stroke-dasharray', lineMode === 'russian' ? 'none' : '6,4')
+              .attr('opacity', lineMode === 'russian' ? 1 : 0.5)
+              .attr('d', rusLine);
           }
-          const minGapPx = Math.abs(x(new Date((x.domain()[0] as any).getTime() + minGapMs)) - x(x.domain()[0] as any));
-          const barWidth = Math.max(2, Math.min(minGapPx * 0.85, 25));
-
-          series.forEach((d: any) => {
-            const date = parseDate(d.date);
-            if (!date) return;
-            const ukr = d.ukr || 0;
-            const rus = d.rus || 0;
-            const cx = x(date);
-
-            if (lineMode === 'both') {
-              // Side-by-side: Russian left, Ukrainian right (no overlap)
-              const halfW = barWidth / 2;
-              if (rus > 0) {
-                svg.append('rect')
-                  .attr('x', cx - halfW).attr('y', y(rus))
-                  .attr('width', halfW - 0.5).attr('height', Math.max(0, height - y(rus)))
-                  .attr('fill', '#dc2626').attr('opacity', 0.45).attr('rx', 1);
-              }
-              if (ukr > 0) {
-                svg.append('rect')
-                  .attr('x', cx + 0.5).attr('y', y(ukr))
-                  .attr('width', halfW - 0.5).attr('height', Math.max(0, height - y(ukr)))
-                  .attr('fill', sourceColors[src]).attr('opacity', 0.85).attr('rx', 1);
-              }
-            } else if (lineMode === 'ukrainian' && ukr > 0) {
-              svg.append('rect')
-                .attr('x', cx - barWidth / 2).attr('y', y(ukr))
-                .attr('width', barWidth).attr('height', height - y(ukr))
-                .attr('fill', sourceColors[src]).attr('opacity', 0.8).attr('rx', 1);
-            } else if (lineMode === 'russian' && rus > 0) {
-              svg.append('rect')
-                .attr('x', cx - barWidth / 2).attr('y', y(rus))
-                .attr('width', barWidth).attr('height', height - y(rus))
-                .attr('fill', '#dc2626').attr('opacity', 0.8).attr('rx', 1);
-            }
-          });
         } else {
           // ── ADOPTION MODE: line chart ──
           const line = d3.line<any>()
@@ -580,28 +555,21 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
               if (dates[mid] <= t) lo = mid; else hi = mid;
             }
 
+            // Interpolate between bracketing points (matches the drawn line)
+            const frac = (dates[hi] - dates[lo]) > 0
+              ? (t - dates[lo]) / (dates[hi] - dates[lo]) : 0;
+
             if (chartMode === 'volume') {
-              // Volume mode: snap to nearest point within half-gap
-              const closest = Math.abs(t - dates[lo]) < Math.abs(t - dates[hi]) ? lo : hi;
-              const distMs = Math.abs(t - dates[closest]);
-              const gaps: number[] = [];
-              for (let i = 1; i < dates.length; i++) gaps.push(dates[i] - dates[i-1]);
-              gaps.sort((a, b) => a - b);
-              const medianGap = gaps[Math.floor(gaps.length / 2)] || 90*86400000;
-              const snapRadius = Math.min(medianGap * 0.55, 120*86400000);
-              if (distMs > snapRadius) continue;
-
-              const d = series[closest];
+              const ukr = Math.round((series[lo].ukr || 0) + frac * ((series[hi].ukr || 0) - (series[lo].ukr || 0)));
+              const rus = Math.round((series[lo].rus || 0) + frac * ((series[hi].rus || 0) - (series[lo].rus || 0)));
+              const total = ukr + rus;
+              const adopt = total > 0 ? Math.round(ukr / total * 1000) / 10 : 0;
               html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}</span>`;
-              html += `<br/>&nbsp;&nbsp;<span style="color:${sourceColors[src]}">UA: <strong>${(d.ukr || 0).toLocaleString()}</strong></span>`;
-              html += `<br/>&nbsp;&nbsp;<span style="color:#dc2626">RU: <strong>${(d.rus || 0).toLocaleString()}</strong></span>`;
-              html += `<br/>&nbsp;&nbsp;<span style="color:#6b7280">Adoption: ${Math.round(d.adoption * 10) / 10}%</span>`;
+              html += `<br/>&nbsp;&nbsp;<span style="color:${sourceColors[src]}">UA: <strong>${ukr.toLocaleString()}</strong></span>`;
+              html += `<br/>&nbsp;&nbsp;<span style="color:#dc2626">RU: <strong>${rus.toLocaleString()}</strong></span>`;
+              html += `<br/>&nbsp;&nbsp;<span style="color:#6b7280">Adoption: ${adopt}%</span>`;
             } else {
-              // Adoption mode: interpolate between points (matches the line)
-              const frac = (dates[hi] - dates[lo]) > 0
-                ? (t - dates[lo]) / (dates[hi] - dates[lo]) : 0;
               const value = Math.round((series[lo].adoption + frac * (series[hi].adoption - series[lo].adoption)) * 10) / 10;
-
               html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${value}%</strong></span>`;
             }
           }
