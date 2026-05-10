@@ -569,10 +569,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
             if (series.length < 2) continue;
 
             const dates = series.map((d: any) => parseDate(d.date)!.getTime());
-            const vals = series.map((d: any) => d.adoption);
             const t = hoveredDate.getTime();
-            // Show nearest point even if hover is slightly outside range
-            if (t < dates[0] - 90*86400000 || t > dates[dates.length - 1] + 90*86400000) continue;
 
             let lo = 0, hi = dates.length - 1;
             while (hi - lo > 1) {
@@ -581,6 +578,17 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
             }
 
             const closest = Math.abs(t - dates[lo]) < Math.abs(t - dates[hi]) ? lo : hi;
+            const distMs = Math.abs(t - dates[closest]);
+
+            // Snap radius = half the median gap between consecutive points
+            // (yearly data → ~6 months, monthly → ~15 days)
+            const gaps: number[] = [];
+            for (let i = 1; i < dates.length; i++) gaps.push(dates[i] - dates[i-1]);
+            gaps.sort((a, b) => a - b);
+            const medianGap = gaps[Math.floor(gaps.length / 2)] || 90*86400000;
+            const snapRadius = Math.min(medianGap * 0.55, 120*86400000);
+            if (distMs > snapRadius) continue;
+
             const d = series[closest];
             const value = Math.round(d.adoption * 10) / 10;
 
