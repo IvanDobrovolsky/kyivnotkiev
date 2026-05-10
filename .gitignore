@@ -77,3 +77,8 @@ data/cl/raw/**/*.csv
 data/cl/raw/**/*.session
 data/cl/raw/**/*.session-journal
 output/
+
+# All data (source of truth is HuggingFace)
+data/
+output/
+dataset/
