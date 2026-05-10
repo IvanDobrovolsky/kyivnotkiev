@@ -78,16 +78,6 @@ def load_sources(config_dir: Path = CONFIG_DIR) -> dict:
         return yaml.safe_load(f)
 
 
-def load_pipeline(config_dir: Path = CONFIG_DIR) -> dict:
-    """Load pipeline.yaml and return parsed config."""
-    with open(config_dir / "pipeline.yaml") as f:
-        return yaml.safe_load(f)
-
-
-def get_enabled_pairs(config_dir: Path = CONFIG_DIR) -> list[dict]:
-    """Return only enabled (non-disabled) pairs."""
-    cfg = load_pairs(config_dir)
-    return [p for p in cfg["pairs"] if p.get("enabled", True)]
 
 
 def get_pair_by_id(pair_id: int, config_dir: Path = CONFIG_DIR) -> Optional[dict]:
@@ -104,9 +94,6 @@ def get_pairs_by_category(category: str, config_dir: Path = CONFIG_DIR) -> list[
     return [p for p in get_enabled_pairs(config_dir) if p["category"] == category]
 
 
-def get_gcp_config(config_dir: Path = CONFIG_DIR) -> dict:
-    """Return GCP project/region/dataset config."""
-    return load_pipeline(config_dir)["gcp"]
 
 
 def get_all_pairs(config_dir: Path = CONFIG_DIR) -> list[dict]:

@@ -13,10 +13,6 @@ CL_EMBEDDINGS_DIR = CL_DIR / "embeddings"
 CL_MODEL_DIR = CL_DIR / "model"
 CL_EXPORT_DIR = CL_DIR / "export"
 
-# BigQuery
-BQ_DATASET = "kyivnotkiev"
-BQ_PROJECT = "kyivnotkiev-research"
-
 # Sampling
 MAX_PER_VARIANT_PER_SOURCE = 500  # max texts per (pair, variant, source)
 MIN_TEXTS_PER_PAIR = 20  # skip pairs with fewer total texts
@@ -27,7 +23,7 @@ GDELT_FETCH_TIMEOUT = 15  # seconds per URL
 GDELT_MIN_ARTICLE_WORDS = 100  # discard if shorter
 GDELT_MAX_ARTICLE_WORDS = 5000  # truncate if longer
 GDELT_FETCH_DELAY = 0.5  # seconds between requests
-GDELT_MAX_URLS_PER_PAIR = 2000  # sample from BQ before fetching
+GDELT_MAX_URLS_PER_PAIR = 2000
 
 # Context classification labels
 CONTEXT_LABELS = [
@@ -48,8 +44,7 @@ CONTEXT_LABELS = [
 SENTIMENT_LABELS = ["positive", "neutral", "negative"]
 
 # Models (Phase 2: LLM annotation)
-LLM_ANNOTATOR = "meta-llama/Llama-3.1-70B-Instruct-AWQ"
-LLM_ANNOTATOR_SMALL = "meta-llama/Llama-3.1-8B-Instruct"
+LLM_ANNOTATOR = "claude-haiku-4-5-20251001"  # Claude Haiku 4.5 for annotation
 
 # Models (Phase 3: encoder fine-tuning benchmark)
 ENCODER_MODELS = {
