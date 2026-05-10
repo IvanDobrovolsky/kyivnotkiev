@@ -87,7 +87,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
     let activeSources = new Set(['gdelt']);
     // hideRuDomains replaced by holdoutFilter
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
-    let chartMode: 'adoption' | 'volume' = 'volume';  // Volume by default — shows actual data density
+    let chartMode: 'adoption' | 'volume' = 'adoption';
     let showEvents = true;
 
     // Read pair from URL query param (?pair=1), default to Kyiv (1)
@@ -571,37 +571,38 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
             const dates = series.map((d: any) => parseDate(d.date)!.getTime());
             const t = hoveredDate.getTime();
 
+            // Outside series range — skip
+            if (t < dates[0] || t > dates[dates.length - 1]) continue;
+
             let lo = 0, hi = dates.length - 1;
             while (hi - lo > 1) {
               const mid = (lo + hi) >> 1;
               if (dates[mid] <= t) lo = mid; else hi = mid;
             }
 
-            const closest = Math.abs(t - dates[lo]) < Math.abs(t - dates[hi]) ? lo : hi;
-            const distMs = Math.abs(t - dates[closest]);
+            if (chartMode === 'volume') {
+              // Volume mode: snap to nearest point within half-gap
+              const closest = Math.abs(t - dates[lo]) < Math.abs(t - dates[hi]) ? lo : hi;
+              const distMs = Math.abs(t - dates[closest]);
+              const gaps: number[] = [];
+              for (let i = 1; i < dates.length; i++) gaps.push(dates[i] - dates[i-1]);
+              gaps.sort((a, b) => a - b);
+              const medianGap = gaps[Math.floor(gaps.length / 2)] || 90*86400000;
+              const snapRadius = Math.min(medianGap * 0.55, 120*86400000);
+              if (distMs > snapRadius) continue;
 
-            // Snap radius = half the median gap between consecutive points
-            // (yearly data → ~6 months, monthly → ~15 days)
-            const gaps: number[] = [];
-            for (let i = 1; i < dates.length; i++) gaps.push(dates[i] - dates[i-1]);
-            gaps.sort((a, b) => a - b);
-            const medianGap = gaps[Math.floor(gaps.length / 2)] || 90*86400000;
-            const snapRadius = Math.min(medianGap * 0.55, 120*86400000);
-            if (distMs > snapRadius) continue;
-
-            const d = series[closest];
-            const value = Math.round(d.adoption * 10) / 10;
-
-            if (chartMode === 'volume' && d.ukr !== undefined) {
+              const d = series[closest];
               html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}</span>`;
               html += `<br/>&nbsp;&nbsp;<span style="color:${sourceColors[src]}">UA: <strong>${(d.ukr || 0).toLocaleString()}</strong></span>`;
               html += `<br/>&nbsp;&nbsp;<span style="color:#dc2626">RU: <strong>${(d.rus || 0).toLocaleString()}</strong></span>`;
-              html += `<br/>&nbsp;&nbsp;<span style="color:#6b7280">Adoption: ${value}%</span>`;
+              html += `<br/>&nbsp;&nbsp;<span style="color:#6b7280">Adoption: ${Math.round(d.adoption * 10) / 10}%</span>`;
             } else {
+              // Adoption mode: interpolate between points (matches the line)
+              const frac = (dates[hi] - dates[lo]) > 0
+                ? (t - dates[lo]) / (dates[hi] - dates[lo]) : 0;
+              const value = Math.round((series[lo].adoption + frac * (series[hi].adoption - series[lo].adoption)) * 10) / 10;
+
               html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${value}%</strong></span>`;
-              if (d.ukr !== undefined) {
-                html += ` <span style="color:#9ca3af;font-size:0.8em">(UA:${(d.ukr||0).toLocaleString()} / RU:${(d.rus||0).toLocaleString()})</span>`;
-              }
             }
           }
 
