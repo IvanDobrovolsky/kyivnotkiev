@@ -261,64 +261,43 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
                 if total > 0:
                     result[spid]["wikipedia"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
 
-    # Reddit (annual)
+    # Reddit (monthly)
     log.info("  Reddit...")
     df = _load("reddit")
     if len(df):
-        df["yr"] = pd.to_datetime(df["date"]).dt.year.astype(str)
-        g = df.groupby(["pair_id", "yr", "variant"]).size().reset_index(name="cnt")
-        p = g.pivot_table(index=["pair_id", "yr"], columns="variant", values="cnt", fill_value=0).reset_index()
+        df["month"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m")
+        g = df.groupby(["pair_id", "month", "variant"]).size().reset_index(name="cnt")
+        p = g.pivot_table(index=["pair_id", "month"], columns="variant", values="cnt", fill_value=0).reset_index()
         for pid, grp in p.groupby("pair_id"):
             if pid not in enabled_ids:
                 continue
             spid = str(pid)
             result.setdefault(spid, {}).setdefault("reddit", [])
-            for _, r in grp.sort_values("yr").iterrows():
+            for _, r in grp.sort_values("month").iterrows():
                 ukr = int(r.get("ukrainian", 0))
                 rus = int(r.get("russian", 0))
                 total = ukr + rus
                 if total >= 2:
-                    result[spid]["reddit"].append({"date": f"{r['yr']}-01", "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
+                    result[spid]["reddit"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
 
-    # YouTube (annual, merge BQ parquet + local CSVs)
+    # YouTube (monthly from parquet)
     log.info("  YouTube...")
-    yt_data = defaultdict(dict)
     df = _load("youtube")
     if len(df):
-        df["yr"] = pd.to_datetime(df["date"]).dt.year.astype(str)
-        g = df.groupby(["pair_id", "yr", "variant"]).size().reset_index(name="cnt")
-        p = g.pivot_table(index=["pair_id", "yr"], columns="variant", values="cnt", fill_value=0).reset_index()
-        for _, r in p.iterrows():
-            pid = int(r["pair_id"])
+        df["month"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m")
+        g = df.groupby(["pair_id", "month", "variant"]).size().reset_index(name="cnt")
+        p = g.pivot_table(index=["pair_id", "month"], columns="variant", values="cnt", fill_value=0).reset_index()
+        for pid, grp in p.groupby("pair_id"):
             if pid not in enabled_ids:
                 continue
-            yt_data[pid][r["yr"]] = (int(r.get("ukrainian", 0)), int(r.get("russian", 0)))
-
-    yt_local_dir = DATA_DIR / "raw" / "youtube"
-    if yt_local_dir.exists():
-        for csv_file in sorted(yt_local_dir.glob("pair_*.csv")):
-            with open(csv_file) as f:
-                for row in csv.DictReader(f):
-                    pid = int(row["pair_id"])
-                    if pid not in enabled_ids:
-                        continue
-                    yr = str(row["year"])
-                    matches = int(row.get("title_matches", 0))
-                    variant = row["variant"]
-                    existing = yt_data[pid].get(yr, (0, 0))
-                    if variant == "ukrainian":
-                        yt_data[pid][yr] = (existing[0] + matches, existing[1])
-                    else:
-                        yt_data[pid][yr] = (existing[0], existing[1] + matches)
-
-    for pid in sorted(yt_data.keys()):
-        spid = str(pid)
-        result.setdefault(spid, {}).setdefault("youtube", [])
-        for yr in sorted(yt_data[pid].keys()):
-            ukr, rus = yt_data[pid][yr]
-            total = ukr + rus
-            if total > 0:
-                result[spid]["youtube"].append({"date": f"{yr}-01", "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
+            spid = str(pid)
+            result.setdefault(spid, {}).setdefault("youtube", [])
+            for _, r in grp.sort_values("month").iterrows():
+                ukr = int(r.get("ukrainian", 0))
+                rus = int(r.get("russian", 0))
+                total = ukr + rus
+                if total > 0:
+                    result[spid]["youtube"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
 
     # Ngrams (yearly)
     log.info("  Ngrams...")
