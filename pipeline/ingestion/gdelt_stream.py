@@ -67,8 +67,8 @@ for pair in _cfg["pairs"]:
         "id": pid,
         "russian": ru,
         "ukrainian": ua,
-        "ru_re": re.compile(re.escape(ru), re.IGNORECASE),
-        "ua_re": re.compile(re.escape(ua), re.IGNORECASE),
+        "ru_re": re.compile(re.escape(ru).replace(r"\ ", r"[\s\-_+%20]+"), re.IGNORECASE),
+        "ua_re": re.compile(re.escape(ua).replace(r"\ ", r"[\s\-_+%20]+"), re.IGNORECASE),
         "negatives": [re.compile(n, re.IGNORECASE) for n in negatives],
     })
 

@@ -574,6 +574,12 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
             }
           }
 
+          // Hide tooltip if only the header (no source matched)
+          if (html === `<strong>${dateStr}</strong>`) {
+            tooltip.style('opacity', '0');
+            crosshairLine.style('opacity', 0);
+            return;
+          }
           tooltip.style('opacity', '1').html(html);
           const cr = chartContainer.getBoundingClientRect();
           const left = event.clientX - cr.left;
