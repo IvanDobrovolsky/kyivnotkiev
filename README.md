@@ -20,8 +20,8 @@
 | Metric | Value |
 |--------|-------|
 | Records scanned | **90B+** |
-| Toponym matches | **351M** |
-| Toponym pairs | **58** |
+| Toponym matches | **346M** |
+| Toponym pairs | **57** |
 | Data sources | **9** (News, Trends, Wiki, Reddit, YouTube, Books, Academic, Telegram, Religious) |
 | Time span | **2010–2025** (Books: 2000–2022) |
 | FP rate | **0.9%** (verified on 19,250 samples) |
@@ -62,7 +62,7 @@ graph LR
 
     subgraph Config["Configuration"]
         style Config fill:#f8f9fb,stroke:#d97706,color:#1a1a2e
-        Pairs["pairs.yaml<br/>58 pairs + matching rules"]
+        Pairs["pairs.yaml<br/>57 pairs + matching rules"]
     end
 
     subgraph Processing["Processing"]

@@ -34,7 +34,8 @@ pairs:
   ukrainian: Kyiv
   enabled: true
   is_control: false
-  notes: Flagship pair, capital city. GDELT excludes "Kievan" URLs (tracked by pair 35 Kievan Rus).
+  notes: Flagship pair, capital city. GDELT excludes "Kievan" URLs (tracked by pair
+    35 Kievan Rus).
   events:
   - date: 2018-10
     label: '#KyivNotKiev launch'
@@ -63,7 +64,8 @@ pairs:
   ukrainian: Odesa
   enabled: true
   is_control: false
-  notes: 'GDELT/Reddit exclude Odessa TX sources. Verified: <0.02% Texas contamination in sampled data.'
+  notes: 'GDELT/Reddit exclude Odessa TX sources. Verified: <0.02% Texas contamination
+    in sampled data.'
   events:
   - date: 2022-07
     label: Russian missile strikes
@@ -157,34 +159,14 @@ pairs:
   match_mode: word_boundary
 - id: 12
   category: geographical
-  russian: Donetsk
-  ukrainian: Donetsk
-  enabled: false
-  is_control: true
-  notes: Control — same in both languages
-- id: 13
-  category: geographical
-  russian: Mariupol
-  ukrainian: Mariupol
-  enabled: false
-  is_control: true
-  notes: Control — same in both languages
-- id: 14
-  category: geographical
-  russian: Kherson
-  ukrainian: Kherson
-  enabled: false
-  is_control: true
-  notes: Control — same in both languages
-- id: 15
-  category: geographical
   russian: Dnieper River
   ukrainian: Dnipro River
   enabled: true
   is_control: false
-  notes: River name. Qualified with "River" to disambiguate from the city (pair 7, Dnepropetrovsk→Dnipro).
+  notes: River name. Qualified with "River" to disambiguate from the city (pair 7,
+    Dnepropetrovsk→Dnipro).
   match_mode: exact_phrase
-- id: 16
+- id: 13
   category: geographical
   russian: Dniester
   ukrainian: Dnister
@@ -192,41 +174,130 @@ pairs:
   is_control: false
   notes: River name
   match_mode: word_boundary
-- id: 17
+- id: 14
   category: geographical
   russian: Donbass
   ukrainian: Donbas
   enabled: true
   is_control: false
-  notes: Politically charged — Russia insists on "Donbass", Ukraine on "Donbas". Part of the 7,800 toponyms renamed across 83 Ukrainian cities since 2022 (Transparent Cities). July 2023 law mandated renaming
-    of Russian imperial toponyms.
+  notes: Politically charged — Russia insists on "Donbass", Ukraine on "Donbas". Part
+    of the 7,800 toponyms renamed across 83 Ukrainian cities since 2022 (Transparent
+    Cities). July 2023 law mandated renaming of Russian imperial toponyms.
   events:
   - date: 2023-07
     label: Ukrainian law mandates toponym decolonization
   match_mode: word_boundary
-- id: 18
-  category: geographical
-  russian: Crimea
-  ukrainian: Krym
-  enabled: false
-  is_control: false
-  notes: ' [Disabled: insufficient or misleading data]'
-- id: 19
+- id: 15
   category: geographical
   russian: Zakarpatye
   ukrainian: Zakarpattia
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 20
-  category: geographical
-  russian: Podolye
-  ukrainian: Podillia
-  enabled: false
+- id: 16
+  category: food
+  russian: Chicken Kiev
+  ukrainian: Chicken Kyiv
+  enabled: true
   is_control: false
+  match_mode: exact_phrase
+- id: 17
+  category: food
+  russian: Kiev cake
+  ukrainian: Kyiv cake
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 18
+  category: food
+  russian: Borsch
+  ukrainian: Borscht
+  enabled: true
+  is_control: false
+  notes: UNESCO inscribed 'Culture of Ukrainian borscht cooking' in July 2022, using
+    'borscht' as the international form. Russian-derived 'borsch' (without t) tests
+    whether English adopts the UNESCO/Ukrainian standard.
+  events:
+  - date: 2022-07
+    label: UNESCO inscribes Ukrainian borscht
   match_mode: word_boundary
-  notes: 'Dropped: 90%+ FP in all sources, term too ambiguous'
-- id: 38
+- id: 19
+  category: landmarks
+  russian: Kiev Pechersk Lavra
+  ukrainian: Kyiv Pechersk Lavra
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 20
+  category: landmarks
+  russian: Saint Sophia Cathedral Kiev
+  ukrainian: Saint Sophia Cathedral Kyiv
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 21
+  category: landmarks
+  russian: Chernobyl Exclusion Zone
+  ukrainian: Chornobyl Exclusion Zone
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 22
+  category: institutional
+  russian: Kiev National University
+  ukrainian: Kyiv National University
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 23
+  category: institutional
+  russian: Kharkov University
+  ukrainian: Kharkiv University
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 24
+  category: institutional
+  russian: Kiev Polytechnic
+  ukrainian: Kyiv Polytechnic
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 25
+  category: institutional
+  russian: Kiev Patriarchate
+  ukrainian: Kyiv Patriarchate
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 26
+  category: sports
+  russian: Dynamo Kiev
+  ukrainian: Dynamo Kyiv
+  enabled: true
+  is_control: false
+  events:
+  - date: 2018-12
+    label: UEFA updates to Dynamo Kyiv
+  match_mode: exact_phrase
+- id: 27
+  category: sports
+  russian: Kiev ballet
+  ukrainian: Kyiv ballet
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 28
+  category: historical
+  russian: Kievan Rus
+  ukrainian: Kyivan Rus
+  enabled: true
+  is_control: false
+  events:
+  - date: 2022-02
+    label: Russia weaponizes Kievan Rus narrative
+  match_mode: exact_phrase
+- id: 29
   category: geographical
   russian: Chernigov
   ukrainian: Chernihiv
@@ -238,317 +309,112 @@ pairs:
   - bar.{0,5}chernigov
   - barcelona
   homonym_type: business_name
-- id: 39
+- id: 30
   category: geographical
   russian: Chernovtsy
   ukrainian: Chernivtsi
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 40
+- id: 31
   category: geographical
   russian: Zhitomir
   ukrainian: Zhytomyr
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 41
+- id: 32
   category: geographical
   russian: Cherkassy
   ukrainian: Cherkasy
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 42
+- id: 33
   category: geographical
   russian: Uzhgorod
   ukrainian: Uzhhorod
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 43
+- id: 34
   category: geographical
   russian: Kremenchug
   ukrainian: Kremenchuk
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 44
+- id: 35
   category: geographical
   russian: Kirovograd
   ukrainian: Kropyvnytskyi
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 45
+- id: 36
   category: geographical
   russian: Ternopol
   ukrainian: Ternopil
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 21
-  category: food
-  russian: Chicken Kiev
-  ukrainian: Chicken Kyiv
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 22
-  category: food
-  russian: Kiev cake
-  ukrainian: Kyiv cake
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 23
-  category: food
-  russian: Borsch
-  ukrainian: Borscht
-  enabled: true
-  is_control: false
-  notes: UNESCO inscribed 'Culture of Ukrainian borscht cooking' in July 2022, using 'borscht' as the international form. Russian-derived 'borsch' (without t) tests whether English adopts the UNESCO/Ukrainian
-    standard.
-  events:
-  - date: 2022-07
-    label: UNESCO inscribes Ukrainian borscht
-  match_mode: word_boundary
-- id: 64
-  category: food
-  russian: Borsch
-  ukrainian: Borshch
-  enabled: false
-  is_control: false
-  notes: 'Disabled: merged into pair 23 (Borsch→Borscht). UNESCO uses borscht as the international standard.'
-- id: 46
+- id: 37
   category: food
   russian: Vareniki
   ukrainian: Varenyky
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 47
-  category: food
-  russian: Gorilka
-  ukrainian: Horilka
-  enabled: false
-  is_control: false
-- id: 24
-  category: landmarks
-  russian: Kiev Pechersk Lavra
-  ukrainian: Kyiv Pechersk Lavra
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 25
-  category: landmarks
-  russian: Saint Sophia Cathedral Kiev
-  ukrainian: Saint Sophia Cathedral Kyiv
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 26
-  category: landmarks
-  russian: Chernobyl Exclusion Zone
-  ukrainian: Chornobyl Exclusion Zone
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 54
-  category: landmarks
-  russian: Babi Yar
-  ukrainian: Babyn Yar
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 55
-  category: landmarks
-  russian: Potemkin Stairs Odessa
-  ukrainian: Potemkin Stairs Odesa
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 56
-  category: landmarks
-  russian: Motherland Monument Kiev
-  ukrainian: Motherland Monument Kyiv
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 27
-  category: country
-  russian: the Ukraine
-  ukrainian: Ukraine
-  enabled: false
-  is_control: false
-  notes: 'Removed: not a toponym, grammatical article construction'
-  filter_pattern: \bthe Ukraine\b(?!\s+(war|crisis|conflict|invasion|situation|government|military|army|front|offensive|defense|aid|support|scandal|story|deal|peace|grain|question|issue|debate|border|region|territory|people|side|thing|part|trip|visit|attack|strike|response|policy|strategy|effort|update|news|report|angle|perspective|context|dimension|topic|narrative))
-  events:
-  - date: 1991-08
-    label: Ukraine declares independence
-- id: 28
-  category: institutional
-  russian: Kiev National University
-  ukrainian: Kyiv National University
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 29
-  category: institutional
-  russian: Kharkov University
-  ukrainian: Kharkiv University
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 30
-  category: institutional
-  russian: Kiev Polytechnic
-  ukrainian: Kyiv Polytechnic
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 31
-  category: institutional
-  russian: Kiev Patriarchate
-  ukrainian: Kyiv Patriarchate
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 57
-  category: institutional
-  russian: Lvov Polytechnic
-  ukrainian: Lviv Polytechnic
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 58
-  category: institutional
-  russian: Odessa National University
-  ukrainian: Odesa National University
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 32
-  category: sports
-  russian: Dynamo Kiev
-  ukrainian: Dynamo Kyiv
-  enabled: true
-  is_control: false
-  events:
-  - date: 2018-12
-    label: UEFA updates to Dynamo Kyiv
-  match_mode: exact_phrase
-- id: 33
-  category: sports
-  russian: Shakhtar Donetsk
-  ukrainian: Shakhtar Donetsk
-  enabled: false
-  is_control: true
-  notes: Control — same in both languages, no adoption signal
-- id: 34
-  category: sports
-  russian: Kiev ballet
-  ukrainian: Kyiv ballet
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 51
-  category: sports
-  russian: Zorya Lugansk
-  ukrainian: Zorya Luhansk
-  enabled: false
-  is_control: false
-  notes: 'Disabled: displaced from Luhansk since 2014, limited data.'
-- id: 52
-  category: sports
-  russian: Metalist Kharkov
-  ukrainian: Metalist Kharkiv
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-- id: 53
-  category: sports
-  russian: Karpaty Lvov
-  ukrainian: Karpaty Lviv
-  enabled: false
-  is_control: false
-  notes: 'Disabled: club dissolved 2021, insufficient recent data.'
-- id: 35
-  category: historical
-  russian: Kievan Rus
-  ukrainian: Kyivan Rus
-  enabled: true
-  is_control: false
-  events:
-  - date: 2022-02
-    label: Russia weaponizes Kievan Rus narrative
-  match_mode: exact_phrase
-- id: 36
-  category: historical
-  russian: Cossack
-  ukrainian: Kozak
-  enabled: false
-  is_control: false
-  notes: 'Disabled: Cossack is a shared English exonym used across Ukrainian, Don, and Kuban contexts. "Kazak" contaminates with Kazakhstan. No clean RU/UA transliteration split exists for this term.'
-- id: 37
-  category: historical
-  russian: Little Russia
-  ukrainian: Ukraine
-  enabled: false
-  is_control: false
-  notes: ' [Disabled: insufficient or misleading data]'
-- id: 48
+- id: 38
   category: historical
   russian: Gopak
   ukrainian: Hopak
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 49
-  category: historical
-  russian: Euromaidan
-  ukrainian: Euromaidan
-  enabled: false
-  is_control: true
-  notes: Control — same in both languages
-- id: 50
-  category: historical
-  russian: Holodomor
-  ukrainian: Holodomor
-  enabled: false
-  is_control: true
-  notes: Control — same in both languages
-- id: 70
-  category: historical
-  russian: Vladimir the Great
-  ukrainian: Volodymyr the Great
+- id: 39
+  category: sports
+  russian: Metalist Kharkov
+  ukrainian: Metalist Kharkiv
   enabled: true
   is_control: false
-  notes: Prince who Christianized Rus (988). Both Russia and Ukraine claim him as founding figure. Key test of historical identity reclamation.
-  events:
-  - date: 2015-07
-    label: Putin unveils Vladimir statue in Moscow
-    color: '#dc2626'
-  - date: 2016-11
-    label: Poroshenko unveils Volodymyr statue in Kyiv
-    color: '#0057B8'
   match_mode: exact_phrase
-- id: 71
-  category: historical
-  russian: Prince of Kiev
-  ukrainian: Prince of Kyiv
+- id: 40
+  category: landmarks
+  russian: Babi Yar
+  ukrainian: Babyn Yar
   enabled: true
   is_control: false
-  notes: Historical title for rulers of Kyivan Rus. Russian framing dominates English-language scholarship.
   match_mode: exact_phrase
-- id: 59
-  category: historical
-  russian: Galicia
-  ukrainian: Halychyna
-  enabled: false
+- id: 41
+  category: landmarks
+  russian: Potemkin Stairs Odessa
+  ukrainian: Potemkin Stairs Odesa
+  enabled: true
   is_control: false
-  notes: ' [Disabled: insufficient or misleading data]'
-- id: 60
+  match_mode: exact_phrase
+- id: 42
+  category: landmarks
+  russian: Motherland Monument Kiev
+  ukrainian: Motherland Monument Kyiv
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 43
+  category: institutional
+  russian: Lvov Polytechnic
+  ukrainian: Lviv Polytechnic
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 44
+  category: institutional
+  russian: Odessa National University
+  ukrainian: Odesa National University
+  enabled: true
+  is_control: false
+  match_mode: exact_phrase
+- id: 45
   category: people
   russian: Alexander Usyk
   ukrainian: Oleksandr Usyk
@@ -560,7 +426,7 @@ pairs:
   - date: 2024-05
     label: Beats Fury, all belts
   match_mode: exact_phrase
-- id: 61
+- id: 46
   category: people
   russian: Vladimir Zelensky
   ukrainian: Volodymyr Zelenskyy
@@ -572,7 +438,7 @@ pairs:
   - date: 2022-02
     label: Wartime leadership begins
   match_mode: exact_phrase
-- id: 62
+- id: 47
   category: people
   russian: Andrey Shevchenko
   ukrainian: Andrii Shevchenko
@@ -580,121 +446,32 @@ pairs:
   is_control: false
   notes: Also matches Andriy Shevchenko (most common English spelling)
   match_mode: exact_phrase
-- id: 63
-  category: people
-  russian: Vitali Klitschko
-  ukrainian: Vitaliy Klychko
-  enabled: false
-  is_control: false
-  notes: ' [Disabled: insufficient or misleading data]'
-- id: 65
-  category: food
-  russian: Pierogi
-  ukrainian: Varenyky
-  enabled: false
-  is_control: false
-  notes: Pierogi is Polish; Ukrainian dish is varenyky. Often conflated in English.
-- id: 66
-  category: food
-  russian: Pirozhki
-  ukrainian: Pyrizhky
-  enabled: false
-  is_control: false
-  notes: ' [Disabled: insufficient or misleading data]'
-- id: 67
-  category: food
-  russian: Syrniki
-  ukrainian: Syrnyky
-  enabled: false
-  is_control: false
-  notes: ' [Disabled: insufficient or misleading data]'
-- id: 68
-  category: food
-  russian: Holubtsy
-  ukrainian: Holubtsi
-  enabled: false
-  is_control: false
-  notes: 'Russian golubets/golubtsy → Ukrainian holubtsi [Disabled: insufficient or misleading data]'
-- id: 69
-  category: people
-  russian: Sergei Rebrov
-  ukrainian: Serhiy Rebrov
-  enabled: false
-  is_control: false
-  notes: Insufficient data quality — too few mentions for reliable adoption signal
-- id: 80
-  category: people
-  russian: Nikolai Gogol
-  ukrainian: Mykola Hohol
-  enabled: true
-  is_control: false
-  notes: Ukrainian-born writer (Миколa Гоголь). Tests Г→H and Микола→Mykola vs Nikolai.
-  match_mode: exact_phrase
-- id: 81
+- id: 48
   category: historical
-  russian: Slava Ukraine
-  ukrainian: Slava Ukraini
-  enabled: false
-  is_control: false
-  notes: National salute — trackable on social media. Russian-influenced English drops the -i ending.
-- id: 82
-  category: geographical
-  russian: Feodosiya
-  ukrainian: Feodosiia
+  russian: Vladimir the Great
+  ukrainian: Volodymyr the Great
   enabled: true
   is_control: false
-  notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms Ukraine's territorial integrity.
-  match_mode: word_boundary
-- id: 83
+  notes: Prince who Christianized Rus (988). Both Russia and Ukraine claim him as
+    founding figure. Key test of historical identity reclamation.
+  events:
+  - date: 2015-07
+    label: Putin unveils Vladimir statue in Moscow
+    color: '#dc2626'
+  - date: 2016-11
+    label: Poroshenko unveils Volodymyr statue in Kyiv
+    color: '#0057B8'
+  match_mode: exact_phrase
+- id: 49
   category: historical
-  russian: Olga of Kiev
-  ukrainian: Olha of Kyiv
+  russian: Prince of Kiev
+  ukrainian: Prince of Kyiv
   enabled: true
   is_control: false
-  notes: Princess of Kyivan Rus (княгиня Ольга). Tests Г→H in first name + Kiev→Kyiv.
+  notes: Historical title for rulers of Kyivan Rus. Russian framing dominates English-language
+    scholarship.
   match_mode: exact_phrase
-- id: 84
-  category: people
-  russian: Igor Sikorsky
-  ukrainian: Ihor Sikorsky
-  enabled: true
-  is_control: false
-  notes: Aviation pioneer (Ігор Сікорський). Tests І→I and Г→H (Igor vs Ihor).
-  match_mode: exact_phrase
-- id: 85
-  category: people
-  russian: Sergei Korolev
-  ukrainian: Serhii Korolyov
-  enabled: true
-  is_control: false
-  notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of the most consequential cases of Ukrainian
-    identity erasure in global science history.
-  match_mode: exact_phrase
-- id: 86
-  category: historical
-  russian: Bogdan Khmelnitsky
-  ukrainian: Bohdan Khmelnytskyi
-  enabled: true
-  is_control: false
-  notes: Hetman (Богдан Хмельницький). Tests Г→H (Bogdan vs Bohdan) and suffix (-itsky vs -ytskyi).
-  match_mode: exact_phrase
-- id: 87
-  category: people
-  russian: Kazimir Malevich
-  ukrainian: Kazymyr Malevych
-  enabled: true
-  is_control: false
-  notes: Suprematist artist (Казимир Малевич). Tests И→Y and Ч→Ch (Malevich vs Malevych).
-  match_mode: exact_phrase
-- id: 89
-  category: landmarks
-  russian: Sviatogorsk Lavra
-  ukrainian: Sviatohirsk Lavra
-  enabled: true
-  is_control: false
-  notes: Holy Dormition Monastery (Свято-Успенська Святогірська Лавра). Tests Г→H (горськ vs хірськ).
-  match_mode: exact_phrase
-- id: 72
+- id: 50
   category: geographical
   russian: Artemovsk
   ukrainian: Bakhmut
@@ -717,3 +494,63 @@ pairs:
   - sparkling
   - winery
   homonym_type: brand_composer
+- id: 51
+  category: people
+  russian: Nikolai Gogol
+  ukrainian: Mykola Hohol
+  enabled: true
+  is_control: false
+  notes: Ukrainian-born writer (Миколa Гоголь). Tests Г→H and Микола→Mykola vs Nikolai.
+  match_mode: exact_phrase
+- id: 52
+  category: geographical
+  russian: Feodosiya
+  ukrainian: Feodosiia
+  enabled: true
+  is_control: false
+  notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms
+    Ukraine's territorial integrity.
+  match_mode: word_boundary
+- id: 53
+  category: historical
+  russian: Olga of Kiev
+  ukrainian: Olha of Kyiv
+  enabled: true
+  is_control: false
+  notes: Princess of Kyivan Rus (княгиня Ольга). Tests Г→H in first name + Kiev→Kyiv.
+  match_mode: exact_phrase
+- id: 54
+  category: people
+  russian: Igor Sikorsky
+  ukrainian: Ihor Sikorsky
+  enabled: true
+  is_control: false
+  notes: Aviation pioneer (Ігор Сікорський). Tests І→I and Г→H (Igor vs Ihor).
+  match_mode: exact_phrase
+- id: 55
+  category: people
+  russian: Sergei Korolev
+  ukrainian: Serhii Korolyov
+  enabled: true
+  is_control: false
+  notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born
+    in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of
+    the most consequential cases of Ukrainian identity erasure in global science history.
+  match_mode: exact_phrase
+- id: 56
+  category: historical
+  russian: Bogdan Khmelnitsky
+  ukrainian: Bohdan Khmelnytskyi
+  enabled: true
+  is_control: false
+  notes: Hetman (Богдан Хмельницький). Tests Г→H (Bogdan vs Bohdan) and suffix (-itsky
+    vs -ytskyi).
+  match_mode: exact_phrase
+- id: 57
+  category: people
+  russian: Kazimir Malevich
+  ukrainian: Kazymyr Malevych
+  enabled: true
+  is_control: false
+  notes: Suprematist artist (Казимир Малевич). Tests И→Y and Ч→Ch (Malevich vs Malevych).
+  match_mode: exact_phrase

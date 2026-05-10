@@ -55,10 +55,10 @@ for pair in _cfg["pairs"]:
                      "odessa.{0,5}a.?zion"]
     elif pid == 6:  # Nikolaev — common surname
         negatives = ["nikolaev.{0,10}(born|author|professor|medal|coach|player)"]
-    elif pid == 72:  # Artemovsk — Hulak-Artemovsky composer, champagne brand
+    elif pid == 50:  # Artemovsk — Hulak-Artemovsky composer, champagne brand
         negatives = ["hulak", "gulak", "artemovsk[ioay]",
                      "champagne", "sparkling", "winery"]
-    elif pid == 38:  # Chernigov — restaurant/bar business names
+    elif pid == 29:  # Chernigov — restaurant/bar business names
         negatives = ["restaurant", "bar.{0,5}chernigov", "barcelona"]
     elif pid == 9:  # Rovno — Slavic adverb "exactly"
         negatives = ["rovno.{0,5}(v|na|po)\\b"]
