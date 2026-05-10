@@ -569,7 +569,8 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
             const dates = series.map((d: any) => parseDate(d.date)!.getTime());
             const vals = series.map((d: any) => d.adoption);
             const t = hoveredDate.getTime();
-            if (t < dates[0] || t > dates[dates.length - 1]) continue;
+            // Show nearest point even if hover is slightly outside range
+            if (t < dates[0] - 90*86400000 || t > dates[dates.length - 1] + 90*86400000) continue;
 
             let lo = 0, hi = dates.length - 1;
             while (hi - lo > 1) {
