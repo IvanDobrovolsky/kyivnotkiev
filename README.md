@@ -20,7 +20,7 @@
 | Metric | Value |
 |--------|-------|
 | Records scanned | **90B+** |
-| Toponym matches | **346M** |
+| Toponym matches | **333M** |
 | Toponym pairs | **57** |
 | Data sources | **9** (News, Trends, Wiki, Reddit, YouTube, Books, Academic, Telegram, Religious) |
 | Time span | **2010–2025** (Books: 2000–2022) |
@@ -31,7 +31,7 @@
 
 | Source | Records | Description |
 |--------|---------|-------------|
-| News (GDELT) | 37.9M | URL-level toponym matching in global news articles |
+| News (GDELT) | 20.3M | URL + entity matching via BigQuery in global news articles |
 | Trends | 174K | Google search interest across 55 countries |
 | Wiki | 312M | Wikipedia pageviews for spelling-variant redirects |
 | Reddit | 20.1K | Posts and comments from r/ukraine, r/worldnews, r/europe |
@@ -49,7 +49,7 @@ All source data is on HuggingFace: [`KyivNotKiev/toponym-adoption-data`](https:/
 graph LR
     subgraph Sources["9 Data Sources"]
         style Sources fill:#f8f9fb,stroke:#0057B8,color:#1a1a2e
-        GDELT["News<br/>37.9M"]
+        GDELT["News<br/>20.3M"]
         Trends["Trends<br/>174K"]
         Wiki["Wiki<br/>312M"]
         Reddit["Reddit<br/>20.1K"]

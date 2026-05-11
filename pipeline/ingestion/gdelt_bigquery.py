@@ -54,7 +54,7 @@ def build_query(pairs, start_date, end_date):
         LOWER(IFNULL(AllNames,'')) AS allnames
     FROM `gdelt-bq.gdeltv2.gkg_partitioned`
     WHERE _PARTITIONTIME >= '{start_date}'
-      AND _PARTITIONTIME < DATE_ADD(DATE '{end_date}', INTERVAL 1 DAY)
+      AND _PARTITIONTIME < TIMESTAMP(DATE_ADD(DATE '{end_date}', INTERVAL 1 DAY))
       AND ({where})
     """
 
