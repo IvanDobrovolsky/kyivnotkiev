@@ -188,27 +188,20 @@ pairs:
     label: Ukrainian law mandates toponym decolonization
   match_mode: word_boundary
 - id: 15
-  category: geographical
-  russian: Zakarpatye
-  ukrainian: Zakarpattia
-  enabled: true
-  is_control: false
-  match_mode: word_boundary
-- id: 16
   category: food
   russian: Chicken Kiev
   ukrainian: Chicken Kyiv
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 17
+- id: 16
   category: food
   russian: Kiev cake
   ukrainian: Kyiv cake
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 18
+- id: 17
   category: food
   russian: Borsch
   ukrainian: Borscht
@@ -221,56 +214,56 @@ pairs:
   - date: 2022-07
     label: UNESCO inscribes Ukrainian borscht
   match_mode: word_boundary
-- id: 19
+- id: 18
   category: landmarks
   russian: Kiev Pechersk Lavra
   ukrainian: Kyiv Pechersk Lavra
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 20
+- id: 19
   category: landmarks
   russian: Saint Sophia Cathedral Kiev
   ukrainian: Saint Sophia Cathedral Kyiv
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 21
+- id: 20
   category: landmarks
   russian: Chernobyl Exclusion Zone
   ukrainian: Chornobyl Exclusion Zone
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 22
+- id: 21
   category: institutional
   russian: Kiev National University
   ukrainian: Kyiv National University
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 23
+- id: 22
   category: institutional
   russian: Kharkov University
   ukrainian: Kharkiv University
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 24
+- id: 23
   category: institutional
   russian: Kiev Polytechnic
   ukrainian: Kyiv Polytechnic
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 25
+- id: 24
   category: institutional
   russian: Kiev Patriarchate
   ukrainian: Kyiv Patriarchate
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 26
+- id: 25
   category: sports
   russian: Dynamo Kiev
   ukrainian: Dynamo Kyiv
@@ -280,14 +273,14 @@ pairs:
   - date: 2018-12
     label: UEFA updates to Dynamo Kyiv
   match_mode: exact_phrase
-- id: 27
+- id: 26
   category: sports
   russian: Kiev ballet
   ukrainian: Kyiv ballet
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 28
+- id: 27
   category: historical
   russian: Kievan Rus
   ukrainian: Kyivan Rus
@@ -297,7 +290,7 @@ pairs:
   - date: 2022-02
     label: Russia weaponizes Kievan Rus narrative
   match_mode: exact_phrase
-- id: 29
+- id: 28
   category: geographical
   russian: Chernigov
   ukrainian: Chernihiv
@@ -309,112 +302,112 @@ pairs:
   - bar.{0,5}chernigov
   - barcelona
   homonym_type: business_name
-- id: 30
+- id: 29
   category: geographical
   russian: Chernovtsy
   ukrainian: Chernivtsi
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 31
+- id: 30
   category: geographical
   russian: Zhitomir
   ukrainian: Zhytomyr
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 32
+- id: 31
   category: geographical
   russian: Cherkassy
   ukrainian: Cherkasy
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 33
+- id: 32
   category: geographical
   russian: Uzhgorod
   ukrainian: Uzhhorod
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 34
+- id: 33
   category: geographical
   russian: Kremenchug
   ukrainian: Kremenchuk
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 35
+- id: 34
   category: geographical
   russian: Kirovograd
   ukrainian: Kropyvnytskyi
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 36
+- id: 35
   category: geographical
   russian: Ternopol
   ukrainian: Ternopil
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 37
+- id: 36
   category: food
   russian: Vareniki
   ukrainian: Varenyky
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 38
+- id: 37
   category: historical
   russian: Gopak
   ukrainian: Hopak
   enabled: true
   is_control: false
   match_mode: word_boundary
-- id: 39
+- id: 38
   category: sports
   russian: Metalist Kharkov
   ukrainian: Metalist Kharkiv
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 40
+- id: 39
   category: landmarks
   russian: Babi Yar
   ukrainian: Babyn Yar
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 41
+- id: 40
   category: landmarks
   russian: Potemkin Stairs Odessa
   ukrainian: Potemkin Stairs Odesa
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 42
+- id: 41
   category: landmarks
   russian: Motherland Monument Kiev
   ukrainian: Motherland Monument Kyiv
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 43
+- id: 42
   category: institutional
   russian: Lvov Polytechnic
   ukrainian: Lviv Polytechnic
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 44
+- id: 43
   category: institutional
   russian: Odessa National University
   ukrainian: Odesa National University
   enabled: true
   is_control: false
   match_mode: exact_phrase
-- id: 45
+- id: 44
   category: people
   russian: Alexander Usyk
   ukrainian: Oleksandr Usyk
@@ -426,7 +419,7 @@ pairs:
   - date: 2024-05
     label: Beats Fury, all belts
   match_mode: exact_phrase
-- id: 46
+- id: 45
   category: people
   russian: Vladimir Zelensky
   ukrainian: Volodymyr Zelenskyy
@@ -438,7 +431,7 @@ pairs:
   - date: 2022-02
     label: Wartime leadership begins
   match_mode: exact_phrase
-- id: 47
+- id: 46
   category: people
   russian: Andrey Shevchenko
   ukrainian: Andrii Shevchenko
@@ -446,7 +439,7 @@ pairs:
   is_control: false
   notes: Also matches Andriy Shevchenko (most common English spelling)
   match_mode: exact_phrase
-- id: 48
+- id: 47
   category: historical
   russian: Vladimir the Great
   ukrainian: Volodymyr the Great
@@ -462,7 +455,7 @@ pairs:
     label: Poroshenko unveils Volodymyr statue in Kyiv
     color: '#0057B8'
   match_mode: exact_phrase
-- id: 49
+- id: 48
   category: historical
   russian: Prince of Kiev
   ukrainian: Prince of Kyiv
@@ -471,7 +464,7 @@ pairs:
   notes: Historical title for rulers of Kyivan Rus. Russian framing dominates English-language
     scholarship.
   match_mode: exact_phrase
-- id: 50
+- id: 49
   category: geographical
   russian: Artemovsk
   ukrainian: Bakhmut
@@ -494,7 +487,7 @@ pairs:
   - sparkling
   - winery
   homonym_type: brand_composer
-- id: 51
+- id: 50
   category: people
   russian: Nikolai Gogol
   ukrainian: Mykola Hohol
@@ -502,7 +495,7 @@ pairs:
   is_control: false
   notes: Ukrainian-born writer (Миколa Гоголь). Tests Г→H and Микола→Mykola vs Nikolai.
   match_mode: exact_phrase
-- id: 52
+- id: 51
   category: geographical
   russian: Feodosiya
   ukrainian: Feodosiia
@@ -511,7 +504,7 @@ pairs:
   notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms
     Ukraine's territorial integrity.
   match_mode: word_boundary
-- id: 53
+- id: 52
   category: historical
   russian: Olga of Kiev
   ukrainian: Olha of Kyiv
@@ -519,7 +512,7 @@ pairs:
   is_control: false
   notes: Princess of Kyivan Rus (княгиня Ольга). Tests Г→H in first name + Kiev→Kyiv.
   match_mode: exact_phrase
-- id: 54
+- id: 53
   category: people
   russian: Igor Sikorsky
   ukrainian: Ihor Sikorsky
@@ -527,7 +520,7 @@ pairs:
   is_control: false
   notes: Aviation pioneer (Ігор Сікорський). Tests І→I and Г→H (Igor vs Ihor).
   match_mode: exact_phrase
-- id: 55
+- id: 54
   category: people
   russian: Sergei Korolev
   ukrainian: Serhii Korolyov
@@ -537,7 +530,7 @@ pairs:
     in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of
     the most consequential cases of Ukrainian identity erasure in global science history.
   match_mode: exact_phrase
-- id: 56
+- id: 55
   category: historical
   russian: Bogdan Khmelnitsky
   ukrainian: Bohdan Khmelnytskyi
@@ -546,7 +539,7 @@ pairs:
   notes: Hetman (Богдан Хмельницький). Tests Г→H (Bogdan vs Bohdan) and suffix (-itsky
     vs -ytskyi).
   match_mode: exact_phrase
-- id: 57
+- id: 56
   category: people
   russian: Kazimir Malevich
   ukrainian: Kazymyr Malevych

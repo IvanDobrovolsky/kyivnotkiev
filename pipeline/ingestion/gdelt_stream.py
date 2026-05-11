@@ -55,10 +55,10 @@ for pair in _cfg["pairs"]:
                      "odessa.{0,5}a.?zion"]
     elif pid == 6:  # Nikolaev — common surname
         negatives = ["nikolaev.{0,10}(born|author|professor|medal|coach|player)"]
-    elif pid == 50:  # Artemovsk — Hulak-Artemovsky composer, champagne brand
+    elif pid == 49:  # Artemovsk — Hulak-Artemovsky composer, champagne brand
         negatives = ["hulak", "gulak", "artemovsk[ioay]",
                      "champagne", "sparkling", "winery"]
-    elif pid == 29:  # Chernigov — restaurant/bar business names
+    elif pid == 28:  # Chernigov — restaurant/bar business names
         negatives = ["restaurant", "bar.{0,5}chernigov", "barcelona"]
     elif pid == 9:  # Rovno — Slavic adverb "exactly"
         negatives = ["rovno.{0,5}(v|na|po)\\b"]
@@ -130,9 +130,27 @@ def main():
     parser.add_argument("--start", default="201502", help="Start month YYYYMM")
     parser.add_argument("--end", default="202612", help="End month YYYYMM")
     parser.add_argument("--workers", type=int, default=100, help="Parallel downloads")
+    parser.add_argument("--checkpoint-every", type=int, default=2000, help="Save every N files")
     args = parser.parse_args()
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+    checkpoint_path = OUT_DIR / "gdelt_stream_checkpoint.json"
+    out_path = OUT_DIR / "gdelt_urls_complete.parquet"
+
+    # Load checkpoint (set of processed URLs)
+    done_urls = set()
+    if checkpoint_path.exists():
+        import json
+        with open(checkpoint_path) as f:
+            done_urls = set(json.load(f))
+        log.info(f"Resuming from checkpoint: {len(done_urls):,} files already done")
+
+    # Load existing results
+    all_matches = []
+    if out_path.exists() and done_urls:
+        existing = pd.read_parquet(out_path)
+        all_matches = existing.to_dict("records")
+        log.info(f"Loaded {len(all_matches):,} existing matches")
 
     # Get master file list
     log.info("Fetching GDELT master file list...")
@@ -146,36 +164,53 @@ def main():
         fname = parts[-1].split("/")[-1]
         month = fname[:6]
         if args.start <= month <= args.end:
-            gkg_files.append(parts[-1])
+            if parts[-1] not in done_urls:
+                gkg_files.append(parts[-1])
 
-    log.info(f"GKG files in range {args.start}-{args.end}: {len(gkg_files):,}")
+    log.info(f"GKG files remaining: {len(gkg_files):,} (skipped {len(done_urls):,} done)")
 
-    # Process in parallel with progress
-    all_matches = []
+    # Process in parallel with checkpointing
     processed = 0
+    batch_matches = []
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as pool:
         futures = {pool.submit(process_gkg_file, url): url for url in gkg_files}
         for future in concurrent.futures.as_completed(futures):
+            url = futures[future]
             matches = future.result()
-            all_matches.extend(matches)
+            batch_matches.extend(matches)
+            done_urls.add(url)
             processed += 1
 
-            if processed % 500 == 0:
-                log.info(f"  {processed:,}/{len(gkg_files):,} files, {len(all_matches):,} matches")
+            if processed % 100 == 0:
+                log.info(f"  {processed:,}/{len(gkg_files):,} files, {len(batch_matches):,} new matches")
 
-    log.info(f"\nDone: {processed:,} files, {len(all_matches):,} total matches")
+            if processed % args.checkpoint_every == 0:
+                all_matches.extend(batch_matches)
+                batch_matches = []
+                # Save checkpoint
+                df = pd.DataFrame(all_matches)
+                if len(df):
+                    df = df.drop_duplicates(subset=["pair_id", "url"])
+                    df.to_parquet(out_path, index=False)
+                import json
+                with open(checkpoint_path, "w") as f:
+                    json.dump(list(done_urls), f)
+                log.info(f"  CHECKPOINT: {len(done_urls):,} files done, {len(df) if len(df) else 0:,} matches saved")
 
+    # Final save
+    all_matches.extend(batch_matches)
     if all_matches:
         df = pd.DataFrame(all_matches)
         df = df.drop_duplicates(subset=["pair_id", "url"])
-        out_path = OUT_DIR / "gdelt_urls_complete.parquet"
         df.to_parquet(out_path, index=False)
-        log.info(f"Saved: {out_path} ({len(df):,} unique URL-pair matches)")
+        import json
+        with open(checkpoint_path, "w") as f:
+            json.dump(list(done_urls), f)
+        log.info(f"\nDone: {processed:,} files, {len(df):,} unique matches")
         log.info(f"Pairs: {df['pair_id'].nunique()}")
         log.info(f"Variants: {df['variant'].value_counts().to_dict()}")
 
-        # Per-pair summary
         for pid, grp in df.groupby("pair_id"):
             pair = next((p for p in _cfg["pairs"] if p["id"] == pid), {})
             ru_n = (grp["variant"] == "russian").sum()

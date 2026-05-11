@@ -21,9 +21,9 @@
 |--------|-------|
 | Records scanned | **90B+** |
 | Toponym matches | **333M** |
-| Toponym pairs | **57** |
+| Toponym pairs | **56** |
 | Data sources | **9** (News, Trends, Wiki, Reddit, YouTube, Books, Academic, Telegram, Religious) |
-| Time span | **2010–2025** (Books: 2000–2022) |
+| Time span | **2010–2025** |
 | FP rate | **0.9%** (verified on 19,250 samples) |
 | CL corpus | **93K** verified English texts |
 
@@ -62,7 +62,7 @@ graph LR
 
     subgraph Config["Configuration"]
         style Config fill:#f8f9fb,stroke:#d97706,color:#1a1a2e
-        Pairs["pairs.yaml<br/>57 pairs + matching rules"]
+        Pairs["pairs.yaml<br/>56 pairs + matching rules"]
     end
 
     subgraph Processing["Processing"]
