@@ -546,8 +546,8 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
             const dates = series.map((d: any) => parseDate(d.date)!.getTime());
             const t = hoveredDate.getTime();
 
-            // Outside series range — skip
-            if (t < dates[0] || t > dates[dates.length - 1]) continue;
+            // Outside series range — skip (allow 45 days past last point)
+            if (t < dates[0] || t > dates[dates.length - 1] + 45*86400000) continue;
 
             let lo = 0, hi = dates.length - 1;
             while (hi - lo > 1) {
@@ -556,8 +556,10 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
             }
 
             // Interpolate between bracketing points (matches the drawn line)
-            const frac = (dates[hi] - dates[lo]) > 0
+            // Clamp to [0,1] so we don't extrapolate past the last point
+            const rawFrac = (dates[hi] - dates[lo]) > 0
               ? (t - dates[lo]) / (dates[hi] - dates[lo]) : 0;
+            const frac = Math.max(0, Math.min(1, rawFrac));
 
             if (chartMode === 'volume') {
               const ukr = Math.round((series[lo].ukr || 0) + frac * ((series[hi].ukr || 0) - (series[lo].ukr || 0)));
