@@ -11,9 +11,12 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.1.7",
+    "@astrojs/svelte": "^8.1.0",
     "astro": "^6.1.1",
     "d3": "^7.9.0",
+    "svelte": "^5.55.5",
     "topojson-client": "^3.1.0",
+    "typescript": "^5.9.3",
     "world-atlas": "^2.0.2"
   },
   "devDependencies": {
