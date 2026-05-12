@@ -372,13 +372,6 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: babyn-yar
-- category: landmarks
-  russian: Potemkin Stairs Odessa
-  ukrainian: Potemkin Stairs Odesa
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-  slug: potemkin-stairs-odesa
 - category: institutional
   russian: Lvov Polytechnic
   ukrainian: Lviv Polytechnic
