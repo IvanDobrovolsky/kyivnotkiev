@@ -892,7 +892,7 @@ def main():
                     continue
                 num = alpha_to_num.get(ca, "")
                 if num:
-                    cdata[num] = {"name": GEO_NAMES.get(num, ca), "adoption": round(ukr / total * 100, 1), "total": total}
+                    cdata[num] = {"name": GEO_NAMES.get(num, ca), "adoption": round(ukr / total * 100, 1), "total": total, "ukr": ukr, "rus": rus}
             if cdata:
                 countries_by_pair[slug] = cdata
         log.info(f"  GDELT countries: {len(countries_by_pair)} pairs")
