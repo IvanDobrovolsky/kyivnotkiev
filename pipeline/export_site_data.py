@@ -694,45 +694,46 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                     for _, r in h.iterrows()
                 ]
 
-    # Wikipedia: pages with Russian spelling
+    # Wikipedia: actual page URLs with Russian spelling
     wiki = _load("wikipedia")
-    if len(wiki):
+    if len(wiki) and "page_title" in wiki.columns:
         w25 = wiki[wiki["date"] >= "2025-01"]
-        if "page_title" in w25.columns:
-            for slug in enabled_slugs:
-                pages = w25[(w25["pair_slug"] == slug) & (w25["variant"] == "russian")]
-                if len(pages):
-                    top = pages.groupby("page_title")["pageviews"].sum().nlargest(50)
-                    if len(top):
-                        by_pair.setdefault(slug, {})["wikipedia"] = [
-                            {"name": t, "views": int(v)} for t, v in top.items()
-                        ]
+        for slug in enabled_slugs:
+            pages = w25[(w25["pair_slug"] == slug) & (w25["variant"] == "russian")]
+            if len(pages):
+                top = pages.groupby("page_title")["pageviews"].sum().nlargest(20)
+                if len(top):
+                    by_pair.setdefault(slug, {})["wikipedia"] = [
+                        {"name": t, "url": f"https://en.wikipedia.org/wiki/{t.replace(' ', '_')}", "views": int(v)}
+                        for t, v in top.items()
+                    ]
 
-    # Reddit: subreddits
+    # Reddit: actual post URLs
     reddit = _load("reddit")
-    if len(reddit) and "subreddit" in reddit.columns:
-        r25 = reddit[reddit["date"] >= "2025-01"]
+    if len(reddit) and "post_id" in reddit.columns:
+        r25 = reddit[(reddit["date"] >= "2025-01") & (reddit["variant"] == "russian")]
         for slug in enabled_slugs:
-            subs = r25[(r25["pair_slug"] == slug) & (r25["variant"] == "russian")]
-            if len(subs):
-                top = subs.groupby("subreddit").size().nlargest(20)
-                if len(top):
-                    by_pair.setdefault(slug, {})["reddit"] = [
-                        {"name": f"r/{s}", "posts": int(c)} for s, c in top.items()
-                    ]
+            posts = r25[r25["pair_slug"] == slug].nlargest(20, "score") if "score" in r25.columns else r25[r25["pair_slug"] == slug].head(20)
+            if len(posts):
+                by_pair.setdefault(slug, {})["reddit"] = [
+                    {"name": f"r/{r['subreddit']}: {str(r.get('title',''))[:60]}",
+                     "url": f"https://reddit.com/r/{r['subreddit']}/comments/{r['post_id']}",
+                     "score": int(r.get("score", 0) or 0)}
+                    for _, r in posts.iterrows()
+                ]
 
-    # YouTube: channels
+    # YouTube: actual video URLs
     youtube = _load("youtube")
-    if len(youtube) and "channel_title" in youtube.columns:
-        y25 = youtube[youtube["date"] >= "2025-01"]
+    if len(youtube) and "video_id" in youtube.columns:
+        y25 = youtube[(youtube["date"] >= "2025-01") & (youtube["variant"] == "russian")]
         for slug in enabled_slugs:
-            chs = y25[(y25["pair_slug"] == slug) & (y25["variant"] == "russian")]
-            if len(chs):
-                top = chs.groupby("channel_title").size().nlargest(20)
-                if len(top):
-                    by_pair.setdefault(slug, {})["youtube"] = [
-                        {"name": ch, "videos": int(c)} for ch, c in top.items()
-                    ]
+            vids = y25[y25["pair_slug"] == slug].head(20)
+            if len(vids):
+                by_pair.setdefault(slug, {})["youtube"] = [
+                    {"name": f"{r['channel_title']}: {str(r.get('title',''))[:60]}",
+                     "url": f"https://youtube.com/watch?v={r['video_id']}"}
+                    for _, r in vids.iterrows()
+                ]
 
     log.info(f"  Holdouts: {len(by_pair)} pairs across news/wiki/reddit/youtube")
 

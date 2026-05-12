@@ -83,8 +83,11 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       religious: 'Religious',
     };
 
-    let activeSource = 'gdelt';  // GDELT first — news coverage is most precise
-    let activeSources = new Set(['gdelt']);
+    // Read source from URL params for shareable links
+    const _urlSource = new URLSearchParams(window.location.search).get('source');
+    const validSources = ['gdelt','trends','wikipedia','reddit','youtube','ngrams','openalex','telegram','religious'];
+    let activeSource = _urlSource && validSources.includes(_urlSource) ? _urlSource : 'gdelt';
+    let activeSources = new Set([activeSource]);
     // hideRuDomains replaced by holdoutFilter
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
     let chartMode: 'adoption' | 'volume' = 'volume';
@@ -1282,23 +1285,30 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
         drawChart();
 
-        // Show/hide GDELT-specific sections
-        const gdeltSections = ['media-origin-container', 'holdout-container'];
-        gdeltSections.forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.style.display = src === 'gdelt' ? 'block' : 'none';
-        });
+        // Media origin only for GDELT
+        const originEl = document.getElementById('media-origin-container');
+        if (originEl) originEl.style.display = src === 'gdelt' ? 'block' : 'none';
 
-        // Show map for GDELT and Trends (both have country data)
+        // Holdouts visible for all sources (each source has its own holdouts)
+        const holdoutEl = document.getElementById('holdout-container');
+        if (holdoutEl) holdoutEl.style.display = 'block';
+        drawHoldoutTable();
+
+        // World map only for News (GDELT has country data from domain ccTLD)
         const mapEl = document.getElementById('map-container');
         if (mapEl) {
-          if (src === 'gdelt' || src === 'trends') {
+          if (src === 'gdelt') {
             mapEl.style.display = 'block';
             drawWorldMap();
           } else {
             mapEl.style.display = 'none';
           }
         }
+
+        // Save source in URL for shareable links
+        const url = new URL(window.location.href);
+        url.searchParams.set('source', src);
+        window.history.replaceState({}, '', url.toString());
       });
     });
 
@@ -1717,39 +1727,38 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         </table>`;
       }
 
-      // Wikipedia pages
+      // Wikipedia pages — with direct links
       const wikiHoldouts = pairHoldouts?.wikipedia || [];
       if (wikiHoldouts.length > 0) {
         const wikiRows = wikiHoldouts.map((w: any) =>
           `<tr style="border-bottom:1px solid #f3f4f6;">
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="https://en.wikipedia.org/wiki/${encodeURIComponent(w.name)}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; border-bottom:1px dotted #d1d5db;">${w.name}</a></td>
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="${w.url || 'https://en.wikipedia.org/wiki/' + encodeURIComponent(w.name)}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; border-bottom:1px dotted #d1d5db;">${w.name}</a></td>
             <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(w.views || 0).toLocaleString()} views</td>
           </tr>`).join('');
-        html += `<h4 style="font-size:0.75rem; color:#636466; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">Wikipedia Pages</h4>
+        html += `<h4 style="font-size:0.75rem; color:#636466; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">📖 Wikipedia Pages (using old spelling)</h4>
         <table style="width:100%; border-collapse:collapse;"><tbody>${wikiRows}</tbody></table>`;
       }
 
-      // Reddit subreddits
+      // Reddit — with direct post links
       const redditHoldouts = pairHoldouts?.reddit || [];
       if (redditHoldouts.length > 0) {
-        const redditRows = redditHoldouts.slice(0, 20).map((r: any) =>
+        const redditRows = redditHoldouts.map((r: any) =>
           `<tr style="border-bottom:1px solid #f3f4f6;">
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="https://reddit.com/${r.name}" target="_blank" rel="noopener" style="color:#FF4500; text-decoration:none;">${r.name}</a></td>
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.posts} posts</td>
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="${r.url || '#'}" target="_blank" rel="noopener" style="color:#FF4500; text-decoration:none; border-bottom:1px dotted #ffccc0;">${r.name}</a></td>
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.score ? r.score.toLocaleString() + ' score' : ''}</td>
           </tr>`).join('');
-        html += `<h4 style="font-size:0.75rem; color:#FF4500; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">Reddit</h4>
+        html += `<h4 style="font-size:0.75rem; color:#FF4500; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">💬 Reddit Posts (using old spelling)</h4>
         <table style="width:100%; border-collapse:collapse;"><tbody>${redditRows}</tbody></table>`;
       }
 
-      // YouTube channels
+      // YouTube — with direct video links
       const ytHoldouts = pairHoldouts?.youtube || [];
       if (ytHoldouts.length > 0) {
-        const ytRows = ytHoldouts.slice(0, 20).map((y: any) =>
+        const ytRows = ytHoldouts.map((y: any) =>
           `<tr style="border-bottom:1px solid #f3f4f6;">
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:var(--text);">${y.name}</td>
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${y.videos} videos</td>
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="${y.url || '#'}" target="_blank" rel="noopener" style="color:#FF0000; text-decoration:none; border-bottom:1px dotted #ffcccc;">${y.name}</a></td>
           </tr>`).join('');
-        html += `<h4 style="font-size:0.75rem; color:#FF0000; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">YouTube Channels</h4>
+        html += `<h4 style="font-size:0.75rem; color:#FF0000; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">▶ YouTube Videos (using old spelling)</h4>
         <table style="width:100%; border-collapse:collapse;"><tbody>${ytRows}</tbody></table>`;
       }
 
