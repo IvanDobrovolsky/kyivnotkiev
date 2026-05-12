@@ -76,10 +76,14 @@ pairs:
   notes: 'GDELT/Reddit exclude Odessa TX sources. Verified: <0.02% Texas contamination
     in sampled data.'
   events:
+  - date: 2014-05
+    label: Trade Unions House massacre
   - date: 2022-07
     label: Russian missile strikes
   - date: 2023-07
     label: Grain deal collapse, port strikes
+  - date: 2025-10
+    label: Peace negotiation surge
   match_mode: word_boundary
   homonym_filters:
   - texas
@@ -174,6 +178,8 @@ pairs:
     label: Exclusion Zone wildfire
   - date: 2022-02
     label: Russia seizes plant
+  - date: 2024-10
+    label: S.T.A.L.K.E.R. 2 game release
   match_mode: word_boundary
   slug: chornobyl
 - category: geographical

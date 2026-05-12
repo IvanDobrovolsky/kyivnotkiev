@@ -565,8 +565,9 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           tooltip.style('opacity', '1').html(html);
           const cr = chartContainer.getBoundingClientRect();
           const left = event.clientX - cr.left;
+          const top = event.clientY - cr.top;
           tooltip.style('left', (left > width / 2 ? left - 200 : left + 20) + 'px')
-            .style('top', '10px');
+            .style('top', Math.max(0, top - 40) + 'px');
         })
         .on('mouseleave', function() {
           crosshairLine.style('opacity', 0);
