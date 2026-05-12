@@ -169,10 +169,9 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
       <div class="chart-subtitle" id="holdout-subtitle">Still using old spelling in 2025</div>
     </div>
     <div class="chart-controls">
-      <button class="line-mode active" data-holdout="all">All</button>
-      <button class="line-mode" data-holdout="intl">Only International</button>
-      <button class="line-mode" data-holdout="ru">Only .ru</button>
-      <button class="line-mode" data-holdout="ua">Only .ua</button>
+      <button class="line-mode active" data-holdout="all">All domains</button>
+      <button class="line-mode" data-holdout="ru">.ru</button>
+      <button class="line-mode" data-holdout="ua">.ua</button>
     </div>
   </div>
   <div id="holdout-table" style="max-height: 500px; overflow-y: auto;"></div>

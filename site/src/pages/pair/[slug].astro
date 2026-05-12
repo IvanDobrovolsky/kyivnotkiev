@@ -1663,7 +1663,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
     }
 
     // ── Holdout table ─────────────────────────────────────
-    let holdoutFilter = 'intl'; // default: hide .ru
+    let holdoutFilter = 'all';
 
     function drawHoldoutTable() {
       const container = document.getElementById('holdout-table')!;
@@ -1707,8 +1707,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       if (holdoutKey === 'news') {
         // News: domain table with filters
         let filtered = items;
-        if (holdoutFilter === 'intl') filtered = items.filter((h: any) => !h.name.endsWith('.ru') && !h.name.endsWith('.ua'));
-        else if (holdoutFilter === 'ru') filtered = items.filter((h: any) => h.name.endsWith('.ru'));
+        if (holdoutFilter === 'ru') filtered = items.filter((h: any) => h.name.endsWith('.ru'));
         else if (holdoutFilter === 'ua') filtered = items.filter((h: any) => h.name.endsWith('.ua'));
 
         if (filtered.length === 0) {
@@ -1736,12 +1735,15 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           </tr></thead><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'wikipedia') {
-        const rows = items.map((w: any) =>
-          `<tr style="border-bottom:1px solid #f3f4f6;">
-            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${w.url}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; border-bottom:1px dotted #d1d5db;">${w.name}</a></td>
+        const rows = items.map((w: any) => {
+          const redirectTag = w.redirects ? '<span style="font-size:0.6rem; color:#059669; background:#ecfdf5; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.4rem;">redirects to UA</span>'
+            : '<span style="font-size:0.6rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.4rem;">no redirect</span>';
+          return `<tr style="border-bottom:1px solid #f3f4f6;">
+            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${w.url}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; border-bottom:1px dotted #d1d5db;">${w.name}</a>${redirectTag}</td>
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(w.views || 0).toLocaleString()} views</td>
-          </tr>`).join('');
-        html = `<p style="font-size:0.75rem; color:#6b7280; margin:0.5rem 0.6rem;">Wikipedia pages still using the old spelling in 2025:</p>
+          </tr>`;
+        }).join('');
+        html = `<p style="font-size:0.75rem; color:#6b7280; margin:0.5rem 0.6rem;">Wikipedia pages with old spelling — pageviews in 2025:</p>
         <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'reddit') {
