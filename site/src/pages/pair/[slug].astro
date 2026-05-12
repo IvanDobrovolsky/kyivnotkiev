@@ -777,7 +777,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       // For each denomination, find this pair's stats
       const rows = (rel.denominations || [])
         .map((d: any) => {
-          const pp = (d.pairs || []).find((p: any) => p.pair_id === pid);
+          const pp = (d.pairs || []).find((p: any) => p.pair_id === pid || p.pair_slug === pid);
           return pp ? {...d, pair: pp} : null;
         })
         .filter(Boolean);
@@ -2037,7 +2037,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         .style('gap', '0.5rem');
 
       for (const pair of showPairs) {
-        const pairData = coll[pair.id];
+        const pairData = coll[pair.slug];
         if (!pairData) continue;
         const hasRu = pairData.russian?.collocates?.length > 0;
         const hasUa = pairData.ukrainian?.collocates?.length > 0;
@@ -2498,9 +2498,9 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
       // Findings row — from data
       const spread = ea.summary?.median_spread_pp || 54;
-      const p70 = (manifest as any).pairs?.find((p:any) => p.slug === 70);
-      const p10 = (manifest as any).pairs?.find((p:any) => p.slug === 10);
-      const p1 = (manifest as any).pairs?.find((p:any) => p.slug === 1);
+      const p70 = (manifest as any).pairs?.find((p:any) => p.slug === 'volodymyr-the-great');
+      const p10 = (manifest as any).pairs?.find((p:any) => p.slug === 'chornobyl');
+      const p1 = (manifest as any).pairs?.find((p:any) => p.slug === 'kyiv');
 
       const findings = [
         { title: 'Cross-source spread', text: `Median ${spread}pp — highly domain-dependent` },

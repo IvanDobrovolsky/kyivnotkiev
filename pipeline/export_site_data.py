@@ -673,42 +673,82 @@ def export_trends_countries(enabled_slugs: set[str]) -> dict:
 
 
 def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
-    log.info("Exporting holdouts...")
-    df = _load("gdelt")
-    if not len(df):
-        return {}, []
-    recent = df[pd.to_datetime(df["date"]).dt.date >= date(2024, 1, 1)].copy()
-
-    # Per-pair holdouts
-    g = recent.groupby(["pair_slug", "source_domain", "variant"])["count"].sum().reset_index()
-    p = g.pivot_table(index=["pair_slug", "source_domain"], columns="variant", values="count", fill_value=0).reset_index()
-    p["total"] = p.get("russian", 0) + p.get("ukrainian", 0)
-    p = p[p["total"] >= 20]
-    p["rus"] = p.get("russian", 0)
-    p = p[p["rus"] > p.get("ukrainian", 0)]
-    p["russian_pct"] = (p["rus"] / p["total"] * 100).round(1)
-    p["is_ru"] = p["source_domain"].str.endswith(".ru")
-
+    """Per-source holdouts for 2025: who still uses Russian spellings."""
+    log.info("Exporting holdouts (2025, all sources)...")
     by_pair = {}
-    for pid, grp in p.groupby("pair_slug"):
-        if pid not in enabled_slugs:
-            continue
-        top = grp.nlargest(50, "total")
-        by_pair[pid] = [{"domain": r["source_domain"], "russian_pct": float(r["russian_pct"]),
-                              "total": int(r["total"]), "is_ru": bool(r["is_ru"])} for _, r in top.iterrows()]
 
-    # Global holdouts
-    g2 = recent.groupby(["source_domain", "variant"])["count"].sum().reset_index()
-    p2 = g2.pivot_table(index="source_domain", columns="variant", values="count", fill_value=0).reset_index()
-    p2["total"] = p2.get("russian", 0) + p2.get("ukrainian", 0)
-    p2 = p2[p2["total"] >= 50]
-    p2["rus"] = p2.get("russian", 0)
-    p2 = p2[p2["rus"] > p2.get("ukrainian", 0)]
-    p2["russian_pct"] = (p2["rus"] / p2["total"] * 100).round(1)
-    p2["is_ru"] = p2["source_domain"].str.endswith(".ru")
-    top_global = p2.nlargest(100, "total")
-    global_list = [{"domain": r["source_domain"], "russian_pct": float(r["russian_pct"]),
-                    "total": int(r["total"]), "is_ru": bool(r["is_ru"])} for _, r in top_global.iterrows()]
+    # News (GDELT): domains using Russian spelling
+    gdelt = _load("gdelt")
+    if len(gdelt):
+        g25 = gdelt[gdelt["date"] >= "2025-01"]
+        ga = g25.groupby(["pair_slug", "source_domain", "variant"])["count"].sum().reset_index()
+        gp = ga.pivot_table(index=["pair_slug", "source_domain"], columns="variant", values="count", fill_value=0).reset_index()
+        gp["total"] = gp.get("russian", 0) + gp.get("ukrainian", 0)
+        gp["rus_pct"] = (gp.get("russian", 0) / gp["total"] * 100).round(1)
+        gp = gp[(gp["total"] >= 5) & (gp["rus_pct"] > 50)]
+        for slug in enabled_slugs:
+            h = gp[gp["pair_slug"] == slug].nlargest(50, "total")
+            if len(h):
+                by_pair.setdefault(slug, {})["news"] = [
+                    {"name": r["source_domain"], "russian_pct": float(r["rus_pct"]), "total": int(r["total"])}
+                    for _, r in h.iterrows()
+                ]
+
+    # Wikipedia: pages with Russian spelling
+    wiki = _load("wikipedia")
+    if len(wiki):
+        w25 = wiki[wiki["date"] >= "2025-01"]
+        if "page_title" in w25.columns:
+            for slug in enabled_slugs:
+                pages = w25[(w25["pair_slug"] == slug) & (w25["variant"] == "russian")]
+                if len(pages):
+                    top = pages.groupby("page_title")["pageviews"].sum().nlargest(50)
+                    if len(top):
+                        by_pair.setdefault(slug, {})["wikipedia"] = [
+                            {"name": t, "views": int(v)} for t, v in top.items()
+                        ]
+
+    # Reddit: subreddits
+    reddit = _load("reddit")
+    if len(reddit) and "subreddit" in reddit.columns:
+        r25 = reddit[reddit["date"] >= "2025-01"]
+        for slug in enabled_slugs:
+            subs = r25[(r25["pair_slug"] == slug) & (r25["variant"] == "russian")]
+            if len(subs):
+                top = subs.groupby("subreddit").size().nlargest(20)
+                if len(top):
+                    by_pair.setdefault(slug, {})["reddit"] = [
+                        {"name": f"r/{s}", "posts": int(c)} for s, c in top.items()
+                    ]
+
+    # YouTube: channels
+    youtube = _load("youtube")
+    if len(youtube) and "channel_title" in youtube.columns:
+        y25 = youtube[youtube["date"] >= "2025-01"]
+        for slug in enabled_slugs:
+            chs = y25[(y25["pair_slug"] == slug) & (y25["variant"] == "russian")]
+            if len(chs):
+                top = chs.groupby("channel_title").size().nlargest(20)
+                if len(top):
+                    by_pair.setdefault(slug, {})["youtube"] = [
+                        {"name": ch, "videos": int(c)} for ch, c in top.items()
+                    ]
+
+    log.info(f"  Holdouts: {len(by_pair)} pairs across news/wiki/reddit/youtube")
+
+    # Global holdouts (top 100 news domains)
+    global_list = []
+    if len(gdelt):
+        g25 = gdelt[gdelt["date"] >= "2025-01"]
+        g2 = g25.groupby(["source_domain", "variant"])["count"].sum().reset_index()
+        p2 = g2.pivot_table(index="source_domain", columns="variant", values="count", fill_value=0).reset_index()
+        p2["total"] = p2.get("russian", 0) + p2.get("ukrainian", 0)
+        p2["rus_pct"] = (p2.get("russian", 0) / p2["total"] * 100).round(1)
+        p2 = p2[(p2["total"] >= 50) & (p2["rus_pct"] > 50)]
+        p2["is_ru"] = p2["source_domain"].str.endswith(".ru")
+        top = p2.nlargest(100, "total")
+        global_list = [{"domain": r["source_domain"], "russian_pct": float(r["rus_pct"]),
+                        "total": int(r["total"]), "is_ru": bool(r["is_ru"])} for _, r in top.iterrows()]
 
     return by_pair, global_list
 
