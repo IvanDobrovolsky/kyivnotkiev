@@ -379,13 +379,6 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: lviv-polytechnic
-- category: institutional
-  russian: Odessa National University
-  ukrainian: Odesa National University
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-  slug: odesa-national-university
 - category: people
   russian: Alexander Usyk
   ukrainian: Oleksandr Usyk
