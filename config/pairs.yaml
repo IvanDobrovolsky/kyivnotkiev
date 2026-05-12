@@ -163,6 +163,9 @@ pairs:
   - rovno.{0,5}(v|na|po)\b
   homonym_type: slavic_adverb
   slug: rivne
+  events:
+  - date: 2022-03
+    label: Russian missile strikes on Rivne
 - category: geographical
   russian: Chernobyl
   ukrainian: Chornobyl
@@ -216,6 +219,9 @@ pairs:
   notes: River name
   match_mode: word_boundary
   slug: dnister
+  events:
+  - date: 2022-04
+    label: Transnistria tensions during invasion
 - category: geographical
   russian: Donbass
   ukrainian: Donbas
@@ -263,6 +269,11 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: kyiv-pechersk-lavra
+  events:
+  - date: 2022-11
+    label: Ukraine raids Lavra over Russian ties
+  - date: 2023-03
+    label: Monks evicted from Kyiv Pechersk Lavra
 - category: landmarks
   russian: Chernobyl Exclusion Zone
   ukrainian: Chornobyl Exclusion Zone
@@ -270,6 +281,13 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: chornobyl-exclusion-zone
+  events:
+  - date: 2016-04
+    label: 30th anniversary
+  - date: 2020-04
+    label: Exclusion Zone wildfire
+  - date: 2022-02
+    label: Russia seizes Exclusion Zone
 - category: institutional
   russian: Kiev National University
   ukrainian: Kyiv National University
@@ -277,6 +295,11 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: kyiv-national-university
+  events:
+  - date: 2021-10
+    label: University centennial
+  - date: 2022-10
+    label: Russian missile strikes near campus
 - category: institutional
   russian: Kharkov University
   ukrainian: Kharkiv University
@@ -284,6 +307,11 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: kharkiv-university
+  events:
+  - date: 2020-09
+    label: University ranking spike
+  - date: 2022-03
+    label: University campus damaged by shelling
 - category: institutional
   russian: Kiev Polytechnic
   ukrainian: Kyiv Polytechnic
@@ -291,6 +319,11 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: kyiv-polytechnic
+  events:
+  - date: 2022-06
+    label: War-related research coverage
+  - date: 2024-05
+    label: Drone development at KPI
 - category: institutional
   russian: Kiev Patriarchate
   ukrainian: Kyiv Patriarchate
@@ -352,6 +385,11 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: chernivtsi
+  events:
+  - date: 2020-03
+    label: COVID-19 first cases in Chernivtsi
+  - date: 2022-03
+    label: Refugee influx to western Ukraine
 - category: geographical
   russian: Zhitomir
   ukrainian: Zhytomyr
@@ -359,6 +397,11 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: zhytomyr
+  events:
+  - date: 2020-03
+    label: COVID-19 regional lockdowns
+  - date: 2022-03
+    label: Russian airstrikes on Zhytomyr
 - category: geographical
   russian: Cherkassy
   ukrainian: Cherkasy
@@ -366,6 +409,9 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: cherkasy
+  events:
+  - date: 2022-03
+    label: Russian strikes on Cherkasy region
 - category: geographical
   russian: Uzhgorod
   ukrainian: Uzhhorod
@@ -373,6 +419,9 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: uzhhorod
+  events:
+  - date: 2022-03
+    label: Border crossing surge, refugee route
 - category: geographical
   russian: Kremenchug
   ukrainian: Kremenchuk
@@ -400,6 +449,9 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: ternopil
+  events:
+  - date: 2022-03
+    label: Refugee hub, military recruitment
 - category: food
   russian: Vareniki
   ukrainian: Varenyky
@@ -510,6 +562,9 @@ pairs:
   notes: Ukrainian-born writer (Миколa Гоголь). Tests Г→H and Микола→Mykola vs Nikolai.
   match_mode: exact_phrase
   slug: mykola-hohol
+  events:
+  - date: 2016-03
+    label: Gogol birthday anniversary coverage
 - category: geographical
   russian: Feodosiya
   ukrainian: Feodosiia
@@ -519,6 +574,9 @@ pairs:
     Ukraine's territorial integrity.
   match_mode: word_boundary
   slug: feodosiia
+  events:
+  - date: 2023-12
+    label: Ukrainian strike on Russian ship in Feodosia
 - category: historical
   russian: Olga of Kiev
   ukrainian: Olha of Kyiv
@@ -535,6 +593,11 @@ pairs:
   notes: Aviation pioneer (Ігор Сікорський). Tests І→I and Г→H (Igor vs Ihor).
   match_mode: exact_phrase
   slug: ihor-sikorsky
+  events:
+  - date: 2016-09
+    label: Kyiv airport renamed to Sikorsky
+  - date: 2024-05
+    label: Airport in war coverage
 - category: people
   russian: Sergei Korolev
   ukrainian: Serhii Korolyov
@@ -545,6 +608,11 @@ pairs:
     the most consequential cases of Ukrainian identity erasure in global science history.
   match_mode: exact_phrase
   slug: serhii-korolyov
+  events:
+  - date: 2017-01
+    label: Korolev 110th birthday anniversary
+  - date: 2025-04
+    label: Space heritage debates
 - category: historical
   russian: Bogdan Khmelnitsky
   ukrainian: Bohdan Khmelnytskyi
@@ -554,6 +622,9 @@ pairs:
     vs -ytskyi).
   match_mode: exact_phrase
   slug: bohdan-khmelnytskyi
+  events:
+  - date: 2016-02
+    label: Street renaming debates in Ukraine
 - category: people
   russian: Kazimir Malevich
   ukrainian: Kazymyr Malevych
@@ -562,3 +633,8 @@ pairs:
   notes: Suprematist artist (Казимир Малевич). Tests И→Y and Ч→Ch (Malevich vs Malevych).
   match_mode: exact_phrase
   slug: kazymyr-malevych
+  events:
+  - date: 2015-11
+    label: Malevich retrospective exhibitions
+  - date: 2022-02
+    label: Cultural heritage debates during invasion
