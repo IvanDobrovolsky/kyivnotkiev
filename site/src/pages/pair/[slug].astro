@@ -303,20 +303,31 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       let yTicks: number[];
 
       if (chartMode === 'volume') {
-        // Max = highest single bar value (side-by-side, not stacked)
         const getVal = (d: any) => {
           if (lineMode === 'ukrainian') return d.ukr || 0;
           if (lineMode === 'russian') return d.rus || 0;
-          return Math.max(d.ukr || 0, d.rus || 0);  // side-by-side: max of either
+          return Math.max(d.ukr || 0, d.rus || 0);
         };
         const allVals = (seriesData || []).map(getVal).filter((v: number) => v > 0);
         const maxVal = allVals.length > 0 ? Math.max(...allVals) : 1;
-        const yMax = maxVal * 1.1;
-        y = d3.scaleLinear().domain([0, yMax]).range([height, 0]);
 
-        // Dynamic grid: 4 evenly spaced ticks based on actual data
-        const step = yMax / 4;
-        yTicks = [0, step, step * 2, step * 3, yMax].map(v => Math.round(v));
+        // Check if data is lopsided (>20x ratio between UA and RU)
+        const maxUkr = Math.max(...(seriesData || []).map((d: any) => d.ukr || 0), 1);
+        const maxRus = Math.max(...(seriesData || []).map((d: any) => d.rus || 0), 1);
+        const ratio = Math.max(maxUkr, maxRus) / Math.min(maxUkr, maxRus);
+        const useSym = ratio > 20 && lineMode === 'both';
+
+        if (useSym) {
+          // Symlog scale: shows both small and large values
+          y = d3.scaleSymlog().domain([0, maxVal * 1.1]).range([height, 0]) as any;
+          const yMax = maxVal * 1.1;
+          yTicks = [0, Math.round(yMax * 0.01), Math.round(yMax * 0.1), Math.round(yMax * 0.5), Math.round(yMax)];
+        } else {
+          const yMax = maxVal * 1.1;
+          y = d3.scaleLinear().domain([0, yMax]).range([height, 0]);
+          const step = yMax / 4;
+          yTicks = [0, step, step * 2, step * 3, yMax].map(v => Math.round(v));
+        }
       } else {
         y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
         yTicks = [0, 25, 50, 75, 100];
@@ -441,47 +452,50 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         allSeriesData[src] = series;
 
         if (chartMode === 'volume') {
-          // ── VOLUME MODE: lines for UA / RU counts ──
+          // ── VOLUME MODE: lines with filled areas ──
           if (lineMode !== 'russian') {
-            const ukrLine = d3.line<any>()
+            const ukrArea = d3.area<any>()
               .x((d: any) => x(parseDate(d.date)!))
-              .y((d: any) => y(d.ukr || 0))
+              .y0(height)
+              .y1((d: any) => y(d.ukr || 0))
               .curve(d3.curveMonotoneX);
-            svg.append('path')
-              .datum(series)
-              .attr('fill', 'none')
-              .attr('stroke', sourceColors[src])
-              .attr('stroke-width', 3)
-              .attr('d', ukrLine);
+            svg.append('path').datum(series)
+              .attr('fill', sourceColors[src]).attr('opacity', 0.15)
+              .attr('d', ukrArea);
+            svg.append('path').datum(series)
+              .attr('fill', 'none').attr('stroke', sourceColors[src]).attr('stroke-width', 3)
+              .attr('d', d3.line<any>().x(d => x(parseDate(d.date)!)).y(d => y(d.ukr || 0)).curve(d3.curveMonotoneX));
           }
           if (lineMode !== 'ukrainian') {
-            const rusLine = d3.line<any>()
+            const rusArea = d3.area<any>()
               .x((d: any) => x(parseDate(d.date)!))
-              .y((d: any) => y(d.rus || 0))
+              .y0(height)
+              .y1((d: any) => y(d.rus || 0))
               .curve(d3.curveMonotoneX);
-            svg.append('path')
-              .datum(series)
-              .attr('fill', 'none')
-              .attr('stroke', '#dc2626')
+            svg.append('path').datum(series)
+              .attr('fill', '#dc2626').attr('opacity', 0.08)
+              .attr('d', rusArea);
+            svg.append('path').datum(series)
+              .attr('fill', 'none').attr('stroke', '#dc2626')
               .attr('stroke-width', lineMode === 'russian' ? 3 : 1.5)
               .attr('stroke-dasharray', lineMode === 'russian' ? 'none' : '6,4')
               .attr('opacity', lineMode === 'russian' ? 1 : 0.5)
-              .attr('d', rusLine);
+              .attr('d', d3.line<any>().x(d => x(parseDate(d.date)!)).y(d => y(d.rus || 0)).curve(d3.curveMonotoneX));
           }
         } else {
-          // ── ADOPTION MODE: line chart ──
-          const line = d3.line<any>()
-            .x((d: any) => x(parseDate(d.date)!))
-            .y((d: any) => y(d.adoption))
-            .curve(d3.curveMonotoneX);
-
+          // ── ADOPTION MODE: line chart with filled areas ──
           if (lineMode !== 'russian') {
-            svg.append('path')
-              .datum(series)
-              .attr('fill', 'none')
-              .attr('stroke', sourceColors[src])
-              .attr('stroke-width', 3)
-              .attr('d', line);
+            const uaArea = d3.area<any>()
+              .x((d: any) => x(parseDate(d.date)!))
+              .y0(height)
+              .y1((d: any) => y(d.adoption))
+              .curve(d3.curveMonotoneX);
+            svg.append('path').datum(series)
+              .attr('fill', sourceColors[src]).attr('opacity', 0.12)
+              .attr('d', uaArea);
+            svg.append('path').datum(series)
+              .attr('fill', 'none').attr('stroke', sourceColors[src]).attr('stroke-width', 3)
+              .attr('d', d3.line<any>().x(d => x(parseDate(d.date)!)).y(d => y(d.adoption)).curve(d3.curveMonotoneX));
           }
 
           if (lineMode !== 'ukrainian') {
