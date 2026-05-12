@@ -3,7 +3,7 @@
  * Single pair card for the home grid.
  */
 interface Props {
-  id: number;
+  slug: string;
   russian: string;
   ukrainian: string;
   adoption: number;
@@ -25,12 +25,12 @@ function fmtBig(n: number | string) {
   return v.toString();
 }
 
-const { id, russian, ukrainian, adoption, total, category, popularRank = 999 } = Astro.props;
+const { slug, russian, ukrainian, adoption, total, category, popularRank = 999 } = Astro.props;
 const pct = adoption || 0;
 const color = adoptionColor(pct);
 ---
 
-<a href={`/pair/${id}`}
+<a href={`/pair/${slug}`}
    class="pair-card"
    data-category={category}
    data-adoption={pct}

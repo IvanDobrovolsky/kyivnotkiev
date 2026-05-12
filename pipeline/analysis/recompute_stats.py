@@ -46,7 +46,7 @@ def load_pairs_config():
     p = ROOT / "config" / "pairs.yaml"
     with open(p) as f:
         cfg = yaml.safe_load(f)
-    return {p["id"]: p for p in cfg["pairs"]
+    return {p["slug"]: p for p in cfg["pairs"]
             if p.get("enabled", True) and not p.get("is_control", False)}
 
 
@@ -61,16 +61,16 @@ def _append_source(frames, df, source_name, value_col, agg_mode, cutoff, date_co
     if not len(d):
         return
     if agg_mode == "count":
-        g = d.groupby(["pair_id", "variant"]).size().reset_index(name="val")
+        g = d.groupby(["pair_slug", "variant"]).size().reset_index(name="val")
     else:
-        g = d.groupby(["pair_id", "variant"])[value_col].sum().reset_index(name="val")
-    p = g.pivot_table(index="pair_id", columns="variant", values="val", fill_value=0).reset_index()
+        g = d.groupby(["pair_slug", "variant"])[value_col].sum().reset_index(name="val")
+    p = g.pivot_table(index="pair_slug", columns="variant", values="val", fill_value=0).reset_index()
     p["source"] = source_name
     p["ukr"] = p.get("ukrainian", 0).astype(float)
     p["rus"] = p.get("russian", 0).astype(float)
     p["total"] = p["ukr"] + p["rus"]
     p["adoption_ratio"] = np.where(p["total"] > 0, p["ukr"] / p["total"], 0)
-    frames.append(p[["pair_id", "source", "ukr", "rus", "total", "adoption_ratio"]])
+    frames.append(p[["pair_slug", "source", "ukr", "rus", "total", "adoption_ratio"]])
 
 
 def compute_adoption_by_pair_source():
@@ -119,7 +119,7 @@ def compute_adoption_by_pair_source():
         _append_source(frames, rel, "religious", "count", "sum", cutoff)
 
     if not frames:
-        return pd.DataFrame(columns=["pair_id", "source", "ukr", "rus", "total", "adoption_ratio"])
+        return pd.DataFrame(columns=["pair_slug", "source", "ukr", "rus", "total", "adoption_ratio"])
     result = pd.concat(frames, ignore_index=True)
     result = result[result["total"] > 0]
     return result
@@ -154,26 +154,26 @@ def compute_pre_post_invasion():
         d["period"] = np.where(d["dt"] < invasion_date, "pre", "post")
 
         if agg_mode == "count":
-            g = d.groupby(["pair_id", "period", "variant"]).size().reset_index(name="val")
+            g = d.groupby(["pair_slug", "period", "variant"]).size().reset_index(name="val")
         else:
-            g = d.groupby(["pair_id", "period", "variant"])[value_col].sum().reset_index(name="val")
+            g = d.groupby(["pair_slug", "period", "variant"])[value_col].sum().reset_index(name="val")
 
-        p = g.pivot_table(index=["pair_id", "period"], columns="variant", values="val", fill_value=0).reset_index()
+        p = g.pivot_table(index=["pair_slug", "period"], columns="variant", values="val", fill_value=0).reset_index()
         p["ukr"] = p.get("ukrainian", 0).astype(float)
         p["rus"] = p.get("russian", 0).astype(float)
         p["total"] = p["ukr"] + p["rus"]
         p = p[p["total"] > 10]
         p["adoption_ratio"] = p["ukr"] / p["total"]
         p["source"] = source_name
-        frames.append(p[["pair_id", "source", "period", "adoption_ratio"]])
+        frames.append(p[["pair_slug", "source", "period", "adoption_ratio"]])
 
     # Telegram
     if len(telegram_df):
         d = telegram_df.copy()
         d["dt"] = pd.to_datetime(d["date"])
         d["period"] = np.where(d["dt"] < invasion_date, "pre", "post")
-        g = d.groupby(["pair_id", "period", "variant"]).size().reset_index(name="val")
-        p = g.pivot_table(index=["pair_id", "period"], columns="variant", values="val", fill_value=0).reset_index()
+        g = d.groupby(["pair_slug", "period", "variant"]).size().reset_index(name="val")
+        p = g.pivot_table(index=["pair_slug", "period"], columns="variant", values="val", fill_value=0).reset_index()
         p["ukr"] = p.get("ukrainian", 0).astype(float)
         p["rus"] = p.get("russian", 0).astype(float)
         p["total"] = p["ukr"] + p["rus"]
@@ -181,7 +181,7 @@ def compute_pre_post_invasion():
         if len(p):
             p["adoption_ratio"] = p["ukr"] / p["total"]
             p["source"] = "telegram"
-            frames.append(p[["pair_id", "source", "period", "adoption_ratio"]])
+            frames.append(p[["pair_slug", "source", "period", "adoption_ratio"]])
 
     # Religious
     rel = _load("religious")
@@ -189,8 +189,8 @@ def compute_pre_post_invasion():
         d = rel.copy()
         d["dt"] = pd.to_datetime(d["date"])
         d["period"] = np.where(d["dt"] < invasion_date, "pre", "post")
-        g = d.groupby(["pair_id", "period", "variant"])["count"].sum().reset_index(name="val")
-        p = g.pivot_table(index=["pair_id", "period"], columns="variant", values="val", fill_value=0).reset_index()
+        g = d.groupby(["pair_slug", "period", "variant"])["count"].sum().reset_index(name="val")
+        p = g.pivot_table(index=["pair_slug", "period"], columns="variant", values="val", fill_value=0).reset_index()
         p["ukr"] = p.get("ukrainian", 0).astype(float)
         p["rus"] = p.get("russian", 0).astype(float)
         p["total"] = p["ukr"] + p["rus"]
@@ -198,10 +198,10 @@ def compute_pre_post_invasion():
         if len(p):
             p["adoption_ratio"] = p["ukr"] / p["total"]
             p["source"] = "religious"
-            frames.append(p[["pair_id", "source", "period", "adoption_ratio"]])
+            frames.append(p[["pair_slug", "source", "period", "adoption_ratio"]])
 
     if not frames:
-        return pd.DataFrame(columns=["pair_id", "source", "period", "adoption_ratio"])
+        return pd.DataFrame(columns=["pair_slug", "source", "period", "adoption_ratio"])
     return pd.concat(frames, ignore_index=True)
 
 
@@ -216,7 +216,7 @@ def main():
 
     adoption_df = compute_adoption_by_pair_source()
     trends_adopt = adoption_df[adoption_df["source"] == "trends"].copy()
-    trends_adopt["category"] = trends_adopt["pair_id"].map(pair_cats)
+    trends_adopt["category"] = trends_adopt["pair_slug"].map(pair_cats)
     trends_adopt = trends_adopt.dropna(subset=["category", "adoption_ratio"])
 
     cat_groups = {cat: grp["adoption_ratio"].values
@@ -275,8 +275,8 @@ def main():
 
     for source in invasion_df["source"].unique():
         src_df = invasion_df[invasion_df["source"] == source]
-        pre = src_df[src_df["period"] == "pre"].set_index("pair_id")["adoption_ratio"]
-        post = src_df[src_df["period"] == "post"].set_index("pair_id")["adoption_ratio"]
+        pre = src_df[src_df["period"] == "pre"].set_index("pair_slug")["adoption_ratio"]
+        post = src_df[src_df["period"] == "post"].set_index("pair_slug")["adoption_ratio"]
         common = pre.index.intersection(post.index)
 
         if len(common) < 5:
@@ -308,7 +308,7 @@ def main():
     log.info("3. SPEARMAN: cross-source correlation")
     log.info("=" * 60)
 
-    pivot = adoption_df.pivot_table(index="pair_id", columns="source", values="adoption_ratio")
+    pivot = adoption_df.pivot_table(index="pair_slug", columns="source", values="adoption_ratio")
     correlations = {}
     sources = sorted([s for s in pivot.columns if s in adoption_df["source"].unique()])
     for i, s1 in enumerate(sources):
@@ -330,16 +330,16 @@ def main():
         t = trends_df[(trends_df["geo"] == "") | (trends_df["geo"].isna())].copy()
         t["dt"] = pd.to_datetime(t["date"])
 
-        pre = t[t["dt"] < "2022-02-24"].groupby(["pair_id", "variant"])["interest"].sum().reset_index()
-        pre_p = pre.pivot_table(index="pair_id", columns="variant", values="interest", fill_value=0).reset_index()
+        pre = t[t["dt"] < "2022-02-24"].groupby(["pair_slug", "variant"])["interest"].sum().reset_index()
+        pre_p = pre.pivot_table(index="pair_slug", columns="variant", values="interest", fill_value=0).reset_index()
         pre_p["baseline_adoption"] = pre_p.get("ukrainian", 0) / (pre_p.get("ukrainian", 0) + pre_p.get("russian", 0))
 
-        post = t[t["dt"] >= "2024-01-01"].groupby(["pair_id", "variant"])["interest"].sum().reset_index()
-        post_p = post.pivot_table(index="pair_id", columns="variant", values="interest", fill_value=0).reset_index()
+        post = t[t["dt"] >= "2024-01-01"].groupby(["pair_slug", "variant"])["interest"].sum().reset_index()
+        post_p = post.pivot_table(index="pair_slug", columns="variant", values="interest", fill_value=0).reset_index()
         post_p["current_adoption"] = post_p.get("ukrainian", 0) / (post_p.get("ukrainian", 0) + post_p.get("russian", 0))
 
-        merged = pre_p[["pair_id", "baseline_adoption"]].merge(post_p[["pair_id", "current_adoption"]], on="pair_id")
-        merged["category"] = merged["pair_id"].map(pair_cats)
+        merged = pre_p[["pair_slug", "baseline_adoption"]].merge(post_p[["pair_slug", "current_adoption"]], on="pair_slug")
+        merged["category"] = merged["pair_slug"].map(pair_cats)
         merged = merged.dropna(subset=["category", "baseline_adoption", "current_adoption"])
         # Filter out pairs where both pre and post sums are 0
         merged = merged[(merged["baseline_adoption"].notna()) & (merged["current_adoption"].notna())]

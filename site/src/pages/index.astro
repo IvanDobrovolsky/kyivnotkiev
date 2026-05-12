@@ -13,11 +13,11 @@ function fmtBig(n: string | number) {
 }
 
 // Popular order: flagship cities first, then by volume
-const popularOrder = [1, 10, 3, 4, 2, 17, 11, 7, 5, 61, 60, 72];
+const popularOrder = ['kyiv', 'chornobyl', 'odesa', 'lviv', 'kharkiv', 'donbas', 'luhansk', 'dnipro', 'zaporizhzhia', 'volodymyr-zelenskyy', 'oleksandr-usyk', 'bakhmut'];
 const allPairs = m.pairs.filter((p: any) => !p.is_control);
 const pairs = [
-  ...popularOrder.map(id => allPairs.find((p: any) => p.id === id)).filter(Boolean),
-  ...allPairs.filter((p: any) => !popularOrder.includes(p.id)).sort((a: any, b: any) => (b.total || 0) - (a.total || 0)),
+  ...popularOrder.map(s => allPairs.find((p: any) => p.slug === s)).filter(Boolean),
+  ...allPairs.filter((p: any) => !popularOrder.includes(p.slug)).sort((a: any, b: any) => (b.total || 0) - (a.total || 0)),
 ];
 const categories = (m.categories || []).filter((c: any) => pairs.some((p: any) => p.category === c.id));
 
@@ -70,7 +70,7 @@ const stats = [
 <div id="pair-grid" class="grid-auto">
   {pairs.map((p: any, i: number) => (
     <PairCard
-      id={p.id}
+      slug={p.slug}
       russian={p.russian}
       ukrainian={p.ukrainian}
       adoption={p.adoption || 0}

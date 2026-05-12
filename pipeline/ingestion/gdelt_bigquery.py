@@ -64,7 +64,7 @@ def classify_matches(df, pairs):
     pair_patterns = []
     for p in pairs:
         pair_patterns.append({
-            "id": p["id"],
+            "slug": p["slug"],
             "russian": p["russian"],
             "ukrainian": p["ukrainian"],
             "ru_re": re.compile(re.escape(p["russian"]), re.IGNORECASE),
@@ -77,7 +77,7 @@ def classify_matches(df, pairs):
         for pp in pair_patterns:
             if pp["ru_re"].search(text):
                 results.append({
-                    "pair_id": pp["id"],
+                    "pair_slug": pp["slug"],
                     "date": str(row.get("gkg_date", "")),
                     "source_domain": str(row.get("domain", "")),
                     "matched_term": pp["russian"],
@@ -86,7 +86,7 @@ def classify_matches(df, pairs):
                 })
             if pp["ua_re"].search(text):
                 results.append({
-                    "pair_id": pp["id"],
+                    "pair_slug": pp["slug"],
                     "date": str(row.get("gkg_date", "")),
                     "source_domain": str(row.get("domain", "")),
                     "matched_term": pp["ukrainian"],
@@ -147,7 +147,7 @@ def main():
     classified = classified.dropna(subset=["date"])
     classified["month"] = classified["date"].dt.strftime("%Y-%m-01")
 
-    agg = (classified.groupby(["pair_id", "month", "source_domain", "matched_term", "variant"])["count"]
+    agg = (classified.groupby(["pair_slug", "month", "source_domain", "matched_term", "variant"])["count"]
            .sum().reset_index())
     agg = agg.rename(columns={"month": "date"})
 
@@ -156,8 +156,8 @@ def main():
     log.info(f"Saved classified: {out_path} ({len(agg):,} rows)")
 
     # Per-pair summary
-    for pid, grp in agg.groupby("pair_id"):
-        p = next((x for x in pairs if x["id"] == pid), {})
+    for pid, grp in agg.groupby("pair_slug"):
+        p = next((x for x in pairs if x["slug"] == pid), {})
         total = grp["count"].sum()
         ru = grp[grp["variant"] == "russian"]["count"].sum()
         ua = grp[grp["variant"] == "ukrainian"]["count"].sum()

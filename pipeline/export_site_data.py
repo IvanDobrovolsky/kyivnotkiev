@@ -55,19 +55,19 @@ def _load(name: str) -> pd.DataFrame:
     return _cache[name]
 
 
-def get_enabled_pair_ids() -> set[int]:
+def get_enabled_slugs() -> set[str]:
     cfg = load_pairs()
-    return {p["id"] for p in cfg["pairs"] if p.get("enabled", True)}
+    return {p["slug"] for p in cfg["pairs"] if p.get("enabled", True)}
 
 
-def get_control_pair_ids() -> set[int]:
+def get_control_slugs() -> set[str]:
     cfg = load_pairs()
-    return {p["id"] for p in cfg["pairs"] if p.get("is_control", False)}
+    return {p["slug"] for p in cfg["pairs"] if p.get("is_control", False)}
 
 
-def get_analyzable_pair_ids() -> set[int]:
+def get_analyzable_slugs() -> set[str]:
     cfg = load_pairs()
-    return {p["id"] for p in cfg["pairs"]
+    return {p["slug"] for p in cfg["pairs"]
             if p.get("enabled", True) and not p.get("is_control", False)}
 
 
@@ -176,11 +176,11 @@ GEO_NAMES = {
 def _get_cl_corpus_size():
     corpus_path = DATA_DIR / "corpus" / "toponyms-corpus.parquet"
     if corpus_path.exists():
-        return len(pd.read_parquet(corpus_path, columns=["pair_id"]))
+        return len(pd.read_parquet(corpus_path, columns=["pair_slug"]))
     # Fallback: old location
     old_path = DATA_DIR / "cl" / "balanced" / "corpus.parquet"
     if old_path.exists():
-        return len(pd.read_parquet(old_path, columns=["pair_id"]))
+        return len(pd.read_parquet(old_path, columns=["pair_slug"]))
     return 0
 
 
@@ -190,7 +190,7 @@ def _safe_div(a, b):
 
 # ── Exports ───────────────────────────────────────────────────────────────────
 
-def export_timeseries(enabled_ids: set[int]) -> dict:
+def export_timeseries(enabled_slugs: set[str]) -> dict:
     log.info("Exporting timeseries...")
     result = {"events": [
         {"date": "2014-02", "label": "Euromaidan", "color": "#d97706"},
@@ -203,12 +203,12 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
     if len(df):
         t = df[(df["geo"] == "") | (df["geo"].isna())].copy()
         t["month"] = pd.to_datetime(t["date"]).dt.strftime("%Y-%m")
-        g = t.groupby(["pair_id", "month", "variant"])["interest"].sum().reset_index()
-        p = g.pivot_table(index=["pair_id", "month"], columns="variant", values="interest", fill_value=0).reset_index()
+        g = t.groupby(["pair_slug", "month", "variant"])["interest"].sum().reset_index()
+        p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="interest", fill_value=0).reset_index()
         ukr_col = "ukrainian" if "ukrainian" in p.columns else 0
         rus_col = "russian" if "russian" in p.columns else 0
-        for pid, grp in p.groupby("pair_id"):
-            if pid not in enabled_ids:
+        for pid, grp in p.groupby("pair_slug"):
+            if pid not in enabled_slugs:
                 continue
             raw = []
             for _, r in grp.sort_values("month").iterrows():
@@ -217,20 +217,20 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
                 total = ukr + rus
                 adoption = round(ukr / total * 100, 1) if total > 0 else None
                 raw.append({"date": r["month"], "adoption": adoption, "ukr": ukr, "rus": rus})
-            result.setdefault(str(pid), {})
-            result[str(pid)]["trends"] = smooth_series(raw, window=3)
+            result.setdefault(pid, {})
+            result[pid]["trends"] = smooth_series(raw, window=3)
 
     # GDELT (monthly)
     log.info("  GDELT...")
     df = _load("gdelt")
     if len(df):
         df["month"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m")
-        g = df.groupby(["pair_id", "month", "variant"])["count"].sum().reset_index()
-        p = g.pivot_table(index=["pair_id", "month"], columns="variant", values="count", fill_value=0).reset_index()
-        for pid, grp in p.groupby("pair_id"):
-            if pid not in enabled_ids:
+        g = df.groupby(["pair_slug", "month", "variant"])["count"].sum().reset_index()
+        p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="count", fill_value=0).reset_index()
+        for pid, grp in p.groupby("pair_slug"):
+            if pid not in enabled_slugs:
                 continue
-            spid = str(pid)
+            spid = pid
             result.setdefault(spid, {}).setdefault("gdelt", [])
             for _, r in grp.sort_values("month").iterrows():
                 ukr = int(r.get("ukrainian", 0))
@@ -244,12 +244,12 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
     df = _load("wikipedia")
     if len(df):
         df["month"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m")
-        g = df.groupby(["pair_id", "month", "variant"])["pageviews"].sum().reset_index()
-        p = g.pivot_table(index=["pair_id", "month"], columns="variant", values="pageviews", fill_value=0).reset_index()
-        for pid, grp in p.groupby("pair_id"):
-            if pid not in enabled_ids:
+        g = df.groupby(["pair_slug", "month", "variant"])["pageviews"].sum().reset_index()
+        p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="pageviews", fill_value=0).reset_index()
+        for pid, grp in p.groupby("pair_slug"):
+            if pid not in enabled_slugs:
                 continue
-            spid = str(pid)
+            spid = pid
             result.setdefault(spid, {}).setdefault("wikipedia", [])
             for _, r in grp.sort_values("month").iterrows():
                 ukr = int(r.get("ukrainian", 0))
@@ -263,12 +263,12 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
     df = _load("reddit")
     if len(df):
         df["month"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m")
-        g = df.groupby(["pair_id", "month", "variant"]).size().reset_index(name="cnt")
-        p = g.pivot_table(index=["pair_id", "month"], columns="variant", values="cnt", fill_value=0).reset_index()
-        for pid, grp in p.groupby("pair_id"):
-            if pid not in enabled_ids:
+        g = df.groupby(["pair_slug", "month", "variant"]).size().reset_index(name="cnt")
+        p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="cnt", fill_value=0).reset_index()
+        for pid, grp in p.groupby("pair_slug"):
+            if pid not in enabled_slugs:
                 continue
-            spid = str(pid)
+            spid = pid
             result.setdefault(spid, {}).setdefault("reddit", [])
             for _, r in grp.sort_values("month").iterrows():
                 ukr = int(r.get("ukrainian", 0))
@@ -282,12 +282,12 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
     df = _load("youtube")
     if len(df):
         df["month"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m")
-        g = df.groupby(["pair_id", "month", "variant"]).size().reset_index(name="cnt")
-        p = g.pivot_table(index=["pair_id", "month"], columns="variant", values="cnt", fill_value=0).reset_index()
-        for pid, grp in p.groupby("pair_id"):
-            if pid not in enabled_ids:
+        g = df.groupby(["pair_slug", "month", "variant"]).size().reset_index(name="cnt")
+        p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="cnt", fill_value=0).reset_index()
+        for pid, grp in p.groupby("pair_slug"):
+            if pid not in enabled_slugs:
                 continue
-            spid = str(pid)
+            spid = pid
             result.setdefault(spid, {}).setdefault("youtube", [])
             for _, r in grp.sort_values("month").iterrows():
                 ukr = int(r.get("ukrainian", 0))
@@ -300,12 +300,12 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
     log.info("  Ngrams...")
     df = _load("ngrams")
     if len(df):
-        g = df[df["year"] >= 1900].groupby(["pair_id", "year", "variant"])["frequency"].sum().reset_index()
-        p = g.pivot_table(index=["pair_id", "year"], columns="variant", values="frequency", fill_value=0).reset_index()
-        for pid, grp in p.groupby("pair_id"):
-            if pid not in enabled_ids:
+        g = df[df["year"] >= 1900].groupby(["pair_slug", "year", "variant"])["frequency"].sum().reset_index()
+        p = g.pivot_table(index=["pair_slug", "year"], columns="variant", values="frequency", fill_value=0).reset_index()
+        for pid, grp in p.groupby("pair_slug"):
+            if pid not in enabled_slugs:
                 continue
-            spid = str(pid)
+            spid = pid
             result.setdefault(spid, {}).setdefault("ngrams", [])
             for _, r in grp.sort_values("year").iterrows():
                 ukr = float(r.get("ukrainian", 0))
@@ -321,10 +321,10 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         with open(openalex_path) as f:
             openalex_data = json.load(f)
         for pair_data in openalex_data:
-            pid = pair_data["pair_id"]
-            if pid not in enabled_ids:
+            pid = pair_data["pair_slug"]
+            if pid not in enabled_slugs:
                 continue
-            spid = str(pid)
+            spid = pid
             raw_series = []
             for yr in pair_data["yearly"]:
                 total = yr["total"]
@@ -340,12 +340,12 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         tg = pd.read_parquet(telegram_path)
         if len(tg) and "date" in tg.columns:
             tg["month"] = pd.to_datetime(tg["date"]).dt.strftime("%Y-%m")
-            g = tg.groupby(["pair_id", "month", "variant"]).size().reset_index(name="count")
-            p = g.pivot_table(index=["pair_id", "month"], columns="variant", values="count", fill_value=0).reset_index()
-            for pid, grp in p.groupby("pair_id"):
-                if pid not in enabled_ids:
+            g = tg.groupby(["pair_slug", "month", "variant"]).size().reset_index(name="count")
+            p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="count", fill_value=0).reset_index()
+            for pid, grp in p.groupby("pair_slug"):
+                if pid not in enabled_slugs:
                     continue
-                spid = str(pid)
+                spid = pid
                 result.setdefault(spid, {}).setdefault("telegram", [])
                 for _, r in grp.sort_values("month").iterrows():
                     ukr = int(r.get("ukrainian", 0))
@@ -361,12 +361,12 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
         rel = pd.read_parquet(religious_path)
         if len(rel) and "date" in rel.columns:
             rel["month"] = pd.to_datetime(rel["date"]).dt.strftime("%Y-%m")
-            g = rel.groupby(["pair_id", "month", "variant"])["count"].sum().reset_index()
-            p = g.pivot_table(index=["pair_id", "month"], columns="variant", values="count", fill_value=0).reset_index()
-            for pid, grp in p.groupby("pair_id"):
-                if pid not in enabled_ids:
+            g = rel.groupby(["pair_slug", "month", "variant"])["count"].sum().reset_index()
+            p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="count", fill_value=0).reset_index()
+            for pid, grp in p.groupby("pair_slug"):
+                if pid not in enabled_slugs:
                     continue
-                spid = str(pid)
+                spid = pid
                 result.setdefault(spid, {}).setdefault("religious", [])
                 for _, r in grp.sort_values("month").iterrows():
                     ukr = int(r.get("ukrainian", 0))
@@ -380,7 +380,7 @@ def export_timeseries(enabled_ids: set[int]) -> dict:
     return result
 
 
-def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids: set[int]) -> dict:
+def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control_slugs: set[str]) -> dict:
     log.info("Exporting manifest (single source of truth)...")
 
     pairs_cfg = load_pairs()
@@ -402,34 +402,34 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
 
     trends = _load("trends")
     if len(trends):
-        source_stats["trends"] = {"records": len(trends), "pairs": int(trends["pair_id"].nunique()), "unit": "datapoints"}
+        source_stats["trends"] = {"records": len(trends), "pairs": int(trends["pair_slug"].nunique()), "unit": "datapoints"}
 
     gdelt = _load("gdelt")
     if len(gdelt):
-        source_stats["gdelt"] = {"records": int(gdelt["count"].sum()), "pairs": int(gdelt["pair_id"].nunique()), "unit": "articles"}
+        source_stats["gdelt"] = {"records": int(gdelt["count"].sum()), "pairs": int(gdelt["pair_slug"].nunique()), "unit": "articles"}
 
     wiki = _load("wikipedia")
     if len(wiki):
-        source_stats["wikipedia"] = {"records": int(wiki["pageviews"].sum()), "pairs": int(wiki["pair_id"].nunique()), "unit": "pageviews"}
+        source_stats["wikipedia"] = {"records": int(wiki["pageviews"].sum()), "pairs": int(wiki["pair_slug"].nunique()), "unit": "pageviews"}
 
     reddit = _load("reddit")
     if len(reddit):
-        source_stats["reddit"] = {"records": len(reddit), "pairs": int(reddit["pair_id"].nunique()), "unit": "posts"}
+        source_stats["reddit"] = {"records": len(reddit), "pairs": int(reddit["pair_slug"].nunique()), "unit": "posts"}
 
     youtube = _load("youtube")
     if len(youtube):
-        source_stats["youtube"] = {"records": len(youtube), "pairs": int(youtube["pair_id"].nunique()), "unit": "videos"}
+        source_stats["youtube"] = {"records": len(youtube), "pairs": int(youtube["pair_slug"].nunique()), "unit": "videos"}
 
     ngrams = _load("ngrams")
     if len(ngrams):
-        source_stats["ngrams"] = {"records": len(ngrams), "pairs": int(ngrams["pair_id"].nunique()), "unit": "records"}
+        source_stats["ngrams"] = {"records": len(ngrams), "pairs": int(ngrams["pair_slug"].nunique()), "unit": "records"}
 
     # Telegram
     telegram_path = DATA_DIR / "cl" / "raw" / "telegram" / "all_channels.parquet"
     telegram = pd.DataFrame()
     if telegram_path.exists():
         telegram = pd.read_parquet(telegram_path)
-        source_stats["telegram"] = {"records": len(telegram), "pairs": int(telegram["pair_id"].nunique()), "unit": "messages"}
+        source_stats["telegram"] = {"records": len(telegram), "pairs": int(telegram["pair_slug"].nunique()), "unit": "messages"}
 
     # Extra stats
     extra_map = {}
@@ -447,7 +447,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     religious_path = DATASET_DIR / "raw_religious.parquet"
     if religious_path.exists():
         religious = pd.read_parquet(religious_path)
-        source_stats["religious"] = {"records": int(religious["count"].sum()), "pairs": int(religious["pair_id"].nunique()), "unit": "articles"}
+        source_stats["religious"] = {"records": int(religious["count"].sum()), "pairs": int(religious["pair_slug"].nunique()), "unit": "articles"}
         extra_map["religious_sites"] = str(religious["source_domain"].nunique())
     if len(trends):
         geo = trends[(trends["geo"] != "") & (trends["geo"].notna())]
@@ -461,7 +461,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     if openalex_parquet.exists():
         oa_df = pd.read_parquet(openalex_parquet)
         openalex_total_papers = int(oa_df["count"].sum()) if "count" in oa_df.columns else len(oa_df)
-        openalex_total_pairs = int(oa_df["pair_id"].nunique())
+        openalex_total_pairs = int(oa_df["pair_slug"].nunique())
     elif openalex_path.exists():
         with open(openalex_path) as f:
             oa_data = json.load(f)
@@ -485,17 +485,17 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         if not len(d):
             return {}
         if agg_mode == "count":
-            g = d.groupby(["pair_id", "variant"]).size().reset_index(name="val")
+            g = d.groupby(["pair_slug", "variant"]).size().reset_index(name="val")
         else:
-            g = d.groupby(["pair_id", "variant"])[value_col].sum().reset_index(name="val")
-        p = g.pivot_table(index="pair_id", columns="variant", values="val", fill_value=0).reset_index()
+            g = d.groupby(["pair_slug", "variant"])[value_col].sum().reset_index(name="val")
+        p = g.pivot_table(index="pair_slug", columns="variant", values="val", fill_value=0).reset_index()
         out = {}
         for _, r in p.iterrows():
             ukr = float(r.get("ukrainian", 0))
             rus = float(r.get("russian", 0))
             total = ukr + rus
             if total >= min_total:
-                out[int(r["pair_id"])] = ukr / total
+                out[r["pair_slug"]] = ukr / total
         return out
 
     per_source = {}
@@ -524,7 +524,7 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
                 rus = sum(yr["russian_count"] for yr in recent)
                 total = ukr + rus
                 if total >= 3:
-                    oa_adopt[p["pair_id"]] = ukr / total
+                    oa_adopt[p["pair_slug"]] = ukr / total
         per_source["openalex"] = oa_adopt
     # Telegram
     if len(telegram):
@@ -547,23 +547,23 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     log.info("  Computing total mentions...")
     total_map = {}
     if len(gdelt):
-        for pid, cnt in gdelt.groupby("pair_id")["count"].sum().items():
+        for pid, cnt in gdelt.groupby("pair_slug")["count"].sum().items():
             total_map[pid] = total_map.get(pid, 0) + int(cnt)
     if len(trends):
         t = trends[(trends["geo"] == "") | (trends["geo"].isna())]
-        for pid, cnt in t.groupby("pair_id")["interest"].sum().items():
+        for pid, cnt in t.groupby("pair_slug")["interest"].sum().items():
             total_map[pid] = total_map.get(pid, 0) + int(cnt)
     if len(wiki):
-        for pid, cnt in wiki.groupby("pair_id")["pageviews"].sum().items():
+        for pid, cnt in wiki.groupby("pair_slug")["pageviews"].sum().items():
             total_map[pid] = total_map.get(pid, 0) + int(cnt)
     if len(reddit):
-        for pid, cnt in reddit.groupby("pair_id").size().items():
+        for pid, cnt in reddit.groupby("pair_slug").size().items():
             total_map[pid] = total_map.get(pid, 0) + int(cnt)
     if len(youtube):
-        for pid, cnt in youtube.groupby("pair_id").size().items():
+        for pid, cnt in youtube.groupby("pair_slug").size().items():
             total_map[pid] = total_map.get(pid, 0) + int(cnt)
     if len(ngrams):
-        for pid, cnt in ngrams.groupby("pair_id")["frequency"].sum().items():
+        for pid, cnt in ngrams.groupby("pair_slug")["frequency"].sum().items():
             total_map[pid] = total_map.get(pid, 0) + int(cnt)
     # OpenAlex
     openalex_path2 = DATA_DIR / "raw" / "openalex" / "openalex_all_pairs.json"
@@ -571,32 +571,32 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         with open(openalex_path2) as f:
             oa = json.load(f)
         for pair_data in oa:
-            pid = pair_data.get("pair_id")
-            if pid in enabled_ids:
+            pid = pair_data.get("pair_slug")
+            if pid in enabled_slugs:
                 oa_total = sum(yr["total"] for yr in pair_data.get("yearly", []))
                 total_map[pid] = total_map.get(pid, 0) + oa_total
     # Telegram
     if len(telegram):
-        for pid, cnt in telegram.groupby("pair_id").size().items():
+        for pid, cnt in telegram.groupby("pair_slug").size().items():
             total_map[pid] = total_map.get(pid, 0) + int(cnt)
     # Religious
     if len(religious):
-        for pid, cnt in religious.groupby("pair_id")["count"].sum().items():
+        for pid, cnt in religious.groupby("pair_slug")["count"].sum().items():
             total_map[pid] = total_map.get(pid, 0) + int(cnt)
 
     # Build pairs
     pairs_out = []
     for p in pairs_cfg["pairs"]:
-        if p["id"] not in enabled_ids:
+        slug = p.get("slug")
+        if not slug or slug not in enabled_slugs:
             continue
-        pid = p["id"]
-        recent = recent_map.get(pid, {})
-        adoption_pct = 0.0 if pid in control_ids else recent.get("adoption", 0.0)
+        recent = recent_map.get(slug, {})
+        adoption_pct = 0.0 if slug in control_slugs else recent.get("adoption", 0.0)
         pairs_out.append({
-            "id": pid, "category": p["category"],
+            "slug": slug, "category": p["category"],
             "russian": p["russian"], "ukrainian": p["ukrainian"],
-            "adoption": adoption_pct, "total": total_map.get(pid, 0),
-            "is_control": pid in control_ids,
+            "adoption": adoption_pct, "total": total_map.get(slug, 0),
+            "is_control": slug in control_slugs,
         })
 
     # Category stats
@@ -616,8 +616,8 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
     toponym_matches = sum(s["records"] for s in source_stats.values()) + openalex_total_papers
 
     manifest = {
-        "total_pairs": len(enabled_ids),
-        "analyzable_pairs": len(analyzable_ids),
+        "total_pairs": len(enabled_slugs),
+        "analyzable_pairs": len(analyzable_slugs),
         "records_scanned": "90B+",
         "toponym_matches": toponym_matches,
         "cl_corpus": _get_cl_corpus_size(),
@@ -637,25 +637,25 @@ def export_manifest(enabled_ids: set[int], analyzable_ids: set[int], control_ids
         },
         "categories": categories,
         "category_stats": sorted(category_list, key=lambda x: -x["avg_adoption"]),
-        "pairs": sorted(pairs_out, key=lambda x: x["id"]),
+        "pairs": sorted(pairs_out, key=lambda x: x["slug"]),
     }
 
     log.info(f"  Manifest: {manifest['analyzable_pairs']} analyzable pairs, {manifest['toponym_matches']:,} toponym matches")
     return manifest
 
 
-def export_trends_countries(enabled_ids: set[int]) -> dict:
+def export_trends_countries(enabled_slugs: set[str]) -> dict:
     log.info("Exporting trends countries...")
     df = _load("trends")
     if not len(df):
         return {}
     t = df[(df["geo"] != "") & (df["geo"].notna())].copy()
-    g = t.groupby(["pair_id", "geo", "variant"])["interest"].sum().reset_index()
-    p = g.pivot_table(index=["pair_id", "geo"], columns="variant", values="interest", fill_value=0).reset_index()
+    g = t.groupby(["pair_slug", "geo", "variant"])["interest"].sum().reset_index()
+    p = g.pivot_table(index=["pair_slug", "geo"], columns="variant", values="interest", fill_value=0).reset_index()
     result = {}
     for _, r in p.iterrows():
-        pid = int(r["pair_id"])
-        if pid not in enabled_ids:
+        pid = r["pair_slug"]
+        if pid not in enabled_slugs:
             continue
         ukr = float(r.get("ukrainian", 0))
         rus = float(r.get("russian", 0))
@@ -665,14 +665,14 @@ def export_trends_countries(enabled_ids: set[int]) -> dict:
         numeric = GEO_TO_NUMERIC.get(r["geo"])
         if not numeric:
             continue
-        spid = str(pid)
+        spid = pid
         result.setdefault(spid, {})
         result[spid][numeric] = {"name": GEO_NAMES.get(numeric, r["geo"]), "adoption": round(ukr / total * 100, 1)}
     log.info(f"  Trends countries: {len(result)} pairs")
     return result
 
 
-def export_holdouts(enabled_ids: set[int]) -> tuple[dict, list]:
+def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     log.info("Exporting holdouts...")
     df = _load("gdelt")
     if not len(df):
@@ -680,8 +680,8 @@ def export_holdouts(enabled_ids: set[int]) -> tuple[dict, list]:
     recent = df[pd.to_datetime(df["date"]).dt.date >= date(2024, 1, 1)].copy()
 
     # Per-pair holdouts
-    g = recent.groupby(["pair_id", "source_domain", "variant"])["count"].sum().reset_index()
-    p = g.pivot_table(index=["pair_id", "source_domain"], columns="variant", values="count", fill_value=0).reset_index()
+    g = recent.groupby(["pair_slug", "source_domain", "variant"])["count"].sum().reset_index()
+    p = g.pivot_table(index=["pair_slug", "source_domain"], columns="variant", values="count", fill_value=0).reset_index()
     p["total"] = p.get("russian", 0) + p.get("ukrainian", 0)
     p = p[p["total"] >= 20]
     p["rus"] = p.get("russian", 0)
@@ -690,11 +690,11 @@ def export_holdouts(enabled_ids: set[int]) -> tuple[dict, list]:
     p["is_ru"] = p["source_domain"].str.endswith(".ru")
 
     by_pair = {}
-    for pid, grp in p.groupby("pair_id"):
-        if pid not in enabled_ids:
+    for pid, grp in p.groupby("pair_slug"):
+        if pid not in enabled_slugs:
             continue
         top = grp.nlargest(50, "total")
-        by_pair[str(pid)] = [{"domain": r["source_domain"], "russian_pct": float(r["russian_pct"]),
+        by_pair[pid] = [{"domain": r["source_domain"], "russian_pct": float(r["russian_pct"]),
                               "total": int(r["total"]), "is_ru": bool(r["is_ru"])} for _, r in top.iterrows()]
 
     # Global holdouts
@@ -713,23 +713,24 @@ def export_holdouts(enabled_ids: set[int]) -> tuple[dict, list]:
     return by_pair, global_list
 
 
-def export_pair_events(enabled_ids: set[int]) -> dict:
+def export_pair_events(enabled_slugs: set[str]) -> dict:
     log.info("Exporting pair events...")
     cfg = load_pairs()
     result = {}
     for p in cfg["pairs"]:
-        if p["id"] not in enabled_ids:
+        slug = p.get("slug")
+        if not slug or slug not in enabled_slugs:
             continue
         events = p.get("events", [])
         if events:
-            result[str(p["id"])] = [
+            result[slug] = [
                 {"date": e["date"], "label": e["label"], "color": e.get("color", "#0057B8")}
                 for e in events
             ]
     return result
 
 
-def export_domain_origins(enabled_ids: set[int]) -> dict:
+def export_domain_origins(enabled_slugs: set[str]) -> dict:
     log.info("Exporting domain origins...")
     df = _load("gdelt")
     if not len(df):
@@ -745,17 +746,17 @@ def export_domain_origins(enabled_ids: set[int]) -> dict:
         return "intl"
 
     recent["origin"] = recent["source_domain"].apply(_origin)
-    g = recent.groupby(["pair_id", "origin", "variant"])["count"].sum().reset_index()
-    p = g.pivot_table(index=["pair_id", "origin"], columns="variant", values="count", fill_value=0).reset_index()
+    g = recent.groupby(["pair_slug", "origin", "variant"])["count"].sum().reset_index()
+    p = g.pivot_table(index=["pair_slug", "origin"], columns="variant", values="count", fill_value=0).reset_index()
     p["total"] = p.get("russian", 0) + p.get("ukrainian", 0)
 
     result = {}
     for _, r in p.iterrows():
-        pid = int(r["pair_id"])
-        if pid not in enabled_ids:
+        pid = r["pair_slug"]
+        if pid not in enabled_slugs:
             continue
         total = int(r["total"])
-        result.setdefault(str(pid), {})[r["origin"]] = {
+        result.setdefault(pid, {})[r["origin"]] = {
             "ukr": int(r.get("ukrainian", 0)), "rus": int(r.get("russian", 0)),
             "total": total, "adoption": round(int(r.get("ukrainian", 0)) / total * 100, 1) if total > 0 else 0,
         }
@@ -794,18 +795,18 @@ def main():
     log.info("Exporting dataset to site JSON")
     log.info("=" * 60)
 
-    enabled_ids = get_enabled_pair_ids()
-    analyzable_ids = get_analyzable_pair_ids()
-    control_ids = get_control_pair_ids()
-    log.info(f"Pairs: {len(enabled_ids)} enabled, {len(analyzable_ids)} analyzable, {len(control_ids)} control")
+    enabled_slugs = get_enabled_slugs()
+    analyzable_slugs = get_analyzable_slugs()
+    control_slugs = get_control_slugs()
+    log.info(f"Pairs: {len(enabled_slugs)} enabled, {len(analyzable_slugs)} analyzable, {len(control_slugs)} control")
 
-    manifest = export_manifest(enabled_ids, analyzable_ids, control_ids)
-    timeseries = export_timeseries(enabled_ids)
-    trends_countries = export_trends_countries(enabled_ids)
-    holdouts_by_pair, holdouts_global = export_holdouts(enabled_ids)
-    pair_events = export_pair_events(enabled_ids)
+    manifest = export_manifest(enabled_slugs, analyzable_slugs, control_slugs)
+    timeseries = export_timeseries(enabled_slugs)
+    trends_countries = export_trends_countries(enabled_slugs)
+    holdouts_by_pair, holdouts_global = export_holdouts(enabled_slugs)
+    pair_events = export_pair_events(enabled_slugs)
     analysis = export_analysis()
-    domain_origins = export_domain_origins(enabled_ids)
+    domain_origins = export_domain_origins(enabled_slugs)
 
     write_json(SITE_DATA_DIR / "manifest.json", manifest)
     write_json(SITE_DATA_DIR / "timeseries.json", timeseries)

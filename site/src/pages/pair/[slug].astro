@@ -12,13 +12,13 @@ export function getStaticPaths() {
   return manifest.pairs
     .filter((p: any) => !p.is_control)
     .map((p: any) => ({
-      params: { id: String(p.id) },
+      params: { slug: p.slug },
       props: { pair: p },
     }));
 }
 
 const { pair } = Astro.props;
-const id = String(pair.id);
+const slug = pair.slug;
 const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 ---
 
@@ -28,8 +28,8 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
   <a href="/" class="link text-sm">&larr; All pairs</a>
 </div>
 
-<script type="application/json" id="pair-route-data" set:html={JSON.stringify({ id: pair.id, russian: pair.russian, ukrainian: pair.ukrainian })} />
-<div id="pair-detail" data-pair-id={id}>
+<script type="application/json" id="pair-route-data" set:html={JSON.stringify({ slug: pair.slug, russian: pair.russian, ukrainian: pair.ukrainian })} />
+<div id="pair-detail" data-pair-slug={slug}>
   <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} toolsPerPair={toolsPerPair} religious={religious} timeSpan={(m as any).time_span} />
 </div>
 
@@ -96,14 +96,14 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       const p = params.get('pair');
       if (p) {
         const id = parseInt(p);
-        if (!isNaN(id) && (pairs as any).pairs.some((pp: any) => pp.id === id)) return id;
+        if (!isNaN(id) && (pairs as any).pairs.some((pp: any) => pp.slug === id)) return id;
       }
       return 0; // 0 = landing/overview, no pair selected
     }
 
-    function updateUrl(pairId: number) {
+    function updateUrl(pairId: string) {
       const url = new URL(window.location.href);
-      if (pairId === 0) {
+      if (!pairId) {
         url.searchParams.delete('pair');
       } else {
         url.searchParams.set('pair', String(pairId));
@@ -132,14 +132,14 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       if (!grid) return;
       grid.innerHTML = '';
       topPairs.forEach((p: any) => {
-        const id = p.id;
+        const id = p.slug;
         const desc = p.category;
         const pct = p.adoption;
         const color = pct >= 55 ? '#059669' : pct >= 25 ? '#d97706' : '#dc2626';
         const coll = (clCollocations as any)?.[String(id)];
         const card = document.createElement('div');
         card.className = 'top6-card';
-        card.dataset.pairId = String(id);
+        card.dataset.pairSlug = p.slug;
         card.style.cssText = 'cursor:pointer; padding:0.75rem; border:1px solid var(--border); border-radius:8px; transition:all 0.15s;';
 
         // Header + adoption
@@ -179,7 +179,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
     }
 
     function showLanding() {
-      activePairId = 0;
+      activePairSlug = 0;
       updateUrl(0);
       showView('landing');
       document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
@@ -195,7 +195,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
     // Pair detail page: ID is guaranteed by getStaticPaths
     const _routeData = JSON.parse(document.getElementById('pair-route-data')!.textContent!);
-    let activePairId = _routeData.id;
+    let activePairSlug = _routeData.slug;
 
     function drawChart() {
       const container = document.getElementById('chart')!;
@@ -222,7 +222,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
-      const pairData = (timeseriesData as any)[String(activePairId)];
+      const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) {
         svg.append('text')
           .attr('x', width / 2).attr('y', height / 2)
@@ -380,7 +380,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       // Event markers — positioned by date on x-scale
       if (showEvents) {
         const globalEvents = ((timeseriesData as any).events || []).map((e: any) => ({...e, type: 'global'}));
-        const customEvents = ((pairEvents as any)[String(activePairId)] || []).map((e: any) => ({...e, type: 'pair'}));
+        const customEvents = ((pairEvents as any)[activePairSlug] || []).map((e: any) => ({...e, type: 'pair'}));
         const events = [...globalEvents, ...customEvents].sort((a: any, b: any) => a.date.localeCompare(b.date));
 
         let eventNum = 0;
@@ -619,18 +619,18 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       });
     });
 
-    function selectPair(pairId: number) {
-      activePairId = pairId;
-      updateUrl(pairId);
+    function selectPair(pairSlug: string) {
+      activePairSlug = pairSlug;
+      updateUrl(pairSlug);
       showView('pair');
       // Close mobile menu on selection
       document.getElementById('sidebar-aside')?.classList.remove('mobile-open');
       document.getElementById('sidebar-overlay')?.classList.remove('open');
       document.querySelectorAll('.sidebar-item').forEach(i => {
-        const id = parseInt((i as HTMLElement).dataset.pairId || '0');
-        i.classList.toggle('active', id === pairId);
+        const slug = (i as HTMLElement).dataset.pairSlug || '';
+        i.classList.toggle('active', slug === pairSlug);
         // Open parent category if needed
-        if (id === pairId) {
+        if (slug === pairSlug) {
           const section = i.closest('.sidebar-section');
           if (section) {
             section.querySelector('.sidebar-header')?.classList.add('open');
@@ -638,7 +638,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           }
         }
       });
-      const pair = (pairs as any).pairs.find((p: any) => p.id === pairId);
+      const pair = (pairs as any).pairs.find((p: any) => p.slug === pairSlug);
       if (pair) {
         document.getElementById('chart-new')!.textContent = pair.ukrainian;
         document.getElementById('chart-old')!.textContent = pair.russian;
@@ -670,10 +670,10 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       const body = document.getElementById('adoption-calc-body');
       if (!body) return;
 
-      const pairData = (timeseriesData as any)[String(activePairId)];
+      const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) { body.innerHTML = ''; return; }
 
-      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (!pair) return;
 
       const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram', 'religious'];
@@ -715,7 +715,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       if (!container) return;
       container.innerHTML = '';
 
-      const pairData = (timeseriesData as any)[String(activePairId)];
+      const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) return;
 
       const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram', 'religious'];
@@ -792,7 +792,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       if (!container || !body) return;
 
       const rel = getReligiousData();
-      const pid = activePairId;
+      const pid = activePairSlug;
       // For each denomination, find this pair's stats
       const rows = (rel.denominations || [])
         .map((d: any) => {
@@ -866,7 +866,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       }
 
       const llmPerPair = getLlmPerPair();
-      const pid = String(activePairId);
+      const pid = activePairSlug;
       const pp = llmPerPair.pairs?.[pid];
       if (!pp || !pp.models) {
         body.innerHTML = `<div style="font-size:0.7rem; color:var(--text-muted); padding:0.5rem 0;">No LLM data for pair ${pid}.</div>`;
@@ -1101,7 +1101,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       uaOriginEl.innerHTML = '';
       ruOriginEl.innerHTML = '';
 
-      const pairData = (timeseriesData as any)[String(activePairId)];
+      const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData?.gdelt || pairData.gdelt.length === 0) {
         wrapper.style.display = 'none';
         return;
@@ -1118,7 +1118,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       ]);
 
       // Domain origin data
-      const origins = (domainOrigins as any)[String(activePairId)];
+      const origins = (domainOrigins as any)[activePairSlug];
       if (origins) {
         const intl = origins.intl || {ukr:0, rus:0, total:0};
         const ua = origins.ua || {ukr:0, rus:0, total:0};
@@ -1194,7 +1194,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       if (!container) return;
       container.innerHTML = '';
 
-      const pairData = (timeseriesData as any)[String(activePairId)];
+      const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) return;
 
       const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram', 'religious'];
@@ -1215,9 +1215,9 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           `;
         } else {
           // Determine why data is missing — expected vs gap
-          const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+          const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
           const cat = pair?.category || '';
-          const pid = activePairId;
+          const pid = activePairSlug;
           const isNewPair = pid >= 80;
           // Sources that don't cover certain categories
           const gdeltNoData = ['food','landmarks','institutional','sports'].includes(cat) || ['people','historical'].includes(cat);
@@ -1243,8 +1243,8 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         const d = pairData[s];
         return d && d.length > 0 && d.reduce((t: number, r: any) => t + (r.ukr || 0) + (r.rus || 0), 0) > 0;
       }).length;
-      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
-      const isNewPair = activePairId >= 80;
+      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
+      const isNewPair = activePairSlug >= 80;
       if (filledCount <= 3) {
         const note = document.createElement('div');
         note.style.cssText = 'grid-column: 1 / -1; font-size:0.65rem; color:var(--text-muted); padding:0.5rem 0.3rem; line-height:1.5; border-top:1px solid rgba(0,0,0,0.06); margin-top:0.3rem;';
@@ -1257,7 +1257,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
     document.querySelectorAll('.sidebar-item').forEach(item => {
       item.addEventListener('click', () => {
-        selectPair(parseInt((item as HTMLElement).dataset.pairId || '1'));
+        selectPair((item as HTMLElement).dataset.pairSlug || '');
       });
     });
 
@@ -1285,8 +1285,8 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
     });
 
     // Initialize from URL param
-    if (activePairId !== 1) {
-      selectPair(activePairId);
+    if (activePairSlug !== 1) {
+      selectPair(activePairSlug);
     }
 
     // Source toggles — radio behavior (one at a time)
@@ -1585,7 +1585,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       // Update map title
       const mapNameEl = document.getElementById('map-pair-name');
       const mapSubEl = document.getElementById('map-subtitle');
-      const mapPair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      const mapPair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (mapNameEl && mapPair) mapNameEl.textContent = `${mapPair.russian} → ${mapPair.ukrainian}`;
       // Source-specific subtitle and data
       if (mapSubEl) {
@@ -1597,9 +1597,9 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       // Use Trends country data or GDELT country data depending on source
       let adoptionMap: Record<string, {name: string; adoption: number}>;
       if (activeSource === 'trends') {
-        adoptionMap = (trendsCountries as any)[String(activePairId)] || {};
+        adoptionMap = (trendsCountries as any)[activePairSlug] || {};
       } else {
-        const pairCountries = (countriesByPair as any)[String(activePairId)];
+        const pairCountries = (countriesByPair as any)[activePairSlug];
         adoptionMap = (pairCountries || {}) as Record<string, {name: string; adoption: number}>;
       }
 
@@ -1681,10 +1681,10 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
     function drawHoldoutTable() {
       const container = document.getElementById('holdout-table')!;
-      const pairHoldouts = (holdoutsByPair as any)[String(activePairId)];
+      const pairHoldouts = (holdoutsByPair as any)[activePairSlug];
 
       const nameEl = document.getElementById('holdout-pair-name');
-      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (nameEl && pair) nameEl.textContent = pair.russian;
 
       if (!pairHoldouts || pairHoldouts.length === 0) {
@@ -1746,7 +1746,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
     });
 
     // Pair is guaranteed by route — always select it
-    selectPair(activePairId);
+    selectPair(activePairSlug);
 
     // Logo click → back to landing
     document.querySelector('.topbar-logo')?.addEventListener('click', (e) => {
@@ -1776,10 +1776,10 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       if (!container) return;
       container.innerHTML = '';
 
-      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (!pair) return;
 
-      const dc = (dictCombined as any)[String(activePairId)];
+      const dc = (dictCombined as any)[activePairSlug];
       if (!dc) { container.innerHTML = '<div style="font-size:0.75rem; color:#9ca3af;">No reference data</div>'; return; }
 
       const sources = [
@@ -1821,7 +1821,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       try {
         const tEl = document.getElementById('tools-per-pair-data');
         if (tEl && tEl.textContent) {
-          toolsData = JSON.parse(tEl.textContent).pairs[String(activePairId)];
+          toolsData = JSON.parse(tEl.textContent).pairs[activePairSlug];
         }
       } catch (e) {
         console.error('[drawSearchPreview] tools data parse failed:', e);
@@ -1998,11 +1998,11 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
       const coll = clCollocations as any;
       const showPairs = [...(pairs as any).pairs]
-        .filter((p: any) => !p.is_control && coll[String(p.id)])
+        .filter((p: any) => !p.is_control && coll[String(p.slug)])
         .sort((a: any, b: any) => (b.total || 0) - (a.total || 0))
         .slice(0, 6)
         .map((p: any) => ({
-          id: String(p.id), ru: p.russian, ua: p.ukrainian, label: p.category,
+          id: String(p.slug), ru: p.russian, ua: p.ukrainian, label: p.category,
         }));
 
       const grid = d3.select(container)
@@ -2022,7 +2022,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           .style('border-radius', '8px')
           .style('padding', '0.6rem 0.75rem')
           .style('cursor', 'pointer')
-          .on('click', () => { selectPair(parseInt(pair.id)); });
+          .on('click', () => { selectPair(pair.slug); });
 
         // Header
         card.append('div').style('font-size', '0.8rem').style('font-weight', '600')
@@ -2074,7 +2074,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       if (collContainer) collContainer.innerHTML = '';
 
       const cl = clAnalysis as any;
-      const pid = String(activePairId);
+      const pid = activePairSlug;
       const ctx = cl.context_distribution?.[pid];
       const sent = cl.sentiment_comparison?.[pid];
       const coll = (clCollocations as any)?.[pid];
@@ -2472,9 +2472,9 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
       // Findings row — from data
       const spread = ea.summary?.median_spread_pp || 54;
-      const p70 = (manifest as any).pairs?.find((p:any) => p.id === 70);
-      const p10 = (manifest as any).pairs?.find((p:any) => p.id === 10);
-      const p1 = (manifest as any).pairs?.find((p:any) => p.id === 1);
+      const p70 = (manifest as any).pairs?.find((p:any) => p.slug === 70);
+      const p10 = (manifest as any).pairs?.find((p:any) => p.slug === 10);
+      const p1 = (manifest as any).pairs?.find((p:any) => p.slug === 1);
 
       const findings = [
         { title: 'Cross-source spread', text: `Median ${spread}pp — highly domain-dependent` },
@@ -2494,7 +2494,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       }
     })();
   
-    // Auto-init handled by main init block above (activePairId set from data-pair-id)
+    // Auto-init handled by main init block above (activePairSlug set from data-pair-slug)
   </script>
 
 

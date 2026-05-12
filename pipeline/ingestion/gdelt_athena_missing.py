@@ -29,8 +29,10 @@ OUT_DIR = ROOT_DIR / "data" / "raw" / "gdelt"
 athena = boto3.client("athena", region_name=AWS_REGION)
 s3 = boto3.client("s3", region_name=AWS_REGION)
 
-MISSING_PAIR_IDS = {15,20,21,22,24,25,26,28,29,30,31,34,35,52,54,55,56,57,58,
-                    60,61,62,70,71,80,83,84,85,86,87,89}
+# All multi-word pairs that have GDELT ending before 2020 (URL matching bug)
+# Plus single-word pairs with no GDELT data at all
+MISSING_PAIR_IDS = {12,16,17,19,20,21,22,23,24,25,26,27,28,29,38,39,40,41,42,
+                    43,44,45,46,47,48,49,50,51,52,53,54,55,56,57}
 
 with open(ROOT_DIR / "config" / "pairs.yaml") as f:
     _cfg = yaml.safe_load(f)
@@ -129,7 +131,9 @@ def main():
         SUBSTR(v21date, 1, 8) AS gkg_date,
         {search_expr} AS searchable
     FROM gdelt_gkg
-    WHERE {where}
+    WHERE SUBSTR(v21date, 1, 6) >= '201905'
+      AND SUBSTR(v21date, 1, 6) <= '202512'
+      AND ({where})
     """
 
     log.info(f"Single-pass query for {len(all_terms)} terms ({len(PAIRS)} pairs)...")

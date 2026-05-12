@@ -41,35 +41,21 @@ PAIR_PATTERNS = []
 for pair in _cfg["pairs"]:
     if not pair.get("enabled") or pair.get("is_control"):
         continue
-    pid = pair["id"]
+    slug = pair["slug"]
     ru = pair["russian"].lower()
     ua = pair["ukrainian"].lower()
 
-    # Disambiguation: only filter genuine homonyms (different entity, same string)
-    # Cross-pair overlaps (Chicken Kiev, Dynamo Kiev, Kievan Rus, etc.) are NOT
-    # filtered — parent pairs intentionally capture all uses of the spelling.
-    negatives = []
-    if pid == 3:  # Odessa — US city (Odessa, TX), band (Odesza)
-        negatives = ["texas", "permian", "midland", "odessa.{0,5}fl\\b",
-                     "odessa.{0,5}missouri", "odesza",
-                     "odessa.{0,5}a.?zion"]
-    elif pid == 6:  # Nikolaev — common surname
-        negatives = ["nikolaev.{0,10}(born|author|professor|medal|coach|player)"]
-    elif pid == 49:  # Artemovsk — Hulak-Artemovsky composer, champagne brand
-        negatives = ["hulak", "gulak", "artemovsk[ioay]",
-                     "champagne", "sparkling", "winery"]
-    elif pid == 28:  # Chernigov — restaurant/bar business names
-        negatives = ["restaurant", "bar.{0,5}chernigov", "barcelona"]
-    elif pid == 9:  # Rovno — Slavic adverb "exactly"
-        negatives = ["rovno.{0,5}(v|na|po)\\b"]
+    # Disambiguation from pairs.yaml homonym_filters (no hardcoded IDs)
+    negatives = [re.compile(f, re.IGNORECASE)
+                 for f in pair.get("homonym_filters", [])]
 
     PAIR_PATTERNS.append({
-        "id": pid,
+        "slug": slug,
         "russian": ru,
         "ukrainian": ua,
         "ru_re": re.compile(re.escape(ru).replace(r"\ ", r"[\s\-_+%20]+"), re.IGNORECASE),
         "ua_re": re.compile(re.escape(ua).replace(r"\ ", r"[\s\-_+%20]+"), re.IGNORECASE),
-        "negatives": [re.compile(n, re.IGNORECASE) for n in negatives],
+        "negatives": negatives,
     })
 
 
@@ -82,9 +68,9 @@ def match_url(url_lower):
             continue
 
         if p["ru_re"].search(url_lower):
-            matches.append((p["id"], "russian", p["russian"]))
+            matches.append((p["slug"], "russian", p["russian"]))
         elif p["ua_re"].search(url_lower):
-            matches.append((p["id"], "ukrainian", p["ukrainian"]))
+            matches.append((p["slug"], "ukrainian", p["ukrainian"]))
     return matches
 
 
@@ -111,7 +97,7 @@ def process_gkg_file(file_url):
                     url_lower = url.lower()
                     for pair_id, variant, term in match_url(url_lower):
                         results.append({
-                            "pair_id": pair_id,
+                            "pair_slug": pair_id,
                             "url": url,
                             "variant": variant,
                             "matched_term": term,
@@ -191,7 +177,7 @@ def main():
                 # Save checkpoint
                 df = pd.DataFrame(all_matches)
                 if len(df):
-                    df = df.drop_duplicates(subset=["pair_id", "url"])
+                    df = df.drop_duplicates(subset=["pair_slug", "url"])
                     df.to_parquet(out_path, index=False)
                 import json
                 with open(checkpoint_path, "w") as f:
@@ -202,7 +188,7 @@ def main():
     all_matches.extend(batch_matches)
     if all_matches:
         df = pd.DataFrame(all_matches)
-        df = df.drop_duplicates(subset=["pair_id", "url"])
+        df = df.drop_duplicates(subset=["pair_slug", "url"])
         df.to_parquet(out_path, index=False)
         import json
         with open(checkpoint_path, "w") as f:
@@ -211,8 +197,8 @@ def main():
         log.info(f"Pairs: {df['pair_id'].nunique()}")
         log.info(f"Variants: {df['variant'].value_counts().to_dict()}")
 
-        for pid, grp in df.groupby("pair_id"):
-            pair = next((p for p in _cfg["pairs"] if p["id"] == pid), {})
+        for pid, grp in df.groupby("pair_slug"):
+            pair = next((p for p in _cfg["pairs"] if p["slug"] == pid), {})
             ru_n = (grp["variant"] == "russian").sum()
             ua_n = (grp["variant"] == "ukrainian").sum()
             log.info(f"  Pair {pid} ({pair.get('russian','')}/{pair.get('ukrainian','')}): {len(grp):,} URLs (RU:{ru_n:,} UA:{ua_n:,})")
