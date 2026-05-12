@@ -1686,7 +1686,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       const subtitleEl = document.getElementById('holdout-subtitle');
       const subtitles: Record<string, string> = {
         news: 'News domains still using old spelling — 2025',
-        wikipedia: 'Wikipedia pages still using old spelling — 2025',
+        wikipedia: 'Wikipedia pages with old spelling (some redirect) — 2025',
         reddit: 'Reddit posts still using old spelling — 2025',
         youtube: 'YouTube videos still using old spelling — 2025',
       };
@@ -1718,24 +1718,21 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
         const rows = filtered.map((h: any) => {
           const domain = h.name;
-          const searchUrl = `https://www.google.com/search?q=site:${domain}+${pair?.russian || ''}`;
+          const articleUrl = h.url || `https://${domain}`;
           const isRu = domain.endsWith('.ru');
           const isUa = domain.endsWith('.ua');
           const tag = isRu ? '<span style="font-size:0.6rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ru</span>'
                     : isUa ? '<span style="font-size:0.6rem; color:#0057B8; background:#f0f9ff; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ua</span>' : '';
+          const vol = h.articles || h.total || 0;
           return `<tr style="border-bottom:1px solid #f3f4f6; ${isRu ? 'background:#fef2f2;' : ''}">
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="https://${domain}" target="_blank" rel="noopener" style="color:var(--text); font-weight:500; text-decoration:none; border-bottom:1px dotted #d1d5db;">${domain}</a>${tag}</td>
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(h.total || 0).toLocaleString()}</td>
-            <td style="padding:0.4rem 0.6rem;"><a href="${searchUrl}" target="_blank" rel="noopener" style="font-size:0.65rem; color:#4285F4;">verify →</a></td>
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="${articleUrl}" target="_blank" rel="noopener" style="color:var(--text); font-weight:500; text-decoration:none; border-bottom:1px dotted #d1d5db;">${domain}</a>${tag}</td>
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${vol.toLocaleString()}</td>
           </tr>`;
         }).join('');
         html = `<table style="width:100%; border-collapse:collapse;">
           <thead><tr style="border-bottom:2px solid #e5e7eb;">
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Domain</th>
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Old %</th>
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Vol</th>
-            <th></th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Domain (click for sample article)</th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Articles</th>
           </tr></thead><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'wikipedia') {
