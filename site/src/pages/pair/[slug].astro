@@ -90,26 +90,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
     let chartMode: 'adoption' | 'volume' = 'volume';
     let showEvents = true;
 
-    // Read pair from URL query param (?pair=1), default to Kyiv (1)
-    function getPairFromUrl(): number {
-      const params = new URLSearchParams(window.location.search);
-      const p = params.get('pair');
-      if (p) {
-        const id = parseInt(p);
-        if (!isNaN(id) && (pairs as any).pairs.some((pp: any) => pp.slug === id)) return id;
-      }
-      return 0; // 0 = landing/overview, no pair selected
-    }
-
-    function updateUrl(pairId: string) {
-      const url = new URL(window.location.href);
-      if (!pairId) {
-        url.searchParams.delete('pair');
-      } else {
-        url.searchParams.set('pair', String(pairId));
-      }
-      window.history.replaceState({}, '', url.toString());
-    }
+    // No query params needed — slug is in the URL path (/pair/kyiv)
 
     function showView(mode: 'landing' | 'pair') {
       const landing = document.getElementById('landing-view');
@@ -179,8 +160,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
     }
 
     function showLanding() {
-      activePairSlug = 0;
-      updateUrl(0);
+      activePairSlug = '';
       showView('landing');
       document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
       renderTop6Cards();
@@ -621,7 +601,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
     function selectPair(pairSlug: string) {
       activePairSlug = pairSlug;
-      updateUrl(pairSlug);
+
       showView('pair');
       // Close mobile menu on selection
       document.getElementById('sidebar-aside')?.classList.remove('mobile-open');
