@@ -36,6 +36,8 @@ pairs:
   notes: Flagship pair, capital city. GDELT excludes "Kievan" URLs (tracked by pair
     35 Kievan Rus).
   events:
+  - date: 2014-02
+    label: Euromaidan revolution
   - date: 2018-10
     label: '#KyivNotKiev launch'
   - date: 2019-06
@@ -44,6 +46,12 @@ pairs:
     label: AP Stylebook adopts Kyiv
   - date: 2019-10
     label: BBC adopts Kyiv
+  - date: 2022-02
+    label: Battle of Kyiv begins
+  - date: 2022-10
+    label: Massive missile strikes on Kyiv
+  - date: 2025-10
+    label: Peace negotiation surge
   match_mode: word_boundary
   slug: kyiv
 - category: geographical
