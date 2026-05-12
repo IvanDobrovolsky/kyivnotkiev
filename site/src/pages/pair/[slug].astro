@@ -1667,107 +1667,90 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
     function drawHoldoutTable() {
       const container = document.getElementById('holdout-table')!;
-      const pairHoldouts = (holdoutsByPair as any)[activePairSlug];
+      const pairHoldouts = (holdoutsByPair as any)[activePairSlug] || {};
+      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
 
       const nameEl = document.getElementById('holdout-pair-name');
-      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (nameEl && pair) nameEl.textContent = pair.russian;
 
-      // New format: {news: [...], wikipedia: [...], reddit: [...], youtube: [...]}
-      const newsHoldouts = pairHoldouts?.news || [];
-      if (!pairHoldouts || newsHoldouts.length === 0) {
-        container.innerHTML = '<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">No holdout data for this pair</div>';
+      // Source-to-holdout key mapping
+      const sourceToKey: Record<string, string> = {
+        gdelt: 'news', trends: 'news', wikipedia: 'wikipedia',
+        reddit: 'reddit', youtube: 'youtube',
+        ngrams: 'news', openalex: 'news', telegram: 'news', religious: 'news',
+      };
+      const holdoutKey = sourceToKey[activeSource] || 'news';
+      const items = pairHoldouts[holdoutKey] || [];
+
+      if (items.length === 0) {
+        container.innerHTML = `<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">No holdout data for ${activeSource}</div>`;
         return;
       }
 
-      // Filter by domain type
-      let filtered = newsHoldouts;
-      if (holdoutFilter === 'intl') filtered = newsHoldouts.filter((h: any) => !h.name.endsWith('.ru') && !h.name.endsWith('.ua'));
-      else if (holdoutFilter === 'ru') filtered = newsHoldouts.filter((h: any) => h.name.endsWith('.ru'));
-      else if (holdoutFilter === 'ua') filtered = newsHoldouts.filter((h: any) => h.name.endsWith('.ua'));
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<div style="padding:1.5rem; text-align:center; color:#9ca3af; font-size:0.8rem;">No holdouts in this category</div>`;
-        return;
-      }
-
-      const rows = filtered.map((h: any) => {
-        const domain = h.name || h.domain;
-        const searchUrl = `https://www.google.com/search?q=site:${domain}+${pair?.russian || ''}`;
-        const isRu = domain.endsWith('.ru');
-        const isUa = domain.endsWith('.ua');
-        const tag = isRu ? '<span style="font-size:0.6rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ru</span>'
-                  : isUa ? '<span style="font-size:0.6rem; color:#0057B8; background:#f0f9ff; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ua</span>'
-                  : '';
-
-        return `<tr style="border-bottom:1px solid #f3f4f6; ${isRu ? 'background:#fef2f2;' : ''}">
-          <td style="padding:0.4rem 0.6rem; font-size:0.8rem;">
-            <a href="https://${domain}" target="_blank" rel="noopener" style="color:var(--text); font-weight:500; text-decoration:none; border-bottom:1px dotted #d1d5db;">${domain}</a>${tag}
-          </td>
-          <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
-          <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(h.total || 0).toLocaleString()}</td>
-          <td style="padding:0.4rem 0.6rem;"><a href="${searchUrl}" target="_blank" rel="noopener" style="font-size:0.65rem; color:#4285F4; text-decoration:none;">verify →</a></td>
-        </tr>`;
-      }).join('');
-
-      // Build sections for each source
       let html = '';
 
-      // News domains
-      if (filtered.length > 0) {
-        html += `<h4 style="font-size:0.75rem; color:#6b7280; margin:0.8rem 0.6rem 0.3rem; text-transform:uppercase;">News Domains</h4>
-        <table style="width:100%; border-collapse:collapse;">
+      if (holdoutKey === 'news') {
+        // News: domain table with filters
+        let filtered = items;
+        if (holdoutFilter === 'intl') filtered = items.filter((h: any) => !h.name.endsWith('.ru') && !h.name.endsWith('.ua'));
+        else if (holdoutFilter === 'ru') filtered = items.filter((h: any) => h.name.endsWith('.ru'));
+        else if (holdoutFilter === 'ua') filtered = items.filter((h: any) => h.name.endsWith('.ua'));
+
+        if (filtered.length === 0) {
+          container.innerHTML = `<div style="padding:1.5rem; text-align:center; color:#9ca3af;">No holdouts in this filter</div>`;
+          return;
+        }
+
+        const rows = filtered.map((h: any) => {
+          const domain = h.name;
+          const searchUrl = `https://www.google.com/search?q=site:${domain}+${pair?.russian || ''}`;
+          const isRu = domain.endsWith('.ru');
+          const isUa = domain.endsWith('.ua');
+          const tag = isRu ? '<span style="font-size:0.6rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ru</span>'
+                    : isUa ? '<span style="font-size:0.6rem; color:#0057B8; background:#f0f9ff; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ua</span>' : '';
+          return `<tr style="border-bottom:1px solid #f3f4f6; ${isRu ? 'background:#fef2f2;' : ''}">
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="https://${domain}" target="_blank" rel="noopener" style="color:var(--text); font-weight:500; text-decoration:none; border-bottom:1px dotted #d1d5db;">${domain}</a>${tag}</td>
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(h.total || 0).toLocaleString()}</td>
+            <td style="padding:0.4rem 0.6rem;"><a href="${searchUrl}" target="_blank" rel="noopener" style="font-size:0.65rem; color:#4285F4;">verify →</a></td>
+          </tr>`;
+        }).join('');
+        html = `<table style="width:100%; border-collapse:collapse;">
           <thead><tr style="border-bottom:2px solid #e5e7eb;">
             <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Domain</th>
             <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Old %</th>
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Articles</th>
-            <th style="padding:0.4rem 0.6rem;"></th>
-          </tr></thead>
-          <tbody>${rows}</tbody>
-        </table>`;
-      }
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Vol</th>
+            <th></th>
+          </tr></thead><tbody>${rows}</tbody></table>`;
 
-      // Wikipedia pages — with direct links
-      const wikiHoldouts = pairHoldouts?.wikipedia || [];
-      if (wikiHoldouts.length > 0) {
-        const wikiRows = wikiHoldouts.map((w: any) =>
+      } else if (holdoutKey === 'wikipedia') {
+        const rows = items.map((w: any) =>
           `<tr style="border-bottom:1px solid #f3f4f6;">
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="${w.url || 'https://en.wikipedia.org/wiki/' + encodeURIComponent(w.name)}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; border-bottom:1px dotted #d1d5db;">${w.name}</a></td>
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(w.views || 0).toLocaleString()} views</td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${w.url}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; border-bottom:1px dotted #d1d5db;">${w.name}</a></td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(w.views || 0).toLocaleString()} views</td>
           </tr>`).join('');
-        html += `<h4 style="font-size:0.75rem; color:#636466; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">📖 Wikipedia Pages (using old spelling)</h4>
-        <table style="width:100%; border-collapse:collapse;"><tbody>${wikiRows}</tbody></table>`;
-      }
+        html = `<p style="font-size:0.75rem; color:#6b7280; margin:0.5rem 0.6rem;">Wikipedia pages still using the old spelling in 2025:</p>
+        <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
-      // Reddit — with direct post links
-      const redditHoldouts = pairHoldouts?.reddit || [];
-      if (redditHoldouts.length > 0) {
-        const redditRows = redditHoldouts.map((r: any) =>
+      } else if (holdoutKey === 'reddit') {
+        const rows = items.map((r: any) =>
           `<tr style="border-bottom:1px solid #f3f4f6;">
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="${r.url || '#'}" target="_blank" rel="noopener" style="color:#FF4500; text-decoration:none; border-bottom:1px dotted #ffccc0;">${r.name}</a></td>
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.score ? r.score.toLocaleString() + ' score' : ''}</td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${r.url}" target="_blank" rel="noopener" style="color:#FF4500; text-decoration:none;">${r.name}</a></td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.score ? r.score.toLocaleString() + ' ↑' : ''}</td>
           </tr>`).join('');
-        html += `<h4 style="font-size:0.75rem; color:#FF4500; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">💬 Reddit Posts (using old spelling)</h4>
-        <table style="width:100%; border-collapse:collapse;"><tbody>${redditRows}</tbody></table>`;
-      }
+        html = `<p style="font-size:0.75rem; color:#6b7280; margin:0.5rem 0.6rem;">Reddit posts still using the old spelling in 2025:</p>
+        <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
-      // YouTube — with direct video links
-      const ytHoldouts = pairHoldouts?.youtube || [];
-      if (ytHoldouts.length > 0) {
-        const ytRows = ytHoldouts.map((y: any) =>
+      } else if (holdoutKey === 'youtube') {
+        const rows = items.map((y: any) =>
           `<tr style="border-bottom:1px solid #f3f4f6;">
-            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="${y.url || '#'}" target="_blank" rel="noopener" style="color:#FF0000; text-decoration:none; border-bottom:1px dotted #ffcccc;">${y.name}</a></td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${y.url}" target="_blank" rel="noopener" style="color:#FF0000; text-decoration:none;">${y.name}</a></td>
           </tr>`).join('');
-        html += `<h4 style="font-size:0.75rem; color:#FF0000; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">▶ YouTube Videos (using old spelling)</h4>
-        <table style="width:100%; border-collapse:collapse;"><tbody>${ytRows}</tbody></table>`;
+        html = `<p style="font-size:0.75rem; color:#6b7280; margin:0.5rem 0.6rem;">YouTube videos still using the old spelling in 2025:</p>
+        <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
       }
 
-      if (!html) {
-        container.innerHTML = '<div style="padding:2rem; text-align:center; color:#9ca3af;">No holdout data</div>';
-        return;
-      }
-
-      container.innerHTML = html;
+      container.innerHTML = html || '<div style="padding:2rem; text-align:center; color:#9ca3af;">No holdout data</div>';
     }
 
     // Holdout filter tabs
@@ -1782,6 +1765,22 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
     // Pair is guaranteed by route — always select it
     selectPair(activePairSlug);
+
+    // Activate source from URL params
+    if (activeSource !== 'gdelt') {
+      document.querySelectorAll('.source-toggle').forEach(b => b.classList.remove('active'));
+      const srcBtn = document.querySelector(`.source-toggle[data-source="${activeSource}"]`);
+      if (srcBtn) {
+        srcBtn.classList.add('active');
+        // Trigger same logic as click
+        const mapEl = document.getElementById('map-container');
+        if (mapEl) mapEl.style.display = activeSource === 'gdelt' ? 'block' : 'none';
+        const originEl = document.getElementById('media-origin-container');
+        if (originEl) originEl.style.display = activeSource === 'gdelt' ? 'block' : 'none';
+        drawChart();
+        drawHoldoutTable();
+      }
+    }
 
     // Logo click → back to landing
     document.querySelector('.topbar-logo')?.addEventListener('click', (e) => {
