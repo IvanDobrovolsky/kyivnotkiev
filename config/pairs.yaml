@@ -244,13 +244,6 @@ pairs:
   - date: 2022-03
     label: Restaurants rebrand to Chicken Kyiv
 - category: food
-  russian: Kiev cake
-  ukrainian: Kyiv cake
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-  slug: kyiv-cake
-- category: food
   russian: Borsch
   ukrainian: Borscht
   enabled: true
