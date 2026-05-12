@@ -1675,7 +1675,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
       // Source-to-holdout key mapping
       const sourceToKey: Record<string, string> = {
-        gdelt: 'news', trends: 'news', wikipedia: 'wikipedia',
+        gdelt: 'news', trends: 'trends', wikipedia: 'wikipedia',
         reddit: 'reddit', youtube: 'youtube',
         telegram: 'telegram', religious: 'religious',
         openalex: 'openalex', ngrams: 'ngrams',
@@ -1783,7 +1783,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           </tr>`).join('');
         html = `<table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
-      } else if (holdoutKey === 'openalex' || holdoutKey === 'ngrams') {
+      } else if (holdoutKey === 'trends' || holdoutKey === 'openalex' || holdoutKey === 'ngrams') {
         const rows = items.map((o: any) =>
           `<tr style="border-bottom:1px solid #f3f4f6;">
             <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${o.url}" target="_blank" rel="noopener" style="color:#06b6d4; text-decoration:none;">${o.name}</a></td>
