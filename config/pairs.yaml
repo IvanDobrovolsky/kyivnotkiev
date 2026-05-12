@@ -64,6 +64,8 @@ pairs:
     label: Battle of Kharkiv
   - date: 2022-09
     label: Kharkiv counteroffensive
+  - date: 2024-05
+    label: Russian border offensive
   match_mode: word_boundary
   slug: kharkiv
 - category: geographical
@@ -76,6 +78,8 @@ pairs:
   events:
   - date: 2022-07
     label: Russian missile strikes
+  - date: 2023-07
+    label: Grain deal collapse, port strikes
   match_mode: word_boundary
   homonym_filters:
   - texas
@@ -94,6 +98,9 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: lviv
+  events:
+  - date: 2022-03
+    label: Refugee hub, diplomatic activity
 - category: geographical
   russian: Zaporozhye
   ukrainian: Zaporizhzhia
@@ -102,6 +109,8 @@ pairs:
   events:
   - date: 2022-03
     label: Russia seizes nuclear plant
+  - date: 2022-08
+    label: Nuclear plant shelling crisis
   match_mode: word_boundary
   slug: zaporizhzhia
 - category: geographical
@@ -115,6 +124,9 @@ pairs:
   homonym_type: surname
   ner_filter: true
   slug: mykolaiv
+  events:
+  - date: 2022-03
+    label: Russian siege begins
 - category: geographical
   russian: Dnepropetrovsk
   ukrainian: Dnipro
@@ -122,7 +134,9 @@ pairs:
   is_control: false
   events:
   - date: 2016-05
-    label: Officially renamed from Dnipropetrovsk
+    label: Renamed from Dnipropetrovsk
+  - date: 2023-01
+    label: Apartment building missile strike
   match_mode: word_boundary
   slug: dnipro
 - category: geographical
@@ -132,6 +146,9 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: vinnytsia
+  events:
+  - date: 2022-07
+    label: Missile strike on city center
 - category: geographical
   russian: Rovno
   ukrainian: Rivne
@@ -149,8 +166,12 @@ pairs:
   is_control: false
   notes: Disaster brand — strongest resistance to change
   events:
+  - date: 2016-04
+    label: 30th anniversary
   - date: 2019-05
     label: HBO Chernobyl series
+  - date: 2020-04
+    label: Exclusion Zone wildfire
   - date: 2022-02
     label: Russia seizes plant
   match_mode: word_boundary
@@ -163,6 +184,10 @@ pairs:
   events:
   - date: 2014-04
     label: Separatist conflict begins
+  - date: 2022-02
+    label: Full-scale invasion
+  - date: 2022-09
+    label: Retreat from Lyman, Luhansk oblast
   match_mode: word_boundary
   slug: luhansk
 - category: geographical
@@ -174,6 +199,9 @@ pairs:
     Dnepropetrovsk→Dnipro).
   match_mode: exact_phrase
   slug: dnipro-river
+  events:
+  - date: 2022-11
+    label: Kherson liberation, Dnipro front line
 - category: geographical
   russian: Dniester
   ukrainian: Dnister
@@ -191,8 +219,12 @@ pairs:
     of the 7,800 toponyms renamed across 83 Ukrainian cities since 2022 (Transparent
     Cities). July 2023 law mandated renaming of Russian imperial toponyms.
   events:
+  - date: 2014-04
+    label: Donbas conflict begins
+  - date: 2022-02
+    label: Full-scale invasion
   - date: 2023-07
-    label: Ukrainian law mandates toponym decolonization
+    label: Toponym decolonization law
   match_mode: word_boundary
   slug: donbas
 - category: food
@@ -202,6 +234,9 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: chicken-kyiv
+  events:
+  - date: 2022-03
+    label: Restaurants rebrand to Chicken Kyiv
 - category: food
   russian: Kiev cake
   ukrainian: Kyiv cake
@@ -264,6 +299,11 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: kyiv-patriarchate
+  events:
+  - date: 2018-10
+    label: Autocephaly from Constantinople
+  - date: 2019-01
+    label: OCU officially established
 - category: sports
   russian: Dynamo Kiev
   ukrainian: Dynamo Kyiv
@@ -288,7 +328,7 @@ pairs:
   is_control: false
   events:
   - date: 2022-02
-    label: Russia weaponizes Kievan Rus narrative
+    label: Russia weaponizes historical narrative
   match_mode: exact_phrase
   slug: kyivan-rus
 - category: geographical
@@ -303,6 +343,9 @@ pairs:
   - barcelona
   homonym_type: business_name
   slug: chernihiv
+  events:
+  - date: 2022-03
+    label: Siege of Chernihiv
 - category: geographical
   russian: Chernovtsy
   ukrainian: Chernivtsi
@@ -338,6 +381,9 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: kremenchuk
+  events:
+  - date: 2022-06
+    label: Shopping mall missile strike
 - category: geographical
   russian: Kirovograd
   ukrainian: Kropyvnytskyi
@@ -345,6 +391,9 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: kropyvnytskyi
+  events:
+  - date: 2016-07
+    label: Renamed from Kirovograd
 - category: geographical
   russian: Ternopol
   ukrainian: Ternopil
@@ -380,6 +429,13 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: babyn-yar
+  events:
+  - date: 2016-09
+    label: 75th anniversary of massacre
+  - date: 2021-10
+    label: Babyn Yar memorial opens
+  - date: 2022-03
+    label: Russian missile hits memorial site
 - category: institutional
   russian: Lvov Polytechnic
   ukrainian: Lviv Polytechnic
@@ -393,10 +449,14 @@ pairs:
   enabled: true
   is_control: false
   events:
+  - date: 2018-07
+    label: Wins cruiserweight title
   - date: 2021-09
-    label: Beats Joshua, undisputed
+    label: Beats Joshua, wins heavyweight belts
   - date: 2024-05
-    label: Beats Fury, all belts
+    label: Beats Fury, undisputed champion
+  - date: 2024-12
+    label: Beats Fury rematch
   match_mode: exact_phrase
   slug: oleksandr-usyk
 - category: people
@@ -405,7 +465,7 @@ pairs:
   enabled: true
   is_control: false
   events:
-  - date: 2019-05
+  - date: 2019-04
     label: Elected president
   - date: 2022-02
     label: Wartime leadership begins
@@ -419,6 +479,9 @@ pairs:
   notes: Also matches Andriy Shevchenko (most common English spelling)
   match_mode: exact_phrase
   slug: andrii-shevchenko
+  events:
+  - date: 2021-06
+    label: Euro 2020 — manages Ukraine
 - category: historical
   russian: Vladimir the Great
   ukrainian: Volodymyr the Great
@@ -428,11 +491,9 @@ pairs:
     founding figure. Key test of historical identity reclamation.
   events:
   - date: 2015-07
-    label: Putin unveils Vladimir statue in Moscow
-    color: '#dc2626'
+    label: Putin unveils Vladimir statue
   - date: 2016-11
-    label: Poroshenko unveils Volodymyr statue in Kyiv
-    color: '#0057B8'
+    label: Poroshenko unveils Volodymyr statue
   match_mode: exact_phrase
   slug: volodymyr-the-great
 - category: historical
@@ -444,6 +505,9 @@ pairs:
     scholarship.
   match_mode: exact_phrase
   slug: prince-of-kyiv
+  events:
+  - date: 2022-02
+    label: Russia invokes historical claim
 - category: geographical
   russian: Artemovsk
   ukrainian: Bakhmut
@@ -453,10 +517,8 @@ pairs:
   events:
   - date: 2022-08
     label: Battle of Bakhmut begins
-    color: '#dc2626'
   - date: 2023-05
     label: Bakhmut falls to Wagner
-    color: '#dc2626'
   match_mode: word_boundary
   homonym_filters:
   - hulak
