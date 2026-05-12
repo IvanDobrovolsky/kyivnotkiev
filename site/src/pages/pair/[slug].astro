@@ -42,7 +42,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
     import holdoutsByPair from '../../data/holdouts_by_pair.json';
     import countriesByPair from '../../data/countries_by_pair.json';
     import pairEvents from '../../data/pair_events.json';
-    import trendsCountries from '../../data/trends_countries.json';
+    // trends_countries removed — using GDELT country distribution only
     import errorAnalysis from '../../data/error_analysis.json';
     import dictCombined from '../../data/dictionary_combined.json';
     import enforcementData from '../../data/enforcement.json';
@@ -1574,14 +1574,9 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           : `URL-level adoption (%) — GDELT news corpus 2024–2026`;
       }
 
-      // Use Trends country data or GDELT country data depending on source
-      let adoptionMap: Record<string, {name: string; adoption: number}>;
-      if (activeSource === 'trends') {
-        adoptionMap = (trendsCountries as any)[activePairSlug] || {};
-      } else {
-        const pairCountries = (countriesByPair as any)[activePairSlug];
-        adoptionMap = (pairCountries || {}) as Record<string, {name: string; adoption: number}>;
-      }
+      // GDELT country distribution (ccTLD mapping from news domains)
+      const pairCountries = (countriesByPair as any)[activePairSlug];
+      const adoptionMap = (pairCountries || {}) as Record<string, {name: string; adoption: number}>;
 
       // Tooltip — positioned relative to container
       const tooltip = d3.select('#world-map')

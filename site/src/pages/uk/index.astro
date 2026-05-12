@@ -506,7 +506,7 @@ function formatNum(n: number) {
     import holdoutsByPair from '../../data/holdouts_by_pair.json';
     import countriesByPair from '../../data/countries_by_pair.json';
     import pairEvents from '../../data/pair_events.json';
-    import trendsCountries from '../../data/trends_countries.json';
+    // trends_countries removed — using GDELT country distribution only
     import errorAnalysis from '../../data/error_analysis.json';
     import dictCombined from '../../data/dictionary_combined.json';
     import enforcementData from '../../data/enforcement.json';
@@ -1598,14 +1598,9 @@ function formatNum(n: number) {
           : `Адопція на рівні URL (%) — новинний корпус GDELT 2024–2026`;
       }
 
-      // Use Trends country data or GDELT country data depending on source
-      let adoptionMap: Record<string, {name: string; adoption: number}>;
-      if (activeSource === 'trends') {
-        adoptionMap = (trendsCountries as any)[String(activePairId)] || {};
-      } else {
-        const pairCountries = (countriesByPair as any)[String(activePairId)];
-        adoptionMap = (pairCountries || {}) as Record<string, {name: string; adoption: number}>;
-      }
+      // GDELT country distribution (ccTLD mapping from news domains)
+      const pairCountries = (countriesByPair as any)[String(activePairId)];
+      const adoptionMap = (pairCountries || {}) as Record<string, {name: string; adoption: number}>;
 
       // Tooltip — positioned relative to container
       const tooltip = d3.select('#world-map')

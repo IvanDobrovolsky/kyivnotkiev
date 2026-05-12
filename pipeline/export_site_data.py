@@ -802,7 +802,7 @@ def main():
 
     manifest = export_manifest(enabled_slugs, analyzable_slugs, control_slugs)
     timeseries = export_timeseries(enabled_slugs)
-    trends_countries = export_trends_countries(enabled_slugs)
+    # trends_countries removed — country distribution from GDELT only
     holdouts_by_pair, holdouts_global = export_holdouts(enabled_slugs)
     pair_events = export_pair_events(enabled_slugs)
     analysis = export_analysis()
@@ -841,7 +841,6 @@ def main():
 
     write_json(SITE_DATA_DIR / "manifest.json", manifest)
     write_json(SITE_DATA_DIR / "timeseries.json", timeseries)
-    write_json(SITE_DATA_DIR / "trends_countries.json", trends_countries)
     write_json(SITE_DATA_DIR / "countries_by_pair.json", countries_by_pair)
     write_json(SITE_DATA_DIR / "domain_origins.json", domain_origins)
     write_json(SITE_DATA_DIR / "holdouts_by_pair.json", holdouts_by_pair)
