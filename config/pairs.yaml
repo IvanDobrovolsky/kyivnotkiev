@@ -414,13 +414,6 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: varenyky
-- category: historical
-  russian: Gopak
-  ukrainian: Hopak
-  enabled: true
-  is_control: false
-  match_mode: word_boundary
-  slug: hopak
 - category: sports
   russian: Metalist Kharkov
   ukrainian: Metalist Kharkiv
