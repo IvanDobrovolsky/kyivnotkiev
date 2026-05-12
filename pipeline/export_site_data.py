@@ -844,7 +844,24 @@ def main():
     manifest = export_manifest(enabled_slugs, analyzable_slugs, control_slugs)
     timeseries = export_timeseries(enabled_slugs)
     # trends_countries removed — country distribution from GDELT only
-    holdouts_by_pair, holdouts_global = export_holdouts(enabled_slugs)
+    # Holdouts: preserve existing file if it has URLs (built by BQ CSV scan)
+    # Only regenerate if file doesn't exist
+    holdouts_path = SITE_DATA_DIR / "holdouts_by_pair.json"
+    if holdouts_path.exists():
+        import json as _json
+        with open(holdouts_path) as _f:
+            _existing = _json.load(_f)
+        # Check if it has the new URL format
+        _sample = next(iter(_existing.values()), {})
+        _news = _sample.get("news", [{}]) if isinstance(_sample, dict) else [{}]
+        if _news and "url" in (_news[0] if _news else {}):
+            log.info("  Using existing holdouts_by_pair.json (has article URLs)")
+            holdouts_by_pair = _existing
+        else:
+            holdouts_by_pair, _ = export_holdouts(enabled_slugs)
+    else:
+        holdouts_by_pair, _ = export_holdouts(enabled_slugs)
+    _, holdouts_global = export_holdouts(enabled_slugs)
     pair_events = export_pair_events(enabled_slugs)
     analysis = export_analysis()
     domain_origins = export_domain_origins(enabled_slugs)
