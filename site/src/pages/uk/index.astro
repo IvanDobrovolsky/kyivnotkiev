@@ -7,8 +7,8 @@ import toolsPerPair from '../../data/tools_per_pair.json';
 const grouped = m.categories.map(cat => ({
   ...cat,
   pairs: m.pairs.filter(p => p.category === cat.id).sort((a, b) => {
-    if (a.id === 1) return -1;
-    if (b.id === 1) return 1;
+    if (a.slug === 'kyiv') return -1;
+    if (b.slug === 'kyiv') return 1;
     return b.total - a.total;
   })
 })).filter(g => g.pairs.length > 0);
@@ -92,9 +92,9 @@ function formatNum(n: number) {
           </div>
           <div class={`sidebar-items ${ci === 0 ? 'open' : ''}`}>
             {cat.pairs.map((pair, pi) => (
-              <div class="sidebar-item" data-pair-id={pair.id}>
+              <div class="sidebar-item" data-pair-slug={pair.slug}>
                 <div class="pair-name">
-                  <span>{[1,3,10,61,70,72].includes(pair.id) ? '★ ' : ''}{pair.ukrainian}</span>
+                  <span>{['kyiv','odesa','chornobyl','volodymyr-zelenskyy','volodymyr-the-great','bakhmut'].includes(pair.slug) ? '★ ' : ''}{pair.ukrainian}</span>
                   <span class="old">{pair.russian}</span>
                 </div>
                 <span class={`adoption-badge ${adoptionClass(pair.adoption)}`}>
@@ -350,7 +350,7 @@ function formatNum(n: number) {
         <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Ключові пари: Детальний аналіз</div>
         <div class="chart-subtitle" style="margin-bottom: 1rem;">6 пар, що представляють увесь спектр — від успіху кампанії до історичного спротиву</div>
         <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;">
-          <div class="top6-card" data-pair-id="1" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+          <div class="top6-card" data-pair-slug="1" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
             <div style="display:flex; justify-content:space-between; align-items:baseline;">
               <div style="font-weight:600; color:var(--text);">Kiev → Kyiv</div>
               <div style="font-size:0.8rem; font-weight:700; color:#059669;">60.3%</div>
@@ -358,7 +358,7 @@ function formatNum(n: number) {
             <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Флагман — історія успіху кампанії</div>
             <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:60.3%; background:#059669; border-radius:2px;"></div></div>
           </div>
-          <div class="top6-card" data-pair-id="10" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+          <div class="top6-card" data-pair-slug="10" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
             <div style="display:flex; justify-content:space-between; align-items:baseline;">
               <div style="font-weight:600; color:var(--text);">Chernobyl → Chornobyl</div>
               <div style="font-size:0.8rem; font-weight:700; color:#dc2626;">26.8%</div>
@@ -366,7 +366,7 @@ function formatNum(n: number) {
             <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Бренд-катастрофа — несприйнятливий до змін</div>
             <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:26.8%; background:#dc2626; border-radius:2px;"></div></div>
           </div>
-          <div class="top6-card" data-pair-id="3" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+          <div class="top6-card" data-pair-slug="3" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
             <div style="display:flex; justify-content:space-between; align-items:baseline;">
               <div style="font-weight:600; color:var(--text);">Odessa → Odesa</div>
               <div style="font-size:0.8rem; font-weight:700; color:#d97706;">43.0%</div>
@@ -374,7 +374,7 @@ function formatNum(n: number) {
             <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Культурне вкорінення — спірний</div>
             <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:43%; background:#d97706; border-radius:2px;"></div></div>
           </div>
-          <div class="top6-card" data-pair-id="61" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+          <div class="top6-card" data-pair-slug="61" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
             <div style="display:flex; justify-content:space-between; align-items:baseline;">
               <div style="font-weight:600; color:var(--text);">Vladimir → Volodymyr Zelenskyy</div>
               <div style="font-size:0.8rem; font-weight:700; color:#d97706;">49.1%</div>
@@ -382,7 +382,7 @@ function formatNum(n: number) {
             <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Президент воєнного часу — ім'я та прізвище під питанням</div>
             <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:49.1%; background:#d97706; border-radius:2px;"></div></div>
           </div>
-          <div class="top6-card" data-pair-id="70" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+          <div class="top6-card" data-pair-slug="70" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
             <div style="display:flex; justify-content:space-between; align-items:baseline;">
               <div style="font-weight:600; color:var(--text);">Vladimir → Volodymyr the Great</div>
               <div style="font-size:0.8rem; font-weight:700; color:#dc2626;">4.8%</div>
@@ -390,7 +390,7 @@ function formatNum(n: number) {
             <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">Історична ідентичність — Росія привласнює наше минуле</div>
             <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:4.8%; background:#dc2626; border-radius:2px;"></div></div>
           </div>
-          <div class="top6-card" data-pair-id="72" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
+          <div class="top6-card" data-pair-slug="72" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
             <div style="display:flex; justify-content:space-between; align-items:baseline;">
               <div style="font-weight:600; color:var(--text);">Artemovsk → Bakhmut</div>
               <div style="font-size:0.8rem; font-weight:700; color:#059669;">89.6%</div>
@@ -543,26 +543,12 @@ function formatNum(n: number) {
     let chartMode: 'adoption' | 'volume' = 'volume';  // Volume by default — shows actual data density
     let showEvents = true;
 
-    // Read pair from URL query param (?pair=1), default to Kyiv (1)
-    function getPairFromUrl(): number {
-      const params = new URLSearchParams(window.location.search);
-      const p = params.get('pair');
-      if (p) {
-        const id = parseInt(p);
-        if (!isNaN(id) && (pairs as any).pairs.some((pp: any) => pp.id === id)) return id;
-      }
-      return 0; // 0 = landing/overview, no pair selected
+    // Default to Kyiv
+    function getInitialPair(): string {
+      return 'kyiv';
     }
 
-    function updateUrl(pairId: number) {
-      const url = new URL(window.location.href);
-      if (pairId === 0) {
-        url.searchParams.delete('pair');
-      } else {
-        url.searchParams.set('pair', String(pairId));
-      }
-      window.history.replaceState({}, '', url.toString());
-    }
+    // No query params — slug in URL path
 
     function showView(mode: 'landing' | 'pair') {
       const landing = document.getElementById('landing-view');
@@ -577,8 +563,7 @@ function formatNum(n: number) {
     }
 
     function showLanding() {
-      activePairId = 0;
-      updateUrl(0);
+      activePairSlug = '';
       showView('landing');
       document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
       drawCategoryChart();
@@ -587,7 +572,7 @@ function formatNum(n: number) {
       drawClCollocations();
     }
 
-    let activePairId = getPairFromUrl();
+    let activePairSlug = getInitialPair();
 
     function drawChart() {
       const container = document.getElementById('chart')!;
@@ -614,7 +599,7 @@ function formatNum(n: number) {
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
-      const pairData = (timeseriesData as any)[String(activePairId)];
+      const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) {
         svg.append('text')
           .attr('x', width / 2).attr('y', height / 2)
@@ -770,7 +755,7 @@ function formatNum(n: number) {
       // Event markers — positioned by date on x-scale
       if (showEvents) {
         const globalEvents = ((timeseriesData as any).events || []).map((e: any) => ({...e, type: 'global'}));
-        const customEvents = ((pairEvents as any)[String(activePairId)] || []).map((e: any) => ({...e, type: 'pair'}));
+        const customEvents = ((pairEvents as any)[activePairSlug] || []).map((e: any) => ({...e, type: 'pair'}));
         const events = [...globalEvents, ...customEvents].sort((a: any, b: any) => a.date.localeCompare(b.date));
 
         let eventNum = 0;
@@ -1012,15 +997,13 @@ function formatNum(n: number) {
       });
     });
 
-    function selectPair(pairId: number) {
-      activePairId = pairId;
-      updateUrl(pairId);
+    function selectPair(pairSlug: string) {
+      activePairSlug = pairSlug;
       showView('pair');
       document.querySelectorAll('.sidebar-item').forEach(i => {
-        const id = parseInt((i as HTMLElement).dataset.pairId || '0');
-        i.classList.toggle('active', id === pairId);
-        // Open parent category if needed
-        if (id === pairId) {
+        const s = (i as HTMLElement).dataset.pairSlug || '';
+        i.classList.toggle('active', s === pairSlug);
+        if (s === pairSlug) {
           const section = i.closest('.sidebar-section');
           if (section) {
             section.querySelector('.sidebar-header')?.classList.add('open');
@@ -1028,7 +1011,7 @@ function formatNum(n: number) {
           }
         }
       });
-      const pair = (pairs as any).pairs.find((p: any) => p.id === pairId);
+      const pair = (pairs as any).pairs.find((p: any) => p.slug === pairSlug);
       if (pair) {
         document.getElementById('chart-new')!.textContent = pair.ukrainian;
         document.getElementById('chart-old')!.textContent = pair.russian;
@@ -1047,10 +1030,10 @@ function formatNum(n: number) {
       const body = document.getElementById('adoption-calc-body');
       if (!body) return;
 
-      const pairData = (timeseriesData as any)[String(activePairId)];
+      const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) { body.innerHTML = ''; return; }
 
-      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (!pair) return;
 
       const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
@@ -1092,7 +1075,7 @@ function formatNum(n: number) {
       if (!container) return;
       container.innerHTML = '';
 
-      const pairData = (timeseriesData as any)[String(activePairId)];
+      const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) return;
 
       const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
@@ -1156,7 +1139,7 @@ function formatNum(n: number) {
       uaOriginEl.innerHTML = '';
       ruOriginEl.innerHTML = '';
 
-      const pairData = (timeseriesData as any)[String(activePairId)];
+      const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData?.gdelt || pairData.gdelt.length === 0) {
         wrapper.style.display = 'none';
         return;
@@ -1173,7 +1156,7 @@ function formatNum(n: number) {
       ]);
 
       // Domain origin data
-      const origins = (domainOrigins as any)[String(activePairId)];
+      const origins = (domainOrigins as any)[activePairSlug];
       if (origins) {
         const intl = origins.intl || {ukr:0, rus:0, total:0};
         const ua = origins.ua || {ukr:0, rus:0, total:0};
@@ -1249,7 +1232,7 @@ function formatNum(n: number) {
       if (!container) return;
       container.innerHTML = '';
 
-      const pairData = (timeseriesData as any)[String(activePairId)];
+      const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) return;
 
       const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
@@ -1282,13 +1265,13 @@ function formatNum(n: number) {
 
     document.querySelectorAll('.sidebar-item').forEach(item => {
       item.addEventListener('click', () => {
-        selectPair(parseInt((item as HTMLElement).dataset.pairId || '1'));
+        selectPair((item as HTMLElement).dataset.pairSlug || 'kyiv');
       });
     });
 
     // Initialize from URL param
-    if (activePairId !== 1) {
-      selectPair(activePairId);
+    if (activePairSlug !== 1) {
+      selectPair(activePairSlug);
     }
 
     // Source toggles — radio behavior (one at a time)
@@ -1589,7 +1572,7 @@ function formatNum(n: number) {
       // Update map title
       const mapNameEl = document.getElementById('map-pair-name');
       const mapSubEl = document.getElementById('map-subtitle');
-      const mapPair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      const mapPair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (mapNameEl && mapPair) mapNameEl.textContent = `${mapPair.russian} → ${mapPair.ukrainian}`;
       // Source-specific subtitle and data
       if (mapSubEl) {
@@ -1599,7 +1582,7 @@ function formatNum(n: number) {
       }
 
       // GDELT country distribution (ccTLD mapping from news domains)
-      const pairCountries = (countriesByPair as any)[String(activePairId)];
+      const pairCountries = (countriesByPair as any)[activePairSlug];
       const adoptionMap = (pairCountries || {}) as Record<string, {name: string; adoption: number}>;
 
       // Tooltip — positioned relative to container
@@ -1680,10 +1663,10 @@ function formatNum(n: number) {
 
     function drawHoldoutTable() {
       const container = document.getElementById('holdout-table')!;
-      const pairHoldouts = (holdoutsByPair as any)[String(activePairId)];
+      const pairHoldouts = (holdoutsByPair as any)[activePairSlug];
 
       const nameEl = document.getElementById('holdout-pair-name');
-      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (nameEl && pair) nameEl.textContent = pair.russian;
 
       if (!pairHoldouts || pairHoldouts.length === 0) {
@@ -1745,8 +1728,8 @@ function formatNum(n: number) {
     });
 
     // Initial load: landing or pair view based on URL
-    if (activePairId > 0) {
-      selectPair(activePairId);
+    if (activePairSlug > 0) {
+      selectPair(activePairSlug);
     } else {
       showView('landing');
       drawCategoryChart();
@@ -1771,7 +1754,7 @@ function formatNum(n: number) {
     // Top 6 cards click → navigate to pair
     document.querySelectorAll('.top6-card').forEach(card => {
       card.addEventListener('click', () => {
-        const pid = parseInt((card as HTMLElement).dataset.pairId || '1');
+        const pid = (card as HTMLElement).dataset.pairSlug || 'kyiv';
         selectPair(pid);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
@@ -1780,7 +1763,7 @@ function formatNum(n: number) {
     });
 
     window.addEventListener('resize', () => {
-      if (activePairId > 0) {
+      if (activePairSlug > 0) {
         drawChart();
         drawWorldMap();
       } else {
@@ -1795,10 +1778,10 @@ function formatNum(n: number) {
       if (!container) return;
       container.innerHTML = '';
 
-      const pair = (pairs as any).pairs.find((p: any) => p.id === activePairId);
+      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (!pair) return;
 
-      const dc = (dictCombined as any)[String(activePairId)];
+      const dc = (dictCombined as any)[activePairSlug];
       if (!dc) { container.innerHTML = '<div style="font-size:0.75rem; color:#9ca3af;">Немає довідкових даних</div>'; return; }
 
       const sources = [
@@ -1835,7 +1818,7 @@ function formatNum(n: number) {
       try {
         const tEl = document.getElementById('tools-per-pair-data');
         if (tEl && tEl.textContent) {
-          toolsData = JSON.parse(tEl.textContent).pairs[String(activePairId)];
+          toolsData = JSON.parse(tEl.textContent).pairs[activePairSlug];
         }
       } catch (e) {
         console.error('[drawSearchPreview] tools data parse failed:', e);
@@ -2021,7 +2004,7 @@ function formatNum(n: number) {
         .style('gap', '1rem');
 
       for (const pair of showPairs) {
-        const pairData = coll[pair.id];
+        const pairData = coll[pair.slug];
         if (!pairData || !pairData.russian?.collocates?.length || !pairData.ukrainian?.collocates?.length) continue;
 
         const card = grid.append('div')
@@ -2029,7 +2012,7 @@ function formatNum(n: number) {
           .style('border-radius', '10px')
           .style('padding', '1rem')
           .style('cursor', 'pointer')
-          .on('click', () => { selectPair(parseInt(pair.id)); });
+          .on('click', () => { selectPair(pair.slug); });
 
         card.append('div')
           .style('font-size', '0.9rem')

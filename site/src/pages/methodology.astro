@@ -131,9 +131,9 @@ function fmtBig(n: string | number) {
     `).join('');
 
     const spread = ea.summary?.median_spread_pp || 54;
-    const p70 = (manifest as any).pairs?.find((p:any) => p.id === 70);
-    const p10 = (manifest as any).pairs?.find((p:any) => p.id === 10);
-    const p1 = (manifest as any).pairs?.find((p:any) => p.id === 1);
+    const p70 = (manifest as any).pairs?.find((p:any) => p.slug === 'volodymyr-the-great');
+    const p10 = (manifest as any).pairs?.find((p:any) => p.slug === 'chornobyl');
+    const p1 = (manifest as any).pairs?.find((p:any) => p.slug === 'kyiv');
     const findings = [
       { title: 'Cross-source spread', text: `Median ${spread}pp \u2014 highly domain-dependent` },
       { title: 'Historical identity', text: `Kyiv ${(p1?.adoption || 0).toFixed(0)}% but Volodymyr the Great ${(p70?.adoption || 0).toFixed(0)}%` },
