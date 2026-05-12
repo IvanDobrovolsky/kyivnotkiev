@@ -379,13 +379,6 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: potemkin-stairs-odesa
-- category: landmarks
-  russian: Motherland Monument Kiev
-  ukrainian: Motherland Monument Kyiv
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-  slug: motherland-monument-kyiv
 - category: institutional
   russian: Lvov Polytechnic
   ukrainian: Lviv Polytechnic
