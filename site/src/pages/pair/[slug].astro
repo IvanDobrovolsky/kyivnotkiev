@@ -1700,18 +1700,65 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         </tr>`;
       }).join('');
 
-      container.innerHTML = `
+      // Build sections for each source
+      let html = '';
+
+      // News domains
+      if (filtered.length > 0) {
+        html += `<h4 style="font-size:0.75rem; color:#6b7280; margin:0.8rem 0.6rem 0.3rem; text-transform:uppercase;">News Domains</h4>
         <table style="width:100%; border-collapse:collapse;">
           <thead><tr style="border-bottom:2px solid #e5e7eb;">
             <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Domain</th>
             <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Old %</th>
             <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Articles</th>
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;"></th>
+            <th style="padding:0.4rem 0.6rem;"></th>
           </tr></thead>
           <tbody>${rows}</tbody>
-        </table>
-        <div style="font-size:0.65rem; color:#9ca3af; padding:0.4rem 0.6rem;">${filtered.length} domains · ${pairHoldouts.length} total</div>
-      `;
+        </table>`;
+      }
+
+      // Wikipedia pages
+      const wikiHoldouts = pairHoldouts?.wikipedia || [];
+      if (wikiHoldouts.length > 0) {
+        const wikiRows = wikiHoldouts.map((w: any) =>
+          `<tr style="border-bottom:1px solid #f3f4f6;">
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="https://en.wikipedia.org/wiki/${encodeURIComponent(w.name)}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; border-bottom:1px dotted #d1d5db;">${w.name}</a></td>
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(w.views || 0).toLocaleString()} views</td>
+          </tr>`).join('');
+        html += `<h4 style="font-size:0.75rem; color:#636466; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">Wikipedia Pages</h4>
+        <table style="width:100%; border-collapse:collapse;"><tbody>${wikiRows}</tbody></table>`;
+      }
+
+      // Reddit subreddits
+      const redditHoldouts = pairHoldouts?.reddit || [];
+      if (redditHoldouts.length > 0) {
+        const redditRows = redditHoldouts.slice(0, 20).map((r: any) =>
+          `<tr style="border-bottom:1px solid #f3f4f6;">
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="https://reddit.com/${r.name}" target="_blank" rel="noopener" style="color:#FF4500; text-decoration:none;">${r.name}</a></td>
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.posts} posts</td>
+          </tr>`).join('');
+        html += `<h4 style="font-size:0.75rem; color:#FF4500; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">Reddit</h4>
+        <table style="width:100%; border-collapse:collapse;"><tbody>${redditRows}</tbody></table>`;
+      }
+
+      // YouTube channels
+      const ytHoldouts = pairHoldouts?.youtube || [];
+      if (ytHoldouts.length > 0) {
+        const ytRows = ytHoldouts.slice(0, 20).map((y: any) =>
+          `<tr style="border-bottom:1px solid #f3f4f6;">
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:var(--text);">${y.name}</td>
+            <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${y.videos} videos</td>
+          </tr>`).join('');
+        html += `<h4 style="font-size:0.75rem; color:#FF0000; margin:1rem 0.6rem 0.3rem; text-transform:uppercase;">YouTube Channels</h4>
+        <table style="width:100%; border-collapse:collapse;"><tbody>${ytRows}</tbody></table>`;
+      }
+
+      if (!html) {
+        container.innerHTML = '<div style="padding:2rem; text-align:center; color:#9ca3af;">No holdout data</div>';
+        return;
+      }
+
+      container.innerHTML = html;
     }
 
     // Holdout filter tabs
