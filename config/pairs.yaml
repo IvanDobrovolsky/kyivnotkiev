@@ -502,18 +502,6 @@ pairs:
     label: Poroshenko unveils Volodymyr statue
   match_mode: exact_phrase
   slug: volodymyr-the-great
-- category: historical
-  russian: Prince of Kiev
-  ukrainian: Prince of Kyiv
-  enabled: true
-  is_control: false
-  notes: Historical title for rulers of Kyivan Rus. Russian framing dominates English-language
-    scholarship.
-  match_mode: exact_phrase
-  slug: prince-of-kyiv
-  events:
-  - date: 2022-02
-    label: Russia invokes historical claim
 - category: geographical
   russian: Artemovsk
   ukrainian: Bakhmut
