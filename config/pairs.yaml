@@ -442,13 +442,6 @@ pairs:
     label: Babyn Yar memorial opens
   - date: 2022-03
     label: Russian missile hits memorial site
-- category: institutional
-  russian: Lvov Polytechnic
-  ukrainian: Lviv Polytechnic
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-  slug: lviv-polytechnic
 - category: people
   russian: Alexander Usyk
   ukrainian: Oleksandr Usyk
