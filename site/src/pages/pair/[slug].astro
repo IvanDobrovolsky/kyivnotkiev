@@ -255,7 +255,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
       // Tight fit — minimal padding so bars fill the chart
       const xStart = new Date(dataMinDate.getFullYear(), dataMinDate.getMonth() - 1, 1);
-      const xEnd = new Date(dataMaxDate.getFullYear(), dataMaxDate.getMonth() + 1, 15);
+      const xEnd = new Date(dataMaxDate.getFullYear(), dataMaxDate.getMonth() + 1, 1);
       const x = d3.scaleTime()
         .domain([xStart, xEnd])
         .range([0, width]);
@@ -1283,7 +1283,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         activeSource = src;
         activeSources = new Set([src]);
 
-        drawChart();
+        try { drawChart(); } catch (e) { console.error('[drawChart]', e); }
 
         // Media origin only for GDELT
         const originEl = document.getElementById('media-origin-container');
@@ -1292,7 +1292,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         // Holdouts visible for all sources (each source has its own holdouts)
         const holdoutEl = document.getElementById('holdout-container');
         if (holdoutEl) holdoutEl.style.display = 'block';
-        drawHoldoutTable();
+        try { drawHoldoutTable(); } catch (e) { console.error('[drawHoldoutTable]', e); }
 
         // World map only for News (GDELT has country data from domain ccTLD)
         const mapEl = document.getElementById('map-container');
