@@ -1682,6 +1682,21 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       const holdoutKey = sourceToKey[activeSource] || 'news';
       const items = pairHoldouts[holdoutKey] || [];
 
+      // Update subtitle and filter visibility per source
+      const subtitleEl = document.getElementById('holdout-subtitle');
+      const subtitles: Record<string, string> = {
+        news: 'News domains still using old spelling — 2025',
+        wikipedia: 'Wikipedia pages still using old spelling — 2025',
+        reddit: 'Reddit posts still using old spelling — 2025',
+        youtube: 'YouTube videos still using old spelling — 2025',
+      };
+      if (subtitleEl) subtitleEl.textContent = subtitles[holdoutKey] || 'Still using old spelling in 2025';
+
+      // Show filter buttons only for news
+      document.querySelectorAll('[data-holdout]').forEach(b => {
+        (b as HTMLElement).style.display = holdoutKey === 'news' ? '' : 'none';
+      });
+
       if (items.length === 0) {
         container.innerHTML = `<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">No holdout data for ${activeSource}</div>`;
         return;
