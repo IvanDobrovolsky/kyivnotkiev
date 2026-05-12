@@ -234,7 +234,7 @@ def main():
     log.info(f"Countries: {mapped['country'].nunique()}")
 
     # Aggregate: per pair × per country × variant → sum(count)
-    agg = mapped.groupby(["pair_id", "country", "variant"])["count"].sum().reset_index()
+    agg = mapped.groupby(["pair_slug", "country", "variant"])["count"].sum().reset_index()
 
     # Build reverse map: alpha-2 → (ISO numeric, name)
     # The site map uses ISO numeric (3-digit padded) as keys
@@ -248,8 +248,8 @@ def main():
 
     # Build output keyed by ISO numeric (for the world map)
     result = {}
-    for pid in sorted(agg["pair_id"].unique()):
-        pair_agg = agg[agg["pair_id"] == pid]
+    for pid in sorted(agg["pair_slug"].unique()):
+        pair_agg = agg[agg["pair_slug"] == pid]
         country_data = {}
 
         for country_alpha in pair_agg["country"].unique():
@@ -272,12 +272,12 @@ def main():
             }
 
         if country_data:
-            result[str(pid)] = country_data
+            result[pid] = country_data
 
     log.info(f"Pairs with country data: {len(result)}")
 
     # Coverage stats
-    for pid in sorted(result.keys(), key=int):
+    for pid in sorted(result.keys()):
         n_countries = len(result[pid])
         total = sum(v["total"] for v in result[pid].values())
         log.info(f"  Pair {pid}: {n_countries} countries, {total:,} records")
