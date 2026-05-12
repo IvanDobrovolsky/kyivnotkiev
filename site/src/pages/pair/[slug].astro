@@ -1662,16 +1662,18 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (nameEl && pair) nameEl.textContent = pair.russian;
 
-      if (!pairHoldouts || pairHoldouts.length === 0) {
+      // New format: {news: [...], wikipedia: [...], reddit: [...], youtube: [...]}
+      const newsHoldouts = pairHoldouts?.news || [];
+      if (!pairHoldouts || newsHoldouts.length === 0) {
         container.innerHTML = '<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">No holdout data for this pair</div>';
         return;
       }
 
       // Filter by domain type
-      let filtered = pairHoldouts;
-      if (holdoutFilter === 'intl') filtered = pairHoldouts.filter((h: any) => !h.is_ru && !h.domain.endsWith('.ua'));
-      else if (holdoutFilter === 'ru') filtered = pairHoldouts.filter((h: any) => h.is_ru);
-      else if (holdoutFilter === 'ua') filtered = pairHoldouts.filter((h: any) => h.domain.endsWith('.ua'));
+      let filtered = newsHoldouts;
+      if (holdoutFilter === 'intl') filtered = newsHoldouts.filter((h: any) => !h.name.endsWith('.ru') && !h.name.endsWith('.ua'));
+      else if (holdoutFilter === 'ru') filtered = newsHoldouts.filter((h: any) => h.name.endsWith('.ru'));
+      else if (holdoutFilter === 'ua') filtered = newsHoldouts.filter((h: any) => h.name.endsWith('.ua'));
 
       if (filtered.length === 0) {
         container.innerHTML = `<div style="padding:1.5rem; text-align:center; color:#9ca3af; font-size:0.8rem;">No holdouts in this category</div>`;
@@ -1679,19 +1681,20 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       }
 
       const rows = filtered.map((h: any) => {
-        const searchUrl = `https://www.google.com/search?q=site:${h.domain}+${pair?.russian || ''}`;
-        const isRu = h.is_ru;
-        const isUa = h.domain.endsWith('.ua');
+        const domain = h.name || h.domain;
+        const searchUrl = `https://www.google.com/search?q=site:${domain}+${pair?.russian || ''}`;
+        const isRu = domain.endsWith('.ru');
+        const isUa = domain.endsWith('.ua');
         const tag = isRu ? '<span style="font-size:0.6rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ru</span>'
                   : isUa ? '<span style="font-size:0.6rem; color:#0057B8; background:#f0f9ff; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ua</span>'
                   : '';
 
         return `<tr style="border-bottom:1px solid #f3f4f6; ${isRu ? 'background:#fef2f2;' : ''}">
           <td style="padding:0.4rem 0.6rem; font-size:0.8rem;">
-            <a href="https://${h.domain}" target="_blank" rel="noopener" style="color:var(--text); font-weight:500; text-decoration:none; border-bottom:1px dotted #d1d5db;">${h.domain}</a>${tag}
+            <a href="https://${domain}" target="_blank" rel="noopener" style="color:var(--text); font-weight:500; text-decoration:none; border-bottom:1px dotted #d1d5db;">${domain}</a>${tag}
           </td>
           <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
-          <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${h.total.toLocaleString()}</td>
+          <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(h.total || 0).toLocaleString()}</td>
           <td style="padding:0.4rem 0.6rem;"><a href="${searchUrl}" target="_blank" rel="noopener" style="font-size:0.65rem; color:#4285F4; text-decoration:none;">verify →</a></td>
         </tr>`;
       }).join('');
