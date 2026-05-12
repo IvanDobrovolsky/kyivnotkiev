@@ -1193,19 +1193,19 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           const last = series[series.length - 1];
           const fmtN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
           card.innerHTML = `
-            <div class="stat-value">${total > 0 ? fmtN(total) : last.adoption + '%'}</div>
+            <div class="stat-value">${last.adoption.toFixed(0)}%</div>
             <div class="stat-label">${sourceLabels[src]}</div>
-            <div class="stat-source">${series.length} data points</div>
+            <div class="stat-source">${fmtN(total)} · ${series.length} pts</div>
           `;
         } else {
           // Determine why data is missing — expected vs gap
           const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
           const cat = pair?.category || '';
           const pid = activePairSlug;
-          const isNewPair = pid >= 80;
+          const isNewPair = false;
           // Sources that don't cover certain categories
-          const gdeltNoData = ['food','landmarks','institutional','sports'].includes(cat) || ['people','historical'].includes(cat);
-          const ngramsNoData = ['sports','institutional','landmarks'].includes(cat) || pid >= 60; // recent pairs
+          const gdeltNoData = false;
+          const ngramsNoData = false;
           const reason =
             isNewPair ? 'Data collection in progress' :
             (src === 'gdelt' && gdeltNoData) ? 'Not in news URLs' :
