@@ -1677,6 +1677,8 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       const sourceToKey: Record<string, string> = {
         gdelt: 'news', trends: 'news', wikipedia: 'wikipedia',
         reddit: 'reddit', youtube: 'youtube',
+        telegram: 'telegram', religious: 'religious',
+        openalex: 'openalex', ngrams: 'ngrams',
       };
       const holdoutKey = sourceToKey[activeSource] || 'news';
       const items = pairHoldouts[holdoutKey] || [];
@@ -1685,9 +1687,13 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       const subtitleEl = document.getElementById('holdout-subtitle');
       const subtitles: Record<string, string> = {
         news: 'News domains still using old spelling — 2025',
-        wikipedia: 'Wikipedia pages with old spelling (some redirect) — 2025',
+        wikipedia: 'Wikipedia pages with old spelling — 2025',
         reddit: 'Reddit posts still using old spelling — 2025',
         youtube: 'YouTube videos still using old spelling — 2025',
+        telegram: 'Telegram channels still using old spelling — 2025',
+        religious: 'Religious institutions still using old spelling',
+        openalex: 'Academic papers using old spelling — since 2020',
+        ngrams: 'Google Books corpus — compare spellings',
       };
       if (subtitleEl) subtitleEl.textContent = subtitles[holdoutKey] || 'Still using old spelling in 2025';
 
@@ -1759,8 +1765,30 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           `<tr style="border-bottom:1px solid #f3f4f6;">
             <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${y.url}" target="_blank" rel="noopener" style="color:#FF0000; text-decoration:none;">${y.name}</a></td>
           </tr>`).join('');
-        html = `<p style="font-size:0.75rem; color:#6b7280; margin:0.5rem 0.6rem;">YouTube videos still using the old spelling in 2025:</p>
-        <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
+        html = `<table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
+
+      } else if (holdoutKey === 'telegram') {
+        const rows = items.map((t: any) =>
+          `<tr style="border-bottom:1px solid #f3f4f6;">
+            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${t.url}" target="_blank" rel="noopener" style="color:#26A5E4; text-decoration:none;">${t.name}</a></td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${t.messages} msgs</td>
+          </tr>`).join('');
+        html = `<table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
+
+      } else if (holdoutKey === 'religious') {
+        const rows = items.map((r: any) =>
+          `<tr style="border-bottom:1px solid #f3f4f6;">
+            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${r.url}" target="_blank" rel="noopener" style="color:#8B0000; text-decoration:none;">${r.name}</a></td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.mentions} mentions</td>
+          </tr>`).join('');
+        html = `<table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
+
+      } else if (holdoutKey === 'openalex' || holdoutKey === 'ngrams') {
+        const rows = items.map((o: any) =>
+          `<tr style="border-bottom:1px solid #f3f4f6;">
+            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${o.url}" target="_blank" rel="noopener" style="color:#06b6d4; text-decoration:none;">${o.name}</a></td>
+          </tr>`).join('');
+        html = `<table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
       }
 
       container.innerHTML = html || '<div style="padding:2rem; text-align:center; color:#9ca3af;">No holdout data</div>';
