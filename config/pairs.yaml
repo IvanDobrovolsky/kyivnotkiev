@@ -141,6 +141,8 @@ pairs:
     label: Renamed from Dnipropetrovsk
   - date: 2023-01
     label: Apartment building missile strike
+  - date: 2025-10
+    label: Peace negotiation surge
   match_mode: word_boundary
   slug: dnipro
 - category: geographical
