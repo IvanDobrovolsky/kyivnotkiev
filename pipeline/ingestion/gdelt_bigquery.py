@@ -60,21 +60,26 @@ def build_query(pairs, start_date, end_date):
 
 
 def classify_matches(df, pairs):
-    """Assign pair_id and variant to each row based on term matching."""
+    """Assign pair_slug and variant to each row. Applies homonym filters from pairs.yaml."""
     pair_patterns = []
     for p in pairs:
+        negatives = [re.compile(f, re.IGNORECASE) for f in p.get("homonym_filters", [])]
         pair_patterns.append({
             "slug": p["slug"],
             "russian": p["russian"],
             "ukrainian": p["ukrainian"],
             "ru_re": re.compile(re.escape(p["russian"]), re.IGNORECASE),
             "ua_re": re.compile(re.escape(p["ukrainian"]), re.IGNORECASE),
+            "negatives": negatives,
         })
 
     results = []
     for _, row in df.iterrows():
         text = str(row.get("url", "")) + " " + str(row.get("allnames", ""))
         for pp in pair_patterns:
+            # Skip if any homonym filter matches
+            if pp["negatives"] and any(neg.search(text) for neg in pp["negatives"]):
+                continue
             if pp["ru_re"].search(text):
                 results.append({
                     "pair_slug": pp["slug"],

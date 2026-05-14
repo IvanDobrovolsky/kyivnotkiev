@@ -51,8 +51,38 @@ def _load(name: str) -> pd.DataFrame:
                 if "date" in str(field.type):
                     table = table.set_column(i, field.name, table.column(i).cast(pa.string()))
             table = table.replace_schema_metadata({})
-            _cache[name] = table.to_pandas()
+            df = table.to_pandas()
+            # Apply homonym filters from pairs.yaml for GDELT
+            if name == "gdelt" and "source_domain" in df.columns:
+                df = _apply_homonym_filters(df)
+            _cache[name] = df
     return _cache[name]
+
+
+def _apply_homonym_filters(df: pd.DataFrame) -> pd.DataFrame:
+    """Remove false positives using homonym_filters from pairs.yaml."""
+    import re
+    cfg = load_pairs()
+    before = len(df)
+    for p in cfg["pairs"]:
+        filters = p.get("homonym_filters", [])
+        if not filters:
+            continue
+        slug = p.get("slug")
+        regexes = [re.compile(f, re.IGNORECASE) for f in filters]
+        mask = df["pair_slug"] == slug
+        if mask.sum() == 0:
+            continue
+        fp_mask = df.loc[mask, "source_domain"].apply(
+            lambda d: any(r.search(str(d)) for r in regexes)
+        )
+        n_fp = fp_mask.sum()
+        if n_fp > 0:
+            df = df.drop(df.loc[mask][fp_mask].index)
+            log.info(f"    Homonym filter: removed {n_fp} FP rows for {slug}")
+    if len(df) < before:
+        log.info(f"    Total FP removed: {before - len(df)}")
+    return df
 
 
 def get_enabled_slugs() -> set[str]:
