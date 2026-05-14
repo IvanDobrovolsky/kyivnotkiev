@@ -226,7 +226,7 @@ function formatNum(n: number) {
         <div class="chart-header">
           <div>
             <div class="chart-title" style="color: var(--text)">Карта адопції: <span id="map-pair-name">Kiev → Kyiv</span></div>
-            <div class="chart-subtitle" id="map-subtitle">Адопція за країнами (%) — новинний корпус GDELT 2024–2026</div>
+            <div class="chart-subtitle" id="map-subtitle">Адопція за країнами (%) — новинний корпус GDELT 2024–2025</div>
           </div>
         </div>
         <div id="world-map" style="width:100%; height:400px;"></div>
@@ -1578,7 +1578,7 @@ function formatNum(n: number) {
       if (mapSubEl) {
         mapSubEl.textContent = activeSource === 'trends'
           ? `Адопція пошукового інтересу (%) — Google Trends 2022–2026`
-          : `Адопція на рівні URL (%) — новинний корпус GDELT 2024–2026`;
+          : `Адопція на рівні URL (%) — новинний корпус GDELT 2024–2025`;
       }
 
       // GDELT country distribution (ccTLD mapping from news domains)
