@@ -1134,6 +1134,8 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       });
     }
 
+    let newsFilter = 'all';
+
     function drawNewsHoldouts() {
       const container = document.getElementById('news-holdouts-container');
       const list = document.getElementById('news-holdouts-list');
@@ -1141,7 +1143,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       list.innerHTML = '';
 
       const pairHoldouts = (holdoutsByPair as any)[activePairSlug];
-      const articles = pairHoldouts?.news_articles || [];
+      const articles: any[] = pairHoldouts?.news_articles || [];
 
       if (articles.length === 0) {
         container.style.display = 'none';
@@ -1149,16 +1151,28 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       }
       container.style.display = 'block';
 
-      const variantColors: Record<string, string> = {russian: '#dc2626', ukrainian: '#0057B8', both: '#6b7280'};
+      // Sort newest first
+      const sorted = [...articles].sort((a: any, b: any) => (b.month || '').localeCompare(a.month || ''));
 
-      for (const a of articles.slice(0, 50)) {
+      // Filter
+      const filtered = newsFilter === 'all' ? sorted : sorted.filter((a: any) => a.variant === newsFilter);
+
+      const variantColors: Record<string, string> = {russian: '#dc2626', ukrainian: '#0057B8', both: '#6b7280'};
+      const variantLabels: Record<string, string> = {russian: 'RU', ukrainian: 'UA', both: 'Both'};
+      const now = new Date();
+      const twoYearsAgo = `${now.getFullYear() - 2}-${String(now.getMonth()+1).padStart(2,'0')}`;
+
+      for (const a of filtered) {
         const color = variantColors[a.variant] || '#6b7280';
+        const isRecent = (a.month || '') >= twoYearsAgo;
+        const isRecentRussian = isRecent && a.variant === 'russian';
         const item = document.createElement('div');
-        item.style.cssText = 'padding:0.5rem 0; border-bottom:1px solid var(--border, #e5e7eb); font-size:0.8rem;';
+        item.style.cssText = `padding:0.5rem 0; border-bottom:1px solid var(--border, #e5e7eb); font-size:0.8rem; ${isRecentRussian ? 'background:#fef2f2; margin:0 -0.75rem; padding-left:0.75rem; padding-right:0.75rem;' : ''}`;
         item.innerHTML = `
           <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.25rem;">
-            <span style="width:8px; height:8px; border-radius:50%; background:${color}; flex-shrink:0;"></span>
+            <span style="width:8px; height:8px; border-radius:50%; background:${color}; flex-shrink:0;" title="${variantLabels[a.variant] || ''} form"></span>
             <a href="${a.url}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${a.domain}</a>
+            ${isRecentRussian ? '<span style="font-size:0.6rem; background:#dc2626; color:white; padding:1px 5px; border-radius:3px;">still RU</span>' : ''}
             <span style="color:var(--text-muted); font-size:0.7rem; margin-left:auto; flex-shrink:0;">${a.month || ''}</span>
           </div>
           <div style="color:var(--text-muted); font-size:0.75rem; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${a.text_preview || ''}</div>
@@ -1169,8 +1183,21 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       // Summary
       const ua = articles.filter((a: any) => a.variant === 'ukrainian').length;
       const ru = articles.filter((a: any) => a.variant === 'russian').length;
-      const subtitle = container.querySelector('.chart-subtitle');
-      if (subtitle) subtitle.textContent = `${articles.length} articles from ${new Set(articles.map((a: any) => a.domain)).size} outlets — ${ua} Ukrainian, ${ru} Russian spelling`;
+      const recentRu = articles.filter((a: any) => a.variant === 'russian' && (a.month || '') >= twoYearsAgo).length;
+      const subtitle = document.getElementById('news-holdouts-subtitle');
+      if (subtitle) {
+        subtitle.textContent = `${articles.length} articles from ${new Set(articles.map((a: any) => a.domain)).size} outlets — ${ua} Ukrainian, ${ru} Russian form${recentRu > 0 ? ` · ${recentRu} major outlets still use Russian form in recent years` : ''}`;
+      }
+
+      // Wire up filter buttons
+      document.querySelectorAll('[data-nfilter]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          newsFilter = (btn as HTMLElement).dataset.nfilter!;
+          document.querySelectorAll('[data-nfilter]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          drawNewsHoldouts();
+        });
+      });
     }
 
     function drawPie(container: HTMLElement, slices: {label: string; value: number; color: string}[]) {
