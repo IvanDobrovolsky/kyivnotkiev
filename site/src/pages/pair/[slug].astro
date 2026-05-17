@@ -1356,13 +1356,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         activeSource = src;
         activeSources = new Set([src]);
 
-        // Auto-switch to adoption mode for Wikipedia (volume is misleading after rename)
-        if (src === 'wikipedia') {
-          chartMode = 'adoption';
-          document.querySelectorAll('[data-chart]').forEach(b => {
-            b.classList.toggle('active', (b as HTMLElement).dataset.chart === 'adoption');
-          });
-        }
+
 
         try { drawChart(); } catch (e) { console.error('[drawChart]', e); }
 
