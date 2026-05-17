@@ -116,34 +116,69 @@ def get_video_details(video_ids: list[str], api_key: str) -> dict[str, dict]:
     return details
 
 
-def fetch_transcripts(video_ids: list[str]) -> dict[str, str]:
-    """Fetch transcripts via youtube_transcript_api (free, no quota)."""
+def fetch_transcripts(video_ids: list[str], max_videos: int = 500) -> dict[str, str]:
+    """Fetch transcripts via youtube_transcript_api v1.2+ (free, no quota)."""
     from youtube_transcript_api import YouTubeTranscriptApi
+    api = YouTubeTranscriptApi()
     transcripts = {}
+    attempted = 0
 
-    for vid in video_ids:
+    for vid in video_ids[:max_videos]:
+        attempted += 1
         try:
-            transcript_list = YouTubeTranscriptApi.list_transcripts(vid)
-            # Prefer English, translate if needed
-            try:
-                t = transcript_list.find_transcript(['en'])
-            except:
-                try:
-                    t = transcript_list.find_transcript(['uk', 'ru']).translate('en')
-                except:
-                    continue
-
-            text = " ".join(chunk["text"] for chunk in t.fetch())
+            # v1.2+: instance methods, .fetch() returns FetchedTranscript
+            result = api.fetch(vid, languages=['en', 'uk', 'ru'])
+            text = " ".join(s.text for s in result.snippets)
             if len(text) > 50:
                 transcripts[vid] = text
-        except:
+        except Exception:
             pass
-        time.sleep(0.5)
+        time.sleep(0.3)
 
-        if len(transcripts) % 20 == 0 and len(transcripts) > 0:
-            log.info(f"    Transcripts: {len(transcripts)}/{len(video_ids)}")
+        if attempted % 50 == 0:
+            log.info(f"    Transcripts: {len(transcripts)}/{attempted} attempted ({len(video_ids)} total)")
 
+    log.info(f"    Transcripts done: {len(transcripts)}/{attempted} attempted")
     return transcripts
+
+
+def _save_videos(all_videos, details, transcripts, slug, ru_term, ua_term, out_path):
+    """Build and save video dataframe."""
+    rows = []
+    for vid, info in all_videos.items():
+        detail = details.get(vid, {})
+        transcript = transcripts.get(vid, "")
+
+        title = info["title"]
+        has_ru = bool(re.search(re.escape(ru_term), title, re.IGNORECASE))
+        has_ua = bool(re.search(re.escape(ua_term), title, re.IGNORECASE))
+        if has_ru and has_ua:
+            variant = "both"
+        elif has_ua:
+            variant = "ukrainian"
+        elif has_ru:
+            variant = "russian"
+        else:
+            variant = info["search_variant"]
+
+        desc = detail.get("description", info.get("description_snippet", ""))
+        corpus_text = f"{title}\n\n{desc}"
+        if transcript:
+            corpus_text += f"\n\n{transcript[:1500]}"
+
+        rows.append({
+            "video_id": vid, "title": title, "channel": info["channel"],
+            "channel_id": detail.get("channel_id", ""),
+            "published_at": info["published_at"], "date": info["published_at"][:10],
+            "view_count": detail.get("view_count", 0), "variant": variant,
+            "matched_term": info["matched_term"], "pair_slug": slug,
+            "has_transcript": bool(transcript),
+            "text": corpus_text[:2000], "text_len": min(len(corpus_text), 2000),
+        })
+
+    df = pd.DataFrame(rows)
+    df.to_parquet(out_path, index=False)
+    return df
 
 
 def collect_pair(pair: dict, api_key: str) -> pd.DataFrame:
@@ -191,55 +226,18 @@ def collect_pair(pair: dict, api_key: str) -> pd.DataFrame:
     details = get_video_details(video_ids, api_key)
     log.info(f"  [{slug}] Metadata for {len(details)} videos (units: {UNITS_USED})")
 
-    # Step 3: Transcripts (free)
-    log.info(f"  [{slug}] Fetching transcripts...")
-    transcripts = fetch_transcripts(video_ids)
-    log.info(f"  [{slug}] Transcripts: {len(transcripts)}/{len(video_ids)}")
+    # Save checkpoint after metadata (before slow transcripts)
+    _save_videos(all_videos, details, {}, slug, ru_term, ua_term, out_path)
+    log.info(f"  [{slug}] Checkpoint saved (pre-transcripts)")
 
-    # Build dataframe
-    rows = []
-    for vid, info in all_videos.items():
-        detail = details.get(vid, {})
-        transcript = transcripts.get(vid, "")
+    # Step 3: Transcripts (free, capped at 500 per pair)
+    log.info(f"  [{slug}] Fetching transcripts (max 500)...")
+    transcripts = fetch_transcripts(video_ids, max_videos=500)
+    log.info(f"  [{slug}] Transcripts: {len(transcripts)}/{min(500, len(video_ids))}")
 
-        # Determine variant from title
-        title = info["title"]
-        has_ru = bool(re.search(re.escape(ru_term), title, re.IGNORECASE))
-        has_ua = bool(re.search(re.escape(ua_term), title, re.IGNORECASE))
-        if has_ru and has_ua:
-            variant = "both"
-        elif has_ua:
-            variant = "ukrainian"
-        elif has_ru:
-            variant = "russian"
-        else:
-            variant = info["search_variant"]
-
-        # Build corpus text: title + description + transcript
-        desc = detail.get("description", info.get("description_snippet", ""))
-        corpus_text = f"{title}\n\n{desc}"
-        if transcript:
-            corpus_text += f"\n\n{transcript[:1500]}"
-
-        rows.append({
-            "video_id": vid,
-            "title": title,
-            "channel": info["channel"],
-            "channel_id": detail.get("channel_id", ""),
-            "published_at": info["published_at"],
-            "date": info["published_at"][:10],
-            "view_count": detail.get("view_count", 0),
-            "variant": variant,
-            "matched_term": info["matched_term"],
-            "pair_slug": slug,
-            "has_transcript": bool(transcript),
-            "text": corpus_text[:2000],
-            "text_len": min(len(corpus_text), 2000),
-        })
-
-    df = pd.DataFrame(rows)
-    df.to_parquet(out_path, index=False)
-    log.info(f"  [{slug}] Saved: {len(df)} videos, {df['has_transcript'].sum()} with transcripts")
+    # Final save with transcripts
+    df = _save_videos(all_videos, details, transcripts, slug, ru_term, ua_term, out_path)
+    log.info(f"  [{slug}] Final: {len(df)} videos, {df['has_transcript'].sum()} with transcripts")
     log.info(f"  Variants: {df['variant'].value_counts().to_dict()}")
 
     return df
