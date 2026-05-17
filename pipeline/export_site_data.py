@@ -28,6 +28,12 @@ DATASET_DIR = ROOT / "dataset"
 DATA_DIR = ROOT / "data"
 SITE_DATA_DIR = ROOT / "site" / "src" / "data"
 
+# ── Minimum data thresholds ──────────────────────────────────────────────────
+# Below these, a source is excluded from a pair's chart (too noisy to display).
+# See data/audit/data_quality_findings.json for methodology.
+MIN_COUNT_THRESHOLD = 30          # min total mentions for count-based sources
+MIN_NGRAMS_FREQ = 1e-9            # min max-frequency for ngrams (~500 book occurrences)
+
 
 # ── Lazy parquet loading ─────────────────────────────────────────────────────
 
@@ -269,9 +275,13 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 if total > 0:
                     result[spid]["gdelt"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
 
-    # Wikipedia (monthly)
+    # Wikipedia (monthly) + rename annotations
     log.info("  Wikipedia...")
     df = _load("wikipedia")
+    wiki_renames_path = ROOT / "data" / "audit" / "wikipedia_renames.json"
+    wiki_renames = {}
+    if wiki_renames_path.exists():
+        wiki_renames = json.loads(wiki_renames_path.read_text())
     if len(df):
         df["month"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m")
         g = df.groupby(["pair_slug", "month", "variant"])["pageviews"].sum().reset_index()
@@ -287,6 +297,10 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 total = ukr + rus
                 if total > 0:
                     result[spid]["wikipedia"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
+            # Add rename annotation if detected
+            rename_info = wiki_renames.get(pid, {})
+            if rename_info.get("rename_month"):
+                result[spid].setdefault("wikipedia_rename", rename_info["rename_month"])
 
     # Reddit (monthly)
     log.info("  Reddit...")
@@ -404,6 +418,37 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                     total = ukr + rus
                     if total > 0:
                         result[spid]["religious"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
+
+    # ── Apply minimum data thresholds ──────────────────────────────────────
+    # Remove pair×source combos that are too sparse to display meaningfully.
+    removed = 0
+    for slug in list(result.keys()):
+        if slug == "events":
+            continue
+        pair_sources = result[slug]
+        for src in list(pair_sources.keys()):
+            series = pair_sources[src]
+            if not isinstance(series, list):
+                continue  # skip metadata fields like wikipedia_rename
+            if not series:
+                del pair_sources[src]
+                removed += 1
+                continue
+            if src == "ngrams":
+                # Ngrams ukr/rus are stored as freq * 1e9 (see line ~351)
+                # Convert back: max_freq = max_stored / 1e9
+                max_stored = max(max(d.get("ukr", 0), d.get("rus", 0)) for d in series)
+                if max_stored / 1e9 < MIN_NGRAMS_FREQ:
+                    del pair_sources[src]
+                    removed += 1
+            else:
+                # For count-based sources, check total volume
+                total = sum(d.get("ukr", 0) + d.get("rus", 0) for d in series)
+                if total < MIN_COUNT_THRESHOLD:
+                    del pair_sources[src]
+                    removed += 1
+    if removed:
+        log.info(f"  Threshold filter: removed {removed} weak pair×source combos (min_count={MIN_COUNT_THRESHOLD}, min_ngrams_freq={MIN_NGRAMS_FREQ})")
 
     pair_count = len([k for k in result if k != "events"])
     log.info(f"  Timeseries: {pair_count} pairs")

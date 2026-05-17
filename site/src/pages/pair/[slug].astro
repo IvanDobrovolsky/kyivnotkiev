@@ -219,18 +219,34 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       // Check if active source has data for this pair
       const hasData = activeSources.size > 0 && [...activeSources].some(s => pairData[s] && pairData[s].length > 0);
       if (!hasData) {
-        svg.append('text')
-          .attr('x', width / 2).attr('y', height / 2 - 10)
+        // Styled "insufficient data" message
+        const g = svg.append('g')
+          .attr('transform', `translate(${width / 2}, ${height / 2 - 20})`);
+        g.append('text')
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#6b7280')
+          .attr('font-size', '15px')
+          .attr('font-weight', '500')
+          .text(`Insufficient ${sourceLabels[activeSource] || activeSource} data`);
+        g.append('text')
+          .attr('y', 24)
           .attr('text-anchor', 'middle')
           .attr('fill', '#9ca3af')
-          .attr('font-size', '14px')
-          .text(`No ${sourceLabels[activeSource] || activeSource} data for this pair`);
-        svg.append('text')
-          .attr('x', width / 2).attr('y', height / 2 + 14)
+          .attr('font-size', '12px')
+          .text('Not enough mentions to produce a reliable chart');
+        g.append('text')
+          .attr('y', 46)
           .attr('text-anchor', 'middle')
           .attr('fill', '#d1d5db')
-          .attr('font-size', '12px')
-          .text('Try switching to Trends or Wikipedia for broader coverage');
+          .attr('font-size', '11px')
+          .text('Try News, Trends, or Books for broader coverage');
+        // Subtle icon
+        g.append('text')
+          .attr('y', -30)
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#e5e7eb')
+          .attr('font-size', '28px')
+          .text('◯');
         return;
       }
 
@@ -414,6 +430,35 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           legendItem.innerHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:${isPair ? '#0057B8' : '#e5e7eb'};color:${isPair ? '#fff' : '#6b7280'};font-size:10px;font-weight:700;margin-right:4px;">${eventNum}</span>${evt.label} (${evt.date})`;
           legendContainer.appendChild(legendItem);
         });
+      }
+
+      // Wikipedia rename annotation
+      if (activeSources.has('wikipedia') && pairData.wikipedia_rename) {
+        const renameDate = parseDate(pairData.wikipedia_rename);
+        if (renameDate && renameDate >= xStart && renameDate <= xEnd) {
+          const rx = x(renameDate);
+          // Solid orange line
+          svg.append('line')
+            .attr('x1', rx).attr('x2', rx)
+            .attr('y1', -5).attr('y2', height)
+            .attr('stroke', '#d97706')
+            .attr('stroke-width', 1.5)
+            .attr('stroke-dasharray', '6,3')
+            .attr('opacity', 0.7);
+          // Label
+          svg.append('text')
+            .attr('x', rx + 4).attr('y', 14)
+            .attr('fill', '#d97706')
+            .attr('font-size', '10px')
+            .attr('font-weight', '600')
+            .text('Article renamed');
+          svg.append('text')
+            .attr('x', rx + 4).attr('y', 26)
+            .attr('fill', '#d97706')
+            .attr('font-size', '9px')
+            .attr('opacity', 0.7)
+            .text('Pageviews shifted');
+        }
       }
 
       // Data lines + crosshair tooltip
@@ -1296,6 +1341,14 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         btn.classList.add('active');
         activeSource = src;
         activeSources = new Set([src]);
+
+        // Auto-switch to adoption mode for Wikipedia (volume is misleading after rename)
+        if (src === 'wikipedia') {
+          chartMode = 'adoption';
+          document.querySelectorAll('[data-chart]').forEach(b => {
+            b.classList.toggle('active', (b as HTMLElement).dataset.chart === 'adoption');
+          });
+        }
 
         try { drawChart(); } catch (e) { console.error('[drawChart]', e); }
 
