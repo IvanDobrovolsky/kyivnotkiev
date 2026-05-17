@@ -918,6 +918,11 @@ def main():
 
     manifest = export_manifest(enabled_slugs, analyzable_slugs, control_slugs)
     timeseries = export_timeseries(enabled_slugs)
+
+    # Update manifest source pairs to match post-threshold timeseries
+    for src in manifest.get("sources", {}):
+        chart_pairs = sum(1 for pid in timeseries if pid != "events" and src in timeseries[pid] and isinstance(timeseries[pid][src], list) and len(timeseries[pid][src]) > 0)
+        manifest["sources"][src]["pairs"] = chart_pairs
     # trends_countries removed — country distribution from GDELT only
     # Holdouts: preserve existing file if it has URLs (built by BQ CSV scan)
     # Only regenerate if file doesn't exist
