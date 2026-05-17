@@ -139,26 +139,11 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
   </div>
 </div>
 
-<!-- GDELT Analysis (3 pie charts) -->
-<div id="media-origin-container" class="resp-grid-3" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
-  <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-    <div class="chart-title" style="color: var(--text)">Overall Spelling</div>
-    <div class="chart-subtitle">UA vs RU form distribution in GDELT</div>
-    <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Ukrainian vs Russian (24mo)</div>
-    <div id="spelling-pie" style="display:flex; align-items:center; justify-content:center;"></div>
-  </div>
-  <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-    <div class="chart-title" style="color: var(--text)">Ukrainian Form Sources</div>
-    <div class="chart-subtitle">Where the Ukrainian spelling appears</div>
-    <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Where do UA-form articles come from?</div>
-    <div id="ua-origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
-  </div>
-  <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-    <div class="chart-title" style="color: var(--text)">Russian Form Sources</div>
-    <div class="chart-subtitle">Where the Russian spelling appears</div>
-    <div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:0.4rem;">Where do RU-form articles come from?</div>
-    <div id="ru-origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
-  </div>
+<!-- News Article Holdouts -->
+<div id="news-holdouts-container" class="chart-container" style="margin-bottom:1rem; padding:0.75rem;">
+  <div class="chart-title" style="color: var(--text)">Verified News Articles</div>
+  <div class="chart-subtitle">English-language articles from 818 verified news outlets, extracted and language-verified</div>
+  <div id="news-holdouts-list" style="margin-top:0.5rem; max-height:400px; overflow-y:auto;"></div>
 </div>
 
 <!-- Holdouts -->

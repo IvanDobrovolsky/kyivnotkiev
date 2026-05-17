@@ -702,7 +702,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         };
         safeDraw('drawPairSourceChart', drawPairSourceChart);
         safeDraw('drawPairReligious', drawPairReligious);
-        safeDraw('drawMediaOrigin', drawMediaOrigin);
+        safeDraw('drawNewsHoldouts', drawNewsHoldouts);
         safeDraw('drawPairLLM', drawPairLLM);
         safeDraw('drawWorldMap', drawWorldMap);
         safeDraw('drawHoldoutTable', drawHoldoutTable);
@@ -1134,56 +1134,43 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       });
     }
 
-    function drawMediaOrigin() {
-      const wrapper = document.getElementById('media-origin-container');
-      const spellingEl = document.getElementById('spelling-pie');
-      const uaOriginEl = document.getElementById('ua-origin-pie');
-      const ruOriginEl = document.getElementById('ru-origin-pie');
-      if (!wrapper || !spellingEl || !uaOriginEl || !ruOriginEl) return;
-      spellingEl.innerHTML = '';
-      uaOriginEl.innerHTML = '';
-      ruOriginEl.innerHTML = '';
+    function drawNewsHoldouts() {
+      const container = document.getElementById('news-holdouts-container');
+      const list = document.getElementById('news-holdouts-list');
+      if (!container || !list) return;
+      list.innerHTML = '';
 
-      const pairData = (timeseriesData as any)[activePairSlug];
-      if (!pairData?.gdelt || pairData.gdelt.length === 0) {
-        wrapper.style.display = 'none';
+      const pairHoldouts = (holdoutsByPair as any)[activePairSlug];
+      const articles = pairHoldouts?.news_articles || [];
+
+      if (articles.length === 0) {
+        container.style.display = 'none';
         return;
       }
-      wrapper.style.display = 'grid';
+      container.style.display = 'block';
 
-      // 1. Overall spelling pie
-      const recent = pairData.gdelt.slice(-24);
-      const ukr = recent.reduce((s: number, d: any) => s + (d.ukr || 0), 0);
-      const rus = recent.reduce((s: number, d: any) => s + (d.rus || 0), 0);
-      drawPie(spellingEl, [
-        {label: 'Ukrainian', value: ukr, color: '#0057B8'},
-        {label: 'Russian', value: rus, color: '#dc2626'},
-      ]);
+      const variantColors: Record<string, string> = {russian: '#dc2626', ukrainian: '#0057B8', both: '#6b7280'};
 
-      // Domain origin data
-      const origins = (domainOrigins as any)[activePairSlug];
-      if (origins) {
-        const intl = origins.intl || {ukr:0, rus:0, total:0};
-        const ua = origins.ua || {ukr:0, rus:0, total:0};
-        const ru = origins.ru || {ukr:0, rus:0, total:0};
-
-        // 2. Ukrainian spelling sources — where do UA-form articles come from?
-        drawPie(uaOriginEl, [
-          {label: 'International', value: intl.ukr, color: '#059669'},
-          {label: '.ua domains', value: ua.ukr, color: '#0057B8'},
-          {label: '.ru domains', value: ru.ukr, color: '#dc2626'},
-        ]);
-
-        // 3. Russian spelling sources — where do RU-form articles come from?
-        drawPie(ruOriginEl, [
-          {label: 'International', value: intl.rus, color: '#059669'},
-          {label: '.ua domains', value: ua.rus, color: '#0057B8'},
-          {label: '.ru domains', value: ru.rus, color: '#dc2626'},
-        ]);
-      } else {
-        uaOriginEl.innerHTML = '<div style="color:#9ca3af; font-size:0.75rem;">No data</div>';
-        ruOriginEl.innerHTML = '';
+      for (const a of articles.slice(0, 50)) {
+        const color = variantColors[a.variant] || '#6b7280';
+        const item = document.createElement('div');
+        item.style.cssText = 'padding:0.5rem 0; border-bottom:1px solid var(--border, #e5e7eb); font-size:0.8rem;';
+        item.innerHTML = `
+          <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.25rem;">
+            <span style="width:8px; height:8px; border-radius:50%; background:${color}; flex-shrink:0;"></span>
+            <a href="${a.url}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${a.domain}</a>
+            <span style="color:var(--text-muted); font-size:0.7rem; margin-left:auto; flex-shrink:0;">${a.month || ''}</span>
+          </div>
+          <div style="color:var(--text-muted); font-size:0.75rem; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${a.text_preview || ''}</div>
+        `;
+        list.appendChild(item);
       }
+
+      // Summary
+      const ua = articles.filter((a: any) => a.variant === 'ukrainian').length;
+      const ru = articles.filter((a: any) => a.variant === 'russian').length;
+      const subtitle = container.querySelector('.chart-subtitle');
+      if (subtitle) subtitle.textContent = `${articles.length} articles from ${new Set(articles.map((a: any) => a.domain)).size} outlets — ${ua} Ukrainian, ${ru} Russian spelling`;
     }
 
     function drawPie(container: HTMLElement, slices: {label: string; value: number; color: string}[]) {
@@ -1352,9 +1339,8 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
         try { drawChart(); } catch (e) { console.error('[drawChart]', e); }
 
-        // Media origin only for GDELT
-        const originEl = document.getElementById('media-origin-container');
-        if (originEl) originEl.style.display = src === 'gdelt' ? 'block' : 'none';
+        // News holdouts — always visible
+        try { drawNewsHoldouts(); } catch (e) { console.error('[drawNewsHoldouts]', e); }
 
         // Holdouts visible for all sources (each source has its own holdouts)
         const holdoutEl = document.getElementById('holdout-container');
@@ -1886,10 +1872,9 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         // Trigger same logic as click
         const mapEl = document.getElementById('map-container');
         if (mapEl) mapEl.style.display = activeSource === 'gdelt' ? 'block' : 'none';
-        const originEl = document.getElementById('media-origin-container');
-        if (originEl) originEl.style.display = activeSource === 'gdelt' ? 'block' : 'none';
         drawChart();
         drawHoldoutTable();
+        try { drawNewsHoldouts(); } catch (e) {}
       }
     }
 
