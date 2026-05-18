@@ -628,7 +628,10 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           const cr = chartContainer.getBoundingClientRect();
           const left = event.clientX - cr.left;
           const top = event.clientY - cr.top;
-          tooltip.style('left', (left > width / 2 ? left - 200 : left + 20) + 'px')
+          const tipNode = tooltip.node() as HTMLElement;
+          const tipW = tipNode ? tipNode.offsetWidth : 180;
+          const tipX = left > width / 2 ? left - tipW - 16 : left + 16;
+          tooltip.style('left', tipX + 'px')
             .style('top', Math.max(0, top - 40) + 'px');
         })
         .on('mouseleave', function() {
