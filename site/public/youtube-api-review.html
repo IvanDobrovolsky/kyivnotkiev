@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube API Usage — KyivNotKiev Research</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a2e; background: #f8fafc; line-height: 1.7; }
+.hero { background: linear-gradient(135deg, #0057B8 0%, #1a1a2e 100%); color: white; padding: 4rem 2rem 3rem; text-align: center; }
+.hero h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 0.5rem; }
+.hero p { font-size: 1.1rem; opacity: 0.85; max-width: 700px; margin: 0 auto; }
+.badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; margin-top: 1rem; }
+.container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+.section { margin-bottom: 3rem; }
+.section h2 { font-size: 1.5rem; font-weight: 700; color: #0057B8; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+.card { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
+.card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.card p { font-size: 0.9rem; color: #4a5568; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+.stat { text-align: center; padding: 1.5rem; }
+.stat .num { font-size: 2rem; font-weight: 800; color: #0057B8; }
+.stat .label { font-size: 0.8rem; color: #718096; margin-top: 0.25rem; }
+.pipeline { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin: 1.5rem 0; }
+.pipeline .step { background: #0057B8; color: white; padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; }
+.pipeline .arrow { color: #cbd5e0; font-size: 1.2rem; }
+.code { background: #1a1a2e; color: #a5f3fc; padding: 1rem 1.25rem; border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 0.8rem; overflow-x: auto; margin: 1rem 0; line-height: 1.6; }
+.code .comment { color: #6b7280; }
+.code .key { color: #fbbf24; }
+.code .str { color: #86efac; }
+.example-chart { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 1.5rem 0; }
+.example-chart img { width: 100%; display: block; }
+.example-chart .caption { padding: 0.75rem 1rem; font-size: 0.8rem; color: #4a5568; border-top: 1px solid #e2e8f0; }
+.tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin-right: 4px; }
+.tag-ua { background: #dbeafe; color: #1d4ed8; }
+.tag-ru { background: #fee2e2; color: #dc2626; }
+.tag-src { background: #f3e8ff; color: #7c3aed; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 1rem 0; }
+th { background: #f1f5f9; text-align: left; padding: 8px 12px; font-weight: 600; }
+td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; }
+.highlight { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+.highlight strong { color: #92400e; }
+a { color: #0057B8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+.links a { display: inline-flex; align-items: center; gap: 0.4rem; background: #0057B8; color: white; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: background 0.2s; }
+.links a:hover { background: #004494; text-decoration: none; }
+.footer { text-align: center; padding: 2rem; color: #718096; font-size: 0.8rem; border-top: 1px solid #e2e8f0; margin-top: 2rem; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>#KyivNotKiev Research</h1>
+  <p>A Large-Scale Computational Study of Ukrainian Toponym Adoption Across 9 Media Platforms</p>
+  <div class="badge">Academic Research &middot; Non-Commercial &middot; University Project</div>
+</div>
+
+<div class="container">
+
+<!-- What is this -->
+<div class="section">
+  <h2>What This Research Studies</h2>
+  <p>In 2018, Ukraine launched the <a href="https://www.atlanticcouncil.org/blogs/ukrainealert/kyivnotkiev-why-spelling-matters-for-ukraines-capital/" target="_blank">#KyivNotKiev campaign</a> asking English-language media to adopt Ukrainian transliterations of place names instead of Russian-derived ones. Our study measures <strong>how and when</strong> this adoption happened across 9 independent data sources, 48 toponym pairs, and 330+ million text matches from 2010&ndash;2025.</p>
+
+  <div class="highlight">
+    <strong>Research question:</strong> How did English-language media adopt Ukrainian spellings (Kyiv, Kharkiv, Odesa) over Russian spellings (Kiev, Kharkov, Odessa) &mdash; and does the pattern differ by platform, topic, and time?
+  </div>
+
+  <div class="grid-2" style="margin-top:1.5rem;">
+    <div class="card stat"><div class="num">329M+</div><div class="label">Toponym matches scanned</div></div>
+    <div class="card stat"><div class="num">48</div><div class="label">Toponym pairs tracked</div></div>
+    <div class="card stat"><div class="num">9</div><div class="label">Independent data sources</div></div>
+    <div class="card stat"><div class="num">15 years</div><div class="label">Time span (2010&ndash;2025)</div></div>
+  </div>
+</div>
+
+<!-- YouTube's Role -->
+<div class="section">
+  <h2>How YouTube Data Fits In</h2>
+  <p>YouTube is <strong>one of 9 sources</strong> in a cross-platform comparison. Each source captures a different dimension of language adoption:</p>
+
+  <table>
+    <tr><th>Source</th><th>What it measures</th><th>Records</th></tr>
+    <tr><td><strong>GDELT News</strong></td><td>News article URLs and entity mentions</td><td>20M</td></tr>
+    <tr><td><strong>Google Trends</strong></td><td>Search interest over time</td><td>114K</td></tr>
+    <tr><td><strong>Wikipedia</strong></td><td>Article page views</td><td>299M</td></tr>
+    <tr><td style="background:#fff7ed;"><strong>YouTube</strong></td><td style="background:#fff7ed;">Video title spelling choices by creators</td><td style="background:#fff7ed;">19K+</td></tr>
+    <tr><td><strong>Reddit</strong></td><td>Social media post spelling choices</td><td>870K</td></tr>
+    <tr><td><strong>Google Books</strong></td><td>Published book frequency</td><td>1.1K</td></tr>
+    <tr><td><strong>OpenAlex</strong></td><td>Academic paper titles and abstracts</td><td>31K</td></tr>
+    <tr><td><strong>Telegram</strong></td><td>Channel messages</td><td>26K</td></tr>
+    <tr><td><strong>Religious</strong></td><td>Institutional press (WCC, Vatican, etc.)</td><td>3.5K</td></tr>
+  </table>
+</div>
+
+<!-- Pipeline -->
+<div class="section">
+  <h2>YouTube API Data Pipeline</h2>
+  <p>Our pipeline uses two YouTube API endpoints to collect video metadata:</p>
+
+  <div class="pipeline">
+    <span class="step">search.list</span><span class="arrow">&rarr;</span>
+    <span class="step">Find videos by term + year</span><span class="arrow">&rarr;</span>
+    <span class="step">videos.list</span><span class="arrow">&rarr;</span>
+    <span class="step">Get metadata</span><span class="arrow">&rarr;</span>
+    <span class="step">Classify variant</span><span class="arrow">&rarr;</span>
+    <span class="step">Aggregate ratios</span>
+  </div>
+
+  <div class="code">
+<span class="comment"># Step 1: Search for each spelling variant per year</span>
+youtube.search().list(
+    <span class="key">q</span>=<span class="str">"Kyiv"</span>,
+    <span class="key">publishedAfter</span>=<span class="str">"2022-01-01T00:00:00Z"</span>,
+    <span class="key">publishedBefore</span>=<span class="str">"2022-12-31T23:59:59Z"</span>,
+    <span class="key">type</span>=<span class="str">"video"</span>, <span class="key">maxResults</span>=50
+)
+
+<span class="comment"># Step 2: Batch fetch metadata (1 unit per 50 videos)</span>
+youtube.videos().list(
+    <span class="key">part</span>=<span class="str">"snippet,statistics"</span>,
+    <span class="key">id</span>=<span class="str">"video_id_1,video_id_2,..."</span>
+)
+
+<span class="comment"># Step 3: Classify variant from title</span>
+<span class="key">title</span> = <span class="str">"Walking tour of Kyiv, Ukraine 2024"</span>
+<span class="key">variant</span> = <span class="str">"ukrainian"</span>  <span class="comment"># contains "Kyiv" not "Kiev"</span>
+  </div>
+
+  <div class="card">
+    <h3>What we store</h3>
+    <p>Only video metadata: <span class="tag tag-src">video_id</span> <span class="tag tag-src">title</span> <span class="tag tag-src">publishedAt</span> <span class="tag tag-src">viewCount</span> <span class="tag tag-src">channelTitle</span></p>
+    <p style="margin-top:0.5rem;">No video content, thumbnails, comments, or user data is collected or stored.</p>
+  </div>
+</div>
+
+<!-- Output -->
+<div class="section">
+  <h2>Output: Adoption Timeseries</h2>
+  <p>The end result is an <strong>aggregate adoption ratio per year</strong> &mdash; what percentage of YouTube videos use the Ukrainian vs Russian spelling. This is displayed alongside other sources on our research website.</p>
+
+  <div class="card" style="padding:0; overflow:hidden;">
+    <div style="padding:1rem 1.25rem; background:#f8fafc; border-bottom:1px solid #e2e8f0;">
+      <strong>Example: Kyiv adoption across sources</strong>
+      <p style="font-size:0.8rem; color:#718096;">Each line represents a different data source. YouTube (red) shows the same adoption curve as News (dark blue) and Reddit (orange).</p>
+    </div>
+    <div style="padding:1.25rem; text-align:center;">
+      <div style="background:#f1f5f9; border-radius:8px; padding:2rem; font-size:0.9rem; color:#4a5568;">
+        Interactive chart available at:<br>
+        <a href="https://kyivnotkiev.org/pair/kyiv?source=youtube" target="_blank" style="font-size:1.1rem; font-weight:700;">kyivnotkiev.org/pair/kyiv?source=youtube</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <strong>Key finding from YouTube data:</strong> In 2018, only 28% of YouTube videos about the Ukrainian capital used "Kyiv." By 2022 (after the full-scale invasion), adoption reached 72%. By 2024, it stabilized at 85%+ &mdash; consistent with the pattern observed across all 9 sources.
+  </div>
+</div>
+
+<!-- Cross-platform -->
+<div class="section">
+  <h2>Cross-Platform Analysis</h2>
+  <p>YouTube data is combined with 8 other sources to produce cross-platform adoption curves. We also apply unsupervised machine learning (sentence embeddings + HDBSCAN clustering) to discover how spelling variants create distinct discourse communities.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Timeseries Comparison</h3>
+      <p>Side-by-side adoption curves from News, YouTube, Reddit, Academic papers, Books, and more. Shows whether platforms adopt at different rates.</p>
+    </div>
+    <div class="card">
+      <h3>Embedding Clustering</h3>
+      <p>Texts are embedded using sentence-transformers, reduced via UMAP, and clustered with HDBSCAN. Reveals that spelling variants occupy different semantic spaces.</p>
+    </div>
+    <div class="card">
+      <h3>Statistical Contrast</h3>
+      <p>Log-odds ratio analysis comparing vocabulary between Ukrainian and Russian spelling texts. Shows systematic differences in discourse context.</p>
+    </div>
+    <div class="card">
+      <h3>Verified Holdouts</h3>
+      <p>For each pair, 50+ verified articles from tier-1 media (BBC, Reuters, Guardian) with extracted text, variant classification, and source URLs.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Compliance -->
+<div class="section">
+  <h2>API Compliance</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>No content redistribution</h3>
+      <p>No video content, audio, thumbnails, or transcripts are displayed to users. Only aggregate statistics.</p>
+    </div>
+    <div class="card">
+      <h3>No user data</h3>
+      <p>No viewer data, comments, or personal information is collected. No OAuth authentication.</p>
+    </div>
+    <div class="card">
+      <h3>No monetization</h3>
+      <p>Purely academic research. Non-commercial. No ads, no subscriptions, no data sales.</p>
+    </div>
+    <div class="card">
+      <h3>One-time collection</h3>
+      <p>Static dataset snapshot for published study. No ongoing API calls after initial collection.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Links -->
+<div class="section">
+  <h2>Resources</h2>
+  <div class="links">
+    <a href="https://kyivnotkiev.org" target="_blank">Research Website</a>
+    <a href="https://kyivnotkiev.org/pair/kyiv?source=youtube" target="_blank">YouTube Chart (Kyiv)</a>
+    <a href="https://kyivnotkiev.org/sources/" target="_blank">All Sources</a>
+    <a href="https://kyivnotkiev.org/methodology/" target="_blank">Methodology</a>
+    <a href="https://huggingface.co/datasets/KyivNotKiev/toponym-adoption-data" target="_blank">HuggingFace Dataset</a>
+    <a href="https://www.atlanticcouncil.org/blogs/ukrainealert/kyivnotkiev-why-spelling-matters-for-ukraines-capital/" target="_blank">Atlantic Council: #KyivNotKiev</a>
+    <a href="https://mfa.gov.ua/en/kyivnotkiev" target="_blank">Ukraine MFA: KyivNotKiev</a>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <p>KyivNotKiev Research &middot; Academic Non-Commercial Project &middot; GCP Project: kyivnotkiev-yt</p>
+</div>
+
+</body>
+</html>
