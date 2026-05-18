@@ -334,8 +334,8 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         const useSym = ratio > 20 && lineMode === 'both';
 
         if (useSym) {
-          // Symlog scale: shows both small and large values
-          y = d3.scaleSymlog().domain([0, maxVal * 1.1]).range([height, 0]) as any;
+          // Symlog scale: constant controls compression — higher = more linear-like = bigger visual gaps
+          y = d3.scaleSymlog().constant(100).domain([0, maxVal * 1.1]).range([height, 0]) as any;
           const yMax = maxVal * 1.1;
           yTicks = [0, Math.round(yMax * 0.01), Math.round(yMax * 0.1), Math.round(yMax * 0.5), Math.round(yMax)];
         } else {
