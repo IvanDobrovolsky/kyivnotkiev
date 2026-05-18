@@ -703,6 +703,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         safeDraw('drawPairSourceChart', drawPairSourceChart);
         safeDraw('drawPairReligious', drawPairReligious);
         safeDraw('drawNewsHoldouts', drawNewsHoldouts);
+        safeDraw('drawRedditHoldouts', drawRedditHoldouts);
         safeDraw('drawPairLLM', drawPairLLM);
         safeDraw('drawWorldMap', drawWorldMap);
         safeDraw('drawHoldoutTable', drawHoldoutTable);
@@ -1196,6 +1197,61 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           document.querySelectorAll('[data-nfilter]').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           drawNewsHoldouts();
+        });
+      });
+    }
+
+    let redditFilter = 'all';
+
+    function drawRedditHoldouts() {
+      const container = document.getElementById('reddit-holdouts-container');
+      const list = document.getElementById('reddit-holdouts-list');
+      if (!container || !list) return;
+      list.innerHTML = '';
+
+      const pairHoldouts = (holdoutsByPair as any)[activePairSlug];
+      const posts: any[] = pairHoldouts?.reddit_posts || [];
+
+      if (posts.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+      container.style.display = 'block';
+
+      const filtered = redditFilter === 'all' ? posts : posts.filter((p: any) => p.variant === redditFilter);
+      const variantColors: Record<string, string> = {russian: '#dc2626', ukrainian: '#0057B8', both: '#6b7280'};
+      const now = new Date();
+      const twoYearsAgo = `${now.getFullYear() - 2}-${String(now.getMonth()+1).padStart(2,'0')}`;
+
+      for (const p of filtered) {
+        const color = variantColors[p.variant] || '#6b7280';
+        const isRecent = (p.date || '') >= twoYearsAgo;
+        const isRecentRu = isRecent && p.variant === 'russian';
+        const item = document.createElement('div');
+        item.style.cssText = `padding:0.5rem 0; border-bottom:1px solid var(--border, #e5e7eb); font-size:0.8rem; ${isRecentRu ? 'background:#fef2f2; margin:0 -0.75rem; padding-left:0.75rem; padding-right:0.75rem;' : ''}`;
+        item.innerHTML = `
+          <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.25rem;">
+            <span style="width:8px; height:8px; border-radius:50%; background:${color}; flex-shrink:0;"></span>
+            <a href="${p.url}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">r/${p.subreddit}</a>
+            ${isRecentRu ? '<span style="font-size:0.6rem; background:#dc2626; color:white; padding:1px 5px; border-radius:3px;">still RU</span>' : ''}
+            <span style="color:var(--text-muted); font-size:0.7rem; margin-left:auto; flex-shrink:0;">↑${p.score?.toLocaleString() || 0} · ${p.date || ''}</span>
+          </div>
+          <div style="color:var(--text-muted); font-size:0.75rem; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${p.text_preview || ''}</div>
+        `;
+        list.appendChild(item);
+      }
+
+      const ua = posts.filter((p: any) => p.variant === 'ukrainian').length;
+      const ru = posts.filter((p: any) => p.variant === 'russian').length;
+      const subtitle = document.getElementById('reddit-holdouts-subtitle');
+      if (subtitle) subtitle.textContent = `${posts.length} posts — ${ua} Ukrainian, ${ru} Russian form`;
+
+      document.querySelectorAll('[data-rfilter]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          redditFilter = (btn as HTMLElement).dataset.rfilter!;
+          document.querySelectorAll('[data-rfilter]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          drawRedditHoldouts();
         });
       });
     }
