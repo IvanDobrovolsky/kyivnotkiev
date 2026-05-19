@@ -1146,6 +1146,12 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       if (!container || !list) return;
       list.innerHTML = '';
 
+      // Only show for News (GDELT) source
+      if (activeSource !== 'gdelt') {
+        container.style.display = 'none';
+        return;
+      }
+
       const pairHoldouts = (holdoutsByPair as any)[activePairSlug];
       const articles: any[] = pairHoldouts?.news_articles || [];
 
@@ -1211,6 +1217,12 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       const list = document.getElementById('reddit-holdouts-list');
       if (!container || !list) return;
       list.innerHTML = '';
+
+      // Only show for Reddit source
+      if (activeSource !== 'reddit') {
+        container.style.display = 'none';
+        return;
+      }
 
       const pairHoldouts = (holdoutsByPair as any)[activePairSlug];
       const posts: any[] = pairHoldouts?.reddit_posts || [];
@@ -1419,8 +1431,9 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
         try { drawChart(); } catch (e) { console.error('[drawChart]', e); }
 
-        // News holdouts — always visible
-        try { drawNewsHoldouts(); } catch (e) { console.error('[drawNewsHoldouts]', e); }
+        // Source-specific holdouts
+        try { drawNewsHoldouts(); } catch (e) {}
+        try { drawRedditHoldouts(); } catch (e) {}
 
         // Holdouts visible for all sources (each source has its own holdouts)
         const holdoutEl = document.getElementById('holdout-container');
