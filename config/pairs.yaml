@@ -611,6 +611,8 @@ pairs:
   match_mode: exact_phrase
   slug: serhii-korolyov
   events:
+  - date: 2011-04
+    label: Gagarin 50th anniversary (Korolev designed Vostok rocket)
   - date: 2017-01
     label: Korolev 110th birthday anniversary
   - date: 2025-04
