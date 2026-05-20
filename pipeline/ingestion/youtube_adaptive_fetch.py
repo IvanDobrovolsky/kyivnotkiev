@@ -35,13 +35,24 @@ PAGE_CAP = 500  # if we get this many, drill down
 _keys = []
 _key_idx = 0
 _units = 0
+_dead_keys = set()
 
 
 def next_key():
     global _key_idx
-    key = _keys[_key_idx % len(_keys)]
-    _key_idx += 1
-    return key
+    # Skip dead keys
+    attempts = 0
+    while attempts < len(_keys):
+        key = _keys[_key_idx % len(_keys)]
+        _key_idx += 1
+        if key not in _dead_keys:
+            return key
+        attempts += 1
+    return None  # all keys dead
+
+
+def all_keys_dead():
+    return len(_dead_keys) >= len(_keys)
 
 
 def track(n):
@@ -54,8 +65,15 @@ def search_window(query, after, before, max_pages=10):
     results = []
     page_token = None
 
+    if all_keys_dead():
+        return results
+
     for page in range(max_pages):
         key = next_key()
+        if key is None:
+            log.warning("  All keys exhausted — stopping")
+            break
+
         params = {
             "part": "snippet", "q": query, "type": "video",
             "maxResults": 50, "relevanceLanguage": "en",
@@ -69,7 +87,10 @@ def search_window(query, after, before, max_pages=10):
         track(100)
 
         if resp.status_code == 403:
-            log.warning(f"  Key exhausted, rotating...")
+            _dead_keys.add(key)
+            log.warning(f"  Key {key[:15]}... exhausted ({len(_dead_keys)}/{len(_keys)} dead)")
+            if all_keys_dead():
+                break
             continue
         if resp.status_code != 200:
             break
@@ -92,14 +113,35 @@ def search_window(query, after, before, max_pages=10):
     return results
 
 
-def adaptive_search(query, year_start, year_end):
-    """Search adaptively — month → week → day when cap is hit."""
+def adaptive_search(query, year_start, year_end, checkpoint_dir=None, slug=None):
+    """Search adaptively — month → week → day when cap is hit. Checkpoints per month."""
+    import json as _json
+
     all_videos = {}
+    completed_months = set()
+
+    # Load checkpoint if exists
+    cp_path = None
+    if checkpoint_dir and slug:
+        cp_path = Path(checkpoint_dir) / f"{slug}_{query.replace(' ', '_')}_checkpoint.json"
+        if cp_path.exists():
+            with open(cp_path) as f:
+                cp = _json.load(f)
+            all_videos = {v['video_id']: v for v in cp.get('videos', [])}
+            completed_months = set(cp.get('completed_months', []))
+            log.info(f"    Resumed checkpoint: {len(all_videos):,} videos, {len(completed_months)} months done")
 
     current = datetime(year_start, 1, 1)
     end = datetime(year_end, 12, 31)
 
     while current < end:
+        month_key = current.strftime("%Y-%m")
+
+        # Skip completed months
+        if month_key in completed_months:
+            current = (current.replace(day=1) + timedelta(days=32)).replace(day=1)
+            continue
+
         # Monthly window
         month_end = min(current + timedelta(days=31), end)
         month_end = month_end.replace(day=1) if month_end.month != current.month else month_end
@@ -111,6 +153,10 @@ def adaptive_search(query, year_start, year_end):
 
         results = search_window(query, after, before)
         new_count = sum(1 for r in results if r["video_id"] not in all_videos)
+
+        if all_keys_dead():
+            log.warning(f"    All keys dead at {current.strftime('%Y-%m')} — saving progress")
+            break
 
         if len(results) >= PAGE_CAP:
             # Drill down to weeks
@@ -144,7 +190,21 @@ def adaptive_search(query, year_start, year_end):
                 all_videos[r["video_id"]] = r
             log.info(f"    {current.strftime('%Y-%m')}: {new_count} new ({len(all_videos)} total, {_units} units)")
 
-        current = month_end
+        # Mark month complete and checkpoint
+        completed_months.add(month_key)
+        if cp_path:
+            with open(cp_path, 'w') as f:
+                _json.dump({
+                    'videos': list(all_videos.values()),
+                    'completed_months': sorted(completed_months),
+                }, f)
+
+        current = (current.replace(day=1) + timedelta(days=32)).replace(day=1)
+
+    # Clean up checkpoint on completion
+    if cp_path and cp_path.exists() and not all_keys_dead():
+        cp_path.unlink()
+        log.info(f"    Checkpoint cleaned up — all months complete")
 
     return all_videos
 
@@ -178,16 +238,29 @@ def collect_pair(pair):
     ua_term = pair["ukrainian"]
 
     out_path = OUT_DIR / f"{slug}.parquet"
+
+    # Load existing data to merge with (resume support)
+    all_videos = {}
     if out_path.exists():
         existing = pd.read_parquet(out_path)
-        log.info(f"  Already exists: {len(existing)} videos — delete to re-fetch")
-        return existing
+        for _, r in existing.iterrows():
+            all_videos[r['video_id']] = {
+                'video_id': r['video_id'], 'title': r['title'],
+                'channel': r['channel'], 'published_at': r['published_at'],
+                'search_variant': r['variant'], 'matched_term': r['matched_term'],
+            }
+        log.info(f"  Loaded {len(all_videos):,} existing videos — will merge new")
 
-    all_videos = {}
+    variant_pairs = [("russian", ru_term), ("ukrainian", ua_term)]
+    if hasattr(collect_pair, '_only_variant') and collect_pair._only_variant:
+        variant_pairs = [(v, t) for v, t in variant_pairs if v == collect_pair._only_variant]
 
-    for variant, term in [("russian", ru_term), ("ukrainian", ua_term)]:
+    cp_dir = OUT_DIR / ".checkpoints"
+    cp_dir.mkdir(parents=True, exist_ok=True)
+
+    for variant, term in variant_pairs:
         log.info(f"  [{slug}] Adaptive search: '{term}' ({variant})")
-        videos = adaptive_search(term, 2015, 2025)
+        videos = adaptive_search(term, 2015, 2025, checkpoint_dir=cp_dir, slug=f"{slug}_{variant}")
         for vid, info in videos.items():
             if vid not in all_videos:
                 info["search_variant"] = variant
@@ -241,6 +314,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--pair", type=str, required=True)
     parser.add_argument("--api-keys", type=str, required=True, help="Comma-separated API keys")
+    parser.add_argument("--variant", type=str, default=None, choices=["russian", "ukrainian"], help="Only fetch one variant")
     args = parser.parse_args()
 
     global _keys
@@ -252,6 +326,8 @@ def main():
     if not pairs:
         log.error(f"Pair '{args.pair}' not found")
         return
+
+    collect_pair._only_variant = args.variant
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     collect_pair(pairs[0])
