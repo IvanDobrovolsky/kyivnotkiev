@@ -107,6 +107,26 @@ KNOWN_OUTLETS = {
     # Ukraine
     "kyivpost.com": "UA", "kyivindependent.com": "UA", "ukrinform.net": "UA",
     "unian.info": "UA", "uatoday.tv": "UA", "112.international": "UA",
+    "obozrevatel.com": "UA", "korrespondent.net": "UA", "unian.net": "UA",
+    "liga.net": "UA", "zaxid.net": "UA", "espreso.tv": "UA",
+    "ukranews.com": "UA", "gordonua.com": "UA", "for-ua.com": "UA",
+    "glavred.info": "UA", "pressorg24.com": "UA", "ukrainianwall.com": "UA",
+    "dailylviv.com": "UA", "kirovograd.net": "UA", "nikvesti.com": "UA",
+    "objectiv.tv": "UA", "radiosvoboda.org": "UA", "champion.com.ua": "UA",
+    "sport.ua": "UA", "pravda.com.ua": "UA", "eurointegration.com.ua": "UA",
+    "epravda.com.ua": "UA", "interfax.com.ua": "UA", "unn.com.ua": "UA",
+    "rbc.ua": "UA", "nv.ua": "UA", "tsn.ua": "UA", "gazeta.ua": "UA",
+    "hromadske.ua": "UA", "suspilne.media": "UA", "babel.ua": "UA",
+    "bigmir.net": "UA", "ostro.org": "UA", "uainfo.org": "UA",
+    "bagnet.org": "UA", "tvoemisto.tv": "UA", "volynnews.com": "UA",
+    # Russia (additional)
+    "ria.ru": "RU", "rg.ru": "RU", "lenta.ru": "RU", "iz.ru": "RU",
+    "gazeta.ru": "RU", "kommersant.ru": "RU", "vedomosti.ru": "RU",
+    "interfax.ru": "RU", "ura.news": "RU", "meduza.io": "LV",
+    # International
+    "euronews.com": "FR", "iheart.com": "US",
+    # Argentina
+    "tiempodesanjuan.com": "AR",
     # China
     "globaltimes.cn": "CN", "chinadaily.com.cn": "CN",
     # Japan
