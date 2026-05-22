@@ -926,22 +926,34 @@ def main():
     # trends_countries removed — country distribution from GDELT only
     # Holdouts: preserve existing file if it has URLs (built by BQ CSV scan)
     # Only regenerate if file doesn't exist
-    holdouts_path = SITE_DATA_DIR / "holdouts_by_pair.json"
-    if holdouts_path.exists():
-        import json as _json
-        with open(holdouts_path) as _f:
-            _existing = _json.load(_f)
-        # Check if it has the new URL format
-        _sample = next(iter(_existing.values()), {})
-        _news = _sample.get("news", [{}]) if isinstance(_sample, dict) else [{}]
-        if _news and "url" in (_news[0] if _news else {}):
-            log.info("  Using existing holdouts_by_pair.json (has article URLs)")
-            holdouts_by_pair = _existing
-        else:
-            holdouts_by_pair, _ = export_holdouts(enabled_slugs)
-    else:
-        holdouts_by_pair, _ = export_holdouts(enabled_slugs)
+    holdouts_by_pair, _ = export_holdouts(enabled_slugs)
     _, holdouts_global = export_holdouts(enabled_slugs)
+
+    # Inject GDELT article holdouts from cleaned parquet files
+    _holdout_dir = ROOT / "data" / "corpus" / "gdelt_holdouts"
+    if _holdout_dir.exists():
+        import glob as _glob
+        _hfiles = _glob.glob(str(_holdout_dir / "*.parquet"))
+        _injected = 0
+        for _hf in _hfiles:
+            _slug = Path(_hf).stem
+            if _slug not in enabled_slugs:
+                continue
+            _hdf = pd.read_parquet(_hf)
+            if len(_hdf) == 0:
+                continue
+            _articles = []
+            for _, _r in _hdf.iterrows():
+                _articles.append({
+                    "domain": _r.get("domain", ""),
+                    "url": _r.get("url", ""),
+                    "variant": _r.get("variant", ""),
+                    "text_preview": str(_r.get("text", ""))[:200],
+                    "month": str(_r.get("month", "")),
+                })
+            holdouts_by_pair.setdefault(_slug, {})["news_articles"] = _articles
+            _injected += 1
+        log.info(f"  Injected GDELT article holdouts: {_injected} pairs, {sum(len(holdouts_by_pair.get(s,{}).get('news_articles',[])) for s in enabled_slugs):,} articles")
     pair_events = export_pair_events(enabled_slugs)
     analysis = export_analysis()
     domain_origins = export_domain_origins(enabled_slugs)
