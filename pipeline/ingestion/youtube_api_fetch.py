@@ -95,7 +95,7 @@ def get_video_details(video_ids: list[str], api_key: str) -> dict[str, dict]:
     for i in range(0, len(video_ids), 50):
         batch = video_ids[i:i + 50]
         resp = requests.get(f"{API_URL}/videos", params={
-            "part": "snippet,statistics",
+            "part": "snippet",
             "id": ",".join(batch),
             "key": api_key,
         }, timeout=15)
@@ -105,11 +105,8 @@ def get_video_details(video_ids: list[str], api_key: str) -> dict[str, dict]:
             for item in resp.json().get("items", []):
                 vid = item["id"]
                 snippet = item.get("snippet", {})
-                stats = item.get("statistics", {})
                 details[vid] = {
                     "description": snippet.get("description", ""),
-                    "view_count": int(stats.get("viewCount", 0)),
-                    "like_count": int(stats.get("likeCount", 0)),
                     "channel_id": snippet.get("channelId", ""),
                 }
         time.sleep(0.2)
@@ -170,7 +167,7 @@ def _save_videos(all_videos, details, transcripts, slug, ru_term, ua_term, out_p
             "video_id": vid, "title": title, "channel": info["channel"],
             "channel_id": detail.get("channel_id", ""),
             "published_at": info["published_at"], "date": info["published_at"][:10],
-            "view_count": detail.get("view_count", 0), "variant": variant,
+            "variant": variant,
             "matched_term": info["matched_term"], "pair_slug": slug,
             "has_transcript": bool(transcript),
             "text": corpus_text[:2000], "text_len": min(len(corpus_text), 2000),

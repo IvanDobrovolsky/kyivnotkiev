@@ -221,7 +221,7 @@ def get_video_details(video_ids):
             log.warning(f"  Keys exhausted at batch {i // 50} — got metadata for {len(details)}/{len(video_ids)}")
             break
         resp = requests.get(f"{API_URL}/videos", params={
-            "part": "snippet,statistics", "id": ",".join(batch), "key": key,
+            "part": "snippet", "id": ",".join(batch), "key": key,
         }, timeout=15)
         track(1)
         if resp.status_code == 403:
@@ -233,10 +233,8 @@ def get_video_details(video_ids):
         if resp.status_code == 200:
             for item in resp.json().get("items", []):
                 snippet = item.get("snippet", {})
-                stats = item.get("statistics", {})
                 details[item["id"]] = {
                     "description": snippet.get("description", ""),
-                    "view_count": int(stats.get("viewCount", 0)),
                     "channel_id": snippet.get("channelId", ""),
                 }
         time.sleep(0.1)
@@ -299,7 +297,6 @@ def collect_pair(pair):
                 "channel_id": detail.get("channel_id", ""),
                 "published_at": info["published_at"],
                 "date": info["published_at"][:10],
-                "view_count": detail.get("view_count", 0),
                 "variant": variant, "matched_term": info["matched_term"],
                 "pair_slug": slug, "has_transcript": False,
                 "text": (title + "\n\n" + desc)[:2000],
