@@ -54,6 +54,7 @@ pairs:
     label: Peace negotiation surge
   match_mode: word_boundary
   slug: kyiv
+  word_boundary: true
 - category: geographical
   russian: Kharkov
   ukrainian: Kharkiv
@@ -68,6 +69,7 @@ pairs:
     label: Russian border offensive
   match_mode: word_boundary
   slug: kharkiv
+  word_boundary: true
 - category: geographical
   russian: Odessa
   ukrainian: Odesa
@@ -95,6 +97,7 @@ pairs:
   - odessa.{0,5}a.?zion
   homonym_type: us_city
   slug: odesa
+  word_boundary: true
 - category: geographical
   russian: Lvov
   ukrainian: Lviv
@@ -105,6 +108,7 @@ pairs:
   events:
   - date: 2022-03
     label: Refugee hub, diplomatic activity
+  word_boundary: true
 - category: geographical
   russian: Zaporozhye
   ukrainian: Zaporizhzhia
@@ -169,6 +173,7 @@ pairs:
   events:
   - date: 2022-03
     label: Russian missile strikes on Rivne
+  word_boundary: true
 - category: geographical
   russian: Chernobyl
   ukrainian: Chornobyl
@@ -252,6 +257,7 @@ pairs:
   events:
   - date: 2022-03
     label: Restaurants rebrand to Chicken Kyiv
+  word_boundary: true
 - category: food
   russian: Borsch
   ukrainian: Borscht
@@ -315,6 +321,7 @@ pairs:
     label: University ranking spike
   - date: 2022-03
     label: University campus damaged by shelling
+  word_boundary: true
 - category: institutional
   russian: Kiev Polytechnic
   ukrainian: Kyiv Polytechnic
@@ -349,6 +356,7 @@ pairs:
     label: UEFA updates to Dynamo Kyiv
   match_mode: exact_phrase
   slug: dynamo-kyiv
+  word_boundary: true
 - category: sports
   russian: Kiev ballet
   ukrainian: Kyiv ballet
@@ -381,6 +389,7 @@ pairs:
   events:
   - date: 2022-03
     label: Siege of Chernihiv
+  word_boundary: true
 - category: geographical
   russian: Chernovtsy
   ukrainian: Chernivtsi
@@ -469,6 +478,7 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: metalist-kharkiv
+  word_boundary: true
 - category: landmarks
   russian: Babi Yar
   ukrainian: Babyn Yar
@@ -588,6 +598,7 @@ pairs:
   notes: Princess of Kyivan Rus (княгиня Ольга). Tests Г→H in first name + Kiev→Kyiv.
   match_mode: exact_phrase
   slug: olha-of-kyiv
+  word_boundary: true
 - category: people
   russian: Igor Sikorsky
   ukrainian: Ihor Sikorsky
