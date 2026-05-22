@@ -255,8 +255,12 @@ pairs:
   match_mode: exact_phrase
   slug: chicken-kyiv
   events:
+  - date: 2015-07
+    label: Chicken Kiev food poisoning outbreak (US)
   - date: 2022-03
-    label: Restaurants rebrand to Chicken Kyiv
+    label: UK supermarkets rebrand to Chicken Kyiv
+  - date: 2022-10
+    label: UK regional press Christmas recipes (still "Kiev")
   word_boundary: true
 - category: food
   russian: Borsch

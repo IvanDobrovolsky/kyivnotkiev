@@ -1807,7 +1807,28 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         .datum(CRIMEA_GEOJSON as any)
         .attr('d', path as any)
         .attr('fill', crimeaColor)
-        .attr('stroke', 'none');
+        .attr('stroke', 'none')
+        .style('pointer-events', 'all')
+        .on('mouseenter', function() {
+          if (!ukraineData) return;
+          // Highlight Ukraine's border
+          svg.selectAll('path.country').filter((d: any) => String(d.id) === '804')
+            .attr('stroke', '#374151').attr('stroke-width', 1.5);
+          const total = ukraineData.total ? ukraineData.total.toLocaleString() : '';
+          const ukr = ukraineData.ukr ? ukraineData.ukr.toLocaleString() : '0';
+          const rus = ukraineData.rus ? ukraineData.rus.toLocaleString() : '0';
+          tooltip.style('opacity', '1')
+            .html(`<strong>${ukraineData.name}</strong><br/><span style="color:${colorScale(ukraineData.adoption)};font-weight:700">${ukraineData.adoption}%</span> adoption<br/><span style="color:#0057B8">UA: ${ukr}</span> · <span style="color:#dc2626">RU: ${rus}</span><br/><span style="color:#6b7280;font-size:0.8em;">${total} total articles</span>`);
+        })
+        .on('mousemove', function(event: MouseEvent) {
+          const cr = container.getBoundingClientRect();
+          tooltip.style('left', (event.clientX - cr.left + 16) + 'px').style('top', (event.clientY - cr.top - 20) + 'px');
+        })
+        .on('mouseleave', function() {
+          svg.selectAll('path.country').filter((d: any) => String(d.id) === '804')
+            .attr('stroke', '#e5e7eb').attr('stroke-width', 0.4);
+          tooltip.style('opacity', '0');
+        });
     }
 
     // ── Holdout table ─────────────────────────────────────
