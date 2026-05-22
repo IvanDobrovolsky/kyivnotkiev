@@ -131,6 +131,7 @@ pairs:
   events:
   - date: 2022-03
     label: Russian siege begins
+  word_boundary: true
 - category: geographical
   russian: Dnepropetrovsk
   ukrainian: Dnipro
