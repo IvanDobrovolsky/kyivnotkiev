@@ -1687,8 +1687,18 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 
     async function drawWorldMap() {
       const container = document.getElementById('world-map')!;
+      const mapContainer = document.getElementById('map-container');
       container.innerHTML = '';
       container.style.position = 'relative';
+
+      // Hide map if fewer than 5 countries have data — not worth showing
+      const pairCountries = (countriesByPair as any)[activePairSlug] || {};
+      const countryCount = Object.keys(pairCountries).length;
+      if (countryCount < 5) {
+        if (mapContainer) mapContainer.style.display = 'none';
+        return;
+      }
+      if (mapContainer) mapContainer.style.display = 'block';
 
       const rect = container.getBoundingClientRect();
       const width = rect.width;
@@ -1698,6 +1708,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         .append('svg')
         .attr('viewBox', `0 0 ${width} ${height}`);
 
+      // UN-compliant world boundaries (Crimea as Ukraine)
       const worldUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
       if (!cachedWorld) {
         try {
