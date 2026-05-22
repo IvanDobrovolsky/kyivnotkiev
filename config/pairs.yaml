@@ -317,7 +317,7 @@ pairs:
 - category: institutional
   russian: Kiev Polytechnic
   ukrainian: Kyiv Polytechnic
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: exact_phrase
   slug: kyiv-polytechnic
@@ -329,7 +329,7 @@ pairs:
 - category: institutional
   russian: Kiev Patriarchate
   ukrainian: Kyiv Patriarchate
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: exact_phrase
   slug: kyiv-patriarchate
