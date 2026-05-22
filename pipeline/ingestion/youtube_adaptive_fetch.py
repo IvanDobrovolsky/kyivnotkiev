@@ -201,10 +201,9 @@ def adaptive_search(query, year_start, year_end, checkpoint_dir=None, slug=None)
 
         current = (current.replace(day=1) + timedelta(days=32)).replace(day=1)
 
-    # Clean up checkpoint on completion
-    if cp_path and cp_path.exists() and not all_keys_dead():
-        cp_path.unlink()
-        log.info(f"    Checkpoint cleaned up — all months complete")
+    # NEVER clean up checkpoint here — only clean up after parquet is saved
+    # in collect_pair(). Data loss happens when checkpoint is deleted but
+    # parquet save fails (e.g., metadata fetch crashes).
 
     return all_videos
 
@@ -212,13 +211,25 @@ def adaptive_search(query, year_start, year_end, checkpoint_dir=None, slug=None)
 def get_video_details(video_ids):
     """Batch metadata. 1 unit per 50."""
     details = {}
+    if all_keys_dead():
+        log.warning("  All keys dead — skipping metadata fetch")
+        return details
     for i in range(0, len(video_ids), 50):
         batch = video_ids[i:i + 50]
         key = next_key()
+        if key is None:
+            log.warning(f"  Keys exhausted at batch {i // 50} — got metadata for {len(details)}/{len(video_ids)}")
+            break
         resp = requests.get(f"{API_URL}/videos", params={
             "part": "snippet,statistics", "id": ",".join(batch), "key": key,
         }, timeout=15)
         track(1)
+        if resp.status_code == 403:
+            _dead_keys.add(key)
+            log.warning(f"  Key exhausted during metadata fetch ({len(_dead_keys)}/{len(_keys)} dead)")
+            if all_keys_dead():
+                break
+            continue
         if resp.status_code == 200:
             for item in resp.json().get("items", []):
                 snippet = item.get("snippet", {})
@@ -271,41 +282,59 @@ def collect_pair(pair):
     if not all_videos:
         return pd.DataFrame()
 
+    def _build_df(all_videos, details=None):
+        if details is None:
+            details = {}
+        rows = []
+        for vid, info in all_videos.items():
+            detail = details.get(vid, {})
+            title = info["title"]
+            has_ru = bool(re.search(re.escape(ru_term), title, re.IGNORECASE))
+            has_ua = bool(re.search(re.escape(ua_term), title, re.IGNORECASE))
+            variant = "both" if (has_ru and has_ua) else ("ukrainian" if has_ua else "russian") if (has_ru or has_ua) else info["search_variant"]
+
+            desc = detail.get("description", "")
+            rows.append({
+                "video_id": vid, "title": title, "channel": info["channel"],
+                "channel_id": detail.get("channel_id", ""),
+                "published_at": info["published_at"],
+                "date": info["published_at"][:10],
+                "view_count": detail.get("view_count", 0),
+                "variant": variant, "matched_term": info["matched_term"],
+                "pair_slug": slug, "has_transcript": False,
+                "text": (title + "\n\n" + desc)[:2000],
+                "text_len": min(len(title + "\n\n" + desc), 2000),
+            })
+        return pd.DataFrame(rows)
+
+    # SAVE SEARCH RESULTS FIRST — never lose data waiting for metadata
+    df = _build_df(all_videos)
+    df.to_parquet(out_path, index=False)
+    log.info(f"  [{slug}] SAVED search results: {len(df)} videos")
+
+    # Now try metadata (enrichment, not critical)
     video_ids = list(all_videos.keys())
     log.info(f"  [{slug}] Fetching metadata for {len(video_ids)} videos...")
     details = get_video_details(video_ids)
 
-    rows = []
-    for vid, info in all_videos.items():
-        detail = details.get(vid, {})
-        title = info["title"]
-        has_ru = bool(re.search(re.escape(ru_term), title, re.IGNORECASE))
-        has_ua = bool(re.search(re.escape(ua_term), title, re.IGNORECASE))
-        variant = "both" if (has_ru and has_ua) else ("ukrainian" if has_ua else "russian") if (has_ru or has_ua) else info["search_variant"]
+    if details:
+        df = _build_df(all_videos, details)
+        df.to_parquet(out_path, index=False)
+        log.info(f"  [{slug}] UPDATED with metadata: {len(details)}/{len(video_ids)} enriched")
 
-        desc = detail.get("description", "")
-        rows.append({
-            "video_id": vid, "title": title, "channel": info["channel"],
-            "channel_id": detail.get("channel_id", ""),
-            "published_at": info["published_at"],
-            "date": info["published_at"][:10],
-            "view_count": detail.get("view_count", 0),
-            "variant": variant, "matched_term": info["matched_term"],
-            "pair_slug": slug, "has_transcript": False,
-            "text": (title + "\n\n" + desc)[:2000],
-            "text_len": min(len(title + "\n\n" + desc), 2000),
-        })
-
-    df = pd.DataFrame(rows)
-    df.to_parquet(out_path, index=False)
-
-    log.info(f"  [{slug}] SAVED: {len(df)} videos, {_units} units used")
+    log.info(f"  [{slug}] FINAL: {len(df)} videos, {_units} units used")
     log.info(f"  Variants: {df['variant'].value_counts().to_dict()}")
     df['year'] = df['date'].str[:4]
     for yr, sub in df.groupby('year'):
         ua = (sub['variant'] == 'ukrainian').sum()
         ru = (sub['variant'] == 'russian').sum()
         log.info(f"    {yr}: {len(sub)} (UA={ua}, RU={ru})")
+
+    # NOW safe to clean up checkpoints — parquet is saved
+    import glob as _glob
+    for cp_file in _glob.glob(str(cp_dir / f"{slug}_*_checkpoint.json")):
+        Path(cp_file).unlink()
+        log.info(f"  Checkpoint cleaned: {Path(cp_file).name}")
 
     return df
 
