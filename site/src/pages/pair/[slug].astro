@@ -1694,7 +1694,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       // Hide map if fewer than 5 countries have data — not worth showing
       const pairCountries = (countriesByPair as any)[activePairSlug] || {};
       const countryCount = Object.keys(pairCountries).length;
-      if (countryCount < 5) {
+      if (countryCount < 10) {
         if (mapContainer) mapContainer.style.display = 'none';
         return;
       }
