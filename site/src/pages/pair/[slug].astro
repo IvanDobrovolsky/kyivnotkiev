@@ -1723,7 +1723,6 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
       }
 
       // GDELT country distribution (ccTLD mapping from news domains)
-      const pairCountries = (countriesByPair as any)[activePairSlug];
       const adoptionMap = (pairCountries || {}) as Record<string, {name: string; adoption: number}>;
 
       // Tooltip — positioned relative to container
