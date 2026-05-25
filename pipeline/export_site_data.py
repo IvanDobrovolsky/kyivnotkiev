@@ -61,8 +61,64 @@ def _load(name: str) -> pd.DataFrame:
             # Apply homonym filters from pairs.yaml for GDELT
             if name == "gdelt" and "source_domain" in df.columns:
                 df = _apply_homonym_filters(df)
+            # Filter YouTube: English titles + verified term presence
+            if name == "youtube" and "title" in df.columns:
+                df = _filter_youtube(df)
             _cache[name] = df
     return _cache[name]
+
+
+def _filter_youtube(df: pd.DataFrame) -> pd.DataFrame:
+    """Filter YouTube data: English titles only + verified term presence."""
+    import re
+    import langdetect
+    langdetect.DetectorFactory.seed = 42
+
+    cfg = load_pairs()
+    pair_terms = {p["slug"]: (p["russian"], p["ukrainian"]) for p in cfg["pairs"]}
+    before = len(df)
+
+    # 1. Language filter — keep only English titles
+    def is_english(title):
+        try:
+            return langdetect.detect(str(title)) == "en"
+        except:
+            return False
+
+    df = df[df["title"].apply(is_english)].copy()
+    after_lang = len(df)
+
+    # 2. Term presence — verify title contains the search term (word boundary)
+    def has_term(row):
+        title = str(row.get("title", "")).lower()
+        slug = row.get("pair_slug", "")
+        if slug not in pair_terms:
+            return False
+        ru, ua = pair_terms[slug]
+        return ru.lower() in title or ua.lower() in title
+
+    df = df[df.apply(has_term, axis=1)].copy()
+    after_term = len(df)
+
+    # 3. Re-classify variant from title (not search variant)
+    def classify_variant(row):
+        title = str(row.get("title", ""))
+        slug = row.get("pair_slug", "")
+        if slug not in pair_terms:
+            return row.get("variant", "russian")
+        ru, ua = pair_terms[slug]
+        has_ru = bool(re.search(re.escape(ru), title, re.IGNORECASE))
+        has_ua = bool(re.search(re.escape(ua), title, re.IGNORECASE))
+        if has_ru and has_ua:
+            return "both"
+        if has_ua:
+            return "ukrainian"
+        return "russian"
+
+    df["variant"] = df.apply(classify_variant, axis=1)
+
+    log.info(f"  YouTube filter: {before:,} → {after_lang:,} (English) → {after_term:,} (term verified)")
+    return df
 
 
 def _apply_homonym_filters(df: pd.DataFrame) -> pd.DataFrame:

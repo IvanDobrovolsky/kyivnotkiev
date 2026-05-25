@@ -83,7 +83,19 @@ def search_window(query, after, before, max_pages=10):
         if page_token:
             params["pageToken"] = page_token
 
-        resp = requests.get(f"{API_URL}/search", params=params, timeout=15)
+        for _attempt in range(3):
+            try:
+                resp = requests.get(f"{API_URL}/search", params=params, timeout=30)
+                break
+            except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+                if _attempt < 2:
+                    log.warning(f"  Network error (attempt {_attempt+1}/3): {e.__class__.__name__}")
+                    time.sleep(5)
+                else:
+                    log.warning(f"  Network error after 3 attempts — skipping window")
+                    resp = None
+        if resp is None:
+            continue
         track(100)
 
         if resp.status_code == 403:
