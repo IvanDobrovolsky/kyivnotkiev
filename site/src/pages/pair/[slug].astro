@@ -1177,7 +1177,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         const isRecent = (a.month || '') >= twoYearsAgo;
         const isRecentRussian = isRecent && a.variant === 'russian';
         const item = document.createElement('div');
-        item.style.cssText = `padding:0.5rem 0; border-bottom:1px solid var(--border, #e5e7eb); font-size:0.8rem; ${isRecentRussian ? 'background:#fef2f2; margin:0 -0.75rem; padding-left:0.75rem; padding-right:0.75rem;' : ''}`;
+        item.style.cssText = `padding:0.5rem 0.75rem; border-bottom:1px solid var(--border, #e5e7eb); font-size:0.8rem; ${isRecentRussian ? 'background:#fef2f2;' : ''}`;
         item.innerHTML = `
           <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.25rem;">
             <span style="width:8px; height:8px; border-radius:50%; background:${color}; flex-shrink:0;" title="${variantLabels[a.variant] || ''} form"></span>
