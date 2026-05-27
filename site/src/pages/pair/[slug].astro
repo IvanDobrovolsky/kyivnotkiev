@@ -49,6 +49,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
     import domainOrigins from '../../data/domain_origins.json';
     import clCollocations from '../../data/cl_collocations.json';
     import clAnalysis from '../../data/cl_analysis.json';
+    import clClusters from '../../data/cl_clusters.json';
     import confusionMatrix from '../../data/confusion_matrix.json';
     import analysisData from '../../data/analysis.json';
     import regexPrecision from '../../data/regex_precision.json';
@@ -708,6 +709,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
         safeDraw('drawNewsHoldouts', drawNewsHoldouts);
         safeDraw('drawRedditHoldouts', drawRedditHoldouts);
         safeDraw('drawPairLLM', drawPairLLM);
+        safeDraw('drawClusterScatter', drawClusterScatter);
         safeDraw('drawWorldMap', drawWorldMap);
         safeDraw('drawHoldoutTable', drawHoldoutTable);
       }, 50);
@@ -2174,6 +2176,83 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
           .style('display', 'flex').style('align-items', 'center').style('gap', '4px')
           .style('font-size', '11px').style('color', '#6b7280')
           .html(`<span style="width:8px;height:8px;border-radius:50%;background:${sourceColors[src] || '#888'};display:inline-block;"></span>${srcNames[src]}`);
+      }
+    }
+
+    function drawClusterScatter() {
+      const wrapper = document.getElementById('cluster-container');
+      const container = document.getElementById('cluster-scatter');
+      if (!container || !wrapper) return;
+      container.innerHTML = '';
+
+      const data = (clClusters as any)?.[activePairSlug];
+      if (!data || !data.points?.length) {
+        wrapper.style.display = 'none';
+        return;
+      }
+      wrapper.style.display = 'block';
+
+      const points = data.points;
+      const clusters = data.clusters || {};
+
+      const rect = container.getBoundingClientRect();
+      const width = rect.width;
+      const height = 400;
+
+      // Canvas for performance
+      const canvas = document.createElement('canvas');
+      canvas.width = width * 2; canvas.height = height * 2;
+      canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
+      container.appendChild(canvas);
+      const ctx = canvas.getContext('2d')!;
+      ctx.scale(2, 2);
+
+      // Compute bounds
+      const xs = points.map((p: any) => p.x);
+      const ys = points.map((p: any) => p.y);
+      const xMin = Math.min(...xs), xMax = Math.max(...xs);
+      const yMin = Math.min(...ys), yMax = Math.max(...ys);
+      const pad = 20;
+      const sx = (x: number) => pad + (x - xMin) / (xMax - xMin) * (width - 2 * pad);
+      const sy = (y: number) => pad + (y - yMin) / (yMax - yMin) * (height - 2 * pad);
+
+      // Draw points
+      const variantColors: Record<string, string> = {r: '#dc262680', u: '#0057B8c0', b: '#6b728080'};
+      for (const p of points) {
+        ctx.fillStyle = variantColors[p.v] || '#9ca3af60';
+        ctx.beginPath();
+        ctx.arc(sx(p.x), sy(p.y), p.v === 'u' ? 3 : 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Draw cluster labels
+      ctx.font = '600 11px system-ui';
+      ctx.textAlign = 'center';
+      for (const [cid, info] of Object.entries(clusters) as any) {
+        const ci = info as any;
+        const lx = sx(ci.cx);
+        const ly = sy(ci.cy);
+        const labelColor = ci.ua_pct > 50 ? '#0057B8' : '#374151';
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        const tw = ctx.measureText(ci.label).width;
+        ctx.fillRect(lx - tw/2 - 4, ly - 8, tw + 8, 14);
+        ctx.fillStyle = labelColor;
+        ctx.fillText(ci.label, lx, ly + 3);
+      }
+
+      // Subtitle
+      const sub = document.getElementById('cluster-subtitle');
+      if (sub) sub.textContent = `${data.total.toLocaleString()} texts, ${data.n_clusters} clusters — colored by variant (blue = Ukrainian, red = Russian)`;
+
+      // Legend
+      const legend = document.getElementById('cluster-legend');
+      if (legend) {
+        legend.innerHTML = '';
+        for (const [cid, info] of Object.entries(clusters) as any) {
+          const ci = info as any;
+          const color = ci.ua_pct > 50 ? '#0057B8' : '#dc2626';
+          legend.innerHTML += `<span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:${color};opacity:0.7;"></span><strong>${ci.label}</strong> (${ci.size} texts, ${ci.ua_pct}% UA)</span>`;
+        }
       }
     }
 
