@@ -189,8 +189,8 @@ pairs:
     label: Exclusion Zone wildfire
   - date: 2022-02
     label: Russia seizes plant
-  - date: 2024-10
-    label: S.T.A.L.K.E.R. 2 game release
+  - date: 2024-11
+    label: S.T.A.L.K.E.R. 2 Heart of Chornobyl release
   match_mode: word_boundary
   slug: chornobyl
 - category: geographical
