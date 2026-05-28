@@ -74,8 +74,11 @@ def search_window(query, after, before, max_pages=10):
             log.warning("  All keys exhausted — stopping")
             break
 
+        # Wrap multi-word queries in quotes for exact phrase matching
+        # Without quotes, YouTube treats "Vladimir the Great" as Vladimir OR Great
+        q = f'"{query}"' if ' ' in query else query
         params = {
-            "part": "snippet", "q": query, "type": "video",
+            "part": "snippet", "q": q, "type": "video",
             "maxResults": 50, "relevanceLanguage": "en",
             "publishedAfter": after, "publishedBefore": before,
             "key": key,
