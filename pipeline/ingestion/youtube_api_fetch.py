@@ -48,9 +48,11 @@ def search_videos(query: str, api_key: str, published_after: str, published_befo
     page_token = None
 
     for page in range(max_pages):
+        # Wrap multi-word queries in quotes for exact phrase matching
+        q = f'"{query}"' if ' ' in query else query
         params = {
             "part": "snippet",
-            "q": query,
+            "q": q,
             "type": "video",
             "maxResults": 50,
             "relevanceLanguage": "en",

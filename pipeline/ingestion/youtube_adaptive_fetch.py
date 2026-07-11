@@ -101,7 +101,7 @@ def search_window(query, after, before, max_pages=10):
             continue
         track(100)
 
-        if resp.status_code == 403:
+        if resp.status_code in (403, 429):
             _dead_keys.add(key)
             log.warning(f"  Key {key[:15]}... exhausted ({len(_dead_keys)}/{len(_keys)} dead)")
             if all_keys_dead():
@@ -239,7 +239,7 @@ def get_video_details(video_ids):
             "part": "snippet", "id": ",".join(batch), "key": key,
         }, timeout=15)
         track(1)
-        if resp.status_code == 403:
+        if resp.status_code in (403, 429):
             _dead_keys.add(key)
             log.warning(f"  Key exhausted during metadata fetch ({len(_dead_keys)}/{len(_keys)} dead)")
             if all_keys_dead():
