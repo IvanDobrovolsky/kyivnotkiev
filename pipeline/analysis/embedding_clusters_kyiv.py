@@ -7,6 +7,7 @@ Usage:
     python -m pipeline.analysis.embedding_clusters_kyiv [--pair kyiv]
 """
 
+import gc
 import json
 import logging
 from pathlib import Path
@@ -28,14 +29,17 @@ def embed_texts(texts: list[str], model_name: str = "all-MiniLM-L6-v2", batch_si
     model = SentenceTransformer(model_name)
     log.info(f"Embedding {len(texts):,} texts...")
     embeddings = model.encode(texts, batch_size=batch_size, show_progress_bar=True, normalize_embeddings=True)
+    del model
+    gc.collect()
     return embeddings
 
 
-def reduce_umap(embeddings, n_components=2, n_neighbors=15, min_dist=0.1):
+def reduce_umap(embeddings, n_components=2, n_neighbors=15, min_dist=0.1, metric="cosine"):
     import umap
-    log.info(f"UMAP: {embeddings.shape} -> {n_components}D")
+    log.info(f"UMAP: {embeddings.shape} -> {n_components}D (metric={metric})")
     reducer = umap.UMAP(n_components=n_components, n_neighbors=n_neighbors,
-                        min_dist=min_dist, metric="cosine", random_state=42)
+                        min_dist=min_dist, metric=metric, low_memory=True,
+                        random_state=42)
     return reducer.fit_transform(embeddings)
 
 
@@ -51,32 +55,48 @@ def cluster_hdbscan(embeddings, min_cluster_size=15, min_samples=5):
     return labels, clusterer
 
 
-def run_variant(df: pd.DataFrame, variant_label: str):
+def run_variant(df: pd.DataFrame, variant_label: str, max_texts: int = 15000):
     """Run full pipeline for one variant subset."""
     log.info(f"\n{'='*60}")
     log.info(f"VARIANT: {variant_label} ({len(df):,} texts)")
     log.info(f"{'='*60}")
 
+    # Auto-sample if too large for laptop memory
+    # UMAP on 40K+ texts needs 8-15 GB; 15K stays under 3 GB
+    if max_texts > 0 and len(df) > max_texts:
+        log.info(f"  Sampling {max_texts:,} from {len(df):,} (stratified by source)")
+        frac = max_texts / len(df)
+        df = df.groupby("source", group_keys=False).apply(
+            lambda g: g.sample(max(1, round(len(g) * frac)), random_state=42)
+        ).sample(frac=1, random_state=42).reset_index(drop=True)
+        log.info(f"  Sampled: {len(df):,} texts")
+
     out = OUT_DIR / variant_label
     out.mkdir(parents=True, exist_ok=True)
 
-    # Embed
+    # Embed (model freed inside embed_texts)
     embeddings = embed_texts(df["text"].tolist())
     np.save(out / "embeddings.npy", embeddings)
 
-    # UMAP 2D for viz
-    coords_2d = reduce_umap(embeddings, n_components=2, n_neighbors=15, min_dist=0.1)
+    # Single UMAP pass: 384D → 10D for clustering (the expensive step)
+    coords_10d = reduce_umap(embeddings, n_components=10, n_neighbors=30, min_dist=0.0)
+    del embeddings
+    gc.collect()
+    log.info("  Freed embedding matrix")
+
+    # HDBSCAN on 10D
+    labels, clusterer = cluster_hdbscan(coords_10d, min_cluster_size=20)
     df = df.copy()
-    df["umap_x"] = coords_2d[:, 0]
-    df["umap_y"] = coords_2d[:, 1]
-
-    # UMAP higher-dim for clustering
-    coords_cluster = reduce_umap(embeddings, n_components=10, n_neighbors=30, min_dist=0.0)
-
-    # HDBSCAN
-    labels, clusterer = cluster_hdbscan(coords_cluster, min_cluster_size=20)
     df["cluster"] = labels
     df["outlier_score"] = clusterer.outlier_scores_
+
+    # 10D → 2D for viz (fast — input is only 10-dim, not 384-dim)
+    coords_2d = reduce_umap(coords_10d, n_components=2, n_neighbors=15, min_dist=0.1,
+                            metric="euclidean")
+    del coords_10d
+    gc.collect()
+    df["umap_x"] = coords_2d[:, 0]
+    df["umap_y"] = coords_2d[:, 1]
 
     # Noise analysis
     noise_df = df[df["cluster"] == -1].copy()
@@ -140,6 +160,8 @@ def main():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--pair", default="kyiv", help="Pair slug to cluster")
+    parser.add_argument("--max-texts", type=int, default=15000,
+                        help="Max texts per variant (0=unlimited, default 15000)")
     args = parser.parse_args()
 
     pair_slug = args.pair
@@ -158,8 +180,8 @@ def main():
     ua = pair_df[pair_df["variant"] == "ukrainian"].reset_index(drop=True)
     ru = pair_df[pair_df["variant"] == "russian"].reset_index(drop=True)
 
-    noise_ua = run_variant(ua, "ukrainian") if len(ua) >= 20 else pd.DataFrame()
-    noise_ru = run_variant(ru, "russian") if len(ru) >= 20 else pd.DataFrame()
+    noise_ua = run_variant(ua, "ukrainian", args.max_texts) if len(ua) >= 20 else pd.DataFrame()
+    noise_ru = run_variant(ru, "russian", args.max_texts) if len(ru) >= 20 else pd.DataFrame()
 
     log.info(f"\n{'='*60}")
     log.info(f"SUMMARY — {pair_slug}")

@@ -13,6 +13,7 @@ Usage:
 """
 
 import argparse
+import gc
 import json
 import logging
 from pathlib import Path
@@ -35,15 +36,18 @@ def embed_texts(texts: list[str], model_name: str = "all-MiniLM-L6-v2", batch_si
     model = SentenceTransformer(model_name)
     log.info(f"Embedding {len(texts):,} texts (batch_size={batch_size})...")
     embeddings = model.encode(texts, batch_size=batch_size, show_progress_bar=True, normalize_embeddings=True)
+    del model
+    gc.collect()
     return embeddings
 
 
-def reduce_umap(embeddings, n_components=2, n_neighbors=15, min_dist=0.1):
-    """Reduce embeddings to 2D with UMAP."""
+def reduce_umap(embeddings, n_components=2, n_neighbors=15, min_dist=0.1, metric="cosine"):
+    """Reduce embeddings with UMAP."""
     import umap
-    log.info(f"UMAP: {embeddings.shape} → {n_components}D")
+    log.info(f"UMAP: {embeddings.shape} → {n_components}D (metric={metric})")
     reducer = umap.UMAP(n_components=n_components, n_neighbors=n_neighbors,
-                        min_dist=min_dist, metric="cosine", random_state=42)
+                        min_dist=min_dist, metric=metric, low_memory=True,
+                        random_state=42)
     coords = reducer.fit_transform(embeddings)
     return coords
 
@@ -135,7 +139,7 @@ def main():
         df = df.sample(args.sample, random_state=42).reset_index(drop=True)
         log.info(f"Sampled: {len(df):,}")
 
-    # Embed
+    # Embed (model freed inside embed_texts)
     embeddings = embed_texts(df["text"].tolist(), model_name=args.model)
 
     # Save embeddings
@@ -143,16 +147,22 @@ def main():
     np.save(emb_path, embeddings)
     log.info(f"Saved embeddings: {emb_path}")
 
-    # UMAP
-    coords_2d = reduce_umap(embeddings)
-    df["umap_x"] = coords_2d[:, 0]
-    df["umap_y"] = coords_2d[:, 1]
-
-    # Also do UMAP to higher dim for clustering (better than 2D)
+    # Single UMAP pass: high-dim for clustering (the expensive step)
     coords_cluster = reduce_umap(embeddings, n_components=10, n_neighbors=30, min_dist=0.0)
+    del embeddings
+    gc.collect()
+    log.info("Freed embedding matrix")
 
     # HDBSCAN
     labels, clusterer = cluster_hdbscan(coords_cluster, min_cluster_size=args.min_cluster)
+
+    # 10D → 2D for viz (fast — input is only 10-dim)
+    coords_2d = reduce_umap(coords_cluster, n_components=2, n_neighbors=15, min_dist=0.1,
+                            metric="euclidean")
+    del coords_cluster
+    gc.collect()
+    df["umap_x"] = coords_2d[:, 0]
+    df["umap_y"] = coords_2d[:, 1]
     df["cluster"] = labels
 
     # Analyze
