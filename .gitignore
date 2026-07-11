@@ -65,6 +65,7 @@ Thumbs.db
 .ipynb_checkpoints/
 
 .claude
+.astro/
 data/raw/screenshots/
 vastai_bundle.tar.gz
 paper/

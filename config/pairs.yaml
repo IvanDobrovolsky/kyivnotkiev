@@ -314,19 +314,6 @@ pairs:
   - date: 2022-10
     label: Russian missile strikes near campus
 - category: institutional
-  russian: Kharkov University
-  ukrainian: Kharkiv University
-  enabled: true
-  is_control: false
-  match_mode: exact_phrase
-  slug: kharkiv-university
-  events:
-  - date: 2020-09
-    label: University ranking spike
-  - date: 2022-03
-    label: University campus damaged by shelling
-  word_boundary: true
-- category: institutional
   russian: Kiev Polytechnic
   ukrainian: Kyiv Polytechnic
   enabled: false
