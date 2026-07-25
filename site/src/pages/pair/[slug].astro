@@ -24,7 +24,16 @@ const { pair } = Astro.props;
 const slug = pair.slug;
 const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 const pairClusterData = (allClClusters as any)?.[slug] || null;
-const pairHoldoutsData = (allHoldoutsByPair as any)?.[slug] || null;
+const pairHoldoutsRaw = (allHoldoutsByPair as any)?.[slug] || null;
+// Trim news_articles: cap at 500, truncate text_preview to save bandwidth
+const pairHoldoutsData = pairHoldoutsRaw ? {
+  ...pairHoldoutsRaw,
+  news_articles: (pairHoldoutsRaw.news_articles || []).slice(0, 500).map((a: any) => ({
+    domain: a.domain, url: a.url, variant: a.variant, month: a.month,
+    text_preview: (a.text_preview || '').slice(0, 120),
+  })),
+  _total_articles: (pairHoldoutsRaw.news_articles || []).length,
+} : null;
 const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug]: (allTimeseries as any)?.[slug] || null };
 ---
 
@@ -1177,13 +1186,15 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
       // Filter
       const filtered = newsFilter === 'all' ? sorted : sorted.filter((a: any) => a.variant === newsFilter);
+      const DISPLAY_LIMIT = 100;
 
       const variantColors: Record<string, string> = {russian: '#dc2626', ukrainian: '#0057B8', both: '#6b7280'};
       const variantLabels: Record<string, string> = {russian: 'RU', ukrainian: 'UA', both: 'Both'};
       const now = new Date();
       const twoYearsAgo = `${now.getFullYear() - 2}-${String(now.getMonth()+1).padStart(2,'0')}`;
 
-      for (const a of filtered) {
+      const displayed = filtered.slice(0, DISPLAY_LIMIT);
+      for (const a of displayed) {
         const color = variantColors[a.variant] || '#6b7280';
         const isRecent = (a.month || '') >= twoYearsAgo;
         const isRecentRussian = isRecent && a.variant === 'russian';
@@ -1201,13 +1212,22 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         list.appendChild(item);
       }
 
+      if (filtered.length > DISPLAY_LIMIT) {
+        const more = document.createElement('div');
+        more.style.cssText = 'padding:0.75rem; text-align:center; color:var(--text-muted); font-size:0.8rem;';
+        const totalArticles = (pairHoldouts as any)?._total_articles || filtered.length;
+        more.textContent = `Showing ${DISPLAY_LIMIT} of ${totalArticles} articles`;
+        list.appendChild(more);
+      }
+
       // Summary
+      const totalArticles = (pairHoldouts as any)?._total_articles || articles.length;
       const ua = articles.filter((a: any) => a.variant === 'ukrainian').length;
       const ru = articles.filter((a: any) => a.variant === 'russian').length;
       const recentRu = articles.filter((a: any) => a.variant === 'russian' && (a.month || '') >= twoYearsAgo).length;
       const subtitle = document.getElementById('news-holdouts-subtitle');
       if (subtitle) {
-        subtitle.textContent = `${articles.length} articles from ${new Set(articles.map((a: any) => a.domain)).size} outlets — ${ua} Ukrainian, ${ru} Russian form${recentRu > 0 ? ` · ${recentRu} major outlets still use Russian form in recent years` : ''}`;
+        subtitle.textContent = `${totalArticles} articles from ${new Set(articles.map((a: any) => a.domain)).size} outlets — ${ua} Ukrainian, ${ru} Russian form${recentRu > 0 ? ` · ${recentRu} major outlets still use Russian form in recent years` : ''}`;
       }
 
       // Wire up filter buttons
