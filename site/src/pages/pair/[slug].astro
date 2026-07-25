@@ -6,6 +6,9 @@ import llmTraj from '../../data/llm_trajectory.json';
 import llmPerPair from '../../data/llm_per_pair.json';
 import toolsPerPair from '../../data/tools_per_pair.json';
 import religious from '../../data/religious.json';
+import allClClusters from '../../data/cl_clusters.json';
+import allHoldoutsByPair from '../../data/holdouts_by_pair.json';
+import allTimeseries from '../../data/timeseries.json';
 
 export function getStaticPaths() {
   const manifest = m as any;
@@ -20,6 +23,9 @@ export function getStaticPaths() {
 const { pair } = Astro.props;
 const slug = pair.slug;
 const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
+const pairClusterData = (allClClusters as any)?.[slug] || null;
+const pairHoldoutsData = (allHoldoutsByPair as any)?.[slug] || null;
+const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug]: (allTimeseries as any)?.[slug] || null };
 ---
 
 <Base title={title}>
@@ -29,6 +35,9 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 </div>
 
 <script type="application/json" id="pair-route-data" set:html={JSON.stringify({ slug: pair.slug, russian: pair.russian, ukrainian: pair.ukrainian })} />
+<script type="application/json" id="pair-cluster-data" set:html={JSON.stringify(pairClusterData)} />
+<script type="application/json" id="pair-holdouts-data" set:html={JSON.stringify(pairHoldoutsData)} />
+<script type="application/json" id="pair-timeseries-data" set:html={JSON.stringify(pairTimeseriesData)} />
 <div id="pair-detail" data-pair-slug={slug}>
   <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} toolsPerPair={toolsPerPair} religious={religious} timeSpan={(m as any).time_span} />
 </div>
@@ -36,10 +45,10 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
   <script>
     import * as d3 from 'd3';
     import * as topojson from 'topojson-client';
-    import timeseriesData from '../../data/timeseries.json';
+    const timeseriesData = JSON.parse(document.getElementById('pair-timeseries-data')?.textContent || '{}');
     import manifest from '../../data/manifest.json';
     import holdoutsData from '../../data/holdouts.json';
-    import holdoutsByPair from '../../data/holdouts_by_pair.json';
+    const holdoutsByPair = { [document.getElementById('pair-detail')!.dataset.pairSlug!]: JSON.parse(document.getElementById('pair-holdouts-data')?.textContent || 'null') };
     import countriesByPair from '../../data/countries_by_pair.json';
     import pairEvents from '../../data/pair_events.json';
     // trends_countries removed — using GDELT country distribution only
@@ -49,7 +58,7 @@ const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
     import domainOrigins from '../../data/domain_origins.json';
     import clCollocations from '../../data/cl_collocations.json';
     import clAnalysis from '../../data/cl_analysis.json';
-    import clClusters from '../../data/cl_clusters.json';
+    const clClusters = { [document.getElementById('pair-detail')!.dataset.pairSlug!]: JSON.parse(document.getElementById('pair-cluster-data')?.textContent || 'null') };
     import confusionMatrix from '../../data/confusion_matrix.json';
     import analysisData from '../../data/analysis.json';
     import regexPrecision from '../../data/regex_precision.json';
