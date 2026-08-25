@@ -3,14 +3,16 @@
 This is the ONE script that updates all derived artifacts:
   dataset/*.parquet → manifest → timeseries → site JSON → corpus stats
 
-Run after ANY data change:
+Run after ANY data change, including enabling or disabling a pair in
+config/pairs.yaml:
     python -m pipeline.rebuild
 
 What it does:
   1. Validates all dataset/ parquets (counts, dups, schema)
-  2. Runs export_site_data.py (manifest + timeseries + holdouts)
-  3. Verifies site JSON matches dataset
-  4. Prints full status report
+  2. Recomputes aggregate stats over enabled pairs (analysis.json)
+  3. Runs export_site_data.py (manifest + timeseries + holdouts + prune)
+  4. Verifies site JSON matches dataset AND config/pairs.yaml
+  5. Prints full status report
 
 After running, commit + push:
   git add site/src/data/ && git commit && git push
@@ -88,16 +90,31 @@ def validate_datasets():
     return issues
 
 
+def run_stats():
+    """Recompute aggregate statistics over the currently enabled pairs.
+
+    analysis.json holds cross-pair aggregates (Kruskal-Wallis, category means,
+    invasion effect, regression). Those are computed ACROSS pairs, so pruning a
+    disabled pair out of the output afterwards cannot fix them — they have to be
+    recomputed. recompute_stats reads config/pairs.yaml and filters on `enabled`,
+    but nothing ran it, so analysis.json silently kept stats for pairs that had
+    been disabled. export_site_data then logged "Using existing analysis.json".
+    """
+    log.info("\n2. RECOMPUTING AGGREGATE STATS")
+    from pipeline.analysis.recompute_stats import main as stats_main
+    stats_main()
+
+
 def run_export():
     """Run export_site_data.py to regenerate all site JSON."""
-    log.info("\n2. EXPORTING SITE DATA")
+    log.info("\n3. EXPORTING SITE DATA")
     from pipeline.export_site_data import main as export_main
     export_main()
 
 
 def verify_site_data():
     """Verify site JSON matches dataset."""
-    log.info("\n3. VERIFYING SITE DATA")
+    log.info("\n4. VERIFYING SITE DATA")
 
     with open(SITE_DATA_DIR / "manifest.json") as f:
         m = json.load(f)
@@ -107,13 +124,17 @@ def verify_site_data():
 
     issues = []
 
+    # Every site JSON must agree with config/pairs.yaml. This is the gate that
+    # catches any pipeline step writing site data without honouring `enabled`.
+    from pipeline.prune_site_data import verify as verify_pairs
+    issues.extend(verify_pairs())
+
     # Check each source
     for src, info in m["sources"].items():
         # Count pairs in timeseries
         ts_pairs = sum(1 for pid in ts if pid != "events" and src in ts[pid] and isinstance(ts[pid][src], list) and len(ts[pid][src]) > 0)
-        if ts_pairs != info["pairs"]:
-            # Pairs mismatch is expected due to threshold filtering
-            pass
+        if ts_pairs > info["pairs"]:
+            issues.append(f"{src}: timeseries has {ts_pairs} pairs but manifest claims {info['pairs']}")
 
         log.info(f"  {src}: records={info['records']:,}, pairs={info['pairs']}, chart_pairs={ts_pairs}")
 
@@ -131,7 +152,7 @@ def verify_site_data():
 
 def push_hf():
     """Push all datasets + corpus to HuggingFace."""
-    log.info("\n4. PUSHING TO HUGGINGFACE")
+    log.info("\n5. PUSHING TO HUGGINGFACE")
     from huggingface_hub import HfApi
     api = HfApi()
     repo_id = "KyivNotKiev/toponym-adoption-data"
@@ -164,6 +185,7 @@ def main():
     issues = validate_datasets()
 
     if not args.verify_only:
+        run_stats()
         run_export()
 
     verify_issues = verify_site_data()

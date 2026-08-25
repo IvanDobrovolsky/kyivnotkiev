@@ -124,7 +124,7 @@ pairs:
 - category: geographical
   russian: Nikolaev
   ukrainian: Mykolaiv
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   homonym_filters:
@@ -153,7 +153,7 @@ pairs:
 - category: geographical
   russian: Vinnitsa
   ukrainian: Vinnytsia
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   slug: vinnytsia
@@ -368,7 +368,7 @@ pairs:
 - category: geographical
   russian: Chernigov
   ukrainian: Chernihiv
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   homonym_filters:
@@ -428,7 +428,7 @@ pairs:
 - category: geographical
   russian: Kremenchug
   ukrainian: Kremenchuk
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   slug: kremenchuk
@@ -438,7 +438,7 @@ pairs:
 - category: geographical
   russian: Kirovograd
   ukrainian: Kropyvnytskyi
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   slug: kropyvnytskyi
@@ -465,7 +465,7 @@ pairs:
 - category: sports
   russian: Metalist Kharkov
   ukrainian: Metalist Kharkiv
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: exact_phrase
   slug: metalist-kharkiv
@@ -623,7 +623,7 @@ pairs:
 - category: historical
   russian: Bogdan Khmelnitsky
   ukrainian: Bohdan Khmelnytskyi
-  enabled: true
+  enabled: false
   is_control: false
   notes: Hetman (Богдан Хмельницький). Tests Г→H (Bogdan vs Bohdan) and suffix (-itsky
     vs -ytskyi).

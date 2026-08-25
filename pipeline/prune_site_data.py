@@ -93,6 +93,65 @@ def main(config_path: Path = CONFIG_PATH, data_dir: Path = SITE_DATA_DIR) -> dic
     return summary
 
 
+def _find(node, drop: set[str], hits: set[str]):
+    if isinstance(node, dict):
+        for k, v in node.items():
+            if isinstance(k, str) and k in drop:
+                hits.add(k)
+            _find(v, drop, hits)
+    elif isinstance(node, list):
+        for v in node:
+            _find(v, drop, hits)
+    elif isinstance(node, str) and node in drop:
+        hits.add(node)
+
+
+def verify(config_path: Path = CONFIG_PATH, data_dir: Path = SITE_DATA_DIR) -> list[str]:
+    """Fail loudly if any site JSON still carries a disabled pair.
+
+    This is the regression gate: any pipeline step that writes site JSON without
+    respecting `enabled` gets caught here rather than shipping to the client.
+    """
+    with open(config_path) as f:
+        cfg = yaml.safe_load(f)
+    drop = {p["slug"] for p in cfg["pairs"] if not p.get("enabled", True)}
+    enabled = {p["slug"] for p in cfg["pairs"] if p.get("enabled", True)}
+
+    issues = []
+    for path in sorted(data_dir.glob("*.json")):
+        try:
+            with open(path) as f:
+                data = json.load(f)
+        except (json.JSONDecodeError, OSError) as e:
+            issues.append(f"{path.name}: unreadable ({e})")
+            continue
+        hits: set[str] = set()
+        _find(data, drop, hits)
+        if hits:
+            issues.append(f"{path.name}: contains {len(hits)} disabled pairs {sorted(hits)}")
+
+    # manifest must agree with config exactly
+    mpath = data_dir / "manifest.json"
+    if mpath.exists():
+        with open(mpath) as f:
+            m = json.load(f)
+        pairs = m.get("pairs", m)
+        slugs = {p["slug"] for p in pairs if isinstance(p, dict) and "slug" in p}
+        if not slugs <= enabled:
+            issues.append(f"manifest.json has pairs absent from config: {sorted(slugs - enabled)}")
+        missing = enabled - slugs
+        if missing:
+            issues.append(f"manifest.json missing {len(missing)} enabled pairs: {sorted(missing)}")
+
+    if issues:
+        for i in issues:
+            log.error(f"  PAIRS CONFIG MISMATCH: {i}")
+    else:
+        log.info(f"  Site JSON matches config/pairs.yaml ({len(enabled)} enabled pairs) OK")
+    return issues
+
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     main()
+    verify()
