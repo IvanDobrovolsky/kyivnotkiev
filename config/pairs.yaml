@@ -139,7 +139,7 @@ pairs:
 - category: geographical
   russian: Dnepropetrovsk
   ukrainian: Dnipro
-  enabled: true
+  enabled: false
   is_control: false
   events:
   - date: 2016-05
@@ -163,7 +163,7 @@ pairs:
 - category: geographical
   russian: Rovno
   ukrainian: Rivne
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   homonym_filters:
@@ -222,7 +222,7 @@ pairs:
 - category: geographical
   russian: Dniester
   ukrainian: Dnister
-  enabled: true
+  enabled: false
   is_control: false
   notes: River name
   match_mode: word_boundary
@@ -278,7 +278,7 @@ pairs:
 - category: landmarks
   russian: Kiev Pechersk Lavra
   ukrainian: Kyiv Pechersk Lavra
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: exact_phrase
   slug: kyiv-pechersk-lavra
@@ -304,7 +304,7 @@ pairs:
 - category: institutional
   russian: Kiev National University
   ukrainian: Kyiv National University
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: exact_phrase
   slug: kyiv-national-university
@@ -396,7 +396,7 @@ pairs:
 - category: geographical
   russian: Zhitomir
   ukrainian: Zhytomyr
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   slug: zhytomyr
@@ -408,7 +408,7 @@ pairs:
 - category: geographical
   russian: Cherkassy
   ukrainian: Cherkasy
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   slug: cherkasy
@@ -418,7 +418,7 @@ pairs:
 - category: geographical
   russian: Uzhgorod
   ukrainian: Uzhhorod
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   slug: uzhhorod
@@ -448,7 +448,7 @@ pairs:
 - category: geographical
   russian: Ternopol
   ukrainian: Ternopil
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   slug: ternopil
@@ -572,7 +572,7 @@ pairs:
 - category: geographical
   russian: Feodosiya
   ukrainian: Feodosiia
-  enabled: true
+  enabled: false
   is_control: false
   notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms
     Ukraine's territorial integrity.

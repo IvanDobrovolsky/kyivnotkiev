@@ -1,9 +1,14 @@
 """Size every pair before committing to a census fetch.
 
 One search call per pair-variant over the whole range, reading YouTube's
-totalResults estimate. 47 pairs x 2 variants = 94 calls = 9,400 units, under
-10% of a day's quota, and it replaces every guess about campaign cost with a
-measurement.
+totalResults estimate. Covers whatever is enabled in config/pairs.yaml, so the
+cost scales with that file (2 calls per enabled pair). Cheap enough to re-run
+after any pair is enabled or disabled, and it replaces every guess about
+campaign cost with a measurement.
+
+Caveat: totalResults is unreliable in both directions — it saturates at
+1,000,000 for broad queries, and measured against a real fetch it undercounted
+one pair-variant by ~4x. Treat it as an order of magnitude, not a target.
 
 Usage:
     python -m pipeline.ingestion.youtube_size_probe --api-keys key1,key2,...

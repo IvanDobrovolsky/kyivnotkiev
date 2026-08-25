@@ -1054,6 +1054,13 @@ def main():
     write_json(SITE_DATA_DIR / "pair_events.json", pair_events)
     write_json(SITE_DATA_DIR / "analysis.json", analysis)
 
+    # Files written above already respect `enabled`, but several site JSONs come
+    # from other pipeline steps that do not. Prune them here so config/pairs.yaml
+    # is the single source of truth and a plain re-export is enough after
+    # enabling or disabling a pair.
+    from pipeline.prune_site_data import main as prune_main
+    prune_main()
+
     log.info("=" * 60)
     log.info("Export complete!")
     log.info("=" * 60)
