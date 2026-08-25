@@ -400,7 +400,7 @@ pairs:
     label: Refugee hub, military recruitment
 - russian: Vareniki
   ukrainian: Varenyky
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   slug: varenyky
@@ -452,7 +452,7 @@ pairs:
   slug: volodymyr-zelenskyy
 - russian: Andrey Shevchenko
   ukrainian: Andrii Shevchenko
-  enabled: true
+  enabled: false
   is_control: false
   notes: Also matches Andriy Shevchenko (most common English spelling)
   match_mode: exact_phrase

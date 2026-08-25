@@ -22,7 +22,7 @@
 |--------|-------|
 | Records scanned | **90B+** |
 | Toponym matches | **319.9M** |
-| Toponym pairs | **22** |
+| Toponym pairs | **20** |
 | Data sources | **9** |
 | Time span | **2010-2025** |
 | CL corpus | **151.6K** verified English texts |
@@ -47,15 +47,15 @@ An unverifiable measurement is dropped rather than reported with a caveat.
 <!-- AUTO:sources -->
 | Source | Records | Pairs | Description |
 |--------|---------|-------|-------------|
-| Wiki | 298.7M | 22 | Wikipedia · monthly |
-| News | 20.1M | 22 | GDELT · 33091 domains |
-| Reddit | 840.2K | 21 | 44766 subreddits |
-| Trends | 113.4K | 22 | Google · 150 countries |
+| Wiki | 298.7M | 20 | Wikipedia · monthly |
+| News | 20.1M | 20 | GDELT · 33091 domains |
+| Reddit | 840.2K | 20 | 44766 subreddits |
+| Trends | 113.4K | 20 | Google · 150 countries |
 | YouTube | 35.4K | 6 | 21984 channels |
 | Academic | 30.7K | 16 | OpenAlex · 250M+ works |
 | Telegram | 25.6K | 9 | 125 channels |
 | Religious | 3.4K | 7 | 4 institutions |
-| Books | 897 | 18 | Google Books · 8M+ volumes |
+| Books | 897 | 17 | Google Books · 8M+ volumes |
 <!-- /AUTO:sources -->
 
 All source data is on HuggingFace: [`KyivNotKiev/toponym-adoption-data`](https://huggingface.co/datasets/KyivNotKiev/toponym-adoption-data)
