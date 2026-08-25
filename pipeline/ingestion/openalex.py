@@ -97,7 +97,6 @@ def collect_pair(pair: dict) -> dict | None:
         "pair_id": pid,
         "russian_term": russian,
         "ukrainian_term": ukrainian,
-        "category": pair["category"],
         "yearly": rows,
         "total_russian": total_ru,
         "total_ukrainian": total_uk,
@@ -133,14 +132,14 @@ def collect_all(pair_ids: list[int] | None = None):
     csv_path = PROCESSED_DIR / "openalex_summary.csv"
     with open(csv_path, "w", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["pair_id", "category", "russian_term", "ukrainian_term",
+        writer.writerow(["pair_id", "russian_term", "ukrainian_term",
                          "year", "russian_count", "ukrainian_count", "total", "adoption_ratio"])
         for r in results:
             for yr in r["yearly"]:
                 total = yr["total"]
                 ratio = yr["ukrainian_count"] / total if total > 0 else None
                 writer.writerow([
-                    r["pair_id"], r["category"], r["russian_term"], r["ukrainian_term"],
+                    r["pair_id"], r["russian_term"], r["ukrainian_term"],
                     yr["year"], yr["russian_count"], yr["ukrainian_count"], yr["total"],
                     round(ratio, 4) if ratio is not None else "",
                 ])

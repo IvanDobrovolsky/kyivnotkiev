@@ -392,7 +392,6 @@ def run_test(model_keys=None, force=False):
                     "pair_id": pair["id"],
                     "russian": pair["russian"],
                     "ukrainian": pair["ukrainian"],
-                    "category": pair.get("category", ""),
                     "prompt": prompt,
                     "response": response[:200],
                     "classified": variant,

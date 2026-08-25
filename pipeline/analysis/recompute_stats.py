@@ -207,67 +207,12 @@ def compute_pre_post_invasion():
 
 def main():
     pairs = load_pairs_config()
-    pair_cats = {pid: p["category"] for pid, p in pairs.items()}
-
-    # ── 1. Category-level Kruskal-Wallis ──
-    log.info("=" * 60)
-    log.info("1. KRUSKAL-WALLIS: category differences in adoption")
-    log.info("=" * 60)
 
     adoption_df = compute_adoption_by_pair_source()
-    trends_adopt = adoption_df[adoption_df["source"] == "trends"].copy()
-    trends_adopt["category"] = trends_adopt["pair_slug"].map(pair_cats)
-    trends_adopt = trends_adopt.dropna(subset=["category", "adoption_ratio"])
 
-    cat_groups = {cat: grp["adoption_ratio"].values
-                  for cat, grp in trends_adopt.groupby("category")
-                  if len(grp) >= 2}
-
-    kw_results = {}
-    if len(cat_groups) >= 2:
-        groups = list(cat_groups.values())
-        h_stat, p_value = scipy_stats.kruskal(*groups)
-        kw_results = {"H": round(h_stat, 2), "p": round(p_value, 4),
-                      "significant": p_value < 0.05, "n_categories": len(cat_groups)}
-        log.info(f"  H = {h_stat:.2f}, p = {p_value:.4f}")
-
-    cat_means = {}
-    for cat, vals in cat_groups.items():
-        cat_means[cat] = {
-            "mean": round(float(np.mean(vals)) * 100, 1),
-            "median": round(float(np.median(vals)) * 100, 1),
-            "n": len(vals),
-        }
-        log.info(f"  {cat}: mean={cat_means[cat]['mean']}%, n={cat_means[cat]['n']}")
-
-    # Pairwise Mann-Whitney with Holm-Bonferroni correction
-    pairwise = []
-    cats = list(cat_groups.keys())
-    for i, c1 in enumerate(cats):
-        for c2 in cats[i + 1:]:
-            u, p = scipy_stats.mannwhitneyu(cat_groups[c1], cat_groups[c2], alternative="two-sided")
-            pairwise.append({"cat1": c1, "cat2": c2, "U": round(float(u), 1),
-                             "p_raw": float(p)})
-
-    # Holm-Bonferroni step-down: sort by p ascending, enforce monotonicity
-    pairwise.sort(key=lambda x: x["p_raw"])
-    m = len(pairwise)
-    prev_adj = 0.0
-    for i, pw in enumerate(pairwise):
-        adj = min(pw["p_raw"] * (m - i), 1.0)
-        adj = max(adj, prev_adj)  # enforce monotonicity
-        prev_adj = adj
-        pw["p"] = round(pw["p_raw"], 4)
-        pw["p_adjusted"] = round(adj, 4)
-        pw["sig"] = adj < 0.05
-    for pw in pairwise:
-        del pw["p_raw"]
-    sig_pairs = [pw for pw in pairwise if pw["sig"]]
-    log.info(f"  Pairwise (Holm-Bonferroni): {len(sig_pairs)}/{len(pairwise)} significant")
-
-    # ── 2. Pre/Post Invasion: Wilcoxon signed-rank ──
+    # ── 1. Pre/Post Invasion: Wilcoxon signed-rank ──
     log.info("=" * 60)
-    log.info("2. WILCOXON: pre vs post Feb 2022 invasion effect")
+    log.info("1. WILCOXON: pre vs post Feb 2022 invasion effect")
     log.info("=" * 60)
 
     invasion_df = compute_pre_post_invasion()
@@ -303,9 +248,9 @@ def main():
         log.info(f"  {source}: pre={invasion_results[source]['pre_mean']}% → "
                  f"post={invasion_results[source]['post_mean']}%, d={d:.2f}, p={p:.6f}")
 
-    # ── 3. Cross-source correlation (Spearman) ──
+    # ── 2. Cross-source correlation (Spearman) ──
     log.info("=" * 60)
-    log.info("3. SPEARMAN: cross-source correlation")
+    log.info("2. SPEARMAN: cross-source correlation")
     log.info("=" * 60)
 
     pivot = adoption_df.pivot_table(index="pair_slug", columns="source", values="adoption_ratio")
@@ -319,9 +264,9 @@ def main():
                 correlations[f"{s1}_vs_{s2}"] = {"rho": round(float(rho), 3), "p": round(float(p), 4)}
                 log.info(f"  {s1} vs {s2}: rho={rho:.3f}, p={p:.4f}")
 
-    # ── 4. OLS regression: what predicts adoption? ──
+    # ── 3. OLS regression: what predicts adoption? ──
     log.info("=" * 60)
-    log.info("4. OLS REGRESSION: predictors of adoption")
+    log.info("3. OLS REGRESSION: predictors of adoption")
     log.info("=" * 60)
 
     regression_results = {}
@@ -339,8 +284,7 @@ def main():
         post_p["current_adoption"] = post_p.get("ukrainian", 0) / (post_p.get("ukrainian", 0) + post_p.get("russian", 0))
 
         merged = pre_p[["pair_slug", "baseline_adoption"]].merge(post_p[["pair_slug", "current_adoption"]], on="pair_slug")
-        merged["category"] = merged["pair_slug"].map(pair_cats)
-        merged = merged.dropna(subset=["category", "baseline_adoption", "current_adoption"])
+        merged = merged.dropna(subset=["baseline_adoption", "current_adoption"])
         # Filter out pairs where both pre and post sums are 0
         merged = merged[(merged["baseline_adoption"].notna()) & (merged["current_adoption"].notna())]
 
@@ -371,9 +315,6 @@ def main():
 
     # ── Compile and save ──
     results = {
-        "kruskal_wallis": kw_results,
-        "category_means_trends": cat_means,
-        "pairwise_mannwhitney": pairwise,
         "invasion_effect": invasion_results,
         "cross_source_correlations": correlations,
         "regression": regression_results,
@@ -387,7 +328,6 @@ def main():
     log.info("\n" + "=" * 60)
     log.info("SUMMARY FOR PAPER")
     log.info("=" * 60)
-    log.info(f"Kruskal-Wallis: H={kw_results.get('H')}, p={kw_results.get('p')}")
     log.info(f"OLS Regression: R²={regression_results.get('r_squared')}, beta={regression_results.get('beta')}, p={regression_results.get('p')}")
     for src, res in invasion_results.items():
         log.info(f"Invasion ({src}): d={res['cohens_d']}, p={res['p']}")

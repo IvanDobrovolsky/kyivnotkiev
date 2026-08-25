@@ -34,7 +34,6 @@ class ChangePointResult:
     pair_id: int
     russian_term: str
     ukrainian_term: str
-    category: str
     source: str
     method: str
     crossover_date: pd.Timestamp | None
@@ -199,7 +198,7 @@ def analyze_pair(
         log.warning(f"  Pair {pair_id}: insufficient data ({len(signal)} points)")
         return ChangePointResult(
             pair_id=pair_id, russian_term=pair["russian"],
-            ukrainian_term=pair["ukrainian"], category=pair["category"],
+            ukrainian_term=pair["ukrainian"],
             source=source, method="none", crossover_date=None,
             change_points=[], change_type="none", confidence=0.0,
             adoption_ratio_before=0.0, adoption_ratio_after=0.0,
@@ -257,7 +256,6 @@ def analyze_pair(
         pair_id=pair_id,
         russian_term=pair["russian"],
         ukrainian_term=pair["ukrainian"],
-        category=pair["category"],
         source=source,
         method="ensemble(pelt+cusum+bocpd)",
         crossover_date=crossover,

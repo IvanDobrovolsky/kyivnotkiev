@@ -330,7 +330,6 @@ def preprocess_reddit() -> pd.DataFrame | None:
 
             frames.append({
                 "pair_id": pair_id,
-                "category": pair["category"],
                 "russian_term": pair["russian"],
                 "ukrainian_term": pair["ukrainian"],
                 "time_filter": time_filter,

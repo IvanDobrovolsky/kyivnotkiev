@@ -7,12 +7,11 @@
 interface Props {
   llmTraj: any;
   llmPerPair: any;
-  toolsPerPair: any;
   religious: any;
   timeSpan: string;
 }
 
-const { llmTraj, llmPerPair, toolsPerPair, religious, timeSpan } = Astro.props;
+const { llmTraj, llmPerPair, religious, timeSpan } = Astro.props;
 const nModels = llmTraj?.summary?.n_models || 72;
 const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 ---
@@ -91,12 +90,6 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
     <div class="chart-title" style="color: var(--text)">Adoption Calculation — <span id="adoption-pct-title"></span></div>
     <div class="chart-subtitle" style="margin-bottom:0.5rem;">Mean of per-source UA/(UA+RU) ratios, last 12 months</div>
     <div id="adoption-calc-body" style="font-size:0.75rem; color:var(--text-muted); line-height:1.6;"></div>
-  </div>
-  <div class="chart-container" id="dict-container" style="margin-bottom:0; padding:0.75rem 1rem;">
-    <div class="chart-title" style="color: var(--text)">Reference Audit</div>
-    <div class="chart-subtitle" style="margin-bottom:0.5rem;">Dictionary and encyclopedia entries for each spelling form</div>
-    <div id="search-preview"></div>
-    <script type="application/json" id="tools-per-pair-data" set:html={JSON.stringify(toolsPerPair)} />
   </div>
 </div>
 

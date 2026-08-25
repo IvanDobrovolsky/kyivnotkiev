@@ -54,13 +54,6 @@ function fmtBig(n: string | number) {
   <div id="error-analysis"></div>
 </div>
 
-<!-- Category Chart -->
-<div class="chart-container" style="margin-bottom:0.75rem;">
-  <div class="chart-title" style="color:var(--text);">Adoption by Category</div>
-  <div class="chart-subtitle" style="margin-bottom:0.5rem;">Mean adoption (%) by category — equal weight per source</div>
-  <div id="category-chart" style="width:100%; height:260px;"></div>
-</div>
-
 <!-- Links -->
 <div class="chart-container" style="margin-bottom:1rem; padding:1rem;">
   <div class="chart-title" style="color:var(--text);">Resources</div>
@@ -87,9 +80,7 @@ function fmtBig(n: string | number) {
   import clAnalysis from '../data/cl_analysis.json';
   import errorAnalysis from '../data/error_analysis.json';
   import manifest from '../data/manifest.json';
-  import regexPrecision from '../data/regex_precision.json';
 
-  const pairs = { categories: (manifest as any).categories, pairs: (manifest as any).pairs };
   const sourceColors: Record<string, string> = {
     trends: '#4285F4', gdelt: '#1e3a5f', wikipedia: '#636466',
     reddit: '#FF4500', youtube: '#FF0000', ngrams: '#7c3aed', openalex: '#06b6d4',
@@ -102,10 +93,8 @@ function fmtBig(n: string | number) {
   // === renderStatAnalysis ===
   (function renderStatAnalysis() {
     const an = analysisData as any;
-    const rp = regexPrecision as any;
     const ea = errorAnalysis as any;
     const reg = an.regression || {};
-    const kw = an.kruskal_wallis || {};
     const inv = an.invasion_effect || {};
 
     let bestInv = { d: 0, p: 1, src: '' };
@@ -119,8 +108,6 @@ function fmtBig(n: string | number) {
     const cards = [
       { value: `R\u00B2=${(reg.r_squared || 0).toFixed(2)}`, label: 'Regression fit', sub: `\u03B2=${(reg.beta || 0).toFixed(2)}, n=${reg.n || 0}`, bg: '#f0f9ff', color: '#0057B8' },
       { value: bestInv.p < 0.001 ? 'p<0.001' : `p=${bestInv.p.toFixed(3)}`, label: 'Invasion effect', sub: `Wilcoxon; d=${bestInv.d.toFixed(2)}`, bg: '#fef2f2', color: '#dc2626' },
-      { value: `${rp.overall_precision || 0}%`, label: 'Regex precision', sub: `${rp.total_false_positives || 0} FP / ${(rp.total_sampled || 0).toLocaleString()}`, bg: '#f0fdf4', color: '#059669' },
-      { value: kw.p < 0.001 ? 'p<0.001' : `p=${(kw.p || 0).toFixed(3)}`, label: 'Category test', sub: `H=${(kw.H || 0).toFixed(2)}`, bg: '#fefce8', color: '#d97706' },
     ];
     grid.innerHTML = cards.map(c => `
       <div style="padding:0.6rem 0.4rem;background:${c.bg};border-radius:6px;text-align:center;">
@@ -294,28 +281,6 @@ function fmtBig(n: string | number) {
     });
   })();
 
-  // === drawCategoryChart ===
-  (function drawCategoryChart() {
-    const container = document.getElementById('category-chart')!;
-    if (!container) return;
-    container.innerHTML = '';
-    const rect = container.getBoundingClientRect();
-    const margin = { top: 10, right: 60, bottom: 20, left: 180 };
-    const width = rect.width - margin.left - margin.right;
-    const height = rect.height - margin.top - margin.bottom;
-    const svg = d3.select('#category-chart').append('svg').attr('viewBox', `0 0 ${rect.width} ${rect.height}`).append('g').attr('transform', `translate(${margin.left},${margin.top})`);
-    const catData = pairs.categories.map((cat: any) => {
-      const catPairs = pairs.pairs.filter((p: any) => p.category === cat.id);
-      const avg = catPairs.length ? catPairs.reduce((s: number, p: any) => s + p.adoption, 0) / catPairs.length : 0;
-      return { name: cat.name, avg: Math.round(avg * 10) / 10, color: cat.color, count: catPairs.length };
-    }).filter((d: any) => d.count > 0).sort((a: any, b: any) => b.avg - a.avg);
-    const y = d3.scaleBand().domain(catData.map((d: any) => d.name)).range([0, height]).padding(0.3);
-    const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
-    svg.selectAll('.bg-bar').data(catData).enter().append('rect').attr('x', 0).attr('width', width).attr('y', (d: any) => y(d.name)!).attr('height', y.bandwidth()).attr('fill', '#f3f4f6').attr('rx', 3);
-    svg.selectAll('.val-bar').data(catData).enter().append('rect').attr('x', 0).attr('width', (d: any) => x(d.avg)).attr('y', (d: any) => y(d.name)!).attr('height', y.bandwidth()).attr('fill', (d: any) => d.color).attr('opacity', 0.8).attr('rx', 3);
-    svg.selectAll('.cat-label').data(catData).enter().append('text').attr('x', -8).attr('y', (d: any) => y(d.name)! + y.bandwidth() / 2 + 4).attr('text-anchor', 'end').attr('fill', '#374151').attr('font-size', '12px').attr('font-weight', '500').text((d: any) => d.name);
-    svg.selectAll('.val-label').data(catData).enter().append('text').attr('x', (d: any) => x(d.avg) + 8).attr('y', (d: any) => y(d.name)! + y.bandwidth() / 2 + 4).attr('fill', '#6b7280').attr('font-size', '12px').attr('font-weight', '600').text((d: any) => d.avg + '%');
-  })();
 </script>
 
 </Base>

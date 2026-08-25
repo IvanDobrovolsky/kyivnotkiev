@@ -94,6 +94,14 @@ def main(config_path: Path = CONFIG_PATH, data_dir: Path = SITE_DATA_DIR) -> dic
 
 
 def _find(node, drop: set[str], hits: set[str]):
+    """Mirror exactly what _prune removes: pair-keyed dict entries and list
+    items describing a pair.
+
+    Deliberately does NOT flag bare string values. A slug can legitimately occur
+    as corpus data — "zaporizhzhia" appears as a collocate of "Dnipro River" in
+    cl_collocations.json — and flagging that produced a false failure that would
+    have blocked every rebuild.
+    """
     if isinstance(node, dict):
         for k, v in node.items():
             if isinstance(k, str) and k in drop:
@@ -101,9 +109,9 @@ def _find(node, drop: set[str], hits: set[str]):
             _find(v, drop, hits)
     elif isinstance(node, list):
         for v in node:
+            if isinstance(v, dict) and (v.get("slug") in drop or v.get("pair_slug") in drop):
+                hits.add(v.get("slug") or v.get("pair_slug"))
             _find(v, drop, hits)
-    elif isinstance(node, str) and node in drop:
-        hits.add(node)
 
 
 def verify(config_path: Path = CONFIG_PATH, data_dir: Path = SITE_DATA_DIR) -> list[str]:

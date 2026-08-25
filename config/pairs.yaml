@@ -2,34 +2,8 @@ metadata:
   version: '2.0'
   description: Ukrainian toponym pairs for adoption analysis
   time_range: 2010-01-01 to 2026-12-31
-categories:
-  geographical:
-    name: Geographical
-    description: Cities, rivers, regions, and administrative areas
-  food:
-    name: Food & Cuisine
-    description: Dishes, drinks, and food-related terms
-  landmarks:
-    name: Landmarks & Heritage Sites
-    description: UNESCO sites, monasteries, historical landmarks
-  country:
-    name: Country-Level Framing
-    description: Sovereignty and statehood markers
-  institutional:
-    name: Institutional
-    description: Universities, churches, and organizations
-  sports:
-    name: Sports
-    description: Football clubs, cultural exports
-  historical:
-    name: Historical
-    description: Colonial-era terms, identity markers
-  people:
-    name: People
-    description: Russian vs Ukrainian transliteration of prominent Ukrainian names
 pairs:
-- category: geographical
-  russian: Kiev
+- russian: Kiev
   ukrainian: Kyiv
   enabled: true
   is_control: false
@@ -55,8 +29,7 @@ pairs:
   match_mode: word_boundary
   slug: kyiv
   word_boundary: true
-- category: geographical
-  russian: Kharkov
+- russian: Kharkov
   ukrainian: Kharkiv
   enabled: true
   is_control: false
@@ -70,8 +43,7 @@ pairs:
   match_mode: word_boundary
   slug: kharkiv
   word_boundary: true
-- category: geographical
-  russian: Odessa
+- russian: Odessa
   ukrainian: Odesa
   enabled: true
   is_control: false
@@ -98,8 +70,7 @@ pairs:
   homonym_type: us_city
   slug: odesa
   word_boundary: true
-- category: geographical
-  russian: Lvov
+- russian: Lvov
   ukrainian: Lviv
   enabled: true
   is_control: false
@@ -109,10 +80,9 @@ pairs:
   - date: 2022-03
     label: Refugee hub, diplomatic activity
   word_boundary: true
-- category: geographical
-  russian: Zaporozhye
+- russian: Zaporozhye
   ukrainian: Zaporizhzhia
-  enabled: true
+  enabled: false
   is_control: false
   events:
   - date: 2022-03
@@ -121,8 +91,7 @@ pairs:
     label: Nuclear plant shelling crisis
   match_mode: word_boundary
   slug: zaporizhzhia
-- category: geographical
-  russian: Nikolaev
+- russian: Nikolaev
   ukrainian: Mykolaiv
   enabled: false
   is_control: false
@@ -136,8 +105,7 @@ pairs:
   - date: 2022-03
     label: Russian siege begins
   word_boundary: true
-- category: geographical
-  russian: Dnepropetrovsk
+- russian: Dnepropetrovsk
   ukrainian: Dnipro
   enabled: false
   is_control: false
@@ -150,8 +118,7 @@ pairs:
     label: Peace negotiation surge
   match_mode: word_boundary
   slug: dnipro
-- category: geographical
-  russian: Vinnitsa
+- russian: Vinnitsa
   ukrainian: Vinnytsia
   enabled: false
   is_control: false
@@ -160,8 +127,7 @@ pairs:
   events:
   - date: 2022-07
     label: Missile strike on city center
-- category: geographical
-  russian: Rovno
+- russian: Rovno
   ukrainian: Rivne
   enabled: false
   is_control: false
@@ -174,8 +140,7 @@ pairs:
   - date: 2022-03
     label: Russian missile strikes on Rivne
   word_boundary: true
-- category: geographical
-  russian: Chernobyl
+- russian: Chernobyl
   ukrainian: Chornobyl
   enabled: true
   is_control: false
@@ -193,8 +158,7 @@ pairs:
     label: S.T.A.L.K.E.R. 2 Heart of Chornobyl release
   match_mode: word_boundary
   slug: chornobyl
-- category: geographical
-  russian: Lugansk
+- russian: Lugansk
   ukrainian: Luhansk
   enabled: true
   is_control: false
@@ -207,8 +171,7 @@ pairs:
     label: Retreat from Lyman, Luhansk oblast
   match_mode: word_boundary
   slug: luhansk
-- category: geographical
-  russian: Dnieper River
+- russian: Dnieper River
   ukrainian: Dnipro River
   enabled: true
   is_control: false
@@ -219,8 +182,7 @@ pairs:
   events:
   - date: 2022-11
     label: Kherson liberation, Dnipro front line
-- category: geographical
-  russian: Dniester
+- russian: Dniester
   ukrainian: Dnister
   enabled: false
   is_control: false
@@ -230,8 +192,7 @@ pairs:
   events:
   - date: 2022-04
     label: Transnistria tensions during invasion
-- category: geographical
-  russian: Donbass
+- russian: Donbass
   ukrainian: Donbas
   enabled: true
   is_control: false
@@ -247,8 +208,7 @@ pairs:
     label: Toponym decolonization law
   match_mode: word_boundary
   slug: donbas
-- category: food
-  russian: Chicken Kiev
+- russian: Chicken Kiev
   ukrainian: Chicken Kyiv
   enabled: true
   is_control: false
@@ -262,8 +222,7 @@ pairs:
   - date: 2022-10
     label: UK regional press Christmas recipes (still "Kiev")
   word_boundary: true
-- category: food
-  russian: Borsch
+- russian: Borsch
   ukrainian: Borscht
   enabled: true
   is_control: false
@@ -275,8 +234,7 @@ pairs:
     label: UNESCO inscribes Ukrainian borscht
   match_mode: word_boundary
   slug: borscht
-- category: landmarks
-  russian: Kiev Pechersk Lavra
+- russian: Kiev Pechersk Lavra
   ukrainian: Kyiv Pechersk Lavra
   enabled: false
   is_control: false
@@ -287,10 +245,9 @@ pairs:
     label: Ukraine raids Lavra over Russian ties
   - date: 2023-03
     label: Monks evicted from Kyiv Pechersk Lavra
-- category: landmarks
-  russian: Chernobyl Exclusion Zone
+- russian: Chernobyl Exclusion Zone
   ukrainian: Chornobyl Exclusion Zone
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: exact_phrase
   slug: chornobyl-exclusion-zone
@@ -301,8 +258,7 @@ pairs:
     label: Exclusion Zone wildfire
   - date: 2022-02
     label: Russia seizes Exclusion Zone
-- category: institutional
-  russian: Kiev National University
+- russian: Kiev National University
   ukrainian: Kyiv National University
   enabled: false
   is_control: false
@@ -313,8 +269,7 @@ pairs:
     label: University centennial
   - date: 2022-10
     label: Russian missile strikes near campus
-- category: institutional
-  russian: Kiev Polytechnic
+- russian: Kiev Polytechnic
   ukrainian: Kyiv Polytechnic
   enabled: false
   is_control: false
@@ -325,8 +280,7 @@ pairs:
     label: War-related research coverage
   - date: 2024-05
     label: Drone development at KPI
-- category: institutional
-  russian: Kiev Patriarchate
+- russian: Kiev Patriarchate
   ukrainian: Kyiv Patriarchate
   enabled: false
   is_control: false
@@ -337,8 +291,7 @@ pairs:
     label: Autocephaly from Constantinople
   - date: 2019-01
     label: OCU officially established
-- category: sports
-  russian: Dynamo Kiev
+- russian: Dynamo Kiev
   ukrainian: Dynamo Kyiv
   enabled: true
   is_control: false
@@ -348,15 +301,13 @@ pairs:
   match_mode: exact_phrase
   slug: dynamo-kyiv
   word_boundary: true
-- category: sports
-  russian: Kiev ballet
+- russian: Kiev ballet
   ukrainian: Kyiv ballet
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: exact_phrase
   slug: kyiv-ballet
-- category: historical
-  russian: Kievan Rus
+- russian: Kievan Rus
   ukrainian: Kyivan Rus
   enabled: true
   is_control: false
@@ -365,8 +316,7 @@ pairs:
     label: Russia weaponizes historical narrative
   match_mode: exact_phrase
   slug: kyivan-rus
-- category: geographical
-  russian: Chernigov
+- russian: Chernigov
   ukrainian: Chernihiv
   enabled: false
   is_control: false
@@ -381,10 +331,9 @@ pairs:
   - date: 2022-03
     label: Siege of Chernihiv
   word_boundary: true
-- category: geographical
-  russian: Chernovtsy
+- russian: Chernovtsy
   ukrainian: Chernivtsi
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: word_boundary
   slug: chernivtsi
@@ -393,8 +342,7 @@ pairs:
     label: COVID-19 first cases in Chernivtsi
   - date: 2022-03
     label: Refugee influx to western Ukraine
-- category: geographical
-  russian: Zhitomir
+- russian: Zhitomir
   ukrainian: Zhytomyr
   enabled: false
   is_control: false
@@ -405,8 +353,7 @@ pairs:
     label: COVID-19 regional lockdowns
   - date: 2022-03
     label: Russian airstrikes on Zhytomyr
-- category: geographical
-  russian: Cherkassy
+- russian: Cherkassy
   ukrainian: Cherkasy
   enabled: false
   is_control: false
@@ -415,8 +362,7 @@ pairs:
   events:
   - date: 2022-03
     label: Russian strikes on Cherkasy region
-- category: geographical
-  russian: Uzhgorod
+- russian: Uzhgorod
   ukrainian: Uzhhorod
   enabled: false
   is_control: false
@@ -425,8 +371,7 @@ pairs:
   events:
   - date: 2022-03
     label: Border crossing surge, refugee route
-- category: geographical
-  russian: Kremenchug
+- russian: Kremenchug
   ukrainian: Kremenchuk
   enabled: false
   is_control: false
@@ -435,8 +380,7 @@ pairs:
   events:
   - date: 2022-06
     label: Shopping mall missile strike
-- category: geographical
-  russian: Kirovograd
+- russian: Kirovograd
   ukrainian: Kropyvnytskyi
   enabled: false
   is_control: false
@@ -445,8 +389,7 @@ pairs:
   events:
   - date: 2016-07
     label: Renamed from Kirovograd
-- category: geographical
-  russian: Ternopol
+- russian: Ternopol
   ukrainian: Ternopil
   enabled: false
   is_control: false
@@ -455,25 +398,22 @@ pairs:
   events:
   - date: 2022-03
     label: Refugee hub, military recruitment
-- category: food
-  russian: Vareniki
+- russian: Vareniki
   ukrainian: Varenyky
   enabled: true
   is_control: false
   match_mode: word_boundary
   slug: varenyky
-- category: sports
-  russian: Metalist Kharkov
+- russian: Metalist Kharkov
   ukrainian: Metalist Kharkiv
   enabled: false
   is_control: false
   match_mode: exact_phrase
   slug: metalist-kharkiv
   word_boundary: true
-- category: landmarks
-  russian: Babi Yar
+- russian: Babi Yar
   ukrainian: Babyn Yar
-  enabled: true
+  enabled: false
   is_control: false
   match_mode: exact_phrase
   slug: babyn-yar
@@ -484,8 +424,7 @@ pairs:
     label: Babyn Yar memorial opens
   - date: 2022-03
     label: Russian missile hits memorial site
-- category: people
-  russian: Alexander Usyk
+- russian: Alexander Usyk
   ukrainian: Oleksandr Usyk
   enabled: true
   is_control: false
@@ -500,8 +439,7 @@ pairs:
     label: Beats Fury rematch
   match_mode: exact_phrase
   slug: oleksandr-usyk
-- category: people
-  russian: Vladimir Zelensky
+- russian: Vladimir Zelensky
   ukrainian: Volodymyr Zelenskyy
   enabled: true
   is_control: false
@@ -512,8 +450,7 @@ pairs:
     label: Wartime leadership begins
   match_mode: exact_phrase
   slug: volodymyr-zelenskyy
-- category: people
-  russian: Andrey Shevchenko
+- russian: Andrey Shevchenko
   ukrainian: Andrii Shevchenko
   enabled: true
   is_control: false
@@ -523,8 +460,7 @@ pairs:
   events:
   - date: 2021-06
     label: Euro 2020 — manages Ukraine
-- category: historical
-  russian: Vladimir the Great
+- russian: Vladimir the Great
   ukrainian: Volodymyr the Great
   enabled: true
   is_control: false
@@ -537,8 +473,7 @@ pairs:
     label: Poroshenko unveils Volodymyr statue
   match_mode: exact_phrase
   slug: volodymyr-the-great
-- category: geographical
-  russian: Artemovsk
+- russian: Artemovsk
   ukrainian: Bakhmut
   enabled: true
   is_control: false
@@ -558,8 +493,7 @@ pairs:
   - winery
   homonym_type: brand_composer
   slug: bakhmut
-- category: people
-  russian: Nikolai Gogol
+- russian: Nikolai Gogol
   ukrainian: Mykola Hohol
   enabled: true
   is_control: false
@@ -569,8 +503,7 @@ pairs:
   events:
   - date: 2016-03
     label: Gogol birthday anniversary coverage
-- category: geographical
-  russian: Feodosiya
+- russian: Feodosiya
   ukrainian: Feodosiia
   enabled: false
   is_control: false
@@ -581,17 +514,15 @@ pairs:
   events:
   - date: 2023-12
     label: Ukrainian strike on Russian ship in Feodosia
-- category: historical
-  russian: Olga of Kiev
+- russian: Olga of Kiev
   ukrainian: Olha of Kyiv
-  enabled: true
+  enabled: false
   is_control: false
   notes: Princess of Kyivan Rus (княгиня Ольга). Tests Г→H in first name + Kiev→Kyiv.
   match_mode: exact_phrase
   slug: olha-of-kyiv
   word_boundary: true
-- category: people
-  russian: Igor Sikorsky
+- russian: Igor Sikorsky
   ukrainian: Ihor Sikorsky
   enabled: true
   is_control: false
@@ -603,8 +534,7 @@ pairs:
     label: Kyiv airport renamed to Sikorsky
   - date: 2024-05
     label: Airport in war coverage
-- category: people
-  russian: Sergei Korolev
+- russian: Sergei Korolev
   ukrainian: Serhii Korolyov
   enabled: true
   is_control: false
@@ -620,8 +550,7 @@ pairs:
     label: Korolev 110th birthday anniversary
   - date: 2025-04
     label: Space heritage debates
-- category: historical
-  russian: Bogdan Khmelnitsky
+- russian: Bogdan Khmelnitsky
   ukrainian: Bohdan Khmelnytskyi
   enabled: false
   is_control: false
@@ -632,8 +561,7 @@ pairs:
   events:
   - date: 2016-02
     label: Street renaming debates in Ukraine
-- category: people
-  russian: Kazimir Malevich
+- russian: Kazimir Malevich
   ukrainian: Kazymyr Malevych
   enabled: true
   is_control: false

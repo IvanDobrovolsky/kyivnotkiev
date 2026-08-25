@@ -1,17 +1,13 @@
 ---
 import '../../styles/global.css';
 import m from '../../data/manifest.json';
-import toolsPerPair from '../../data/tools_per_pair.json';
 
-// manifest.json is the single source of truth — all stats, pairs, categories
-const grouped = m.categories.map(cat => ({
-  ...cat,
-  pairs: m.pairs.filter(p => p.category === cat.id).sort((a, b) => {
-    if (a.slug === 'kyiv') return -1;
-    if (b.slug === 'kyiv') return 1;
-    return b.total - a.total;
-  })
-})).filter(g => g.pairs.length > 0);
+// manifest.json is the single source of truth — all stats and pairs
+const sortedPairs = [...m.pairs].sort((a, b) => {
+  if (a.slug === 'kyiv') return -1;
+  if (b.slug === 'kyiv') return 1;
+  return b.total - a.total;
+});
 
 function fmtBig(n: string | number) {
   const v = typeof n === 'string' ? parseInt(n) : n;
@@ -83,28 +79,21 @@ function formatNum(n: number) {
     </nav>
 
     <aside class="sidebar">
-      {grouped.map((cat, ci) => (
-        <div class="sidebar-section">
-          <div class={`sidebar-header ${ci === 0 ? 'open' : ''}`} data-category={cat.id}>
-            <span class="dot" style={`background: ${cat.color}`}></span>
-            {cat.name}
-            <span class="arrow">▶</span>
-          </div>
-          <div class={`sidebar-items ${ci === 0 ? 'open' : ''}`}>
-            {cat.pairs.map((pair, pi) => (
-              <div class="sidebar-item" data-pair-slug={pair.slug}>
-                <div class="pair-name">
-                  <span>{['kyiv','odesa','chornobyl','volodymyr-zelenskyy','volodymyr-the-great','bakhmut'].includes(pair.slug) ? '★ ' : ''}{pair.ukrainian}</span>
-                  <span class="old">{pair.russian}</span>
-                </div>
-                <span class={`adoption-badge ${adoptionClass(pair.adoption)}`}>
-                  {pair.adoption}%
-                </span>
+      <div class="sidebar-section">
+        <div class="sidebar-items open">
+          {sortedPairs.map((pair) => (
+            <div class="sidebar-item" data-pair-slug={pair.slug}>
+              <div class="pair-name">
+                <span>{['kyiv','odesa','chornobyl','volodymyr-zelenskyy','volodymyr-the-great','bakhmut'].includes(pair.slug) ? '★ ' : ''}{pair.ukrainian}</span>
+                <span class="old">{pair.russian}</span>
               </div>
-            ))}
-          </div>
+              <span class={`adoption-badge ${adoptionClass(pair.adoption)}`}>
+                {pair.adoption}%
+              </span>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </aside>
 
     <main class="main" style="opacity:0; transition:opacity 0.15s;">
@@ -208,8 +197,6 @@ function formatNum(n: number) {
         </div>
         <div class="chart-container" id="dict-container" style="margin-bottom:0; padding:0.75rem 1rem;">
           <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Аудит посилань</div>
-          <div id="search-preview"></div>
-          <script type="application/json" id="tools-per-pair-data" set:html={JSON.stringify(toolsPerPair)} />
         </div>
       </div>
 
@@ -336,13 +323,6 @@ function formatNum(n: number) {
             <div style="font-size:0.75rem; color:#6b7280;">Chernobyl: 1% у Trends, 0% у Вікіпедії — несприйнятливий до змін</div>
           </div>
         </div>
-      </div>
-
-      <!-- Category chart -->
-      <div class="chart-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1.1rem;">Адопція за категоріями</div>
-        <div class="chart-subtitle" style="margin-bottom: 0.5rem;">Середня адопція (%) за категоріями — рівна вага кожного джерела</div>
-        <div id="category-chart" style="width:100%; height:260px;"></div>
       </div>
 
       <!-- Top 6 Deep Dive -->
@@ -508,13 +488,11 @@ function formatNum(n: number) {
     import pairEvents from '../../data/pair_events.json';
     // trends_countries removed — using GDELT country distribution only
     import errorAnalysis from '../../data/error_analysis.json';
-    import dictCombined from '../../data/dictionary_combined.json';
-    import enforcementData from '../../data/enforcement.json';
     import domainOrigins from '../../data/domain_origins.json';
     import clCollocations from '../../data/cl_collocations.json';
 
     // Use manifest as the single pairs source
-    const pairs = { categories: manifest.categories, pairs: manifest.pairs };
+    const pairs = { pairs: manifest.pairs };
 
     const sourceColors: Record<string, string> = {
       trends: '#4285F4',
@@ -566,7 +544,6 @@ function formatNum(n: number) {
       activePairSlug = '';
       showView('landing');
       document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-      drawCategoryChart();
       drawHeatmap();
       drawErrorAnalysis();
       drawClCollocations();
@@ -1023,7 +1000,6 @@ function formatNum(n: number) {
       drawMediaOrigin();
       drawWorldMap();
       drawHoldoutTable();
-      drawSearchPreview();
     }
 
     function drawAdoptionCalc() {
@@ -1334,91 +1310,12 @@ function formatNum(n: number) {
       drawChart();
     });
 
-    // ── Category bar chart ──────────────────────────────
-    function drawCategoryChart() {
-      const container = document.getElementById('category-chart')!;
-      container.innerHTML = '';
-
-      const rect = container.getBoundingClientRect();
-      const margin = { top: 10, right: 60, bottom: 20, left: 180 };
-      const width = rect.width - margin.left - margin.right;
-      const height = rect.height - margin.top - margin.bottom;
-
-      const svg = d3.select('#category-chart')
-        .append('svg')
-        .attr('viewBox', `0 0 ${rect.width} ${rect.height}`)
-        .append('g')
-        .attr('transform', `translate(${margin.left},${margin.top})`);
-
-      // Aggregate by category
-      const catData = pairs.categories.map((cat: any) => {
-        const catPairs = pairs.pairs.filter((p: any) => p.category === cat.id);
-        const avg = catPairs.length ? catPairs.reduce((s: number, p: any) => s + p.adoption, 0) / catPairs.length : 0;
-        return { name: cat.name, avg: Math.round(avg * 10) / 10, color: cat.color, count: catPairs.length };
-      }).sort((a: any, b: any) => b.avg - a.avg);
-
-      const y = d3.scaleBand()
-        .domain(catData.map((d: any) => d.name))
-        .range([0, height])
-        .padding(0.3);
-
-      const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
-
-      // Background bars
-      svg.selectAll('.bg-bar')
-        .data(catData)
-        .enter().append('rect')
-        .attr('x', 0).attr('width', width)
-        .attr('y', (d: any) => y(d.name)!)
-        .attr('height', y.bandwidth())
-        .attr('fill', '#f3f4f6')
-        .attr('rx', 3);
-
-      // Value bars
-      svg.selectAll('.val-bar')
-        .data(catData)
-        .enter().append('rect')
-        .attr('x', 0)
-        .attr('width', (d: any) => x(d.avg))
-        .attr('y', (d: any) => y(d.name)!)
-        .attr('height', y.bandwidth())
-        .attr('fill', (d: any) => d.color)
-        .attr('opacity', 0.8)
-        .attr('rx', 3);
-
-      // Labels
-      svg.selectAll('.cat-label')
-        .data(catData)
-        .enter().append('text')
-        .attr('x', -8)
-        .attr('y', (d: any) => y(d.name)! + y.bandwidth() / 2 + 4)
-        .attr('text-anchor', 'end')
-        .attr('fill', '#374151')
-        .attr('font-size', '12px')
-        .attr('font-weight', '500')
-        .text((d: any) => d.name);
-
-      // Value labels
-      svg.selectAll('.val-label')
-        .data(catData)
-        .enter().append('text')
-        .attr('x', (d: any) => x(d.avg) + 8)
-        .attr('y', (d: any) => y(d.name)! + y.bandwidth() / 2 + 4)
-        .attr('fill', '#6b7280')
-        .attr('font-size', '12px')
-        .attr('font-weight', '600')
-        .text((d: any) => d.avg + '%');
-    }
-
     // ── Heatmap / pair overview ──────────────────────────
     function drawHeatmap() {
       const container = document.getElementById('heatmap-chart')!;
       container.innerHTML = '';
 
       const sorted = [...pairs.pairs].sort((a: any, b: any) => b.adoption - a.adoption);
-
-      const catColors: Record<string, string> = {};
-      pairs.categories.forEach((c: any) => { catColors[c.id] = c.color; });
 
       const rowHeight = 28;
       const totalHeight = sorted.length * rowHeight;
@@ -1450,7 +1347,7 @@ function formatNum(n: number) {
         svg.append('circle')
           .attr('cx', -170).attr('cy', yPos + rowHeight / 2)
           .attr('r', 4)
-          .attr('fill', catColors[pair.category] || '#999');
+          .attr('fill', colorScale(pair.adoption));
 
         // Label: Ukrainian name
         svg.append('text')
@@ -1495,14 +1392,6 @@ function formatNum(n: number) {
           .attr('font-family', 'var(--font-mono)')
           .text(pair.adoption + '%');
 
-        // Divider
-        if (i > 0 && sorted[i - 1].category !== pair.category) {
-          svg.append('line')
-            .attr('x1', -175).attr('x2', barWidth + 50)
-            .attr('y1', yPos).attr('y2', yPos)
-            .attr('stroke', '#e5e7eb')
-            .attr('stroke-width', 1);
-        }
       });
     }
 
@@ -1773,133 +1662,6 @@ function formatNum(n: number) {
     });
 
     // ── Error Analysis chart ─────────────────────────────────
-    function drawSearchPreview() {
-      const container = document.getElementById('search-preview');
-      if (!container) return;
-      container.innerHTML = '';
-
-      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
-      if (!pair) return;
-
-      const dc = (dictCombined as any)[activePairSlug];
-      if (!dc) { container.innerHTML = '<div style="font-size:0.75rem; color:#9ca3af;">Немає довідкових даних</div>'; return; }
-
-      const sources = [
-        { key: 'wikipedia', name: 'Wikipedia', icon: '📖' },
-        { key: 'wiktionary', name: 'Wiktionary', icon: '📝' },
-        { key: 'britannica', name: 'Britannica', icon: '🔵' },
-        { key: 'cambridge', name: 'Cambridge', icon: '📕' },
-      ];
-
-      let html = '<div style="display:grid; grid-template-columns: auto 1fr 1fr; gap:0; font-size:0.75rem;">';
-
-      // Header
-      html += '<div style="padding:0.35rem 0.5rem; font-weight:600; color:var(--text-muted); border-bottom:2px solid #e5e7eb;"></div>';
-      html += `<div style="padding:0.35rem 0.5rem; font-weight:700; color:#9ca3af; border-bottom:2px solid #e5e7eb; text-decoration:line-through;">${pair.russian}</div>`;
-      html += `<div style="padding:0.35rem 0.5rem; font-weight:700; color:#0057B8; border-bottom:2px solid #e5e7eb;">${pair.ukrainian}</div>`;
-
-      for (const src of sources) {
-        const data = dc[src.key];
-        html += `<div style="padding:0.35rem 0.5rem; font-weight:500; border-bottom:1px solid #f3f4f6; display:flex; align-items:center; gap:0.3rem;"><span style="font-size:0.85rem;">${src.icon}</span>${src.name}</div>`;
-
-        if (src.key === 'wikipedia') {
-          html += refBadge(data?.russian_article, pair.russian, pair.ukrainian, 'wiki', true);
-          html += refBadge(data?.ukrainian_article, pair.russian, pair.ukrainian, 'wiki', false);
-        } else {
-          const ruData = data?.russian ? {...data.russian, _isRussianCol: true} : data?.russian;
-          const ukData = data?.ukrainian ? {...data.ukrainian, _isRussianCol: false} : data?.ukrainian;
-          html += refBadge(ruData, pair.russian, pair.ukrainian, src.key);
-          html += refBadge(ukData, pair.russian, pair.ukrainian, src.key);
-        }
-      }
-
-      // Enforcement row — read per-pair from injected JSON
-      let toolsData: any = null;
-      try {
-        const tEl = document.getElementById('tools-per-pair-data');
-        if (tEl && tEl.textContent) {
-          toolsData = JSON.parse(tEl.textContent).pairs[activePairSlug];
-        }
-      } catch (e) {
-        console.error('[drawSearchPreview] tools data parse failed:', e);
-      }
-
-      html += '<div style="padding:0.4rem 0.5rem; font-weight:500; display:flex; align-items:center; gap:0.3rem;"><span style="font-size:0.85rem;">🔧</span>Інструменти</div>';
-      html += '<div style="padding:0.4rem 0.5rem; grid-column: span 2; display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">';
-      if (toolsData) {
-        const hunRu = toolsData.hunspell.russian;
-        const hunUa = toolsData.hunspell.ukrainian;
-        const ruIcon = hunRu.accepted ? '✓' : '✗';
-        const uaIcon = hunUa.accepted ? '✓' : '✗';
-        const ruColor = hunRu.accepted ? '#059669' : '#dc2626';
-        const uaColor = hunUa.accepted ? '#059669' : '#dc2626';
-        const ruTitle = hunRu.accepted
-          ? `hunspell en_US приймає "${hunRu.word_checked}"`
-          : `hunspell en_US відхиляє "${hunRu.word_checked}"${hunRu.suggestions.length ? ` (пропонує: ${hunRu.suggestions.join(', ')})` : ''}`;
-        const uaTitle = hunUa.accepted
-          ? `hunspell en_US приймає "${hunUa.word_checked}"`
-          : `hunspell en_US відхиляє "${hunUa.word_checked}"${hunUa.suggestions.length ? ` (пропонує: ${hunUa.suggestions.join(', ')})` : ''}`;
-        html += `<span title="${ruTitle}">${badge(`Hunspell · ${pair.russian.split(' ')[0]}`, ruColor, ruIcon)}</span>`;
-        html += `<span title="${uaTitle}">${badge(`Hunspell · ${pair.ukrainian.split(' ')[0]}`, uaColor, uaIcon)}</span>`;
-        const apDoc = toolsData.ap_stylebook.documented;
-        const bbcDoc = toolsData.bbc_style_guide.documented;
-        html += `<span title="${apDoc ? 'AP Stylebook фіксує українську форму для цієї пари' : 'Не у записах AP Stylebook'}">`
-          + badge('AP Stylebook', apDoc ? '#059669' : '#9ca3af', apDoc ? '✓' : '—')
-          + '</span>';
-        html += `<span title="${bbcDoc ? 'BBC News Style Guide фіксує українську форму для цієї пари' : 'Не у записах BBC News Style Guide'}">`
-          + badge('BBC', bbcDoc ? '#059669' : '#9ca3af', bbcDoc ? '✓' : '—')
-          + '</span>';
-      } else {
-        html += '<span style="font-size:0.65rem; color:#9ca3af;">дані недоступні</span>';
-      }
-      html += '</div>';
-
-      html += '</div>';
-      container.innerHTML = html;
-    }
-
-    function badge(label: string, color: string, icon: string): string {
-      return `<span style="display:inline-flex; align-items:center; gap:0.2rem; padding:0.15rem 0.4rem; border-radius:4px; background:${color}11; border:1px solid ${color}33; font-size:0.68rem; color:${color};"><strong>${icon}</strong> ${label}</span>`;
-    }
-
-    function refBadge(data: any, ru: string, uk: string, type: string, isRuCol?: boolean): string {
-      const cell = 'padding:0.3rem 0.4rem; border-bottom:1px solid #f3f4f6; font-size:0.72rem;';
-
-      if (type === 'wiki') {
-        if (!data) return `<div style="${cell} color:#d1d5db;">—</div>`;
-        const artClean = data.toLowerCase().replace(/[\s']/g, '');
-        const ukClean = uk.toLowerCase().replace(/[\s']/g, '');
-        const isUkr = artClean.includes(ukClean);
-        // For wiki: if article uses Ukrainian form = ✅, otherwise ⚠️
-        const icon = isUkr ? '✅' : '⚠️';
-        return `<div style="${cell}">${icon} <strong>${data}</strong></div>`;
-      }
-
-      if (!data || !data.exists) return `<div style="${cell} color:#d1d5db;">✗ немає</div>`;
-
-      // Determine if this is a "good" (Ukrainian form) or "bad" (Russian form) entry
-      const isRussianColumn = data._isRussianCol;
-
-      let label = '';
-      let sub = '';
-      if (type === 'wiktionary') {
-        label = data.title || 'знайдено';
-        if (data.etymology) sub = data.etymology.slice(0, 45) + '…';
-      } else if (type === 'britannica') {
-        label = data.top_result || 'знайдено';
-      } else if (type === 'cambridge') {
-        label = data.headword || 'знайдено';
-        if (data.definition) sub = data.definition.slice(0, 40) + '…';
-        if (data.redirected) label += ' ↗';
-      }
-
-      const icon = isRussianColumn ? '⚠️' : '✅';
-      let html = `<div style="${cell}">${icon} <strong>${label}</strong>`;
-      if (sub) html += `<div style="font-size:0.58rem; color:#9ca3af; margin-top:0.1rem;">${sub}</div>`;
-      html += '</div>';
-      return html;
-    }
-
     function drawErrorAnalysis() {
       const container = document.getElementById('error-analysis-chart');
       if (!container) return;

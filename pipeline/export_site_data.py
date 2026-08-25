@@ -515,17 +515,6 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
     log.info("Exporting manifest (single source of truth)...")
 
     pairs_cfg = load_pairs()
-    categories_raw = pairs_cfg.get("categories", {})
-
-    cat_colors = {
-        "geographical": "#0057B8", "food": "#e6b800", "landmarks": "#8B4513",
-        "country": "#228B22", "institutional": "#4B0082", "sports": "#DC143C",
-        "historical": "#708090", "people": "#FF6347",
-    }
-    categories = [
-        {"id": cid, "name": info["name"], "color": cat_colors.get(cid, "#888")}
-        for cid, info in categories_raw.items()
-    ]
 
     # ── Per-source stats ──
     log.info("  Computing per-source stats...")
@@ -724,24 +713,10 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
         recent = recent_map.get(slug, {})
         adoption_pct = 0.0 if slug in control_slugs else recent.get("adoption", 0.0)
         pairs_out.append({
-            "slug": slug, "category": p["category"],
+            "slug": slug,
             "russian": p["russian"], "ukrainian": p["ukrainian"],
             "adoption": adoption_pct, "total": total_map.get(slug, 0),
             "is_control": slug in control_slugs,
-        })
-
-    # Category stats
-    cat_stats = {}
-    for p in pairs_out:
-        if p["is_control"]:
-            continue
-        cat_stats.setdefault(p["category"], []).append(p["adoption"])
-    category_list = []
-    for c in categories:
-        vals = cat_stats.get(c["id"], [])
-        category_list.append({
-            **c, "count": len(vals),
-            "avg_adoption": round(sum(vals) / len(vals), 1) if vals else 0,
         })
 
     toponym_matches = sum(s["records"] for s in source_stats.values()) + openalex_total_papers
@@ -766,8 +741,6 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
             "telegram": {"records": source_stats.get("telegram", {}).get("records", 0), "pairs": source_stats.get("telegram", {}).get("pairs", 0), "label": "Telegram", "unit": "messages", "extra": f"{extra_map.get('telegram_channels', '0')} channels", "color": "#26A5E4"},
             "religious": {"records": source_stats.get("religious", {}).get("records", 0), "pairs": source_stats.get("religious", {}).get("pairs", 0), "label": "Religious", "unit": "articles", "extra": f"{extra_map.get('religious_sites', '0')} institutions", "color": "#8B0000"},
         },
-        "categories": categories,
-        "category_stats": sorted(category_list, key=lambda x: -x["avg_adoption"]),
         "pairs": sorted(pairs_out, key=lambda x: x["slug"]),
     }
 

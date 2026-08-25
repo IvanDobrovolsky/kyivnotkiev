@@ -321,7 +321,6 @@ def preprocess_youtube() -> pd.DataFrame | None:
 
             frames.append({
                 "pair_id": pair_id,
-                "category": pair["category"],
                 "russian_term": pair["russian"],
                 "ukrainian_term": pair["ukrainian"],
                 "year": int(year),

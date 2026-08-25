@@ -8,7 +8,6 @@ interface Props {
   ukrainian: string;
   adoption: number;
   total: number | string;
-  category: string;
   popularRank?: number;
 }
 
@@ -25,14 +24,13 @@ function fmtBig(n: number | string) {
   return v.toString();
 }
 
-const { slug, russian, ukrainian, adoption, total, category, popularRank = 999 } = Astro.props;
+const { slug, russian, ukrainian, adoption, total, popularRank = 999 } = Astro.props;
 const pct = adoption || 0;
 const color = adoptionColor(pct);
 ---
 
 <a href={`/pair/${slug}`}
    class="pair-card"
-   data-category={category}
    data-adoption={pct}
    data-total={total || 0}
    data-name={ukrainian}
@@ -49,7 +47,6 @@ const color = adoptionColor(pct);
     <div class="pair-card-bar-fill" style={`width:${Math.min(pct, 100)}%; background:${color};`}></div>
   </div>
   <div class="pair-card-meta">
-    <span>{category}</span>
     <span>{fmtBig(total || 0)} matches</span>
   </div>
 </a>

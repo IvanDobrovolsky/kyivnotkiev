@@ -11,8 +11,9 @@ What it does:
   1. Validates all dataset/ parquets (counts, dups, schema)
   2. Recomputes aggregate stats over enabled pairs (analysis.json)
   3. Runs export_site_data.py (manifest + timeseries + holdouts + prune)
-  4. Verifies site JSON matches dataset AND config/pairs.yaml
-  5. Prints full status report
+  4. Refreshes README numbers from the manifest
+  5. Verifies site JSON matches dataset AND config/pairs.yaml
+  6. Prints full status report
 
 After running, commit + push:
   git add site/src/data/ && git commit && git push
@@ -112,9 +113,16 @@ def run_export():
     export_main()
 
 
+def run_readme():
+    """Refresh the README's generated numbers from the manifest."""
+    log.info("\n4. UPDATING README")
+    from pipeline.update_readme import main as readme_main
+    readme_main()
+
+
 def verify_site_data():
     """Verify site JSON matches dataset."""
-    log.info("\n4. VERIFYING SITE DATA")
+    log.info("\n5. VERIFYING SITE DATA")
 
     with open(SITE_DATA_DIR / "manifest.json") as f:
         m = json.load(f)
@@ -152,7 +160,7 @@ def verify_site_data():
 
 def push_hf():
     """Push all datasets + corpus to HuggingFace."""
-    log.info("\n5. PUSHING TO HUGGINGFACE")
+    log.info("\n6. PUSHING TO HUGGINGFACE")
     from huggingface_hub import HfApi
     api = HfApi()
     repo_id = "KyivNotKiev/toponym-adoption-data"
@@ -187,6 +195,7 @@ def main():
     if not args.verify_only:
         run_stats()
         run_export()
+        run_readme()
 
     verify_issues = verify_site_data()
 

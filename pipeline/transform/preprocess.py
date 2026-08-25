@@ -120,7 +120,6 @@ def preprocess_trends() -> pd.DataFrame | None:
             continue
 
         df_norm["pair_id"] = pair_id
-        df_norm["category"] = pair["category"]
         df_norm["russian_term"] = russian
         df_norm["ukrainian_term"] = ukrainian
         df_norm["geo"] = df["geo"].iloc[0] if "geo" in df.columns else "worldwide"
@@ -188,7 +187,6 @@ def preprocess_ngrams() -> pd.DataFrame | None:
             continue
 
         merged["pair_id"] = pair_id
-        merged["category"] = pair["category"]
         merged["russian_term"] = pair["russian"]
         merged["ukrainian_term"] = pair["ukrainian"]
 

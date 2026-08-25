@@ -343,7 +343,6 @@ def preprocess_wikipedia() -> pd.DataFrame | None:
         total = result["russian_views"] + result["ukrainian_views"]
         result["adoption_ratio"] = result["ukrainian_views"] / total.replace(0, float("nan"))
         result["pair_id"] = pair_id
-        result["category"] = pair["category"]
         result["russian_term"] = pair["russian"]
         result["ukrainian_term"] = pair["ukrainian"]
         result["source"] = "wikipedia"

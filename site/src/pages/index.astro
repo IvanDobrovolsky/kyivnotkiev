@@ -19,7 +19,6 @@ const pairs = [
   ...popularOrder.map(s => allPairs.find((p: any) => p.slug === s)).filter(Boolean),
   ...allPairs.filter((p: any) => !popularOrder.includes(p.slug)).sort((a: any, b: any) => (b.total || 0) - (a.total || 0)),
 ];
-const categories = (m.categories || []).filter((c: any) => pairs.some((p: any) => p.category === c.id));
 
 const stats = [
   { value: m.records_scanned, label: 'records scanned' },
@@ -57,13 +56,6 @@ const stats = [
     <button class="ctrl-btn" data-sort="adoption">Adoption</button>
     <button class="ctrl-btn" data-sort="alpha">A-Z</button>
   </div>
-  <div class="controls-group">
-    <span class="controls-label">Filter</span>
-    <button class="ctrl-btn active" data-cat="all">All</button>
-    {categories.map((cat: any) => (
-      <button class="ctrl-btn" data-cat={cat.id}>{cat.name}</button>
-    ))}
-  </div>
 </div>
 
 <!-- Pair cards -->
@@ -75,7 +67,6 @@ const stats = [
       ukrainian={p.ukrainian}
       adoption={p.adoption || 0}
       total={p.total || 0}
-      category={p.category}
       popularRank={i}
     />
   ))}
@@ -114,14 +105,6 @@ const stats = [
     });
   });
 
-  document.querySelectorAll('[data-cat]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-cat]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const cat = (btn as HTMLElement).dataset.cat;
-      cards.forEach(c => { c.style.display = (cat === 'all' || c.dataset.category === cat) ? '' : 'none'; });
-    });
-  });
 </script>
 
 <style>

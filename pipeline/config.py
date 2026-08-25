@@ -41,9 +41,3 @@ def get_pair_by_slug(slug: str, config_dir: Path = CONFIG_DIR) -> Optional[dict]
 def get_slug_map(config_dir: Path = CONFIG_DIR) -> dict[str, dict]:
     """Return {slug: pair_config} for all enabled pairs."""
     return {p["slug"]: p for p in get_enabled_pairs(config_dir)}
-
-
-def get_categories(config_dir: Path = CONFIG_DIR) -> dict:
-    """Return category definitions."""
-    cfg = load_pairs(config_dir)
-    return cfg.get("categories", {})

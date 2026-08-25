@@ -737,7 +737,6 @@ def run(model_keys, force=False):
                     "pair_id": pair["id"],
                     "russian": pair["russian"],
                     "ukrainian": pair["ukrainian"],
-                    "category": pair.get("category", ""),
                     "trials": [],
                 }
                 cp["pairs"].append(entry)
