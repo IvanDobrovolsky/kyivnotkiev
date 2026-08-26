@@ -9,9 +9,11 @@ interface Props {
   llmPerPair: any;
   timeSpan: string;
   corpusHoldouts?: any;
+  corpusQuality?: any;
 }
 
-const { llmTraj, llmPerPair, timeSpan, corpusHoldouts } = Astro.props;
+const { llmTraj, llmPerPair, timeSpan, corpusHoldouts, corpusQuality } = Astro.props;
+const q = corpusQuality || null;
 const ch = corpusHoldouts || null;
 const chSources: string[] = ch ? Object.keys(ch) : [];
 const chTotal: number = ch ? chSources.reduce((n, s) => n + ch[s].length, 0) : 0;
@@ -137,6 +139,41 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 </div>
 
 <!-- Verified News Articles -->
+{q && (
+<div class="chart-container" style="margin-bottom:1rem; padding:0.75rem;">
+  <div class="chart-title" style="color:var(--text)">Data completeness &amp; quality</div>
+  <div class="chart-subtitle" style="margin-bottom:0.5rem;">
+    {q.corpus_records} corpus records, all exact word-boundary matches.
+    {q.dropped_duplicate_context} further matches dropped as duplicate context.
+  </div>
+  <div style="overflow-x:auto;">
+  <table style="width:100%;border-collapse:collapse;font-size:0.75rem;">
+    <thead><tr style="text-align:right;color:var(--text-muted);">
+      <th style="text-align:left;padding:0.3rem;">Source</th><th>Scanned</th><th>Exact match</th>
+      <th>Match rate</th><th>In corpus</th><th style="text-align:center;">Checkable</th>
+    </tr></thead>
+    <tbody>
+    {q.sources.map((s: any) => (
+      <tr style="border-top:1px solid var(--border);text-align:right;">
+        <td style="text-align:left;padding:0.3rem;font-weight:600;">{s.source}</td>
+        <td>{s.scanned.toLocaleString()}</td>
+        <td>{s.exact_match.toLocaleString()}</td>
+        <td style="color:var(--text-muted);">{s.match_rate === null ? '—' : s.match_rate + '%'}</td>
+        <td style="font-weight:600;">{s.in_corpus.toLocaleString()}</td>
+        <td style="text-align:center;">{s.in_corpus === 0 ? '—' : (s.linkable ? '✓' : '✗')}</td>
+      </tr>
+    ))}
+    </tbody>
+  </table>
+  </div>
+  {q.caveats.map((c: any) => (
+    <div style={`margin-top:0.5rem;padding:0.5rem 0.6rem;border-radius:5px;font-size:0.72rem;line-height:1.5;color:#1a1a2e;background:${c.severity==='high'?'#fef2f2':'#f8fafc'};border:1px solid ${c.severity==='high'?'#fca5a5':'var(--border)'};`}>
+      <strong>{c.source}{c.severity === 'high' ? ' — treat with caution' : ''}.</strong> {c.text}
+    </div>
+  ))}
+</div>
+)}
+
 {ch && (
 <div class="chart-container" style="margin-bottom:1rem; padding:0.75rem;">
   <div class="chart-title" style="color:var(--text)">Corpus records — every row verified</div>
