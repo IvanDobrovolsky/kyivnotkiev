@@ -283,9 +283,15 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const dataMinDate = d3.min(allDates) as Date;
       const dataMaxDate = d3.max(allDates) as Date;
 
-      // Tight fit — minimal padding so bars fill the chart
-      const xStart = new Date(dataMinDate.getFullYear(), dataMinDate.getMonth() - 1, 1);
-      const xEnd = new Date(dataMaxDate.getFullYear(), dataMaxDate.getMonth() + 1, 1);
+      // Tight fit — minimal padding so bars fill the chart, clamped to the study
+      // period. The data runs 2010-01 to 2025-12; padding a month past the last
+      // point pushed the axis into 2026 and rendered a year with no data in it.
+      const STUDY_START = new Date(2010, 0, 1);
+      const STUDY_END = new Date(2025, 11, 31);
+      const padStart = new Date(dataMinDate.getFullYear(), dataMinDate.getMonth() - 1, 1);
+      const padEnd = new Date(dataMaxDate.getFullYear(), dataMaxDate.getMonth() + 1, 1);
+      const xStart = padStart < STUDY_START ? STUDY_START : padStart;
+      const xEnd = padEnd > STUDY_END ? STUDY_END : padEnd;
       const x = d3.scaleTime()
         .domain([xStart, xEnd])
         .range([0, width]);
@@ -1653,7 +1659,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // Source-specific subtitle and data
       if (mapSubEl) {
         mapSubEl.textContent = activeSource === 'trends'
-          ? `Search interest adoption (%) — Google Trends 2022–2026`
+          ? `Search interest adoption (%) — Google Trends 2022–2025`
           : `URL-level adoption (%) — GDELT news corpus 2024–2025`;
       }
 

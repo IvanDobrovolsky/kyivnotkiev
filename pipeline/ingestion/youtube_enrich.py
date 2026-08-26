@@ -126,6 +126,15 @@ def main():
     df["span_artifact"] = (title.apply(lambda t: bool(span_re.search(t)))
                            | desc.apply(lambda t: bool(span_re.search(t))))
 
+    # Copy-pasted keyword boilerplate: one channel pasted the same block into 44
+    # unrelated videos, injecting 44 Russian "mentions" from a single authorial
+    # choice. Labelled, never dropped — the ratio moves <2pp either way, but the
+    # training corpus should not see 34 identical texts.
+    dup_mask = desc.str.len() > 50
+    counts = desc[dup_mask].value_counts()
+    repeated = set(counts[counts > 1].index)
+    df["description_duplicate"] = desc.isin(repeated) & dup_mask
+
     df["in_title"] = df.ru_in_title | df.ua_in_title
     df["in_description"] = df.ru_in_desc | df.ua_in_desc
     df["verified"] = df.in_title | df.in_description
@@ -150,6 +159,7 @@ def main():
     log.info(f"  form: {df.form.value_counts().to_dict()}")
     log.info(f"  UNVERIFIED (matched on tags/other signals): {(~df.verified).sum():,}")
     log.info(f"  span_artifact (e.g. 'the Great Dane'), flagged not dropped: {df.span_artifact.sum():,}")
+    log.info(f"  description_duplicate (copy-pasted boilerplate): {df.description_duplicate.sum():,}")
     log.info("  NOTE: referent is irrelevant — a rabbit named 'Vladimir the Great' "
              "is a real use of the Russian form and is counted.")
 
