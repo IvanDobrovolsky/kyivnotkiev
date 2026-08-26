@@ -12,7 +12,7 @@ Usage:
 import argparse
 import logging
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import pandas as pd
@@ -239,6 +239,10 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Just show what would be fetched")
     parser.add_argument("--after", default="2010-01-01", help="Start date")
     parser.add_argument("--before", default="2026-01-01", help="End date")
+    parser.add_argument("--gap-fill", action="store_true",
+                        help="Append only what is newer than each pair's existing data. "
+                             "Reads the existing parquet, resumes from its last date, "
+                             "merges and dedups by post_id. Never overwrites blind.")
     args = parser.parse_args()
 
     pairs = load_pairs()
@@ -263,15 +267,49 @@ def main():
     for i, pair in enumerate(pairs):
         log.info(f"\n[{i+1}/{len(pairs)}] {pair['slug']}")
 
-        # Skip if already fetched
         out_path = OUT_DIR / f"{pair['slug']}.parquet"
+        existing = None
+
         if out_path.exists():
+            if not args.gap_fill:
+                existing = pd.read_parquet(out_path)
+                log.info(f"  Already exists: {len(existing):,} rows — skipping (use --gap-fill to extend)")
+                total_all += len(existing)
+                continue
+            # Gap fill: resume from the day after this pair's last record.
             existing = pd.read_parquet(out_path)
-            log.info(f"  Already exists: {len(existing):,} rows — skipping (delete to re-fetch)")
-            total_all += len(existing)
+            last = str(existing["date"].max())[:10]
+            resume = (datetime.strptime(last, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
+            if resume >= args.before:
+                log.info(f"  Up to date (last {last}) — nothing to fetch")
+                total_all += len(existing)
+                continue
+            log.info(f"  Gap fill: {len(existing):,} existing rows, last {last} -> fetching {resume}..{args.before}")
+            after_arg = resume
+        else:
+            after_arg = args.after
+
+        df = collect_pair(pair, after=after_arg, before=args.before)
+
+        if existing is not None:
+            if df.empty:
+                log.info(f"  No new results — {len(existing):,} rows unchanged")
+                total_all += len(existing)
+                continue
+            before_n = len(existing)
+            merged = pd.concat([existing, df], ignore_index=True)
+            merged = merged.drop_duplicates(subset=["post_id"], keep="first")
+            added = len(merged) - before_n
+            # Never write a file smaller than what was there.
+            if len(merged) < before_n:
+                log.error(f"  REFUSING to write: merge would shrink {before_n:,} -> {len(merged):,}")
+                continue
+            merged.to_parquet(out_path, index=False)
+            log.info(f"  Saved: {before_n:,} + {added:,} new = {len(merged):,} rows "
+                     f"(last now {str(merged['date'].max())[:10]})")
+            total_all += len(merged)
             continue
 
-        df = collect_pair(pair, after=args.after, before=args.before)
         if df.empty:
             log.info(f"  No results")
             continue
