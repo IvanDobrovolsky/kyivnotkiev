@@ -391,7 +391,7 @@ pairs:
     label: Renamed from Kirovograd
 - russian: Ternopol
   ukrainian: Ternopil
-  enabled: false
+  enabled: true
   is_control: false
   match_mode: word_boundary
   slug: ternopil
@@ -400,7 +400,7 @@ pairs:
     label: Refugee hub, military recruitment
 - russian: Vareniki
   ukrainian: Varenyky
-  enabled: false
+  enabled: true
   is_control: false
   match_mode: word_boundary
   slug: varenyky
@@ -413,7 +413,7 @@ pairs:
   word_boundary: true
 - russian: Babi Yar
   ukrainian: Babyn Yar
-  enabled: false
+  enabled: true
   is_control: false
   match_mode: exact_phrase
   slug: babyn-yar
@@ -505,7 +505,7 @@ pairs:
     label: Gogol birthday anniversary coverage
 - russian: Feodosiya
   ukrainian: Feodosiia
-  enabled: false
+  enabled: true
   is_control: false
   notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms
     Ukraine's territorial integrity.
