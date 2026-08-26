@@ -53,7 +53,7 @@ An unverifiable measurement is dropped rather than reported with a caveat.
 | Trends | 113.4K | 20 | Google · 150 countries |
 | Academic | 30.7K | 16 | OpenAlex · 250M+ works |
 | Telegram | 25.6K | 9 | 125 channels |
-| YouTube | 900 | 1 | 607 channels |
+| YouTube | 9.1K | 2 | 4209 channels |
 | Books | 897 | 17 | Google Books · 8M+ volumes |
 <!-- /AUTO:sources -->
 
