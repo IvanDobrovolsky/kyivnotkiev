@@ -194,6 +194,41 @@ def cmd_clean(args) -> int:
     return 0
 
 
+def cmd_final(args) -> int:
+    """The deliverable: one row per attested English-language article.
+
+    Two filters define the metric, and both are load-bearing:
+      * native_en  -- TranslationInfo is NULL. 88.7% of GKG matches are machine
+        translations of foreign-language articles and say nothing about English usage.
+      * url_match  -- the spelling appears in the CMS-authored URL path. AllNames is
+        canonicalised NER and cannot attest a spelling.
+
+    GDELT re-records some articles across many timestamps (one URL appears 2,683
+    times), so rows are deduped by URL keeping the earliest date -- publication, not
+    re-observation. No URL was found carrying conflicting variants, so this is lossless.
+    """
+    df = pd.read_parquet(OUT / "mentions_clean.parquet")
+    g = df[df.native_en & df.url_match].copy()
+    before = len(g)
+    g = g.sort_values("date").drop_duplicates("url", keep="first")
+    g = g.rename(columns={"var_url": "variant"})[
+        ["pair_slug", "variant", "date", "domain", "url", "url_term"]]
+
+    path = OUT / "mentions_final.parquet"
+    g.to_parquet(path, compression="zstd", index=False)
+
+    g["month"] = g.date.dt.to_period("M").astype(str)
+    monthly = (g.groupby(["pair_slug", "month", "variant"]).size()
+                 .reset_index(name="count").sort_values(["pair_slug", "month", "variant"]))
+    mpath = OUT / "mentions_monthly.parquet"
+    monthly.to_parquet(mpath, compression="zstd", index=False)
+
+    print(f"deduped {before:,} -> {len(g):,} rows ({before - len(g):,} repeat records dropped)")
+    print(f"saved {len(g):,} rows -> {path} ({path.stat().st_size / 1e6:.1f} MB)")
+    print(f"saved {len(monthly):,} rows -> {mpath} ({mpath.stat().st_size / 1e6:.1f} MB)")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -202,6 +237,7 @@ def main() -> int:
     q.set_defaults(func=cmd_query)
     sub.add_parser("download", help="destination table -> parquet").set_defaults(func=cmd_download)
     sub.add_parser("clean", help="map terms to pairs, flag language and attestation").set_defaults(func=cmd_clean)
+    sub.add_parser("final", help="apply the metric filters, dedup, write the deliverable").set_defaults(func=cmd_final)
     args = ap.parse_args()
     return args.func(args)
 
