@@ -75,7 +75,29 @@ MAX_PAGES = 15                # safety bound on pagination
 # So the signal is whether the last non-empty page came back FULL. A full final
 # page means the API stopped early and more exists; a partial one means it ran out.
 LADDER = ["month", "week", "day", "hour"]   # 'hour' is terminal
+
+# DESCENT POLICY — the cap signal alone is NOT sufficient.
+#
+# Descending only when the last non-empty page came back full leaves months with
+# wildly different sampling depth, because YouTube stops serving well before it
+# signals truncation. Measured on chornobyl: 2013-04 returned 579 videos in 2
+# windows with no cap flag, while 2022-02 — the month Russian forces seized the
+# plant — returned 333 in 2 windows, also unflagged. April 2013 out-collected
+# February 2022. Across 180 months the coefficient of variation was 0.33, i.e.
+# nearly flat, which is impossible for real content volume and proves the counts
+# were tracking sampling depth rather than content.
+#
+# Two additional triggers, either of which forces a descent:
+#   DESCEND_ABOVE  a window returning at least this many results is presumed
+#                  under-served even if it did not signal a cap
+#   --min-depth    a uniform floor: always descend to this level regardless of
+#                  what any window returns, so every month gets equal treatment
+DESCEND_ABOVE = 150
 SEARCHES_PER_MINUTE = 80      # headroom under the 100/min ceiling
+
+# set from CLI in main(); see the DESCENT POLICY note above
+_min_depth = "month"
+_descend_above = DESCEND_ABOVE
 
 
 class Budget:
@@ -255,10 +277,16 @@ def collect_month(term, year, month, key, budget, ledger,
         new = sum(1 for v in videos if v not in accum)
         accum.update(videos)          # keep parent results regardless
 
-        if capped and level != LADDER[-1]:
-            nxt = LADDER[LADDER.index(level) + 1]
+        li = LADDER.index(level)
+        below_floor = li < LADDER.index(_min_depth)
+        dense = len(videos) >= _descend_above
+        should_descend = capped or below_floor or dense
+
+        if should_descend and level != LADDER[-1]:
+            nxt = LADDER[li + 1]
+            why = "CAPPED" if capped else ("floor" if below_floor else f">={_descend_above}")
             log.info(f"    {iso(a)[:13]}..{iso(b)[:13]} [{level}]: "
-                     f"{len(videos)} CAPPED -> descending to {nxt}")
+                     f"{len(videos)} {why} -> descending to {nxt}")
             split_windows.add(wkey)
             collect_month.checkpoint_cb()
             for ca, cb in subwindows(a, b, level):
@@ -295,7 +323,19 @@ def main():
                     help="default: both, queried over identical windows")
     ap.add_argument("--api-key", required=True)
     ap.add_argument("--max-searches", type=int, default=2000)
+    ap.add_argument("--min-depth", choices=LADDER, default="month",
+                    help="Uniform descent floor. 'month' keeps the old adaptive "
+                         "behaviour; 'week'/'day' force every month to equal depth so "
+                         "months are comparable (costs roughly 5x / 30x).")
+    ap.add_argument("--descend-above", type=int, default=DESCEND_ABOVE,
+                    help="Descend any window returning at least this many results even "
+                         "if it did not signal a cap. The API under-serves before "
+                         "signalling, so the cap alone is insufficient.")
     args = ap.parse_args()
+
+    global _min_depth, _descend_above
+    _min_depth = args.min_depth
+    _descend_above = args.descend_above
 
     with open(CONFIG_PATH) as f:
         cfg = yaml.safe_load(f)
@@ -312,7 +352,8 @@ def main():
     (OUT_DIR / ".ledger").mkdir(exist_ok=True)
 
     log.info(f"pair={args.pair} year={args.year} variants={variants} "
-             f"budget={args.max_searches} searches")
+             f"budget={args.max_searches} searches | min-depth={_min_depth} "
+             f"descend-above={_descend_above}")
 
     summary = []
     for variant in variants:
