@@ -39,11 +39,20 @@ inside the 1 TiB/month free tier.
 Results land in a destination table so the expensive scan is never repeated; every
 later question is answered by re-reading that table cheaply.
 
+FILES
+-----
+The BigQuery destination table is the source of record; local parquet is derived.
+`download` annotates as it streams, so there is no second identical copy on disk.
+
+    gdelt_mentions_annotated.parquet  every matched row + language/attestation flags
+    gdelt_mentions_final.parquet      the metric: attested, English, deduped
+    gdelt_mentions_monthly.parquet    pair x month x variant counts, for the site
+
 USAGE
 -----
     python -m pipeline.ingestion.gdelt_mentions query      # the one paid scan
-    python -m pipeline.ingestion.gdelt_mentions download   # table -> parquet
-    python -m pipeline.ingestion.gdelt_mentions clean      # map terms -> pairs
+    python -m pipeline.ingestion.gdelt_mentions download   # table -> annotated parquet
+    python -m pipeline.ingestion.gdelt_mentions final      # apply metric, dedup, aggregate
 """
 from __future__ import annotations
 
@@ -61,6 +70,9 @@ DEST = f"{PROJECT}.gdelt_v2.mentions_raw"
 SOURCE = "`gdelt-bq.gdeltv2.gkg_partitioned`"
 CONFIG = pathlib.Path("config/pairs.yaml")
 OUT = pathlib.Path("data/raw/gdelt/mentions_v2")
+ANNOTATED = "gdelt_mentions_annotated.parquet"
+FINAL = "gdelt_mentions_final.parquet"
+MONTHLY = "gdelt_mentions_monthly.parquet"
 
 # Refuse to run if a change to pairs.yaml has blown the scan far past what we measured.
 MEASURED_BYTES = 667_884_946_710
@@ -111,13 +123,32 @@ WHERE REGEXP_CONTAINS(LOWER(DocumentIdentifier), r'{rx}')
 """.strip()
 
 
+def annotate(df: pd.DataFrame) -> pd.DataFrame:
+    """Attach pair/variant/language/attestation flags. Nothing is dropped, only labelled."""
+    rows = load_terms()
+    lut = {term: (slug, variant) for slug, variant, term, _ in rows}
+    norm = lambda s: re.sub(r"[-_]+", " ", s.lower()).strip() if isinstance(s, str) else None
+    u = df.url_term.map(norm)
+    n = df.name_term.map(norm)
+    df["pair_url"] = u.map(lambda t: lut.get(t, (None, None))[0])
+    df["var_url"] = u.map(lambda t: lut.get(t, (None, None))[1])
+    df["pair_nam"] = n.map(lambda t: lut.get(t, (None, None))[0])
+    df["var_nam"] = n.map(lambda t: lut.get(t, (None, None))[1])
+    # srclc:<lang>;eng:<engine> when GDELT translated the document; NULL when natively English.
+    df["src_lang"] = df.translation_info.str.extract(r"srclc:(\w+)")[0]
+    df["native_en"] = df.translation_info.isna() | (df.translation_info == "")
+    df["date"] = pd.to_datetime(df.gkg_date.astype(str).str[:8], format="%Y%m%d", errors="coerce")
+    df["pair_slug"] = df.pair_url.fillna(df.pair_nam)
+    return df
+
+
 def cmd_query(args) -> int:
     from google.cloud import bigquery
 
     rows = load_terms()
     sql = build_sql(build_regex(rows))
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "query.sql").write_text(sql)
+    (OUT / "gdelt_mentions_query.sql").write_text(sql)
     print(f"{len({r[0] for r in rows})} pairs, {len(rows)} terms")
 
     client = bigquery.Client(project=PROJECT)
@@ -142,52 +173,54 @@ def cmd_query(args) -> int:
     return 0
 
 
+def _stabilise(df: pd.DataFrame) -> pd.DataFrame:
+    """Pin dtypes so every streamed batch yields an identical parquet schema."""
+    for c in ("url", "domain", "translation_info", "url_term", "name_term",
+              "pair_url", "var_url", "pair_nam", "var_nam", "src_lang", "pair_slug"):
+        df[c] = df[c].astype("string")
+    return df
+
+
 def cmd_download(args) -> int:
+    """Stream the destination table to disk, annotating as we go.
+
+    Annotation is row-local, so it happens inside the stream. That is deliberate:
+    an unannotated dump would be a byte-for-byte duplicate of this file with fewer
+    columns, and the BigQuery table is already the source of record.
+    """
+    import pyarrow as pa
     import pyarrow.parquet as pq
     from google.cloud import bigquery, bigquery_storage
 
     OUT.mkdir(parents=True, exist_ok=True)
     client = bigquery.Client(project=PROJECT)
     reader = bigquery_storage.BigQueryReadClient()
-    path = OUT / "mentions_raw.parquet"
+    path = OUT / ANNOTATED
     writer, n, t0 = None, 0, time.time()
     for i, batch in enumerate(client.list_rows(DEST).to_arrow_iterable(bqstorage_client=reader)):
+        df = _stabilise(annotate(batch.to_pandas()))
+        table = pa.Table.from_pandas(df, preserve_index=False)
         if writer is None:
-            writer = pq.ParquetWriter(path, batch.schema, compression="zstd")
-        writer.write_batch(batch)
-        n += batch.num_rows
+            writer = pq.ParquetWriter(path, table.schema, compression="zstd")
+        writer.write_table(table)
+        n += len(df)
         if i % 50 == 0:
             print(f"  {n:,} rows ({time.time() - t0:.0f}s)", flush=True)
     if writer is None:
-        print("no rows", file=sys.stderr)
+        print("no rows returned", file=sys.stderr)
         return 1
     writer.close()
-    print(f"saved {n:,} rows -> {path} ({path.stat().st_size / 1e6:.0f} MB)")
+    print(f"saved {n:,} annotated rows -> {path} ({path.stat().st_size / 1e6:.1f} MB)")
     return 0
 
 
 def cmd_clean(args) -> int:
-    rows = load_terms()
-    lut = {term: (slug, variant) for slug, variant, term, _ in rows}
-    norm = lambda s: re.sub(r"[-_]+", " ", s.lower()).strip() if isinstance(s, str) else None
-
-    df = pd.read_parquet(OUT / "mentions_raw.parquet")
-    df["u"] = df.url_term.map(norm)
-    df["n"] = df.name_term.map(norm)
-    df["pair_url"] = df.u.map(lambda t: lut.get(t, (None, None))[0])
-    df["var_url"] = df.u.map(lambda t: lut.get(t, (None, None))[1])
-    df["pair_nam"] = df.n.map(lambda t: lut.get(t, (None, None))[0])
-    df["var_nam"] = df.n.map(lambda t: lut.get(t, (None, None))[1])
-    # srclc:<lang>;eng:<engine> when GDELT translated the document; NULL when natively English.
-    df["src_lang"] = df.translation_info.str.extract(r"srclc:(\w+)")[0]
-    df["native_en"] = df.translation_info.isna() | (df.translation_info == "")
-    df["date"] = pd.to_datetime(df.gkg_date.astype(str).str[:8], format="%Y%m%d", errors="coerce")
-    df["pair_slug"] = df.pair_url.fillna(df.pair_nam)
-
-    path = OUT / "mentions_clean.parquet"
+    """Re-annotate in place after config/pairs.yaml changes, without re-downloading."""
+    path = OUT / ANNOTATED
+    df = _stabilise(annotate(pd.read_parquet(path, columns=["url", "domain", "gkg_date", "translation_info", "url_term", "name_term", "url_match", "allnames_match"])))
     df.to_parquet(path, compression="zstd", index=False)
     usable = df[df.native_en & df.url_match]
-    print(f"saved {len(df):,} rows -> {path}")
+    print(f"re-annotated {len(df):,} rows -> {path}")
     print(f"natively English : {df.native_en.sum():,} ({df.native_en.mean() * 100:.1f}%)")
     print(f"URL-attested     : {df.url_match.sum():,} ({df.url_match.mean() * 100:.1f}%)")
     print(f"usable metric    : {len(usable):,} ({len(usable) / len(df) * 100:.1f}%)")
@@ -203,29 +236,35 @@ def cmd_final(args) -> int:
       * url_match  -- the spelling appears in the CMS-authored URL path. AllNames is
         canonicalised NER and cannot attest a spelling.
 
+    Note this filters on the LANGUAGE OF THE DOCUMENT, never on the domain. Ukrainian
+    and Russian outlets are kept when they publish in English -- english.nv.ua,
+    en.24tv.ua, english.pravda.ru all survive, as do kyivpost.com and unian.info. A
+    TLD blocklist would discard Ukraine's English-language press, the population most
+    worth measuring.
+
     GDELT re-records some articles across many timestamps (one URL appears 2,683
     times), so rows are deduped by URL keeping the earliest date -- publication, not
     re-observation. No URL was found carrying conflicting variants, so this is lossless.
     """
-    df = pd.read_parquet(OUT / "mentions_clean.parquet")
+    df = pd.read_parquet(OUT / ANNOTATED)
     g = df[df.native_en & df.url_match].copy()
     before = len(g)
     g = g.sort_values("date").drop_duplicates("url", keep="first")
     g = g.rename(columns={"var_url": "variant"})[
         ["pair_slug", "variant", "date", "domain", "url", "url_term"]]
 
-    path = OUT / "mentions_final.parquet"
+    path = OUT / FINAL
     g.to_parquet(path, compression="zstd", index=False)
 
     g["month"] = g.date.dt.to_period("M").astype(str)
     monthly = (g.groupby(["pair_slug", "month", "variant"]).size()
                  .reset_index(name="count").sort_values(["pair_slug", "month", "variant"]))
-    mpath = OUT / "mentions_monthly.parquet"
+    mpath = OUT / MONTHLY
     monthly.to_parquet(mpath, compression="zstd", index=False)
 
     print(f"deduped {before:,} -> {len(g):,} rows ({before - len(g):,} repeat records dropped)")
     print(f"saved {len(g):,} rows -> {path} ({path.stat().st_size / 1e6:.1f} MB)")
-    print(f"saved {len(monthly):,} rows -> {mpath} ({mpath.stat().st_size / 1e6:.1f} MB)")
+    print(f"saved {len(monthly):,} rows -> {mpath} ({mpath.stat().st_size / 1e6:.2f} MB)")
     return 0
 
 
@@ -235,8 +274,8 @@ def main() -> int:
     q = sub.add_parser("query", help="the one paid scan; writes to the destination table")
     q.add_argument("--dry-run", action="store_true", help="report bytes and stop")
     q.set_defaults(func=cmd_query)
-    sub.add_parser("download", help="destination table -> parquet").set_defaults(func=cmd_download)
-    sub.add_parser("clean", help="map terms to pairs, flag language and attestation").set_defaults(func=cmd_clean)
+    sub.add_parser("download", help="destination table -> annotated parquet").set_defaults(func=cmd_download)
+    sub.add_parser("clean", help="re-annotate in place after a pairs.yaml change").set_defaults(func=cmd_clean)
     sub.add_parser("final", help="apply the metric filters, dedup, write the deliverable").set_defaults(func=cmd_final)
     args = ap.parse_args()
     return args.func(args)
