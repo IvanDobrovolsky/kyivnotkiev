@@ -13,12 +13,14 @@ import concurrent.futures
 import logging
 import sys
 
-from pipeline.config import get_enabled_pairs, get_pair_by_id, load_pipeline
+from pipeline.config import get_enabled_pairs, get_pair_by_slug, load_pipeline
 from pipeline.ingestion.watermarks import is_stale, get_all_watermarks
 
 logger = logging.getLogger(__name__)
 
-SOURCES = ["gdelt", "trends", "ngrams", "wikipedia", "reddit", "youtube"]
+# youtube is collected by pipeline.ingestion.youtube_census, not here — the old
+# youtube.py collector produced the void data (50-vs-500 cap bug) and is gone.
+SOURCES = ["gdelt", "trends", "ngrams", "wikipedia", "reddit"]
 
 
 def ingest_pair_all_sources(pair: dict, cfg: dict, force: bool = False):
@@ -73,8 +75,6 @@ def _run_source(source: str, pair_ids: list[int], cfg: dict):
     elif source == "reddit":
         from pipeline.ingestion.reddit import run
         run(pair_ids)
-    elif source == "youtube":
-        from pipeline.ingestion.youtube import run
         run(pair_ids)
     else:
         logger.warning(f"Unknown source: {source}")
@@ -143,7 +143,7 @@ def main():
     cfg = load_pipeline()
 
     if args.pair_id:
-        pair = get_pair_by_id(args.pair_id)
+        pair = get_pair_by_slug(args.pair_id)
         if not pair:
             logger.error(f"Pair {args.pair_id} not found in pairs.yaml")
             sys.exit(1)
