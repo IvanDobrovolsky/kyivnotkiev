@@ -199,11 +199,28 @@ def main():
 
             r = df.loc[idx]
             doc_id = str(r[id_col]) if id_col and id_col in df.columns else ""
+            # The document's own title, for display in holdout tables. Kept in the
+            # MANIFEST, never in the training frame — it is metadata, not the text
+            # the model sees.
+            title = ""
+            for tc in ("title", "article_title", "page_title"):
+                if tc in df.columns and pd.notna(r.get(tc)):
+                    title = str(r[tc]).strip()
+                    break
             url = str(r[url_col]) if url_col and url_col in df.columns else ""
             date = ""
             for dc in ("date", "published_at", "created_utc", "year"):
                 if dc in df.columns and pd.notna(r.get(dc)):
-                    date = str(r[dc])[:10]
+                    raw = str(r[dc])
+                    # OpenAlex carries a numeric `year`, which stringifies as
+                    # "2026.0" and sorts/renders wrong. Normalise to a real date.
+                    if dc == "year":
+                        try:
+                            date = f"{int(float(raw)):04d}-01-01"
+                        except (TypeError, ValueError):
+                            date = ""
+                    else:
+                        date = raw[:10]
                     break
 
             rid = hashlib.sha1(f"{args.pair}|{r['_source']}|{doc_id}|{ctx[:120]}".encode()).hexdigest()[:16]
@@ -211,6 +228,7 @@ def main():
                          "text": ctx, "variant": variant, "date": date,
                          "short_context": len(ctx) < MIN_PROSE_CHARS})
             manifest.append({"record_id": rid, "source": r["_source"], "doc_id": doc_id,
+                             "title": title,
                              "url": build_url(r["_source"], doc_id, url),
                              "raw_chars": len(text),
                              "n_mentions": len(ru_re.findall(text)) + len(ua_re.findall(text))})
