@@ -30,7 +30,7 @@ AMBIGUOUS_PAIRS = {
 
 # All CL raw sources that contain article text
 CL_SOURCES = [
-    "gdelt", "gdelt_articles", "reddit", "youtube", "openalex", "telegram", "wikipedia", "religious",
+    "gdelt", "gdelt_articles", "reddit", "youtube", "openalex", "telegram", "wikipedia",
 ]
 
 

@@ -23,7 +23,7 @@
 | Records scanned | **90B+** |
 | Toponym matches | **319.9M** |
 | Toponym pairs | **20** |
-| Data sources | **9** |
+| Data sources | **8** |
 | Time span | **2010-2025** |
 | CL corpus | **151.6K** verified English texts |
 <!-- /AUTO:metrics -->
@@ -51,10 +51,9 @@ An unverifiable measurement is dropped rather than reported with a caveat.
 | News | 20.1M | 20 | GDELT · 33091 domains |
 | Reddit | 840.2K | 20 | 44766 subreddits |
 | Trends | 113.4K | 20 | Google · 150 countries |
-| YouTube | 35.4K | 6 | 21984 channels |
 | Academic | 30.7K | 16 | OpenAlex · 250M+ works |
 | Telegram | 25.6K | 9 | 125 channels |
-| Religious | 3.4K | 7 | 4 institutions |
+| YouTube | 900 | 1 | 607 channels |
 | Books | 897 | 17 | Google Books · 8M+ volumes |
 <!-- /AUTO:sources -->
 

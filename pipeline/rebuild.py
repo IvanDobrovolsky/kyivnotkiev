@@ -51,7 +51,6 @@ def validate_datasets():
         "raw_trends.parquet": {"key": ["pair_slug", "date", "variant", "geo"], "has_count": False},
         "raw_wikipedia.parquet": {"key": ["pair_slug", "date", "variant"], "has_count": False},
         "raw_ngrams.parquet": {"key": ["pair_slug", "year", "variant"], "has_count": False},
-        "raw_religious.parquet": {"key": ["pair_slug", "date", "variant", "source_domain"], "has_count": True},
     }
 
     for fname, spec in expected.items():

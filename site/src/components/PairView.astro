@@ -7,12 +7,11 @@
 interface Props {
   llmTraj: any;
   llmPerPair: any;
-  religious: any;
   timeSpan: string;
   corpusHoldouts?: any;
 }
 
-const { llmTraj, llmPerPair, religious, timeSpan, corpusHoldouts } = Astro.props;
+const { llmTraj, llmPerPair, timeSpan, corpusHoldouts } = Astro.props;
 const ch = corpusHoldouts || null;
 const chSources: string[] = ch ? Object.keys(ch) : [];
 const chTotal: number = ch ? chSources.reduce((n, s) => n + ch[s].length, 0) : 0;
@@ -45,7 +44,6 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
         <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed"><span class="source-dot"></span>Books</button>
         <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4"><span class="source-dot"></span>Academic</button>
         <button class="source-toggle" data-source="telegram" style="--source-color: #26A5E4"><span class="source-dot"></span>Telegram</button>
-        <button class="source-toggle" data-source="religious" style="--source-color: #8B0000"><span class="source-dot"></span>Religious</button>
       </div>
       <div class="chart-controls" style="margin:0;">
         <button class="chart-mode active" data-chart="volume" id="volume-btn">Volume</button>
@@ -97,18 +95,12 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
   </div>
 </div>
 
-<!-- Source Comparison + Religious -->
-<div id="comparison-row" class="resp-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
+<!-- Source Comparison -->
+<div id="comparison-row" style="margin-bottom:1rem;">
   <div class="chart-container" style="margin-bottom:0;">
     <div class="chart-title" style="color: var(--text)">Source Comparison</div>
     <div class="chart-subtitle" style="margin-bottom:0.5rem;">Adoption rate per data source for this pair</div>
     <div id="pair-source-chart" style="width:100%;"></div>
-  </div>
-  <div class="chart-container" id="pair-religious-container" style="margin-bottom:0;">
-    <div class="chart-title" style="color: var(--text)">Religious Institutions</div>
-    <div class="chart-subtitle" style="margin-bottom:0.5rem;">How major religious bodies refer to this pair in English</div>
-    <div id="pair-religious-body"></div>
-    <script type="application/json" id="religious-per-pair-data" set:html={JSON.stringify(religious)} />
   </div>
 </div>
 

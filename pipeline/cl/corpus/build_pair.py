@@ -70,7 +70,6 @@ SOURCES = {
     "gdelt_articles":     (["text"],                 None,       "url"),
     "gdelt":              (["text"],                 None,       "url"),
     "openalex":           (["title", "abstract"],    "openalex_id", None),
-    "religious":          (["title", "body", "text"], None,      "url"),
     "telegram":           (["text"],                 None,       None),
     "wikipedia_articles": (["text"],                 None,       None),
     "wikipedia":          (["text"],                 None,       None),

@@ -113,11 +113,6 @@ def compute_adoption_by_pair_source():
         tg = pd.read_parquet(telegram_path)
         _append_source(frames, tg, "telegram", None, "count", cutoff)
 
-    # Religious
-    rel = _load("religious")
-    if len(rel):
-        _append_source(frames, rel, "religious", "count", "sum", cutoff)
-
     if not frames:
         return pd.DataFrame(columns=["pair_slug", "source", "ukr", "rus", "total", "adoption_ratio"])
     result = pd.concat(frames, ignore_index=True)
@@ -181,23 +176,6 @@ def compute_pre_post_invasion():
         if len(p):
             p["adoption_ratio"] = p["ukr"] / p["total"]
             p["source"] = "telegram"
-            frames.append(p[["pair_slug", "source", "period", "adoption_ratio"]])
-
-    # Religious
-    rel = _load("religious")
-    if len(rel):
-        d = rel.copy()
-        d["dt"] = pd.to_datetime(d["date"])
-        d["period"] = np.where(d["dt"] < invasion_date, "pre", "post")
-        g = d.groupby(["pair_slug", "period", "variant"])["count"].sum().reset_index(name="val")
-        p = g.pivot_table(index=["pair_slug", "period"], columns="variant", values="val", fill_value=0).reset_index()
-        p["ukr"] = p.get("ukrainian", 0).astype(float)
-        p["rus"] = p.get("russian", 0).astype(float)
-        p["total"] = p["ukr"] + p["rus"]
-        p = p[p["total"] > 10]
-        if len(p):
-            p["adoption_ratio"] = p["ukr"] / p["total"]
-            p["source"] = "religious"
             frames.append(p[["pair_slug", "source", "period", "adoption_ratio"]])
 
     if not frames:

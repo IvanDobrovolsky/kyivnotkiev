@@ -4,7 +4,6 @@ import PairView from '../../components/PairView.astro';
 import m from '../../data/manifest.json';
 import llmTraj from '../../data/llm_trajectory.json';
 import llmPerPair from '../../data/llm_per_pair.json';
-import religious from '../../data/religious.json';
 import allClClusters from '../../data/cl_clusters.json';
 import allHoldoutsByPair from '../../data/holdouts_by_pair.json';
 import allCorpusHoldouts from '../../data/corpus_holdouts.json';
@@ -48,7 +47,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 <script type="application/json" id="pair-holdouts-data" set:html={JSON.stringify(pairHoldoutsData)} />
 <script type="application/json" id="pair-timeseries-data" set:html={JSON.stringify(pairTimeseriesData)} />
 <div id="pair-detail" data-pair-slug={slug}>
-  <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} religious={religious} timeSpan={(m as any).time_span} corpusHoldouts={(allCorpusHoldouts as any)[pair.slug] || null} />
+  <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} timeSpan={(m as any).time_span} corpusHoldouts={(allCorpusHoldouts as any)[pair.slug] || null} />
 </div>
 
   <script>
@@ -84,7 +83,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       ngrams: '#7c3aed',
       openalex: '#06b6d4',
       telegram: '#26A5E4',
-      religious: '#8B0000',
     };
 
     const sourceLabels: Record<string, string> = {
@@ -96,12 +94,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       ngrams: 'Books',
       openalex: 'Academic',
       telegram: 'Telegram',
-      religious: 'Religious',
     };
 
     // Read source from URL params for shareable links
     const _urlSource = new URLSearchParams(window.location.search).get('source');
-    const validSources = ['gdelt','trends','wikipedia','reddit','youtube','ngrams','openalex','telegram','religious'];
+    const validSources = ['gdelt','trends','wikipedia','reddit','youtube','ngrams','openalex','telegram'];
     let activeSource = _urlSource && validSources.includes(_urlSource) ? _urlSource : 'gdelt';
     let activeSources = new Set([activeSource]);
     // hideRuDomains replaced by holdoutFilter
@@ -309,7 +306,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         ngrams: 'Google Books corpus (English 2022)',
         openalex: 'OpenAlex academic papers',
         telegram: 'Public channel messages',
-        religious: 'Institutional press articles',
       };
       const startYear = dataMinDate.getFullYear();
       const endYear = dataMaxDate.getFullYear();
@@ -723,7 +719,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           try { fn(); } catch (e) { console.error(`[${name}] failed:`, e); }
         };
         safeDraw('drawPairSourceChart', drawPairSourceChart);
-        safeDraw('drawPairReligious', drawPairReligious);
         safeDraw('drawNewsHoldouts', drawNewsHoldouts);
         safeDraw('drawRedditHoldouts', drawRedditHoldouts);
         safeDraw('drawPairLLM', drawPairLLM);
@@ -743,7 +738,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (!pair) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram', 'religious'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
       const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
 
       // Put adoption % in card title
@@ -785,7 +780,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram', 'religious'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
       const items: {src: string; adoption: number; n: number}[] = [];
 
       for (const src of srcOrder) {
@@ -833,73 +828,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           .attr('font-size', '11px').attr('font-weight', '600').attr('fill', sourceColors[item.src])
           .text(`${item.adoption}%`);
       });
-    }
-
-    // ── Per-pair religious panel ──
-    // Religious data is global per-source not per-pair-per-year, but each
-    // source has a list of pairs it has mentions for. Show only the
-    // denominations that have data for THIS pair.
-    let _religiousCache: any = null;
-    function getReligiousData() {
-      if (_religiousCache !== null) return _religiousCache;
-      const el = document.getElementById('religious-per-pair-data');
-      if (!el || !el.textContent) { _religiousCache = {}; return _religiousCache; }
-      try {
-        _religiousCache = JSON.parse(el.textContent);
-      } catch (e) {
-        console.error('[drawPairReligious] failed to parse religious data:', e);
-        _religiousCache = {};
-      }
-      return _religiousCache;
-    }
-
-    function drawPairReligious() {
-      const container = document.getElementById('pair-religious-container');
-      const body = document.getElementById('pair-religious-body');
-      if (!container || !body) return;
-
-      const rel = getReligiousData();
-      const pid = activePairSlug;
-      // For each denomination, find this pair's stats
-      const rows = (rel.denominations || [])
-        .map((d: any) => {
-          const pp = (d.pairs || []).find((p: any) => p.pair_id === pid || p.pair_slug === pid);
-          return pp ? {...d, pair: pp} : null;
-        })
-        .filter(Boolean);
-
-      if (rows.length === 0) {
-        body.innerHTML = `<div style="font-size:0.7rem; color:var(--text-muted); padding:0.5rem 0;">No religious-press mentions for this pair across the 4 tracked institutions.</div>`;
-        return;
-      }
-
-      // Sort by total mentions desc
-      rows.sort((a: any, b: any) => (b.pair.ru + b.pair.ua) - (a.pair.ru + a.pair.ua));
-
-      let html = '';
-      html += `<div style="display:flex; flex-direction:column; gap:0.4rem;">`;
-      for (const r of rows) {
-        const pp = r.pair;
-        const total = pp.ru + pp.ua;
-        const uaPct = total > 0 ? (pp.ua / total * 100) : 0;
-        html += `
-          <div style="display:grid; grid-template-columns:140px 1fr 90px; gap:0.5rem; align-items:center; font-size:0.7rem;">
-            <div style="display:flex; align-items:center; gap:0.4rem;">
-              <span style="display:inline-block; width:8px; height:8px; border-radius:2px; background:${r.color}; flex-shrink:0;"></span>
-              <span style="color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${r.short}</span>
-            </div>
-            <div style="display:flex; height:14px; border-radius:2px; overflow:hidden; background:#f0f0f0;">
-              <div style="width:${uaPct}%; background:#0057B8;"></div>
-              <div style="width:${100 - uaPct}%; background:#D52B1E;"></div>
-            </div>
-            <div style="font-family:monospace; font-size:0.6rem; color:var(--text-muted); text-align:right;">${pp.ua}/${total} (${uaPct.toFixed(0)}%)</div>
-          </div>
-        `;
-      }
-      html += `</div>`;
-      html += `<div style="margin-top:0.6rem; font-size:0.6rem; color:var(--text-muted);"><span style="color:#0057B8;">●</span> Ukrainian spelling · <span style="color:#D52B1E;">●</span> Russian spelling</div>`;
-
-      body.innerHTML = html;
     }
 
     // ── Per-pair LLM scan: 71 frontier models × 3 prompt variants for THIS pair ──
@@ -1356,7 +1284,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram', 'religious'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
       for (const src of srcOrder) {
         const series = pairData[src];
         const card = document.createElement('div');
@@ -1731,7 +1659,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const sourceToKey: Record<string, string> = {
         gdelt: 'news', trends: 'trends', wikipedia: 'wikipedia',
         reddit: 'reddit', youtube: 'youtube',
-        telegram: 'telegram', religious: 'religious',
+        telegram: 'telegram',
         openalex: 'openalex', ngrams: 'ngrams',
       };
       const holdoutKey = sourceToKey[activeSource] || 'news';
@@ -1745,7 +1673,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         reddit: 'Reddit posts still using old spelling — 2025',
         youtube: 'YouTube videos still using old spelling — 2025',
         telegram: 'Telegram channels still using old spelling — 2025',
-        religious: 'Religious institutions still using old spelling',
         openalex: 'Academic papers using old spelling — since 2020',
         ngrams: 'Google Books corpus — compare spellings',
       };
@@ -1829,14 +1756,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           </tr>`).join('');
         html = `<table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
-      } else if (holdoutKey === 'religious') {
-        const rows = items.map((r: any) =>
-          `<tr style="border-bottom:1px solid #f3f4f6;">
-            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${r.url}" target="_blank" rel="noopener" style="color:#8B0000; text-decoration:none;">${r.name}</a></td>
-            <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.mentions} mentions</td>
-          </tr>`).join('');
-        html = `<table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
-
       } else if (holdoutKey === 'trends' || holdoutKey === 'openalex' || holdoutKey === 'ngrams') {
         const rows = items.map((o: any) =>
           `<tr style="border-bottom:1px solid #f3f4f6;">
@@ -1910,7 +1829,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         .sort((a: any, b: any) => b.spread_pp - a.spread_pp)
         .slice(0, 10);
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram', 'religious'];
+      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
 
       const rowH = 36;
       const margin = { top: 25, right: 50, bottom: 10, left: 140 };

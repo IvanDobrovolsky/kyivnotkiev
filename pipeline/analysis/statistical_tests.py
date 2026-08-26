@@ -15,7 +15,6 @@ Tests included
    Ngrams Kiev/Kyiv yearly adoption series. Identifies the year of
    the regime change for each.
 4. Mospat binomial CI on the "91% Russian" rate, plus a Fisher exact
-   test against the other religious sources combined.
 5. LLM TAS regression decomposing family effect from release-date
    effect: TAS ~ family + release_date_months (OLS).
 6. Hunspell multi-word check — also runs the full toponym (not just
@@ -392,40 +391,6 @@ def changepoint_tests():
     return results
 
 
-def mospat_binomial_test():
-    """Wilson CI on Mospat's Russian-spelling rate, plus a Fisher exact
-    test against all other religious sources combined."""
-    rel = json.load(open(SITE_DATA / "religious.json"))
-    mospat = next(d for d in rel["denominations"] if d["id"] == "mospat")
-    others = [d for d in rel["denominations"] if d["id"] != "mospat"
-              and d["totals"]["ru"] + d["totals"]["ua"] > 0]
-    m_ru, m_ua = mospat["totals"]["ru"], mospat["totals"]["ua"]
-    o_ru = sum(d["totals"]["ru"] for d in others)
-    o_ua = sum(d["totals"]["ua"] for d in others)
-
-    ci = wilson_ci(m_ru, m_ru + m_ua)
-    p = fisher_exact_2x2(m_ru, m_ua, o_ru, o_ua)
-    return {
-        "mospat": {
-            "ru": m_ru, "ua": m_ua,
-            "russian_pct": round(m_ru / (m_ru + m_ua) * 100, 2),
-            "wilson_95ci_pct": [round(ci[0] * 100, 2), round(ci[1] * 100, 2)],
-        },
-        "other_religious_sources_combined": {
-            "ru": o_ru, "ua": o_ua,
-            "russian_pct": round(o_ru / (o_ru + o_ua) * 100, 2) if (o_ru + o_ua) else None,
-            "n_sources": len(others),
-        },
-        "fisher_exact_p": p,
-        "interpretation": (
-            f"Mospat uses Russian forms at {m_ru/(m_ru+m_ua)*100:.1f}% (95% CI "
-            f"[{ci[0]*100:.1f}, {ci[1]*100:.1f}]). All other religious sources "
-            f"combined use Russian forms at {o_ru/(o_ru+o_ua)*100:.1f}%. "
-            f"Difference is statistically significant (Fisher exact p ≈ {p:.2e})."
-        ),
-    }
-
-
 def llm_release_date_regression():
     """OLS: TAS ~ release_months + C(family)."""
     lt = json.load(open(SITE_DATA / "llm_trajectory.json"))
@@ -514,7 +479,6 @@ def main():
         "pair_bootstrap_cis": pair_bootstrap_cis(),
         "tas_alpha_sensitivity": tas_alpha_sensitivity(),
         "changepoint_tests": changepoint_tests(),
-        "mospat_binomial_test": mospat_binomial_test(),
         "llm_release_date_regression": llm_release_date_regression(),
         "hunspell_multiword": hunspell_multiword(),
     }
@@ -528,9 +492,6 @@ def main():
     print()
     print("=== Changepoint tests ===")
     print(json.dumps(payload["changepoint_tests"], indent=2))
-    print()
-    print("=== Mospat binomial / Fisher ===")
-    print(json.dumps(payload["mospat_binomial_test"], indent=2))
     print()
     print("=== LLM release-date regression ===")
     print(json.dumps(payload["llm_release_date_regression"], indent=2))

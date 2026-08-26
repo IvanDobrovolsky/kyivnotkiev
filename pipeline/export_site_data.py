@@ -496,27 +496,6 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                     if total > 0:
                         result[spid]["telegram"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
 
-    # Religious (yearly from scraped institutional sites)
-    log.info("  Religious...")
-    religious_path = DATASET_DIR / "raw_religious.parquet"
-    if religious_path.exists():
-        rel = pd.read_parquet(religious_path)
-        if len(rel) and "date" in rel.columns:
-            rel["month"] = pd.to_datetime(rel["date"]).dt.strftime("%Y-%m")
-            g = rel.groupby(["pair_slug", "month", "variant"])["count"].sum().reset_index()
-            p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="count", fill_value=0).reset_index()
-            for pid, grp in p.groupby("pair_slug"):
-                if pid not in enabled_slugs:
-                    continue
-                spid = pid
-                result.setdefault(spid, {}).setdefault("religious", [])
-                for _, r in grp.sort_values("month").iterrows():
-                    ukr = int(r.get("ukrainian", 0))
-                    rus = int(r.get("russian", 0))
-                    total = ukr + rus
-                    if total > 0:
-                        result[spid]["religious"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
-
     # ── Apply minimum data thresholds ──────────────────────────────────────
     # Remove pair×source combos that are too sparse to display meaningfully.
     removed = 0
@@ -605,12 +584,6 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
         extra_map["telegram_channels"] = str(telegram["channel"].nunique())
 
     # Religious
-    religious = pd.DataFrame()
-    religious_path = DATASET_DIR / "raw_religious.parquet"
-    if religious_path.exists():
-        religious = pd.read_parquet(religious_path)
-        source_stats["religious"] = {"records": int(religious["count"].sum()), "pairs": int(religious["pair_slug"].nunique()), "unit": "articles"}
-        extra_map["religious_sites"] = str(religious["source_domain"].nunique())
     if len(trends):
         geo = trends[(trends["geo"] != "") & (trends["geo"].notna())]
         extra_map["trends_countries"] = str(geo["geo"].nunique())
@@ -691,9 +664,6 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
     # Telegram
     if len(telegram):
         per_source["telegram"] = _source_adoption(telegram, None, "date", cutoff_12m, agg_mode="count", min_total=3)
-    # Religious
-    if len(religious):
-        per_source["religious"] = _source_adoption(religious, "count", "date", cutoff_12m, min_total=3)
 
     # Mean adoption across sources per pair
     recent_map = {}
@@ -741,10 +711,6 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
     if len(telegram):
         for pid, cnt in telegram.groupby("pair_slug").size().items():
             total_map[pid] = total_map.get(pid, 0) + int(cnt)
-    # Religious
-    if len(religious):
-        for pid, cnt in religious.groupby("pair_slug")["count"].sum().items():
-            total_map[pid] = total_map.get(pid, 0) + int(cnt)
 
     # Build pairs
     pairs_out = []
@@ -770,7 +736,7 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
         "toponym_matches": toponym_matches,
         "cl_corpus": _get_cl_corpus_size(),
         "time_span": "2010-2025",
-        "num_sources": 9,  # 7 standard + telegram + religious
+        "num_sources": 8,  # 7 standard + telegram (religious removed 2026-08-25)
         "num_countries": int(extra_map.get("trends_countries", "0")),
         "sources": {
             "gdelt": {"records": source_stats.get("gdelt", {}).get("records", 0), "pairs": source_stats.get("gdelt", {}).get("pairs", 0), "label": "News", "unit": "articles", "extra": f"GDELT · {extra_map.get('gdelt_domains', '0')} domains", "color": "#1e3a5f"},
@@ -781,7 +747,6 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
             "ngrams": {"records": source_stats.get("ngrams", {}).get("records", 0), "pairs": source_stats.get("ngrams", {}).get("pairs", 0), "label": "Books", "unit": "records", "extra": "Google Books · 8M+ volumes", "color": "#7c3aed"},
             "openalex": {"records": openalex_total_papers, "pairs": openalex_total_pairs, "label": "Academic", "unit": "papers", "extra": "OpenAlex · 250M+ works", "color": "#06b6d4"},
             "telegram": {"records": source_stats.get("telegram", {}).get("records", 0), "pairs": source_stats.get("telegram", {}).get("pairs", 0), "label": "Telegram", "unit": "messages", "extra": f"{extra_map.get('telegram_channels', '0')} channels", "color": "#26A5E4"},
-            "religious": {"records": source_stats.get("religious", {}).get("records", 0), "pairs": source_stats.get("religious", {}).get("pairs", 0), "label": "Religious", "unit": "articles", "extra": f"{extra_map.get('religious_sites', '0')} institutions", "color": "#8B0000"},
         },
         "pairs": sorted(pairs_out, key=lambda x: x["slug"]),
     }
