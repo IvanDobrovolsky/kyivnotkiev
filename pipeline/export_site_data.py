@@ -68,6 +68,48 @@ def _load(name: str) -> pd.DataFrame:
     return _cache[name]
 
 
+def _load_youtube_census() -> pd.DataFrame:
+    """YouTube comes from the census, never from dataset/raw_youtube.parquet.
+
+    Everything collected before 2026-08-25 is void: those fetches treated a
+    window as complete unless it hit a 500-result ceiling, but the real ceiling
+    is one full page (50), so any window returning 50 was silently truncated.
+    The undercount measured 6-7x on volodymyr-the-great 2010.
+
+    Rows are kept only where the spelling is actually present in the title or
+    description, and `form` is used rather than `variant` — `variant` records
+    which query surfaced the video, `form` records which spelling the author
+    actually wrote, which is the thing being measured. Coincidental spans
+    ("Vladimir the Great Dane") are excluded via span_artifact.
+
+    Language detection is deliberately NOT applied: the presence of the
+    Latin-script English form IS the signal, and langdetect on short titles is
+    unreliable. A mixed-language title that writes "Saint Vladimir the Great"
+    made the orthographic choice being measured.
+
+    Pairs with no census file simply have no YouTube data — that is correct,
+    not a gap to be filled from the void dataset.
+    """
+    census_dir = ROOT / "data" / "cl" / "raw" / "youtube_census"
+    files = sorted(census_dir.glob("*_enriched.parquet"))
+    if not files:
+        log.warning("  YouTube: no census files — source will be absent")
+        return pd.DataFrame()
+
+    df = pd.concat([pd.read_parquet(f) for f in files], ignore_index=True)
+    total = len(df)
+    df = df[df["verified"] & ~df.get("span_artifact", False)]
+    df = df[df["form"].isin(["russian", "ukrainian", "both"])].copy()
+    df["variant"] = df["form"]
+    df["date"] = pd.to_datetime(df["published_at"], errors="coerce", utc=True).dt.strftime("%Y-%m-%d")
+    df = df.dropna(subset=["date"])
+    log.info(f"  YouTube census: {len(files)} pair file(s), "
+             f"{total:,} collected -> {len(df):,} verified "
+             f"({100*len(df)/max(total,1):.1f}%), "
+             f"{df.pair_slug.nunique()} pair(s)")
+    return df[["pair_slug", "date", "variant", "title", "channel_title", "video_id"]]
+
+
 def _filter_youtube(df: pd.DataFrame) -> pd.DataFrame:
     """Filter YouTube data: English titles only + verified term presence."""
     import re
@@ -379,7 +421,7 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
 
     # YouTube (monthly from parquet)
     log.info("  YouTube...")
-    df = _load("youtube")
+    df = _load_youtube_census()
     if len(df):
         df["month"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m")
         g = df.groupby(["pair_slug", "month", "variant"]).size().reset_index(name="cnt")
@@ -536,7 +578,7 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
     if len(reddit):
         source_stats["reddit"] = {"records": len(reddit), "pairs": int(reddit["pair_slug"].nunique()), "unit": "posts"}
 
-    youtube = _load("youtube")
+    youtube = _load_youtube_census()
     if len(youtube):
         source_stats["youtube"] = {"records": len(youtube), "pairs": int(youtube["pair_slug"].nunique()), "unit": "videos"}
 
@@ -827,7 +869,7 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                 ]
 
     # YouTube: actual video URLs
-    youtube = _load("youtube")
+    youtube = _load_youtube_census()
     if len(youtube) and "video_id" in youtube.columns:
         y25 = youtube[(youtube["date"] >= "2025-01") & (youtube["variant"] == "russian")]
         for slug in enabled_slugs:
