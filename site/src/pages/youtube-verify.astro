@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+import Base from '../layouts/Base.astro';
+import v from '../data/youtube_verify.json';
+const d = v as any;
+---
+<Base title="YouTube collection — verification">
+<div style="max-width:1100px;margin:0 auto;padding:1rem;">
+
+  <h1 style="font-size:1.4rem;margin:0 0 .25rem;">YouTube collection — verification</h1>
+  <p style="color:var(--text-muted);font-size:.85rem;margin:0 0 1rem;">
+    Pair <strong>{d.pair.russian}</strong> → <strong>{d.pair.ukrainian}</strong>,
+    2010–2025, collected {d.searches_used} search calls + {d.enrich_units} units for descriptions.
+  </p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.5rem;margin-bottom:1rem;">
+    {[['Collected', d.collected.toLocaleString(), 'returned by search'],
+      ['Verified', d.verified.toLocaleString(), `${d.verify_rate}% — term present in text`],
+      ['In title', d.in_title.toLocaleString(), 'highest confidence'],
+      ['In description', d.in_description.toLocaleString(), 'lower confidence']].map(([k,val,sub]) => (
+      <div style="padding:.6rem;border:1px solid var(--border);border-radius:6px;">
+        <div style="font-size:1.25rem;font-weight:700;color:var(--text);">{val}</div>
+        <div style="font-size:.7rem;color:var(--text-muted);">{k}</div>
+        <div style="font-size:.62rem;color:#9ca3af;">{sub}</div>
+      </div>
+    ))}
+  </div>
+
+  <div style="padding:.7rem;border:1px solid #fbbf24;background:#fffbeb;border-radius:6px;font-size:.78rem;line-height:1.5;margin-bottom:1.2rem;color:#1a1a2e;">
+    <strong>How to read this.</strong> YouTube search returns videos that do not contain the
+    term — it matches tags and undocumented signals, and it does not honour quoted phrases.
+    Only <strong>{d.verify_rate}%</strong> of what search returned actually contains either
+    spelling in the title or description. Ratios below use the verified subset only.
+    Early years verify at near zero, so their ratios are undefined rather than low.
+    <br/><br/>
+    <strong>Referent does not matter.</strong> This measures which spelling an author chose,
+    not who they were writing about. A rabbit named “Vladimir the Great” is a genuine use of
+    the Russian form and is counted. The only exclusion is a coincidental string span where
+    the phrase never occurs as a name — “Vladimir the Great Dane” is a dog. Nothing is
+    deleted: raw search output is stored unfiltered and every judgement is a column.
+  </div>
+
+  <h2 style="font-size:1rem;margin:1rem 0 .4rem;">By year</h2>
+  <div style="overflow-x:auto;">
+  <table style="width:100%;border-collapse:collapse;font-size:.78rem;">
+    <thead><tr style="text-align:right;color:var(--text-muted);">
+      <th style="text-align:left;padding:.3rem;">Year</th><th>Collected</th><th>Verified</th>
+      <th>Verify rate</th><th>RU</th><th>UA</th><th>UA share</th>
+    </tr></thead>
+    <tbody>
+    {d.by_year.map((r:any) => (
+      <tr style="border-top:1px solid var(--border);text-align:right;">
+        <td style="text-align:left;padding:.3rem;font-weight:600;">{r.year}</td>
+        <td>{r.collected.toLocaleString()}</td>
+        <td>{r.verified.toLocaleString()}</td>
+        <td style={`color:${r.verify_rate < 5 ? '#dc2626' : r.verify_rate < 20 ? '#d97706' : '#059669'}`}>{r.verify_rate}%</td>
+        <td>{r.ru}</td><td>{r.ua}</td>
+        <td style="font-weight:600;">{r.ua_share === null ? '—' : r.ua_share + '%'}</td>
+      </tr>
+    ))}
+    </tbody>
+  </table>
+  </div>
+
+  <h2 style="font-size:1rem;margin:1.5rem 0 .4rem;">Sample videos — verify these by hand</h2>
+  {[['ukrainian','Matched “Volodymyr the Great”','#2563eb'],
+    ['russian','Matched “Vladimir the Great”','#dc2626'],
+    ['unverified','Returned by search but term NOT in title or description','#6b7280'],
+    ['span','Coincidental span — phrase never occurs as a name (“the Great Dane”)','#b45309']].map(([key,label,color]) => (
+    <div style="margin-bottom:1.2rem;">
+      <div style={`font-weight:600;font-size:.85rem;color:${color};margin-bottom:.3rem;`}>{label}
+        <span style="color:var(--text-muted);font-weight:400;"> — {d.samples[key as string].length} shown</span></div>
+      <div style="border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+      {d.samples[key as string].map((s:any, i:number) => (
+        <div style={`padding:.35rem .5rem;font-size:.72rem;${i%2?'background:rgba(0,0,0,0.02);':''}`}>
+          <a href={`https://youtube.com/watch?v=${s.id}`} target="_blank"
+             style="color:var(--text);text-decoration:none;font-weight:500;">{s.title}</a>
+          <span style="color:#9ca3af;"> · {s.date} · {s.channel}</span>
+          <span style="color:#9ca3af;"> · found in {s.where} · queried as {s.queried}</span>
+        </div>
+      ))}
+      </div>
+    </div>
+  ))}
+
+</div>
+</Base>

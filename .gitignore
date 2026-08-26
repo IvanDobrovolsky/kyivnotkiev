@@ -84,3 +84,4 @@ output/
 /dataset/
 # Keep site data JSON (generated, needed for build)
 !site/src/data/
+!site/src/data/*.json
