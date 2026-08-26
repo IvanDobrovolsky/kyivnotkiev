@@ -30,13 +30,23 @@ ROOT = Path(__file__).resolve().parent.parent.parent.parent
 PAIRS_DIR = ROOT / "data" / "corpus" / "pairs"
 OUT_PATH = ROOT / "site" / "src" / "data" / "corpus_holdouts.json"
 
-PER_SOURCE = 12          # rows per source per variant
-SNIPPET = 180
+PER_SOURCE = 15          # rows per source per variant
+SNIPPET = 320            # long enough to read a whole clause
 
 
 def clean(text: str) -> str:
+    """Collapse whitespace and truncate at a WORD boundary.
+
+    Cutting at a fixed character count sliced mid-word and produced unreadable
+    fragments like "baptizing the city into Christian…".
+    """
     t = re.sub(r"\s+", " ", str(text)).strip()
-    return t[:SNIPPET] + ("…" if len(t) > SNIPPET else "")
+    if len(t) <= SNIPPET:
+        return t
+    cut = t.rfind(" ", 0, SNIPPET)
+    if cut < SNIPPET * 0.6:      # no sensible break — fall back to the hard cut
+        cut = SNIPPET
+    return t[:cut].rstrip(" ,;:—-") + "…"
 
 
 def build_pair(slug: str) -> dict | None:
@@ -48,6 +58,11 @@ def build_pair(slug: str) -> dict | None:
     man = pd.read_parquet(mpath)
     df = corpus.merge(man, on="record_id", how="inner")
     df = df[df.url.str.len() > 0]
+    # show readable records first; flagged ones remain in the corpus regardless
+    if "short_context" in df.columns:
+        df = df[~df.short_context.fillna(False)]
+    if "duplicate_context" in df.columns:
+        df = df[~df.duplicate_context.fillna(False)]
     if not len(df):
         return None
 

@@ -177,12 +177,15 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 {ch && (
 <div class="chart-container" style="margin-bottom:1rem; padding:0.75rem;">
   <div class="chart-title" style="color:var(--text)">Corpus records — every row verified</div>
-  <div class="chart-subtitle" style="margin-bottom:0.5rem;">
+  <div class="chart-subtitle" style="margin-bottom:0.5rem;" id="corpus-records-subtitle">
     {chTotal} linked records across {chSources.length} sources. Each contains an exact
     word-boundary match of one spelling and links to the original document.
   </div>
+  <div id="corpus-no-src" style="display:none;font-size:0.75rem;color:var(--text-muted);padding:0.5rem;">
+    No corpus records for this source — it contributes an adoption metric but no text.
+  </div>
   {chSources.map((src) => (
-    <div style="margin-bottom:0.8rem;">
+    <div class="corpus-src-block" data-corpus-source={src} style="margin-bottom:0.8rem;">
       <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-muted);margin-bottom:0.25rem;">
         {src} <span style="font-weight:400;text-transform:none;">— {ch[src].length} records</span>
       </div>

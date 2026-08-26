@@ -80,6 +80,9 @@ def main():
         a["linked"] = int((sub.url.str.len() > 0).sum()) if len(sub) else 0
         a["linkable"] = bool(a["linked"] and a["linked"] == a["in_corpus"])
         a["match_rate"] = round(100 * a["exact_match"] / a["scanned"], 3) if a["scanned"] else None
+        # exact_match counts ROWS; in_corpus counts DOCUMENTS. The gap is the same
+        # document appearing in several crawl files, not records being discarded.
+        a["dedup_dropped"] = max(0, a["exact_match"] - a["in_corpus"])
         a.pop("raw_source", None)
         merged.append(a)
     merged.sort(key=lambda x: -x["in_corpus"])

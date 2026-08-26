@@ -71,7 +71,7 @@ SOURCES = {
     "gdelt":              (["text"],                 None,       "url"),
     "openalex":           (["title", "abstract"],    "openalex_id", None),
     "telegram":           (["text"],                 None,       None),
-    "wikipedia_articles": (["text"],                 None,       None),
+    "wikipedia_articles": (["text"],                 "article_title", None),
     "wikipedia":          (["text"],                 None,       None),
 }
 
@@ -86,6 +86,20 @@ def sentence_window(text: str, start: int, end: int, width: int = CONTEXT_CHARS)
     right = text.find(". ", end, hi)
     if right != -1:
         hi = right + 1
+    else:
+        # No sentence end in range — back off to the last whole word rather than
+        # slicing mid-token, which produced unreadable fragments.
+        nxt = text.find(" ", hi)
+        if nxt != -1 and nxt - hi < 25:
+            hi = nxt
+        else:
+            sp = text.rfind(" ", end, hi)
+            if sp != -1:
+                hi = sp
+    if lo > 0:
+        sp = text.find(" ", lo)
+        if sp != -1 and sp - lo < 25:
+            lo = sp + 1
     return text[lo:hi].strip()
 
 
@@ -103,6 +117,8 @@ def build_url(source: str, doc_id: str, raw_url: str) -> str:
         return doc_id if doc_id.startswith("http") else f"https://openalex.org/{doc_id}"
     if source == "reddit" and doc_id:
         return f"https://reddit.com/{doc_id}"
+    if source == "wikipedia" and doc_id:
+        return "https://en.wikipedia.org/wiki/" + doc_id.replace(" ", "_")
     return ""
 
 
@@ -180,8 +196,6 @@ def main():
 
             m = (ua_re.search(text) if has_ua else ru_re.search(text))
             ctx = sentence_window(text, m.start(), m.end(), args.context_chars)[:MAX_TEXT_CHARS]
-            if len(ctx) < MIN_PROSE_CHARS:
-                continue
 
             r = df.loc[idx]
             doc_id = str(r[id_col]) if id_col and id_col in df.columns else ""
@@ -194,7 +208,8 @@ def main():
 
             rid = hashlib.sha1(f"{args.pair}|{r['_source']}|{doc_id}|{ctx[:120]}".encode()).hexdigest()[:16]
             rows.append({"record_id": rid, "pair_slug": args.pair,
-                         "text": ctx, "variant": variant, "date": date})
+                         "text": ctx, "variant": variant, "date": date,
+                         "short_context": len(ctx) < MIN_PROSE_CHARS})
             manifest.append({"record_id": rid, "source": r["_source"], "doc_id": doc_id,
                              "url": build_url(r["_source"], doc_id, url),
                              "raw_chars": len(text),
@@ -207,9 +222,15 @@ def main():
         log.error("no records — nothing written")
         return
 
-    corpus = pd.DataFrame(rows).drop_duplicates(subset=["text"]).reset_index(drop=True)
+    # Every exact match is kept. Duplicates and short fragments are FLAGGED, not
+    # removed, so a caller can reproduce any earlier cut without re-scanning —
+    # 375 Reddit crossposts share a title, and dropping them silently hid the
+    # fact that they are one authorial choice repeated, not many.
+    corpus = pd.DataFrame(rows).reset_index(drop=True)
+    corpus["duplicate_context"] = corpus.duplicated(subset=["text"], keep="first")
     man = pd.DataFrame(manifest)
     man = man[man.record_id.isin(set(corpus.record_id))].drop_duplicates(subset=["record_id"])
+    corpus = corpus.drop_duplicates(subset=["record_id"]).reset_index(drop=True)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     corpus.to_parquet(OUT_DIR / f"{args.pair}.parquet", index=False)
@@ -220,6 +241,10 @@ def main():
     log.info(f"TRAINING FRAME  {len(corpus):,} records -> {args.pair}.parquet")
     log.info(f"  columns (source deliberately absent): {list(corpus.columns)}")
     log.info(f"  variant: {corpus.variant.value_counts().to_dict()}")
+    log.info(f"  flagged duplicate_context: {int(corpus.duplicate_context.sum()):,} "
+             f"| short_context: {int(corpus.short_context.sum()):,}  (kept, not dropped)")
+    clean = corpus[~corpus.duplicate_context & ~corpus.short_context]
+    log.info(f"  clean subset if you filter both: {len(clean):,}")
     log.info(f"  text chars: median={int(corpus.text.str.len().median())}, "
              f"p90={int(corpus.text.str.len().quantile(0.9))}, max={int(corpus.text.str.len().max())}")
     log.info(f"MANIFEST        {len(man):,} rows -> {args.pair}_manifest.parquet")

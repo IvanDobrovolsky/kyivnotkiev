@@ -1663,6 +1663,22 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         telegram: 'telegram',
         openalex: 'openalex', ngrams: 'ngrams',
       };
+      // Corpus records follow the selected source rather than listing all of them.
+      (function filterCorpusRecords() {
+        const blocks = Array.from(document.querySelectorAll('.corpus-src-block')) as HTMLElement[];
+        if (!blocks.length) return;
+        let shown = 0;
+        blocks.forEach(b => {
+          const match = b.dataset.corpusSource === activeSource;
+          b.style.display = match ? '' : 'none';
+          if (match) shown++;
+        });
+        const empty = document.getElementById('corpus-no-src');
+        if (empty) empty.style.display = shown ? 'none' : '';
+        const sub = document.getElementById('corpus-records-subtitle');
+        if (sub) sub.style.display = shown ? '' : 'none';
+      })();
+
       const holdoutKey = sourceToKey[activeSource] || 'news';
       const items = pairHoldouts[holdoutKey] || [];
 
