@@ -7,6 +7,7 @@ import llmPerPair from '../../data/llm_per_pair.json';
 import religious from '../../data/religious.json';
 import allClClusters from '../../data/cl_clusters.json';
 import allHoldoutsByPair from '../../data/holdouts_by_pair.json';
+import allCorpusHoldouts from '../../data/corpus_holdouts.json';
 import allTimeseries from '../../data/timeseries.json';
 
 export function getStaticPaths() {
@@ -47,7 +48,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 <script type="application/json" id="pair-holdouts-data" set:html={JSON.stringify(pairHoldoutsData)} />
 <script type="application/json" id="pair-timeseries-data" set:html={JSON.stringify(pairTimeseriesData)} />
 <div id="pair-detail" data-pair-slug={slug}>
-  <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} religious={religious} timeSpan={(m as any).time_span} />
+  <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} religious={religious} timeSpan={(m as any).time_span} corpusHoldouts={(allCorpusHoldouts as any)[pair.slug] || null} />
 </div>
 
   <script>
