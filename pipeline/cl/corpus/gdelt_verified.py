@@ -88,23 +88,46 @@ def build(pair: str) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--pair", required=True)
+    g = ap.add_mutually_exclusive_group(required=True)
+    g.add_argument("--pair")
+    g.add_argument("--all-pairs", action="store_true",
+                   help="rebuild every pair that has fetched text on disk")
     a = ap.parse_args()
 
-    verified, series, audit = build(a.pair)
     OUT.mkdir(parents=True, exist_ok=True)
-    verified.to_parquet(OUT / f"{a.pair}.parquet", compression="zstd", index=False)
-    series.to_parquet(OUT / f"{a.pair}_series.parquet", compression="zstd", index=False)
+    if a.all_pairs:
+        if not TEXTS.exists():
+            print("no fetched text yet"); return 0
+        pairs = sorted(pd.read_parquet(TEXTS, columns=["pair_slug"]).pair_slug.dropna().unique())
+    else:
+        pairs = [a.pair]
 
-    print(f"=== {a.pair} ===")
-    for k, v in audit.items():
-        print(f"  {k:<26}{v:>6,}")
-    if len(verified):
-        print(f"\n  variant split: {verified.variant.value_counts().to_dict()}")
-        print(f"  date span    : {verified.date.min().date()} -> {verified.date.max().date()}")
-        print(f"  median chars : {int(verified.text_len.median()):,}")
-        print(f"  domains      : {verified.domain.nunique()}")
-    print(f"\nwrote {OUT / (a.pair + '.parquet')}")
+    rows = []
+    for slug in pairs:
+        verified, series, audit = build(slug)
+        if not len(verified):
+            if not a.all_pairs:
+                print(f"{slug}: no verified records")
+            continue
+        verified.to_parquet(OUT / f"{slug}.parquet", compression="zstd", index=False)
+        series.to_parquet(OUT / f"{slug}_series.parquet", compression="zstd", index=False)
+        vc = verified.variant.value_counts()
+        ua, ru = int(vc.get("ukrainian", 0)), int(vc.get("russian", 0))
+        rows.append({"pair": slug, "urls": audit["urls_attempted"], "records": len(verified),
+                     "ua": ua, "ru": ru, "both": int(vc.get("both", 0)),
+                     "ua_%": round(ua / (ua + ru) * 100, 1) if ua + ru else None,
+                     "domains": verified.domain.nunique(),
+                     "url_agree_%": audit["url_agreement_%"],
+                     "chartable": len(verified) >= 30})
+        if not a.all_pairs:
+            for k, v in audit.items():
+                print(f"  {k:<26}{v!s:>8}")
+    if rows:
+        summary = pd.DataFrame(rows).sort_values("records", ascending=False)
+        print(summary.to_string(index=False))
+        summary.to_csv(OUT / "_summary.csv", index=False)
+        print(f"{int(summary.records.sum()):,} verified records, {len(summary)} pair(s), "
+              f"{int(summary.chartable.sum())} above the 30-record chart threshold")
     return 0
 
 

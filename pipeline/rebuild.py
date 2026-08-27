@@ -10,10 +10,11 @@ config/pairs.yaml:
 What it does:
   1. Validates all dataset/ parquets (counts, dups, schema)
   2. Recomputes aggregate stats over enabled pairs (analysis.json)
-  3. Runs export_site_data.py (manifest + timeseries + holdouts + prune)
-  4. Refreshes README numbers from the manifest
-  5. Verifies site JSON matches dataset AND config/pairs.yaml
-  6. Prints full status report
+  3. Rebuilds verified GDELT records from fetched article text (no fetching)
+  4. Runs export_site_data.py (manifest + timeseries + holdouts + prune)
+  5. Refreshes README numbers from the manifest
+  6. Verifies site JSON matches dataset AND config/pairs.yaml
+  7. Prints full status report
 
 After running, commit + push:
   git add site/src/data/ && git commit && git push
@@ -105,23 +106,46 @@ def run_stats():
     stats_main()
 
 
+def run_gdelt_verified():
+    """Rebuild verified GDELT records from whatever article text is on disk.
+
+    Derivation, not collection: it never fetches. Fetching is a separate long-running
+    step (pipeline.ingestion.gdelt_fetch_texts). This runs before the export so the
+    series and the holdouts are always regenerated from the current records rather
+    than from whatever happened to be written last.
+    """
+    import subprocess, sys
+    log.info("\n3. REBUILDING VERIFIED GDELT RECORDS")
+    texts = ROOT / "data" / "raw" / "gdelt" / "texts" / "article_texts.parquet"
+    if not texts.exists():
+        log.info("  no fetched article text yet — skipping")
+        return
+    res = subprocess.run([sys.executable, "-m", "pipeline.cl.corpus.gdelt_verified", "--all-pairs"],
+                         capture_output=True, text=True, cwd=ROOT)
+    for line in res.stdout.strip().split("\n"):
+        if line.strip():
+            log.info(f"  {line}")
+    if res.returncode:
+        raise SystemExit(f"verified rebuild failed: {res.stderr.strip()[-400:]}")
+
+
 def run_export():
     """Run export_site_data.py to regenerate all site JSON."""
-    log.info("\n3. EXPORTING SITE DATA")
+    log.info("\n4. EXPORTING SITE DATA")
     from pipeline.export_site_data import main as export_main
     export_main()
 
 
 def run_readme():
     """Refresh the README's generated numbers from the manifest."""
-    log.info("\n4. UPDATING README")
+    log.info("\n5. UPDATING README")
     from pipeline.update_readme import main as readme_main
     readme_main()
 
 
 def verify_site_data():
     """Verify site JSON matches dataset."""
-    log.info("\n5. VERIFYING SITE DATA")
+    log.info("\n6. VERIFYING SITE DATA")
 
     with open(SITE_DATA_DIR / "manifest.json") as f:
         m = json.load(f)
@@ -159,7 +183,7 @@ def verify_site_data():
 
 def push_hf():
     """Push all datasets + corpus to HuggingFace."""
-    log.info("\n6. PUSHING TO HUGGINGFACE")
+    log.info("\n7. PUSHING TO HUGGINGFACE")
     from huggingface_hub import HfApi
     api = HfApi()
     repo_id = "KyivNotKiev/toponym-adoption-data"
@@ -193,6 +217,7 @@ def main():
 
     if not args.verify_only:
         run_stats()
+        run_gdelt_verified()
         run_export()
         run_readme()
 
