@@ -789,6 +789,57 @@ def export_trends_countries(enabled_slugs: set[str]) -> dict:
     return result
 
 
+# OpenAlex terms that collide with something other than the toponym. Excluded from
+# academic holdouts because a word-boundary match cannot separate them:
+#   borscht  -- "Borsch" is the plant taxonomist T. Borsch; 2,228 of 3,484 Russian-variant
+#               papers since 2022 are botanical taxonomy and none contain "borscht".
+#   ihor-sikorsky -- "Igor Sikorsky Kyiv Polytechnic Institute" is a university's official
+#               English name, so matches are affiliation strings, not the person.
+OPENALEX_COLLISIONS = {"borscht", "ihor-sikorsky"}
+OPENALEX_SINCE_YEAR = 2020   # academic publication lag makes a 2022 cut too aggressive
+
+
+def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
+    """Most-cited papers still using the Russian spelling, with links to the work.
+
+    Mapped through `matched_term` rather than the parquet's `pair_id`: that column
+    refers to a numeric scheme dropped when pairs.yaml moved to slugs. The config
+    mapping agrees with the parquet's own `variant` on 99.98% of rows.
+    """
+    path = DATA_DIR / "cl" / "raw" / "openalex" / "all_pairs.parquet"
+    if not path.exists():
+        log.warning("  OpenAlex per-paper parquet missing; no academic holdouts")
+        return {}
+    cfg = load_pairs()
+    lut = {}
+    for p in cfg["pairs"]:
+        if p.get("slug") not in enabled_slugs:
+            continue
+        for v in ("ukrainian", "russian"):
+            lut[str(p[v]).strip().lower()] = (p["slug"], v)
+    df = pd.read_parquet(path)
+    df["mt"] = df["matched_term"].astype(str).str.strip().str.lower()
+    mapped = df["mt"].map(lambda t: lut.get(t, (None, None)))
+    df["slug"] = [m[0] for m in mapped]
+    df["var"] = [m[1] for m in mapped]
+    df = df[df["slug"].notna() & (df["var"] == "russian") & (df["year"] >= OPENALEX_SINCE_YEAR)]
+    df = df[~df["slug"].isin(OPENALEX_COLLISIONS)]
+    df = df[df["openalex_id"].notna() & df["title"].notna()]
+
+    out, skipped = {}, sorted(OPENALEX_COLLISIONS)
+    for slug, g in df.groupby("slug"):
+        g = g.drop_duplicates("openalex_id").nlargest(HOLDOUT_CAP, "cited_by_count")
+        out[slug] = [{
+            "name": str(r["title"])[:160],
+            "url": str(r["openalex_id"]),
+            "cited": int(r["cited_by_count"] or 0),
+            "year": int(r["year"]),
+        } for _, r in g.iterrows()]
+    log.info(f"  OpenAlex holdouts: {len(out)} pairs, {sum(len(v) for v in out.values()):,} papers "
+             f"(since {OPENALEX_SINCE_YEAR}, cap {HOLDOUT_CAP}; excluded collisions: {', '.join(skipped)})")
+    return out
+
+
 def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     """Per-source holdouts for 2025: who still uses Russian spellings."""
     log.info("Exporting holdouts (2025, all sources)...")
@@ -1021,6 +1072,8 @@ def main():
             _kept += len(_articles)
         log.info(f"  GDELT article holdouts: {_injected} pairs, {_kept:,} articles "
                  f"(since {HOLDOUT_SINCE}, cap {HOLDOUT_CAP}/pair; dropped {_dropped:,} unattested)")
+    for _slug, _papers in export_openalex_holdouts(enabled_slugs).items():
+        holdouts_by_pair.setdefault(_slug, {})["openalex"] = _papers
     pair_events = export_pair_events(enabled_slugs)
     analysis = export_analysis()
     domain_origins = export_domain_origins(enabled_slugs)

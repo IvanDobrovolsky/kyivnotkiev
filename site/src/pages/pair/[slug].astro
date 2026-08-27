@@ -1635,7 +1635,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         reddit: 'Reddit posts still using old spelling — 2025',
         youtube: 'YouTube videos still using old spelling — 2025',
         telegram: 'Telegram channels still using old spelling — 2025',
-        openalex: 'Academic papers using old spelling — since 2020',
+        openalex: 'Most-cited papers still using the Russian spelling — 2020 onward',
         ngrams: 'Google Books corpus — compare spellings',
       };
       if (subtitleEl) subtitleEl.textContent = subtitles[holdoutKey] || 'Still using old spelling in 2025';
@@ -1717,7 +1717,21 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           </tr>`).join('');
         html = `<table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
-      } else if (holdoutKey === 'trends' || holdoutKey === 'openalex' || holdoutKey === 'ngrams') {
+      } else if (holdoutKey === 'openalex') {
+        const rows = items.map((o: any) =>
+          `<tr style="border-bottom:1px solid #f3f4f6;">
+            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${o.url}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; border-bottom:1px dotted #d1d5db;">${o.name}</a></td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono); white-space:nowrap;">${o.year}</td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono); white-space:nowrap;">${(o.cited || 0).toLocaleString()} cites</td>
+          </tr>`).join('');
+        html = `<table style="width:100%; border-collapse:collapse;">
+          <thead><tr style="border-bottom:2px solid #e5e7eb;">
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Paper (click to open on OpenAlex)</th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Year</th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Cited</th>
+          </tr></thead><tbody>${rows}</tbody></table>`;
+
+      } else if (holdoutKey === 'trends' || holdoutKey === 'ngrams') {
         const rows = items.map((o: any) =>
           `<tr style="border-bottom:1px solid #f3f4f6;">
             <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${o.url}" target="_blank" rel="noopener" style="color:#06b6d4; text-decoration:none;">${o.name}</a></td>
