@@ -388,6 +388,36 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 if total > 0:
                     result[spid]["gdelt"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
 
+    # Where verified records exist, the chart is computed from the SAME records that
+    # supply the article texts, so the two can never disagree. A pair is either fully
+    # verified or fully url-based -- never a mix, which would make its own months
+    # incomparable. Mixed usage ("both") counts toward neither variant but is carried
+    # so the denominator is honest.
+    _vdir = ROOT / "data" / "cl" / "corpus" / "gdelt_verified"
+    if _vdir.exists():
+        _swapped = []
+        for _f in sorted(_vdir.glob("*_series.parquet")):
+            _slug = _f.stem[:-len("_series")]
+            if _slug not in enabled_slugs:
+                continue
+            _sr = pd.read_parquet(_f)
+            _pv = _sr.pivot_table(index="month", columns="variant", values="articles",
+                                  fill_value=0).reset_index()
+            _rows = []
+            for _, r in _pv.sort_values("month").iterrows():
+                ukr, rus = int(r.get("ukrainian", 0)), int(r.get("russian", 0))
+                both = int(r.get("both", 0))
+                if ukr + rus == 0:
+                    continue
+                _rows.append({"date": r["month"], "adoption": round(ukr / (ukr + rus) * 100, 1),
+                              "ukr": ukr, "rus": rus, "both": both, "verified": True})
+            if _rows:
+                result.setdefault(_slug, {})["gdelt"] = _rows
+                _swapped.append(_slug)
+        if _swapped:
+            log.info(f"  GDELT series from verified text for {len(_swapped)} pair(s): "
+                     f"{', '.join(_swapped)}")
+
     # Wikipedia (monthly) + rename annotations
     log.info("  Wikipedia...")
     df = _load("wikipedia")
