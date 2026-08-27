@@ -265,3 +265,65 @@ having only that bucket. Still rendered on the uk page; not yet removed.
   Coventry and a Ukrainian navy corvette. The apparent 2019 switch may be a change in what
   gets covered. UA share moved 16.2% → 43.8% once text was read, because 6 of the 17 were
   invisible to the URL-based series and 5 of those 6 are Ukrainian.
+
+
+---
+
+## 9. Data layout (agreed 2026-08-26)
+
+Four stages, each a function of the previous, each output regenerable from the one
+before it. **Only `raw` is expensive**; everything downstream is a recompute.
+
+```
+collect  ->  <source>_raw.parquet         everything the provider returned, untouched
+process  ->  <source>_processed.parquet   cleaned + regex-matched; correct records only
+split    ->  pairs/<slug>.parquet         all sources stacked, unbalanced, carries source
+balance  ->  (later)                      training set
+```
+
+### Why the filter lives in `process`, not `collect`
+The matcher has already changed twice — word boundaries, then punctuation, after
+`«Volodymyr, the Great!»` scored as containing no spelling. Because `raw` is retained
+in full, a matcher fix re-runs `process(raw)` over local parquet in minutes. If `raw`
+were pre-filtered, the same fix would mean refetching 1.4M URLs.
+
+Two consequences:
+- **`raw` stores full uncapped text.** Capping is a processing decision; capping in
+  `raw` would make the cap length unchangeable without a refetch.
+- **`raw` keeps the junk.** The Vladimir Putin videos, the Borsch taxonomy papers and
+  the Odessa-Texas articles are what the provider returned. They are the evidence that
+  the filtering did something, and without them it cannot be audited.
+
+### There is no `verified` column
+It was doing work it had not earned — the word implies a judgement, while the reality
+is a regex outcome that was twice wrong. `processed` carries `ua_hits`, `ru_hits` and
+the `variant` derived from them. The evidence is the data; the reader decides.
+
+Auditing is done against the **matcher**, not the corpus, which is a few hundred rows
+rather than hundreds of thousands:
+- store the matched **span**, not only a count — 50 spans tell you whether the matcher
+  works; 50 documents tell you almost nothing
+- store a **near_miss** flag: text contains one word of the phrase but no full match.
+  That is exactly the signal that exposed the comma bug (144 rows containing
+  "volodymyr" scoring zero).
+
+### Which source has which tier
+| source | raw | processed | in pairs/ |
+|---|---|---|---|
+| gdelt, youtube, reddit, openalex | yes | yes | yes |
+| wikipedia, trends, ngrams | yes | yes | **no** — no document, only counts |
+| telegram | yes | — | no — 80% Cyrillic, measures Ukrainian-language channels |
+
+A pageview is not a document. Count-only sources feed the adoption series and cannot
+appear in a text corpus; forcing empty files there would be a lie about coverage.
+
+### `pairs/<slug>.parquet`
+The union of every source's `processed` rows for that pair. Unbalanced by design —
+balancing is a training-time decision, not a storage one. **Carries `source`**: it is
+required at evaluation time, because the first question about any cluster is whether
+it merely rediscovered the source. Dropping it is the feature-matrix step's job.
+
+### Publishing
+The same files go to HuggingFace unchanged, `raw` included, so the study is
+reproducible from the repo alone after a wiped laptop. Publishing is an allowlist
+(see §7): a file is published because it is named, never because of its extension.
