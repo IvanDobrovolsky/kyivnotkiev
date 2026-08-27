@@ -43,8 +43,10 @@ import asyncio
 import json
 import pathlib
 import random
+import hashlib
 import re
 import sys
+from urllib.parse import urlparse
 import time
 
 import pandas as pd
@@ -62,6 +64,19 @@ TIMEOUT = 10           # a host that has not answered in 10s is not going to
 BATCH = 200              # flush to disk this often
 MIN_TEXT = 200           # below this, extraction failed rather than the page being short
 UA = "Mozilla/5.0 (compatible; kyivnotkiev-research/1.0; +https://kyivnotkiev.org)"
+
+
+def _lost_the_article(requested: str, final: str) -> bool:
+    """True when a redirect landed somewhere that cannot be the requested article.
+
+    Only fires when the destination path is effectively empty (homepage or section
+    root) while the request asked for a deep path. Same-path http->https upgrades and
+    ordinary canonical redirects are left alone.
+    """
+    a, b = urlparse(requested), urlparse(final)
+    req_depth = len([x for x in a.path.split("/") if x])
+    fin_depth = len([x for x in b.path.split("/") if x])
+    return req_depth >= 2 and fin_depth <= 1
 
 
 def pair_patterns() -> dict:
@@ -96,12 +111,23 @@ async def fetch_one(client, row, pats, sem):
     rec = {"url": row.url, "pair_slug": row.pair_slug, "url_variant": row.variant,
            "domain": row.domain, "date": row.date,
            "status": None, "error": None, "text": None, "text_len": 0,
-           "body_ua": 0, "body_ru": 0, "body_variant": None, "agrees": None}
+           "body_ua": 0, "body_ru": 0, "body_variant": None, "agrees": None,
+           "final_url": None, "redirected_off_article": False, "text_hash": None}
     async with sem:
         try:
             r = await client.get(row.url, follow_redirects=True,
                                  headers={"User-Agent": UA})
             rec["status"] = r.status_code
+            rec["final_url"] = str(r.url)
+            # A parked or restructured domain answers 200 with its CURRENT homepage.
+            # uatoday.tv did exactly this: two 2015/2016 articles both came back as an
+            # identical live war-casualty ticker dated 2026. That is worse than a 404
+            # because it looks like data, so detect it by the redirect collapsing the
+            # path away rather than by inspecting the text.
+            if _lost_the_article(row.url, str(r.url)):
+                rec["redirected_off_article"] = True
+                rec["error"] = "redirected_off_article"
+                return rec
             if r.status_code != 200:
                 rec["error"] = f"http_{r.status_code}"
                 return rec
@@ -113,6 +139,10 @@ async def fetch_one(client, row, pats, sem):
                 return rec
             rec["text"] = body
             rec["text_len"] = len(body)
+            # Syndicated wire copy runs under many domains and GDELT re-records the same
+            # article under several dates. Hash the body so duplicates are identifiable
+            # downstream without deciding here which copy is canonical.
+            rec["text_hash"] = hashlib.sha1(re.sub(r"\s+", " ", body).strip().encode()).hexdigest()[:16]
             ua, ru, label = classify(body, pats)
             rec["body_ua"], rec["body_ru"], rec["body_variant"] = ua, ru, label
             rec["agrees"] = (label == row.variant) if label in ("ukrainian", "russian") else None
@@ -166,6 +196,7 @@ async def run(targets, pats_by_pair, concurrency):
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--pair", help="restrict to one pair slug, for a controlled trial run")
     ap.add_argument("--limit", type=int, default=600)
     ap.add_argument("--sample-per-year", type=int, default=0,
                     help="stratify the sample evenly across years to expose link rot by age")
@@ -175,6 +206,10 @@ def main() -> int:
 
     OUT.mkdir(parents=True, exist_ok=True)
     df = pd.read_parquet(SRC)
+    if a.pair:
+        df = df[df.pair_slug == a.pair]
+        if df.empty:
+            print(f"no attested urls for pair '{a.pair}'", file=sys.stderr); return 1
     seen = set(LEDGER.read_text().split()) if LEDGER.exists() else set()
     df = df[~df.url.isin(seen)]
     if df.empty:
@@ -188,7 +223,7 @@ def main() -> int:
             rng.shuffle(idx)
             parts.append(g.loc[idx[:a.sample_per_year]])
         df = pd.concat(parts)
-    elif not a.all:
+    elif not a.all and not a.pair:
         df = df.head(a.limit)
 
     targets = list(df.itertuples())
