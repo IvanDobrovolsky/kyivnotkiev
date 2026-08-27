@@ -6,7 +6,6 @@ import llmTraj from '../../data/llm_trajectory.json';
 import llmPerPair from '../../data/llm_per_pair.json';
 import allClClusters from '../../data/cl_clusters.json';
 import allHoldoutsByPair from '../../data/holdouts_by_pair.json';
-import allCorpusHoldouts from '../../data/corpus_holdouts.json';
 import allTimeseries from '../../data/timeseries.json';
 
 export function getStaticPaths() {
@@ -47,7 +46,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 <script type="application/json" id="pair-holdouts-data" set:html={JSON.stringify(pairHoldoutsData)} />
 <script type="application/json" id="pair-timeseries-data" set:html={JSON.stringify(pairTimeseriesData)} />
 <div id="pair-detail" data-pair-slug={slug}>
-  <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} timeSpan={(m as any).time_span} corpusHoldouts={(allCorpusHoldouts as any)[pair.slug] || null} />
+  <PairView llmTraj={llmTraj} llmPerPair={llmPerPair} timeSpan={(m as any).time_span} />
 </div>
 
   <script>
@@ -1096,26 +1095,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // trends, ngrams and telegram have no holdout data: nothing renders.
     };
 
-    // Corpus records follow the selected source rather than listing all of them.
-    // This used to live inside drawHoldoutTable, which meant it stopped running for
-    // sources routed elsewhere: selecting News left every source's block on screen.
-    function filterCorpusRecords() {
-      const blocks = Array.from(document.querySelectorAll('.corpus-src-block')) as HTMLElement[];
-      if (!blocks.length) return;
-      let shown = 0;
-      blocks.forEach(b => {
-        const match = b.dataset.corpusSource === activeSource;
-        b.style.display = match ? '' : 'none';
-        if (match) shown++;
-      });
-      const empty = document.getElementById('corpus-no-src');
-      if (empty) empty.style.display = shown ? 'none' : '';
-      const sub = document.getElementById('corpus-records-subtitle');
-      if (sub) sub.style.display = shown ? '' : 'none';
-    }
 
     function renderHoldouts() {
-      filterCorpusRecords();          // runs for EVERY source, including gdelt
       HOLDOUT_PANEL_IDS.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
