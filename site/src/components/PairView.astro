@@ -183,22 +183,6 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
   <div id="news-holdouts-list" style="margin-top:0.5rem; max-height:500px; overflow-y:auto;"></div>
 </div>
 
-<!-- Reddit Posts -->
-<div id="reddit-holdouts-container" class="chart-container" style="margin-bottom:1rem; padding:0.75rem;">
-  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
-    <div>
-      <div class="chart-title" style="color: var(--text)">Reddit Posts</div>
-      <div class="chart-subtitle" id="reddit-holdouts-subtitle">Top-scored verified posts from 47K+ subreddits</div>
-    </div>
-    <div class="chart-controls" id="reddit-holdouts-filters">
-      <button class="line-mode active" data-rfilter="all">All</button>
-      <button class="line-mode" data-rfilter="russian" style="color:#dc2626;">Russian form</button>
-      <button class="line-mode" data-rfilter="ukrainian" style="color:#0057B8;">Ukrainian form</button>
-    </div>
-  </div>
-  <div id="reddit-holdouts-list" style="margin-top:0.5rem; max-height:500px; overflow-y:auto;"></div>
-</div>
-
 <!-- Generic per-source holdouts (YouTube, Wikipedia and any source without a dedicated panel).
      Hidden by default; drawHoldoutTable() reveals it only when the active source has rows. -->
 <div id="holdout-container" class="chart-container" style="margin-bottom:1rem; padding:0.75rem; display:none;">
@@ -206,11 +190,6 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
     <div>
       <div class="chart-title" style="color: var(--text)">Holdouts: <span id="holdout-pair-name"></span></div>
       <div class="chart-subtitle" id="holdout-subtitle">Still using the older spelling</div>
-    </div>
-    <div class="chart-controls" id="holdout-filters">
-      <button class="line-mode active" data-holdout="all">All</button>
-      <button class="line-mode" data-holdout="ru" style="color:#dc2626;">.ru</button>
-      <button class="line-mode" data-holdout="ua" style="color:#0057B8;">.ua</button>
     </div>
   </div>
   <div id="holdout-table" style="margin-top:0.5rem; max-height:500px; overflow-y:auto;"></div>
