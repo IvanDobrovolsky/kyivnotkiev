@@ -181,24 +181,76 @@ def verify_site_data():
     return issues
 
 
+# Publishing is opt-in per file. The previous version uploaded every *.parquet in
+# dataset/, which meant a backup written alongside the real data -- raw_gdelt.v1_
+# allnames.bak.parquet, 2,053,205 rows of superseded AllNames counts -- was a
+# publication candidate purely because of its extension. An allowlist cannot do that.
+HF_REPO = "KyivNotKiev/toponym-adoption-data"
+HF_PUBLISHABLE = {
+    "raw_gdelt.parquet",
+    "raw_ngrams.parquet",
+    "raw_reddit.parquet",
+    "raw_trends.parquet",
+    "raw_wikipedia.parquet",
+}
+# Excluded on purpose, with the reason, so removing a line is a deliberate act:
+HF_WITHHELD = {
+    "raw_youtube.parquet": "pre-2026-08-25 collection is void (result cap bug, 6-7x "
+                           "undercount); rebuild from data/cl/raw/youtube_census first",
+    "raw_telegram.parquet": "80% Cyrillic — measures Ukrainian-language channels, not "
+                            "English adoption",
+}
+
+
 def push_hf():
-    """Push all datasets + corpus to HuggingFace."""
+    """Upload the allowlisted datasets, pruned to enabled pairs.
+
+    Disabled pairs were reaching the published dataset even though the site prunes
+    them: five files carried 15-22 pairs that config/pairs.yaml no longer enables.
+    Pruning happens here rather than in dataset/ so the local parquets stay complete
+    and re-enabling a pair needs no re-collection.
+    """
     log.info("\n7. PUSHING TO HUGGINGFACE")
+    import tempfile
+
     from huggingface_hub import HfApi
-    api = HfApi()
-    repo_id = "KyivNotKiev/toponym-adoption-data"
 
-    for fname in sorted(os.listdir(DATASET_DIR)):
-        if fname.endswith(".parquet"):
-            path = DATASET_DIR / fname
-            size = os.path.getsize(path) / 1024 / 1024
-            log.info(f"  Uploading {fname} ({size:.1f}MB)...")
-            api.upload_file(path_or_fileobj=str(path), path_in_repo=fname, repo_id=repo_id, repo_type="dataset")
+    token = None
+    for candidate in (Path("/etc/secrets/hf"), Path.home() / ".huggingface" / "token"):
+        if candidate.exists():
+            token = candidate.read_text().strip()
+            break
+    api = HfApi(token=token)
 
-    if CORPUS_PATH.exists():
-        size = os.path.getsize(CORPUS_PATH) / 1024 / 1024
-        log.info(f"  Uploading corpus ({size:.1f}MB)...")
-        api.upload_file(path_or_fileobj=str(CORPUS_PATH), path_in_repo="toponyms-corpus.parquet", repo_id=repo_id, repo_type="dataset")
+    from pipeline.export_site_data import get_enabled_slugs
+    enabled = get_enabled_slugs()
+    for name, why in sorted(HF_WITHHELD.items()):
+        if (DATASET_DIR / name).exists():
+            log.info(f"  WITHHELD {name}: {why}")
+
+    present = {f.name for f in DATASET_DIR.glob("*.parquet")}
+    unknown = present - HF_PUBLISHABLE - set(HF_WITHHELD)
+    for name in sorted(unknown):
+        log.warning(f"  NOT PUBLISHED (not on the allowlist): {name}")
+
+    with tempfile.TemporaryDirectory() as tmp:
+        for name in sorted(HF_PUBLISHABLE):
+            path = DATASET_DIR / name
+            if not path.exists():
+                log.warning(f"  missing, skipped: {name}")
+                continue
+            df = pd.read_parquet(path)
+            if "pair_slug" in df.columns:
+                before = df.pair_slug.nunique()
+                df = df[df.pair_slug.isin(enabled)]
+                if df.pair_slug.nunique() != before:
+                    log.info(f"  {name}: pruned {before - df.pair_slug.nunique()} disabled pair(s)")
+            staged = Path(tmp) / name
+            df.to_parquet(staged, compression="zstd", index=False)
+            mb = staged.stat().st_size / 1024 / 1024
+            log.info(f"  Uploading {name} ({len(df):,} rows, {mb:.1f}MB)...")
+            api.upload_file(path_or_fileobj=str(staged), path_in_repo=f"data/{name}",
+                            repo_id=HF_REPO, repo_type="dataset")
 
     log.info("  HuggingFace push complete ✓")
 
