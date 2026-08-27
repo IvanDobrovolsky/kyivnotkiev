@@ -167,6 +167,11 @@ def _filter_youtube(df: pd.DataFrame) -> pd.DataFrame:
 # holdouts today, so the window starts at the 2022 invasion.
 HOLDOUT_SINCE = "2022-01-01"
 HOLDOUT_CAP = 100
+# One outlet can otherwise own the table -- sputniknews.com was 77 of 100 rows for
+# donbas and 66 for kyiv. The table is meant to show WHO still uses the old spelling,
+# so breadth of outlets matters more than depth on any one of them. State-affiliated
+# outlets publish at volume and would crowd out everyone else on raw recency.
+HOLDOUT_PER_DOMAIN = 3
 
 
 def _apply_homonym_filters(df: pd.DataFrame) -> pd.DataFrame:
@@ -1059,7 +1064,11 @@ def main():
             # Russian spellings are the holdouts worth reading; Ukrainian ones are
             # only kept to fill the cap when there are too few Russian examples.
             _hdf["_rank"] = (_hdf["_variant"] != "russian").astype(int)
-            _hdf = _hdf.sort_values(["_rank", "month"], ascending=[True, False]).head(HOLDOUT_CAP)
+            _hdf = _hdf.sort_values(["_rank", "month"], ascending=[True, False])
+            _hdf = (_hdf.groupby("domain", sort=False, group_keys=False)
+                        .head(HOLDOUT_PER_DOMAIN)
+                        .sort_values(["_rank", "month"], ascending=[True, False])
+                        .head(HOLDOUT_CAP))
             _articles = [{
                 "domain": _r.get("domain", ""),
                 "url": _r.get("url", ""),
