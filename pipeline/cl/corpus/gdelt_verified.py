@@ -61,15 +61,24 @@ def build(pair: str) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     # 1. the body decides; the slug is kept only so the disagreement is auditable
     verified["variant"] = verified.body_variant
     verified["url_claimed"] = verified.url_variant
-    verified["reclassified"] = (verified.url_claimed.notna()
+    # Two different things were being conflated. A body containing BOTH spellings does
+    # not contradict the slug, it exceeds it -- on babyn-yar, 90 of 99 flagged rows were
+    # this, which made the url metric look far less reliable than it is.
+    both = verified.variant == "both"
+    verified["enriched"] = verified.url_claimed.notna() & both
+    verified["reclassified"] = (verified.url_claimed.notna() & ~both
                                 & (verified.url_claimed != verified.variant))
+    strict = verified[verified.url_claimed.notna() & ~both]
     audit["reclassified_from_url"] = int(verified.reclassified.sum())
+    audit["enriched_to_both"] = int(verified.enriched.sum())
+    audit["url_agreement_%"] = (round((strict.url_claimed == strict.variant).mean() * 100, 1)
+                                if len(strict) else None)
     audit["had_no_url_claim"] = int(verified.url_claimed.isna().sum())
 
     verified["date"] = pd.to_datetime(verified.date)
     verified["month"] = verified.date.dt.to_period("M").astype(str)
     cols = ["url", "domain", "date", "month", "variant", "body_ua", "body_ru",
-            "url_claimed", "reclassified", "text", "text_len", "text_hash"]
+            "url_claimed", "reclassified", "enriched", "text", "text_len", "text_hash"]
     verified = verified[cols].sort_values("date").reset_index(drop=True)
 
     series = (verified.groupby(["month", "variant"]).size()
