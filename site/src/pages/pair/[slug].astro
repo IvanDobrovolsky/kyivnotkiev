@@ -1096,7 +1096,26 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // trends, ngrams and telegram have no holdout data: nothing renders.
     };
 
+    // Corpus records follow the selected source rather than listing all of them.
+    // This used to live inside drawHoldoutTable, which meant it stopped running for
+    // sources routed elsewhere: selecting News left every source's block on screen.
+    function filterCorpusRecords() {
+      const blocks = Array.from(document.querySelectorAll('.corpus-src-block')) as HTMLElement[];
+      if (!blocks.length) return;
+      let shown = 0;
+      blocks.forEach(b => {
+        const match = b.dataset.corpusSource === activeSource;
+        b.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      const empty = document.getElementById('corpus-no-src');
+      if (empty) empty.style.display = shown ? 'none' : '';
+      const sub = document.getElementById('corpus-records-subtitle');
+      if (sub) sub.style.display = shown ? '' : 'none';
+    }
+
     function renderHoldouts() {
+      filterCorpusRecords();          // runs for EVERY source, including gdelt
       HOLDOUT_PANEL_IDS.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
@@ -1492,22 +1511,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         telegram: 'telegram',
         openalex: 'openalex', ngrams: 'ngrams',
       };
-      // Corpus records follow the selected source rather than listing all of them.
-      (function filterCorpusRecords() {
-        const blocks = Array.from(document.querySelectorAll('.corpus-src-block')) as HTMLElement[];
-        if (!blocks.length) return;
-        let shown = 0;
-        blocks.forEach(b => {
-          const match = b.dataset.corpusSource === activeSource;
-          b.style.display = match ? '' : 'none';
-          if (match) shown++;
-        });
-        const empty = document.getElementById('corpus-no-src');
-        if (empty) empty.style.display = shown ? 'none' : '';
-        const sub = document.getElementById('corpus-records-subtitle');
-        if (sub) sub.style.display = shown ? '' : 'none';
-      })();
-
       const holdoutKey = sourceToKey[activeSource];
       if (!holdoutKey) { hide(); return; }
       const items = pairHoldouts[holdoutKey] || [];
