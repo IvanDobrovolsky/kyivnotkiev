@@ -59,9 +59,20 @@ LEDGER = OUT / "fetched_urls.txt"
 RESULTS = OUT / "article_texts.parquet"
 PARTS = OUT / "parts"
 
-CONCURRENCY = 32         # global ceiling
-PER_HOST = 2             # simultaneous requests to any ONE host
-HOST_DELAY = 0.4         # seconds between requests to the same host
+CONCURRENCY = 96         # global ceiling
+PER_HOST_START = 8       # starting simultaneous requests per host
+PER_HOST_MAX = 16
+PER_HOST_MIN = 1
+HOST_DELAY = 0.0         # no blanket delay; back off only on evidence
+HOST_FAIL_LIMIT = 8      # consecutive failures before a host is abandoned
+HOST_429_BACKOFF = 30    # seconds to stand down from a host that rate-limits us
+
+# A per-host cap makes dead hosts far more expensive than they look: a ConnectTimeout
+# holds a slot for the full timeout, so with ~17 urls per host in a batch and
+# PER_HOST=2 a single unresponsive host serialises the batch to ~85s. donbas is the
+# worst case -- 12,097 remaining urls across 12 hosts, 75% of them on three. Hosts
+# that have proven dead are abandoned rather than retried url by url; the rows are
+# still written, carrying the reason, so coverage stays measurable.
 
 # The median is 3 urls per domain, but the median says nothing about the tail. On
 # oleksandr-usyk a 5,000-url window held 256 urls on boxingnewsonline.net and 255 on
@@ -114,7 +125,8 @@ def classify(text: str, pats: tuple) -> tuple:
     return ua, ru, label
 
 
-async def fetch_one(client, row, pats, sem, host_sems, host_last):
+async def fetch_one(client, row, pats, sem, host_sems, host_last, host_fails, host_until,
+                    host_permits, ok_streak):
     import trafilatura
     from urllib.parse import urlparse
     rec = {"url": row.url, "pair_slug": row.pair_slug, "url_variant": row.variant,
@@ -123,18 +135,42 @@ async def fetch_one(client, row, pats, sem, host_sems, host_last):
            "body_ua": 0, "body_ru": 0, "body_variant": None, "agrees": None,
            "final_url": None, "redirected_off_article": False, "text_hash": None}
     host = urlparse(str(row.url)).netloc
-    hs = host_sems.setdefault(host, asyncio.Semaphore(PER_HOST))
+    if host_fails.get(host, 0) >= HOST_FAIL_LIMIT:
+        rec["error"] = "host_abandoned"
+        return rec
+    # Additive-increase / multiplicative-decrease per host, the same shape as TCP
+    # congestion control: assume a host can take real traffic and reduce only when it
+    # says otherwise. A fixed conservative cap throttles hosts that were never the
+    # problem -- with 12 hosts and PER_HOST=2 the whole run was capped at 24 in flight.
+    hs = host_sems.setdefault(host, asyncio.Semaphore(PER_HOST_START))
+    host_permits.setdefault(host, PER_HOST_START)
     async with sem, hs:
-        # Space out requests to the same host; different hosts stay fully parallel.
-        wait = HOST_DELAY - (asyncio.get_event_loop().time() - host_last.get(host, 0))
-        if wait > 0:
-            await asyncio.sleep(wait)
-        host_last[host] = asyncio.get_event_loop().time()
+        now = asyncio.get_event_loop().time()
+        if host_until.get(host, 0) > now:
+            rec["error"] = "host_backoff"
+            return rec
+        host_last[host] = now
         try:
             r = await client.get(row.url, follow_redirects=True,
                                  headers={"User-Agent": UA})
             rec["status"] = r.status_code
             rec["final_url"] = str(r.url)
+            if r.status_code == 429:
+                host_until[host] = asyncio.get_event_loop().time() + HOST_429_BACKOFF
+                host_fails[host] = host_fails.get(host, 0) + 1
+                cur = host_permits.get(host, PER_HOST_START)
+                host_permits[host] = max(PER_HOST_MIN, cur // 2)      # multiplicative decrease
+                for _ in range(cur - host_permits[host]):
+                    await hs.acquire()                                # retire permits
+                rec["error"] = "http_429"
+                return rec
+            host_fails[host] = 0
+            ok_streak[host] = ok_streak.get(host, 0) + 1
+            cur = host_permits.get(host, PER_HOST_START)
+            if ok_streak[host] >= 20 and cur < PER_HOST_MAX:          # additive increase
+                host_permits[host] = cur + 1
+                hs.release()
+                ok_streak[host] = 0
             # A parked or restructured domain answers 200 with its CURRENT homepage.
             # uatoday.tv did exactly this: two 2015/2016 articles both came back as an
             # identical live war-casualty ticker dated 2026. That is worse than a 404
@@ -165,6 +201,7 @@ async def fetch_one(client, row, pats, sem, host_sems, host_last):
                              if (label in ("ukrainian", "russian") and row.variant) else None)
         except Exception as e:                       # noqa: BLE001 - error class IS the datum
             rec["error"] = type(e).__name__
+            host_fails[host] = host_fails.get(host, 0) + 1
     return rec
 
 
@@ -198,20 +235,26 @@ async def run(targets, pats_by_pair, concurrency):
     sem = asyncio.Semaphore(concurrency)
     host_sems: dict = {}
     host_last: dict = {}
+    host_fails: dict = {}
+    host_until: dict = {}
+    host_permits: dict = {}
+    ok_streak: dict = {}
     done, batch, t0, first = 0, [], time.time(), not RESULTS.exists()
-    limits = httpx.Limits(max_connections=concurrency, max_keepalive_connections=concurrency)
+    limits = httpx.Limits(max_connections=concurrency * 2, max_keepalive_connections=concurrency)
     async with httpx.AsyncClient(timeout=TIMEOUT, limits=limits, verify=False) as client:
         for i in range(0, len(targets), BATCH):
             chunk = targets[i:i + BATCH]
             recs = await asyncio.gather(*[
-                fetch_one(client, r, pats_by_pair[r.pair_slug], sem, host_sems, host_last)
+                fetch_one(client, r, pats_by_pair[r.pair_slug], sem, host_sems, host_last,
+                          host_fails, host_until, host_permits, ok_streak)
                 for r in chunk])
             batch.extend(recs)
             flush(batch, first); first = False; batch = []
             done += len(recs)
             ok = sum(1 for r in recs if r["text"])
+            dead = sum(1 for h, n in host_fails.items() if n >= HOST_FAIL_LIMIT)
             print(f"  {done:,}/{len(targets):,}  batch_ok={ok}/{len(recs)}  "
-                  f"{done/(time.time()-t0):.1f} url/s", flush=True)
+                  f"{done/(time.time()-t0):.1f} url/s  hosts_abandoned={dead}", flush=True)
 
 
 def main() -> int:
