@@ -48,8 +48,6 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
         <button class="line-mode active" data-mode="both">All</button>
         <button class="line-mode" data-mode="ukrainian">UA</button>
         <button class="line-mode" data-mode="russian">RU</button>
-        <span class="toggle-sep"></span>
-        <button class="event-toggle active" id="events-toggle">Events</button>
       </div>
     </div>
   </div>
@@ -58,7 +56,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 </div>
 
 <!-- Per-pair source stats -->
-<div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(9, 1fr); margin-bottom: 0.75rem;"></div>
+<div id="pair-stats" class="stats source-stats" style="margin-bottom: 0.75rem;"></div>
 
 <!-- CL: Context + Collocations -->
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
@@ -82,18 +80,14 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
   <div id="cluster-legend" style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem; font-size:0.7rem;"></div>
 </div>
 
-<!-- Adoption + Reference -->
+<!-- Adoption + Source Comparison: same component, same row -->
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
   <div id="adoption-calc" class="chart-container" style="margin-bottom:0;">
     <div class="chart-title" style="color: var(--text)">Adoption Calculation — <span id="adoption-pct-title"></span></div>
     <div class="chart-subtitle" style="margin-bottom:0.5rem;">Mean of per-source UA/(UA+RU) ratios, last 12 months</div>
-    <div id="adoption-calc-body" style="font-size:0.75rem; color:var(--text-muted); line-height:1.6;"></div>
+    <div id="adoption-calc-body"></div>
   </div>
-</div>
-
-<!-- Source Comparison -->
-<div id="comparison-row" style="margin-bottom:1rem;">
-  <div class="chart-container" style="margin-bottom:0;">
+  <div id="comparison-row" class="chart-container" style="margin-bottom:0;">
     <div class="chart-title" style="color: var(--text)">Source Comparison</div>
     <div class="chart-subtitle" style="margin-bottom:0.5rem;">Adoption rate per data source for this pair</div>
     <div id="pair-source-chart" style="width:100%;"></div>
