@@ -178,7 +178,6 @@ function formatNum(n: number) {
               <button class="line-mode" data-mode="ukrainian">УКР</button>
               <button class="line-mode" data-mode="russian">РОС</button>
               <span class="toggle-sep"></span>
-              <button class="event-toggle active" id="events-toggle">Події</button>
             </div>
           </div>
         </div>
@@ -1269,12 +1268,6 @@ function formatNum(n: number) {
     });
 
     // Events toggle
-    document.getElementById('events-toggle')?.addEventListener('click', (e) => {
-      const btn = e.currentTarget as HTMLElement;
-      btn.classList.toggle('active');
-      showEvents = btn.classList.contains('active');
-      drawChart();
-    });
 
     // ── Heatmap / pair overview ──────────────────────────
     function drawHeatmap() {
