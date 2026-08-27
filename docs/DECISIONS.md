@@ -113,7 +113,11 @@ hints, not evidence. Three rules:
 The series is a **derived view** of the surviving records, so the chart and the corpus cannot
 disagree.
 
-**URL vs body agreement is 98.4%** (250/254) — a validation the URL metric never had.
+**URL vs body agreement is 96.6%** on babyn-yar (254 of 263 strict comparisons) and 100% on
+volodymyr-the-great — a validation the URL metric never had. A body containing *both* spellings
+is tracked separately as `enriched`, not as a disagreement: it does not contradict the slug, it
+exceeds it. Conflating the two initially made the URL metric look far worse than it is (99
+apparent disagreements on babyn-yar were really 9 disagreements plus 90 both-spelling bodies).
 Disagreements run both ways: `unian.info/kiev/...-kyiv-stuck-in-traffic-jams` is a legacy
 section path over a body saying Kyiv 3×; `sbnation`'s `dynamo-kyiv` slug sits over a body
 saying Kiev.
@@ -149,6 +153,17 @@ per-domain courtesy, not parallelism, and Dataflow would bill for workers idle o
 Their overlap — attested URLs successfully fetched — is the calibration set, the only place
 URL variant, body variant and fetch outcome are all observed. That makes inverse-probability
 weighting per (year, variant, domain) estimable rather than assumed.
+
+**Measured on babyn-yar at volume**: the same attested pool reads 28.7% Ukrainian across all
+1,071 URLs, and **46.4% across the 353 that survived fetching — a +17.7 point survivorship
+shift.** Any verified-text series carries this and must report it or reweight. Because rot rises
+with age, the inflation is larger in older years, so a rising Ukrainian trend is understated
+rather than manufactured by it.
+
+**A small-sample result that did not survive.** On volodymyr-the-great (7 unattested records)
+unattested articles looked 63 points more Ukrainian than attested ones. At n=2,207 on babyn-yar
+they are **7.4 points less** Ukrainian. The n=7 signal was noise; do not generalise attested-vs-
+unattested composition from a thin pair.
 
 ---
 
