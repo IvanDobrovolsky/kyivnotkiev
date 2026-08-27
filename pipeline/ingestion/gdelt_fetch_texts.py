@@ -53,6 +53,7 @@ import pandas as pd
 import yaml
 
 SRC = pathlib.Path("data/raw/gdelt/mentions_v2/gdelt_mentions_final.parquet")
+MATCHED = pathlib.Path("data/raw/gdelt/mentions_v2/gdelt_mentions_matched.parquet")
 OUT = pathlib.Path("data/raw/gdelt/texts")
 LEDGER = OUT / "fetched_urls.txt"
 RESULTS = OUT / "article_texts.parquet"
@@ -145,7 +146,8 @@ async def fetch_one(client, row, pats, sem):
             rec["text_hash"] = hashlib.sha1(re.sub(r"\s+", " ", body).strip().encode()).hexdigest()[:16]
             ua, ru, label = classify(body, pats)
             rec["body_ua"], rec["body_ru"], rec["body_variant"] = ua, ru, label
-            rec["agrees"] = (label == row.variant) if label in ("ukrainian", "russian") else None
+            rec["agrees"] = ((label == row.variant)
+                             if (label in ("ukrainian", "russian") and row.variant) else None)
         except Exception as e:                       # noqa: BLE001 - error class IS the datum
             rec["error"] = type(e).__name__
     return rec
@@ -197,6 +199,10 @@ async def run(targets, pats_by_pair, concurrency):
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--pair", help="restrict to one pair slug, for a controlled trial run")
+    ap.add_argument("--unattested", action="store_true",
+                    help="fetch the English articles whose spelling is NOT in the url. "
+                         "These contribute nothing to the metric today; the body is the "
+                         "only way to learn which variant they used.")
     ap.add_argument("--limit", type=int, default=600)
     ap.add_argument("--sample-per-year", type=int, default=0,
                     help="stratify the sample evenly across years to expose link rot by age")
@@ -205,7 +211,15 @@ def main() -> int:
     a = ap.parse_args()
 
     OUT.mkdir(parents=True, exist_ok=True)
-    df = pd.read_parquet(SRC)
+    if a.unattested:
+        m = pd.read_parquet(MATCHED, columns=["url", "domain", "date", "pair_slug",
+                                              "native_en", "url_match"])
+        attested = set(pd.read_parquet(SRC, columns=["url"]).url)
+        df = m[m.native_en & ~m.url_match].drop_duplicates("url")
+        df = df[~df.url.isin(attested) & df.pair_slug.notna()].copy()
+        df["variant"] = None          # unknown by definition -- that is the point
+    else:
+        df = pd.read_parquet(SRC)
     if a.pair:
         df = df[df.pair_slug == a.pair]
         if df.empty:
