@@ -59,8 +59,15 @@ LEDGER = OUT / "fetched_urls.txt"
 RESULTS = OUT / "article_texts.parquet"
 PARTS = OUT / "parts"
 
-CONCURRENCY = 32         # async IO in one process; the cap that matters is per-domain courtesy,
-                         # and with a median of 3 urls per domain we are wide, not deep
+CONCURRENCY = 32         # global ceiling
+PER_HOST = 2             # simultaneous requests to any ONE host
+HOST_DELAY = 0.4         # seconds between requests to the same host
+
+# The median is 3 urls per domain, but the median says nothing about the tail. On
+# oleksandr-usyk a 5,000-url window held 256 urls on boxingnewsonline.net and 255 on
+# boxingnews24.com; with only a global cap we opened dozens of simultaneous
+# connections to each, drew 24% HTTP 403, and throughput collapsed from 11.8 to
+# 0.4 url/s. Politeness has to be enforced per host, not on average.
 TIMEOUT = 10           # a host that has not answered in 10s is not going to
 BATCH = 200              # flush to disk this often
 MIN_TEXT = 200           # below this, extraction failed rather than the page being short
@@ -107,14 +114,22 @@ def classify(text: str, pats: tuple) -> tuple:
     return ua, ru, label
 
 
-async def fetch_one(client, row, pats, sem):
+async def fetch_one(client, row, pats, sem, host_sems, host_last):
     import trafilatura
+    from urllib.parse import urlparse
     rec = {"url": row.url, "pair_slug": row.pair_slug, "url_variant": row.variant,
            "domain": row.domain, "date": row.date,
            "status": None, "error": None, "text": None, "text_len": 0,
            "body_ua": 0, "body_ru": 0, "body_variant": None, "agrees": None,
            "final_url": None, "redirected_off_article": False, "text_hash": None}
-    async with sem:
+    host = urlparse(str(row.url)).netloc
+    hs = host_sems.setdefault(host, asyncio.Semaphore(PER_HOST))
+    async with sem, hs:
+        # Space out requests to the same host; different hosts stay fully parallel.
+        wait = HOST_DELAY - (asyncio.get_event_loop().time() - host_last.get(host, 0))
+        if wait > 0:
+            await asyncio.sleep(wait)
+        host_last[host] = asyncio.get_event_loop().time()
         try:
             r = await client.get(row.url, follow_redirects=True,
                                  headers={"User-Agent": UA})
@@ -181,13 +196,16 @@ def consolidate() -> pathlib.Path:
 async def run(targets, pats_by_pair, concurrency):
     import httpx
     sem = asyncio.Semaphore(concurrency)
+    host_sems: dict = {}
+    host_last: dict = {}
     done, batch, t0, first = 0, [], time.time(), not RESULTS.exists()
     limits = httpx.Limits(max_connections=concurrency, max_keepalive_connections=concurrency)
     async with httpx.AsyncClient(timeout=TIMEOUT, limits=limits, verify=False) as client:
         for i in range(0, len(targets), BATCH):
             chunk = targets[i:i + BATCH]
             recs = await asyncio.gather(*[
-                fetch_one(client, r, pats_by_pair[r.pair_slug], sem) for r in chunk])
+                fetch_one(client, r, pats_by_pair[r.pair_slug], sem, host_sems, host_last)
+                for r in chunk])
             batch.extend(recs)
             flush(batch, first); first = False; batch = []
             done += len(recs)
@@ -240,7 +258,12 @@ def main() -> int:
     elif not a.all and not a.pair:
         df = df.head(a.limit)
 
-    targets = list(df.itertuples())
+    # Round-robin across hosts so a single batch never piles onto one site: sorting
+    # by pair/date groups same-host urls together, which is the worst possible order.
+    from urllib.parse import urlparse as _up
+    df = df.assign(_host=df.url.map(lambda u: _up(str(u)).netloc))
+    df = df.assign(_rank=df.groupby("_host").cumcount()).sort_values(["_rank", "_host"])
+    targets = list(df.drop(columns=["_host", "_rank"]).itertuples())
     print(f"fetching {len(targets):,} urls at concurrency {a.concurrency} "
           f"({len(seen):,} already done)")
     asyncio.run(run(targets, pair_patterns(), a.concurrency))
