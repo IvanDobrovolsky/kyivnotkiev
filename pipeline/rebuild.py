@@ -34,7 +34,6 @@ log = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent
 DATASET_DIR = ROOT / "dataset"
-HF_EXPORT_DIR = ROOT / "data" / "hf_export"
 SITE_DATA_DIR = ROOT / "site" / "src" / "data"
 CORPUS_PATH = ROOT / "data" / "corpus" / "toponyms-corpus.parquet"
 
@@ -70,17 +69,10 @@ def validate_datasets():
 
         log.info(f"  {fname}: {len(df):,} rows ✓")
 
-    # Sync dataset/ → hf_export/
-    for fname in expected:
-        ds_path = DATASET_DIR / fname
-        hf_path = HF_EXPORT_DIR / fname
-        if ds_path.exists():
-            ds_size = os.path.getsize(ds_path)
-            hf_size = os.path.getsize(hf_path) if hf_path.exists() else 0
-            if ds_size != hf_size:
-                log.info(f"  Syncing {fname} to hf_export/")
-                import shutil
-                shutil.copy2(ds_path, hf_path)
+    # data/hf_export/ used to hold a mirror of dataset/ that push_hf never read --
+    # it uploaded from dataset/ directly. The mirror only ever drifted, and still
+    # carried raw_religious.parquet after that source was removed on 2026-08-25.
+    # push_hf now stages its own pruned copies, so there is nothing to mirror.
 
     if issues:
         for i in issues:
