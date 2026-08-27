@@ -8,13 +8,9 @@ interface Props {
   llmTraj: any;
   llmPerPair: any;
   timeSpan: string;
-  corpusHoldouts?: any;
 }
 
-const { llmTraj, llmPerPair, timeSpan, corpusHoldouts } = Astro.props;
-const ch = corpusHoldouts || null;
-const chSources: string[] = ch ? Object.keys(ch) : [];
-const chTotal: number = ch ? chSources.reduce((n, s) => n + ch[s].length, 0) : 0;
+const { llmTraj, llmPerPair, timeSpan } = Astro.props;
 const nModels = llmTraj?.summary?.n_models || 72;
 const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 ---
@@ -115,38 +111,6 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 </div>
 
 <!-- World map -->
-<!-- Verified News Articles -->
-{ch && (
-<div class="chart-container" style="margin-bottom:1rem; padding:0.75rem;">
-  <div class="chart-title" style="color:var(--text)">Corpus records — every row verified</div>
-  <div class="chart-subtitle" style="margin-bottom:0.5rem;" id="corpus-records-subtitle">
-    {chTotal} linked records across {chSources.length} sources. Each contains an exact
-    word-boundary match of one spelling and links to the original document.
-  </div>
-  <div id="corpus-no-src" style="display:none;font-size:0.75rem;color:var(--text-muted);padding:0.5rem;">
-    No corpus records for this source — it contributes an adoption metric but no text.
-  </div>
-  {chSources.map((src) => (
-    <div class="corpus-src-block" data-corpus-source={src} style="margin-bottom:0.8rem;">
-      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-muted);margin-bottom:0.25rem;">
-        {src} <span style="font-weight:400;text-transform:none;">— {ch[src].length} records</span>
-      </div>
-      <div style="border:1px solid var(--border);border-radius:6px;overflow:hidden;">
-        {ch[src].map((r: any, i: number) => (
-          <div style={`display:flex;gap:0.5rem;align-items:flex-start;padding:0.35rem 0.5rem;font-size:0.72rem;${i%2?'background:rgba(0,0,0,0.02);':''}`}>
-            <span style={`flex-shrink:0;font-weight:700;font-size:0.6rem;padding:0.05rem 0.3rem;border-radius:3px;color:#fff;background:${r.variant==='ukrainian'?'#2563eb':r.variant==='russian'?'#dc2626':'#7c3aed'};`}>
-              {r.variant==='ukrainian'?'UA':r.variant==='russian'?'RU':'BOTH'}
-            </span>
-            <a href={r.url} target="_blank" style="color:var(--text);text-decoration:none;flex:1;min-width:0;">{r.text}</a>
-            <span style="flex-shrink:0;color:#9ca3af;font-size:0.65rem;">{r.date}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  ))}
-</div>
-)}
-
 <div id="news-holdouts-container" class="chart-container" style="margin-bottom:1rem; padding:0.75rem;">
   <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
     <div>

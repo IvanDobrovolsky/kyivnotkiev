@@ -49,7 +49,7 @@ An unverifiable measurement is dropped rather than reported with a caveat.
 |--------|---------|-------|-------------|
 | Wiki | 298.7M | 24 | Wikipedia · monthly |
 | Reddit | 840.2K | 24 | 44766 subreddits |
-| News | 332.6K | 22 | GDELT · 9389 domains |
+| News | 332.6K | 21 | GDELT · 9389 domains |
 | YouTube | 178.5K | 12 | 79755 channels |
 | Trends | 113.4K | 24 | Google · 150 countries |
 | Academic | 30.7K | 18 | OpenAlex · 250M+ works |
