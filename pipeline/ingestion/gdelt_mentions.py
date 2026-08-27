@@ -42,16 +42,16 @@ later question is answered by re-reading that table cheaply.
 FILES
 -----
 The BigQuery destination table is the source of record; local parquet is derived.
-`download` annotates as it streams, so there is no second identical copy on disk.
+`download` flags rows as it streams, so there is no second identical copy on disk.
 
-    gdelt_mentions_annotated.parquet  every matched row + language/attestation flags
+    gdelt_mentions_matched.parquet    every GKG row the regex hit + language/attestation flags
     gdelt_mentions_final.parquet      the metric: attested, English, deduped
     gdelt_mentions_monthly.parquet    pair x month x variant counts, for the site
 
 USAGE
 -----
     python -m pipeline.ingestion.gdelt_mentions query      # the one paid scan
-    python -m pipeline.ingestion.gdelt_mentions download   # table -> annotated parquet
+    python -m pipeline.ingestion.gdelt_mentions download   # table -> matched parquet
     python -m pipeline.ingestion.gdelt_mentions final      # apply metric, dedup, aggregate
 """
 from __future__ import annotations
@@ -70,7 +70,7 @@ DEST = f"{PROJECT}.gdelt_v2.mentions_raw"
 SOURCE = "`gdelt-bq.gdeltv2.gkg_partitioned`"
 CONFIG = pathlib.Path("config/pairs.yaml")
 OUT = pathlib.Path("data/raw/gdelt/mentions_v2")
-ANNOTATED = "gdelt_mentions_annotated.parquet"
+MATCHED = "gdelt_mentions_matched.parquet"
 FINAL = "gdelt_mentions_final.parquet"
 MONTHLY = "gdelt_mentions_monthly.parquet"
 
@@ -123,7 +123,7 @@ WHERE REGEXP_CONTAINS(LOWER(DocumentIdentifier), r'{rx}')
 """.strip()
 
 
-def annotate(df: pd.DataFrame) -> pd.DataFrame:
+def flag_rows(df: pd.DataFrame) -> pd.DataFrame:
     """Attach pair/variant/language/attestation flags. Nothing is dropped, only labelled."""
     rows = load_terms()
     lut = {term: (slug, variant) for slug, variant, term, _ in rows}
@@ -182,10 +182,10 @@ def _stabilise(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def cmd_download(args) -> int:
-    """Stream the destination table to disk, annotating as we go.
+    """Stream the destination table to disk, flagging as we go.
 
-    Annotation is row-local, so it happens inside the stream. That is deliberate:
-    an unannotated dump would be a byte-for-byte duplicate of this file with fewer
+    Flagging is row-local, so it happens inside the stream. That is deliberate:
+    an unflagged dump would be a byte-for-byte duplicate of this file with fewer
     columns, and the BigQuery table is already the source of record.
     """
     import pyarrow as pa
@@ -195,10 +195,10 @@ def cmd_download(args) -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     client = bigquery.Client(project=PROJECT)
     reader = bigquery_storage.BigQueryReadClient()
-    path = OUT / ANNOTATED
+    path = OUT / MATCHED
     writer, n, t0 = None, 0, time.time()
     for i, batch in enumerate(client.list_rows(DEST).to_arrow_iterable(bqstorage_client=reader)):
-        df = _stabilise(annotate(batch.to_pandas()))
+        df = _stabilise(flag_rows(batch.to_pandas()))
         table = pa.Table.from_pandas(df, preserve_index=False)
         if writer is None:
             writer = pq.ParquetWriter(path, table.schema, compression="zstd")
@@ -210,17 +210,17 @@ def cmd_download(args) -> int:
         print("no rows returned", file=sys.stderr)
         return 1
     writer.close()
-    print(f"saved {n:,} annotated rows -> {path} ({path.stat().st_size / 1e6:.1f} MB)")
+    print(f"saved {n:,} matched rows -> {path} ({path.stat().st_size / 1e6:.1f} MB)")
     return 0
 
 
 def cmd_clean(args) -> int:
-    """Re-annotate in place after config/pairs.yaml changes, without re-downloading."""
-    path = OUT / ANNOTATED
-    df = _stabilise(annotate(pd.read_parquet(path, columns=["url", "domain", "gkg_date", "translation_info", "url_term", "name_term", "url_match", "allnames_match"])))
+    """Re-flag in place after config/pairs.yaml changes, without re-downloading."""
+    path = OUT / MATCHED
+    df = _stabilise(flag_rows(pd.read_parquet(path, columns=["url", "domain", "gkg_date", "translation_info", "url_term", "name_term", "url_match", "allnames_match"])))
     df.to_parquet(path, compression="zstd", index=False)
     usable = df[df.native_en & df.url_match]
-    print(f"re-annotated {len(df):,} rows -> {path}")
+    print(f"re-flagged {len(df):,} rows -> {path}")
     print(f"natively English : {df.native_en.sum():,} ({df.native_en.mean() * 100:.1f}%)")
     print(f"URL-attested     : {df.url_match.sum():,} ({df.url_match.mean() * 100:.1f}%)")
     print(f"usable metric    : {len(usable):,} ({len(usable) / len(df) * 100:.1f}%)")
@@ -246,7 +246,7 @@ def cmd_final(args) -> int:
     times), so rows are deduped by URL keeping the earliest date -- publication, not
     re-observation. No URL was found carrying conflicting variants, so this is lossless.
     """
-    df = pd.read_parquet(OUT / ANNOTATED)
+    df = pd.read_parquet(OUT / MATCHED)
     g = df[df.native_en & df.url_match].copy()
     before = len(g)
     g = g.sort_values("date").drop_duplicates("url", keep="first")
@@ -274,8 +274,8 @@ def main() -> int:
     q = sub.add_parser("query", help="the one paid scan; writes to the destination table")
     q.add_argument("--dry-run", action="store_true", help="report bytes and stop")
     q.set_defaults(func=cmd_query)
-    sub.add_parser("download", help="destination table -> annotated parquet").set_defaults(func=cmd_download)
-    sub.add_parser("clean", help="re-annotate in place after a pairs.yaml change").set_defaults(func=cmd_clean)
+    sub.add_parser("download", help="destination table -> matched parquet").set_defaults(func=cmd_download)
+    sub.add_parser("clean", help="re-flag in place after a pairs.yaml change").set_defaults(func=cmd_clean)
     sub.add_parser("final", help="apply the metric filters, dedup, write the deliverable").set_defaults(func=cmd_final)
     args = ap.parse_args()
     return args.func(args)
