@@ -172,6 +172,9 @@ HOLDOUT_CAP = 100
 # so breadth of outlets matters more than depth on any one of them. State-affiliated
 # outlets publish at volume and would crowd out everyone else on raw recency.
 HOLDOUT_PER_DOMAIN = 3
+# Russian and mixed usage are the holdouts worth reading; Ukrainian-only rows are
+# not holdouts at all. Applied identically to every source.
+HOLDOUT_VARIANTS = ("russian", "both")
 
 
 def _apply_homonym_filters(df: pd.DataFrame) -> pd.DataFrame:
@@ -802,7 +805,7 @@ def export_trends_countries(enabled_slugs: set[str]) -> dict:
 #   ihor-sikorsky -- "Igor Sikorsky Kyiv Polytechnic Institute" is a university's official
 #               English name, so matches are affiliation strings, not the person.
 OPENALEX_COLLISIONS = {"borscht", "ihor-sikorsky"}
-OPENALEX_SINCE_YEAR = 2020   # academic publication lag makes a 2022 cut too aggressive
+OPENALEX_SINCE_YEAR = int(HOLDOUT_SINCE[:4])   # same window as every other source
 
 
 def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
@@ -828,13 +831,16 @@ def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
     mapped = df["mt"].map(lambda t: lut.get(t, (None, None)))
     df["slug"] = [m[0] for m in mapped]
     df["var"] = [m[1] for m in mapped]
-    df = df[df["slug"].notna() & (df["var"] == "russian") & (df["year"] >= OPENALEX_SINCE_YEAR)]
+    df = df[df["slug"].notna() & df["var"].isin(HOLDOUT_VARIANTS) & (df["year"] >= OPENALEX_SINCE_YEAR)]
     df = df[~df["slug"].isin(OPENALEX_COLLISIONS)]
     df = df[df["openalex_id"].notna() & df["title"].notna()]
 
     out, skipped = {}, sorted(OPENALEX_COLLISIONS)
     for slug, g in df.groupby("slug"):
-        g = g.drop_duplicates("openalex_id").nlargest(HOLDOUT_CAP, "cited_by_count")
+        g = (g.drop_duplicates("openalex_id")
+               .sort_values("cited_by_count", ascending=False)
+               .groupby("year", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN * 10)
+               .nlargest(HOLDOUT_CAP, "cited_by_count"))
         out[slug] = [{
             "name": str(r["title"])[:160],
             "url": str(r["openalex_id"]),
@@ -868,46 +874,60 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                     for _, r in h.iterrows()
                 ]
 
-    # Wikipedia: actual page URLs with Russian spelling
+    # Every source below uses the SAME rules as the news holdouts: the window starts
+    # at HOLDOUT_SINCE, Russian and mixed usage both count, and the cap is HOLDOUT_CAP.
+    # They previously used 2025-only, russian-only and a hard-coded 20, which is why
+    # YouTube looked empty while its chart showed data.
+    since = HOLDOUT_SINCE[:7]          # these sources carry "YYYY-MM" strings
+
+    # Wikipedia: actual page URLs with the Russian spelling
     wiki = _load("wikipedia")
     if len(wiki) and "page_title" in wiki.columns:
-        w25 = wiki[wiki["date"] >= "2025-01"]
+        w = wiki[(wiki["date"] >= since) & (wiki["variant"].isin(HOLDOUT_VARIANTS))]
         for slug in enabled_slugs:
-            pages = w25[(w25["pair_slug"] == slug) & (w25["variant"] == "russian")]
-            if len(pages):
-                top = pages.groupby("page_title")["pageviews"].sum().nlargest(20)
-                if len(top):
-                    by_pair.setdefault(slug, {})["wikipedia"] = [
-                        {"name": t, "url": f"https://en.wikipedia.org/wiki/{t.replace(' ', '_')}", "views": int(v)}
-                        for t, v in top.items()
-                    ]
+            pages = w[w["pair_slug"] == slug]
+            if not len(pages):
+                continue
+            top = pages.groupby("page_title")["pageviews"].sum().nlargest(HOLDOUT_CAP)
+            if len(top):
+                by_pair.setdefault(slug, {})["wikipedia"] = [
+                    {"name": t, "url": f"https://en.wikipedia.org/wiki/{t.replace(' ', '_')}", "views": int(v)}
+                    for t, v in top.items()
+                ]
 
-    # Reddit: actual post URLs
+    # Reddit: actual post URLs, best-scoring first
     reddit = _load("reddit")
     if len(reddit) and "post_id" in reddit.columns:
-        r25 = reddit[(reddit["date"] >= "2025-01") & (reddit["variant"] == "russian")]
+        r = reddit[(reddit["date"] >= since) & (reddit["variant"].isin(HOLDOUT_VARIANTS))]
         for slug in enabled_slugs:
-            posts = r25[r25["pair_slug"] == slug].nlargest(20, "score") if "score" in r25.columns else r25[r25["pair_slug"] == slug].head(20)
-            if len(posts):
-                by_pair.setdefault(slug, {})["reddit"] = [
-                    {"name": f"r/{r['subreddit']}: {str(r.get('title',''))[:60]}",
-                     "url": f"https://reddit.com/r/{r['subreddit']}/comments/{r['post_id']}",
-                     "score": int(r.get("score", 0) or 0)}
-                    for _, r in posts.iterrows()
-                ]
+            posts = r[r["pair_slug"] == slug]
+            if not len(posts):
+                continue
+            posts = posts.nlargest(HOLDOUT_CAP, "score") if "score" in posts.columns else posts.head(HOLDOUT_CAP)
+            by_pair.setdefault(slug, {})["reddit"] = [
+                {"name": f"r/{x['subreddit']}: {str(x.get('title',''))[:80]}",
+                 "url": f"https://reddit.com/r/{x['subreddit']}/comments/{x['post_id']}",
+                 "score": int(x.get("score", 0) or 0)}
+                for _, x in posts.iterrows()
+            ]
 
-    # YouTube: actual video URLs
+    # YouTube: actual video URLs. One video per channel, so a single prolific channel
+    # cannot own the table -- the same reason the news holdouts cap per domain.
     youtube = _load_youtube_census()
     if len(youtube) and "video_id" in youtube.columns:
-        y25 = youtube[(youtube["date"] >= "2025-01") & (youtube["variant"] == "russian")]
+        y = youtube[(youtube["date"] >= since) & (youtube["variant"].isin(HOLDOUT_VARIANTS))]
         for slug in enabled_slugs:
-            vids = y25[y25["pair_slug"] == slug].head(20)
-            if len(vids):
-                by_pair.setdefault(slug, {})["youtube"] = [
-                    {"name": f"{r['channel_title']}: {str(r.get('title',''))[:60]}",
-                     "url": f"https://youtube.com/watch?v={r['video_id']}"}
-                    for _, r in vids.iterrows()
-                ]
+            vids = y[y["pair_slug"] == slug]
+            if not len(vids):
+                continue
+            vids = vids.sort_values("date", ascending=False)
+            vids = vids.groupby("channel_title", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
+            vids = vids.head(HOLDOUT_CAP)
+            by_pair.setdefault(slug, {})["youtube"] = [
+                {"name": f"{x['channel_title']}: {str(x.get('title',''))[:80]}",
+                 "url": f"https://youtube.com/watch?v={x['video_id']}"}
+                for _, x in vids.iterrows()
+            ]
 
     log.info(f"  Holdouts: {len(by_pair)} pairs across news/wiki/reddit/youtube")
 
