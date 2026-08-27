@@ -12,6 +12,7 @@ Usage:
 import csv
 import json
 import logging
+import os
 from collections import defaultdict
 from datetime import date, timedelta
 from pathlib import Path
@@ -217,6 +218,46 @@ def get_analyzable_slugs() -> set[str]:
     cfg = load_pairs()
     return {p["slug"] for p in cfg["pairs"]
             if p.get("enabled", True) and not p.get("is_control", False)}
+
+
+# A monthly ratio built from a handful of documents is not a measurement, it is a
+# coin flip: one video in a month reads 0% or 100% and nothing between. For
+# volodymyr-the-great's YouTube series the median month holds 4 videos and 50 of 134
+# months hold 2 or fewer, which is why that line oscillates full-scale.
+#
+# Averaging the percentages (what smooth_series does) is the wrong repair: it weights
+# a 1-document month equally with a 50-document month. This instead recomputes the
+# ratio over a window of SUMMED counts, and widens that window only where the
+# denominator is too small. Dense months keep their true monthly resolution.
+SMOOTH_MIN_DENOM = 20      # documents needed before a month is trusted on its own
+SMOOTH_MAX_HALF = 6        # widest half-window, i.e. +/- 6 months
+SMOOTH_MIN_PLOT = 5        # below this even at full width, the point is not plotted
+
+
+def smooth_ratio_series(series: list[dict]) -> list[dict]:
+    """Adaptive ratio-of-sums. Requires ukr/rus counts; returns the series unchanged without them."""
+    if not series or not all("ukr" in d and "rus" in d for d in series):
+        return series
+    ukr = [int(d.get("ukr") or 0) for d in series]
+    rus = [int(d.get("rus") or 0) for d in series]
+    out = []
+    for i, d in enumerate(series):
+        half = 0
+        while True:
+            lo, hi = max(0, i - half), min(len(series), i + half + 1)
+            u, r = sum(ukr[lo:hi]), sum(rus[lo:hi])
+            if u + r >= SMOOTH_MIN_DENOM or half >= SMOOTH_MAX_HALF:
+                break
+            half += 1
+        total = u + r
+        e = dict(d)
+        # Widening exhausted and still almost nothing to divide: refuse to draw a
+        # number rather than draw one the data cannot support.
+        e["adoption"] = round(u / total * 100, 1) if total >= SMOOTH_MIN_PLOT else None
+        e["n"] = int(ukr[i] + rus[i])          # the month's own volume, for the tooltip
+        e["window"] = half                      # 0 means the month stood on its own
+        out.append(e)
+    return [e for e in out if e["adoption"] is not None]
 
 
 def smooth_series(series: list[dict], window: int = 3) -> list[dict]:
@@ -540,6 +581,23 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                     total = ukr + rus
                     if total > 0:
                         result[spid]["telegram"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
+
+    # Stabilise every count-based series before thresholding.
+    _smoothed = 0
+    for _slug in list(result.keys()):
+        if _slug == "events":
+            continue
+        for _src in list(result[_slug].keys()):
+            _ser = result[_slug][_src]
+            if not isinstance(_ser, list) or not _ser:
+                continue
+            _new = smooth_ratio_series(_ser)
+            if _new is not _ser:
+                result[_slug][_src] = _new
+                _smoothed += 1
+    if _smoothed:
+        log.info(f"  Adaptive ratio smoothing applied to {_smoothed} pair×source series "
+                 f"(min denominator {SMOOTH_MIN_DENOM}, max ±{SMOOTH_MAX_HALF} months)")
 
     # ── Apply minimum data thresholds ──────────────────────────────────────
     # Remove pair×source combos that are too sparse to display meaningfully.
@@ -905,6 +963,35 @@ def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
     return out
 
 
+def _youtube_view_counts(video_ids: list[str], key: str) -> dict:
+    """viewCount per video id, fetched at export time and never written to disk.
+
+    The census does not carry view counts and cannot: YouTube's terms do not allow
+    retaining non-ID API data, so ranking by popularity has to be re-fetched each time
+    the site is built and discarded afterwards. videos.list costs 1 unit per 50 ids
+    from the daily units pool, which is separate from the search quota that actually
+    binds, so a full site build is a few dozen units.
+    """
+    import requests
+    out = {}
+    for i in range(0, len(video_ids), 50):
+        batch = video_ids[i:i + 50]
+        try:
+            r = requests.get("https://www.googleapis.com/youtube/v3/videos",
+                             params={"part": "statistics", "id": ",".join(batch), "key": key},
+                             timeout=30)
+            if r.status_code != 200:
+                log.warning(f"    view fetch: HTTP {r.status_code} on batch {i // 50} — skipped")
+                continue
+            for item in r.json().get("items", []):
+                v = item.get("statistics", {}).get("viewCount")
+                if v is not None:
+                    out[item["id"]] = int(v)
+        except Exception as e:                       # noqa: BLE001
+            log.warning(f"    view fetch failed on batch {i // 50}: {type(e).__name__}")
+    return out
+
+
 def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     """Per-source holdouts for 2025: who still uses Russian spellings."""
     log.info("Exporting holdouts (2025, all sources)...")
@@ -967,20 +1054,38 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     # YouTube: actual video URLs. One video per channel, so a single prolific channel
     # cannot own the table -- the same reason the news holdouts cap per domain.
     youtube = _load_youtube_census()
+    _yt_key = os.environ.get("YOUTUBE_API_KEY", "").strip()
+    _yt_ranked: list[str] = []
     if len(youtube) and "video_id" in youtube.columns:
         y = youtube[(youtube["date"] >= since) & (youtube["variant"].isin(HOLDOUT_VARIANTS))]
         for slug in enabled_slugs:
             vids = y[y["pair_slug"] == slug]
             if not len(vids):
                 continue
+            # Rank by views when a key is available, most-recent otherwise. Which one
+            # ran is logged, so the table is never silently ordered by the fallback.
             vids = vids.sort_values("date", ascending=False)
             vids = vids.groupby("channel_title", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
-            vids = vids.head(HOLDOUT_CAP)
+            if _yt_key:
+                cand = vids.head(HOLDOUT_CAP * 3)
+                views = _youtube_view_counts(cand.video_id.tolist(), _yt_key)
+                if views:
+                    cand = cand.assign(_v=cand.video_id.map(views).fillna(-1))
+                    vids = cand.sort_values("_v", ascending=False).head(HOLDOUT_CAP)
+                    _yt_ranked.append(slug)
+                else:
+                    vids = vids.head(HOLDOUT_CAP)
+            else:
+                vids = vids.head(HOLDOUT_CAP)
             by_pair.setdefault(slug, {})["youtube"] = [
                 {"name": f"{x['channel_title']}: {str(x.get('title',''))[:80]}",
                  "url": f"https://youtube.com/watch?v={x['video_id']}"}
                 for _, x in vids.iterrows()
             ]
+        if _yt_ranked:
+            log.info(f"  YouTube holdouts ranked by views for {len(_yt_ranked)} pair(s)")
+        else:
+            log.info("  YouTube holdouts ordered by recency — set YOUTUBE_API_KEY to rank by views")
 
     log.info(f"  Holdouts: {len(by_pair)} pairs across news/wiki/reddit/youtube")
 

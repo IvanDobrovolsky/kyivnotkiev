@@ -158,7 +158,6 @@ function formatNum(n: number) {
             </div>
             <span id="chart-range" style="font-size:0.72rem; color:var(--text-muted);"></span>
             <span id="chart-info" style="font-size:0.68rem; color:var(--text-dim); font-style:italic;"></span>
-            <span id="chart-adoption-formula" style="font-size:0.68rem; color:var(--text-dim);"></span>
           </div>
           <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.4rem;">
             <div class="chart-controls" style="margin:0;">
@@ -624,24 +623,6 @@ function formatNum(n: number) {
       if (rangeEl) rangeEl.textContent = `${startYear}–${endYear}`;
       if (infoEl) infoEl.textContent = sourceInfo[activeSource] || '';
 
-      // Show adoption formula
-      const formulaEl = document.getElementById('chart-adoption-formula');
-      if (formulaEl && seriesData.length > 0) {
-        const last = seriesData[seriesData.length - 1];
-        const ukr = last.ukr || 0;
-        const rus = last.rus || 0;
-        const total = ukr + rus;
-        if (total > 0) {
-          const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
-          if (chartMode === 'adoption') {
-            formulaEl.innerHTML = `· Адопція = <strong>${fN(ukr)}</strong> / (<strong>${fN(ukr)}</strong> + ${fN(rus)}) = <strong>${last.adoption}%</strong>`;
-          } else {
-            formulaEl.innerHTML = `· Останнє: <strong style="color:#0057B8">${fN(ukr)}</strong> УКР + <strong style="color:#dc2626">${fN(rus)}</strong> РОС = ${fN(total)} всього`;
-          }
-        } else {
-          formulaEl.textContent = '';
-        }
-      }
 
       // Y-axis depends on chart mode
       let y: d3.ScaleLinear<number, number>;
