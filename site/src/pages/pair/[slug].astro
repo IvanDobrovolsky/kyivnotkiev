@@ -307,25 +307,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       if (rangeEl) rangeEl.textContent = `${startYear}–${endYear}`;
       if (infoEl) infoEl.textContent = sourceInfo[activeSource] || '';
 
-      // Show adoption formula
-      const formulaEl = document.getElementById('chart-adoption-formula');
-      if (formulaEl && seriesData.length > 0) {
-        const last = seriesData[seriesData.length - 1];
-        const ukr = last.ukr || 0;
-        const rus = last.rus || 0;
-        const total = ukr + rus;
-        if (total > 0) {
-          const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
-          if (chartMode === 'adoption') {
-            formulaEl.innerHTML = `· Adoption = <strong>${fN(ukr)}</strong> / (<strong>${fN(ukr)}</strong> + ${fN(rus)}) = <strong>${last.adoption}%</strong>`;
-          } else {
-            formulaEl.innerHTML = `· Latest: <strong style="color:#0057B8">${fN(ukr)}</strong> UA + <strong style="color:#dc2626">${fN(rus)}</strong> RU = ${fN(total)} total`;
-          }
-        } else {
-          formulaEl.textContent = '';
-        }
-      }
-
       // Y-axis depends on chart mode
       let y: d3.ScaleLinear<number, number>;
       let yTicks: number[];
