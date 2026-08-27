@@ -23,7 +23,7 @@ log = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 CORPUS_PATH = ROOT / "data" / "corpus" / "toponyms-corpus.parquet"
-TELEGRAM_PATH = ROOT / "data" / "hf_export" / "raw_telegram.parquet"
+TELEGRAM_PATH = ROOT / "dataset" / "raw_telegram.parquet"
 CORPUS_OUT = ROOT / "data" / "corpus" / "language_labels.parquet"
 TELEGRAM_OUT = ROOT / "data" / "audit" / "telegram_languages.parquet"
 
