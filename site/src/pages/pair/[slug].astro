@@ -52,16 +52,13 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
   <script>
     import * as d3 from 'd3';
-    import * as topojson from 'topojson-client';
     const timeseriesData = JSON.parse(document.getElementById('pair-timeseries-data')?.textContent || '{}');
     import manifest from '../../data/manifest.json';
     import holdoutsData from '../../data/holdouts.json';
     const holdoutsByPair = { [document.getElementById('pair-detail')!.dataset.pairSlug!]: JSON.parse(document.getElementById('pair-holdouts-data')?.textContent || 'null') };
-    import countriesByPair from '../../data/countries_by_pair.json';
     import pairEvents from '../../data/pair_events.json';
     // trends_countries removed — using GDELT country distribution only
     import errorAnalysis from '../../data/error_analysis.json';
-    import domainOrigins from '../../data/domain_origins.json';
     import clCollocations from '../../data/cl_collocations.json';
     import clAnalysis from '../../data/cl_analysis.json';
     const clClusters = { [document.getElementById('pair-detail')!.dataset.pairSlug!]: JSON.parse(document.getElementById('pair-cluster-data')?.textContent || 'null') };
@@ -71,7 +68,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     // Use manifest as the single pairs source
     const pairs = { pairs: manifest.pairs };
 
-    // Declared early to avoid TDZ in drawWorldMap
     let cachedWorld: any = null;
 
     const sourceColors: Record<string, string> = {
@@ -722,7 +718,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         safeDraw('drawNewsHoldouts', drawNewsHoldouts);
         safeDraw('drawPairLLM', drawPairLLM);
         safeDraw('drawClusterScatter', drawClusterScatter);
-        safeDraw('drawWorldMap', drawWorldMap);
         safeDraw('drawHoldoutTable', drawHoldoutTable);
       }, 50);
     }
@@ -1337,17 +1332,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         // that have a dedicated panel, and for sources with no holdout rows.
         try { drawHoldoutTable(); } catch (e) { console.error('[drawHoldoutTable]', e); }
 
-        // World map only for News (GDELT has country data from domain ccTLD)
-        const mapEl = document.getElementById('map-container');
-        if (mapEl) {
-          if (src === 'gdelt') {
-            mapEl.style.display = 'block';
-            drawWorldMap();
-          } else {
-            mapEl.style.display = 'none';
-          }
-        }
-
         // Save source in URL for shareable links
         const url = new URL(window.location.href);
         url.searchParams.set('source', src);
@@ -1471,116 +1455,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
     // ── World map ─────────────────────────────────────────
 
-    async function drawWorldMap() {
-      const container = document.getElementById('world-map')!;
-      const mapContainer = document.getElementById('map-container');
-      container.innerHTML = '';
-      container.style.position = 'relative';
-
-      const pairCountries = (countriesByPair as any)[activePairSlug] || {};
-      const countryCount = Object.keys(pairCountries).length;
-      if (countryCount < 10) {
-        if (mapContainer) mapContainer.style.display = 'none';
-        return;
-      }
-      if (mapContainer) mapContainer.style.display = 'block';
-
-      const rect = container.getBoundingClientRect();
-      const width = rect.width;
-      const height = rect.height;
-
-      const svg = d3.select('#world-map')
-        .append('svg')
-        .attr('viewBox', `0 0 ${width} ${height}`);
-
-      // Corrected world boundaries: Crimea is part of Ukraine (de jure)
-      const worldUrl = '/world-corrected.json';
-      if (!cachedWorld) {
-        try {
-          cachedWorld = await d3.json(worldUrl);
-        } catch {
-          svg.append('text').attr('x', width/2).attr('y', height/2)
-            .attr('text-anchor', 'middle').attr('fill', '#9ca3af')
-            .text('Map loading...');
-          return;
-        }
-      }
-      const world = cachedWorld;
-
-      const countries = topojson.feature(world, world.objects.countries) as any;
-
-      const projection = d3.geoNaturalEarth1()
-        .fitSize([width, height - 10], countries);
-
-      const path = d3.geoPath().projection(projection);
-
-      const colorScale = d3.scaleSequential()
-        .domain([0, 100])
-        .interpolator(d3.interpolateRgbBasis(['#dc2626', '#f97316', '#eab308', '#22c55e', '#047857']));
-
-      // Update map title
-      const mapNameEl = document.getElementById('map-pair-name');
-      const mapSubEl = document.getElementById('map-subtitle');
-      const mapPair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
-      if (mapNameEl && mapPair) mapNameEl.textContent = `${mapPair.russian} → ${mapPair.ukrainian}`;
-      // Source-specific subtitle and data
-      if (mapSubEl) {
-        mapSubEl.textContent = activeSource === 'trends'
-          ? `Search interest adoption (%) — Google Trends 2022–2025`
-          : `URL-level adoption (%) — GDELT news corpus 2024–2025`;
-      }
-
-      // GDELT country distribution (ccTLD mapping from news domains)
-      const adoptionMap = (pairCountries || {}) as Record<string, {name: string; adoption: number}>;
-
-      // Tooltip — positioned relative to container
-      const tooltip = d3.select('#world-map')
-        .append('div')
-        .style('position', 'absolute')
-        .style('background', 'white')
-        .style('border', '1px solid #d1d5db')
-        .style('border-radius', '6px')
-        .style('padding', '8px 12px')
-        .style('font-size', '12px')
-        .style('pointer-events', 'none')
-        .style('opacity', '0')
-        .style('box-shadow', '0 4px 12px rgba(0,0,0,0.1)')
-        .style('z-index', '10')
-        .style('white-space', 'nowrap');
-
-      // Draw countries — IDs in properties.id (corrected TopoJSON)
-      svg.selectAll('path.country')
-        .data(countries.features)
-        .enter().append('path')
-        .attr('class', 'country')
-        .attr('d', path as any)
-        .attr('fill', (d: any) => {
-          const id = String(d.properties?.id || d.id || '').padStart(3, '0');
-          const info = adoptionMap[id];
-          return info ? colorScale(info.adoption) as string : '#f3f4f6';
-        })
-        .attr('stroke', '#e5e7eb')
-        .attr('stroke-width', 0.4)
-        .on('mouseenter', function(_event: MouseEvent, d: any) {
-          const id = String(d.properties?.id || d.id || '').padStart(3, '0');
-          const info = adoptionMap[id];
-          if (!info) return;
-          d3.select(this).attr('stroke', '#374151').attr('stroke-width', 1.5);
-          const total = info.total ? info.total.toLocaleString() : '';
-          const ukr = info.ukr ? info.ukr.toLocaleString() : '0';
-          const rus = info.rus ? info.rus.toLocaleString() : '0';
-          tooltip.style('opacity', '1')
-            .html(`<strong>${info.name}</strong><br/><span style="color:${colorScale(info.adoption)};font-weight:700">${info.adoption}%</span> adoption<br/><span style="color:#0057B8">UA: ${ukr}</span> · <span style="color:#dc2626">RU: ${rus}</span><br/><span style="color:#6b7280;font-size:0.8em;">${total} total articles</span>`);
-        })
-        .on('mousemove', function(event: MouseEvent) {
-          const cr = container.getBoundingClientRect();
-          tooltip.style('left', (event.clientX - cr.left + 16) + 'px').style('top', (event.clientY - cr.top - 20) + 'px');
-        })
-        .on('mouseleave', function() {
-          d3.select(this).attr('stroke', '#e5e7eb').attr('stroke-width', 0.4);
-          tooltip.style('opacity', '0');
-        });
-    }
 
     // ── Holdout table ─────────────────────────────────────
     let holdoutFilter = 'all';
@@ -1763,8 +1637,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       if (srcBtn) {
         srcBtn.classList.add('active');
         // Trigger same logic as click
-        const mapEl = document.getElementById('map-container');
-        if (mapEl) mapEl.style.display = activeSource === 'gdelt' ? 'block' : 'none';
         drawChart();
         drawHoldoutTable();
         try { drawNewsHoldouts(); } catch (e) {}
@@ -1790,7 +1662,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
     window.addEventListener('resize', () => {
       drawChart();
-      drawWorldMap();
     });
 
     function drawErrorAnalysis() {

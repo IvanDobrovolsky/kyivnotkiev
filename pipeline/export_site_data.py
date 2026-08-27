@@ -283,6 +283,8 @@ GEO_TO_NUMERIC = {
     "SN": "686", "CI": "384", "CM": "120", "UG": "800",
 }
 
+
+
 GEO_NAMES = {
     "004": "Afghanistan", "008": "Albania", "012": "Algeria", "032": "Argentina",
     "036": "Australia", "040": "Austria", "051": "Armenia", "031": "Azerbaijan",
@@ -316,7 +318,6 @@ GEO_NAMES = {
     "784": "UAE", "807": "North Macedonia", "275": "Palestine",
     "887": "Yemen", "894": "Zambia",
 }
-
 
 def _get_cl_corpus_size():
     corpus_path = DATA_DIR / "corpus" / "toponyms-corpus.parquet"
@@ -1087,40 +1088,8 @@ def main():
     analysis = export_analysis()
     domain_origins = export_domain_origins(enabled_slugs)
 
-    # GDELT per-country adoption (ccTLD + known outlets mapping)
-    log.info("Exporting GDELT country distribution...")
-    from pipeline.ingestion.gdelt_athena_countries import domain_to_country, ISO_NUM_TO_ALPHA
-    gdelt = _load("gdelt")
-    countries_by_pair = {}
-    if len(gdelt):
-        cutoff = (date.today() - timedelta(days=24 * 30)).isoformat()[:10]
-        recent = gdelt[gdelt["date"] >= cutoff].copy()
-        recent["country"] = recent["source_domain"].apply(domain_to_country)
-        mapped = recent[recent["country"] != ""]
-        alpha_to_num = {v: k for k, v in ISO_NUM_TO_ALPHA.items()}
-        agg = mapped.groupby(["pair_slug", "country", "variant"])["count"].sum().reset_index()
-        for slug in agg["pair_slug"].unique():
-            if slug not in enabled_slugs:
-                continue
-            pair_agg = agg[agg["pair_slug"] == slug]
-            cdata = {}
-            for ca in pair_agg["country"].unique():
-                cd = pair_agg[pair_agg["country"] == ca]
-                ukr = int(cd[cd["variant"] == "ukrainian"]["count"].sum())
-                rus = int(cd[cd["variant"] == "russian"]["count"].sum())
-                total = ukr + rus
-                if total < 10:
-                    continue
-                num = alpha_to_num.get(ca, "")
-                if num:
-                    cdata[num] = {"name": GEO_NAMES.get(num, ca), "adoption": round(ukr / total * 100, 1), "total": total, "ukr": ukr, "rus": rus}
-            if cdata:
-                countries_by_pair[slug] = cdata
-        log.info(f"  GDELT countries: {len(countries_by_pair)} pairs")
-
     write_json(SITE_DATA_DIR / "manifest.json", manifest)
     write_json(SITE_DATA_DIR / "timeseries.json", timeseries)
-    write_json(SITE_DATA_DIR / "countries_by_pair.json", countries_by_pair)
     write_json(SITE_DATA_DIR / "domain_origins.json", domain_origins)
     write_json(SITE_DATA_DIR / "holdouts_by_pair.json", holdouts_by_pair)
     write_json(SITE_DATA_DIR / "holdouts.json", holdouts_global)

@@ -209,28 +209,7 @@ function formatNum(n: number) {
       </div>
 
       <!-- Per-pair world map (GDELT only) -->
-      <div class="chart-container" id="map-container">
-        <div class="chart-header">
-          <div>
-            <div class="chart-title" style="color: var(--text)">Карта адопції: <span id="map-pair-name">Kiev → Kyiv</span></div>
-            <div class="chart-subtitle" id="map-subtitle">Адопція за країнами (%) — новинний корпус GDELT 2024–2025</div>
-          </div>
-        </div>
-        <div id="world-map" style="width:100%; height:400px;"></div>
-        <div class="chart-legend" id="map-legend" style="justify-content: center; gap: 0.5rem;">
-          <span style="font-size:0.75rem; color:var(--text-muted)">0%</span>
-          <div style="display:flex; height:12px; width:240px; border-radius:6px; overflow:hidden;">
-            <div style="flex:1; background:#dc2626"></div>
-            <div style="flex:1; background:#f97316"></div>
-            <div style="flex:1; background:#eab308"></div>
-            <div style="flex:1; background:#22c55e"></div>
-            <div style="flex:1; background:#047857"></div>
-          </div>
-          <span style="font-size:0.75rem; color:var(--text-muted)">100%</span>
-        </div>
-      </div>
-
-      <!-- Per-pair: GDELT Analysis (3 pie charts) -->
+            <!-- Per-pair: GDELT Analysis (3 pie charts) -->
       <div id="media-origin-container" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
         <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
           <div style="font-size:0.78rem; font-weight:600; color:var(--text); margin-bottom:0.2rem;">Загальний правопис</div>
@@ -479,12 +458,10 @@ function formatNum(n: number) {
 
   <script>
     import * as d3 from 'd3';
-    import * as topojson from 'topojson-client';
     import timeseriesData from '../../data/timeseries.json';
     import manifest from '../../data/manifest.json';
     import holdoutsData from '../../data/holdouts.json';
     import holdoutsByPair from '../../data/holdouts_by_pair.json';
-    import countriesByPair from '../../data/countries_by_pair.json';
     import pairEvents from '../../data/pair_events.json';
     // trends_countries removed — using GDELT country distribution only
     import errorAnalysis from '../../data/error_analysis.json';
@@ -998,7 +975,6 @@ function formatNum(n: number) {
       drawAdoptionCalc();
       drawPairSourceChart();
       drawMediaOrigin();
-      drawWorldMap();
       drawHoldoutTable();
     }
 
@@ -1269,16 +1245,6 @@ function formatNum(n: number) {
           if (el) el.style.display = src === 'gdelt' ? 'block' : 'none';
         });
 
-        // Show map for GDELT and Trends (both have country data)
-        const mapEl = document.getElementById('map-container');
-        if (mapEl) {
-          if (src === 'gdelt' || src === 'trends') {
-            mapEl.style.display = 'block';
-            drawWorldMap();
-          } else {
-            mapEl.style.display = 'none';
-          }
-        }
       });
     });
 
@@ -1421,131 +1387,6 @@ function formatNum(n: number) {
 
     let cachedWorld: any = null;
 
-    async function drawWorldMap() {
-      const container = document.getElementById('world-map')!;
-      container.innerHTML = '';
-      container.style.position = 'relative';
-
-      const rect = container.getBoundingClientRect();
-      const width = rect.width;
-      const height = rect.height;
-
-      const svg = d3.select('#world-map')
-        .append('svg')
-        .attr('viewBox', `0 0 ${width} ${height}`);
-
-      const worldUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
-      if (!cachedWorld) {
-        try {
-          cachedWorld = await d3.json(worldUrl);
-        } catch {
-          svg.append('text').attr('x', width/2).attr('y', height/2)
-            .attr('text-anchor', 'middle').attr('fill', '#9ca3af')
-            .text('Завантаження карти...');
-          return;
-        }
-      }
-      const world = cachedWorld;
-
-      const countries = topojson.feature(world, world.objects.countries) as any;
-
-      const projection = d3.geoNaturalEarth1()
-        .fitSize([width, height - 10], countries);
-
-      const path = d3.geoPath().projection(projection);
-
-      const colorScale = d3.scaleSequential()
-        .domain([0, 100])
-        .interpolator(d3.interpolateRgbBasis(['#dc2626', '#f97316', '#eab308', '#22c55e', '#047857']));
-
-      // Update map title
-      const mapNameEl = document.getElementById('map-pair-name');
-      const mapSubEl = document.getElementById('map-subtitle');
-      const mapPair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
-      if (mapNameEl && mapPair) mapNameEl.textContent = `${mapPair.russian} → ${mapPair.ukrainian}`;
-      // Source-specific subtitle and data
-      if (mapSubEl) {
-        mapSubEl.textContent = activeSource === 'trends'
-          ? `Адопція пошукового інтересу (%) — Google Trends 2022–2026`
-          : `Адопція на рівні URL (%) — новинний корпус GDELT 2024–2025`;
-      }
-
-      // GDELT country distribution (ccTLD mapping from news domains)
-      const pairCountries = (countriesByPair as any)[activePairSlug];
-      const adoptionMap = (pairCountries || {}) as Record<string, {name: string; adoption: number}>;
-
-      // Tooltip — positioned relative to container
-      const tooltip = d3.select('#world-map')
-        .append('div')
-        .style('position', 'absolute')
-        .style('background', 'white')
-        .style('border', '1px solid #d1d5db')
-        .style('border-radius', '6px')
-        .style('padding', '8px 12px')
-        .style('font-size', '12px')
-        .style('pointer-events', 'none')
-        .style('opacity', '0')
-        .style('box-shadow', '0 4px 12px rgba(0,0,0,0.1)')
-        .style('z-index', '10')
-        .style('white-space', 'nowrap');
-
-      // Draw countries
-      svg.selectAll('path.country')
-        .data(countries.features)
-        .enter().append('path')
-        .attr('class', 'country')
-        .attr('d', path as any)
-        .attr('fill', (d: any) => {
-          const id = String(d.id).padStart(3, '0');
-          const info = adoptionMap[id];
-          return info ? colorScale(info.adoption) as string : '#f3f4f6';
-        })
-        .attr('stroke', '#e5e7eb')
-        .attr('stroke-width', 0.4)
-        .on('mouseenter', function(_event: MouseEvent, d: any) {
-          const id = String(d.id).padStart(3, '0');
-          const info = adoptionMap[id];
-          if (!info) return;
-          d3.select(this).attr('stroke', '#374151').attr('stroke-width', 1.5);
-          tooltip.style('opacity', '1')
-            .html(`<strong>${info.name}</strong><br/><span style="color:${colorScale(info.adoption)};font-weight:700">${info.adoption}%</span> адопція`);
-        })
-        .on('mousemove', function(event: MouseEvent) {
-          const cr = container.getBoundingClientRect();
-          const x = event.clientX - cr.left;
-          const y = event.clientY - cr.top;
-          tooltip.style('left', (x + 16) + 'px').style('top', (y - 20) + 'px');
-        })
-        .on('mouseleave', function() {
-          d3.select(this).attr('stroke', '#e5e7eb').attr('stroke-width', 0.4);
-          tooltip.style('opacity', '0');
-        });
-
-      // Crimea overlay — colored as Ukraine (country 804)
-      const ukraineData = adoptionMap['804'];
-      const crimeaColor = ukraineData ? colorScale(ukraineData.adoption) as string : '#059669';
-
-      svg.append('path')
-        .datum(CRIMEA_GEOJSON as any)
-        .attr('d', path as any)
-        .attr('fill', crimeaColor)
-        .attr('stroke', '#e5e7eb')
-        .attr('stroke-width', 0.4)
-        .on('mouseenter', function() {
-          d3.select(this).attr('stroke', '#374151').attr('stroke-width', 1.5);
-          tooltip.style('opacity', '1')
-            .html(`<strong>Крим (Україна)</strong><br/><span style="color:${crimeaColor};font-weight:700">${ukraineData?.adoption || 98.5}%</span> адопція`);
-        })
-        .on('mousemove', function(event: MouseEvent) {
-          const cr = container.getBoundingClientRect();
-          tooltip.style('left', (event.clientX - cr.left + 16) + 'px')
-            .style('top', (event.clientY - cr.top - 20) + 'px');
-        })
-        .on('mouseleave', function() {
-          d3.select(this).attr('stroke', '#e5e7eb').attr('stroke-width', 0.4);
-          tooltip.style('opacity', '0');
-        });
-    }
 
     // ── Holdout table ─────────────────────────────────────
     let holdoutFilter = 'intl'; // default: hide .ru
@@ -1655,7 +1496,6 @@ function formatNum(n: number) {
     window.addEventListener('resize', () => {
       if (activePairSlug > 0) {
         drawChart();
-        drawWorldMap();
       } else {
         drawCategoryChart();
         drawHeatmap();
