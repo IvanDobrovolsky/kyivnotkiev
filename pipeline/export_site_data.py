@@ -808,6 +808,29 @@ OPENALEX_COLLISIONS = {"borscht", "ihor-sikorsky"}
 OPENALEX_SINCE_YEAR = int(HOLDOUT_SINCE[:4])   # same window as every other source
 
 
+def _preview_around_match(text: str, variant: str, slug: str, width: int = 220) -> str:
+    """Window the preview on the spelling being alleged.
+
+    A first-200-chars preview failed to show the claimed spelling in 28.4% of rows,
+    which defeats the point of an evidence table.
+    """
+    import re as _re
+    cfg = load_pairs()
+    pair = next((p for p in cfg["pairs"] if p.get("slug") == slug), None)
+    if not pair:
+        return str(text)[:width]
+    terms = ([str(pair["russian"]), str(pair["ukrainian"])] if variant == "both"
+             else [str(pair["russian"] if variant == "russian" else pair["ukrainian"])])
+    for t in terms:
+        rx = _re.compile(r"\b" + r"[-_\s]+".join(_re.escape(w) for w in t.split()) + r"\b", _re.I)
+        m = rx.search(text or "")
+        if m:
+            lo = max(0, m.start() - width // 2)
+            snippet = str(text)[lo:lo + width].strip()
+            return ("…" if lo else "") + _re.sub(r"\s+", " ", snippet) + "…"
+    return _re.sub(r"\s+", " ", str(text)[:width])
+
+
 def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
     """Most-cited papers still using the Russian spelling, with links to the work.
 
@@ -1057,6 +1080,39 @@ def main():
     # The variant is taken from the rebuilt data (attested in the URL path), never
     # from the old file. Article text is carried over because the rebuilt pull holds
     # URLs only; a text pipeline is a separate piece of work.
+    # Verified records supersede the legacy holdout parquets wherever they exist.
+    # Those parquets were written in May by the AllNames pipeline and their SELECTION
+    # is whatever that pipeline happened to fetch; the verified set is fetched from the
+    # rebuilt attested+unattested pools and classified from the article body. Pairs
+    # without a verified build fall through to the legacy path below.
+    _verified_dir = ROOT / "data" / "cl" / "corpus" / "gdelt_verified"
+    _verified_pairs: set[str] = set()
+    if _verified_dir.exists():
+        for _vf in sorted(_verified_dir.glob("*.parquet")):
+            if _vf.stem.endswith("_series"):
+                continue
+            _slug = _vf.stem
+            if _slug not in enabled_slugs:
+                continue
+            _vdf = pd.read_parquet(_vf)
+            _vdf = _vdf[_vdf.variant.isin(HOLDOUT_VARIANTS) & (_vdf.date >= HOLDOUT_SINCE)]
+            if not len(_vdf):
+                continue
+            _vdf = (_vdf.sort_values("date", ascending=False)
+                        .groupby("domain", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
+                        .head(HOLDOUT_CAP))
+            holdouts_by_pair.setdefault(_slug, {})["news_articles"] = [{
+                "domain": r.domain,
+                "url": r.url,
+                "variant": r.variant,
+                "text_preview": _preview_around_match(r.text, r.variant, _slug),
+                "month": r.month,
+            } for r in _vdf.itertuples()]
+            _verified_pairs.add(_slug)
+        if _verified_pairs:
+            log.info(f"  Verified GDELT holdouts: {len(_verified_pairs)} pairs "
+                     f"({', '.join(sorted(_verified_pairs))})")
+
     _holdout_dir = ROOT / "data" / "corpus" / "gdelt_holdouts"
     _attested_path = ROOT / "data" / "raw" / "gdelt" / "mentions_v2" / "gdelt_mentions_final.parquet"
     if _holdout_dir.exists() and _attested_path.exists():
@@ -1067,7 +1123,7 @@ def main():
         _injected, _kept, _dropped = 0, 0, 0
         for _hf in _glob.glob(str(_holdout_dir / "*.parquet")):
             _slug = Path(_hf).stem
-            if _slug not in enabled_slugs:
+            if _slug not in enabled_slugs or _slug in _verified_pairs:
                 continue
             _hdf = pd.read_parquet(_hf)
             if len(_hdf) == 0:
