@@ -694,7 +694,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         const safeDraw = (name: string, fn: () => void) => {
           try { fn(); } catch (e) { console.error(`[${name}] failed:`, e); }
         };
-        safeDraw('drawPairSourceChart', drawPairSourceChart);
         safeDraw('renderHoldouts', renderHoldouts);
         safeDraw('drawPairLLM', drawPairLLM);
         safeDraw('drawClusterScatter', drawClusterScatter);
@@ -722,16 +721,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     }
 
     function renderSourceBars(el: HTMLElement | null, rows: BarRow[],
-                              opts: { showCounts?: boolean; barH?: number; labelW?: number } = {}) {
+                              opts: { barH?: number; labelW?: number } = {}) {
       if (!el) return;
       if (!rows.length) { el.innerHTML = ''; return; }
-      const { showCounts = false, barH = 14, labelW = 66 } = opts;
+      const { barH = 9, labelW = 66 } = opts;
       const fN = (n: number) => n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1) + 'K' : String(n);
       const out = rows.map(r => {
-        const total = r.ukr + r.rus;
-        const counts = showCounts && total > 0
-          ? `<span style="width:64px; font-size:0.62rem; color:var(--text-muted); text-align:right; flex-shrink:0;">${fN(r.ukr)}/${fN(total)}</span>`
-          : '';
         return `<div style="display:flex; align-items:center; gap:0.4rem;">
           <span style="width:${labelW}px; font-size:0.68rem; color:var(--text-muted); text-align:right; flex-shrink:0;">${sourceLabels[r.src].split(' ')[0]}</span>
           <div style="flex:1; height:${barH}px; background:#f0f0f0; border-radius:${barH / 2}px; position:relative; overflow:hidden;">
@@ -739,22 +734,16 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <div style="height:100%; width:${Math.max(1, Math.min(100, r.pct))}%; background:${sourceColors[r.src]}; border-radius:${barH / 2}px; opacity:0.85;"></div>
           </div>
           <span style="width:42px; font-size:0.7rem; font-weight:600; color:${sourceColors[r.src]}; text-align:right; flex-shrink:0;">${r.pct}%</span>
-          ${counts}
         </div>`;
       }).join('');
-      el.innerHTML = `<div style="display:flex; flex-direction:column; gap:0.35rem;">${out}</div>`;
+      el.innerHTML = `<div style="display:flex; flex-direction:column; gap:0.25rem;">${out}</div>`;
     }
 
     function drawAdoptionCalc() {
       const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       const titleEl = document.getElementById('adoption-pct-title');
       if (titleEl && pair) titleEl.textContent = `${pair.adoption}%`;
-      renderSourceBars(document.getElementById('adoption-calc-body'), sourceBarRows(), { showCounts: true });
-    }
-
-    function drawPairSourceChart() {
-      renderSourceBars(document.getElementById('pair-source-chart'), sourceBarRows(),
-                       { barH: 20, labelW: 80 });
+      renderSourceBars(document.getElementById('adoption-calc-body'), sourceBarRows(), { barH: 9, labelW: 72 });
     }
 
     // ── Per-pair LLM scan: 71 frontier models × 3 prompt variants for THIS pair ──
@@ -866,7 +855,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         const fcPct = safePct(f.forced_pct);
         html += `
           <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0.5rem; align-items:center; margin-bottom:0.3rem; font-size:0.65rem;">
-            <div style="color:var(--text); display:flex; align-items:center; gap:0.35rem; min-width:0;">
+            <div style="color:var(--text); display:flex; align-items:center; gap:0.25rem; min-width:0;">
               <span style="display:inline-block; width:8px; height:8px; border-radius:2px; background:${color}; flex-shrink:0;"></span>
               <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${fam}</span>
               <span style="color:var(--text-muted); font-family:monospace; flex-shrink:0;">×${f.n}</span>
