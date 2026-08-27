@@ -163,6 +163,12 @@ def _filter_youtube(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+# Holdouts are evidence of *current* usage. Outlets that switched in 2019 are not
+# holdouts today, so the window starts at the 2022 invasion.
+HOLDOUT_SINCE = "2022-01-01"
+HOLDOUT_CAP = 100
+
+
 def _apply_homonym_filters(df: pd.DataFrame) -> pd.DataFrame:
     """Remove false positives using homonym_filters from pairs.yaml."""
     import re
@@ -965,31 +971,56 @@ def main():
     holdouts_by_pair, _ = export_holdouts(enabled_slugs)
     _, holdouts_global = export_holdouts(enabled_slugs)
 
-    # Inject GDELT article holdouts from cleaned parquet files
+    # GDELT article holdouts, validated against the rebuilt attested mention set.
+    #
+    # The parquet files under data/corpus/gdelt_holdouts predate the v2 rebuild and
+    # were derived from AllNames matching, where 78.9% of rows had no URL attestation
+    # and 88.7% were machine translations. Rather than trust them, each row is kept
+    # only when its URL also appears in gdelt_mentions_final.parquet -- 53.8% survive.
+    # The variant is taken from the rebuilt data (attested in the URL path), never
+    # from the old file. Article text is carried over because the rebuilt pull holds
+    # URLs only; a text pipeline is a separate piece of work.
     _holdout_dir = ROOT / "data" / "corpus" / "gdelt_holdouts"
-    if _holdout_dir.exists():
+    _attested_path = ROOT / "data" / "raw" / "gdelt" / "mentions_v2" / "gdelt_mentions_final.parquet"
+    if _holdout_dir.exists() and _attested_path.exists():
         import glob as _glob
-        _hfiles = _glob.glob(str(_holdout_dir / "*.parquet"))
-        _injected = 0
-        for _hf in _hfiles:
+        _att = pd.read_parquet(_attested_path, columns=["url", "variant", "date", "pair_slug"])
+        _att = _att[_att["date"] >= HOLDOUT_SINCE]
+        _by_url = dict(zip(_att["url"], _att["variant"]))
+        _injected, _kept, _dropped = 0, 0, 0
+        for _hf in _glob.glob(str(_holdout_dir / "*.parquet")):
             _slug = Path(_hf).stem
             if _slug not in enabled_slugs:
                 continue
             _hdf = pd.read_parquet(_hf)
             if len(_hdf) == 0:
                 continue
-            _articles = []
-            for _, _r in _hdf.iterrows():
-                _articles.append({
-                    "domain": _r.get("domain", ""),
-                    "url": _r.get("url", ""),
-                    "variant": _r.get("variant", ""),
-                    "text_preview": str(_r.get("text", ""))[:200],
-                    "month": str(_r.get("month", "")),
-                })
+            _hdf = _hdf.drop_duplicates("url")
+            # The same story is syndicated under several URLs, so URL dedup alone
+            # leaves visibly repeated rows. Dedup on the preview the reader sees.
+            _hdf["_preview"] = _hdf["text"].astype(str).str.slice(0, 200)
+            _hdf = _hdf[_hdf["_preview"].str.strip().str.len() > 0].drop_duplicates("_preview")
+            _hdf["_variant"] = _hdf["url"].map(_by_url)
+            _dropped += int(_hdf["_variant"].isna().sum())
+            _hdf = _hdf[_hdf["_variant"].notna()]
+            if len(_hdf) == 0:
+                continue
+            # Russian spellings are the holdouts worth reading; Ukrainian ones are
+            # only kept to fill the cap when there are too few Russian examples.
+            _hdf["_rank"] = (_hdf["_variant"] != "russian").astype(int)
+            _hdf = _hdf.sort_values(["_rank", "month"], ascending=[True, False]).head(HOLDOUT_CAP)
+            _articles = [{
+                "domain": _r.get("domain", ""),
+                "url": _r.get("url", ""),
+                "variant": _r["_variant"],
+                "text_preview": _r["_preview"],
+                "month": str(_r.get("month", "")),
+            } for _, _r in _hdf.iterrows()]
             holdouts_by_pair.setdefault(_slug, {})["news_articles"] = _articles
             _injected += 1
-        log.info(f"  Injected GDELT article holdouts: {_injected} pairs, {sum(len(holdouts_by_pair.get(s,{}).get('news_articles',[])) for s in enabled_slugs):,} articles")
+            _kept += len(_articles)
+        log.info(f"  GDELT article holdouts: {_injected} pairs, {_kept:,} articles "
+                 f"(since {HOLDOUT_SINCE}, cap {HOLDOUT_CAP}/pair; dropped {_dropped:,} unattested)")
     pair_events = export_pair_events(enabled_slugs)
     analysis = export_analysis()
     domain_origins = export_domain_origins(enabled_slugs)

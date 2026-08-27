@@ -1394,9 +1394,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         try { drawNewsHoldouts(); } catch (e) {}
         try { drawRedditHoldouts(); } catch (e) {}
 
-        // Holdouts visible for all sources (each source has its own holdouts)
-        const holdoutEl = document.getElementById('holdout-container');
-        if (holdoutEl) holdoutEl.style.display = 'block';
+        // drawHoldoutTable owns this panel's visibility: it hides it for sources
+        // that have a dedicated panel, and for sources with no holdout rows.
         try { drawHoldoutTable(); } catch (e) { console.error('[drawHoldoutTable]', e); }
 
         // World map only for News (GDELT has country data from domain ccTLD)
@@ -1648,7 +1647,14 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     let holdoutFilter = 'all';
 
     function drawHoldoutTable() {
-      const container = document.getElementById('holdout-table')!;
+      // This panel is the fallback for sources without a dedicated one (YouTube,
+      // Wikipedia). `gdelt` and `reddit` render through drawNewsHoldouts /
+      // drawRedditHoldouts, so showing them here too would duplicate the table.
+      const container = document.getElementById('holdout-table');
+      const panel = document.getElementById('holdout-container');
+      if (!container) return;
+      const hide = () => { if (panel) panel.style.display = 'none'; };
+      if (activeSource === 'gdelt' || activeSource === 'reddit') { hide(); return; }
       const pairHoldouts = (holdoutsByPair as any)[activePairSlug] || {};
       const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
 
@@ -1699,10 +1705,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         (b as HTMLElement).style.display = holdoutKey === 'news' ? '' : 'none';
       });
 
-      if (items.length === 0) {
-        container.innerHTML = `<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">No holdout data for ${activeSource}</div>`;
-        return;
-      }
+      if (items.length === 0) { hide(); return; }
+      if (panel) panel.style.display = 'block';
 
       let html = '';
 
@@ -1716,6 +1720,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           container.innerHTML = `<div style="padding:1.5rem; text-align:center; color:#9ca3af;">No holdouts in this filter</div>`;
           return;
         }
+
 
         const rows = filtered.map((h: any) => {
           const domain = h.name;

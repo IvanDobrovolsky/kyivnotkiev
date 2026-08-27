@@ -268,6 +268,41 @@ def cmd_final(args) -> int:
     return 0
 
 
+def cmd_export(args) -> int:
+    """Write dataset/raw_gdelt.parquet in the legacy schema the site pipeline reads.
+
+    Downstream (`export_site_data._load`) expects exactly:
+        pair_slug, date ("YYYY-MM-01" string), variant, matched_term, source_domain, count
+    Emitting that shape means every consumer -- charts, per-source stats, the world
+    map, holdouts -- picks up the rebuilt numbers with no downstream change.
+
+    The previous file at this path counted canonicalised NER hits on
+    machine-translated articles. It is backed up rather than deleted.
+    """
+    src = OUT / FINAL
+    if not src.exists():
+        print(f"missing {src}; run `final` first", file=sys.stderr)
+        return 1
+    df = pd.read_parquet(src)
+    df["date"] = df.date.dt.to_period("M").dt.to_timestamp().dt.strftime("%Y-%m-01")
+    out = (df.groupby(["pair_slug", "date", "variant", "url_term", "domain"])
+             .size().reset_index(name="count")
+             .rename(columns={"url_term": "matched_term", "domain": "source_domain"}))
+    out["count"] = out["count"].astype("Int64")
+    out = out[["pair_slug", "date", "variant", "matched_term", "source_domain", "count"]]
+
+    dest = pathlib.Path("dataset/raw_gdelt.parquet")
+    if dest.exists():
+        backup = dest.with_suffix(".v1_allnames.bak.parquet")
+        if not backup.exists():
+            dest.rename(backup)
+            print(f"backed up previous file -> {backup}")
+    out.to_parquet(dest, compression="zstd", index=False)
+    print(f"wrote {len(out):,} rows -> {dest} ({dest.stat().st_size / 1e6:.1f} MB)")
+    print(f"  articles: {int(out['count'].sum()):,} | pairs: {out.pair_slug.nunique()} | domains: {out.source_domain.nunique():,}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -277,6 +312,7 @@ def main() -> int:
     sub.add_parser("download", help="destination table -> matched parquet").set_defaults(func=cmd_download)
     sub.add_parser("clean", help="re-flag in place after a pairs.yaml change").set_defaults(func=cmd_clean)
     sub.add_parser("final", help="apply the metric filters, dedup, write the deliverable").set_defaults(func=cmd_final)
+    sub.add_parser("export", help="write dataset/raw_gdelt.parquet for the site pipeline").set_defaults(func=cmd_export)
     args = ap.parse_args()
     return args.func(args)
 

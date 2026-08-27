@@ -1551,7 +1551,8 @@ function formatNum(n: number) {
     let holdoutFilter = 'intl'; // default: hide .ru
 
     function drawHoldoutTable() {
-      const container = document.getElementById('holdout-table')!;
+      const container = document.getElementById('holdout-table');
+      if (!container) return;
       const pairHoldouts = (holdoutsByPair as any)[activePairSlug];
 
       const nameEl = document.getElementById('holdout-pair-name');

@@ -199,6 +199,23 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
   <div id="reddit-holdouts-list" style="margin-top:0.5rem; max-height:500px; overflow-y:auto;"></div>
 </div>
 
+<!-- Generic per-source holdouts (YouTube, Wikipedia and any source without a dedicated panel).
+     Hidden by default; drawHoldoutTable() reveals it only when the active source has rows. -->
+<div id="holdout-container" class="chart-container" style="margin-bottom:1rem; padding:0.75rem; display:none;">
+  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+    <div>
+      <div class="chart-title" style="color: var(--text)">Holdouts: <span id="holdout-pair-name"></span></div>
+      <div class="chart-subtitle" id="holdout-subtitle">Still using the older spelling</div>
+    </div>
+    <div class="chart-controls" id="holdout-filters">
+      <button class="line-mode active" data-holdout="all">All</button>
+      <button class="line-mode" data-holdout="ru" style="color:#dc2626;">.ru</button>
+      <button class="line-mode" data-holdout="ua" style="color:#0057B8;">.ua</button>
+    </div>
+  </div>
+  <div id="holdout-table" style="margin-top:0.5rem; max-height:500px; overflow-y:auto;"></div>
+</div>
+
 <!-- Source note -->
 <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem; padding: 0.5rem 0.75rem; background: #f8f9fb; border-radius: 4px; border-left: 3px solid var(--border);">
   Source availability varies by source and pair. Time span: {timeSpan}. Not all pairs have data from every source.
