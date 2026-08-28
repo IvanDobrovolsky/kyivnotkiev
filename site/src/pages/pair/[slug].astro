@@ -569,36 +569,46 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         .on('mousemove', function(event: MouseEvent) {
           const [mx] = d3.pointer(event);
           const hoveredDate = x.invert(mx);
-          const dateStr = d3.timeFormat('%b %Y')(hoveredDate);
 
-          crosshairLine.attr('x1', mx).attr('x2', mx).style('opacity', 1);
+          // The series is monthly: every point is one month's measured total. The
+          // tooltip used to interpolate between the two bracketing months, so a cursor
+          // between May and June reported a blend of the two -- a value that exists in
+          // no month and was never measured -- under a real month's label. Snap to the
+          // nearest actual point instead, and label it with THAT point's date.
+          let snapDate: Date | null = null;
+          {
+            let best = Infinity;
+            for (const src of Object.keys(allSeriesData)) {
+              for (const d of allSeriesData[src]) {
+                const dt = parseDate(d.date);
+                if (!dt) continue;
+                const gap = Math.abs(dt.getTime() - hoveredDate.getTime());
+                if (gap < best) { best = gap; snapDate = dt; }
+              }
+            }
+          }
+          if (!snapDate) { tooltip.style('opacity', '0'); crosshairLine.style('opacity', 0); return; }
+          const dateStr = d3.timeFormat('%b %Y')(snapDate);
+          const snapT = snapDate.getTime();
+
+          crosshairLine.attr('x1', x(snapDate)).attr('x2', x(snapDate)).style('opacity', 1);
 
           let html = `<strong>${dateStr}</strong>`;
           for (const src of Object.keys(allSeriesData)) {
             const series = allSeriesData[src];
             if (series.length < 2) continue;
 
-            const dates = series.map((d: any) => parseDate(d.date)!.getTime());
-            const t = hoveredDate.getTime();
-
-            // Outside series range — skip (allow 45 days past last point)
-            if (t < dates[0] || t > dates[dates.length - 1] + 45*86400000) continue;
-
-            let lo = 0, hi = dates.length - 1;
-            while (hi - lo > 1) {
-              const mid = (lo + hi) >> 1;
-              if (dates[mid] <= t) lo = mid; else hi = mid;
-            }
-
-            // Interpolate between bracketing points (matches the drawn line)
-            // Clamp to [0,1] so we don't extrapolate past the last point
-            const rawFrac = (dates[hi] - dates[lo]) > 0
-              ? (t - dates[lo]) / (dates[hi] - dates[lo]) : 0;
-            const frac = Math.max(0, Math.min(1, rawFrac));
+            // Exact match on the snapped month, or nothing. A source without a point
+            // that month is absent from the tooltip rather than approximated.
+            const pt = series.find((d: any) => {
+              const dt = parseDate(d.date);
+              return dt && Math.abs(dt.getTime() - snapT) < 86400000;
+            });
+            if (!pt) continue;
 
             if (chartMode === 'volume') {
-              const ukr = Math.round((series[lo].ukr || 0) + frac * ((series[hi].ukr || 0) - (series[lo].ukr || 0)));
-              const rus = Math.round((series[lo].rus || 0) + frac * ((series[hi].rus || 0) - (series[lo].rus || 0)));
+              const ukr = pt.ukr || 0;
+              const rus = pt.rus || 0;
               const total = ukr + rus;
               const adopt = total > 0 ? Math.round(ukr / total * 1000) / 10 : 0;
               html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}</span>`;
@@ -606,8 +616,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               html += `<br/>&nbsp;&nbsp;<span style="color:#dc2626">RU: <strong>${rus.toLocaleString()}</strong></span>`;
               html += `<br/>&nbsp;&nbsp;<span style="color:#6b7280">Adoption: ${adopt}%</span>`;
             } else {
-              const value = Math.round((series[lo].adoption + frac * (series[hi].adoption - series[lo].adoption)) * 10) / 10;
-              html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${value}%</strong></span>`;
+              html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${pt.adoption}%</strong></span>`;
             }
           }
 
