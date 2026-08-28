@@ -208,6 +208,22 @@ RAW_BUILDERS = {"gdelt": raw_gdelt, "youtube": raw_youtube, "reddit": raw_reddit
 
 # ── processed: clean + regex-match; only correct records survive ──────────────
 
+def _row_date(r) -> str:
+    """Best available date as YYYY-MM-DD. Falls back to year for sources that only
+    publish one (OpenAlex), which is honest to a year's precision rather than blank."""
+    for attr in ("date", "published_at"):
+        v = getattr(r, attr, None)
+        if v is not None and str(v).strip() not in ("", "None", "nan", "NaT"):
+            return str(v)[:10]
+    y = getattr(r, "year", None)
+    try:
+        if y is not None and 1900 < int(float(y)) < 2100:
+            return f"{int(float(y))}-01-01"
+    except (TypeError, ValueError):
+        pass
+    return ""
+
+
 def process_text_source(raw: pd.DataFrame, source: str, pats: dict) -> pd.DataFrame:
     rows = []
     for r in raw.itertuples():
@@ -227,7 +243,9 @@ def process_text_source(raw: pd.DataFrame, source: str, pats: dict) -> pd.DataFr
             "record_id": f"{slug}:{source}:{getattr(r, 'doc_id', '')}",
             "pair_slug": slug, "source": source, "doc_id": str(getattr(r, "doc_id", "")),
             "url": str(getattr(r, "url", "") or ""),
-            "date": str(getattr(r, "date", "") or getattr(r, "published_at", "") or "")[:10],
+            # OpenAlex carries `year`, not `date` or `published_at`, so every academic
+            # record was undated and could not be placed in time.
+            "date": _row_date(r),
             "title": str(getattr(r, "title", "") or ""),
             "text": text,
             "ua_hits": len(ua_m), "ru_hits": len(ru_m),
