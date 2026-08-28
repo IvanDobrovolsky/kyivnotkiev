@@ -56,10 +56,20 @@ def fetch_details(video_ids, key):
     out, units = {}, 0
     for i in range(0, len(video_ids), 50):
         batch = video_ids[i:i + 50]
-        for attempt in range(4):
-            resp = requests.get(API, params={
-                "part": "snippet", "id": ",".join(batch), "key": key,
-            }, timeout=30)
+        resp = None
+        for attempt in range(5):
+            try:
+                resp = requests.get(API, params={
+                    "part": "snippet", "id": ",".join(batch), "key": key,
+                }, timeout=30)
+            except requests.exceptions.RequestException as e:
+                # A read timeout used to escape this loop and kill the whole run:
+                # chornobyl died at 52,035 of 71,321 videos, discarding an hour of work
+                # because only HTTP 429 was retried and network errors were not caught.
+                wait = 5 * (attempt + 1)
+                log.warning(f"  {type(e).__name__} — retrying in {wait}s")
+                time.sleep(wait)
+                continue
             units += 1
             if resp.status_code == 429:
                 wait = 15 * (attempt + 1)
@@ -67,6 +77,9 @@ def fetch_details(video_ids, key):
                 time.sleep(wait)
                 continue
             break
+        if resp is None:
+            log.warning(f"  batch {i//50}: unreachable after retries — skipped")
+            continue
         if resp.status_code != 200:
             log.warning(f"  batch {i//50}: HTTP {resp.status_code} — skipped")
             continue
