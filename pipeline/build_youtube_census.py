@@ -62,21 +62,47 @@ def ckpt_path(pair: str, variant: str, year: int) -> pathlib.Path:
 
 
 def searches_used(pair: str, variant: str, year: int) -> int:
-    """Read the search count back out of the checkpoint rather than trusting the log."""
+    """Count actual API calls from the per-call ledger.
+
+    The checkpoint's month entries carry only `count` and `resolved` -- there is no
+    `searches` field. Reading one returned 0 for every target, which both raised a
+    false "0 search calls used" warning and left the budget permanently at zero, so it
+    could never have stopped the run. The ledger writes one line per call.
+    """
+    # A ledger line is a WINDOW, not an API call: windows paginate, and each page is a
+    # separate search.list call. Counting lines undercounted by ~25% (8,005 tracked vs
+    # 10,078 actually spent), so the budget never fired and the run continued until the
+    # API cut it off mid-year. Sum the `pages` field instead.
+    led = CENSUS_DIR / ".ledger" / f"{pair}_{variant}_{year}.jsonl"
+    if led.exists():
+        try:
+            total = 0
+            for line in led.open():
+                try:
+                    total += json.loads(line).get("pages", 1)
+                except Exception:                      # noqa: BLE001
+                    total += 1
+            return total
+        except Exception:                              # noqa: BLE001
+            return 0
+    # fall back to window count, which is a lower bound on calls made
     p = ckpt_path(pair, variant, year)
     if not p.exists():
         return 0
     try:
         d = json.loads(p.read_text())
-        return sum(m.get("searches", 0) for m in d.get("months", {}).values())
+        return len(d.get("done_windows", [])) + len(d.get("split_windows", []))
     except Exception:                                  # noqa: BLE001
         return 0
 
 
 def archive_target(pair: str, variant: str, year: int) -> None:
     ARCHIVE.mkdir(parents=True, exist_ok=True)
+    # The ledger must be archived too, or searches_used() counts calls from the run
+    # being replaced and the budget is wrong from the first target onward.
     for src in (ckpt_path(pair, variant, year),
-                CENSUS_DIR / f"{pair}_{variant}_{year}.parquet"):
+                CENSUS_DIR / f"{pair}_{variant}_{year}.parquet",
+                CENSUS_DIR / ".ledger" / f"{pair}_{variant}_{year}.jsonl"):
         if src.exists():
             shutil.move(str(src), str(ARCHIVE / f"{int(time.time())}_{src.name}"))
 
