@@ -79,6 +79,25 @@ def pair_patterns() -> dict:
     return out
 
 
+def word_span(text: str, at: int, before: int = 70, after: int = 130) -> str:
+    """Window around `at`, snapped outward to whole words.
+
+    A raw character slice cuts mid-word at both ends -- "imir Putin marked ... gala
+    Tuesday attende" -- which makes the span unreadable as evidence and, worse, can
+    truncate the very term the row is labelled on. Expanding to the nearest space costs
+    a few characters and preserves every word.
+    """
+    lo, hi = max(0, at - before), min(len(text), at + after)
+    if lo > 0:
+        sp = text.rfind(" ", 0, lo)
+        lo = 0 if sp == -1 else sp + 1
+    if hi < len(text):
+        sp = text.find(" ", hi)
+        hi = len(text) if sp == -1 else sp
+    out = re.sub(r"\s+", " ", text[lo:hi]).strip()
+    return ("…" if lo > 0 else "") + out + ("…" if hi < len(text) else "")
+
+
 def clean_text(*parts) -> str:
     """Decode entities and normalise whitespace. No truncation -- raw keeps everything."""
     joined = "\n\n".join(str(p) for p in parts if p and str(p) not in ("nan", "None",
@@ -213,7 +232,7 @@ def process_text_source(raw: pd.DataFrame, source: str, pats: dict) -> pd.DataFr
             "text": text,
             "ua_hits": len(ua_m), "ru_hits": len(ru_m),
             "variant": "both" if ua_m and ru_m else "ukrainian" if ua_m else "russian",
-            "match_span": re.sub(r"\s+", " ", text[max(0, first - 60):first + 120]).strip(),
+            "match_context": word_span(text, first),
             "text_hash": hashlib.sha1(re.sub(r"\s+", " ", text).encode()).hexdigest()[:16],
         })
     return pd.DataFrame(rows)
