@@ -235,7 +235,16 @@ def process_text_source(raw: pd.DataFrame, source: str, pats: dict) -> pd.DataFr
             "match_context": word_span(text, first),
             "text_hash": hashlib.sha1(re.sub(r"\s+", " ", text).encode()).hexdigest()[:16],
         })
-    return pd.DataFrame(rows)
+    out = pd.DataFrame(rows)
+    if len(out):
+        # record_id must be unique: the same document can appear twice in a provider
+        # dump (one OpenAlex work was present twice with identical text), and a
+        # duplicate id silently double-counts in every downstream stage.
+        before = len(out)
+        out = out.drop_duplicates("record_id", keep="first").reset_index(drop=True)
+        if len(out) < before:
+            print(f"    dropped {before - len(out)} duplicate record_id(s)")
+    return out
 
 
 def process_count_source(raw: pd.DataFrame, source: str, pats: dict) -> pd.DataFrame:
