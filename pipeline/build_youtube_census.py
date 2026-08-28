@@ -61,6 +61,26 @@ def ckpt_path(pair: str, variant: str, year: int) -> pathlib.Path:
     return CKPT_DIR / f"{pair}_{variant}_{year}.json"
 
 
+def is_complete(pair: str, variant: str, year: int) -> bool:
+    """A checkpoint existing is not the same as a year being finished.
+
+    chornobyl 2018 russian stopped at 8 of 12 months when the daily quota ran out and
+    exited cleanly. Treating the checkpoint's existence as "collected" would have
+    skipped those 4 months on every future run, permanently. A year counts as complete
+    only when every month it covers is resolved.
+    """
+    p = ckpt_path(pair, variant, year)
+    if not p.exists():
+        return False
+    try:
+        months = json.loads(p.read_text()).get("months", {})
+    except Exception:                                  # noqa: BLE001
+        return False
+    if not months:
+        return False
+    return all(m.get("resolved") for m in months.values()) and len(months) >= 12
+
+
 def searches_used(pair: str, variant: str, year: int) -> int:
     """Count actual API calls from the per-call ledger.
 
@@ -137,7 +157,7 @@ def main() -> int:
 
     years = list(range(a.year_start, a.year_end + 1))
     jobs = [(p, v, y) for p in targets for y in years for v in VARIANTS]
-    pending = [j for j in jobs if a.force or not ckpt_path(*[j[0], j[1], j[2]]).exists()]
+    pending = [j for j in jobs if a.force or not is_complete(j[0], j[1], j[2])]
     already = len(jobs) - len(pending)
 
     print(f"{len(targets)} pair(s) x {len(years)} years x 2 variants = {len(jobs)} targets")
