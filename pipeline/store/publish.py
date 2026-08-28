@@ -74,10 +74,10 @@ that the filtering did something. Without them the filtering cannot be audited.
 ## Columns in `_processed` and `pairs/`
 
 `record_id, pair_slug, source, doc_id, url, date, title, text, ua_hits, ru_hits,
-variant, match_span, text_hash`
+variant, match_context, text_hash`
 
 There is no `verified` column. `ua_hits` and `ru_hits` are word-boundary match counts
-and `variant` is derived from them; `match_span` is the surrounding text so the match
+and `variant` is derived from them; `match_context` is the surrounding text so the match
 can be checked by eye. The evidence is the data.
 
 `pairs/` carries `source` because it is needed at evaluation time -- the first question
