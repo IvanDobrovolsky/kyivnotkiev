@@ -53,7 +53,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     import * as d3 from 'd3';
     const timeseriesData = JSON.parse(document.getElementById('pair-timeseries-data')?.textContent || '{}');
     import manifest from '../../data/manifest.json';
-    import holdoutsData from '../../data/holdouts.json';
     const holdoutsByPair = { [document.getElementById('pair-detail')!.dataset.pairSlug!]: JSON.parse(document.getElementById('pair-holdouts-data')?.textContent || 'null') };
     import pairEvents from '../../data/pair_events.json';
     // trends_countries removed — using GDELT country distribution only

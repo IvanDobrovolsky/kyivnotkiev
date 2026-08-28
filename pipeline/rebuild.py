@@ -135,9 +135,50 @@ def run_readme():
     readme_main()
 
 
+# Files the export regenerates every run. Anything else in site/src/data/ is an
+# orphan: nothing produces it, so it silently keeps whatever it last held. The site
+# has been rendering error_analysis.json and cl_analysis.json from April.
+REGENERATED = {
+    "manifest.json", "timeseries.json", "holdouts_by_pair.json", "holdouts.json",
+    "pair_events.json", "analysis.json", "domain_origins.json",
+}
+STALE_AFTER_DAYS = 7
+
+
+def report_stale_artifacts():
+    """Name every site JSON that this run did not regenerate, with its age.
+
+    Stale artefacts have repeatedly produced wrong conclusions in this project --
+    comparisons computed against an enriched parquet from the previous day, holdouts
+    drawn from superseded parquets, a YouTube dataset that was void for months. The
+    fix is not vigilance; it is printing the age of everything the site depends on so
+    a stale file cannot be mistaken for a fresh one.
+    """
+    import time
+    log.info("\n   Artifact freshness:")
+    now = time.time()
+    rows = []
+    for f in sorted((SITE_DATA_DIR).glob("*.json")):
+        age_d = (now - f.stat().st_mtime) / 86400
+        produced = f.name in REGENERATED
+        rows.append((f.name, age_d, produced))
+    for name, age, produced in sorted(rows, key=lambda r: -r[1]):
+        if produced and age < 1:
+            continue                       # regenerated this run, nothing to say
+        tag = "regenerated" if produced else "NO PRODUCER"
+        level = log.warning if (not produced and age > STALE_AFTER_DAYS) else log.info
+        level(f"     {name:<28}{age:>6.1f}d  {tag}")
+    orphaned = [r for r in rows if not r[2] and r[1] > STALE_AFTER_DAYS]
+    if orphaned:
+        log.warning(f"     {len(orphaned)} orphaned artifact(s) older than "
+                    f"{STALE_AFTER_DAYS}d are still rendered by the site")
+    return orphaned
+
+
 def verify_site_data():
     """Verify site JSON matches dataset."""
     log.info("\n6. VERIFYING SITE DATA")
+    report_stale_artifacts()
 
     with open(SITE_DATA_DIR / "manifest.json") as f:
         m = json.load(f)
