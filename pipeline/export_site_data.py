@@ -70,46 +70,57 @@ def _load(name: str) -> pd.DataFrame:
 
 
 def _stale_youtube_years() -> set:
-    """(pair, year) whose RECORDED collection depth differs from the DECLARED one.
+    """(pair, year) that must not be plotted. A year is excluded when it is:
 
-    Depth is a per-pair decision driven by density, not something to infer. A sparse
-    pair like volodymyr-the-great peaks at 58 results in a month window, so month depth
-    already returns everything and day depth would spend 365 windows finding the same
-    videos. A dense pair like chornobyl peaks at 521 and loses most of a month.
+      * past STUDY_END_YEAR — a partial year is not comparable with full ones
+      * missing a variant entirely — the other side then reads as 0% adoption
+      * incomplete — fewer than 12 resolved months on either side, so the year's
+        total is a fraction of the truth and its dip reads as history
+      * collected at a depth other than the one declared in config/pairs.yaml
 
-    So `youtube_depth` is declared in config/pairs.yaml and compared against what each
-    year was actually collected at. Only a MISMATCH is stale -- a pair collected
-    entirely at its declared depth is internally comparable, whatever that depth is.
+    Depth is declared, not inferred: a sparse pair peaks at 58 results in a month
+    window and needs no day-level descent, while chornobyl peaks at 521 and loses most
+    of a month. Pairs marked `legacy` were collected with cap-triggered descent, where
+    depth varies month to month by construction; they are never filtered on depth
+    because no single depth describes them.
 
-    This exists because chornobyl 2022-2024 sit at ~285 videos/month against ~460 for
-    their recollected neighbours, purely because they have not been redone. A gap is
-    more honest than a dip that reads as history.
+    A gap is more honest than a value the collection cannot support.
     """
     import json as _json
     cfg = load_pairs()
-    # "legacy" means collected with cap-triggered descent, where depth varies month to
-    # month by construction. No single depth describes it, so those pairs are never
-    # filtered -- they are uniformly imprecise rather than internally inconsistent.
     want = {p["slug"]: p.get("youtube_depth") for p in cfg["pairs"]
             if p.get("youtube_depth") and p.get("youtube_depth") != "legacy"}
     ck = ROOT / "data" / "cl" / "raw" / "youtube_census" / ".checkpoints"
-    if not ck.exists() or not want:
+    if not ck.exists():
         return set()
-    stale = set()
+
+    seen: dict = {}
     for f in ck.glob("*.json"):
         parts = f.stem.rsplit("_", 2)
         if len(parts) != 3:
             continue
-        pair, _variant, year = parts
-        if pair not in want:
-            continue
+        pair, variant, year = parts
         try:
             d = _json.loads(f.read_text())
         except Exception:                              # noqa: BLE001
             continue
+        months = d.get("months", {})
         w = len(d.get("done_windows", []))
-        got = d.get("min_depth") or ("day" if w >= 300 else "week" if w >= 60 else "month")
-        if got != want[pair]:
+        seen.setdefault((pair, year), {})[variant] = {
+            "resolved": sum(1 for m in months.values() if m.get("resolved")),
+            "depth": d.get("min_depth") or ("day" if w >= 300 else "week" if w >= 60 else "month"),
+        }
+
+    stale = set()
+    for (pair, year), v in seen.items():
+        if int(year) > STUDY_END_YEAR:
+            stale.add((pair, year)); continue
+        ru, uk = v.get("russian"), v.get("ukrainian")
+        if ru is None or uk is None:
+            stale.add((pair, year)); continue
+        if ru["resolved"] < 12 or uk["resolved"] < 12:
+            stale.add((pair, year)); continue
+        if pair in want and (ru["depth"] != want[pair] or uk["depth"] != want[pair]):
             stale.add((pair, year))
     return stale
 
@@ -149,6 +160,15 @@ def _load_youtube_census() -> pd.DataFrame:
     df["variant"] = df["form"]
     df["date"] = pd.to_datetime(df["published_at"], errors="coerce", utc=True).dt.strftime("%Y-%m-%d")
     df = df.dropna(subset=["date"])
+
+    # Drop anything past the last complete calendar year: a partial year is not
+    # comparable with full ones and, on chornobyl 2026, its ukrainian half was never
+    # collected at all, so every month read as 0% adoption.
+    before_year = len(df)
+    df = df[df.date.str[:4].astype(int) <= STUDY_END_YEAR].copy()
+    if before_year - len(df):
+        log.info(f"  YouTube: dropped {before_year-len(df):,} rows after "
+                 f"{STUDY_END_YEAR} (incomplete year)")
 
     stale = _stale_youtube_years()
     if stale:
@@ -222,6 +242,7 @@ def _filter_youtube(df: pd.DataFrame) -> pd.DataFrame:
 
 # Holdouts are evidence of *current* usage. Outlets that switched in 2019 are not
 # holdouts today, so the window starts at the 2022 invasion.
+STUDY_END_YEAR = 2025      # last complete calendar year; partial years are not comparable
 HOLDOUT_SINCE = "2022-01-01"
 HOLDOUT_CAP = 100
 # One outlet can otherwise own the table -- sputniknews.com was 77 of 100 rows for
