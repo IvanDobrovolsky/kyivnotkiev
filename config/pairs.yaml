@@ -69,6 +69,7 @@ pairs:
   - odessa.{0,5}a.?zion
   homonym_type: us_city
   slug: odesa
+  youtube_depth: legacy
   word_boundary: true
 - russian: Lvov
   ukrainian: Lviv
@@ -158,6 +159,7 @@ pairs:
     label: S.T.A.L.K.E.R. 2 Heart of Chornobyl release
   match_mode: word_boundary
   slug: chornobyl
+  youtube_depth: day
 - russian: Lugansk
   ukrainian: Luhansk
   enabled: true
@@ -179,6 +181,7 @@ pairs:
     Dnepropetrovsk→Dnipro).
   match_mode: exact_phrase
   slug: dnipro-river
+  youtube_depth: legacy
   events:
   - date: 2022-11
     label: Kherson liberation, Dnipro front line
@@ -214,6 +217,7 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: chicken-kyiv
+  youtube_depth: legacy
   events:
   - date: 2015-07
     label: Chicken Kiev food poisoning outbreak (US)
@@ -300,6 +304,7 @@ pairs:
     label: UEFA updates to Dynamo Kyiv
   match_mode: exact_phrase
   slug: dynamo-kyiv
+  youtube_depth: legacy
   word_boundary: true
 - russian: Kiev ballet
   ukrainian: Kyiv ballet
@@ -316,6 +321,7 @@ pairs:
     label: Russia weaponizes historical narrative
   match_mode: exact_phrase
   slug: kyivan-rus
+  youtube_depth: legacy
 - russian: Chernigov
   ukrainian: Chernihiv
   enabled: false
@@ -439,6 +445,7 @@ pairs:
     label: Beats Fury rematch
   match_mode: exact_phrase
   slug: oleksandr-usyk
+  youtube_depth: legacy
 - russian: Vladimir Zelensky
   ukrainian: Volodymyr Zelenskyy
   enabled: true
@@ -473,6 +480,7 @@ pairs:
     label: Poroshenko unveils Volodymyr statue
   match_mode: exact_phrase
   slug: volodymyr-the-great
+  youtube_depth: legacy
 - russian: Artemovsk
   ukrainian: Bakhmut
   enabled: true
@@ -500,6 +508,7 @@ pairs:
   notes: Ukrainian-born writer (Миколa Гоголь). Tests Г→H and Микола→Mykola vs Nikolai.
   match_mode: exact_phrase
   slug: mykola-hohol
+  youtube_depth: legacy
   events:
   - date: 2016-03
     label: Gogol birthday anniversary coverage
@@ -529,6 +538,7 @@ pairs:
   notes: Aviation pioneer (Ігор Сікорський). Tests І→I and Г→H (Igor vs Ihor).
   match_mode: exact_phrase
   slug: ihor-sikorsky
+  youtube_depth: legacy
   events:
   - date: 2016-09
     label: Kyiv airport renamed to Sikorsky
@@ -543,6 +553,7 @@ pairs:
     the most consequential cases of Ukrainian identity erasure in global science history.
   match_mode: exact_phrase
   slug: serhii-korolyov
+  youtube_depth: legacy
   events:
   - date: 2011-04
     label: Gagarin 50th anniversary (Korolev designed Vostok rocket)
@@ -568,6 +579,7 @@ pairs:
   notes: Suprematist artist (Казимир Малевич). Tests И→Y and Ч→Ch (Malevich vs Malevych).
   match_mode: exact_phrase
   slug: kazymyr-malevych
+  youtube_depth: legacy
   events:
   - date: 2015-11
     label: Malevich retrospective exhibitions
