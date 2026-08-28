@@ -37,6 +37,7 @@ ARCHIVE = pathlib.Path("data/archive/youtube_census_superseded")
 KEY_ID = "029b0141-1889-4665-a569-36d75c0f6191"
 KEY_PROJECT = "kyivnotkiev-yt"
 DAILY_SEARCH_QUOTA = 10_000
+STUDY_END_YEAR = 2025          # last complete calendar year
 VARIANTS = ("russian", "ukrainian")
 
 
@@ -134,7 +135,11 @@ def main() -> int:
     g.add_argument("--pairs", help="comma-separated")
     g.add_argument("--all", action="store_true")
     ap.add_argument("--year-start", type=int, default=2010)
-    ap.add_argument("--year-end", type=int, default=2026)
+    # The study ends at the last COMPLETE calendar year. A partial year cannot be
+    # compared against full ones, and collecting it invites exactly the failure seen on
+    # chornobyl 2026: seven months of russian against a ukrainian half that was never
+    # queried, every month reading as 0% adoption.
+    ap.add_argument("--year-end", type=int, default=STUDY_END_YEAR)
     ap.add_argument("--min-depth", default="day", choices=["month", "week", "day", "hour"])
     ap.add_argument("--budget", type=int, default=DAILY_SEARCH_QUOTA,
                     help="search calls for this run; stops cleanly when reached")
