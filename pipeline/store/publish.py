@@ -23,12 +23,32 @@ import sys
 STORE = pathlib.Path("data/store")
 REPO = "KyivNotKiev/toponym-adoption-data"
 
-CARD = """---
+def _configs() -> str:
+    """Declare every parquet as a named config.
+
+    Without this the HF viewer auto-detects and presents the repo as one dataset,
+    hiding the raw/processed/per-pair split that the layout exists to express. Each
+    file becomes a selectable subset instead.
+    """
+    lines = ["configs:"]
+    for f in sorted(STORE.glob("*.parquet")):
+        lines.append(f"- config_name: {f.stem}")
+        lines.append(f"  data_files: {f.name}")
+    for f in sorted((STORE / "pairs").glob("*.parquet")):
+        lines.append(f"- config_name: pair_{f.stem.replace('-', '_')}")
+        lines.append(f"  data_files: pairs/{f.name}")
+    return "\n".join(lines)
+
+
+CARD_HEAD = """---
 license: cc-by-4.0
 language: [en]
 tags: [linguistics, toponyms, ukraine, computational-social-science]
+{configs}
 ---
+"""
 
+CARD_BODY = """
 # Toponym adoption data
 
 English-language adoption of Ukrainian vs Russian toponym transliterations
@@ -99,7 +119,7 @@ def main() -> int:
 
     from huggingface_hub import HfApi
     api = HfApi(token=token)
-    (STORE / "README.md").write_text(CARD)
+    (STORE / "README.md").write_text(CARD_HEAD.format(configs=_configs()) + CARD_BODY)
     print(f"\nuploading to {REPO} ...")
     api.upload_folder(folder_path=str(STORE), repo_id=REPO, repo_type="dataset",
                       allow_patterns=["*.parquet", "_manifest.json", "README.md"],
