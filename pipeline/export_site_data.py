@@ -69,6 +69,51 @@ def _load(name: str) -> pd.DataFrame:
     return _cache[name]
 
 
+def _stale_youtube_years() -> set:
+    """(pair, year) whose RECORDED collection depth differs from the DECLARED one.
+
+    Depth is a per-pair decision driven by density, not something to infer. A sparse
+    pair like volodymyr-the-great peaks at 58 results in a month window, so month depth
+    already returns everything and day depth would spend 365 windows finding the same
+    videos. A dense pair like chornobyl peaks at 521 and loses most of a month.
+
+    So `youtube_depth` is declared in config/pairs.yaml and compared against what each
+    year was actually collected at. Only a MISMATCH is stale -- a pair collected
+    entirely at its declared depth is internally comparable, whatever that depth is.
+
+    This exists because chornobyl 2022-2024 sit at ~285 videos/month against ~460 for
+    their recollected neighbours, purely because they have not been redone. A gap is
+    more honest than a dip that reads as history.
+    """
+    import json as _json
+    cfg = load_pairs()
+    # "legacy" means collected with cap-triggered descent, where depth varies month to
+    # month by construction. No single depth describes it, so those pairs are never
+    # filtered -- they are uniformly imprecise rather than internally inconsistent.
+    want = {p["slug"]: p.get("youtube_depth") for p in cfg["pairs"]
+            if p.get("youtube_depth") and p.get("youtube_depth") != "legacy"}
+    ck = ROOT / "data" / "cl" / "raw" / "youtube_census" / ".checkpoints"
+    if not ck.exists() or not want:
+        return set()
+    stale = set()
+    for f in ck.glob("*.json"):
+        parts = f.stem.rsplit("_", 2)
+        if len(parts) != 3:
+            continue
+        pair, _variant, year = parts
+        if pair not in want:
+            continue
+        try:
+            d = _json.loads(f.read_text())
+        except Exception:                              # noqa: BLE001
+            continue
+        w = len(d.get("done_windows", []))
+        got = d.get("min_depth") or ("day" if w >= 300 else "week" if w >= 60 else "month")
+        if got != want[pair]:
+            stale.add((pair, year))
+    return stale
+
+
 def _load_youtube_census() -> pd.DataFrame:
     """YouTube comes from the census, never from dataset/raw_youtube.parquet.
 
@@ -104,6 +149,17 @@ def _load_youtube_census() -> pd.DataFrame:
     df["variant"] = df["form"]
     df["date"] = pd.to_datetime(df["published_at"], errors="coerce", utc=True).dt.strftime("%Y-%m-%d")
     df = df.dropna(subset=["date"])
+
+    stale = _stale_youtube_years()
+    if stale:
+        before = len(df)
+        df = df[[(p, d[:4]) not in stale for p, d in zip(df.pair_slug, df.date)]].copy()
+        if before - len(df):
+            years = sorted({f"{p} {y}" for p, y in stale})
+            log.info(f"  YouTube: dropped {before-len(df):,} rows whose collection depth "
+                     f"differs from the declared youtube_depth ({', '.join(years[:6])}"
+                     f"{'...' if len(years) > 6 else ''}) — shown as gaps, not wrong values")
+
     log.info(f"  YouTube census: {len(files)} pair file(s), "
              f"{total:,} collected -> {len(df):,} verified "
              f"({100*len(df)/max(total,1):.1f}%), "
