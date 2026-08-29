@@ -1,180 +1,215 @@
-"""Collect Google Trends data for toponym pairs using pytrends.
+"""Collect Google Trends interest for toponym pairs, via SerpApi.
 
-Handles rate limiting with exponential backoff, collects both worldwide
-and per-country data for geographic diffusion analysis.
+WHY SOLO CALLS
+--------------
+Trends normalises every request to the joint maximum across all terms in it.
+Ask for both variants at once and the low-volume one is compressed into the
+0-1 band and integer-rounded away.  Measured on chornobyl, same 192 months,
+same term, the only difference being the query mode:
+
+    joint  ->  2 distinct values,   1/192 months non-zero, range 0-1
+    solo   -> 21 distinct values, 120/192 months non-zero, range 0-100
+
+The Russian column is identical either way -- it is the high-volume side and
+sets the scale regardless -- so the joint query costs nothing on RU and
+destroys UA.  Hence: one solo call per variant.
+
+Windowing was tried and made things WORSE, which is worth recording because it
+is counter-intuitive.  Narrow windows return weekly buckets, and a weekly
+bucket for a rare term often falls under Google's reporting threshold and comes
+back as zero.  On a common monthly basis:
+
+    single 16-year query   120/192 months non-zero  (62 %)
+    4 x 4-year windows     102/193 months non-zero  (53 %)
+
+So the widest possible span is the right call for solo queries, and no
+stitching or chain-rescaling is needed at all.
+
+RECOVERING THE SCALE
+--------------------
+Solo calls each renormalise to their own peak, so both variants come back
+topping out at 100 and the cross-term scale is gone.  One joint call restores
+it, placed in the window where the Ukrainian variant is strongest and
+quantisation therefore bites least.  Validated on chornobyl: this path puts
+Nov-2024 at 15.3 % against 15.5 % measured by direct joint query -- two
+different routes to the same number.
+
+Note Trends is non-deterministic: repeated identical calls differ by a point
+or two (2019-05 came back 54 and 56 on two calls).  Responses are cached to
+disk and reused rather than re-fetched, so a rebuild is reproducible.
 
 Usage:
-    python -m pipeline.ingestion.collect_trends [--pair-ids 1,2,3] [--countries-only] [--worldwide-only]
+    python -m pipeline.ingestion.trends --pairs chornobyl
+    python -m pipeline.ingestion.trends --all
 """
 
 import argparse
+import json
 import logging
+import pathlib
 import time
+import urllib.parse
+import urllib.request
 
 import pandas as pd
-from pytrends.request import TrendReq
 
-from pipeline.config import (
-    TARGET_COUNTRIES,
-    TRENDS_BACKOFF_FACTOR,
-    TRENDS_MAX_RETRIES,
-    TRENDS_RAW_DIR,
-    TRENDS_REQUEST_DELAY,
-    TRENDS_TIMEFRAME,
-    ensure_dirs,
-    get_all_pairs,
-)
+from pipeline.config import ROOT_DIR, get_enabled_pairs, get_pair_by_slug
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
+CACHE = ROOT_DIR / "data" / "raw" / "trends_serp"
+OUT_DIR = ROOT_DIR / "data" / "raw" / "trends"
+KEY_FILE = pathlib.Path("/etc/secrets/serpapi")
 
-def create_pytrends_client() -> TrendReq:
-    """Create a pytrends client with retry-friendly settings."""
-    return TrendReq(
-        hl="en-US",
-        tz=0,  # UTC
-        retries=3,
-        backoff_factor=1.0,
-    )
+STUDY_START, STUDY_END = "2010-01-01", "2025-12-31"
+CAL_MONTHS = 24            # width of the calibration window
+REQUEST_DELAY = 2.0
 
 
-def fetch_with_retry(
-    pytrends: TrendReq,
-    keywords: list[str],
-    timeframe: str,
-    geo: str = "",
-    max_retries: int = TRENDS_MAX_RETRIES,
-) -> pd.DataFrame | None:
-    """Fetch interest over time with exponential backoff on rate limits."""
-    for attempt in range(max_retries):
+def _key() -> str:
+    return KEY_FILE.read_text().strip()
+
+
+def call(q: str, date: str, tag: str) -> dict:
+    """One SerpApi request, cached on disk by tag.  Cache hit costs nothing."""
+    f = CACHE / f"{tag}.json"
+    if f.exists():
+        return json.loads(f.read_text())
+    params = {"engine": "google_trends", "q": q, "data_type": "TIMESERIES",
+              "date": date, "api_key": _key()}
+    url = "https://serpapi.com/search?" + urllib.parse.urlencode(params)
+    with urllib.request.urlopen(url, timeout=120) as r:
+        d = json.loads(r.read())
+    if "error" in d:
+        raise RuntimeError(f"SerpApi: {d['error']}")
+    f.parent.mkdir(parents=True, exist_ok=True)
+    f.write_text(json.dumps(d))          # save on arrival
+    log.info(f"    fetched {tag}")
+    time.sleep(REQUEST_DELAY)
+    return d
+
+
+def frame(d: dict) -> pd.DataFrame:
+    """timeline_data -> DataFrame indexed by timestamp, one column per query."""
+    rows: dict[str, dict] = {}
+    for x in d.get("interest_over_time", {}).get("timeline_data", []):
+        ts = x.get("timestamp")
+        if not ts:
+            continue
+        t = pd.to_datetime(int(ts), unit="s")
+        for v in x.get("values", []):
+            rows.setdefault(v.get("query"), {})[t] = v.get("extracted_value", 0)
+    return pd.DataFrame(rows).sort_index()
+
+
+def calibration_window(uk: pd.Series) -> tuple[str, str]:
+    """The CAL_MONTHS-wide span holding the most Ukrainian-variant interest."""
+    m = uk.resample("MS").mean()
+    if not len(m):
+        return STUDY_START, STUDY_END
+    roll = m.rolling(CAL_MONTHS, min_periods=1).sum()
+    end = roll.idxmax()
+    start = max(m.index[0], end - pd.DateOffset(months=CAL_MONTHS - 1))
+    return str(start.date()), str((end + pd.offsets.MonthEnd(1)).date())
+
+
+def collect_pair(pair: dict) -> tuple[pd.DataFrame | None, dict]:
+    slug, ru, uk = pair["slug"], pair["russian"], pair["ukrainian"]
+    span = f"{STUDY_START} {STUDY_END}"
+
+    ru_s = frame(call(ru, span, f"solo_{ru}_16y"))
+    if ru_s.empty:
+        return None, {"slug": slug, "ok": False, "reason": "no_ru_series"}
+    ru_s = ru_s.iloc[:, 0]
+
+    if pair.get("is_control") and ru == uk:
+        return pd.DataFrame({ru: ru_s}), {"slug": slug, "ok": True, "control": True}
+
+    uk_s = frame(call(uk, span, f"solo_{uk}_16y"))
+    if uk_s.empty:
+        return None, {"slug": slug, "ok": False, "reason": "no_uk_series"}
+    uk_s = uk_s.iloc[:, 0]
+
+    lo, hi = calibration_window(uk_s)
+    j = frame(call(f"{ru},{uk}", f"{lo} {hi}", f"joint_{slug}_{lo[:7]}_{hi[:7]}"))
+    if ru not in j.columns or uk not in j.columns:
+        return None, {"slug": slug, "ok": False, "reason": "joint_missing_columns"}
+
+    j_ru, j_uk = j[ru].sum(), j[uk].sum()
+    if j_ru <= 0 or j_uk <= 0:
+        # The variants are never close enough in volume for a joint call to
+        # resolve both; an intermediate anchor term would be needed.
+        return None, {"slug": slug, "ok": False, "reason": "joint_quantised_to_zero",
+                      "window": f"{lo}..{hi}"}
+
+    s_ru, s_uk = ru_s[lo:hi].sum(), uk_s[lo:hi].sum()
+    if s_ru <= 0 or s_uk <= 0:
+        return None, {"slug": slug, "ok": False, "reason": "solo_zero_in_window"}
+
+    k = (j_uk / j_ru) * s_ru / s_uk
+    frame_out = pd.DataFrame({ru: ru_s, uk: uk_s * k}).dropna()
+    return frame_out, {"slug": slug, "ok": True, "control": False,
+                       "cal_window": f"{lo}..{hi}", "k": round(float(k), 6),
+                       "joint_ratio": round(float(j_uk / j_ru), 5)}
+
+
+def to_records(frame_out: pd.DataFrame, pair: dict) -> pd.DataFrame:
+    ru, uk = pair["russian"], pair["ukrainian"]
+    control = pair.get("is_control") and ru == uk
+    m = frame_out.resample("MS").mean()
+    rows = []
+    for ts, r in m.iterrows():
+        rows.append({"date": str(ts.date()), "term": ru, "variant": "russian",
+                     "interest": float(r[ru]), "geo": "",
+                     "pair_slug": pair["slug"], "source": "trends"})
+        if not control:
+            rows.append({"date": str(ts.date()), "term": uk, "variant": "ukrainian",
+                         "interest": float(r[uk]), "geo": "",
+                         "pair_slug": pair["slug"], "source": "trends"})
+    return pd.DataFrame(rows)
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--pairs")
+    ap.add_argument("--all", action="store_true")
+    args = ap.parse_args()
+
+    if args.all:
+        pairs = get_enabled_pairs()
+    elif args.pairs:
+        pairs = [p for p in (get_pair_by_slug(s.strip())
+                             for s in args.pairs.split(",")) if p]
+    else:
+        ap.error("pass --pairs or --all")
+
+    CACHE.mkdir(parents=True, exist_ok=True)
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    log.info(f"{len(pairs)} pair(s) x 3 calls = {len(pairs) * 3} SerpApi requests (cached ones are free)")
+
+    out, report = [], []
+    for i, pair in enumerate(pairs, 1):
+        log.info(f"[{i}/{len(pairs)}] {pair['slug']}")
         try:
-            pytrends.build_payload(keywords, timeframe=timeframe, geo=geo)
-            df = pytrends.interest_over_time()
-            if df.empty:
-                log.warning(f"  Empty result for {keywords} (geo={geo or 'worldwide'})")
-                return None
-            # Drop the isPartial column
-            if "isPartial" in df.columns:
-                df = df.drop(columns=["isPartial"])
-            return df
-        except Exception as e:
-            error_msg = str(e)
-            if "429" in error_msg or "Too Many Requests" in error_msg:
-                wait = TRENDS_REQUEST_DELAY * (TRENDS_BACKOFF_FACTOR ** attempt)
-                log.warning(f"  Rate limited (attempt {attempt + 1}/{max_retries}), waiting {wait:.0f}s")
-                time.sleep(wait)
-            else:
-                log.error(f"  Error fetching {keywords}: {e}")
-                return None
+            f, meta = collect_pair(pair)
+        except Exception as exc:
+            f, meta = None, {"slug": pair["slug"], "ok": False, "reason": str(exc)[:120]}
+        report.append(meta)
+        if f is None:
+            log.warning(f"    SKIP {pair['slug']}: {meta.get('reason')}")
+            continue
+        out.append(to_records(f, pair))
+        log.info(f"    ok  k={meta.get('k')}  window={meta.get('cal_window')}")
 
-    log.error(f"  Max retries exceeded for {keywords} (geo={geo or 'worldwide'})")
-    return None
-
-
-def collect_pair_worldwide(pytrends: TrendReq, pair: dict) -> pd.DataFrame | None:
-    """Collect worldwide interest over time for a toponym pair."""
-    pair_id = pair["id"]
-    russian = pair["russian"]
-    ukrainian = pair["ukrainian"]
-
-    log.info(f"  Worldwide: '{russian}' vs '{ukrainian}'")
-
-    if pair["is_control"] and russian == ukrainian:
-        log.info(f"  Pair {pair_id}: control case, collecting single term")
-        df = fetch_with_retry(pytrends, [russian], TRENDS_TIMEFRAME)
-    else:
-        df = fetch_with_retry(pytrends, [russian, ukrainian], TRENDS_TIMEFRAME)
-
-    if df is not None:
-        df["pair_id"] = pair_id
-        df["geo"] = "worldwide"
-        out_path = TRENDS_RAW_DIR / f"pair_{pair_id:02d}_worldwide.csv"
-        df.to_csv(out_path)
-        log.info(f"  Saved: {out_path}")
-
-    return df
-
-
-def collect_pair_by_country(pytrends: TrendReq, pair: dict) -> dict[str, pd.DataFrame]:
-    """Collect per-country interest for a toponym pair."""
-    pair_id = pair["id"]
-    russian = pair["russian"]
-    ukrainian = pair["ukrainian"]
-    results = {}
-
-    if pair["is_control"] and russian == ukrainian:
-        keywords = [russian]
-    else:
-        keywords = [russian, ukrainian]
-
-    for country_code in TARGET_COUNTRIES:
-        log.info(f"  Country {country_code}: '{russian}' vs '{ukrainian}'")
-        df = fetch_with_retry(pytrends, keywords, TRENDS_TIMEFRAME, geo=country_code)
-
-        if df is not None:
-            df["pair_id"] = pair_id
-            df["geo"] = country_code
-            results[country_code] = df
-
-        time.sleep(TRENDS_REQUEST_DELAY)
-
-    if results:
-        combined = pd.concat(results.values())
-        out_path = TRENDS_RAW_DIR / f"pair_{pair_id:02d}_countries.csv"
-        combined.to_csv(out_path)
-        log.info(f"  Saved {len(results)} countries: {out_path}")
-
-    return results
-
-
-def collect_all(
-    pair_ids: list[int] | None = None,
-    worldwide: bool = True,
-    countries: bool = True,
-) -> None:
-    """Collect Google Trends data for all (or selected) toponym pairs."""
-    ensure_dirs()
-    pytrends = create_pytrends_client()
-    pairs = get_all_pairs()
-
-    if pair_ids:
-        pairs = [p for p in pairs if p["id"] in pair_ids]
-
-    log.info(f"Collecting {len(pairs)} pairs (worldwide={worldwide}, countries={countries})")
-
-    for pair in pairs:
-        pair_id = pair["id"]
-        log.info(f"Pair {pair_id}: '{pair['russian']}' vs '{pair['ukrainian']}'")
-
-        if worldwide:
-            collect_pair_worldwide(pytrends, pair)
-            time.sleep(TRENDS_REQUEST_DELAY)
-
-        if countries:
-            collect_pair_by_country(pytrends, pair)
-
-        log.info(f"Pair {pair_id}: done")
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Collect Google Trends data for toponym pairs")
-    parser.add_argument("--pair-ids", type=str, default=None,
-                        help="Comma-separated pair IDs to collect (default: all)")
-    parser.add_argument("--worldwide-only", action="store_true",
-                        help="Only collect worldwide data (skip per-country)")
-    parser.add_argument("--countries-only", action="store_true",
-                        help="Only collect per-country data (skip worldwide)")
-    args = parser.parse_args()
-
-    pair_ids = None
-    if args.pair_ids:
-        pair_ids = [int(x) for x in args.pair_ids.split(",")]
-
-    worldwide = not args.countries_only
-    countries = not args.worldwide_only
-
-    collect_all(pair_ids=pair_ids, worldwide=worldwide, countries=countries)
+    pd.DataFrame(report).to_csv(OUT_DIR / "calibration_report.csv", index=False)
+    if not out:
+        log.error("nothing collected")
+        return
+    df = pd.concat(out, ignore_index=True)
+    df.to_parquet(OUT_DIR / "trends_world_monthly.parquet", index=False)
+    log.info(f"{sum(1 for r in report if r.get('ok'))}/{len(report)} pairs, "
+             f"{len(df):,} rows -> {OUT_DIR/'trends_world_monthly.parquet'}")
 
 
 if __name__ == "__main__":
