@@ -330,10 +330,20 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         const useSym = ratio > 20 && lineMode === 'both';
 
         if (useSym) {
-          // Symlog scale: constant controls compression — higher = more linear-like = bigger visual gaps
-          y = d3.scaleSymlog().constant(100).domain([0, maxVal * 1.1]).range([height, 0]) as any;
+          // Symlog constant sets where the scale stops being linear. It was fixed at
+          // 100, which on a 0-110 domain kept everything linear and hid the smaller
+          // variant entirely — calibrated trends put Chornobyl at 0.9 against
+          // Chernobyl's 100. Derive it from the smallest positive value instead, so
+          // the compression matches the actual spread.
+          const positives = (seriesData || [])
+            .flatMap((d: any) => [d.ukr || 0, d.rus || 0])
+            .filter((v: number) => v > 0);
+          const minPos = positives.length ? Math.min(...positives) : 1;
+          y = d3.scaleSymlog().constant(Math.max(minPos, maxVal / 1e4))
+                .domain([0, maxVal * 1.1]).range([height, 0]) as any;
           const yMax = maxVal * 1.1;
-          yTicks = [0, Math.round(yMax * 0.01), Math.round(yMax * 0.1), Math.round(yMax * 0.5), Math.round(yMax)];
+          const rnd = (v: number) => v >= 10 ? Math.round(v) : Math.round(v * 100) / 100;
+          yTicks = [0, rnd(yMax * 0.001), rnd(yMax * 0.01), rnd(yMax * 0.1), rnd(yMax)];
         } else {
           const yMax = maxVal * 1.1;
           y = d3.scaleLinear().domain([0, yMax]).range([height, 0]);
@@ -341,8 +351,20 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           yTicks = [0, step, step * 2, step * 3, yMax].map(v => Math.round(v));
         }
       } else {
-        y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
-        yTicks = [0, 25, 50, 75, 100];
+        // The adoption axis scales to the active source rather than always spanning
+        // 0-100%. chornobyl trends peaks at 15.3% with a median of 0.18%, which on a
+        // fixed 0-100% axis is a flat line along the bottom and reads as "no data"
+        // instead of as a small but real share. Sources are scaled independently so
+        // each one's shape is legible; the axis label carries the level.
+        const adVals = (seriesData || [])
+          .map((d: any) => d.adoption)
+          .filter((v: any) => v !== null && v !== undefined && !isNaN(v));
+        const adMax = adVals.length ? Math.max(...adVals) : 100;
+        const yMax = adMax >= 60 ? 100 : Math.min(100, Math.max(adMax * 1.2, 1));
+        y = d3.scaleLinear().domain([0, yMax]).range([height, 0]);
+        const st = yMax / 4;
+        const rnd = (v: number) => yMax >= 20 ? Math.round(v) : Math.round(v * 100) / 100;
+        yTicks = [0, rnd(st), rnd(st * 2), rnd(st * 3), rnd(yMax)];
       }
 
       // Grid lines
