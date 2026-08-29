@@ -1401,6 +1401,45 @@ def main():
     manifest = export_manifest(enabled_slugs, analyzable_slugs, control_slugs)
     timeseries = export_timeseries(enabled_slugs)
 
+    # Per-source figures for the pair-view cards, derived from the SAME series the
+    # chart draws, so the two cannot disagree. They were previously summed in the
+    # browser over the plotted points, which printed the sum of Trends' 0-100 index
+    # as a mention count; computing them from the raw frames instead would have
+    # disagreed with the chart, since GDELT plots the verified-text series and
+    # several sources are smoothed before display.
+    INDEX_UNITS = {"trends": "index", "ngrams": "frequency"}
+    UNITS = {"gdelt": "articles", "wikipedia": "pageviews", "reddit": "posts",
+             "youtube": "videos", "openalex": "papers", "telegram": "messages"}
+    pss: dict = {}
+    for _slug, _srcs in timeseries.items():
+        if _slug == "events" or not isinstance(_srcs, dict):
+            continue
+        for _src, _ser in _srcs.items():
+            if not isinstance(_ser, list) or not _ser:
+                continue
+            u = sum(float(d.get("ukr") or 0) for d in _ser)
+            r = sum(float(d.get("rus") or 0) for d in _ser)
+            if u + r <= 0:
+                continue
+            # Prefer the series' own adoption where it exists: for Trends that is the
+            # calibrated ratio, the only scale on which the two variants compare.
+            adopts = [d["adoption"] for d in _ser
+                      if d.get("adoption") is not None and (float(d.get("ukr") or 0) + float(d.get("rus") or 0)) > 0]
+            wts = [float(d.get("ukr") or 0) + float(d.get("rus") or 0) for d in _ser
+                   if d.get("adoption") is not None and (float(d.get("ukr") or 0) + float(d.get("rus") or 0)) > 0]
+            adoption = (sum(a * w for a, w in zip(adopts, wts)) / sum(wts)) if wts else (u / (u + r) * 100)
+            countable = _src not in INDEX_UNITS
+            e = {"adoption": round(adoption, 1),
+                 "unit": INDEX_UNITS.get(_src, UNITS.get(_src, "records")),
+                 "countable": countable}
+            if countable:
+                e["ukr"], e["rus"] = int(round(u)), int(round(r))
+            pss.setdefault(_slug, {})[_src] = e
+    manifest["pair_source_stats"] = pss
+    log.info(f"  Per-pair source stats: {len(pss)} pairs, "
+             f"{sum(len(v) for v in pss.values())} pair×source entries "
+             f"(derived from the plotted series)")
+
     # Update manifest source pairs to match post-threshold timeseries
     for src in manifest.get("sources", {}):
         chart_pairs = sum(1 for pid in timeseries if pid != "events" and src in timeseries[pid] and isinstance(timeseries[pid][src], list) and len(timeseries[pid][src]) > 0)

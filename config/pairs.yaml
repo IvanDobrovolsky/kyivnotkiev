@@ -300,8 +300,14 @@ pairs:
   enabled: true
   is_control: false
   events:
+  - date: 2016-02
+    label: Champions League tie vs Manchester City
   - date: 2018-12
     label: UEFA updates to Dynamo Kyiv
+  - date: 2019-03
+    label: Europa League tie vs Chelsea
+  - date: 2021-10
+    label: Champions League tie vs Barcelona
   match_mode: exact_phrase
   slug: dynamo-kyiv
   youtube_depth: legacy
@@ -523,6 +529,8 @@ pairs:
   match_mode: word_boundary
   slug: feodosiia
   events:
+  - date: 2014-03
+    label: Russia annexes Crimea
   - date: 2023-12
     label: Ukrainian strike on Russian ship in Feodosia
 - russian: Olga of Kiev
