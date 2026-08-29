@@ -97,9 +97,12 @@ a:hover { text-decoration: underline; }
 }
 
 .subtitle {
-  font-size: 0.78rem;
+  /* The hero subtitle carries the whole premise; 0.78rem rendered it at 12.5px,
+     smaller than body text. */
+  font-size: 1.02rem;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.65;
+  max-width: 54rem;
 }
 
 .text-sm { font-size: 0.86rem; }
