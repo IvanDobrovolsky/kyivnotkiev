@@ -280,10 +280,14 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // point pushed the axis into 2026 and rendered a year with no data in it.
       const STUDY_START = new Date(2010, 0, 1);
       const STUDY_END = new Date(2025, 11, 31);
-      const padStart = new Date(dataMinDate.getFullYear(), dataMinDate.getMonth() - 1, 1);
-      const padEnd = new Date(dataMaxDate.getFullYear(), dataMaxDate.getMonth() + 1, 1);
-      const xStart = padStart < STUDY_START ? STUDY_START : padStart;
-      const xEnd = padEnd > STUDY_END ? STUDY_END : padEnd;
+      // The x axis is the whole study period for every source, never the active
+      // source's own extent. Sources begin at different times -- GDELT has nothing
+      // before 2015 -- and rescaling the axis per source made series covering
+      // different years look aligned, which defeats comparing them. Spans a source
+      // does not cover are hatched below, so an absence reads as an absence rather
+      // than as a flat line at zero.
+      const xStart = STUDY_START;
+      const xEnd = STUDY_END;
       const x = d3.scaleTime()
         .domain([xStart, xEnd])
         .range([0, width]);
@@ -349,6 +353,73 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         .attr('y1', (d: number) => y(d)).attr('y2', (d: number) => y(d))
         .attr('stroke', '#e5e7eb')
         .attr('stroke-dasharray', '3,4');
+
+      // ── No-data regions ──────────────────────────────────────────────────
+      // Hatch every span the active source does not cover. The gap threshold is
+      // derived from the source's own median cadence rather than a fixed number of
+      // days, because sources differ: ngrams is yearly, the rest monthly, and a
+      // fixed threshold would mark all of ngrams as missing.
+      const defs = svg.append('defs');
+      defs.append('pattern')
+        .attr('id', 'nodata-hatch')
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr('width', 6).attr('height', 6)
+        .attr('patternTransform', 'rotate(45)')
+        .append('line')
+        .attr('x1', 0).attr('y1', 0).attr('x2', 0).attr('y2', 6)
+        .attr('stroke', '#cbd5e1').attr('stroke-width', 2);
+
+      const covDates = (seriesData || [])
+        .map((d: any) => parseDate(d.date))
+        .filter((d: any) => !!d)
+        .sort((a: any, b: any) => a.getTime() - b.getTime());
+
+      const gapSpans: [Date, Date][] = [];
+      if (covDates.length === 0) {
+        gapSpans.push([xStart, xEnd]);
+      } else {
+        const deltas: number[] = [];
+        for (let i = 1; i < covDates.length; i++) {
+          deltas.push(covDates[i].getTime() - covDates[i - 1].getTime());
+        }
+        deltas.sort((a, b) => a - b);
+        const med = deltas.length ? deltas[Math.floor(deltas.length / 2)] : 31 * 864e5;
+        const gapMs = Math.max(med * 2.5, 45 * 864e5);
+        if (covDates[0].getTime() > xStart.getTime()) gapSpans.push([xStart, covDates[0]]);
+        for (let i = 1; i < covDates.length; i++) {
+          if (covDates[i].getTime() - covDates[i - 1].getTime() > gapMs) {
+            gapSpans.push([covDates[i - 1], covDates[i]]);
+          }
+        }
+        const last = covDates[covDates.length - 1];
+        if (last.getTime() < xEnd.getTime()) gapSpans.push([last, xEnd]);
+      }
+
+      const gapG = svg.append('g').attr('class', 'nodata-regions');
+      for (const [ga, gb] of gapSpans) {
+        const gx0 = Math.max(0, x(ga));
+        const gx1 = Math.min(width, x(gb));
+        if (gx1 - gx0 < 3) continue;
+        gapG.append('rect')
+          .attr('x', gx0).attr('y', 0)
+          .attr('width', gx1 - gx0).attr('height', height)
+          .attr('fill', 'url(#nodata-hatch)').attr('opacity', 0.5);
+        gapG.append('rect')
+          .attr('x', gx0).attr('y', 0)
+          .attr('width', gx1 - gx0).attr('height', height)
+          .attr('fill', 'none').attr('stroke', '#cbd5e1')
+          .attr('stroke-width', 1).attr('stroke-dasharray', '4,3');
+        if (gx1 - gx0 >= 46) {
+          const cx = (gx0 + gx1) / 2;
+          const vertical = (gx1 - gx0) < 96;
+          gapG.append('text')
+            .attr('x', cx).attr('y', height / 2)
+            .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+            .attr('font-size', 10).attr('fill', '#94a3b8')
+            .attr('transform', vertical ? `rotate(-90 ${cx} ${height / 2})` : null)
+            .text('no data');
+        }
+      }
 
       // Y-axis labels — same ticks as grid
       const fmtY = (d: number) => {
