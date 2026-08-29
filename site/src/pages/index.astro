@@ -31,10 +31,10 @@ const pairs = [
     <h1 class="heading-xl">#KyivNotKiev</h1>
     <p class="subtitle">
       In 2018 Ukraine's foreign ministry <a href="https://en.wikipedia.org/wiki/KyivNotKiev" target="_blank">asked the world</a>
-      to write Ukrainian names the Ukrainian way: not only cities, but people, dishes and historical figures.
-      This project measures how far that has happened. It scores every record in <strong>{m.num_sources} sources</strong>
-      from <strong>{m.time_span}</strong> for which spelling its author chose, then uses statistical tests and machine
-      learning trained on that data to find what moved usage and what held it back.
+      to write Ukrainian names the Ukrainian way — not just cities, but people, dishes and historical figures.
+      This project tracks how far that took hold. It reads what writers actually published from
+      <strong>{m.time_span}</strong>, applies statistics and machine learning to find what shifted usage and what
+      resisted, and puts the same question to <a href="/llm">today's AI chatbots</a>.
     </p>
   </div>
 </div>
@@ -49,7 +49,7 @@ const pairs = [
      collided with the pill borders and the closing clause orphaned onto its own
      line on a phone. The date range is already in the stat strip above. -->
 <div class="source-row mb-lg">
-  <span class="source-row-label">Data from {m.num_sources} sources</span>
+  <span class="source-row-label">Data from</span>
   <div class="source-row-marks">
     {Object.entries(m.sources).map(([key, s]: any) => (
       <a class="src-mark" href={`/sources#${key}`} style={`--c: ${s.color}`}
