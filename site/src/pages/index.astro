@@ -48,7 +48,7 @@ const pairs = [
      Laid out as a uniform row rather than a comma-separated sentence: the commas
      collided with the pill borders and the closing clause orphaned onto its own
      line on a phone. The date range is already in the stat strip above. -->
-<div class="source-row mb-lg">
+<div class="source-row mb-md">
   <span class="source-row-label">Data from</span>
   <div class="source-row-marks">
     {Object.entries(m.sources).map(([key, s]: any) => (
@@ -135,14 +135,18 @@ const pairs = [
 </script>
 
 <style>
+  /* The page is meant to land whole on a desktop screen: nav, hero, sources,
+     controls and all 24 cards without scrolling. The stack measured 811px against
+     roughly 790px usable at 1440x900, so the fixed chrome gives the room back —
+     the card grid is the content and is left alone. */
   .hero {
     display: flex;
     align-items: center;
-    gap: var(--space-xl);
-    padding: var(--space-xl) 0 var(--space-md);
+    gap: var(--space-lg);
+    padding: var(--space-md) 0 var(--space-sm);
   }
   .hero-logo {
-    height: 80px;
+    height: 52px;
     width: auto;
     flex-shrink: 0;
   }
