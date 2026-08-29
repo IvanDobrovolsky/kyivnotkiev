@@ -33,6 +33,10 @@
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Source Serif is the Stanford identity face and reads as scholarly rather than
+     decorative. Headings and prose take the serif; data, labels and UI stay in Inter,
+     whose numerals are better suited to figures sitting in a grid. */
+  --font-serif: 'Source Serif 4', Charter, 'Bitstream Charter', Cambria, Georgia, serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 
   /* Spacing */
@@ -59,6 +63,7 @@
 
 body {
   font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
   background: var(--bg-page);
   color: var(--text);
   line-height: 1.55;
@@ -432,3 +437,20 @@ a:hover { text-decoration: underline; }
   .stat-value { font-size: 1.1rem; }
   .chart-title { font-size: 0.95rem; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   Editorial type
+   Serif for headings and running prose, sans for anything that is
+   a number, a label or a control. Keeps the page scholarly without
+   making the data harder to scan.
+   ═══════════════════════════════════════════════════════════ */
+h1, h2, h3, .chart-title, .lede {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+h1 { letter-spacing: -0.02em; }
+.prose-wrap p, .analysis-box p, .lede { font-family: var(--font-serif); }
+.stat-value, .stat-pill-value, .pairs-table td, .src-mark,
+.controls-bar, .stat-label, .stat-source { font-family: var(--font-sans); }

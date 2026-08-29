@@ -17,13 +17,6 @@ function adoptionColor(pct: number) {
   return 'var(--red)';
 }
 
-function fmtBig(n: number | string) {
-  const v = typeof n === 'string' ? parseInt(n) : n;
-  if (v >= 1_000_000) return (v / 1_000_000).toFixed(1) + 'M';
-  if (v >= 1_000) return (v / 1_000).toFixed(1) + 'K';
-  return v.toString();
-}
-
 const { slug, russian, ukrainian, adoption, total, popularRank = 999 } = Astro.props;
 const pct = adoption || 0;
 const color = adoptionColor(pct);
@@ -45,9 +38,6 @@ const color = adoptionColor(pct);
   </div>
   <div class="pair-card-bar">
     <div class="pair-card-bar-fill" style={`width:${Math.min(pct, 100)}%; background:${color};`}></div>
-  </div>
-  <div class="pair-card-meta">
-    <span>{fmtBig(total || 0)} matches</span>
   </div>
 </a>
 
@@ -101,18 +91,11 @@ const color = adoptionColor(pct);
     height: 3px;
     background: #f0f0f0;
     border-radius: 2px;
-    margin-top: 0.3rem;
+    margin-top: 0.4rem;
     overflow: hidden;
   }
   .pair-card-bar-fill {
     height: 100%;
     border-radius: 2px;
-  }
-  .pair-card-meta {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.2rem;
-    font-size: 0.82rem;
-    color: var(--text-dim);
   }
 </style>

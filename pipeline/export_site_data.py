@@ -1045,8 +1045,8 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
         "num_sources": 8,  # 7 standard + telegram (religious removed 2026-08-25)
         "num_countries": int(extra_map.get("trends_countries", "0")),
         "sources": {
-            "gdelt": {"records": source_stats.get("gdelt", {}).get("records", 0), "pairs": source_stats.get("gdelt", {}).get("pairs", 0), "label": "News", "unit": "articles", "extra": f"GDELT · {extra_map.get('gdelt_domains', '0')} domains", "color": "#1e3a5f"},
             "trends": {"records": source_stats.get("trends", {}).get("records", 0), "pairs": source_stats.get("trends", {}).get("pairs", 0), "label": "Trends", "unit": "datapoints", "extra": f"Google · {extra_map.get('trends_countries', '55')} countries", "color": "#4285F4"},
+            "gdelt": {"records": source_stats.get("gdelt", {}).get("records", 0), "pairs": source_stats.get("gdelt", {}).get("pairs", 0), "label": "News", "unit": "articles", "extra": f"GDELT · {extra_map.get('gdelt_domains', '0')} domains", "color": "#1e3a5f"},
             "wikipedia": {"records": source_stats.get("wikipedia", {}).get("records", 0), "pairs": source_stats.get("wikipedia", {}).get("pairs", 0), "label": "Wiki", "unit": "pageviews", "extra": "Wikipedia · monthly", "color": "#636466"},
             "reddit": {"records": source_stats.get("reddit", {}).get("records", 0), "pairs": source_stats.get("reddit", {}).get("pairs", 0), "label": "Reddit", "unit": "posts", "extra": f"{extra_map.get('reddit_subreddits', '0')} subreddits", "color": "#FF4500"},
             "youtube": {"records": source_stats.get("youtube", {}).get("records", 0), "pairs": source_stats.get("youtube", {}).get("pairs", 0), "label": "YouTube", "unit": "videos", "extra": f"{extra_map.get('youtube_channels', '0')} channels", "color": "#FF0000"},
@@ -1557,6 +1557,22 @@ def main():
     write_json(SITE_DATA_DIR / "holdouts_by_pair.json", holdouts_by_pair)
     write_json(SITE_DATA_DIR / "holdouts.json", holdouts_global)
     write_json(SITE_DATA_DIR / "pair_events.json", pair_events)
+
+    # Pair metadata for the About table, straight from config/pairs.yaml so the forms
+    # and rationales on the page cannot drift from what the study measures. Disabled
+    # pairs are carried with enabled=false and filtered at render, not dropped here,
+    # so the file stays a faithful view of the config.
+    _meta = [{
+        "slug": p["slug"],
+        "enabled": bool(p.get("enabled", True)),
+        "russian": p.get("russian", ""),
+        "ukrainian": p.get("ukrainian", ""),
+        "ukrainian_cyrillic": p.get("ukrainian_cyrillic", ""),
+        "significance": p.get("significance", ""),
+    } for p in load_pairs().get("pairs", [])]
+    write_json(SITE_DATA_DIR / "pairs_meta.json", _meta)
+    log.info(f"  Wrote pairs_meta.json ({sum(1 for x in _meta if x['enabled'])} enabled "
+             f"of {len(_meta)} pairs)")
     write_json(SITE_DATA_DIR / "analysis.json", analysis)
 
     # Files written above already respect `enabled`, but several site JSONs come
