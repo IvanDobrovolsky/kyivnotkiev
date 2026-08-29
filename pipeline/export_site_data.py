@@ -1048,10 +1048,18 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
             "openalex": {"records": openalex_total_papers, "pairs": openalex_total_pairs, "label": "Academic", "unit": "papers", "extra": "OpenAlex · 250M+ works", "color": "#06b6d4"},
             "telegram": {"records": source_stats.get("telegram", {}).get("records", 0), "pairs": source_stats.get("telegram", {}).get("pairs", 0), "label": "Telegram", "unit": "messages", "extra": f"{extra_map.get('telegram_channels', '0')} channels", "color": "#26A5E4"},
         },
+        # Which source the chart opens on. It lives in config/pairs.yaml so it is set
+        # in one place rather than duplicated across the pair view, the Ukrainian
+        # landing page and their separate button markup, which had already drifted
+        # apart once — the default said one source while the highlighted button said
+        # another.
+        "default_source": (load_pairs().get("metadata", {}) or {}).get("default_source", "trends"),
         "pairs": sorted(pairs_out, key=lambda x: x["slug"]),
     }
 
-    log.info(f"  Manifest: {manifest['analyzable_pairs']} analyzable pairs, {manifest['toponym_matches']:,} toponym matches")
+    log.info(f"  Manifest: {manifest['analyzable_pairs']} analyzable pairs, "
+             f"{manifest['toponym_matches']:,} toponym matches, "
+             f"default source '{manifest['default_source']}'")
     return manifest
 
 

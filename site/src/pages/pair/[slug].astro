@@ -93,12 +93,19 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     // Read source from URL params for shareable links
     const _urlSource = new URLSearchParams(window.location.search).get('source');
     const validSources = ['trends','gdelt','wikipedia','reddit','youtube','ngrams','openalex','telegram'];
-    // Trends is the default: it is the only source covering all 24 pairs across the
-    // full 2010-2025 span (4,608 points). GDELT begins 2015-02 and covers 22 pairs,
-    // so opening on it showed a chart that is empty for a third of the study period
-    // before the reader has chosen anything.
-    let activeSource = _urlSource && validSources.includes(_urlSource) ? _urlSource : 'trends';
+    // The default comes from config/pairs.yaml via the manifest, so it is set in one
+    // place. It used to be hardcoded here, in the Ukrainian landing page, and again
+    // in the button markup — which drifted apart: the default named one source while
+    // the highlighted button showed another.
+    const _cfgDefault = (manifest as any).default_source || 'trends';
+    let activeSource = _urlSource && validSources.includes(_urlSource)
+      ? _urlSource
+      : (validSources.includes(_cfgDefault) ? _cfgDefault : 'trends');
     let activeSources = new Set([activeSource]);
+    // Keep the highlighted button in step with the resolved default.
+    document.querySelectorAll('.source-toggle').forEach((b) => {
+      b.classList.toggle('active', (b as HTMLElement).dataset.source === activeSource);
+    });
     // hideRuDomains replaced by holdoutFilter
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
     let chartMode: 'adoption' | 'volume' = 'volume';
@@ -305,7 +312,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         // 0-100 index, and each variant here is fetched separately so each is scaled
         // to its OWN peak. That is why both curves reach 100, at different dates.
         // Saying so on the chart stops the index being read as search volume.
-        trends: 'Monthly search interest — normalized index, each variant to its own peak (100); not absolute volume',
+        trends: 'Monthly search interest — normalized index, each variant to its own peak (100)',
         wikipedia: 'Pageviews API',
         reddit: 'Reddit posts',
         youtube: 'Video title matches',

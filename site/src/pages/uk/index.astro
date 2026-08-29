@@ -489,10 +489,12 @@ function formatNum(n: number) {
       openalex: 'Наукові статті',
     };
 
-    // Trends first: the only source covering all 24 pairs across the full 2010-2025
-    // span. GDELT begins 2015-02 and covers 22, so it opened on an empty third.
-    let activeSource = 'trends';
-    let activeSources = new Set(['trends']);
+    // Default from config/pairs.yaml via the manifest — set in one place.
+    let activeSource = (manifest as any).default_source || 'trends';
+    let activeSources = new Set([activeSource]);
+    document.querySelectorAll('.source-toggle').forEach((b) => {
+      b.classList.toggle('active', (b as HTMLElement).dataset.source === activeSource);
+    });
     // hideRuDomains replaced by holdoutFilter
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
     let chartMode: 'adoption' | 'volume' = 'volume';  // Volume by default — shows actual data density
