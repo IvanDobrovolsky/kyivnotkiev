@@ -112,8 +112,8 @@ function fmtBig(n: string | number) {
     grid.innerHTML = cards.map(c => `
       <div style="padding:0.6rem 0.4rem;background:${c.bg};border-radius:6px;text-align:center;">
         <div style="font-size:1.2rem;font-weight:700;color:${c.color};">${c.value}</div>
-        <div style="font-size:0.65rem;color:#6b7280;">${c.label}</div>
-        <div style="font-size:0.58rem;color:#9ca3af;">${c.sub}</div>
+        <div style="font-size:0.8rem;color:#6b7280;">${c.label}</div>
+        <div style="font-size:0.77rem;color:#9ca3af;">${c.sub}</div>
       </div>
     `).join('');
 
@@ -131,8 +131,8 @@ function fmtBig(n: string | number) {
     if (findingsEl) {
       findingsEl.innerHTML = findings.map(f => `
         <div style="padding:0.4rem 0.6rem;background:#f8f9fb;border-radius:5px;">
-          <div style="font-size:0.72rem;font-weight:600;color:var(--text);">${f.title}</div>
-          <div style="font-size:0.65rem;color:#6b7280;">${f.text}</div>
+          <div style="font-size:0.84rem;font-weight:600;color:var(--text);">${f.title}</div>
+          <div style="font-size:0.8rem;color:#6b7280;">${f.text}</div>
         </div>
       `).join('');
     }
@@ -157,11 +157,11 @@ function fmtBig(n: string | number) {
     const rowSums = matrix.map((r: number[]) => r.reduce((a: number, b: number) => a + b, 0));
     const maxOff = Math.max(...matrix.flatMap((r: number[], i: number) => r.map((v: number, j: number) => i === j ? 0 : v / (rowSums[i] || 1) * 100)));
     const svg = d3.select(container).append('svg').attr('viewBox', `0 0 ${w} ${h}`).style('max-width', '520px').style('width', '100%');
-    svg.append('text').attr('x', padL + n*cell/2).attr('y', h - 2).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af').text(`Predicted (DeBERTa-v3-large) \u2014 F1=${(cm.f1_macro || 0).toFixed(3)}`);
-    svg.append('text').attr('x', 8).attr('y', padT + n*cell/2).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af').attr('transform', `rotate(-90,8,${padT + n*cell/2})`).text('True (Haiku)');
+    svg.append('text').attr('x', padL + n*cell/2).attr('y', h - 2).attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', '#9ca3af').text(`Predicted (DeBERTa-v3-large) \u2014 F1=${(cm.f1_macro || 0).toFixed(3)}`);
+    svg.append('text').attr('x', 8).attr('y', padT + n*cell/2).attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', '#9ca3af').attr('transform', `rotate(-90,8,${padT + n*cell/2})`).text('True (Haiku)');
     labels.forEach((l: string, j: number) => {
-      svg.append('text').attr('x', padL + j*cell + cell/2).attr('y', padT - 8).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#6b7280').attr('transform', `rotate(-35,${padL + j*cell + cell/2},${padT - 8})`).text(short[l] || l);
-      svg.append('text').attr('x', padL - 4).attr('y', padT + j*cell + cell/2 + 3).attr('text-anchor', 'end').attr('font-size', 9).attr('fill', '#6b7280').text(short[l] || l);
+      svg.append('text').attr('x', padL + j*cell + cell/2).attr('y', padT - 8).attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', '#6b7280').attr('transform', `rotate(-35,${padL + j*cell + cell/2},${padT - 8})`).text(short[l] || l);
+      svg.append('text').attr('x', padL - 4).attr('y', padT + j*cell + cell/2 + 3).attr('text-anchor', 'end').attr('font-size', 12).attr('fill', '#6b7280').text(short[l] || l);
     });
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < n; j++) {
@@ -182,9 +182,9 @@ function fmtBig(n: string | number) {
         }
         svg.append('rect').attr('x', x).attr('y', y).attr('width', cell-1).attr('height', cell-1).attr('fill', fill).attr('rx', 3);
         if (i === j) {
-          svg.append('text').attr('x', x + cell/2).attr('y', y + cell/2 + 4).attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', textFill).attr('font-weight', 700).text(`${pct.toFixed(0)}%`);
+          svg.append('text').attr('x', x + cell/2).attr('y', y + cell/2 + 4).attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', textFill).attr('font-weight', 700).text(`${pct.toFixed(0)}%`);
         } else if (raw > 0) {
-          svg.append('text').attr('x', x + cell/2).attr('y', y + cell/2 + 4).attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', textFill).text(raw);
+          svg.append('text').attr('x', x + cell/2).attr('y', y + cell/2 + 4).attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', textFill).text(raw);
         }
       }
     }
@@ -230,7 +230,7 @@ function fmtBig(n: string | number) {
       info.append('div').style('font-size', '0.65rem').style('color', 'var(--text-muted)').text(`${m.params} params \u2014 ${m.desc}`);
       const accPct = (data.accuracy * 100);
       card.append('div').style('width', '80px').style('display', 'flex').style('flex-direction', 'column').style('align-items', 'flex-end').style('gap', '2px')
-        .html(`<div style="font-size:0.65rem;color:var(--text-muted)">Acc ${accPct.toFixed(1)}%</div>
+        .html(`<div style="font-size:0.8rem;color:var(--text-muted)">Acc ${accPct.toFixed(1)}%</div>
                <div style="width:100%;height:4px;background:var(--border);border-radius:2px"><div style="width:${(accPct - 80) * 5}%;height:100%;background:${isBest ? '#059669' : '#94a3b8'};border-radius:2px"></div></div>`);
     });
   })();

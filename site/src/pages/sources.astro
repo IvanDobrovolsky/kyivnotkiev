@@ -39,9 +39,9 @@ const sourceInfo: Record<string, {desc: string; url: string; coverage: string}> 
           <div style="font-size:0.9rem; font-weight:700; color:var(--text);">{s.label}</div>
           <div style="font-size:1.1rem; font-weight:800; color:{s.color};">{fmtBig(s.records)}</div>
         </div>
-        <div style="font-size:0.7rem; color:var(--text-muted); margin:0.2rem 0 0.4rem;">{s.extra}</div>
-        <p style="font-size:0.72rem; color:var(--text); margin:0 0 0.3rem; line-height:1.5;">{info.desc}</p>
-        <div style="display:flex; justify-content:space-between; font-size:0.6rem; color:var(--text-dim);">
+        <div style="font-size:0.82rem; color:var(--text-muted); margin:0.2rem 0 0.4rem;">{s.extra}</div>
+        <p style="font-size:0.84rem; color:var(--text); margin:0 0 0.3rem; line-height:1.5;">{info.desc}</p>
+        <div style="display:flex; justify-content:space-between; font-size:0.78rem; color:var(--text-dim);">
           <span>{info.coverage}</span>
           {info.url && <a href={info.url} target="_blank" style="color:#0057B8;">Source</a>}
         </div>

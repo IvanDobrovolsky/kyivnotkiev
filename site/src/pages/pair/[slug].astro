@@ -143,7 +143,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <div style="font-weight:600; color:var(--text); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${p.russian} → ${p.ukrainian}</div>
             <div style="font-size:0.8rem; font-weight:700; color:${color}; flex-shrink:0;">${pct}%</div>
           </div>
-          <div style="font-size:0.65rem; color:var(--text-muted); margin-top:0.15rem;">${desc}</div>
+          <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.15rem;">${desc}</div>
           <div style="height:3px; background:#f0f0f0; border-radius:2px; margin-top:0.3rem; margin-bottom:0.4rem;"><div style="height:100%; width:${pct}%; background:${color}; border-radius:2px;"></div></div>`;
 
         // Collocations inline
@@ -152,7 +152,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             const words = coll[variant]?.collocates?.slice(0, 5) || [];
             if (!words.length) continue;
             const maxC = Math.max(...words.map((w: any) => w.count));
-            html += `<div style="margin-bottom:0.2rem;"><span style="font-size:0.55rem;color:${vcolor};font-weight:700;text-transform:uppercase;letter-spacing:0.04em;margin-right:0.25rem;">${label}</span>`;
+            html += `<div style="margin-bottom:0.2rem;"><span style="font-size:0.76rem;color:${vcolor};font-weight:700;text-transform:uppercase;letter-spacing:0.04em;margin-right:0.25rem;">${label}</span>`;
             words.forEach((w: any, i: number) => {
               const sz = 0.68 + (w.count / maxC) * 0.3;
               const fw = i < 2 ? 700 : 400;
@@ -456,7 +456,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           gapG.append('text')
             .attr('x', cx).attr('y', height / 2)
             .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-            .attr('font-size', 10).attr('fill', '#94a3b8')
+            .attr('font-size', 12).attr('fill', '#94a3b8')
             .attr('transform', vertical ? `rotate(-90 ${cx} ${height / 2})` : null)
             .text('no data');
         }
@@ -530,8 +530,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           // Legend entry below chart
           const legendItem = document.createElement('span');
           legendItem.className = 'legend-item';
-          legendItem.style.cssText = `font-size:0.78rem; color:${isPair ? '#0057B8' : '#6b7280'}; ${isPair ? 'font-weight:600;' : ''}`;
-          legendItem.innerHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:${isPair ? '#0057B8' : '#e5e7eb'};color:${isPair ? '#fff' : '#6b7280'};font-size:10px;font-weight:700;margin-right:4px;">${eventNum}</span>${evt.label} (${evt.date})`;
+          legendItem.style.cssText = `font-size:0.87rem; color:${isPair ? '#0057B8' : '#6b7280'}; ${isPair ? 'font-weight:600;' : ''}`;
+          legendItem.innerHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:${isPair ? '#0057B8' : '#e5e7eb'};color:${isPair ? '#fff' : '#6b7280'};font-size:12px;font-weight:700;margin-right:4px;">${eventNum}</span>${evt.label} (${evt.date})`;
           legendContainer.appendChild(legendItem);
         });
       }
@@ -886,12 +886,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const fN = (n: number) => n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1) + 'K' : String(n);
       const out = rows.map(r => {
         return `<div style="display:flex; align-items:center; gap:0.4rem;">
-          <span style="width:${labelW}px; font-size:0.68rem; color:var(--text-muted); text-align:right; flex-shrink:0;">${sourceLabels[r.src].split(' ')[0]}</span>
+          <span style="width:${labelW}px; font-size:0.81rem; color:var(--text-muted); text-align:right; flex-shrink:0;">${sourceLabels[r.src].split(' ')[0]}</span>
           <div style="flex:1; height:${barH}px; background:#f0f0f0; border-radius:${barH / 2}px; position:relative; overflow:hidden;">
             <div style="position:absolute; left:50%; top:0; bottom:0; width:1px; background:#d1d5db;"></div>
             <div style="height:100%; width:${Math.max(1, Math.min(100, r.pct))}%; background:${sourceColors[r.src]}; border-radius:${barH / 2}px; opacity:0.85;"></div>
           </div>
-          <span style="width:42px; font-size:0.7rem; font-weight:600; color:${sourceColors[r.src]}; text-align:right; flex-shrink:0;">${r.pct}%</span>
+          <span style="width:42px; font-size:0.82rem; font-weight:600; color:${sourceColors[r.src]}; text-align:right; flex-shrink:0;">${r.pct}%</span>
         </div>`;
       }).join('');
       el.innerHTML = `<div style="display:flex; flex-direction:column; gap:0.25rem;">${out}</div>`;
@@ -938,7 +938,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const pid = activePairSlug;
       const pp = llmPerPair.pairs?.[pid];
       if (!pp || !pp.models) {
-        body.innerHTML = `<div style="font-size:0.7rem; color:var(--text-muted); padding:0.5rem 0;">No LLM data for pair ${pid}.</div>`;
+        body.innerHTML = `<div style="font-size:0.82rem; color:var(--text-muted); padding:0.5rem 0;">No LLM data for pair ${pid}.</div>`;
         return;
       }
       container.style.display = '';
@@ -970,19 +970,19 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       html += `
         <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.5rem; margin-bottom:0.75rem;">
           <div style="padding:0.6rem 0.75rem; background:rgba(213,43,30,0.05); border-left:3px solid #D52B1E; border-radius:3px;">
-            <div style="font-size:0.6rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Free recall</div>
+            <div style="font-size:0.78rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Free recall</div>
             <div style="font-size:1.4rem; font-weight:700; color:var(--text);">${fmt(sum.open_pct)}</div>
-            <div style="font-size:0.6rem; color:var(--text-muted);">of models pick "${pp.ukrainian}" when generating</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">of models pick "${pp.ukrainian}" when generating</div>
           </div>
           <div style="padding:0.6rem 0.75rem; background:rgba(0,87,184,0.05); border-left:3px solid #0057B8; border-radius:3px;">
-            <div style="font-size:0.6rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Forced choice (avg)</div>
+            <div style="font-size:0.78rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Forced choice (avg)</div>
             <div style="font-size:1.4rem; font-weight:700; color:var(--text);">${fmt(((sum.forced_ru_pct || 0) + (sum.forced_ua_pct || 0)) / 2)}</div>
-            <div style="font-size:0.6rem; color:var(--text-muted);">when shown both spellings</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">when shown both spellings</div>
           </div>
           <div style="padding:0.6rem 0.75rem; background:rgba(0,87,184,0.03); border-left:3px solid var(--text-muted); border-radius:3px;">
-            <div style="font-size:0.6rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">TAS (weighted)</div>
+            <div style="font-size:0.78rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">TAS (weighted)</div>
             <div style="font-size:1.4rem; font-weight:700; color:var(--text);">${fmt(sum.tas_mean)}</div>
-            <div style="font-size:0.6rem; color:var(--text-muted);">across ${sum.n_models} frontier models</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">across ${sum.n_models} frontier models</div>
           </div>
         </div>
       `;
@@ -991,7 +991,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // Show concrete counts (e.g. "3/3" or "17/17") in addition to %
       // because "100%" with N=3 looks identical to "100%" with N=71 and
       // misleads users into thinking small samples are universal truths.
-      html += `<div style="font-size:0.7rem; font-weight:700; color:var(--text); margin:0.75rem 0 0.4rem;">By family</div>`;
+      html += `<div style="font-size:0.82rem; font-weight:700; color:var(--text); margin:0.75rem 0 0.4rem;">By family</div>`;
       const safePct = (v: any) => (typeof v === 'number' ? v : 0);
       // Per-family raw counts: walk pp.models and tally
       const famCounts: Record<string, {open_ua: number, open_n: number, forced_ua: number, forced_n: number}> = {};
@@ -1012,7 +1012,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         const opPct = safePct(f.open_pct);
         const fcPct = safePct(f.forced_pct);
         html += `
-          <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0.5rem; align-items:center; margin-bottom:0.3rem; font-size:0.65rem;">
+          <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0.5rem; align-items:center; margin-bottom:0.3rem; font-size:0.8rem;">
             <div style="color:var(--text); display:flex; align-items:center; gap:0.25rem; min-width:0;">
               <span style="display:inline-block; width:8px; height:8px; border-radius:2px; background:${color}; flex-shrink:0;"></span>
               <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${fam}</span>
@@ -1022,19 +1022,19 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               <div style="flex:1; height:12px; background:#f0f0f0; border-radius:2px; overflow:hidden;">
                 <div style="width:${opPct}%; height:100%; background:#D52B1E; opacity:0.85;"></div>
               </div>
-              <span style="font-family:monospace; color:var(--text-muted); font-size:0.6rem; width:36px; text-align:right;">${counts.open_ua}/${counts.open_n}</span>
+              <span style="font-family:monospace; color:var(--text-muted); font-size:0.78rem; width:36px; text-align:right;">${counts.open_ua}/${counts.open_n}</span>
             </div>
             <div style="display:flex; align-items:center; gap:0.4rem;">
               <div style="flex:1; height:12px; background:#f0f0f0; border-radius:2px; overflow:hidden;">
                 <div style="width:${fcPct}%; height:100%; background:#0057B8; opacity:0.85;"></div>
               </div>
-              <span style="font-family:monospace; color:var(--text-muted); font-size:0.6rem; width:42px; text-align:right;">${counts.forced_ua}/${counts.forced_n}</span>
+              <span style="font-family:monospace; color:var(--text-muted); font-size:0.78rem; width:42px; text-align:right;">${counts.forced_ua}/${counts.forced_n}</span>
             </div>
           </div>
         `;
       }
       html += `
-        <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0.5rem; font-size:0.55rem; color:var(--text-muted); margin-top:0.5rem; padding-top:0.4rem; border-top:1px solid rgba(0,0,0,0.06);">
+        <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0.5rem; font-size:0.76rem; color:var(--text-muted); margin-top:0.5rem; padding-top:0.4rem; border-top:1px solid rgba(0,0,0,0.06);">
           <div></div>
           <div style="display:flex; align-items:center; gap:0.3rem;"><span style="width:8px; height:8px; background:#D52B1E; display:inline-block; border-radius:1px;"></span>free recall — UA picks / total decisive</div>
           <div style="display:flex; align-items:center; gap:0.3rem;"><span style="width:8px; height:8px; background:#0057B8; display:inline-block; border-radius:1px;"></span>forced choice — UA picks / 2 trials per model</div>
@@ -1043,8 +1043,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
       // Per-model scatter plot — one circle per model, grouped by family on X,
       // TAS on Y. Replaces the giant table; hover shows model + TAS.
-      html += `<div style="font-size:0.7rem; font-weight:700; color:var(--text); margin:1rem 0 0.25rem;">All ${models.length} models · TAS by family</div>`;
-      html += `<div style="font-size:0.6rem; color:var(--text-muted); margin-bottom:0.4rem;">Each dot is one model. Y axis is TAS (0–100%). Hover for the model name and its three trial outcomes.</div>`;
+      html += `<div style="font-size:0.82rem; font-weight:700; color:var(--text); margin:1rem 0 0.25rem;">All ${models.length} models · TAS by family</div>`;
+      html += `<div style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.4rem;">Each dot is one model. Y axis is TAS (0–100%). Hover for the model name and its three trial outcomes.</div>`;
       html += `<div id="pair-llm-scatter" style="width:100%; height:240px;"></div>`;
 
       body.innerHTML = html;
@@ -1225,10 +1225,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.25rem;">
             <span style="width:8px; height:8px; border-radius:50%; background:${color}; flex-shrink:0;" title="${variantLabels[a.variant] || ''} form"></span>
             <a href="${a.url}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${a.domain}</a>
-            ${isRecentRussian ? '<span style="font-size:0.6rem; background:#dc2626; color:white; padding:1px 5px; border-radius:3px;">still RU</span>' : ''}
-            <span style="color:var(--text-muted); font-size:0.7rem; margin-left:auto; flex-shrink:0;">${a.month || ''}</span>
+            ${isRecentRussian ? '<span style="font-size:0.78rem; background:#dc2626; color:white; padding:1px 5px; border-radius:3px;">still RU</span>' : ''}
+            <span style="color:var(--text-muted); font-size:0.82rem; margin-left:auto; flex-shrink:0;">${a.month || ''}</span>
           </div>
-          <div style="color:var(--text-muted); font-size:0.75rem; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${a.text_preview || ''}</div>
+          <div style="color:var(--text-muted); font-size:0.86rem; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${a.text_preview || ''}</div>
         `;
         list.appendChild(item);
       }
@@ -1299,7 +1299,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       for (const slice of slices) {
         const pct = total > 0 ? (slice.value / total * 100).toFixed(1) : '0';
         const fmtVal = slice.value >= 1e6 ? (slice.value/1e6).toFixed(1)+'M' : slice.value >= 1e3 ? (slice.value/1e3).toFixed(1)+'K' : String(slice.value);
-        legend += `<div style="display:flex; align-items:center; gap:0.3rem; font-size:0.68rem;">`;
+        legend += `<div style="display:flex; align-items:center; gap:0.3rem; font-size:0.81rem;">`;
         legend += `<span style="width:8px; height:8px; border-radius:2px; background:${slice.color}; flex-shrink:0;"></span>`;
         legend += `<span style="color:var(--text);">${slice.label}</span>`;
         legend += `<span style="color:var(--text-muted); margin-left:auto;">${pct}% (${fmtVal})</span>`;
@@ -1372,7 +1372,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const isNewPair = activePairSlug >= 80;
       if (filledCount <= 3) {
         const note = document.createElement('div');
-        note.style.cssText = 'grid-column: 1 / -1; font-size:0.65rem; color:var(--text-muted); padding:0.5rem 0.3rem; line-height:1.5; border-top:1px solid rgba(0,0,0,0.06); margin-top:0.3rem;';
+        note.style.cssText = 'grid-column: 1 / -1; font-size:0.8rem; color:var(--text-muted); padding:0.5rem 0.3rem; line-height:1.5; border-top:1px solid rgba(0,0,0,0.06); margin-top:0.3rem;';
         note.innerHTML = isNewPair
           ? `<strong>New pair.</strong> Data collection is in progress for this pair. Most sources are being scraped and will appear shortly.`
           : `<strong>Limited coverage.</strong> This pair has sparse data because it appears primarily in ${filledCount <= 1 ? 'a single source' : filledCount + ' sources'}.`;
@@ -1615,8 +1615,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           const articleUrl = h.url || `https://${domain}`;
           const isRu = domain.endsWith('.ru');
           const isUa = domain.endsWith('.ua');
-          const tag = isRu ? '<span style="font-size:0.6rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ru</span>'
-                    : isUa ? '<span style="font-size:0.6rem; color:#0057B8; background:#f0f9ff; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ua</span>' : '';
+          const tag = isRu ? '<span style="font-size:0.78rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ru</span>'
+                    : isUa ? '<span style="font-size:0.78rem; color:#0057B8; background:#f0f9ff; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ua</span>' : '';
           const vol = h.articles || h.total || 0;
           return `<tr style="border-bottom:1px solid #f3f4f6; ${isRu ? 'background:#fef2f2;' : ''}">
             <td style="padding:0.4rem 0.6rem; font-size:0.8rem;"><a href="${articleUrl}" target="_blank" rel="noopener" style="color:var(--text); font-weight:500; text-decoration:none; border-bottom:1px dotted #d1d5db;">${domain}</a>${tag}</td>
@@ -1625,20 +1625,20 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         }).join('');
         html = `<table style="width:100%; border-collapse:collapse;">
           <thead><tr style="border-bottom:2px solid #e5e7eb;">
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Domain (click for sample article)</th>
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Articles</th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.8rem; text-transform:uppercase; color:#6b7280;">Domain (click for sample article)</th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.8rem; text-transform:uppercase; color:#6b7280;">Articles</th>
           </tr></thead><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'wikipedia') {
         const rows = items.map((w: any) => {
-          const redirectTag = w.redirects ? '<span style="font-size:0.6rem; color:#059669; background:#ecfdf5; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.4rem;">redirects to UA</span>'
-            : '<span style="font-size:0.6rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.4rem;">no redirect</span>';
+          const redirectTag = w.redirects ? '<span style="font-size:0.78rem; color:#059669; background:#ecfdf5; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.4rem;">redirects to UA</span>'
+            : '<span style="font-size:0.78rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.4rem;">no redirect</span>';
           return `<tr style="border-bottom:1px solid #f3f4f6;">
             <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${w.url}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; border-bottom:1px dotted #d1d5db;">${w.name}</a>${redirectTag}</td>
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(w.views || 0).toLocaleString()} views</td>
           </tr>`;
         }).join('');
-        html = `<p style="font-size:0.75rem; color:#6b7280; margin:0.5rem 0.6rem;">Wikipedia pages with old spelling — pageviews in 2025:</p>
+        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">Wikipedia pages with old spelling — pageviews in 2025:</p>
         <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'reddit') {
@@ -1647,7 +1647,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${r.url}" target="_blank" rel="noopener" style="color:#FF4500; text-decoration:none;">${r.name}</a></td>
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.score ? r.score.toLocaleString() + ' ↑' : ''}</td>
           </tr>`).join('');
-        html = `<p style="font-size:0.75rem; color:#6b7280; margin:0.5rem 0.6rem;">Reddit posts still using the old spelling in 2025:</p>
+        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">Reddit posts still using the old spelling in 2025:</p>
         <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'youtube') {
@@ -1674,9 +1674,9 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           </tr>`).join('');
         html = `<table style="width:100%; border-collapse:collapse;">
           <thead><tr style="border-bottom:2px solid #e5e7eb;">
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Paper (click to open on OpenAlex)</th>
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Year</th>
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.65rem; text-transform:uppercase; color:#6b7280;">Cited</th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.8rem; text-transform:uppercase; color:#6b7280;">Paper (click to open on OpenAlex)</th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.8rem; text-transform:uppercase; color:#6b7280;">Year</th>
+            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.8rem; text-transform:uppercase; color:#6b7280;">Cited</th>
           </tr></thead><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'trends' || holdoutKey === 'ngrams') {
@@ -2051,7 +2051,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             .html(`Sentiment: <span style="color:#ef4444">RU ${sent.russian?.mean_score?.toFixed(2) || '?'}</span> / <span style="color:#3b82f6">UA ${sent.ukrainian?.mean_score?.toFixed(2) || '?'}</span>`);
         }
       } else if (ctxContainer) {
-        ctxContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.75rem;">No context data</div>';
+        ctxContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.86rem;">No context data</div>';
       }
 
       // Right: contrastive analysis (log-odds ratio, Monroe et al. 2008)
@@ -2096,7 +2096,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           });
         }
       } else if (collContainer) {
-        collContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.75rem;">No contrastive data</div>';
+        collContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.86rem;">No contrastive data</div>';
       }
     }
 
@@ -2250,7 +2250,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         const accPct = (data.accuracy * 100);
         card.append('div').style('width', '80px').style('display', 'flex').style('flex-direction', 'column')
           .style('align-items', 'flex-end').style('gap', '2px')
-          .html(`<div style="font-size:0.65rem;color:var(--text-muted)">Acc ${accPct.toFixed(1)}%</div>
+          .html(`<div style="font-size:0.8rem;color:var(--text-muted)">Acc ${accPct.toFixed(1)}%</div>
                  <div style="width:100%;height:4px;background:var(--border);border-radius:2px">
                    <div style="width:${(accPct - 80) * 5}%;height:100%;background:${isBest ? '#059669' : '#94a3b8'};border-radius:2px"></div>
                  </div>`);
@@ -2283,18 +2283,18 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
       // Axis labels
       svg.append('text').attr('x', padL + n*cell/2).attr('y', h - 2)
-        .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af').text(`Predicted (DeBERTa-v3-large) — F1=${((confusionMatrix as any).f1_macro || 0).toFixed(3)}`);
+        .attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', '#9ca3af').text(`Predicted (DeBERTa-v3-large) — F1=${((confusionMatrix as any).f1_macro || 0).toFixed(3)}`);
       svg.append('text').attr('x', 8).attr('y', padT + n*cell/2)
-        .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#9ca3af')
+        .attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', '#9ca3af')
         .attr('transform', `rotate(-90,8,${padT + n*cell/2})`).text('True (Haiku)');
 
       // Headers
       labels.forEach((l: string, j: number) => {
         svg.append('text').attr('x', padL + j*cell + cell/2).attr('y', padT - 8)
-          .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#6b7280')
+          .attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', '#6b7280')
           .attr('transform', `rotate(-35,${padL + j*cell + cell/2},${padT - 8})`).text(short[l] || l);
         svg.append('text').attr('x', padL - 4).attr('y', padT + j*cell + cell/2 + 3)
-          .attr('text-anchor', 'end').attr('font-size', 9).attr('fill', '#6b7280').text(short[l] || l);
+          .attr('text-anchor', 'end').attr('font-size', 12).attr('fill', '#6b7280').text(short[l] || l);
       });
 
       // Cells
@@ -2319,11 +2319,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             .attr('fill', fill).attr('rx', 3);
           if (i === j) {
             svg.append('text').attr('x', x + cell/2).attr('y', y + cell/2 + 4)
-              .attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', textFill)
+              .attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', textFill)
               .attr('font-weight', 700).text(`${pct.toFixed(0)}%`);
           } else if (raw > 0) {
             svg.append('text').attr('x', x + cell/2).attr('y', y + cell/2 + 4)
-              .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', textFill).text(raw);
+              .attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', textFill).text(raw);
           }
         }
       }
@@ -2368,8 +2368,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       grid.innerHTML = cards.map(c => `
         <div style="padding:0.6rem 0.4rem;background:${c.bg};border-radius:6px;text-align:center;">
           <div style="font-size:1.2rem;font-weight:700;color:${c.color};">${c.value}</div>
-          <div style="font-size:0.65rem;color:#6b7280;">${c.label}</div>
-          <div style="font-size:0.58rem;color:#9ca3af;">${c.sub}</div>
+          <div style="font-size:0.8rem;color:#6b7280;">${c.label}</div>
+          <div style="font-size:0.77rem;color:#9ca3af;">${c.sub}</div>
         </div>
       `).join('');
 
@@ -2390,8 +2390,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       if (findingsEl) {
         findingsEl.innerHTML = findings.map(f => `
           <div style="padding:0.4rem 0.6rem;background:#f8f9fb;border-radius:5px;">
-            <div style="font-size:0.72rem;font-weight:600;color:var(--text);">${f.title}</div>
-            <div style="font-size:0.65rem;color:#6b7280;">${f.text}</div>
+            <div style="font-size:0.84rem;font-weight:600;color:var(--text);">${f.title}</div>
+            <div style="font-size:0.8rem;color:#6b7280;">${f.text}</div>
           </div>
         `).join('');
       }
