@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import StatStrip from '../components/StatStrip.astro';
 import PairCard from '../components/PairCard.astro';
 import m from '../data/manifest.json';
+import icons from '../data/source_icons.json';
 
 function fmtBig(n: string | number) {
   const v = typeof n === 'string' ? parseInt(n) : n;
@@ -49,17 +50,20 @@ const stats = [
   <StatStrip items={stats} />
 </div>
 
-<!-- Data sources, as one compact sentence. Driven from manifest.sources so the
-     list, colours and count cannot drift from what the pipeline produced. Named
-     colour marks rather than brand logos: nothing external to fetch, so it cannot
-     break offline, and no third-party trademarks are reproduced. -->
+<!-- Data sources, as one compact clickable line. Driven from manifest.sources so
+     the list, colours and counts cannot drift from the pipeline. Marks are inlined
+     SVG: five are brand logos from simple-icons (CC0); GDELT, Google Ngrams and
+     OpenAlex have no mark in that set, and borrowing Google News' logo for GDELT
+     would misattribute the source, so those three are neutral glyphs. Inlining
+     means nothing is fetched at runtime. -->
 <p class="source-line mb-lg">
   Data is collected from {m.num_sources} sources:{' '}
   {Object.entries(m.sources).map(([key, s]: any, i: number) => (
     <>
       <a class="src-mark" href={`/sources#${key}`} style={`--c: ${s.color}`}
          title={`${s.label} — ${fmtBig(s.records)} ${s.unit}`}>
-        <span class="src-dot"></span>{s.label}
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d={(icons as any)[key]?.path} /></svg>
+        <span>{s.label}</span>
       </a>{i < Object.keys(m.sources).length - 1 ? ', ' : ''}
     </>
   ))}
@@ -67,20 +71,17 @@ const stats = [
 </p>
 
 <style>
-  .source-line {
-    font-size: 0.9rem; line-height: 1.9; color: var(--text-muted, #6b7280);
-  }
+  .source-line { font-size: 0.9rem; line-height: 2.1; color: var(--text-muted, #6b7280); }
   .src-mark {
-    display: inline-flex; align-items: center; gap: 0.28rem;
-    padding: 0.1rem 0.42rem; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 0.32rem;
+    padding: 0.12rem 0.45rem; border-radius: 999px;
     border: 1px solid #e5e7eb; background: #fff;
     color: var(--text, #111); text-decoration: none;
     font-weight: 600; font-size: 0.84rem; white-space: nowrap;
+    transition: border-color 0.15s;
   }
+  .src-mark svg { width: 13px; height: 13px; fill: var(--c); flex: 0 0 auto; }
   .src-mark:hover { border-color: var(--c); text-decoration: none; }
-  .src-dot {
-    width: 7px; height: 7px; border-radius: 50%; background: var(--c); flex: 0 0 auto;
-  }
 </style>
 
 <!-- Sort + Filter -->
