@@ -75,8 +75,12 @@ const navItems = [
 
   <footer class="site-footer">
     <div class="site-footer-inner">
+      <span>Built by <a href="https://github.com/IvanDobrovolsky" target="_blank" rel="noopener">Ivan Dobrovolskyi</a></span>
+      <span class="dot">·</span>
       <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank" rel="noopener">GitHub</a>
+      <span class="dot">·</span>
       <a href="https://huggingface.co/KyivNotKiev" target="_blank" rel="noopener">Hugging Face</a>
+      <span class="dot">·</span>
       <a href="/privacy.html">Privacy</a>
     </div>
   </footer>
@@ -158,11 +162,14 @@ const navItems = [
 
   .site-footer { border-top: 1px solid var(--border, #e5e7eb); margin-top: 3rem; }
   .site-footer-inner {
-    max-width: 1272px; margin: 0 auto; padding: 1rem;
-    display: flex; gap: 1.25rem; flex-wrap: wrap;
+    max-width: 1272px; margin: 0 auto; padding: 1.25rem 1rem;
+    display: flex; gap: 0.6rem; flex-wrap: wrap;
+    align-items: center; justify-content: center;
+    font-size: 0.82rem; color: var(--text-muted, #6b7280);
   }
   .site-footer-inner a {
     font-size: 0.82rem; color: var(--text-muted, #6b7280); text-decoration: none;
   }
+  .site-footer-inner .dot { opacity: 0.5; }
   .site-footer-inner a:hover { color: var(--text, #111); text-decoration: underline; }
 </style>
