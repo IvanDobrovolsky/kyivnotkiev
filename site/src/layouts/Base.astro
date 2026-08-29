@@ -133,4 +133,20 @@ const navItems = [
     margin: 0 auto;
     padding: 0.75rem 1rem 2rem;
   }
+
+  /* The four nav items plus the wordmark measure roughly 510px, so on a phone they
+     exceeded the viewport — and body sets overflow-x: hidden, which CLIPS rather
+     than scrolls, leaving the last item unreachable. Tighten the row and let it
+     scroll on its own axis. */
+  @media (max-width: 640px) {
+    .site-nav-inner { padding: 0 0.6rem; gap: 0.5rem; }
+    .site-nav-links {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .site-nav-links::-webkit-scrollbar { display: none; }
+    .site-nav-links a { padding: 0.85rem 0.55rem; font-size: 0.8rem; white-space: nowrap; }
+    .site-nav-logo span { font-size: 0.88rem; }
+  }
 </style>

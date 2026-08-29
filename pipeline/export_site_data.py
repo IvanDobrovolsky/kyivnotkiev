@@ -1027,12 +1027,18 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
             "is_control": slug in control_slugs,
         })
 
-    toponym_matches = sum(s["records"] for s in source_stats.values()) + openalex_total_papers
+    # Only document-level matches count. Summing every source's `records` added
+    # Wikipedia PAGEVIEWS (298.7M) and Trends index datapoints to article and post
+    # counts, so the total read 300.3M when 99.5% of it was neither a document nor a
+    # match. These four sources are the ones where a record is a text in which a
+    # variant actually appears.
+    TEXT_SOURCES_FOR_TOTAL = ("gdelt", "reddit", "youtube")
+    toponym_matches = (sum(source_stats.get(s, {}).get("records", 0)
+                           for s in TEXT_SOURCES_FOR_TOTAL) + openalex_total_papers)
 
     manifest = {
         "total_pairs": len(enabled_slugs),
         "analyzable_pairs": len(analyzable_slugs),
-        "records_scanned": "90B+",
         "toponym_matches": toponym_matches,
         "cl_corpus": _get_cl_corpus_size(),
         "time_span": "2010-2025",

@@ -409,6 +409,21 @@ a:hover { text-decoration: underline; }
   .chart-title { font-size: 1rem; }
 }
 
+@media (max-width: 640px) {
+  /* Reclaim horizontal space: --space-lg either side costs real width on a phone. */
+  .container { padding: 0 0.75rem; }
+  .controls-bar { gap: var(--space-sm); align-items: stretch; }
+  .controls-group { flex-wrap: wrap; }
+  .stat-strip { grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); }
+}
+
+@media (max-width: 420px) {
+  /* Two columns of stat pills stop fitting around here. */
+  .grid-4, .grid-5 { grid-template-columns: 1fr 1fr; }
+  .stat-strip { grid-template-columns: 1fr 1fr; }
+  h1 { font-size: 1.35rem; }
+}
+
 @media (max-width: 600px) {
   .grid-4, .grid-5 { grid-template-columns: repeat(2, 1fr); }
   .grid-auto { grid-template-columns: 1fr; }

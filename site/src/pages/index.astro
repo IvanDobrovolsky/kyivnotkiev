@@ -21,8 +21,10 @@ const pairs = [
 ];
 
 const stats = [
-  { value: m.records_scanned, label: 'records scanned' },
-  { value: fmtBig(m.toponym_matches), label: 'toponym matches' },
+  // "90B+ records scanned" was a hardcoded string, not a measurement, and
+  // "300.3M toponym matches" summed every source's record field regardless of unit
+  // — 99.5% of it was Wikipedia PAGEVIEWS counted as textual matches. Both removed
+  // rather than restated; the remaining figures are each directly verifiable.
   { value: String(m.analyzable_pairs), label: 'pairs tracked' },
   { value: String(m.num_sources), label: 'data sources' },
   { value: m.time_span, label: 'time span' },
@@ -46,6 +48,40 @@ const stats = [
 <div class="mb-lg">
   <StatStrip items={stats} />
 </div>
+
+<!-- Data sources, as one compact sentence. Driven from manifest.sources so the
+     list, colours and count cannot drift from what the pipeline produced. Named
+     colour marks rather than brand logos: nothing external to fetch, so it cannot
+     break offline, and no third-party trademarks are reproduced. -->
+<p class="source-line mb-lg">
+  Data is collected from {m.num_sources} sources:{' '}
+  {Object.entries(m.sources).map(([key, s]: any, i: number) => (
+    <>
+      <a class="src-mark" href={`/sources#${key}`} style={`--c: ${s.color}`}
+         title={`${s.label} — ${fmtBig(s.records)} ${s.unit}`}>
+        <span class="src-dot"></span>{s.label}
+      </a>{i < Object.keys(m.sources).length - 1 ? ', ' : ''}
+    </>
+  ))}
+  {' '}covering {m.time_span}.
+</p>
+
+<style>
+  .source-line {
+    font-size: 0.9rem; line-height: 1.9; color: var(--text-muted, #6b7280);
+  }
+  .src-mark {
+    display: inline-flex; align-items: center; gap: 0.28rem;
+    padding: 0.1rem 0.42rem; border-radius: 999px;
+    border: 1px solid #e5e7eb; background: #fff;
+    color: var(--text, #111); text-decoration: none;
+    font-weight: 600; font-size: 0.84rem; white-space: nowrap;
+  }
+  .src-mark:hover { border-color: var(--c); text-decoration: none; }
+  .src-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--c); flex: 0 0 auto;
+  }
+</style>
 
 <!-- Sort + Filter -->
 <div class="controls-bar mb-md">
