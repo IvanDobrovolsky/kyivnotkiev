@@ -1336,17 +1336,23 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         card.className = 'stat-card mini';
         card.style.setProperty('--accent', sourceColors[src] || '#888');
 
-        if (series && series.length > 0) {
-          const totalUkr = series.reduce((s: number, d: any) => s + (d.ukr || 0), 0);
-          const totalRus = series.reduce((s: number, d: any) => s + (d.rus || 0), 0);
-          const total = totalUkr + totalRus;
-          const last = series[series.length - 1];
+        // Figures come from the pipeline (manifest.pair_source_stats), computed over
+        // the source records. Summing the plotted series client-side printed the sum
+        // of Trends' 0-100 index as a mention count and derived the headline
+        // percentage from it. Sources whose unit is not countable — Trends' index,
+        // ngrams' frequency — publish an adoption figure and no totals.
+        const st = ((manifest as any).pair_source_stats || {})[activePairSlug] || {};
+        const sstat = st[src];
+
+        if (sstat) {
           const fmtN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
-          const adoptionPct = total > 0 ? Math.round(totalUkr / total * 100) : 0;
+          const detail = sstat.countable
+            ? `<span style="color:#0057B8;">${fmtN(sstat.ukr)}</span> · <span style="color:#dc2626;">${fmtN(sstat.rus)}</span> ${sstat.unit}`
+            : `${sstat.unit}`;
           card.innerHTML = `
-            <div class="stat-value">${adoptionPct}%</div>
+            <div class="stat-value">${Math.round(sstat.adoption)}%</div>
             <div class="stat-label">${sourceLabels[src]}</div>
-            <div class="stat-source"><span style="color:#0057B8;">${fmtN(totalUkr)}</span> · <span style="color:#dc2626;">${fmtN(totalRus)}</span> · ${series.length} pts</div>
+            <div class="stat-source">${detail}</div>
           `;
         } else {
           // Determine why data is missing — expected vs gap
@@ -1355,11 +1361,14 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           const isNewPair = false;
           const gdeltNoData = false;
           const ngramsNoData = false;
+          // "No mentions found" asserted a measured zero. Absence here means the
+          // source has too little for this pair to support a figure — which is a
+          // different claim, and usually the true one.
           const reason =
             isNewPair ? 'Data collection in progress' :
             (src === 'gdelt' && gdeltNoData) ? 'Not in news URLs' :
             (src === 'ngrams' && ngramsNoData) ? 'Not in book corpus' :
-            'No mentions found';
+            'Not enough data';
           card.innerHTML = `
             <div class="stat-value" style="color:#d1d5db;">—</div>
             <div class="stat-label">${sourceLabels[src]}</div>
