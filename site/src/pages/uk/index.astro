@@ -161,8 +161,8 @@ function formatNum(n: number) {
           </div>
           <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.4rem;">
             <div class="chart-controls" style="margin:0;">
-              <button class="source-toggle active" data-source="gdelt" style="--source-color: #1e3a5f"><span class="source-dot"></span>GDELT</button>
-              <button class="source-toggle" data-source="trends" style="--source-color: #4285F4"><span class="source-dot"></span>Trends</button>
+              <button class="source-toggle active" data-source="trends" style="--source-color: #4285F4"><span class="source-dot"></span>Trends</button>
+              <button class="source-toggle" data-source="gdelt" style="--source-color: #1e3a5f"><span class="source-dot"></span>GDELT</button>
               <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466"><span class="source-dot"></span>Вікі</button>
               <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500"><span class="source-dot"></span>Reddit</button>
               <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000"><span class="source-dot"></span>YouTube</button>
@@ -489,8 +489,10 @@ function formatNum(n: number) {
       openalex: 'Наукові статті',
     };
 
-    let activeSource = 'gdelt';  // GDELT first — news coverage is most precise
-    let activeSources = new Set(['gdelt']);
+    // Trends first: the only source covering all 24 pairs across the full 2010-2025
+    // span. GDELT begins 2015-02 and covers 22, so it opened on an empty third.
+    let activeSource = 'trends';
+    let activeSources = new Set(['trends']);
     // hideRuDomains replaced by holdoutFilter
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
     let chartMode: 'adoption' | 'volume' = 'volume';  // Volume by default — shows actual data density
@@ -968,7 +970,7 @@ function formatNum(n: number) {
       const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       if (!pair) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
       const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
 
       // Big number at top
@@ -1010,7 +1012,7 @@ function formatNum(n: number) {
       const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
+      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
       const items: {src: string; adoption: number; n: number}[] = [];
 
       for (const src of srcOrder) {
