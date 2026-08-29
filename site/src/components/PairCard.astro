@@ -28,16 +28,16 @@ const color = adoptionColor(pct);
    data-total={total || 0}
    data-name={ukrainian}
    data-popular={popularRank}>
-  <div class="pair-card-top">
-    <div class="pair-card-names">
-      <span class="pair-old">{russian}</span>
-      <span class="pair-arrow">&rarr;</span>
-      <span class="pair-new">{ukrainian}</span>
+  <div class="pair-card-names">
+    <span class="pair-old">{russian}</span>
+    <span class="pair-arrow">&rarr;</span>
+    <span class="pair-new">{ukrainian}</span>
+  </div>
+  <div class="pair-card-row">
+    <div class="pair-card-bar">
+      <div class="pair-card-bar-fill" style={`width:${Math.min(pct, 100)}%; background:${color};`}></div>
     </div>
     <span class="pair-pct" style={`color:${color}`}>{pct}%</span>
-  </div>
-  <div class="pair-card-bar">
-    <div class="pair-card-bar-fill" style={`width:${Math.min(pct, 100)}%; background:${color};`}></div>
   </div>
 </a>
 
@@ -57,15 +57,20 @@ const color = adoptionColor(pct);
     box-shadow: 0 2px 8px rgba(0,87,184,0.08);
     text-decoration: none;
   }
-  .pair-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--space-sm);
-  }
+  /* Names take a full row of their own. Sharing the row with the percentage meant
+     a long pair wrapped to two lines while a short one stayed on one, so cards in
+     the same grid row ended up different heights. */
   .pair-card-names {
     min-width: 0;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pair-card-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.4rem;
   }
   .pair-old {
     font-size: 0.82rem;
@@ -83,15 +88,17 @@ const color = adoptionColor(pct);
     color: var(--text);
   }
   .pair-pct {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    flex-shrink: 0;
+    flex: 0 0 auto;
+    min-width: 2.6rem;
+    text-align: right;
   }
   .pair-card-bar {
-    height: 3px;
+    flex: 1 1 auto;
+    height: 4px;
     background: #f0f0f0;
     border-radius: 2px;
-    margin-top: 0.4rem;
     overflow: hidden;
   }
   .pair-card-bar-fill {
