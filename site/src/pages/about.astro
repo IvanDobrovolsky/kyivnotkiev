@@ -136,7 +136,10 @@ const rows = (pairsConfig as any[]).filter(p => p.enabled);
 </Base>
 
 <style>
-  .prose-wrap { max-width: 60rem; margin: 0 auto; }
+  .prose-wrap { max-width: 100%; margin: 0; }
+  /* Prose still gets a comfortable measure; the table and lists use the full
+     container width like every other page. */
+  .prose-wrap > p, .prose-wrap > .note { max-width: 46rem; }
   .lede { font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem; }
   .prose-wrap p { line-height: 1.7; margin-bottom: 1rem; }
   .prose-wrap h2 { margin: 2rem 0 0.75rem; font-size: 1.15rem; }
