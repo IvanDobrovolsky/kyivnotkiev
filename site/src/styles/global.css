@@ -32,10 +32,11 @@
   --c-openalex: #06b6d4;
 
   /* Typography */
-  /* One family across the whole site. Mixing a serif for prose with a sans for data
-     read as two designs sharing a page. Source Serif holds up at UI sizes, keeps the
-     scholarly register, and its tabular figures line the numbers up in the grids. */
-  --font-sans: 'Source Serif 4', Charter, 'Bitstream Charter', Cambria, Georgia, serif;
+  /* One family across the whole site. A serif was tried and read badly at UI sizes
+     in a data-dense layout. IBM Plex Sans is a technical face with more character
+     than a neutral grotesque, and its tabular figures keep numbers aligned in the
+     grids without a second family. */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 
   /* Spacing */

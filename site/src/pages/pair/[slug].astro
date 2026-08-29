@@ -526,12 +526,17 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             .attr('cx', xPos).attr('cy', -18)
             .attr('r', 9)
             .attr('fill', isPair ? '#0057B8' : '#e5e7eb');
+          // Two-digit numbers crowd the circle at a fixed size, so the type steps down
+          // once the label reaches double digits. Centred on the baseline rather than
+          // by a hand-tuned y offset, which drifted as the size changed.
           svg.append('text')
-            .attr('x', xPos).attr('y', -14)
+            .attr('x', xPos).attr('y', -18)
             .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'central')
             .attr('fill', isPair ? '#fff' : '#6b7280')
-            .attr('font-size', '10px')
-            .attr('font-weight', '700')
+            .attr('font-size', String(eventNum).length > 1 ? '8px' : '9.5px')
+            .attr('font-weight', '600')
+            .attr('letter-spacing', '-0.02em')
             .text(eventNum);
 
           // Legend entry below chart
