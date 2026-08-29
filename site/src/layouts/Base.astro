@@ -72,7 +72,7 @@ const navExternal = [
       </a>
       <div class="site-nav-links">
         {navItems.map(item => (
-          <a href={item.href} class={active === item.id ? 'active' : ''}>{item.label}</a>
+          <a href={item.href} class={activeNav === item.id ? 'active' : ''}>{item.label}</a>
         ))}
         <span class="nav-sep"></span>
         {navExternal.map(x => (
