@@ -46,6 +46,13 @@ SOURCES = {
     "ngrams":    {"file": "dataset/raw_ngrams.parquet"},
     "telegram":  {"file": "dataset/raw_telegram.parquet"},
 }
+# The study period. `raw` deliberately keeps whatever the provider returned --
+# collection ran into 2026 and that data is real, so discarding it would destroy
+# provenance. But 2026 is a partial year: a trailing fragment against fifteen
+# complete ones reads as a collapse in volume rather than as an incomplete
+# window, so it is cut from `processed` and therefore from the pair files too.
+STUDY_END = "2025-12-31"
+
 TEXT_SOURCES = {"gdelt", "youtube", "reddit", "openalex"}
 COUNT_SOURCES = {"wikipedia", "trends", "ngrams"}
 NO_PROCESSED = {"telegram"}     # 80% Cyrillic: raw kept, never processed
@@ -262,14 +269,36 @@ def process_text_source(raw: pd.DataFrame, source: str, pats: dict) -> pd.DataFr
         out = out.drop_duplicates("record_id", keep="first").reset_index(drop=True)
         if len(out) < before:
             print(f"    dropped {before - len(out)} duplicate record_id(s)")
-    return out
+    return apply_study_scope(out, source)
 
 
 def process_count_source(raw: pd.DataFrame, source: str, pats: dict) -> pd.DataFrame:
     enabled = {s for s, p in pats.items() if p["enabled"]}
     df = raw[raw.pair_slug.isin(enabled)].copy()
     df["source"] = source
-    return df.reset_index(drop=True)
+    return apply_study_scope(df.reset_index(drop=True), source)
+
+
+def apply_study_scope(df: pd.DataFrame, source: str) -> pd.DataFrame:
+    """Drop anything past STUDY_END, on whichever date column the source carries."""
+    if not len(df):
+        return df
+    # An undated row must survive: missing dates are a data-quality problem tracked
+    # elsewhere, and dropping them here would delete records under the wrong banner.
+    # Note NaT <= Timestamp evaluates to False, not NaN, so the null case has to be
+    # spelled out -- a .fillna(True) after the comparison never fires.
+    if "date" in df.columns:
+        dt = pd.to_datetime(df["date"], errors="coerce")
+        keep = dt.isna() | (dt <= pd.Timestamp(STUDY_END))
+    elif "year" in df.columns:
+        yr = pd.to_numeric(df["year"], errors="coerce")
+        keep = yr.isna() | (yr <= int(STUDY_END[:4]))
+    else:
+        return df
+    dropped = int((~keep).sum())
+    if dropped:
+        print(f"    study scope: dropped {dropped:,} row(s) after {STUDY_END}")
+    return df[keep].reset_index(drop=True)
 
 
 KEY_COLS = ["record_id", "doc_id", "url", "pair_slug", "date", "variant", "text_hash"]
