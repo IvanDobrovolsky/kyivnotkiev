@@ -26,6 +26,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 
 ROOT = Path(__file__).resolve().parent.parent
 DATASET_DIR = ROOT / "dataset"
+STUDY_END_DATE = "2025-12-31"   # the study period ends here; 2026 is partial
 DATA_DIR = ROOT / "data"
 SITE_DATA_DIR = ROOT / "site" / "src" / "data"
 
@@ -59,6 +60,23 @@ def _load(name: str) -> pd.DataFrame:
                     table = table.set_column(i, field.name, table.column(i).cast(pa.string()))
             table = table.replace_schema_metadata({})
             df = table.to_pandas()
+            # Clamp every source to the study period in one place. 2026 is a
+            # partial year: a trailing fragment beside sixteen complete ones reads
+            # as a collapse in volume rather than an incomplete window. GDELT ran
+            # to 2026-08 and was drawing points past the axis end.
+            if "date" in df.columns:
+                _d = pd.to_datetime(df["date"], errors="coerce")
+                _keep = _d.isna() | (_d <= pd.Timestamp(STUDY_END_DATE))
+                if int((~_keep).sum()):
+                    log.info(f"  {name}: dropped {int((~_keep).sum()):,} rows after {STUDY_END_DATE}")
+                    df = df[_keep].reset_index(drop=True)
+            elif "year" in df.columns:
+                _y = pd.to_numeric(df["year"], errors="coerce")
+                _keep = _y.isna() | (_y <= int(STUDY_END_DATE[:4]))
+                if int((~_keep).sum()):
+                    log.info(f"  {name}: dropped {int((~_keep).sum()):,} rows after {STUDY_END_DATE[:4]}")
+                    df = df[_keep].reset_index(drop=True)
+
             # Apply homonym filters from pairs.yaml for GDELT
             if name == "gdelt" and "source_domain" in df.columns:
                 df = _apply_homonym_filters(df)
@@ -310,13 +328,19 @@ SMOOTH_MIN_DENOM = 20      # documents needed before a month is trusted on its o
 SMOOTH_MAX_HALF = 6        # widest half-window, i.e. +/- 6 months
 SMOOTH_MIN_PLOT = 5        # below this even at full width, the point is not plotted
 
+# Sources whose ukr/rus really are document counts. Google Trends is NOT one: its
+# values are a 0-100 normalised index, so "20 documents" is meaningless there, and
+# calibrating the Ukrainian variant onto the Russian scale puts it below 1.0 for an
+# asymmetric pair -- which int() then truncated to zero, flatlining the adoption line.
+COUNT_BASED_SOURCES = {"gdelt", "youtube", "reddit", "openalex", "wikipedia", "ngrams"}
+
 
 def smooth_ratio_series(series: list[dict]) -> list[dict]:
     """Adaptive ratio-of-sums. Requires ukr/rus counts; returns the series unchanged without them."""
     if not series or not all("ukr" in d and "rus" in d for d in series):
         return series
-    ukr = [int(d.get("ukr") or 0) for d in series]
-    rus = [int(d.get("rus") or 0) for d in series]
+    ukr = [float(d.get("ukr") or 0) for d in series]
+    rus = [float(d.get("rus") or 0) for d in series]
     out = []
     for i, d in enumerate(series):
         half = 0
@@ -331,7 +355,7 @@ def smooth_ratio_series(series: list[dict]) -> list[dict]:
         # Widening exhausted and still almost nothing to divide: refuse to draw a
         # number rather than draw one the data cannot support.
         e["adoption"] = round(u / total * 100, 1) if total >= SMOOTH_MIN_PLOT else None
-        e["n"] = int(ukr[i] + rus[i])          # the month's own volume, for the tooltip
+        e["n"] = round(ukr[i] + rus[i], 2)     # the month's own volume, for the tooltip
         e["window"] = half                      # 0 means the month stood on its own
         out.append(e)
     return [e for e in out if e["adoption"] is not None]
@@ -479,11 +503,16 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 continue
             raw = []
             for _, r in grp.sort_values("month").iterrows():
-                ukr = int(r.get(ukr_col, 0))
-                rus = int(r.get(rus_col, 0))
+                # Trends interest is a normalised index, not a count. Calibrating the
+                # Ukrainian variant onto the Russian variant's scale divides it by ~111
+                # for an asymmetric pair like chornobyl, so int() truncated every value
+                # to 0 and the adoption line flatlined. Keep the float.
+                ukr = float(r.get(ukr_col, 0) or 0)
+                rus = float(r.get(rus_col, 0) or 0)
                 total = ukr + rus
-                adoption = round(ukr / total * 100, 1) if total > 0 else None
-                raw.append({"date": r["month"], "adoption": adoption, "ukr": ukr, "rus": rus})
+                adoption = round(ukr / total * 100, 2) if total > 0 else None
+                raw.append({"date": r["month"], "adoption": adoption,
+                            "ukr": round(ukr, 4), "rus": round(rus, 4)})
             result.setdefault(pid, {})
             result[pid]["trends"] = smooth_series(raw, window=3)
 
@@ -521,6 +550,10 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
             _sr = pd.read_parquet(_f)
             _pv = _sr.pivot_table(index="month", columns="variant", values="articles",
                                   fill_value=0).reset_index()
+            # This path bypasses _load(), so the study-period clamp has to be
+            # repeated here -- GDELT collection ran into 2026 and those months were
+            # being drawn past the end of the axis.
+            _pv = _pv[_pv["month"].astype(str) <= STUDY_END_DATE[:7]]
             _rows = []
             for _, r in _pv.sort_values("month").iterrows():
                 ukr, rus = int(r.get("ukrainian", 0)), int(r.get("russian", 0))
@@ -667,6 +700,8 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
         for _src in list(result[_slug].keys()):
             _ser = result[_slug][_src]
             if not isinstance(_ser, list) or not _ser:
+                continue
+            if _src not in COUNT_BASED_SOURCES:
                 continue
             _new = smooth_ratio_series(_ser)
             if _new is not _ser:
@@ -1307,7 +1342,9 @@ def main():
             if _slug not in enabled_slugs:
                 continue
             _vdf = pd.read_parquet(_vf)
-            _vdf = _vdf[_vdf.variant.isin(HOLDOUT_VARIANTS) & (_vdf.date >= HOLDOUT_SINCE)]
+            _vdf = _vdf[_vdf.variant.isin(HOLDOUT_VARIANTS)
+                        & (_vdf.date >= HOLDOUT_SINCE)
+                        & (_vdf.date <= STUDY_END_DATE)]
             if not len(_vdf):
                 continue
             _vdf = (_vdf.sort_values("date", ascending=False)
