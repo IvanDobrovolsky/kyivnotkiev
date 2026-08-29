@@ -24,17 +24,8 @@ const {
 
 // "Pairs" is dropped: the wordmark already returns to the pair index, so it was a
 // second link to the page the reader is usually on.
-import icons from '../data/source_icons.json';
-
 const navItems = [
   { href: '/about', id: 'about', label: 'About' },
-  { href: '/sources', id: 'sources', label: 'Sources' },
-  { href: '/methodology', id: 'methodology', label: 'Methodology' },
-  { href: '/llm', id: 'llm', label: 'AI Audit' },
-];
-const navExternal = [
-  { href: 'https://github.com/IvanDobrovolsky/kyivnotkiev', icon: 'github', label: 'GitHub' },
-  { href: 'https://huggingface.co/KyivNotKiev', icon: 'huggingface', label: 'Hugging Face' },
 ];
 ---
 
@@ -61,7 +52,7 @@ const navExternal = [
   <link rel="canonical" href="https://kyivnotkiev.org/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 </head>
 <body>
   <nav class="site-nav">
@@ -74,14 +65,6 @@ const navExternal = [
         {navItems.map(item => (
           <a href={item.href} class={activeNav === item.id ? 'active' : ''}>{item.label}</a>
         ))}
-        <span class="nav-sep"></span>
-        {navExternal.map(x => (
-          <a href={x.href} class="nav-icon" target="_blank" rel="noopener"
-             title={x.label} aria-label={x.label}>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d={(icons as any)[x.icon]?.path} /></svg>
-          </a>
-        ))}
-        <a href="/privacy.html" class="nav-privacy" title="Privacy Policy">Privacy</a>
       </div>
     </div>
   </nav>
@@ -89,6 +72,14 @@ const navExternal = [
   <main class="site-main">
     <slot />
   </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://huggingface.co/KyivNotKiev" target="_blank" rel="noopener">Hugging Face</a>
+      <a href="/privacy.html">Privacy</a>
+    </div>
+  </footer>
 </body>
 </html>
 
@@ -165,14 +156,13 @@ const navExternal = [
     .site-nav-logo span { font-size: 0.88rem; }
   }
 
-  .nav-sep {
-    width: 1px; height: 16px; background: var(--border, #e5e7eb); margin: 0 0.35rem;
-    flex: 0 0 auto;
+  .site-footer { border-top: 1px solid var(--border, #e5e7eb); margin-top: 3rem; }
+  .site-footer-inner {
+    max-width: 1272px; margin: 0 auto; padding: 1rem;
+    display: flex; gap: 1.25rem; flex-wrap: wrap;
   }
-  .nav-icon { display: inline-flex; align-items: center; padding: 0.85rem 0.5rem; }
-  .nav-icon svg { width: 15px; height: 15px; fill: var(--text-muted, #6b7280); }
-  .nav-icon:hover svg { fill: var(--text, #111); }
-  /* Kept in the nav rather than a footer: the YouTube API Services terms require a
-     reachable privacy policy, and in the footer it appeared on the home page only. */
-  .nav-privacy { font-size: 0.74rem !important; opacity: 0.75; }
+  .site-footer-inner a {
+    font-size: 0.82rem; color: var(--text-muted, #6b7280); text-decoration: none;
+  }
+  .site-footer-inner a:hover { color: var(--text, #111); text-decoration: underline; }
 </style>

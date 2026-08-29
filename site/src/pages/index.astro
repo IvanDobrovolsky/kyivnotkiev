@@ -85,10 +85,10 @@ const pairs = [
   }
 </style>
 
-<p class="pair-count mb-md">Tracking <strong>{m.analyzable_pairs} name pairs</strong> across those sources.</p>
-
-<!-- Sort + Filter -->
+<!-- Sort + Filter. The pair count rides in this row rather than taking a line of
+     its own: it is a caption for the grid below, not a statement in its own right. -->
 <div class="controls-bar mb-md">
+  <span class="pair-count">Tracking <strong>{m.analyzable_pairs} name pairs</strong></span>
   <div class="controls-group">
     <span class="controls-label">Sort</span>
     <button class="ctrl-btn active" data-sort="popular">Popular</button>
