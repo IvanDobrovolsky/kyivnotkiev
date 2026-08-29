@@ -103,8 +103,9 @@ a:hover { text-decoration: underline; }
   /* Muted grey at this length was hard to read; the subtitle is body copy carrying
      the premise, not a caption. */
   color: var(--text);
-  line-height: 1.7;
-  max-width: 54rem;
+  line-height: 1.6;
+  /* No measure cap: the subtitle sits beside the logo in a flex row, and capping it
+     at 54rem forced a fourth line while the rest of the row sat empty. */
 }
 
 .text-sm { font-size: 0.86rem; }
