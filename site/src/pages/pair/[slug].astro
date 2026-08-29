@@ -92,8 +92,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
     // Read source from URL params for shareable links
     const _urlSource = new URLSearchParams(window.location.search).get('source');
-    const validSources = ['gdelt','trends','wikipedia','reddit','youtube','ngrams','openalex','telegram'];
-    let activeSource = _urlSource && validSources.includes(_urlSource) ? _urlSource : 'gdelt';
+    const validSources = ['trends','gdelt','wikipedia','reddit','youtube','ngrams','openalex','telegram'];
+    // Trends is the default: it is the only source covering all 24 pairs across the
+    // full 2010-2025 span (4,608 points). GDELT begins 2015-02 and covers 22 pairs,
+    // so opening on it showed a chart that is empty for a third of the study period
+    // before the reader has chosen anything.
+    let activeSource = _urlSource && validSources.includes(_urlSource) ? _urlSource : 'trends';
     let activeSources = new Set([activeSource]);
     // hideRuDomains replaced by holdoutFilter
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
@@ -422,8 +426,14 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         // the last point — otherwise a monthly series ending 2025-12-01 left a sliver
         // hatched against an axis ending 2025-12-31 on every chart, covered or not.
         if (covDates[0].getTime() > xStart.getTime()) gapSpans.push([xStart, covDates[0]]);
+        // A point covers its whole period, so coverage runs one cadence past the last
+        // point and the hatch starts there. Hatching from the point itself would mark
+        // a covered period as missing — ngrams' 2022-01 point covers all of 2022.
+        // The blank strip this leaves on yearly sources is closed by extending the
+        // plotted area instead (see seriesForPlot below), not by moving the hatch.
         const lastCovered = covDates[covDates.length - 1].getTime() + med;
         if (lastCovered < xEnd.getTime()) gapSpans.push([new Date(lastCovered), xEnd]);
+        (window as any).__lastCadenceMs = med;
       }
 
       const gapG = svg.append('g').attr('class', 'nodata-regions');
@@ -590,6 +600,30 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         if (!series) continue;
         allSeriesData[src] = series;
 
+        // A yearly point stands for its whole year, but the drawn line stops at the
+        // point's own date — so ngrams (last point 2022-01) and openalex (2025-01)
+        // ended a full year short of the coverage the hatching asserts, leaving a
+        // blank strip that belonged to neither. Hold the final value across the
+        // period it represents so the area matches the coverage. Monthly series
+        // already close the gap, so only coarse cadences are extended, and the
+        // synthetic point is NOT added to allSeriesData, so tooltips never report it.
+        const plotSeries = (() => {
+          if (!series.length || series.length < 2) return series;
+          const ds = series.map((d: any) => parseDate(d.date)).filter(Boolean) as Date[];
+          if (ds.length < 2) return series;
+          const dl: number[] = [];
+          for (let i = 1; i < ds.length; i++) dl.push(ds[i].getTime() - ds[i - 1].getTime());
+          dl.sort((a, b) => a - b);
+          const cad = dl[Math.floor(dl.length / 2)];
+          if (cad <= 45 * 864e5) return series;            // monthly or finer
+          const lastD = ds[ds.length - 1];
+          const endT = Math.min(lastD.getTime() + cad, xEnd.getTime());
+          if (endT - lastD.getTime() < 20 * 864e5) return series;
+          const e = new Date(endT);
+          const key = `${e.getFullYear()}-${String(e.getMonth() + 1).padStart(2, '0')}`;
+          return [...series, { ...series[series.length - 1], date: key }];
+        })();
+
         if (chartMode === 'volume') {
           // ── VOLUME MODE: lines with filled areas ──
           if (lineMode !== 'russian') {
@@ -598,10 +632,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .y0(height)
               .y1((d: any) => y(d.ukr || 0))
               .curve(d3.curveMonotoneX);
-            svg.append('path').datum(series)
+            svg.append('path').datum(plotSeries)
               .attr('fill', sourceColors[src]).attr('opacity', 0.15)
               .attr('d', ukrArea);
-            svg.append('path').datum(series)
+            svg.append('path').datum(plotSeries)
               .attr('fill', 'none').attr('stroke', sourceColors[src]).attr('stroke-width', 3)
               .attr('d', d3.line<any>().x(d => x(parseDate(d.date)!)).y(d => y(d.ukr || 0)).curve(d3.curveMonotoneX));
           }
@@ -611,10 +645,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .y0(height)
               .y1((d: any) => y(d.rus || 0))
               .curve(d3.curveMonotoneX);
-            svg.append('path').datum(series)
+            svg.append('path').datum(plotSeries)
               .attr('fill', '#dc2626').attr('opacity', 0.08)
               .attr('d', rusArea);
-            svg.append('path').datum(series)
+            svg.append('path').datum(plotSeries)
               .attr('fill', 'none').attr('stroke', '#dc2626')
               .attr('stroke-width', lineMode === 'russian' ? 3 : 1.5)
               .attr('stroke-dasharray', lineMode === 'russian' ? 'none' : '6,4')
@@ -629,10 +663,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .y0(height)
               .y1((d: any) => y(d.adoption))
               .curve(d3.curveMonotoneX);
-            svg.append('path').datum(series)
+            svg.append('path').datum(plotSeries)
               .attr('fill', sourceColors[src]).attr('opacity', 0.12)
               .attr('d', uaArea);
-            svg.append('path').datum(series)
+            svg.append('path').datum(plotSeries)
               .attr('fill', 'none').attr('stroke', sourceColors[src]).attr('stroke-width', 3)
               .attr('d', d3.line<any>().x(d => x(parseDate(d.date)!)).y(d => y(d.adoption)).curve(d3.curveMonotoneX));
           }
@@ -644,7 +678,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .curve(d3.curveMonotoneX);
 
             svg.append('path')
-              .datum(series)
+              .datum(plotSeries)
               .attr('fill', 'none')
               .attr('stroke', '#dc2626')
               .attr('stroke-width', lineMode === 'russian' ? 3 : 1.5)
@@ -833,7 +867,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     function sourceBarRows(): BarRow[] {
       const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) return [];
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
+      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
       const rows: BarRow[] = [];
       for (const src of srcOrder) {
         const series = pairData[src];
@@ -1284,7 +1318,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) return;
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
+      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
       // A card is rendered for every source, including empty ones, so the column count
       // is the source count. It was hard-coded to 9 against 8 sources, leaving an empty
       // ninth column that stopped the strip reaching full width.
@@ -1715,7 +1749,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         .sort((a: any, b: any) => b.spread_pp - a.spread_pp)
         .slice(0, 10);
 
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
+      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
 
       const rowH = 36;
       const margin = { top: 25, right: 50, bottom: 10, left: 140 };
