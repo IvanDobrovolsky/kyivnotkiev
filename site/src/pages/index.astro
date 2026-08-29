@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import StatStrip from '../components/StatStrip.astro';
 import PairCard from '../components/PairCard.astro';
 import m from '../data/manifest.json';
 import icons from '../data/source_icons.json';
@@ -21,15 +20,6 @@ const pairs = [
   ...allPairs.filter((p: any) => !popularOrder.includes(p.slug)).sort((a: any, b: any) => (b.total || 0) - (a.total || 0)),
 ];
 
-const stats = [
-  // "90B+ records scanned" was a hardcoded string, not a measurement, and
-  // "300.3M toponym matches" summed every source's record field regardless of unit
-  // — 99.5% of it was Wikipedia PAGEVIEWS counted as textual matches. Both removed
-  // rather than restated; the remaining figures are each directly verifiable.
-  { value: String(m.analyzable_pairs), label: 'pairs tracked' },
-  { value: String(m.num_sources), label: 'data sources' },
-  { value: m.time_span, label: 'time span' },
-];
 ---
 
 <Base activeNav="home">
@@ -42,15 +32,14 @@ const stats = [
     <p class="subtitle">
       In 2018, Ukraine's foreign ministry <a href="https://en.wikipedia.org/wiki/KyivNotKiev" target="_blank">launched a campaign</a>
       to change how the world spells Ukrainian place names. This measures whether it worked: every record across
-      {m.num_sources} independent sources reduced to one question — Ukrainian form, or the Russian-derived one — then
-      read with time-series and corpus statistics to separate what drove adoption from what still resists it.
+      <strong>{m.num_sources} independent sources</strong>, <strong>{m.time_span}</strong>, reduced to one question —
+      Ukrainian form, or the Russian-derived one — then read with time-series and corpus statistics to separate what
+      drove adoption from what still resists it.
     </p>
   </div>
 </div>
 
-<div class="mb-lg">
-  <StatStrip items={stats} />
-</div>
+
 
 <!-- Data sources. Driven from manifest.sources so the list, order, colours and
      counts cannot drift from the pipeline. Marks are inlined SVG — five brand logos
@@ -79,6 +68,7 @@ const stats = [
     color: var(--text-muted, #6b7280); white-space: nowrap;
   }
   .source-row-marks { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .pair-count { font-size: 0.9rem; color: var(--text-muted, #6b7280); }
   .src-mark {
     display: inline-flex; align-items: center; gap: 0.3rem;
     padding: 0.2rem 0.5rem; border-radius: 6px;
@@ -94,6 +84,8 @@ const stats = [
     .source-row-label { width: 100%; }
   }
 </style>
+
+<p class="pair-count mb-md">Tracking <strong>{m.analyzable_pairs} name pairs</strong> across those sources.</p>
 
 <!-- Sort + Filter -->
 <div class="controls-bar mb-md">
