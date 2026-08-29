@@ -148,7 +148,15 @@ def collect_pair(pair: dict) -> tuple[pd.DataFrame | None, dict]:
         return None, {"slug": slug, "ok": False, "reason": "solo_zero_in_window"}
 
     k = (j_uk / j_ru) * s_ru / s_uk
-    frame_out = pd.DataFrame({ru: ru_s, uk: uk_s * k}).dropna()
+    # Two columns per variant, deliberately. `interest` is what the solo call
+    # returned, each variant normalised to its OWN peak -- that is the series with
+    # full dynamic range, and the one worth plotting: both variants reach 100 at
+    # their own high points and their individual shapes stay legible.
+    # `interest_calibrated` puts the Ukrainian variant on the Russian variant's
+    # scale, which is required for the adoption share and useless for display,
+    # because at a 111x gap it draws as a flat line on the axis.
+    frame_out = pd.DataFrame({ru: ru_s, uk: uk_s,
+                              f"{uk}__cal": uk_s * k}).dropna()
     return frame_out, {"slug": slug, "ok": True, "control": False,
                        "cal_window": f"{lo}..{hi}", "k": round(float(k), 6),
                        "joint_ratio": round(float(j_uk / j_ru), 5)}
@@ -158,15 +166,19 @@ def to_records(frame_out: pd.DataFrame, pair: dict) -> pd.DataFrame:
     ru, uk = pair["russian"], pair["ukrainian"]
     control = pair.get("is_control") and ru == uk
     m = frame_out.resample("MS").mean()
+    cal_col = f"{uk}__cal"
     rows = []
     for ts, r in m.iterrows():
         rows.append({"date": str(ts.date()), "term": ru, "variant": "russian",
-                     "interest": float(r[ru]), "geo": "",
+                     "interest": float(r[ru]),
+                     "interest_calibrated": float(r[ru]), "geo": "",
                      "pair_slug": pair["slug"], "source": "trends"})
         if not control:
             rows.append({"date": str(ts.date()), "term": uk, "variant": "ukrainian",
-                         "interest": float(r[uk]), "geo": "",
-                         "pair_slug": pair["slug"], "source": "trends"})
+                         "interest": float(r[uk]),
+                         "interest_calibrated": float(r[cal_col]) if cal_col in m.columns
+                                                else float(r[uk]),
+                         "geo": "", "pair_slug": pair["slug"], "source": "trends"})
     return pd.DataFrame(rows)
 
 

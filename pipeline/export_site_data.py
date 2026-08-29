@@ -494,8 +494,20 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
     if len(df):
         t = df[(df["geo"] == "") | (df["geo"].isna())].copy()
         t["month"] = pd.to_datetime(t["date"]).dt.strftime("%Y-%m")
-        g = t.groupby(["pair_slug", "month", "variant"])["interest"].sum().reset_index()
-        p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="interest", fill_value=0).reset_index()
+        # Two scales, each used where it is correct. `interest` is the solo series
+        # with each variant normalised to its own peak -- plotted, because both
+        # variants then reach 100 at their own high points and each shape stays
+        # legible. `interest_calibrated` puts UA on RU's scale and is used only for
+        # the adoption share, where the cross-variant ratio actually matters; it is
+        # useless for display since a 111x gap draws as a flat line on the axis.
+        if "interest_calibrated" not in t.columns:
+            t["interest_calibrated"] = t["interest"]
+        g = t.groupby(["pair_slug", "month", "variant"])[["interest", "interest_calibrated"]].sum().reset_index()
+        p = g.pivot_table(index=["pair_slug", "month"], columns="variant",
+                          values="interest", fill_value=0).reset_index()
+        pc = g.pivot_table(index=["pair_slug", "month"], columns="variant",
+                           values="interest_calibrated", fill_value=0).reset_index()
+        pc = pc.set_index(["pair_slug", "month"])
         ukr_col = "ukrainian" if "ukrainian" in p.columns else 0
         rus_col = "russian" if "russian" in p.columns else 0
         for pid, grp in p.groupby("pair_slug"):
@@ -509,8 +521,14 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 # to 0 and the adoption line flatlined. Keep the float.
                 ukr = float(r.get(ukr_col, 0) or 0)
                 rus = float(r.get(rus_col, 0) or 0)
-                total = ukr + rus
-                adoption = round(ukr / total * 100, 2) if total > 0 else None
+                try:
+                    cr = pc.loc[(pid, r["month"])]
+                    cu = float(cr.get(ukr_col, 0) or 0)
+                    cru = float(cr.get(rus_col, 0) or 0)
+                except KeyError:
+                    cu, cru = ukr, rus
+                ctotal = cu + cru
+                adoption = round(cu / ctotal * 100, 2) if ctotal > 0 else None
                 raw.append({"date": r["month"], "adoption": adoption,
                             "ukr": round(ukr, 4), "rus": round(rus, 4)})
             result.setdefault(pid, {})
