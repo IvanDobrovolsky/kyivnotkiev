@@ -31,6 +31,8 @@ pairs:
   match_mode: word_boundary
   slug: kyiv
   word_boundary: true
+  ukrainian_cyrillic: Київ
+  significance: The capital and the campaign's namesake. Г→H and И→Y are the two contrasts the official table turns on, and Kyiv is where English usage shifted first.
 - russian: Kharkov
   ukrainian: Kharkiv
   enabled: true
@@ -45,6 +47,8 @@ pairs:
   match_mode: word_boundary
   slug: kharkiv
   word_boundary: true
+  ukrainian_cyrillic: Харків
+  significance: Second city. "Kharkov" is a direct Russian rendering; the Ukrainian form restores the -iv ending common to Ukrainian city names.
 - russian: Odessa
   ukrainian: Odesa
   enabled: true
@@ -72,6 +76,8 @@ pairs:
   slug: odesa
   youtube_depth: legacy
   word_boundary: true
+  ukrainian_cyrillic: Одеса
+  significance: A single vs double "s" encodes which language the name is read through. The Ukrainian spelling has one.
 - russian: Lvov
   ukrainian: Lviv
   enabled: true
@@ -82,6 +88,8 @@ pairs:
   - date: 2022-03
     label: Refugee hub, diplomatic activity
   word_boundary: true
+  ukrainian_cyrillic: Львів
+  significance: Historically rendered through Russian, Polish and German. "Lviv" is the form Ukraine submitted to the UN.
 - russian: Zaporozhye
   ukrainian: Zaporizhzhia
   enabled: false
@@ -163,6 +171,8 @@ pairs:
   match_mode: word_boundary
   slug: chornobyl
   youtube_depth: day
+  ukrainian_cyrillic: Чорнобиль
+  significance: Known worldwide through a Soviet-era Russian spelling. The Ukrainian form places the site in the country that lives with it.
 - russian: Lugansk
   ukrainian: Luhansk
   enabled: true
@@ -176,6 +186,8 @@ pairs:
     label: Retreat from Lyman, Luhansk oblast
   match_mode: word_boundary
   slug: luhansk
+  ukrainian_cyrillic: Луганськ
+  significance: Г→H again. Occupied since 2014, which makes the spelling a marker of whose administration is being recognised.
 - russian: Dnieper River
   ukrainian: Dnipro River
   enabled: true
@@ -189,6 +201,8 @@ pairs:
     label: Kherson liberation, Dnipro front line
   - date: 2023-06
     label: Kakhovka Dam destroyed
+  ukrainian_cyrillic: Дніпро
+  significance: The river runs the length of the country; "Dnieper" reaches English through Russian and older cartography.
 - russian: Dniester
   ukrainian: Dnister
   enabled: false
@@ -213,6 +227,8 @@ pairs:
     label: Toponym decolonization law
   match_mode: word_boundary
   slug: donbas
+  ukrainian_cyrillic: Донбас
+  significance: The doubled "ss" of "Donbass" is a Russian orthographic convention, not a Ukrainian one.
 - russian: Chicken Kiev
   ukrainian: Chicken Kyiv
   enabled: true
@@ -228,6 +244,8 @@ pairs:
   - date: 2022-10
     label: UK regional press Christmas recipes (still "Kiev")
   word_boundary: true
+  ukrainian_cyrillic: Котлета по-київськи
+  significance: A dish carrying the capital's name on menus worldwide — food packaging and restaurant listings are among the slowest surfaces to change.
 - russian: Borsch
   ukrainian: Borscht
   enabled: true
@@ -238,6 +256,8 @@ pairs:
     label: UNESCO inscribes Ukrainian borscht
   match_mode: word_boundary
   slug: borscht
+  ukrainian_cyrillic: Борщ
+  significance: Inscribed by UNESCO as Ukrainian intangible cultural heritage. Culinary naming is a site of symbolic ownership.
 - russian: Kiev Pechersk Lavra
   ukrainian: Kyiv Pechersk Lavra
   enabled: false
@@ -312,6 +332,8 @@ pairs:
   slug: dynamo-kyiv
   youtube_depth: legacy
   word_boundary: true
+  ukrainian_cyrillic: Динамо Київ
+  significance: 'Sports media is a distinct discourse with its own inertia: club names are often frozen in the form the wire services first used.'
 - russian: Kiev ballet
   ukrainian: Kyiv ballet
   enabled: false
@@ -328,6 +350,8 @@ pairs:
   match_mode: exact_phrase
   slug: kyivan-rus
   youtube_depth: legacy
+  ukrainian_cyrillic: Київська Русь
+  significance: 'Erosion of historical memory and appropriation of the Kyivan Rus inheritance. (source: provided)'
 - russian: Chernigov
   ukrainian: Chernihiv
   enabled: false
@@ -410,12 +434,16 @@ pairs:
   events:
   - date: 2022-03
     label: Refugee hub, military recruitment
+  ukrainian_cyrillic: Тернопіль
+  significance: Western regional centre; the -pil ending is Ukrainian, "-pol" reaches English through Russian.
 - russian: Vareniki
   ukrainian: Varenyky
   enabled: true
   is_control: false
   match_mode: word_boundary
   slug: varenyky
+  ukrainian_cyrillic: Вареники
+  significance: 'Appropriation of dishes and cultural appropriation. (source: provided)'
 - russian: Metalist Kharkov
   ukrainian: Metalist Kharkiv
   enabled: false
@@ -436,6 +464,8 @@ pairs:
     label: Babyn Yar memorial opens
   - date: 2022-03
     label: Russian missile hits memorial site
+  ukrainian_cyrillic: Бабин Яр
+  significance: A Holocaust memorial site. The naming appears in commemorative and archival language, which changes more slowly than news.
 - russian: Alexander Usyk
   ukrainian: Oleksandr Usyk
   enabled: true
@@ -456,6 +486,8 @@ pairs:
   match_mode: exact_phrase
   slug: oleksandr-usyk
   youtube_depth: legacy
+  ukrainian_cyrillic: Олександр Усик
+  significance: A living athlete who states his own name. Sports coverage is a test of whether English follows a person's own usage.
 - russian: Vladimir Zelensky
   ukrainian: Volodymyr Zelenskyy
   enabled: true
@@ -467,6 +499,8 @@ pairs:
     label: Wartime leadership begins
   match_mode: exact_phrase
   slug: volodymyr-zelenskyy
+  ukrainian_cyrillic: Володимир Зеленський
+  significance: A head of state whose name entered global English abruptly in 2022, largely in its Ukrainian form.
 - russian: Andrey Shevchenko
   ukrainian: Andrii Shevchenko
   enabled: false
@@ -490,6 +524,8 @@ pairs:
   match_mode: exact_phrase
   slug: volodymyr-the-great
   youtube_depth: legacy
+  ukrainian_cyrillic: Володимир Великий
+  significance: 'Erosion of historical memory and appropriation of the Kyivan Rus inheritance. (source: provided)'
 - russian: Artemovsk
   ukrainian: Bakhmut
   enabled: true
@@ -510,6 +546,8 @@ pairs:
   - winery
   homonym_type: brand_composer
   slug: bakhmut
+  ukrainian_cyrillic: Бахмут
+  significance: Renamed from the Soviet "Artemovsk" in 2016; the pair tests whether English followed the official renaming.
 - russian: Nikolai Gogol
   ukrainian: Mykola Hohol
   enabled: true
@@ -521,6 +559,8 @@ pairs:
   events:
   - date: 2016-03
     label: Gogol birthday anniversary coverage
+  ukrainian_cyrillic: Микола Гоголь
+  significance: 'Appropriation of a Ukrainian figure and framing him as Russian. (source: provided)'
 - russian: Feodosiya
   ukrainian: Feodosiia
   enabled: true
@@ -533,6 +573,8 @@ pairs:
     label: Russia annexes Crimea
   - date: 2023-12
     label: Ukrainian strike on Russian ship in Feodosia
+  ukrainian_cyrillic: Феодосія
+  significance: "After the annexation of Crimea, correct naming underlines the illegality of Russia's actions. (source: provided)"
 - russian: Olga of Kiev
   ukrainian: Olha of Kyiv
   enabled: false
@@ -554,6 +596,8 @@ pairs:
     label: Kyiv airport renamed to Sikorsky
   - date: 2024-05
     label: Airport in war coverage
+  ukrainian_cyrillic: Ігор Сікорський
+  significance: 'Appropriation of a Ukrainian figure and framing him as Russian. (source: provided)'
 - russian: Sergei Korolev
   ukrainian: Serhii Korolyov
   enabled: true
@@ -569,6 +613,8 @@ pairs:
     label: Korolev 110th birthday anniversary
   - date: 2025-04
     label: Space heritage debates
+  ukrainian_cyrillic: Сергій Корольов
+  significance: 'Appropriation of a Ukrainian figure and framing him as Russian. (source: provided)'
 - russian: Bogdan Khmelnitsky
   ukrainian: Bohdan Khmelnytskyi
   enabled: false
@@ -592,3 +638,5 @@ pairs:
     label: Malevich retrospective exhibitions
   - date: 2022-02
     label: Cultural heritage debates during invasion
+  ukrainian_cyrillic: Казимир Малевич
+  significance: 'Appropriation of a Ukrainian figure and framing him as Russian. (source: provided)'

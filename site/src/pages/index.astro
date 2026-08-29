@@ -50,38 +50,47 @@ const stats = [
   <StatStrip items={stats} />
 </div>
 
-<!-- Data sources, as one compact clickable line. Driven from manifest.sources so
-     the list, colours and counts cannot drift from the pipeline. Marks are inlined
-     SVG: five are brand logos from simple-icons (CC0); GDELT, Google Ngrams and
-     OpenAlex have no mark in that set, and borrowing Google News' logo for GDELT
-     would misattribute the source, so those three are neutral glyphs. Inlining
-     means nothing is fetched at runtime. -->
-<p class="source-line mb-lg">
-  Data is collected from {m.num_sources} sources:{' '}
-  {Object.entries(m.sources).map(([key, s]: any, i: number) => (
-    <>
+<!-- Data sources. Driven from manifest.sources so the list, order, colours and
+     counts cannot drift from the pipeline. Marks are inlined SVG — five brand logos
+     from simple-icons (CC0), three neutral glyphs for GDELT / Ngrams / OpenAlex,
+     which have no mark in that set. Nothing is fetched at runtime.
+     Laid out as a uniform row rather than a comma-separated sentence: the commas
+     collided with the pill borders and the closing clause orphaned onto its own
+     line on a phone. The date range is already in the stat strip above. -->
+<div class="source-row mb-lg">
+  <span class="source-row-label">Data from {m.num_sources} sources</span>
+  <div class="source-row-marks">
+    {Object.entries(m.sources).map(([key, s]: any) => (
       <a class="src-mark" href={`/sources#${key}`} style={`--c: ${s.color}`}
          title={`${s.label} — ${fmtBig(s.records)} ${s.unit}`}>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d={(icons as any)[key]?.path} /></svg>
         <span>{s.label}</span>
-      </a>{i < Object.keys(m.sources).length - 1 ? ', ' : ''}
-    </>
-  ))}
-  {' '}covering {m.time_span}.
-</p>
+      </a>
+    ))}
+  </div>
+</div>
 
 <style>
-  .source-line { font-size: 0.9rem; line-height: 2.1; color: var(--text-muted, #6b7280); }
+  .source-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+  .source-row-label {
+    font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--text-muted, #6b7280); white-space: nowrap;
+  }
+  .source-row-marks { display: flex; flex-wrap: wrap; gap: 0.3rem; }
   .src-mark {
-    display: inline-flex; align-items: center; gap: 0.32rem;
-    padding: 0.12rem 0.45rem; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    padding: 0.2rem 0.5rem; border-radius: 6px;
     border: 1px solid #e5e7eb; background: #fff;
     color: var(--text, #111); text-decoration: none;
-    font-weight: 600; font-size: 0.84rem; white-space: nowrap;
+    font-weight: 500; font-size: 0.8rem; white-space: nowrap;
     transition: border-color 0.15s;
   }
-  .src-mark svg { width: 13px; height: 13px; fill: var(--c); flex: 0 0 auto; }
+  .src-mark svg { width: 12px; height: 12px; fill: var(--c); flex: 0 0 auto; }
   .src-mark:hover { border-color: var(--c); text-decoration: none; }
+  @media (max-width: 640px) {
+    .source-row { gap: 0.4rem; }
+    .source-row-label { width: 100%; }
+  }
 </style>
 
 <!-- Sort + Filter -->
@@ -109,15 +118,7 @@ const stats = [
   ))}
 </div>
 
-<!-- Footer -->
-<div class="page-footer">
-  <p>
-    Built by <a href="https://github.com/IvanDobrovolsky" target="_blank">Ivan Dobrovolsky</a>.
-    Dataset and model on <a href="https://huggingface.co/KyivNotKiev" target="_blank">Hugging Face</a>.
-    <a href="https://www.bbc.com/ukrainian/news-45718643" target="_blank">BBC Ukraine coverage</a>.
-    <a href="/privacy.html">Privacy Policy</a>.
-  </p>
-</div>
+
 
 <script>
   const grid = document.getElementById('pair-grid')!;
