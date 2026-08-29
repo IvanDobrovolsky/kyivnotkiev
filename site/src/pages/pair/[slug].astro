@@ -410,19 +410,18 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         }
         deltas.sort((a, b) => a - b);
         const med = deltas.length ? deltas[Math.floor(deltas.length / 2)] : 31 * 864e5;
-        const gapMs = Math.max(med * 2.5, 45 * 864e5);
-        // A point stands for its whole period, not an instant: a monthly series
-        // ending 2025-12-01 covers through 2025-12-31. Comparing the bare timestamp
-        // against the axis end left a one-cadence sliver hatched on the right of
-        // every chart, including fully covered ones. Extend coverage by one cadence
-        // before deciding a gap exists, and start interior gaps after the previous
-        // point's period ends rather than at the point itself.
+        // Only the span OUTSIDE a source's coverage is missing data. A month with no
+        // point INSIDE the covered range is a measured zero, not an unobserved month:
+        // the export drops rows where ukr+rus is 0, and Reddit was crawled
+        // continuously from 2010, so "nobody mentioned ihor-sikorsky in March 2013"
+        // was being hatched as "we never looked". That produced 258 false interior
+        // bands across the pairs, densest on exactly the sparse pairs where reading
+        // the chart correctly matters most.
+        //
+        // A point also stands for its whole period, so coverage runs one cadence past
+        // the last point — otherwise a monthly series ending 2025-12-01 left a sliver
+        // hatched against an axis ending 2025-12-31 on every chart, covered or not.
         if (covDates[0].getTime() > xStart.getTime()) gapSpans.push([xStart, covDates[0]]);
-        for (let i = 1; i < covDates.length; i++) {
-          if (covDates[i].getTime() - covDates[i - 1].getTime() > gapMs) {
-            gapSpans.push([new Date(covDates[i - 1].getTime() + med), covDates[i]]);
-          }
-        }
         const lastCovered = covDates[covDates.length - 1].getTime() + med;
         if (lastCovered < xEnd.getTime()) gapSpans.push([new Date(lastCovered), xEnd]);
       }
