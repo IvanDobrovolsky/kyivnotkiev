@@ -64,6 +64,7 @@ KEY_FILE = pathlib.Path("/etc/secrets/serpapi")
 
 STUDY_START, STUDY_END = "2010-01-01", "2025-12-31"
 CAL_MONTHS = 24            # width of the calibration window
+BELOW_FLOOR_MAX_NONZERO = 10   # of 192 months; fewer than this is quantisation noise
 REQUEST_DELAY = 2.0
 
 
@@ -82,7 +83,14 @@ def call(q: str, date: str, tag: str) -> dict:
     with urllib.request.urlopen(url, timeout=120) as r:
         d = json.loads(r.read())
     if "error" in d:
-        raise RuntimeError(f"SerpApi: {d['error']}")
+        # "hasn't returned any results" means the term is below Trends' reporting
+        # threshold for the whole span. That is a measurement — the spelling has no
+        # detectable English search volume — not a failure, and it must not be
+        # confused with a fetch error. Cache it so it is not re-queried.
+        if "any results" in str(d["error"]).lower():
+            d = {"below_floor": True, "interest_over_time": {"timeline_data": []}}
+        else:
+            raise RuntimeError(f"SerpApi: {d['error']}")
     f.parent.mkdir(parents=True, exist_ok=True)
     f.write_text(json.dumps(d))          # save on arrival
     log.info(f"    fetched {tag}")
@@ -103,15 +111,37 @@ def frame(d: dict) -> pd.DataFrame:
     return pd.DataFrame(rows).sort_index()
 
 
-def calibration_window(uk: pd.Series) -> tuple[str, str]:
-    """The CAL_MONTHS-wide span holding the most Ukrainian-variant interest."""
-    m = uk.resample("MS").mean()
-    if not len(m):
-        return STUDY_START, STUDY_END
-    roll = m.rolling(CAL_MONTHS, min_periods=1).sum()
-    end = roll.idxmax()
-    start = max(m.index[0], end - pd.DateOffset(months=CAL_MONTHS - 1))
-    return str(start.date()), str((end + pd.offsets.MonthEnd(1)).date())
+def calibration_windows(ru: pd.Series, uk: pd.Series, n: int = 3) -> list[tuple[str, str]]:
+    """Candidate calibration spans, best first.
+
+    A joint call resolves both variants only where BOTH are strong, so windows are
+    scored by the WEAKER side after normalising each series to its own peak — not
+    by the Ukrainian peak alone. Scoring on UA broke feodosiia and kazymyr-malevych,
+    where the Ukrainian spelling dominates and the joint call therefore quantised the
+    RUSSIAN side to zero, leaving no scale factor at all.
+
+    Several candidates are returned because quantisation is only observable after
+    spending the call.
+    """
+    a = ru.resample("MS").mean()
+    b = uk.resample("MS").mean()
+    idx = a.index.union(b.index)
+    a, b = a.reindex(idx).fillna(0), b.reindex(idx).fillna(0)
+    if not len(idx) or a.max() <= 0 or b.max() <= 0:
+        return [(STUDY_START, STUDY_END)]
+    ra = (a / a.max()).rolling(CAL_MONTHS, min_periods=1).sum()
+    rb = (b / b.max()).rolling(CAL_MONTHS, min_periods=1).sum()
+    score = pd.concat([ra, rb], axis=1).min(axis=1)      # the weaker side governs
+    out, used = [], []
+    for end in score.sort_values(ascending=False).index:
+        if any(abs((end - u).days) < 30 * CAL_MONTHS // 2 for u in used):
+            continue                                     # keep candidates distinct
+        used.append(end)
+        start = max(idx[0], end - pd.DateOffset(months=CAL_MONTHS - 1))
+        out.append((str(start.date()), str((end + pd.offsets.MonthEnd(1)).date())))
+        if len(out) >= n:
+            break
+    return out or [(STUDY_START, STUDY_END)]
 
 
 def collect_pair(pair: dict) -> tuple[pd.DataFrame | None, dict]:
@@ -126,28 +156,63 @@ def collect_pair(pair: dict) -> tuple[pd.DataFrame | None, dict]:
     if pair.get("is_control") and ru == uk:
         return pd.DataFrame({ru: ru_s}), {"slug": slug, "ok": True, "control": True}
 
-    uk_s = frame(call(uk, span, f"solo_{uk}_16y"))
-    if uk_s.empty:
-        return None, {"slug": slug, "ok": False, "reason": "no_uk_series"}
-    uk_s = uk_s.iloc[:, 0]
+    uk_raw = frame(call(uk, span, f"solo_{uk}_16y"))
+    if uk_raw.empty:
+        # Below Trends' reporting threshold for the entire span. That is a result:
+        # the spelling has no detectable English search volume. Carry it as an
+        # explicit zero series so the pair is present and reads as ~0 adoption,
+        # rather than dropping the pair or leaving a stale artifact in its place.
+        uk_s = pd.Series(0.0, index=ru_s.index)
+        frame_out = pd.DataFrame({ru: ru_s, uk: uk_s, f"{uk}__cal": uk_s})
+        return frame_out, {"slug": slug, "ok": True, "control": False,
+                           "below_floor": True, "k": 0.0,
+                           "note": "UA below Trends reporting threshold for 2010-2025"}
+    uk_s = uk_raw.iloc[:, 0]
 
-    lo, hi = calibration_window(uk_s)
-    j = frame(call(f"{ru},{uk}", f"{lo} {hi}", f"joint_{slug}_{lo[:7]}_{hi[:7]}"))
-    if ru not in j.columns or uk not in j.columns:
-        return None, {"slug": slug, "ok": False, "reason": "joint_missing_columns"}
-
-    j_ru, j_uk = j[ru].sum(), j[uk].sum()
-    if j_ru <= 0 or j_uk <= 0:
-        # The variants are never close enough in volume for a joint call to
-        # resolve both; an intermediate anchor term would be needed.
+    # Quantisation is only visible after the call, so try candidate windows in order.
+    tried = []
+    k = None
+    for lo, hi in calibration_windows(ru_s, uk_s):
+        j = frame(call(f"{ru},{uk}", f"{lo} {hi}", f"joint_{slug}_{lo[:7]}_{hi[:7]}"))
+        if ru not in j.columns or uk not in j.columns:
+            tried.append(f"{lo[:7]}:missing_cols")
+            continue
+        j_ru, j_uk = j[ru].sum(), j[uk].sum()
+        s_ru, s_uk = ru_s[lo:hi].sum(), uk_s[lo:hi].sum()
+        if j_ru <= 0 or j_uk <= 0:
+            tried.append(f"{lo[:7]}:zero(ru={j_ru:.0f},ua={j_uk:.0f})")
+            continue
+        if s_ru <= 0 or s_uk <= 0:
+            tried.append(f"{lo[:7]}:solo_zero")
+            continue
+        k = (j_uk / j_ru) * s_ru / s_uk
+        break
+    if k is None:
+        # No window resolves both variants. Two independent signals then agree that
+        # the weaker one is below the instrument floor rather than merely hard to
+        # calibrate: the joint call reports it as 0 in every window tried, and its
+        # solo series is a handful of non-zero months in 192 — the same quantisation
+        # noise that gave ihor-sikorsky a single month at 100 and a fake 79%
+        # adoption peak. Carry it as an explicit zero instead of dropping the pair.
+        nz_ru = int((ru_s.resample("MS").mean() > 0).sum())
+        nz_uk = int((uk_s.resample("MS").mean() > 0).sum())
+        weak, strong = (uk, ru) if nz_uk <= nz_ru else (ru, uk)
+        weak_nz, strong_nz = (nz_uk, nz_ru) if weak == uk else (nz_ru, nz_uk)
+        if weak_nz <= BELOW_FLOOR_MAX_NONZERO < strong_nz:
+            zero = pd.Series(0.0, index=ru_s.index if weak == uk else uk_s.index)
+            keep = ru_s if weak == uk else uk_s
+            frame_out = (pd.DataFrame({ru: keep, uk: zero, f"{uk}__cal": zero})
+                         if weak == uk else
+                         pd.DataFrame({ru: zero, uk: keep, f"{uk}__cal": keep}))
+            return frame_out, {"slug": slug, "ok": True, "control": False,
+                               "below_floor": True, "k": 0.0,
+                               "note": f"{weak} below floor: {weak_nz}/192 non-zero "
+                                       f"months and 0 in every joint window",
+                               "tried": "; ".join(tried)}
+        # Both sides carry real volume but no window resolves them together; an
+        # intermediate anchor term would be required.
         return None, {"slug": slug, "ok": False, "reason": "joint_quantised_to_zero",
-                      "window": f"{lo}..{hi}"}
-
-    s_ru, s_uk = ru_s[lo:hi].sum(), uk_s[lo:hi].sum()
-    if s_ru <= 0 or s_uk <= 0:
-        return None, {"slug": slug, "ok": False, "reason": "solo_zero_in_window"}
-
-    k = (j_uk / j_ru) * s_ru / s_uk
+                      "tried": "; ".join(tried)}
     # Two columns per variant, deliberately. `interest` is what the solo call
     # returned, each variant normalised to its OWN peak -- that is the series with
     # full dynamic range, and the one worth plotting: both variants reach 100 at
