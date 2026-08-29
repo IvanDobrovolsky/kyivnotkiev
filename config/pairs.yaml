@@ -1,17 +1,19 @@
 metadata:
   version: '2.0'
   description: Ukrainian toponym pairs for adoption analysis
-  time_range: 2010-01-01 to 2026-12-31
+  time_range: 2010-01-01 to 2025-12-31
+  default_source: trends
 pairs:
 - russian: Kiev
   ukrainian: Kyiv
   enabled: true
   is_control: false
-  notes: Flagship pair, capital city. GDELT excludes "Kievan" URLs (tracked by pair
-    35 Kievan Rus).
+  notes: Flagship pair, capital city. GDELT excludes "Kievan" URLs (tracked by pair 35 Kievan Rus).
   events:
   - date: 2014-02
     label: Euromaidan revolution
+  - date: 2018-05
+    label: UEFA Champions League final in Kyiv
   - date: 2018-10
     label: '#KyivNotKiev launch'
   - date: 2019-06
@@ -47,8 +49,7 @@ pairs:
   ukrainian: Odesa
   enabled: true
   is_control: false
-  notes: 'GDELT/Reddit exclude Odessa TX sources. Verified: <0.02% Texas contamination
-    in sampled data.'
+  notes: 'GDELT/Reddit exclude Odessa TX sources. Verified: <0.02% Texas contamination in sampled data.'
   events:
   - date: 2014-05
     label: Trade Unions House massacre
@@ -147,6 +148,8 @@ pairs:
   is_control: false
   notes: Disaster brand — strongest resistance to change
   events:
+  - date: 2011-03
+    label: Fukushima disaster
   - date: 2016-04
     label: 30th anniversary
   - date: 2019-05
@@ -177,14 +180,15 @@ pairs:
   ukrainian: Dnipro River
   enabled: true
   is_control: false
-  notes: River name. Qualified with "River" to disambiguate from the city (pair 7,
-    Dnepropetrovsk→Dnipro).
+  notes: River name. Qualified with "River" to disambiguate from the city (pair 7, Dnepropetrovsk→Dnipro).
   match_mode: exact_phrase
   slug: dnipro-river
   youtube_depth: legacy
   events:
   - date: 2022-11
     label: Kherson liberation, Dnipro front line
+  - date: 2023-06
+    label: Kakhovka Dam destroyed
 - russian: Dniester
   ukrainian: Dnister
   enabled: false
@@ -199,9 +203,7 @@ pairs:
   ukrainian: Donbas
   enabled: true
   is_control: false
-  notes: Politically charged — Russia insists on "Donbass", Ukraine on "Donbas". Part
-    of the 7,800 toponyms renamed across 83 Ukrainian cities since 2022 (Transparent
-    Cities). July 2023 law mandated renaming of Russian imperial toponyms.
+  notes: Politically charged — Russia insists on "Donbass", Ukraine on "Donbas". Part of the 7,800 toponyms renamed across 83 Ukrainian cities since 2022 (Transparent Cities). July 2023 law mandated renaming of Russian imperial toponyms.
   events:
   - date: 2014-04
     label: Donbas conflict begins
@@ -230,9 +232,7 @@ pairs:
   ukrainian: Borscht
   enabled: true
   is_control: false
-  notes: UNESCO inscribed 'Culture of Ukrainian borscht cooking' in July 2022, using
-    'borscht' as the international form. Russian-derived 'borsch' (without t) tests
-    whether English adopts the UNESCO/Ukrainian standard.
+  notes: UNESCO inscribed 'Culture of Ukrainian borscht cooking' in July 2022, using 'borscht' as the international form. Russian-derived 'borsch' (without t) tests whether English adopts the UNESCO/Ukrainian standard.
   events:
   - date: 2022-07
     label: UNESCO inscribes Ukrainian borscht
@@ -439,10 +439,14 @@ pairs:
     label: Wins cruiserweight title
   - date: 2021-09
     label: Beats Joshua, wins heavyweight belts
+  - date: 2022-08
+    label: Usyk beats Joshua (Jeddah)
   - date: 2024-05
     label: Beats Fury, undisputed champion
   - date: 2024-12
     label: Beats Fury rematch
+  - date: 2025-07
+    label: Usyk beats Dubois (Wembley)
   match_mode: exact_phrase
   slug: oleksandr-usyk
   youtube_depth: legacy
@@ -471,8 +475,7 @@ pairs:
   ukrainian: Volodymyr the Great
   enabled: true
   is_control: false
-  notes: Prince who Christianized Rus (988). Both Russia and Ukraine claim him as
-    founding figure. Key test of historical identity reclamation.
+  notes: Prince who Christianized Rus (988). Both Russia and Ukraine claim him as founding figure. Key test of historical identity reclamation.
   events:
   - date: 2015-07
     label: Putin unveils Vladimir statue
@@ -516,8 +519,7 @@ pairs:
   ukrainian: Feodosiia
   enabled: true
   is_control: false
-  notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms
-    Ukraine's territorial integrity.
+  notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms Ukraine's territorial integrity.
   match_mode: word_boundary
   slug: feodosiia
   events:
@@ -548,9 +550,7 @@ pairs:
   ukrainian: Serhii Korolyov
   enabled: true
   is_control: false
-  notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born
-    in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of
-    the most consequential cases of Ukrainian identity erasure in global science history.
+  notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of the most consequential cases of Ukrainian identity erasure in global science history.
   match_mode: exact_phrase
   slug: serhii-korolyov
   youtube_depth: legacy
@@ -565,8 +565,7 @@ pairs:
   ukrainian: Bohdan Khmelnytskyi
   enabled: false
   is_control: false
-  notes: Hetman (Богдан Хмельницький). Tests Г→H (Bogdan vs Bohdan) and suffix (-itsky
-    vs -ytskyi).
+  notes: Hetman (Богдан Хмельницький). Tests Г→H (Bogdan vs Bohdan) and suffix (-itsky vs -ytskyi).
   match_mode: exact_phrase
   slug: bohdan-khmelnytskyi
   events:
