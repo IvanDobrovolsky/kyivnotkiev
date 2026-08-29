@@ -297,7 +297,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const infoEl = document.getElementById('chart-info');
       const sourceInfo: Record<string, string> = {
         gdelt: 'GDELT v2 news monitoring',
-        trends: 'Monthly search interest',
+        // Google Trends never returns counts on any endpoint or tier -- it reports a
+        // 0-100 index, and each variant here is fetched separately so each is scaled
+        // to its OWN peak. That is why both curves reach 100, at different dates.
+        // Saying so on the chart stops the index being read as search volume.
+        trends: 'Monthly search interest — normalized index, each variant to its own peak (100); not absolute volume',
         wikipedia: 'Pageviews API',
         reddit: 'Reddit posts',
         youtube: 'Video title matches',
