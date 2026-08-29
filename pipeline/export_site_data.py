@@ -27,6 +27,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 ROOT = Path(__file__).resolve().parent.parent
 DATASET_DIR = ROOT / "dataset"
 STUDY_END_DATE = "2025-12-31"   # the study period ends here; 2026 is partial
+MAX_ZERO_FILL_RUN = 6          # longer silent runs read as non-collection, not zeros
 DATA_DIR = ROOT / "data"
 SITE_DATA_DIR = ROOT / "site" / "src" / "data"
 
@@ -709,6 +710,72 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                     total = ukr + rus
                     if total > 0:
                         result[spid]["telegram"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
+
+    # A month with zero mentions is a measurement, not a hole. Every source above
+    # skips months whose total is 0, which erases the difference between "we counted
+    # and found none" and "we never observed this month" — and the chart then had no
+    # way to tell them apart either, hatching 258 measured zeros as missing data.
+    # Fill interior months inside each series' own span with explicit zeros, so
+    # absence from the series means only one thing: outside the coverage window.
+    # Yearly sources (ngrams, openalex) are left alone; their gaps are cadence.
+    _filled = _filled_series = _unfilled = 0
+    _unfilled_detail: list[str] = []
+    for _slug in list(result.keys()):
+        if _slug == "events":
+            continue
+        for _src in list(result[_slug].keys()):
+            _ser = result[_slug][_src]
+            if not isinstance(_ser, list) or len(_ser) < 3:
+                continue
+            _months = sorted(d["date"] for d in _ser if d.get("date"))
+            try:
+                _span = pd.period_range(_months[0], _months[-1], freq="M").astype(str)
+            except Exception:
+                continue
+            if len(_span) < 2 or len(_months) / len(_span) < 0.15:
+                continue          # not a monthly series (yearly cadence) — leave it
+            _have = {d["date"]: d for d in _ser}
+            _missing = [m for m in _span if m not in _have]
+            if not _missing:
+                continue
+            # Only short runs are filled. A handful of silent months in a sparse pair
+            # is a real zero; half a year of unbroken silence in an otherwise monthly
+            # source looks like non-collection (Reddit has a known PullPush outage),
+            # and claiming "counted, found none" there is the same error as claiming
+            # "never looked" for a genuine zero. We cannot separate them from the data
+            # alone, so long runs keep the weaker claim and stay absent.
+            _runs, _cur = [], []
+            for m in _span:
+                if m in _have:
+                    if _cur:
+                        _runs.append(_cur)
+                        _cur = []
+                else:
+                    _cur.append(m)
+            if _cur:
+                _runs.append(_cur)
+            _long = [r for r in _runs if len(r) > MAX_ZERO_FILL_RUN]
+            if _long:
+                _unfilled += sum(len(r) for r in _long)
+                _unfilled_detail.append(f"{_slug}/{_src}:{max(len(r) for r in _long)}mo")
+            _missing = [m for r in _runs if len(r) <= MAX_ZERO_FILL_RUN for m in r]
+            if not _missing:
+                continue
+            for m in _missing:
+                # adoption is None, not 0: a share of nothing is undefined, and the
+                # smoother below recomputes it over a window where that is meaningful.
+                _have[m] = {"date": m, "adoption": None, "ukr": 0, "rus": 0,
+                            "measured_zero": True}
+            result[_slug][_src] = [_have[m] for m in _span if m in _have]
+            _filled += len(_missing)
+            _filled_series += 1
+    if _filled:
+        log.info(f"  Filled {_filled:,} measured-zero months across {_filled_series} "
+                 f"pair×source series (0 is a count, not a gap)")
+    if _unfilled:
+        log.info(f"  Left {_unfilled:,} month(s) unfilled in runs over "
+                 f"{MAX_ZERO_FILL_RUN} months — likely non-collection, shown as gaps: "
+                 f"{', '.join(sorted(_unfilled_detail)[:8])}")
 
     # Stabilise every count-based series before thresholding.
     _smoothed = 0
