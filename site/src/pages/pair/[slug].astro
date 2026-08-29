@@ -407,14 +407,20 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         deltas.sort((a, b) => a - b);
         const med = deltas.length ? deltas[Math.floor(deltas.length / 2)] : 31 * 864e5;
         const gapMs = Math.max(med * 2.5, 45 * 864e5);
+        // A point stands for its whole period, not an instant: a monthly series
+        // ending 2025-12-01 covers through 2025-12-31. Comparing the bare timestamp
+        // against the axis end left a one-cadence sliver hatched on the right of
+        // every chart, including fully covered ones. Extend coverage by one cadence
+        // before deciding a gap exists, and start interior gaps after the previous
+        // point's period ends rather than at the point itself.
         if (covDates[0].getTime() > xStart.getTime()) gapSpans.push([xStart, covDates[0]]);
         for (let i = 1; i < covDates.length; i++) {
           if (covDates[i].getTime() - covDates[i - 1].getTime() > gapMs) {
-            gapSpans.push([covDates[i - 1], covDates[i]]);
+            gapSpans.push([new Date(covDates[i - 1].getTime() + med), covDates[i]]);
           }
         }
-        const last = covDates[covDates.length - 1];
-        if (last.getTime() < xEnd.getTime()) gapSpans.push([last, xEnd]);
+        const lastCovered = covDates[covDates.length - 1].getTime() + med;
+        if (lastCovered < xEnd.getTime()) gapSpans.push([new Date(lastCovered), xEnd]);
       }
 
       const gapG = svg.append('g').attr('class', 'nodata-regions');
@@ -661,6 +667,20 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         .on('mousemove', function(event: MouseEvent) {
           const [mx] = d3.pointer(event);
           const hoveredDate = x.invert(mx);
+
+          // Inside a hatched span there is nothing to report. The snap below picks
+          // the nearest point at any distance, so hovering a gap used to surface the
+          // last real month's values under the cursor -- a reading that belongs to a
+          // different part of the chart entirely. Only one source renders at a time,
+          // so the active source's gaps are the gaps.
+          const ht = hoveredDate.getTime();
+          for (const [ga, gb] of gapSpans) {
+            if (ht > ga.getTime() && ht < gb.getTime()) {
+              tooltip.style('opacity', '0');
+              crosshairLine.style('opacity', 0);
+              return;
+            }
+          }
 
           // The series is monthly: every point is one month's measured total. The
           // tooltip used to interpolate between the two bracketing months, so a cursor
