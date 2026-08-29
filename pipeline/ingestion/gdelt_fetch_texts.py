@@ -211,8 +211,19 @@ def flush(records, _first=None):
     PARTS.mkdir(parents=True, exist_ok=True)
     n = len(list(PARTS.glob("part-*.parquet")))
     pd.DataFrame(records).to_parquet(PARTS / f"part-{n:06d}.parquet", compression="zstd", index=False)
+    # Only URLs we actually requested go in the ledger. host_abandoned and
+    # host_backoff mean no request was ever made -- the host had tripped
+    # HOST_FAIL_LIMIT, or was inside its 429 cooldown, and the URL was recorded
+    # without being tried. Writing those as done turned a transient host failure
+    # into permanent loss: 60,419 URLs were locked out of every later run, and the
+    # loss is domain-correlated (yahoo.com, sputniknews.com, unian.info,
+    # 112.international), so it skews per-outlet results rather than thinning them
+    # evenly. Roughly a third of them return 200 on retry.
+    NOT_ATTEMPTED = {"host_abandoned", "host_backoff"}
     with LEDGER.open("a") as fh:
         for r in records:
+            if r.get("error") in NOT_ATTEMPTED:
+                continue
             fh.write(r["url"] + "\n")
 
 
