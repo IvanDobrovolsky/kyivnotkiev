@@ -36,7 +36,8 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
         <button id="adoption-details-btn" style="margin-left:0.35rem; border:1px solid var(--border,#d1d5db); background:#fff; border-radius:6px; padding:0.15rem 0.55rem; font-size:0.8rem; cursor:pointer; color:var(--text-muted);">View details</button>
         <div id="adoption-pop" class="info-pop" hidden style="right:0; left:auto; top:1.9rem; width:min(30rem,92vw); white-space:normal;">
           <button id="adoption-pop-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>
-          <p style="margin:0 0 0.5rem;"><strong>How this number is made.</strong> Mean of per-source UA&nbsp;/&nbsp;(UA&nbsp;+&nbsp;RU) ratios over the last 12 months; each bar is one source, counts beside it.</p>
+          <p style="margin:0 0 0.5rem;">The average of the sources below, over the last 12 months.
+          Counts: <span style="color:#0057B8;font-weight:600;">Ukrainian</span> · <span style="color:#dc2626;font-weight:600;">Russian</span> spelling.</p>
           <div id="adoption-calc-body"></div>
         </div>
       </span>
