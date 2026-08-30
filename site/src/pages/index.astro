@@ -30,10 +30,12 @@ const pairs = [
   <div>
     <h1 class="heading-xl">#KyivNotKiev</h1>
     <p class="subtitle">
-      In 2018 Ukraine's foreign ministry <a href="https://en.wikipedia.org/wiki/KyivNotKiev" target="_blank">asked the world</a>
-      to write Ukrainian names the Ukrainian way — cities, people, dishes, historical figures. This tracks how far
-      that took hold from <strong>{m.time_span}</strong>, using statistics and machine learning to find what shifted
-      usage and what resisted, and asks the same of <a href="/llm">today's AI chatbots</a>.
+      Kyiv, not Kiev. Since 2018 Ukraine has <a href="https://en.wikipedia.org/wiki/KyivNotKiev" target="_blank">asked the world</a>
+      to spell its names from Ukrainian instead of Russian. Did anyone listen? We followed
+      <strong>{m.analyzable_pairs} names</strong> — cities, dishes, historical figures — through
+      <strong>{m.time_span}</strong>: some now adopted almost everywhere, some still contested,
+      some that never took hold even inside Ukraine. We also <a href="/llm">asked the AI chatbots</a>
+      which spelling they use.
     </p>
   </div>
 </div>
@@ -87,7 +89,7 @@ const pairs = [
 <!-- Sort + Filter. The pair count rides in this row rather than taking a line of
      its own: it is a caption for the grid below, not a statement in its own right. -->
 <div class="controls-bar mb-md">
-  <span class="pair-count">Tracking <strong>{m.analyzable_pairs} name pairs</strong></span>
+  <span class="pair-count">The {m.analyzable_pairs} pairs</span>
   <div class="controls-group">
     <span class="controls-label">Sort</span>
     <button class="ctrl-btn active" data-sort="popular">Popular</button>
@@ -145,7 +147,7 @@ const pairs = [
     padding: var(--space-md) 0 var(--space-sm);
   }
   .hero-logo {
-    height: 84px;
+    height: 108px;
     width: auto;
     flex-shrink: 0;
   }
