@@ -1639,11 +1639,11 @@ def main():
             _cells = _cg.value_counts()
             _anchors = []
             for (_cx0, _cy0), _cnt in _cells.items():
-                if _cnt < max(0.25 * len(_m), 40) and _anchors:
+                if _cnt < max(0.15 * len(_m), 25) and _anchors:
                     break
                 _in = _m[(_cg.iloc[:, 0] == _cx0) & (_cg.iloc[:, 1] == _cy0)]
                 _anchors.append([float(_in.umap_x.median()), float(_in.umap_y.median())])
-                if len(_anchors) >= 2:
+                if len(_anchors) >= 3:
                     break
             _clusters[str(_cid)] = {
                 "label": _label,
