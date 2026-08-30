@@ -1887,14 +1887,31 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // Draw cluster labels
       ctx.font = '600 11px system-ui';
       ctx.textAlign = 'center';
-      for (const [cid, info] of Object.entries(clusters) as any) {
+      // Draw small clusters first so the big ones land on top — labels were drawn
+      // in id order and a later label's white backing box could sit straight over
+      // an earlier one, which is how a major cluster ended up apparently unnamed.
+      // A drawn-boxes list nudges any overlapping label downward instead of
+      // letting it stamp out its neighbour.
+      const drawn: Array<[number, number, number, number]> = [];
+      const entries = (Object.entries(clusters) as any[])
+        .sort((a: any, b: any) => (a[1].size || 0) - (b[1].size || 0));
+      for (const [cid, info] of entries) {
         const ci = info as any;
         const lx = sx(ci.cx);
-        const ly = sy(ci.cy);
+        let ly = sy(ci.cy);
+        const tw = ctx.measureText(ci.label).width;
+        let box: [number, number, number, number] = [lx - tw/2 - 4, ly - 8, tw + 8, 14];
+        let guard = 0;
+        while (guard++ < 8 && drawn.some(b =>
+            box[0] < b[0] + b[2] && box[0] + box[2] > b[0] &&
+            box[1] < b[1] + b[3] && box[1] + box[3] > b[1])) {
+          ly += 15;
+          box = [lx - tw/2 - 4, ly - 8, tw + 8, 14];
+        }
+        drawn.push(box);
         const labelColor = ci.ua_pct > 50 ? '#0057B8' : '#374151';
         ctx.fillStyle = 'rgba(255,255,255,0.85)';
-        const tw = ctx.measureText(ci.label).width;
-        ctx.fillRect(lx - tw/2 - 4, ly - 8, tw + 8, 14);
+        ctx.fillRect(box[0], box[1], box[2], box[3]);
         ctx.fillStyle = labelColor;
         ctx.fillText(ci.label, lx, ly + 3);
       }
@@ -1903,16 +1920,9 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const sub = document.getElementById('cluster-subtitle');
       if (sub) sub.textContent = `${data.total.toLocaleString()} texts, ${data.n_clusters} clusters — colored by variant (blue = Ukrainian, red = Russian)`;
 
-      // Legend
-      const legend = document.getElementById('cluster-legend');
-      if (legend) {
-        legend.innerHTML = '';
-        for (const [cid, info] of Object.entries(clusters) as any) {
-          const ci = info as any;
-          const color = ci.ua_pct > 50 ? '#0057B8' : '#dc2626';
-          legend.innerHTML += `<span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:${color};opacity:0.7;"></span><strong>${ci.label}</strong> (${ci.size} texts, ${ci.ua_pct}% UA)</span>`;
-        }
-      }
+      // No legend list: every cluster is already named on the canvas at its
+      // centroid, and repeating all sixteen below the chart duplicated the labels
+      // — including the filler ones — as a wall of text.
     }
 
     function drawClCollocations() {

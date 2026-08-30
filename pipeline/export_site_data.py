@@ -1612,9 +1612,22 @@ def main():
             # Label: the first two distinguishing terms that are not the pair's own
             # spellings, which head almost every list.
             _terms = [t for t in _c.get("top_terms", [])
-                      if t.lower() not in _pairwords and len(t) > 2][:2]
+                      if t.lower() not in _pairwords and len(t) > 2]
+            # Labels must be unique on the chart: two stalker clusters both showed
+            # "shadow · stalker". Extend with further terms until distinct.
+            if _c.get("english_ratio", 1.0) < 0.08:
+                # essentially no English function words: name the fact, not fragments
+                _terms = []
+                _label = "non-English"
+            else:
+                _label = " · ".join(_terms[:2]) if _terms else f"cluster {_cid}"
+            _used = {v["label"] for v in _clusters.values()}
+            _i = 2
+            while _label in _used and _i < len(_terms):
+                _label = " · ".join(_terms[:2] + [_terms[_i]])
+                _i += 1
             _clusters[str(_cid)] = {
-                "label": " · ".join(_terms) if _terms else f"cluster {_cid}",
+                "label": _label,
                 "cx": float(_m.umap_x.median()), "cy": float(_m.umap_y.median()),
                 "ua_pct": round(_c.get("variant_share", {}).get("ukrainian", 0) * 100, 1),
                 "size": _c.get("size", int(len(_m))),

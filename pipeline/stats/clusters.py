@@ -176,9 +176,21 @@ def merge_small(post: np.ndarray, means: np.ndarray) -> np.ndarray:
 def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict:
     """c-TF-IDF: each cluster as one document, so terms are distinguishing
     rather than merely frequent."""
-    from sklearn.feature_extraction.text import CountVectorizer
+    from sklearn.feature_extraction.text import CountVectorizer, ENGLISH_STOP_WORDS
+    # sklearn's english list keeps conversational fillers, so the biggest casual
+    # cluster labelled itself "like - just". Filler and non-English function words
+    # are stopped as well; a Spanish-language cluster should surface through terms
+    # like "video" or stay generic, not advertise "que - por" as if it meant
+    # something about naming.
+    FILLERS = {"like", "just", "time", "people", "know", "think", "really", "going",
+               "want", "got", "way", "thing", "things", "good", "make", "say", "said",
+               "yeah", "don", "didn", "doesn", "ve", "ll", "im", "actually", "right",
+               "new", "old", "year", "years", "day", "days", "watch", "video",
+               "que", "por", "para", "una", "del", "las", "los", "con", "este",
+               "und", "der", "die", "das", "les", "des", "dans", "pour"}
+    stop = list(ENGLISH_STOP_WORDS | FILLERS)
     docs = [" ".join(texts[labels == c].head(2000)) for c in range(k)]
-    cv = CountVectorizer(stop_words="english", max_features=30_000,
+    cv = CountVectorizer(stop_words=stop, max_features=30_000,
                          token_pattern=r"[a-zA-Z][a-zA-Z'-]{2,}")
     tf = cv.fit_transform(docs).toarray().astype(np.float64)
     tf = tf / np.maximum(tf.sum(1, keepdims=True), 1)
@@ -253,8 +265,24 @@ def main() -> int:
         g = df[m]
         vs = g.variant.value_counts(normalize=True).round(3).to_dict()
         yr = g.groupby("year").size()
+        # English stopword hit-rate flags non-English clusters: the corpus is meant
+        # to be English-only, but reddit and youtube leak other languages, and one
+        # Spanish cluster labelled itself from token fragments. Low ratio -> the
+        # exporter names it plainly instead of pretending the fragments are terms.
+        _tok = g.text.str.lower().str.findall(r"[a-z']+")
+        _eng = {"the","and","of","to","in","is","it","that","for","was","on","with","as","this"}
+        # Judge only texts long enough to have function words at all: hashtag-style
+        # YouTube Shorts titles carry ~5 tokens and no stopwords in any language,
+        # and the first version branded that cluster non-English. Under 30% judgeable
+        # docs the ratio abstains (1.0 = assume English).
+        _long = _tok[_tok.str.len() >= 20]
+        if len(_long) >= 0.3 * len(_tok):
+            _ratio = float(_long.apply(lambda ws: sum(w in _eng for w in ws[:60]) / min(len(ws), 60)).mean())
+        else:
+            _ratio = 1.0
         summary["clusters"].append({
             "cluster": int(c), "size": int(m.sum()),
+            "english_ratio": round(_ratio, 3),
             "top_terms": terms.get(c, []),
             "variant_share": vs,
             "borderline_share": round(float(borderline[m].mean()), 4),
