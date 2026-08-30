@@ -1217,25 +1217,21 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // Sort newest first
       const sorted = [...articles].sort((a: any, b: any) => (b.month || '').localeCompare(a.month || ''));
 
-      // Filter
-      const filtered = newsFilter === 'all' ? sorted : sorted.filter((a: any) => a.variant === newsFilter);
+      // Every row is a Russian-form holdout — the export no longer emits any other
+      // variant here. So there is nothing to filter between, and a per-row RU/UA
+      // label would restate what the whole table already means.
       const DISPLAY_LIMIT = 100;
-
-      const variantColors: Record<string, string> = {russian: '#dc2626', ukrainian: '#0057B8', both: '#6b7280'};
-      const variantLabels: Record<string, string> = {russian: 'RU', ukrainian: 'UA', both: 'Both'};
       const now = new Date();
       const twoYearsAgo = `${now.getFullYear() - 2}-${String(now.getMonth()+1).padStart(2,'0')}`;
 
-      const displayed = filtered.slice(0, DISPLAY_LIMIT);
+      const displayed = sorted.slice(0, DISPLAY_LIMIT);
       for (const a of displayed) {
-        const color = variantColors[a.variant] || '#6b7280';
-        const isRecent = (a.month || '') >= twoYearsAgo;
-        const isRecentRussian = isRecent && a.variant === 'russian';
+        const color = '#dc2626';
+        const isRecentRussian = (a.month || '') >= twoYearsAgo;
         const item = document.createElement('div');
         item.style.cssText = `padding:0.5rem 0.75rem; border-bottom:1px solid var(--border, #e5e7eb); font-size:0.8rem; ${isRecentRussian ? 'background:#fef2f2;' : ''}`;
         item.innerHTML = `
           <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.25rem;">
-            <span style="width:8px; height:8px; border-radius:50%; background:${color}; flex-shrink:0;" title="${variantLabels[a.variant] || ''} form"></span>
             <a href="${a.url}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${a.domain}</a>
             ${isRecentRussian ? '<span style="font-size:0.78rem; background:#dc2626; color:white; padding:1px 5px; border-radius:3px;">still RU</span>' : ''}
             <span style="color:var(--text-muted); font-size:0.82rem; margin-left:auto; flex-shrink:0;">${a.month || ''}</span>

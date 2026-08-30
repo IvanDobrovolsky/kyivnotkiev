@@ -104,11 +104,6 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
       <div class="chart-title" style="color: var(--text)">Verified News Articles</div>
       <div class="chart-subtitle" id="news-holdouts-subtitle">English-language articles from 818 verified news outlets</div>
     </div>
-    <div class="chart-controls" id="news-holdouts-filters">
-      <button class="line-mode active" data-nfilter="all">All</button>
-      <button class="line-mode" data-nfilter="russian" style="color:#dc2626;">Russian form</button>
-      <button class="line-mode" data-nfilter="ukrainian" style="color:#0057B8;">Ukrainian form</button>
-    </div>
   </div>
   <div id="news-holdouts-list" style="margin-top:0.5rem; max-height:500px; overflow-y:auto;"></div>
 </div>

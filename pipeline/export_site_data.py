@@ -271,7 +271,7 @@ HOLDOUT_CAP = 100
 HOLDOUT_PER_DOMAIN = 3
 # Russian and mixed usage are the holdouts worth reading; Ukrainian-only rows are
 # not holdouts at all. Applied identically to every source.
-HOLDOUT_VARIANTS = ("russian", "both")
+HOLDOUT_VARIANTS = ("russian",)   # a holdout is a Russian spelling; "both" uses each form
 
 
 def _apply_homonym_filters(df: pd.DataFrame) -> pd.DataFrame:
@@ -1265,7 +1265,20 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     # YouTube: actual video URLs. One video per channel, so a single prolific channel
     # cannot own the table -- the same reason the news holdouts cap per domain.
     youtube = _load_youtube_census()
+    # Fall back to the project key so the ordering is deterministic rather than
+    # depending on whether someone exported a variable. Without it the table
+    # silently falls back to recency, which is a different table.
     _yt_key = os.environ.get("YOUTUBE_API_KEY", "").strip()
+    if not _yt_key:
+        try:
+            import subprocess as _sp
+            _yt_key = _sp.run(
+                ["gcloud", "services", "api-keys", "get-key-string",
+                 "029b0141-1889-4665-a569-36d75c0f6191",
+                 "--project=kyivnotkiev-yt", "--format=value(keyString)"],
+                capture_output=True, text=True, timeout=30).stdout.strip()
+        except Exception:
+            _yt_key = ""
     _yt_ranked: list[str] = []
     if len(youtube) and "video_id" in youtube.columns:
         y = youtube[(youtube["date"] >= since) & (youtube["variant"].isin(HOLDOUT_VARIANTS))]
@@ -1525,13 +1538,17 @@ def main():
             _hdf = _hdf[_hdf["_variant"].notna()]
             if len(_hdf) == 0:
                 continue
-            # Russian spellings are the holdouts worth reading; Ukrainian ones are
-            # only kept to fill the cap when there are too few Russian examples.
-            _hdf["_rank"] = (_hdf["_variant"] != "russian").astype(int)
-            _hdf = _hdf.sort_values(["_rank", "month"], ascending=[True, False])
+            # Russian spellings only. This previously padded the cap with Ukrainian
+            # articles when Russian ones ran short, which put 99 of them on the site
+            # under a table of holdouts — the opposite of what it claims to show.
+            # A short table is honest; a padded one is not.
+            _hdf = _hdf[_hdf["_variant"].isin(HOLDOUT_VARIANTS)]
+            if len(_hdf) == 0:
+                continue
+            _hdf = _hdf.sort_values("month", ascending=False)
             _hdf = (_hdf.groupby("domain", sort=False, group_keys=False)
                         .head(HOLDOUT_PER_DOMAIN)
-                        .sort_values(["_rank", "month"], ascending=[True, False])
+                        .sort_values("month", ascending=False)
                         .head(HOLDOUT_CAP))
             _articles = [{
                 "domain": _r.get("domain", ""),
