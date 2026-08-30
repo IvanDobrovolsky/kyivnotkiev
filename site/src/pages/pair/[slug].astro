@@ -812,22 +812,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           tooltip.style('opacity', '0');
         });
 
-      // Legend
-      if (lineMode !== 'russian') {
-        for (const item of activeLegend) {
-          const el = document.createElement('div');
-          el.className = 'legend-item';
-          el.innerHTML = `<span class="legend-line" style="background: ${item.color}"></span>${item.label}: ${item.value}%`;
-          legendContainer.appendChild(el);
-        }
-      }
-      if (lineMode !== 'ukrainian') {
-        const el = document.createElement('div');
-        el.className = 'legend-item';
-        const lastVal = activeLegend[0] ? (100 - activeLegend[0].value).toFixed(1) : '?';
-        el.innerHTML = `<span class="legend-line" style="background: #dc2626"></span>Old spelling: ${lastVal}%`;
-        legendContainer.appendChild(el);
-      }
+      // No percentage legend under the chart: it restated the latest point, which
+      // the line's right edge and the tooltip already say. The two line colors are
+      // identified by the variant names in the pair header.
+      legendContainer.innerHTML = '';
     }
 
     // Sidebar
@@ -1337,57 +1325,34 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       if (!pairData) return;
 
       const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
-      // A card is rendered for every source, including empty ones, so the column count
-      // is the source count. It was hard-coded to 9 against 8 sources, leaving an empty
-      // ninth column that stopped the strip reaching full width.
-      container.style.gridTemplateColumns = `repeat(${srcOrder.length}, minmax(0, 1fr))`;
+      // One slim row per source. The card grid truncated every label ("TREN",
+      // "WIKI"), stacked its numbers three lines tall, and spent a third of the
+      // viewport saying eight numbers.
+      container.style.cssText = 'display:flex; flex-direction:column; gap:0; border:1px solid var(--border,#e5e7eb); border-radius:10px; background:#fff; overflow:hidden;';
+      const st = ((manifest as any).pair_source_stats || {})[activePairSlug] || {};
       for (const src of srcOrder) {
-        const series = pairData[src];
-        const card = document.createElement('div');
-        card.className = 'stat-card mini';
-        card.style.setProperty('--accent', sourceColors[src] || '#888');
-
-        // Figures come from the pipeline (manifest.pair_source_stats), computed over
-        // the source records. Summing the plotted series client-side printed the sum
-        // of Trends' 0-100 index as a mention count and derived the headline
-        // percentage from it. Sources whose unit is not countable — Trends' index,
-        // ngrams' frequency — publish an adoption figure and no totals.
-        const st = ((manifest as any).pair_source_stats || {})[activePairSlug] || {};
         const sstat = st[src];
-
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex; align-items:baseline; gap:0.6rem; padding:0.42rem 0.8rem; border-bottom:1px solid #f3f4f6; font-size:0.86rem;';
+        const color = sourceColors[src] || '#888';
         if (sstat) {
           const fmtN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
-          const detail = sstat.countable
-            ? `<span style="color:#0057B8;">${fmtN(sstat.ukr)}</span> · <span style="color:#dc2626;">${fmtN(sstat.rus)}</span> ${sstat.unit}`
-            : `${sstat.unit}`;
-          card.innerHTML = `
-            <div class="stat-value">${Math.round(sstat.adoption)}%</div>
-            <div class="stat-label">${sourceLabels[src]}</div>
-            <div class="stat-source">${detail}</div>
-          `;
+          const counts = sstat.countable
+            ? `<span style="color:#0057B8;">${fmtN(sstat.ukr)}</span> · <span style="color:#dc2626;">${fmtN(sstat.rus)}</span> <span style="color:#9ca3af;">${sstat.unit}</span>`
+            : `<span style="color:#9ca3af;">${sstat.unit}</span>`;
+          row.innerHTML =
+            `<span style="width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0;align-self:center;"></span>` +
+            `<span style="width:5.5rem;font-weight:600;">${sourceLabels[src]}</span>` +
+            `<span style="width:3.2rem;font-weight:700;color:${color};text-align:right;">${Math.round(sstat.adoption)}%</span>` +
+            `<span style="flex:1;"></span><span style="white-space:nowrap;">${counts}</span>`;
         } else {
-          // Determine why data is missing — expected vs gap
-          const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
-          const pid = activePairSlug;
-          const isNewPair = false;
-          const gdeltNoData = false;
-          const ngramsNoData = false;
-          // "No mentions found" asserted a measured zero. Absence here means the
-          // source has too little for this pair to support a figure — which is a
-          // different claim, and usually the true one.
-          const reason =
-            isNewPair ? 'Data collection in progress' :
-            (src === 'gdelt' && gdeltNoData) ? 'Not in news URLs' :
-            (src === 'ngrams' && ngramsNoData) ? 'Not in book corpus' :
-            'Not enough data';
-          card.innerHTML = `
-            <div class="stat-value" style="color:#d1d5db;">—</div>
-            <div class="stat-label">${sourceLabels[src]}</div>
-            <div class="stat-source" title="${reason}">${reason}</div>
-          `;
-          card.style.opacity = '0.4';
+          row.style.opacity = '0.45';
+          row.innerHTML =
+            `<span style="width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0;align-self:center;"></span>` +
+            `<span style="width:5.5rem;font-weight:600;">${sourceLabels[src]}</span>` +
+            `<span style="color:#9ca3af;">Not enough data</span>`;
         }
-        container.appendChild(card);
+        container.appendChild(row);
       }
 
       // If most sources are empty, add a note
