@@ -66,7 +66,10 @@ def _load(name: str) -> pd.DataFrame:
             # as a collapse in volume rather than an incomplete window. GDELT ran
             # to 2026-08 and was drawing points past the axis end.
             if "date" in df.columns:
-                _d = pd.to_datetime(df["date"], errors="coerce")
+                # utc=True then drop the zone: telegram's dates are tz-aware, and
+                # comparing them against a naive Timestamp raised — which killed the
+                # whole export, not just the telegram block.
+                _d = pd.to_datetime(df["date"], errors="coerce", utc=True).dt.tz_localize(None)
                 _keep = _d.isna() | (_d <= pd.Timestamp(STUDY_END_DATE))
                 if int((~_keep).sum()):
                     log.info(f"  {name}: dropped {int((~_keep).sum()):,} rows after {STUDY_END_DATE}")
@@ -1338,7 +1341,47 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
         else:
             log.info("  YouTube holdouts ordered by recency — set YOUTUBE_API_KEY to rank by views")
 
-    log.info(f"  Holdouts: {len(by_pair)} pairs across news/wiki/reddit/youtube")
+    # Telegram: Latin-script Russian forms inside (mostly Cyrillic) public-channel
+    # messages. One guard is mandatory: the match must survive URL-stripping —
+    # dynamo.kiev.ua's own channel matched "Kiev" 311 times through the link
+    # footer in every post, which is boilerplate, not usage.
+    try:
+        _tg = pd.read_parquet(ROOT / "data" / "store" / "telegram_raw.parquet")
+    except Exception:
+        _tg = pd.DataFrame()
+    if len(_tg):
+        import re as _re2
+        _dstr = _tg.date.astype(str).str[:10]
+        _t = _tg[(_tg.variant == "russian")
+                 & (_dstr >= HOLDOUT_SINCE)
+                 & (_dstr <= STUDY_END_DATE)
+                 & _tg.pair_slug.isin(enabled_slugs)].copy()
+        _t["_clean"] = (_t.text.astype(str)
+                        .str.replace(r"https?://\S+", " ", regex=True)
+                        .str.replace(r"\b[\w.-]+\.(?:ua|com|org|net|info)/\S*", " ", regex=True))
+        _t = _t[[bool(_re2.search(r"\b" + _re2.escape(str(r.matched_term)) + r"\b",
+                                  r._clean, _re2.I))
+                 for r in _t.itertuples()]]
+        _n_tg = 0
+        for _slug, _g in _t.groupby("pair_slug"):
+            _g = (_g.sort_values("views", ascending=False)
+                    .groupby("channel_title", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
+                    .sort_values("views", ascending=False).head(HOLDOUT_CAP))
+            if not len(_g):
+                continue
+            by_pair.setdefault(_slug, {})["telegram"] = [{
+                "name": str(r.channel_title)[:60],
+                "url": f"https://t.me/{r.channel}",
+                "snippet": _re2.sub(r"\s+", " ", str(r.text))[:160],
+                "term": str(r.matched_term),
+                "views": int(r.views) if pd.notna(r.views) else 0,
+                "month": str(r.date)[:7],
+            } for r in _g.itertuples()]
+            _n_tg += len(_g)
+        log.info(f"  Telegram holdouts: {_n_tg} messages (russian form outside URLs, "
+                 f"since {HOLDOUT_SINCE}, view-ranked)")
+
+    log.info(f"  Holdouts: {len(by_pair)} pairs across news/wiki/reddit/youtube/telegram")
 
     # Global holdouts (top 100 news domains)
     global_list = []
