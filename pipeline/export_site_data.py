@@ -1629,28 +1629,57 @@ def main():
             # Anchor the label at the cluster's densest cell, not its median: for a
             # crescent or two-lobed cluster the median can sit outside the visible
             # mass entirely, which is how a large cluster appeared unlabelled.
-            # A cluster can be multi-lobed — EM binds every text that writes the
-            # Ukrainian form into one component, and even k=24 keeps its news lobe
-            # and its gaming lobe together (22% of mass at the second cell). One
-            # anchor cannot mark two lobes, so any coarse cell holding >=15% of the
-            # cluster gets the label too.
+            # A cluster can be multi-lobed. Each point is assigned to its nearest
+            # candidate anchor; an anchor survives only if it owns >=15% of the
+            # cluster AND sits at least 2.5 units from every stronger anchor —
+            # three near-identical badges for one register were candidate cells
+            # that barely cleared a bare count threshold. Each surviving lobe
+            # carries a radius (the 80th-percentile distance of its points), so the
+            # chart can draw extent instead of a bare dot.
             _cg = pd.concat([(_m.umap_x / 3).round() * 3,
                              (_m.umap_y / 3).round() * 3], axis=1)
             _cells = _cg.value_counts()
-            _anchors = []
-            for (_cx0, _cy0), _cnt in _cells.items():
-                if _cnt < max(0.15 * len(_m), 25) and _anchors:
-                    break
+            _cand = []
+            for (_cx0, _cy0), _cnt in _cells.head(6).items():
                 _in = _m[(_cg.iloc[:, 0] == _cx0) & (_cg.iloc[:, 1] == _cy0)]
-                _anchors.append([float(_in.umap_x.median()), float(_in.umap_y.median())])
-                if len(_anchors) >= 3:
+                _cand.append((float(_in.umap_x.median()), float(_in.umap_y.median())))
+            _keep = []
+            for _ax, _ay in _cand:
+                if all(((_ax - kx) ** 2 + (_ay - ky) ** 2) ** 0.5 >= 2.5 for kx, ky, *_ in _keep):
+                    _keep.append((_ax, _ay))
+                if len(_keep) >= 3:
                     break
+            import numpy as _np
+            _pts = _m[["umap_x", "umap_y"]].to_numpy()
+            _d = _np.stack([((_pts[:, 0] - kx) ** 2 + (_pts[:, 1] - ky) ** 2) ** 0.5
+                            for kx, ky in _keep])
+            _own = _d.argmin(0)
+            _anchors = []
+            for _ai, (_ax, _ay) in enumerate(_keep):
+                _mine = _d[_ai][_own == _ai]
+                _share = float((_own == _ai).mean())
+                if _share < 0.15 and _anchors:
+                    continue
+                _anchors.append([round(_ax, 3), round(_ay, 3),
+                                 round(float(_np.percentile(_mine, 80)) if len(_mine) else 1.0, 3),
+                                 round(_share, 3)])
+            _ua_pct = round(_c.get("variant_share", {}).get("ukrainian", 0) * 100, 1)
+            if _ua_pct < 3:
+                _phrase = "almost entirely Russian form"
+            elif _ua_pct < 25:
+                _phrase = "mostly Russian form"
+            elif _ua_pct <= 75:
+                _phrase = "genuinely mixed"
+            else:
+                _phrase = "mostly Ukrainian form"
+            _peak = _c.get("peak_year")
             _clusters[str(_cid)] = {
                 "label": _label,
                 "anchors": _anchors,
                 "cx": _anchors[0][0], "cy": _anchors[0][1],
-                "ua_pct": round(_c.get("variant_share", {}).get("ukrainian", 0) * 100, 1),
+                "ua_pct": _ua_pct,
                 "size": _c.get("size", int(len(_m))),
+                "desc": _phrase + (f", peaks {_peak}" if _peak else ""),
             }
         _cl_out[_slug] = {"points": _points, "clusters": _clusters,
                           "total": int(_summ.get("n", len(_asg))),
