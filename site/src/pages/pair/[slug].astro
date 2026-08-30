@@ -1897,8 +1897,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         .sort((a: any, b: any) => (a[1].size || 0) - (b[1].size || 0));
       for (const [cid, info] of entries) {
         const ci = info as any;
-        const lx = sx(ci.cx);
-        let ly = sy(ci.cy);
+        const anchors: Array<[number, number]> = (ci.anchors && ci.anchors.length)
+          ? ci.anchors : [[ci.cx, ci.cy]];
+        for (const [ax, ay] of anchors) {
+        const lx = sx(ax);
+        let ly = sy(ay);
         const tw = ctx.measureText(ci.label).width;
         let box: [number, number, number, number] = [lx - tw/2 - 4, ly - 8, tw + 8, 14];
         // Dodge alternates up/down and stays inside the canvas — pushing only
@@ -1920,6 +1923,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         ctx.fillRect(box[0], box[1], box[2], box[3]);
         ctx.fillStyle = labelColor;
         ctx.fillText(ci.label, lx, ly + 3);
+        }
       }
 
       // Subtitle

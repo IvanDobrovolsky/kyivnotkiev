@@ -57,7 +57,7 @@ STATS = ROOT / "data" / "stats"
 
 SEED = 20260829
 SAMPLE_CAP = 15_000          # UMAP OOMs above ~40K on this machine; measured
-K_RANGE = range(4, 17)
+K_RANGE = range(4, 25)   # BIC hit the top of 4..16 twice; give the knee room to bite
 MIN_CLUSTER_SHARE = 0.02     # components smaller than this are merged, not narrated
 BORDERLINE_MARGIN = 0.20
 EMBED_MODEL = "all-MiniLM-L6-v2"

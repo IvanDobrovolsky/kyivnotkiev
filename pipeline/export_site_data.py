@@ -1629,13 +1629,26 @@ def main():
             # Anchor the label at the cluster's densest cell, not its median: for a
             # crescent or two-lobed cluster the median can sit outside the visible
             # mass entirely, which is how a large cluster appeared unlabelled.
-            _gx = (_m.umap_x * 2).round() / 2
-            _gy = (_m.umap_y * 2).round() / 2
-            _cell = pd.concat([_gx, _gy], axis=1).value_counts().idxmax()
-            _in = _m[(_gx == _cell[0]) & (_gy == _cell[1])]
+            # A cluster can be multi-lobed — EM binds every text that writes the
+            # Ukrainian form into one component, and even k=24 keeps its news lobe
+            # and its gaming lobe together (22% of mass at the second cell). One
+            # anchor cannot mark two lobes, so any coarse cell holding >=15% of the
+            # cluster gets the label too.
+            _cg = pd.concat([(_m.umap_x / 3).round() * 3,
+                             (_m.umap_y / 3).round() * 3], axis=1)
+            _cells = _cg.value_counts()
+            _anchors = []
+            for (_cx0, _cy0), _cnt in _cells.items():
+                if _cnt < max(0.15 * len(_m), 25) and _anchors:
+                    break
+                _in = _m[(_cg.iloc[:, 0] == _cx0) & (_cg.iloc[:, 1] == _cy0)]
+                _anchors.append([float(_in.umap_x.median()), float(_in.umap_y.median())])
+                if len(_anchors) >= 3:
+                    break
             _clusters[str(_cid)] = {
                 "label": _label,
-                "cx": float(_in.umap_x.median()), "cy": float(_in.umap_y.median()),
+                "anchors": _anchors,
+                "cx": _anchors[0][0], "cy": _anchors[0][1],
                 "ua_pct": round(_c.get("variant_share", {}).get("ukrainian", 0) * 100, 1),
                 "size": _c.get("size", int(len(_m))),
             }
