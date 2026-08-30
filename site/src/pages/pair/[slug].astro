@@ -310,22 +310,18 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const rangeEl = document.getElementById('chart-range');
       const infoEl = document.getElementById('chart-info');
       const sourceInfo: Record<string, string> = {
-        gdelt: 'GDELT v2 news monitoring',
-        // Google Trends never returns counts on any endpoint or tier -- it reports a
-        // 0-100 index, and each variant here is fetched separately so each is scaled
-        // to its OWN peak. That is why both curves reach 100, at different dates.
-        // Saying so on the chart stops the index being read as search volume.
-        trends: 'Monthly search interest — normalized index, each variant to its own peak (100)',
-        wikipedia: 'Pageviews API',
-        reddit: 'Reddit posts',
-        youtube: 'Video title matches',
-        ngrams: 'Google Books corpus (English 2022)',
-        openalex: 'OpenAlex academic papers',
-        telegram: 'Public channel messages',
+        trends: 'Google search interest — relative, normalized 0–100',
+        gdelt: 'Verified articles from active news media',
+        wikipedia: 'Wikipedia page views',
+        reddit: 'Reddit user posts',
+        youtube: 'YouTube videos naming the spelling in title or description',
+        ngrams: 'Word frequency in printed books (Google Books)',
+        openalex: 'Academic papers (OpenAlex)',
+        telegram: 'Public Telegram channel messages',
       };
-      const startYear = dataMinDate.getFullYear();
-      const endYear = dataMaxDate.getFullYear();
-      if (rangeEl) rangeEl.textContent = `${startYear}–${endYear}`;
+      // The date range label is gone: the x axis is pinned to the study period on
+      // every source, so the axis already says it.
+      if (rangeEl) rangeEl.textContent = '';
       if (infoEl) infoEl.textContent = sourceInfo[activeSource] || '';
 
       // Y-axis depends on chart mode
@@ -490,9 +486,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         .text(fmtY);
 
       // X-axis — decades for Ngrams, years for others
-      const xTicks = activeSource === 'ngrams'
-        ? d3.axisBottom(x).ticks(d3.timeYear.every(10)).tickSize(0).tickPadding(8).tickFormat(d3.timeFormat('%Y') as any)
-        : d3.axisBottom(x).ticks(d3.timeYear.every(1)).tickSize(0).tickPadding(8).tickFormat(d3.timeFormat('%Y') as any);
+      const xTicks = d3.axisBottom(x).ticks(d3.timeYear.every(1)).tickSize(0).tickPadding(8).tickFormat(d3.timeFormat('%Y') as any);
 
       svg.append('g')
         .attr('transform', `translate(0,${height})`)
