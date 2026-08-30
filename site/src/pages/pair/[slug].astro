@@ -524,19 +524,22 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             .attr('stroke-dasharray', '4,3')
             .attr('opacity', isPair ? 0.5 : 0.3);
 
-          // Numbered circle at top. Hovering it pulses the matching legend entry
-          // once — enough to show which line lit up, quiet enough not to perform.
+          // Numbered circle at top. Hovering it pulses the matching legend entry.
+          // `eventNum` is a shared mutable counter, so the handlers must capture
+          // this iteration's value — closing over the variable made every badge
+          // pulse only the last event's legend row.
+          const thisNum = eventNum;
           svg.append('circle')
             .attr('cx', xPos).attr('cy', -18)
             .attr('r', 9)
             .attr('fill', isPair ? '#0057B8' : '#e5e7eb')
             .style('cursor', 'default')
             .on('mouseenter', () => {
-              const el = document.querySelector(`[data-event-legend="${eventNum}"]`);
+              const el = document.querySelector(`[data-event-legend="${thisNum}"]`);
               if (el) { el.classList.remove('evt-pulse'); void (el as HTMLElement).offsetWidth; el.classList.add('evt-pulse'); }
             })
             .on('mouseleave', () => {
-              document.querySelector(`[data-event-legend="${eventNum}"]`)?.classList.remove('evt-pulse');
+              document.querySelector(`[data-event-legend="${thisNum}"]`)?.classList.remove('evt-pulse');
             });
           // Two-digit numbers crowd the circle at a fixed size, so the type steps down
           // once the label reaches double digits. Centred on the baseline rather than
@@ -1902,6 +1905,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // timeseries already do, and the legend carries the words.
       const ordered = (Object.entries(clusters) as any[])
         .sort((a: any, b: any) => (b[1].size || 0) - (a[1].size || 0));
+      // Canvas has no per-element events, so badge hover is a hit-test: positions
+      // recorded at draw time, checked on mousemove, and the matching legend row
+      // pulses exactly as the event markers do.
+      const badgeHits: Array<[number, number, number]> = [];
       // Scale a UMAP-unit radius into pixels (x and y scales differ slightly;
       // use the mean so circles stay circles).
       const ux = (width - 2 * pad) / (xMax - xMin);
@@ -1914,6 +1921,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         const badgeColor = info.ua_pct > 50 ? '#0057B8' : '#374151';
         for (const [ax, ay, ar] of anchors) {
           const bx = sx(ax), by = sy(ay);
+          badgeHits.push([bx, by, idx]);
           // extent first: a soft disc plus dashed ring says "this region", where a
           // bare dot said nothing about how far the cluster reaches
           const rr = Math.max(14, (ar || 1) * ur);
@@ -1965,6 +1973,28 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         `This pair: ${data.total.toLocaleString()} texts sampled, ${ordered.length} groups` +
         (data.borderline_share ? `, ${(data.borderline_share*100).toFixed(1)}% between groups.` : '.');
 
+      if (!(canvas as any)._hitWired) {
+        (canvas as any)._hitWired = true;
+        let lastHit = -1;
+        canvas.addEventListener('mousemove', (e: MouseEvent) => {
+          const r = canvas.getBoundingClientRect();
+          const mx2 = e.clientX - r.left, my2 = e.clientY - r.top;
+          let hit = -1;
+          for (const [bx, by, idx] of badgeHits) {
+            if ((mx2 - bx) ** 2 + (my2 - by) ** 2 <= 144) { hit = idx; break; }
+          }
+          if (hit !== lastHit) {
+            if (lastHit >= 0) document.querySelector(`[data-cluster-legend="${lastHit}"]`)?.classList.remove('evt-pulse');
+            if (hit >= 0) {
+              const el = document.querySelector(`[data-cluster-legend="${hit}"]`);
+              if (el) { el.classList.remove('evt-pulse'); void (el as HTMLElement).offsetWidth; el.classList.add('evt-pulse'); }
+            }
+            lastHit = hit;
+          }
+          canvas.style.cursor = hit >= 0 ? 'pointer' : 'default';
+        });
+      }
+
       // Legend: the numbered explanation list. One row per cluster, matching the
       // badges above.
       const legendEl = document.getElementById('cluster-legend');
@@ -1975,7 +2005,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           const color = info.ua_pct > 50 ? '#0057B8' : '#374151';
           // Meaning first, exact number second: "the 2024 STALKER game · 92.2% UA".
           // The auto-terms live in the hover title for anyone who wants them.
-          legendEl.innerHTML += `<span title="terms: ${info.label}" style="display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">` +
+          legendEl.innerHTML += `<span class="legend-item" data-cluster-legend="${idx}" title="terms: ${info.label}" style="display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">` +
             `<span style="width:16px;height:16px;border-radius:50%;background:${color};color:#fff;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>` +
             `<strong>${info.gloss || info.label}</strong>` +
             `<span style="color:#6b7280;">${info.ua_pct}% UA · ${info.size.toLocaleString()} texts</span></span>`;
