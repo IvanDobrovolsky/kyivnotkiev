@@ -1356,11 +1356,11 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                  & (_dstr >= HOLDOUT_SINCE)
                  & (_dstr <= STUDY_END_DATE)
                  & _tg.pair_slug.isin(enabled_slugs)].copy()
-        _t["_clean"] = (_t.text.astype(str)
+        _t["cleantext"] = (_t.text.astype(str)
                         .str.replace(r"https?://\S+", " ", regex=True)
                         .str.replace(r"\b[\w.-]+\.(?:ua|com|org|net|info)/\S*", " ", regex=True))
         _t = _t[[bool(_re2.search(r"\b" + _re2.escape(str(r.matched_term)) + r"\b",
-                                  r._clean, _re2.I))
+                                  r.cleantext, _re2.I))
                  for r in _t.itertuples()]]
         _n_tg = 0
         for _slug, _g in _t.groupby("pair_slug"):
