@@ -443,3 +443,12 @@ a:hover { text-decoration: underline; }
   .stat-value { font-size: 1.1rem; }
   .chart-title { font-size: 0.95rem; }
 }
+
+/* One quiet pulse on the legend entry whose event marker is hovered. */
+@keyframes evt-pulse-kf {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+.legend-item { display: inline-block; transition: color 0.15s; }
+.legend-item.evt-pulse { animation: evt-pulse-kf 0.45s ease 1; color: var(--blue); }

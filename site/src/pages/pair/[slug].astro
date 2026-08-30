@@ -524,11 +524,20 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             .attr('stroke-dasharray', '4,3')
             .attr('opacity', isPair ? 0.5 : 0.3);
 
-          // Numbered circle at top
+          // Numbered circle at top. Hovering it pulses the matching legend entry
+          // once — enough to show which line lit up, quiet enough not to perform.
           svg.append('circle')
             .attr('cx', xPos).attr('cy', -18)
             .attr('r', 9)
-            .attr('fill', isPair ? '#0057B8' : '#e5e7eb');
+            .attr('fill', isPair ? '#0057B8' : '#e5e7eb')
+            .style('cursor', 'default')
+            .on('mouseenter', () => {
+              const el = document.querySelector(`[data-event-legend="${eventNum}"]`);
+              if (el) { el.classList.remove('evt-pulse'); void (el as HTMLElement).offsetWidth; el.classList.add('evt-pulse'); }
+            })
+            .on('mouseleave', () => {
+              document.querySelector(`[data-event-legend="${eventNum}"]`)?.classList.remove('evt-pulse');
+            });
           // Two-digit numbers crowd the circle at a fixed size, so the type steps down
           // once the label reaches double digits. Centred on the baseline rather than
           // by a hand-tuned y offset, which drifted as the size changed.
@@ -545,6 +554,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           // Legend entry below chart
           const legendItem = document.createElement('span');
           legendItem.className = 'legend-item';
+          legendItem.setAttribute('data-event-legend', String(eventNum));
           legendItem.style.cssText = `font-size:0.87rem; color:${isPair ? '#0057B8' : '#6b7280'}; ${isPair ? 'font-weight:600;' : ''}`;
           legendItem.innerHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:${isPair ? '#0057B8' : '#e5e7eb'};color:${isPair ? '#fff' : '#6b7280'};font-size:12px;font-weight:700;margin-right:4px;">${eventNum}</span>${evt.label} (${evt.date})`;
           legendContainer.appendChild(legendItem);
