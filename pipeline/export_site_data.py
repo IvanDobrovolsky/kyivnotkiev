@@ -1626,9 +1626,16 @@ def main():
             while _label in _used and _i < len(_terms):
                 _label = " · ".join(_terms[:2] + [_terms[_i]])
                 _i += 1
+            # Anchor the label at the cluster's densest cell, not its median: for a
+            # crescent or two-lobed cluster the median can sit outside the visible
+            # mass entirely, which is how a large cluster appeared unlabelled.
+            _gx = (_m.umap_x * 2).round() / 2
+            _gy = (_m.umap_y * 2).round() / 2
+            _cell = pd.concat([_gx, _gy], axis=1).value_counts().idxmax()
+            _in = _m[(_gx == _cell[0]) & (_gy == _cell[1])]
             _clusters[str(_cid)] = {
                 "label": _label,
-                "cx": float(_m.umap_x.median()), "cy": float(_m.umap_y.median()),
+                "cx": float(_in.umap_x.median()), "cy": float(_in.umap_y.median()),
                 "ua_pct": round(_c.get("variant_share", {}).get("ukrainian", 0) * 100, 1),
                 "size": _c.get("size", int(len(_m))),
             }

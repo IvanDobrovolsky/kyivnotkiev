@@ -1901,11 +1901,17 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         let ly = sy(ci.cy);
         const tw = ctx.measureText(ci.label).width;
         let box: [number, number, number, number] = [lx - tw/2 - 4, ly - 8, tw + 8, 14];
+        // Dodge alternates up/down and stays inside the canvas — pushing only
+        // downward could carry a label straight off the bottom edge, leaving its
+        // cluster apparently unnamed.
         let guard = 0;
+        const ly0 = ly;
         while (guard++ < 8 && drawn.some(b =>
             box[0] < b[0] + b[2] && box[0] + box[2] > b[0] &&
             box[1] < b[1] + b[3] && box[1] + box[3] > b[1])) {
-          ly += 15;
+          const step = Math.ceil(guard / 2) * 15;
+          ly = ly0 + (guard % 2 ? step : -step);
+          ly = Math.max(10, Math.min(height - 6, ly));
           box = [lx - tw/2 - 4, ly - 8, tw + 8, 14];
         }
         drawn.push(box);
