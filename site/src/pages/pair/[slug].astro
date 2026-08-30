@@ -4,7 +4,10 @@ import PairView from '../../components/PairView.astro';
 import m from '../../data/manifest.json';
 import llmTraj from '../../data/llm_trajectory.json';
 import llmPerPair from '../../data/llm_per_pair.json';
-import allClClusters from '../../data/cl_clusters.json';
+// Removed 2026-08-29: computed from the corpus before the GDELT (26 Aug), trends (28 Aug)
+// and YouTube rebuilds, so it stated findings the current data no longer supports.
+// Empty rather than deleted inline so the render guards hide the section.
+const allClClusters: any = {};
 import allHoldoutsByPair from '../../data/holdouts_by_pair.json';
 import allTimeseries from '../../data/timeseries.json';
 
@@ -56,11 +59,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     const holdoutsByPair = { [document.getElementById('pair-detail')!.dataset.pairSlug!]: JSON.parse(document.getElementById('pair-holdouts-data')?.textContent || 'null') };
     import pairEvents from '../../data/pair_events.json';
     // trends_countries removed — using GDELT country distribution only
-    import errorAnalysis from '../../data/error_analysis.json';
-    import clCollocations from '../../data/cl_collocations.json';
-    import clAnalysis from '../../data/cl_analysis.json';
+    const errorAnalysis: any = {};
+    const clCollocations: any = {};
+    const clAnalysis: any = {};
     const clClusters = { [document.getElementById('pair-detail')!.dataset.pairSlug!]: JSON.parse(document.getElementById('pair-cluster-data')?.textContent || 'null') };
-    import confusionMatrix from '../../data/confusion_matrix.json';
+    const confusionMatrix: any = {};
     import analysisData from '../../data/analysis.json';
 
     // Use manifest as the single pairs source
