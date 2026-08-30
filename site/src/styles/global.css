@@ -452,3 +452,26 @@ a:hover { text-decoration: underline; }
 }
 .legend-item { display: inline-block; transition: color 0.15s; }
 .legend-item.evt-pulse { animation: evt-pulse-kf 0.45s ease 1; color: var(--blue); }
+
+/* Method popover: floats over the page, never pushes content. */
+.info-btn {
+  border: none; background: none; padding: 2px; cursor: pointer;
+  color: #9ca3af; vertical-align: -2px; margin-left: 2px;
+}
+.info-btn:hover { color: #374151; }
+.info-pop {
+  position: absolute; z-index: 60; top: 1.6rem; left: 0;
+  width: min(34rem, 92vw);
+  border: 1px solid #e5e7eb; border-radius: 10px; background: #fff;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  padding: 1rem 1.2rem; font-size: 0.84rem; line-height: 1.65;
+  text-align: left; text-transform: none; letter-spacing: normal;
+  color: var(--text);
+}
+.info-pop p { margin: 0 0 0.6rem; }
+.info-pop .formula { text-align: center; font-size: 0.95rem; margin: 0.4rem 0 0.7rem; }
+.info-pop .frac { display: inline-flex; flex-direction: column; vertical-align: middle; margin-left: 0.3rem; }
+.info-pop .frac > span { padding: 0 0.5rem; text-align: center; }
+.info-pop .frac > span:first-child { border-bottom: 1px solid var(--text); }
+#cluster-info-viz .bar-row { display: flex; align-items: center; gap: 6px; margin: 2px 0; font-size: 0.76rem; }
+#cluster-info-viz .bar { height: 8px; border-radius: 4px; }

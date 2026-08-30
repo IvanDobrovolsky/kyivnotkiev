@@ -1944,7 +1944,21 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const infoPop = document.getElementById('cluster-info-pop');
       if (infoBtn && infoPop && !(infoBtn as any)._wired) {
         (infoBtn as any)._wired = true;
-        infoBtn.addEventListener('click', () => { infoPop.hidden = !infoPop.hidden; });
+        infoBtn.addEventListener('click', (e) => { e.stopPropagation(); infoPop.hidden = !infoPop.hidden; });
+        document.getElementById('cluster-info-close')?.addEventListener('click', () => { infoPop.hidden = true; });
+        document.addEventListener('click', (e) => {
+          if (!infoPop.hidden && !infoPop.contains(e.target as Node)) infoPop.hidden = true;
+        });
+      }
+      // A picture inside the explanation: group sizes as bars, blue where the
+      // Ukrainian form dominates.
+      const viz = document.getElementById('cluster-info-viz');
+      if (viz) {
+        const mx = Math.max(...ordered.map(([,i]: any) => i.size));
+        viz.innerHTML = ordered.map(([,i]: any, n: number) =>
+          `<div class="bar-row"><span style="width:14px;text-align:right;color:#6b7280;">${n+1}</span>` +
+          `<div class="bar" style="width:${Math.max(3, i.size/mx*100)}%;background:${i.ua_pct>50?'#0057B8':'#9ca3af'};"></div>` +
+          `<span style="color:#6b7280;">${i.size.toLocaleString()}</span></div>`).join('');
       }
       const infoStats = document.getElementById('cluster-info-stats');
       if (infoStats) infoStats.textContent =
