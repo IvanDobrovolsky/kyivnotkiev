@@ -1571,6 +1571,60 @@ def main():
         "significance": p.get("significance", ""),
     } for p in load_pairs().get("pairs", [])]
     write_json(SITE_DATA_DIR / "pairs_meta.json", _meta)
+
+    # Cluster scatter for the pair pages, regenerated from the stats pipeline
+    # (pipeline/stats/clusters.py). Only pairs whose clustering has been run on the
+    # CURRENT corpus appear; there is no fallback to the old artifact, which was
+    # computed before the GDELT and trends rebuilds and deleted for it.
+    _cl_out = {}
+    _cl_root = ROOT / "data" / "stats"
+    for _cdir in sorted(_cl_root.glob("*/clusters")):
+        _slug = _cdir.parent.name
+        if _slug not in enabled_slugs:
+            continue
+        try:
+            _summ = json.loads((_cdir / "summary.json").read_text())
+            _asg = pd.read_parquet(_cdir / "assignments.parquet")
+        except Exception as _e:
+            log.warning(f"  clusters: skipping {_slug}: {_e}")
+            continue
+        # Cap the payload: 4,000 seeded points draw the same picture as 15,000 at
+        # a fraction of the page weight.
+        if len(_asg) > 4000:
+            _asg_s = _asg.sample(4000, random_state=20260829)
+        else:
+            _asg_s = _asg
+        _vmap = {"russian": "r", "ukrainian": "u", "both": "b"}
+        _points = [{"x": float(r.umap_x), "y": float(r.umap_y),
+                    "v": _vmap.get(r.variant, "b")}
+                   for r in _asg_s.itertuples()]
+        _clusters = {}
+        # The pair's own spellings head almost every term list; excluding them makes
+        # the labels describe the CONTEXT. Derived from config, not hardcoded.
+        _pc = next((q for q in load_pairs().get("pairs", []) if q.get("slug") == _slug), {})
+        _pairwords = {w.lower() for t in (_pc.get("russian", ""), _pc.get("ukrainian", ""))
+                      for w in str(t).split()}
+        for _c in _summ.get("clusters", []):
+            _cid = _c["cluster"]
+            _m = _asg[_asg.cluster == _cid]
+            if not len(_m):
+                continue
+            # Label: the first two distinguishing terms that are not the pair's own
+            # spellings, which head almost every list.
+            _terms = [t for t in _c.get("top_terms", [])
+                      if t.lower() not in _pairwords and len(t) > 2][:2]
+            _clusters[str(_cid)] = {
+                "label": " · ".join(_terms) if _terms else f"cluster {_cid}",
+                "cx": float(_m.umap_x.median()), "cy": float(_m.umap_y.median()),
+                "ua_pct": round(_c.get("variant_share", {}).get("ukrainian", 0) * 100, 1),
+                "size": _c.get("size", int(len(_m))),
+            }
+        _cl_out[_slug] = {"points": _points, "clusters": _clusters,
+                          "total": int(_summ.get("n", len(_asg))),
+                          "n_clusters": int(_summ.get("k_chosen", len(_clusters))),
+                          "borderline_share": _summ.get("borderline_share")}
+    write_json(SITE_DATA_DIR / "cl_clusters.json", _cl_out)
+    log.info(f"  Wrote cl_clusters.json ({len(_cl_out)} pair(s) with current clustering)")
     log.info(f"  Wrote pairs_meta.json ({sum(1 for x in _meta if x['enabled'])} enabled "
              f"of {len(_meta)} pairs)")
     write_json(SITE_DATA_DIR / "analysis.json", analysis)

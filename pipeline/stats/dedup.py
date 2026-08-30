@@ -84,13 +84,22 @@ def run(df: pd.DataFrame, threshold: float = THRESHOLD, quiet: bool = False) -> 
             x = parent[x]
         return x
 
+    # Verify candidates against the SIGNATURES, not the raw text. The previous
+    # version recomputed shingles — regex normalisation and a set build over the
+    # full text — for every candidate pair. Reddit boilerplate produces millions
+    # of candidates, so verification ran for 50+ minutes of pure re.sub and had
+    # no bound. The MinHash estimator (fraction of agreeing signature rows,
+    # unbiased, sd ~= sqrt(t(1-t)/128) ~= 0.03 at 128 permutations) needs no
+    # text access and vectorises. Same seed, same input -> same groups.
     confirmed = 0
-    for i, j in cand:
-        si, sj = shingles(texts[i]), shingles(texts[j])
-        if not si or not sj:
-            continue
-        if len(si & sj) / len(si | sj) >= threshold:
-            ri, rj = find(i), find(j)
+    if cand:
+        pairs = np.fromiter((k for ij in cand for k in ij),
+                            dtype=np.int64).reshape(-1, 2)
+        est = (sigs[pairs[:, 0]] == sigs[pairs[:, 1]]).mean(axis=1)
+        for (i, j), ok in zip(pairs, est >= threshold):
+            if not ok:
+                continue
+            ri, rj = find(int(i)), find(int(j))
             if ri != rj:
                 parent[max(ri, rj)] = min(ri, rj)
             confirmed += 1
