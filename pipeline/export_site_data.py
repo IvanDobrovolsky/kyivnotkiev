@@ -1578,7 +1578,7 @@ def main():
     GLOSS_RULES = [
         ({"heart"}, "the 2024 STALKER game"),
         ({"stalker", "shadow"}, "the 2007 STALKER game"),
-        ({"stalker"}, "STALKER game discourse"),
+        ({"stalker"}, "STALKER game fans"),
         ({"hbo", "series", "mazin"}, "the HBO miniseries"),
         ({"vudu", "itunes", "steam", "keys"}, "storefront listings"),
         ({"beat"}, "'type beat' music titles"),
@@ -1720,22 +1720,27 @@ def main():
         # Identical glosses on different clusters read as duplicates — the exact
         # complaint the glosses were meant to fix. Append each cluster's first
         # distinguishing term to break the tie.
-        _seen_g = {}
-        for _k2, _v2 in _clusters.items():
-            _g = _v2["gloss"].split(" (")[0]
-            if _g in _seen_g:
-                _ka, _kb = _seen_g[_g], _k2
-                _la = set(_clusters[_ka]["label"].split(" · "))
-                _lb = set(_clusters[_kb]["label"].split(" · "))
-                # the distinguishing term is the one the OTHER cluster lacks —
-                # appending the shared first term stamped "(nuclear)" on both
-                for _kx, _mine, _other in ((_ka, _la, _lb), (_kb, _lb, _la)):
-                    _d3 = [t for t in _clusters[_kx]["label"].split(" · ")
-                           if t and t not in _other]
-                    if _d3 and not _clusters[_kx]["gloss"].endswith(")"):
-                        _clusters[_kx]["gloss"] = f"{_g} ({_d3[0]})"
+        # Two clusters sharing a gloss AND a spelling regime are one PRESENTED
+        # group — "the 1986 disaster (radiation)" vs "(disaster)" told a reader
+        # nothing. Merge them for display: sizes sum, UA share weights, anchors
+        # concatenate. Same gloss with genuinely different UA shares stays split
+        # and gets the exact shares as the distinguisher.
+        _by_gloss = {}
+        for _k2, _v2 in list(_clusters.items()):
+            _g = _v2["gloss"]
+            if _g in _by_gloss and abs(_clusters[_by_gloss[_g]]["ua_pct"] - _v2["ua_pct"]) <= 3.0:
+                _a = _clusters[_by_gloss[_g]]
+                _tot = _a["size"] + _v2["size"]
+                _a["ua_pct"] = round((_a["ua_pct"] * _a["size"] + _v2["ua_pct"] * _v2["size"]) / _tot, 1)
+                _a["size"] = _tot
+                _a["anchors"] = (_a.get("anchors", []) + _v2.get("anchors", []))[:4]
+                _a["label"] = _a["label"] if len(_a["label"]) <= len(_v2["label"]) else _v2["label"]
+                del _clusters[_k2]
+            elif _g in _by_gloss:
+                _clusters[_k2]["gloss"] = f"{_g} ({_v2['ua_pct']}% UA)"
             else:
-                _seen_g[_g] = _k2
+                _by_gloss[_g] = _k2
+
         _cl_out[_slug] = {"points": _points, "clusters": _clusters,
                           "total": int(_summ.get("n", len(_asg))),
                           "n_clusters": int(_summ.get("k_chosen", len(_clusters))),
