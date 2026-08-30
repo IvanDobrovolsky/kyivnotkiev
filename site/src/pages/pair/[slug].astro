@@ -878,15 +878,31 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     type BarRow = { src: string; pct: number; ukr: number; rus: number };
 
     function sourceBarRows(): BarRow[] {
-      const pairData = (timeseriesData as any)[activePairSlug];
-      if (!pairData) return [];
-      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
+      // ONE window for everything on a row. Previously the bar showed the latest
+      // month, the headline the 12-month mean, and the counts lifetime totals —
+      // Reddit read 22.6% beside counts implying 26.8%, Telegram "100%" beside
+      // 175·17. Percent and counts now both come from the last 12 study months.
+      const SINCE = '2025-01';
       const rows: BarRow[] = [];
-      for (const src of srcOrder) {
-        const series = pairData[src];
-        if (!series || series.length === 0) continue;
-        const last = series[series.length - 1];
-        rows.push({ src, pct: last.adoption, ukr: last.ukr || 0, rus: last.rus || 0 });
+      for (const src of ['trends','gdelt','wikipedia','reddit','youtube','ngrams','openalex','telegram']) {
+        const series = (pairData as any)[src];
+        if (!series || !series.length) continue;
+        const win = series.filter((d: any) => d.date >= SINCE);
+        if (!win.length) continue;
+        let ukr = 0, rus = 0, wsum = 0, asum = 0;
+        for (const d of win) {
+          ukr += d.ukr || 0; rus += d.rus || 0;
+          if (d.adoption !== null && d.adoption !== undefined) {
+            const w = (d.ukr || 0) + (d.rus || 0) || 1;
+            asum += d.adoption * w; wsum += w;
+          }
+        }
+        const countable = !(src === 'trends' || src === 'ngrams');
+        const pct = countable
+          ? (ukr + rus > 0 ? +(ukr / (ukr + rus) * 100).toFixed(1) : null)
+          : (wsum ? +(asum / wsum).toFixed(1) : null);
+        if (pct === null || (countable && ukr + rus < 5)) continue;
+        rows.push({ src, pct, ukr: countable ? Math.round(ukr) : 0, rus: countable ? Math.round(rus) : 0 });
       }
       return rows;
     }
@@ -905,10 +921,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <div style="height:100%; width:${Math.max(1, Math.min(100, r.pct))}%; background:${sourceColors[r.src]}; border-radius:${barH / 2}px; opacity:0.85;"></div>
           </div>
           <span style="width:42px; font-size:0.82rem; font-weight:600; color:${sourceColors[r.src]}; text-align:right; flex-shrink:0;">${r.pct}%</span>
-          <span style="min-width:7.5rem; font-size:0.76rem; color:#9ca3af; text-align:right; flex-shrink:0;">${(() => {
-            const st = ((manifest as any).pair_source_stats || {})[activePairSlug]?.[r.src];
-            return st && st.countable ? `${fN(st.ukr)} · ${fN(st.rus)} ${st.unit}` : (st ? st.unit : '');
-          })()}</span>
+          <span style="min-width:7.5rem; font-size:0.76rem; text-align:right; flex-shrink:0;">${
+            (r.ukr || r.rus)
+              ? `<span style="color:#0057B8;">${fN(r.ukr)}</span> <span style="color:#9ca3af;">·</span> <span style="color:#dc2626;">${fN(r.rus)}</span> <span style="color:#9ca3af;">${(((manifest as any).pair_source_stats || {})[activePairSlug]?.[r.src] || {}).unit || ''}</span>`
+              : `<span style="color:#9ca3af;">${(((manifest as any).pair_source_stats || {})[activePairSlug]?.[r.src] || {}).unit || ''}</span>`
+          }</span>
         </div>`;
       }).join('');
       el.innerHTML = `<div style="display:flex; flex-direction:column; gap:0.25rem;">${out}</div>`;
@@ -929,8 +946,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     function drawAdoptionCalc() {
       const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       const titleEl = document.getElementById('adoption-pct-title');
-      if (titleEl && pair) titleEl.textContent = `${pair.adoption}%`;
-      renderSourceBars(document.getElementById('adoption-calc-body'), sourceBarRows(), { barH: 9, labelW: 72 });
+      const rowsNow = sourceBarRows();
+      const mean = rowsNow.length ? (rowsNow.reduce((a, r) => a + r.pct, 0) / rowsNow.length) : null;
+      if (titleEl) titleEl.textContent = mean === null ? '—' : `${mean.toFixed(1)}%`;
+      renderSourceBars(document.getElementById('adoption-calc-body'), rowsNow, { barH: 9, labelW: 72 });
     }
 
     // ── Per-pair LLM scan: 71 frontier models × 3 prompt variants for THIS pair ──
