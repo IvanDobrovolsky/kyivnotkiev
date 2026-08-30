@@ -884,8 +884,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // 175·17. Percent and counts now both come from the last 12 study months.
       const SINCE = '2025-01';
       const rows: BarRow[] = [];
+      // pairData is local to drawChart — reading it here was a ReferenceError that
+      // silently emptied the whole popover. Resolve the series from the module-level
+      // data by the active slug instead.
+      const pd2 = (timeseriesData as any)[activePairSlug] || {};
       for (const src of ['trends','gdelt','wikipedia','reddit','youtube','ngrams','openalex','telegram']) {
-        const series = (pairData as any)[src];
+        const series = pd2[src];
         if (!series || !series.length) continue;
         const win = series.filter((d: any) => d.date >= SINCE);
         if (!win.length) continue;
