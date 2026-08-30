@@ -1593,11 +1593,17 @@ def main():
     ]
 
     def _gloss_for(terms: list, label: str) -> str:
+        # Best keyword overlap wins; ties go to the earlier rule. First-match on a
+        # single keyword mislabelled clusters — the 2007 game's terms contain
+        # "heart", so it grabbed the 2024 gloss, and the storefront cluster carries
+        # "stalker" deep in its list and became a game.
         low = {t.lower() for t in terms}
+        best, best_n = None, 0
         for kw, g in GLOSS_RULES:
-            if kw & low:
-                return g
-        return label
+            n = len(kw & low)
+            if n > best_n:
+                best, best_n = g, n
+        return best if best_n else label
 
     # Cluster scatter for the pair pages, regenerated from the stats pipeline
     # (pipeline/stats/clusters.py). Only pairs whose clustering has been run on the
@@ -1708,8 +1714,23 @@ def main():
                 "size": _c.get("size", int(len(_m))),
                 "gloss": ("non-English coverage" if _label == "non-English"
                           else _gloss_for(_c.get("top_terms", []), _label)),
+                # filled below once all clusters exist; placeholder keeps key order
                 "peak": _peak,
             }
+        # Identical glosses on different clusters read as duplicates — the exact
+        # complaint the glosses were meant to fix. Append each cluster's first
+        # distinguishing term to break the tie.
+        _seen_g = {}
+        for _k2, _v2 in _clusters.items():
+            _g = _v2["gloss"]
+            if _g in _seen_g:
+                for _k3 in (_seen_g[_g], _k2):
+                    _v3 = _clusters[_k3]
+                    _t3 = [t for t in _v3["label"].split(" · ") if t and t not in _v3["gloss"]]
+                    if _t3 and not _v3["gloss"].endswith(")"):
+                        _v3["gloss"] = f"{_v3['gloss']} ({_t3[0]})"
+            else:
+                _seen_g[_g] = _k2
         _cl_out[_slug] = {"points": _points, "clusters": _clusters,
                           "total": int(_summ.get("n", len(_asg))),
                           "n_clusters": int(_summ.get("k_chosen", len(_clusters))),
