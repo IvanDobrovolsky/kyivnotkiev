@@ -26,8 +26,20 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
         <span class="arrow">→</span>
         <span class="new-name" id="chart-new">Kyiv</span>
       </div>
-      <span id="chart-range" style="font-size:0.84rem; color:var(--text-muted);"></span>
       <span id="chart-info" style="font-size:0.81rem; color:var(--text-dim); font-style:italic;"></span>
+      <span id="chart-range" hidden></span>
+      <!-- Adoption lives in the header now: one line, details on demand. Replaces
+           both the "Adoption Calculation" card and the per-source stats list,
+           which said the same numbers twice in two blocks. -->
+      <span id="adoption-summary" style="margin-left:auto; position:relative; white-space:nowrap; font-size:0.86rem;">
+        Estimated adoption <strong id="adoption-pct-title" style="font-size:1rem;"></strong>
+        <button id="adoption-details-btn" style="margin-left:0.35rem; border:1px solid var(--border,#d1d5db); background:#fff; border-radius:6px; padding:0.15rem 0.55rem; font-size:0.8rem; cursor:pointer; color:var(--text-muted);">View details</button>
+        <div id="adoption-pop" class="info-pop" hidden style="right:0; left:auto; top:1.9rem; width:min(30rem,92vw); white-space:normal;">
+          <button id="adoption-pop-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>
+          <p style="margin:0 0 0.5rem;"><strong>How this number is made.</strong> Mean of per-source UA&nbsp;/&nbsp;(UA&nbsp;+&nbsp;RU) ratios over the last 12 months; each bar is one source, counts beside it.</p>
+          <div id="adoption-calc-body"></div>
+        </div>
+      </span>
     </div>
     <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.4rem;">
       <div class="chart-controls" style="margin:0;">
@@ -53,9 +65,6 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
   <div id="chart"></div>
   <div class="chart-legend" id="chart-legend"></div>
 </div>
-
-<!-- Per-pair source stats -->
-<div id="pair-stats" class="stats source-stats" style="margin-bottom: 0.75rem;"></div>
 
 <!-- CL: Context + Collocations -->
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
@@ -99,13 +108,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
   <div id="cluster-legend" style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem; font-size:0.82rem;"></div>
 </div>
 
-<!-- Adoption. One card: the Source Comparison card rendered the identical six
-     numbers from the identical component, so it was the same card twice. -->
-<div id="adoption-calc" class="chart-container" style="margin-bottom:1rem;">
-  <div class="chart-title" style="color: var(--text)">Adoption Calculation — <span id="adoption-pct-title"></span></div>
-  <div class="chart-subtitle" style="margin-bottom:0.5rem;">Mean of per-source UA/(UA+RU) ratios, last 12 months</div>
-  <div id="adoption-calc-body"></div>
-</div>
+
 
 <!-- Per-pair AI / LLM scan -->
 <div class="chart-container" id="pair-llm-container" style="margin-bottom:1rem;">
