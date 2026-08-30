@@ -1576,6 +1576,12 @@ def main():
     # not per-pair hand edits: the first rule whose keywords intersect a cluster's
     # top terms names it. Editable here, reproducible everywhere.
     GLOSS_RULES = [
+        ({"kievan", "kyivan", "rus"}, "Kyivan Rus history"),
+        ({"church", "orthodox", "baptism", "christianity"}, "church & baptism"),
+        ({"monument", "park", "statue", "arch"}, "Kyiv monuments & places"),
+        ({"putin", "trump"}, "Putin nicknamed 'Vladimir the Great'"),
+        ({"evony", "duke", "king", "bce"}, "games & other 'Greats'"),
+        ({"coin", "coins", "hryvnia"}, "commemorative coins"),
         ({"heart"}, "the 2024 STALKER game"),
         ({"stalker", "shadow"}, "the 2007 STALKER game"),
         ({"stalker"}, "STALKER game fans"),
@@ -1585,7 +1591,7 @@ def main():
         ({"fukushima"}, "nuclear-energy debate"),
         ({"thyroid", "exposure"}, "radiation-health research"),
         ({"pripyat", "exclusion", "tour", "tourism"}, "exclusion-zone visits"),
-        ({"reactor", "disaster", "radiation", "accident"}, "the 1986 disaster"),
+        ({"reactor", "disaster", "radiation", "accident", "nuclear"}, "the 1986 disaster"),
         ({"ukraine", "russian", "war", "invasion"}, "war & news coverage"),
         ({"recipe", "soup", "cook", "food"}, "cooking & recipes"),
         ({"boxing", "fight", "fury", "joshua"}, "boxing coverage"),
@@ -1601,6 +1607,10 @@ def main():
         best, best_n = None, 0
         for kw, g in GLOSS_RULES:
             n = len(kw & low)
+            # multi-keyword rules need two hits: the war rule fired on every
+            # cluster of a pair whose whole corpus is about Russia and Ukraine
+            if n < min(2, len(kw)):
+                continue
             if n > best_n:
                 best, best_n = g, n
         return best if best_n else label

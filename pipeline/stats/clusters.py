@@ -57,7 +57,11 @@ STATS = ROOT / "data" / "stats"
 
 SEED = 20260829
 SAMPLE_CAP = 15_000          # UMAP OOMs above ~40K on this machine; measured
-K_RANGE = range(4, 25)   # BIC hit the top of 4..16 twice; give the knee room to bite
+# k's ceiling scales with corpus size: BIC fragmented 1,138 VTG texts into 17
+# clusters, most of them one register shredded. One cluster per ~150 documents,
+# floor 6, cap 24 (chornobyl's 15K keeps its 24).
+def k_range_for(n: int) -> range:
+    return range(4, max(6, min(24, n // 150)) + 1)
 MIN_CLUSTER_SHARE = 0.02     # components smaller than this are merged, not narrated
 BORDERLINE_MARGIN = 0.20
 EMBED_MODEL = "all-MiniLM-L6-v2"
@@ -135,7 +139,7 @@ def fit_gmm(X: np.ndarray):
     log(f"  pca -> {X.shape[1]}d, variance kept {pca.explained_variance_ratio_.sum()*100:.0f}%")
     best, best_bic, bics = None, np.inf, {}
     fits = {}
-    for k in K_RANGE:
+    for k in k_range_for(len(X)):
         gm = GaussianMixture(n_components=k, covariance_type="diag",
                              random_state=SEED, n_init=2, max_iter=200)
         gm.fit(X)
