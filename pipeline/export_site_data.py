@@ -1572,6 +1572,33 @@ def main():
     } for p in load_pairs().get("pairs", [])]
     write_json(SITE_DATA_DIR / "pairs_meta.json", _meta)
 
+    # Plain-language glosses for cluster registers. Deterministic keyword rules,
+    # not per-pair hand edits: the first rule whose keywords intersect a cluster's
+    # top terms names it. Editable here, reproducible everywhere.
+    GLOSS_RULES = [
+        ({"heart"}, "the 2024 STALKER game"),
+        ({"stalker", "shadow"}, "the 2007 STALKER game"),
+        ({"stalker"}, "STALKER game discourse"),
+        ({"hbo", "series", "mazin"}, "the HBO miniseries"),
+        ({"vudu", "itunes", "steam", "keys"}, "storefront listings"),
+        ({"beat"}, "'type beat' music titles"),
+        ({"fukushima"}, "nuclear-energy debate"),
+        ({"thyroid", "exposure"}, "radiation-health research"),
+        ({"pripyat", "exclusion", "tour", "tourism"}, "exclusion-zone visits"),
+        ({"reactor", "disaster", "radiation", "accident"}, "the 1986 disaster"),
+        ({"ukraine", "russian", "war", "invasion"}, "war & news coverage"),
+        ({"recipe", "soup", "cook", "food"}, "cooking & recipes"),
+        ({"boxing", "fight", "fury", "joshua"}, "boxing coverage"),
+        ({"football", "league", "match", "goal"}, "football coverage"),
+    ]
+
+    def _gloss_for(terms: list, label: str) -> str:
+        low = {t.lower() for t in terms}
+        for kw, g in GLOSS_RULES:
+            if kw & low:
+                return g
+        return label
+
     # Cluster scatter for the pair pages, regenerated from the stats pipeline
     # (pipeline/stats/clusters.py). Only pairs whose clustering has been run on the
     # CURRENT corpus appear; there is no fallback to the old artifact, which was
@@ -1679,7 +1706,9 @@ def main():
                 "cx": _anchors[0][0], "cy": _anchors[0][1],
                 "ua_pct": _ua_pct,
                 "size": _c.get("size", int(len(_m))),
-                "desc": _phrase + (f", peaks {_peak}" if _peak else ""),
+                "gloss": ("non-English coverage" if _label == "non-English"
+                          else _gloss_for(_c.get("top_terms", []), _label)),
+                "peak": _peak,
             }
         _cl_out[_slug] = {"points": _points, "clusters": _clusters,
                           "total": int(_summ.get("n", len(_asg))),
