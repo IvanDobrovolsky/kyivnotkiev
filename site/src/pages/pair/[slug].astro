@@ -1885,54 +1885,48 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       }
 
       // Draw cluster labels
-      ctx.font = '600 11px system-ui';
-      ctx.textAlign = 'center';
-      // Draw small clusters first so the big ones land on top — labels were drawn
-      // in id order and a later label's white backing box could sit straight over
-      // an earlier one, which is how a major cluster ended up apparently unnamed.
-      // A drawn-boxes list nudges any overlapping label downward instead of
-      // letting it stamp out its neighbour.
-      const drawn: Array<[number, number, number, number]> = [];
-      const entries = (Object.entries(clusters) as any[])
-        .sort((a: any, b: any) => (a[1].size || 0) - (b[1].size || 0));
-      for (const [cid, info] of entries) {
-        const ci = info as any;
-        const anchors: Array<[number, number]> = (ci.anchors && ci.anchors.length)
-          ? ci.anchors : [[ci.cx, ci.cy]];
+      // Numbered badges at every lobe, one legend row per cluster below. Text
+      // labels on the canvas either collided, walked off the chart, or — drawn at
+      // two lobes — read as duplicated clusters. A number can mark every lobe of a
+      // cluster without duplicating anything, exactly as the event markers on the
+      // timeseries already do, and the legend carries the words.
+      const ordered = (Object.entries(clusters) as any[])
+        .sort((a: any, b: any) => (b[1].size || 0) - (a[1].size || 0));
+      ordered.forEach(([cid, info]: any, idx: number) => {
+        const num = String(idx + 1);
+        const anchors: Array<[number, number]> = (info.anchors && info.anchors.length)
+          ? info.anchors : [[info.cx, info.cy]];
+        const badgeColor = info.ua_pct > 50 ? '#0057B8' : '#374151';
         for (const [ax, ay] of anchors) {
-        const lx = sx(ax);
-        let ly = sy(ay);
-        const tw = ctx.measureText(ci.label).width;
-        let box: [number, number, number, number] = [lx - tw/2 - 4, ly - 8, tw + 8, 14];
-        // Dodge alternates up/down and stays inside the canvas — pushing only
-        // downward could carry a label straight off the bottom edge, leaving its
-        // cluster apparently unnamed.
-        let guard = 0;
-        const ly0 = ly;
-        while (guard++ < 8 && drawn.some(b =>
-            box[0] < b[0] + b[2] && box[0] + box[2] > b[0] &&
-            box[1] < b[1] + b[3] && box[1] + box[3] > b[1])) {
-          const step = Math.ceil(guard / 2) * 15;
-          ly = ly0 + (guard % 2 ? step : -step);
-          ly = Math.max(10, Math.min(height - 6, ly));
-          box = [lx - tw/2 - 4, ly - 8, tw + 8, 14];
+          const bx = sx(ax), by = sy(ay);
+          ctx.beginPath();
+          ctx.arc(bx, by, 9, 0, Math.PI * 2);
+          ctx.fillStyle = badgeColor;
+          ctx.fill();
+          ctx.strokeStyle = '#fff';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.font = '700 10px system-ui';
+          ctx.textAlign = 'center';
+          ctx.fillStyle = '#fff';
+          ctx.fillText(num, bx, by + 3.5);
         }
-        drawn.push(box);
-        const labelColor = ci.ua_pct > 50 ? '#0057B8' : '#374151';
-        ctx.fillStyle = 'rgba(255,255,255,0.85)';
-        ctx.fillRect(box[0], box[1], box[2], box[3]);
-        ctx.fillStyle = labelColor;
-        ctx.fillText(ci.label, lx, ly + 3);
-        }
+      });
+
+      // Legend: the numbered explanation list. One row per cluster, matching the
+      // badges above.
+      const legendEl = document.getElementById('cluster-legend');
+      if (legendEl) {
+        legendEl.innerHTML = '';
+        legendEl.style.cssText = 'display:flex; flex-wrap:wrap; gap:0.35rem 1.1rem; justify-content:center; margin-top:0.5rem; font-size:0.82rem;';
+        ordered.forEach(([cid, info]: any, idx: number) => {
+          const color = info.ua_pct > 50 ? '#0057B8' : '#374151';
+          legendEl.innerHTML += `<span style="display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">` +
+            `<span style="width:16px;height:16px;border-radius:50%;background:${color};color:#fff;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">${idx+1}</span>` +
+            `<strong>${info.label}</strong>` +
+            `<span style="color:#6b7280;">${info.size.toLocaleString()} texts · ${info.ua_pct}% UA</span></span>`;
+        });
       }
-
-      // Subtitle
-      const sub = document.getElementById('cluster-subtitle');
-      if (sub) sub.textContent = `${data.total.toLocaleString()} texts, ${data.n_clusters} clusters — colored by variant (blue = Ukrainian, red = Russian)`;
-
-      // No legend list: every cluster is already named on the canvas at its
-      // centroid, and repeating all sixteen below the chart duplicated the labels
-      // — including the filler ones — as a wall of text.
     }
 
     function drawClCollocations() {
