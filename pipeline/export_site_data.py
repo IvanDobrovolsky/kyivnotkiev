@@ -1722,13 +1722,18 @@ def main():
         # distinguishing term to break the tie.
         _seen_g = {}
         for _k2, _v2 in _clusters.items():
-            _g = _v2["gloss"]
+            _g = _v2["gloss"].split(" (")[0]
             if _g in _seen_g:
-                for _k3 in (_seen_g[_g], _k2):
-                    _v3 = _clusters[_k3]
-                    _t3 = [t for t in _v3["label"].split(" · ") if t and t not in _v3["gloss"]]
-                    if _t3 and not _v3["gloss"].endswith(")"):
-                        _v3["gloss"] = f"{_v3['gloss']} ({_t3[0]})"
+                _ka, _kb = _seen_g[_g], _k2
+                _la = set(_clusters[_ka]["label"].split(" · "))
+                _lb = set(_clusters[_kb]["label"].split(" · "))
+                # the distinguishing term is the one the OTHER cluster lacks —
+                # appending the shared first term stamped "(nuclear)" on both
+                for _kx, _mine, _other in ((_ka, _la, _lb), (_kb, _lb, _la)):
+                    _d3 = [t for t in _clusters[_kx]["label"].split(" · ")
+                           if t and t not in _other]
+                    if _d3 and not _clusters[_kx]["gloss"].endswith(")"):
+                        _clusters[_kx]["gloss"] = f"{_g} ({_d3[0]})"
             else:
                 _seen_g[_g] = _k2
         _cl_out[_slug] = {"points": _points, "clusters": _clusters,
