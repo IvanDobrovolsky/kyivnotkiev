@@ -74,7 +74,23 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 <!-- CL: Discourse Clusters -->
 <div class="chart-container" id="cluster-container" style="margin-bottom:0.75rem; display:none;">
   <div class="chart-title" style="color: var(--text)">Discourse Clusters</div>
-  <div class="chart-subtitle" id="cluster-subtitle" style="margin-bottom:0.5rem;">Gaussian-mixture (EM) clustering of text embeddings — UMAP used for layout only</div>
+  <div class="chart-subtitle" id="cluster-subtitle" style="margin-bottom:0.5rem;">
+    Texts grouped by what they talk about — blue groups write the Ukrainian form
+    <button id="cluster-info-btn" aria-label="How this works" style="border:1px solid #d1d5db;background:#fff;border-radius:50%;width:18px;height:18px;font-size:11px;line-height:1;cursor:pointer;color:#6b7280;vertical-align:middle;margin-left:4px;">i</button>
+  </div>
+  <div id="cluster-info-pop" hidden style="border:1px solid #e5e7eb;border-radius:8px;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,0.08);padding:0.9rem 1.1rem;margin:0.25rem 0 0.75rem;font-size:0.82rem;line-height:1.6;max-width:46rem;">
+    <strong>How these groups are made.</strong>
+    Each text becomes a 384-number vector with the
+    <code>all-MiniLM-L6-v2</code> sentence-embedding model, reduced to 50 dimensions by PCA.
+    A Gaussian mixture is then fitted with the EM algorithm: each group is a Gaussian, and every text
+    gets a probability of belonging to each group,
+    <span style="white-space:nowrap;">&gamma;(z<sub>ik</sub>) = &pi;<sub>k</sub>&nbsp;N(x<sub>i</sub>&nbsp;|&nbsp;&mu;<sub>k</sub>,&nbsp;&Sigma;<sub>k</sub>) / &Sigma;<sub>j</sub>&nbsp;&pi;<sub>j</sub>&nbsp;N(x<sub>i</sub>&nbsp;|&nbsp;&mu;<sub>j</sub>,&nbsp;&Sigma;<sub>j</sub>)</span>.
+    The number of groups is chosen by BIC, then groups whose top vocabulary overlaps &ge;50% are merged —
+    unless their Ukrainian shares differ by more than 20 points, so a spelling split is never merged away.
+    A text whose top two probabilities are within 0.20 is counted as <em>between</em> groups.
+    The 2-D picture is a UMAP projection of the embeddings; positions are for reading, distances are approximate.
+    <span id="cluster-info-stats" style="display:block;margin-top:0.4rem;color:#6b7280;"></span>
+  </div>
   <div id="cluster-scatter" style="width:100%; height:400px; position:relative;"></div>
   <div id="cluster-legend" style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem; font-size:0.82rem;"></div>
 </div>

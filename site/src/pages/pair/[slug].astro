@@ -1930,6 +1930,17 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         }
       });
 
+      const infoBtn = document.getElementById('cluster-info-btn');
+      const infoPop = document.getElementById('cluster-info-pop');
+      if (infoBtn && infoPop && !(infoBtn as any)._wired) {
+        (infoBtn as any)._wired = true;
+        infoBtn.addEventListener('click', () => { infoPop.hidden = !infoPop.hidden; });
+      }
+      const infoStats = document.getElementById('cluster-info-stats');
+      if (infoStats) infoStats.textContent =
+        `This pair: ${data.total.toLocaleString()} texts sampled, ${ordered.length} groups` +
+        (data.borderline_share ? `, ${(data.borderline_share*100).toFixed(1)}% between groups.` : '.');
+
       // Legend: the numbered explanation list. One row per cluster, matching the
       // badges above.
       const legendEl = document.getElementById('cluster-legend');
@@ -1938,11 +1949,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         legendEl.style.cssText = 'display:flex; flex-wrap:wrap; gap:0.35rem 1.1rem; justify-content:center; margin-top:0.5rem; font-size:0.82rem;';
         ordered.forEach(([cid, info]: any, idx: number) => {
           const color = info.ua_pct > 50 ? '#0057B8' : '#374151';
-          const lobes = (info.anchors || []).length;
-          legendEl.innerHTML += `<span style="display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">` +
+          // Meaning first, exact number second: "the 2024 STALKER game · 92.2% UA".
+          // The auto-terms live in the hover title for anyone who wants them.
+          legendEl.innerHTML += `<span title="terms: ${info.label}" style="display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">` +
             `<span style="width:16px;height:16px;border-radius:50%;background:${color};color:#fff;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>` +
-            `<strong>${info.label}</strong>` +
-            `<span style="color:#6b7280;">${info.desc || ''}${lobes > 1 ? ` · ${lobes} regions` : ''} · ${info.size.toLocaleString()} texts</span></span>`;
+            `<strong>${info.gloss || info.label}</strong>` +
+            `<span style="color:#6b7280;">${info.ua_pct}% UA · ${info.size.toLocaleString()} texts</span></span>`;
         });
       }
     }
