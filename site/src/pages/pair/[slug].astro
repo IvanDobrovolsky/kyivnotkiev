@@ -1196,7 +1196,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       youtube:   drawHoldoutTable,
       wikipedia: drawHoldoutTable,
       openalex:  drawHoldoutTable,
-      // trends, ngrams and telegram have no holdout data: nothing renders.
+      telegram:  drawHoldoutTable,
+      // trends and ngrams have no holdout data: nothing renders.
     };
 
 
@@ -1674,6 +1675,20 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.score ? r.score.toLocaleString() + ' ↑' : ''}</td>
           </tr>`).join('');
         html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">Reddit posts still using the old spelling in 2025:</p>
+        <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
+
+      } else if (holdoutKey === 'telegram') {
+        const rows = items.map((m: any) =>
+          `<tr style="border-bottom:1px solid #f3f4f6;">
+            <td style="padding:0.5rem 0.6rem; font-size:0.85rem; max-width:0; width:60%;">
+              <a href="${m.url}" target="_blank" rel="noopener" style="color:#26A5E4; text-decoration:none; font-weight:500;">${m.name}</a>
+              <div style="color:#6b7280; font-size:0.82rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${m.snippet || ''}</div>
+            </td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#dc2626; white-space:nowrap;">${m.term}</td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono); white-space:nowrap;">${(m.views || 0).toLocaleString()} views</td>
+          </tr>`).join('');
+        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">
+          Public channel messages still using the Russian spelling in Latin script (links excluded from matching), ranked by views:</p>
         <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'youtube') {
