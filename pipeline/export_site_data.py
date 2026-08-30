@@ -359,7 +359,9 @@ def smooth_ratio_series(series: list[dict]) -> list[dict]:
         e["n"] = round(ukr[i] + rus[i], 2)     # the month's own volume, for the tooltip
         e["window"] = half                      # 0 means the month stood on its own
         out.append(e)
-    return [e for e in out if e["adoption"] is not None]
+    # Measured zeros survive with a null ratio: the month was observed and held
+    # nothing, which is not the same as the month being unsupported.
+    return [e for e in out if e["adoption"] is not None or e.get("measured_zero")]
 
 
 def smooth_series(series: list[dict], window: int = 3) -> list[dict]:
@@ -630,6 +632,53 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 total = ukr + rus
                 if total > 0:
                     result[spid]["youtube"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
+
+        # Coverage comes from the COLLECTION state, not from where the first verified
+        # video happens to fall. volodymyr-the-great collected 5,160 videos for 2010
+        # and verified none — that is a measured zero, and rendering it as a gap
+        # claims the source was never observed. Every month of a complete,
+        # study-period year (both variants, 12 resolved months, not stale) is
+        # emitted; those without a verified video carry ukr=0, rus=0 and a null
+        # adoption, since a share of nothing is undefined. Months outside collected
+        # years stay absent, which is what a real gap looks like.
+        import json as _cj, re as _cre
+        _ck = ROOT / "data" / "cl" / "raw" / "youtube_census" / ".checkpoints"
+        _stale2 = _stale_youtube_years()
+        _complete: dict = {}
+        if _ck.exists():
+            for _f in _ck.glob("*.json"):
+                _m = _cre.match(r"(.+)_(russian|ukrainian)_(\d{4})$", _f.stem)
+                if not _m:
+                    continue
+                _slug2, _, _yr = _m.group(1), _m.group(2), int(_m.group(3))
+                if _yr > int(STUDY_END_DATE[:4]) or (_slug2, _yr) in _stale2:
+                    continue
+                try:
+                    _mo = _cj.load(open(_f)).get("months") or {}
+                except Exception:
+                    continue
+                if sum(1 for v in _mo.values() if v.get("resolved")) >= 12:
+                    _complete.setdefault(_slug2, {}).setdefault(_yr, 0)
+                    _complete[_slug2][_yr] += 1
+        _zeroed = 0
+        for _slug2, _yrs in _complete.items():
+            if _slug2 not in enabled_slugs:
+                continue
+            _ser = result.setdefault(_slug2, {}).setdefault("youtube", [])
+            _have = {x["date"] for x in _ser}
+            for _yr, _nvar in sorted(_yrs.items()):
+                if _nvar < 2:
+                    continue                    # one variant missing: not observed
+                for _mm in range(1, 13):
+                    _key = f"{_yr}-{_mm:02d}"
+                    if _key not in _have:
+                        _ser.append({"date": _key, "adoption": None,
+                                     "ukr": 0, "rus": 0, "measured_zero": True})
+                        _zeroed += 1
+            _ser.sort(key=lambda x: x["date"])
+        if _zeroed:
+            log.info(f"  YouTube: {_zeroed} observed months with zero verified videos "
+                     f"emitted as explicit zeros (collected but nothing named the term)")
 
     # Ngrams (yearly)
     log.info("  Ngrams...")
