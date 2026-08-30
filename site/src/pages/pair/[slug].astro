@@ -200,6 +200,18 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     const _routeData = JSON.parse(document.getElementById('pair-route-data')!.textContent!);
     let activePairSlug = _routeData.slug;
 
+    const infoEl2 = document.getElementById('chart-info');
+    const sourceInfo2: Record<string, string> = {
+      trends: 'Google search interest — relative, normalized 0–100',
+      gdelt: 'Verified articles from active news media',
+      wikipedia: 'Wikipedia page views',
+      reddit: 'Reddit user posts',
+      youtube: 'YouTube videos naming the spelling in title or description',
+      ngrams: 'Word frequency in printed books (Google Books)',
+      openalex: 'Academic papers (OpenAlex)',
+      telegram: 'Public Telegram channel messages',
+    };
+
     function drawChart() {
       const container = document.getElementById('chart')!;
       const legendContainer = document.getElementById('chart-legend')!;
@@ -282,6 +294,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         }
       }
 
+      // Subtitle and mode chrome update BEFORE any early return: switching to a
+      // source with no data used to bail out up here and leave the previous
+      // source's description ("Reddit user posts") stuck on screen.
+      if (infoEl2) infoEl2.textContent = sourceInfo2[activeSource] || '';
       if (allDates.length === 0) return;
 
       // Dynamic range based on actual data for this pair + source
@@ -308,17 +324,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
       // Update title range and info text
       const rangeEl = document.getElementById('chart-range');
-      const infoEl = document.getElementById('chart-info');
-      const sourceInfo: Record<string, string> = {
-        trends: 'Google search interest — relative, normalized 0–100',
-        gdelt: 'Verified articles from active news media',
-        wikipedia: 'Wikipedia page views',
-        reddit: 'Reddit user posts',
-        youtube: 'YouTube videos naming the spelling in title or description',
-        ngrams: 'Word frequency in printed books (Google Books)',
-        openalex: 'Academic papers (OpenAlex)',
-        telegram: 'Public Telegram channel messages',
-      };
+      const infoEl = infoEl2;
+      const sourceInfo = sourceInfo2;
       // The date range label is gone: the x axis is pinned to the study period on
       // every source, so the axis already says it.
       if (rangeEl) rangeEl.textContent = '';
@@ -812,10 +819,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           tooltip.style('opacity', '0');
         });
 
-      // No percentage legend under the chart: it restated the latest point, which
-      // the line's right edge and the tooltip already say. The two line colors are
-      // identified by the variant names in the pair header.
-      legendContainer.innerHTML = '';
+      // (percentage legend removed; the events legend appended above stays)
     }
 
     // Sidebar
@@ -852,7 +856,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         if (reportLink) reportLink.href = `/report#pair-${pairId}`;
       }
       drawChart();
-      drawPairStats();
       drawAdoptionCalc();
       drawPairClContext();
       // setTimeout ensures browser has fully laid out pair-view before measuring widths.
@@ -902,10 +905,26 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <div style="height:100%; width:${Math.max(1, Math.min(100, r.pct))}%; background:${sourceColors[r.src]}; border-radius:${barH / 2}px; opacity:0.85;"></div>
           </div>
           <span style="width:42px; font-size:0.82rem; font-weight:600; color:${sourceColors[r.src]}; text-align:right; flex-shrink:0;">${r.pct}%</span>
+          <span style="min-width:7.5rem; font-size:0.76rem; color:#9ca3af; text-align:right; flex-shrink:0;">${(() => {
+            const st = ((manifest as any).pair_source_stats || {})[activePairSlug]?.[r.src];
+            return st && st.countable ? `${fN(st.ukr)} · ${fN(st.rus)} ${st.unit}` : (st ? st.unit : '');
+          })()}</span>
         </div>`;
       }).join('');
       el.innerHTML = `<div style="display:flex; flex-direction:column; gap:0.25rem;">${out}</div>`;
     }
+
+    (function wireAdoptionPop() {
+      const btn = document.getElementById('adoption-details-btn');
+      const pop = document.getElementById('adoption-pop');
+      if (!btn || !pop || (btn as any)._wired) return;
+      (btn as any)._wired = true;
+      btn.addEventListener('click', (e) => { e.stopPropagation(); pop.hidden = !pop.hidden; });
+      document.getElementById('adoption-pop-close')?.addEventListener('click', () => { pop.hidden = true; });
+      document.addEventListener('click', (e) => {
+        if (!pop.hidden && !pop.contains(e.target as Node) && e.target !== btn) pop.hidden = true;
+      });
+    })();
 
     function drawAdoptionCalc() {
       const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
@@ -1316,61 +1335,9 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       container.innerHTML = svg + legend;
     }
 
-    function drawPairStats() {
-      const container = document.getElementById('pair-stats');
-      if (!container) return;
-      container.innerHTML = '';
+    // drawPairStats removed: the header adoption summary + details popover
+    // replaced both blocks that showed these numbers.
 
-      const pairData = (timeseriesData as any)[activePairSlug];
-      if (!pairData) return;
-
-      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex', 'telegram'];
-      // One slim row per source. The card grid truncated every label ("TREN",
-      // "WIKI"), stacked its numbers three lines tall, and spent a third of the
-      // viewport saying eight numbers.
-      container.style.cssText = 'display:flex; flex-direction:column; gap:0; border:1px solid var(--border,#e5e7eb); border-radius:10px; background:#fff; overflow:hidden;';
-      const st = ((manifest as any).pair_source_stats || {})[activePairSlug] || {};
-      for (const src of srcOrder) {
-        const sstat = st[src];
-        const row = document.createElement('div');
-        row.style.cssText = 'display:flex; align-items:baseline; gap:0.6rem; padding:0.42rem 0.8rem; border-bottom:1px solid #f3f4f6; font-size:0.86rem;';
-        const color = sourceColors[src] || '#888';
-        if (sstat) {
-          const fmtN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
-          const counts = sstat.countable
-            ? `<span style="color:#0057B8;">${fmtN(sstat.ukr)}</span> · <span style="color:#dc2626;">${fmtN(sstat.rus)}</span> <span style="color:#9ca3af;">${sstat.unit}</span>`
-            : `<span style="color:#9ca3af;">${sstat.unit}</span>`;
-          row.innerHTML =
-            `<span style="width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0;align-self:center;"></span>` +
-            `<span style="width:5.5rem;font-weight:600;">${sourceLabels[src]}</span>` +
-            `<span style="width:3.2rem;font-weight:700;color:${color};text-align:right;">${Math.round(sstat.adoption)}%</span>` +
-            `<span style="flex:1;"></span><span style="white-space:nowrap;">${counts}</span>`;
-        } else {
-          row.style.opacity = '0.45';
-          row.innerHTML =
-            `<span style="width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0;align-self:center;"></span>` +
-            `<span style="width:5.5rem;font-weight:600;">${sourceLabels[src]}</span>` +
-            `<span style="color:#9ca3af;">Not enough data</span>`;
-        }
-        container.appendChild(row);
-      }
-
-      // If most sources are empty, add a note
-      const filledCount = srcOrder.filter(s => {
-        const d = pairData[s];
-        return d && d.length > 0 && d.reduce((t: number, r: any) => t + (r.ukr || 0) + (r.rus || 0), 0) > 0;
-      }).length;
-      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
-      const isNewPair = activePairSlug >= 80;
-      if (filledCount <= 3) {
-        const note = document.createElement('div');
-        note.style.cssText = 'grid-column: 1 / -1; font-size:0.8rem; color:var(--text-muted); padding:0.5rem 0.3rem; line-height:1.5; border-top:1px solid rgba(0,0,0,0.06); margin-top:0.3rem;';
-        note.innerHTML = isNewPair
-          ? `<strong>New pair.</strong> Data collection is in progress for this pair. Most sources are being scraped and will appear shortly.`
-          : `<strong>Limited coverage.</strong> This pair has sparse data because it appears primarily in ${filledCount <= 1 ? 'a single source' : filledCount + ' sources'}.`;
-        container.appendChild(note);
-      }
-    }
 
     document.querySelectorAll('.sidebar-item').forEach(item => {
       item.addEventListener('click', () => {
