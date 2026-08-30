@@ -76,9 +76,12 @@ function fmtBig(n: string | number) {
 <script>
   import * as d3 from 'd3';
   import analysisData from '../data/analysis.json';
-  import confusionMatrix from '../data/confusion_matrix.json';
-  import clAnalysis from '../data/cl_analysis.json';
-  import errorAnalysis from '../data/error_analysis.json';
+// Removed 2026-08-29: computed from the corpus before the GDELT (26 Aug), trends (28 Aug)
+// and YouTube rebuilds, so it stated findings the current data no longer supports.
+// Empty rather than deleted inline so the render guards hide the section.
+  const confusionMatrix: any = {};
+  const clAnalysis: any = {};
+  const errorAnalysis: any = {};
   import manifest from '../data/manifest.json';
 
   const sourceColors: Record<string, string> = {

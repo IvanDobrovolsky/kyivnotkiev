@@ -537,28 +537,9 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
 
     # GDELT (monthly)
     log.info("  GDELT...")
-    df = _load("gdelt")
-    if len(df):
-        df["month"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m")
-        g = df.groupby(["pair_slug", "month", "variant"])["count"].sum().reset_index()
-        p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="count", fill_value=0).reset_index()
-        for pid, grp in p.groupby("pair_slug"):
-            if pid not in enabled_slugs:
-                continue
-            spid = pid
-            result.setdefault(spid, {}).setdefault("gdelt", [])
-            for _, r in grp.sort_values("month").iterrows():
-                ukr = int(r.get("ukrainian", 0))
-                rus = int(r.get("russian", 0))
-                total = ukr + rus
-                if total > 0:
-                    result[spid]["gdelt"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
-
-    # Where verified records exist, the chart is computed from the SAME records that
-    # supply the article texts, so the two can never disagree. A pair is either fully
-    # verified or fully url-based -- never a mix, which would make its own months
-    # incomparable. Mixed usage ("both") counts toward neither variant but is carried
-    # so the denominator is honest.
+    # Verified-text series only. There is no legacy fallback: a pair without a
+    # verified build shows nothing rather than a series derived from URL spellings,
+    # which is a different measurement and was silently standing in for the same one.
     _vdir = ROOT / "data" / "cl" / "corpus" / "gdelt_verified"
     if _vdir.exists():
         _swapped = []
@@ -569,9 +550,6 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
             _sr = pd.read_parquet(_f)
             _pv = _sr.pivot_table(index="month", columns="variant", values="articles",
                                   fill_value=0).reset_index()
-            # This path bypasses _load(), so the study-period clamp has to be
-            # repeated here -- GDELT collection ran into 2026 and those months were
-            # being drawn past the end of the axis.
             _pv = _pv[_pv["month"].astype(str) <= STUDY_END_DATE[:7]]
             _rows = []
             for _, r in _pv.sort_values("month").iterrows():
@@ -584,9 +562,9 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
             if _rows:
                 result.setdefault(_slug, {})["gdelt"] = _rows
                 _swapped.append(_slug)
-        if _swapped:
-            log.info(f"  GDELT series from verified text for {len(_swapped)} pair(s): "
-                     f"{', '.join(_swapped)}")
+        _missing = sorted(enabled_slugs - set(_swapped))
+        log.info(f"  GDELT series from verified text for {len(_swapped)} pair(s)"
+                 + (f"; NO series for {_missing} (no verified build)" if _missing else ""))
 
     # Wikipedia (monthly) + rename annotations
     log.info("  Wikipedia...")
@@ -1513,55 +1491,11 @@ def main():
             log.info(f"  Verified GDELT holdouts: {len(_verified_pairs)} pairs "
                      f"({', '.join(sorted(_verified_pairs))})")
 
-    _holdout_dir = ROOT / "data" / "corpus" / "gdelt_holdouts"
-    _attested_path = ROOT / "data" / "raw" / "gdelt" / "mentions_v2" / "gdelt_mentions_final.parquet"
-    if _holdout_dir.exists() and _attested_path.exists():
-        import glob as _glob
-        _att = pd.read_parquet(_attested_path, columns=["url", "variant", "date", "pair_slug"])
-        _att = _att[_att["date"] >= HOLDOUT_SINCE]
-        _by_url = dict(zip(_att["url"], _att["variant"]))
-        _injected, _kept, _dropped = 0, 0, 0
-        for _hf in _glob.glob(str(_holdout_dir / "*.parquet")):
-            _slug = Path(_hf).stem
-            if _slug not in enabled_slugs or _slug in _verified_pairs:
-                continue
-            _hdf = pd.read_parquet(_hf)
-            if len(_hdf) == 0:
-                continue
-            _hdf = _hdf.drop_duplicates("url")
-            # The same story is syndicated under several URLs, so URL dedup alone
-            # leaves visibly repeated rows. Dedup on the preview the reader sees.
-            _hdf["_preview"] = _hdf["text"].astype(str).str.slice(0, 200)
-            _hdf = _hdf[_hdf["_preview"].str.strip().str.len() > 0].drop_duplicates("_preview")
-            _hdf["_variant"] = _hdf["url"].map(_by_url)
-            _dropped += int(_hdf["_variant"].isna().sum())
-            _hdf = _hdf[_hdf["_variant"].notna()]
-            if len(_hdf) == 0:
-                continue
-            # Russian spellings only. This previously padded the cap with Ukrainian
-            # articles when Russian ones ran short, which put 99 of them on the site
-            # under a table of holdouts — the opposite of what it claims to show.
-            # A short table is honest; a padded one is not.
-            _hdf = _hdf[_hdf["_variant"].isin(HOLDOUT_VARIANTS)]
-            if len(_hdf) == 0:
-                continue
-            _hdf = _hdf.sort_values("month", ascending=False)
-            _hdf = (_hdf.groupby("domain", sort=False, group_keys=False)
-                        .head(HOLDOUT_PER_DOMAIN)
-                        .sort_values("month", ascending=False)
-                        .head(HOLDOUT_CAP))
-            _articles = [{
-                "domain": _r.get("domain", ""),
-                "url": _r.get("url", ""),
-                "variant": _r["_variant"],
-                "text_preview": _r["_preview"],
-                "month": str(_r.get("month", "")),
-            } for _, _r in _hdf.iterrows()]
-            holdouts_by_pair.setdefault(_slug, {})["news_articles"] = _articles
-            _injected += 1
-            _kept += len(_articles)
-        log.info(f"  GDELT article holdouts: {_injected} pairs, {_kept:,} articles "
-                 f"(since {HOLDOUT_SINCE}, cap {HOLDOUT_CAP}/pair; dropped {_dropped:,} unattested)")
+    # No legacy holdout fallback. It derived the variant from the URL rather than
+    # the article body, and padded the cap with Ukrainian rows when Russian ones ran
+    # short — 99 of them reached the site under a table of Russian holdouts. A pair
+    # without a verified build now shows no table at all.
+
     for _slug, _papers in export_openalex_holdouts(enabled_slugs).items():
         holdouts_by_pair.setdefault(_slug, {})["openalex"] = _papers
     pair_events = export_pair_events(enabled_slugs)

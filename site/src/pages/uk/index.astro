@@ -462,9 +462,12 @@ function formatNum(n: number) {
     import holdoutsByPair from '../../data/holdouts_by_pair.json';
     import pairEvents from '../../data/pair_events.json';
     // trends_countries removed — using GDELT country distribution only
-    import errorAnalysis from '../../data/error_analysis.json';
+// Removed 2026-08-29: computed from the corpus before the GDELT (26 Aug), trends (28 Aug)
+// and YouTube rebuilds, so it stated findings the current data no longer supports.
+// Empty rather than deleted inline so the render guards hide the section.
+    const errorAnalysis: any = {};
     import domainOrigins from '../../data/domain_origins.json';
-    import clCollocations from '../../data/cl_collocations.json';
+    const clCollocations: any = {};
 
     // Use manifest as the single pairs source
     const pairs = { pairs: manifest.pairs };
