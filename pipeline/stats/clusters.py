@@ -226,6 +226,50 @@ def main() -> int:
         post = merged_post
         log(f"  merged {int((mapping != np.arange(len(mapping))).sum())} small component(s)")
 
+    # ── Merge components that say the same thing ─────────────────────────────
+    # BIC rewards likelihood, so it happily splits one register across many
+    # near-identical components: the first k=24 run produced 29 cluster pairs
+    # sharing at least half their top terms, eight of them at 75%. Statistical
+    # structure and presentational structure are different things — components
+    # whose top-8 c-TF-IDF terms overlap >= 0.5 are one context and are merged
+    # (union-find), their posteriors summed. The merge is part of the pipeline,
+    # deterministic, and reported.
+    k0 = post.shape[1]
+    lab0 = post.argmax(1)
+    terms0 = top_terms(df.text, lab0, k0, n=8)
+    parent2 = list(range(k0))
+    def find2(x):
+        while parent2[x] != x:
+            parent2[x] = parent2[parent2[x]]
+            x = parent2[x]
+        return x
+    # Never merge across the variant axis. The two STALKER games share their
+    # vocabulary but sit at 0.2% and 92% Ukrainian — the first version fused them
+    # into one 38%-UA cluster and erased the franchise-rename finding. Components
+    # merge only when they agree on BOTH topic (term overlap) and spelling regime
+    # (UA share within 20 points).
+    _ua0 = np.array([
+        (df.variant.values[lab0 == c] == "ukrainian").mean() if (lab0 == c).any() else 0.0
+        for c in range(k0)])
+    for i in range(k0):
+        for j in range(i + 1, k0):
+            ti, tj = set(terms0.get(i, [])), set(terms0.get(j, []))
+            if not ti or not tj or len(ti & tj) / 8 < 0.5:
+                continue
+            if abs(_ua0[i] - _ua0[j]) > 0.20:
+                continue
+            ri, rj = find2(i), find2(j)
+            if ri != rj:
+                parent2[max(ri, rj)] = min(ri, rj)
+    roots = sorted({find2(i) for i in range(k0)})
+    if len(roots) < k0:
+        remap = {r: n for n, r in enumerate(roots)}
+        merged = np.zeros((post.shape[0], len(roots)), dtype=post.dtype)
+        for src in range(k0):
+            merged[:, remap[find2(src)]] += post[:, src]
+        post = merged
+        log(f"  merged {k0} components -> {len(roots)} distinct contexts (term overlap >= 0.5)")
+
     order = np.argsort(-post, axis=1)
     p1 = post[np.arange(len(post)), order[:, 0]]
     p2 = post[np.arange(len(post)), order[:, 1]]
