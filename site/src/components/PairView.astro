@@ -115,7 +115,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 <div class="chart-container" id="pair-llm-container" style="margin-bottom:1rem;">
   <div class="chart-title" style="color: var(--text)">What AI says about <span id="pair-llm-pair-name">this pair</span></div>
   <div class="chart-subtitle" style="margin-bottom:0.5rem;" id="pair-llm-subtitle">
-    {nModels} LLMs from {nLabs} labs, 3 prompt variants each — what they answer for this specific pair.
+    We asked {nModels} AI chatbots from {nLabs} labs three questions about this name — here is every answer, counted.
   </div>
   <div id="pair-llm-body"></div>
   <script type="application/json" id="llm-per-pair-data" set:html={JSON.stringify(llmPerPair)} />

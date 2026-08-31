@@ -1,26 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
-import m from '../data/manifest.json';
 import llmTraj from '../data/llm_trajectory.json';
 
-const nModels = (llmTraj as any)?.summary?.n_models || 72;
-const nLabs = Object.keys((llmTraj as any)?.families || {}).length || 8;
-
-// Heatmap data
 const traj = llmTraj as any;
-const models = traj.models.filter((m: any) => m.release_date && m.tas != null);
+const nModels = traj.n_models || 72;
+const nPairs = traj.n_pairs_total || 66;
+const nLabs = Object.keys(traj.families || {}).length || 8;
 const families = traj.families;
+
+const models = traj.models.filter((m: any) => m.release_date && m.open_n > 0);
+const openPct = (m: any) => m.open_n ? m.open_ua / m.open_n * 100 : 0;
+const forcedPct = (m: any) => m.forced_n ? m.forced_ua / m.forced_n * 100 : 0;
 
 const dateToMonths = (d: string) => { const [yr, mo] = d.split('-').map(Number); return yr * 12 + (mo - 1); };
 const monToQuarter = (m: number) => { const yr = Math.floor(m / 12); const mo = m % 12; return yr * 4 + Math.floor(mo / 3); };
 const qLabel = (q: number) => `Q${(q % 4) + 1} ${String(Math.floor(q / 4)).slice(-2)}`;
 
 const famList = Object.keys(families).sort((a, b) => {
-  const ta = models.filter((m: any) => m.family === a).map((m: any) => m.tas);
-  const tb = models.filter((m: any) => m.family === b).map((m: any) => m.tas);
-  const ma = ta.length ? ta.reduce((x: number, y: number) => x + y, 0) / ta.length : 0;
-  const mb = tb.length ? tb.reduce((x: number, y: number) => x + y, 0) / tb.length : 0;
-  return mb - ma;
+  const avg = (f: string) => {
+    const list = models.filter((m: any) => m.family === f);
+    return list.length ? list.reduce((s: number, m: any) => s + openPct(m), 0) / list.length : 0;
+  };
+  return avg(b) - avg(a);
 });
 
 const qs = models.map((m: any) => monToQuarter(dateToMonths(m.release_date)));
@@ -31,22 +32,34 @@ const quarters = Array.from({length: qMax - qMin + 1}, (_, i) => qMin + i);
 const cells: Record<string, Record<number, any>> = {};
 for (const fam of famList) {
   cells[fam] = {};
-  for (const q of quarters) cells[fam][q] = {tasSum: 0, openSum: 0, forcedSum: 0, n: 0, models: []};
+  for (const q of quarters) cells[fam][q] = {open_ua: 0, open_n: 0, forced_ua: 0, forced_n: 0, models: []};
 }
 for (const md of models) {
   const q = monToQuarter(dateToMonths(md.release_date));
   const c = cells[md.family]?.[q];
   if (!c) continue;
-  c.tasSum += md.tas; c.openSum += md.open || 0; c.forcedSum += md.forced || 0; c.n += 1; c.models.push(md);
+  c.open_ua += md.open_ua; c.open_n += md.open_n;
+  c.forced_ua += md.forced_ua; c.forced_n += md.forced_n;
+  c.models.push(md);
 }
 
-const tasColor = (v: number) => {
+const recallColor = (v: number) => {
   if (v == null || isNaN(v)) return '#f8f9fb';
-  const t = Math.max(0, Math.min(1, (v - 40) / 60));
+  const t = Math.max(0, Math.min(1, (v - 30) / 70));
   if (t < 0.5) { const u = t * 2; return `rgb(${220 - Math.round(u * 60)}, ${60 + Math.round(u * 180)}, ${60 + Math.round(u * 180)})`; }
   else { const u = (t - 0.5) * 2; return `rgb(${160 - Math.round(u * 130)}, ${240 - Math.round(u * 100)}, ${240 - Math.round(u * 56)})`; }
 };
 
+const openVals = models.map(openPct);
+const forcedVals = models.map(forcedPct);
+const openMin = Math.min(...openVals).toFixed(0);
+const openMax = Math.max(...openVals).toFixed(0);
+const forcedMin = Math.min(...forcedVals).toFixed(0);
+const forcedMax = Math.max(...forcedVals).toFixed(0);
+const relMin = models.reduce((a: string, m: any) => m.release_date < a ? m.release_date : a, '9999');
+const relMax = models.reduce((a: string, m: any) => m.release_date > a ? m.release_date : a, '0000');
+
+const byRecall = models.slice().sort((a: any, b: any) => openPct(b) - openPct(a) || b.open_ua - a.open_ua);
 const gridCols = `minmax(140px, 180px) repeat(${quarters.length}, minmax(0, 1fr))`;
 ---
 
@@ -55,28 +68,38 @@ const gridCols = `minmax(140px, 180px) repeat(${quarters.length}, minmax(0, 1fr)
 <div class="chart-container" style="margin-bottom:1rem;">
   <div class="chart-title" style="color:var(--text);">What AI Tells You About Ukraine</div>
   <div class="chart-subtitle" style="margin-bottom:0.75rem;">
-    Search is being replaced by chat. We asked <strong>{nModels} frontier models</strong> from
-    {nLabs} labs to spell Ukrainian places — three different ways each — to see how the answer
-    changes between recognition and free recall.
+    Search is being replaced by chat. We asked <strong>{nModels} models</strong> from {nLabs} labs
+    about <strong>{nPairs} Ukrainian names</strong> — each name three times — and counted every answer.
+    No scores, no weighting: the numbers below are answers, counted.
   </div>
 
   <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.5rem; margin-bottom:1rem; font-size:0.8rem;">
-    <div style="padding:0.5rem 0.6rem; background:rgba(0,87,184,0.05); border-left:2px solid #0057B8; border-radius:3px;">
-      <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">Test 1 · Forced choice (RU first)</div>
-      <div style="color:var(--text-muted); font-family:monospace;">"Kiev or Kyiv? Answer with one word."</div>
-    </div>
-    <div style="padding:0.5rem 0.6rem; background:rgba(0,87,184,0.05); border-left:2px solid #0057B8; border-radius:3px;">
-      <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">Test 2 · Forced choice (UA first)</div>
-      <div style="color:var(--text-muted); font-family:monospace;">"Kyiv or Kiev? Answer with one word."</div>
-    </div>
     <div style="padding:0.5rem 0.6rem; background:rgba(213,43,30,0.05); border-left:2px solid #D52B1E; border-radius:3px;">
-      <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">Test 3 · Free recall</div>
-      <div style="color:var(--text-muted); font-family:monospace;">"What is the capital of Ukraine? One word."</div>
+      <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">Free recall</div>
+      <div style="color:var(--text-muted); font-family:monospace;">"What is the capital of Ukraine called in English? Answer with one word."</div>
+      <div style="color:var(--text-muted); margin-top:0.25rem;">Neither spelling is shown — the model writes what it knows.</div>
+    </div>
+    <div style="padding:0.5rem 0.6rem; background:rgba(0,87,184,0.05); border-left:2px solid #0057B8; border-radius:3px;">
+      <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">Forced choice</div>
+      <div style="color:var(--text-muted); font-family:monospace;">"Kiev or Kyiv? Answer with one word."</div>
+      <div style="color:var(--text-muted); margin-top:0.25rem;">Both spellings shown; the model picks.</div>
+    </div>
+    <div style="padding:0.5rem 0.6rem; background:rgba(0,87,184,0.05); border-left:2px solid #0057B8; border-radius:3px;">
+      <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">Forced choice, order swapped</div>
+      <div style="color:var(--text-muted); font-family:monospace;">"Kyiv or Kiev? Answer with one word."</div>
+      <div style="color:var(--text-muted); margin-top:0.25rem;">Same question, reversed — so a habit of picking the first option cancels out.</div>
     </div>
   </div>
+  <div style="font-size:0.8rem; color:var(--text-muted); margin:-0.5rem 0 1rem;">
+    Shown here for Kyiv; every one of the {nPairs} names gets its own version of the three questions.
+    Each pair's page lists its exact wording and every model's answer.
+  </div>
 
-  <!-- Heatmap grid -->
+  <!-- Heatmap: free recall by family and release quarter -->
   <div style="width:100%; margin-bottom:0.75rem;">
+    <div style="font-size:0.85rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">
+      Free recall over time — the spelling models produce on their own
+    </div>
     <div style={`display:grid; grid-template-columns:${gridCols}; gap:3px; align-items:stretch;`}>
       <div></div>
       {quarters.map((q) => (
@@ -93,32 +116,32 @@ const gridCols = `minmax(140px, 180px) repeat(${quarters.length}, minmax(0, 1fr)
           </div>,
           ...quarters.map((q) => {
             const cell = cells[fam][q];
-            if (!cell || cell.n === 0) return <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:3px; min-height:24px;"></div>;
-            const tas = cell.tasSum / cell.n;
-            const open = cell.openSum / cell.n;
-            const forced = cell.forcedSum / cell.n;
-            const fill = tasColor(tas);
-            const textColor = tas < 60 || tas > 90 ? 'white' : '#111827';
-            const tip = `${fam} · ${qLabel(q)}\n${cell.n} model${cell.n === 1 ? '' : 's'}\nTAS avg: ${tas.toFixed(1)}%\nFree recall: ${open.toFixed(1)}%\nForced choice: ${forced.toFixed(1)}%\nModels: ${cell.models.map((m: any) => m.key).join(', ')}`;
-            return <div title={tip} style={`background:${fill}; border:1px solid #d1d5db; border-radius:3px; min-height:24px; display:flex; align-items:center; justify-content:center; font-size:0.82rem; font-weight:600; color:${textColor};`}>{tas.toFixed(0)}</div>;
+            if (!cell || cell.models.length === 0) return <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:3px; min-height:24px;"></div>;
+            const op = cell.open_n ? cell.open_ua / cell.open_n * 100 : 0;
+            const fc = cell.forced_n ? cell.forced_ua / cell.forced_n * 100 : 0;
+            const fill = recallColor(op);
+            const textColor = op < 55 || op > 90 ? 'white' : '#111827';
+            const tip = `${fam} · ${qLabel(q)}\n${cell.models.length} model${cell.models.length === 1 ? '' : 's'}\nFree recall: Ukrainian spelling in ${cell.open_ua} of ${cell.open_n} answers (${op.toFixed(0)}%)\nForced choice: ${cell.forced_ua} of ${cell.forced_n} (${fc.toFixed(0)}%)\nModels: ${cell.models.map((m: any) => m.key).join(', ')}`;
+            return <div title={tip} style={`background:${fill}; border:1px solid #d1d5db; border-radius:3px; min-height:24px; display:flex; align-items:center; justify-content:center; font-size:0.82rem; font-weight:600; color:${textColor};`}>{op.toFixed(0)}</div>;
           }),
         ];
       })}
     </div>
 
     <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.6rem; padding:0.2rem 0.3rem; flex-wrap:wrap;">
-      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">TAS legend (% Kyiv)</span>
-      {[40, 50, 60, 70, 80, 90, 100].map((v) => (
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">% of free-recall answers using the Ukrainian spelling</span>
+      {[30, 40, 50, 60, 70, 80, 90, 100].map((v) => (
         <div style="display:flex; flex-direction:column; align-items:center; gap:0.1rem;">
-          <div style={`width:28px; height:12px; background:${tasColor(v)}; border:1px solid #d1d5db; border-radius:2px;`}></div>
+          <div style={`width:28px; height:12px; background:${recallColor(v)}; border:1px solid #d1d5db; border-radius:2px;`}></div>
           <span style="font-size:0.78rem; color:var(--text-muted);">{v}</span>
         </div>
       ))}
     </div>
 
     <div style="font-size:0.8rem; color:var(--text-muted); padding:0.5rem 0.3rem 0; line-height:1.6;">
-      <strong>How to read.</strong> Rows are model families, columns are calendar quarters. Each cell shows the
-      <em>average TAS</em> across all models that family released that quarter. Hover for details.
+      <strong>How to read.</strong> Rows are model families, columns are release quarters. Each cell:
+      of all free-recall questions the quarter's models answered, the percentage answered with the
+      Ukrainian spelling. Hover a cell for the raw counts and the model list.
     </div>
   </div>
 
@@ -134,37 +157,34 @@ const gridCols = `minmax(140px, 180px) repeat(${quarters.length}, minmax(0, 1fr)
       ))}
     </div>
     <div style="font-size:0.82rem; color:var(--text); line-height:1.6; padding-left:1rem; border-left:2px solid rgba(0,87,184,0.15);">
-      <strong>The story.</strong> Every single model has a gap between forced-choice (recognition) and free
-      recall (generation). Forced-choice runs from
-      <strong>{traj.summary.forced_min}% to {traj.summary.forced_max}% Kyiv</strong>;
-      free recall is much lower at <strong>{traj.summary.open_min}% to {traj.summary.open_max}%</strong>.
-      That gap is the alignment correction layer — models trained to <em>pick</em> Kyiv when shown both,
-      but still <em>generate</em> Kiev a third of the time.
+      <strong>The story.</strong> Shown both spellings, models overwhelmingly pick the Ukrainian one
+      ({forcedMin}–{forcedMax}% across models). Left to write the name themselves, they use it far
+      less ({openMin}–{openMax}%). The difference is the training data showing through: the text these
+      models learned from still mostly spells names the old way, and free recall repeats it — while the
+      choice between visible options reflects newer preference tuning.
     </div>
   </div>
 
-  <!-- Top/bottom models -->
+  <!-- Free recall leaders / trailers -->
   <div style="margin-top:1rem; display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
     <div>
-      <div style="font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Most Ukrainian-leaning (highest TAS)</div>
+      <div style="font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Writes Ukrainian spellings unprompted — most often</div>
       <div style="font-size:0.8rem; font-family:monospace; color:var(--text);">
-        {traj.models.slice().sort((a: any, b: any) => (b.tas || 0) - (a.tas || 0)).slice(0, 5).map((md: any) => (
-          <div style="display:grid; grid-template-columns:1fr auto auto; gap:0.5rem; padding:0.2rem 0; border-bottom:1px solid rgba(0,0,0,0.04);">
+        {byRecall.slice(0, 5).map((md: any) => (
+          <div style="display:grid; grid-template-columns:1fr auto; gap:0.5rem; padding:0.2rem 0; border-bottom:1px solid rgba(0,0,0,0.04);">
             <span style={`color:${families[md.family]?.color || '#666'}; font-weight:600;`}>{md.key}</span>
-            <span style="color:var(--text-muted);">{md.tas}%</span>
-            <span style="color:var(--text-muted);">gap {md.gap}pp</span>
+            <span style="color:var(--text-muted);">{md.open_ua} of {md.open_n} names</span>
           </div>
         ))}
       </div>
     </div>
     <div>
-      <div style="font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Most Russian-leaning (lowest TAS)</div>
+      <div style="font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">Least often</div>
       <div style="font-size:0.8rem; font-family:monospace; color:var(--text);">
-        {traj.models.slice().sort((a: any, b: any) => (a.tas || 0) - (b.tas || 0)).slice(0, 5).map((md: any) => (
-          <div style="display:grid; grid-template-columns:1fr auto auto; gap:0.5rem; padding:0.2rem 0; border-bottom:1px solid rgba(0,0,0,0.04);">
+        {byRecall.slice(-5).reverse().map((md: any) => (
+          <div style="display:grid; grid-template-columns:1fr auto; gap:0.5rem; padding:0.2rem 0; border-bottom:1px solid rgba(0,0,0,0.04);">
             <span style={`color:${families[md.family]?.color || '#666'}; font-weight:600;`}>{md.key}</span>
-            <span style="color:var(--text-muted);">{md.tas}%</span>
-            <span style="color:var(--text-muted);">gap {md.gap}pp</span>
+            <span style="color:var(--text-muted);">{md.open_ua} of {md.open_n} names</span>
           </div>
         ))}
       </div>
@@ -172,9 +192,10 @@ const gridCols = `minmax(140px, 180px) repeat(${quarters.length}, minmax(0, 1fr)
   </div>
 
   <div style="margin-top:0.75rem; padding:0.5rem 0.75rem; background:rgba(0,87,184,0.04); border-radius:4px; font-size:0.8rem; color:var(--text-muted);">
-    <strong style="color:var(--text);">Toponymic Alignment Score (TAS) = 0.4 &times; (forced&#x2081; + forced&#x2082;)/2 + 0.6 &times; open</strong> —
-    weights favor free recall because it measures parametric memory rather than instruction-following.
-    {nModels} hosted-API models tested, {traj.summary.release_min}–{traj.summary.release_max}.
+    {nModels} hosted-API models, released {relMin}–{relMax}, each asked 3 questions per name across
+    {nPairs} name pairs. An answer counts as Ukrainian or Russian only when the model produced that
+    spelling; anything else (refusals, other names) is excluded from the counts. Raw prompts and
+    verbatim responses are preserved in the dataset.
   </div>
 </div>
 
