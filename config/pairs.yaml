@@ -495,8 +495,14 @@ pairs:
   events:
   - date: 2019-04
     label: Elected president
+  - date: 2019-09
+    label: Trump call scandal
+  - date: 2021-04
+    label: Russian buildup at border
   - date: 2022-02
     label: Wartime leadership begins
+  - date: 2025-02
+    label: Oval Office clash with Trump
   match_mode: exact_phrase
   slug: volodymyr-zelenskyy
   ukrainian_cyrillic: Володимир Зеленський
