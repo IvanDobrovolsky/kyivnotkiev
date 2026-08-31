@@ -53,6 +53,21 @@ def build(pair: str) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     usage = fetched[fetched.body_variant.isin(["ukrainian", "russian", "both"])].copy()
     audit["dropped_no_usage"] = int(len(fetched) - len(usage))
 
+    # 2b. homonym false positives: the match term names a different referent
+    # entirely (Odessa TX / Odessa A'zion / The Odessa File for the odesa pair).
+    # Patterns come from pairs.yaml homonym_filters and run over the BODY text —
+    # the domain-level filter upstream cannot see a Texas story on a national
+    # outlet. Measured 2026-08-31: 17% of odesa texts carried Texas markers.
+    import re as _re
+    import yaml as _yaml
+    _cfg = _yaml.safe_load(open("config/pairs.yaml"))
+    _pats = [_re.compile(f, _re.I) for p in _cfg["pairs"]
+             if p.get("slug") == pair for f in p.get("homonym_filters", [])]
+    if _pats:
+        _hit = usage.text.astype(str).apply(lambda t: any(r.search(t) for r in _pats))
+        audit["dropped_homonym"] = int(_hit.sum())
+        usage = usage[~_hit].copy()
+
     # 3. one record per article
     verified = usage.drop_duplicates("text_hash").copy()
     audit["dropped_duplicate_body"] = int(len(usage) - len(verified))
