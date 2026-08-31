@@ -30,6 +30,7 @@ pairs:
     label: Peace negotiation surge
   match_mode: word_boundary
   slug: kyiv
+  blurb: "The capital — where English switched first"
   word_boundary: true
   ukrainian_cyrillic: Київ
   significance: The capital and the campaign's namesake. Г→H and И→Y are the two contrasts the official table turns on, and Kyiv is where English usage shifted first.
@@ -46,6 +47,7 @@ pairs:
     label: Russian border offensive
   match_mode: word_boundary
   slug: kharkiv
+  blurb: "Second city, 40 km from the Russian border"
   word_boundary: true
   ukrainian_cyrillic: Харків
   significance: Second city. "Kharkov" is a direct Russian rendering; the Ukrainian form restores the -iv ending common to Ukrainian city names.
@@ -74,6 +76,7 @@ pairs:
   - odessa.{0,5}a.?zion
   homonym_type: us_city
   slug: odesa
+  blurb: "Black Sea port; one “s” or two"
   youtube_depth: legacy
   word_boundary: true
   ukrainian_cyrillic: Одеса
@@ -84,6 +87,7 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: lviv
+  blurb: "The western hub English used to call Lvov"
   events:
   - date: 2022-03
     label: Refugee hub, diplomatic activity
@@ -170,6 +174,7 @@ pairs:
     label: S.T.A.L.K.E.R. 2 Heart of Chornobyl release
   match_mode: word_boundary
   slug: chornobyl
+  blurb: "A disaster known by its Soviet-era spelling"
   youtube_depth: day
   ukrainian_cyrillic: Чорнобиль
   significance: Known worldwide through a Soviet-era Russian spelling. The Ukrainian form places the site in the country that lives with it.
@@ -186,6 +191,7 @@ pairs:
     label: Retreat from Lyman, Luhansk oblast
   match_mode: word_boundary
   slug: luhansk
+  blurb: "Occupied since 2014"
   ukrainian_cyrillic: Луганськ
   significance: Г→H again. Occupied since 2014, which makes the spelling a marker of whose administration is being recognised.
 - russian: Dnieper River
@@ -195,6 +201,7 @@ pairs:
   notes: River name. Qualified with "River" to disambiguate from the city (pair 7, Dnepropetrovsk→Dnipro).
   match_mode: exact_phrase
   slug: dnipro-river
+  blurb: "The river English still calls the Dnieper"
   youtube_depth: legacy
   events:
   - date: 2022-11
@@ -227,6 +234,7 @@ pairs:
     label: Toponym decolonization law
   match_mode: word_boundary
   slug: donbas
+  blurb: "The war’s first front; one “s” or two"
   ukrainian_cyrillic: Донбас
   significance: The doubled "ss" of "Donbass" is a Russian orthographic convention, not a Ukrainian one.
 - russian: Chicken Kiev
@@ -235,6 +243,7 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: chicken-kyiv
+  blurb: "The capital’s name, frozen on menus"
   youtube_depth: legacy
   events:
   - date: 2015-07
@@ -256,6 +265,7 @@ pairs:
     label: UNESCO inscribes Ukrainian borscht
   match_mode: word_boundary
   slug: borscht
+  blurb: "UNESCO lists it as Ukrainian heritage"
   ukrainian_cyrillic: Борщ
   significance: Inscribed by UNESCO as Ukrainian intangible cultural heritage. Culinary naming is a site of symbolic ownership.
 - russian: Kiev Pechersk Lavra
@@ -330,6 +340,7 @@ pairs:
     label: Champions League tie vs Barcelona
   match_mode: exact_phrase
   slug: dynamo-kyiv
+  blurb: "The club Europe watches weekly"
   youtube_depth: legacy
   word_boundary: true
   ukrainian_cyrillic: Динамо Київ
@@ -349,9 +360,10 @@ pairs:
     label: Russia weaponizes historical narrative
   match_mode: exact_phrase
   slug: kyivan-rus
+  blurb: "The medieval state both nations claim"
   youtube_depth: legacy
   ukrainian_cyrillic: Київська Русь
-  significance: 'Erosion of historical memory and appropriation of the Kyivan Rus inheritance. (source: provided)'
+  significance: "The medieval state from which Ukraine, Belarus and Russia all descend; whether its name is anchored to Kyiv is the whole argument."
 - russian: Chernigov
   ukrainian: Chernihiv
   enabled: false
@@ -431,6 +443,7 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: ternopil
+  blurb: "Ukrainian -pil vs Russian -pol"
   events:
   - date: 2022-03
     label: Refugee hub, military recruitment
@@ -442,8 +455,9 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: varenyky
+  blurb: "Dumplings English met through Russian"
   ukrainian_cyrillic: Вареники
-  significance: 'Appropriation of dishes and cultural appropriation. (source: provided)'
+  significance: "A dish English met through the Russian “vareniki”; the Ukrainian name marks the cuisine as its own."
 - russian: Metalist Kharkov
   ukrainian: Metalist Kharkiv
   enabled: false
@@ -457,6 +471,7 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: babyn-yar
+  blurb: "Holocaust site, named in two traditions"
   events:
   - date: 2016-09
     label: 75th anniversary of massacre
@@ -485,6 +500,7 @@ pairs:
     label: Usyk beats Dubois (Wembley)
   match_mode: exact_phrase
   slug: oleksandr-usyk
+  blurb: "The champion spells it Oleksandr"
   youtube_depth: legacy
   ukrainian_cyrillic: Олександр Усик
   significance: A living athlete who states his own name. Sports coverage is a test of whether English follows a person's own usage.
@@ -505,6 +521,7 @@ pairs:
     label: Oval Office clash with Trump
   match_mode: exact_phrase
   slug: volodymyr-zelenskyy
+  blurb: "The president the world met in 2022"
   ukrainian_cyrillic: Володимир Зеленський
   significance: A head of state whose name entered global English abruptly in 2022, largely in its Ukrainian form.
 - russian: Andrey Shevchenko
@@ -529,9 +546,10 @@ pairs:
     label: Poroshenko unveils Volodymyr statue
   match_mode: exact_phrase
   slug: volodymyr-the-great
+  blurb: "The prince who baptized Rus in 988"
   youtube_depth: legacy
   ukrainian_cyrillic: Володимир Великий
-  significance: 'Erosion of historical memory and appropriation of the Kyivan Rus inheritance. (source: provided)'
+  significance: "The prince who baptized Kyivan Rus in 988. Moscow and Kyiv both unveiled statues of him; his name decides which capital the story starts in."
 - russian: Artemovsk
   ukrainian: Bakhmut
   enabled: true
@@ -552,6 +570,7 @@ pairs:
   - winery
   homonym_type: brand_composer
   slug: bakhmut
+  blurb: "Renamed in 2016, world-famous by 2023"
   ukrainian_cyrillic: Бахмут
   significance: Renamed from the Soviet "Artemovsk" in 2016; the pair tests whether English followed the official renaming.
 - russian: Nikolai Gogol
@@ -561,12 +580,13 @@ pairs:
   notes: Ukrainian-born writer (Миколa Гоголь). Tests Г→H and Микола→Mykola vs Nikolai.
   match_mode: exact_phrase
   slug: mykola-hohol
+  blurb: "The writer Russia publishes as Gogol"
   youtube_depth: legacy
   events:
   - date: 2016-03
     label: Gogol birthday anniversary coverage
   ukrainian_cyrillic: Микола Гоголь
-  significance: 'Appropriation of a Ukrainian figure and framing him as Russian. (source: provided)'
+  significance: "Born in the Poltava region, published in Russian as Nikolai Gogol — the Г→H and Микола→Mykola test on a canonical writer."
 - russian: Feodosiya
   ukrainian: Feodosiia
   enabled: true
@@ -574,13 +594,14 @@ pairs:
   notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms Ukraine's territorial integrity.
   match_mode: word_boundary
   slug: feodosiia
+  blurb: "A Crimean port under occupation"
   events:
   - date: 2014-03
     label: Russia annexes Crimea
   - date: 2023-12
     label: Ukrainian strike on Russian ship in Feodosia
   ukrainian_cyrillic: Феодосія
-  significance: "After the annexation of Crimea, correct naming underlines the illegality of Russia's actions. (source: provided)"
+  significance: "A Crimean port city; after the 2014 annexation the Ukrainian transliteration marks the peninsula as occupied, not Russian."
 - russian: Olga of Kiev
   ukrainian: Olha of Kyiv
   enabled: false
@@ -596,6 +617,7 @@ pairs:
   notes: Aviation pioneer (Ігор Сікорський). Tests І→I and Г→H (Igor vs Ihor).
   match_mode: exact_phrase
   slug: ihor-sikorsky
+  blurb: "The helicopter pioneer from Kyiv"
   youtube_depth: legacy
   events:
   - date: 2016-09
@@ -603,7 +625,7 @@ pairs:
   - date: 2024-05
     label: Airport in war coverage
   ukrainian_cyrillic: Ігор Сікорський
-  significance: 'Appropriation of a Ukrainian figure and framing him as Russian. (source: provided)'
+  significance: "The Kyiv-born aviation pioneer behind the modern helicopter; American fame fixed the Russian rendering of his name."
 - russian: Sergei Korolev
   ukrainian: Serhii Korolyov
   enabled: true
@@ -611,6 +633,7 @@ pairs:
   notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of the most consequential cases of Ukrainian identity erasure in global science history.
   match_mode: exact_phrase
   slug: serhii-korolyov
+  blurb: "The engineer who launched Sputnik"
   youtube_depth: legacy
   events:
   - date: 2011-04
@@ -620,7 +643,7 @@ pairs:
   - date: 2025-04
     label: Space heritage debates
   ukrainian_cyrillic: Сергій Корольов
-  significance: 'Appropriation of a Ukrainian figure and framing him as Russian. (source: provided)'
+  significance: "The Zhytomyr-born chief designer of the Soviet space programme, fixed in history books as Sergei Korolev."
 - russian: Bogdan Khmelnitsky
   ukrainian: Bohdan Khmelnytskyi
   enabled: false
@@ -638,6 +661,7 @@ pairs:
   notes: Suprematist artist (Казимир Малевич). Tests И→Y and Ч→Ch (Malevich vs Malevych).
   match_mode: exact_phrase
   slug: kazymyr-malevych
+  blurb: "Black Square’s painter, born in Kyiv"
   youtube_depth: legacy
   events:
   - date: 2015-11
@@ -645,4 +669,4 @@ pairs:
   - date: 2022-02
     label: Cultural heritage debates during invasion
   ukrainian_cyrillic: Казимир Малевич
-  significance: 'Appropriation of a Ukrainian figure and framing him as Russian. (source: provided)'
+  significance: "The Kyiv-born painter of the Black Square, catalogued worldwide under the Russian form of his name."
