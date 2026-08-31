@@ -39,8 +39,12 @@ PARTS = OUT / "parts"
 
 CONCURRENCY = 24          # in-flight HTTP cap; breadth across domains
 WORKERS = 48              # queue consumers; ones parked on lane backoffs are cheap
-DOMAIN_INTERVAL = 1.5     # min seconds between hits on the SAME domain
+DOMAIN_INTERVAL = 1.0     # min seconds between hits on the SAME domain
 DEAD_AFTER = 20           # consecutive connection failures -> abandon domain
+# Measured hopeless on 2026-08-31 (attempts -> texts): 360cities.net 1,761->11,
+# newswest9.com 1,735->6, news-gazette.com 1,743->0. Hard bot-walls; their
+# remaining URLs are skipped, stay out of the ledger, and remain retryable.
+SKIP_DOMAINS = {"360cities.net", "newswest9.com", "news-gazette.com"}
 MIN_TEXT = 300
 
 
@@ -200,6 +204,10 @@ def main() -> int:
     pool = d[(d.status == 403) | (d.error == "too_short")].drop_duplicates("url")
     seen = set(LEDGER.read_text().split()) if LEDGER.exists() else set()
     pool = pool[~pool.url.isin(seen)]
+    n_skip = pool.domain.isin(SKIP_DOMAINS).sum()
+    if n_skip:
+        print(f"skipping {n_skip:,} urls on measured-hopeless domains: {sorted(SKIP_DOMAINS)}")
+        pool = pool[~pool.domain.isin(SKIP_DOMAINS)]
     if a.sample:
         pool = pool.sample(min(a.sample, len(pool)), random_state=20260830)
     else:
