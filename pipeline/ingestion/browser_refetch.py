@@ -96,7 +96,11 @@ async def fetch_one(session, row, pats, sem, lanes):
         lane.next_ok = time.monotonic() + DOMAIN_INTERVAL
         async with sem:
             try:
-                r = await session.get(row.url, timeout=25, allow_redirects=True)
+                # Belt over curl_cffi's own timeout: one hung socket froze the
+                # whole pool for an hour (0.1% CPU, zero completions). wait_for
+                # guarantees the slot is returned no matter what libcurl does.
+                r = await asyncio.wait_for(
+                    session.get(row.url, timeout=25, allow_redirects=True), 35)
                 rec["status"] = r.status_code
                 lane.conn_fails = 0
                 if r.status_code == 429:
