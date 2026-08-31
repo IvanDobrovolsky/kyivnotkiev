@@ -40,6 +40,7 @@ PARTS = OUT / "parts"
 CONCURRENCY = 24          # in-flight HTTP cap; breadth across domains
 WORKERS = 48              # queue consumers; ones parked on lane backoffs are cheap
 DOMAIN_INTERVAL = 1.0     # min seconds between hits on the SAME domain
+FAST_DOMAINS = {"oaoa.com": 0.5}  # measured 0.2-0.6s responses; dominates the tail
 DEAD_AFTER = 20           # consecutive connection failures -> abandon domain
 # Measured hopeless on 2026-08-31 (attempts -> texts): 360cities.net 1,761->11,
 # newswest9.com 1,735->6, news-gazette.com 1,743->0. Hard bot-walls; their
@@ -89,6 +90,10 @@ async def fetch_one(session, row, pats, sem, lanes):
     lane = lanes[row.domain]
     # Pacing sleeps hold only the domain lock; the global semaphore bounds
     # in-flight HTTP only — a backed-off domain must never occupy a slot.
+    # Hold the lane lock only to take a pacing slot, not through the request:
+    # holding it for the full HTTP round-trip made the dominant domain's lane
+    # serialize at request-time + interval, which is how an 11k tail became a
+    # 12-hour estimate. In-flight per domain is bounded by pacing, not the lock.
     async with lane.lock:
         if lane.dead:
             rec["error"] = "domain_abandoned"
@@ -97,7 +102,8 @@ async def fetch_one(session, row, pats, sem, lanes):
         wait = lane.next_ok - time.monotonic()
         if wait > 0:
             await asyncio.sleep(wait)
-        lane.next_ok = time.monotonic() + DOMAIN_INTERVAL
+        lane.next_ok = time.monotonic() + FAST_DOMAINS.get(row.domain, DOMAIN_INTERVAL)
+    if True:
         async with sem:
             try:
                 # Belt over curl_cffi's own timeout: one hung socket froze the
