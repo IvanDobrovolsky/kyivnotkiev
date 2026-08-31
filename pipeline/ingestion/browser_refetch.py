@@ -100,6 +100,12 @@ async def fetch_one(session, row, pats, sem, lanes):
             rec["not_attempted"] = True
             return rec
         wait = lane.next_ok - time.monotonic()
+        if wait > 2.0:
+            # Long backoff (429 stand-down, connection-failure penalty): do NOT
+            # park a worker on it — hand the URL back to the queue and move on.
+            # Parked workers were the collapse: three misbehaving domains could
+            # absorb the whole pool while healthy lanes idled.
+            return "REQUEUE"
         if wait > 0:
             await asyncio.sleep(wait)
         lane.next_ok = time.monotonic() + FAST_DOMAINS.get(row.domain, DOMAIN_INTERVAL)
@@ -177,6 +183,10 @@ async def run(targets, pats):
                 except asyncio.QueueEmpty:
                     return
                 rec = await fetch_one(session, r, pats, sem, lanes)
+                if rec == "REQUEUE":
+                    q.put_nowait(r)
+                    await asyncio.sleep(0.5)   # bounded spin when only backed-off lanes remain
+                    continue
                 async with blk:
                     batch.append(rec)
                     stats["done"] += 1
