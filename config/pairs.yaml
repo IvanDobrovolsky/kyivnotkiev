@@ -73,6 +73,11 @@ pairs:
   - odessa.{0,5}fl\b
   - odessa.{0,5}missouri
   - odesza
+  - a.?zion
+  - odessa\s+file
+  - ector\s+county
+  - friday\s+night\s+lights
+  - odessa\s+american
   - odessa.{0,5}a.?zion
   homonym_type: us_city
   slug: odesa

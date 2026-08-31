@@ -241,6 +241,21 @@ def _filter_youtube(df: pd.DataFrame) -> pd.DataFrame:
     df = df[df.apply(has_term, axis=1)].copy()
     after_term = len(df)
 
+    # 3. Homonym false positives, content-level (title+description): the same
+    # patterns pairs.yaml uses for news bodies. Odessa TX alone was 17% of the
+    # odesa pair's verified videos before this existed.
+    ho = {p["slug"]: [re.compile(f, re.I) for f in p.get("homonym_filters", [])]
+          for p in cfg["pairs"] if p.get("homonym_filters")}
+    if ho:
+        blob = (df["title"].fillna("").astype(str) + " " +
+                df.get("description", pd.Series("", index=df.index)).fillna("").astype(str))
+        fp = [bool(slug in ho and any(r.search(t) for r in ho[slug]))
+              for slug, t in zip(df["pair_slug"], blob)]
+        n_fp = sum(fp)
+        if n_fp:
+            log.info(f"    YouTube homonym filter: removed {n_fp:,} rows")
+            df = df[[not x for x in fp]].copy()
+
     # 3. Re-classify variant from title (not search variant)
     def classify_variant(row):
         title = str(row.get("title", ""))
