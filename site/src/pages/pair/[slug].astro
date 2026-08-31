@@ -1010,161 +1010,158 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const sum = pp.summary;
       const pctOf = (a: number, b: number) => b ? (a / b * 100) : 0;
 
-      // Model order: by family (largest first), then release date — no scores.
       const familyOrder = Object.keys(sum.by_family || {}).sort(
         (a, b) => sum.by_family[b].n - sum.by_family[a].n);
       const models = [...pp.models].sort((a, b) =>
         familyOrder.indexOf(a.family) - familyOrder.indexOf(b.family) ||
         String(a.release_date || '').localeCompare(String(b.release_date || '')));
-
-      const openPct = pctOf(sum.open_ua, sum.open_n);
-      const forcedPct = pctOf(sum.forced_ua, sum.forced_n);
       const q = pp.questions || {};
 
-      let html = '';
+      // Donut helper: conic-gradient ring with a count in the middle.
+      const donut = (ua: number, total: number, ruColorShare: number, label: string, sub: string) => {
+        const uaPct = pctOf(ua, total);
+        const ruPct = ruColorShare;
+        const gray = Math.max(0, 100 - uaPct - ruPct);
+        return `
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.35rem;">
+            <div style="width:104px; height:104px; border-radius:50%; background:conic-gradient(#0057B8 0 ${uaPct}%, #D52B1E ${uaPct}% ${uaPct + ruPct}%, #c8ccd2 ${uaPct + ruPct}% 100%); display:flex; align-items:center; justify-content:center;">
+              <div style="width:66px; height:66px; border-radius:50%; background:var(--bg, #fff); display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                <div style="font-size:0.95rem; font-weight:700; color:var(--text); line-height:1.1;">${ua}/${total}</div>
+                <div style="font-size:0.68rem; color:var(--text-muted);">${uaPct.toFixed(0)}%</div>
+              </div>
+            </div>
+            <div style="font-size:0.78rem; font-weight:700; color:var(--text);">${label}</div>
+            <div style="font-size:0.72rem; color:var(--text-muted); text-align:center; max-width:150px; line-height:1.35;">${sub}</div>
+          </div>`;
+      };
 
-      // What this name is + how the test works, in plain words.
-      html += `
-        <div style="font-size:0.85rem; color:var(--text); line-height:1.55; margin-bottom:0.6rem;">
-          ${pp.significance ? `<p style="margin:0 0 0.45rem;">${pp.significance}</p>` : ''}
-          <p style="margin:0;">We asked each chatbot three questions about this name.
-          In <strong>free recall</strong> the model has to produce the name itself — neither
-          spelling is shown, so the answer comes from what it absorbed in training.
-          In <strong>forced choice</strong> we show both spellings and ask it to pick one;
-          we ask twice with the order swapped, so a habit of picking the first option cancels out.</p>
+      // RU shares for the ring (rest is grey = other/no answer)
+      const openRu = models.filter((m: any) => m.x_open === 0).length;
+      const forcedRu = models.reduce((s: number, m: any) =>
+        s + (m.x_forced_ru_first === 0 ? 1 : 0) + (m.x_forced_ua_first === 0 ? 1 : 0), 0);
+
+      let html = `
+        <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap;">
+          <div style="flex:1 1 220px; min-width:200px; font-size:0.84rem; color:var(--text); line-height:1.55;">
+            <p style="margin:0 0 0.4rem;">Once the model must write the name itself with no spelling shown
+            (<strong>free recall</strong> — what it absorbed in training), and twice we show both spellings
+            and it picks one (<strong>forced choice</strong>, order swapped the second time).</p>
+            <div style="display:flex; gap:0.8rem; font-size:0.74rem; color:var(--text-muted); flex-wrap:wrap;">
+              <span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:#0057B8;"></span> ${pp.ukrainian}</span>
+              <span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:#D52B1E;"></span> ${pp.russian}</span>
+              <span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:#c8ccd2;"></span> other</span>
+            </div>
+          </div>
+          ${donut(sum.open_ua, sum.open_n, pctOf(openRu, sum.open_n), 'Free recall', `models writing "${pp.ukrainian}" unprompted`)}
+          ${donut(sum.forced_ua, sum.forced_n, pctOf(forcedRu, sum.forced_n), 'Forced choice', `answers picking "${pp.ukrainian}" when shown both`)}
         </div>
-        <details style="margin-bottom:0.75rem;">
-          <summary style="font-size:0.8rem; color:var(--text-muted); cursor:pointer;">The exact questions we asked</summary>
-          <div style="font-size:0.8rem; font-family:monospace; color:var(--text); padding:0.5rem 0.6rem; background:rgba(0,0,0,0.03); border-radius:3px; margin-top:0.35rem; line-height:1.7;">
+        <button id="llm-details-btn" class="pill-btn" style="margin-top:0.75rem; font-size:0.78rem; padding:0.3rem 0.8rem; cursor:pointer;">View details</button>
+        <div id="llm-details" style="display:none; margin-top:0.75rem;"></div>
+      `;
+      body.innerHTML = html;
+
+      // ── details, built only when opened ──
+      const btn = document.getElementById('llm-details-btn');
+      const det = document.getElementById('llm-details');
+      if (!btn || !det) return;
+      let built = false;
+      btn.addEventListener('click', () => {
+        const open = det.style.display !== 'none';
+        det.style.display = open ? 'none' : '';
+        btn.textContent = open ? 'View details' : 'Hide details';
+        if (built || open) return;
+        built = true;
+
+        let d = `
+          <div style="font-size:0.8rem; font-family:monospace; color:var(--text); padding:0.5rem 0.6rem; background:rgba(0,0,0,0.03); border-radius:3px; line-height:1.7; margin-bottom:0.75rem;">
             <div>1. ${q.open || '—'} <span style="color:var(--text-muted);">(free recall)</span></div>
             <div>2. ${q.forced_ru_first || '—'} <span style="color:var(--text-muted);">(forced choice)</span></div>
             <div>3. ${q.forced_ua_first || '—'} <span style="color:var(--text-muted);">(forced choice, order swapped)</span></div>
-          </div>
-        </details>
-      `;
-
-      // Two headline numbers — absolute counts, no composite score.
-      html += `
-        <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:0.5rem; margin-bottom:0.6rem;">
-          <div style="padding:0.6rem 0.75rem; background:rgba(213,43,30,0.05); border-left:3px solid #D52B1E; border-radius:3px;">
-            <div style="font-size:0.78rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Free recall</div>
-            <div style="font-size:1.4rem; font-weight:700; color:var(--text);">${sum.open_ua} of ${sum.open_n}</div>
-            <div style="font-size:0.78rem; color:var(--text-muted);">models write "${pp.ukrainian}" on their own (${openPct.toFixed(0)}%)</div>
-          </div>
-          <div style="padding:0.6rem 0.75rem; background:rgba(0,87,184,0.05); border-left:3px solid #0057B8; border-radius:3px;">
-            <div style="font-size:0.78rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Forced choice</div>
-            <div style="font-size:1.4rem; font-weight:700; color:var(--text);">${sum.forced_ua} of ${sum.forced_n}</div>
-            <div style="font-size:0.78rem; color:var(--text-muted);">answers pick "${pp.ukrainian}" when shown both (${forcedPct.toFixed(0)}%)</div>
-          </div>
-        </div>
-      `;
-
-      // Say what the gap means only when there is one.
-      if (sum.open_n >= 10 && forcedPct - openPct >= 10) {
-        html += `<div style="font-size:0.82rem; color:var(--text); line-height:1.5; margin-bottom:0.75rem;">
-          The gap between the two is the training data showing through: writing freely, many models
-          fall back to the spelling that dominates their older training text; shown both options,
-          they pick "${pp.ukrainian}".</div>`;
-      } else if (sum.open_n >= 10 && openPct - forcedPct >= 10) {
-        html += `<div style="font-size:0.82rem; color:var(--text); line-height:1.5; margin-bottom:0.75rem;">
-          Unusually for this dataset, free recall runs ahead of forced choice here.</div>`;
-      }
-
-      // Per-family rollup mini-bars (absolute counts beside every bar).
-      html += `<div style="font-size:0.82rem; font-weight:700; color:var(--text); margin:0.75rem 0 0.4rem;">By family</div>`;
-      for (const fam of familyOrder) {
-        const f = sum.by_family[fam];
-        const color = families[fam]?.color || '#666';
-        const opPct = pctOf(f.open_ua, f.open_n);
-        const fcPct = pctOf(f.forced_ua, f.forced_n);
-        html += `
-          <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0.5rem; align-items:center; margin-bottom:0.3rem; font-size:0.8rem;">
-            <div style="color:var(--text); display:flex; align-items:center; gap:0.25rem; min-width:0;">
-              <span style="display:inline-block; width:8px; height:8px; border-radius:2px; background:${color}; flex-shrink:0;"></span>
-              <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${fam}</span>
-              <span style="color:var(--text-muted); font-family:monospace; flex-shrink:0;">×${f.n}</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:0.4rem;">
-              <div style="flex:1; height:12px; background:#f0f0f0; border-radius:2px; overflow:hidden;">
-                <div style="width:${opPct}%; height:100%; background:#D52B1E; opacity:0.85;"></div>
-              </div>
-              <span style="font-family:monospace; color:var(--text-muted); font-size:0.78rem; width:40px; text-align:right;">${f.open_ua}/${f.open_n}</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:0.4rem;">
-              <div style="flex:1; height:12px; background:#f0f0f0; border-radius:2px; overflow:hidden;">
-                <div style="width:${fcPct}%; height:100%; background:#0057B8; opacity:0.85;"></div>
-              </div>
-              <span style="font-family:monospace; color:var(--text-muted); font-size:0.78rem; width:44px; text-align:right;">${f.forced_ua}/${f.forced_n}</span>
-            </div>
-          </div>
-        `;
-      }
-      html += `
-        <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0.5rem; font-size:0.76rem; color:var(--text-muted); margin-top:0.5rem; padding-top:0.4rem; border-top:1px solid rgba(0,0,0,0.06);">
-          <div></div>
-          <div style="display:flex; align-items:center; gap:0.3rem;"><span style="width:8px; height:8px; background:#D52B1E; display:inline-block; border-radius:1px;"></span>free recall — "${pp.ukrainian}" / models asked</div>
-          <div style="display:flex; align-items:center; gap:0.3rem;"><span style="width:8px; height:8px; background:#0057B8; display:inline-block; border-radius:1px;"></span>forced choice — "${pp.ukrainian}" picks / answers</div>
-        </div>
-      `;
-
-      // Every model, every answer: one row of three cells per model, grouped by
-      // family. Hover any model for the verbatim questions and its answers.
-      html += `<div style="font-size:0.82rem; font-weight:700; color:var(--text); margin:1rem 0 0.25rem;">Every model, every answer</div>`;
-      html += `<div style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.5rem;">Three cells per model: free recall, then the two forced-choice askings. Blue — "${pp.ukrainian}", red — "${pp.russian}", grey — something else. Hover a model for its exact answers.</div>`;
-      html += `<div id="pair-llm-grid" style="position:relative; display:flex; flex-wrap:wrap; gap:0.6rem 1rem;"></div>`;
-
-      body.innerHTML = html;
-
-      const grid = document.getElementById('pair-llm-grid');
-      if (!grid) return;
-      const cellColor = (v: any) => v === 1 ? '#0057B8' : (v === 0 ? '#D52B1E' : '#c8ccd2');
-      const answerText = (mdl: any, t: string) => {
-        const v = mdl['x_' + t];
-        if (v === 1) return pp.ukrainian;
-        if (v === 0) return pp.russian;
-        return (mdl.other && mdl.other[t]) ? `"${mdl.other[t]}"` : 'no clear answer';
-      };
-
-      const tipEl = document.createElement('div');
-      tipEl.style.cssText = 'position:absolute; pointer-events:none; background:rgba(17,24,39,0.96); color:#fff; padding:7px 10px; border-radius:4px; font-size:11px; line-height:1.5; opacity:0; z-index:10; max-width:320px;';
-      grid.appendChild(tipEl);
-
-      for (const fam of familyOrder) {
-        const famModels = models.filter((m: any) => m.family === fam);
-        const color = families[fam]?.color || '#666';
-        const box = document.createElement('div');
-        box.style.cssText = 'min-width:130px;';
-        let inner = `<div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:0.2rem; display:flex; align-items:center; gap:0.25rem;"><span style="width:7px;height:7px;border-radius:2px;background:${color};display:inline-block;"></span>${fam}</div>`;
-        for (const mdl of famModels) {
-          inner += `<div class="llm-mrow" data-key="${mdl.key}" style="display:flex; align-items:center; gap:0.3rem; margin-bottom:2px; cursor:default;">
-            <span style="font-family:monospace; font-size:0.7rem; color:var(--text); width:78px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${modelLabel(mdl.key)}</span>
-            <span style="width:11px; height:11px; border-radius:2px; background:${cellColor(mdl.x_open)};"></span>
-            <span style="width:11px; height:11px; border-radius:2px; background:${cellColor(mdl.x_forced_ru_first)};"></span>
-            <span style="width:11px; height:11px; border-radius:2px; background:${cellColor(mdl.x_forced_ua_first)};"></span>
           </div>`;
-        }
-        box.innerHTML = inner;
-        grid.appendChild(box);
-      }
 
-      const modelByKey: Record<string, any> = {};
-      for (const mdl of models) modelByKey[mdl.key] = mdl;
-      grid.addEventListener('mousemove', (ev: any) => {
-        const row = ev.target.closest ? ev.target.closest('.llm-mrow') : null;
-        if (!row) { tipEl.style.opacity = '0'; return; }
-        const mdl = modelByKey[row.dataset.key];
-        if (!mdl) { tipEl.style.opacity = '0'; return; }
-        tipEl.innerHTML = `<b>${mdl.key}</b> <span style="opacity:0.7;">${mdl.release_date || ''}</span><br>` +
-          `${q.open || 'free recall'}<br>→ <b>${answerText(mdl, 'open')}</b><br>` +
-          `${q.forced_ru_first || 'forced choice'}<br>→ <b>${answerText(mdl, 'forced_ru_first')}</b><br>` +
-          `${q.forced_ua_first || 'forced choice, swapped'}<br>→ <b>${answerText(mdl, 'forced_ua_first')}</b>`;
-        const rect = grid.getBoundingClientRect();
-        const x = Math.min(ev.clientX - rect.left + 12, rect.width - 330);
-        tipEl.style.left = Math.max(0, x) + 'px';
-        tipEl.style.top = (ev.clientY - rect.top + 14) + 'px';
-        tipEl.style.opacity = '1';
+        d += `<div style="font-size:0.82rem; font-weight:700; color:var(--text); margin:0 0 0.4rem;">By family</div>`;
+        for (const fam of familyOrder) {
+          const f = sum.by_family[fam];
+          const color = families[fam]?.color || '#666';
+          const opPct = pctOf(f.open_ua, f.open_n);
+          const fcPct = pctOf(f.forced_ua, f.forced_n);
+          d += `
+            <div style="display:grid; grid-template-columns:140px 1fr 1fr; gap:0.5rem; align-items:center; margin-bottom:0.3rem; font-size:0.8rem;">
+              <div style="color:var(--text); display:flex; align-items:center; gap:0.25rem; min-width:0;">
+                <span style="display:inline-block; width:8px; height:8px; border-radius:2px; background:${color}; flex-shrink:0;"></span>
+                <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${fam}</span>
+                <span style="color:var(--text-muted); font-family:monospace; flex-shrink:0;">×${f.n}</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.4rem;">
+                <div style="flex:1; height:11px; background:#f0f0f0; border-radius:2px; overflow:hidden;"><div style="width:${opPct}%; height:100%; background:#D52B1E; opacity:0.85;"></div></div>
+                <span style="font-family:monospace; color:var(--text-muted); font-size:0.76rem; width:40px; text-align:right;">${f.open_ua}/${f.open_n}</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.4rem;">
+                <div style="flex:1; height:11px; background:#f0f0f0; border-radius:2px; overflow:hidden;"><div style="width:${fcPct}%; height:100%; background:#0057B8; opacity:0.85;"></div></div>
+                <span style="font-family:monospace; color:var(--text-muted); font-size:0.76rem; width:44px; text-align:right;">${f.forced_ua}/${f.forced_n}</span>
+              </div>
+            </div>`;
+        }
+        d += `
+          <div style="display:grid; grid-template-columns:140px 1fr 1fr; gap:0.5rem; font-size:0.74rem; color:var(--text-muted); margin:0.4rem 0 0.9rem; padding-top:0.35rem; border-top:1px solid rgba(0,0,0,0.06);">
+            <div></div>
+            <div>free recall — "${pp.ukrainian}" / models asked</div>
+            <div>forced choice — "${pp.ukrainian}" picks / answers</div>
+          </div>`;
+
+        d += `<div style="font-size:0.82rem; font-weight:700; color:var(--text); margin:0 0 0.25rem;">Every model, every answer</div>`;
+        d += `<div style="font-size:0.76rem; color:var(--text-muted); margin-bottom:0.5rem;">Three cells per model: free recall, then the two forced-choice askings. Hover a model for its exact answers.</div>`;
+        d += `<div id="pair-llm-grid" style="position:relative; display:flex; flex-wrap:wrap; gap:0.6rem 1rem;"></div>`;
+        det.innerHTML = d;
+
+        const grid = document.getElementById('pair-llm-grid');
+        if (!grid) return;
+        const cellColor = (v: any) => v === 1 ? '#0057B8' : (v === 0 ? '#D52B1E' : '#c8ccd2');
+        const answerText = (mdl: any, t: string) => {
+          const v = mdl['x_' + t];
+          if (v === 1) return pp.ukrainian;
+          if (v === 0) return pp.russian;
+          return (mdl.other && mdl.other[t]) ? `"${mdl.other[t]}"` : 'no clear answer';
+        };
+        const tipEl = document.createElement('div');
+        tipEl.style.cssText = 'position:absolute; pointer-events:none; background:rgba(17,24,39,0.96); color:#fff; padding:7px 10px; border-radius:4px; font-size:11px; line-height:1.5; opacity:0; z-index:10; max-width:320px;';
+        grid.appendChild(tipEl);
+        for (const fam of familyOrder) {
+          const famModels = models.filter((m: any) => m.family === fam);
+          const color = families[fam]?.color || '#666';
+          const box = document.createElement('div');
+          box.style.cssText = 'min-width:130px;';
+          let inner = `<div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:0.2rem; display:flex; align-items:center; gap:0.25rem;"><span style="width:7px;height:7px;border-radius:2px;background:${color};display:inline-block;"></span>${fam}</div>`;
+          for (const mdl of famModels) {
+            inner += `<div class="llm-mrow" data-key="${mdl.key}" style="display:flex; align-items:center; gap:0.3rem; margin-bottom:2px; cursor:default;">
+              <span style="font-family:monospace; font-size:0.7rem; color:var(--text); width:78px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${modelLabel(mdl.key)}</span>
+              <span style="width:11px; height:11px; border-radius:2px; background:${cellColor(mdl.x_open)};"></span>
+              <span style="width:11px; height:11px; border-radius:2px; background:${cellColor(mdl.x_forced_ru_first)};"></span>
+              <span style="width:11px; height:11px; border-radius:2px; background:${cellColor(mdl.x_forced_ua_first)};"></span>
+            </div>`;
+          }
+          box.innerHTML = inner;
+          grid.appendChild(box);
+        }
+        const modelByKey: Record<string, any> = {};
+        for (const mdl of models) modelByKey[mdl.key] = mdl;
+        grid.addEventListener('mousemove', (ev: any) => {
+          const row = ev.target.closest ? ev.target.closest('.llm-mrow') : null;
+          if (!row) { tipEl.style.opacity = '0'; return; }
+          const mdl = modelByKey[row.dataset.key];
+          if (!mdl) { tipEl.style.opacity = '0'; return; }
+          tipEl.innerHTML = `<b>${mdl.key}</b> <span style="opacity:0.7;">${mdl.release_date || ''}</span><br>` +
+            `${q.open || 'free recall'}<br>→ <b>${answerText(mdl, 'open')}</b><br>` +
+            `${q.forced_ru_first || 'forced choice'}<br>→ <b>${answerText(mdl, 'forced_ru_first')}</b><br>` +
+            `${q.forced_ua_first || 'forced choice, swapped'}<br>→ <b>${answerText(mdl, 'forced_ua_first')}</b>`;
+          const rect = grid.getBoundingClientRect();
+          const x = Math.min(ev.clientX - rect.left + 12, rect.width - 330);
+          tipEl.style.left = Math.max(0, x) + 'px';
+          tipEl.style.top = (ev.clientY - rect.top + 14) + 'px';
+          tipEl.style.opacity = '1';
+        });
+        grid.addEventListener('mouseleave', () => { tipEl.style.opacity = '0'; });
       });
-      grid.addEventListener('mouseleave', () => { tipEl.style.opacity = '0'; });
     }
 
     let newsFilter = 'all';
