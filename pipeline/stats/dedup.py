@@ -59,22 +59,6 @@ def run(df: pd.DataFrame, threshold: float = THRESHOLD, quiet: bool = False) -> 
             print(f"    hashed {i:,}/{n:,}", flush=True)
 
     rows_per_band = NUM_PERM // BANDS
-    cand = set()
-    for band in range(BANDS):
-        buckets = defaultdict(list)
-        blk = sigs[:, band * rows_per_band:(band + 1) * rows_per_band]
-        for i, row in enumerate(blk):
-            buckets[row.tobytes()].append(i)
-        for idxs in buckets.values():
-            if len(idxs) < 2:
-                continue
-            if len(idxs) > 400:                     # boilerplate bucket: star, don't clique
-                for j in idxs[1:]:
-                    cand.add((idxs[0], j))
-            else:
-                for x in range(len(idxs)):
-                    for y in range(x + 1, len(idxs)):
-                        cand.add((idxs[x], idxs[y]))
 
     parent = list(range(n))
 
@@ -91,12 +75,39 @@ def run(df: pd.DataFrame, threshold: float = THRESHOLD, quiet: bool = False) -> 
     # no bound. The MinHash estimator (fraction of agreeing signature rows,
     # unbiased, sd ~= sqrt(t(1-t)/128) ~= 0.03 at 128 permutations) needs no
     # text access and vectorises. Same seed, same input -> same groups.
+    # Band-by-band instead of one global candidate set. A syndication-heavy pair
+    # (zelenskyy: 258k gdelt rows of wire copy) produced enough candidate tuples
+    # to OOM-kill the process; per-band processing bounds memory at the largest
+    # band. The final partition is the transitive closure of all verified pairs,
+    # so processing order cannot change the result — same seed, same groups. A
+    # pair surfacing in several bands is re-verified redundantly; that costs a
+    # little compute and no correctness.
     confirmed = 0
-    if cand:
-        pairs = np.fromiter((k for ij in cand for k in ij),
-                            dtype=np.int64).reshape(-1, 2)
-        est = (sigs[pairs[:, 0]] == sigs[pairs[:, 1]]).mean(axis=1)
-        for (i, j), ok in zip(pairs, est >= threshold):
+    n_cand = 0
+    for band in range(BANDS):
+        buckets = defaultdict(list)
+        blk = sigs[:, band * rows_per_band:(band + 1) * rows_per_band]
+        for i, row in enumerate(blk):
+            buckets[row.tobytes()].append(i)
+        pairs_i, pairs_j = [], []
+        for idxs in buckets.values():
+            if len(idxs) < 2:
+                continue
+            if len(idxs) > 400:                     # boilerplate bucket: star, don't clique
+                pairs_i.extend([idxs[0]] * (len(idxs) - 1))
+                pairs_j.extend(idxs[1:])
+            else:
+                for x in range(len(idxs)):
+                    for y in range(x + 1, len(idxs)):
+                        pairs_i.append(idxs[x])
+                        pairs_j.append(idxs[y])
+        if not pairs_i:
+            continue
+        pi = np.asarray(pairs_i, dtype=np.int64)
+        pj = np.asarray(pairs_j, dtype=np.int64)
+        n_cand += len(pi)
+        est = (sigs[pi] == sigs[pj]).mean(axis=1)
+        for i, j, ok in zip(pi, pj, est >= threshold):
             if not ok:
                 continue
             ri, rj = find(int(i)), find(int(j))
@@ -117,7 +128,7 @@ def run(df: pd.DataFrame, threshold: float = THRESHOLD, quiet: bool = False) -> 
 
     stats = {
         "records": n,
-        "candidate_pairs": len(cand),
+        "candidate_pairs": n_cand,
         "confirmed_pairs": confirmed,
         "duplicate_groups": len(dupes),
         "rows_in_duplicate_groups": sum(len(v) for v in dupes.values()),
