@@ -15,7 +15,7 @@ function fmtBig(n: string | number) {
 
 // Popular order: flagship cities first, then by volume
 const popularOrder = ['kyiv', 'chornobyl', 'odesa', 'lviv', 'kharkiv', 'donbas', 'luhansk', 'dnipro', 'zaporizhzhia', 'volodymyr-zelenskyy', 'oleksandr-usyk', 'bakhmut'];
-const sigBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, p.significance || '']));
+const sigBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, p.blurb || p.significance || '']));
 const allPairs = m.pairs.filter((p: any) => !p.is_control);
 const pairs = [
   ...popularOrder.map(s => allPairs.find((p: any) => p.slug === s)).filter(Boolean),
