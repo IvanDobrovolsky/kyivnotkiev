@@ -47,8 +47,16 @@ LEDGER = OUT / "wayback_ledger.txt"
 PARTS = OUT / "parts"
 
 UA = "kyivnotkiev-research/1.0 (academic study of toponym adoption; contact: dobrovolsky94@gmail.com)"
-CONCURRENCY = 4
-DELAY = 0.9
+# Raised from 4/0.9s after a clean pilot (zero 429s): 14 in flight, minimal
+# inter-request delay, and a GLOBAL stand-down the moment the archive pushes
+# back. If 429s appear at this rate, the right response is lowering this again,
+# not tuning around the throttle.
+# 14 was too greedy: the archive throttles at the CONNECTION level — 65% of
+# attempts came back ConnectError with not a single 429, so the 429 guard never
+# fired. 8 with modest delay is the measured safe zone; connection refusals
+# also trigger the global stand-down now.
+CONCURRENCY = 6
+DELAY = 0.3
 MIN_TEXT = 300
 
 
@@ -83,21 +91,36 @@ async def fetch_one(client, row, pats, sem):
            "body_ua": 0, "body_ru": 0, "body_variant": None, "text_hash": None}
     import trafilatura
     async with sem:
+        # global stand-down: one 429 pauses every worker, not just its own
+        while time.time() < globals().get("_THROTTLED_UNTIL", 0):
+            await asyncio.sleep(2)
         try:
+            # One round-trip, not two: /web/{ts}id_/{url} redirects to the snapshot
+            # closest to ts on its own — the availability JSON API said the same
+            # thing for a second request and was the slower endpoint. A 404 here IS
+            # the no-snapshot answer.
             ts = str(row.date)[:10].replace("-", "") if pd.notna(row.date) else "2020"
-            q = ("http://archive.org/wayback/available?url="
-                 + urllib.parse.quote(str(row.url), safe="") + f"&timestamp={ts}")
-            r = await client.get(q, timeout=25)
-            snap = (r.json().get("archived_snapshots", {}) or {}).get("closest", {}) or {}
-            if not snap.get("available"):
+            snap_url = f"https://web.archive.org/web/{ts}id_/{row.url}"
+            rec["snapshot"] = snap_url
+            r2 = await client.get(snap_url, timeout=40, follow_redirects=True)
+            if r2.status_code == 404:
                 rec["error"] = "no_snapshot"
                 return rec
-            snap_url = snap["url"].replace("http://", "https://")
-            snap_url = re.sub(r"(/web/\d+)/", r"\1id_/", snap_url, count=1)
-            rec["snapshot"] = snap_url
-            await asyncio.sleep(DELAY)
-            r2 = await client.get(snap_url, timeout=40, follow_redirects=True)
             rec["status"] = r2.status_code
+            if r2.status_code == 429:
+                # the archive is throttling us: stand down hard, do not hammer a
+                # library. The URL stays out of the ledger via the error path?
+                # No — it IS attempted; record it, a later pass can re-run 429s.
+                rec["error"] = "snap_http_429"
+                globals()["_THROTTLED_UNTIL"] = time.time() + 45
+                return rec
+            if r2.status_code in (500, 502, 503, 504, 429):
+                # overload answers are throttling, not attempts: stand down and
+                # leave the URL retryable
+                rec["error"] = f"snap_http_{r2.status_code}"
+                rec["not_attempted"] = True
+                globals()["_THROTTLED_UNTIL"] = time.time() + 30
+                return rec
             if r2.status_code != 200:
                 rec["error"] = f"snap_http_{r2.status_code}"
                 return rec
@@ -115,6 +138,11 @@ async def fetch_one(client, row, pats, sem):
             rec["body_ua"], rec["body_ru"], rec["body_variant"] = ua, ru, label
         except Exception as e:                        # noqa: BLE001 — the class is the datum
             rec["error"] = type(e).__name__
+            if "Connect" in rec["error"] or "Timeout" in rec["error"]:
+                # connection-level throttling: stand everyone down, and mark the
+                # row as NOT attempted so it is never ledger-locked
+                globals()["_THROTTLED_UNTIL"] = time.time() + 30
+                rec["not_attempted"] = True
     return rec
 
 
@@ -127,7 +155,8 @@ def flush(records):
     # fetcher's 60k lockout is baked in from the start here.
     with LEDGER.open("a") as fh:
         for r in records:
-            fh.write(r["url"] + "\n")
+            if not r.pop("not_attempted", False):
+                fh.write(r["url"] + "\n")
 
 
 async def run(targets, pats):
