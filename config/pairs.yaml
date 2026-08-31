@@ -68,6 +68,7 @@ pairs:
   match_mode: word_boundary
   homonym_filters:
   - texas
+  - \btx\b
   - permian
   - midland
   - odessa.{0,5}fl\b
