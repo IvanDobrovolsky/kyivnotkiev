@@ -89,10 +89,10 @@ def main() -> int:
             other = {}
             for t in ("open", "forced_ru_first", "forced_ua_first"):
                 r = g[g.test == t]
-                x = None if r.empty else r.x.iloc[0]
+                x = None if r.empty or pd.isna(r.x.iloc[0]) else int(r.x.iloc[0])
                 e["x_" + t] = x
                 if x is None and not r.empty:
-                    other[t] = (r.response.iloc[0] or "")[:80]
+                    other[t] = str(r.response.iloc[0] or "")[:80]
             if other:
                 e["other"] = other
             models.append(e)
@@ -130,7 +130,7 @@ def main() -> int:
     site = ROOT / "site" / "src" / "data"
     out1 = {"n_pairs": len(pairs_out), "n_models": flat.model.nunique(),
             "families": fam_meta, "pairs": pairs_out}
-    (site / "llm_per_pair.json").write_text(json.dumps(out1))
+    (site / "llm_per_pair.json").write_text(json.dumps(out1, allow_nan=False))
     print(f"site: llm_per_pair.json — {len(pairs_out)} pairs, "
           f"{out1['n_models']} models")
 
@@ -150,7 +150,7 @@ def main() -> int:
     out2 = {"n_models": len(traj), "n_pairs": int(flat.pair_slug.nunique()),
             "n_pairs_total": int(flat.groupby(["russian", "ukrainian"]).ngroups),
             "families": fam_meta, "models": traj}
-    (site / "llm_trajectory.json").write_text(json.dumps(out2))
+    (site / "llm_trajectory.json").write_text(json.dumps(out2, allow_nan=False))
     print(f"site: llm_trajectory.json — {len(traj)} models")
     return 0
 
