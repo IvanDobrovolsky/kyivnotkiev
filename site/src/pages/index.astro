@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PairCard from '../components/PairCard.astro';
 import m from '../data/manifest.json';
 import icons from '../data/source_icons.json';
+import pairsMeta from '../data/pairs_meta.json';
 
 function fmtBig(n: string | number) {
   const v = typeof n === 'string' ? parseInt(n) : n;
@@ -14,6 +15,7 @@ function fmtBig(n: string | number) {
 
 // Popular order: flagship cities first, then by volume
 const popularOrder = ['kyiv', 'chornobyl', 'odesa', 'lviv', 'kharkiv', 'donbas', 'luhansk', 'dnipro', 'zaporizhzhia', 'volodymyr-zelenskyy', 'oleksandr-usyk', 'bakhmut'];
+const sigBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, p.significance || '']));
 const allPairs = m.pairs.filter((p: any) => !p.is_control);
 const pairs = [
   ...popularOrder.map(s => allPairs.find((p: any) => p.slug === s)).filter(Boolean),
@@ -110,6 +112,7 @@ const pairs = [
       adoption={p.adoption || 0}
       total={p.total || 0}
       popularRank={i}
+      significance={sigBySlug[p.slug] || ''}
     />
   ))}
 </div>

@@ -9,6 +9,7 @@ interface Props {
   adoption: number;
   total: number | string;
   popularRank?: number;
+  significance?: string;
 }
 
 function adoptionColor(pct: number) {
@@ -17,7 +18,7 @@ function adoptionColor(pct: number) {
   return 'var(--red)';
 }
 
-const { slug, russian, ukrainian, adoption, total, popularRank = 999 } = Astro.props;
+const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '' } = Astro.props;
 const pct = adoption || 0;
 const color = adoptionColor(pct);
 ---
@@ -33,6 +34,7 @@ const color = adoptionColor(pct);
     <span class="pair-arrow">&rarr;</span>
     <span class="pair-new">{ukrainian}</span>
   </div>
+  {significance && <div class="pair-card-why" title={significance}>{significance}</div>}
   <div class="pair-card-row">
     <div class="pair-card-bar">
       <div class="pair-card-bar-fill" style={`width:${Math.min(pct, 100)}%; background:${color};`}></div>
@@ -65,6 +67,17 @@ const color = adoptionColor(pct);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .pair-card-why {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-top: 0.3rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.2em;
   }
   .pair-card-row {
     display: flex;

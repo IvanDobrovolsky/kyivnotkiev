@@ -128,7 +128,8 @@ a:hover { text-decoration: underline; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
 .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
-.grid-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.5rem; }
+.grid-auto { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+@media (max-width: 900px) { .grid-auto { grid-template-columns: repeat(2, 1fr); } }
 
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
