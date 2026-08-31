@@ -179,6 +179,23 @@ def _load_youtube_census() -> pd.DataFrame:
     total = len(df)
     df = df[df["verified"] & ~df.get("span_artifact", False)]
     df = df[df["form"].isin(["russian", "ukrainian", "both"])].copy()
+
+    # Homonym false positives, content-level. Verified means the spelling is
+    # present — not that it names OUR referent: Odessa TX + Odessa A'zion were
+    # 17% of the odesa pair's verified videos. Same patterns as the news bodies.
+    import re as _re
+    _cfg = load_pairs()
+    _ho = {p["slug"]: [_re.compile(f, _re.I) for f in p.get("homonym_filters", [])]
+           for p in _cfg["pairs"] if p.get("homonym_filters")}
+    if _ho:
+        _blob = (df["title"].fillna("").astype(str) + " " +
+                 df["description"].fillna("").astype(str)) if "description" in df.columns                 else df["title"].fillna("").astype(str)
+        _fp = [bool(s_ in _ho and any(r.search(t) for r in _ho[s_]))
+               for s_, t in zip(df["pair_slug"], _blob)]
+        _n = sum(_fp)
+        if _n:
+            log.info(f"  YouTube homonym filter: removed {_n:,} verified rows")
+            df = df[[not x for x in _fp]].copy()
     df["variant"] = df["form"]
     df["date"] = pd.to_datetime(df["published_at"], errors="coerce", utc=True).dt.strftime("%Y-%m-%d")
     df = df.dropna(subset=["date"])
