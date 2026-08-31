@@ -1055,7 +1055,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           ${donut(sum.open_ua, sum.open_n, pctOf(openRu, sum.open_n), 'Free recall', `models writing "${pp.ukrainian}" unprompted`)}
           ${donut(sum.forced_ua, sum.forced_n, pctOf(forcedRu, sum.forced_n), 'Forced choice', `answers picking "${pp.ukrainian}" when shown both`)}
         </div>
-        <button id="llm-details-btn" class="pill-btn" style="margin-top:0.75rem; font-size:0.78rem; padding:0.3rem 0.8rem; cursor:pointer;">View details</button>
+        <button id="llm-details-btn" style="margin-top:0.75rem; border:1px solid var(--border,#d1d5db); background:#fff; border-radius:6px; padding:0.15rem 0.55rem; font-size:0.8rem; cursor:pointer; color:var(--text-muted);">View details</button>
         <div id="llm-details" style="display:none; margin-top:0.75rem;"></div>
       `;
       body.innerHTML = html;
