@@ -1875,7 +1875,10 @@ def main():
         # hyphen splitting, and pronoun leakage the stopword list misses.
         _junk = {"our", "ours", "us", "your", "yours", "my", "mine",
                  "it's", "i'm", "i’m", "it’s", "don't", "don’t", "that's", "that’s",
-                 "through", "back", "still", "even", "really", "much", "many"}
+                 "through", "back", "still", "even", "really", "much", "many",
+                 "reddit", "youtube", "twitter", "facebook", "instagram", "tiktok",
+                 "php", "www", "http", "https", "com", "html",
+                 "way", "life", "people", "thing", "things", "lot", "kind", "stuff"}
         def _keep(x):
             w = x["word"]
             return (abs(float(x["mean_z"])) >= 2.0 and len(w) >= 3
