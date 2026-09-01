@@ -1857,6 +1857,29 @@ def main():
                           "borderline_share": _summ.get("borderline_share")}
     write_json(SITE_DATA_DIR / "cl_clusters.json", _cl_out)
     log.info(f"  Wrote cl_clusters.json ({len(_cl_out)} pair(s) with current clustering)")
+
+    # Contrastive vocabulary (collocations): the words statistically distinctive
+    # to each spelling's context. Read from each pair's stats analysis.json —
+    # log-odds with an informative Dirichlet prior, robust across >=2 sources.
+    _kj = {}
+    for _f in sorted((ROOT / "data" / "stats").glob("*/analysis.json")):
+        _slug = _f.parent.name
+        if _slug not in enabled_slugs:
+            continue
+        try:
+            _a = json.loads(_f.read_text())
+        except Exception:                              # noqa: BLE001
+            continue
+        _k = _a.get("keyness", _a)
+        _ua = [{"w": x["word"], "z": round(float(x["mean_z"]), 1)}
+               for x in _k.get("robust_ukrainian", [])[:10]]
+        _ru = [{"w": x["word"], "z": round(float(x["mean_z"]), 1)}
+               for x in _k.get("robust_russian", [])[:10]]
+        if _ua or _ru:
+            _kj[_slug] = {"ua": _ua, "ru": _ru,
+                          "sources": _k.get("sources_used") or _a.get("sources_used")}
+    write_json(SITE_DATA_DIR / "cl_keyness.json", _kj)
+    log.info(f"  Wrote cl_keyness.json ({len(_kj)} pair(s))")
     log.info(f"  Wrote pairs_meta.json ({sum(1 for x in _meta if x['enabled'])} enabled "
              f"of {len(_meta)} pairs)")
     write_json(SITE_DATA_DIR / "analysis.json", analysis)

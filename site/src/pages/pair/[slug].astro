@@ -25,6 +25,8 @@ const { pair } = Astro.props;
 const slug = pair.slug;
 const title = `${pair.russian} → ${pair.ukrainian} — #KyivNotKiev`;
 const pairClusterData = (allClClusters as any)?.[slug] || null;
+import allKeyness from '../../data/cl_keyness.json';
+const pairKeyness = (allKeyness as any)?.[slug] || null;
 const pairHoldoutsRaw = (allHoldoutsByPair as any)?.[slug] || null;
 // Trim news_articles: cap at 500, truncate text_preview to save bandwidth
 const pairHoldoutsData = pairHoldoutsRaw ? {
@@ -46,6 +48,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
 <script type="application/json" id="pair-route-data" set:html={JSON.stringify({ slug: pair.slug, russian: pair.russian, ukrainian: pair.ukrainian })} />
 <script type="application/json" id="pair-cluster-data" set:html={JSON.stringify(pairClusterData)} />
+<script type="application/json" id="pair-keyness-data" set:html={JSON.stringify(pairKeyness)} />
 <script type="application/json" id="pair-holdouts-data" set:html={JSON.stringify(pairHoldoutsData)} />
 <script type="application/json" id="pair-timeseries-data" set:html={JSON.stringify(pairTimeseriesData)} />
 <div id="pair-detail" data-pair-slug={slug}>
@@ -1164,6 +1167,26 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       });
     }
 
+    function renderKeyness() {
+      const blk = document.getElementById('keyness-block');
+      if (!blk) return;
+      let kd: any = null;
+      try { kd = JSON.parse(document.getElementById('pair-keyness-data')?.textContent || 'null'); } catch {}
+      if (!kd || (!kd.ua?.length && !kd.ru?.length)) { blk.style.display = 'none'; return; }
+      blk.style.display = '';
+      const meta = getLlmPerPair()?.pairs?.[activePairSlug] || {};
+      const uaL = document.getElementById('keyness-ua-label');
+      const ruL = document.getElementById('keyness-ru-label');
+      if (uaL) uaL.textContent = `Around "${meta.ukrainian || 'the Ukrainian form'}"`;
+      if (ruL) ruL.textContent = `Around "${meta.russian || 'the Russian form'}"`;
+      const chip = (w: string, z: number, c: string) =>
+        `<span title="lean strength ${z}" style="padding:0.15rem 0.5rem; border:1px solid ${c}33; background:${c}0d; border-radius:10px; font-size:0.78rem; color:var(--text);">${w}</span>`;
+      const ua = document.getElementById('keyness-ua');
+      const ru = document.getElementById('keyness-ru');
+      if (ua) ua.innerHTML = (kd.ua || []).map((x: any) => chip(x.w, x.z, '#0057B8')).join('');
+      if (ru) ru.innerHTML = (kd.ru || []).map((x: any) => chip(x.w, x.z, '#D52B1E')).join('');
+    }
+
     let newsFilter = 'all';
 
     // ONE place decides which holdout panel belongs to the active source.
@@ -1779,6 +1802,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         return;
       }
       wrapper.style.display = 'block';
+      renderKeyness();
 
       const points = data.points;
       const clusters = data.clusters || {};
