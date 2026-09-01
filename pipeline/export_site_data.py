@@ -1873,7 +1873,9 @@ def main():
         _k = _a.get("keyness", _a)
         # Display filter: drop weak leans (|z|<2), token fragments from
         # hyphen splitting, and pronoun leakage the stopword list misses.
-        _junk = {"our", "ours", "us", "your", "yours", "my", "mine"}
+        _junk = {"our", "ours", "us", "your", "yours", "my", "mine",
+                 "it's", "i'm", "i’m", "it’s", "don't", "don’t", "that's", "that’s",
+                 "through", "back", "still", "even", "really", "much", "many"}
         def _keep(x):
             w = x["word"]
             return (abs(float(x["mean_z"])) >= 2.0 and len(w) >= 3
