@@ -1871,10 +1871,18 @@ def main():
         except Exception:                              # noqa: BLE001
             continue
         _k = _a.get("keyness", _a)
+        # Display filter: drop weak leans (|z|<2), token fragments from
+        # hyphen splitting, and pronoun leakage the stopword list misses.
+        _junk = {"our", "ours", "us", "your", "yours", "my", "mine"}
+        def _keep(x):
+            w = x["word"]
+            return (abs(float(x["mean_z"])) >= 2.0 and len(w) >= 3
+                    and not w.startswith("-") and not w.endswith("-")
+                    and w not in _junk)
         _ua = [{"w": x["word"], "z": round(float(x["mean_z"]), 1)}
-               for x in _k.get("robust_ukrainian", [])[:10]]
-        _ru = [{"w": x["word"], "z": round(float(x["mean_z"]), 1)}
-               for x in _k.get("robust_russian", [])[:10]]
+               for x in _k.get("robust_ukrainian", []) if _keep(x)][:10]
+        _ru = [{"w": x["word"], "z": round(abs(float(x["mean_z"])), 1)}
+               for x in _k.get("robust_russian", []) if _keep(x)][:10]
         if _ua or _ru:
             _kj[_slug] = {"ua": _ua, "ru": _ru,
                           "sources": _k.get("sources_used") or _a.get("sources_used")}

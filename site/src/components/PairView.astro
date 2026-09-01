@@ -108,24 +108,6 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
   <div id="cluster-scatter" style="width:100%; height:400px; position:relative;"></div>
   <div id="cluster-legend" style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem; font-size:0.82rem;"></div>
 
-  <!-- Contrastive vocabulary: which words keep company with each spelling -->
-  <div id="keyness-block" style="display:none; margin-top:1rem; padding-top:0.75rem; border-top:1px solid rgba(0,0,0,0.06);">
-    <div style="font-size:0.85rem; font-weight:700; color:var(--text); margin-bottom:0.2rem;">The company each spelling keeps</div>
-    <div style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.5rem;">
-      Words statistically distinctive to documents using each spelling — counted, contrasted against
-      the whole corpus, and kept only when the lean repeats across at least two sources.
-    </div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
-      <div>
-        <div style="font-size:0.76rem; font-weight:700; color:#0057B8; margin-bottom:0.3rem;" id="keyness-ua-label"></div>
-        <div id="keyness-ua" style="display:flex; flex-wrap:wrap; gap:0.3rem;"></div>
-      </div>
-      <div>
-        <div style="font-size:0.76rem; font-weight:700; color:#D52B1E; margin-bottom:0.3rem;" id="keyness-ru-label"></div>
-        <div id="keyness-ru" style="display:flex; flex-wrap:wrap; gap:0.3rem;"></div>
-      </div>
-    </div>
-  </div>
 </div>
 
 

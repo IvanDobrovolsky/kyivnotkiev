@@ -28,6 +28,7 @@ you i not no nor so such own same too very can will just should now about into o
 after before under above between out up down off again further once here there when
 where why how all any both each few more most other some only have has had do does did
 would could may might must one two also new like get got go going make made said say
+our ours us your yours my mine
 says see seen come came take took know knew think thought want wanted use used first
 last long good best time year years day days www com http https org html video watch
 subscribe channel please thanks thank welcome what who whom which while because until
