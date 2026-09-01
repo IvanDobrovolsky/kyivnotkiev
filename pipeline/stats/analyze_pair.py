@@ -64,6 +64,18 @@ def analyse(slug: str, quiet: bool = False) -> dict:
         _blob = (df.get("title", pd.Series("", index=df.index)).fillna("").astype(str)
                  + " " + df.get("text", pd.Series("", index=df.index)).fillna("").astype(str))
         _fp = _blob.apply(lambda t: any(r.search(t) for r in _pats))
+        # The stats store keeps only a span around each mention; a Texas crime
+        # story passes if the snippet never names the state. For gdelt rows,
+        # test the FULL body from the master text file as well.
+        if "source" in df.columns and (df.source == "gdelt").any():
+            _g = df.source == "gdelt"
+            _m = pd.read_parquet("data/raw/gdelt/texts/article_texts.parquet",
+                                 columns=["url", "pair_slug", "text"])
+            _m = _m[(_m.pair_slug == slug) & _m.text.notna()]
+            _bad = set(_m.url[_m.text.astype(str).apply(
+                lambda t: any(r.search(t) for r in _pats))])
+            if _bad:
+                _fp = _fp | (_g & df.url.isin(_bad))
         if int(_fp.sum()):
             print(f"  homonym filter: dropped {int(_fp.sum()):,} of {len(df):,}")
             df = df[~_fp].copy()
