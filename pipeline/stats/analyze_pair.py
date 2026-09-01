@@ -51,6 +51,22 @@ def analyse(slug: str, quiet: bool = False) -> dict:
         raise SystemExit(f"no store file: {src}")
     df = pd.read_parquet(src)
     terms = pair_terms(slug)
+
+    # Homonym false positives, content-level, ALL sources. The series path gets
+    # this in gdelt_verified/export; the stats corpus reads the store directly
+    # and was still carrying Odessa-TX — the odesa clustering surfaced 2,000+
+    # Texas documents as their own clusters (midland·texas, shooting·texas).
+    import re as _re, yaml as _yaml
+    _cfg = _yaml.safe_load(pathlib.Path("config/pairs.yaml").read_text())
+    _pats = [_re.compile(f, _re.I) for p in (_cfg["pairs"] if isinstance(_cfg, dict) else _cfg)
+             if p.get("slug") == slug for f in p.get("homonym_filters", [])]
+    if _pats:
+        _blob = (df.get("title", pd.Series("", index=df.index)).fillna("").astype(str)
+                 + " " + df.get("text", pd.Series("", index=df.index)).fillna("").astype(str))
+        _fp = _blob.apply(lambda t: any(r.search(t) for r in _pats))
+        if int(_fp.sum()):
+            print(f"  homonym filter: dropped {int(_fp.sum()):,} of {len(df):,}")
+            df = df[~_fp].copy()
     outdir = OUT / slug
     outdir.mkdir(parents=True, exist_ok=True)
 

@@ -216,6 +216,22 @@ def main() -> int:
     df = load_canonical(a.pair)
     df = stratified_sample(df, SAMPLE_CAP)
 
+    # English gate at the sample stage (cheap here, prohibitive corpus-wide):
+    # the odesa run produced a whole Portuguese cluster (lousa·interativa) —
+    # non-English documents measure other languages' conventions, which the
+    # translation-bias audit showed is a different quantity entirely.
+    import langdetect
+    langdetect.DetectorFactory.seed = 42
+    def _is_en(txt):
+        try:
+            return langdetect.detect(str(txt)[:400]) == "en"
+        except Exception:                              # noqa: BLE001
+            return False
+    _en = df.text.apply(_is_en)
+    if int((~_en).sum()):
+        print(f"  english gate: dropped {int((~_en).sum()):,} non-English of {len(df):,}")
+        df = df[_en].copy()
+
     log(f"  embedding {len(df):,} texts ({EMBED_MODEL})")
     X = embed(df.text.tolist())
 
