@@ -2091,48 +2091,27 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       }
 
       // Right: contrastive analysis — reads the keyness export (log-odds with
-      // Dirichlet prior, robust across >=2 sources), same data as the stats files.
+      // Dirichlet prior, robust across >=2 sources). Rendered as term chips.
       let kd: any = null;
       try { kd = JSON.parse(document.getElementById('pair-keyness-data')?.textContent || 'null'); } catch {}
       if (collContainer && kd && (kd.ua?.length || kd.ru?.length)) {
-        const right = d3.select(collContainer);
-        right.append('div').style('font-size', '0.55rem').style('color', 'var(--text-dim)')
-          .style('margin-bottom', '0.5rem').text('Log-odds ratio (z-score), robust across sources');
-
-        for (const [variant, color, label] of [
-          ['ru', '#dc2626', 'Russian-distinctive'],
-          ['ua', '#2563eb', 'Ukrainian-distinctive']
-        ] as const) {
-          const words = (kd[variant] || []).map((x: any) => ({word: x.w, z: x.z}));
-          const section = right.append('div').style('margin-bottom', '0.5rem');
-          section.append('div').style('font-size', '0.6rem').style('color', color)
-            .style('font-weight', '700').style('text-transform', 'uppercase')
-            .style('letter-spacing', '0.04em').style('margin-bottom', '0.2rem').text(label);
-
-          if (!words.length) {
-            section.append('div').style('font-size', '0.7rem').style('color', 'var(--text-muted)')
-              .style('font-style', 'italic').text('insufficient data');
-            continue;
-          }
-
-          const maxZ = Math.max(...words.map((w: any) => Math.abs(w.z || w.pmi || 1)));
-          words.forEach((w: any, i: number) => {
-            const z = Math.abs(w.z || w.pmi || 0);
-            const barW = Math.max(5, (z / maxZ) * 100);
-            const row = section.append('div').style('display', 'flex').style('align-items', 'center')
-              .style('gap', '4px').style('margin-bottom', '1px');
-            row.append('div').style('width', '65px').style('text-align', 'right')
-              .style('font-size', '0.68rem').style('color', 'var(--text)').style('flex-shrink', '0')
-              .style('font-weight', i < 3 ? '700' : '400').text(w.word);
-            row.append('div').style('flex', '1').style('height', '8px').style('background', 'var(--border)')
-              .style('border-radius', '4px').style('overflow', 'hidden')
-              .append('div').style('height', '100%').style('width', `${barW}%`)
-              .style('background', color).style('opacity', '0.7').style('border-radius', '4px');
-            row.append('div').style('width', '30px').style('font-size', '0.55rem')
-              .style('color', 'var(--text-muted)').style('flex-shrink', '0')
-              .text(`z=${z.toFixed(0)}`);
-          });
-        }
+        const names = getLlmPerPair()?.pairs?.[pid] || {};
+        const chip = (w: string, z: number, c: string) =>
+          `<span title="lean strength ${z}" style="padding:0.15rem 0.5rem; border:1px solid ${c}33; background:${c}0d; border-radius:10px; font-size:0.78rem; color:var(--text);">${w}</span>`;
+        const col = (label: string, color: string, list: any[]) => `
+          <div>
+            <div style="font-size:0.74rem; font-weight:700; color:${color}; margin-bottom:0.3rem;">${label}</div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.3rem;">
+              ${list.length ? list.map((x: any) => chip(x.w, x.z, color)).join('') : '<span style="font-size:0.76rem; color:var(--text-muted); font-style:italic;">no distinctive vocabulary — usage too scattered</span>'}
+            </div>
+          </div>`;
+        collContainer.innerHTML = `
+          <div style="display:grid; grid-template-columns:1fr; gap:0.7rem;">
+            ${col(`Around "${names.ukrainian || 'the Ukrainian form'}"`, '#2563eb', kd.ua || [])}
+            ${col(`Around "${names.russian || 'the Russian form'}"`, '#dc2626', kd.ru || [])}
+          </div>
+          <div style="font-size:0.7rem; color:var(--text-dim); margin-top:0.5rem;">Log-odds with a corpus prior; a word appears only if it leans the same way in two or more sources.</div>
+        `;
       } else if (collContainer) {
         collContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.86rem;">No contrastive data</div>';
       }
