@@ -1637,6 +1637,29 @@ def main():
     # and rationales on the page cannot drift from what the study measures. Disabled
     # pairs are carried with enabled=false and filtered at render, not dropped here,
     # so the file stays a faithful view of the config.
+    # Data-readiness flag for the pair grid: a pair is "ready" when its YouTube
+    # census is complete for 2010-2025, both variants, 12 resolved months each —
+    # the same completeness the census orchestrator enforces.
+    import json as _json
+    _ck = ROOT / "data" / "cl" / "raw" / "youtube_census" / ".checkpoints"
+    _done: dict = {}
+    if _ck.exists():
+        for _f in _ck.glob("*.json"):
+            _parts = _f.stem.rsplit("_", 2)
+            if len(_parts) != 3:
+                continue
+            _pair, _var, _yr = _parts
+            try:
+                _d = _json.loads(_f.read_text())
+            except Exception:                          # noqa: BLE001
+                continue
+            _m = _d.get("months", {})
+            if sum(1 for x in _m.values() if x.get("resolved")) >= 12:
+                _done.setdefault(_pair, set()).add((_var, _yr))
+    def _yt_complete(slug):
+        s_ = _done.get(slug, set())
+        return all((v, str(y)) in s_ for v in ("russian", "ukrainian")
+                   for y in range(2010, 2026))
     _meta = [{
         "slug": p["slug"],
         "enabled": bool(p.get("enabled", True)),
@@ -1645,6 +1668,7 @@ def main():
         "ukrainian_cyrillic": p.get("ukrainian_cyrillic", ""),
         "significance": p.get("significance", ""),
         "blurb": p.get("blurb", ""),
+        "data_ready": _yt_complete(p["slug"]),
     } for p in load_pairs().get("pairs", [])]
     write_json(SITE_DATA_DIR / "pairs_meta.json", _meta)
 
