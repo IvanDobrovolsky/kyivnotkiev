@@ -10,6 +10,7 @@ interface Props {
   total: number | string;
   popularRank?: number;
   significance?: string;
+  dataReady?: boolean;
 }
 
 function adoptionColor(pct: number) {
@@ -18,7 +19,7 @@ function adoptionColor(pct: number) {
   return 'var(--red)';
 }
 
-const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '' } = Astro.props;
+const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false } = Astro.props;
 const pct = adoption || 0;
 const color = adoptionColor(pct);
 ---
@@ -30,6 +31,8 @@ const color = adoptionColor(pct);
    data-name={ukrainian}
    data-popular={popularRank}>
   <div class="pair-card-names">
+    <span class="ready-dot" style={`background:${dataReady ? '#16a34a' : '#f59e0b'};`}
+          title={dataReady ? 'Complete dataset — all sources fully collected' : 'Data collection in progress'}></span>
     <span class="pair-old">{russian}</span>
     <span class="pair-arrow">&rarr;</span>
     <span class="pair-new">{ukrainian}</span>
@@ -62,6 +65,14 @@ const color = adoptionColor(pct);
   /* Names take a full row of their own. Sharing the row with the percentage meant
      a long pair wrapped to two lines while a short one stayed on one, so cards in
      the same grid row ended up different heights. */
+  .ready-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
   .pair-card-names {
     min-width: 0;
     white-space: nowrap;
