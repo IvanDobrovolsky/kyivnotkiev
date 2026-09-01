@@ -1676,6 +1676,8 @@ def main():
     # not per-pair hand edits: the first rule whose keywords intersect a cluster's
     # top terms names it. Editable here, reproducible everywhere.
     GLOSS_RULES = [
+        ({"police", "arrested", "department", "sheriff"}, "crime & police news"),
+        ({"battle", "wagner", "soledar"}, "the battle for Bakhmut"),
         ({"kievan", "kyivan", "rus"}, "Kyivan Rus history"),
         ({"church", "orthodox", "baptism", "christianity"}, "church & baptism"),
         ({"monument", "park", "statue", "arch"}, "Kyiv monuments & places"),
@@ -1847,7 +1849,10 @@ def main():
                 _a["label"] = _a["label"] if len(_a["label"]) <= len(_v2["label"]) else _v2["label"]
                 del _clusters[_k2]
             elif _g in _by_gloss:
-                _clusters[_k2]["gloss"] = f"{_g} ({_v2['ua_pct']}% UA)"
+                _tier = ("mostly Ukrainian-spelling outlets" if _v2["ua_pct"] >= 67
+                         else "mostly old-spelling outlets" if _v2["ua_pct"] <= 33
+                         else "mixed outlets")
+                _clusters[_k2]["gloss"] = f"{_g} — {_tier}"
             else:
                 _by_gloss[_g] = _k2
 
