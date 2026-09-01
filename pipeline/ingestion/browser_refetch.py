@@ -40,12 +40,12 @@ PARTS = OUT / "parts"
 CONCURRENCY = 24          # in-flight HTTP cap; breadth across domains
 WORKERS = 48              # queue consumers; ones parked on lane backoffs are cheap
 DOMAIN_INTERVAL = 1.0     # min seconds between hits on the SAME domain
-FAST_DOMAINS = {"oaoa.com": 0.5}  # measured 0.2-0.6s responses; dominates the tail
+FAST_DOMAINS = {}  # oaoa at 0.5s provoked server-side timeouts: their ceiling, not ours
 DEAD_AFTER = 20           # consecutive connection failures -> abandon domain
 # Measured hopeless on 2026-08-31 (attempts -> texts): 360cities.net 1,761->11,
 # newswest9.com 1,735->6, news-gazette.com 1,743->0. Hard bot-walls; their
 # remaining URLs are skipped, stay out of the ledger, and remain retryable.
-SKIP_DOMAINS = {"360cities.net", "newswest9.com", "news-gazette.com"}
+SKIP_DOMAINS = set((__import__("os").environ.get("REFETCH_SKIP") or "360cities.net,newswest9.com,news-gazette.com").split(","))
 MIN_TEXT = 300
 
 
