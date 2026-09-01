@@ -39,7 +39,7 @@ PARTS = OUT / "parts"
 
 CONCURRENCY = 24          # in-flight HTTP cap; breadth across domains
 WORKERS = 48              # queue consumers; ones parked on lane backoffs are cheap
-DOMAIN_INTERVAL = 1.0     # min seconds between hits on the SAME domain
+DOMAIN_INTERVAL = 2.0     # min seconds between hits on the SAME domain
 FAST_DOMAINS = {}  # oaoa at 0.5s provoked server-side timeouts: their ceiling, not ours
 DEAD_AFTER = 20           # consecutive connection failures -> abandon domain
 # Measured hopeless on 2026-08-31 (attempts -> texts): 360cities.net 1,761->11,
