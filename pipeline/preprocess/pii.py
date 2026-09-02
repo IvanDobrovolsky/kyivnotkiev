@@ -61,57 +61,93 @@ def audit_frame(df: pd.DataFrame, cols: list[str]) -> dict:
 SCRUB_ALL = ("email", "phone", "ipv4", "url_token")
 SCRUB_REDDIT_ONLY = ("handle", "tg_link")
 TEXT_COLS = ("text", "title", "description", "match_context")
+STREAM_OVER_MB = 300
+
+
+def _scrub_series(sr, classes, counts):
+    """Vectorized: count then replace, per class, C-speed regex."""
+    for name in classes:
+        rx = CLASSES[name]
+        n = int(sr.str.count(rx.pattern, flags=rx.flags).sum())
+        if n:
+            counts[name] = counts.get(name, 0) + n
+            sr = sr.str.replace(rx.pattern, REPLACEMENT[name],
+                                regex=True, flags=rx.flags)
+    return sr
 
 
 def scrub_frame(df, source_hint=None):
-    """Apply the release policy in place. Returns per-class counts."""
     import pandas as _pd
-    counts = {k: 0 for k in CLASSES}
+    counts: dict = {}
     src = df["source"] if "source" in df.columns else _pd.Series(
         source_hint or "", index=df.index)
-    reddit = src.astype(str).str.contains("reddit", case=False)
+    is_reddit = src.astype(str).str.contains("reddit", case=False)
     for col in TEXT_COLS:
         if col not in df.columns:
             continue
-        vals = df[col].astype("object")
-        mask = vals.notna()
-        def _one(t, is_reddit):
-            out = str(t)
-            for name in SCRUB_ALL:
-                out, n = CLASSES[name].subn(REPLACEMENT[name], out)
-                counts[name] += n
-            if is_reddit:
-                for name in SCRUB_REDDIT_ONLY:
-                    out, n = CLASSES[name].subn(REPLACEMENT[name], out)
-                    counts[name] += n
-            return out
-        df.loc[mask, col] = [
-            _one(t, r) for t, r in zip(vals[mask], reddit[mask])]
+        mask = df[col].notna()
+        if not mask.any():
+            continue
+        vals = df.loc[mask, col].astype(str)
+        r = is_reddit[mask]
+        out = vals.copy()
+        out.loc[:] = _scrub_series(vals, SCRUB_ALL, counts)
+        if r.any():
+            out.loc[r] = _scrub_series(out.loc[r], SCRUB_REDDIT_ONLY, counts)
+        df.loc[mask, col] = out
+    return counts
+
+
+def _scrub_file(f: str) -> dict:
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+    path = pathlib.Path(f)
+    hint = "reddit" if "reddit" in path.stem else ""
+    size_mb = path.stat().st_size / 1e6
+    if size_mb <= STREAM_OVER_MB:
+        df = pd.read_parquet(f)
+        c = scrub_frame(df, source_hint=hint)
+        if sum(c.values()):
+            df.to_parquet(f, compression="zstd", index=False)
+        return c
+    # Stream row groups so a 2GB file never fully materializes.
+    pf = pq.ParquetFile(f)
+    tmp = path.with_suffix(".scrub_tmp.parquet")
+    writer = None
+    counts: dict = {}
+    for batch in pf.iter_batches(batch_size=50_000):
+        df = batch.to_pandas()
+        c = scrub_frame(df, source_hint=hint)
+        for k, v in c.items():
+            counts[k] = counts.get(k, 0) + v
+        table = pa.Table.from_pandas(df, preserve_index=False)
+        if writer is None:
+            writer = pq.ParquetWriter(tmp, table.schema, compression="zstd")
+        writer.write_table(table)
+    if writer:
+        writer.close()
+    if sum(counts.values()):
+        tmp.replace(path)
+    else:
+        tmp.unlink(missing_ok=True)
     return counts
 
 
 def scrub_store() -> dict:
-    """Rewrite every store parquet with the release policy applied.
-    The store is regenerable from raw via migrate, so this is safe; migrate
-    output must be re-scrubbed before any publish (publish.py enforces it).
-    """
-    report = {}
     import pyarrow.parquet as pq
+    report = {}
     for f in sorted(glob.glob("data/store/*.parquet")) + sorted(
             glob.glob("data/store/pairs/*.parquet")):
-        # Schema peek first: the count tables (wikipedia is 298M rows) must be
-        # skipped without loading — reading one to check columns OOM-kills.
+        if ".scrub_tmp" in f or ".pre_merge" in f:
+            continue
         names = set(pq.ParquetFile(f).schema_arrow.names)
         if not names & set(TEXT_COLS):
             continue
-        df = pd.read_parquet(f)
-        hint = "reddit" if "reddit" in pathlib.Path(f).stem else ""
-        c = scrub_frame(df, source_hint=hint)
-        if sum(c.values()):
-            df.to_parquet(f, compression="zstd", index=False)
-            report[pathlib.Path(f).name] = {k: v for k, v in c.items() if v}
-            print(f"scrubbed {pathlib.Path(f).name}: "
-                  + " ".join(f"{k}={v:,}" for k, v in c.items() if v), flush=True)
+        c = _scrub_file(f)
+        report[pathlib.Path(f).name] = {k: v for k, v in c.items() if v}
+        print(f"scrubbed {pathlib.Path(f).name}: "
+              + (" ".join(f"{k}={v:,}" for k, v in c.items() if v) or "clean"),
+              flush=True)
     pathlib.Path("data/audit/pii_scrub_report.json").write_text(
         json.dumps(report, indent=1))
     return report
