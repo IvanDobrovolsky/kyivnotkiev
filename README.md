@@ -21,7 +21,7 @@
 | Metric | Value |
 |--------|-------|
 | Records scanned | **—** |
-| Toponym matches | **1.6M** |
+| Toponym matches | **1.5M** |
 | Toponym pairs | **24** |
 | Data sources | **7** |
 | Time span | **2010-2025** |
@@ -49,7 +49,7 @@ An unverifiable measurement is dropped rather than reported with a caveat.
 |--------|---------|-------|-------------|
 | Wiki | 298.7M | 24 | Wikipedia · monthly |
 | Reddit | 840.2K | 24 | 44766 subreddits |
-| YouTube | 377.2K | 17 | 146997 channels |
+| YouTube | 351.2K | 12 | 136596 channels |
 | News | 316.4K | 22 | GDELT · 9267 domains |
 | Trends | 113.8K | 24 | Google · 150 countries |
 | Academic | 30.7K | 18 | OpenAlex · 250M+ works |
