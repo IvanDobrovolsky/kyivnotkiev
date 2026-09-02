@@ -86,9 +86,11 @@ const pairs = [
 
 <!-- Hero -->
 <div class="hero">
-  <img src="/logo.svg" alt="Kyiv chestnut" class="hero-logo">
-  <div>
+  <div class="hero-head">
+    <img src="/logo.svg" alt="Kyiv chestnut" class="hero-logo">
     <h1 class="heading-xl">#KyivNotKiev</h1>
+  </div>
+  <div class="hero-body">
     <p class="subtitle">
       "Kyiv, not Kiev." In 2018 Ukraine <a href="https://en.wikipedia.org/wiki/KyivNotKiev" target="_blank">launched a campaign</a>
       asking the world to drop Russian spellings of its names. Did it work?
@@ -212,6 +214,18 @@ const pairs = [
     align-items: center;
     gap: var(--space-lg);
     padding: var(--space-md) 0 var(--space-sm);
+  }
+  .hero-head { display: contents; }
+  @media (max-width: 640px) {
+    .hero { display: block; }
+    .hero-head {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.4rem;
+    }
+    .hero-head .hero-logo { height: 44px; }
+    .hero-head h1 { margin: 0; }
   }
   .hero-logo {
     height: 108px;
