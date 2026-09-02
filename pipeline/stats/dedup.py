@@ -115,6 +115,21 @@ def run(df: pd.DataFrame, threshold: float = THRESHOLD, quiet: bool = False) -> 
                 parent[max(ri, rj)] = min(ri, rj)
             confirmed += 1
 
+    # Lead-fingerprint pass: wire syndications share their opening verbatim
+    # while site chrome varies the tail, which can push full-text Jaccard
+    # under the threshold (babyn-yar: 18 surviving copies of one RFE story).
+    # The first 300 normalised characters are a deterministic story identity.
+    lead = defaultdict(list)
+    for i, t in enumerate(texts):
+        k = re.sub(r"\s+", " ", str(t or "").lower()).strip()[:300]
+        if len(k) >= 120:
+            lead[k].append(i)
+    for idxs in lead.values():
+        for j in idxs[1:]:
+            ri, rj = find(idxs[0]), find(j)
+            if ri != rj:
+                parent[max(ri, rj)] = min(ri, rj)
+
     groups = defaultdict(list)
     for i in range(n):
         groups[find(i)].append(i)
