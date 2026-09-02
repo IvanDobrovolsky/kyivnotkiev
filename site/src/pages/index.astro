@@ -57,11 +57,10 @@ const pairs = [
   <span class="source-row-label">Data collected from</span>
   <div class="source-row-marks">
     {Object.entries(m.sources).map(([key, s]: any) => (
-      <a class="src-mark" href={`/sources#${key}`} style={`--c: ${s.color}`}
-         title={`${s.label} — ${fmtBig(s.records)} ${s.unit}`}>
+      <span class="src-mark" style={`--c: ${s.color}`}>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d={(icons as any)[key]?.path} /></svg>
-        <span>{s.label}</span>
-      </a>
+        <span>{s.label} <span style="color:var(--text-muted); font-weight:400;">({fmtBig(s.records)} {s.unit})</span></span>
+      </span>
     ))}
   </div>
 </div>
@@ -69,7 +68,7 @@ const pairs = [
 <style>
   .source-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
   .source-row-label {
-    font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase;
+    font-size: 0.85rem;
     color: var(--text-muted, #6b7280); white-space: nowrap;
   }
   .source-row-marks { display: flex; flex-wrap: wrap; gap: 0.3rem; }
@@ -83,7 +82,7 @@ const pairs = [
     transition: border-color 0.15s;
   }
   .src-mark svg { width: 12px; height: 12px; fill: var(--c); flex: 0 0 auto; }
-  .src-mark:hover { border-color: var(--c); text-decoration: none; }
+  
   @media (max-width: 640px) {
     .source-row { gap: 0.4rem; }
     .source-row-label { width: 100%; }
