@@ -1665,9 +1665,18 @@ def main():
         else:
             _asg_s = _asg
         _vmap = {"russian": "r", "ukrainian": "u", "both": "b"}
-        _points = [{"x": float(r.umap_x), "y": float(r.umap_y),
-                    "v": _vmap.get(r.variant, "b")}
-                   for r in _asg_s.itertuples()]
+        # Template stacks (N boilerplate docs at one embedding) draw as one
+        # heavy false "outlier"; the map keeps a single dot per rounded spot.
+        _seen_pts = set()
+        _points = []
+        for r in _asg_s.itertuples():
+            _k2 = (round(float(r.umap_x), 1), round(float(r.umap_y), 1),
+                   _vmap.get(r.variant, "b"))
+            if _k2 in _seen_pts:
+                continue
+            _seen_pts.add(_k2)
+            _points.append({"x": float(r.umap_x), "y": float(r.umap_y),
+                            "v": _k2[2]})
         _clusters = {}
         # The pair's own spellings head almost every term list; excluding them makes
         # the labels describe the CONTEXT. Derived from config, not hardcoded.
