@@ -204,6 +204,17 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     let activePairSlug = _routeData.slug;
 
     const infoEl2 = document.getElementById('chart-info');
+    // Empty states name the source limitation, so absence reads as a data
+    // boundary rather than a bug.
+    const NO_DATA_REASON: Record<string, string> = {
+      ngrams: 'Google Books data ends in 2022 and covers only widely printed names',
+      trends: 'Search volume for this pair sits below Google Trends\u2019 reporting floor',
+      gdelt: 'No verified news articles for this pair yet',
+      youtube: 'YouTube census for this pair is still being collected',
+      openalex: 'Too few academic papers mention this pair',
+      wikipedia: 'No Wikipedia pageview series for this pair',
+      reddit: 'Too few Reddit posts mention this pair',
+    };
     const sourceInfo2: Record<string, string> = {
       trends: 'Google search interest',
       gdelt: 'News articles, spelling verified in the article text',
@@ -246,7 +257,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           .attr('text-anchor', 'middle')
           .attr('fill', '#9ca3af')
           .attr('font-size', '14px')
-          .text('No data available for this pair');
+          .text(NO_DATA_REASON[activeSource] || 'No data for this pair from this source');
         return;
       }
 
