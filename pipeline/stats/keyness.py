@@ -108,8 +108,45 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
     for s in per_source:
         per_source[s].pop("_scores")
 
+    # One-sided pairs: when the Ukrainian side is too thin to contrast, the
+    # dominant form's discourse is still the signal — profile it against a
+    # background sampled from the other pairs' corpora ("what company keeps
+    # the Russian form alive"). Same log-odds machinery, different baseline.
+    solo = []
+    solo_variant = None
+    if len(usable) < 2:
+        counts = df.variant.value_counts()
+        solo_variant = ("russian" if counts.get("russian", 0) >= counts.get("ukrainian", 0)
+                        else "ukrainian")
+        own = df[df.variant == solo_variant]
+        if len(own) >= MIN_DOCS:
+            import glob as _glob
+            import pandas as _pd
+            bg_frames = []
+            here = df.pair_slug.iloc[0] if "pair_slug" in df.columns and len(df) else ""
+            for f in sorted(_glob.glob("data/stats/*/records.parquet")):
+                if f"/{here}/" in f:
+                    continue
+                try:
+                    bg_frames.append(_pd.read_parquet(f, columns=["text"]).sample(
+                        n=1500, random_state=7, replace=False))
+                except Exception:                      # noqa: BLE001
+                    continue
+                if len(bg_frames) >= 8:
+                    break
+            if bg_frames:
+                bg = _pd.concat(bg_frames, ignore_index=True)
+                ca = Counter(w for t in own.text for w in tokenise(t, mask))
+                cb = Counter(w for t in bg.text.dropna() for w in tokenise(t, mask))
+                sc = _log_odds(ca, cb)
+                solo = [{"word": w, "mean_z": round(z, 2)}
+                        for w, (z, *_) in sorted(sc.items(), key=lambda kv: -kv[1][0])
+                        if z >= MIN_Z][:TOP_N]
+
     return {
         "method": "log-odds ratio, informative Dirichlet prior (Monroe et al. 2008), within source",
+        "solo_variant": solo_variant,
+        "solo_terms": solo,
         "min_docs_per_side": MIN_DOCS, "min_term_count": MIN_COUNT, "min_abs_z": MIN_Z,
         "sources_used": usable, "sources_skipped": skipped,
         "per_source": per_source,
