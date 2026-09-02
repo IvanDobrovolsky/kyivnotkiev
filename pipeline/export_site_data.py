@@ -756,32 +756,6 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
 
     # Telegram (monthly)
     log.info("  Telegram...")
-    telegram_path = DATA_DIR / "cl" / "raw" / "telegram" / "all_channels.parquet"
-    if False:  # telegram DEPRECATED 2026-09-02 — excluded from all site products
-        tg = pd.read_parquet(telegram_path)
-        if len(tg) and "date" in tg.columns:
-            tg["month"] = pd.to_datetime(tg["date"]).dt.strftime("%Y-%m")
-            g = tg.groupby(["pair_slug", "month", "variant"]).size().reset_index(name="count")
-            p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="count", fill_value=0).reset_index()
-            for pid, grp in p.groupby("pair_slug"):
-                if pid not in enabled_slugs:
-                    continue
-                spid = pid
-                result.setdefault(spid, {}).setdefault("telegram", [])
-                for _, r in grp.sort_values("month").iterrows():
-                    ukr = int(r.get("ukrainian", 0))
-                    rus = int(r.get("russian", 0))
-                    total = ukr + rus
-                    if total > 0:
-                        result[spid]["telegram"].append({"date": r["month"], "adoption": round(ukr / total * 100, 1), "ukr": ukr, "rus": rus})
-
-    # A month with zero mentions is a measurement, not a hole. Every source above
-    # skips months whose total is 0, which erases the difference between "we counted
-    # and found none" and "we never observed this month" — and the chart then had no
-    # way to tell them apart either, hatching 258 measured zeros as missing data.
-    # Fill interior months inside each series' own span with explicit zeros, so
-    # absence from the series means only one thing: outside the coverage window.
-    # Yearly sources (ngrams, openalex) are left alone; their gaps are cadence.
     _filled = _filled_series = _unfilled = 0
     _unfilled_detail: list[str] = []
     for _slug in list(result.keys()):
@@ -929,14 +903,6 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
     if len(ngrams):
         source_stats["ngrams"] = {"records": len(ngrams), "pairs": int(ngrams["pair_slug"].nunique()), "unit": "records"}
 
-    # Telegram
-    telegram_path = DATA_DIR / "cl" / "raw" / "telegram" / "all_channels.parquet"
-    telegram = pd.DataFrame()
-    if False:  # telegram DEPRECATED 2026-09-02
-        telegram = pd.read_parquet(telegram_path)
-        source_stats["telegram"] = {"records": len(telegram), "pairs": int(telegram["pair_slug"].nunique()), "unit": "messages"}
-
-    # Extra stats
     extra_map = {}
     if len(gdelt):
         extra_map["gdelt_domains"] = str(gdelt["source_domain"].nunique())
@@ -944,10 +910,7 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
         extra_map["reddit_subreddits"] = str(reddit["subreddit"].nunique())
     if len(youtube):
         extra_map["youtube_channels"] = str(youtube["channel_title"].nunique())
-    if len(telegram):
-        extra_map["telegram_channels"] = str(telegram["channel"].nunique())
 
-    # Religious
     if len(trends):
         geo = trends[(trends["geo"] != "") & (trends["geo"].notna())]
         extra_map["trends_countries"] = str(geo["geo"].nunique())
