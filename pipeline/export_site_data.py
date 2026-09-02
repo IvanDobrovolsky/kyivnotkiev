@@ -1104,7 +1104,7 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
         "toponym_matches": toponym_matches,
         "cl_corpus": _get_cl_corpus_size(),
         "time_span": "2010-2025",
-        "num_sources": 8,  # 7 standard + telegram (religious removed 2026-08-25)
+        "num_sources": 7,  # telegram deprecated 2026-09-02; religious removed 2026-08-25
         "num_countries": int(extra_map.get("trends_countries", "0")),
         "sources": {
             "trends": {"records": source_stats.get("trends", {}).get("records", 0), "pairs": source_stats.get("trends", {}).get("pairs", 0), "label": "Trends", "unit": "datapoints", "extra": f"Google · {extra_map.get('trends_countries', '55')} countries", "color": "#4285F4"},
@@ -1114,7 +1114,6 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
             "youtube": {"records": source_stats.get("youtube", {}).get("records", 0), "pairs": source_stats.get("youtube", {}).get("pairs", 0), "label": "YouTube", "unit": "videos", "extra": f"{extra_map.get('youtube_channels', '0')} channels", "color": "#FF0000"},
             "ngrams": {"records": source_stats.get("ngrams", {}).get("records", 0), "pairs": source_stats.get("ngrams", {}).get("pairs", 0), "label": "Books", "unit": "records", "extra": "Google Books · 8M+ volumes", "color": "#7c3aed"},
             "openalex": {"records": openalex_total_papers, "pairs": openalex_total_pairs, "label": "Academic", "unit": "papers", "extra": "OpenAlex · 250M+ works", "color": "#06b6d4"},
-            "telegram": {"records": source_stats.get("telegram", {}).get("records", 0), "pairs": source_stats.get("telegram", {}).get("pairs", 0), "label": "Telegram", "unit": "messages", "extra": f"{extra_map.get('telegram_channels', '0')} channels", "color": "#26A5E4"},
         },
         # Which source the chart opens on. It lives in config/pairs.yaml so it is set
         # in one place rather than duplicated across the pair view, the Ukrainian
