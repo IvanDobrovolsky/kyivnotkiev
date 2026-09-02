@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>A Computational Study of Ukrainian Toponym Adoption</strong><br>
-  Multi-source data analysis and machine learning across 9 independent sources.
+  Multi-source data analysis and machine learning across 7 independent sources, 2010–2025.
 </p>
 
 <p align="center">
@@ -23,7 +23,7 @@
 | Records scanned | **—** |
 | Toponym matches | **1.6M** |
 | Toponym pairs | **24** |
-| Data sources | **8** |
+| Data sources | **7** |
 | Time span | **2010-2025** |
 | CL corpus | **151.6K** verified English texts |
 <!-- /AUTO:metrics -->
@@ -53,7 +53,6 @@ An unverifiable measurement is dropped rather than reported with a caveat.
 | News | 316.4K | 22 | GDELT · 9267 domains |
 | Trends | 113.8K | 24 | Google · 150 countries |
 | Academic | 30.7K | 18 | OpenAlex · 250M+ works |
-| Telegram | 25.6K | 10 | 125 channels |
 | Books | 897 | 21 | Google Books · 8M+ volumes |
 <!-- /AUTO:sources -->
 
@@ -65,41 +64,48 @@ All source data is on HuggingFace: [`KyivNotKiev/toponym-adoption-data`](https:/
 graph LR
     subgraph Sources["Data Sources"]
         style Sources fill:#f8f9fb,stroke:#0057B8,color:#1a1a2e
-        GDELT["News<br/>GDELT"]
-        Trends["Trends<br/>Google"]
+        GDELT["News<br/>GDELT + body fetch"]
+        Trends["Trends<br/>SerpApi, calibrated"]
         Wiki["Wiki<br/>pageviews"]
-        Reddit["Reddit"]
-        YT["YouTube"]
+        Reddit["Reddit<br/>PullPush"]
+        YT["YouTube<br/>census, week floor"]
         Ngrams["Books<br/>Ngrams"]
         OA["Academic<br/>OpenAlex"]
-        TG["Telegram"]
-        Rel["Religious"]
     end
 
     subgraph Config["Configuration"]
         style Config fill:#f8f9fb,stroke:#d97706,color:#1a1a2e
-        Pairs["pairs.yaml<br/>enabled pairs + matching rules"]
+        Pairs["pairs.yaml<br/>pairs · homonym filters · events"]
     end
 
     subgraph Processing["Processing"]
         style Processing fill:#f8f9fb,stroke:#059669,color:#1a1a2e
-        PostFilter["post_filter.py<br/>Homonym + NER"]
-        Stats["recompute_stats.py<br/>Wilcoxon · Spearman · OLS"]
-        Export["export_site_data.py<br/>→ JSON"]
-        Prune["prune_site_data.py<br/>drop disabled pairs + verify"]
+        Verify["gdelt_verified<br/>body-attested records"]
+        Homonym["content homonym filter<br/>(Odessa TX, A'zion, ...)"]
+        PII["preprocess/pii.py<br/>release scrub + publish guard"]
+        Stats["stats/: dedup → keyness → prosody<br/>clusters: EM over embeddings"]
+        Export["export_site_data.py → JSON"]
     end
 
     subgraph Output["Output"]
         style Output fill:#f8f9fb,stroke:#0057B8,color:#1a1a2e
-        HF["HuggingFace<br/>parquets"]
+        HF["HuggingFace<br/>store parquets (PII-scrubbed)"]
         Site["kyivnotkiev.org<br/>Astro + Cloudflare"]
     end
 
-    GDELT & Trends & Wiki & Reddit & YT & Ngrams & OA & TG & Rel --> PostFilter
-    Pairs --> PostFilter
-    PostFilter --> Stats --> Export --> Prune --> Site
-    PostFilter --> HF
+    GDELT & Trends & Wiki & Reddit & YT & Ngrams & OA --> Verify
+    Pairs --> Homonym
+    Verify --> Homonym --> Stats --> Export --> Site
+    Homonym --> PII --> HF
 ```
+
+Key entry points: `pipeline.build_youtube_census` (adaptive-depth census),
+`pipeline.build_gdelt_verified` (body-verified news records),
+`pipeline.merge_browser_refetch` (paywalled-article recovery),
+`pipeline.stats.analyze_pair` / `pipeline.stats.clusters` (per-pair statistics),
+`pipeline.preprocess.pii` (release scrubbing), `pipeline.store.migrate` / `publish`
+(HuggingFace mirror). Telegram was collected once and deprecated (Cyrillic-dominated,
+not international English); its raw file ships as `deprecated_telegram_raw.parquet`.
 
 ## Rebuilding
 
@@ -109,9 +115,10 @@ One command regenerates every derived artifact from the dataset parquets and `co
 python -m pipeline.rebuild
 ```
 
-It validates the dataset parquets, recomputes aggregate statistics over the **enabled** pairs,
-exports the site JSON, prunes any disabled pair from every site file, refreshes this README,
-and then verifies that all site data agrees with `config/pairs.yaml` — failing if it does not.
+It validates the dataset parquets, exports the site JSON, prunes any disabled pair from every
+site file, refreshes this README, and verifies that all site data agrees with
+`config/pairs.yaml` — failing if it does not. Final statistical estimates (hierarchical
+Bayesian adoption curves) ship with the paper, not this repo.
 
 Then build and deploy the site:
 

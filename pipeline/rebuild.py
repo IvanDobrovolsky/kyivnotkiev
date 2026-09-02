@@ -94,10 +94,8 @@ def run_stats():
     been disabled. export_site_data then logged "Using existing analysis.json".
     """
     log.info("\n2. RECOMPUTING AGGREGATE STATS")
-    from pipeline.analysis.recompute_stats import main as stats_main
-    stats_main()
-
-
+    # recompute_stats retired 2026-09-02 with the stale exploratory statistics;
+    # the hierarchical model replaces it at paper time.
 def run_gdelt_verified():
     """Rebuild verified GDELT records from whatever article text is on disk.
 
