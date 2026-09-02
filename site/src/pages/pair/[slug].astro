@@ -507,7 +507,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         .text(fmtY);
 
       // X-axis — decades for Ngrams, years for others
-      const xTicks = d3.axisBottom(x).ticks(d3.timeYear.every(1)).tickSize(0).tickPadding(8).tickFormat(d3.timeFormat('%Y') as any);
+      const yearStep = width < 420 ? 4 : width < 640 ? 3 : width < 900 ? 2 : 1;
+      const xTicks = d3.axisBottom(x).ticks(d3.timeYear.every(yearStep)).tickSize(0).tickPadding(8).tickFormat(d3.timeFormat('%Y') as any);
 
       svg.append('g')
         .attr('transform', `translate(0,${height})`)
