@@ -21,9 +21,15 @@ function fmtBig(n: string | number) {
 <!-- Statistical Analysis -->
 <div class="chart-container" style="margin-bottom:0.75rem;">
   <div class="chart-title" style="color:var(--text);">Statistical Analysis</div>
-  <div class="chart-subtitle" style="margin-bottom:0.5rem;">Kruskal-Wallis, Wilcoxon, Spearman, OLS — validating that patterns are real</div>
-  <div id="stat-analysis-grid" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:0.4rem;"></div>
-  <div id="stat-analysis-findings" style="display:grid; grid-template-columns:1fr 1fr; gap:0.35rem; margin-top:0.4rem;"></div>
+  <div class="chart-subtitle" style="margin-bottom:0.5rem;">In progress — final estimates ship with the paper</div>
+  <div style="font-size:0.85rem; color:var(--text); line-height:1.6;">
+    Earlier exploratory test statistics were computed on a superseded 46-pair corpus and have been
+    retired rather than left to mislead. The published analysis will fit one hierarchical Bayesian
+    model over all pairs and sources — per-pair adoption curves with shared population priors,
+    source offsets, and pre-registered event covariates (2014, 2018 campaign, 2019 AP style change,
+    2022 invasion). Deterministic per-pair statistics that are already final — duplicate-collapsed
+    contrastive vocabulary and discourse clusters — are live on each pair's page.
+  </div>
 </div>
 
 <!-- Confusion Matrix + Benchmark side by side -->
@@ -97,47 +103,7 @@ function fmtBig(n: string | number) {
   (function renderStatAnalysis() {
     const an = analysisData as any;
     const ea = errorAnalysis as any;
-    const reg = an.regression || {};
-    const inv = an.invasion_effect || {};
-
-    let bestInv = { d: 0, p: 1, src: '' };
-    for (const [src, res] of Object.entries(inv)) {
-      const r = res as any;
-      if (Math.abs(r.cohens_d) > Math.abs(bestInv.d)) bestInv = { d: r.cohens_d, p: r.p, src };
-    }
-
-    const grid = document.getElementById('stat-analysis-grid');
-    if (!grid) return;
-    const cards = [
-      { value: `R\u00B2=${(reg.r_squared || 0).toFixed(2)}`, label: 'Regression fit', sub: `\u03B2=${(reg.beta || 0).toFixed(2)}, n=${reg.n || 0}`, bg: '#f0f9ff', color: '#0057B8' },
-      { value: bestInv.p < 0.001 ? 'p<0.001' : `p=${bestInv.p.toFixed(3)}`, label: 'Invasion effect', sub: `Wilcoxon; d=${bestInv.d.toFixed(2)}`, bg: '#fef2f2', color: '#dc2626' },
-    ];
-    grid.innerHTML = cards.map(c => `
-      <div style="padding:0.6rem 0.4rem;background:${c.bg};border-radius:6px;text-align:center;">
-        <div style="font-size:1.2rem;font-weight:700;color:${c.color};">${c.value}</div>
-        <div style="font-size:0.8rem;color:#6b7280;">${c.label}</div>
-        <div style="font-size:0.77rem;color:#9ca3af;">${c.sub}</div>
-      </div>
-    `).join('');
-
-    const spread = ea.summary?.median_spread_pp || 54;
-    const p70 = (manifest as any).pairs?.find((p:any) => p.slug === 'volodymyr-the-great');
-    const p10 = (manifest as any).pairs?.find((p:any) => p.slug === 'chornobyl');
-    const p1 = (manifest as any).pairs?.find((p:any) => p.slug === 'kyiv');
-    const findings = [
-      { title: 'Cross-source spread', text: `Median ${spread}pp \u2014 highly domain-dependent` },
-      { title: 'Historical identity', text: `Kyiv ${(p1?.adoption || 0).toFixed(0)}% but Volodymyr the Great ${(p70?.adoption || 0).toFixed(0)}%` },
-      { title: 'Disaster brand', text: `Chernobyl: ${(p10?.adoption || 0).toFixed(0)}% overall adoption` },
-      { title: 'Recognition vs recall', text: `72 LLMs: 90%+ forced, 65\u201378% free` },
-    ];
-    const findingsEl = document.getElementById('stat-analysis-findings');
-    if (findingsEl) {
-      findingsEl.innerHTML = findings.map(f => `
-        <div style="padding:0.4rem 0.6rem;background:#f8f9fb;border-radius:5px;">
-          <div style="font-size:0.84rem;font-weight:600;color:var(--text);">${f.title}</div>
-          <div style="font-size:0.8rem;color:#6b7280;">${f.text}</div>
-        </div>
-      `).join('');
+    // Stale exploratory statistics removed 2026-09-01 — see the card note.
     }
   })();
 
