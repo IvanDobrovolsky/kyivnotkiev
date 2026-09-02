@@ -12,6 +12,7 @@ interface Props {
   significance?: string;
   dataReady?: boolean;
   spark?: number[];
+  verdict?: string;
 }
 
 function adoptionColor(pct: number) {
@@ -20,7 +21,7 @@ function adoptionColor(pct: number) {
   return 'var(--red)';
 }
 
-const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false, spark = [] } = Astro.props;
+const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false, spark = [], verdict = '' } = Astro.props;
 const SW = 260, SH = 34;
 function path(vals: number[], flip = false): string {
   if (vals.length < 2) return '';
@@ -54,7 +55,7 @@ const color = adoptionColor(pct);
   <div class="pair-adopt">
     Calculated adoption in 2025: <span class="pair-pct" style={`color:${color}`}>{pct}%</span>
   </div>
-  <div class="pair-adopt-note">Share of records using the Ukrainian spelling, averaged across our sources.</div>
+  <div class="pair-adopt-note">{verdict || "Share of records using the Ukrainian spelling, averaged across our sources."}</div>
 </a>
 
 <style>
