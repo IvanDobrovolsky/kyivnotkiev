@@ -44,7 +44,9 @@ SOURCES = {
     "wikipedia": {"file": "dataset/raw_wikipedia.parquet"},
     "trends":    {"file": "dataset/raw_trends.parquet"},
     "ngrams":    {"file": "dataset/raw_ngrams.parquet"},
-    "telegram":  {"file": "dataset/raw_telegram.parquet"},
+    # telegram: DEPRECATED 2026-09-02 — poor coverage, ~80% Cyrillic channels;
+    # measures Ukrainian-language Telegram, not international English usage.
+    # Store file renamed deprecated_telegram_raw.parquet; raw archive untouched.
 }
 # The study period. `raw` deliberately keeps whatever the provider returned --
 # collection ran into 2026 and that data is real, so discarding it would destroy
@@ -55,7 +57,7 @@ STUDY_END = "2025-12-31"
 
 TEXT_SOURCES = {"gdelt", "youtube", "reddit", "openalex"}
 COUNT_SOURCES = {"wikipedia", "trends", "ngrams"}
-NO_PROCESSED = {"telegram"}     # 80% Cyrillic: raw kept, never processed
+NO_PROCESSED = set()
 
 
 def checksum(df: pd.DataFrame, cols: list[str]) -> str:
@@ -210,7 +212,7 @@ def raw_gdelt() -> pd.DataFrame:
 RAW_BUILDERS = {"gdelt": raw_gdelt, "youtube": raw_youtube, "reddit": raw_reddit,
                 "openalex": raw_openalex,
                 **{s: (lambda s=s: raw_counts(s)) for s in COUNT_SOURCES},
-                "telegram": lambda: raw_counts("telegram")}
+                }
 
 
 # ── processed: clean + regex-match; only correct records survive ──────────────

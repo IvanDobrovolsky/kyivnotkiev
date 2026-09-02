@@ -755,7 +755,7 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
     # Telegram (monthly)
     log.info("  Telegram...")
     telegram_path = DATA_DIR / "cl" / "raw" / "telegram" / "all_channels.parquet"
-    if telegram_path.exists():
+    if False:  # telegram DEPRECATED 2026-09-02 — excluded from all site products
         tg = pd.read_parquet(telegram_path)
         if len(tg) and "date" in tg.columns:
             tg["month"] = pd.to_datetime(tg["date"]).dt.strftime("%Y-%m")
@@ -930,7 +930,7 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
     # Telegram
     telegram_path = DATA_DIR / "cl" / "raw" / "telegram" / "all_channels.parquet"
     telegram = pd.DataFrame()
-    if telegram_path.exists():
+    if False:  # telegram DEPRECATED 2026-09-02
         telegram = pd.read_parquet(telegram_path)
         source_stats["telegram"] = {"records": len(telegram), "pairs": int(telegram["pair_slug"].nunique()), "unit": "messages"}
 
