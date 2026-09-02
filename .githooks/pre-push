@@ -1,0 +1,35 @@
+#!/bin/zsh
+# Block any push whose outgoing commits touch site/ unless the site builds
+# clean and every page renders non-empty. Added 2026-09-03 after two pushes
+# shipped broken builds (a dangling closure, then a CF-killing dependency).
+set -e
+RANGE=$(git rev-parse @{push}..HEAD 2>/dev/null || echo HEAD~1..HEAD)
+CHANGED=$(git diff --name-only ${RANGE} 2>/dev/null || git diff --name-only HEAD~1..HEAD)
+if echo "$CHANGED" | grep -qE '^site/'; then
+  echo "[pre-push] site/ changed — building before push..."
+  (cd site && npm run build > /tmp/prepush_build.log 2>&1) || {
+    echo "[pre-push] BUILD FAILED — push blocked. Log: /tmp/prepush_build.log"
+    grep -E "\[ERROR\]" -A4 /tmp/prepush_build.log | head -12
+    exit 1
+  }
+  BAD=0; N=0
+  for f in site/dist/**/*.html(N); do
+    N=$((N+1)); [ "$(wc -c < $f)" -lt 2000 ] && { echo "[pre-push] EMPTY PAGE: $f"; BAD=1; }
+  done
+  [ $BAD -eq 1 ] && { echo "[pre-push] push blocked: empty pages"; exit 1; }
+  /opt/anaconda3/bin/python - <<'PY' || exit 1
+import json
+def K(d,p=''):
+    o=set()
+    for k,v in d.items():
+        o.add(p+k)
+        if isinstance(v,dict): o|=K(v,p+k+'.')
+    return o
+e=json.load(open('site/src/i18n/en.json')); u=json.load(open('site/src/i18n/uk.json'))
+ke,ku=K(e),K(u)
+assert ke==ku, f"[pre-push] i18n parity broken: en-only={ke-ku} uk-only={ku-ke}"
+print(f"[pre-push] i18n parity OK ({len(ke)} keys)")
+PY
+  echo "[pre-push] $N pages OK — pushing."
+fi
+exit 0
