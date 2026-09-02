@@ -1821,6 +1821,29 @@ def main():
         if _ua or _ru:
             _kj[_slug] = {"ua": _ua, "ru": _ru,
                           "sources": _k.get("sources_used") or _a.get("sources_used")}
+        elif _k.get("solo_terms"):
+            # Domain-label tokens (easybranches, worldnews, ...) are attribution
+            # artifacts of aggregator-heavy corpora, not discourse: exclude any
+            # token that appears inside a source domain of this pair's records.
+            _dom_tokens: set = set()
+            _rp = ROOT / "data" / "stats" / _slug / "records.parquet"
+            if _rp.exists():
+                try:
+                    import pandas as _pd2
+                    for _d in _pd2.read_parquet(_rp, columns=["url"]).url.dropna().unique()[:20000]:
+                        _host = str(_d).split("/")[2] if "//" in str(_d) else str(_d)
+                        for _lab in _host.lower().replace("-", ".").split("."):
+                            if len(_lab) >= 3:
+                                _dom_tokens.add(_lab)
+                except Exception:                      # noqa: BLE001
+                    pass
+            _solo = [{"w": x["word"], "z": round(float(x["mean_z"]), 1)}
+                     for x in _k["solo_terms"]
+                     if _keep(x) and x["word"] not in _dom_tokens
+                     and not any(x["word"] in _t or _t in x["word"]
+                                 for _t in _dom_tokens if len(_t) >= 5)][:10]
+            if len(_solo) >= 4:
+                _kj[_slug] = {"solo": _solo, "solo_variant": _k.get("solo_variant")}
     write_json(SITE_DATA_DIR / "cl_keyness.json", _kj)
     log.info(f"  Wrote cl_keyness.json ({len(_kj)} pair(s))")
     log.info(f"  Wrote pairs_meta.json ({sum(1 for x in _meta if x['enabled'])} enabled "

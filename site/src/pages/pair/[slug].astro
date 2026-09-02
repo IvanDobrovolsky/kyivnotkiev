@@ -2090,7 +2090,19 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // Dirichlet prior, robust across >=2 sources). Rendered as term chips.
       let kd: any = null;
       try { kd = JSON.parse(document.getElementById('pair-keyness-data')?.textContent || 'null'); } catch {}
-      if (collContainer && kd && (kd.ua?.length || kd.ru?.length)) {
+      if (collContainer && kd && kd.solo?.length) {
+        const names2 = getLlmPerPair()?.pairs?.[pid] || {};
+        const form = kd.solo_variant === 'russian' ? (names2.russian || 'the Russian form') : (names2.ukrainian || 'the Ukrainian form');
+        const c2 = kd.solo_variant === 'russian' ? '#dc2626' : '#2563eb';
+        collContainer.innerHTML = `
+          <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.4rem;">
+            The other spelling is too rare here for a contrast — these are the words that keep
+            <strong style="color:${c2};">"${form}"</strong> alive, measured against the whole corpus.
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:0.3rem;">
+            ${kd.solo.map((x: any) => `<span title="lean strength ${x.z}" style="padding:0.15rem 0.5rem; border:1px solid ${c2}33; background:${c2}0d; border-radius:10px; font-size:0.78rem; color:var(--text);">${x.w}</span>`).join('')}
+          </div>`;
+      } else if (collContainer && kd && (kd.ua?.length || kd.ru?.length)) {
         const names = getLlmPerPair()?.pairs?.[pid] || {};
         const chip = (w: string, z: number, c: string) =>
           `<span title="lean strength ${z}" style="padding:0.15rem 0.5rem; border:1px solid ${c}33; background:${c}0d; border-radius:10px; font-size:0.78rem; color:var(--text);">${w}</span>`;
