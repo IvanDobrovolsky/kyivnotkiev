@@ -1,10 +1,10 @@
 ---
-import PairShell from '../../components/PairShell.astro';
-import m from '../../data/manifest.json';
+import PairShell from '../../../components/PairShell.astro';
+import m from '../../../data/manifest.json';
 export function getStaticPaths() {
   return (m as any).pairs.filter((p: any) => !p.is_control)
     .map((p: any) => ({ params: { slug: p.slug }, props: { pair: p } }));
 }
 const { pair } = Astro.props;
 ---
-<PairShell pair={pair} lang="en" />
+<PairShell pair={pair} lang="uk" />

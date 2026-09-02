@@ -1,4 +1,5 @@
 ---
+import { t } from '../i18n';
 /**
  * Pair detail view — shown when a pair is selected from the sidebar.
  * All content is rendered dynamically by client-side JS via element IDs.
@@ -10,7 +11,7 @@ interface Props {
   timeSpan: string;
 }
 
-const { llmTraj, llmPerPair, timeSpan } = Astro.props;
+const { llmTraj, llmPerPair, timeSpan, lang = 'en' } = Astro.props;
 const nModels = llmTraj?.summary?.n_models || 72;
 const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 ---
@@ -31,8 +32,8 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
            both the "Adoption Calculation" card and the per-source stats list,
            which said the same numbers twice in two blocks. -->
       <span id="adoption-summary" style="margin-left:auto; position:relative; white-space:nowrap; font-size:0.86rem;">
-        Estimated adoption in 2025 <strong id="adoption-pct-title" style="font-size:1rem;"></strong>
-        <button id="adoption-details-btn" class="method-btn">View details</button>
+        {t(lang, 'pair.estimated_adoption')} <strong id="adoption-pct-title" style="font-size:1rem;"></strong>
+        <button id="adoption-details-btn" class="method-btn">{t(lang, 'pair.view_details')}</button>
         <div id="adoption-pop" class="info-pop" hidden style="right:0; left:auto; top:1.9rem; width:min(30rem,92vw); white-space:normal;">
           <button id="adoption-pop-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>
           <p style="margin:0 0 0.5rem;">The average of the sources below, over the last 12 months.
@@ -43,17 +44,17 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
     </div>
     <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.4rem;">
       <div class="chart-controls" style="margin:0;">
-        <button class="source-toggle active" data-source="trends" style="--source-color: #4285F4"><span class="source-dot"></span>Trends</button>
-        <button class="source-toggle" data-source="gdelt" style="--source-color: #1e3a5f"><span class="source-dot"></span>News</button>
-        <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466"><span class="source-dot"></span>Wiki</button>
+        <button class="source-toggle active" data-source="trends" style="--source-color: #4285F4"><span class="source-dot"></span>{t(lang, "sources.trends")}</button>
+        <button class="source-toggle" data-source="gdelt" style="--source-color: #1e3a5f"><span class="source-dot"></span>{t(lang, "sources.gdelt")}</button>
+        <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466"><span class="source-dot"></span>{t(lang, "sources.wikipedia")}</button>
         <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500"><span class="source-dot"></span>Reddit</button>
         <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000"><span class="source-dot"></span>YouTube</button>
-        <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed"><span class="source-dot"></span>Books</button>
-        <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4"><span class="source-dot"></span>Academic</button>
+        <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed"><span class="source-dot"></span>{t(lang, "sources.ngrams")}</button>
+        <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4"><span class="source-dot"></span>{t(lang, "sources.openalex")}</button>
       </div>
       <div class="chart-controls" style="margin:0 0 0 auto;">
-        <button class="chart-mode active" data-chart="volume" id="volume-btn">Volume</button>
-        <button class="chart-mode" data-chart="adoption">Adoption %</button>
+        <button class="chart-mode active" data-chart="volume" id="volume-btn">{t(lang, "pair.volume")}</button>
+        <button class="chart-mode" data-chart="adoption">{t(lang, "pair.adoption_pct")}</button>
       </div>
     </div>
     <div style="display:flex; align-items:center; gap:0.9rem; flex-wrap:wrap; min-height:1.2rem;">
@@ -73,9 +74,9 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
     <div id="pair-cl-body"></div>
   </div>
   <div class="chart-container" id="pair-cl-collocations" style="margin-bottom:0;">
-    <div class="chart-title" style="color: var(--text)">Contrastive Analysis</div>
-    <div class="chart-subtitle" style="margin-bottom:0.5rem; position:relative;">Words that keep company with each spelling
-      <button id="keyness-info-btn" class="method-btn">View methodology</button>
+    <div class="chart-title" style="color: var(--text)">{t(lang, 'pair.contrastive_title')}</div>
+    <div class="chart-subtitle" style="margin-bottom:0.5rem; position:relative;">{t(lang, 'pair.contrastive_sub')}
+      <button id="keyness-info-btn" class="method-btn">{t(lang, 'pair.view_methodology')}</button>
       <div id="keyness-info-pop" hidden class="info-pop">
         <button id="keyness-info-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>
         <p><strong>How the words are chosen.</strong> Word counts from documents using each spelling are
@@ -96,10 +97,10 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 
 <!-- CL: Discourse Clusters -->
 <div class="chart-container" id="cluster-container" style="margin-bottom:0.75rem; display:none;">
-  <div class="chart-title" style="color: var(--text)">Discourse Clusters</div>
+  <div class="chart-title" style="color: var(--text)">{t(lang, 'pair.discourse_title')}</div>
   <div class="chart-subtitle" id="cluster-subtitle" style="margin-bottom:0.5rem; position:relative;">
     Texts grouped by what they talk about — blue groups write the Ukrainian form
-    <button id="cluster-info-btn" class="method-btn">View methodology</button>
+    <button id="cluster-info-btn" class="method-btn">{t(lang, 'pair.view_methodology')}</button>
     <div id="cluster-info-pop" hidden class="info-pop">
       <button id="cluster-info-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>
       <p><strong>How the groups are made.</strong> Every text is turned into a vector with a
@@ -132,7 +133,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 
 <!-- Per-pair AI / LLM scan -->
 <div class="chart-container" id="pair-llm-container" style="margin-bottom:1rem;">
-  <div class="chart-title" style="color: var(--text)">What AI says about <span id="pair-llm-pair-name">this pair</span></div>
+  <div class="chart-title" style="color: var(--text)">{t(lang, 'pair.ai_title')} <span id="pair-llm-pair-name">this pair</span></div>
   <div class="chart-subtitle" style="margin-bottom:0.5rem;" id="pair-llm-subtitle">
     Chatbot audit: {nModels} models, {nLabs} labs — free generation vs forced choice between the two spellings.
   </div>

@@ -1,0 +1,243 @@
+---
+const { lang = 'en' } = Astro.props;
+import Base from '../layouts/Base.astro';
+import { t } from '../i18n';
+import PairCard from '../components/PairCard.astro';
+import m from '../data/manifest.json';
+import icons from '../data/source_icons.json';
+import pairsMeta from '../data/pairs_meta.json';
+import timeseries from '../data/timeseries.json';
+
+function fmtBig(n: string | number) {
+  const v = typeof n === 'string' ? parseInt(n) : n;
+  if (v >= 1_000_000_000) return (v / 1_000_000_000).toFixed(1) + 'B';
+  if (v >= 1_000_000) return (v / 1_000_000).toFixed(1) + 'M';
+  if (v >= 1_000) return (v / 1_000).toFixed(1) + 'K';
+  return v.toString();
+}
+
+// Popular order: flagship cities first, then by volume
+const popularOrder = ['kyiv', 'chornobyl', 'odesa', 'lviv', 'kharkiv', 'donbas', 'luhansk', 'dnipro', 'zaporizhzhia', 'volodymyr-zelenskyy', 'oleksandr-usyk', 'bakhmut'];
+const sigBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, (lang === 'uk' ? (p.blurb_uk || p.significance) : p.significance) || p.blurb || '']));
+
+// Per-card sparkline: combined adoption across sources, quarterly means.
+// Computed at build time; each card gets the same-sized pair of curves.
+function sparkSeries(slug: string): { v: number[]; switchYear: string | null; switchPos: number } {
+  const src = (timeseries as any)[slug] || {};
+  const byQ: Record<string, number[]> = {};
+  for (const [name, rows] of Object.entries(src)) {
+    if (!Array.isArray(rows)) continue;
+    for (const r of rows as any[]) {
+      if (!r?.date || r.adoption == null) continue;
+      const q = r.date.slice(0, 4) + '-Q' + (Math.floor((+r.date.slice(5, 7) - 1) / 3) + 1);
+      (byQ[q] = byQ[q] || []).push(r.adoption);
+    }
+  }
+  const keys = Object.keys(byQ).sort();
+  const v = keys.map(q => byQ[q].reduce((a, b) => a + b, 0) / byQ[q].length);
+  // Decisive switch: starts clearly below 50, ends clearly above, and after the
+  // crossing never falls back under. Label the crossing year; otherwise nothing.
+  let switchYear: string | null = null;
+  let switchPos = 0;
+  if (v.length > 8 && v[0] < 45 && v[v.length - 1] > 55) {
+    for (let i = 1; i < v.length; i++) {
+      if (v[i] >= 50 && v.slice(i).every(x => x >= 48)) {
+        switchYear = keys[i].slice(0, 4);
+        switchPos = i / (v.length - 1);
+        break;
+      }
+    }
+  }
+  return { v, switchYear, switchPos };
+}
+function sparkPath(vals: number[], w: number, h: number, flip = false): string {
+  if (vals.length < 2) return '';
+  const step = w / (vals.length - 1);
+  return vals.map((v, i) => {
+    const y = h - ((flip ? 100 - v : v) / 100) * h;
+    return `${i ? 'L' : 'M'}${(i * step).toFixed(1)},${y.toFixed(1)}`;
+  }).join('');
+}
+const sparkBySlug: Record<string, any> = Object.fromEntries(
+  (pairsMeta as any[]).filter((p: any) => p.enabled).map((p: any) => [p.slug, sparkSeries(p.slug)]));
+
+// Headline number per card: mean adoption across sources over 2025 months.
+function adoption2025(slug: string): number | null {
+  const src = (timeseries as any)[slug] || {};
+  const vals: number[] = [];
+  for (const rows of Object.values(src)) {
+    if (!Array.isArray(rows)) continue;
+    const own = (rows as any[]).filter(r => r?.date >= '2025-01' && r.adoption != null);
+    if (own.length) vals.push(own.reduce((a, r) => a + r.adoption, 0) / own.length);
+  }
+  return vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length * 10) / 10 : null;
+}
+const adoption25BySlug: Record<string, number | null> = Object.fromEntries(
+  (pairsMeta as any[]).filter((p: any) => p.enabled).map((p: any) => [p.slug, adoption2025(p.slug)]));
+const readyBySlug: Record<string, boolean> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, !!p.data_ready]));
+const verdictBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, (lang === 'uk' ? p.verdict_uk : p.verdict) || p.verdict || '']));
+const allPairs = m.pairs.filter((p: any) => !p.is_control);
+const pairs = [
+  ...popularOrder.map(s => allPairs.find((p: any) => p.slug === s)).filter(Boolean),
+  ...allPairs.filter((p: any) => !popularOrder.includes(p.slug)).sort((a: any, b: any) => (b.total || 0) - (a.total || 0)),
+];
+
+---
+
+<Base activeNav="home" lang={lang}>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-head">
+    <img src="/logo.svg" alt="Kyiv chestnut" class="hero-logo">
+    <h1 class="heading-xl">#KyivNotKiev</h1>
+  </div>
+  <div class="hero-body">
+    <p class="subtitle">
+      <Fragment set:html={t(lang, 'home.hero_html', {pairs: m.analyzable_pairs, span: m.time_span})} />
+    </p>
+  </div>
+</div>
+
+
+
+<!-- Data sources. Driven from manifest.sources so the list, order, colours and
+     counts cannot drift from the pipeline. Marks are inlined SVG — five brand logos
+     from simple-icons (CC0), three neutral glyphs for GDELT / Ngrams / OpenAlex,
+     which have no mark in that set. Nothing is fetched at runtime.
+     Laid out as a uniform row rather than a comma-separated sentence: the commas
+     collided with the pill borders and the closing clause orphaned onto its own
+     line on a phone. The date range is already in the stat strip above. -->
+<div class="source-row mb-md">
+  <span class="source-row-label">{t(lang, "home.sources_label")}</span>
+  <div class="source-row-marks">
+    {Object.entries(m.sources).map(([key, s]: any) => (
+      <span class="src-mark" style={`--c: ${s.color}`}
+         title={`${s.label} — ${fmtBig(s.records)} ${s.unit}`}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d={(icons as any)[key]?.path} /></svg>
+        <span>{t(lang, `sources.${key}`)}</span>
+      </span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .source-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+  .source-row-label {
+    font-size: 0.85rem;
+    color: var(--text-muted, #6b7280); white-space: nowrap;
+  }
+  .source-row-marks { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .pair-count { font-size: 0.9rem; color: var(--text-muted, #6b7280); }
+  .src-mark {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    padding: 0.2rem 0.5rem; border-radius: 6px;
+    border: 1px solid #e5e7eb; background: #fff;
+    color: var(--text, #111); text-decoration: none;
+    font-weight: 500; font-size: 0.8rem; white-space: nowrap;
+    transition: border-color 0.15s;
+  }
+  .src-mark svg { width: 12px; height: 12px; fill: var(--c); flex: 0 0 auto; }
+  
+  @media (max-width: 640px) {
+    .source-row { gap: 0.4rem; }
+    .source-row-label { width: 100%; }
+  }
+</style>
+
+<!-- Sort + Filter. The pair count rides in this row rather than taking a line of
+     its own: it is a caption for the grid below, not a statement in its own right. -->
+<div class="controls-bar mb-md">
+  <span class="pair-count">{t(lang, 'home.pairs_title', {n: m.analyzable_pairs})}
+    <span style="display:block; font-size:0.78rem; color:var(--text-dim);">{t(lang, 'home.pairs_hint')}</span></span>
+  <div class="controls-group">
+    <span class="controls-label">{t(lang, "home.sort")}</span>
+    <button class="ctrl-btn active" data-sort="popular">{t(lang, "home.sort_popular")}</button>
+    <button class="ctrl-btn" data-sort="volume">{t(lang, "home.sort_volume")}</button>
+    <button class="ctrl-btn" data-sort="adoption">{t(lang, "home.sort_adoption")}</button>
+    <button class="ctrl-btn" data-sort="alpha">{t(lang, "home.sort_az")}</button>
+  </div>
+</div>
+
+<!-- Pair cards -->
+<div id="pair-grid" class="grid-auto">
+  {pairs.map((p: any, i: number) => (
+    <PairCard
+      slug={p.slug}
+      russian={p.russian}
+      ukrainian={p.ukrainian}
+      adoption={adoption25BySlug[p.slug] ?? (p.adoption || 0)}
+      total={p.total || 0}
+      popularRank={i}
+      lang={lang}
+      significance={sigBySlug[p.slug] || ''}
+      dataReady={readyBySlug[p.slug] || false}
+      spark={sparkBySlug[p.slug]?.v || []}
+      switchYear={sparkBySlug[p.slug]?.switchYear || ''}
+      switchPos={sparkBySlug[p.slug]?.switchPos || 0}
+      verdict={verdictBySlug[p.slug] || ''}
+    />
+  ))}
+</div>
+
+
+<script>
+  const grid = document.getElementById('pair-grid')!;
+  const cards = Array.from(grid.querySelectorAll('.pair-card')) as HTMLElement[];
+
+  document.querySelectorAll('[data-sort]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-sort]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const mode = (btn as HTMLElement).dataset.sort;
+      [...cards].sort((a, b) => {
+        if (mode === 'popular') return (Number(a.dataset.popular) || 0) - (Number(b.dataset.popular) || 0);
+        if (mode === 'volume') return (Number(b.dataset.total) || 0) - (Number(a.dataset.total) || 0);
+        if (mode === 'adoption') return (Number(b.dataset.adoption) || 0) - (Number(a.dataset.adoption) || 0);
+        return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+      }).forEach(c => grid.appendChild(c));
+    });
+  });
+
+</script>
+
+<style>
+  /* The page is meant to land whole on a desktop screen: nav, hero, sources,
+     controls and all 24 cards without scrolling. The stack measured 811px against
+     roughly 790px usable at 1440x900, so the fixed chrome gives the room back —
+     the card grid is the content and is left alone. */
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-md) 0 var(--space-sm);
+  }
+  .hero-head { display: contents; }
+  @media (max-width: 640px) {
+    .hero { display: block; }
+    .hero-head {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.4rem;
+    }
+    .hero-head .hero-logo { height: 44px; }
+    .hero-head h1 { margin: 0; }
+  }
+  .hero-logo {
+    height: 108px;
+    width: auto;
+    flex-shrink: 0;
+  }
+  .page-footer {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .page-footer p { margin: 0 0 0.4rem; }
+</style>
+
+</Base>

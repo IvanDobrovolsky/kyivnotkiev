@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { t, altPath } from '../i18n';
 import m from '../data/manifest.json';
 
 interface Props {
@@ -26,6 +27,9 @@ const {
 // "Pairs" is dropped: the wordmark already returns to the pair index, so it was a
 // second link to the page the reader is usually on.
 const navItems = [
+  { href: lang === 'uk' ? '/uk/' : '/', id: 'home', label: lang === 'uk' ? 'Пари' : 'Pairs' },
+  { href: '/methodology', id: 'methodology', label: t(lang, 'nav.methodology') },
+  { href: '/llm', id: 'llm', label: t(lang, 'nav.ai') },
 ];
 ---
 
@@ -55,7 +59,7 @@ const navItems = [
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="dev-banner">Work in progress — data collection is ongoing and figures on this site will change.</div>
+  <div class="dev-banner">{t(lang, "banner")}</div>
   <nav class="site-nav">
     <div class="site-nav-inner">
       <a href={lang === 'uk' ? '/uk/' : '/'} class="site-nav-logo">
@@ -69,7 +73,7 @@ const navItems = [
         {navItems.map(item => (
           <a href={item.href} class={activeNav === item.id ? 'active' : ''}>{item.label}</a>
         ))}
-        <a href={lang === 'uk' ? '/' : '/uk/'} class="nav-lang">{lang === 'uk' ? 'EN' : 'УКР'}</a>
+        <a href={altPath(lang, Astro.url.pathname)} class="nav-lang">{t(lang, 'nav.lang')}</a>
       </div>
     </div>
   </nav>
@@ -88,13 +92,13 @@ const navItems = [
 
   <footer class="site-footer">
     <div class="site-footer-inner">
-      <span>Built by <a href="https://github.com/IvanDobrovolsky" target="_blank" rel="noopener">Ivan Dobrovolskyi</a></span>
+      <span>{t(lang, "footer.built_by")} <a href="https://github.com/IvanDobrovolsky" target="_blank" rel="noopener">Ivan Dobrovolskyi</a></span>
       <span class="dot">·</span>
       <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank" rel="noopener">GitHub</a>
       <span class="dot">·</span>
       <a href="https://huggingface.co/KyivNotKiev" target="_blank" rel="noopener">Hugging Face</a>
       <span class="dot">·</span>
-      <a href="/privacy.html">Privacy</a>
+      <a href="/privacy.html">{t(lang, "footer.privacy")}</a>
     </div>
   </footer>
 </body>
