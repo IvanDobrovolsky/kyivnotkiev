@@ -30,6 +30,7 @@ where why how all any both each few more most other some only have has had do do
 would could may might must one two also new like get got go going make made said say
 our ours us your yours my mine it's i'm don't that's through back still even really much many
 reddit youtube twitter facebook instagram tiktok php www http https com html way life people thing things lot kind stuff
+folha reuters rfe rferl afp bbc cnn cnbc tass interfax unian ap-photo getty epa
 says see seen come came take took know knew think thought want wanted use used first
 last long good best time year years day days www com http https org html video watch
 subscribe channel please thanks thank welcome what who whom which while because until
@@ -44,7 +45,17 @@ def tokenise(text: str, mask) -> list[str]:
     t = str(text or "").lower()
     for rx in mask:
         t = rx.sub(" ", t)
-    return [w for w in re.findall(r"[a-z][a-z'’-]{2,}", t) if w not in STOP]
+    out = []
+    for w in re.findall(r"[a-z][a-z'’-]{2,}", t):
+        # "kiev", "kiev's" and the curly-quote "kiev’s" are one word: unify
+        # apostrophes and strip the possessive before counting, or the same
+        # term shows up three times in the contrast table.
+        w = w.replace("’", "'")
+        if w.endswith("'s"):
+            w = w[:-2]
+        if len(w) >= 3 and w not in STOP:
+            out.append(w)
+    return out
 
 
 def _log_odds(ca: Counter, cb: Counter) -> dict:
