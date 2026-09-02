@@ -45,7 +45,7 @@ def pair_terms(slug: str) -> list[str]:
     return [str(p["ukrainian"]), str(p["russian"])]
 
 
-def analyse(slug: str, quiet: bool = False) -> dict:
+def analyse(slug: str, quiet: bool = False, skip_dedup: bool = False) -> dict:
     src = STORE / f"{slug}.parquet"
     if not src.exists():
         raise SystemExit(f"no store file: {src}")
@@ -87,12 +87,23 @@ def analyse(slug: str, quiet: bool = False) -> dict:
     print(f"  sources {df.source.value_counts().to_dict()}")
     print(f"  variants {df.variant.value_counts().to_dict()}")
 
-    print("  [1/3] dedup")
-    df, d_stats = dedup.run(df, quiet=quiet)
-    print(f"        {d_stats['duplicate_groups']:,} groups, "
+    if skip_dedup and (outdir / "records.parquet").exists():
+        # Stages 2-3 only: reuse the deduplicated records so a stopword or
+        # tokenizer change re-derives keyness/prosody in minutes, not the
+        # 30-minute MinHash pass.
+        df = pd.read_parquet(outdir / "records.parquet")
+        d_stats = {"duplicate_groups": int(df.dup_group.nunique()),
+                   "redundant": int((~df.is_canonical).sum()),
+                   "redundant_pct": round(float((~df.is_canonical).mean()) * 100, 1),
+                   "exact_hash_would_catch": None, "reused": True}
+        print("  [1/3] dedup — reused existing records.parquet")
+    else:
+        print("  [1/3] dedup")
+        df, d_stats = dedup.run(df, quiet=quiet)
+        print(f"        {d_stats['duplicate_groups']:,} groups, "
           f"{d_stats['redundant']:,} redundant ({d_stats['redundant_pct']}%), "
           f"exact hashing would have caught {d_stats['exact_hash_would_catch']:,}")
-    df.to_parquet(outdir / "records.parquet", compression="zstd", index=False)
+        df.to_parquet(outdir / "records.parquet", compression="zstd", index=False)
 
     canon = df[df.is_canonical]
     print(f"  [2/3] keyness on {len(canon):,} canonical records")
@@ -141,7 +152,7 @@ def main() -> int:
              if a.all else [a.pair])
     rows = []
     for s in slugs:
-        m = analyse(s, quiet=a.quiet)
+        m = analyse(s, quiet=a.quiet, skip_dedup=a.skip_dedup)
         rows.append({"pair": s, "records": m["input_rows"],
                      "redundant_pct": m["dedup"]["redundant_pct"],
                      "sources_usable": len(m["keyness"]["sources_used"]),
