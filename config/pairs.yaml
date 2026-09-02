@@ -3,6 +3,11 @@ metadata:
   description: Ukrainian toponym pairs for adoption analysis
   time_range: 2010-01-01 to 2025-12-31
   default_source: trends
+  global_events:
+  - date: 2014-02
+    label: Euromaidan
+  - date: 2022-02
+    label: Full-scale war
 pairs:
 - russian: Kiev
   ukrainian: Kyiv
@@ -332,6 +337,8 @@ pairs:
     label: UEFA updates to Dynamo Kyiv
   - date: 2019-03
     label: Europa League tie vs Chelsea
+  - date: 2020-11
+    label: Faces Messi's Barcelona in Champions League
   - date: 2021-10
     label: Champions League tie vs Barcelona
   match_mode: exact_phrase
