@@ -1046,9 +1046,9 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       let html = `
         <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap;">
           <div style="flex:1 1 220px; min-width:200px; font-size:0.84rem; color:var(--text); line-height:1.55;">
-            <p style="margin:0 0 0.4rem;">Once the model must write the name itself with no spelling shown
-            (<strong>free recall</strong> — what it absorbed in training), and twice we show both spellings
-            and it picks one (<strong>forced choice</strong>, order swapped the second time).</p>
+            <p style="margin:0 0 0.4rem;"><strong>Free recall</strong>: the model writes the name unprompted —
+            training data speaks. <strong>Forced choice</strong>: both spellings shown, pick one; asked twice
+            with the order swapped.</p>
             <div style="display:flex; gap:0.8rem; font-size:0.74rem; color:var(--text-muted); flex-wrap:wrap;">
               <span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:#0057B8;"></span> ${pp.ukrainian}</span>
               <span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:#D52B1E;"></span> ${pp.russian}</span>
