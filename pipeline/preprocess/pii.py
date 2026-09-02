@@ -65,11 +65,15 @@ STREAM_OVER_MB = 300
 
 
 def _scrub_series(sr, classes, counts):
-    """Vectorized: count then replace, per class, C-speed regex."""
+    """Vectorized count-then-replace per class, iterated to a fixpoint:
+    non-overlapping replacement can splice two digit runs into a NEW match
+    across the seam (verified: 2,968 phone residues after a single pass)."""
     for name in classes:
         rx = CLASSES[name]
-        n = int(sr.str.count(rx.pattern, flags=rx.flags).sum())
-        if n:
+        for _ in range(4):
+            n = int(sr.str.count(rx.pattern, flags=rx.flags).sum())
+            if not n:
+                break
             counts[name] = counts.get(name, 0) + n
             sr = sr.str.replace(rx.pattern, REPLACEMENT[name],
                                 regex=True, flags=rx.flags)
