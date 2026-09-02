@@ -114,7 +114,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     });
     // hideRuDomains replaced by holdoutFilter
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
-    let chartMode: 'adoption' | 'volume' = 'adoption';
+    let chartMode: 'adoption' | 'volume' = 'volume';
     let showEvents = true;
 
     // No query params needed — slug is in the URL path (/pair/kyiv)
@@ -205,14 +205,13 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
     const infoEl2 = document.getElementById('chart-info');
     const sourceInfo2: Record<string, string> = {
-      trends: 'Google search interest. In Volume view each line is normalized to its own peak — line heights are not comparable to each other; the Adoption view applies the measured calibration between them.',
-      gdelt: 'Verified articles from active news media',
-      wikipedia: 'Wikipedia page views',
-      reddit: 'Reddit user posts',
-      youtube: 'YouTube videos naming the spelling in title or description',
-      ngrams: 'Word frequency in printed books (Google Books)',
-      openalex: 'Academic papers (OpenAlex)',
-      telegram: 'Public Telegram channel messages',
+      trends: 'Google search interest',
+      gdelt: 'News articles, spelling verified in the article text',
+      wikipedia: 'Monthly page views of each spelling\u2019s article',
+      reddit: 'Reddit posts and comments',
+      youtube: 'Videos using the spelling in title or description',
+      ngrams: 'Word frequency in Google Books',
+      openalex: 'Academic papers',
     };
 
     function drawChart() {
@@ -301,6 +300,18 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // source with no data used to bail out up here and leave the previous
       // source's description ("Reddit user posts") stuck on screen.
       if (infoEl2) infoEl2.textContent = sourceInfo2[activeSource] || '';
+      const volLegend = document.getElementById('vol-legend');
+      if (volLegend) {
+        if (chartMode === 'volume') {
+          const c = sourceColors[activeSource] || '#0057B8';
+          volLegend.style.display = 'inline-flex';
+          volLegend.innerHTML =
+            `<span style="display:inline-flex;align-items:center;gap:0.3rem;"><span style="width:18px;height:3px;background:${c};display:inline-block;border-radius:2px;"></span>Ukrainian</span>` +
+            `<span style="display:inline-flex;align-items:center;gap:0.3rem;"><span style="width:18px;height:0;border-top:2px dashed #dc2626;display:inline-block;"></span>Russian</span>`;
+        } else {
+          volLegend.style.display = 'none';
+        }
+      }
       if (allDates.length === 0) return;
 
       // Dynamic range based on actual data for this pair + source
@@ -523,7 +534,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           svg.append('line')
             .attr('x1', xPos).attr('x2', xPos)
             .attr('y1', -10).attr('y2', height)
-            .attr('stroke', isPair ? '#0057B8' : '#d1d5db')
+            .attr('stroke', '#0057B8')
             .attr('stroke-width', 1)
             .attr('stroke-dasharray', '4,3')
             .attr('opacity', isPair ? 0.5 : 0.3);
@@ -536,7 +547,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           svg.append('circle')
             .attr('cx', xPos).attr('cy', -18)
             .attr('r', 9)
-            .attr('fill', isPair ? '#0057B8' : '#e5e7eb')
+            .attr('fill', '#0057B8')
             .style('cursor', 'default')
             .on('mouseenter', () => {
               const el = document.querySelector(`[data-event-legend="${thisNum}"]`);

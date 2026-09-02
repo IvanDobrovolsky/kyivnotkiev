@@ -26,7 +26,6 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
         <span class="arrow">→</span>
         <span class="new-name" id="chart-new">Kyiv</span>
       </div>
-      <span id="chart-info" style="font-size:0.81rem; color:var(--text-dim); font-style:italic;"></span>
       <span id="chart-range" hidden></span>
       <!-- Adoption lives in the header now: one line, details on demand. Replaces
            both the "Adoption Calculation" card and the per-source stats list,
@@ -53,9 +52,13 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
         <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4"><span class="source-dot"></span>Academic</button>
       </div>
       <div class="chart-controls" style="margin:0 0 0 auto;">
-        <button class="chart-mode active" data-chart="adoption">Adoption %</button>
-        <button class="chart-mode" data-chart="volume" id="volume-btn">Volume</button>
+        <button class="chart-mode active" data-chart="volume" id="volume-btn">Volume</button>
+        <button class="chart-mode" data-chart="adoption">Adoption %</button>
       </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:0.9rem; flex-wrap:wrap; min-height:1.2rem;">
+      <span id="chart-info" style="font-size:0.81rem; color:var(--text-dim);"></span>
+      <span id="vol-legend" style="display:none; font-size:0.78rem; color:var(--text-muted); gap:0.7rem; align-items:center;"></span>
     </div>
   </div>
   <div id="chart"></div>
