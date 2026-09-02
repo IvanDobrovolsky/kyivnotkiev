@@ -1790,7 +1790,22 @@ def main():
             else:
                 _by_gloss[_g] = _k2
 
+        # Display clip: a lone extreme point must not cost half the canvas.
+        # Points beyond 1.35x the 99.5th-percentile radius are dropped from the
+        # MAP only (data untouched) and the count is surfaced in the caption.
+        _clipped = 0
+        if len(_points) > 50:
+            _xs = sorted(p["x"] for p in _points)
+            _ys = sorted(p["y"] for p in _points)
+            _mx, _my = _xs[len(_xs)//2], _ys[len(_ys)//2]
+            _ds = sorted(((p["x"]-_mx)**2 + (p["y"]-_my)**2) ** 0.5 for p in _points)
+            _lim = _ds[int(len(_ds)*0.995)] * 1.35
+            _kept = [p for p in _points
+                     if ((p["x"]-_mx)**2 + (p["y"]-_my)**2) ** 0.5 <= _lim]
+            _clipped = len(_points) - len(_kept)
+            _points = _kept
         _cl_out[_slug] = {"points": _points, "clusters": _clusters,
+                          "clipped": _clipped,
                           "total": int(_summ.get("n", len(_asg))),
                           "n_clusters": int(_summ.get("k_chosen", len(_clusters))),
                           "borderline_share": _summ.get("borderline_share")}
