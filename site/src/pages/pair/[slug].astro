@@ -114,7 +114,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     });
     // hideRuDomains replaced by holdoutFilter
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
-    let chartMode: 'adoption' | 'volume' = 'adoption';
+    let chartMode: 'adoption' | 'volume' = 'volume';
     let showEvents = true;
 
     // No query params needed — slug is in the URL path (/pair/kyiv)
@@ -688,8 +688,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .attr('d', d3.line<any>().x(d => x(parseDate(d.date)!)).y(d => y(d.rus || 0)).curve(d3.curveMonotoneX));
           }
         } else {
-          // ── ADOPTION MODE: line chart with filled areas ──
-          if (lineMode !== 'russian') {
+          // ── ADOPTION MODE: one 0–100 curve, always ──
+          if (true) {
             const uaArea = d3.area<any>()
               .x((d: any) => x(parseDate(d.date)!))
               .y0(height)
@@ -703,21 +703,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .attr('d', d3.line<any>().x(d => x(parseDate(d.date)!)).y(d => y(d.adoption)).curve(d3.curveMonotoneX));
           }
 
-          if (lineMode !== 'ukrainian') {
-            const russianLine = d3.line<any>()
-              .x((d: any) => x(parseDate(d.date)!))
-              .y((d: any) => y(100 - d.adoption))
-              .curve(d3.curveMonotoneX);
-
-            svg.append('path')
-              .datum(plotSeries)
-              .attr('fill', 'none')
-              .attr('stroke', '#dc2626')
-              .attr('stroke-width', lineMode === 'russian' ? 3 : 1.5)
-              .attr('stroke-dasharray', lineMode === 'russian' ? 'none' : '6,4')
-              .attr('opacity', lineMode === 'russian' ? 1 : 0.5)
-              .attr('d', russianLine);
-          }
+          // Adoption is one number; a mirrored 100−x "Russian" line doubles
+          // the ink with zero information and made the mode read as two series.
         }
 
         const last = series[series.length - 1];
