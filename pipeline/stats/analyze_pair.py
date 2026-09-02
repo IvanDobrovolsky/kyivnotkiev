@@ -146,6 +146,7 @@ def main() -> int:
     g.add_argument("--pair")
     g.add_argument("--all", action="store_true")
     ap.add_argument("--quiet", action="store_true")
+    ap.add_argument("--skip-dedup", action="store_true")
     a = ap.parse_args()
 
     slugs = ([pathlib.Path(f).stem for f in sorted(glob.glob(str(STORE / "*.parquet")))]
