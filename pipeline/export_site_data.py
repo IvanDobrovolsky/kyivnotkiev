@@ -1808,7 +1808,9 @@ def main():
                  "through", "back", "still", "even", "really", "much", "many",
                  "reddit", "youtube", "twitter", "facebook", "instagram", "tiktok",
                  "php", "www", "http", "https", "com", "html",
-                 "way", "life", "people", "thing", "things", "lot", "kind", "stuff"}
+                 "way", "life", "people", "thing", "things", "lot", "kind", "stuff",
+                 "easybranches", "worldnews", "fanyi", "youdao", "tractorlinks",
+                 "sundayschool", "dmautosales", "url", "enj", "univ-lorraine"}
         def _keep(x):
             w = x["word"]
             return (abs(float(x["mean_z"])) >= 2.0 and len(w) >= 3
