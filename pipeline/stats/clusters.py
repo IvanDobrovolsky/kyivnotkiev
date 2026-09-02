@@ -79,6 +79,13 @@ def load_canonical(pair: str) -> pd.DataFrame:
     dd = STATS / pair / "records.parquet"
     if dd.exists():
         d = pd.read_parquet(dd, columns=["record_id", "is_canonical"])
+        # records.parquet is the FILTERED canonical corpus (homonym and
+        # full-body false-positive filters applied in analyze_pair). Clustering
+        # must see exactly that corpus: restrict the store rows to ids present
+        # there, or every upstream filter silently skips the cluster map — the
+        # odesa ghost-outlier bug (32 deleted Texas genealogy docs still on
+        # the published map).
+        df = df[df.record_id.isin(set(d.record_id))]
         df = df.merge(d, on="record_id", how="left")
         before = len(df)
         df = df[df.is_canonical.fillna(True)]
