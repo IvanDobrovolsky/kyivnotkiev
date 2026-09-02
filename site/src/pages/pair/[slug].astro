@@ -98,7 +98,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
     // Read source from URL params for shareable links
     const _urlSource = new URLSearchParams(window.location.search).get('source');
-    const validSources = ['trends','gdelt','wikipedia','reddit','youtube','ngrams','openalex','telegram'];
+    const validSources = ['trends','gdelt','wikipedia','reddit','youtube','ngrams','openalex'];
     // The default comes from config/pairs.yaml via the manifest, so it is set in one
     // place. It used to be hardcoded here, in the Ukrainian landing page, and again
     // in the button markup — which drifted apart: the default named one source while
@@ -879,7 +879,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // silently emptied the whole popover. Resolve the series from the module-level
       // data by the active slug instead.
       const pd2 = (timeseriesData as any)[activePairSlug] || {};
-      for (const src of ['trends','gdelt','wikipedia','reddit','youtube','ngrams','openalex','telegram']) {
+      for (const src of ['trends','gdelt','wikipedia','reddit','youtube','ngrams','openalex']) {
         const series = pd2[src];
         if (!series || !series.length) continue;
         const win = series.filter((d: any) => d.date >= SINCE);
@@ -1169,7 +1169,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       youtube:   drawHoldoutTable,
       wikipedia: drawHoldoutTable,
       openalex:  drawHoldoutTable,
-      telegram:  drawHoldoutTable,
       // trends and ngrams have no holdout data: nothing renders.
     };
 
@@ -1493,7 +1492,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const sourceToKey: Record<string, string> = {
         gdelt: 'news', trends: 'trends', wikipedia: 'wikipedia',
         reddit: 'reddit', youtube: 'youtube',
-        telegram: 'telegram',
         openalex: 'openalex', ngrams: 'ngrams',
       };
       const holdoutKey = sourceToKey[activeSource];
@@ -1507,7 +1505,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         wikipedia: 'Wikipedia pages with old spelling — 2025',
         reddit: 'Reddit posts still using old spelling — 2025',
         youtube: 'YouTube videos still using old spelling — 2025',
-        telegram: 'Telegram channels still using old spelling — 2025',
         openalex: 'Most-cited papers still using the Russian spelling — 2020 onward',
         ngrams: 'Google Books corpus — compare spellings',
       };
