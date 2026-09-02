@@ -11,6 +11,7 @@ interface Props {
   popularRank?: number;
   significance?: string;
   dataReady?: boolean;
+  spark?: number[];
 }
 
 function adoptionColor(pct: number) {
@@ -19,7 +20,13 @@ function adoptionColor(pct: number) {
   return 'var(--red)';
 }
 
-const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false } = Astro.props;
+const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false, spark = [] } = Astro.props;
+const SW = 260, SH = 34;
+function path(vals: number[], flip = false): string {
+  if (vals.length < 2) return '';
+  const step = SW / (vals.length - 1);
+  return vals.map((v, i) => `${i ? 'L' : 'M'}${(i * step).toFixed(1)},${(SH - ((flip ? 100 - v : v) / 100) * SH).toFixed(1)}`).join('');
+}
 const pct = adoption || 0;
 const color = adoptionColor(pct);
 ---
@@ -37,7 +44,13 @@ const color = adoptionColor(pct);
     <span class="pair-arrow">&rarr;</span>
     <span class="pair-new">{ukrainian}</span>
   </div>
-  {significance && <div class="pair-card-why" title={significance}>{significance}</div>}
+  {significance && <div class="pair-card-why">{significance}</div>}
+  {spark.length > 1 && (
+    <svg class="pair-spark" viewBox={`0 0 ${SW} ${SH}`} preserveAspectRatio="none" aria-hidden="true">
+      <path d={path(spark, true)} fill="none" stroke="#dc2626" stroke-width="1.6" opacity="0.55" stroke-dasharray="4,3" />
+      <path d={path(spark)} fill="none" stroke="#0057B8" stroke-width="2" />
+    </svg>
+  )}
   <div class="pair-card-row">
     <div class="pair-card-bar">
       <div class="pair-card-bar-fill" style={`width:${Math.min(pct, 100)}%; background:${color};`}></div>
@@ -82,13 +95,14 @@ const color = adoptionColor(pct);
   .pair-card-why {
     font-size: 0.78rem;
     color: var(--text-muted);
-    line-height: 1.4;
+    line-height: 1.45;
     margin-top: 0.3rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: 2.2em;
+  }
+  .pair-spark {
+    display: block;
+    width: 100%;
+    height: 34px;
+    margin-top: 0.45rem;
   }
   .pair-card-row {
     display: flex;
