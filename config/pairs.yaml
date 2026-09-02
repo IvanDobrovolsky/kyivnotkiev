@@ -31,7 +31,7 @@ pairs:
   blurb: "The capital — where English switched first"
   word_boundary: true
   ukrainian_cyrillic: Київ
-  significance: The capital and the campaign's namesake. Г→H and И→Y are the two contrasts the official table turns on, and Kyiv is where English usage shifted first.
+  significance: "The capital and the campaign's namesake — where the proper spelling was adopted first."
 - russian: Kharkov
   ukrainian: Kharkiv
   enabled: true
@@ -47,11 +47,11 @@ pairs:
   slug: kharkiv
   blurb_uk: "Друге місто, 40 км від російського кордону"
   verdict_uk: "Харків пішов шляхом Києва: англомовні новини майже повністю пишуть Kharkiv."
-  verdict: "The second city followed Kyiv's path; English news now overwhelmingly writes Kharkiv."
+  verdict: "The second city followed Kyiv's path; English news agencies predominantly write Kharkiv."
   blurb: "Second city, 40 km from the Russian border"
   word_boundary: true
   ukrainian_cyrillic: Харків
-  significance: Second city. "Kharkov" is a direct Russian rendering; the Ukrainian form restores the -iv ending common to Ukrainian city names.
+  significance: "Second largest city. 'Kharkov' is a direct Russian transliteration."
 - russian: Odessa
   ukrainian: Odesa
   enabled: true
@@ -90,7 +90,7 @@ pairs:
   youtube_depth: legacy
   word_boundary: true
   ukrainian_cyrillic: Одеса
-  significance: A single vs double "s" encodes which language the name is read through. The Ukrainian spelling has one.
+  significance: "A single vs double 's' encodes which language the name is read through. The Ukrainian spelling has one 's'."
 - russian: Lvov
   ukrainian: Lviv
   enabled: true
@@ -106,7 +106,7 @@ pairs:
     label: Refugee hub, diplomatic activity
   word_boundary: true
   ukrainian_cyrillic: Львів
-  significance: Historically rendered through Russian, Polish and German. "Lviv" is the form Ukraine submitted to the UN.
+  significance: "Historically rendered through Russian, Polish and German. 'Lviv' is the modern Ukrainian name."
 - russian: Zaporozhye
   ukrainian: Zaporizhzhia
   enabled: false
@@ -193,7 +193,7 @@ pairs:
   blurb: "A disaster known by its Soviet-era spelling"
   youtube_depth: day
   ukrainian_cyrillic: Чорнобиль
-  significance: Known worldwide through a Soviet-era Russian spelling. The Ukrainian form places the site in the country that lives with it.
+  significance: "Known worldwide through a Soviet-era Russian spelling."
 - russian: Lugansk
   ukrainian: Luhansk
   enabled: true
@@ -209,10 +209,10 @@ pairs:
   slug: luhansk
   blurb_uk: "Окупований із 2014 року"
   verdict_uk: "Висвітлення окупації просунуло Luhansk уперед; російська форма живе в архівах до 2014 року."
-  verdict: "Occupation coverage pushed Luhansk ahead; the Russian form lives on in pre-2014 archives."
+  verdict: "News coverage pushed Luhansk ahead; the Russian spelling lives on in pre-2014 archives."
   blurb: "Occupied since 2014"
   ukrainian_cyrillic: Луганськ
-  significance: Г→H again. Occupied since 2014, which makes the spelling a marker of whose administration is being recognised.
+  significance: "Ukrainian city occupied since 2014, which makes the correct Ukrainian spelling a marker of recognition."
 - russian: Dnieper River
   ukrainian: Dnipro River
   enabled: true
@@ -554,7 +554,7 @@ pairs:
   blurb: "The champion spells it Oleksandr"
   youtube_depth: legacy
   ukrainian_cyrillic: Олександр Усик
-  significance: A living athlete who states his own name. Sports coverage is a test of whether English follows a person's own usage.
+  significance: "An athlete who states his own name. Sports coverage is a test of whether English follows a person's own usage."
 - russian: Vladimir Zelensky
   ukrainian: Volodymyr Zelenskyy
   enabled: true
@@ -574,7 +574,7 @@ pairs:
   slug: volodymyr-zelenskyy
   blurb_uk: "Президент, якого світ пізнав 2022 року"
   verdict_uk: "Війна майже миттєво зробила українську форму стандартом; коротше Zelensky тримається в заголовках."
-  verdict: "The war made the Ukrainian form the default almost overnight; the shorter Zelensky persists mainly in headline style."
+  verdict: "The war made the Ukrainian form the default almost overnight."
   blurb: "The president the world met in 2022"
   ukrainian_cyrillic: Володимир Зеленський
   significance: A head of state whose name entered global English abruptly in 2022, largely in its Ukrainian form.
