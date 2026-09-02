@@ -21,6 +21,22 @@ import pathlib
 import sys
 
 STORE = pathlib.Path("data/store")
+
+def _pii_preflight():
+    """Sample-scan the store for unscrubbed emails; abort publish on hits."""
+    import glob as _g
+    import pandas as _pd
+    from pipeline.preprocess.pii import CLASSES
+    for f in sorted(_g.glob("data/store/pairs/*.parquet"))[:6]:
+        df = _pd.read_parquet(f, columns=None)
+        col = next((c for c in ("text", "title") if c in df.columns), None)
+        if col is None:
+            continue
+        sample = df[col].dropna().astype(str).head(4000)
+        if sample.apply(lambda x: bool(CLASSES["email"].search(x))).any():
+            raise SystemExit(f"PII preflight failed on {f}: run "
+                             "python -m pipeline.preprocess.pii --scrub-store first")
+
 REPO = "KyivNotKiev/toponym-adoption-data"
 
 def _configs() -> str:
@@ -96,6 +112,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
+    _pii_preflight()
 
     files = sorted(STORE.glob("*.parquet")) + sorted((STORE / "pairs").glob("*.parquet"))
     manifest = STORE / "_manifest.json"
