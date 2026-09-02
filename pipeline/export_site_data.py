@@ -1660,6 +1660,12 @@ def main():
         s_ = _done.get(slug, set())
         return all((v, str(y)) in s_ for v in ("russian", "ukrainian")
                    for y in range(2010, 2026))
+    def _ready(slug):
+        # "Ready" is a promise to the reader: fully collected AND fully
+        # analyzed. A complete census without clusters/collocations is amber.
+        return (_yt_complete(slug)
+                and (ROOT / "data" / "stats" / slug / "analysis.json").exists()
+                and (ROOT / "data" / "stats" / slug / "clusters" / "summary.json").exists())
     _meta = [{
         "slug": p["slug"],
         "enabled": bool(p.get("enabled", True)),
@@ -1668,7 +1674,7 @@ def main():
         "ukrainian_cyrillic": p.get("ukrainian_cyrillic", ""),
         "significance": p.get("significance", ""),
         "blurb": p.get("blurb", ""),
-        "data_ready": _yt_complete(p["slug"]),
+        "data_ready": _ready(p["slug"]),
     } for p in load_pairs().get("pairs", [])]
     write_json(SITE_DATA_DIR / "pairs_meta.json", _meta)
 
