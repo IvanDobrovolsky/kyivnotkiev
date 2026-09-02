@@ -58,10 +58,69 @@ def audit_frame(df: pd.DataFrame, cols: list[str]) -> dict:
     return tot
 
 
+SCRUB_ALL = ("email", "phone", "ipv4", "url_token")
+SCRUB_REDDIT_ONLY = ("handle", "tg_link")
+TEXT_COLS = ("text", "title", "description", "match_context")
+
+
+def scrub_frame(df, source_hint=None):
+    """Apply the release policy in place. Returns per-class counts."""
+    import pandas as _pd
+    counts = {k: 0 for k in CLASSES}
+    src = df["source"] if "source" in df.columns else _pd.Series(
+        source_hint or "", index=df.index)
+    reddit = src.astype(str).str.contains("reddit", case=False)
+    for col in TEXT_COLS:
+        if col not in df.columns:
+            continue
+        vals = df[col].astype("object")
+        mask = vals.notna()
+        def _one(t, is_reddit):
+            out = str(t)
+            for name in SCRUB_ALL:
+                out, n = CLASSES[name].subn(REPLACEMENT[name], out)
+                counts[name] += n
+            if is_reddit:
+                for name in SCRUB_REDDIT_ONLY:
+                    out, n = CLASSES[name].subn(REPLACEMENT[name], out)
+                    counts[name] += n
+            return out
+        df.loc[mask, col] = [
+            _one(t, r) for t, r in zip(vals[mask], reddit[mask])]
+    return counts
+
+
+def scrub_store() -> dict:
+    """Rewrite every store parquet with the release policy applied.
+    The store is regenerable from raw via migrate, so this is safe; migrate
+    output must be re-scrubbed before any publish (publish.py enforces it).
+    """
+    report = {}
+    for f in sorted(glob.glob("data/store/*.parquet")) + sorted(
+            glob.glob("data/store/pairs/*.parquet")):
+        df = pd.read_parquet(f)
+        if not any(c in df.columns for c in TEXT_COLS):
+            continue
+        hint = "reddit" if "reddit" in pathlib.Path(f).stem else ""
+        c = scrub_frame(df, source_hint=hint)
+        if sum(c.values()):
+            df.to_parquet(f, compression="zstd", index=False)
+            report[pathlib.Path(f).name] = {k: v for k, v in c.items() if v}
+            print(f"scrubbed {pathlib.Path(f).name}: "
+                  + " ".join(f"{k}={v:,}" for k, v in c.items() if v), flush=True)
+    pathlib.Path("data/audit/pii_scrub_report.json").write_text(
+        json.dumps(report, indent=1))
+    return report
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--audit", action="store_true")
+    ap.add_argument("--scrub-store", action="store_true")
     a = ap.parse_args()
+    if a.scrub_store:
+        scrub_store()
+        return 0
     report = {}
     for f in sorted(glob.glob("data/store/pairs/*.parquet")):
         slug = pathlib.Path(f).stem
