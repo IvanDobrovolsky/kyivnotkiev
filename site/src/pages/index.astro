@@ -4,6 +4,7 @@ import PairCard from '../components/PairCard.astro';
 import m from '../data/manifest.json';
 import icons from '../data/source_icons.json';
 import pairsMeta from '../data/pairs_meta.json';
+import timeseries from '../data/timeseries.json';
 
 function fmtBig(n: string | number) {
   const v = typeof n === 'string' ? parseInt(n) : n;
@@ -15,7 +16,33 @@ function fmtBig(n: string | number) {
 
 // Popular order: flagship cities first, then by volume
 const popularOrder = ['kyiv', 'chornobyl', 'odesa', 'lviv', 'kharkiv', 'donbas', 'luhansk', 'dnipro', 'zaporizhzhia', 'volodymyr-zelenskyy', 'oleksandr-usyk', 'bakhmut'];
-const sigBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, p.blurb || p.significance || '']));
+const sigBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, p.significance || p.blurb || '']));
+
+// Per-card sparkline: combined adoption across sources, quarterly means.
+// Computed at build time; each card gets the same-sized pair of curves.
+function sparkSeries(slug: string): number[] {
+  const src = (timeseries as any)[slug] || {};
+  const byQ: Record<string, number[]> = {};
+  for (const [name, rows] of Object.entries(src)) {
+    if (!Array.isArray(rows)) continue;
+    for (const r of rows as any[]) {
+      if (!r?.date || r.adoption == null) continue;
+      const q = r.date.slice(0, 4) + '-Q' + (Math.floor((+r.date.slice(5, 7) - 1) / 3) + 1);
+      (byQ[q] = byQ[q] || []).push(r.adoption);
+    }
+  }
+  return Object.keys(byQ).sort().map(q => byQ[q].reduce((a, b) => a + b, 0) / byQ[q].length);
+}
+function sparkPath(vals: number[], w: number, h: number, flip = false): string {
+  if (vals.length < 2) return '';
+  const step = w / (vals.length - 1);
+  return vals.map((v, i) => {
+    const y = h - ((flip ? 100 - v : v) / 100) * h;
+    return `${i ? 'L' : 'M'}${(i * step).toFixed(1)},${y.toFixed(1)}`;
+  }).join('');
+}
+const sparkBySlug: Record<string, number[]> = Object.fromEntries(
+  (pairsMeta as any[]).filter((p: any) => p.enabled).map((p: any) => [p.slug, sparkSeries(p.slug)]));
 const readyBySlug: Record<string, boolean> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, !!p.data_ready]));
 const allPairs = m.pairs.filter((p: any) => !p.is_control);
 const pairs = [
@@ -93,7 +120,8 @@ const pairs = [
 <!-- Sort + Filter. The pair count rides in this row rather than taking a line of
      its own: it is a caption for the grid below, not a statement in its own right. -->
 <div class="controls-bar mb-md">
-  <span class="pair-count">The {m.analyzable_pairs} pairs</span>
+  <span class="pair-count">The {m.analyzable_pairs} pairs
+    <span style="display:block; font-size:0.78rem; color:var(--text-dim);">Click a pair for the detailed view</span></span>
   <div class="controls-group">
     <span class="controls-label">Sort</span>
     <button class="ctrl-btn active" data-sort="popular">Popular</button>
@@ -115,11 +143,33 @@ const pairs = [
       popularRank={i}
       significance={sigBySlug[p.slug] || ''}
       dataReady={readyBySlug[p.slug] || false}
+      spark={sparkBySlug[p.slug] || []}
     />
   ))}
 </div>
 
-
+<!-- Why these names — moved from the retired About page so the landing page
+     carries the full story on its own. -->
+<div class="chart-container" style="margin-top:1.25rem;">
+  <div class="chart-title" style="color:var(--text);">Why these names</div>
+  <div style="font-size:0.88rem; color:var(--text); line-height:1.65; max-width:64rem;">
+    <p style="margin:0 0 0.6rem;">
+      The sample is built around a legally codified transliteration standard. Ukraine's Cabinet of
+      Ministers established a unified table for rendering proper names in Latin script; it was
+      approved by the United Nations in 2012 and adopted by BGN/PCGN in 2019. The pairs are chosen
+      to maximise contrast exactly where Ukrainian and Russian diverge in Latin script: Ukrainian
+      <strong>Г</strong> becomes <em>H</em> not <em>G</em>, <strong>И</strong> becomes <em>y</em>,
+      <strong>Я</strong> becomes <em>ya</em>/<em>ia</em> — producing <em>Bohdan</em>,
+      <em>Volodymyr</em>, <em>Kyiv</em>, <em>Odesa</em>, <em>Feodosiia</em>. Each pair tests a
+      structurally meaningful rule of the official system, not another example of the same one.
+    </p>
+    <p style="margin:0;">
+      Place names sit at the intersection of orthography, cartography and sovereignty; person
+      names, dishes and historical figures test how far the same rules travel without a state
+      campaign behind them.
+    </p>
+  </div>
+</div>
 
 <script>
   const grid = document.getElementById('pair-grid')!;
