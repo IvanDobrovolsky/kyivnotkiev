@@ -114,7 +114,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     });
     // hideRuDomains replaced by holdoutFilter
     let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
-    let chartMode: 'adoption' | 'volume' = 'volume';
+    let chartMode: 'adoption' | 'volume' = 'adoption';
     let showEvents = true;
 
     // No query params needed — slug is in the URL path (/pair/kyiv)
@@ -205,7 +205,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
     const infoEl2 = document.getElementById('chart-info');
     const sourceInfo2: Record<string, string> = {
-      trends: 'Google search interest — relative, normalized 0–100',
+      trends: 'Google search interest. In Volume view each line is normalized to its own peak — line heights are not comparable to each other; the Adoption view applies the measured calibration between them.',
       gdelt: 'Verified articles from active news media',
       wikipedia: 'Wikipedia page views',
       reddit: 'Reddit user posts',
@@ -691,6 +691,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           // ── ADOPTION MODE: one 0–100 curve, always ──
           if (true) {
             const uaArea = d3.area<any>()
+              .defined((d: any) => d.adoption != null)
               .x((d: any) => x(parseDate(d.date)!))
               .y0(height)
               .y1((d: any) => y(d.adoption))
@@ -700,7 +701,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .attr('d', uaArea);
             svg.append('path').datum(plotSeries)
               .attr('fill', 'none').attr('stroke', sourceColors[src]).attr('stroke-width', 3)
-              .attr('d', d3.line<any>().x(d => x(parseDate(d.date)!)).y(d => y(d.adoption)).curve(d3.curveMonotoneX));
+              .attr('d', d3.line<any>().defined((d: any) => d.adoption != null).x(d => x(parseDate(d.date)!)).y(d => y(d.adoption)).curve(d3.curveMonotoneX));
           }
 
           // Adoption is one number; a mirrored 100−x "Russian" line doubles
