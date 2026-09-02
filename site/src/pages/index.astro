@@ -43,6 +43,20 @@ function sparkPath(vals: number[], w: number, h: number, flip = false): string {
 }
 const sparkBySlug: Record<string, number[]> = Object.fromEntries(
   (pairsMeta as any[]).filter((p: any) => p.enabled).map((p: any) => [p.slug, sparkSeries(p.slug)]));
+
+// Headline number per card: mean adoption across sources over 2025 months.
+function adoption2025(slug: string): number | null {
+  const src = (timeseries as any)[slug] || {};
+  const vals: number[] = [];
+  for (const rows of Object.values(src)) {
+    if (!Array.isArray(rows)) continue;
+    const own = (rows as any[]).filter(r => r?.date >= '2025-01' && r.adoption != null);
+    if (own.length) vals.push(own.reduce((a, r) => a + r.adoption, 0) / own.length);
+  }
+  return vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length * 10) / 10 : null;
+}
+const adoption25BySlug: Record<string, number | null> = Object.fromEntries(
+  (pairsMeta as any[]).filter((p: any) => p.enabled).map((p: any) => [p.slug, adoption2025(p.slug)]));
 const readyBySlug: Record<string, boolean> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, !!p.data_ready]));
 const allPairs = m.pairs.filter((p: any) => !p.is_control);
 const pairs = [
@@ -138,7 +152,7 @@ const pairs = [
       slug={p.slug}
       russian={p.russian}
       ukrainian={p.ukrainian}
-      adoption={p.adoption || 0}
+      adoption={adoption25BySlug[p.slug] ?? (p.adoption || 0)}
       total={p.total || 0}
       popularRank={i}
       significance={sigBySlug[p.slug] || ''}
@@ -148,28 +162,6 @@ const pairs = [
   ))}
 </div>
 
-<!-- Why these names — moved from the retired About page so the landing page
-     carries the full story on its own. -->
-<div class="chart-container" style="margin-top:1.25rem;">
-  <div class="chart-title" style="color:var(--text);">Why these names</div>
-  <div style="font-size:0.88rem; color:var(--text); line-height:1.65; max-width:64rem;">
-    <p style="margin:0 0 0.6rem;">
-      The sample is built around a legally codified transliteration standard. Ukraine's Cabinet of
-      Ministers established a unified table for rendering proper names in Latin script; it was
-      approved by the United Nations in 2012 and adopted by BGN/PCGN in 2019. The pairs are chosen
-      to maximise contrast exactly where Ukrainian and Russian diverge in Latin script: Ukrainian
-      <strong>Г</strong> becomes <em>H</em> not <em>G</em>, <strong>И</strong> becomes <em>y</em>,
-      <strong>Я</strong> becomes <em>ya</em>/<em>ia</em> — producing <em>Bohdan</em>,
-      <em>Volodymyr</em>, <em>Kyiv</em>, <em>Odesa</em>, <em>Feodosiia</em>. Each pair tests a
-      structurally meaningful rule of the official system, not another example of the same one.
-    </p>
-    <p style="margin:0;">
-      Place names sit at the intersection of orthography, cartography and sovereignty; person
-      names, dishes and historical figures test how far the same rules travel without a state
-      campaign behind them.
-    </p>
-  </div>
-</div>
 
 <script>
   const grid = document.getElementById('pair-grid')!;

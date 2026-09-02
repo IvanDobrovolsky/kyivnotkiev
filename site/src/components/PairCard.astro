@@ -51,12 +51,10 @@ const color = adoptionColor(pct);
       <path d={path(spark)} fill="none" stroke="#0057B8" stroke-width="2" />
     </svg>
   )}
-  <div class="pair-card-row">
-    <div class="pair-card-bar">
-      <div class="pair-card-bar-fill" style={`width:${Math.min(pct, 100)}%; background:${color};`}></div>
-    </div>
-    <span class="pair-pct" style={`color:${color}`}>{pct}%</span>
+  <div class="pair-adopt">
+    Calculated adoption in 2025: <span class="pair-pct" style={`color:${color}`}>{pct}%</span>
   </div>
+  <div class="pair-adopt-note">Share of records using the Ukrainian spelling, averaged across our sources.</div>
 </a>
 
 <style>
@@ -104,11 +102,16 @@ const color = adoptionColor(pct);
     height: 34px;
     margin-top: 0.45rem;
   }
-  .pair-card-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.4rem;
+  .pair-adopt {
+    margin-top: 0.45rem;
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+  .pair-adopt-note {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    line-height: 1.35;
+    margin-top: 0.1rem;
   }
   .pair-old {
     font-size: 0.95rem;
@@ -126,21 +129,9 @@ const color = adoptionColor(pct);
     color: var(--text);
   }
   .pair-pct {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     font-weight: 700;
-    flex: 0 0 auto;
-    min-width: 2.6rem;
-    text-align: right;
   }
-  .pair-card-bar {
-    flex: 1 1 auto;
-    height: 4px;
-    background: #f0f0f0;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .pair-card-bar-fill {
-    height: 100%;
-    border-radius: 2px;
-  }
+  
+  
 </style>
