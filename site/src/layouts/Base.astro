@@ -73,6 +73,9 @@ const navItems = [
         {navItems.map(item => (
           <a href={item.href} class={activeNav === item.id ? 'active' : ''}>{item.label}</a>
         ))}
+        <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://huggingface.co/datasets/KyivNotKiev/toponym-adoption-data" target="_blank" rel="noopener">Dataset</a>
+        <a href="/privacy.html">{t(lang, 'footer.privacy')}</a>
         <a href={altPath(lang, Astro.url.pathname)} class="nav-lang">{t(lang, 'nav.lang')}</a>
       </div>
     </div>
@@ -90,17 +93,7 @@ const navItems = [
     <slot />
   </main>
 
-  <footer class="site-footer">
-    <div class="site-footer-inner">
-      <span>{t(lang, "footer.built_by")} <a href="https://github.com/IvanDobrovolsky" target="_blank" rel="noopener">Ivan Dobrovolskyi</a></span>
-      <span class="dot">·</span>
-      <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank" rel="noopener">GitHub</a>
-      <span class="dot">·</span>
-      <a href="https://huggingface.co/KyivNotKiev" target="_blank" rel="noopener">Hugging Face</a>
-      <span class="dot">·</span>
-      <a href="/privacy.html">{t(lang, "footer.privacy")}</a>
-    </div>
-  </footer>
+  
 </body>
 </html>
 
@@ -158,9 +151,7 @@ const navItems = [
   /* Body is a full-height column and main flexes to fill it, so the footer sits
      at the bottom of short pages and after the content on long ones — no
      hardcoded margins doing the positioning. */
-  body { min-height: 100vh; display: flex; flex-direction: column; }
   .site-main {
-    flex: 1 0 auto;
     width: 100%;
     max-width: 1272px;
     margin: 0 auto;
@@ -182,19 +173,6 @@ const navItems = [
     .site-nav-links a { padding: 0.85rem 0.55rem; font-size: 0.8rem; white-space: nowrap; }
     .site-nav-logo span { font-size: 0.88rem; }
   }
-
-  .site-footer { border-top: 1px solid var(--border, #e5e7eb); }
-  .site-footer-inner {
-    max-width: 1272px; margin: 0 auto; padding: 0.85rem 1rem;
-    display: flex; gap: 0.6rem; flex-wrap: wrap;
-    align-items: center; justify-content: center;
-    font-size: 0.82rem; color: var(--text-muted, #6b7280);
-  }
-  .site-footer-inner a {
-    font-size: 0.82rem; color: var(--text-muted, #6b7280); text-decoration: none;
-  }
-  .site-footer-inner .dot { opacity: 0.5; }
-  .site-footer-inner a:hover { color: var(--text, #111); text-decoration: underline; }
 
   .dev-banner {
     background: #fef3c7;
