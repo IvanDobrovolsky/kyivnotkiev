@@ -516,8 +516,22 @@ a:hover { text-decoration: underline; }
 .nav-lang { font-weight: 700; letter-spacing: 0.04em; color: #0057B8 !important; }
 @media (max-width: 640px) {
   .nav-burger { display: block; }
-  .site-nav-links { display: none; width: 100%; flex-direction: column; align-items: flex-start; gap: 0; padding-bottom: 0.5rem; }
+  .site-nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.25rem 0 0.6rem;
+    border-top: 1px solid var(--border, #e5e7eb);
+    margin-top: 0.4rem;
+  }
   .site-nav-links.open { display: flex; }
-  .site-nav-links a { padding: 0.6rem 0.2rem !important; width: 100%; }
+  .site-nav-links a {
+    padding: 0.65rem 0.25rem !important;
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .site-nav-links a:last-child { border-bottom: none; }
   .site-nav-inner { flex-wrap: wrap; }
 }

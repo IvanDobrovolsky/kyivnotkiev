@@ -1518,9 +1518,17 @@ def main():
                         & (_vdf.date <= STUDY_END_DATE)]
             if not len(_vdf):
                 continue
+            # One entry per story: syndication farms (Big News Network's shell
+            # mastheads) republish identical wire copy under dozens of domains;
+            # a holdout table full of one article is a broken exhibit.
+            _vdf = _vdf.assign(_lead=_vdf.text.astype(str)
+                               .str.replace(r"\s+", " ", regex=True)
+                               .str.lower().str.slice(0, 300))
             _vdf = (_vdf.sort_values("date", ascending=False)
+                        .drop_duplicates("_lead")
                         .groupby("domain", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
-                        .head(HOLDOUT_CAP))
+                        .head(HOLDOUT_CAP)
+                        .drop(columns="_lead"))
             holdouts_by_pair.setdefault(_slug, {})["news_articles"] = [{
                 "domain": r.domain,
                 "url": r.url,
