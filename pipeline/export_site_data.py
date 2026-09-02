@@ -1839,11 +1839,25 @@ def main():
                                 _dom_tokens.add(_lab)
                 except Exception:                      # noqa: BLE001
                     pass
+            # Quality gate: a genuine register word appears across many
+            # outlets; proxy/aggregator debris concentrates in one or two.
+            # Fail closed: a term with no measured spread does not ship.
+            _spread = {}
+            if _rp.exists():
+                try:
+                    import pandas as _pd3
+                    _rr = _pd3.read_parquet(_rp, columns=["text", "url"])
+                    _hosts = _rr["url"].astype(str).str.extract(r"//([^/]+)")[0].fillna("")
+                    _txt = _rr["text"].fillna("").astype(str).str.lower()
+                    for x in _k["solo_terms"][:40]:
+                        _w = str(x["word"]).lower()
+                        _spread[_w] = int(_hosts[_txt.str.contains(_re.escape(_w))].nunique())
+                except Exception as _ex:               # noqa: BLE001
+                    log.info(f"    solo spread failed for {_slug}: {_ex}")
             _solo = [{"w": x["word"], "z": round(float(x["mean_z"]), 1)}
                      for x in _k["solo_terms"]
                      if _keep(x) and x["word"] not in _dom_tokens
-                     and not any(x["word"] in _t or _t in x["word"]
-                                 for _t in _dom_tokens if len(_t) >= 5)][:10]
+                     and _spread.get(str(x["word"]).lower(), 0) >= 5][:10]
             if len(_solo) >= 4:
                 _kj[_slug] = {"solo": _solo, "solo_variant": _k.get("solo_variant")}
     write_json(SITE_DATA_DIR / "cl_keyness.json", _kj)
