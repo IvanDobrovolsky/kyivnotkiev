@@ -477,3 +477,35 @@ a:hover { text-decoration: underline; }
 .info-pop .frac > span:first-child { border-bottom: 1px solid var(--text); }
 #cluster-info-viz .bar-row { display: flex; align-items: center; gap: 6px; margin: 2px 0; font-size: 0.76rem; }
 #cluster-info-viz .bar { height: 8px; border-radius: 4px; }
+
+/* Link-buttons opening the technical layer on analytical cards */
+.method-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  margin-left: 0.5rem;
+  padding: 0.14rem 0.6rem;
+  border: 1px solid rgba(0, 87, 184, 0.25);
+  border-radius: 999px;
+  background: rgba(0, 87, 184, 0.05);
+  font: 600 0.72rem/1.4 inherit;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  color: #0057B8;
+  cursor: pointer;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: background 0.15s, border-color 0.15s;
+}
+.method-btn::after {
+  content: "\203A";
+  font-size: 0.85em;
+  line-height: 1;
+  transform: translateY(-0.5px);
+}
+.method-btn:hover {
+  background: rgba(0, 87, 184, 0.12);
+  border-color: rgba(0, 87, 184, 0.5);
+}
