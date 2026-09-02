@@ -57,9 +57,10 @@ const pairs = [
   <span class="source-row-label">Data collected from</span>
   <div class="source-row-marks">
     {Object.entries(m.sources).map(([key, s]: any) => (
-      <span class="src-mark" style={`--c: ${s.color}`}>
+      <span class="src-mark" style={`--c: ${s.color}`}
+         title={`${s.label} — ${fmtBig(s.records)} ${s.unit}`}>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d={(icons as any)[key]?.path} /></svg>
-        <span>{s.label} <span style="color:var(--text-muted); font-weight:400;">({fmtBig(s.records)} {s.unit})</span></span>
+        <span>{s.label}</span>
       </span>
     ))}
   </div>
