@@ -20,6 +20,7 @@ const {
   title = '#KyivNotKiev — Measuring Ukrainian Toponym Adoption',
   description = `In 2018 Ukraine asked the world to write Ukrainian names the Ukrainian way — cities, people, dishes, historical figures. This project tracks how far that took hold across ${m.time_span}, and asks the same of today's AI chatbots.`,
   activeNav = '',
+  lang = 'en',
 } = Astro.props;
 
 // "Pairs" is dropped: the wordmark already returns to the pair index, so it was a
@@ -28,7 +29,7 @@ const navItems = [
 ];
 ---
 
-<html lang="en">
+<html lang={lang}>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -1,13 +1,10 @@
 ---
-import '../../styles/global.css';
+import Base from '../../layouts/Base.astro';
+import PairCard from '../../components/PairCard.astro';
 import m from '../../data/manifest.json';
-
-// manifest.json is the single source of truth — all stats and pairs
-const sortedPairs = [...m.pairs].sort((a, b) => {
-  if (a.slug === 'kyiv') return -1;
-  if (b.slug === 'kyiv') return 1;
-  return b.total - a.total;
-});
+import icons from '../../data/source_icons.json';
+import pairsMeta from '../../data/pairs_meta.json';
+import timeseries from '../../data/timeseries.json';
 
 function fmtBig(n: string | number) {
   const v = typeof n === 'string' ? parseInt(n) : n;
@@ -17,1691 +14,234 @@ function fmtBig(n: string | number) {
   return v.toString();
 }
 
-function adoptionClass(pct: number) {
-  if (pct >= 70) return 'adoption-high';
-  if (pct >= 30) return 'adoption-mid';
-  return 'adoption-low';
-}
+// Popular order: flagship cities first, then by volume
+const popularOrder = ['kyiv', 'chornobyl', 'odesa', 'lviv', 'kharkiv', 'donbas', 'luhansk', 'dnipro', 'zaporizhzhia', 'volodymyr-zelenskyy', 'oleksandr-usyk', 'bakhmut'];
+const sigBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, p.significance || p.blurb || '']));
 
-const src = (name: string) => (m.sources as any)[name];
-
-function formatNum(n: number) {
-  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
-  if (n >= 1_000) return (n / 1_000).toFixed(0) + 'K';
-  return n.toString();
+// Per-card sparkline: combined adoption across sources, quarterly means.
+// Computed at build time; each card gets the same-sized pair of curves.
+function sparkSeries(slug: string): { v: number[]; switchYear: string | null; switchPos: number } {
+  const src = (timeseries as any)[slug] || {};
+  const byQ: Record<string, number[]> = {};
+  for (const [name, rows] of Object.entries(src)) {
+    if (!Array.isArray(rows)) continue;
+    for (const r of rows as any[]) {
+      if (!r?.date || r.adoption == null) continue;
+      const q = r.date.slice(0, 4) + '-Q' + (Math.floor((+r.date.slice(5, 7) - 1) / 3) + 1);
+      (byQ[q] = byQ[q] || []).push(r.adoption);
+    }
+  }
+  const keys = Object.keys(byQ).sort();
+  const v = keys.map(q => byQ[q].reduce((a, b) => a + b, 0) / byQ[q].length);
+  // Decisive switch: starts clearly below 50, ends clearly above, and after the
+  // crossing never falls back under. Label the crossing year; otherwise nothing.
+  let switchYear: string | null = null;
+  let switchPos = 0;
+  if (v.length > 8 && v[0] < 45 && v[v.length - 1] > 55) {
+    for (let i = 1; i < v.length; i++) {
+      if (v[i] >= 50 && v.slice(i).every(x => x >= 48)) {
+        switchYear = keys[i].slice(0, 4);
+        switchPos = i / (v.length - 1);
+        break;
+      }
+    }
+  }
+  return { v, switchYear, switchPos };
 }
+function sparkPath(vals: number[], w: number, h: number, flip = false): string {
+  if (vals.length < 2) return '';
+  const step = w / (vals.length - 1);
+  return vals.map((v, i) => {
+    const y = h - ((flip ? 100 - v : v) / 100) * h;
+    return `${i ? 'L' : 'M'}${(i * step).toFixed(1)},${y.toFixed(1)}`;
+  }).join('');
+}
+const sparkBySlug: Record<string, any> = Object.fromEntries(
+  (pairsMeta as any[]).filter((p: any) => p.enabled).map((p: any) => [p.slug, sparkSeries(p.slug)]));
+
+// Headline number per card: mean adoption across sources over 2025 months.
+function adoption2025(slug: string): number | null {
+  const src = (timeseries as any)[slug] || {};
+  const vals: number[] = [];
+  for (const rows of Object.values(src)) {
+    if (!Array.isArray(rows)) continue;
+    const own = (rows as any[]).filter(r => r?.date >= '2025-01' && r.adoption != null);
+    if (own.length) vals.push(own.reduce((a, r) => a + r.adoption, 0) / own.length);
+  }
+  return vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length * 10) / 10 : null;
+}
+const adoption25BySlug: Record<string, number | null> = Object.fromEntries(
+  (pairsMeta as any[]).filter((p: any) => p.enabled).map((p: any) => [p.slug, adoption2025(p.slug)]));
+const readyBySlug: Record<string, boolean> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, !!p.data_ready]));
+const verdictBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, p.verdict_uk || p.verdict || '']));
+const allPairs = m.pairs.filter((p: any) => !p.is_control);
+const pairs = [
+  ...popularOrder.map(s => allPairs.find((p: any) => p.slug === s)).filter(Boolean),
+  ...allPairs.filter((p: any) => !popularOrder.includes(p.slug)).sort((a: any, b: any) => (b.total || 0) - (a.total || 0)),
+];
+
 ---
 
-<html lang="uk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <title>#KyivNotKiev — Вимірювання топонімічних змін у реальному часі</title>
-  <meta name="description" content={`Мультиджерельна обчислювальна платформа для відстеження прийняття українського правопису ${fmtBig(m.toponym_matches)}+ топонімічних збігів з ${m.num_sources} джерел, ${m.time_span}.`}>
+<Base activeNav="home" lang="uk">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="#KyivNotKiev — Вимірювання топонімічних змін у реальному часі">
-  <meta property="og:description" content={`Вимірювання топонімічних змін у реальному часі ${fmtBig(m.toponym_matches)}+ збігів. Найбільше обчислювальне дослідження прийняття українського правопису у світі.`}>
-  <meta property="og:image" content="https://kyivnotkiev.org/og.png">
-  <meta property="og:url" content="https://kyivnotkiev.org/uk/">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="uk_UA">
-  <meta property="og:locale:alternate" content="en_US">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="#KyivNotKiev — Вимірювання топонімічних змін у реальному часі">
-  <meta name="twitter:description" content={`${fmtBig(m.toponym_matches)}+ записів, ${m.num_sources} джерел, ${m.num_countries} країн. Вимірювання топонімічних змін у реальному часі ${m.time_span}.`}>
-  <meta name="twitter:image" content="https://kyivnotkiev.org/og.png">
-
-  <!-- Favicon -->
-  <link rel="icon" href="/logo.svg" type="image/svg+xml">
-  <link rel="alternate" hreflang="uk" href="https://kyivnotkiev.org/uk/">
-  <link rel="alternate" hreflang="en" href="https://kyivnotkiev.org/">
-  <link rel="canonical" href="https://kyivnotkiev.org/uk/">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div style="background:#fef3c7;color:#92400e;text-align:center;font-size:0.78rem;padding:0.3rem 1rem;border-bottom:1px solid #fde68a;">Сайт у розробці — збір даних триває, цифри змінюватимуться.</div>
-  <div class="app">
-    <nav class="topbar">
-      <a href="/uk/" class="topbar-logo" style="text-decoration:none;">
-        <img src="/logo.svg" alt="Kyiv chestnut" style="height:28px; width:auto; margin-right:0.4rem;">
-        <span style="font-size:0.9rem; font-weight:800; color:#0057B8;">#KyivNotKiev</span>
-      </a>
-      <div class="topbar-links">
-        <a href="/">EN</a>
-        <a href="https://github.com/IvanDobrovolsky/kyivnotkiev" target="_blank">GitHub</a>
-        <a href="/uk/" id="about-link">Про проєкт</a>
-      </div>
-    </nav>
-
-    <aside class="sidebar">
-      <div class="sidebar-section">
-        <div class="sidebar-items open">
-          {sortedPairs.map((pair) => (
-            <div class="sidebar-item" data-pair-slug={pair.slug}>
-              <div class="pair-name">
-                <span>{['kyiv','odesa','chornobyl','volodymyr-zelenskyy','volodymyr-the-great','bakhmut'].includes(pair.slug) ? '★ ' : ''}{pair.ukrainian}</span>
-                <span class="old">{pair.russian}</span>
-              </div>
-              <span class={`adoption-badge ${adoptionClass(pair.adoption)}`}>
-                {pair.adoption}%
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </aside>
-
-    <main class="main" style="opacity:0; transition:opacity 0.15s;">
-      <!-- ══ LANDING VIEW (visible when no pair selected) ══ -->
-      <div id="landing-view" style="display:none;">
-        <div style="display:flex; align-items:center; gap:1.5rem; padding:2rem 0.5rem 1.5rem; margin-bottom:1rem;">
-          <img src="/logo.svg" alt="Kyiv chestnut" style="height:100px; width:auto; flex-shrink:0;">
-          <div>
-            <h1 style="font-size:1.8rem; font-weight:800; margin:0; line-height:1.2; color:#0057B8;">
-              #KyivNotKiev
-            </h1>
-            <p style="color:var(--text); font-size:0.95rem; margin:0.4rem 0 0; line-height:1.5;">
-              Відстеження прийняття українського правопису у {fmtBig(m.toponym_matches)} записах з {m.num_sources} джерел, {m.num_countries} країн, 2010–2026.
-            </p>
-          </div>
-        </div>
-
-      <div class="stats" style="grid-template-columns: repeat(5, 1fr);">
-        <div class="stat-card">
-          <div class="stat-value">{fmtBig(m.toponym_matches)}</div>
-          <div class="stat-label">Записів проаналізовано</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">~{m.data_processed_pb} PB</div>
-          <div class="stat-label">Даних оброблено</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">{m.analyzable_pairs}</div>
-          <div class="stat-label">Пар топонімів</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">{m.num_sources}</div>
-          <div class="stat-label">Джерел даних</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">{m.time_span}</div>
-          <div class="stat-label">Період</div>
-        </div>
-      </div>
-      <div class="stats source-stats" style="grid-template-columns: repeat(7, 1fr);">
-        {Object.entries(m.sources).map(([key, s]: [string, any]) => (
-          <div class="stat-card mini" style={`--accent: ${s.color}`}>
-            <div class="stat-value">{fmtBig(s.records)}</div>
-            <div class="stat-label">{s.label}</div>
-            <div class="stat-source">{s.extra}</div>
-          </div>
-        ))}
-      </div>
-
-      </div><!-- end landing-view -->
-
-      <!-- ══ PAIR VIEW (visible when pair selected) ══ -->
-      <div id="pair-view" style="display:none;">
-
-      <div class="chart-container">
-        <div class="chart-header" style="flex-direction:column; align-items:stretch; gap:0.3rem;">
-          <div style="display:flex; align-items:baseline; gap:0.5rem; flex-wrap:wrap;">
-            <div class="chart-title" style="margin:0; white-space:nowrap;">
-              <span class="old-name" id="chart-old">Kiev</span>
-              <span class="arrow">→</span>
-              <span class="new-name" id="chart-new">Kyiv</span>
-            </div>
-            <span id="chart-range" style="font-size:0.84rem; color:var(--text-muted);"></span>
-            <span id="chart-info" style="font-size:0.81rem; color:var(--text-dim); font-style:italic;"></span>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.4rem;">
-            <div class="chart-controls" style="margin:0;">
-              <button class="source-toggle active" data-source="trends" style="--source-color: #4285F4"><span class="source-dot"></span>Trends</button>
-              <button class="source-toggle" data-source="gdelt" style="--source-color: #1e3a5f"><span class="source-dot"></span>GDELT</button>
-              <button class="source-toggle" data-source="wikipedia" style="--source-color: #636466"><span class="source-dot"></span>Вікі</button>
-              <button class="source-toggle" data-source="reddit" style="--source-color: #FF4500"><span class="source-dot"></span>Reddit</button>
-              <button class="source-toggle" data-source="youtube" style="--source-color: #FF0000"><span class="source-dot"></span>YouTube</button>
-              <button class="source-toggle" data-source="ngrams" style="--source-color: #7c3aed"><span class="source-dot"></span>Ngrams</button>
-              <button class="source-toggle" data-source="openalex" style="--source-color: #06b6d4"><span class="source-dot"></span>Наукові</button>
-            </div>
-            <div class="chart-controls" style="margin:0;">
-              <button class="chart-mode active" data-chart="volume" id="volume-btn">Обсяг</button>
-              <button class="chart-mode" data-chart="adoption">Адопція %</button>
-              <span class="toggle-sep"></span>
-              <button class="line-mode active" data-mode="both">Усі</button>
-              <button class="line-mode" data-mode="ukrainian">УКР</button>
-              <button class="line-mode" data-mode="russian">РОС</button>
-              <span class="toggle-sep"></span>
-            </div>
-          </div>
-        </div>
-        <div id="chart"></div>
-        <div class="chart-legend" id="chart-legend"></div>
-      </div>
-
-      <!-- Per-pair source stats -->
-      <div id="pair-stats" class="stats source-stats" style="grid-template-columns: repeat(7, 1fr); margin-bottom: 0.75rem;"></div>
-
-      <!-- Adoption + Reference side by side -->
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
-        <div id="adoption-calc" class="chart-container" style="margin-bottom:0; padding:0.75rem 1rem;">
-          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Розрахунок адопції</div>
-          <div id="adoption-calc-body" style="font-size:0.86rem; color:var(--text-muted); line-height:1.6;"></div>
-        </div>
-        <div class="chart-container" id="dict-container" style="margin-bottom:0; padding:0.75rem 1rem;">
-          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.4rem;">Аудит посилань</div>
-        </div>
-      </div>
-
-      <!-- Source Comparison -->
-      <div id="comparison-row" style="display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:1rem;">
-        <div class="chart-container" style="margin-bottom:0;">
-          <div style="font-size:0.8rem; font-weight:600; color:var(--text); margin-bottom:0.3rem;">Порівняння джерел</div>
-          <div id="pair-source-chart" style="width:100%;"></div>
-        </div>
-      </div>
-
-      <!-- Per-pair world map (GDELT only) -->
-            <!-- Per-pair: GDELT Analysis (3 pie charts) -->
-      <div id="media-origin-container" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
-        <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-          <div style="font-size:0.87rem; font-weight:600; color:var(--text); margin-bottom:0.2rem;">Загальний правопис</div>
-          <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.4rem;">Українська vs Російська (24 міс.)</div>
-          <div id="spelling-pie" style="display:flex; align-items:center; justify-content:center;"></div>
-        </div>
-        <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-          <div style="font-size:0.87rem; font-weight:600; color:#0057B8; margin-bottom:0.2rem;">Джерела українського правопису</div>
-          <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.4rem;">Звідки надходять статті з УКР-формою?</div>
-          <div id="ua-origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
-        </div>
-        <div class="chart-container" style="margin-bottom:0; padding:0.6rem 0.75rem;">
-          <div style="font-size:0.87rem; font-weight:600; color:#dc2626; margin-bottom:0.2rem;">Джерела російського правопису</div>
-          <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.4rem;">Звідки надходять статті з РОС-формою?</div>
-          <div id="ru-origin-pie" style="display:flex; align-items:center; justify-content:center;"></div>
-        </div>
-      </div>
-
-      <!-- Source comparison moved to comparison-row above -->
-
-      <!-- Per-pair holdouts (GDELT only) -->
-      <div class="chart-container" id="holdout-container">
-        <div class="chart-header">
-          <div>
-            <div class="chart-title" style="color: var(--text)">Holdouts: <span id="holdout-pair-name">Kiev</span></div>
-            <div class="chart-subtitle">Домени, що досі використовують стару назву — натисніть для перевірки у GDELT</div>
-          </div>
-          <div class="chart-controls">
-            <button class="line-mode" data-holdout="intl">Міжнародні</button>
-            <button class="line-mode active" data-holdout="all">Усі</button>
-            <button class="line-mode" data-holdout="ru">Показати .ru</button>
-            <button class="line-mode" data-holdout="ua">.ua</button>
-          </div>
-        </div>
-        <div id="holdout-table" style="max-height: 500px; overflow-y: auto;"></div>
-      </div>
-
-      <!-- Data source availability note -->
-      <div style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1rem; padding: 0.5rem 0.75rem; background: #f8f9fb; border-radius: 4px; border-left: 3px solid var(--border);">
-        Доступність джерел: Trends (2010–2026), GDELT (2015–2026), Вікіпедія (2015–2026), Reddit (2007–2026), Ngrams (книги, 2000–2019)
-      </div>
-
-      <!-- Reference Audit moved to grid above -->
-
-      </div><!-- end pair-view -->
-
-      <!-- ══ GLOBAL VIEWS (visible on landing, hidden on pair view) ══ -->
-      <div id="global-view">
-
-      <!-- Statistical Highlights — values from analysis.json (recomputed from BQ) -->
-      <div class="chart-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 1rem;">Статистичний аналіз</div>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;">
-          <div style="padding:1rem; background:#f0f9ff; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#0057B8;">R²=0.87</div>
-            <div style="font-size:0.86rem; color:#6b7280;">Регресійна модель</div>
-            <div style="font-size:0.8rem; color:#9ca3af; margin-top:0.2rem;">Стрибок при вторгненні (β=0.87) — головний предиктор поточної адопції</div>
-          </div>
-          <div style="padding:1rem; background:#fef2f2; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#dc2626;">p&lt;0.001</div>
-            <div style="font-size:0.86rem; color:#6b7280;">Ефект вторгнення</div>
-            <div style="font-size:0.8rem; color:#9ca3af; margin-top:0.2rem;">Значущий у всіх 4 тестованих джерелах (Wilcoxon); Reddit d=1.38</div>
-          </div>
-          <div style="padding:1rem; background:#f0fdf4; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#059669;">99.8%</div>
-            <div style="font-size:0.86rem; color:#6b7280;">Точність Regex</div>
-            <div style="font-size:0.8rem; color:#9ca3af; margin-top:0.2rem;">1 444 збіги GDELT перевірено — 3 хибних спрацювання (лише Odessa)</div>
-          </div>
-          <div style="padding:1rem; background:#fefce8; border-radius:6px; text-align:center;">
-            <div style="font-size:1.8rem; font-weight:700; color:#d97706;">p=0.035</div>
-            <div style="font-size:0.86rem; color:#6b7280;">Тест категорій</div>
-          </div>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 0.75rem;">
-          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Розкид між джерелами</div>
-            <div style="font-size:0.86rem; color:#6b7280;">Медіана 54пп — адопція дуже залежить від домену</div>
-          </div>
-          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Історична ідентичність</div>
-            <div style="font-size:0.86rem; color:#6b7280;">Kyiv 74%, але Volodymyr the Great лише 7% — історія й досі в російських рамках</div>
-          </div>
-          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Міжмовний аналіз</div>
-            <div style="font-size:0.86rem; color:#6b7280;">US 47% → FR 4% → IT 2% — кампанія ледь вийшла за межі англомовного світу</div>
-          </div>
-          <div style="padding:0.75rem 1rem; background:#f8f9fb; border-radius:6px;">
-            <div style="font-size:0.8rem; font-weight:600; color:var(--text);">Бренд-катастрофа</div>
-            <div style="font-size:0.86rem; color:#6b7280;">Chernobyl: 1% у Trends, 0% у Вікіпедії — несприйнятливий до змін</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Top 6 Deep Dive -->
-      <div class="chart-container" style="margin-bottom: 1rem;">
-        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Ключові пари: Детальний аналіз</div>
-        <div class="chart-subtitle" style="margin-bottom: 1rem;">6 пар, що представляють увесь спектр — від успіху кампанії до історичного спротиву</div>
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem;">
-          <div class="top6-card" data-pair-slug="1" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Kiev → Kyiv</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#059669;">60.3%</div>
-            </div>
-            <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Флагман — історія успіху кампанії</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:60.3%; background:#059669; border-radius:2px;"></div></div>
-          </div>
-          <div class="top6-card" data-pair-slug="10" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Chernobyl → Chornobyl</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#dc2626;">26.8%</div>
-            </div>
-            <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Бренд-катастрофа — несприйнятливий до змін</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:26.8%; background:#dc2626; border-radius:2px;"></div></div>
-          </div>
-          <div class="top6-card" data-pair-slug="3" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Odessa → Odesa</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#d97706;">43.0%</div>
-            </div>
-            <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Культурне вкорінення — спірний</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:43%; background:#d97706; border-radius:2px;"></div></div>
-          </div>
-          <div class="top6-card" data-pair-slug="61" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Vladimir → Volodymyr Zelenskyy</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#d97706;">49.1%</div>
-            </div>
-            <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Президент воєнного часу — ім'я та прізвище під питанням</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:49.1%; background:#d97706; border-radius:2px;"></div></div>
-          </div>
-          <div class="top6-card" data-pair-slug="70" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Vladimir → Volodymyr the Great</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#dc2626;">4.8%</div>
-            </div>
-            <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Історична ідентичність — Росія привласнює наше минуле</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:4.8%; background:#dc2626; border-radius:2px;"></div></div>
-          </div>
-          <div class="top6-card" data-pair-slug="72" style="cursor:pointer; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; transition:all 0.15s;">
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <div style="font-weight:600; color:var(--text);">Artemovsk → Bakhmut</div>
-              <div style="font-size:0.8rem; font-weight:700; color:#059669;">89.6%</div>
-            </div>
-            <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Називання як спротив — окупаційну назву відкинуто</div>
-            <div style="height:4px; background:#f0f0f0; border-radius:2px; margin-top:0.4rem;"><div style="height:100%; width:89.6%; background:#059669; border-radius:2px;"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CL Insights: Collocations -->
-      <div class="chart-container" id="cl-insights">
-        <div class="chart-title" style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.3rem;">Комп'ютерна лінгвістика: Що оточує кожен правопис?</div>
-        <div class="chart-subtitle" style="margin-bottom: 1rem;">Найчастіші слова-супутники (ранжовані за PMI) розкривають різні дискурсивні світи для кожного варіанту правопису</div>
-        <div id="cl-collocations-grid"></div>
-      </div>
-
-      <!-- All pairs heatmap -->
-      <div class="chart-container">
-        <div class="chart-header">
-          <div>
-            <div class="chart-title" style="color: var(--text)">Огляд усіх пар</div>
-            <div class="chart-subtitle">Поточний рівень адопції — середнє за джерелами, останні 12 місяців</div>
-          </div>
-        </div>
-        <div id="heatmap-chart" style="width:100%; min-height:400px;"></div>
-      </div>
-
-      <div class="chart-container" id="methodology">
-        <h2 style="font-size:1.3rem; margin-bottom:1rem; color:#e2e8f0;">Три рівні аналізу</h2>
-        <div class="methodology-grid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1.2rem; margin-bottom:1.5rem;">
-          <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; border-left:3px solid #f59e0b;">
-            <div style="font-size:0.86rem; text-transform:uppercase; color:#f59e0b; letter-spacing:0.05em; margin-bottom:0.5rem;">Рівень 1</div>
-            <div style="font-size:1rem; font-weight:600; color:#e2e8f0; margin-bottom:0.5rem;">Великі дані</div>
-            <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">
-              {fmtBig(m.toponym_matches)}+ записів із {m.num_sources} джерел. Просте запитання для кожного запису: автор написав українську чи російську форму? Бінарний regex-пошук у масштабі новин, пошукових запитів, соцмереж, книжок та наукових праць.
-            </div>
-            <div style="font-size:0.8rem; color:#f59e0b; margin-top:0.7rem; font-style:italic;">Відповідає: "Чи змінив світ написання?"</div>
-          </div>
-          <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; border-left:3px solid #8b5cf6;">
-            <div style="font-size:0.86rem; text-transform:uppercase; color:#8b5cf6; letter-spacing:0.05em; margin-bottom:0.5rem;">Рівень 2</div>
-            <div style="font-size:1rem; font-weight:600; color:#e2e8f0; margin-bottom:0.5rem;">Статистична валідація</div>
-            <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">
-              Регресійні моделі (R&sup2;=0.87), тести Крускала-Уолліса за категоріями, критерій Уілкоксона для часових зсувів, міжджерельні кореляції Спірмена, довірчі інтервали Уілсона. Доводить, що патерни — не шум.
-            </div>
-            <div style="font-size:0.8rem; color:#8b5cf6; margin-top:0.7rem; font-style:italic;">Відповідає: "Чи це реально?"</div>
-          </div>
-          <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; border-left:3px solid #06b6d4;">
-            <div style="font-size:0.86rem; text-transform:uppercase; color:#06b6d4; letter-spacing:0.05em; margin-bottom:0.5rem;">Рівень 3</div>
-            <div style="font-size:1rem; font-weight:600; color:#e2e8f0; margin-bottom:0.5rem;">Комп'ютерна лінгвістика</div>
-            <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">
-              Що саме говорить текст <em>навколо</em> кожного правопису? Класифікація контексту на основі трансформерів, аналіз тональності, колокації та семантичні вектори показують, що варіанти правопису живуть у різних дискурсивних світах.
-            </div>
-            <div style="font-size:0.8rem; color:#06b6d4; margin-top:0.7rem; font-style:italic;">Відповідає: "Чому одні змінили, а інші ні?"</div>
-          </div>
-        </div>
-        <div style="background:#1a1a2e; border-radius:10px; padding:1.2rem; margin-bottom:1rem;">
-          <div style="font-size:0.9rem; font-weight:600; color:#e2e8f0; margin-bottom:0.6rem;">Ключове відкриття: правопис маркує світогляд</div>
-          <div style="font-size:0.85rem; color:#94a3b8; line-height:1.6;">
-            Тексти з "Chernobyl" (російська форма) вживаються поруч із <span style="color:#f59e0b;">simulator, gaming, tourism, pop culture</span> — катастрофа як розважальний бренд.
-            Тексти з "Chornobyl" (українська форма) вживаються поруч із <span style="color:#06b6d4;">disaster, nuclear plant, shelter, confinement</span> — реальна катастрофа.
-            Правопис не просто відображає старе vs. нове — він сигналізує, з якою версією реальності взаємодіє автор.
-            Ігрова франшиза S.T.A.L.K.E.R. сама перейшла: "Shadow of <em>Chernobyl</em>" (2007) на "Heart of <em>Chornobyl</em>" (2024).
-          </div>
-        </div>
-      </div>
-
-      <div class="chart-container" id="about">
-        <h2 style="font-size:1.3rem; margin-bottom:1rem; color:#e2e8f0;">Про цей проєкт</h2>
-        <div class="about-text">
-          <p>
-            У 2018 році Міністерство закордонних справ України запустило #KyivNotKiev — кампанію
-            зі зміни того, як світ пише українські географічні назви. Ми побудували конвеєр даних, щоб
-            виміряти, чи це справді спрацювало.
-          </p>
-          <p>
-            Ця панель відстежує {m.analyzable_pairs} пар українських топонімів (від назв міст до страв і
-            історичних термінів) у {m.num_sources} незалежних джерелах даних. Кожна точка даних походить з
-            реального вжитку — новинних статей, дописів у соцмережах, переглядів енциклопедій,
-            частотності у книжках та пошукових трендів.
-          </p>
-          <p>
-            Наш рівень комп'ютерної лінгвістики йде глибше: за допомогою трансформерних моделей,
-            навчених на {fmtBig(m.cl_corpus)}+ розмічених текстах, ми класифікуємо <em>контекст</em>, у якому з'являється
-            кожен правопис. Опублікована модель і набір даних доступні на Hugging Face для інших
-            дослідників, що вивчають прийняття мовної політики у світі.
-          </p>
-          <p>
-            Деякі знахідки: спільноти соцмереж прийняли українські написання у 5–9 разів швидше,
-            ніж традиційні ЗМІ. "Бренди-катастрофи" на кшталт Chernobyl майже непорушні.
-            Терміни історичної ідентичності (Vladimir the Great vs. Volodymyr) ледь зрушили на рівні 5%.
-            А кулінарні терміни, як-от Борщ, ведуть окрему боротьбу завдяки кампанії шефа
-            Євгена Клопотенка в UNESCO.
-          </p>
-        </div>
-        <div class="about-links">
-          <a href="https://github.com/IvanDobrovolsky/kyivnotkiev">Вихідний код</a>
-          <a href="https://github.com/IvanDobrovolsky/KyivNotKiev-paper">Наукова стаття</a>
-          <a href="https://huggingface.co/IvanDobrovolsky">Hugging Face</a>
-        </div>
-      </div>
-
-      </div><!-- end global-view -->
-    </main>
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-head">
+    <img src="/logo.svg" alt="Kyiv chestnut" class="hero-logo">
+    <h1 class="heading-xl">#KyivNotKiev</h1>
   </div>
+  <div class="hero-body">
+    <p class="subtitle">
+      «Kyiv, not Kiev». 2018 року Україна <a href="https://uk.wikipedia.org/wiki/KyivNotKiev" target="_blank">запустила кампанію</a>
+      з проханням до світу відмовитися від російських написань її назв. Чи спрацювало?
+      Ми відстежили <strong>{m.analyzable_pairs} українські назви</strong> — географічні, історичні, культурні
+      та політичні — за <strong>{m.time_span}</strong>, використовуючи машинне навчання для аналізу контексту
+      adoption or resistance. Some spellings are now the global standard, others remain contested, and a few
+      never caught on, even locally. We also audited <a href="/llm">major AI models</a> to see which
+      versions they default to today.
+    </p>
+  </div>
+</div>
 
-  <script>
-    import * as d3 from 'd3';
-    import timeseriesData from '../../data/timeseries.json';
-    import manifest from '../../data/manifest.json';
-    import holdoutsData from '../../data/holdouts.json';
-    import holdoutsByPair from '../../data/holdouts_by_pair.json';
-    import pairEvents from '../../data/pair_events.json';
-    // trends_countries removed — using GDELT country distribution only
-// Removed 2026-08-29: computed from the corpus before the GDELT (26 Aug), trends (28 Aug)
-// and YouTube rebuilds, so it stated findings the current data no longer supports.
-// Empty rather than deleted inline so the render guards hide the section.
-    const errorAnalysis: any = {};
-    import domainOrigins from '../../data/domain_origins.json';
-    const clCollocations: any = {};
 
-    // Use manifest as the single pairs source
-    const pairs = { pairs: manifest.pairs };
 
-    const sourceColors: Record<string, string> = {
-      trends: '#4285F4',
-      gdelt: '#1e3a5f',
-      wikipedia: '#636466',
-      reddit: '#FF4500',
-      youtube: '#FF0000',
-      ngrams: '#7c3aed',
-      openalex: '#06b6d4',
-    };
+<!-- Data sources. Driven from manifest.sources so the list, order, colours and
+     counts cannot drift from the pipeline. Marks are inlined SVG — five brand logos
+     from simple-icons (CC0), three neutral glyphs for GDELT / Ngrams / OpenAlex,
+     which have no mark in that set. Nothing is fetched at runtime.
+     Laid out as a uniform row rather than a comma-separated sentence: the commas
+     collided with the pill borders and the closing clause orphaned onto its own
+     line on a phone. The date range is already in the stat strip above. -->
+<div class="source-row mb-md">
+  <span class="source-row-label">Джерела даних</span>
+  <div class="source-row-marks">
+    {Object.entries(m.sources).map(([key, s]: any) => (
+      <span class="src-mark" style={`--c: ${s.color}`}
+         title={`${s.label} — ${fmtBig(s.records)} ${s.unit}`}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d={(icons as any)[key]?.path} /></svg>
+        <span>{s.label}</span>
+      </span>
+    ))}
+  </div>
+</div>
 
-    const sourceLabels: Record<string, string> = {
-      trends: 'Google Trends',
-      gdelt: 'GDELT Новини',
-      wikipedia: 'Вікіпедія',
-      reddit: 'Reddit',
-      youtube: 'YouTube',
-      ngrams: 'Google Книги',
-      openalex: 'Наукові статті',
-    };
+<style>
+  .source-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+  .source-row-label {
+    font-size: 0.85rem;
+    color: var(--text-muted, #6b7280); white-space: nowrap;
+  }
+  .source-row-marks { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .pair-count { font-size: 0.9rem; color: var(--text-muted, #6b7280); }
+  .src-mark {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    padding: 0.2rem 0.5rem; border-radius: 6px;
+    border: 1px solid #e5e7eb; background: #fff;
+    color: var(--text, #111); text-decoration: none;
+    font-weight: 500; font-size: 0.8rem; white-space: nowrap;
+    transition: border-color 0.15s;
+  }
+  .src-mark svg { width: 12px; height: 12px; fill: var(--c); flex: 0 0 auto; }
+  
+  @media (max-width: 640px) {
+    .source-row { gap: 0.4rem; }
+    .source-row-label { width: 100%; }
+  }
+</style>
 
-    // Default from config/pairs.yaml via the manifest — set in one place.
-    let activeSource = (manifest as any).default_source || 'trends';
-    let activeSources = new Set([activeSource]);
-    document.querySelectorAll('.source-toggle').forEach((b) => {
-      b.classList.toggle('active', (b as HTMLElement).dataset.source === activeSource);
+<!-- Sort + Filter. The pair count rides in this row rather than taking a line of
+     its own: it is a caption for the grid below, not a statement in its own right. -->
+<div class="controls-bar mb-md">
+  <span class="pair-count">{m.analyzable_pairs} пари
+    <span style="display:block; font-size:0.78rem; color:var(--text-dim);">Натисніть на пару, щоб відкрити деталі</span></span>
+  <div class="controls-group">
+    <span class="controls-label">Сортування</span>
+    <button class="ctrl-btn active" data-sort="popular">Популярні</button>
+    <button class="ctrl-btn" data-sort="volume">Обсяг</button>
+    <button class="ctrl-btn" data-sort="adoption">Прийняття</button>
+    <button class="ctrl-btn" data-sort="alpha">А-Я</button>
+  </div>
+</div>
+
+<!-- Pair cards -->
+<div id="pair-grid" class="grid-auto">
+  {pairs.map((p: any, i: number) => (
+    <PairCard
+      slug={p.slug}
+      russian={p.russian}
+      ukrainian={p.ukrainian}
+      adoption={adoption25BySlug[p.slug] ?? (p.adoption || 0)}
+      total={p.total || 0}
+      popularRank={i}
+      lang="uk"
+      significance={sigBySlug[p.slug] || ''}
+      dataReady={readyBySlug[p.slug] || false}
+      spark={sparkBySlug[p.slug]?.v || []}
+      switchYear={sparkBySlug[p.slug]?.switchYear || ''}
+      switchPos={sparkBySlug[p.slug]?.switchPos || 0}
+      verdict={verdictBySlug[p.slug] || ''}
+    />
+  ))}
+</div>
+
+
+<script>
+  const grid = document.getElementById('pair-grid')!;
+  const cards = Array.from(grid.querySelectorAll('.pair-card')) as HTMLElement[];
+
+  document.querySelectorAll('[data-sort]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-sort]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const mode = (btn as HTMLElement).dataset.sort;
+      [...cards].sort((a, b) => {
+        if (mode === 'popular') return (Number(a.dataset.popular) || 0) - (Number(b.dataset.popular) || 0);
+        if (mode === 'volume') return (Number(b.dataset.total) || 0) - (Number(a.dataset.total) || 0);
+        if (mode === 'adoption') return (Number(b.dataset.adoption) || 0) - (Number(a.dataset.adoption) || 0);
+        return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+      }).forEach(c => grid.appendChild(c));
     });
-    // hideRuDomains replaced by holdoutFilter
-    let lineMode: 'both' | 'ukrainian' | 'russian' = 'both';
-    let chartMode: 'adoption' | 'volume' = 'volume';  // Volume by default — shows actual data density
-    let showEvents = true;
+  });
 
-    // Default to Kyiv
-    function getInitialPair(): string {
-      return 'kyiv';
+</script>
+
+<style>
+  /* The page is meant to land whole on a desktop screen: nav, hero, sources,
+     controls and all 24 cards without scrolling. The stack measured 811px against
+     roughly 790px usable at 1440x900, so the fixed chrome gives the room back —
+     the card grid is the content and is left alone. */
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-md) 0 var(--space-sm);
+  }
+  .hero-head { display: contents; }
+  @media (max-width: 640px) {
+    .hero { display: block; }
+    .hero-head {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.4rem;
     }
-
-    // No query params — slug in URL path
-
-    function showView(mode: 'landing' | 'pair') {
-      const landing = document.getElementById('landing-view');
-      const global = document.getElementById('global-view');
-      const pair = document.getElementById('pair-view');
-      const main = document.querySelector('.main') as HTMLElement;
-      if (landing) landing.style.display = mode === 'landing' ? 'block' : 'none';
-      if (global) global.style.display = mode === 'landing' ? 'block' : 'none';
-      if (pair) pair.style.display = mode === 'pair' ? 'block' : 'none';
-      // Fade in on first render
-      if (main) main.style.opacity = '1';
-    }
-
-    function showLanding() {
-      activePairSlug = '';
-      showView('landing');
-      document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-      drawHeatmap();
-      drawErrorAnalysis();
-      drawClCollocations();
-    }
-
-    let activePairSlug = getInitialPair();
-
-    function drawChart() {
-      const container = document.getElementById('chart')!;
-      const legendContainer = document.getElementById('chart-legend')!;
-
-      // Fade out, redraw, fade in
-      container.style.opacity = '0';
-      container.style.transition = 'opacity 0.15s ease';
-      container.innerHTML = '';
-      legendContainer.innerHTML = '';
-
-      requestAnimationFrame(() => {
-        container.style.opacity = '1';
-      });
-
-      const rect = container.getBoundingClientRect();
-      const margin = { top: 30, right: 10, bottom: 28, left: 45 };
-      const width = rect.width - margin.left - margin.right;
-      const height = rect.height - margin.top - margin.bottom;
-
-      const svg = d3.select('#chart')
-        .append('svg')
-        .attr('viewBox', `0 0 ${rect.width} ${rect.height}`)
-        .append('g')
-        .attr('transform', `translate(${margin.left},${margin.top})`);
-
-      const pairData = (timeseriesData as any)[activePairSlug];
-      if (!pairData) {
-        svg.append('text')
-          .attr('x', width / 2).attr('y', height / 2)
-          .attr('text-anchor', 'middle')
-          .attr('fill', '#9ca3af')
-          .attr('font-size', '14px')
-          .text('Дані незабаром з\'являться');
-        return;
-      }
-
-      // Check if active source has data for this pair
-      const hasData = activeSources.size > 0 && [...activeSources].some(s => pairData[s] && pairData[s].length > 0);
-      if (!hasData) {
-        svg.append('text')
-          .attr('x', width / 2).attr('y', height / 2 - 10)
-          .attr('text-anchor', 'middle')
-          .attr('fill', '#9ca3af')
-          .attr('font-size', '14px')
-          .text(`Немає даних ${sourceLabels[activeSource] || activeSource} для цієї пари`);
-        svg.append('text')
-          .attr('x', width / 2).attr('y', height / 2 + 14)
-          .attr('text-anchor', 'middle')
-          .attr('fill', '#d1d5db')
-          .attr('font-size', '12px')
-          .text('Спробуйте перейти на Trends або Wikipedia для ширшого покриття');
-        return;
-      }
-
-      const parseDate = d3.timeParse('%Y-%m');
-      const allDates: Date[] = [];
-
-      for (const src of activeSources) {
-        const series = pairData[src];
-        if (!series) continue;
-        for (const d of series) {
-          const date = parseDate(d.date);
-          if (date) allDates.push(date);
-        }
-      }
-
-      if (allDates.length === 0) return;
-
-      // Dynamic range based on actual data for this pair + source
-      const seriesData = pairData[activeSource] || [];
-      const dataMinDate = d3.min(allDates) as Date;
-      const dataMaxDate = d3.max(allDates) as Date;
-
-      // Pad 1 month before/after data range (tight fit)
-      const xStart = new Date(dataMinDate.getFullYear(), dataMinDate.getMonth() - 1, 1);
-      const xEnd = new Date(dataMaxDate.getFullYear(), dataMaxDate.getMonth() + 2, 1);
-      const x = d3.scaleTime()
-        .domain([xStart, xEnd])
-        .range([0, width]);
-
-      // Update title range and info text
-      const rangeEl = document.getElementById('chart-range');
-      const infoEl = document.getElementById('chart-info');
-      const sourceInfo: Record<string, string> = {
-        trends: 'Щомісячний пошуковий інтерес',
-        gdelt: 'GDELT v2 моніторинг новин',
-        wikipedia: 'API переглядів',
-        reddit: 'Дописи Reddit, річні',
-        youtube: 'Збіги у назвах відео, річні',
-        ngrams: 'Корпус Google Книг',
-        openalex: 'Наукові статті OpenAlex',
-      };
-      const startYear = dataMinDate.getFullYear();
-      const endYear = dataMaxDate.getFullYear();
-      if (rangeEl) rangeEl.textContent = `${startYear}–${endYear}`;
-      if (infoEl) infoEl.textContent = sourceInfo[activeSource] || '';
-
-
-      // Y-axis depends on chart mode
-      let y: d3.ScaleLinear<number, number>;
-      let yTicks: number[];
-
-      if (chartMode === 'volume') {
-        // Max = highest single bar value (side-by-side, not stacked)
-        const getVal = (d: any) => {
-          if (lineMode === 'ukrainian') return d.ukr || 0;
-          if (lineMode === 'russian') return d.rus || 0;
-          return Math.max(d.ukr || 0, d.rus || 0);  // side-by-side: max of either
-        };
-        const allVals = (seriesData || []).map(getVal).filter((v: number) => v > 0);
-        const maxVal = allVals.length > 0 ? Math.max(...allVals) : 1;
-        const yMax = maxVal * 1.1;
-        y = d3.scaleLinear().domain([0, yMax]).range([height, 0]);
-
-        // Dynamic grid: 4 evenly spaced ticks based on actual data
-        const step = yMax / 4;
-        yTicks = [0, step, step * 2, step * 3, yMax].map(v => Math.round(v));
-      } else {
-        y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
-        yTicks = [0, 25, 50, 75, 100];
-      }
-
-      // Grid lines
-      svg.append('g').selectAll('line')
-        .data(yTicks)
-        .enter().append('line')
-        .attr('x1', 0).attr('x2', width)
-        .attr('y1', (d: number) => y(d)).attr('y2', (d: number) => y(d))
-        .attr('stroke', '#e5e7eb')
-        .attr('stroke-dasharray', '3,4');
-
-      // Y-axis labels — same ticks as grid
-      const fmtY = (d: number) => {
-        if (chartMode === 'volume') {
-          if (d >= 1e6) return (d / 1e6).toFixed(1) + 'M';
-          if (d >= 1e3) return (d / 1e3).toFixed(0) + 'K';
-          return d === 0 ? '0' : String(Math.round(d));
-        }
-        return d + '%';
-      };
-      svg.append('g').selectAll('text')
-        .data(yTicks)
-        .enter().append('text')
-        .attr('x', -8).attr('y', (d: number) => y(d) + 4)
-        .attr('text-anchor', 'end')
-        .attr('fill', '#9ca3af').attr('font-size', '10px')
-        .text(fmtY);
-
-      // X-axis — decades for Ngrams, years for others
-      const xTicks = activeSource === 'ngrams'
-        ? d3.axisBottom(x).ticks(d3.timeYear.every(10)).tickSize(0).tickPadding(8).tickFormat(d3.timeFormat('%Y') as any)
-        : d3.axisBottom(x).ticks(d3.timeYear.every(1)).tickSize(0).tickPadding(8).tickFormat(d3.timeFormat('%Y') as any);
-
-      svg.append('g')
-        .attr('transform', `translate(0,${height})`)
-        .call(xTicks)
-        .selectAll('text').attr('fill', '#9ca3af').attr('font-size', '12px');
-
-      svg.selectAll('.domain').attr('stroke', '#e5e7eb');
-
-      // Event markers — positioned by date on x-scale
-      if (showEvents) {
-        const globalEvents = ((timeseriesData as any).events || []).map((e: any) => ({...e, type: 'global'}));
-        const customEvents = ((pairEvents as any)[activePairSlug] || []).map((e: any) => ({...e, type: 'pair'}));
-        const events = [...globalEvents, ...customEvents].sort((a: any, b: any) => a.date.localeCompare(b.date));
-
-        let eventNum = 0;
-        events.forEach((evt: any) => {
-          const date = parseDate(evt.date);
-          if (!date || date < xStart || date > xEnd) return;
-          eventNum++;
-          const xPos = x(date);
-          const isPair = evt.type === 'pair';
-
-          // Vertical dashed line
-          svg.append('line')
-            .attr('x1', xPos).attr('x2', xPos)
-            .attr('y1', -10).attr('y2', height)
-            .attr('stroke', isPair ? '#0057B8' : '#d1d5db')
-            .attr('stroke-width', 1)
-            .attr('stroke-dasharray', '4,3')
-            .attr('opacity', isPair ? 0.5 : 0.3);
-
-          // Numbered circle at top
-          svg.append('circle')
-            .attr('cx', xPos).attr('cy', -18)
-            .attr('r', 9)
-            .attr('fill', isPair ? '#0057B8' : '#e5e7eb');
-          svg.append('text')
-            .attr('x', xPos).attr('y', -14)
-            .attr('text-anchor', 'middle')
-            .attr('fill', isPair ? '#fff' : '#6b7280')
-            .attr('font-size', '10px')
-            .attr('font-weight', '700')
-            .text(eventNum);
-
-          // Legend entry below chart
-          const legendItem = document.createElement('span');
-          legendItem.className = 'legend-item';
-          legendItem.style.cssText = `font-size:0.87rem; color:${isPair ? '#0057B8' : '#6b7280'}; ${isPair ? 'font-weight:600;' : ''}`;
-          legendItem.innerHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:${isPair ? '#0057B8' : '#e5e7eb'};color:${isPair ? '#fff' : '#6b7280'};font-size:12px;font-weight:700;margin-right:4px;">${eventNum}</span>${evt.label} (${evt.date})`;
-          legendContainer.appendChild(legendItem);
-        });
-      }
-
-      // Data lines + crosshair tooltip
-      const chartContainer = document.getElementById('chart')!;
-      chartContainer.style.position = 'relative';
-
-      const tooltip = d3.select('#chart')
-        .append('div')
-        .style('position', 'absolute')
-        .style('background', 'white')
-        .style('border', '1px solid #d1d5db')
-        .style('border-radius', '8px')
-        .style('padding', '10px 14px')
-        .style('font-size', '13px')
-        .style('pointer-events', 'none')
-        .style('opacity', '0')
-        .style('box-shadow', '0 4px 16px rgba(0,0,0,0.12)')
-        .style('z-index', '10')
-        .style('white-space', 'nowrap')
-        .style('line-height', '1.6');
-
-      const crosshairLine = svg.append('line')
-        .attr('y1', 0).attr('y2', height)
-        .attr('stroke', '#d1d5db')
-        .attr('stroke-width', 1)
-        .attr('stroke-dasharray', '4,3')
-        .style('opacity', 0);
-
-      // Build all series data for crosshair lookup
-      const allSeriesData: Record<string, any[]> = {};
-      const activeLegend: {label: string; color: string; value: number}[] = [];
-
-      for (const src of activeSources) {
-        const series = pairData[src];
-        if (!series) continue;
-        allSeriesData[src] = series;
-
-        if (chartMode === 'volume') {
-          // ── VOLUME MODE: stacked bar chart ──
-          // Bar width based on data density: fewer points = wider bars
-          const timeSpanMs = (x.domain()[1] as any) - (x.domain()[0] as any);
-          const avgGapMs = series.length > 1 ? timeSpanMs / series.length : timeSpanMs;
-          const gapPx = Math.abs(x(new Date((x.domain()[0] as any).getTime() + avgGapMs)) - x(x.domain()[0] as any));
-          const barWidth = Math.max(2, Math.min(gapPx * 0.7, 25));
-
-          series.forEach((d: any) => {
-            const date = parseDate(d.date);
-            if (!date) return;
-            const ukr = d.ukr || 0;
-            const rus = d.rus || 0;
-            const cx = x(date);
-
-            if (lineMode === 'both') {
-              // Side-by-side: Russian left, Ukrainian right (no overlap)
-              const halfW = barWidth / 2;
-              if (rus > 0) {
-                svg.append('rect')
-                  .attr('x', cx - halfW).attr('y', y(rus))
-                  .attr('width', halfW - 0.5).attr('height', Math.max(0, height - y(rus)))
-                  .attr('fill', '#dc2626').attr('opacity', 0.45).attr('rx', 1);
-              }
-              if (ukr > 0) {
-                svg.append('rect')
-                  .attr('x', cx + 0.5).attr('y', y(ukr))
-                  .attr('width', halfW - 0.5).attr('height', Math.max(0, height - y(ukr)))
-                  .attr('fill', sourceColors[src]).attr('opacity', 0.85).attr('rx', 1);
-              }
-            } else if (lineMode === 'ukrainian' && ukr > 0) {
-              svg.append('rect')
-                .attr('x', cx - barWidth / 2).attr('y', y(ukr))
-                .attr('width', barWidth).attr('height', height - y(ukr))
-                .attr('fill', sourceColors[src]).attr('opacity', 0.8).attr('rx', 1);
-            } else if (lineMode === 'russian' && rus > 0) {
-              svg.append('rect')
-                .attr('x', cx - barWidth / 2).attr('y', y(rus))
-                .attr('width', barWidth).attr('height', height - y(rus))
-                .attr('fill', '#dc2626').attr('opacity', 0.8).attr('rx', 1);
-            }
-          });
-        } else {
-          // ── ADOPTION MODE: line chart ──
-          const line = d3.line<any>()
-            .x((d: any) => x(parseDate(d.date)!))
-            .y((d: any) => y(d.adoption))
-            .curve(d3.curveBasis);
-
-          if (lineMode !== 'russian') {
-            svg.append('path')
-              .datum(series)
-              .attr('fill', 'none')
-              .attr('stroke', sourceColors[src])
-              .attr('stroke-width', 3)
-              .attr('d', line);
-          }
-
-          if (lineMode !== 'ukrainian') {
-            const russianLine = d3.line<any>()
-              .x((d: any) => x(parseDate(d.date)!))
-              .y((d: any) => y(100 - d.adoption))
-              .curve(d3.curveBasis);
-
-            svg.append('path')
-              .datum(series)
-              .attr('fill', 'none')
-              .attr('stroke', '#dc2626')
-              .attr('stroke-width', lineMode === 'russian' ? 3 : 1.5)
-              .attr('stroke-dasharray', lineMode === 'russian' ? 'none' : '6,4')
-              .attr('opacity', lineMode === 'russian' ? 1 : 0.5)
-              .attr('d', russianLine);
-          }
-        }
-
-        const last = series[series.length - 1];
-
-        activeLegend.push({
-          label: sourceLabels[src],
-          color: sourceColors[src],
-          value: last.adoption,
-        });
-      }
-
-      // Crosshair overlay — interpolates between data points
-      svg.append('rect')
-        .attr('width', width).attr('height', height)
-        .attr('fill', 'transparent')
-        .on('mousemove', function(event: MouseEvent) {
-          const [mx] = d3.pointer(event);
-          const hoveredDate = x.invert(mx);
-          const dateStr = d3.timeFormat('%b %Y')(hoveredDate);
-
-          crosshairLine.attr('x1', mx).attr('x2', mx).style('opacity', 1);
-
-          let html = `<strong>${dateStr}</strong>`;
-          for (const src of Object.keys(allSeriesData)) {
-            const series = allSeriesData[src];
-            if (series.length < 2) continue;
-
-            const dates = series.map((d: any) => parseDate(d.date)!.getTime());
-            const vals = series.map((d: any) => d.adoption);
-            const t = hoveredDate.getTime();
-            if (t < dates[0] || t > dates[dates.length - 1]) continue;
-
-            let lo = 0, hi = dates.length - 1;
-            while (hi - lo > 1) {
-              const mid = (lo + hi) >> 1;
-              if (dates[mid] <= t) lo = mid; else hi = mid;
-            }
-
-            const closest = Math.abs(t - dates[lo]) < Math.abs(t - dates[hi]) ? lo : hi;
-            const d = series[closest];
-            const value = Math.round(d.adoption * 10) / 10;
-
-            if (chartMode === 'volume' && d.ukr !== undefined) {
-              html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}</span>`;
-              html += `<br/>&nbsp;&nbsp;<span style="color:${sourceColors[src]}">УКР: <strong>${(d.ukr || 0).toLocaleString()}</strong></span>`;
-              html += `<br/>&nbsp;&nbsp;<span style="color:#dc2626">РОС: <strong>${(d.rus || 0).toLocaleString()}</strong></span>`;
-              html += `<br/>&nbsp;&nbsp;<span style="color:#6b7280">Адопція: ${value}%</span>`;
-            } else {
-              html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${value}%</strong></span>`;
-              if (d.ukr !== undefined) {
-                html += ` <span style="color:#9ca3af;font-size:0.8em">(УКР:${(d.ukr||0).toLocaleString()} / РОС:${(d.rus||0).toLocaleString()})</span>`;
-              }
-            }
-          }
-
-          tooltip.style('opacity', '1').html(html);
-          const cr = chartContainer.getBoundingClientRect();
-          const left = event.clientX - cr.left;
-          tooltip.style('left', (left > width / 2 ? left - 200 : left + 20) + 'px')
-            .style('top', '10px');
-        })
-        .on('mouseleave', function() {
-          crosshairLine.style('opacity', 0);
-          tooltip.style('opacity', '0');
-        });
-
-      // Legend
-      if (lineMode !== 'russian') {
-        for (const item of activeLegend) {
-          const el = document.createElement('div');
-          el.className = 'legend-item';
-          el.innerHTML = `<span class="legend-line" style="background: ${item.color}"></span>${item.label}: ${item.value}%`;
-          legendContainer.appendChild(el);
-        }
-      }
-      if (lineMode !== 'ukrainian') {
-        const el = document.createElement('div');
-        el.className = 'legend-item';
-        const lastVal = activeLegend[0] ? (100 - activeLegend[0].value).toFixed(1) : '?';
-        el.innerHTML = `<span class="legend-line" style="background: #dc2626"></span>Стара назва: ${lastVal}%`;
-        legendContainer.appendChild(el);
-      }
-    }
-
-    // Sidebar
-    document.querySelectorAll('.sidebar-header').forEach(header => {
-      header.addEventListener('click', () => {
-        header.classList.toggle('open');
-        header.nextElementSibling?.classList.toggle('open');
-      });
-    });
-
-    function selectPair(pairSlug: string) {
-      activePairSlug = pairSlug;
-      showView('pair');
-      document.querySelectorAll('.sidebar-item').forEach(i => {
-        const s = (i as HTMLElement).dataset.pairSlug || '';
-        i.classList.toggle('active', s === pairSlug);
-        if (s === pairSlug) {
-          const section = i.closest('.sidebar-section');
-          if (section) {
-            section.querySelector('.sidebar-header')?.classList.add('open');
-            section.querySelector('.sidebar-items')?.classList.add('open');
-          }
-        }
-      });
-      const pair = (pairs as any).pairs.find((p: any) => p.slug === pairSlug);
-      if (pair) {
-        document.getElementById('chart-new')!.textContent = pair.ukrainian;
-        document.getElementById('chart-old')!.textContent = pair.russian;
-      }
-      drawChart();
-      drawPairStats();
-      drawAdoptionCalc();
-      drawPairSourceChart();
-      drawMediaOrigin();
-      drawHoldoutTable();
-    }
-
-    function drawAdoptionCalc() {
-      const body = document.getElementById('adoption-calc-body');
-      if (!body) return;
-
-      const pairData = (timeseriesData as any)[activePairSlug];
-      if (!pairData) { body.innerHTML = ''; return; }
-
-      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
-      if (!pair) return;
-
-      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
-      const fN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
-
-      // Big number at top
-      let html = `<div style="display:flex; align-items:baseline; gap:0.5rem; margin-bottom:0.5rem;">`;
-      html += `<span style="font-size:1.8rem; font-weight:800; color:#0057B8;">${pair.adoption}%</span>`;
-      html += `<span style="font-size:0.82rem; color:var(--text-muted);">середнє за ${srcOrder.filter(s => pairData[s]?.length > 0).length} джерелами</span>`;
-      html += `</div>`;
-
-      // Per-source bars
-      html += '<div style="display:flex; flex-direction:column; gap:0.3rem;">';
-      for (const src of srcOrder) {
-        const series = pairData[src];
-        if (!series || series.length === 0) continue;
-        const last = series[series.length - 1];
-        const pct = last.adoption;
-        const ukr = last.ukr || 0;
-        const rus = last.rus || 0;
-        const total = ukr + rus;
-        const countStr = total > 0 ? `${fN(ukr)}/${fN(total)}` : '';
-
-        html += `<div style="display:flex; align-items:center; gap:0.4rem;">`;
-        html += `<span style="width:60px; font-size:0.8rem; color:var(--text-muted); text-align:right; flex-shrink:0;">${sourceLabels[src].split(' ')[0]}</span>`;
-        html += `<div style="flex:1; height:14px; background:#f0f0f0; border-radius:7px; overflow:hidden; position:relative;">`;
-        html += `<div style="height:100%; width:${Math.min(100, pct)}%; background:${sourceColors[src]}; border-radius:7px; opacity:0.8;"></div>`;
-        html += `</div>`;
-        html += `<span style="width:38px; font-size:0.81rem; font-weight:600; color:${sourceColors[src]}; text-align:right; flex-shrink:0;">${pct}%</span>`;
-        html += `</div>`;
-      }
-      html += '</div>';
-
-      body.innerHTML = html;
-    }
-
-    function drawPairSourceChart() {
-      const container = document.getElementById('pair-source-chart');
-      if (!container) return;
-      container.innerHTML = '';
-
-      const pairData = (timeseriesData as any)[activePairSlug];
-      if (!pairData) return;
-
-      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
-      const items: {src: string; adoption: number; n: number}[] = [];
-
-      for (const src of srcOrder) {
-        const series = pairData[src];
-        if (!series || series.length === 0) continue;
-        const last = series[series.length - 1];
-        items.push({src, adoption: last.adoption, n: series.length});
-      }
-
-      if (items.length === 0) return;
-
-      const margin = {top: 5, right: 50, bottom: 5, left: 110};
-      const rowH = 26;
-      const width = container.getBoundingClientRect().width - margin.left - margin.right;
-      const height = items.length * rowH;
-      const totalH = height + margin.top + margin.bottom;
-      const totalW = width + margin.left + margin.right;
-
-      const svg = d3.select('#pair-source-chart')
-        .append('svg')
-        .attr('width', '100%')
-        .attr('height', totalH)
-        .attr('viewBox', `0 0 ${totalW} ${totalH}`)
-        .attr('preserveAspectRatio', 'xMinYMin meet')
-        .append('g').attr('transform', `translate(${margin.left},${margin.top})`);
-
-      const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
-      const y = d3.scaleBand().domain(items.map(d => d.src)).range([0, height]).padding(0.3);
-
-      // 50% line
-      svg.append('line').attr('x1', x(50)).attr('x2', x(50)).attr('y1', 0).attr('y2', height)
-        .attr('stroke', '#e5e7eb').attr('stroke-dasharray', '3,3');
-
-      items.forEach(item => {
-        svg.append('text').attr('x', -6).attr('y', y(item.src)! + y.bandwidth()/2 + 4)
-          .attr('text-anchor', 'end').attr('font-size', '11px').attr('fill', 'var(--text)')
-          .text(sourceLabels[item.src] || item.src);
-
-        svg.append('rect')
-          .attr('x', 0).attr('y', y(item.src)!)
-          .attr('width', Math.max(2, x(item.adoption))).attr('height', y.bandwidth())
-          .attr('fill', sourceColors[item.src]).attr('rx', 3).attr('opacity', 0.85);
-
-        svg.append('text')
-          .attr('x', x(item.adoption) + 6).attr('y', y(item.src)! + y.bandwidth()/2 + 4)
-          .attr('font-size', '11px').attr('font-weight', '600').attr('fill', sourceColors[item.src])
-          .text(`${item.adoption}%`);
-      });
-    }
-
-    function drawMediaOrigin() {
-      const wrapper = document.getElementById('media-origin-container');
-      const spellingEl = document.getElementById('spelling-pie');
-      const uaOriginEl = document.getElementById('ua-origin-pie');
-      const ruOriginEl = document.getElementById('ru-origin-pie');
-      if (!wrapper || !spellingEl || !uaOriginEl || !ruOriginEl) return;
-      spellingEl.innerHTML = '';
-      uaOriginEl.innerHTML = '';
-      ruOriginEl.innerHTML = '';
-
-      const pairData = (timeseriesData as any)[activePairSlug];
-      if (!pairData?.gdelt || pairData.gdelt.length === 0) {
-        wrapper.style.display = 'none';
-        return;
-      }
-      wrapper.style.display = 'grid';
-
-      // 1. Overall spelling pie
-      const recent = pairData.gdelt.slice(-24);
-      const ukr = recent.reduce((s: number, d: any) => s + (d.ukr || 0), 0);
-      const rus = recent.reduce((s: number, d: any) => s + (d.rus || 0), 0);
-      drawPie(spellingEl, [
-        {label: 'Українська', value: ukr, color: '#0057B8'},
-        {label: 'Російська', value: rus, color: '#dc2626'},
-      ]);
-
-      // Domain origin data
-      const origins = (domainOrigins as any)[activePairSlug];
-      if (origins) {
-        const intl = origins.intl || {ukr:0, rus:0, total:0};
-        const ua = origins.ua || {ukr:0, rus:0, total:0};
-        const ru = origins.ru || {ukr:0, rus:0, total:0};
-
-        // 2. Ukrainian spelling sources — where do UA-form articles come from?
-        drawPie(uaOriginEl, [
-          {label: 'Міжнародні', value: intl.ukr, color: '#059669'},
-          {label: 'Домени .ua', value: ua.ukr, color: '#0057B8'},
-          {label: 'Домени .ru', value: ru.ukr, color: '#dc2626'},
-        ]);
-
-        // 3. Russian spelling sources — where do RU-form articles come from?
-        drawPie(ruOriginEl, [
-          {label: 'Міжнародні', value: intl.rus, color: '#059669'},
-          {label: 'Домени .ua', value: ua.rus, color: '#0057B8'},
-          {label: 'Домени .ru', value: ru.rus, color: '#dc2626'},
-        ]);
-      } else {
-        uaOriginEl.innerHTML = '<div style="color:#9ca3af; font-size:0.86rem;">Немає даних</div>';
-        ruOriginEl.innerHTML = '';
-      }
-    }
-
-    function drawPie(container: HTMLElement, slices: {label: string; value: number; color: string}[]) {
-      const total = slices.reduce((s, d) => s + d.value, 0);
-      if (total === 0) return;
-
-      const size = 130;
-      const r = size / 2 - 5;
-      const cx = size / 2;
-      const cy = size / 2;
-
-      let svg = `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">`;
-      let startAngle = -Math.PI / 2;
-
-      for (const slice of slices) {
-        const pct = slice.value / total;
-        const angle = pct * 2 * Math.PI;
-        const endAngle = startAngle + angle;
-        const large = angle > Math.PI ? 1 : 0;
-
-        const x1 = cx + r * Math.cos(startAngle);
-        const y1 = cy + r * Math.sin(startAngle);
-        const x2 = cx + r * Math.cos(endAngle);
-        const y2 = cy + r * Math.sin(endAngle);
-
-        if (pct > 0.001) {
-          svg += `<path d="M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z" fill="${slice.color}" opacity="0.85"/>`;
-        }
-        startAngle = endAngle;
-      }
-      svg += '</svg>';
-
-      // Legend below
-      let legend = '<div style="display:flex; flex-direction:column; gap:0.2rem; margin-top:0.3rem;">';
-      for (const slice of slices) {
-        const pct = total > 0 ? (slice.value / total * 100).toFixed(1) : '0';
-        const fmtVal = slice.value >= 1e6 ? (slice.value/1e6).toFixed(1)+'M' : slice.value >= 1e3 ? (slice.value/1e3).toFixed(1)+'K' : String(slice.value);
-        legend += `<div style="display:flex; align-items:center; gap:0.3rem; font-size:0.81rem;">`;
-        legend += `<span style="width:8px; height:8px; border-radius:2px; background:${slice.color}; flex-shrink:0;"></span>`;
-        legend += `<span style="color:var(--text);">${slice.label}</span>`;
-        legend += `<span style="color:var(--text-muted); margin-left:auto;">${pct}% (${fmtVal})</span>`;
-        legend += '</div>';
-      }
-      legend += '</div>';
-
-      container.innerHTML = svg + legend;
-    }
-
-    function drawPairStats() {
-      const container = document.getElementById('pair-stats');
-      if (!container) return;
-      container.innerHTML = '';
-
-      const pairData = (timeseriesData as any)[activePairSlug];
-      if (!pairData) return;
-
-      const srcOrder = ['trends', 'gdelt', 'wikipedia', 'reddit', 'youtube', 'ngrams', 'openalex'];
-      for (const src of srcOrder) {
-        const series = pairData[src];
-        const card = document.createElement('div');
-        card.className = 'stat-card mini';
-        card.style.setProperty('--accent', sourceColors[src] || '#888');
-
-        if (series && series.length > 0) {
-          const total = series.reduce((s: number, d: any) => s + (d.ukr || 0) + (d.rus || 0), 0);
-          const last = series[series.length - 1];
-          const fmtN = (n: number) => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(n);
-          card.innerHTML = `
-            <div class="stat-value">${total > 0 ? fmtN(total) : last.adoption + '%'}</div>
-            <div class="stat-label">${sourceLabels[src]}</div>
-            <div class="stat-source">${series.length} точок даних</div>
-          `;
-        } else {
-          card.innerHTML = `
-            <div class="stat-value" style="color:#d1d5db;">—</div>
-            <div class="stat-label">${sourceLabels[src]}</div>
-            <div class="stat-source">Немає даних</div>
-          `;
-          card.style.opacity = '0.4';
-        }
-        container.appendChild(card);
-      }
-    }
-
-    document.querySelectorAll('.sidebar-item').forEach(item => {
-      item.addEventListener('click', () => {
-        selectPair((item as HTMLElement).dataset.pairSlug || 'kyiv');
-      });
-    });
-
-    // Initialize from URL param
-    if (activePairSlug !== 1) {
-      selectPair(activePairSlug);
-    }
-
-    // Source toggles — radio behavior (one at a time)
-    document.querySelectorAll('.source-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const src = (btn as HTMLElement).dataset.source!;
-        // Deactivate all, activate clicked
-        document.querySelectorAll('.source-toggle').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        activeSource = src;
-        activeSources = new Set([src]);
-
-        drawChart();
-
-        // Show/hide GDELT-specific sections
-        const gdeltSections = ['media-origin-container', 'holdout-container'];
-        gdeltSections.forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.style.display = src === 'gdelt' ? 'block' : 'none';
-        });
-
-      });
-    });
-
-    // Chart mode radio (Adoption % / Volume)
-    document.querySelectorAll('.chart-mode').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.chart-mode').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        chartMode = (btn as HTMLElement).dataset.chart as any;
-        drawChart();
-      });
-    });
-
-    // Line mode radio (All / UA / RU)
-    document.querySelectorAll('.line-mode').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.line-mode').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        lineMode = (btn as HTMLElement).dataset.mode as any;
-        drawChart();
-      });
-    });
-
-    // Events toggle
-
-    // ── Heatmap / pair overview ──────────────────────────
-    function drawHeatmap() {
-      const container = document.getElementById('heatmap-chart')!;
-      container.innerHTML = '';
-
-      const sorted = [...pairs.pairs].sort((a: any, b: any) => b.adoption - a.adoption);
-
-      const rowHeight = 28;
-      const totalHeight = sorted.length * rowHeight;
-      container.style.height = totalHeight + 'px';
-
-      const rect = container.getBoundingClientRect();
-      const margin = { top: 0, right: 55, bottom: 0, left: 180 };
-      const barWidth = rect.width - margin.left - margin.right;
-
-      const svg = d3.select('#heatmap-chart')
-        .append('svg')
-        .attr('viewBox', `0 0 ${rect.width} ${totalHeight}`)
-        .append('g')
-        .attr('transform', `translate(${margin.left},0)`);
-
-      const x = d3.scaleLinear().domain([0, 100]).range([0, barWidth]);
-
-      const colorScale = (pct: number) => {
-        if (pct >= 80) return '#059669';
-        if (pct >= 50) return '#d97706';
-        if (pct >= 20) return '#ea580c';
-        return '#dc2626';
-      };
-
-      sorted.forEach((pair: any, i: number) => {
-        const yPos = i * rowHeight;
-
-        // Category dot
-        svg.append('circle')
-          .attr('cx', -170).attr('cy', yPos + rowHeight / 2)
-          .attr('r', 4)
-          .attr('fill', colorScale(pair.adoption));
-
-        // Label: Ukrainian name
-        svg.append('text')
-          .attr('x', -160).attr('y', yPos + rowHeight / 2 + 4)
-          .attr('fill', '#374151')
-          .attr('font-size', '11px')
-          .attr('font-weight', '500')
-          .text(pair.ukrainian);
-
-        // Old name (strikethrough)
-        svg.append('text')
-          .attr('x', -160).attr('y', yPos + rowHeight / 2 + 4)
-          .attr('fill', 'transparent')
-          .attr('font-size', '0px')
-          .text('');
-
-        // Background bar
-        svg.append('rect')
-          .attr('x', 0).attr('width', barWidth)
-          .attr('y', yPos + 4)
-          .attr('height', rowHeight - 8)
-          .attr('fill', '#f3f4f6')
-          .attr('rx', 2);
-
-        // Value bar
-        svg.append('rect')
-          .attr('x', 0)
-          .attr('width', x(pair.adoption))
-          .attr('y', yPos + 4)
-          .attr('height', rowHeight - 8)
-          .attr('fill', colorScale(pair.adoption))
-          .attr('opacity', 0.75)
-          .attr('rx', 2);
-
-        // Percentage
-        svg.append('text')
-          .attr('x', barWidth + 8)
-          .attr('y', yPos + rowHeight / 2 + 4)
-          .attr('fill', colorScale(pair.adoption))
-          .attr('font-size', '11px')
-          .attr('font-weight', '700')
-          .attr('font-family', 'var(--font-mono)')
-          .text(pair.adoption + '%');
-
-      });
-    }
-
-    // ── World map ─────────────────────────────────────────
-    // Crimea is Ukraine. The default world-atlas TopoJSON incorrectly
-    // shows it as part of Russia. We overlay a corrected Crimea polygon.
-    const CRIMEA_GEOJSON = {
-      type: "Feature",
-      properties: { name: "Crimea (Ukraine)" },
-      geometry: {
-        type: "Polygon",
-        coordinates: [[
-          [33.0, 46.1], [33.5, 46.1], [34.0, 46.05], [34.5, 45.95],
-          [35.0, 45.7], [35.4, 45.35], [35.8, 45.0], [36.2, 45.2],
-          [36.6, 45.35], [36.4, 45.5], [35.8, 45.7], [35.2, 45.5],
-          [35.0, 45.55], [34.5, 45.55], [34.0, 45.6], [33.7, 45.8],
-          [33.5, 45.95], [33.65, 46.2], [33.85, 46.25], [34.1, 46.3],
-          [34.5, 46.15], [34.8, 46.1], [35.2, 46.0], [35.5, 45.75],
-          [35.8, 45.4], [36.0, 45.15], [36.5, 45.05], [36.8, 45.0],
-          [36.6, 44.7], [36.2, 44.5], [35.6, 44.4], [35.0, 44.55],
-          [34.4, 44.55], [33.8, 44.4], [33.5, 44.55], [33.0, 44.4],
-          [32.5, 44.45], [32.0, 44.65], [31.8, 44.85], [32.0, 45.15],
-          [32.5, 45.35], [32.8, 45.5], [33.0, 45.7], [33.0, 46.1]
-        ]]
-      }
-    };
-
-    let cachedWorld: any = null;
-
-
-    // ── Holdout table ─────────────────────────────────────
-    let holdoutFilter = 'intl'; // default: hide .ru
-
-    function drawHoldoutTable() {
-      const container = document.getElementById('holdout-table');
-      if (!container) return;
-      const pairHoldouts = (holdoutsByPair as any)[activePairSlug];
-
-      const nameEl = document.getElementById('holdout-pair-name');
-      const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
-      if (nameEl && pair) nameEl.textContent = pair.russian;
-
-      if (!pairHoldouts || pairHoldouts.length === 0) {
-        container.innerHTML = '<div style="padding:2rem; text-align:center; color:#9ca3af; font-size:0.85rem;">Немає даних holdouts для цієї пари</div>';
-        return;
-      }
-
-      // Filter by domain type
-      let filtered = pairHoldouts;
-      if (holdoutFilter === 'intl') filtered = pairHoldouts.filter((h: any) => !h.is_ru && !h.domain.endsWith('.ua'));
-      else if (holdoutFilter === 'ru') filtered = pairHoldouts.filter((h: any) => h.is_ru);
-      else if (holdoutFilter === 'ua') filtered = pairHoldouts.filter((h: any) => h.domain.endsWith('.ua'));
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<div style="padding:1.5rem; text-align:center; color:#9ca3af; font-size:0.8rem;">Немає holdouts у цій категорії</div>`;
-        return;
-      }
-
-      const rows = filtered.map((h: any) => {
-        const searchUrl = `https://www.google.com/search?q=site:${h.domain}+${pair?.russian || ''}`;
-        const isRu = h.is_ru;
-        const isUa = h.domain.endsWith('.ua');
-        const tag = isRu ? '<span style="font-size:0.78rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ru</span>'
-                  : isUa ? '<span style="font-size:0.78rem; color:#0057B8; background:#f0f9ff; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.3rem;">.ua</span>'
-                  : '';
-
-        return `<tr style="border-bottom:1px solid #f3f4f6; ${isRu ? 'background:#fef2f2;' : ''}">
-          <td style="padding:0.4rem 0.6rem; font-size:0.8rem;">
-            <a href="https://${h.domain}" target="_blank" rel="noopener" style="color:var(--text); font-weight:500; text-decoration:none; border-bottom:1px dotted #d1d5db;">${h.domain}</a>${tag}
-          </td>
-          <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#dc2626; font-weight:600; font-family:var(--font-mono);">${h.russian_pct}%</td>
-          <td style="padding:0.4rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${h.total.toLocaleString()}</td>
-          <td style="padding:0.4rem 0.6rem;"><a href="${searchUrl}" target="_blank" rel="noopener" style="font-size:0.8rem; color:#4285F4; text-decoration:none;">перевірити →</a></td>
-        </tr>`;
-      }).join('');
-
-      container.innerHTML = `
-        <table style="width:100%; border-collapse:collapse;">
-          <thead><tr style="border-bottom:2px solid #e5e7eb;">
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.8rem; text-transform:uppercase; color:#6b7280;">Домен</th>
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.8rem; text-transform:uppercase; color:#6b7280;">Стара %</th>
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.8rem; text-transform:uppercase; color:#6b7280;">Статті</th>
-            <th style="padding:0.4rem 0.6rem; text-align:left; font-size:0.8rem; text-transform:uppercase; color:#6b7280;"></th>
-          </tr></thead>
-          <tbody>${rows}</tbody>
-        </table>
-        <div style="font-size:0.8rem; color:#9ca3af; padding:0.4rem 0.6rem;">${filtered.length} доменів · ${pairHoldouts.length} всього</div>
-      `;
-    }
-
-    // Holdout filter tabs
-    document.querySelectorAll('[data-holdout]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('[data-holdout]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        holdoutFilter = (btn as HTMLElement).dataset.holdout!;
-        drawHoldoutTable();
-      });
-    });
-
-    // Initial load: landing or pair view based on URL
-    if (activePairSlug > 0) {
-      selectPair(activePairSlug);
-    } else {
-      showView('landing');
-      drawCategoryChart();
-      drawHeatmap();
-    }
-
-    // Logo click → back to landing
-    document.querySelector('.topbar-logo')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      showLanding();
-    });
-
-    // About link → landing + scroll to about
-    document.getElementById('about-link')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      showLanding();
-      setTimeout(() => {
-        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    });
-
-    // Top 6 cards click → navigate to pair
-    document.querySelectorAll('.top6-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const pid = (card as HTMLElement).dataset.pairSlug || 'kyiv';
-        selectPair(pid);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-      card.addEventListener('mouseenter', () => { (card as HTMLElement).style.borderColor = '#0057B8'; (card as HTMLElement).style.boxShadow = '0 2px 8px rgba(0,87,184,0.1)'; });
-      card.addEventListener('mouseleave', () => { (card as HTMLElement).style.borderColor = '#e5e7eb'; (card as HTMLElement).style.boxShadow = 'none'; });
-    });
-
-    window.addEventListener('resize', () => {
-      if (activePairSlug > 0) {
-        drawChart();
-      } else {
-        drawCategoryChart();
-        drawHeatmap();
-      }
-    });
-
-    // ── Error Analysis chart ─────────────────────────────────
-    function drawErrorAnalysis() {
-      const container = document.getElementById('error-analysis-chart');
-      if (!container) return;
-      container.innerHTML = '';
-
-      const ea = errorAnalysis as any;
-      // Pick 10 most interesting pairs (mix of high/low spread)
-      const items = ea.disagreements
-        .filter((d: any) => Object.keys(d.sources).length >= 3)
-        .sort((a: any, b: any) => b.spread_pp - a.spread_pp)
-        .slice(0, 10);
-
-      const srcOrder = ['gdelt', 'trends', 'wikipedia', 'reddit', 'youtube', 'openalex'];
-
-      const rowH = 36;
-      const margin = { top: 25, right: 50, bottom: 10, left: 140 };
-      const width = container.getBoundingClientRect().width - margin.left - margin.right;
-      const height = items.length * rowH;
-
-      const svg = d3.select('#error-analysis-chart')
-        .append('svg')
-        .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
-        .append('g')
-        .attr('transform', `translate(${margin.left},${margin.top})`);
-
-      const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
-      const y = d3.scaleBand().domain(items.map((_: any, i: number) => String(i))).range([0, height]).padding(0.2);
-
-      // Grid
-      [0, 25, 50, 75, 100].forEach(v => {
-        svg.append('line').attr('x1', x(v)).attr('x2', x(v)).attr('y1', -5).attr('y2', height)
-          .attr('stroke', v === 50 ? '#d1d5db' : '#f0f0f0').attr('stroke-dasharray', v === 50 ? '3,3' : 'none');
-        svg.append('text').attr('x', x(v)).attr('y', -10).attr('text-anchor', 'middle')
-          .attr('font-size', '9px').attr('fill', '#9ca3af').text(v + '%');
-      });
-
-      items.forEach((item: any, i: number) => {
-        const yi = y(String(i))!;
-        const h = y.bandwidth();
-        const barH = h / (srcOrder.length + 1);
-
-        // Label
-        svg.append('text')
-          .attr('x', -6).attr('y', yi + h / 2 + 4)
-          .attr('text-anchor', 'end').attr('font-size', '11px').attr('fill', 'var(--text)')
-          .attr('font-weight', '500')
-          .text(item.ukrainian.length > 18 ? item.ukrainian.slice(0, 16) + '...' : item.ukrainian);
-
-        // One bar per source
-        let barIdx = 0;
-        for (const src of srcOrder) {
-          const val = item.sources[src];
-          if (val === undefined) continue;
-          svg.append('rect')
-            .attr('x', x(0)).attr('y', yi + barIdx * barH)
-            .attr('width', Math.max(2, x(val))).attr('height', barH - 1)
-            .attr('fill', sourceColors[src] || '#888')
-            .attr('opacity', 0.8).attr('rx', 2);
-          barIdx++;
-        }
-
-        // Spread label
-        const vals = Object.values(item.sources) as number[];
-        svg.append('text')
-          .attr('x', x(Math.max(...vals)) + 6).attr('y', yi + h / 2 + 4)
-          .attr('font-size', '10px').attr('fill', '#9ca3af').attr('font-weight', '600')
-          .text(`${item.spread_pp}пп`);
-      });
-
-      // Legend
-      const legend = d3.select('#error-analysis-chart').append('div')
-        .style('display', 'flex').style('gap', '0.75rem').style('justify-content', 'center')
-        .style('margin-top', '0.5rem').style('flex-wrap', 'wrap');
-
-      for (const src of srcOrder) {
-        legend.append('div')
-          .style('display', 'flex').style('align-items', 'center').style('gap', '4px')
-          .style('font-size', '11px').style('color', '#6b7280')
-          .html(`<span style="width:8px;height:8px;border-radius:50%;background:${sourceColors[src] || '#888'};display:inline-block;"></span>${sourceLabels[src]}`);
-      }
-    }
-
-    function drawClCollocations() {
-      const container = document.getElementById('cl-collocations-grid');
-      if (!container) return;
-      container.innerHTML = '';
-
-      const coll = clCollocations as any;
-      // Show top 6 pairs that have collocation data for both variants
-      const showPairs = [
-        { id: '10', ru: 'Chernobyl', ua: 'Chornobyl', label: 'Бренд-катастрофа vs. реальна катастрофа' },
-        { id: '1', ru: 'Kiev', ua: 'Kyiv', label: 'Флагман кампанії' },
-        { id: '3', ru: 'Odessa', ua: 'Odesa', label: 'Культурне вкорінення' },
-        { id: '61', ru: 'Vladimir Zelensky', ua: 'Volodymyr Zelenskyy', label: 'Президент воєнного часу' },
-        { id: '23', ru: 'Borscht', ua: 'Borshch', label: 'Їжа як ідентичність' },
-        { id: '46', ru: 'Pierogi', ua: 'Varenyky', label: 'Кулінарне змагання' },
-      ];
-
-      const grid = d3.select(container)
-        .style('display', 'grid')
-        .style('grid-template-columns', 'repeat(2, 1fr)')
-        .style('gap', '1rem');
-
-      for (const pair of showPairs) {
-        const pairData = coll[pair.slug];
-        if (!pairData || !pairData.russian?.collocates?.length || !pairData.ukrainian?.collocates?.length) continue;
-
-        const card = grid.append('div')
-          .style('background', '#1a1a2e')
-          .style('border-radius', '10px')
-          .style('padding', '1rem')
-          .style('cursor', 'pointer')
-          .on('click', () => { selectPair(pair.slug); });
-
-        card.append('div')
-          .style('font-size', '0.9rem')
-          .style('font-weight', '600')
-          .style('color', '#e2e8f0')
-          .style('margin-bottom', '0.2rem')
-          .text(`${pair.ru} → ${pair.ua}`);
-
-        card.append('div')
-          .style('font-size', '0.7rem')
-          .style('color', '#64748b')
-          .style('margin-bottom', '0.8rem')
-          .text(pair.label);
-
-        // Two columns: RU words | UA words
-        const cols = card.append('div')
-          .style('display', 'grid')
-          .style('grid-template-columns', '1fr 1fr')
-          .style('gap', '0.5rem');
-
-        // Russian collocates
-        const ruCol = cols.append('div');
-        ruCol.append('div')
-          .style('font-size', '0.7rem')
-          .style('color', '#ef4444')
-          .style('font-weight', '600')
-          .style('margin-bottom', '0.4rem')
-          .style('text-transform', 'uppercase')
-          .style('letter-spacing', '0.05em')
-          .text('Російська форма');
-
-        const ruWords = pairData.russian.collocates
-          .filter((c: any) => c.count >= 3)
-          .slice(0, 8);
-        const maxPmi = Math.max(...ruWords.map((c: any) => c.pmi), 1);
-
-        for (const w of ruWords) {
-          const row = ruCol.append('div')
-            .style('display', 'flex')
-            .style('align-items', 'center')
-            .style('gap', '4px')
-            .style('margin-bottom', '2px');
-
-          row.append('div')
-            .style('width', `${Math.max(8, (w.pmi / maxPmi) * 60)}%`)
-            .style('height', '14px')
-            .style('background', 'rgba(239, 68, 68, 0.3)')
-            .style('border-radius', '2px')
-            .style('display', 'flex')
-            .style('align-items', 'center')
-            .style('padding-left', '4px')
-            .style('font-size', '0.7rem')
-            .style('color', '#fca5a5')
-            .style('white-space', 'nowrap')
-            .text(w.word);
-
-          row.append('div')
-            .style('font-size', '0.6rem')
-            .style('color', '#64748b')
-            .text(`(${w.count})`);
-        }
-
-        // Ukrainian collocates
-        const uaCol = cols.append('div');
-        uaCol.append('div')
-          .style('font-size', '0.7rem')
-          .style('color', '#3b82f6')
-          .style('font-weight', '600')
-          .style('margin-bottom', '0.4rem')
-          .style('text-transform', 'uppercase')
-          .style('letter-spacing', '0.05em')
-          .text('Українська форма');
-
-        const uaWords = pairData.ukrainian.collocates
-          .filter((c: any) => c.count >= 3)
-          .slice(0, 8);
-        const maxPmiUa = Math.max(...uaWords.map((c: any) => c.pmi), 1);
-
-        for (const w of uaWords) {
-          const row = uaCol.append('div')
-            .style('display', 'flex')
-            .style('align-items', 'center')
-            .style('gap', '4px')
-            .style('margin-bottom', '2px');
-
-          row.append('div')
-            .style('width', `${Math.max(8, (w.pmi / maxPmiUa) * 60)}%`)
-            .style('height', '14px')
-            .style('background', 'rgba(59, 130, 246, 0.3)')
-            .style('border-radius', '2px')
-            .style('display', 'flex')
-            .style('align-items', 'center')
-            .style('padding-left', '4px')
-            .style('font-size', '0.7rem')
-            .style('color', '#93c5fd')
-            .style('white-space', 'nowrap')
-            .text(w.word);
-
-          row.append('div')
-            .style('font-size', '0.6rem')
-            .style('color', '#64748b')
-            .text(`(${w.count})`);
-        }
-      }
-    }
-  </script>
-</body>
-</html>
+    .hero-head .hero-logo { height: 44px; }
+    .hero-head h1 { margin: 0; }
+  }
+  .hero-logo {
+    height: 108px;
+    width: auto;
+    flex-shrink: 0;
+  }
+  .page-footer {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .page-footer p { margin: 0 0 0.4rem; }
+</style>
+
+</Base>

@@ -25,6 +25,8 @@ pairs:
     label: Peace negotiation surge
   match_mode: word_boundary
   slug: kyiv
+  blurb_uk: "Столиця — тут англійська змінилася першою"
+  verdict_uk: "Кампанія спрацювала: англійська перейшла на Kyiv близько 2019 року, ще до вторгнення — війна лише закріпила зміну."
   verdict: "The campaign worked: English switched around 2019, before the invasion — and the war cemented it."
   blurb: "The capital — where English switched first"
   word_boundary: true
@@ -43,6 +45,8 @@ pairs:
     label: Russian border offensive
   match_mode: word_boundary
   slug: kharkiv
+  blurb_uk: "Друге місто, 40 км від російського кордону"
+  verdict_uk: "Харків пішов шляхом Києва: англомовні новини майже повністю пишуть Kharkiv."
   verdict: "The second city followed Kyiv's path; English news now overwhelmingly writes Kharkiv."
   blurb: "Second city, 40 km from the Russian border"
   word_boundary: true
@@ -79,6 +83,8 @@ pairs:
   - odessa.{0,5}a.?zion
   homonym_type: us_city
   slug: odesa
+  blurb_uk: "Чорноморський порт; одна «с» чи дві"
+  verdict_uk: "Спірна територія: воєнні репортажі перейшли на Odesa, але подвійна «s» досі панує в культурних текстах."
   verdict: "Contested ground: war reporting shifted to Odesa, but the double-s Odessa still owns casual and cultural writing."
   blurb: "Black Sea port; one “s” or two"
   youtube_depth: legacy
@@ -91,6 +97,8 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: lviv
+  blurb_uk: "Західний центр, який англійська звала Lvov"
+  verdict_uk: "Майже повний перехід: Lvov лишився здебільшого в історичних текстах."
   verdict: "A near-complete switch: Lvov survives mainly in historical prose."
   blurb: "The western hub English used to call Lvov"
   events:
@@ -179,6 +187,8 @@ pairs:
     label: S.T.A.L.K.E.R. 2 Heart of Chornobyl release
   match_mode: word_boundary
   slug: chornobyl
+  blurb_uk: "Катастрофа, відома за радянським написанням"
+  verdict_uk: "Назву заморозила катастрофа: англійська досі пише Chernobyl; українська форма зайшла переважно через гру 2024 року."
   verdict: "The disaster froze the name in its Soviet-era form; the Ukrainian spelling entered English mainly through the 2024 video game."
   blurb: "A disaster known by its Soviet-era spelling"
   youtube_depth: day
@@ -197,6 +207,8 @@ pairs:
     label: Retreat from Lyman, Luhansk oblast
   match_mode: word_boundary
   slug: luhansk
+  blurb_uk: "Окупований із 2014 року"
+  verdict_uk: "Висвітлення окупації просунуло Luhansk уперед; російська форма живе в архівах до 2014 року."
   verdict: "Occupation coverage pushed Luhansk ahead; the Russian form lives on in pre-2014 archives."
   blurb: "Occupied since 2014"
   ukrainian_cyrillic: Луганськ
@@ -208,6 +220,8 @@ pairs:
   notes: River name. Qualified with "River" to disambiguate from the city (pair 7, Dnepropetrovsk→Dnipro).
   match_mode: exact_phrase
   slug: dnipro-river
+  blurb_uk: "Річка, яку англійська досі зве Dnieper"
+  verdict_uk: "Досі навпіл: атласи й старіша проза тримаються російського Dnieper."
   verdict: "Still split: atlases and older prose keep the Russian-derived Dnieper for the river."
   blurb: "The river English still calls the Dnieper"
   youtube_depth: legacy
@@ -242,6 +256,8 @@ pairs:
     label: Toponym decolonization law
   match_mode: word_boundary
   slug: donbas
+  blurb_uk: "Перший фронт війни; одна «с» чи дві"
+  verdict_uk: "Одна «с» перемогла в новинах; Donbass затримується у проросійських виданнях."
   verdict: "The single-s form won the news; Donbass lingers in Russian-aligned outlets."
   blurb: "The war’s first front; one “s” or two"
   ukrainian_cyrillic: Донбас
@@ -252,6 +268,8 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: chicken-kyiv
+  blurb_uk: "Імʼя столиці, заморожене в меню"
+  verdict_uk: "Меню опираються: страва здебільшого лишається Chicken Kiev, хоч місто вже змінилося."
   verdict: "Menus resist: the dish mostly stays Chicken Kiev even though the city switched."
   blurb: "The capital’s name, frozen on menus"
   youtube_depth: legacy
@@ -275,6 +293,8 @@ pairs:
     label: UNESCO inscribes Ukrainian borscht
   match_mode: word_boundary
   slug: borscht
+  blurb_uk: "ЮНЕСКО визнає його українським"
+  verdict_uk: "Українське написання стало англійським стандартом, закріплене рішенням ЮНЕСКО 2022 року."
   verdict: "The Ukrainian-aligned spelling is now the English standard, anchored by the 2022 UNESCO listing."
   blurb: "UNESCO lists it as Ukrainian heritage"
   ukrainian_cyrillic: Борщ
@@ -353,6 +373,8 @@ pairs:
     label: Champions League tie vs Barcelona
   match_mode: exact_phrase
   slug: dynamo-kyiv
+  blurb_uk: "Клуб, який Європа бачить щотижня"
+  verdict_uk: "Спортивний стиль відстає: УЄФА перейменувала клуб 2018-го, але репортажі досі пишуть Dynamo Kiev."
   verdict: "Sports style lags: UEFA renamed the club in 2018, but most match reports still write Dynamo Kiev."
   blurb: "The club Europe watches weekly"
   youtube_depth: legacy
@@ -374,6 +396,8 @@ pairs:
     label: Russia weaponizes historical narrative
   match_mode: exact_phrase
   slug: kyivan-rus
+  blurb_uk: "Середньовічна держава, яку привласнюють"
+  verdict_uk: "Середньовічну державу досі читають через російську: Kievan Rus панує в історичних текстах."
   verdict: "The medieval state is still read through Russian: Kievan Rus dominates history writing."
   blurb: "The medieval state both nations claim"
   youtube_depth: legacy
@@ -458,6 +482,8 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: ternopil
+  blurb_uk: "Українське -піль проти російського -поль"
+  verdict_uk: "Тихий, майже повний перехід — Ternopol практично зник із сучасної англійської."
   verdict: "A quiet, near-complete switch — Ternopol has almost vanished from current English."
   blurb: "Ukrainian -pil vs Russian -pol"
   events:
@@ -471,6 +497,8 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: varenyky
+  blurb_uk: "Вареники виходять у світ"
+  verdict_uk: "Українська назва набирає силу з глобалізацією кухні; vareniki живе в старих рецептах."
   verdict: "The Ukrainian name gained ground as the cuisine went global; vareniki persists in older recipe archives."
   blurb: "Dumplings English met through Russian"
   ukrainian_cyrillic: Вареники
@@ -488,6 +516,8 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: babyn-yar
+  blurb_uk: "Місце Голокосту з двома традиціями назви"
+  verdict_uk: "Мова памʼяті розділена: меморіальні інституції прийняли Babyn Yar, історіографія тримає Babi Yar."
   verdict: "Commemorative language is split: memorial institutions adopted Babyn Yar, historical writing keeps Babi Yar."
   blurb: "Holocaust site, named in two traditions"
   events:
@@ -518,6 +548,8 @@ pairs:
     label: Usyk beats Dubois (Wembley)
   match_mode: exact_phrase
   slug: oleksandr-usyk
+  blurb_uk: "Чемпіон пише своє імʼя сам"
+  verdict_uk: "Чемпіон називає себе сам — і англійська послухалась: майже повне прийняття."
   verdict: "The champion states his own name, and English complied — adoption is near-total."
   blurb: "The champion spells it Oleksandr"
   youtube_depth: legacy
@@ -540,6 +572,8 @@ pairs:
     label: Oval Office clash with Trump
   match_mode: exact_phrase
   slug: volodymyr-zelenskyy
+  blurb_uk: "Президент, якого світ пізнав 2022 року"
+  verdict_uk: "Війна майже миттєво зробила українську форму стандартом; коротше Zelensky тримається в заголовках."
   verdict: "The war made the Ukrainian form the default almost overnight; the shorter Zelensky persists mainly in headline style."
   blurb: "The president the world met in 2022"
   ukrainian_cyrillic: Володимир Зеленський
@@ -566,6 +600,8 @@ pairs:
     label: Poroshenko unveils Volodymyr statue
   match_mode: exact_phrase
   slug: volodymyr-the-great
+  blurb_uk: "Князь, який охрестив Русь 988 року"
+  verdict_uk: "Російська форма домінує: англійська досі повʼязує князя — і Русь — із Росією більше, ніж з Україною."
   verdict: "The Russian form dominates: English still ties the prince — and Kyivan Rus — to Russia more than to Ukraine."
   blurb: "The prince who baptized Rus in 988"
   youtube_depth: legacy
@@ -591,6 +627,8 @@ pairs:
   - winery
   homonym_type: brand_composer
   slug: bakhmut
+  blurb_uk: "Перейменований 2016-го, відомий світові 2023-го"
+  verdict_uk: "Битва написала імʼя: англійська вивчила місто як Bakhmut, Artemovsk не мав англійського життя."
   verdict: "The battle wrote the name: English learned the city as Bakhmut, and Artemovsk never had an English life."
   blurb: "Renamed in 2016, world-famous by 2023"
   ukrainian_cyrillic: Бахмут
@@ -602,6 +640,8 @@ pairs:
   notes: Ukrainian-born writer (Миколa Гоголь). Tests Г→H and Микола→Mykola vs Nikolai.
   match_mode: exact_phrase
   slug: mykola-hohol
+  blurb_uk: "Письменник, якого Росія видає як Gogol"
+  verdict_uk: "Gogol непорушний: російська видавнича спадщина зафіксувала імʼя письменника."
   verdict: "Gogol is immovable: a Russian-published literary legacy fixed the writer's English name."
   blurb: "The writer Russia publishes as Gogol"
   youtube_depth: legacy
@@ -617,6 +657,8 @@ pairs:
   notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms Ukraine's territorial integrity.
   match_mode: word_boundary
   slug: feodosiia
+  blurb_uk: "Кримський порт під окупацією"
+  verdict_uk: "Окупований кримський порт в англійських текстах здебільшого зберігає російське написання."
   verdict: "The occupied Crimean port mostly keeps its Russian-era spelling in English text."
   blurb: "A Crimean port under occupation"
   events:
@@ -641,6 +683,8 @@ pairs:
   notes: Aviation pioneer (Ігор Сікорський). Tests І→I and Г→H (Igor vs Ihor).
   match_mode: exact_phrase
   slug: ihor-sikorsky
+  blurb_uk: "Авіапіонер із Києва"
+  verdict_uk: "Американська слава заморозила російську передачу: в англійській він досі Igor."
   verdict: "American fame froze the Russian rendering; the aviation pioneer remains Igor in English."
   blurb: "The helicopter pioneer from Kyiv"
   youtube_depth: legacy
@@ -658,6 +702,8 @@ pairs:
   notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of the most consequential cases of Ukrainian identity erasure in global science history.
   match_mode: exact_phrase
   slug: serhii-korolyov
+  blurb_uk: "Інженер, що запустив Супутник"
+  verdict_uk: "Історія записала його один раз: конструктор космічної програми всюди лишається Sergei Korolev."
   verdict: "History books wrote him once: the space chief stays Sergei Korolev everywhere."
   blurb: "The engineer who launched Sputnik"
   youtube_depth: legacy
@@ -687,6 +733,8 @@ pairs:
   notes: Suprematist artist (Казимир Малевич). Tests И→Y and Ч→Ch (Malevich vs Malevych).
   match_mode: exact_phrase
   slug: kazymyr-malevych
+  blurb_uk: "Автор «Чорного квадрата», киянин"
+  verdict_uk: "Музеї каталогізують художника в російській транслітерації; українська форма майже не зʼявляється."
   verdict: "Museums catalogue the painter under the Russian transliteration; the Ukrainian form barely registers."
   blurb: "Black Square’s painter, born in Kyiv"
   youtube_depth: legacy
