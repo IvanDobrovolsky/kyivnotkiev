@@ -989,8 +989,6 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
                     oa_adopt[p["pair_slug"]] = ukr / total
         per_source["openalex"] = oa_adopt
     # Telegram
-    if len(telegram):
-        per_source["telegram"] = _source_adoption(telegram, None, "date", cutoff_12m, agg_mode="count", min_total=3)
 
     # Mean adoption across sources per pair
     recent_map = {}
@@ -1034,10 +1032,6 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
             if pid in enabled_slugs:
                 oa_total = sum(yr["total"] for yr in pair_data.get("yearly", []))
                 total_map[pid] = total_map.get(pid, 0) + oa_total
-    # Telegram
-    if len(telegram):
-        for pid, cnt in telegram.groupby("pair_slug").size().items():
-            total_map[pid] = total_map.get(pid, 0) + int(cnt)
 
     # Build pairs
     pairs_out = []
@@ -1337,47 +1331,7 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
         else:
             log.info("  YouTube holdouts ordered by recency — set YOUTUBE_API_KEY to rank by views")
 
-    # Telegram: Latin-script Russian forms inside (mostly Cyrillic) public-channel
-    # messages. One guard is mandatory: the match must survive URL-stripping —
-    # dynamo.kiev.ua's own channel matched "Kiev" 311 times through the link
-    # footer in every post, which is boilerplate, not usage.
-    try:
-        _tg = pd.read_parquet(ROOT / "data" / "store" / "telegram_raw.parquet")
-    except Exception:
-        _tg = pd.DataFrame()
-    if len(_tg):
-        import re as _re2
-        _dstr = _tg.date.astype(str).str[:10]
-        _t = _tg[(_tg.variant == "russian")
-                 & (_dstr >= HOLDOUT_SINCE)
-                 & (_dstr <= STUDY_END_DATE)
-                 & _tg.pair_slug.isin(enabled_slugs)].copy()
-        _t["cleantext"] = (_t.text.astype(str)
-                        .str.replace(r"https?://\S+", " ", regex=True)
-                        .str.replace(r"\b[\w.-]+\.(?:ua|com|org|net|info)/\S*", " ", regex=True))
-        _t = _t[[bool(_re2.search(r"\b" + _re2.escape(str(r.matched_term)) + r"\b",
-                                  r.cleantext, _re2.I))
-                 for r in _t.itertuples()]]
-        _n_tg = 0
-        for _slug, _g in _t.groupby("pair_slug"):
-            _g = (_g.sort_values("views", ascending=False)
-                    .groupby("channel_title", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
-                    .sort_values("views", ascending=False).head(HOLDOUT_CAP))
-            if not len(_g):
-                continue
-            by_pair.setdefault(_slug, {})["telegram"] = [{
-                "name": str(r.channel_title)[:60],
-                "url": f"https://t.me/{r.channel}",
-                "snippet": _re2.sub(r"\s+", " ", str(r.text))[:160],
-                "term": str(r.matched_term),
-                "views": int(r.views) if pd.notna(r.views) else 0,
-                "month": str(r.date)[:7],
-            } for r in _g.itertuples()]
-            _n_tg += len(_g)
-        log.info(f"  Telegram holdouts: {_n_tg} messages (russian form outside URLs, "
-                 f"since {HOLDOUT_SINCE}, view-ranked)")
-
-    log.info(f"  Holdouts: {len(by_pair)} pairs across news/wiki/reddit/youtube/telegram")
+    log.info(f"  Holdouts: {len(by_pair)} pairs across news/wiki/reddit/youtube")
 
     # Global holdouts (top 100 news domains)
     global_list = []
@@ -1494,7 +1448,7 @@ def main():
     # several sources are smoothed before display.
     INDEX_UNITS = {"trends": "index", "ngrams": "frequency"}
     UNITS = {"gdelt": "articles", "wikipedia": "pageviews", "reddit": "posts",
-             "youtube": "videos", "openalex": "papers", "telegram": "messages"}
+             "youtube": "videos", "openalex": "papers"}
     pss: dict = {}
     for _slug, _srcs in timeseries.items():
         if _slug == "events" or not isinstance(_srcs, dict):
