@@ -354,6 +354,28 @@ def build_pairs() -> bool:
         print("no text-bearing processed files yet")
         return False
     allp = pd.concat(frames, ignore_index=True)
+
+    # Homonym false positives are excluded from the analysis-ready pair files —
+    # the same release principle as the telegram deprecation: raw source
+    # mirrors stay untouched, combined pairs are clean. Odessa-TX alone was
+    # 34,735 rows of odesa's pair file before this existed (2026-09-02).
+    import re as _re
+    import yaml as _yaml
+    _cfg = _yaml.safe_load(open("config/pairs.yaml"))
+    _pats = {p["slug"]: [_re.compile(f, _re.I) for f in p.get("homonym_filters", [])]
+             for p in _cfg["pairs"] if p.get("homonym_filters")}
+    if _pats:
+        _blob = (allp.get("title", pd.Series("", index=allp.index)).fillna("").astype(str)
+                 + " " + allp["text"].fillna("").astype(str))
+        _fp = pd.Series(False, index=allp.index)
+        for _slug, _ps in _pats.items():
+            _m2 = allp.pair_slug == _slug
+            if _m2.any():
+                _fp.loc[_m2] = _blob[_m2].apply(lambda t: any(r.search(t) for r in _ps))
+        if int(_fp.sum()):
+            print(f"  homonym filter: {int(_fp.sum()):,} false-positive rows excluded from pair files")
+            allp = allp[~_fp]
+
     out = STORE / "pairs"
     out.mkdir(parents=True, exist_ok=True)
     print(f"\n=== pairs === ({len(allp):,} records from {len(frames)} source(s))")
