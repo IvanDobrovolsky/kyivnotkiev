@@ -1597,6 +1597,8 @@ def main():
         "significance": p.get("significance", ""),
         "blurb": p.get("blurb", ""),
         "verdict": p.get("verdict", ""),
+        "blurb_uk": p.get("blurb_uk", ""),
+        "verdict_uk": p.get("verdict_uk", ""),
         "data_ready": _ready(p["slug"]),
     } for p in load_pairs().get("pairs", [])]
     write_json(SITE_DATA_DIR / "pairs_meta.json", _meta)

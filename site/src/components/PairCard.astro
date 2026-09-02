@@ -15,6 +15,7 @@ interface Props {
   verdict?: string;
   switchYear?: string;
   switchPos?: number;
+  lang?: string;
 }
 
 function adoptionColor(pct: number) {
@@ -23,7 +24,7 @@ function adoptionColor(pct: number) {
   return 'var(--red)';
 }
 
-const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false, spark = [], verdict = '', switchYear = '', switchPos = 0 } = Astro.props;
+const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false, spark = [], verdict = '', switchYear = '', switchPos = 0, lang = 'en' } = Astro.props;
 const SW = 260, SH = 34;
 function path(vals: number[], flip = false): string {
   if (vals.length < 2) return '';
@@ -62,7 +63,7 @@ const color = adoptionColor(pct);
     </>
   )}
   <div class="pair-adopt" style="display:flex; align-items:baseline; justify-content:space-between; gap:0.5rem;">
-    <span>Adoption in 2025: <span class="pair-pct" style={`color:${color}`}>{pct}%</span></span>
+    <span>{lang === 'uk' ? 'Прийняття у 2025' : 'Adoption in 2025'}: <span class="pair-pct" style={`color:${color}`}>{pct}%</span></span>
     <span class="mini-legend" aria-hidden="true">
       <span class="ml-swatch" style="background:#0057B8;"></span>UA
       <span class="ml-swatch ml-dash"></span>RU
