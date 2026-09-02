@@ -889,7 +889,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     // Source Comparison card. They render the same numbers -- last.adoption per source --
     // and previously did it twice in two different technologies (inline HTML vs a d3 SVG),
     // so they could drift apart visually while claiming to show the same thing.
-    type BarRow = { src: string; pct: number; ukr: number; rus: number };
+    type BarRow = { src: string; pct: number; ukr: number; rus: number; note?: string };
 
     function sourceBarRows(): BarRow[] {
       // ONE window for everything on a row. Previously the bar showed the latest
@@ -905,7 +905,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       for (const src of ['trends','gdelt','wikipedia','reddit','youtube','ngrams','openalex']) {
         const series = pd2[src];
         if (!series || !series.length) continue;
-        const win = series.filter((d: any) => d.date >= SINCE);
+        let win = series.filter((d: any) => d.date >= SINCE);
+        let note = '';
+        if (!win.length && src === 'ngrams') {
+          win = series.slice(-12);
+          note = (win[win.length - 1]?.date || '').slice(0, 4) + ', latest available';
+        }
         if (!win.length) continue;
         let ukr = 0, rus = 0, wsum = 0, asum = 0;
         for (const d of win) {
@@ -920,7 +925,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           ? (ukr + rus > 0 ? +(ukr / (ukr + rus) * 100).toFixed(1) : null)
           : (wsum ? +(asum / wsum).toFixed(1) : null);
         if (pct === null || (countable && ukr + rus < 5)) continue;
-        rows.push({ src, pct, ukr: countable ? Math.round(ukr) : 0, rus: countable ? Math.round(rus) : 0 });
+        rows.push({ src, pct, ukr: countable ? Math.round(ukr) : 0, rus: countable ? Math.round(rus) : 0, note: note || (src === 'trends' ? 'relative index' : '') });
       }
       return rows;
     }
@@ -941,8 +946,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           <span style="width:52px; font-size:0.82rem; font-weight:600; color:${sourceColors[r.src]}; text-align:right; flex-shrink:0;">${r.pct}%</span>
           <span style="min-width:8.5rem; margin-left:0.9rem; font-size:0.76rem; text-align:right; flex-shrink:0;">${
             (r.ukr || r.rus)
-              ? `<span style="color:#0057B8;">${fN(r.ukr)}</span> <span style="color:#9ca3af;">·</span> <span style="color:#dc2626;">${fN(r.rus)}</span> <span style="color:#9ca3af;">${(((manifest as any).pair_source_stats || {})[activePairSlug]?.[r.src] || {}).unit || ''}</span>`
-              : `<span style="color:#9ca3af;">${(((manifest as any).pair_source_stats || {})[activePairSlug]?.[r.src] || {}).unit || ''}</span>`
+              ? `<span style="color:#0057B8;">${fN(r.ukr)}</span> <span style="color:#9ca3af;">·</span> <span style="color:#dc2626;">${fN(r.rus)}</span> <span style="color:#9ca3af;">${(((manifest as any).pair_source_stats || {})[activePairSlug]?.[r.src] || {}).unit || ''}${r.note ? ' · ' + r.note : ''}</span>`
+              : `<span style="color:#9ca3af;">${r.note || (((manifest as any).pair_source_stats || {})[activePairSlug]?.[r.src] || {}).unit || ''}</span>`
           }</span>
         </div>`;
       }).join('');

@@ -58,17 +58,29 @@ const navItems = [
   <div class="dev-banner">Work in progress — data collection is ongoing and figures on this site will change.</div>
   <nav class="site-nav">
     <div class="site-nav-inner">
-      <a href="/" class="site-nav-logo">
+      <a href={lang === 'uk' ? '/uk/' : '/'} class="site-nav-logo">
         <img src="/logo.svg" alt="" style="height:26px; width:auto;">
         <span>#KyivNotKiev</span>
       </a>
-      <div class="site-nav-links">
+      <button id="nav-burger" class="nav-burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="site-nav-links" id="nav-links">
         {navItems.map(item => (
           <a href={item.href} class={activeNav === item.id ? 'active' : ''}>{item.label}</a>
         ))}
+        <a href={lang === 'uk' ? '/' : '/uk/'} class="nav-lang">{lang === 'uk' ? 'EN' : 'УКР'}</a>
       </div>
     </div>
   </nav>
+  <script>
+    const burger = document.getElementById('nav-burger');
+    const links = document.getElementById('nav-links');
+    if (burger && links) burger.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      burger.setAttribute('aria-expanded', String(open));
+    });
+  </script>
 
   <main class="site-main">
     <slot />
