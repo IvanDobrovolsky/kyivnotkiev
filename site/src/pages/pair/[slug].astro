@@ -1866,6 +1866,16 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         }
       });
 
+      (function wireKeynessInfo() {
+        const b = document.getElementById('keyness-info-btn');
+        const p = document.getElementById('keyness-info-pop');
+        const c = document.getElementById('keyness-info-close');
+        if (!b || !p || (b as any)._wired) return;
+        (b as any)._wired = true;
+        b.addEventListener('click', () => { p.hidden = !p.hidden; });
+        if (c) c.addEventListener('click', () => { p.hidden = true; });
+      })();
+
       const infoBtn = document.getElementById('cluster-info-btn');
       const infoPop = document.getElementById('cluster-info-pop');
       if (infoBtn && infoPop && !(infoBtn as any)._wired) {
