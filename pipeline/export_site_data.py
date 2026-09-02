@@ -522,8 +522,10 @@ def _safe_div(a, b):
 def export_timeseries(enabled_slugs: set[str]) -> dict:
     log.info("Exporting timeseries...")
     result = {"events": [
-        {"date": "2014-02", "label": "Euromaidan", "color": "#d97706"},
-        {"date": "2022-02", "label": "Full-scale war", "color": "#dc2626"},
+        # Global markers come from config metadata.global_events — nothing
+        # event-shaped is hardcoded here.
+        *[{"date": ev["date"], "label": ev["label"], "color": "#0057B8"}
+          for ev in (load_pairs().get("metadata", {}) or {}).get("global_events", [])],
     ]}
 
     # Trends (monthly, smoothed)
