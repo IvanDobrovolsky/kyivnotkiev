@@ -1779,6 +1779,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         return;
       }
       wrapper.style.display = 'block';
+      const clipNote = document.getElementById('cluster-clip-note');
+      if (clipNote) clipNote.textContent = data.clipped ? `${data.clipped} distant point${data.clipped === 1 ? '' : 's'} omitted for scale` : '';
 
       const points = data.points;
       const clusters = data.clusters || {};
