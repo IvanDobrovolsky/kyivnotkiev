@@ -13,6 +13,8 @@ interface Props {
   dataReady?: boolean;
   spark?: number[];
   verdict?: string;
+  switchYear?: string;
+  switchPos?: number;
 }
 
 function adoptionColor(pct: number) {
@@ -21,7 +23,7 @@ function adoptionColor(pct: number) {
   return 'var(--red)';
 }
 
-const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false, spark = [], verdict = '' } = Astro.props;
+const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false, spark = [], verdict = '', switchYear = '', switchPos = 0 } = Astro.props;
 const SW = 260, SH = 34;
 function path(vals: number[], flip = false): string {
   if (vals.length < 2) return '';
@@ -47,13 +49,24 @@ const color = adoptionColor(pct);
   </div>
   {significance && <div class="pair-card-why">{significance}</div>}
   {spark.length > 1 && (
+    <>
     <svg class="pair-spark" viewBox={`0 0 ${SW} ${SH}`} preserveAspectRatio="none" aria-hidden="true">
       <path d={path(spark, true)} fill="none" stroke="#dc2626" stroke-width="1.6" opacity="0.55" stroke-dasharray="4,3" />
       <path d={path(spark)} fill="none" stroke="#0057B8" stroke-width="2" />
     </svg>
+    <div class="spark-axis">
+      <span>2010</span>
+      {switchYear && <span class="spark-switch" style={`left:${(switchPos * 100).toFixed(0)}%;`}>{switchYear}</span>}
+      <span>2025</span>
+    </div>
+    </>
   )}
-  <div class="pair-adopt">
-    Calculated adoption in 2025: <span class="pair-pct" style={`color:${color}`}>{pct}%</span>
+  <div class="pair-adopt" style="display:flex; align-items:baseline; justify-content:space-between; gap:0.5rem;">
+    <span>Adoption in 2025: <span class="pair-pct" style={`color:${color}`}>{pct}%</span></span>
+    <span class="mini-legend" aria-hidden="true">
+      <span class="ml-swatch" style="background:#0057B8;"></span>UA
+      <span class="ml-swatch ml-dash"></span>RU
+    </span>
   </div>
   <div class="pair-adopt-note">{verdict || "Share of records using the Ukrainian spelling, averaged across our sources."}</div>
 </a>
@@ -102,6 +115,37 @@ const color = adoptionColor(pct);
     width: 100%;
     height: 34px;
     margin-top: 0.45rem;
+  }
+  .spark-axis {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.66rem;
+    color: var(--text-dim);
+    margin-top: 0.1rem;
+  }
+  .spark-switch {
+    position: absolute;
+    transform: translateX(-50%);
+    color: #0057B8;
+    font-weight: 700;
+  }
+  .mini-legend {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  .ml-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 3px;
+    border-radius: 2px;
+  }
+  .ml-dash {
+    background: repeating-linear-gradient(90deg, #dc2626 0 4px, transparent 4px 7px);
   }
   .pair-adopt {
     margin-top: 0.45rem;
