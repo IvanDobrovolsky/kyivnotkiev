@@ -1572,7 +1572,11 @@ def main():
             except Exception:                          # noqa: BLE001
                 continue
             _m = _d.get("months", {})
-            if sum(1 for x in _m.values() if x.get("resolved")) >= 12:
+            # A legacy month-grid year "resolves" 12 months with ~12-16 windows;
+            # a week-floor year uses 60+. Completeness requires the real grid,
+            # so hollow legacy checkpoints can never turn a pair green.
+            _w = len(_d.get("done_windows", [])) + len(_d.get("split_windows", []))
+            if sum(1 for x in _m.values() if x.get("resolved")) >= 12 and _w >= 40:
                 _done.setdefault(_pair, set()).add((_var, _yr))
     def _yt_complete(slug):
         s_ = _done.get(slug, set())
