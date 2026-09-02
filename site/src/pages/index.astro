@@ -20,7 +20,7 @@ const sigBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]
 
 // Per-card sparkline: combined adoption across sources, quarterly means.
 // Computed at build time; each card gets the same-sized pair of curves.
-function sparkSeries(slug: string): number[] {
+function sparkSeries(slug: string): { v: number[]; switchYear: string | null; switchPos: number } {
   const src = (timeseries as any)[slug] || {};
   const byQ: Record<string, number[]> = {};
   for (const [name, rows] of Object.entries(src)) {
@@ -31,7 +31,22 @@ function sparkSeries(slug: string): number[] {
       (byQ[q] = byQ[q] || []).push(r.adoption);
     }
   }
-  return Object.keys(byQ).sort().map(q => byQ[q].reduce((a, b) => a + b, 0) / byQ[q].length);
+  const keys = Object.keys(byQ).sort();
+  const v = keys.map(q => byQ[q].reduce((a, b) => a + b, 0) / byQ[q].length);
+  // Decisive switch: starts clearly below 50, ends clearly above, and after the
+  // crossing never falls back under. Label the crossing year; otherwise nothing.
+  let switchYear: string | null = null;
+  let switchPos = 0;
+  if (v.length > 8 && v[0] < 45 && v[v.length - 1] > 55) {
+    for (let i = 1; i < v.length; i++) {
+      if (v[i] >= 50 && v.slice(i).every(x => x >= 48)) {
+        switchYear = keys[i].slice(0, 4);
+        switchPos = i / (v.length - 1);
+        break;
+      }
+    }
+  }
+  return { v, switchYear, switchPos };
 }
 function sparkPath(vals: number[], w: number, h: number, flip = false): string {
   if (vals.length < 2) return '';
@@ -41,7 +56,7 @@ function sparkPath(vals: number[], w: number, h: number, flip = false): string {
     return `${i ? 'L' : 'M'}${(i * step).toFixed(1)},${y.toFixed(1)}`;
   }).join('');
 }
-const sparkBySlug: Record<string, number[]> = Object.fromEntries(
+const sparkBySlug: Record<string, any> = Object.fromEntries(
   (pairsMeta as any[]).filter((p: any) => p.enabled).map((p: any) => [p.slug, sparkSeries(p.slug)]));
 
 // Headline number per card: mean adoption across sources over 2025 months.
@@ -158,7 +173,9 @@ const pairs = [
       popularRank={i}
       significance={sigBySlug[p.slug] || ''}
       dataReady={readyBySlug[p.slug] || false}
-      spark={sparkBySlug[p.slug] || []}
+      spark={sparkBySlug[p.slug]?.v || []}
+      switchYear={sparkBySlug[p.slug]?.switchYear || ''}
+      switchPos={sparkBySlug[p.slug]?.switchPos || 0}
       verdict={verdictBySlug[p.slug] || ''}
     />
   ))}
