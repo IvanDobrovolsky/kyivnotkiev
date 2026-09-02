@@ -537,7 +537,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             .attr('stroke', '#0057B8')
             .attr('stroke-width', 1)
             .attr('stroke-dasharray', '4,3')
-            .attr('opacity', isPair ? 0.5 : 0.3);
+            .attr('opacity', 0.5);
 
           // Numbered circle at top. Hovering it pulses the matching legend entry.
           // `eventNum` is a shared mutable counter, so the handlers must capture
@@ -563,7 +563,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             .attr('x', xPos).attr('y', -18)
             .attr('text-anchor', 'middle')
             .attr('dominant-baseline', 'central')
-            .attr('fill', isPair ? '#fff' : '#6b7280')
+            .attr('fill', '#fff')
             .attr('font-size', String(eventNum).length > 1 ? '8px' : '9.5px')
             .attr('font-weight', '600')
             .attr('letter-spacing', '-0.02em')
@@ -573,8 +573,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           const legendItem = document.createElement('span');
           legendItem.className = 'legend-item';
           legendItem.setAttribute('data-event-legend', String(eventNum));
-          legendItem.style.cssText = `font-size:0.87rem; color:${isPair ? '#0057B8' : '#6b7280'}; ${isPair ? 'font-weight:600;' : ''}`;
-          legendItem.innerHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:${isPair ? '#0057B8' : '#e5e7eb'};color:${isPair ? '#fff' : '#6b7280'};font-size:12px;font-weight:700;margin-right:4px;">${eventNum}</span>${evt.label} (${evt.date})`;
+          legendItem.style.cssText = 'font-size:0.87rem; color:#0057B8; font-weight:600;';
+          legendItem.innerHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#0057B8;color:#fff;font-size:12px;font-weight:700;margin-right:4px;">${eventNum}</span>${evt.label} (${evt.date})`;
           legendContainer.appendChild(legendItem);
         });
       }
@@ -926,8 +926,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <div style="position:absolute; left:50%; top:0; bottom:0; width:1px; background:#d1d5db;"></div>
             <div style="height:100%; width:${Math.max(1, Math.min(100, r.pct))}%; background:${sourceColors[r.src]}; border-radius:${barH / 2}px; opacity:0.85;"></div>
           </div>
-          <span style="width:42px; font-size:0.82rem; font-weight:600; color:${sourceColors[r.src]}; text-align:right; flex-shrink:0;">${r.pct}%</span>
-          <span style="min-width:7.5rem; font-size:0.76rem; text-align:right; flex-shrink:0;">${
+          <span style="width:52px; font-size:0.82rem; font-weight:600; color:${sourceColors[r.src]}; text-align:right; flex-shrink:0;">${r.pct}%</span>
+          <span style="min-width:8.5rem; margin-left:0.9rem; font-size:0.76rem; text-align:right; flex-shrink:0;">${
             (r.ukr || r.rus)
               ? `<span style="color:#0057B8;">${fN(r.ukr)}</span> <span style="color:#9ca3af;">·</span> <span style="color:#dc2626;">${fN(r.rus)}</span> <span style="color:#9ca3af;">${(((manifest as any).pair_source_stats || {})[activePairSlug]?.[r.src] || {}).unit || ''}</span>`
               : `<span style="color:#9ca3af;">${(((manifest as any).pair_source_stats || {})[activePairSlug]?.[r.src] || {}).unit || ''}</span>`
