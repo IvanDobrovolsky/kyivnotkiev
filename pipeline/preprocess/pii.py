@@ -96,11 +96,15 @@ def scrub_store() -> dict:
     output must be re-scrubbed before any publish (publish.py enforces it).
     """
     report = {}
+    import pyarrow.parquet as pq
     for f in sorted(glob.glob("data/store/*.parquet")) + sorted(
             glob.glob("data/store/pairs/*.parquet")):
-        df = pd.read_parquet(f)
-        if not any(c in df.columns for c in TEXT_COLS):
+        # Schema peek first: the count tables (wikipedia is 298M rows) must be
+        # skipped without loading — reading one to check columns OOM-kills.
+        names = set(pq.ParquetFile(f).schema_arrow.names)
+        if not names & set(TEXT_COLS):
             continue
+        df = pd.read_parquet(f)
         hint = "reddit" if "reddit" in pathlib.Path(f).stem else ""
         c = scrub_frame(df, source_hint=hint)
         if sum(c.values()):
