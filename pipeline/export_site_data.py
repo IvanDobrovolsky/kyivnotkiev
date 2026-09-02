@@ -1845,6 +1845,7 @@ def main():
             _spread = {}
             if _rp.exists():
                 try:
+                    import re as _re
                     import pandas as _pd3
                     _rr = _pd3.read_parquet(_rp, columns=["text", "url"])
                     _hosts = _rr["url"].astype(str).str.extract(r"//([^/]+)")[0].fillna("")
