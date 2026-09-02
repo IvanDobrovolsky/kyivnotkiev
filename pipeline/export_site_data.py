@@ -1675,6 +1675,7 @@ def main():
         "ukrainian_cyrillic": p.get("ukrainian_cyrillic", ""),
         "significance": p.get("significance", ""),
         "blurb": p.get("blurb", ""),
+        "verdict": p.get("verdict", ""),
         "data_ready": _ready(p["slug"]),
     } for p in load_pairs().get("pairs", [])]
     write_json(SITE_DATA_DIR / "pairs_meta.json", _meta)
