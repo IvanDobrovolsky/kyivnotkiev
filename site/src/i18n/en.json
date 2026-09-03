@@ -110,5 +110,27 @@
     "— mostly Ukrainian-spelling outlets": "— mostly Ukrainian-spelling outlets",
     "— mostly old-spelling outlets": "— mostly old-spelling outlets",
     "— mixed outlets": "— mixed outlets"
+  },
+  "llm_page": {
+    "title": "What AI Tells You About Ukraine",
+    "subtitle_html": "Search is being replaced by chat. We asked <strong>{n} models</strong> from {labs} labs about <strong>{pairs} Ukrainian names</strong> — each name three times — and counted every answer. No scores, no weighting: the numbers below are answers, counted.",
+    "q_free": "Free recall",
+    "q_free_ex": "\"What is the capital of Ukraine called in English? Answer with one word.\"",
+    "q_free_note": "Neither spelling is shown — the model writes what it knows.",
+    "q_forced": "Forced choice",
+    "q_forced_ex": "\"Kiev or Kyiv? Answer with one word.\"",
+    "q_forced_note": "Both spellings shown; the model picks.",
+    "q_swapped": "Forced choice, order swapped",
+    "q_swapped_ex": "\"Kyiv or Kiev? Answer with one word.\"",
+    "q_swapped_note": "Same question, reversed — so a habit of picking the first option cancels out.",
+    "example_note": "Shown here for Kyiv; every one of the {pairs} names gets its own version of the three questions. Each pair's page lists its exact wording and every model's answer.",
+    "heat_title": "Free recall over time — the spelling models produce on their own",
+    "legend": "% of free-recall answers using the Ukrainian spelling",
+    "how_html": "<strong>How to read.</strong> Rows are model families, columns are release quarters. Each cell: of all free-recall questions the quarter's models answered, the percentage answered with the Ukrainian spelling. Hover a cell for the raw counts and the model list.",
+    "story_html": "<strong>The story.</strong> Shown both spellings, models overwhelmingly pick the Ukrainian one ({fmin}–{fmax}% across models). Left to write the name themselves, they use it far less ({omin}–{omax}%). The difference is the training data showing through: the text these models learned from still mostly spells names the old way, and free recall repeats it — while the choice between visible options reflects newer preference tuning.",
+    "top": "Writes Ukrainian spellings unprompted — most often",
+    "bottom": "Least often",
+    "of_names": "of {n} names",
+    "foot": "{n} hosted-API models, released {rmin}–{rmax}, each asked 3 questions per name across {pairs} name pairs. An answer counts as Ukrainian or Russian only when the model produced that spelling; anything else (refusals, other names) is excluded from the counts. Raw prompts and verbatim responses are preserved in the dataset."
   }
 }
