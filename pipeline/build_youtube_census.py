@@ -186,6 +186,13 @@ def main() -> int:
             break
         if a.force:
             archive_target(pair, variant, year)
+        # Rotate any ledger a prior run left behind: searches_used() sums the whole
+        # file, so stale rows get billed to TODAY's budget. Measured 2026-09-03:
+        # 1,610 stale pages made the chain stop with 22% of real quota unspent.
+        led = CENSUS_DIR / ".ledger" / f"{pair}_{variant}_{year}.jsonl"
+        if led.exists():
+            ARCHIVE.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(led), str(ARCHIVE / f"{int(time.time())}_stale_{led.name}"))
         print(f"[{i}/{len(pending)}] {pair} {year} {variant}  (spent {spent:,}/{a.budget:,})",
               flush=True)
         r = subprocess.run([sys.executable, "-u", "-m", "pipeline.ingestion.youtube_census",
