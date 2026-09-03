@@ -53,6 +53,17 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     const v = String(path).split('.').reduce((o: any, k: string) => (o ? o[k] : undefined), __T);
     return (v === undefined || v === null) ? fb : v;
   };
+
+  const glossT = (g: string) => {
+    if (!g) return g;
+    for (const suf of ['— mostly Ukrainian-spelling outlets', '— mostly old-spelling outlets', '— mixed outlets']) {
+      if (g.endsWith(suf)) {
+        const base = g.slice(0, -suf.length).trim();
+        return (tt('glosses.' + base, base)) + ' ' + tt('glosses.' + suf, suf);
+      }
+    }
+    return tt('glosses.' + g, g);
+  };
     import * as d3 from 'd3';
     const timeseriesData = JSON.parse(document.getElementById('pair-timeseries-data')?.textContent || '{}');
     import manifest from '../data/manifest.json';
@@ -213,13 +224,13 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       reddit: 'Too few Reddit posts mention this pair',
     };
     const sourceInfo2: Record<string, string> = {
-      trends: 'Google search interest',
-      gdelt: 'News articles, spelling verified in the article text',
-      wikipedia: 'Monthly page views of each spelling\u2019s article',
-      reddit: 'Reddit posts and comments',
-      youtube: 'Videos using the spelling in title or description',
-      ngrams: 'Word frequency in Google Books',
-      openalex: 'Academic papers',
+      trends: tt('pair.sources_info.trends', 'Google search interest'),
+      gdelt: tt('pair.sources_info.gdelt', 'News articles, spelling verified in the article text'),
+      wikipedia: tt('pair.sources_info.wikipedia', 'Monthly page views'),
+      reddit: tt('pair.sources_info.reddit', 'Reddit posts and comments'),
+      youtube: tt('pair.sources_info.youtube', 'Videos using the spelling in title or description'),
+      ngrams: tt('pair.sources_info.ngrams', 'Word frequency in Google Books'),
+      openalex: tt('pair.sources_info.openalex', 'Academic papers'),
     };
 
     function drawChart() {
@@ -1059,19 +1070,17 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       let html = `
         <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap;">
           <div style="flex:1 1 220px; min-width:200px; font-size:0.84rem; color:var(--text); line-height:1.55;">
-            <p style="margin:0 0 0.4rem;"><strong>Free recall</strong>: the model writes the name unprompted —
-            training data speaks. <strong>Forced choice</strong>: both spellings shown, pick one; asked twice
-            with the order swapped.</p>
+            <p style="margin:0 0 0.4rem;">${tt('llm.defs_html', '<strong>Free recall</strong>: the model writes the name unprompted. <strong>Forced choice</strong>: both spellings shown, pick one; asked twice with the order swapped.')}</p>
             <div style="display:flex; gap:0.8rem; font-size:0.74rem; color:var(--text-muted); flex-wrap:wrap;">
               <span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:#0057B8;"></span> ${pp.ukrainian}</span>
               <span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:#D52B1E;"></span> ${pp.russian}</span>
               <span><span style="display:inline-block; width:9px; height:9px; border-radius:2px; background:#c8ccd2;"></span> other</span>
             </div>
           </div>
-          ${donut(sum.open_ua, sum.open_n, pctOf(openRu, sum.open_n), 'Free recall', `models writing "${pp.ukrainian}" unprompted`)}
-          ${donut(sum.forced_ua, sum.forced_n, pctOf(forcedRu, sum.forced_n), 'Forced choice', `answers picking "${pp.ukrainian}" when shown both`)}
+          ${donut(sum.open_ua, sum.open_n, pctOf(openRu, sum.open_n), tt('llm.free_recall','Free recall'), tt('llm.donut_free_sub', `models writing "${pp.ukrainian}" unprompted`).replaceAll('{ua}', pp.ukrainian))}
+          ${donut(sum.forced_ua, sum.forced_n, pctOf(forcedRu, sum.forced_n), tt('llm.forced_choice','Forced choice'), tt('llm.donut_forced_sub', `answers picking "${pp.ukrainian}" when shown both`).replaceAll('{ua}', pp.ukrainian))}
         </div>
-        <button id="llm-details-btn" class="method-btn" style="margin:0.75rem 0 0;">View details</button>
+        <button id="llm-details-btn" class="method-btn" style="margin:0.75rem 0 0;">${tt('pair.view_details','View details')}</button>
         <div id="llm-details" style="display:none; margin-top:0.75rem;"></div>
       `;
       body.innerHTML = html;
@@ -1793,7 +1802,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       }
       wrapper.style.display = 'block';
       const clipNote = document.getElementById('cluster-clip-note');
-      if (clipNote) clipNote.textContent = data.clipped ? `${data.clipped} distant point${data.clipped === 1 ? '' : 's'} omitted for scale` : '';
+      if (clipNote) clipNote.textContent = data.clipped ? tt('pair.clip_note', `${data.clipped} distant points omitted for scale`).replaceAll('{n}', String(data.clipped)) : '';
 
       const points = data.points;
       const clusters = data.clusters || {};
@@ -1948,7 +1957,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           // The auto-terms live in the hover title for anyone who wants them.
           legendEl.innerHTML += `<span class="legend-item" data-cluster-legend="${idx}" title="terms: ${info.label}" style="display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">` +
             `<span style="width:16px;height:16px;border-radius:50%;background:${color};color:#fff;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>` +
-            `<strong>${info.gloss || info.label}</strong>` +
+            `<strong>${glossT(info.gloss || info.label)}</strong>` +
             `<span style="color:#6b7280;">${info.ua_pct}% UA · ${info.size.toLocaleString()} texts</span></span>`;
         });
       }

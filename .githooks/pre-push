@@ -51,6 +51,14 @@ PY
     tail -6 /tmp/prepush_smoke.log
     exit 1
   fi
-  echo "[pre-push] committed tree: $N pages OK, runtime smoke OK — pushing."
+  # Translation-coverage denylist: known English chrome must not appear on
+  # Ukrainian pages (article content inside holdout tables is legitimately EN).
+  for FRAG in "Texts grouped" "View details" "View methodology" "Discourse Context" "Still using the older" "distant point" "Data collected from" "Click a pair"; do
+    if grep -q "$FRAG" "$TMP/site/dist/client/uk/index.html" "$TMP/site/dist/client/uk/pair/kyiv/index.html" 2>/dev/null; then
+      echo "[pre-push] UNTRANSLATED CHROME on /uk: '$FRAG' — push blocked."
+      exit 1
+    fi
+  done
+  echo "[pre-push] committed tree: $N pages OK, runtime smoke OK, uk chrome clean — pushing."
 fi
 exit 0

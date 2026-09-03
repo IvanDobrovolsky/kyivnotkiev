@@ -36,8 +36,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
         <button id="adoption-details-btn" class="method-btn">{t(lang, 'pair.view_details')}</button>
         <div id="adoption-pop" class="info-pop" hidden style="right:0; left:auto; top:1.9rem; width:min(30rem,92vw); white-space:normal;">
           <button id="adoption-pop-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>
-          <p style="margin:0 0 0.5rem;">The average of the sources below, over the last 12 months.
-          Counts: <span style="color:#0057B8;font-weight:600;">Ukrainian</span> · <span style="color:#dc2626;font-weight:600;">Russian</span> spelling.</p>
+          <p style="margin:0 0 0.5rem;" set:html={t(lang, "pair.avg_note_html")}></p>
           <div id="adoption-calc-body"></div>
         </div>
       </span>
@@ -69,8 +68,8 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 <!-- CL: Context + Collocations -->
 <div class="cl-two-cards" style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem;">
   <div class="chart-container" id="pair-cl-context" style="margin-bottom:0;">
-    <div class="chart-title" style="color: var(--text)">Discourse Context</div>
-    <div class="chart-subtitle" style="margin-bottom:0.5rem;">Where each spelling shows up — by kind of writing</div>
+    <div class="chart-title" style="color: var(--text)">{t(lang, 'pair.discourse_ctx_title')}</div>
+    <div class="chart-subtitle" style="margin-bottom:0.5rem;">{t(lang, 'pair.discourse_ctx_sub')}</div>
     <div id="pair-cl-body"></div>
   </div>
   <div class="chart-container" id="pair-cl-collocations" style="margin-bottom:0;">
@@ -99,7 +98,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 <div class="chart-container" id="cluster-container" style="margin-bottom:0.75rem; display:none;">
   <div class="chart-title" style="color: var(--text)">{t(lang, 'pair.discourse_title')}</div>
   <div class="chart-subtitle" id="cluster-subtitle" style="margin-bottom:0.5rem; position:relative;">
-    Texts grouped by what they talk about — blue groups write the Ukrainian form
+    {t(lang, 'pair.cluster_sub')}
     <button id="cluster-info-btn" class="method-btn">{t(lang, 'pair.view_methodology')}</button>
     <div id="cluster-info-pop" hidden class="info-pop">
       <button id="cluster-info-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>
@@ -135,7 +134,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 <div class="chart-container" id="pair-llm-container" style="margin-bottom:1rem;">
   <div class="chart-title" style="color: var(--text)">{t(lang, 'pair.ai_title')} <span id="pair-llm-pair-name">this pair</span></div>
   <div class="chart-subtitle" style="margin-bottom:0.5rem;" id="pair-llm-subtitle">
-    Chatbot audit: {nModels} models, {nLabs} labs — free generation vs forced choice between the two spellings.
+    {t(lang, "pair.ai_sub", {n: nModels, labs: nLabs})}
   </div>
   <div id="pair-llm-body"></div>
   <script type="application/json" id="llm-per-pair-data" set:html={JSON.stringify(llmPerPair)} />
@@ -145,8 +144,8 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 <div id="news-holdouts-container" class="chart-container" style="margin-bottom:1rem; padding:0.75rem;">
   <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
     <div>
-      <div class="chart-title" style="color: var(--text)">Verified News Articles</div>
-      <div class="chart-subtitle" id="news-holdouts-subtitle">English-language articles from 818 verified news outlets</div>
+      <div class="chart-title" style="color: var(--text)">{t(lang, 'pair.news_holdouts_title')}</div>
+      <div class="chart-subtitle" id="news-holdouts-subtitle">{t(lang, "pair.news_holdouts_sub")}</div>
     </div>
   </div>
   <div id="news-holdouts-list" style="margin-top:0.5rem; max-height:500px; overflow-y:auto;"></div>
@@ -157,8 +156,8 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 <div id="holdout-container" class="chart-container" style="margin-bottom:1rem; padding:0.75rem; display:none;">
   <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
     <div>
-      <div class="chart-title" style="color: var(--text)">Holdouts: <span id="holdout-pair-name"></span></div>
-      <div class="chart-subtitle" id="holdout-subtitle">Still using the older spelling</div>
+      <div class="chart-title" style="color: var(--text)">{t(lang, 'pair.holdouts_title')} <span id="holdout-pair-name"></span></div>
+      <div class="chart-subtitle" id="holdout-subtitle">{t(lang, "pair.holdouts_sub")}</div>
     </div>
   </div>
   <div id="holdout-table" style="margin-top:0.5rem; max-height:500px; overflow-y:auto;"></div>

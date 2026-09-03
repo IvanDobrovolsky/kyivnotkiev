@@ -1,27 +1,48 @@
 {
   "banner": "Work in progress — data collection is ongoing and figures on this site will change.",
-  "nav": { "methodology": "Methodology", "ai": "AI audit", "lang": "УКР" },
-  "footer": { "built_by": "Built by", "privacy": "Privacy" },
+  "nav": {
+    "methodology": "Methodology",
+    "ai": "AI audit",
+    "lang": "УКР"
+  },
+  "footer": {
+    "built_by": "Built by",
+    "privacy": "Privacy"
+  },
   "home": {
     "hero_html": "In 2018 Ukraine <a href=\"https://en.wikipedia.org/wiki/KyivNotKiev\" target=\"_blank\">launched a campaign</a> asking the world to drop Russian spellings of its names. We tracked how <strong>{pairs} Ukrainian names</strong> — geographical, historical, cultural and political — were adopted across <strong>{span}</strong>, using machine learning to identify the context of adoption or resistance. Some spellings have become a global standard, others remain contested, and a few never caught on, even locally.",
     "sources_label": "Data collected from",
     "pairs_title": "The {n} pairs",
     "pairs_hint": "Click a pair for the detailed view",
-    "sort": "Sort", "sort_popular": "Popular", "sort_volume": "Volume", "sort_adoption": "Adoption", "sort_az": "A-Z"
+    "sort": "Sort",
+    "sort_popular": "Popular",
+    "sort_volume": "Volume",
+    "sort_adoption": "Adoption",
+    "sort_az": "A-Z"
   },
   "card": {
     "adoption_2025": "Adoption in 2025",
     "ready_title": "Complete dataset — all sources fully collected",
     "collecting_title": "Data collection in progress"
   },
-  "sources": { "trends": "Trends", "gdelt": "News", "wikipedia": "Wiki", "reddit": "Reddit", "youtube": "YouTube", "ngrams": "Books", "openalex": "Academic" },
+  "sources": {
+    "trends": "Trends",
+    "gdelt": "News",
+    "wikipedia": "Wiki",
+    "reddit": "Reddit",
+    "youtube": "YouTube",
+    "ngrams": "Books",
+    "openalex": "Academic"
+  },
   "pair": {
     "back": "All pairs",
     "estimated_adoption": "Estimated adoption in 2025",
     "view_details": "View details",
     "view_methodology": "View methodology",
-    "volume": "Volume", "adoption_pct": "Adoption %",
-    "ua": "Ukrainian", "ru": "Russian",
+    "volume": "Volume",
+    "adoption_pct": "Adoption %",
+    "ua": "Ukrainian",
+    "ru": "Russian",
     "discourse_title": "Discourse Clusters",
     "contrastive_title": "Contrastive Analysis",
     "contrastive_sub": "Words that keep company with each spelling",
@@ -35,6 +56,59 @@
       "wikipedia": "No Wikipedia pageview series for this pair",
       "reddit": "Too few Reddit posts mention this pair",
       "default": "No data for this pair from this source"
+    },
+    "avg_note_html": "The average of the sources below, over the last 12 months. Counts: <span style=\"color:#0057B8;font-weight:600;\">Ukrainian</span> · <span style=\"color:#dc2626;font-weight:600;\">Russian</span> spelling.",
+    "discourse_ctx_title": "Discourse Context",
+    "discourse_ctx_sub": "Where each spelling shows up — by kind of writing",
+    "cluster_sub": "Texts grouped by what they talk about — blue groups write the Ukrainian form",
+    "news_holdouts_title": "Verified News Articles",
+    "news_holdouts_sub": "English-language articles from verified news outlets",
+    "holdouts_title": "Holdouts:",
+    "holdouts_sub": "Still using the older spelling",
+    "clip_note": "{n} distant points omitted for scale",
+    "ai_sub": "Chatbot audit: {n} models, {labs} labs — free generation vs forced choice between the two spellings.",
+    "sources_info": {
+      "trends": "Google search interest. In Volume view each line is normalized to its own peak — line heights are not comparable to each other; the Adoption view applies the measured calibration between them.",
+      "gdelt": "News articles, spelling verified in the article text",
+      "wikipedia": "Monthly page views of each spelling’s article",
+      "reddit": "Reddit posts and comments",
+      "youtube": "Videos using the spelling in title or description",
+      "ngrams": "Word frequency in Google Books",
+      "openalex": "Academic papers"
     }
+  },
+  "llm": {
+    "defs_html": "<strong>Free recall</strong>: the model writes the name unprompted — training data speaks. <strong>Forced choice</strong>: both spellings shown, pick one; asked twice with the order swapped.",
+    "free_recall": "Free recall",
+    "forced_choice": "Forced choice",
+    "donut_free_sub": "models writing \"{ua}\" unprompted",
+    "donut_forced_sub": "answers picking \"{ua}\" when shown both",
+    "exact_questions": "The exact questions we asked",
+    "by_family": "By family",
+    "every_model": "Every model, every answer",
+    "every_model_sub": "Three cells per model: free recall, then the two forced-choice askings. Hover a model for its exact answers.",
+    "legend_other": "other"
+  },
+  "glosses": {
+    "war & news coverage": "war & news coverage",
+    "crime & police news": "crime & police news",
+    "the battle for Bakhmut": "the battle for Bakhmut",
+    "Kyivan Rus history": "Kyivan Rus history",
+    "church & baptism": "church & baptism",
+    "Kyiv monuments & places": "Kyiv monuments & places",
+    "Putin nicknamed 'Vladimir the Great'": "Putin nicknamed 'Vladimir the Great'",
+    "games & other 'Greats'": "games & other 'Greats'",
+    "commemorative coins": "commemorative coins",
+    "the 2024 STALKER game": "the 2024 STALKER game",
+    "the 2007 STALKER game": "the 2007 STALKER game",
+    "STALKER game fans": "STALKER game fans",
+    "the HBO miniseries": "the HBO miniseries",
+    "storefront listings": "storefront listings",
+    "the 1986 disaster": "the 1986 disaster",
+    "'type beat' music titles": "'type beat' music titles",
+    "non-English coverage": "non-English coverage",
+    "— mostly Ukrainian-spelling outlets": "— mostly Ukrainian-spelling outlets",
+    "— mostly old-spelling outlets": "— mostly old-spelling outlets",
+    "— mixed outlets": "— mixed outlets"
   }
 }
