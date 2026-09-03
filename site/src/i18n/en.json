@@ -132,5 +132,17 @@
     "bottom": "Least often",
     "of_names": "of {n} names",
     "foot": "{n} hosted-API models, released {rmin}–{rmax}, each asked 3 questions per name across {pairs} name pairs. An answer counts as Ukrainian or Russian only when the model produced that spelling; anything else (refusals, other names) is excluded from the counts. Raw prompts and verbatim responses are preserved in the dataset."
+  },
+  "meth": {
+    "title": "Methodology",
+    "intro": "Statistical tests, ML pipeline, model benchmarks, and validation procedures.",
+    "confusion": "Confusion Matrix",
+    "benchmark": "Encoder Benchmark",
+    "context_dist": "Context Distribution",
+    "context_dist_sub": "Distribution of {n} texts across 11 kinds of writing",
+    "errors": "Error Analysis",
+    "errors_sub": "Most confused class pairs in the DeBERTa classifier",
+    "resources": "Resources",
+    "dataset_line": "Full dataset on Hugging Face"
   }
 }
