@@ -71,6 +71,17 @@ def build(pair: str) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     # 3. one record per article
     verified = usage.drop_duplicates("text_hash").copy()
     audit["dropped_duplicate_body"] = int(len(usage) - len(verified))
+
+    # 3b. one record per STORY. Syndication farms republish identical wire copy
+    # under dozens of mastheads with only site chrome varying; the first 300
+    # normalised characters are the story identity (same rule as stats dedup).
+    # Measured 2026-09-03: 2-17% duplicate stories per pair; kyivan-rus adoption
+    # was inflated 4.7pp by a farm on its Ukrainian side.
+    _lead = (verified.text.astype(str).str.replace(r"\s+", " ", regex=True)
+             .str.lower().str.slice(0, 300))
+    before_story = len(verified)
+    verified = verified.loc[_lead.drop_duplicates().index].copy()
+    audit["dropped_duplicate_story"] = int(before_story - len(verified))
     audit["verified_records"] = len(verified)
 
     # 1. the body decides; the slug is kept only so the disagreement is auditable
