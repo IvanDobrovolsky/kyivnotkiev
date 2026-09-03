@@ -1,0 +1,40 @@
+{
+  "banner": "Work in progress — data collection is ongoing and figures on this site will change.",
+  "nav": { "methodology": "Methodology", "ai": "AI audit", "lang": "УКР" },
+  "footer": { "built_by": "Built by", "privacy": "Privacy" },
+  "home": {
+    "hero_html": "In 2018 Ukraine <a href=\"https://en.wikipedia.org/wiki/KyivNotKiev\" target=\"_blank\">launched a campaign</a> asking the world to drop Russian spellings of its names. We tracked how <strong>{pairs} Ukrainian names</strong> — geographical, historical, cultural and political — were adopted across <strong>{span}</strong>, using machine learning to identify the context of adoption or resistance. Some spellings have become a global standard, others remain contested, and a few never caught on, even locally.",
+    "sources_label": "Data collected from",
+    "pairs_title": "The {n} pairs",
+    "pairs_hint": "Click a pair for the detailed view",
+    "sort": "Sort", "sort_popular": "Popular", "sort_volume": "Volume", "sort_adoption": "Adoption", "sort_az": "A-Z"
+  },
+  "card": {
+    "adoption_2025": "Adoption in 2025",
+    "ready_title": "Complete dataset — all sources fully collected",
+    "collecting_title": "Data collection in progress"
+  },
+  "sources": { "trends": "Trends", "gdelt": "News", "wikipedia": "Wiki", "reddit": "Reddit", "youtube": "YouTube", "ngrams": "Books", "openalex": "Academic" },
+  "pair": {
+    "back": "All pairs",
+    "estimated_adoption": "Estimated adoption in 2025",
+    "view_details": "View details",
+    "view_methodology": "View methodology",
+    "volume": "Volume", "adoption_pct": "Adoption %",
+    "ua": "Ukrainian", "ru": "Russian",
+    "discourse_title": "Discourse Clusters",
+    "contrastive_title": "Contrastive Analysis",
+    "contrastive_sub": "Words that keep company with each spelling",
+    "ai_title": "What AI says about",
+    "no_data": {
+      "ngrams": "Google Books data ends in 2022 and covers only widely printed names",
+      "trends": "Search volume for this pair sits below Google Trends’ reporting floor",
+      "gdelt": "No verified news articles for this pair yet",
+      "youtube": "YouTube census for this pair is still being collected",
+      "openalex": "Too few academic papers mention this pair",
+      "wikipedia": "No Wikipedia pageview series for this pair",
+      "reddit": "Too few Reddit posts mention this pair",
+      "default": "No data for this pair from this source"
+    }
+  }
+}
