@@ -77,9 +77,13 @@ def is_complete(pair: str, variant: str, year: int) -> bool:
         months = json.loads(p.read_text()).get("months", {})
     except Exception:                                  # noqa: BLE001
         return False
-    if not months:
-        return False
-    return all(m.get("resolved") for m in months.values()) and len(months) >= 12
+    # A month is only recorded once every window in it was visited, so 12 recorded
+    # months mean the whole year was explored. Do NOT additionally require every
+    # month `resolved`: a window capped at the bottom of the ladder (hour) is a
+    # TERMINAL state — the count is a flagged lower bound, not missing work.
+    # Requiring resolution re-queued fully-explored targets forever (mykola-hohol
+    # 2021/2022 ukrainian re-ran daily at 0 collectable calls, 2026-09-03).
+    return len(months) >= 12
 
 
 def searches_used(pair: str, variant: str, year: int) -> int:
