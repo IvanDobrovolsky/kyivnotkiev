@@ -35,6 +35,19 @@ e=json.load(open(base+'en.json')); u=json.load(open(base+'uk.json'))
 assert K(e)==K(u), "[pre-push] i18n parity broken in COMMITTED files"
 print(f"[pre-push] i18n parity OK ({len(K(e))} keys, committed)")
 PY
-  echo "[pre-push] committed tree: $N pages OK — pushing."
+  # Runtime smoke: serve the committed build, load key pages headless, fail on
+  # any console/page error — build-time cannot see an undefined function.
+  (cd "$TMP/site" && python3 -m http.server 4199 --directory dist/client > /dev/null 2>&1 &)
+  SRV=$!
+  sleep 1
+  (cd site && node smoke.mjs http://localhost:4199 > /tmp/prepush_smoke.log 2>&1)
+  SMOKE=$?
+  kill $SRV 2>/dev/null
+  if [ $SMOKE -ne 0 ]; then
+    echo "[pre-push] RUNTIME SMOKE FAILED — push blocked."
+    tail -6 /tmp/prepush_smoke.log
+    exit 1
+  fi
+  echo "[pre-push] committed tree: $N pages OK, runtime smoke OK — pushing."
 fi
 exit 0

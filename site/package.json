@@ -16,6 +16,7 @@
     "world-atlas": "^2.0.2"
   },
   "devDependencies": {
+    "playwright-core": "^1.62.1",
     "simple-icons": "^16.29.0",
     "wrangler": "^4.80.0"
   },
