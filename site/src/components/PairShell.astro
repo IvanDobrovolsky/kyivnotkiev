@@ -48,6 +48,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
   <script type="application/json" id="i18n-dict" set:html={JSON.stringify(clientDict(lang))} />
 <script>
+  const __T = (() => { try { return JSON.parse(document.getElementById('i18n-dict')?.textContent || '{}'); } catch (e) { return {}; } })();
+  const tt = (path: string, fb: string) => {
+    const v = String(path).split('.').reduce((o: any, k: string) => (o ? o[k] : undefined), __T);
+    return (v === undefined || v === null) ? fb : v;
+  };
     import * as d3 from 'd3';
     const timeseriesData = JSON.parse(document.getElementById('pair-timeseries-data')?.textContent || '{}');
     import manifest from '../data/manifest.json';
