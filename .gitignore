@@ -89,3 +89,5 @@ output/
 private/
 node_modules/
 .astro/
+
+!site/src/i18n/*.json
