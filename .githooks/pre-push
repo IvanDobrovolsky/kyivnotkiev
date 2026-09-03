@@ -37,12 +37,15 @@ print(f"[pre-push] i18n parity OK ({len(K(e))} keys, committed)")
 PY
   # Runtime smoke: serve the committed build, load key pages headless, fail on
   # any console/page error — build-time cannot see an undefined function.
-  (cd "$TMP/site" && python3 -m http.server 4199 --directory dist/client > /dev/null 2>&1 &)
+  python3 -m http.server 4199 --directory "$TMP/site/dist/client" > /dev/null 2>&1 &
   SRV=$!
   sleep 1
+  set +e
   (cd site && node smoke.mjs http://localhost:4199 > /tmp/prepush_smoke.log 2>&1)
   SMOKE=$?
-  kill $SRV 2>/dev/null
+  kill $SRV > /dev/null 2>&1
+  wait $SRV 2>/dev/null
+  set -e
   if [ $SMOKE -ne 0 ]; then
     echo "[pre-push] RUNTIME SMOKE FAILED — push blocked."
     tail -6 /tmp/prepush_smoke.log
