@@ -96,8 +96,11 @@ def _stale_youtube_years() -> set:
 
       * past STUDY_END_YEAR — a partial year is not comparable with full ones
       * missing a variant entirely — the other side then reads as 0% adoption
-      * incomplete — fewer than 12 resolved months on either side, so the year's
-        total is a fraction of the truth and its dip reads as history
+      * incomplete — fewer than 12 RECORDED months on either side, so the year's
+        total is a fraction of the truth and its dip reads as history. A month
+        that is recorded but hour-capped is explored (a flagged lower bound) and
+        does not condemn its year; it is excluded month-level instead, by
+        _capped_youtube_months()
       * collected at a depth other than the one declared in config/pairs.yaml
 
     Depth is declared, not inferred: a sparse pair peaks at 58 results in a month
@@ -129,7 +132,7 @@ def _stale_youtube_years() -> set:
         months = d.get("months", {})
         w = len(d.get("done_windows", []))
         seen.setdefault((pair, year), {})[variant] = {
-            "resolved": sum(1 for m in months.values() if m.get("resolved")),
+            "explored": len(months),
             "depth": d.get("min_depth") or ("day" if w >= 300 else "week" if w >= 60 else "month"),
         }
 
@@ -140,11 +143,40 @@ def _stale_youtube_years() -> set:
         ru, uk = v.get("russian"), v.get("ukrainian")
         if ru is None or uk is None:
             stale.add((pair, year)); continue
-        if ru["resolved"] < 12 or uk["resolved"] < 12:
+        if ru["explored"] < 12 or uk["explored"] < 12:
             stale.add((pair, year)); continue
         if pair in want and (ru["depth"] != want[pair] or uk["depth"] != want[pair]):
             stale.add((pair, year))
     return stale
+
+
+def _capped_youtube_months() -> set:
+    """(pair, 'YYYY-MM') where either variant's month ended hour-capped.
+
+    A capped month is fully explored but its count is a lower bound for the
+    saturated variant, which biases adoption toward the other side. The month is
+    excluded — a genuine gap — while the year's clean months still plot. This is
+    the month-level twin of _stale_youtube_years(): year-level exclusion is for
+    unexplored years, month-level for explored-but-capped months.
+    """
+    import json as _json
+    ck = ROOT / "data" / "cl" / "raw" / "youtube_census" / ".checkpoints"
+    out: set = set()
+    if not ck.exists():
+        return out
+    for f in ck.glob("*.json"):
+        parts = f.stem.rsplit("_", 2)
+        if len(parts) != 3:
+            continue
+        pair = parts[0]
+        try:
+            months = _json.loads(f.read_text()).get("months", {})
+        except Exception:                              # noqa: BLE001
+            continue
+        for mkey, m in months.items():
+            if not m.get("resolved"):
+                out.add((pair, mkey))
+    return out
 
 
 def _load_youtube_census() -> pd.DataFrame:
@@ -218,6 +250,15 @@ def _load_youtube_census() -> pd.DataFrame:
             log.info(f"  YouTube: dropped {before-len(df):,} rows whose collection depth "
                      f"differs from the declared youtube_depth ({', '.join(years[:6])}"
                      f"{'...' if len(years) > 6 else ''}) — shown as gaps, not wrong values")
+
+    capped = _capped_youtube_months()
+    if capped:
+        before = len(df)
+        df = df[[(p, d[:7]) not in capped for p, d in zip(df.pair_slug, df.date)]].copy()
+        if before - len(df):
+            log.info(f"  YouTube: {before-len(df):,} rows in {len(capped)} hour-capped "
+                     f"month(s) excluded — counts there are lower bounds for the "
+                     f"saturated variant, which biases adoption; shown as gaps")
 
     log.info(f"  YouTube census: {len(files)} pair file(s), "
              f"{total:,} collected -> {len(df):,} verified "
@@ -688,13 +729,13 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 if not _m:
                     continue
                 _slug2, _, _yr = _m.group(1), _m.group(2), int(_m.group(3))
-                if _yr > int(STUDY_END_DATE[:4]) or (_slug2, _yr) in _stale2:
+                if _yr > int(STUDY_END_DATE[:4]) or (_slug2, str(_yr)) in _stale2:
                     continue
                 try:
                     _mo = _cj.load(open(_f)).get("months") or {}
                 except Exception:
                     continue
-                if sum(1 for v in _mo.values() if v.get("resolved")) >= 12:
+                if len(_mo) >= 12:
                     _complete.setdefault(_slug2, {}).setdefault(_yr, 0)
                     _complete[_slug2][_yr] += 1
         _zeroed = 0
@@ -703,11 +744,14 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 continue
             _ser = result.setdefault(_slug2, {}).setdefault("youtube", [])
             _have = {x["date"] for x in _ser}
+            _capped2 = _capped_youtube_months()
             for _yr, _nvar in sorted(_yrs.items()):
                 if _nvar < 2:
                     continue                    # one variant missing: not observed
                 for _mm in range(1, 13):
                     _key = f"{_yr}-{_mm:02d}"
+                    if (_slug2, _key) in _capped2:
+                        continue                # hour-capped: a gap, never a zero
                     if _key not in _have:
                         _ser.append({"date": _key, "adoption": None,
                                      "ukr": 0, "rus": 0, "measured_zero": True})
@@ -774,6 +818,11 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 continue          # not a monthly series (yearly cadence) — leave it
             _have = {d["date"]: d for d in _ser}
             _missing = [m for m in _span if m not in _have]
+            # An hour-capped YouTube month is not a zero: collection saturated
+            # there, so its absence is a policy gap and must never be refilled.
+            if _src == "youtube":
+                _capped3 = _capped_youtube_months()
+                _missing = [m for m in _missing if (_slug, m) not in _capped3]
             if not _missing:
                 continue
             # Only short runs are filled. A handful of silent months in a sparse pair
@@ -1583,8 +1632,11 @@ def main():
             # A legacy month-grid year "resolves" 12 months with ~12-16 windows;
             # a week-floor year uses 60+. Completeness requires the real grid,
             # so hollow legacy checkpoints can never turn a pair green.
+            # 12 RECORDED months mean the year was fully explored; hour-capped
+            # months are flagged lower bounds, excluded month-level, and must
+            # not hold a pair's readiness hostage.
             _w = len(_d.get("done_windows", [])) + len(_d.get("split_windows", []))
-            if sum(1 for x in _m.values() if x.get("resolved")) >= 12 and _w >= 40:
+            if len(_m) >= 12 and _w >= 40:
                 _done.setdefault(_pair, set()).add((_var, _yr))
     def _yt_complete(slug):
         s_ = _done.get(slug, set())
