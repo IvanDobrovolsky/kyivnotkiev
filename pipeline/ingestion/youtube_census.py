@@ -106,6 +106,7 @@ class Budget:
     def __init__(self, max_searches: int | None):
         self.max_searches = max_searches
         self.searches = 0
+        self.rejected = 0
         self.units = 0
         self._times: deque[float] = deque()
 
@@ -169,7 +170,12 @@ def search_window(term, start, end, key, budget, ledger):
             time.sleep(5 * backoff)
             continue
 
-        budget.searches += 1
+        # Only accepted calls consume the daily quota; 429/403 rejects are free.
+        # Counting every response made the budget self-stop early on 429 storms.
+        if resp.status_code == 200:
+            budget.searches += 1
+        else:
+            budget.rejected += 1
 
         if resp.status_code in (403, 429):
             reasons = set()
@@ -185,7 +191,8 @@ def search_window(term, start, end, key, budget, ledger):
                 wait = min(120, 15 * backoff)
                 log.warning(f"    429 rate limited — backing off {wait}s ({backoff}/8)")
                 time.sleep(wait)
-                budget._times.clear()
+                # Keep the sliding window: clearing it here let the client
+                # re-burst at full speed and provoke the next 429 immediately.
                 continue
             log.error(f"    quota exhausted for the day: {sorted(reasons)}")
             raise Exhausted()
@@ -453,7 +460,7 @@ def main():
             ok = all(bool(v) for v in res.loc[mkey].values) if mkey in res.index else True
             log.info(f"{mkey:<10}{ru:>8}{ua:>8}{share:>11}   {'yes' if ok else 'NO'}")
         log.info("=" * 62)
-    log.info(f"\nTotal: {budget.searches} search calls used")
+    log.info(f"\nTotal: {budget.searches} search calls used, {budget.rejected} rejected (not charged)")
 
 
 if __name__ == "__main__":
