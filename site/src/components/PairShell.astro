@@ -1104,7 +1104,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <div>3. ${q.forced_ua_first || '—'} <span style="color:var(--text-muted);">(forced choice, order swapped)</span></div>
           </div>`;
 
-        d += `<div style="font-size:0.82rem; font-weight:700; color:var(--text); margin:0 0 0.4rem;">By family</div>`;
+        d += `<div style="font-size:0.82rem; font-weight:700; color:var(--text); margin:0 0 0.4rem;">${tt('llm.by_family','By family')}</div>`;
         for (const fam of familyOrder) {
           const f = sum.by_family[fam];
           const color = families[fam]?.color || '#666';
@@ -1134,8 +1134,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <div>forced choice — "${pp.ukrainian}" picks / answers</div>
           </div>`;
 
-        d += `<div style="font-size:0.82rem; font-weight:700; color:var(--text); margin:0 0 0.25rem;">Every model, every answer</div>`;
-        d += `<div style="font-size:0.76rem; color:var(--text-muted); margin-bottom:0.5rem;">Three cells per model: free recall, then the two forced-choice askings. Hover a model for its exact answers.</div>`;
+        d += `<div style="font-size:0.82rem; font-weight:700; color:var(--text); margin:0 0 0.25rem;">${tt('llm.every_model','Every model, every answer')}</div>`;
+        d += `<div style="font-size:0.76rem; color:var(--text-muted); margin-bottom:0.5rem;">${tt('llm.every_model_sub','Three cells per model: free recall, then the two forced-choice askings. Hover a model for its exact answers.')}</div>`;
         d += `<div id="pair-llm-grid" style="position:relative; display:flex; flex-wrap:wrap; gap:0.6rem 1rem;"></div>`;
         det.innerHTML = d;
 
