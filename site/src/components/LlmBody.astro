@@ -1,0 +1,192 @@
+---
+import { t } from '../i18n';
+const { lang = 'en' } = Astro.props;
+import Base from '../layouts/Base.astro';
+import llmTraj from '../data/llm_trajectory.json';
+
+const traj = llmTraj as any;
+const nModels = traj.n_models || 72;
+const nPairs = traj.n_pairs_total || 66;
+const nLabs = Object.keys(traj.families || {}).length || 8;
+const families = traj.families;
+
+const models = traj.models.filter((m: any) => m.release_date && m.open_n > 0);
+const openPct = (m: any) => m.open_n ? m.open_ua / m.open_n * 100 : 0;
+const forcedPct = (m: any) => m.forced_n ? m.forced_ua / m.forced_n * 100 : 0;
+
+const dateToMonths = (d: string) => { const [yr, mo] = d.split('-').map(Number); return yr * 12 + (mo - 1); };
+const monToQuarter = (m: number) => { const yr = Math.floor(m / 12); const mo = m % 12; return yr * 4 + Math.floor(mo / 3); };
+const qLabel = (q: number) => `Q${(q % 4) + 1} ${String(Math.floor(q / 4)).slice(-2)}`;
+
+const famList = Object.keys(families).sort((a, b) => {
+  const avg = (f: string) => {
+    const list = models.filter((m: any) => m.family === f);
+    return list.length ? list.reduce((s: number, m: any) => s + openPct(m), 0) / list.length : 0;
+  };
+  return avg(b) - avg(a);
+});
+
+const qs = models.map((m: any) => monToQuarter(dateToMonths(m.release_date)));
+const qMin = Math.min(...qs);
+const qMax = Math.max(...qs);
+const quarters = Array.from({length: qMax - qMin + 1}, (_, i) => qMin + i);
+
+const cells: Record<string, Record<number, any>> = {};
+for (const fam of famList) {
+  cells[fam] = {};
+  for (const q of quarters) cells[fam][q] = {open_ua: 0, open_n: 0, forced_ua: 0, forced_n: 0, models: []};
+}
+for (const md of models) {
+  const q = monToQuarter(dateToMonths(md.release_date));
+  const c = cells[md.family]?.[q];
+  if (!c) continue;
+  c.open_ua += md.open_ua; c.open_n += md.open_n;
+  c.forced_ua += md.forced_ua; c.forced_n += md.forced_n;
+  c.models.push(md);
+}
+
+const recallColor = (v: number) => {
+  if (v == null || isNaN(v)) return '#f8f9fb';
+  const t = Math.max(0, Math.min(1, (v - 30) / 70));
+  if (t < 0.5) { const u = t * 2; return `rgb(${220 - Math.round(u * 60)}, ${60 + Math.round(u * 180)}, ${60 + Math.round(u * 180)})`; }
+  else { const u = (t - 0.5) * 2; return `rgb(${160 - Math.round(u * 130)}, ${240 - Math.round(u * 100)}, ${240 - Math.round(u * 56)})`; }
+};
+
+const openVals = models.map(openPct);
+const forcedVals = models.map(forcedPct);
+const openMin = Math.min(...openVals).toFixed(0);
+const openMax = Math.max(...openVals).toFixed(0);
+const forcedMin = Math.min(...forcedVals).toFixed(0);
+const forcedMax = Math.max(...forcedVals).toFixed(0);
+const relMin = models.reduce((a: string, m: any) => m.release_date < a ? m.release_date : a, '9999');
+const relMax = models.reduce((a: string, m: any) => m.release_date > a ? m.release_date : a, '0000');
+
+const byRecall = models.slice().sort((a: any, b: any) => openPct(b) - openPct(a) || b.open_ua - a.open_ua);
+const gridCols = `minmax(140px, 180px) repeat(${quarters.length}, minmax(0, 1fr))`;
+---
+
+<Base title="AI Audit — #KyivNotKiev" activeNav="llm" lang={lang}>
+
+<div class="chart-container" style="margin-bottom:1rem;">
+  <div class="chart-title" style="color:var(--text);">{t(lang, 'llm_page.title')}</div>
+  <div class="chart-subtitle" style="margin-bottom:0.75rem;">
+    <Fragment set:html={t(lang, 'llm_page.subtitle_html', {n: nModels, labs: nLabs, pairs: nPairs})} />
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.5rem; margin-bottom:1rem; font-size:0.8rem;">
+    <div style="padding:0.5rem 0.6rem; background:rgba(213,43,30,0.05); border-left:2px solid #D52B1E; border-radius:3px;">
+      <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">{t(lang, 'llm_page.q_free')}</div>
+      <div style="color:var(--text-muted); font-family:monospace;">{t(lang, 'llm_page.q_free_ex')}</div>
+      <div style="color:var(--text-muted); margin-top:0.25rem;">{t(lang, 'llm_page.q_free_note')}</div>
+    </div>
+    <div style="padding:0.5rem 0.6rem; background:rgba(0,87,184,0.05); border-left:2px solid #0057B8; border-radius:3px;">
+      <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">{t(lang, 'llm_page.q_forced')}</div>
+      <div style="color:var(--text-muted); font-family:monospace;">{t(lang, 'llm_page.q_forced_ex')}</div>
+      <div style="color:var(--text-muted); margin-top:0.25rem;">{t(lang, 'llm_page.q_forced_note')}</div>
+    </div>
+    <div style="padding:0.5rem 0.6rem; background:rgba(0,87,184,0.05); border-left:2px solid #0057B8; border-radius:3px;">
+      <div style="font-weight:700; color:var(--text); margin-bottom:0.2rem;">{t(lang, 'llm_page.q_swapped')}</div>
+      <div style="color:var(--text-muted); font-family:monospace;">{t(lang, 'llm_page.q_swapped_ex')}</div>
+      <div style="color:var(--text-muted); margin-top:0.25rem;">{t(lang, 'llm_page.q_swapped_note')}</div>
+    </div>
+  </div>
+  <div style="font-size:0.8rem; color:var(--text-muted); margin:-0.5rem 0 1rem;">
+    {t(lang, 'llm_page.example_note', {pairs: nPairs})}
+  </div>
+
+  <!-- Heatmap: free recall by family and release quarter -->
+  <div style="width:100%; margin-bottom:0.75rem;">
+    <div style="font-size:0.85rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">
+      {t(lang, 'llm_page.heat_title')}
+    </div>
+    <div style={`display:grid; grid-template-columns:${gridCols}; gap:3px; align-items:stretch;`}>
+      <div></div>
+      {quarters.map((q) => (
+        <div style="text-align:center; font-size:0.8rem; font-weight:600; color:var(--text-muted); padding:0.2rem 0;">{qLabel(q)}</div>
+      ))}
+      {famList.map((fam) => {
+        const fcolor = families[fam]?.color || '#888';
+        const nFam = families[fam]?.n_models || 0;
+        return [
+          <div style="display:flex; align-items:center; gap:0.4rem; padding:0.2rem 0.3rem; min-width:0;">
+            <span style={`flex:0 0 4px; height:14px; border-radius:2px; background:${fcolor};`}></span>
+            <span style="font-size:0.84rem; font-weight:600; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{fam}</span>
+            <span style="font-size:0.79rem; color:var(--text-muted); margin-left:auto; font-family:monospace;">&times;{nFam}</span>
+          </div>,
+          ...quarters.map((q) => {
+            const cell = cells[fam][q];
+            if (!cell || cell.models.length === 0) return <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:3px; min-height:24px;"></div>;
+            const op = cell.open_n ? cell.open_ua / cell.open_n * 100 : 0;
+            const fc = cell.forced_n ? cell.forced_ua / cell.forced_n * 100 : 0;
+            const fill = recallColor(op);
+            const textColor = op < 55 || op > 90 ? 'white' : '#111827';
+            const tip = `${fam} · ${qLabel(q)}\n${cell.models.length} model${cell.models.length === 1 ? '' : 's'}\nFree recall: Ukrainian spelling in ${cell.open_ua} of ${cell.open_n} answers (${op.toFixed(0)}%)\nForced choice: ${cell.forced_ua} of ${cell.forced_n} (${fc.toFixed(0)}%)\nModels: ${cell.models.map((m: any) => m.key).join(', ')}`;
+            return <div title={tip} style={`background:${fill}; border:1px solid #d1d5db; border-radius:3px; min-height:24px; display:flex; align-items:center; justify-content:center; font-size:0.82rem; font-weight:600; color:${textColor};`}>{op.toFixed(0)}</div>;
+          }),
+        ];
+      })}
+    </div>
+
+    <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.6rem; padding:0.2rem 0.3rem; flex-wrap:wrap;">
+      <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">{t(lang, 'llm_page.legend')}</span>
+      {[30, 40, 50, 60, 70, 80, 90, 100].map((v) => (
+        <div style="display:flex; flex-direction:column; align-items:center; gap:0.1rem;">
+          <div style={`width:28px; height:12px; background:${recallColor(v)}; border:1px solid #d1d5db; border-radius:2px;`}></div>
+          <span style="font-size:0.78rem; color:var(--text-muted);">{v}</span>
+        </div>
+      ))}
+    </div>
+
+    <div style="font-size:0.8rem; color:var(--text-muted); padding:0.5rem 0.3rem 0; line-height:1.6;">
+      <Fragment set:html={t(lang, 'llm_page.how_html')} />
+    </div>
+  </div>
+
+  <!-- Family legend + story -->
+  <div style="display:grid; grid-template-columns:auto 1fr; gap:0.75rem; align-items:start;">
+    <div style="display:flex; flex-direction:column; gap:0.3rem; min-width:140px;">
+      {Object.entries(families).sort((a: any, b: any) => (b[1] as any).n_models - (a[1] as any).n_models).map(([fam, info]: [string, any]) => (
+        <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.82rem;">
+          <span style={`display:inline-block; width:12px; height:12px; border-radius:2px; background:${info.color};`}></span>
+          <span style="color:var(--text);">{fam}</span>
+          <span style="color:var(--text-muted); font-family:monospace;">({info.n_models})</span>
+        </div>
+      ))}
+    </div>
+    <div style="font-size:0.82rem; color:var(--text); line-height:1.6; padding-left:1rem; border-left:2px solid rgba(0,87,184,0.15);">
+      <Fragment set:html={t(lang, 'llm_page.story_html', {fmin: forcedMin, fmax: forcedMax, omin: openMin, omax: openMax})} />
+    </div>
+  </div>
+
+  <!-- Free recall leaders / trailers -->
+  <div style="margin-top:1rem; display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+    <div>
+      <div style="font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">{t(lang, 'llm_page.top')}</div>
+      <div style="font-size:0.8rem; font-family:monospace; color:var(--text);">
+        {byRecall.slice(0, 5).map((md: any) => (
+          <div style="display:grid; grid-template-columns:1fr auto; gap:0.5rem; padding:0.2rem 0; border-bottom:1px solid rgba(0,0,0,0.04);">
+            <span style={`color:${families[md.family]?.color || '#666'}; font-weight:600;`}>{md.key}</span>
+            <span style="color:var(--text-muted);">{md.open_ua} {t(lang, 'llm_page.of_names', {n: md.open_n})}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div>
+      <div style="font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.4rem;">{t(lang, 'llm_page.bottom')}</div>
+      <div style="font-size:0.8rem; font-family:monospace; color:var(--text);">
+        {byRecall.slice(-5).reverse().map((md: any) => (
+          <div style="display:grid; grid-template-columns:1fr auto; gap:0.5rem; padding:0.2rem 0; border-bottom:1px solid rgba(0,0,0,0.04);">
+            <span style={`color:${families[md.family]?.color || '#666'}; font-weight:600;`}>{md.key}</span>
+            <span style="color:var(--text-muted);">{md.open_ua} {t(lang, 'llm_page.of_names', {n: md.open_n})}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:0.75rem; padding:0.5rem 0.75rem; background:rgba(0,87,184,0.04); border-radius:4px; font-size:0.8rem; color:var(--text-muted);">
+    {t(lang, 'llm_page.foot', {n: nModels, rmin: relMin, rmax: relMax, pairs: nPairs})}
+  </div>
+</div>
+
+</Base>
