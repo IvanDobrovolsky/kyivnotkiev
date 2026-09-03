@@ -78,17 +78,8 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
       <button id="keyness-info-btn" class="method-btn">{t(lang, 'pair.view_methodology')}</button>
       <div id="keyness-info-pop" hidden class="info-pop">
         <button id="keyness-info-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>
-        <p><strong>How the words are chosen.</strong> Word counts from documents using each spelling are
-        contrasted with a log-odds ratio under an informative Dirichlet prior (Monroe, Colaresi &amp;
-        Quinn 2008), z-scored. The prior is the pooled corpus, so a word only scores when it exceeds
-        the rate the whole corpus predicts &mdash; plain frequency or PMI over-reward rare words.</p>
-        <p>Contrasts are computed <em>within each source</em> and a word is shown only when it leans the
-        same way in two or more sources (|z| &ge; 2) &mdash; separating discourse from source register.
-        Possessives fold into their stem; outlet names, URL debris and stopwords are excluded.</p>
-        <p>When one spelling is too rare to contrast (under 25 documents per source), the dominant
-        form is profiled against a cross-pair background sample instead, and a term must appear
-        across at least five distinct outlets to ship.</p>
-      </div>
+        <Fragment set:html={t(lang, "meth_pop.keyness_html")} />
+            </div>
     </div>
     <div id="pair-cl-coll-body"></div>
   </div>
@@ -102,22 +93,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
     <button id="cluster-info-btn" class="method-btn">{t(lang, 'pair.view_methodology')}</button>
     <div id="cluster-info-pop" hidden class="info-pop">
       <button id="cluster-info-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>
-      <p><strong>How the groups are made.</strong> Every text is turned into a vector with a
-      sentence-embedding model (<code>all-MiniLM-L6-v2</code>), compressed to 50 dimensions with PCA.</p>
-      <p>A <strong>mixture of Gaussians</strong> is fitted with the <strong>EM algorithm</strong>: each text
-      x<sup>(i)</sup> is modelled as drawn from one of k Gaussians selected by a <strong>latent</strong>
-      variable z<sup>(i)</sup>&nbsp;&sim;&nbsp;Multinomial(&phi;), with
-      x<sup>(i)</sup>&thinsp;|&thinsp;z<sup>(i)</sup>&hairsp;=&hairsp;j &sim; &#119977;(&mu;<sub>j</sub>, &Sigma;<sub>j</sub>).
-      The <strong>E-step</strong> computes the &ldquo;soft&rdquo; assignments by Bayes rule:</p>
-      <p class="formula">w<sub>j</sub><sup>(i)</sup> := p(z<sup>(i)</sup>&hairsp;=&hairsp;j&thinsp;|&thinsp;x<sup>(i)</sup>; &phi;, &mu;, &Sigma;) =
-        <span class="frac"><span>p(x<sup>(i)</sup>|z<sup>(i)</sup>&hairsp;=&hairsp;j;&thinsp;&mu;,&Sigma;)&thinsp;&phi;<sub>j</sub></span><span>&Sigma;<sub>l</sub> p(x<sup>(i)</sup>|z<sup>(i)</sup>&hairsp;=&hairsp;l;&thinsp;&mu;,&Sigma;)&thinsp;&phi;<sub>l</sub></span></span></p>
-      <p>The <strong>M-step</strong> re-estimates &phi;<sub>j</sub>, &mu;<sub>j</sub>, &Sigma;<sub>j</sub> from those
-      weights, and the two steps repeat until the log-likelihood &ell;(&phi;, &mu;, &Sigma;) converges —
-      soft assignments w<sub>j</sub><sup>(i)</sup> in place of k-means&rsquo; hard c<sup>(i)</sup>.
-      k is chosen by BIC; groups whose vocabulary overlaps &ge;50% are merged —
-      unless their Ukrainian shares differ by over 20 points, so a spelling split is never merged away.
-      A text whose top two posteriors are within 0.20 counts as <em>between</em> groups.
-      The 2-D layout is a UMAP projection: positions are for reading, distances are approximate.</p>
+      <Fragment set:html={t(lang, "meth_pop.cluster_html")} />
       <div id="cluster-info-viz"></div>
       <p id="cluster-info-stats" style="color:#6b7280; margin:0.4rem 0 0;"></p>
     </div>
