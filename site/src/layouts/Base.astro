@@ -182,4 +182,43 @@ const navItems = [
     padding: 0.3rem 1rem;
     border-bottom: 1px solid #fde68a;
   }
+  .nav-burger {
+    display: none;
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  .nav-burger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text, #111);
+    margin: 4px 0;
+    border-radius: 1px;
+  }
+  .nav-lang { font-weight: 700; letter-spacing: 0.04em; color: #0057B8; }
+  @media (max-width: 640px) {
+    .nav-burger { display: block; }
+    .site-nav-links {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0.25rem 0 0.6rem;
+      border-top: 1px solid var(--border, #e5e7eb);
+      margin-top: 0.4rem;
+    }
+    .site-nav-links.open { display: flex; }
+    .site-nav-links a {
+      padding: 0.65rem 0.25rem;
+      width: 100%;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .site-nav-links a:last-child { border-bottom: none; }
+    .site-nav-inner { flex-wrap: wrap; }
+  }
 </style>
