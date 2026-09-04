@@ -68,6 +68,34 @@ def build(pair: str) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
         audit["dropped_homonym"] = int(_hit.sum())
         usage = usage[~_hit].copy()
 
+    # 2c. referent verification (config referent_filter). Two modes:
+    #   evidence(+evidence_domains): a record with NO referent evidence anywhere
+    #     in the body, and not from a whitelisted outlet, names a different
+    #     referent entirely. odesa measured 2026-09-03: 10,772/22,439 records
+    #     were US towns and actresses — every one russian-variant, deflating
+    #     adoption 67.5% -> 34.2%. The gazetteer rescue is mandatory: naive
+    #     no-referent tests deleted real kyivpost journalism (Trukhanov).
+    #   frozen: rows matching a fossilised compound WITHOUT substantive evidence
+    #     make no spelling choice ("Borscht Belt" = 61% of borscht records).
+    _rf = next((p.get("referent_filter") for p in _cfg["pairs"]
+                if p.get("slug") == pair and p.get("referent_filter")), None)
+    if _rf:
+        _txt = usage.text.astype(str)
+        if _rf.get("evidence"):
+            _ev = _txt.str.contains(_rf["evidence"], case=False, regex=True)
+        else:
+            _ev = pd.Series(True, index=usage.index)
+        if _rf.get("evidence_domains"):
+            _dom = usage.url.astype(str).str.extract(r"https?://(?:www\.)?([^/]+)")[0].fillna("")
+            _ev = _ev | _dom.str.contains(_rf["evidence_domains"], case=False, regex=True)
+        if _rf.get("frozen"):
+            _drop = _txt.str.contains(_rf["frozen"], case=False, regex=True) & ~_ev
+            audit["dropped_frozen_compound"] = int(_drop.sum())
+        else:
+            _drop = ~_ev
+            audit["dropped_no_referent"] = int(_drop.sum())
+        usage = usage[~_drop].copy()
+
     # 3. one record per article
     verified = usage.drop_duplicates("text_hash").copy()
     audit["dropped_duplicate_body"] = int(len(usage) - len(verified))

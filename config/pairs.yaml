@@ -81,7 +81,17 @@ pairs:
   - friday\s+night\s+lights
   - odessa\s+american
   - odessa.{0,5}a.?zion
+  - odessa\s+(?:young|rae)
   homonym_type: us_city
+  # Referent verification (body-level, applied in the verified-corpus builder):
+  # a record whose body has ZERO Ukraine evidence and is not from a Ukrainian
+  # outlet names a different Odessa (US towns, actresses). Measured 2026-09-03:
+  # 10,772 of 22,439 records, all russian-variant — adoption 34.2% -> 67.5%.
+  # Evidence regex validated against kyivpost false-drop cases (Trukhanov,
+  # Mykhailyk); exhibits in data/audit/odesa_referent_exhibits.csv.
+  referent_filter:
+    evidence: \b(?:ukrain\w*|black sea|kyiv|kiev|kherson|mykolaiv|zelensk\w+|oblast|russia\w*|moscow|donbas|crimea\w*|odesa|trukhanov|saakashvili|potemkin st\w*|derybasivska|deribasovskaya|privoz|prymorsky|arcadia beach|izmail|chornomorsk|yuzhne|hryvn\w+|verkhovna|maidan|poroshenko|kuchma|yanukovych)\b
+    evidence_domains: kyivpost|unian|ukrinform|interfax\.com\.ua|pravda\.com\.ua|kyivindependent|odessa-journal
   slug: odesa
   blurb_uk: "Чорноморський порт; одна «с» чи дві"
   verdict_uk: "Спірна територія: воєнні репортажі перейшли на Odesa, але подвійна «s» досі панує в культурних текстах."
@@ -293,6 +303,16 @@ pairs:
     label: UNESCO inscribes Ukrainian borscht
   match_mode: word_boundary
   slug: borscht
+  # "Borscht Belt" is a fossilised US toponym (Catskills resorts) — it can never
+  # flip to "Borshch Belt", so a record mentioning ONLY the Belt makes no
+  # spelling choice about the dish. Measured 2026-09-03: 2,061/3,373 records
+  # mention the Belt; 1,511 have no food/UA context at all — 83.3% -> 69.3%.
+  # Records with real food context are kept even when the Belt appears.
+  referent_filter:
+    frozen: borscht\s+belt
+    evidence: \b(?:ukrain\w*|russia\w*|kyiv|kiev|soviet|beet\w*|soup|recipe|cook\w*)\b
+  youtube_homonym_filters:
+  - borscht\s+belt
   blurb_uk: "ЮНЕСКО визнає його українським"
   verdict_uk: "Українське написання стало англійським стандартом, закріплене рішенням ЮНЕСКО 2022 року."
   verdict: "The Ukrainian-aligned spelling is now the English standard, anchored by the 2022 UNESCO listing."
