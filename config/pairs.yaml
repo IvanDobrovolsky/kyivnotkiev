@@ -278,6 +278,7 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: chicken-kyiv
+  hide_global_events: true
   blurb_uk: "Імʼя столиці, заморожене в меню"
   verdict_uk: "Меню опираються: страва здебільшого лишається Chicken Kiev, хоч місто вже змінилося."
   verdict: "Menus resist: the dish mostly stays Chicken Kiev even though the city switched."
@@ -290,6 +291,8 @@ pairs:
     label: UK supermarkets rebrand to Chicken Kyiv
   - date: 2022-10
     label: UK regional press Christmas recipes (still "Kiev")
+  - date: 2025-08
+    label: Alaska summit — Russian delegation serves "Chicken Kyiv" in-flight
   word_boundary: true
   ukrainian_cyrillic: Котлета по-київськи
   significance: A dish carrying the capital's name on menus worldwide — food packaging and restaurant listings are among the slowest surfaces to change.

@@ -1430,6 +1430,13 @@ def export_pair_events(enabled_slugs: set[str]) -> dict:
                 {"date": e["date"], "label": e["label"], "color": e.get("color", "#0057B8")}
                 for e in events
             ]
+    # Pairs whose story the global markers (Euromaidan, full-scale war) do not
+    # explain — a dish's spikes are culinary and diplomatic-trivia moments, not
+    # front lines. The underscore key cannot collide with a slug.
+    hide = [p["slug"] for p in cfg["pairs"]
+            if p.get("slug") in enabled_slugs and p.get("hide_global_events")]
+    if hide:
+        result["_hide_global"] = hide
     return result
 
 
