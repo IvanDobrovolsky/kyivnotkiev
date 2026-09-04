@@ -217,8 +217,10 @@ def _load_youtube_census() -> pd.DataFrame:
     # 17% of the odesa pair's verified videos. Same patterns as the news bodies.
     import re as _re
     _cfg = load_pairs()
-    _ho = {p["slug"]: [_re.compile(f, _re.I) for f in p.get("homonym_filters", [])]
-           for p in _cfg["pairs"] if p.get("homonym_filters")}
+    _ho = {p["slug"]: [_re.compile(f, _re.I)
+                       for f in p.get("homonym_filters", []) + p.get("youtube_homonym_filters", [])]
+           for p in _cfg["pairs"]
+           if p.get("homonym_filters") or p.get("youtube_homonym_filters")}
     if _ho:
         _blob = (df["title"].fillna("").astype(str) + " " +
                  df["description"].fillna("").astype(str)) if "description" in df.columns                 else df["title"].fillna("").astype(str)
@@ -420,6 +422,13 @@ def smooth_ratio_series(series: list[dict]) -> list[dict]:
     rus = [float(d.get("rus") or 0) for d in series]
     out = []
     for i, d in enumerate(series):
+        if d.get("capped"):
+            # An hour-capped month has no usable count; recomputing it from
+            # neighbours would paint a value over a month we cannot measure.
+            e = dict(d)
+            e["adoption"], e["n"], e["window"] = None, 0.0, 0
+            out.append(e)
+            continue
         half = 0
         while True:
             lo, hi = max(0, i - half), min(len(series), i + half + 1)
@@ -437,7 +446,8 @@ def smooth_ratio_series(series: list[dict]) -> list[dict]:
         out.append(e)
     # Measured zeros survive with a null ratio: the month was observed and held
     # nothing, which is not the same as the month being unsupported.
-    return [e for e in out if e["adoption"] is not None or e.get("measured_zero")]
+    return [e for e in out if e["adoption"] is not None or e.get("measured_zero")
+            or e.get("capped")]
 
 
 def smooth_series(series: list[dict], window: int = 3) -> list[dict]:
@@ -751,7 +761,14 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 for _mm in range(1, 13):
                     _key = f"{_yr}-{_mm:02d}"
                     if (_slug2, _key) in _capped2:
-                        continue                # hour-capped: a gap, never a zero
+                        # Emit an explicit capped marker, not an absent month: the
+                        # chart interpolates straight across absent points, which
+                        # HIDES the gap. A null point with capped=true breaks the
+                        # line and hatches the month.
+                        if _key not in _have:
+                            _ser.append({"date": _key, "adoption": None,
+                                         "ukr": None, "rus": None, "capped": True})
+                        continue
                     if _key not in _have:
                         _ser.append({"date": _key, "adoption": None,
                                      "ukr": 0, "rus": 0, "measured_zero": True})
@@ -901,13 +918,13 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
             if src == "ngrams":
                 # Ngrams ukr/rus are stored as freq * 1e9 (see line ~351)
                 # Convert back: max_freq = max_stored / 1e9
-                max_stored = max(max(d.get("ukr", 0), d.get("rus", 0)) for d in series)
+                max_stored = max(max(d.get("ukr") or 0, d.get("rus") or 0) for d in series)
                 if max_stored / 1e9 < MIN_NGRAMS_FREQ:
                     del pair_sources[src]
                     removed += 1
             else:
                 # For count-based sources, check total volume
-                total = sum(d.get("ukr", 0) + d.get("rus", 0) for d in series)
+                total = sum((d.get("ukr") or 0) + (d.get("rus") or 0) for d in series)
                 if total < MIN_COUNT_THRESHOLD:
                     del pair_sources[src]
                     removed += 1

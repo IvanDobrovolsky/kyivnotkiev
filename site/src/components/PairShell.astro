@@ -480,6 +480,15 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         const lastCovered = covDates[covDates.length - 1].getTime() + med;
         if (lastCovered < xEnd.getTime()) gapSpans.push([new Date(lastCovered), xEnd]);
         (window as any).__lastCadenceMs = med;
+        // Hour-capped YouTube months: the point exists but carries no usable
+        // value (the API stopped serving results). Hatch that month with the
+        // same no-data language as uncovered spans and mute the tooltip there.
+        for (const d of (seriesData || [])) {
+          if (d && d.capped) {
+            const pd = parseDate(d.date);
+            if (pd) gapSpans.push([pd, new Date(pd.getTime() + med)]);
+          }
+        }
       }
 
       const gapG = svg.append('g').attr('class', 'nodata-regions');
@@ -694,19 +703,21 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .x((d: any) => x(parseDate(d.date)!))
               .y0(height)
               .y1((d: any) => y(d.ukr || 0))
+              .defined((d: any) => !d.capped)
               .curve(d3.curveMonotoneX);
             svg.append('path').datum(plotSeries)
               .attr('fill', sourceColors[src]).attr('opacity', 0.15)
               .attr('d', ukrArea);
             svg.append('path').datum(plotSeries)
               .attr('fill', 'none').attr('stroke', sourceColors[src]).attr('stroke-width', 3)
-              .attr('d', d3.line<any>().x(d => x(parseDate(d.date)!)).y(d => y(d.ukr || 0)).curve(d3.curveMonotoneX));
+              .attr('d', d3.line<any>().defined((d: any) => !d.capped).x(d => x(parseDate(d.date)!)).y(d => y(d.ukr || 0)).curve(d3.curveMonotoneX));
           }
           if (lineMode !== 'ukrainian') {
             const rusArea = d3.area<any>()
               .x((d: any) => x(parseDate(d.date)!))
               .y0(height)
               .y1((d: any) => y(d.rus || 0))
+              .defined((d: any) => !d.capped)
               .curve(d3.curveMonotoneX);
             svg.append('path').datum(plotSeries)
               .attr('fill', '#dc2626').attr('opacity', 0.08)
@@ -716,7 +727,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .attr('stroke-width', lineMode === 'russian' ? 3 : 1.5)
               .attr('stroke-dasharray', lineMode === 'russian' ? 'none' : '6,4')
               .attr('opacity', lineMode === 'russian' ? 1 : 0.5)
-              .attr('d', d3.line<any>().x(d => x(parseDate(d.date)!)).y(d => y(d.rus || 0)).curve(d3.curveMonotoneX));
+              .attr('d', d3.line<any>().defined((d: any) => !d.capped).x(d => x(parseDate(d.date)!)).y(d => y(d.rus || 0)).curve(d3.curveMonotoneX));
           }
         } else {
           // ── ADOPTION MODE: one 0–100 curve, always ──
