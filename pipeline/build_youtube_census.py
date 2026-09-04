@@ -210,9 +210,18 @@ def main() -> int:
             failed.append((pair, year, variant))
             print(f"    FAILED: {(r.stderr or r.stdout).strip().splitlines()[-1][:140]}")
         elif used == 0:
-            # the exact failure mode that wasted a run: exits successfully having done nothing
-            print(f"    WARNING: 0 search calls used — target already resolved; "
-                  f"use --force to recollect")
+            if is_complete(pair, variant, year):
+                # raced to completion by a parallel/prior run — genuinely done
+                done += 1
+                print("    0 search calls used — target already complete")
+            else:
+                # 0 calls AND an incomplete checkpoint: the key is dead for the
+                # day (census exits cleanly on quotaExceeded). Marching on would
+                # zero through every remaining target and let the chain enrich
+                # and DEPLOY a half-collected pair (seen 2026-09-03, kyivan-rus).
+                print(f"    0 calls, checkpoint incomplete — API key dead for the day")
+                print(f"\nstopping cleanly with {len(pending)-i+1} target(s) left")
+                break
         else:
             done += 1
             print(f"    {used:,} searches")
