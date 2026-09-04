@@ -451,6 +451,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         .sort((a: any, b: any) => a.getTime() - b.getTime());
 
       const gapSpans: [Date, Date][] = [];
+      const cappedSpans: [Date, Date, string][] = [];
       if (covDates.length === 0) {
         gapSpans.push([xStart, xEnd]);
       } else {
@@ -486,7 +487,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         for (const d of (seriesData || [])) {
           if (d && d.capped) {
             const pd = parseDate(d.date);
-            if (pd) gapSpans.push([pd, new Date(pd.getTime() + med)]);
+            if (pd) {
+              gapSpans.push([pd, new Date(pd.getTime() + med)]);
+              cappedSpans.push([pd, new Date(pd.getTime() + med), d.date]);
+            }
           }
         }
       }
@@ -773,6 +777,17 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           // different part of the chart entirely. Only one source renders at a time,
           // so the active source's gaps are the gaps.
           const ht = hoveredDate.getTime();
+          // A capped month is a different kind of unreadable than "never looked":
+          // say WHY there is no value here instead of going silent.
+          for (const [ca, cb, cd] of cappedSpans) {
+            if (ht > ca.getTime() && ht < cb.getTime()) {
+              tooltip.style('opacity', '1').html(
+                `<strong>${cd}</strong><br/>` +
+                tt('pair.capped_tooltip', "YouTube's result cap saturated this month — the count is a lower bound and is not plotted."));
+              crosshairLine.style('opacity', 0);
+              return;
+            }
+          }
           for (const [ga, gb] of gapSpans) {
             if (ht > ga.getTime() && ht < gb.getTime()) {
               tooltip.style('opacity', '0');
