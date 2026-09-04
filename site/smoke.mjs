@@ -1,7 +1,11 @@
 // Runtime smoke: load pages headless, fail on any console error / pageerror.
 import { chromium } from 'playwright-core';
 const base = process.argv[2] || 'http://localhost:4173';
-const paths = ['/', '/uk/', '/pair/kyiv/', '/uk/pair/kyiv/'];
+// Source deep-links exercise per-source render paths (holdouts, clusters) that
+// the default view never runs — the `filtered` ReferenceError shipped because
+// nothing loaded ?source=gdelt.
+const paths = ['/', '/uk/', '/pair/kyiv/', '/uk/pair/kyiv/',
+               '/pair/chicken-kyiv/?source=gdelt', '/pair/kyiv/?source=youtube'];
 const exe = process.env.CHROME_BIN ||
   '/Users/tati/Library/Caches/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-mac-arm64/chrome-headless-shell';
 const b = await chromium.launch({ executablePath: exe });

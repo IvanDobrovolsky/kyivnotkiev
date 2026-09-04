@@ -551,7 +551,9 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
       // Event markers — positioned by date on x-scale
       if (showEvents) {
-        const globalEvents = ((timeseriesData as any).events || []).map((e: any) => ({...e, type: 'global'}));
+        const hideGlobal = (((pairEvents as any)._hide_global) || []).includes(activePairSlug);
+        const globalEvents = hideGlobal ? [] :
+          ((timeseriesData as any).events || []).map((e: any) => ({...e, type: 'global'}));
         const customEvents = ((pairEvents as any)[activePairSlug] || []).map((e: any) => ({...e, type: 'pair'}));
         const events = [...globalEvents, ...customEvents].sort((a: any, b: any) => a.date.localeCompare(b.date));
 
@@ -1283,10 +1285,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         list.appendChild(item);
       }
 
-      if (filtered.length > DISPLAY_LIMIT) {
+      if (sorted.length > DISPLAY_LIMIT) {
         const more = document.createElement('div');
         more.style.cssText = 'padding:0.75rem; text-align:center; color:var(--text-muted); font-size:0.8rem;';
-        const totalArticles = (pairHoldouts as any)?._total_articles || filtered.length;
+        const totalArticles = (pairHoldouts as any)?._total_articles || sorted.length;
         more.textContent = `Showing ${DISPLAY_LIMIT} of ${totalArticles} articles`;
         list.appendChild(more);
       }
