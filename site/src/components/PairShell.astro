@@ -1640,8 +1640,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 
       } else if (holdoutKey === 'wikipedia') {
         const rows = items.map((w: any) => {
-          const redirectTag = w.redirects ? '<span style="font-size:0.78rem; color:#059669; background:#ecfdf5; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.4rem;">redirects to UA</span>'
-            : '<span style="font-size:0.78rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.4rem;">no redirect</span>';
+          // Tag only when the status was actually measured; an absent field is
+          // unknown, not "no redirect".
+          const redirectTag = w.redirects === true ? '<span style="font-size:0.78rem; color:#059669; background:#ecfdf5; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.4rem;">redirects to UA</span>'
+            : w.redirects === false ? '<span style="font-size:0.78rem; color:#dc2626; background:#fef2f2; padding:0.1rem 0.3rem; border-radius:3px; margin-left:0.4rem;">no redirect</span>'
+            : '';
           return `<tr style="border-bottom:1px solid #f3f4f6;">
             <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${w.url}" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; border-bottom:1px dotted #d1d5db;">${w.name}</a>${redirectTag}</td>
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(w.views || 0).toLocaleString()} views</td>
