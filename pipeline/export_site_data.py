@@ -1930,9 +1930,55 @@ def main():
             return (abs(float(x["mean_z"])) >= 2.0 and len(w) >= 3
                     and not w.startswith("-") and not w.endswith("-")
                     and w not in _junk)
-        _ua = [{"w": x["word"], "z": round(float(x["mean_z"]), 1)}
+
+        # Provenance, derived from the data: which sources scored the term, and
+        # one verbatim example from this pair's records. No hand-written blurbs.
+        _ps = _k.get("per_source", {})
+        def _prov(word, side):
+            return sorted(s for s, d in _ps.items()
+                          if any(t.get("word") == word for t in d.get(side, [])))
+        _exdf = None
+        _rp0 = ROOT / "data" / "stats" / _slug / "records.parquet"
+        if _rp0.exists():
+            try:
+                import pandas as _pdx
+                _exdf = _pdx.read_parquet(
+                    _rp0, columns=["text", "source", "variant"]).head(30000)
+                _exdf["_lc"] = _exdf.text.astype(str).str.lower()
+            except Exception:                          # noqa: BLE001
+                _exdf = None
+        def _example(word, side):
+            if _exdf is None:
+                return None
+            import re as _rex
+            # Word-bounded, like the keyness tokenizer: a plain substring match
+            # put "war" inside "afterwards".
+            _wrx = r"\b" + _rex.escape(word.lower()) + r"\b"
+            _m = _exdf[(_exdf.variant == side)
+                       & _exdf._lc.str.contains(_wrx, regex=True, na=False)]
+            if not len(_m):
+                _m = _exdf[_exdf._lc.str.contains(_wrx, regex=True, na=False)]
+            if not len(_m):
+                return None
+            _t = _rex.sub(r"\s+", " ", str(_m.iloc[0].text))
+            _mm = _rex.search(_wrx, _t.lower())
+            _i = _mm.start() if _mm else -1
+            if _i < 0:
+                return None
+            _a0 = max(0, _i - 45)
+            _snip = ("…" if _a0 else "") + _t[_a0:_i + len(word) + 60].strip() + "…"
+            return {"s": str(_m.iloc[0].source), "t": _snip}
+        def _entry(x, side):
+            w = x["word"]
+            e = {"w": w, "z": round(abs(float(x["mean_z"])), 1),
+                 "src": _prov(w, side)}
+            ex = _example(w, side)
+            if ex:
+                e["ex"] = ex
+            return e
+        _ua = [_entry(x, "ukrainian")
                for x in _k.get("robust_ukrainian", []) if _keep(x)][:10]
-        _ru = [{"w": x["word"], "z": round(abs(float(x["mean_z"])), 1)}
+        _ru = [_entry(x, "russian")
                for x in _k.get("robust_russian", []) if _keep(x)][:10]
         if _ua or _ru:
             _kj[_slug] = {"ua": _ua, "ru": _ru,
@@ -1969,7 +2015,8 @@ def main():
                         _spread[_w] = int(_hosts[_txt.str.contains(_re.escape(_w))].nunique())
                 except Exception as _ex:               # noqa: BLE001
                     log.info(f"    solo spread failed for {_slug}: {_ex}")
-            _solo = [{"w": x["word"], "z": round(float(x["mean_z"]), 1)}
+            _side = "ukrainian" if _k.get("solo_variant") == "ukrainian" else "russian"
+            _solo = [_entry(x, _side)
                      for x in _k["solo_terms"]
                      if _keep(x) and x["word"] not in _dom_tokens
                      and _spread.get(str(x["word"]).lower(), 0) >= 5][:10]
