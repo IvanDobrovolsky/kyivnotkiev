@@ -25,7 +25,7 @@
     "collecting_title": "Data collection in progress"
   },
   "sources": {
-    "trends": "Search interest; Volume normalizes each line to its own peak.",
+    "trends": "Trends",
     "gdelt": "News",
     "wikipedia": "Wiki",
     "reddit": "Reddit",
@@ -67,7 +67,7 @@
     "clip_note": "{n} distant points omitted for scale",
     "ai_sub": "Chatbot audit: {n} models, {labs} labs — free generation vs forced choice between the two spellings.",
     "sources_info": {
-      "trends": "Google search interest. In Volume view each line is normalized to its own peak — line heights are not comparable to each other; the Adoption view applies the measured calibration between them.",
+      "trends": "Google search interest, normalized 0–100",
       "gdelt": "News articles, spelling verified in the article text",
       "wikipedia": "Monthly page views of each spelling’s article",
       "reddit": "Reddit posts and comments",
