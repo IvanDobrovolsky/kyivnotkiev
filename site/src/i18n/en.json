@@ -25,7 +25,7 @@
     "collecting_title": "Data collection in progress"
   },
   "sources": {
-    "trends": "Trends",
+    "trends": "Search interest; Volume normalizes each line to its own peak — use Adoption to compare.",
     "gdelt": "News",
     "wikipedia": "Wiki",
     "reddit": "Reddit",
