@@ -258,6 +258,25 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
+      // The event legend is a property of the PAIR, not of the active source;
+      // rendering it only when the source has data made the layout jump on
+      // every switch to an empty source.
+      const renderEventLegendOnly = () => {
+        if (!showEvents) return;
+        const hideG = (((pairEvents as any)._hide_global) || []).includes(activePairSlug);
+        const gl = hideG ? [] : ((timeseriesData as any).events || []);
+        const pe = ((pairEvents as any)[activePairSlug] || []);
+        let n = 0;
+        for (const evt of [...gl, ...pe].sort((a: any, b: any) => a.date.localeCompare(b.date))) {
+          n += 1;
+          const li = document.createElement('span');
+          li.className = 'legend-item';
+          li.style.cssText = 'font-size:0.87rem; color:#0057B8; font-weight:600; opacity:0.55;';
+          li.innerHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#0057B8;color:#fff;font-size:12px;font-weight:700;margin-right:4px;">${n}</span>${evt.label} (${evt.date})`;
+          legendContainer.appendChild(li);
+        }
+      };
+
       const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) {
         svg.append('text')
@@ -266,6 +285,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           .attr('fill', '#9ca3af')
           .attr('font-size', '14px')
           .text(tt('pair.no_data.' + activeSource, NO_DATA_REASON[activeSource]) || tt('pair.no_data.default', 'No data'));
+        renderEventLegendOnly();
         return;
       }
 
@@ -300,6 +320,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           .attr('fill', '#e5e7eb')
           .attr('font-size', '28px')
           .text('◯');
+        renderEventLegendOnly();
         return;
       }
 
