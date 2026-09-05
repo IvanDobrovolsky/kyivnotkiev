@@ -1,4 +1,5 @@
 ---
+import { localePath } from '../i18n';
 /**
  * Single pair card for the home grid.
  */
@@ -35,7 +36,7 @@ const pct = adoption || 0;
 const color = adoptionColor(pct);
 ---
 
-<a href={`/pair/${slug}`}
+<a href={localePath(lang, `/pair/${slug}`)}
    class="pair-card"
    data-adoption={pct}
    data-total={total || 0}

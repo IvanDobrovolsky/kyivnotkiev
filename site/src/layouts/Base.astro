@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { t, altPath } from '../i18n';
+import { t, altPath, localePath } from '../i18n';
 import m from '../data/manifest.json';
 
 interface Props {
@@ -28,8 +28,8 @@ const {
 // second link to the page the reader is usually on.
 const navItems = [
   { href: lang === 'uk' ? '/uk/' : '/', id: 'home', label: lang === 'uk' ? 'Пари' : 'Pairs' },
-  { href: '/methodology', id: 'methodology', label: t(lang, 'nav.methodology') },
-  { href: '/llm', id: 'llm', label: t(lang, 'nav.ai') },
+  { href: localePath(lang, '/methodology'), id: 'methodology', label: t(lang, 'nav.methodology') },
+  { href: localePath(lang, '/llm'), id: 'llm', label: t(lang, 'nav.ai') },
 ];
 ---
 
