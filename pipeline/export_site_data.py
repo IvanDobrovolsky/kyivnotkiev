@@ -13,6 +13,7 @@ import csv
 import json
 import logging
 import os
+import re
 from collections import defaultdict
 from datetime import date, timedelta
 from pathlib import Path
@@ -1597,11 +1598,19 @@ def main():
             _vdf = _vdf.assign(_lead=_vdf.text.astype(str)
                                .str.replace(r"\s+", " ", regex=True)
                                .str.lower().str.slice(0, 300))
+            # The lead fingerprint misses syndicated copies whose site chrome
+            # differs at the top while the paragraph around the matched term is
+            # verbatim (one Straussians piece under three mastheads on
+            # ternopil). The preview window IS that paragraph — dedup on it too.
+            _vdf = _vdf.assign(_ctx=[
+                re.sub(r"\s+", " ", str(_preview_around_match(t, v, _slug) or "")).lower()
+                for t, v in zip(_vdf.text, _vdf.variant)])
             _vdf = (_vdf.sort_values("date", ascending=False)
                         .drop_duplicates("_lead")
+                        .drop_duplicates("_ctx")
                         .groupby("domain", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
                         .head(HOLDOUT_CAP)
-                        .drop(columns="_lead"))
+                        .drop(columns=["_lead", "_ctx"]))
             holdouts_by_pair.setdefault(_slug, {})["news_articles"] = [{
                 "domain": r.domain,
                 "url": r.url,
