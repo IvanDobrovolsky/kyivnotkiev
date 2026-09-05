@@ -77,7 +77,9 @@
       "openalex": "Academic papers"
     },
     "capped_tooltip": "YouTube's result cap saturated this month — the count is a lower bound and is not plotted.",
-    "colloc_sources": "Distinctive in"
+    "colloc_sources": "Distinctive in",
+    "colloc_z": "distinctiveness",
+    "colloc_solo_note": "Distinctive of the dominant form, measured against the cross-pair background"
   },
   "llm": {
     "defs_html": "<strong>Free recall</strong>: the model writes the name unprompted — training data speaks. <strong>Forced choice</strong>: both spellings shown, pick one; asked twice with the order swapped.",

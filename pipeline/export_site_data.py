@@ -1942,8 +1942,11 @@ def main():
         if _rp0.exists():
             try:
                 import pandas as _pdx
-                _exdf = _pdx.read_parquet(
-                    _rp0, columns=["text", "source", "variant"]).head(30000)
+                # Stratified per source: a head() sample was all news rows, so
+                # YouTube-hashtag terms (heartofchornobyl) never found their
+                # example. Up to 8K docs from EACH source.
+                _exdf = (_pdx.read_parquet(_rp0, columns=["text", "source", "variant"])
+                         .groupby("source", group_keys=False).head(8000))
                 _exdf["_lc"] = _exdf.text.astype(str).str.lower()
             except Exception:                          # noqa: BLE001
                 _exdf = None
