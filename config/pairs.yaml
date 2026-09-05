@@ -507,6 +507,7 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: ternopil
+  hide_global_events: true
   blurb_uk: "Українське -піль проти російського -поль"
   verdict_uk: "Тихий, майже повний перехід — Ternopol практично зник із сучасної англійської."
   verdict: "A quiet, near-complete switch — Ternopol has almost vanished from current English."
