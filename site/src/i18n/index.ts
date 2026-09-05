@@ -22,3 +22,9 @@ export function altPath(lang: string, pathname: string): string {
 export function clientDict(lang: string): any {
   return locales[lang] ?? en;
 }
+
+/** Locale-aware internal link: prefixes /uk on Ukrainian pages. */
+export function localePath(lang: string, path: string): string {
+  if (lang !== 'uk') return path;
+  return path === '/' ? '/uk/' : `/uk${path}`;
+}

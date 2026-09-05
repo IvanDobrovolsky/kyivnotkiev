@@ -1,5 +1,5 @@
 ---
-import { t, clientDict } from '../i18n';
+import { t, clientDict, localePath } from '../i18n';
 import Base from '../layouts/Base.astro';
 import PairView from '../components/PairView.astro';
 import m from '../data/manifest.json';
@@ -34,7 +34,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 <Base lang={lang} title={title}>
 
 <div class="flex items-center gap-sm mb-md">
-  <a href="/" class="link text-sm">&larr; {t(lang, 'pair.back')}</a>
+  <a href={localePath(lang, "/")} class="link text-sm">&larr; {t(lang, 'pair.back')}</a>
 </div>
 
 <script type="application/json" id="pair-route-data" set:html={JSON.stringify({ slug: pair.slug, russian: pair.russian, ukrainian: pair.ukrainian })} />
