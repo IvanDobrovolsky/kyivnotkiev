@@ -472,21 +472,20 @@ def smooth_series(series: list[dict], window: int = 3) -> list[dict]:
         window = max(window, 7)
     elif jump_rate > 0.05 or null_pct > 0.15:
         window = max(window, 5)
-    filled = []
-    last_val = non_null[0] if non_null else 0
-    for v in values:
-        if v is not None:
-            last_val = v
-        filled.append(last_val)
-    smoothed = []
+    # Windowed mean over MEASURED months only. The old forward-fill invented
+    # values for unmeasured months (oleksandr-usyk: 31 months of fabricated
+    # 100% before any measurement existed) and averaging the filled sequence
+    # flattened real switch points (bakhmut 2022-05: 98.1% shown as 55.4%).
+    # A month without measurement stays null and the chart breaks the line.
+    out = []
     half = window // 2
-    for i in range(len(filled)):
-        start = max(0, i - half)
-        end = min(len(filled), i + half + 1)
-        avg = sum(filled[start:end]) / (end - start)
-        smoothed.append(round(avg, 1))
-    return [{**{k: v for k, v in series[i].items() if k != "adoption"}, "adoption": smoothed[i]}
-            for i in range(len(series))]
+    for i, d in enumerate(series):
+        if values[i] is None:
+            out.append(d)
+            continue
+        win = [v for v in values[max(0, i - half):i + half + 1] if v is not None]
+        out.append({**d, "adoption": round(sum(win) / len(win), 1)})
+    return out
 
 
 # ── Country codes ─────────────────────────────────────────────────────────────
@@ -593,7 +592,10 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
         # the adoption share, where the cross-variant ratio actually matters; it is
         # useless for display since a 111x gap draws as a flat line on the axis.
         if "interest_calibrated" not in t.columns:
-            t["interest_calibrated"] = t["interest"]
+            # Silently equating the two scales would un-calibrate every pair's
+            # adoption by up to 111x. Fail loudly instead.
+            raise RuntimeError("trends parquet lost interest_calibrated — "
+                               "re-run the trends ingestion before exporting")
         g = t.groupby(["pair_slug", "month", "variant"])[["interest", "interest_calibrated"]].sum().reset_index()
         p = g.pivot_table(index=["pair_slug", "month"], columns="variant",
                           values="interest", fill_value=0).reset_index()
@@ -602,6 +604,18 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
         pc = pc.set_index(["pair_slug", "month"])
         ukr_col = "ukrainian" if "ukrainian" in p.columns else 0
         rus_col = "russian" if "russian" in p.columns else 0
+        # Below-floor calibrations (k pinned to 0) cannot place UA on RU's
+        # scale: asserting 0% adoption there painted 127 fabricated feodosiia
+        # months while the joint windows actually contradicted the pin. An
+        # unmeasurable ratio is a gap, never a value.
+        _cal = ROOT / "data" / "raw" / "trends" / "calibration_report.csv"
+        _k0: set = set()
+        if _cal.exists():
+            try:
+                _cr = pd.read_csv(_cal)
+                _k0 = set(_cr[_cr["k"] <= 0]["slug"].astype(str))
+            except Exception:                          # noqa: BLE001
+                pass
         for pid, grp in p.groupby("pair_slug"):
             if pid not in enabled_slugs:
                 continue
@@ -617,10 +631,14 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                     cr = pc.loc[(pid, r["month"])]
                     cu = float(cr.get(ukr_col, 0) or 0)
                     cru = float(cr.get(rus_col, 0) or 0)
+                    ctotal = cu + cru
+                    adoption = round(cu / ctotal * 100, 2) if ctotal > 0 else None
                 except KeyError:
-                    cu, cru = ukr, rus
-                ctotal = cu + cru
-                adoption = round(cu / ctotal * 100, 2) if ctotal > 0 else None
+                    # No calibrated row: the ratio is unmeasured for this
+                    # month. Falling back to raw indices mixed two scales.
+                    cu, cru, adoption = ukr, rus, None
+                if pid in _k0:
+                    adoption = None
                 raw.append({"date": r["month"], "adoption": adoption,
                             "ukr": round(ukr, 4), "rus": round(rus, 4)})
             result.setdefault(pid, {})
