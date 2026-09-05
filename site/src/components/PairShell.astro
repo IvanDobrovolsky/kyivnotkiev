@@ -2175,17 +2175,34 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           });
         }
         const srcName = (sid: string) => (typeof sourceLabels !== 'undefined' && (sourceLabels as any)[sid]) || sid;
-        scope.querySelectorAll('.coll-chip').forEach((ch: any) => ch.addEventListener('click', () => {
+        let pinned: any = null;
+        let hideTimer: any = null;
+        const showFor = (ch: any) => {
           const m = JSON.parse(decodeURIComponent(ch.dataset.meta || '%7B%7D'));
           const srcs = (m.src || []).map(srcName).join(', ');
-          pop.innerHTML = `<div style="margin-bottom:0.25rem;"><strong>${escH(ch.textContent || '')}</strong> <span style="color:var(--text-muted);">· z=${m.z}</span></div>`
-            + (srcs ? `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${tt('pair.colloc_sources', 'Distinctive in')}: ${escH(srcs)}</div>` : '')
+          pop.innerHTML = `<div style="margin-bottom:0.25rem;"><strong>${escH(ch.textContent || '')}</strong> <span style="color:var(--text-muted);">· ${tt('pair.colloc_z', 'distinctiveness')} z = ${m.z}</span></div>`
+            + (srcs ? `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${tt('pair.colloc_sources', 'Distinctive in')}: ${escH(srcs)}</div>`
+                    : `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${tt('pair.colloc_solo_note', 'Distinctive of the dominant form, measured against the cross-pair background')}</div>`)
             + (m.ex ? `<div style="border-left:2px solid var(--border,#e5e7eb); padding-left:0.5rem; color:var(--text);">“${escH(m.ex.t)}” <span style="color:var(--text-muted);">— ${escH(srcName(m.ex.s))}</span></div>` : '');
           const r = ch.getBoundingClientRect();
-          pop.style.left = Math.min(window.scrollX + r.left, window.scrollX + window.innerWidth - pop.offsetWidth - 12) + 'px';
+          pop.style.left = Math.min(window.scrollX + r.left, window.scrollX + window.innerWidth - 360) + 'px';
           pop.style.top = (window.scrollY + r.bottom + 6) + 'px';
           pop.hidden = false;
-        }));
+        };
+        pop.addEventListener('mouseenter', () => { if (hideTimer) clearTimeout(hideTimer); });
+        pop.addEventListener('mouseleave', () => { if (!pinned) pop.hidden = true; });
+        scope.querySelectorAll('.coll-chip').forEach((ch: any) => {
+          ch.addEventListener('mouseenter', () => { if (hideTimer) clearTimeout(hideTimer); if (!pinned) showFor(ch); });
+          ch.addEventListener('mouseleave', () => {
+            if (!pinned) hideTimer = setTimeout(() => { pop.hidden = true; }, 180);
+          });
+          ch.addEventListener('click', (ev: any) => {
+            ev.stopPropagation();
+            if (pinned === ch) { pinned = null; pop.hidden = true; return; }
+            pinned = ch; showFor(ch);
+          });
+        });
+        document.addEventListener('click', () => { pinned = null; }, { once: false });
       }
 
       // Right: contrastive analysis — reads the keyness export (log-odds with
