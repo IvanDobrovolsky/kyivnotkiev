@@ -9,6 +9,7 @@ export default defineConfig({
     defaultLocale: 'en',
     routing: { prefixDefaultLocale: false },
   },
+  redirects: { '/methodology': '/', '/uk/methodology': '/uk/' },
   site: 'https://kyivnotkiev.org',
   adapter: cloudflare(),
 });
