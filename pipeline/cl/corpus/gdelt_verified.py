@@ -110,6 +110,28 @@ def build(pair: str) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     before_story = len(verified)
     verified = verified.loc[_lead.drop_duplicates().index].copy()
     audit["dropped_duplicate_story"] = int(before_story - len(verified))
+
+    # 3c. one record per REUSED PARAGRAPH. Syndicated copies often differ in
+    # site chrome at the top (dateline, editor notes, ads), which defeats the
+    # lead fingerprint, while the paragraph around the matched term stays
+    # verbatim — one Straussians piece survived under three mastheads on
+    # ternopil. Key: 300 normalised chars centred on the first surface-form hit.
+    _pc2 = next((x for x in _cfg["pairs"] if x.get("slug") == pair), {})
+    _terms = [t for t in (_pc2.get("ukrainian"), _pc2.get("russian")) if t]
+    if _terms:
+        _trx = _re.compile("|".join(_re.escape(t).replace(r"\ ", r"\s+")
+                                    for t in _terms), _re.I)
+        _norm = verified.text.astype(str).str.replace(r"\s+", " ", regex=True)
+        def _ctxkey(t: str) -> str:
+            m = _trx.search(t)
+            if not m:
+                return t[:300].lower()
+            a0 = max(0, m.start() - 150)
+            return t[a0:m.start() + 150].lower()
+        _ck = _norm.map(_ctxkey)
+        before_ctx = len(verified)
+        verified = verified.loc[_ck.drop_duplicates().index].copy()
+        audit["dropped_reused_paragraph"] = int(before_ctx - len(verified))
     audit["verified_records"] = len(verified)
 
     # 1. the body decides; the slug is kept only so the disagreement is auditable
