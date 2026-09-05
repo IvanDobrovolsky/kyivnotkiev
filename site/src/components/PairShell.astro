@@ -405,15 +405,19 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           yTicks = [0, step, step * 2, step * 3, yMax].map(v => Math.round(v));
         }
       } else {
-        // The adoption axis scales to the active source rather than always spanning
-        // 0-100%. chornobyl trends peaks at 15.3% with a median of 0.18%, which on a
-        // fixed 0-100% axis is a flat line along the bottom and reads as "no data"
-        // instead of as a small but real share. Sources are scaled independently so
-        // each one's shape is legible; the axis label carries the level.
-        const adVals = (seriesData || [])
-          .map((d: any) => d.adoption)
-          .filter((v: any) => v !== null && v !== undefined && !isNaN(v));
-        const adMax = adVals.length ? Math.max(...adVals) : 100;
+        // The adoption axis scales to the PAIR's maximum across all its sources,
+        // not to the active source: per-source scaling made the curve leap on
+        // every source switch. All-low pairs (chornobyl peaks ~15%) still get a
+        // zoomed axis; the axis simply never moves between sources of one pair.
+        let adMax = 0;
+        for (const ser of Object.values(pairTimeseriesData as any)) {
+          if (!Array.isArray(ser)) continue;
+          for (const d of ser as any[]) {
+            const v = d?.adoption;
+            if (v != null && !isNaN(v) && v > adMax) adMax = v;
+          }
+        }
+        if (!adMax) adMax = 100;
         const yMax = adMax >= 60 ? 100 : Math.min(100, Math.max(adMax * 1.2, 1));
         y = d3.scaleLinear().domain([0, yMax]).range([height, 0]);
         const st = yMax / 4;
@@ -2149,6 +2153,41 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         ctxContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.86rem;">No context data</div>';
       }
 
+      // Collocation chips carry their provenance: which sources scored the
+      // term and one verbatim example from this pair's records — derived at
+      // export time, never hand-written. Click a chip to see it.
+      const escH = (t: string) => t.replace(/[&<>"']/g, (ch: string) =>
+        ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch] as string));
+      const collChip = (x: any, c: string) => {
+        const meta = encodeURIComponent(JSON.stringify({src: x.src || [], ex: x.ex || null, z: x.z}));
+        return `<button class="coll-chip" data-meta="${meta}" style="padding:0.15rem 0.5rem; border:1px solid ${c}33; background:${c}0d; border-radius:10px; font-size:0.78rem; color:var(--text); cursor:pointer; font-family:inherit;">${escH(String(x.w))}</button>`;
+      };
+      function bindCollChips(scope: HTMLElement) {
+        let pop = document.getElementById('coll-pop') as HTMLElement;
+        if (!pop) {
+          pop = document.createElement('div');
+          pop.id = 'coll-pop'; pop.className = 'info-pop';
+          pop.style.cssText = 'position:absolute; width:min(22rem,88vw); z-index:50; font-size:0.78rem; line-height:1.45;';
+          pop.hidden = true;
+          document.body.appendChild(pop);
+          document.addEventListener('click', (ev: any) => {
+            if (!pop.hidden && !pop.contains(ev.target) && !ev.target.closest?.('.coll-chip')) pop.hidden = true;
+          });
+        }
+        const srcName = (sid: string) => (typeof sourceLabels !== 'undefined' && (sourceLabels as any)[sid]) || sid;
+        scope.querySelectorAll('.coll-chip').forEach((ch: any) => ch.addEventListener('click', () => {
+          const m = JSON.parse(decodeURIComponent(ch.dataset.meta || '%7B%7D'));
+          const srcs = (m.src || []).map(srcName).join(', ');
+          pop.innerHTML = `<div style="margin-bottom:0.25rem;"><strong>${escH(ch.textContent || '')}</strong> <span style="color:var(--text-muted);">· z=${m.z}</span></div>`
+            + (srcs ? `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${tt('pair.colloc_sources', 'Distinctive in')}: ${escH(srcs)}</div>` : '')
+            + (m.ex ? `<div style="border-left:2px solid var(--border,#e5e7eb); padding-left:0.5rem; color:var(--text);">“${escH(m.ex.t)}” <span style="color:var(--text-muted);">— ${escH(srcName(m.ex.s))}</span></div>` : '');
+          const r = ch.getBoundingClientRect();
+          pop.style.left = Math.min(window.scrollX + r.left, window.scrollX + window.innerWidth - pop.offsetWidth - 12) + 'px';
+          pop.style.top = (window.scrollY + r.bottom + 6) + 'px';
+          pop.hidden = false;
+        }));
+      }
+
       // Right: contrastive analysis — reads the keyness export (log-odds with
       // Dirichlet prior, robust across >=2 sources). Rendered as term chips.
       let kd: any = null;
@@ -2163,17 +2202,17 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <strong style="color:${c2};">"${form}"</strong> alive, measured against the whole corpus.
           </div>
           <div style="display:flex; flex-wrap:wrap; gap:0.3rem;">
-            ${kd.solo.map((x: any) => `<span title="lean strength ${x.z}" style="padding:0.15rem 0.5rem; border:1px solid ${c2}33; background:${c2}0d; border-radius:10px; font-size:0.78rem; color:var(--text);">${x.w}</span>`).join('')}
+            ${kd.solo.map((x: any) => collChip(x, c2)).join('')}
           </div>`;
+        bindCollChips(collContainer);
       } else if (collContainer && kd && (kd.ua?.length || kd.ru?.length)) {
         const names = getLlmPerPair()?.pairs?.[pid] || {};
-        const chip = (w: string, z: number, c: string) =>
-          `<span title="lean strength ${z}" style="padding:0.15rem 0.5rem; border:1px solid ${c}33; background:${c}0d; border-radius:10px; font-size:0.78rem; color:var(--text);">${w}</span>`;
+        const chip = (x: any, c: string) => collChip(x, c);
         const col = (label: string, color: string, list: any[]) => `
           <div>
             <div style="font-size:0.74rem; font-weight:700; color:${color}; margin-bottom:0.3rem;">${label}</div>
             <div style="display:flex; flex-wrap:wrap; gap:0.3rem;">
-              ${list.length ? list.map((x: any) => chip(x.w, x.z, color)).join('') : '<span style="font-size:0.76rem; color:var(--text-muted); font-style:italic;">no distinctive vocabulary — usage too scattered</span>'}
+              ${list.length ? list.map((x: any) => chip(x, color)).join('') : '<span style="font-size:0.76rem; color:var(--text-muted); font-style:italic;">no distinctive vocabulary — usage too scattered</span>'}
             </div>
           </div>`;
         collContainer.innerHTML = `
@@ -2183,6 +2222,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           </div>
           <div style="font-size:0.7rem; color:var(--text-dim); margin-top:0.5rem;">Log-odds with a corpus prior; a word appears only if it leans the same way in two or more sources.</div>
         `;
+        bindCollChips(collContainer);
       } else if (collContainer) {
         collContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.86rem;">No contrastive data</div>';
       }
