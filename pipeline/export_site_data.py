@@ -1318,20 +1318,50 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     # YouTube looked empty while its chart showed data.
     since = HOLDOUT_SINCE[:7]          # these sources carry "YYYY-MM" strings
 
-    # Wikipedia: actual page URLs with the Russian spelling
+    # Wikipedia: actual page URLs with the Russian spelling. Redirect status is
+    # MEASURED against the live API (one batched call, cached in data/audit/) —
+    # without measurement the UI showed "no redirect" for every page, false for
+    # Kiev since 2020. A title missing from the cache gets no tag at all.
     wiki = _load("wikipedia")
     if len(wiki) and "page_title" in wiki.columns:
         w = wiki[(wiki["date"] >= since) & (wiki["variant"].isin(HOLDOUT_VARIANTS))]
+        _tops: dict = {}
         for slug in enabled_slugs:
             pages = w[w["pair_slug"] == slug]
-            if not len(pages):
-                continue
-            top = pages.groupby("page_title")["pageviews"].sum().nlargest(HOLDOUT_CAP)
-            if len(top):
-                by_pair.setdefault(slug, {})["wikipedia"] = [
-                    {"name": t, "url": f"https://en.wikipedia.org/wiki/{t.replace(' ', '_')}", "views": int(v)}
-                    for t, v in top.items()
-                ]
+            if len(pages):
+                _tops[slug] = pages.groupby("page_title")["pageviews"].sum().nlargest(HOLDOUT_CAP)
+        _rc_path = ROOT / "data" / "audit" / "wikipedia_redirects.json"
+        try:
+            _rcache = json.loads(_rc_path.read_text()) if _rc_path.exists() else {}
+        except Exception:                              # noqa: BLE001
+            _rcache = {}
+        _missing = sorted({str(t) for tp in _tops.values() for t in tp.index}
+                          - set(_rcache))
+        if _missing:
+            try:
+                import requests as _rq
+                _resp = _rq.get("https://en.wikipedia.org/w/api.php",
+                                params={"action": "query", "format": "json",
+                                        "redirects": 1,
+                                        "titles": "|".join(_missing[:50])},
+                                headers={"User-Agent": "kyivnotkiev.org data audit"},
+                                timeout=20).json()
+                _redirected = {r["from"] for r in
+                               _resp.get("query", {}).get("redirects", [])}
+                for t in _missing[:50]:
+                    _rcache[t] = t in _redirected
+                _rc_path.write_text(json.dumps(_rcache, ensure_ascii=False,
+                                               indent=1, sort_keys=True))
+            except Exception as _e:                    # noqa: BLE001
+                log.info(f"  wikipedia redirect probe skipped: {_e}")
+        for slug, top in _tops.items():
+            by_pair.setdefault(slug, {})["wikipedia"] = [
+                {"name": t,
+                 "url": f"https://en.wikipedia.org/wiki/{t.replace(' ', '_')}",
+                 "views": int(v),
+                 **({"redirects": _rcache[str(t)]} if str(t) in _rcache else {})}
+                for t, v in top.items()
+            ]
 
     # Reddit: actual post URLs, best-scoring first
     reddit = _load("reddit")
