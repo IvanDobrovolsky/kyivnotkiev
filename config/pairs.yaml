@@ -415,6 +415,8 @@ pairs:
   enabled: true
   is_control: false
   events:
+  - date: 2018-07
+    label: Autocephaly row — Constantinople calls Moscow church Kyiv's daughter
   - date: 2022-02
     label: Russia weaponizes historical narrative
   match_mode: exact_phrase

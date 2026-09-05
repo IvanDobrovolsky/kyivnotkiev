@@ -154,6 +154,30 @@ def raw_counts(source: str) -> pd.DataFrame:
 
 def raw_reddit() -> pd.DataFrame:
     df = pd.read_parquet(SOURCES["reddit"]["file"])
+    # Mirror/bot subreddits (autotldr, AutoNewspaper, DOOMMM_* chain-posters...)
+    # repeat the OUTLET's spelling, not a redditor's choice — they leak the news
+    # signal into the organic social series. Behavioural rule, measured
+    # 2026-09-04 on 840K rows (19.3% dropped): a subreddit with >=100 posts is a
+    # mirror when it has <=2 distinct authors, or >=10% of its titles carry the
+    # (N/M) chain-post marker. Human subs with templated titles survive the
+    # author gate (indiegameswap: 241 authors). The kyivan-rus 2023-03 "spike"
+    # was one syndicated article chain-posted 104x. Audit CSV in data/audit/.
+    if "subreddit" in df.columns and "author" in df.columns:
+        _t = df.get("title", pd.Series("", index=df.index)).astype(str)
+        _chunk = _t.str.match(r"\(\d+/\d+\)")
+        _st = df.groupby("subreddit").agg(
+            posts=("post_id", "size"), authors=("author", "nunique"))
+        _st["chunk_share"] = _chunk.groupby(df["subreddit"]).mean()
+        _bots = _st[(_st.posts >= 100)
+                    & ((_st.authors <= 2) | (_st.chunk_share >= 0.10))]
+        _n0 = len(df)
+        df = df[~df.subreddit.isin(set(_bots.index))].copy()
+        print(f"  reddit: dropped {_n0 - len(df):,} rows from "
+              f"{len(_bots)} mirror/bot subreddit(s)")
+        try:
+            _bots.to_csv(pathlib.Path("data/audit/reddit_bot_subreddits.csv"))
+        except Exception:                              # noqa: BLE001
+            pass
     df["source"] = "reddit"
     df["doc_id"] = df["post_id"].astype(str)
     df["url"] = "https://reddit.com/r/" + df["subreddit"].astype(str) + "/comments/" + df["doc_id"]
