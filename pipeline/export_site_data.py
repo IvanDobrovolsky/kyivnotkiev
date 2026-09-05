@@ -1950,7 +1950,9 @@ def main():
                 _exdf["_lc"] = _exdf.text.astype(str).str.lower()
             except Exception:                          # noqa: BLE001
                 _exdf = None
+        _exdf_full = None
         def _example(word, side):
+            nonlocal _exdf_full
             if _exdf is None:
                 return None
             import re as _rex
@@ -1961,6 +1963,20 @@ def main():
                        & _exdf._lc.str.contains(_wrx, regex=True, na=False)]
             if not len(_m):
                 _m = _exdf[_exdf._lc.str.contains(_wrx, regex=True, na=False)]
+            if not len(_m):
+                # Rare term outside the stratified slice (hashtag compounds
+                # like heartofchornobyl): one full-corpus retry, frame cached.
+                nonlocal _exdf_full
+                if _exdf_full is None:
+                    try:
+                        import pandas as _pdf
+                        _exdf_full = _pdf.read_parquet(
+                            _rp0, columns=["text", "source", "variant"])
+                        _exdf_full["_lc"] = _exdf_full.text.astype(str).str.lower()
+                    except Exception:                  # noqa: BLE001
+                        _exdf_full = False
+                if _exdf_full is not False and _exdf_full is not None:
+                    _m = _exdf_full[_exdf_full._lc.str.contains(_wrx, regex=True, na=False)]
             if not len(_m):
                 return None
             _t = _rex.sub(r"\s+", " ", str(_m.iloc[0].text))
