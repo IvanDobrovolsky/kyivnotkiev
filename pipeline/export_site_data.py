@@ -1257,6 +1257,25 @@ def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
         for v in ("ukrainian", "russian"):
             lut[str(p[v]).strip().lower()] = (p["slug"], v)
     df = pd.read_parquet(path)
+    # Metalinguistic works — a title carrying BOTH variants of one pair
+    # ("Kyiv or Kiev: how Russian propaganda...") discusses the spelling
+    # choice rather than making one; it cannot exhibit "still uses the
+    # Russian form". Series counting is untouched (such works genuinely
+    # attest both), only the holdout exhibit excludes them.
+    import re as _re_m
+    _both = None
+    for q in cfg["pairs"]:
+        if not q.get("enabled", True):
+            continue
+        _ua = _re_m.escape(str(q["ukrainian"])).replace(r"\ ", r"\s+")
+        _ru = _re_m.escape(str(q["russian"])).replace(r"\ ", r"\s+")
+        _rx = _re_m.compile(rf"(?=.*\b{_ua}\b)(?=.*\b{_ru}\b)", _re_m.I | _re_m.S)
+        _m = df["title"].astype(str).str.contains(_rx)
+        _both = _m if _both is None else (_both | _m)
+    if _both is not None and _both.any():
+        log.info(f"  OpenAlex holdouts: {int(_both.sum())} metalinguistic "
+                 f"row(s) excluded (title carries both variants)")
+        df = df[~_both]
     df["mt"] = df["matched_term"].astype(str).str.strip().str.lower()
     mapped = df["mt"].map(lambda t: lut.get(t, (None, None)))
     df["slug"] = [m[0] for m in mapped]
