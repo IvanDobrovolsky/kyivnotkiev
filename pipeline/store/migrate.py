@@ -154,6 +154,14 @@ def raw_counts(source: str) -> pd.DataFrame:
 
 def raw_reddit() -> pd.DataFrame:
     df = pd.read_parquet(SOURCES["reddit"]["file"])
+    # 2025-05..12 gap, recovered from the public monthly dumps after PullPush
+    # went paid (pipeline/ingestion/reddit_backfill_merge.py). Concatenated
+    # BEFORE the bot filter so mirror subreddits in the new months are caught.
+    _bf = pathlib.Path("data/raw/reddit/backfill/backfill_submissions.parquet")
+    if _bf.exists():
+        _b = pd.read_parquet(_bf)
+        print(f"  reddit: +{len(_b):,} backfilled rows (dump sweep 2025-05..12)")
+        df = pd.concat([df, _b], ignore_index=True)
     # Mirror/bot subreddits (autotldr, AutoNewspaper, DOOMMM_* chain-posters...)
     # repeat the OUTLET's spelling, not a redditor's choice — they leak the news
     # signal into the organic social series. Behavioural rule, measured
