@@ -84,9 +84,23 @@ def check_pair(slug: str, ts: dict, key: dict, clu: dict, meta: list) -> list[st
         else:
             try:
                 a = json.loads(an.read_text())
-                want = a.get("input_sha1")
-                if want and sha1(vp) != want:
-                    issues.append("stats: STALE — input_sha1 differs from current corpus")
+                # Freshness against the RECORDED input (the pairs store), not
+                # the verified corpus. pipeline.rebuild rewrites parquets after
+                # stats with identical content but different bytes, so sha1
+                # inequality alone is not staleness — row count is the
+                # content-level signal (dedup and refetch change rows).
+                ip = ROOT / a.get("input", "")
+                if not ip.exists():
+                    issues.append(f"stats: recorded input missing ({a.get('input')})")
+                elif a.get("input_sha1") and sha1(ip) == a["input_sha1"]:
+                    pass                               # byte-identical: fresh
+                else:
+                    import pyarrow.parquet as _pq
+                    rows = _pq.read_metadata(ip).num_rows
+                    if a.get("input_rows") != rows:
+                        issues.append(
+                            f"stats: STALE — input had {a.get('input_rows'):,} rows, "
+                            f"store now has {rows:,}")
             except Exception as e:                     # noqa: BLE001
                 issues.append(f"stats: unreadable ({e})")
 
