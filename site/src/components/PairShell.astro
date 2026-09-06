@@ -264,8 +264,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const renderEventLegendOnly = () => {
         if (!showEvents) return;
         const hideG = (((pairEvents as any)._hide_global) || []).includes(activePairSlug);
-        const gl = hideG ? [] : ((timeseriesData as any).events || []);
         const pe = ((pairEvents as any)[activePairSlug] || []);
+        const peDates = new Set(pe.map((e: any) => e.date));
+        const gl = hideG ? [] : ((timeseriesData as any).events || [])
+          .filter((e: any) => !peDates.has(e.date));
         let n = 0;
         for (const evt of [...gl, ...pe].sort((a: any, b: any) => a.date.localeCompare(b.date))) {
           n += 1;
@@ -431,7 +433,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         // every source switch. All-low pairs (chornobyl peaks ~15%) still get a
         // zoomed axis; the axis simply never moves between sources of one pair.
         let adMax = 0;
-        for (const ser of Object.values(pairTimeseriesData as any)) {
+        for (const ser of Object.values(((timeseriesData as any)[activePairSlug]) || {})) {
           if (!Array.isArray(ser)) continue;
           for (const d of ser as any[]) {
             const v = d?.adoption;
@@ -577,9 +579,15 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // Event markers — positioned by date on x-scale
       if (showEvents) {
         const hideGlobal = (((pairEvents as any)._hide_global) || []).includes(activePairSlug);
-        const globalEvents = hideGlobal ? [] :
-          ((timeseriesData as any).events || []).map((e: any) => ({...e, type: 'global'}));
         const customEvents = ((pairEvents as any)[activePairSlug] || []).map((e: any) => ({...e, type: 'pair'}));
+        // A pair event dated the same month as a global marker IS that event,
+        // told specifically (kyiv: 'Euromaidan revolution' vs the generic
+        // 'Euromaidan') — the pair label wins, the global is dropped.
+        const customDates = new Set(customEvents.map((e: any) => e.date));
+        const globalEvents = hideGlobal ? [] :
+          ((timeseriesData as any).events || [])
+            .filter((e: any) => !customDates.has(e.date))
+            .map((e: any) => ({...e, type: 'global'}));
         const events = [...globalEvents, ...customEvents].sort((a: any, b: any) => a.date.localeCompare(b.date));
 
         let eventNum = 0;
@@ -973,9 +981,9 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           note = (win[win.length - 1]?.date || '').slice(0, 4) + ', latest available';
         }
         if (!win.length) continue;
-        let ukr = 0, rus = 0, wsum = 0, asum = 0;
+        let ukr = 0, rus = 0, wsum = 0, asum = 0, cukr = 0;
         for (const d of win) {
-          ukr += d.ukr || 0; rus += d.rus || 0;
+          ukr += d.ukr || 0; rus += d.rus || 0; cukr += d.cukr || 0;
           if (d.adoption !== null && d.adoption !== undefined) {
             const w = (d.ukr || 0) + (d.rus || 0) || 1;
             asum += d.adoption * w; wsum += w;
@@ -986,7 +994,13 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           ? (ukr + rus > 0 ? +(ukr / (ukr + rus) * 100).toFixed(1) : null)
           : (wsum ? +(asum / wsum).toFixed(1) : null);
         if (pct === null || (countable && ukr + rus < 5)) continue;
-        rows.push({ src, pct, ukr: countable ? Math.round(ukr) : 0, rus: countable ? Math.round(rus) : 0, note: note || (src === 'trends' ? 'relative index' : '') });
+        // Trends: sum the CALIBRATED UA index against the RU index — the only
+        // pair of trends numbers on one scale. Label carries the unit.
+        const tUkr = src === 'trends' ? Math.round(cukr) : Math.round(ukr);
+        rows.push({ src, pct,
+                    ukr: countable || (src === 'trends' && cukr > 0) ? tUkr : 0,
+                    rus: countable || (src === 'trends' && cukr > 0) ? Math.round(rus) : 0,
+                    note: note || (src === 'trends' ? (cukr > 0 ? tt('pair.search_index', 'search index') : 'relative index') : '') });
       }
       return rows;
     }
@@ -1654,9 +1668,13 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'reddit') {
+        // live === false: probed and removed on Reddit — tagged, never hidden
+        // (deletion of war-related posts is itself part of the record); the
+        // usage was captured near posting time. Absent field = never probed.
+        const removedTag = `<span style="font-size:0.72rem; color:#9ca3af; background:#f3f4f6; padding:0.1rem 0.35rem; border-radius:3px; margin-left:0.4rem;">${tt('pair.reddit_removed', 'removed on Reddit — archived')}</span>`;
         const rows = items.map((r: any) =>
-          `<tr style="border-bottom:1px solid #f3f4f6;">
-            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${r.url}" target="_blank" rel="noopener" style="color:#FF4500; text-decoration:none;">${r.name}</a></td>
+          `<tr style="border-bottom:1px solid #f3f4f6;${r.live === false ? ' opacity:0.75;' : ''}">
+            <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${r.url}" target="_blank" rel="noopener" style="color:#FF4500; text-decoration:none;">${r.name}</a>${r.live === false ? removedTag : ''}</td>
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.score ? r.score.toLocaleString() + ' ↑' : ''}</td>
           </tr>`).join('');
         html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">Reddit posts still using the old spelling in 2025:</p>
