@@ -640,7 +640,10 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 if pid in _k0:
                     adoption = None
                 raw.append({"date": r["month"], "adoption": adoption,
-                            "ukr": round(ukr, 4), "rus": round(rus, 4)})
+                            "ukr": round(ukr, 4), "rus": round(rus, 4),
+                            # calibrated UA (RU scale): the only trends number
+                            # comparable across variants — the summary bars sum it
+                            "cukr": round(cu, 4)})
             result.setdefault(pid, {})
             result[pid]["trends"] = smooth_series(raw, window=3)
 
@@ -1308,6 +1311,37 @@ def _youtube_view_counts(video_ids: list[str], key: str) -> dict:
     return out
 
 
+_UMB_CACHE: dict | None = None
+
+
+def umbrella_exclusions() -> dict:
+    """Per-pair regex of OTHER enabled pairs' longer compounds that contain
+    this pair's surface form as a word (kyiv -> Chicken Kiev, Dynamo Kiev,
+    Kievan Rus...). Series count them deliberately; holdout exhibits of the
+    bare form exclude them."""
+    global _UMB_CACHE
+    if _UMB_CACHE is not None:
+        return _UMB_CACHE
+    import re as _re_u
+    _forms = {q["slug"]: [q["ukrainian"], q["russian"]]
+              for q in load_pairs()["pairs"] if q.get("enabled", True)}
+    out: dict = {}
+    for _p1, _f1 in _forms.items():
+        pats = []
+        for _p2, _f2 in _forms.items():
+            if _p1 == _p2:
+                continue
+            for t2 in _f2:
+                for t1 in _f1:
+                    if (t1.lower() != t2.lower()
+                            and _re_u.search(r"\b" + _re_u.escape(t1.lower()) + r"\b", t2.lower())):
+                        pats.append(_re_u.escape(t2).replace(r"\ ", r"\s+"))
+        if pats:
+            out[_p1] = _re_u.compile(r"\b(?:" + "|".join(sorted(set(pats))) + r")\b", _re_u.I)
+    _UMB_CACHE = out
+    return out
+
+
 def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     """Per-source holdouts for 2025: who still uses Russian spellings."""
     log.info("Exporting holdouts (2025, all sources)...")
@@ -1381,6 +1415,8 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                 for t, v in top.items()
             ]
 
+    _umb = umbrella_exclusions()
+
     # Reddit: actual post URLs, best-scoring first
     reddit = _load("reddit")
     if len(reddit) and "post_id" in reddit.columns:
@@ -1389,13 +1425,30 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
             posts = r[r["pair_slug"] == slug]
             if not len(posts):
                 continue
+            if slug in _umb and "title" in posts.columns:
+                posts = posts[~posts["title"].fillna("").astype(str).str.contains(_umb[slug])]
             posts = posts.nlargest(HOLDOUT_CAP, "score") if "score" in posts.columns else posts.head(HOLDOUT_CAP)
-            by_pair.setdefault(slug, {})["reddit"] = [
+            # Liveness from the headless-probe cache (site/reddit_liveness.mjs):
+            # live posts sort first — the table is a "see for yourself" exhibit —
+            # and removed ones ship tagged rather than hidden, because deletion
+            # of war-related posts is itself part of the record. Unknown ids get
+            # no tag and no reorder.
+            _lv_path = ROOT / "data" / "audit" / "reddit_liveness.json"
+            try:
+                _lv = json.loads(_lv_path.read_text()) if _lv_path.exists() else {}
+            except Exception:                          # noqa: BLE001
+                _lv = {}
+            _entries = [
                 {"name": f"r/{x['subreddit']}: {str(x.get('title',''))[:80]}",
                  "url": f"https://reddit.com/r/{x['subreddit']}/comments/{x['post_id']}",
-                 "score": int(x.get("score", 0) or 0)}
+                 "score": int(x.get("score", 0) or 0),
+                 **({"live": _lv[str(x["post_id"])]["status"] == "live"}
+                    if str(x["post_id"]) in _lv else {})}
                 for _, x in posts.iterrows()
             ]
+            _entries.sort(key=lambda e: (0 if e.get("live") is True else
+                                         1 if "live" not in e else 2))
+            by_pair.setdefault(slug, {})["reddit"] = _entries
 
     # YouTube: actual video URLs. One video per channel, so a single prolific channel
     # cannot own the table -- the same reason the news holdouts cap per domain.
@@ -1419,6 +1472,8 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
         y = youtube[(youtube["date"] >= since) & (youtube["variant"].isin(HOLDOUT_VARIANTS))]
         for slug in enabled_slugs:
             vids = y[y["pair_slug"] == slug]
+            if slug in _umb and "title" in vids.columns:
+                vids = vids[~vids["title"].fillna("").astype(str).str.contains(_umb[slug])]
             if not len(vids):
                 continue
             # Rank by views when a key is available, most-recent otherwise. Which one
@@ -1638,6 +1693,9 @@ def main():
             _vdf = _vdf[_vdf.variant.isin(HOLDOUT_VARIANTS)
                         & (_vdf.date >= HOLDOUT_SINCE)
                         & (_vdf.date <= STUDY_END_DATE)]
+            _umb2 = umbrella_exclusions()
+            if _slug in _umb2:
+                _vdf = _vdf[~_vdf.text.fillna("").astype(str).str.contains(_umb2[_slug])]
             if not len(_vdf):
                 continue
             # One entry per story: syndication farms (Big News Network's shell
