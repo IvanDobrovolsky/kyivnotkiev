@@ -97,9 +97,13 @@ def check_pair(slug: str, ts: dict, key: dict, clu: dict, meta: list) -> list[st
                 else:
                     import pyarrow.parquet as _pq
                     rows = _pq.read_metadata(ip).num_rows
-                    if a.get("input_rows") != rows:
+                    # Prefer the pre-filter store count when recorded: pairs
+                    # with reader-side homonym filters (odesa) legitimately
+                    # analyse fewer rows than the store holds.
+                    recorded = a.get("input_rows_store", a.get("input_rows"))
+                    if recorded != rows:
                         issues.append(
-                            f"stats: STALE — input had {a.get('input_rows'):,} rows, "
+                            f"stats: STALE — input had {recorded:,} rows, "
                             f"store now has {rows:,}")
             except Exception as e:                     # noqa: BLE001
                 issues.append(f"stats: unreadable ({e})")

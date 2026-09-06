@@ -50,6 +50,7 @@ def analyse(slug: str, quiet: bool = False, skip_dedup: bool = False) -> dict:
     if not src.exists():
         raise SystemExit(f"no store file: {src}")
     df = pd.read_parquet(src)
+    store_rows = len(df)          # pre-filter count, for the freshness audit
     terms = pair_terms(slug)
 
     # Homonym false positives, content-level, ALL sources. The series path gets
@@ -128,6 +129,7 @@ def analyse(slug: str, quiet: bool = False, skip_dedup: bool = False) -> dict:
         "input": str(src),
         "input_sha1": hashlib.sha1(src.read_bytes()).hexdigest()[:16],
         "input_rows": len(df),
+        "input_rows_store": store_rows,
         "terms": terms,
         "sources": df.source.value_counts().to_dict(),
         "variants": df.variant.value_counts().to_dict(),
