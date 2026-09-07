@@ -1536,7 +1536,8 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                     if ent.get("status") == "gone":
                         return False
                     title_now = ent.get("title", "")
-                    if not _ru_rx.search(title_now):
+                    # collection attests in title OR description; recheck both
+                    if not _ru_rx.search(title_now + " " + ent.get("description", "")):
                         return False
                 _t = (title_now if title_now is not None
                       else str(row.get("title", ""))).lower()
