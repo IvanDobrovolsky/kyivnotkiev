@@ -1602,14 +1602,14 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // Update subtitle and filter visibility per source
       const subtitleEl = document.getElementById('holdout-subtitle');
       const subtitles: Record<string, string> = {
-        news: 'News domains still using old spelling — 2025',
-        wikipedia: 'Wikipedia pages with old spelling — 2025',
-        reddit: 'Reddit posts still using old spelling — 2025',
-        youtube: 'YouTube videos still using old spelling — 2025',
-        openalex: 'Most-cited papers still using the Russian spelling — 2020 onward',
+        news: tt('pair.holdout_sub.news', 'News articles using the Russian spelling — since 2022'),
+        wikipedia: tt('pair.holdout_sub.wikipedia', 'Wikipedia pages titled with the Russian spelling — pageviews since 2022'),
+        reddit: tt('pair.holdout_sub.reddit', 'Reddit posts using the Russian spelling — since 2022, by score'),
+        youtube: tt('pair.holdout_sub.youtube', 'YouTube videos using the Russian spelling — since 2022'),
+        openalex: tt('pair.holdout_sub.openalex', 'Papers using the Russian spelling — since 2022, ordered by citations (most have none)'),
         ngrams: 'Google Books corpus — compare spellings',
       };
-      if (subtitleEl) subtitleEl.textContent = subtitles[holdoutKey] || 'Still using old spelling in 2025';
+      if (subtitleEl) subtitleEl.textContent = subtitles[holdoutKey] || tt('pair.holdout_sub.default', 'Using the Russian spelling');
 
       // Show filter buttons only for news
       document.querySelectorAll('[data-holdout]').forEach(b => {
@@ -1664,7 +1664,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(w.views || 0).toLocaleString()} views</td>
           </tr>`;
         }).join('');
-        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">Wikipedia pages with old spelling — pageviews in 2025:</p>
+        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">${tt('pair.holdout_sub.wikipedia', 'Wikipedia pages titled with the Russian spelling — pageviews since 2022')}:</p>
         <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'reddit') {
@@ -1677,7 +1677,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${r.url}" target="_blank" rel="noopener" style="color:#FF4500; text-decoration:none;">${r.name}</a>${r.live === false ? removedTag : ''}</td>
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.score ? r.score.toLocaleString() + ' ↑' : ''}</td>
           </tr>`).join('');
-        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">Reddit posts still using the old spelling in 2025:</p>
+        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">${tt('pair.holdout_sub.reddit', 'Reddit posts using the Russian spelling — since 2022, by score')}:</p>
         <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'telegram') {
