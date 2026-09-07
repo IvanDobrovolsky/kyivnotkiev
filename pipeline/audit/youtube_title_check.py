@@ -55,6 +55,9 @@ def main() -> int:
         for item in r.json().get("items", []):
             found[item["id"]] = {
                 "title": item["snippet"].get("title", ""),
+                # collection verifies title OR description — the recheck must
+                # look at both, or description-attested videos read as renamed
+                "description": item["snippet"].get("description", "")[:800],
                 "channel": item["snippet"].get("channelTitle", ""),
                 "status": "live",
                 "checked_at": now,
