@@ -47,6 +47,14 @@ _cache = {}
 def _load(name: str) -> pd.DataFrame:
     if name not in _cache:
         path = DATASET_DIR / f"raw_{name}.parquet"
+        # Reddit flows through the STORE: the migration applies the mirror-bot
+        # filter and the 2025 dump backfill there. Reading the frozen dataset
+        # file served pre-filter data ending at 2025-05 — the site's series
+        # missed both corrections until this pointed at the store.
+        if name == "reddit":
+            _sp = ROOT / "data" / "store" / "reddit_processed.parquet"
+            if _sp.exists():
+                path = _sp
         if not path.exists():
             path = DATASET_DIR / f"{name}.parquet"
         if not path.exists():
@@ -223,8 +231,11 @@ def _load_youtube_census() -> pd.DataFrame:
            for p in _cfg["pairs"]
            if p.get("homonym_filters") or p.get("youtube_homonym_filters")}
     if _ho:
+        # Channel names are part of the identity evidence: "GLOCK - KIEV" from
+        # channel "KIEV RTF (OFFICIAL)" is the rapper, but only the channel says so.
         _blob = (df["title"].fillna("").astype(str) + " " +
-                 df["description"].fillna("").astype(str)) if "description" in df.columns                 else df["title"].fillna("").astype(str)
+                 (df["description"].fillna("").astype(str) if "description" in df.columns else "") + " " +
+                 (df["channel"].fillna("").astype(str) if "channel" in df.columns else ""))
         _fp = [bool(s_ in _ho and any(r.search(t) for r in _ho[s_]))
                for s_, t in zip(df["pair_slug"], _blob)]
         _n = sum(_fp)
@@ -1499,6 +1510,41 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
             # ran is logged, so the table is never silently ordered by the fallback.
             vids = vids.sort_values("date", ascending=False)
             vids = vids.groupby("channel_title", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
+            # Exhibit-level guards (series untouched):
+            # 1. CURRENT title must still attest the claimed form — creators
+            #    rename after collection (Kiev -> Kyiv) and a corrected title
+            #    under a "still uses the Russian spelling" header is worse than
+            #    no row. Cache from pipeline/audit/youtube_title_check.py;
+            #    unchecked ids pass through until probed.
+            # 2. Non-English titles are their language's own convention, not an
+            #    English choice (Spanish "ataques contra Kiev") — two or more
+            #    Romance/Germanic function words exclude the row from exhibits.
+            _tc_p = ROOT / "data" / "audit" / "youtube_titles.json"
+            _tc = json.loads(_tc_p.read_text()) if _tc_p.exists() else {}
+            import re as _re_y
+            _ru_form = next((str(q["russian"]) for q in load_pairs()["pairs"]
+                             if q.get("slug") == slug), "")
+            _ru_rx = _re_y.compile(r"\b" + _re_y.escape(_ru_form).replace(r"\ ", r"\s+") + r"\b", _re_y.I)
+            _fw = {"de", "la", "el", "los", "las", "una", "del", "en", "que",
+                   "contra", "tras", "durante", "les", "des", "dans", "sur",
+                   "der", "die", "das", "und", "di", "il", "della", "dopo",
+                   "gli", "un", "se", "sus", "por", "para", "nueva", "nuevos"}
+            def _exhibitable(row):
+                title_now = None
+                ent = _tc.get(str(row["video_id"]))
+                if ent:
+                    if ent.get("status") == "gone":
+                        return False
+                    title_now = ent.get("title", "")
+                    if not _ru_rx.search(title_now):
+                        return False
+                _t = (title_now if title_now is not None
+                      else str(row.get("title", ""))).lower()
+                toks = _re_y.findall(r"[a-zà-öø-ÿ]+", _t)
+                if sum(1 for w in toks if w in _fw) >= 2:
+                    return False
+                return True
+            vids = vids[[_exhibitable(x) for _, x in vids.iterrows()]]
             if _yt_key:
                 cand = vids.head(HOLDOUT_CAP * 3)
                 views = _youtube_view_counts(cand.video_id.tolist(), _yt_key)
