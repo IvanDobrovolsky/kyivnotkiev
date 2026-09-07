@@ -1989,7 +1989,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         const mx = Math.max(...ordered.map(([,i]: any) => i.size));
         viz.innerHTML = ordered.map(([,i]: any, n: number) =>
           `<div class="bar-row"><span style="width:14px;text-align:right;color:#6b7280;">${n+1}</span>` +
-          `<div class="bar" style="width:${Math.max(3, i.size/mx*100)}%;background:${i.ua_pct>50?'#0057B8':'#9ca3af'};"></div>` +
+          `<div class="bar" style="width:${Math.max(3, i.size/mx*100)}%;background:linear-gradient(to right, #0057B8 ${i.ua_pct}%, #dc2626 ${i.ua_pct}%);"></div>` +
           `<span style="color:#6b7280;">${i.size.toLocaleString()}</span></div>`).join('');
       }
       const infoStats = document.getElementById('cluster-info-stats');
@@ -2032,7 +2032,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           legendEl.innerHTML += `<span class="legend-item" data-cluster-legend="${idx}" title="terms: ${info.label}" style="display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">` +
             `<span style="width:16px;height:16px;border-radius:50%;background:${color};color:#fff;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>` +
             `<strong>${glossT(info.gloss || info.label)}</strong>` +
-            `<span style="color:#6b7280;">${info.ua_pct}% UA · ${info.size.toLocaleString()} texts</span></span>`;
+            `<span style="color:#6b7280;"><span style="color:#0057B8;font-weight:600;">${info.ua_pct}% UA</span> · <span style="color:#dc2626;font-weight:600;">${(100-info.ua_pct).toFixed(1)}% RU</span> · ${info.size.toLocaleString()} texts</span></span>`;
         });
       }
     }

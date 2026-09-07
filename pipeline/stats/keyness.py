@@ -41,10 +41,32 @@ MIN_Z = 1.5
 TOP_N = 25
 
 
+# Top function words of the major Romance/Germanic languages: whole non-English
+# documents leak into the Reddit/YouTube layers (Spanish coverage of "Lugansk"
+# is heavy — the Romance-reservoir finding), and their function words otherwise
+# surface as "collocations". Content words from those docs are neutralised by
+# the fragment rule below plus these anchors.
+NON_EN_STOP = {
+    "una", "unos", "unas", "sus", "los", "las", "del", "por", "para", "con",
+    "este", "esta", "estos", "estas", "pero", "más", "mas", "como", "qué",
+    "les", "des", "dans", "avec", "pour", "sur", "aux", "cette", "nous",
+    "vous", "und", "der", "die", "das", "den", "dem", "ein", "eine", "nicht",
+    "von", "mit", "für", "auf", "ist", "sich", "dei", "della", "delle",
+    "degli", "nel", "nella", "che", "gli", "una", "uma", "dos", "das", "não",
+    "por", "são", "fuerzas", "conflicto", "guerra", "contra", "entre",
+}
+
+
 def tokenise(text: str, mask) -> list[str]:
     t = str(text or "").lower()
     for rx in mask:
         t = rx.sub(" ", t)
+    # Accented characters are WORD characters, not separators: splitting on
+    # them shredded Spanish words into English-looking fragments — "análisis"
+    # became "anal", "república" became "blica". Words carrying any non-ASCII
+    # letter are dropped whole (this study measures English usage).
+    if re.search(r"[à-öø-ÿ]", t):
+        t = re.sub(r"[a-zà-öø-ÿ'’-]*[à-öø-ÿ][a-zà-öø-ÿ'’-]*", " ", t)
     out = []
     for w in re.findall(r"[a-z][a-z'’-]{2,}", t):
         # "kiev", "kiev's" and the curly-quote "kiev’s" are one word: unify
@@ -53,7 +75,7 @@ def tokenise(text: str, mask) -> list[str]:
         w = w.replace("’", "'")
         if w.endswith("'s"):
             w = w[:-2]
-        if len(w) >= 3 and w not in STOP:
+        if len(w) >= 3 and w not in STOP and w not in NON_EN_STOP:
             out.append(w)
     return out
 
