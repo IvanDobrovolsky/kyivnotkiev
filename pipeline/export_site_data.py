@@ -1511,6 +1511,7 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
             _entries = [
                 {"name": f"r/{x['subreddit']}: {str(x.get('title',''))[:80]}",
                  "url": f"https://reddit.com/r/{x['subreddit']}/comments/{x['post_id']}",
+                 "month": str(x.get("date", ""))[:7],
                  "score": int(x.get("score", 0) or 0),
                  **({"live": _lv[str(x["post_id"])]["status"] == "live"}
                     if str(x["post_id"]) in _lv else {})}
@@ -1609,7 +1610,8 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                 vids = vids.head(HOLDOUT_CAP)
             by_pair.setdefault(slug, {})["youtube"] = [
                 {"name": f"{x['channel_title']}: {str(x.get('title',''))[:80]}",
-                 "url": f"https://youtube.com/watch?v={x['video_id']}"}
+                 "url": f"https://youtube.com/watch?v={x['video_id']}",
+                 "month": str(x.get("date", ""))[:7]}
                 for _, x in vids.iterrows()
             ]
         if _yt_ranked:

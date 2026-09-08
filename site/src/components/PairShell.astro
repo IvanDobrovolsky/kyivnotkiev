@@ -1602,11 +1602,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // Update subtitle and filter visibility per source
       const subtitleEl = document.getElementById('holdout-subtitle');
       const subtitles: Record<string, string> = {
-        news: tt('pair.holdout_sub.news', 'News articles using the Russian spelling — since 2022'),
-        wikipedia: tt('pair.holdout_sub.wikipedia', 'Wikipedia pages titled with the Russian spelling — pageviews since 2022'),
-        reddit: tt('pair.holdout_sub.reddit', 'Reddit posts using the Russian spelling — since 2022, by score'),
-        youtube: tt('pair.holdout_sub.youtube', 'YouTube videos using the Russian spelling — since 2022'),
-        openalex: tt('pair.holdout_sub.openalex', 'Papers using the Russian spelling — since 2022, ordered by citations (most have none)'),
+        news: tt('pair.holdout_sub.news', 'News articles using the Russian spelling — in 2025'),
+        wikipedia: tt('pair.holdout_sub.wikipedia', 'Wikipedia pages titled with the Russian spelling — pageviews in 2025'),
+        reddit: tt('pair.holdout_sub.reddit', 'Reddit posts using the Russian spelling — in 2025, by score'),
+        youtube: tt('pair.holdout_sub.youtube', 'YouTube videos using the Russian spelling — in 2025'),
+        openalex: tt('pair.holdout_sub.openalex', 'Papers using the Russian spelling — in 2025, ordered by citations (most have none)'),
         ngrams: 'Google Books corpus — compare spellings',
       };
       if (subtitleEl) subtitleEl.textContent = subtitles[holdoutKey] || tt('pair.holdout_sub.default', 'Using the Russian spelling');
@@ -1664,7 +1664,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(w.views || 0).toLocaleString()} views</td>
           </tr>`;
         }).join('');
-        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">${tt('pair.holdout_sub.wikipedia', 'Wikipedia pages titled with the Russian spelling — pageviews since 2022')}:</p>
+        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">${tt('pair.holdout_sub.wikipedia', 'Wikipedia pages titled with the Russian spelling — pageviews in 2025')}:</p>
         <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'reddit') {
@@ -1675,9 +1675,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         const rows = items.map((r: any) =>
           `<tr style="border-bottom:1px solid #f3f4f6;${r.live === false ? ' opacity:0.75;' : ''}">
             <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${r.url}" target="_blank" rel="noopener" style="color:#FF4500; text-decoration:none;">${r.name}</a>${r.live === false ? removedTag : ''}</td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono); white-space:nowrap;">${r.month || ''}</td>
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.score ? r.score.toLocaleString() + ' ↑' : ''}</td>
           </tr>`).join('');
-        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">${tt('pair.holdout_sub.reddit', 'Reddit posts using the Russian spelling — since 2022, by score')}:</p>
+        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">${tt('pair.holdout_sub.reddit', 'Reddit posts using the Russian spelling — in 2025, by score')}:</p>
         <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'telegram') {
@@ -1698,6 +1699,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         const rows = items.map((y: any) =>
           `<tr style="border-bottom:1px solid #f3f4f6;">
             <td style="padding:0.5rem 0.6rem; font-size:0.85rem;"><a href="${y.url}" target="_blank" rel="noopener" style="color:#FF0000; text-decoration:none;">${y.name}</a></td>
+            <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono); white-space:nowrap;">${y.month || ''}</td>
           </tr>`).join('');
         html = `<table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
