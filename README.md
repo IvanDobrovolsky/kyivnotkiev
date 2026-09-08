@@ -20,14 +20,7 @@
 <!-- AUTO:metrics -->
 | Metric | Value |
 |--------|-------|
-| Toponym matches | **1.5M** |
 | Toponym pairs | **24** |
 | Data sources | **7** |
 | Time span | **2010-2025** |
-| CL corpus | **151.6K** verified English texts |
 <!-- /AUTO:metrics -->
-
-Everything else — per-pair charts, methodology, collocations, discourse clusters,
-and the verified holdout exhibits — lives on [kyivnotkiev.org](https://kyivnotkiev.org).
-Pairs are configured in [`config/pairs.yaml`](config/pairs.yaml); all numbers here are
-regenerated from the data manifest by `pipeline/update_readme.py` — never edit them by hand.
