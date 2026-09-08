@@ -82,11 +82,11 @@
     "search_index": "search index",
     "reddit_removed": "removed on Reddit — archived",
     "holdout_sub": {
-      "news": "News articles using the Russian spelling — since 2022",
-      "wikipedia": "Wikipedia pages titled with the Russian spelling — pageviews since 2022",
-      "reddit": "Reddit posts using the Russian spelling — since 2022, by score",
-      "youtube": "YouTube videos using the Russian spelling — since 2022",
-      "openalex": "Papers using the Russian spelling — since 2022, ordered by citations (most have none)",
+      "news": "News articles using the Russian spelling — in 2025",
+      "wikipedia": "Wikipedia pages titled with the Russian spelling — pageviews in 2025",
+      "reddit": "Reddit posts using the Russian spelling — in 2025, by score",
+      "youtube": "YouTube videos using the Russian spelling — in 2025",
+      "openalex": "Papers using the Russian spelling — in 2025, ordered by citations (most have none)",
       "default": "Using the Russian spelling"
     }
   },
