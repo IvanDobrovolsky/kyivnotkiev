@@ -1664,8 +1664,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${(w.views || 0).toLocaleString()} views</td>
           </tr>`;
         }).join('');
-        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">${tt('pair.holdout_sub.wikipedia', 'Wikipedia pages titled with the Russian spelling — pageviews in 2025')}:</p>
-        <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
+        html = `        <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'reddit') {
         // live === false: probed and removed on Reddit — tagged, never hidden
@@ -1678,8 +1677,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono); white-space:nowrap;">${r.month || ''}</td>
             <td style="padding:0.5rem 0.6rem; font-size:0.8rem; color:#9ca3af; font-family:var(--font-mono);">${r.score ? r.score.toLocaleString() + ' ↑' : ''}</td>
           </tr>`).join('');
-        html = `<p style="font-size:0.86rem; color:#6b7280; margin:0.5rem 0.6rem;">${tt('pair.holdout_sub.reddit', 'Reddit posts using the Russian spelling — in 2025, by score')}:</p>
-        <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
+        html = `        <table style="width:100%; border-collapse:collapse;"><tbody>${rows}</tbody></table>`;
 
       } else if (holdoutKey === 'telegram') {
         const rows = items.map((m: any) =>
