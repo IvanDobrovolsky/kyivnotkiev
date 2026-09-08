@@ -24,6 +24,19 @@ pairs:
   - date: 2025-10
     label: Peace negotiation surge
   match_mode: word_boundary
+  # Person/artist homonyms and non-English-convention channels on YouTube:
+  # "Kiev RTF" is a Dutch rapper (stage name); TURFA OLAM is an Uzbek news
+  # channel whose "Kiev" is Uzbek's own convention, not an English choice.
+  # Derivative compounds and variant spellings never exhibit under the bare
+  # toponym (timeseries are a different question and unaffected).
+  holdout_exclude:
+  - dinamo\s+ki[ye]v
+  - kievan
+  youtube_homonym_filters:
+  - kiev\W{0,3}rtf
+  - turfa\s+olam
+  # Soviet camera product lines (Arsenal factory) — a product name, not the city
+  - kiev\s*-?\s*(?:60|88|4am?|19m?)\b
   slug: kyiv
   blurb_uk: "Столиця — тут англійська змінилася першою"
   verdict_uk: "Кампанія спрацювала: англійська перейшла на Kyiv близько 2019 року, ще до вторгнення — війна лише закріпила зміну."

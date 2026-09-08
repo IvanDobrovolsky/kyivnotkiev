@@ -19,6 +19,10 @@ p.on('console', m => {
 for (const path of paths) {
   await p.goto(base + path, { waitUntil: 'load', timeout: 30000 }).catch(e => { console.log('NAV-FAIL', path, e.message.slice(0,80)); failed = true; });
   await p.waitForTimeout(900);
+  // Adoption mode is a click away from the default view; a ReferenceError in
+  // its draw path shipped because nothing ever clicked it.
+  const btn = await p.$('.chart-mode[data-chart="adoption"]');
+  if (btn) { await btn.click().catch(() => {}); await p.waitForTimeout(500); }
 }
 await b.close();
 console.log(failed ? 'SMOKE FAILED' : 'SMOKE OK');
