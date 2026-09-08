@@ -56,7 +56,6 @@ def main() -> None:
     # regex_precision.json was removed for this reason.
 
     metrics = [
-        ("Records scanned", f"**{manifest.get('records_scanned', '—')}**"),
         ("Toponym matches", f"**{_fmt(manifest.get('toponym_matches', 0))}**"),
         ("Toponym pairs", f"**{manifest.get('analyzable_pairs', 0)}**"),
         ("Data sources", f"**{manifest.get('num_sources', 0)}**"),
