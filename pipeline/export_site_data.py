@@ -90,6 +90,12 @@ def _load(name: str) -> pd.DataFrame:
                     log.info(f"  {name}: dropped {int((~_keep).sum()):,} rows after {STUDY_END_DATE[:4]}")
                     df = df[_keep].reset_index(drop=True)
 
+            # The store's processed reddit uses doc_id and drops subreddit;
+            # derive the columns the exporter grew up expecting.
+            if name == "reddit" and "post_id" not in df.columns and "doc_id" in df.columns:
+                df["post_id"] = df["doc_id"].astype(str)
+                if "subreddit" not in df.columns and "url" in df.columns:
+                    df["subreddit"] = df["url"].astype(str).str.extract(r"/r/([^/]+)/")[0].fillna("")
             # Apply homonym filters from pairs.yaml for GDELT
             if name == "gdelt" and "source_domain" in df.columns:
                 df = _apply_homonym_filters(df)
@@ -352,7 +358,9 @@ def _filter_youtube(df: pd.DataFrame) -> pd.DataFrame:
 # Holdouts are evidence of *current* usage. Outlets that switched in 2019 are not
 # holdouts today, so the window starts at the 2022 invasion.
 STUDY_END_YEAR = 2025      # last complete calendar year; partial years are not comparable
-HOLDOUT_SINCE = "2022-01-01"
+# The exhibits claim "still using the Russian spelling" — the honest window is
+# the adoption headline's own year, not the whole post-invasion era.
+HOLDOUT_SINCE = "2025-01-01"
 HOLDOUT_CAP = 100
 # One outlet can otherwise own the table -- sputniknews.com was 77 of 100 rows for
 # donbas and 66 for kyiv. The table is meant to show WHO still uses the old spelling,
@@ -1295,10 +1303,37 @@ def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
     df = df[~df["slug"].isin(OPENALEX_COLLISIONS)]
     df = df[df["openalex_id"].notna() & df["title"].notna()]
 
+    # Exhibit guards, same reasoning as the YouTube tables:
+    # - a non-English title uses its language's own convention (Portuguese
+    #   "Eslováquia ameaça Kiev..."), not an English spelling choice;
+    # - OpenAlex often carries several records of one work (preprint /
+    #   published / translated) — one normalized title, one exhibit row.
+    import re as _re_o
+    _fw_o = {"de", "la", "el", "los", "las", "una", "del", "en", "que", "com",
+             "por", "para", "contra", "les", "des", "dans", "sur", "der",
+             "die", "das", "und", "di", "il", "della", "dei", "um", "uma",
+             "dos", "ameaça", "russe", "russo", "entre", "hacia", "desde"}
+    def _non_en_title(t):
+        toks = _re_o.findall(r"[a-zà-öø-ÿçãõ]+", str(t).lower())
+        return sum(1 for w in toks if w in _fw_o) >= 2
+    # Wrong-referent title classes (agent-audited 2026-09-07):
+    # WHO influenza strain IDs freeze "A/Kiev/1/57" into dataset titles
+    # (EMPIAR cryo-EM depositions), and garbled translations render Kyivan
+    # Rus as "Kiev Rus(sian)" — neither is a spelling choice about the city.
+    _wr = _re_o.compile(r"\ba/kiev/\d|\bkiev(an)?\s+rus", _re_o.I)
+    _n0 = len(df)
+    df = df[~df["title"].astype(str).str.contains(_wr)]
+    df = df[~df["title"].map(_non_en_title)]
+    if _n0 - len(df):
+        log.info(f"  OpenAlex holdouts: {_n0 - len(df)} non-English-title row(s) excluded")
+    df["_tkey"] = (df["title"].astype(str).str.lower()
+                   .str.replace(r"[^a-z0-9]+", " ", regex=True).str.strip())
+
     out, skipped = {}, sorted(OPENALEX_COLLISIONS)
     for slug, g in df.groupby("slug"):
         g = (g.drop_duplicates("openalex_id")
                .sort_values("cited_by_count", ascending=False)
+               .drop_duplicates("_tkey")
                .groupby("year", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN * 10)
                .nlargest(HOLDOUT_CAP, "cited_by_count"))
         out[slug] = [{
@@ -1353,8 +1388,10 @@ def umbrella_exclusions() -> dict:
     if _UMB_CACHE is not None:
         return _UMB_CACHE
     import re as _re_u
+    # ALL configured pairs, enabled or not: a disabled pair's compound
+    # (Kyiv Pechersk Lavra) is still a derivative the umbrella must exclude.
     _forms = {q["slug"]: [q["ukrainian"], q["russian"]]
-              for q in load_pairs()["pairs"] if q.get("enabled", True)}
+              for q in load_pairs()["pairs"]}
     out: dict = {}
     for _p1, _f1 in _forms.items():
         pats = []
@@ -1366,6 +1403,9 @@ def umbrella_exclusions() -> dict:
                     if (t1.lower() != t2.lower()
                             and _re_u.search(r"\b" + _re_u.escape(t1.lower()) + r"\b", t2.lower())):
                         pats.append(_re_u.escape(t2).replace(r"\ ", r"\s+"))
+        for extra in (next((q for q in load_pairs()["pairs"]
+                            if q.get("slug") == _p1), {}) or {}).get("holdout_exclude", []):
+            pats.append(str(extra))
         if pats:
             out[_p1] = _re_u.compile(r"\b(?:" + "|".join(sorted(set(pats))) + r")\b", _re_u.I)
     _UMB_CACHE = out
@@ -1528,7 +1568,11 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
             _fw = {"de", "la", "el", "los", "las", "una", "del", "en", "que",
                    "contra", "tras", "durante", "les", "des", "dans", "sur",
                    "der", "die", "das", "und", "di", "il", "della", "dopo",
-                   "gli", "un", "se", "sus", "por", "para", "nueva", "nuevos"}
+                   "gli", "un", "se", "sus", "por", "para", "nueva", "nuevos",
+                   # Italian / Spanish / Turkish leakage measured 2026-09-07
+                   "per", "non", "nessun", "passa", "alla", "dalla", "come",
+                   "como", "diez", "hacia", "ataca", "lanza", "nuevas",
+                   "ve", "bir", "için", "ile", "daha", "sonra", "önce", "con", "gol"}
             def _exhibitable(row):
                 title_now = None
                 ent = _tc.get(str(row["video_id"]))
@@ -1541,8 +1585,14 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                         return False
                 _t = (title_now if title_now is not None
                       else str(row.get("title", ""))).lower()
-                toks = _re_y.findall(r"[a-zà-öø-ÿ]+", _t)
-                if sum(1 for w in toks if w in _fw) >= 2:
+                # Two signals of a non-English title, either alone or combined:
+                # function words, and words carrying ANY non-ASCII letter
+                # (Turkish ş/ı sit outside Latin-1, so an accent range missed
+                # Beşiktaş entirely).
+                toks = _re_y.findall(r"[^\W\d_]+", _t, _re_y.UNICODE)
+                fw_hits = sum(1 for w in toks if w in _fw)
+                nonascii = sum(1 for w in toks if any(ord(c) > 127 for c in w))
+                if fw_hits >= 2 or nonascii >= 2 or (fw_hits and nonascii):
                     return False
                 return True
             vids = vids[[_exhibitable(x) for _, x in vids.iterrows()]]
