@@ -39,7 +39,7 @@ def non_english(t: str) -> bool:
     toks = re.findall(r"[^\W\d_]+", str(t).lower(), re.UNICODE)
     fw = sum(1 for w in toks if w in FW)
     na = sum(1 for w in toks if any(ord(c) > 127 for c in w))
-    return fw >= 2 or na >= 3 or (fw and na >= 2)
+    return bool(fw >= 2 or na >= 3 or (fw >= 1 and na >= 2))
 
 
 def main() -> int:
