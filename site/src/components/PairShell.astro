@@ -279,6 +279,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         }
       };
 
+      // Subtitle and mode chrome update BEFORE any early return: switching to a
+      // source with no data used to bail out up here and leave the previous
+      // source's description ("Reddit user posts") stuck on screen.
+      if (infoEl2) infoEl2.textContent = sourceInfo2[activeSource] || '';
+
       const pairData = (timeseriesData as any)[activePairSlug];
       if (!pairData) {
         svg.append('text')
@@ -338,10 +343,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         }
       }
 
-      // Subtitle and mode chrome update BEFORE any early return: switching to a
-      // source with no data used to bail out up here and leave the previous
-      // source's description ("Reddit user posts") stuck on screen.
-      if (infoEl2) infoEl2.textContent = sourceInfo2[activeSource] || '';
       const volLegend = document.getElementById('vol-legend');
       if (volLegend) {
         if (chartMode === 'volume') {
