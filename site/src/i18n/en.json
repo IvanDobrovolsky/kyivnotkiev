@@ -59,7 +59,7 @@
     "avg_note_html": "The average of the sources below, over the last 12 months. Counts: <span style=\"color:#0057B8;font-weight:600;\">Ukrainian</span> · <span style=\"color:#dc2626;font-weight:600;\">Russian</span> spelling.",
     "discourse_ctx_title": "Discourse Context",
     "discourse_ctx_sub": "Where each spelling shows up — by kind of writing",
-    "cluster_sub": "Texts grouped by what they talk about — blue groups write the Ukrainian form",
+    "cluster_sub": "Texts grouped by what they talk about",
     "news_holdouts_title": "Verified News Articles",
     "news_holdouts_sub": "English-language articles from verified news outlets",
     "holdouts_title": "Holdouts:",
