@@ -45,6 +45,16 @@ metadata:
     label: Euromaidan
   - date: 2022-02
     label: Full-scale war
+metadata:
+  version: '2.0'
+  description: Ukrainian toponym pairs for adoption analysis
+  time_range: 2010-01-01 to 2025-12-31
+  default_source: trends
+  global_events:
+  - date: 2014-02
+    label: Euromaidan
+  - date: 2022-02
+    label: Full-scale war
 pairs:
 - russian: Kiev
   ukrainian: Kyiv
@@ -525,6 +535,7 @@ pairs:
   - \bai[\s-]*(?:magic|generated)\b
   - arepas,\s*chicken kiev,\s*doner kebab
   - chicken[\s-]*kiev['’"”]?\s+(?:speech|address)
+  - chicken\s+kiev\s+chicken\s+(?:noodles|chili)\b
   - chicken\s+kiev\s+videos?\s+chicken\s+\w+\s+video
   - r/(?:tf2|truetf2|tf2fashionadvice|tf2shitposterclub|sfm)\b
   - r/[A-Za-z]*personals\b
@@ -568,6 +579,7 @@ pairs:
   - \bborsch\b(?=[\s\S]{0,400}\b(?:bosch|refrigerator|fridge|freezer|dishwasher|compressor)\b)
   - \bborsch\b(?=[\s\S]{0,400}\b(?:frigidaire|dishwasher|ikea|appliance)\b)
   - \bborsch\b(?=[\s\S]{0,400}\b(?:hoover|vacuum|appliance|bosch)\b)
+  - \bborsch\b[^\n]{0,25}\balbania\b
   - \bdon(?:ald)?\s+borsch\b
   - \bmamaalltag\b
   - anistyn(?:\s+grace)?\s+borsch
@@ -716,6 +728,7 @@ pairs:
   - \bmeci amical\b
   - ^fc_dynamo_kyiv$
   - anyone looking for matchworn shirts
+  - arda\s+guler\s+vs\s+kyiv\b
   - free sports pick loaded from
   - next4k
 - russian: Kiev ballet
@@ -1258,6 +1271,7 @@ pairs:
   - kazimir malevich[ -]*(?:inspired|style)[^\n]{0,80}(?:metal )?wall (?:art|decor|sign)
   - kazimir malevich\s+maurizio cattelan
   - malevich pintor ruso
+  - malevich[^\n]{0,40}metal\s+wall\s+art
   - patricia taxxon\s*[-–]\s*kazimir malevich
   - t[aáạ]c ph[aẩ]m|hinh vuong den
   - vamos conhecer um pouco de
