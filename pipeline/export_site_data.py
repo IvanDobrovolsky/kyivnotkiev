@@ -1298,6 +1298,10 @@ def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
     df = df[df["slug"].notna() & df["var"].isin(HOLDOUT_VARIANTS) & (df["year"] >= OPENALEX_SINCE_YEAR)]
     df = df[~df["slug"].isin(OPENALEX_COLLISIONS)]
     df = df[df["openalex_id"].notna() & df["title"].notna()]
+    from pipeline.filters import _verified_drops as _vd
+    _vall = {u for sl in df["slug"].dropna().unique() for u in _vd(sl)}
+    if _vall:
+        df = df[~df["openalex_id"].astype(str).isin(_vall)]
 
     # Exhibit guards, same reasoning as the YouTube tables:
     # - a non-English title uses its language's own convention (Portuguese
@@ -1472,7 +1476,10 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                                                indent=1, sort_keys=True))
             except Exception as _e:                    # noqa: BLE001
                 log.info(f"  wikipedia redirect probe skipped: {_e}")
+        from pipeline.filters import _verified_drops as _vdw
         for slug, top in _tops.items():
+            _wrong = {u.rsplit("/", 1)[-1] for u in _vdw(slug)}
+            top = top[[str(t).replace(" ", "_") not in _wrong for t in top.index]]
             # A redirecting page IS the switch — Wikipedia no longer uses the
             # Russian title. Holdouts list only measured non-redirecting
             # pages; a pair with none left shows the empty state, which is
@@ -1524,9 +1531,13 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
             ]
             # Exhibits are alive or absent: a probed-dead post is not a
             # demonstration anyone can click. Series unaffected.
-            _live = [e for e in _entries if e.get("live") is True][:HOLDOUT_CAP]
-            if _live:
-                by_pair.setdefault(slug, {})["reddit"] = _live
+            # Probed-live first, then never-probed (unknown is not dead —
+            # excluding them collapsed the tables to 10 entries total).
+            # Probed-dead are excluded outright.
+            _ok = ([e for e in _entries if e.get("live") is True]
+                   + [e for e in _entries if "live" not in e])[:HOLDOUT_CAP]
+            if _ok:
+                by_pair.setdefault(slug, {})["reddit"] = _ok
 
     # YouTube: actual video URLs. One video per channel, so a single prolific channel
     # cannot own the table -- the same reason the news holdouts cap per domain.
