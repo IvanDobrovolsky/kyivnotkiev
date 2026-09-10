@@ -28,8 +28,12 @@ def main() -> int:
             web[f.stem] = {"ua_pct": round(100 * u / (u + r), 1), "rows": u + r}
 
     # model signal: share of model answers using the Ukrainian form, per pair
-    res = json.loads((ROOT / "data" / "raw" / "llm_spelling"
-                      / "llm_spelling_results.json").read_text())
+    # v2 covers all 24 pairs with order-counterbalanced forced choice
+    # ("Kiev or Kyiv?" and "Kyiv or Kiev?"), which controls position bias;
+    # v1 reached only 16 pairs.
+    v2 = ROOT / "data" / "raw" / "llm_spelling" / "v2" / "llm_spelling_v2_results.json"
+    res = json.loads(v2.read_text()) if v2.exists() else json.loads(
+        (ROOT / "data" / "raw" / "llm_spelling" / "llm_spelling_results.json").read_text())
     cfg = __import__("yaml").safe_load(open(ROOT / "config" / "pairs.yaml"))
     by_terms = {(str(p["ukrainian"]).lower(), str(p["russian"]).lower()): p["slug"]
                 for p in cfg["pairs"]}
@@ -38,11 +42,19 @@ def main() -> int:
         for p in model.get("pairs", []):
             key = (str(p.get("ukrainian", "")).lower(), str(p.get("russian", "")).lower())
             slug = by_terms.get(key)
-            if not slug or p.get("classified") not in ("ukrainian", "russian"):
+            if not slug:
                 continue
             e = llm.setdefault(slug, {"ua": 0, "n": 0})
-            e["n"] += 1
-            e["ua"] += p["classified"] == "ukrainian"
+            trials = p.get("trials")
+            if trials:                       # v2: one row per counterbalanced trial
+                for t in trials:
+                    x = t.get("x")
+                    if x in (0, 1):
+                        e["n"] += 1
+                        e["ua"] += int(x == 1)
+            elif p.get("classified") in ("ukrainian", "russian"):
+                e["n"] += 1
+                e["ua"] += p["classified"] == "ukrainian"
 
     rows = []
     for slug, w in web.items():
