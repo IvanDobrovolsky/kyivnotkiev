@@ -1925,6 +1925,26 @@ def main():
             _w = len(_d.get("done_windows", [])) + len(_d.get("split_windows", []))
             if len(_m) >= 12 and _w >= 40:
                 _done.setdefault(_pair, set()).add((_var, _yr))
+    # Stats freshness per pair: collocations and clusters are computed from the
+    # store, so a pair whose store file is newer than its analysis.json is
+    # showing pre-cleanup analysis. Surfaced rather than hidden — the card
+    # goes amber until its recompute lands.
+    import json as _jf
+    _stale_stats = set()
+    for _pf in (ROOT / "data" / "store" / "pairs").glob("*.parquet"):
+        _an = ROOT / "data" / "stats" / _pf.stem / "analysis.json"
+        if not _an.exists():
+            _stale_stats.add(_pf.stem); continue
+        try:
+            _rows = _jf.loads(_an.read_text()).get("input_rows_store")
+            import pyarrow.parquet as _pq
+            if _rows is not None and _rows != _pq.read_metadata(_pf).num_rows:
+                _stale_stats.add(_pf.stem)
+        except Exception:                                  # noqa: BLE001
+            _stale_stats.add(_pf.stem)
+    if _stale_stats:
+        log.info(f"  stats stale for {len(_stale_stats)} pair(s) — cards marked recomputing")
+
     def _yt_complete(slug):
         s_ = _done.get(slug, set())
         return all((v, str(y)) in s_ for v in ("russian", "ukrainian")
@@ -1947,6 +1967,7 @@ def main():
         "blurb_uk": p.get("blurb_uk", ""),
         "verdict_uk": p.get("verdict_uk", ""),
         "data_ready": _ready(p["slug"]),
+        "stats_stale": p["slug"] in _stale_stats,
     } for p in load_pairs().get("pairs", [])]
     write_json(SITE_DATA_DIR / "pairs_meta.json", _meta)
 

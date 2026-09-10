@@ -12,6 +12,7 @@ interface Props {
   popularRank?: number;
   significance?: string;
   dataReady?: boolean;
+  statsStale?: boolean;
   spark?: number[];
   verdict?: string;
   switchYear?: string;
@@ -25,7 +26,7 @@ function adoptionColor(pct: number) {
   return 'var(--red)';
 }
 
-const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false, spark = [], verdict = '', switchYear = '', switchPos = 0, lang = 'en' } = Astro.props;
+const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false, statsStale = false, spark = [], verdict = '', switchYear = '', switchPos = 0, lang = 'en' } = Astro.props;
 const SW = 260, SH = 34;
 function path(vals: number[], flip = false): string {
   if (vals.length < 2) return '';
@@ -43,8 +44,10 @@ const color = adoptionColor(pct);
    data-name={ukrainian}
    data-popular={popularRank}>
   <div class="pair-card-names">
-    <span class="ready-dot" style={`background:${dataReady ? '#16a34a' : '#f59e0b'};`}
-          title={dataReady ? 'Complete dataset — all sources fully collected' : 'Data collection in progress'}></span>
+    <span class="ready-dot" style={`background:${!dataReady ? '#f59e0b' : statsStale ? '#eab308' : '#16a34a'};`}
+          title={!dataReady ? 'Data collection in progress'
+                 : statsStale ? 'Collected in full; collocations and clusters are being recomputed on the cleaned corpus'
+                 : 'Complete dataset — all sources fully collected'}></span>
     <span class="pair-old">{russian}</span>
     <span class="pair-arrow">&rarr;</span>
     <span class="pair-new">{ukrainian}</span>
