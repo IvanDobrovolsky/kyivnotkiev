@@ -15,6 +15,16 @@ metadata:
     label: Euromaidan
   - date: 2022-02
     label: Full-scale war
+metadata:
+  version: '2.0'
+  description: Ukrainian toponym pairs for adoption analysis
+  time_range: 2010-01-01 to 2025-12-31
+  default_source: trends
+  global_events:
+  - date: 2014-02
+    label: Euromaidan
+  - date: 2022-02
+    label: Full-scale war
 pairs:
 - russian: Kiev
   ukrainian: Kyiv
@@ -887,6 +897,7 @@ pairs:
   - massacre de babi yar
   - poems?[^\n]{0,25}babi yar
   - sarabi yar
+  - op\.?\s*113[^\n]{0,25}babi yar
 - russian: Alexander Usyk
   ukrainian: Oleksandr Usyk
   enabled: true
@@ -1081,6 +1092,7 @@ pairs:
   - quanto mais fundo
   - quizlit
   - teatru radiofonic
+  - nikolai\s*gogol\s*edit
 - russian: Feodosiya
   ukrainian: Feodosiia
   enabled: true
