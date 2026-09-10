@@ -97,6 +97,12 @@ def build(pair: str) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
         if _rf.get("frozen"):
             _drop = _txt.str.contains(_rf["frozen"], case=False, regex=True) & ~_ev
             audit["dropped_frozen_compound"] = int(_drop.sum())
+            if _rf.get("require_evidence"):
+                # analyst-surname docs ("Borsch said healthcare costs...")
+                # carry zero food/Ukraine context — evidence is mandatory,
+                # frozen-compound handling on top.
+                _drop = _drop | ~_ev
+                audit["dropped_no_referent"] = int((~_ev).sum())
         else:
             _drop = ~_ev
             audit["dropped_no_referent"] = int(_drop.sum())

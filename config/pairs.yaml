@@ -105,6 +105,10 @@ pairs:
   referent_filter:
     evidence: \b(?:ukrain\w*|black sea|kyiv|kiev|kherson|mykolaiv|zelensk\w+|oblast|russia\w*|moscow|donbas|crimea\w*|odesa|trukhanov|saakashvili|potemkin st\w*|derybasivska|deribasovskaya|privoz|prymorsky|arcadia beach|izmail|chornomorsk|yuzhne|hryvn\w+|verkhovna|maidan|poroshenko|kuchma|yanukovych)\b
     evidence_domains: kyivpost|unian|ukrinform|interfax\.com\.ua|pravda\.com\.ua|kyivindependent|odessa-journal
+    # personals/adult spam co-lists Ukrainian cities, so the gazetteer rescue
+    # passes it; explicit drop
+    drop:
+    - \b(?:escort|dating\s+site|hookup|xxx|porn\w*|sexy?\s+(?:girl|teen|women)|anal|tits)\b
   slug: odesa
   blurb_uk: "Чорноморський порт; одна «с» чи дві"
   verdict_uk: "Спірна територія: воєнні репортажі перейшли на Odesa, але подвійна «s» досі панує в культурних текстах."
@@ -331,7 +335,8 @@ pairs:
   # Records with real food context are kept even when the Belt appears.
   referent_filter:
     frozen: borscht\s+belt
-    evidence: \b(?:ukrain\w*|russia\w*|kyiv|kiev|soviet|beet\w*|soup|recipe|cook\w*)\b
+    require_evidence: true
+    evidence: \b(?:ukrain\w*|russia\w*|kyiv|kiev|soviet|beet\w*|soup|recipe|cook\w*|restaurant|dish|food|cuisine|chef|menu)\b
     # Matthew Borsch (Goldman Sachs analyst; 231 docs, all counted as the
     # Russian form) + piracy/MLM spam templates that inflated the UA share.
     drop:
