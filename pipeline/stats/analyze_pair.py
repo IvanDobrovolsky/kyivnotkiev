@@ -30,6 +30,7 @@ from datetime import datetime, timezone
 import pandas as pd
 import yaml
 
+from pipeline.filters import apply_source_filters
 from pipeline.stats import dedup, keyness, prosody
 
 STORE = pathlib.Path("data/store/pairs")
@@ -91,33 +92,19 @@ def analyse(slug: str, quiet: bool = False, skip_dedup: bool = False) -> dict:
     except ImportError:
         print("  language gate SKIPPED — langdetect not installed")
 
-    # Homonym false positives, content-level, ALL sources. The series path gets
-    # this in gdelt_verified/export; the stats corpus reads the store directly
-    # and was still carrying Odessa-TX — the odesa clustering surfaced 2,000+
-    # Texas documents as their own clusters (midland·texas, shooting·texas).
-    import re as _re, yaml as _yaml
-    _cfg = _yaml.safe_load(pathlib.Path("config/pairs.yaml").read_text())
-    _pats = [_re.compile(f, _re.I) for p in (_cfg["pairs"] if isinstance(_cfg, dict) else _cfg)
-             if p.get("slug") == slug for f in p.get("homonym_filters", [])]
-    if _pats:
-        _blob = (df.get("title", pd.Series("", index=df.index)).fillna("").astype(str)
-                 + " " + df.get("text", pd.Series("", index=df.index)).fillna("").astype(str))
-        _fp = _blob.apply(lambda t: any(r.search(t) for r in _pats))
-        # The stats store keeps only a span around each mention; a Texas crime
-        # story passes if the snippet never names the state. For gdelt rows,
-        # test the FULL body from the master text file as well.
-        if "source" in df.columns and (df.source == "gdelt").any():
-            _g = df.source == "gdelt"
-            _m = pd.read_parquet("data/raw/gdelt/texts/article_texts.parquet",
-                                 columns=["url", "pair_slug", "text"])
-            _m = _m[(_m.pair_slug == slug) & _m.text.notna()]
-            _bad = set(_m.url[_m.text.astype(str).apply(
-                lambda t: any(r.search(t) for r in _pats))])
-            if _bad:
-                _fp = _fp | (_g & df.url.isin(_bad))
-        if int(_fp.sum()):
-            print(f"  homonym filter: dropped {int(_fp.sum()):,} of {len(df):,}")
-            df = df[~_fp].copy()
+    # Homonym + referent false positives, content-level, ALL sources — the one
+    # canonical implementation in pipeline.filters, applied per source so
+    # youtube rows also get youtube_homonym_filters. gdelt rows arrived from
+    # the VERIFIED corpus above, which already ran these same rules over the
+    # full body text, so re-application there is a deliberate no-op.
+    if len(df):
+        _before = len(df)
+        df = pd.concat(
+            [apply_source_filters(g, slug, s)
+             for s, g in df.groupby("source", sort=False)],
+        ).sort_index()
+        if _before - len(df):
+            print(f"  homonym filter: dropped {_before - len(df):,} of {_before:,}")
     outdir = OUT / slug
     outdir.mkdir(parents=True, exist_ok=True)
 
