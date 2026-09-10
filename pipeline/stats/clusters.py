@@ -304,7 +304,13 @@ def main() -> int:
 
     order = np.argsort(-post, axis=1)
     p1 = post[np.arange(len(post)), order[:, 0]]
-    p2 = post[np.arange(len(post)), order[:, 1]]
+    # A pair whose components all merge into one context has no second-best
+    # component; every document then belongs to that context with no rival,
+    # so the borderline margin is 1 by definition (korolyov, 2026-09-09).
+    if order.shape[1] > 1:
+        p2 = post[np.arange(len(post)), order[:, 1]]
+    else:
+        p2 = np.zeros_like(p1)
     labels = order[:, 0]
     margin = p1 - p2
     borderline = margin < BORDERLINE_MARGIN
