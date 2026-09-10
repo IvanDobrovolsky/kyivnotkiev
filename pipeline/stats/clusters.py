@@ -48,6 +48,8 @@ os.environ.setdefault("OMP_NUM_THREADS", "4")
 os.environ.setdefault("MKL_NUM_THREADS", "4")
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
+import re
+
 import numpy as np
 import pandas as pd
 
@@ -184,6 +186,9 @@ def merge_small(post: np.ndarray, means: np.ndarray) -> np.ndarray:
     return mapping
 
 
+LABEL_JUNK = re.compile(r"\[\]\(#[\w-]+\)|\(#[\w-]+\)|\b(?:background-(?:image|position|size|color)|linear-gradient|sprite\w*|bar-\w*|icon-\w*|webrip|yourmegafile|auto-generated)\b", re.I)
+
+
 def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict:
     """c-TF-IDF: each cluster as one document, so terms are distinguishing
     rather than merely frequent."""
@@ -200,7 +205,7 @@ def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict
                "que", "por", "para", "una", "del", "las", "los", "con", "este",
                "und", "der", "die", "das", "les", "des", "dans", "pour"}
     stop = list(ENGLISH_STOP_WORDS | FILLERS)
-    docs = [" ".join(texts[labels == c].head(2000)) for c in range(k)]
+    docs = [LABEL_JUNK.sub(" ", " ".join(texts[labels == c].head(2000))) for c in range(k)]
     cv = CountVectorizer(stop_words=stop, max_features=30_000,
                          token_pattern=r"[a-zA-Z][a-zA-Z'-]{2,}")
     tf = cv.fit_transform(docs).toarray().astype(np.float64)
