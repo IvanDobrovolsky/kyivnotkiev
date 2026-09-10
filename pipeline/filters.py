@@ -94,7 +94,17 @@ def apply_source_filters(df: pd.DataFrame, slug: str, source: str,
         # at export time (youtube.com/watch?v=ID, reddit.com/r/x/comments/ID)
         # while the frames carry video_id / post_id / openalex_id, so a
         # URL-only comparison silently missed 355 YouTube rows.
-        ids = {u.rsplit("v=", 1)[-1].split("&")[0].rsplit("/", 1)[-1] for u in vdrop}
+        # Only platform-style identifiers, never news slugs: a bare
+        # rsplit('/') on an article URL yields its headline slug, which can
+        # collide with an unrelated row and delete real evidence.
+        ids = set()
+        for u in vdrop:
+            if "youtube.com" in u or "youtu.be" in u:
+                ids.add(u.rsplit("v=", 1)[-1].split("&")[0].rsplit("/", 1)[-1])
+            elif "reddit.com" in u:
+                ids.add(u.rstrip("/").rsplit("/", 1)[-1])
+            elif "openalex.org" in u:
+                ids.add(u.rstrip("/").rsplit("/", 1)[-1])
         for col in ("url", "doc_id", "video_id", "post_id", "openalex_id"):
             if col in df.columns:
                 vals = df[col].astype(str)
