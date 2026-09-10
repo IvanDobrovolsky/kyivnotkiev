@@ -37,6 +37,8 @@ import pathlib
 
 import pandas as pd
 
+from pipeline.filters import apply_source_filters
+
 TEXTS = pathlib.Path("data/raw/gdelt/texts/article_texts.parquet")
 OUT = pathlib.Path("data/cl/corpus/gdelt_verified")
 
@@ -53,60 +55,17 @@ def build(pair: str) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     usage = fetched[fetched.body_variant.isin(["ukrainian", "russian", "both"])].copy()
     audit["dropped_no_usage"] = int(len(fetched) - len(usage))
 
-    # 2b. homonym false positives: the match term names a different referent
-    # entirely (Odessa TX / Odessa A'zion / The Odessa File for the odesa pair).
-    # Patterns come from pairs.yaml homonym_filters and run over the BODY text —
-    # the domain-level filter upstream cannot see a Texas story on a national
-    # outlet. Measured 2026-08-31: 17% of odesa texts carried Texas markers.
-    import re as _re
-    import yaml as _yaml
-    _cfg = _yaml.safe_load(open("config/pairs.yaml"))
-    _pats = [_re.compile(f, _re.I) for p in _cfg["pairs"]
-             if p.get("slug") == pair for f in p.get("homonym_filters", [])]
-    if _pats:
-        _hit = usage.text.astype(str).apply(lambda t: any(r.search(t) for r in _pats))
-        audit["dropped_homonym"] = int(_hit.sum())
-        usage = usage[~_hit].copy()
-
-    # 2c. referent verification (config referent_filter). Two modes:
-    #   evidence(+evidence_domains): a record with NO referent evidence anywhere
-    #     in the body, and not from a whitelisted outlet, names a different
-    #     referent entirely. odesa measured 2026-09-03: 10,772/22,439 records
-    #     were US towns and actresses — every one russian-variant, deflating
-    #     adoption 67.5% -> 34.2%. The gazetteer rescue is mandatory: naive
-    #     no-referent tests deleted real kyivpost journalism (Trukhanov).
-    #   frozen: rows matching a fossilised compound WITHOUT substantive evidence
-    #     make no spelling choice ("Borscht Belt" = 61% of borscht records).
-    _rf = next((p.get("referent_filter") for p in _cfg["pairs"]
-                if p.get("slug") == pair and p.get("referent_filter")), None)
-    if _rf:
-        _txt = usage.text.astype(str)
-        if _rf.get("evidence"):
-            _ev = _txt.str.contains(_rf["evidence"], case=False, regex=True)
-        else:
-            _ev = pd.Series(True, index=usage.index)
-        if _rf.get("evidence_domains"):
-            _dom = usage.url.astype(str).str.extract(r"https?://(?:www\.)?([^/]+)")[0].fillna("")
-            _ev = _ev | _dom.str.contains(_rf["evidence_domains"], case=False, regex=True)
-        if _rf.get("drop"):
-            _dr = _txt.str.contains("|".join(_rf["drop"]), case=False, regex=True)
-            audit["dropped_referent_drop"] = int(_dr.sum())
-            usage = usage[~_dr].copy()
-            _txt = usage.text.astype(str)
-            _ev = _ev.loc[usage.index]
-        if _rf.get("frozen"):
-            _drop = _txt.str.contains(_rf["frozen"], case=False, regex=True) & ~_ev
-            audit["dropped_frozen_compound"] = int(_drop.sum())
-            if _rf.get("require_evidence"):
-                # analyst-surname docs ("Borsch said healthcare costs...")
-                # carry zero food/Ukraine context — evidence is mandatory,
-                # frozen-compound handling on top.
-                _drop = _drop | ~_ev
-                audit["dropped_no_referent"] = int((~_ev).sum())
-        else:
-            _drop = ~_ev
-            audit["dropped_no_referent"] = int(_drop.sum())
-        usage = usage[~_drop].copy()
+    # 2b + 2c. homonym false positives and referent verification. Both rule
+    # sets (pairs.yaml homonym_filters + referent_filter) are applied by the
+    # single shared implementation in pipeline/filters.py — see its module
+    # docstring. Measured history: 17% of odesa texts carried Texas markers
+    # (2026-08-31); 10,772/22,439 odesa records were US towns and actresses,
+    # every one russian-variant, deflating adoption 67.5% -> 34.2%
+    # (2026-09-03); the gazetteer rescue is mandatory (kyivpost/Trukhanov);
+    # "Borscht Belt" = 61% of borscht records. Audit keys written by
+    # filters.py: dropped_homonym, dropped_referent_drop,
+    # dropped_frozen_compound, dropped_no_referent.
+    usage = apply_source_filters(usage, pair, "gdelt", audit)
 
     # 3. one record per article
     verified = usage.drop_duplicates("text_hash").copy()
@@ -122,6 +81,10 @@ def build(pair: str) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     before_story = len(verified)
     verified = verified.loc[_lead.drop_duplicates().index].copy()
     audit["dropped_duplicate_story"] = int(before_story - len(verified))
+
+    import re as _re
+    import yaml as _yaml
+    _cfg = _yaml.safe_load(open("config/pairs.yaml"))
 
     # 3c. one record per REUSED PARAGRAPH. Syndicated copies often differ in
     # site chrome at the top (dateline, editor notes, ads), which defeats the

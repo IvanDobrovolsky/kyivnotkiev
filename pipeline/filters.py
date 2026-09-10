@@ -1,0 +1,112 @@
+"""The one place source filtering happens.
+
+Every consumer — the verified news builder, the store's pair stacking, the
+site's YouTube loader, the stats corpus, the training corpus — calls
+apply_source_filters() instead of owning a private copy of the rules. A
+filter that exists here exists everywhere; the week of "fixed on the site,
+still on HuggingFace" bugs came from scattered per-consumer copies.
+
+Rules, all config-driven from pairs.yaml per pair:
+
+  homonym_filters           all sources; regex over title+text+channel blob
+  youtube_homonym_filters   youtube rows only, same blob
+  referent_filter           all text sources:
+      evidence              row needs this regex (or a whitelisted domain)
+      evidence_domains      domain whitelist counted as evidence
+      drop                  unconditional drop patterns
+      frozen                frozen-compound: drop when matching WITHOUT evidence
+      require_evidence      with frozen: evidence is mandatory regardless
+
+Deterministic: same input frame + same config = same output, always.
+"""
+
+from __future__ import annotations
+
+import re
+
+import pandas as pd
+import yaml
+
+
+_CFG_CACHE: dict | None = None
+
+
+def _pair_cfg(slug: str) -> dict:
+    global _CFG_CACHE
+    if _CFG_CACHE is None:
+        doc = yaml.safe_load(open("config/pairs.yaml"))
+        _CFG_CACHE = {p["slug"]: p for p in doc["pairs"]}
+    return _CFG_CACHE.get(slug, {})
+
+
+def _blob(df: pd.DataFrame) -> pd.Series:
+    parts = []
+    for col in ("title", "text", "channel", "channel_title", "description"):
+        if col in df.columns:
+            parts.append(df[col].fillna("").astype(str))
+    if not parts:
+        return pd.Series("", index=df.index)
+    out = parts[0]
+    for p in parts[1:]:
+        # " | " separator: a plain space created phantom cross-field matches
+        # ("...Kiev" + "19.05..." read as the Kiev-19 camera at the seam)
+        out = out + " | " + p
+    return out
+
+
+def apply_source_filters(df: pd.DataFrame, slug: str, source: str,
+                         audit: dict | None = None) -> pd.DataFrame:
+    """Filter one pair's rows for one source. Returns the surviving frame."""
+    if not len(df):
+        return df
+    cfg = _pair_cfg(slug)
+    blob = _blob(df)
+    note = (lambda k, n: audit.__setitem__(k, audit.get(k, 0) + int(n))
+            if audit is not None else None)
+
+    pats = list(cfg.get("homonym_filters", []))
+    if source == "youtube":
+        pats += cfg.get("youtube_homonym_filters", [])
+    if pats:
+        rx = re.compile("|".join(pats), re.I)
+        hit = blob.str.contains(rx)
+        note("dropped_homonym", hit.sum())
+        df, blob = df[~hit], blob[~hit]
+
+    rf = cfg.get("referent_filter")
+    if rf and len(df):
+        text = blob
+        # Evidence-class rules (evidence / frozen / require_evidence) are
+        # validated on text-rich sources; short video metadata cannot carry
+        # gazetteer evidence, so applying them to youtube would drop tens of
+        # thousands of genuine videos (measured: odesa 43K). Explicit `drop`
+        # patterns apply to every source regardless.
+        _ev_sources = set(rf.get("evidence_sources", ["gdelt", "openalex", "reddit"]))
+        _ev_applies = source in _ev_sources
+        if rf.get("evidence"):
+            ev = text.str.contains(rf["evidence"], case=False, regex=True)
+        else:
+            ev = pd.Series(True, index=df.index)
+        if rf.get("evidence_domains") and "url" in df.columns:
+            dom = df["url"].astype(str).str.extract(
+                r"https?://(?:www\.)?([^/]+)")[0].fillna("")
+            ev = ev | dom.str.contains(rf["evidence_domains"], case=False,
+                                       regex=True)
+        if rf.get("drop"):
+            dr = text.str.contains("|".join(rf["drop"]), case=False, regex=True)
+            note("dropped_referent_drop", dr.sum())
+            df, text, ev = df[~dr], text[~dr], ev[~dr]
+        if not _ev_applies:
+            return df
+        if rf.get("frozen"):
+            drop = text.str.contains(rf["frozen"], case=False, regex=True) & ~ev
+            note("dropped_frozen_compound", drop.sum())
+            if rf.get("require_evidence"):
+                drop = drop | ~ev
+                note("dropped_no_referent", (~ev).sum())
+        else:
+            drop = ~ev
+            note("dropped_no_referent", drop.sum())
+        df = df[~drop]
+
+    return df

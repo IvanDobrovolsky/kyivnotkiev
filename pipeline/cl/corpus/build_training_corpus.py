@@ -16,6 +16,8 @@ import re
 import pandas as pd
 import yaml
 
+from pipeline.filters import apply_source_filters
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent.parent.parent
 OUT = ROOT / "data" / "cl" / "corpus" / "training"
 
@@ -58,21 +60,24 @@ def main() -> int:
     for p in pairs:
         slug = p["slug"]
         rx_ua, rx_ru = mk(p["ukrainian"]), mk(p["russian"])
-        homos = [re.compile(f, re.I) for f in
-                 p.get("homonym_filters", []) + p.get("youtube_homonym_filters", [])]
         frames = []
 
-        # news — already referent-filtered, deduped, verified
+        # news — already referent-filtered, deduped, verified; the canonical
+        # call is an idempotent no-op by design, kept for uniformity (url stays
+        # in the frame so evidence_domains whitelists remain visible)
         nf = ROOT / "data" / "cl" / "corpus" / "gdelt_verified" / f"{slug}.parquet"
         if nf.exists():
-            d = pd.read_parquet(nf, columns=["url", "date", "text", "variant"])
+            d = apply_source_filters(
+                pd.read_parquet(nf, columns=["url", "date", "text", "variant"]),
+                slug, "gdelt")
             frames.append(pd.DataFrame({
                 "source": "gdelt", "doc_id": d.url.astype(str),
                 "date": d.date.astype(str).str[:10],
                 "text": d.text.astype(str), "variant": d.variant}))
             inputs[f"gdelt_verified/{slug}.parquet"] = sha1(nf)
 
-        # youtube — verified rows, homonym-screened incl. channel
+        # youtube — verified rows; canonical filters (youtube homonyms +
+        # referent rules) run over the native title/description/channel columns
         yf = ROOT / "data" / "cl" / "raw" / "youtube_census" / f"{slug}_enriched.parquet"
         if yf.exists():
             y = pd.read_parquet(yf)
@@ -80,12 +85,9 @@ def main() -> int:
                 y = y[y["verified"]]
             if "span_artifact" in y.columns:
                 y = y[~y["span_artifact"].fillna(False)]
+            y = apply_source_filters(y, slug, "youtube")
             blob = (y.get("title", pd.Series("", index=y.index)).fillna("").astype(str) + " " +
                     y.get("description", pd.Series("", index=y.index)).fillna("").astype(str))
-            full = blob + " " + y.get("channel", pd.Series("", index=y.index)).fillna("").astype(str)
-            if homos:
-                keep = ~full.map(lambda t: any(r.search(t) for r in homos))
-                y, blob = y[keep], blob[keep]
             frames.append(pd.DataFrame({
                 "source": "youtube", "doc_id": y.video_id.astype(str),
                 "date": y.published_at.astype(str).str[:10],
@@ -93,25 +95,28 @@ def main() -> int:
                 "variant": y["form"] if "form" in y.columns else y["variant"]}))
             inputs[f"youtube_census/{slug}_enriched.parquet"] = sha1(yf)
 
-        # reddit — store is bot-filtered and backfilled
-        r = reddit[reddit.pair_slug == slug]
+        # reddit — store is bot-filtered and backfilled; canonical filters run
+        # on the native slice so title/url stay visible (referent rules apply)
+        r = apply_source_filters(reddit[reddit.pair_slug == slug], slug, "reddit")
         if len(r):
             frames.append(pd.DataFrame({
                 "source": "reddit", "doc_id": r.doc_id.astype(str),
                 "date": r.date.astype(str).str[:10],
                 "text": r.text.astype(str), "variant": r.variant}))
 
-        # openalex — wrong-referent guards apply
+        # openalex — WRONG_REF title guard (extra strictness, kept), then
+        # canonical filters over the title+abstract text (referent rules apply;
+        # the standardized frame is filtered because _blob cannot see abstract)
         o = oa[oa.matched_term.astype(str).str.strip().str.lower().isin(
             {str(p["ukrainian"]).lower(), str(p["russian"]).lower()})]
         if len(o):
             ot = (o.title.fillna("").astype(str) + ". " +
                   o.abstract.fillna("").astype(str))
             keep = ~o.title.astype(str).str.contains(WRONG_REF)
-            frames.append(pd.DataFrame({
+            frames.append(apply_source_filters(pd.DataFrame({
                 "source": "openalex", "doc_id": o[keep].openalex_id.astype(str),
                 "date": o[keep].year.fillna(0).astype(int).astype(str) + "-01-01",
-                "text": ot[keep], "variant": o[keep].variant}))
+                "text": ot[keep], "variant": o[keep].variant}), slug, "openalex"))
 
         if not frames:
             continue

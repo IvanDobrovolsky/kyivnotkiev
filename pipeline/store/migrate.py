@@ -31,6 +31,8 @@ import sys
 import pandas as pd
 import yaml
 
+from pipeline.filters import apply_source_filters
+
 STORE = pathlib.Path("data/store")
 MANIFEST = STORE / "_manifest.json"
 
@@ -415,26 +417,20 @@ def build_pairs() -> bool:
             print(f"  gdelt: {_n_store:,} store rows replaced by "
                   f"{len(_gv):,} verified rows")
 
-    # Homonym false positives are excluded from the analysis-ready pair files —
-    # the same release principle as the telegram deprecation: raw source
-    # mirrors stay untouched, combined pairs are clean. Odessa-TX alone was
-    # 34,735 rows of odesa's pair file before this existed (2026-09-02).
-    import re as _re
-    import yaml as _yaml
-    _cfg = _yaml.safe_load(open("config/pairs.yaml"))
-    _pats = {p["slug"]: [_re.compile(f, _re.I) for f in p.get("homonym_filters", [])]
-             for p in _cfg["pairs"] if p.get("homonym_filters")}
-    if _pats:
-        _blob = (allp.get("title", pd.Series("", index=allp.index)).fillna("").astype(str)
-                 + " " + allp["text"].fillna("").astype(str))
-        _fp = pd.Series(False, index=allp.index)
-        for _slug, _ps in _pats.items():
-            _m2 = allp.pair_slug == _slug
-            if _m2.any():
-                _fp.loc[_m2] = _blob[_m2].apply(lambda t: any(r.search(t) for r in _ps))
-        if int(_fp.sum()):
-            print(f"  homonym filter: {int(_fp.sum()):,} false-positive rows excluded from pair files")
-            allp = allp[~_fp]
+    # Homonym and referent false positives are excluded from the
+    # analysis-ready pair files — the same release principle as the telegram
+    # deprecation: raw source mirrors stay untouched, combined pairs are
+    # clean. All rules live in pipeline/filters.py and are applied per
+    # (pair, source), so youtube_homonym_filters and the referent rules
+    # reach reddit/youtube/openalex rows too, not just gdelt. Odessa-TX
+    # alone was 34,735 rows of odesa's pair file before this existed
+    # (2026-09-02).
+    _n0 = len(allp)
+    _kept = [apply_source_filters(g, _slug, _src)
+             for (_slug, _src), g in allp.groupby(["pair_slug", "source"],
+                                                  dropna=False, sort=False)]
+    allp = pd.concat(_kept).sort_index() if _kept else allp
+    print(f"  source filters: {_n0 - len(allp):,} rows dropped from pair files")
 
     out = STORE / "pairs"
     out.mkdir(parents=True, exist_ok=True)
