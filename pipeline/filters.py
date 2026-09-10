@@ -29,6 +29,30 @@ import yaml
 
 
 _CFG_CACHE: dict | None = None
+_VDROP_CACHE: dict | None = None
+
+# Individually verified wrong entries (data/audit/holdout_ai_verification.json,
+# produced by the per-pair verification agents). Each carries a recorded reason;
+# they are dropped from EVERY layer — corpus, series, exhibits — because a row
+# that names a person or a band was never evidence of a spelling choice. The
+# reusable half of the same audit lands in pairs.yaml as regex patterns; this
+# is the residue that no pattern generalises.
+def _verified_drops(slug: str) -> set:
+    global _VDROP_CACHE
+    if _VDROP_CACHE is None:
+        import json
+        import pathlib
+        _VDROP_CACHE = {}
+        p = pathlib.Path("data/audit/holdout_ai_verification.json")
+        if p.exists():
+            try:
+                for d in json.loads(p.read_text()).get("drops", []):
+                    u = str(d.get("url") or "").strip()
+                    if u:
+                        _VDROP_CACHE.setdefault(d.get("pair"), set()).add(u)
+            except Exception:                          # noqa: BLE001
+                pass
+    return _VDROP_CACHE.get(slug, set())
 
 
 def _pair_cfg(slug: str) -> dict:
@@ -63,6 +87,15 @@ def apply_source_filters(df: pd.DataFrame, slug: str, source: str,
     blob = _blob(df)
     note = (lambda k, n: audit.__setitem__(k, audit.get(k, 0) + int(n))
             if audit is not None else None)
+
+    vdrop = _verified_drops(slug)
+    if vdrop:
+        for col in ("url", "doc_id"):
+            if col in df.columns:
+                hit = df[col].astype(str).isin(vdrop)
+                if hit.any():
+                    note("dropped_verified_wrong", hit.sum())
+                    df, blob = df[~hit], blob[~hit]
 
     pats = list(cfg.get("homonym_filters", []))
     if source == "youtube":

@@ -1331,7 +1331,7 @@ def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
                .sort_values("cited_by_count", ascending=False)
                .drop_duplicates("_tkey")
                .groupby("year", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN * 10)
-               .nlargest(HOLDOUT_CAP, "cited_by_count"))
+               .head(HOLDOUT_CAP))
         out[slug] = [{
             "name": str(r["title"])[:160],
             "url": str(r["openalex_id"]),
@@ -1499,7 +1499,10 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                 continue
             if slug in _umb and "title" in posts.columns:
                 posts = posts[~posts["title"].fillna("").astype(str).str.contains(_umb[slug])]
-            posts = posts.nlargest(HOLDOUT_CAP, "score") if "score" in posts.columns else posts.head(HOLDOUT_CAP)
+            # Rank a wider pool so liveness/verification drops refill from the
+            # corpus instead of shrinking the table below HOLDOUT_CAP.
+            posts = (posts.nlargest(HOLDOUT_CAP * 6, "score")
+                     if "score" in posts.columns else posts.head(HOLDOUT_CAP * 6))
             # Liveness from the headless-probe cache (site/reddit_liveness.mjs):
             # live posts sort first — the table is a "see for yourself" exhibit —
             # and removed ones ship tagged rather than hidden, because deletion
@@ -1521,7 +1524,7 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
             ]
             # Exhibits are alive or absent: a probed-dead post is not a
             # demonstration anyone can click. Series unaffected.
-            _live = [e for e in _entries if e.get("live") is True]
+            _live = [e for e in _entries if e.get("live") is True][:HOLDOUT_CAP]
             if _live:
                 by_pair.setdefault(slug, {})["reddit"] = _live
 
