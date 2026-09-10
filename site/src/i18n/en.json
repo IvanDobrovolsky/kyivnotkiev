@@ -88,7 +88,8 @@
       "youtube": "YouTube videos using the Russian spelling — in 2025",
       "openalex": "Papers using the Russian spelling — in 2025, ordered by citations (most have none)",
       "default": "Using the Russian spelling"
-    }
+    },
+    "holdout_news_head": "Recent news articles that keep using the Russian form"
   },
   "llm": {
     "defs_html": "<strong>Free recall</strong>: the model writes the name unprompted — training data speaks. <strong>Forced choice</strong>: both spellings shown, pick one; asked twice with the order swapped.",

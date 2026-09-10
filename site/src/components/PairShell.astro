@@ -1340,7 +1340,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const recentRu = articles.filter((a: any) => a.variant === 'russian' && (a.month || '') >= twoYearsAgo).length;
       const subtitle = document.getElementById('news-holdouts-subtitle');
       if (subtitle) {
-        subtitle.textContent = `${totalArticles} articles from ${new Set(articles.map((a: any) => a.domain)).size} outlets — ${ua} Ukrainian, ${ru} Russian form${recentRu > 0 ? ` · ${recentRu} major outlets still use Russian form in recent years` : ''}`;
+        subtitle.textContent = tt('pair.holdout_news_head', 'Recent news articles that keep using the Russian form');
       }
 
       // Wire up filter buttons
