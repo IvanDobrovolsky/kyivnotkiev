@@ -2151,6 +2151,17 @@ def main():
         # Display filter: drop weak leans (|z|<2), token fragments from
         # hyphen splitting, and pronoun leakage the stopword list misses.
         _junk = {"our", "ours", "us", "your", "yours", "my", "mine",
+                 # display-tier generics: real words, zero pair information
+                 "war", "forces", "military", "news", "city", "region",
+                 "national", "united", "president", "company", "club",
+                 "round", "group", "cup", "equipment", "comments", "posted",
+                 # platform/markup/outlet tokens
+                 "sprite", "bar-", "icon-sub", "soccerbot", "boardgamegeek",
+                 "bgg", "boardgame", "wotreplays", "yourmegafile", "webrip",
+                 "auto-generated", "amuseio", "background-image",
+                 "linear-gradient", "background-position", "wikipedia",
+                 "hmu", "ukrinform", "dezeen", "suspilne", "kyivindependent",
+                 "babynyar", "jamiroquai",
                  "it's", "i'm", "i’m", "it’s", "don't", "don’t", "that's", "that’s",
                  "through", "back", "still", "even", "really", "much", "many",
                  "reddit", "youtube", "twitter", "facebook", "instagram", "tiktok",

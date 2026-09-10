@@ -23,6 +23,9 @@ from collections import Counter
 import pandas as pd
 
 STOP = set("""a an the and or but if then than that this these those of in on at to for
+him never every always something often big near books million army home live local world
+europe didn't didn’t doesn't wasn't weren't isn't aren't won't can't couldn't wouldn't
+shouldn't anything everything nothing someone everyone
 with from by as is are was were be been being it its he she they them his her their we
 you i not no nor so such own same too very can will just should now about into over
 after before under above between out up down off again further once here there when
@@ -49,6 +52,10 @@ TOP_N = 25
 NON_EN_STOP = {
     "una", "unos", "unas", "sus", "los", "las", "del", "por", "para", "con",
     "este", "esta", "estos", "estas", "pero", "más", "mas", "como", "qué",
+    "que", "qui", "pas", "une", "contre", "russes", "russie", "ukrainien",
+    "militaire", "l'ukraine", "sono", "ucrania", "ukrayna", "ancak", "izle",
+    "canli", "canl", "een", "tegen", "niet", "voor", "wedstrijd", "ich",
+    "cho", "hoy", "desde", "rusos", "rusas", "vov", "mai",
     "les", "des", "dans", "avec", "pour", "sur", "aux", "cette", "nous",
     "vous", "und", "der", "die", "das", "den", "dem", "ein", "eine", "nicht",
     "von", "mit", "für", "auf", "ist", "sich", "dei", "della", "delle",
@@ -57,8 +64,15 @@ NON_EN_STOP = {
 }
 
 
+# Reddit match-thread flair markup ([](#sprite1-p8), (#bar-2-green)) and inline
+# CSS from badly-scraped HTML shipped as "collocations" (sprite, bar-, icon-,
+# background-image) across five pairs. Strip structurally, before tokens exist.
+MARKUP = re.compile(r"\[\]\(#[\w-]+\)|\(#[\w-]+\)|\b(?:background-(?:image|position|size|color)|linear-gradient|border-radius)\b[^;\n]*", re.I)
+
+
 def tokenise(text: str, mask) -> list[str]:
     t = str(text or "").lower()
+    t = MARKUP.sub(" ", t)
     for rx in mask:
         t = rx.sub(" ", t)
     # Accented characters are WORD characters, not separators: splitting on
@@ -97,8 +111,13 @@ def _log_odds(ca: Counter, cb: Counter) -> dict:
 
 
 def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
+    # The full phrase AND each of its words: masking only "Igor Sikorsky"
+    # let "sikorsky" alone ship as that pair's own top collocation (self-echo
+    # in nine pairs). The label is not evidence, in any of its parts.
     mask = [re.compile(r"\b" + r"[\s\-_,.]+".join(re.escape(w) for w in t.split()) + r"\b", re.I)
             for t in terms]
+    mask += [re.compile(r"\b" + re.escape(w) + r"\b", re.I)
+             for t in terms for w in str(t).split() if len(w) >= 3]
     per_source, skipped = {}, {}
     for src, g in df.groupby("source"):
         ua, ru = g[g.variant == "ukrainian"], g[g.variant == "russian"]
