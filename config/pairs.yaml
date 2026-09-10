@@ -1,3 +1,10 @@
+# Toponym pairs — the single source of truth for the study.
+# homonym_filters entries added 2026-09-09 come from the per-pair holdout
+# verification agents (data/audit/holdout_ai_verification.md) and were each
+# measured corpus-wide before inclusion (data/audit/pattern_validation.md):
+# only patterns matching <2% of a pair's rows and never the pair's own form
+# were auto-accepted. Rejected and borderline patterns are listed in that
+# report with their measured impact.
 metadata:
   version: '2.0'
   description: Ukrainian toponym pairs for adoption analysis
@@ -24,38 +31,43 @@ pairs:
   - date: 2025-10
     label: Peace negotiation surge
   match_mode: word_boundary
-  # Frozen brands derived from the city but offering no spelling choice:
-  # the Arsenal-factory camera lines (Kiev 60/88/4/19). Applies to news
-  # bodies, Reddit, and pair files; YouTube keeps its own copy below.
   homonym_filters:
   - kiev\s*-?\s*(?:60|88|4am?|19m?)\b
-  # frozen band/product names and a US given name (human-testing finds):
-  # Lost In Kiev (French post-rock band), Dr Martens Kiev backpack,
-  # Kiev Kwentel Otey (person)
   - lost\s+in\s+kiev
   - martens\s+kiev|kiev\s+leather\s+backpack
   - kiev\s+kwentel
-  # Person/artist homonyms and non-English-convention channels on YouTube:
-  # "Kiev RTF" is a Dutch rapper (stage name); TURFA OLAM is an Uzbek news
-  # channel whose "Kiev" is Uzbek's own convention, not an English choice.
-  # Derivative compounds and variant spellings never exhibit under the bare
-  # toponym (timeseries are a different question and unaffected).
+  - \b(?:chicken|pheasant|frog\s+legs?|mushroom|garlic|veggie|vegan|salmon|turkey|beef|cod)\s+(?:a\s*la\s+|ala\s+)?kiev\b
+  - azur\s*lane|azurlane
+  - d[ií]namo\s+de\s+kiev
+  - ghost\s+of\s+kiev\s+ukrainian\s+freedom\s+vodka
+  - giornaledibrescia\.it
+  - green\s+soul\s+kiev|kiev\s+orthopedic
+  - irishdentist\.ie
+  - kiev.{0,40}\bdestroyer\b
+  - kiev[\s-]*class
+  - kiev\s*-?\s*(?:4a?m?|6\s*c?|19m?|60|88)\b
+  - kiev\s*beats
+  - kiev\s+station
+  - langa\s*finga|kappalani
+  - new escort ads|last week'?s new profiles
+  - one\s+5g\s+ace|codename\s+kiev
+  - recruitment\s+agency\s+esca|raise\s+karma
+  - sam\s+hyde
   holdout_exclude:
   - dinamo\s+ki[ye]v
   - kievan
   youtube_homonym_filters:
   - kiev\W{0,3}rtf
   - turfa\s+olam
-  # Soviet camera product lines (Arsenal factory) — a product name, not the city
   - kiev\s*-?\s*(?:60|88|4am?|19m?)\b
   slug: kyiv
-  blurb_uk: "Столиця — тут англійська змінилася першою"
-  verdict_uk: "Кампанія спрацювала: англійська перейшла на Kyiv близько 2019 року, ще до вторгнення — війна лише закріпила зміну."
-  verdict: "The campaign worked: English switched around 2019, before the invasion — and the war cemented it."
-  blurb: "The capital — where English switched first"
+  blurb_uk: Столиця — тут англійська змінилася першою
+  verdict_uk: 'Кампанія спрацювала: англійська перейшла на Kyiv близько 2019 року, ще до вторгнення — війна лише закріпила зміну.'
+  verdict: 'The campaign worked: English switched around 2019, before the invasion — and the war cemented it.'
+  blurb: The capital — where English switched first
   word_boundary: true
   ukrainian_cyrillic: Київ
-  significance: "The capital and the campaign's namesake — where the proper spelling was adopted first."
+  significance: The capital and the campaign's namesake — where the proper spelling was adopted first.
 - russian: Kharkov
   ukrainian: Kharkiv
   enabled: true
@@ -69,13 +81,37 @@ pairs:
     label: Russian border offensive
   match_mode: word_boundary
   slug: kharkiv
-  blurb_uk: "Друге місто, 40 км від російського кордону"
-  verdict_uk: "Харків пішов шляхом Києва: англомовні новини майже повністю пишуть Kharkiv."
-  verdict: "The second city followed Kyiv's path; English news agencies predominantly write Kharkiv."
-  blurb: "Second city, 40 km from the Russian border"
+  blurb_uk: Друге місто, 40 км від російського кордону
+  verdict_uk: 'Харків пішов шляхом Києва: англомовні новини майже повністю пишуть Kharkiv.'
+  verdict: The second city followed Kyiv's path; English news agencies predominantly write Kharkiv.
+  blurb: Second city, 40 km from the Russian border
   word_boundary: true
   ukrainian_cyrillic: Харків
-  significance: "Second largest city. 'Kharkov' is a direct Russian transliteration."
+  significance: Second largest city. 'Kharkov' is a direct Russian transliteration.
+  homonym_filters:
+  - \barma\s?3\b|milsim
+  - \bkharkov\s+8\b
+  - balroomdancing|ballroomdancing
+  - call\s+of\s+duty
+  - hell\s*let\s*loose|\bhll\b
+  - irishdentist\.ie
+  - jean\s+lopez
+  - kharkov never sleeps
+  - kharkov:?\s*battles\s+before\s+and\s+after
+  - kharkov\\?_\d+-\d+
+  - r/gatesofhellostfront
+  - r/hellletloose|hell\s*let\s*loose
+  - r/natureofpredators
+  - r/thefirerisesmod
+  - r/u_iam_tender_angel
+  - r/victoria3
+  - send\.monobank\.ua
+  - serge[iy]\s+kharkov
+  - simona\s+kharkov
+  - spring\s+prelude
+  - st=kharkov|/l=kharkov
+  - white\s+stork
+  - world\s+of\s+tanks
 - russian: Odessa
   ukrainian: Odesa
   enabled: true
@@ -106,52 +142,118 @@ pairs:
   - odessa\s+american
   - odessa.{0,5}a.?zion
   - odessa\s+(?:young|rae)
+  - \b(?:permian|midland|landman|west\s+texas|oil\s+jobs)\b
+  - \bm\.?\s?v\.?\s+odessa\b
+  - ^r/(?:odessatexxx|westtexasgonewild|midessa432wtxslutz|permianplaytime3|midland432m4a|midlandtxxx|trapsgonewild|wtx_pnp|texasswingersofficial|midlandstraight4gaybi|kcm4m|delawarer4r)\b
+  - ^r/delaware\b
+  - ^r/midessa\b
+  - ^r/namenerds\b
+  - band\s+odessa
+  - géographie des ténèbres
+  - historic\s+odessa|odessa,?\s*delaware|women'?s\s+club\s+of\s+odessa
+  - kagura\s+odessa|global\s+kagura
+  - neon\s+love|\bby\s+odessa\b
+  - new\s+odessa
+  - nova\s+odessa
+  - o['’]dessa|sadie\s+sink
+  - odessa,?\s*wash(?:ington)?\b|deutschesfest
+  - odessa,?\s+(?:de|delaware)\b|odessa,\s*de\s+197
+  - odessa[\s-]*doran|odessa\s+canyon
+  - odessa[^.]{0,30}\b(?:1250|model|grill|smoker|pellet)\b
+  - odessa[^a-z]{0,5}(?:fl|florida)\b|tampa[^.]{0,20}odessa
+  - odessa\s*[-–]\s*caribou|caribou[^.]{0,12}odessa
+  - odessa\s+(?:group|network|organi[sz]ation)
+  - odessa\s+(?:mini\s+)?dress
+  - odessa\s+(?:network|group|organi[sz]ation)
+  - odessa\s+(?:v\d|prometheus)
+  - odessa\s+a['’]?zion
+  - odessa\s+bulgar
+  - odessa\s+cubbage
+  - odessa\s+grocery
+  - odessa\s+oliveira
+  - odessa\s+priority\s+emergency\s+room
+  - odessa\s+silverberg
+  - odessa\s+young
+  - onroute|mallorytown
+  - parov\s+stelar
+  - project\s+odessa
+  - project\s+odessa|odessa\s+baby
+  - reasonings\s+with\s+odessa
+  - setlist
+  - smart\s+and\s+strong\s+dogs
+  - the\s+odessa\s+journal
+  - the\s+odessa\s+review
+  - twin\s+peaks\s+odessa
+  - vampirate\s+odessa|odessa\s+delico
+  - williston|bakken|permian
   homonym_type: us_city
-  # Referent verification (body-level, applied in the verified-corpus builder):
-  # a record whose body has ZERO Ukraine evidence and is not from a Ukrainian
-  # outlet names a different Odessa (US towns, actresses). Measured 2026-09-03:
-  # 10,772 of 22,439 records, all russian-variant — adoption 34.2% -> 67.5%.
-  # Evidence regex validated against kyivpost false-drop cases (Trukhanov,
-  # Mykhailyk); exhibits in data/audit/odesa_referent_exhibits.csv.
   referent_filter:
-    evidence: \b(?:ukrain\w*|black sea|kyiv|kiev|kherson|mykolaiv|zelensk\w+|oblast|russia\w*|moscow|donbas|crimea\w*|odesa|trukhanov|saakashvili|potemkin st\w*|derybasivska|deribasovskaya|privoz|prymorsky|arcadia beach|izmail|chornomorsk|yuzhne|hryvn\w+|verkhovna|maidan|poroshenko|kuchma|yanukovych)\b
+    evidence: \b(?:ukrain\w*|black sea|kyiv|kiev|kherson|mykolaiv|zelensk\w+|oblast|russia\w*|moscow|donbas|crimea\w*|odesa|trukhanov|saakashvili|potemkin st\w*|derybasivska|deribasovskaya|privoz|prymorsky|arcadia
+      beach|izmail|chornomorsk|yuzhne|hryvn\w+|verkhovna|maidan|poroshenko|kuchma|yanukovych)\b
     evidence_domains: kyivpost|unian|ukrinform|interfax\.com\.ua|pravda\.com\.ua|kyivindependent|odessa-journal
-    # personals/adult spam co-lists Ukrainian cities, so the gazetteer rescue
-    # passes it; explicit drop
     drop:
     - \b(?:escort|dating\s+site|hookup|xxx|porn\w*|sexy?\s+(?:girl|teen|women)|anal|tits)\b
   slug: odesa
-  blurb_uk: "Чорноморський порт; одна «с» чи дві"
-  verdict_uk: "Спірна територія: воєнні репортажі перейшли на Odesa, але подвійна «s» досі панує в культурних текстах."
-  verdict: "Contested ground: war reporting shifted to Odesa, but the double-s Odessa still owns casual and cultural writing."
-  blurb: "Black Sea port; one “s” or two"
+  blurb_uk: Чорноморський порт; одна «с» чи дві
+  verdict_uk: 'Спірна територія: воєнні репортажі перейшли на Odesa, але подвійна «s» досі панує в культурних текстах.'
+  verdict: 'Contested ground: war reporting shifted to Odesa, but the double-s Odessa still owns casual and cultural writing.'
+  blurb: Black Sea port; one “s” or two
   youtube_depth: legacy
   word_boundary: true
   ukrainian_cyrillic: Одеса
-  significance: "A single vs double 's' encodes which language the name is read through. The Ukrainian spelling has one 's'."
+  significance: A single vs double 's' encodes which language the name is read through. The Ukrainian spelling has one 's'.
 - russian: Lvov
   ukrainian: Lviv
   enabled: true
   is_control: false
   match_mode: word_boundary
   slug: lviv
-  # Prince Georgy Lvov (1917 PM) and Tolstoy's Lvov are people, not the city.
   referent_filter:
     drop:
     - prince\s+(?:georg\w+\s+)?lvov
     - lvov\s+government
     - lvov[^.]{0,60}(?:provisional\s+government|kerensky|tsar|karenina)
     - (?:provisional\s+government|kerensky|karenina)[^.]{0,60}lvov
-  blurb_uk: "Західний центр, який англійська звала Lvov"
-  verdict_uk: "Майже повний перехід: Lvov лишився здебільшого в історичних текстах."
-  verdict: "A near-complete switch: Lvov survives mainly in historical prose."
-  blurb: "The western hub English used to call Lvov"
+  blurb_uk: Західний центр, який англійська звала Lvov
+  verdict_uk: 'Майже повний перехід: Lvov лишився здебільшого в історичних текстах.'
+  verdict: 'A near-complete switch: Lvov survives mainly in historical prose.'
+  blurb: The western hub English used to call Lvov
   events:
   - date: 2022-03
     label: Refugee hub, diplomatic activity
   word_boundary: true
   ukrainian_cyrillic: Львів
-  significance: "Historically rendered through Russian, Polish and German. 'Lviv' is the modern Ukrainian name."
+  significance: Historically rendered through Russian, Polish and German. 'Lviv' is the modern Ukrainian name.
+  homonym_filters:
+  - '#lvov\b'
+  - /city/lvov/
+  - \balexe[yi]\s+lvov\b
+  - \bberlioz\s+et\s+lvov\b
+  - \bchristine\s+lvov\b
+  - \bdmitri[iy]\s+lvov\b
+  - \bevgeny\s+\w+\s+lvov\b
+  - \bgene\s+lvov\b
+  - \bgeorg\w*\s+lvov\b
+  - \bi\s+lvov\W{0,3}e\b
+  - \blvov(?:'|’)?s\b[^.]{0,40}\bgiggy\b
+  - \blvov-kompaneets\b
+  - \blvov[\s-]sandomir\b
+  - \blvov[\s–-]*warsaw\b
+  - \blvov\s*,?\s*ukraina\b
+  - \blvov\s+vodka\b
+  - \bmikhail\s+lvov\b
+  - \bnikola[iy]\s+(?:\w+\s+)?lvov\b
+  - \bpavel\s+lvov\b
+  - \bprince\s+lvov\b
+  - \bromance\s+in\s+lvov\b
+  - \bsverdlovsk[\s–-]*lvov\b
+  - \bv\.\s*lvov\b
+  - arkady\s+lvov
+  - bohdan\s+lvov
+  - david\s+lvov
+  - dmitri\s+lvov
+  - love\s+song\s+for\s+lemberg\s+lvov
+  - lvovの意味
 - russian: Zaporozhye
   ukrainian: Zaporizhzhia
   enabled: false
@@ -232,13 +334,39 @@ pairs:
     label: S.T.A.L.K.E.R. 2 Heart of Chornobyl release
   match_mode: word_boundary
   slug: chornobyl
-  blurb_uk: "Катастрофа, відома за радянським написанням"
-  verdict_uk: "Назву заморозила катастрофа: англійська досі пише Chernobyl; українська форма зайшла переважно через гру 2024 року."
-  verdict: "The disaster froze the name in its Soviet-era form; the Ukrainian spelling entered English mainly through the 2024 video game."
-  blurb: "A disaster known by its Soviet-era spelling"
+  blurb_uk: Катастрофа, відома за радянським написанням
+  verdict_uk: 'Назву заморозила катастрофа: англійська досі пише Chernobyl; українська форма зайшла переважно через гру 2024 року.'
+  verdict: The disaster froze the name in its Soviet-era form; the Ukrainian spelling entered English mainly through the 2024 video game.
+  blurb: A disaster known by its Soviet-era spelling
   youtube_depth: day
   ukrainian_cyrillic: Чорнобиль
-  significance: "Known worldwide through a Soviet-era Russian spelling."
+  significance: Known worldwide through a Soviet-era Russian spelling.
+  homonym_filters:
+  - '#tamil'
+  - (?:hbo'?s|miniseries|mini[- ]series)\s+chernobyl
+  - (?:re)?watch(?:ing|ed)\s+chernobyl
+  - 9\s*lb\s+hammer|skunk\s*#\s*1
+  - chernobyl:?\s*escape\s+from\s+pripyat
+  - chernobyl[\s-]*(?:disaster\s*)?optimi[sz](?:er|ation|ing)
+  - chernobyl[\s-]*(?:disaster\s*)?optimi[sz](?:er|ation|ing)|chernobyl[\s-]inspired\s+optimi
+  - chernobyl[\s-]inspired\s+optimi
+  - chernobyl\.\s*adam\s+nagaitis
+  - chernobyl\s*(?:,|and)\s*(?:i\s+also|mindhunter|severance)
+  - chernobyl\s*2\s*exclu[sz]ion\s+zone
+  - chernobyl\s*\(2019\)
+  - chernobyl\s*\(2019\)|#chernobyl\s*#hboseries
+  - chernobyl\s*\(?\s*2019\s*\)?
+  - chernobyl\s*\(?\s*76\s*sticks\)?|hooligan\s+chase
+  - chernobyl\s+children
+  - chernobyl\s+diaries
+  - chernobyl\s+mini[\s-]?series
+  - chernobyl\s+pack
+  - chernobyl\s+vs\s+edgerunners
+  - chilecomparte\.cl|\[?(?:1080p|720p)\]?.*\bx265\b
+  - heart\s+of\s+cherno?byl
+  - midnight\s+in\s+cherno?byl
+  - mini[\s-]?series\s+chernobyl
+  - renck\s*\(chernobyl\)|\(hbo'?s[^)]*chernobyl\)
 - russian: Lugansk
   ukrainian: Luhansk
   enabled: true
@@ -252,12 +380,21 @@ pairs:
     label: Retreat from Lyman, Luhansk oblast
   match_mode: word_boundary
   slug: luhansk
-  blurb_uk: "Окупований із 2014 року"
-  verdict_uk: "Висвітлення окупації просунуло Luhansk уперед; російська форма живе в архівах до 2014 року."
-  verdict: "News coverage pushed Luhansk ahead; the Russian spelling lives on in pre-2014 archives."
-  blurb: "Occupied since 2014"
+  blurb_uk: Окупований із 2014 року
+  verdict_uk: Висвітлення окупації просунуло Luhansk уперед; російська форма живе в архівах до 2014 року.
+  verdict: News coverage pushed Luhansk ahead; the Russian spelling lives on in pre-2014 archives.
+  blurb: Occupied since 2014
   ukrainian_cyrillic: Луганськ
-  significance: "Ukrainian city occupied since 2014, which makes the correct Ukrainian spelling a marker of recognition."
+  significance: Ukrainian city occupied since 2014, which makes the correct Ukrainian spelling a marker of recognition.
+  homonym_filters:
+  - carollism
+  - getmusic\.fm/tags/lugansk
+  - lugansk\.ua
+  - lugansk\s+4-prong
+  - mbbs\s+(?:in\s+russia|abroad)
+  - onlyfans\.com/
+  - urbanhellcirclejerk
+  - wikimedia\.org/wiki/file:\S*lugansk
 - russian: Dnieper River
   ukrainian: Dnipro River
   enabled: true
@@ -265,10 +402,10 @@ pairs:
   notes: River name. Qualified with "River" to disambiguate from the city (pair 7, Dnepropetrovsk→Dnipro).
   match_mode: exact_phrase
   slug: dnipro-river
-  blurb_uk: "Річка, яку англійська досі зве Dnieper"
-  verdict_uk: "Досі навпіл: атласи й старіша проза тримаються російського Dnieper."
-  verdict: "Still split: atlases and older prose keep the Russian-derived Dnieper for the river."
-  blurb: "The river English still calls the Dnieper"
+  blurb_uk: Річка, яку англійська досі зве Dnieper
+  verdict_uk: 'Досі навпіл: атласи й старіша проза тримаються російського Dnieper.'
+  verdict: 'Still split: atlases and older prose keep the Russian-derived Dnieper for the river.'
+  blurb: The river English still calls the Dnieper
   youtube_depth: legacy
   events:
   - date: 2022-11
@@ -277,6 +414,13 @@ pairs:
     label: Kakhovka Dam destroyed
   ukrainian_cyrillic: Дніпро
   significance: The river runs the length of the country; "Dnieper" reaches English through Russian and older cartography.
+  homonym_filters:
+  - (?:bender|tiraspol|transnistria\w*|chisinau|moldova\w*)[^.]{0,150}dnieper|dnieper[^.]{0,150}(?:bender|tiraspol|transnistria\w*)
+  - (?:hit|struck|attack(?:ed|s)?|shell(?:ed|s)?)\s+the\s+dnieper\s+river\b
+  - (?:transnistria\w*|tiraspol|bender|gagauz|moldova\w*)[^.]{0,150}dnieper|dnieper[^.]{0,150}(?:transnistria\w*|tiraspol|bender|gagauz)
+  - \b(?:aur|kya|hain|karte|jante|kaun|zaroor|nahi|ka istemaal|ki tijarat)\b
+  - belarusian\s+dnieper\s+river
+  - captivating\s+destination|why\s+should\s+you\s+visit
 - russian: Dniester
   ukrainian: Dnister
   enabled: false
@@ -291,7 +435,8 @@ pairs:
   ukrainian: Donbas
   enabled: true
   is_control: false
-  notes: Politically charged — Russia insists on "Donbass", Ukraine on "Donbas". Part of the 7,800 toponyms renamed across 83 Ukrainian cities since 2022 (Transparent Cities). July 2023 law mandated renaming of Russian imperial toponyms.
+  notes: Politically charged — Russia insists on "Donbass", Ukraine on "Donbas". Part of the 7,800 toponyms renamed across 83 Ukrainian cities since 2022 (Transparent Cities). July 2023 law mandated renaming
+    of Russian imperial toponyms.
   events:
   - date: 2014-04
     label: Donbas conflict begins
@@ -299,12 +444,27 @@ pairs:
     label: Full-scale invasion
   match_mode: word_boundary
   slug: donbas
-  blurb_uk: "Перший фронт війни; одна «с» чи дві"
-  verdict_uk: "Одна «с» перемогла в новинах; Donbass затримується у проросійських виданнях."
-  verdict: "The single-s form won the news; Donbass lingers in Russian-aligned outlets."
-  blurb: "The war’s first front; one “s” or two"
+  blurb_uk: Перший фронт війни; одна «с» чи дві
+  verdict_uk: Одна «с» перемогла в новинах; Donbass затримується у проросійських виданнях.
+  verdict: The single-s form won the news; Donbass lingers in Russian-aligned outlets.
+  blurb: The war’s first front; one “s” or two
   ukrainian_cyrillic: Донбас
   significance: The doubled "ss" of "Donbass" is a Russian orthographic convention, not a Ukrainian one.
+  homonym_filters:
+  - (?:union\s+of\s+donbass\s+volunteers|donbass\s+volunteers?\s+union)
+  - \b(?:novyi?|new)\s+donbass\b(?!\s+line)
+  - \breptilians?\b|\benerg(?:y|etic)\s+healer\b
+  - divided\s+donbass
+  - donbass\s*arena
+  - donbass\s+arena
+  - donbass\s+case
+  - donbass\s+dome
+  - donbass\s+media\s+cent(?:re|er)
+  - dw\.com/ru/donbass
+  - giornaledibrescia\.it
+  - irishdentist\.ie
+  - moddb\.com
+  - odnako\.org
 - russian: Chicken Kiev
   ukrainian: Chicken Kyiv
   enabled: true
@@ -312,10 +472,10 @@ pairs:
   match_mode: exact_phrase
   slug: chicken-kyiv
   hide_global_events: true
-  blurb_uk: "Імʼя столиці, заморожене в меню"
-  verdict_uk: "Меню опираються: страва здебільшого лишається Chicken Kiev, хоч місто вже змінилося."
-  verdict: "Menus resist: the dish mostly stays Chicken Kiev even though the city switched."
-  blurb: "The capital’s name, frozen on menus"
+  blurb_uk: Імʼя столиці, заморожене в меню
+  verdict_uk: 'Меню опираються: страва здебільшого лишається Chicken Kiev, хоч місто вже змінилося.'
+  verdict: 'Menus resist: the dish mostly stays Chicken Kiev even though the city switched.'
+  blurb: The capital’s name, frozen on menus
   youtube_depth: legacy
   events:
   - date: 2015-07
@@ -329,27 +489,34 @@ pairs:
   word_boundary: true
   ukrainian_cyrillic: Котлета по-київськи
   significance: A dish carrying the capital's name on menus worldwide — food packaging and restaurant listings are among the slowest surfaces to change.
+  homonym_filters:
+  - '#ai(?:generated|cat)\b'
+  - \b(?:tf2|team fortress 2|pootis)\b
+  - \bai[\s-]*(?:magic|generated)\b
+  - arepas,\s*chicken kiev,\s*doner kebab
+  - chicken[\s-]*kiev['’"”]?\s+(?:speech|address)
+  - chicken\s+kiev\s+videos?\s+chicken\s+\w+\s+video
+  - r/(?:tf2|truetf2|tf2fashionadvice|tf2shitposterclub|sfm)\b
+  - r/[A-Za-z]*personals\b
+  - r/kuhinja\b
+  - r/playrust\b
+  - renam\w*\s+[“"']?chicken\s*kiev
+  - viva food:\s*[^.]{0,60}chicken kiev recipe
 - russian: Borsch
   ukrainian: Borscht
   enabled: true
   is_control: false
-  notes: UNESCO inscribed 'Culture of Ukrainian borscht cooking' in July 2022, using 'borscht' as the international form. Russian-derived 'borsch' (without t) tests whether English adopts the UNESCO/Ukrainian standard.
+  notes: UNESCO inscribed 'Culture of Ukrainian borscht cooking' in July 2022, using 'borscht' as the international form. Russian-derived 'borsch' (without t) tests whether English adopts the UNESCO/Ukrainian
+    standard.
   events:
   - date: 2022-07
     label: UNESCO inscribes Ukrainian borscht
   match_mode: word_boundary
   slug: borscht
-  # "Borscht Belt" is a fossilised US toponym (Catskills resorts) — it can never
-  # flip to "Borshch Belt", so a record mentioning ONLY the Belt makes no
-  # spelling choice about the dish. Measured 2026-09-03: 2,061/3,373 records
-  # mention the Belt; 1,511 have no food/UA context at all — 83.3% -> 69.3%.
-  # Records with real food context are kept even when the Belt appears.
   referent_filter:
     frozen: borscht\s+belt
     require_evidence: true
     evidence: \b(?:ukrain\w*|russia\w*|kyiv|kiev|soviet|beet\w*|soup|recipe|cook\w*|restaurant|dish|food|cuisine|chef|menu)\b
-    # Matthew Borsch (Goldman Sachs analyst; 231 docs, all counted as the
-    # Russian form) + piracy/MLM spam templates that inflated the UA share.
     drop:
     - matthew\s+borsch
     - borsch[,\s]+(?:an?\s+)?(?:goldman|analyst|sachs)
@@ -357,12 +524,39 @@ pairs:
     - lingzhi|cordyceps
   youtube_homonym_filters:
   - borscht\s+belt
-  blurb_uk: "ЮНЕСКО визнає його українським"
-  verdict_uk: "Українське написання стало англійським стандартом, закріплене рішенням ЮНЕСКО 2022 року."
-  verdict: "The Ukrainian-aligned spelling is now the English standard, anchored by the 2022 UNESCO listing."
-  blurb: "UNESCO lists it as Ukrainian heritage"
+  blurb_uk: ЮНЕСКО визнає його українським
+  verdict_uk: Українське написання стало англійським стандартом, закріплене рішенням ЮНЕСКО 2022 року.
+  verdict: The Ukrainian-aligned spelling is now the English standard, anchored by the 2022 UNESCO listing.
+  blurb: UNESCO lists it as Ukrainian heritage
   ukrainian_cyrillic: Борщ
   significance: Inscribed by UNESCO as Ukrainian intangible cultural heritage. Culinary naming is a site of symbolic ownership.
+  homonym_filters:
+  - (?:ev|auto\w*|parts|component)\s+supplier[^.]{0,25}\bborsch\b
+  - \b(?:himar[eë]|dh[eë]rmi|ksamil|albanian?\s+riviera)\b
+  - \b(?:onlyfans|girlcock|tgirl|cumshot|blowjob|pornstar|milf|creampie|nsfw)\b
+  - \bborsch\b(?=[\s\S]{0,400}\b(?:bosch|refrigerator|fridge|freezer|dishwasher|compressor)\b)
+  - \bborsch\b(?=[\s\S]{0,400}\b(?:frigidaire|dishwasher|ikea|appliance)\b)
+  - \bborsch\b(?=[\s\S]{0,400}\b(?:hoover|vacuum|appliance|bosch)\b)
+  - \bdon(?:ald)?\s+borsch\b
+  - anistyn(?:\s+grace)?\s+borsch
+  - borsch\s+bandit
+  - borsch\s+belt
+  - borsch\s+house
+  - borsch\s+man
+  - borschev
+  - dan\s+borsch
+  - frederick\s+borsch
+  - freekarma
+  - jerome(?:\s+francisco)?\s+borsch
+  - jo[ãa]o\s+borsch
+  - johnny\s+yong\s+borsch
+  - katarina\s+borsch
+  - mark\s+borsch
+  - olga\s+borsch
+  - operation\s+borsch
+  - peter\s+borsch
+  - tatiana\s+borsch
+  - thomas\s+borsch
 - russian: Kiev Pechersk Lavra
   ukrainian: Kyiv Pechersk Lavra
   enabled: false
@@ -437,14 +631,52 @@ pairs:
     label: Champions League tie vs Barcelona
   match_mode: exact_phrase
   slug: dynamo-kyiv
-  blurb_uk: "Клуб, який Європа бачить щотижня"
-  verdict_uk: "Спортивний стиль відстає: УЄФА перейменувала клуб 2018-го, але репортажі досі пишуть Dynamo Kiev."
-  verdict: "Sports style lags: UEFA renamed the club in 2018, but most match reports still write Dynamo Kiev."
-  blurb: "The club Europe watches weekly"
+  blurb_uk: Клуб, який Європа бачить щотижня
+  verdict_uk: 'Спортивний стиль відстає: УЄФА перейменувала клуб 2018-го, але репортажі досі пишуть Dynamo Kiev.'
+  verdict: 'Sports style lags: UEFA renamed the club in 2018, but most match reports still write Dynamo Kiev.'
+  blurb: The club Europe watches weekly
   youtube_depth: legacy
   word_boundary: true
   ukrainian_cyrillic: Динамо Київ
   significance: 'Sports media is a distinct discourse with its own inertia: club names are often frozen in the form the wire services first used.'
+  homonym_filters:
+  - (pron[oó]sticos?|apuestas deportivas|futbol europeo|jornada \d)
+  - \b(ao vivo|sem delay|palpites|análises do|jogos do dia)\b
+  - \b(bgmi|1v[s]?4 clutch|spraygod|m416clutch)\b
+  - \b(bgmi|dynamo gaming|dynamogaming)\b
+  - \b(bgmi|dynamo gaming|dynamogaming|1v[s]?4 clutch|m416)\b
+  - \b(equipa|arriscamos|ganhar a primeira liga|já agora)\b
+  - \b(exploit incroyable|qui a marqué|l histoire)\b
+  - \b(golü|sanchezin|maçi|maçı)\b
+  - \b(hasil|tadi malam|ketika|semua pemain|kualifikasi|pertandingan|melawan|mempertemukan|menewaskan|menang lagi)\b
+  - \b(hasil|tadi malam|kualifikasi|jadwal|pertandingan)\b
+  - \b(kariyer önerisi|fm2[0-9]kariyer|türkçe|spiker)\b
+  - \b(konferans ligi|rakipleri|rakibi)\b
+  - \b(le roi oublié|du football)\b
+  - \b(maci biletleri|ne zaman|satisa cikar)\b
+  - \b(maçini|izlerse|fanatik|rezillik|tepki videosu)\b
+  - \b(mempertemukan|melawan|gol salto|pada tanggal)\b
+  - \b(menang lagi|menewaskan|padu mat|kalah)\b
+  - \b(palpites|análises do|ao vivo|sem delay|jogos do dia|o sucesso da equipa)\b
+  - \b(palpites|de quinta|da quinta)\b
+  - \b(pronostics?|pronostic foot|ligue des champions)\b
+  - \b(pronostics?|pronostic foot|ligue europa conference)\b
+  - \b(pronostics?|téléfoot|ligue des champions|ligue europa)\b
+  - \b(rakibi|rakibimizi|tanıyalım|rakipleri)\b
+  - \b(rezillik|tepki videosu|maçi|maçı)\b
+  - \b(semua pemain|klub lokal|dipaksa|tentara|pertandingan)\b
+  - \b(sintesi|andata|ritorno|calcio europeo)\b
+  - \b(téléfoot|1/[24] de finale|coupe des clubs champions)\b
+  - \b(téléfoot|pronostics?|1/[24] de finale|coupe de france)\b
+  - \b(türkçe|spiker|maçi|maçı)\b
+  - \b(victoire importante|pour continuer|l aventure europeenne)\b
+  - \b(özet|maçi|maçı|maçini|rakibi|rakibimizi|rakipleri|golü|türkçe|spiker|kariyer önerisi|tepki videosu|biletleri|kayıtları|satisa|tanıyalım|izlerse)\b
+  - \bgnk\s+d[iy]namo\b
+  - \bmeci amical\b
+  - ^fc_dynamo_kyiv$
+  - anyone looking for matchworn shirts
+  - free sports pick loaded from
+  - next4k
 - russian: Kiev ballet
   ukrainian: Kyiv ballet
   enabled: false
@@ -462,13 +694,24 @@ pairs:
     label: Russia weaponizes historical narrative
   match_mode: exact_phrase
   slug: kyivan-rus
-  blurb_uk: "Середньовічна держава, яку привласнюють"
-  verdict_uk: "Середньовічну державу досі читають через російську: Kievan Rus панує в історичних текстах."
-  verdict: "The medieval state is still read through Russian: Kievan Rus dominates history writing."
-  blurb: "The medieval state both nations claim"
+  blurb_uk: Середньовічна держава, яку привласнюють
+  verdict_uk: 'Середньовічну державу досі читають через російську: Kievan Rus панує в історичних текстах.'
+  verdict: 'The medieval state is still read through Russian: Kievan Rus dominates history writing.'
+  blurb: The medieval state both nations claim
   youtube_depth: legacy
   ukrainian_cyrillic: Київська Русь
-  significance: "The medieval state from which Ukraine, Belarus and Russia all descend; whether its name is anchored to Kyiv is the whole argument."
+  significance: The medieval state from which Ukraine, Belarus and Russia all descend; whether its name is anchored to Kyiv is the whole argument.
+  homonym_filters:
+  - (?:analysis|report)\s+from\s+chatgpt
+  - (?:countries|country) (?:i|we) show in this video
+  - \b(?:kasaysayan|paano ito|mula sa|susuriin natin)\b
+  - \|\s*kievan rus\s*\|\s*kievan rus fall\s*\|
+  - ^r/(?:chto_ne_skache|the_way_of_the_doommm|the_big_doommm|doommm_links\d*|corona_links\d*|punishment_panic)\b
+  - countries i show in this video
+  - if you like our content, check out our original comics
+  - kievan rus\s+\d{3,4}\s*ad
+  - oxiwyle|com\.oxiwyle\.kievanrus|apps\.apple\.com/[a-z]{2}/app/kievan-rus
+  - sterling silver 925|ebay\.us/m/
 - russian: Chernigov
   ukrainian: Chernihiv
   enabled: false
@@ -549,10 +792,10 @@ pairs:
   match_mode: word_boundary
   slug: ternopil
   hide_global_events: true
-  blurb_uk: "Українське -піль проти російського -поль"
-  verdict_uk: "Тихий, майже повний перехід — Ternopol практично зник із сучасної англійської."
-  verdict: "A quiet, near-complete switch — Ternopol has almost vanished from current English."
-  blurb: "Ukrainian -pil vs Russian -pol"
+  blurb_uk: Українське -піль проти російського -поль
+  verdict_uk: Тихий, майже повний перехід — Ternopol практично зник із сучасної англійської.
+  verdict: A quiet, near-complete switch — Ternopol has almost vanished from current English.
+  blurb: Ukrainian -pil vs Russian -pol
   events:
   - date: 2022-03
     label: Refugee hub, military recruitment
@@ -562,18 +805,45 @@ pairs:
     label: Russian strike on Ternopil high-rises kills 19+
   ukrainian_cyrillic: Тернопіль
   significance: Western regional centre; the -pil ending is Ukrainian, "-pol" reaches English through Russian.
+  homonym_filters:
+  - '#\s?ternopol'
+  - \bukraina\b
+  - https?://[^\s)\]]*ternopol
+  - onlyfans\.com
+  - ternopol\s*leather
 - russian: Vareniki
   ukrainian: Varenyky
   enabled: true
   is_control: false
   match_mode: word_boundary
   slug: varenyky
-  blurb_uk: "Вареники виходять у світ"
-  verdict_uk: "Українська назва набирає силу з глобалізацією кухні; vareniki живе в старих рецептах."
-  verdict: "The Ukrainian name gained ground as the cuisine went global; vareniki persists in older recipe archives."
-  blurb: "Dumplings English met through Russian"
+  blurb_uk: Вареники виходять у світ
+  verdict_uk: Українська назва набирає силу з глобалізацією кухні; vareniki живе в старих рецептах.
+  verdict: The Ukrainian name gained ground as the cuisine went global; vareniki persists in older recipe archives.
+  blurb: Dumplings English met through Russian
   ukrainian_cyrillic: Вареники
-  significance: "A dish English met through the Russian “vareniki”; the Ukrainian name marks the cuisine as its own."
+  significance: A dish English met through the Russian “vareniki”; the Ukrainian name marks the cuisine as its own.
+  homonym_filters:
+  - '#(?:essen|sehr|lecker|deutschland)\b'
+  - '#(?:tarif|pratik\w*tarif\w*)\b'
+  - '#cherryculinar\w*'
+  - '#ke[sş]fet'
+  - '#retsept\b|kartoshkali'
+  - \bkartof\s+p[ie]lmeni\b
+  - \blos\s+vareniki
+  - \bpeynirli\b|\brus\s+mant[ıi]\b
+  - \bravioli\s+russi\b|\bcucina\s+russa\b
+  - \bteigtaschen\b
+  - \bukrainische\b
+  - \bvareniki\s+con\b
+  - \bşirin\s+varenik
+  - \bсталик\b
+  - ^(?:\s*#\w+)+\s*$
+  - ^\s*vareniki\s*@
+  - ^r/u_
+  - ukrayna\s+mant[ıi]s[ıi]
+  - vareniki\s+s\s+[ck]artoshkoi
+  - вареники\s+по\s+рецепту
 - russian: Metalist Kharkov
   ukrainian: Metalist Kharkiv
   enabled: false
@@ -587,10 +857,10 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: babyn-yar
-  blurb_uk: "Місце Голокосту з двома традиціями назви"
-  verdict_uk: "Мова памʼяті розділена: меморіальні інституції прийняли Babyn Yar, історіографія тримає Babi Yar."
-  verdict: "Commemorative language is split: memorial institutions adopted Babyn Yar, historical writing keeps Babi Yar."
-  blurb: "Holocaust site, named in two traditions"
+  blurb_uk: Місце Голокосту з двома традиціями назви
+  verdict_uk: 'Мова памʼяті розділена: меморіальні інституції прийняли Babyn Yar, історіографія тримає Babi Yar.'
+  verdict: 'Commemorative language is split: memorial institutions adopted Babyn Yar, historical writing keeps Babi Yar.'
+  blurb: Holocaust site, named in two traditions
   events:
   - date: 2016-09
     label: 75th anniversary of massacre
@@ -600,6 +870,23 @@ pairs:
     label: Russian missile hits memorial site
   ukrainian_cyrillic: Бабин Яр
   significance: A Holocaust memorial site. The naming appears in commemorative and archival language, which changes more slowly than news.
+  homonym_filters:
+  - 13th symphony[^\n]{0,20}babi yar
+  - babi yar (?:memorial )?park
+  - babi yar colombiano
+  - babi yar commemoration
+  - babi yar concert
+  - babi yar et les
+  - babi yar park
+  - babi yar symphony
+  - babi yar.{0,2}\s*symphony
+  - babi yar\s+symphony
+  - babin yar
+  - in memoriam[^\n]{0,15}babi yar
+  - jurang pembantaian
+  - massacre de babi yar
+  - poems?[^\n]{0,25}babi yar
+  - sarabi yar
 - russian: Alexander Usyk
   ukrainian: Oleksandr Usyk
   enabled: true
@@ -619,13 +906,28 @@ pairs:
     label: Usyk beats Dubois (Wembley)
   match_mode: exact_phrase
   slug: oleksandr-usyk
-  blurb_uk: "Чемпіон пише своє імʼя сам"
-  verdict_uk: "Чемпіон називає себе сам — і англійська послухалась: майже повне прийняття."
-  verdict: "The champion states his own name, and English complied — adoption is near-total."
-  blurb: "The champion spells it Oleksandr"
+  blurb_uk: Чемпіон пише своє імʼя сам
+  verdict_uk: 'Чемпіон називає себе сам — і англійська послухалась: майже повне прийняття.'
+  verdict: The champion states his own name, and English complied — adoption is near-total.
+  blurb: The champion spells it Oleksandr
   youtube_depth: legacy
   ukrainian_cyrillic: Олександр Усик
-  significance: "An athlete who states his own name. Sports coverage is a test of whether English follows a person's own usage."
+  significance: An athlete who states his own name. Sports coverage is a test of whether English follows a person's own usage.
+  homonym_filters:
+  - \b(analisis|pembalasan|pembuktian|tinju dunia)\b
+  - \b(mengerikan|pertarungan|prediksi|menumbangkan)\b
+  - \b(tinju|kehebatan|mengakui|tertandingi)\b
+  - \bbeobachtet\b|\bbei dem wiegen\b
+  - \bboks\b|\bmmauzbekistan\b
+  - \bbondia\b|\bamepigana\b
+  - \bbondia\b|\bpambano\b|\bndiye\b
+  - \bkekalahan\b
+  - \bkelas berat\b|\bsiapa yang\b
+  - \bkucing\b|\bnamanya\b
+  - \boleksander\b
+  - \btype beat\b
+  - alexander usyk\s+asmr
+  - ballad\s+of\s+alexander\s+usyk
 - russian: Vladimir Zelensky
   ukrainian: Volodymyr Zelenskyy
   enabled: true
@@ -643,12 +945,39 @@ pairs:
     label: Oval Office clash with Trump
   match_mode: exact_phrase
   slug: volodymyr-zelenskyy
-  blurb_uk: "Президент, якого світ пізнав 2022 року"
-  verdict_uk: "Війна майже миттєво зробила українську форму стандартом; коротше Zelensky тримається в заголовках."
-  verdict: "The war made the Ukrainian form the default almost overnight."
-  blurb: "The president the world met in 2022"
+  blurb_uk: Президент, якого світ пізнав 2022 року
+  verdict_uk: Війна майже миттєво зробила українську форму стандартом; коротше Zelensky тримається в заголовках.
+  verdict: The war made the Ukrainian form the default almost overnight.
+  blurb: The president the world met in 2022
   ukrainian_cyrillic: Володимир Зеленський
   significance: A head of state whose name entered global English abruptly in 2022, largely in its Ukrainian form.
+  homonym_filters:
+  - (?:russian president|president of russia)\s+vladimir zelensk
+  - ',\s*vladimir putin,\s*vladimir zelensky,'
+  - /\s*vladimir zelensky
+  - \b(?:ane vale hai|ab .{0,20} india ane)\b
+  - \b(?:ang|ng|sina|nagkita|kasama)\b
+  - \b(?:el enviado especial|calificó de|declaraciones de)\b
+  - \b(?:incontrer|riferendosi|settimane|abbiamo)\b
+  - \b(?:indo à luta|guarda costas)\b
+  - \b(?:ki phir amad|kon sy|par pabandi)\b
+  - \b(?:pani|bata nai thiye|dherai similarities xa)\b
+  - \b(?:presiden ukraina|ukraina|rusia|dengan|yang|untuk)\b
+  - \b(?:presidencial|candidato|pero no lo es también)\b
+  - \b(?:presidentin|deklaroi|takimi|mund të)\b
+  - \b(?:rais wa|amesema|kutoka kwa|akijibu)\b
+  - \bgreat prophecy\b
+  - \|\s*vladimir zelensky\s*\|
+  - donald trump-\s*vladimir zelensky zelensky
+  - ex-zelensky aide threatens to jail him for life
+  - i stand with ukraine vladimir zelensky
+  - 'starring ai models:'
+  - the flamingo that doesn'?t fly
+  - this is the first gay erotic piece i ever wrote
+  - trump and j\.d\. v[ae]nce glorified president vladimir zelensky
+  - ukraine'?s deaths reach 1 millions
+  - zelensky claimed he ‘never heard of’ ukrainian nazi wwii crimes
+  - •\s*vladimir zelensky \(ukraine\)
 - russian: Andrey Shevchenko
   ukrainian: Andrii Shevchenko
   enabled: false
@@ -671,13 +1000,21 @@ pairs:
     label: Poroshenko unveils Volodymyr statue
   match_mode: exact_phrase
   slug: volodymyr-the-great
-  blurb_uk: "Князь, який охрестив Русь 988 року"
-  verdict_uk: "Російська форма домінує: англійська досі повʼязує князя — і Русь — із Росією більше, ніж з Україною."
-  verdict: "The Russian form dominates: English still ties the prince — and Kyivan Rus — to Russia more than to Ukraine."
-  blurb: "The prince who baptized Rus in 988"
+  blurb_uk: Князь, який охрестив Русь 988 року
+  verdict_uk: 'Російська форма домінує: англійська досі повʼязує князя — і Русь — із Росією більше, ніж з Україною.'
+  verdict: 'The Russian form dominates: English still ties the prince — and Kyivan Rus — to Russia more than to Ukraine.'
+  blurb: The prince who baptized Rus in 988
   youtube_depth: legacy
   ukrainian_cyrillic: Володимир Великий
-  significance: "The prince who baptized Kyivan Rus in 988. Moscow and Kyiv both unveiled statues of him; his name decides which capital the story starts in."
+  significance: The prince who baptized Kyivan Rus in 988. Moscow and Kyiv both unveiled statues of him; his name decides which capital the story starts in.
+  homonym_filters:
+  - \bsejarah\b
+  - ^r/kaiserreich
+  - house of huisache|tuatha de acacia|chinacate
+  - klyucharev
+  - taariikhda
+  - vladimir the dirty
+  - vladimir the great,[^.]{0,80}volodymyr
 - russian: Artemovsk
   ukrainian: Bakhmut
   enabled: true
@@ -696,12 +1033,17 @@ pairs:
   - champagne
   - sparkling
   - winery
+  - '#artemovsk\b'
+  - '\s-\s*topic:'
+  - artemovsk\s+overpass
+  - green\s+revonk|arma\s*3
+  - onlyfans\.com
   homonym_type: brand_composer
   slug: bakhmut
-  blurb_uk: "Перейменований 2016-го, відомий світові 2023-го"
-  verdict_uk: "Битва написала імʼя: англійська вивчила місто як Bakhmut, Artemovsk не мав англійського життя."
-  verdict: "The battle wrote the name: English learned the city as Bakhmut, and Artemovsk never had an English life."
-  blurb: "Renamed in 2016, world-famous by 2023"
+  blurb_uk: Перейменований 2016-го, відомий світові 2023-го
+  verdict_uk: 'Битва написала імʼя: англійська вивчила місто як Bakhmut, Artemovsk не мав англійського життя.'
+  verdict: 'The battle wrote the name: English learned the city as Bakhmut, and Artemovsk never had an English life.'
+  blurb: Renamed in 2016, world-famous by 2023
   ukrainian_cyrillic: Бахмут
   significance: Renamed from the Soviet "Artemovsk" in 2016; the pair tests whether English followed the official renaming.
 - russian: Nikolai Gogol
@@ -711,16 +1053,34 @@ pairs:
   notes: Ukrainian-born writer (Миколa Гоголь). Tests Г→H and Микола→Mykola vs Nikolai.
   match_mode: exact_phrase
   slug: mykola-hohol
-  blurb_uk: "Письменник, якого Росія видає як Gogol"
-  verdict_uk: "Gogol непорушний: російська видавнича спадщина зафіксувала імʼя письменника."
-  verdict: "Gogol is immovable: a Russian-published literary legacy fixed the writer's English name."
-  blurb: "The writer Russia publishes as Gogol"
+  blurb_uk: Письменник, якого Росія видає як Gogol
+  verdict_uk: 'Gogol непорушний: російська видавнича спадщина зафіксувала імʼя письменника.'
+  verdict: 'Gogol is immovable: a Russian-published literary legacy fixed the writer''s English name.'
+  blurb: The writer Russia publishes as Gogol
   youtube_depth: legacy
   events:
   - date: 2016-03
     label: Gogol birthday anniversary coverage
   ukrainian_cyrillic: Микола Гоголь
-  significance: "Born in the Poltava region, published in Russian as Nikolai Gogol — the Г→H and Микола→Mykola test on a canonical writer."
+  significance: Born in the Poltava region, published in Russian as Nikolai Gogol — the Г→H and Микола→Mykola test on a canonical writer.
+  homonym_filters:
+  - '#animeart|animeart'
+  - '#animeart|animedrawing'
+  - ',\s*de\s+nikolai\s+gogol'
+  - \(amv\)|jester-like design
+  - ^r/recomandaricarti_ro
+  - ^r/transbr
+  - almas mortas
+  - audiolivro|clássico da literatura russa
+  - carte audio|povestiri
+  - creepypasta reacts|m!y/n
+  - despre vindecarea
+  - islamic video|quranrecitation
+  - klasiket|frymë të vdekura
+  - literatura russa|história mais triste
+  - quanto mais fundo
+  - quizlit
+  - teatru radiofonic
 - russian: Feodosiya
   ukrainian: Feodosiia
   enabled: true
@@ -730,17 +1090,24 @@ pairs:
   slug: feodosiia
   youtube_homonym_filters:
   - cheap.?hotels|accomodation\.today|best\s+hotels\s+in
-  blurb_uk: "Кримський порт під окупацією"
-  verdict_uk: "Окупований кримський порт в англійських текстах здебільшого зберігає російське написання."
-  verdict: "The occupied Crimean port mostly keeps its Russian-era spelling in English text."
-  blurb: "A Crimean port under occupation"
+  blurb_uk: Кримський порт під окупацією
+  verdict_uk: Окупований кримський порт в англійських текстах здебільшого зберігає російське написання.
+  verdict: The occupied Crimean port mostly keeps its Russian-era spelling in English text.
+  blurb: A Crimean port under occupation
   events:
   - date: 2014-03
     label: Russia annexes Crimea
   - date: 2023-12
     label: Ukrainian strike on Russian ship in Feodosia
   ukrainian_cyrillic: Феодосія
-  significance: "A Crimean port city; after the 2014 annexation the Ukrainian transliteration marks the peninsula as occupied, not Russian."
+  significance: A Crimean port city; after the 2014 annexation the Ukrainian transliteration marks the peninsula as occupied, not Russian.
+  homonym_filters:
+  - \(es\)\s*\d{2}\.\d{2}\.\d{4}
+  - \b(?:partlayiş\w*|hücum\w*|vuruldu|neft\s+bazası|şəhərind\w*)\b
+  - feodosiya\s+lapschina
+  - feodosiya\s+mironova
+  - feodosiya\s+to(?:&#39;|['’`])?qliyeva
+  - happy\s+birthday\s+song\b|#makemyday
 - russian: Olga of Kiev
   ukrainian: Olha of Kyiv
   enabled: false
@@ -756,10 +1123,10 @@ pairs:
   notes: Aviation pioneer (Ігор Сікорський). Tests І→I and Г→H (Igor vs Ihor).
   match_mode: exact_phrase
   slug: ihor-sikorsky
-  blurb_uk: "Авіапіонер із Києва"
-  verdict_uk: "Американська слава заморозила російську передачу: в англійській він досі Igor."
-  verdict: "American fame froze the Russian rendering; the aviation pioneer remains Igor in English."
-  blurb: "The helicopter pioneer from Kyiv"
+  blurb_uk: Авіапіонер із Києва
+  verdict_uk: 'Американська слава заморозила російську передачу: в англійській він досі Igor.'
+  verdict: American fame froze the Russian rendering; the aviation pioneer remains Igor in English.
+  blurb: The helicopter pioneer from Kyiv
   youtube_depth: legacy
   events:
   - date: 2016-09
@@ -767,21 +1134,27 @@ pairs:
   - date: 2024-05
     label: Airport in war coverage
   ukrainian_cyrillic: Ігор Сікорський
-  significance: "The Kyiv-born aviation pioneer behind the modern helicopter; American fame fixed the Russian rendering of his name."
+  significance: The Kyiv-born aviation pioneer behind the modern helicopter; American fame fixed the Russian rendering of his name.
+  homonym_filters:
+  - igor\s+sikorsky\s+(kyiv|kiev)\s+international\s+airport
+  - igor\s+sikorsky\s+bridge
+  - igor\s+sikorsky\s+historical\s+archives
+  - igor\s+sikorsky\s+memorial
+  - igor\s+sikorsky\s+street
 - russian: Sergei Korolev
   ukrainian: Serhii Korolyov
   enabled: true
   is_control: false
-  notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of the most consequential cases of Ukrainian identity erasure in global science history.
+  notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of the most consequential cases of Ukrainian
+    identity erasure in global science history.
   match_mode: exact_phrase
   slug: serhii-korolyov
-  # auto-generated music uploads for a namesake composer, not the designer
   youtube_homonym_filters:
   - provided\s+to\s+youtube\s+by|auto-?generated\s+by\s+youtube
-  blurb_uk: "Інженер, що запустив Супутник"
-  verdict_uk: "Історія записала його один раз: конструктор космічної програми всюди лишається Sergei Korolev."
-  verdict: "History books wrote him once: the space chief stays Sergei Korolev everywhere."
-  blurb: "The engineer who launched Sputnik"
+  blurb_uk: Інженер, що запустив Супутник
+  verdict_uk: 'Історія записала його один раз: конструктор космічної програми всюди лишається Sergei Korolev.'
+  verdict: 'History books wrote him once: the space chief stays Sergei Korolev everywhere.'
+  blurb: The engineer who launched Sputnik
   youtube_depth: legacy
   events:
   - date: 2011-04
@@ -791,7 +1164,15 @@ pairs:
   - date: 2025-04
     label: Space heritage debates
   ukrainian_cyrillic: Сергій Корольов
-  significance: "The Zhytomyr-born chief designer of the Soviet space programme, fixed in history books as Sergei Korolev."
+  significance: The Zhytomyr-born chief designer of the Soviet space programme, fixed in history books as Sergei Korolev.
+  homonym_filters:
+  - (fsb|federal security service)[^.]{0,120}sergei korolev
+  - pobeda search group,\s*sergei korolev
+  - sergei korolev,\s*first deputy director
+  - sergei korolev,\s*general manager
+  - sergei korolev[^.]{0,60}(russian mafia|organi[sz]ed crime)
+  - sergei korolev\s+space\s*x
+  - space\s+sergei korolev\s+soviet rocket program
 - russian: Bogdan Khmelnitsky
   ukrainian: Bohdan Khmelnytskyi
   enabled: false
@@ -809,10 +1190,10 @@ pairs:
   notes: Suprematist artist (Казимир Малевич). Tests И→Y and Ч→Ch (Malevich vs Malevych).
   match_mode: exact_phrase
   slug: kazymyr-malevych
-  blurb_uk: "Автор «Чорного квадрата», киянин"
-  verdict_uk: "Музеї каталогізують художника в російській транслітерації; українська форма майже не зʼявляється."
-  verdict: "Museums catalogue the painter under the Russian transliteration; the Ukrainian form barely registers."
-  blurb: "Black Square’s painter, born in Kyiv"
+  blurb_uk: Автор «Чорного квадрата», киянин
+  verdict_uk: Музеї каталогізують художника в російській транслітерації; українська форма майже не зʼявляється.
+  verdict: Museums catalogue the painter under the Russian transliteration; the Ukrainian form barely registers.
+  blurb: Black Square’s painter, born in Kyiv
   youtube_depth: legacy
   events:
   - date: 2015-11
@@ -820,4 +1201,18 @@ pairs:
   - date: 2022-02
     label: Cultural heritage debates during invasion
   ukrainian_cyrillic: Казимир Малевич
-  significance: "The Kyiv-born painter of the Black Square, catalogued worldwide under the Russian form of his name."
+  significance: The Kyiv-born painter of the Black Square, catalogued worldwide under the Russian form of his name.
+  homonym_filters:
+  - \(@artistmalevich\)
+  - artista abstracto
+  - customcanvascurators
+  - hanno contribuito significativamente
+  - how to pronounce\s*['"‘’“”]{0,2}\s*kazimir malevich
+  - il dipinto|a causa della
+  - kazimir malevich artist (?:prize|award)
+  - kazimir malevich[ -]*(?:inspired|style)[^\n]{0,80}(?:metal )?wall (?:art|decor|sign)
+  - kazimir malevich\s+maurizio cattelan
+  - malevich pintor ruso
+  - patricia taxxon\s*[-–]\s*kazimir malevich
+  - t[aáạ]c ph[aẩ]m|hinh vuong den
+  - vamos conhecer um pouco de
