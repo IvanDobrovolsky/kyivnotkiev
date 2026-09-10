@@ -35,6 +35,16 @@ metadata:
     label: Euromaidan
   - date: 2022-02
     label: Full-scale war
+metadata:
+  version: '2.0'
+  description: Ukrainian toponym pairs for adoption analysis
+  time_range: 2010-01-01 to 2025-12-31
+  default_source: trends
+  global_events:
+  - date: 2014-02
+    label: Euromaidan
+  - date: 2022-02
+    label: Full-scale war
 pairs:
 - russian: Kiev
   ukrainian: Kyiv
@@ -551,6 +561,7 @@ pairs:
   ukrainian_cyrillic: Борщ
   significance: Inscribed by UNESCO as Ukrainian intangible cultural heritage. Culinary naming is a site of symbolic ownership.
   homonym_filters:
+  - '#\s*rezept\b'
   - (?:ev|auto\w*|parts|component)\s+supplier[^.]{0,25}\bborsch\b
   - \b(?:himar[eë]|dh[eë]rmi|ksamil|albanian?\s+riviera)\b
   - \b(?:onlyfans|girlcock|tgirl|cumshot|blowjob|pornstar|milf|creampie|nsfw)\b
@@ -558,25 +569,34 @@ pairs:
   - \bborsch\b(?=[\s\S]{0,400}\b(?:frigidaire|dishwasher|ikea|appliance)\b)
   - \bborsch\b(?=[\s\S]{0,400}\b(?:hoover|vacuum|appliance|bosch)\b)
   - \bdon(?:ald)?\s+borsch\b
+  - \bmamaalltag\b
   - anistyn(?:\s+grace)?\s+borsch
   - borsch\s+bandit
   - borsch\s+belt
   - borsch\s+house
   - borsch\s+man
   - borschev
+  - chess\s+fight\s+night
   - dan\s+borsch
+  - dirty\s+borsch\s*(?:[-/]|f(?:ea)?t\b)
   - frederick\s+borsch
   - freekarma
   - jerome(?:\s+francisco)?\s+borsch
   - jo[ãa]o\s+borsch
   - johnny\s+yong\s+borsch
   - katarina\s+borsch
+  - lexvorn
   - mark\s+borsch
   - olga\s+borsch
   - operation\s+borsch
   - peter\s+borsch
+  - sopa\s+russa
+  - sopa\s+t[ií]pica
   - tatiana\s+borsch
   - thomas\s+borsch
+  - ucraniano\s+tradicional
+  - vlad\s+borsch
+  - wostok\s+style
 - russian: Kiev Pechersk Lavra
   ukrainian: Kyiv Pechersk Lavra
   enabled: false
@@ -691,6 +711,7 @@ pairs:
   - \b(türkçe|spiker|maçi|maçı)\b
   - \b(victoire importante|pour continuer|l aventure europeenne)\b
   - \b(özet|maçi|maçı|maçini|rakibi|rakibimizi|rakipleri|golü|türkçe|spiker|kariyer önerisi|tepki videosu|biletleri|kayıtları|satisa|tanıyalım|izlerse)\b
+  - \b(özet|maçi|maçı|rakibi|golü|türkçe|spiker|şov|futbol)\b
   - \bgnk\s+d[iy]namo\b
   - \bmeci amical\b
   - ^fc_dynamo_kyiv$
@@ -905,9 +926,10 @@ pairs:
   - in memoriam[^\n]{0,15}babi yar
   - jurang pembantaian
   - massacre de babi yar
+  - op\.?\s*113[^\n]{0,25}babi yar
   - poems?[^\n]{0,25}babi yar
   - sarabi yar
-  - op\.?\s*113[^\n]{0,25}babi yar
+  - symphony no\.?\s*13[^\n]{0,25}babi yar
 - russian: Alexander Usyk
   ukrainian: Oleksandr Usyk
   enabled: true
@@ -1126,6 +1148,7 @@ pairs:
   homonym_filters:
   - \(es\)\s*\d{2}\.\d{2}\.\d{4}
   - \b(?:partlayiş\w*|hücum\w*|vuruldu|neft\s+bazası|şəhərind\w*)\b
+  - \b(?:serangan|ukraina|krimea|jembatan|pelabuhan)\b
   - feodosiya\s+lapschina
   - feodosiya\s+mironova
   - feodosiya\s+to(?:&#39;|['’`])?qliyeva
