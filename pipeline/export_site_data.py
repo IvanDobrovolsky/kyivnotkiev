@@ -1477,13 +1477,19 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
             except Exception as _e:                    # noqa: BLE001
                 log.info(f"  wikipedia redirect probe skipped: {_e}")
         for slug, top in _tops.items():
-            by_pair.setdefault(slug, {})["wikipedia"] = [
+            # A redirecting page IS the switch — Wikipedia no longer uses the
+            # Russian title. Holdouts list only measured non-redirecting
+            # pages; a pair with none left shows the empty state, which is
+            # the finding (the encyclopedia fully switched), not a gap.
+            _rows = [
                 {"name": t,
                  "url": f"https://en.wikipedia.org/wiki/{t.replace(' ', '_')}",
-                 "views": int(v),
-                 **({"redirects": _rcache[str(t)]} if str(t) in _rcache else {})}
+                 "views": int(v)}
                 for t, v in top.items()
+                if _rcache.get(str(t)) is False   # measured non-redirect only
             ]
+            if _rows:
+                by_pair.setdefault(slug, {})["wikipedia"] = _rows
 
     _umb = umbrella_exclusions()
 
