@@ -53,6 +53,44 @@ def analyse(slug: str, quiet: bool = False, skip_dedup: bool = False) -> dict:
     store_rows = len(df)          # pre-filter count, for the freshness audit
     terms = pair_terms(slug)
 
+    # UNIFICATION: gdelt rows come from the VERIFIED corpus, not the store —
+    # the referent filters (odesa US towns, borscht analyst surname, lviv
+    # Prince Lvov), dedup layers, and drop rules live there. The stats read
+    # the store's unfiltered gdelt for months, which is why odesa's clusters
+    # kept surfacing Texas after the series was fixed.
+    _vp = pathlib.Path(f"data/cl/corpus/gdelt_verified/{slug}.parquet")
+    if _vp.exists():
+        _v = pd.read_parquet(_vp)
+        _g = pd.DataFrame({
+            "record_id": "gv_" + _v.reset_index().index.astype(str),
+            "pair_slug": slug, "source": "gdelt",
+            "doc_id": _v.url.astype(str), "url": _v.url.astype(str),
+            "date": _v.date.astype(str).str[:10], "title": "",
+            "text": _v.text.astype(str), "variant": _v.variant,
+        })
+        df = pd.concat([df[df.source != "gdelt"], _g], ignore_index=True)
+
+    # Document-level language gate: ASCII-spelled French/Spanish/Dutch/Turkish
+    # passed every token heuristic and shipped as collocations (que, voor,
+    # izle). langdetect on documents >=80 chars; shorter texts (titles) keep
+    # the token-level screens.
+    try:
+        from langdetect import detect, DetectorFactory
+        DetectorFactory.seed = 0
+        _long = df.text.astype(str).str.len() >= 80
+        def _is_en(t):
+            try:
+                return detect(t[:600]) == "en"
+            except Exception:                          # noqa: BLE001
+                return True
+        _keep = ~_long | df.text.astype(str).map(_is_en)
+        _dropped_lang = int((~_keep).sum())
+        if _dropped_lang:
+            print(f"  language gate: dropped {_dropped_lang:,} non-English document(s)")
+        df = df[_keep]
+    except ImportError:
+        print("  language gate SKIPPED — langdetect not installed")
+
     # Homonym false positives, content-level, ALL sources. The series path gets
     # this in gdelt_verified/export; the stats corpus reads the store directly
     # and was still carrying Odessa-TX — the odesa clustering surfaced 2,000+

@@ -88,6 +88,12 @@ def build(pair: str) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
         if _rf.get("evidence_domains"):
             _dom = usage.url.astype(str).str.extract(r"https?://(?:www\.)?([^/]+)")[0].fillna("")
             _ev = _ev | _dom.str.contains(_rf["evidence_domains"], case=False, regex=True)
+        if _rf.get("drop"):
+            _dr = _txt.str.contains("|".join(_rf["drop"]), case=False, regex=True)
+            audit["dropped_referent_drop"] = int(_dr.sum())
+            usage = usage[~_dr].copy()
+            _txt = usage.text.astype(str)
+            _ev = _ev.loc[usage.index]
         if _rf.get("frozen"):
             _drop = _txt.str.contains(_rf["frozen"], case=False, regex=True) & ~_ev
             audit["dropped_frozen_compound"] = int(_drop.sum())
