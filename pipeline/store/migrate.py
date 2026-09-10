@@ -387,6 +387,34 @@ def build_pairs() -> bool:
         return False
     allp = pd.concat(frames, ignore_index=True)
 
+    # GDELT rows come from the VERIFIED corpus, not gdelt_processed: the
+    # referent filters (US-town evidence rule, analyst-surname and 1917-prince
+    # drops), the story/paragraph dedups and the reclassification all live
+    # there. Publishing the store's unfiltered gdelt sent the noise to
+    # HuggingFace even after the site was fixed.
+    _vdir = pathlib.Path("data/cl/corpus/gdelt_verified")
+    if _vdir.exists():
+        _vframes = []
+        for _vf in sorted(_vdir.glob("*.parquet")):
+            if _vf.stem.endswith("_series"):
+                continue
+            _v = pd.read_parquet(_vf)
+            _vframes.append(pd.DataFrame({
+                "record_id": "gv_" + _vf.stem + "_" + _v.reset_index().index.astype(str),
+                "pair_slug": _vf.stem, "source": "gdelt",
+                "doc_id": _v.url.astype(str), "url": _v.url.astype(str),
+                "date": _v.date.astype(str).str[:10],
+                "title": "", "text": _v.text.astype(str),
+                "variant": _v.variant,
+            }))
+        if _vframes:
+            _gv = pd.concat(_vframes, ignore_index=True)
+            _n_store = int((allp.source == "gdelt").sum())
+            allp = pd.concat([allp[allp.source != "gdelt"], _gv],
+                             ignore_index=True)
+            print(f"  gdelt: {_n_store:,} store rows replaced by "
+                  f"{len(_gv):,} verified rows")
+
     # Homonym false positives are excluded from the analysis-ready pair files —
     # the same release principle as the telegram deprecation: raw source
     # mirrors stay untouched, combined pairs are clean. Odessa-TX alone was
