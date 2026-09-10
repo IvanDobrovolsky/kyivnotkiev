@@ -21,7 +21,7 @@ from pathlib import Path
 import pandas as pd
 
 from pipeline.config import load_pairs
-from pipeline.filters import apply_source_filters
+from pipeline.filters import apply_source_filters, _verified_drops
 
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -1520,6 +1520,9 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                 _lv = json.loads(_lv_path.read_text()) if _lv_path.exists() else {}
             except Exception:                          # noqa: BLE001
                 _lv = {}
+            _vw = _verified_drops(slug)
+            _vwids = {u.rstrip("/").rsplit("/", 1)[-1] for u in _vw if "reddit.com" in u}
+            posts = posts[~posts["post_id"].astype(str).isin(_vwids)]
             _entries = [
                 {"name": f"r/{x['subreddit']}: {str(x.get('title',''))[:80]}",
                  "url": f"https://reddit.com/r/{x['subreddit']}/comments/{x['post_id']}",
