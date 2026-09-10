@@ -21,6 +21,7 @@ from pathlib import Path
 import pandas as pd
 
 from pipeline.config import load_pairs
+from pipeline.filters import apply_source_filters
 
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -229,25 +230,20 @@ def _load_youtube_census() -> pd.DataFrame:
 
     # Homonym false positives, content-level. Verified means the spelling is
     # present — not that it names OUR referent: Odessa TX + Odessa A'zion were
-    # 17% of the odesa pair's verified videos. Same patterns as the news bodies.
-    import re as _re
-    _cfg = load_pairs()
-    _ho = {p["slug"]: [_re.compile(f, _re.I)
-                       for f in p.get("homonym_filters", []) + p.get("youtube_homonym_filters", [])]
-           for p in _cfg["pairs"]
-           if p.get("homonym_filters") or p.get("youtube_homonym_filters")}
-    if _ho:
-        # Channel names are part of the identity evidence: "GLOCK - KIEV" from
-        # channel "KIEV RTF (OFFICIAL)" is the rapper, but only the channel says so.
-        _blob = (df["title"].fillna("").astype(str) + " " +
-                 (df["description"].fillna("").astype(str) if "description" in df.columns else "") + " " +
-                 (df["channel"].fillna("").astype(str) if "channel" in df.columns else ""))
-        _fp = [bool(s_ in _ho and any(r.search(t) for r in _ho[s_]))
-               for s_, t in zip(df["pair_slug"], _blob)]
-        _n = sum(_fp)
+    # 17% of the odesa pair's verified videos. Rules come from the canonical
+    # pipeline.filters module (homonym + youtube_homonym + referent), applied
+    # per pair — same patterns as the news bodies, one implementation.
+    # Channel names are part of the identity evidence: "GLOCK - KIEV" from
+    # channel "KIEV RTF (OFFICIAL)" is the rapper, but only the channel says so.
+    if len(df):
+        _before = len(df)
+        df = pd.concat(
+            [apply_source_filters(g, s_, "youtube")
+             for s_, g in df.groupby("pair_slug", sort=False)],
+        ).sort_index()
+        _n = _before - len(df)
         if _n:
             log.info(f"  YouTube homonym filter: removed {_n:,} verified rows")
-            df = df[[not x for x in _fp]].copy()
     df["variant"] = df["form"]
     df["date"] = pd.to_datetime(df["published_at"], errors="coerce", utc=True).dt.strftime("%Y-%m-%d")
     df = df.dropna(subset=["date"])
@@ -1523,9 +1519,11 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                     if str(x["post_id"]) in _lv else {})}
                 for _, x in posts.iterrows()
             ]
-            _entries.sort(key=lambda e: (0 if e.get("live") is True else
-                                         1 if "live" not in e else 2))
-            by_pair.setdefault(slug, {})["reddit"] = _entries
+            # Exhibits are alive or absent: a probed-dead post is not a
+            # demonstration anyone can click. Series unaffected.
+            _live = [e for e in _entries if e.get("live") is True]
+            if _live:
+                by_pair.setdefault(slug, {})["reddit"] = _live
 
     # YouTube: actual video URLs. One video per channel, so a single prolific channel
     # cannot own the table -- the same reason the news holdouts cap per domain.
