@@ -120,6 +120,13 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: lviv
+  # Prince Georgy Lvov (1917 PM) and Tolstoy's Lvov are people, not the city.
+  referent_filter:
+    drop:
+    - prince\s+(?:georg\w+\s+)?lvov
+    - lvov\s+government
+    - lvov[^.]{0,60}(?:provisional\s+government|kerensky|tsar|karenina)
+    - (?:provisional\s+government|kerensky|karenina)[^.]{0,60}lvov
   blurb_uk: "Західний центр, який англійська звала Lvov"
   verdict_uk: "Майже повний перехід: Lvov лишився здебільшого в історичних текстах."
   verdict: "A near-complete switch: Lvov survives mainly in historical prose."
@@ -325,6 +332,13 @@ pairs:
   referent_filter:
     frozen: borscht\s+belt
     evidence: \b(?:ukrain\w*|russia\w*|kyiv|kiev|soviet|beet\w*|soup|recipe|cook\w*)\b
+    # Matthew Borsch (Goldman Sachs analyst; 231 docs, all counted as the
+    # Russian form) + piracy/MLM spam templates that inflated the UA share.
+    drop:
+    - matthew\s+borsch
+    - borsch[,\s]+(?:an?\s+)?(?:goldman|analyst|sachs)
+    - yourmegafile|webrip
+    - lingzhi|cordyceps
   youtube_homonym_filters:
   - borscht\s+belt
   blurb_uk: "ЮНЕСКО визнає його українським"
