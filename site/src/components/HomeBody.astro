@@ -75,6 +75,7 @@ function adoption2025(slug: string): number | null {
 const adoption25BySlug: Record<string, number | null> = Object.fromEntries(
   (pairsMeta as any[]).filter((p: any) => p.enabled).map((p: any) => [p.slug, adoption2025(p.slug)]));
 const readyBySlug: Record<string, boolean> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, !!p.data_ready]));
+const staleBySlug = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, !!p.stats_stale]));
 const verdictBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, (lang === 'uk' ? p.verdict_uk : p.verdict) || p.verdict || '']));
 const allPairs = m.pairs.filter((p: any) => !p.is_control);
 const pairs = [
@@ -177,6 +178,7 @@ const pairs = [
       lang={lang}
       significance={sigBySlug[p.slug] || ''}
       dataReady={readyBySlug[p.slug] || false}
+      statsStale={staleBySlug[p.slug] || false}
       spark={sparkBySlug[p.slug]?.v || []}
       switchYear={sparkBySlug[p.slug]?.switchYear || ''}
       switchPos={sparkBySlug[p.slug]?.switchPos || 0}
