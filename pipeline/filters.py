@@ -90,9 +90,15 @@ def apply_source_filters(df: pd.DataFrame, slug: str, source: str,
 
     vdrop = _verified_drops(slug)
     if vdrop:
-        for col in ("url", "doc_id"):
+        # Match on the URL and on the bare identifier: exhibit URLs are built
+        # at export time (youtube.com/watch?v=ID, reddit.com/r/x/comments/ID)
+        # while the frames carry video_id / post_id / openalex_id, so a
+        # URL-only comparison silently missed 355 YouTube rows.
+        ids = {u.rsplit("v=", 1)[-1].split("&")[0].rsplit("/", 1)[-1] for u in vdrop}
+        for col in ("url", "doc_id", "video_id", "post_id", "openalex_id"):
             if col in df.columns:
-                hit = df[col].astype(str).isin(vdrop)
+                vals = df[col].astype(str)
+                hit = vals.isin(vdrop) | vals.isin(ids)
                 if hit.any():
                     note("dropped_verified_wrong", hit.sum())
                     df, blob = df[~hit], blob[~hit]
