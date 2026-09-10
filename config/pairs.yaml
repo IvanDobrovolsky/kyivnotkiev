@@ -29,6 +29,12 @@ pairs:
   # bodies, Reddit, and pair files; YouTube keeps its own copy below.
   homonym_filters:
   - kiev\s*-?\s*(?:60|88|4am?|19m?)\b
+  # frozen band/product names and a US given name (human-testing finds):
+  # Lost In Kiev (French post-rock band), Dr Martens Kiev backpack,
+  # Kiev Kwentel Otey (person)
+  - lost\s+in\s+kiev
+  - martens\s+kiev|kiev\s+leather\s+backpack
+  - kiev\s+kwentel
   # Person/artist homonyms and non-English-convention channels on YouTube:
   # "Kiev RTF" is a Dutch rapper (stage name); TURFA OLAM is an Uzbek news
   # channel whose "Kiev" is Uzbek's own convention, not an English choice.
