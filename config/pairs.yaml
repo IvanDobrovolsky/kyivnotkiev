@@ -25,6 +25,16 @@ metadata:
     label: Euromaidan
   - date: 2022-02
     label: Full-scale war
+metadata:
+  version: '2.0'
+  description: Ukrainian toponym pairs for adoption analysis
+  time_range: 2010-01-01 to 2025-12-31
+  default_source: trends
+  global_events:
+  - date: 2014-02
+    label: Euromaidan
+  - date: 2022-02
+    label: Full-scale war
 pairs:
 - russian: Kiev
   ukrainian: Kyiv
@@ -208,7 +218,7 @@ pairs:
   verdict_uk: 'Спірна територія: воєнні репортажі перейшли на Odesa, але подвійна «s» досі панує в культурних текстах.'
   verdict: 'Contested ground: war reporting shifted to Odesa, but the double-s Odessa still owns casual and cultural writing.'
   blurb: Black Sea port; one “s” or two
-  youtube_depth: legacy
+  youtube_depth: week
   word_boundary: true
   ukrainian_cyrillic: Одеса
   significance: A single vs double 's' encodes which language the name is read through. The Ukrainian spelling has one 's'.
@@ -416,7 +426,7 @@ pairs:
   verdict_uk: 'Досі навпіл: атласи й старіша проза тримаються російського Dnieper.'
   verdict: 'Still split: atlases and older prose keep the Russian-derived Dnieper for the river.'
   blurb: The river English still calls the Dnieper
-  youtube_depth: legacy
+  youtube_depth: week
   events:
   - date: 2022-11
     label: Kherson liberation, Dnipro front line
@@ -486,7 +496,7 @@ pairs:
   verdict_uk: 'Меню опираються: страва здебільшого лишається Chicken Kiev, хоч місто вже змінилося.'
   verdict: 'Menus resist: the dish mostly stays Chicken Kiev even though the city switched.'
   blurb: The capital’s name, frozen on menus
-  youtube_depth: legacy
+  youtube_depth: week
   events:
   - date: 2015-07
     label: Chicken Kiev food poisoning outbreak (US)
@@ -645,7 +655,7 @@ pairs:
   verdict_uk: 'Спортивний стиль відстає: УЄФА перейменувала клуб 2018-го, але репортажі досі пишуть Dynamo Kiev.'
   verdict: 'Sports style lags: UEFA renamed the club in 2018, but most match reports still write Dynamo Kiev.'
   blurb: The club Europe watches weekly
-  youtube_depth: legacy
+  youtube_depth: week
   word_boundary: true
   ukrainian_cyrillic: Динамо Київ
   significance: 'Sports media is a distinct discourse with its own inertia: club names are often frozen in the form the wire services first used.'
@@ -708,7 +718,7 @@ pairs:
   verdict_uk: 'Середньовічну державу досі читають через російську: Kievan Rus панує в історичних текстах.'
   verdict: 'The medieval state is still read through Russian: Kievan Rus dominates history writing.'
   blurb: The medieval state both nations claim
-  youtube_depth: legacy
+  youtube_depth: week
   ukrainian_cyrillic: Київська Русь
   significance: The medieval state from which Ukraine, Belarus and Russia all descend; whether its name is anchored to Kyiv is the whole argument.
   homonym_filters:
@@ -921,7 +931,7 @@ pairs:
   verdict_uk: 'Чемпіон називає себе сам — і англійська послухалась: майже повне прийняття.'
   verdict: The champion states his own name, and English complied — adoption is near-total.
   blurb: The champion spells it Oleksandr
-  youtube_depth: legacy
+  youtube_depth: week
   ukrainian_cyrillic: Олександр Усик
   significance: An athlete who states his own name. Sports coverage is a test of whether English follows a person's own usage.
   homonym_filters:
@@ -1015,7 +1025,7 @@ pairs:
   verdict_uk: 'Російська форма домінує: англійська досі повʼязує князя — і Русь — із Росією більше, ніж з Україною.'
   verdict: 'The Russian form dominates: English still ties the prince — and Kyivan Rus — to Russia more than to Ukraine.'
   blurb: The prince who baptized Rus in 988
-  youtube_depth: legacy
+  youtube_depth: week
   ukrainian_cyrillic: Володимир Великий
   significance: The prince who baptized Kyivan Rus in 988. Moscow and Kyiv both unveiled statues of him; his name decides which capital the story starts in.
   homonym_filters:
@@ -1068,7 +1078,7 @@ pairs:
   verdict_uk: 'Gogol непорушний: російська видавнича спадщина зафіксувала імʼя письменника.'
   verdict: 'Gogol is immovable: a Russian-published literary legacy fixed the writer''s English name.'
   blurb: The writer Russia publishes as Gogol
-  youtube_depth: legacy
+  youtube_depth: week
   events:
   - date: 2016-03
     label: Gogol birthday anniversary coverage
@@ -1139,7 +1149,7 @@ pairs:
   verdict_uk: 'Американська слава заморозила російську передачу: в англійській він досі Igor.'
   verdict: American fame froze the Russian rendering; the aviation pioneer remains Igor in English.
   blurb: The helicopter pioneer from Kyiv
-  youtube_depth: legacy
+  youtube_depth: week
   events:
   - date: 2016-09
     label: Kyiv airport renamed to Sikorsky
@@ -1167,7 +1177,7 @@ pairs:
   verdict_uk: 'Історія записала його один раз: конструктор космічної програми всюди лишається Sergei Korolev.'
   verdict: 'History books wrote him once: the space chief stays Sergei Korolev everywhere.'
   blurb: The engineer who launched Sputnik
-  youtube_depth: legacy
+  youtube_depth: week
   events:
   - date: 2011-04
     label: Gagarin 50th anniversary (Korolev designed Vostok rocket)
@@ -1206,7 +1216,7 @@ pairs:
   verdict_uk: Музеї каталогізують художника в російській транслітерації; українська форма майже не зʼявляється.
   verdict: Museums catalogue the painter under the Russian transliteration; the Ukrainian form barely registers.
   blurb: Black Square’s painter, born in Kyiv
-  youtube_depth: legacy
+  youtube_depth: week
   events:
   - date: 2015-11
     label: Malevich retrospective exhibitions
