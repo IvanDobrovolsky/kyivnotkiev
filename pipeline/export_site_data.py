@@ -147,9 +147,14 @@ def _stale_youtube_years() -> set:
             continue
         months = d.get("months", {})
         w = len(d.get("done_windows", []))
+        # Depth is only knowable when the checkpoint recorded it. Inferring
+        # it from window counts is wrong for sparse pairs: a quiet year at the
+        # week floor resolves in ~20 windows because empty weeks need no
+        # descent, so inference called it "month" and the year was discarded
+        # as a depth mismatch — 21,554 rows, nine pairs, measured 2026-09-10.
         seen.setdefault((pair, year), {})[variant] = {
             "explored": len(months),
-            "depth": d.get("min_depth") or ("day" if w >= 300 else "week" if w >= 60 else "month"),
+            "depth": d.get("min_depth"),
         }
 
     stale = set()
@@ -161,7 +166,11 @@ def _stale_youtube_years() -> set:
             stale.add((pair, year)); continue
         if ru["explored"] < 12 or uk["explored"] < 12:
             stale.add((pair, year)); continue
-        if pair in want and (ru["depth"] != want[pair] or uk["depth"] != want[pair]):
+        # Only a RECORDED depth can contradict the declaration; an unknown
+        # depth is not evidence of a mismatch.
+        if pair in want and (
+                (ru["depth"] and ru["depth"] != want[pair])
+                or (uk["depth"] and uk["depth"] != want[pair])):
             stale.add((pair, year))
     return stale
 
