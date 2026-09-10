@@ -712,6 +712,8 @@ pairs:
   notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms Ukraine's territorial integrity.
   match_mode: word_boundary
   slug: feodosiia
+  youtube_homonym_filters:
+  - cheap.?hotels|accomodation\.today|best\s+hotels\s+in
   blurb_uk: "Кримський порт під окупацією"
   verdict_uk: "Окупований кримський порт в англійських текстах здебільшого зберігає російське написання."
   verdict: "The occupied Crimean port mostly keeps its Russian-era spelling in English text."
@@ -757,6 +759,9 @@ pairs:
   notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of the most consequential cases of Ukrainian identity erasure in global science history.
   match_mode: exact_phrase
   slug: serhii-korolyov
+  # auto-generated music uploads for a namesake composer, not the designer
+  youtube_homonym_filters:
+  - provided\s+to\s+youtube\s+by|auto-?generated\s+by\s+youtube
   blurb_uk: "Інженер, що запустив Супутник"
   verdict_uk: "Історія записала його один раз: конструктор космічної програми всюди лишається Sergei Korolev."
   verdict: "History books wrote him once: the space chief stays Sergei Korolev everywhere."

@@ -2103,7 +2103,12 @@ def main():
                 _a["ua_pct"] = round((_a["ua_pct"] * _a["size"] + _v2["ua_pct"] * _v2["size"]) / _tot, 1)
                 _a["size"] = _tot
                 _a["anchors"] = (_a.get("anchors", []) + _v2.get("anchors", []))[:4]
-                _a["label"] = _a["label"] if len(_a["label"]) <= len(_v2["label"]) else _v2["label"]
+                # The LARGER constituent names the merged cluster: shorter-
+                # label-wins let a 470-text CS:GO-cheat cluster ("hvh ·
+                # youtube") name chornobyl's 7,246-text disaster coverage.
+                _a["label"] = (_a["label"] if _a["size"] - _v2["size"] >= _v2["size"] - _a["size"]
+                               else _v2["label"]) if _a["size"] != _v2["size"] else min(
+                                   _a["label"], _v2["label"], key=len)
                 del _clusters[_k2]
             elif _g in _by_gloss:
                 _tier = ("mostly Ukrainian-spelling outlets" if _v2["ua_pct"] >= 67
