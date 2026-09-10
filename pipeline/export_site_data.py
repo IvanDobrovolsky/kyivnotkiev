@@ -2220,6 +2220,32 @@ def main():
             _a0 = max(0, _i - 45)
             _snip = ("…" if _a0 else "") + _t[_a0:_i + len(word) + 60].strip() + "…"
             return {"s": str(_m.iloc[0].source), "t": _snip}
+        # Display-level morphological family collapse: statistics stay on
+        # exact surface forms; the CHIP LIST spends one slot per family
+        # (ukraine/ukrainian/ukraine's -> strongest member). Conservative
+        # rule: shared stem >=5 chars + closed suffix set, so russia/russian
+        # merge while kyiv/kyivan never do — that distinction is a pair.
+        _SUFF = ("", "s", "'s", "n", "ns", "an", "ans", "ian", "ians", "e", "es")
+        def _family(w):
+            w = str(w).lower()
+            for suf in sorted(_SUFF, key=len, reverse=True):
+                if suf and w.endswith(suf) and len(w) - len(suf) >= 5:
+                    return w[:len(w) - len(suf)]
+            return w if len(w) >= 5 else w + "#"
+        def _dedup_family(entries):
+            # families match when one stem prefixes the other (russia/russi):
+            # exact-stem equality misses asymmetric strips.
+            seen, out = [], []
+            for e in entries:
+                f = _family(e["w"])
+                if any(len(g) >= 5 and len(f) >= 5
+                       and (f.startswith(g) or g.startswith(f)) or f == g
+                       for g in seen):
+                    continue
+                seen.append(f)
+                out.append(e)
+            return out
+
         def _entry(x, side):
             w = x["word"]
             e = {"w": w, "z": round(abs(float(x["mean_z"])), 1),
@@ -2228,10 +2254,10 @@ def main():
             if ex:
                 e["ex"] = ex
             return e
-        _ua = [_entry(x, "ukrainian")
-               for x in _k.get("robust_ukrainian", []) if _keep(x)][:10]
-        _ru = [_entry(x, "russian")
-               for x in _k.get("robust_russian", []) if _keep(x)][:10]
+        _ua = _dedup_family([_entry(x, "ukrainian")
+               for x in _k.get("robust_ukrainian", []) if _keep(x)])[:10]
+        _ru = _dedup_family([_entry(x, "russian")
+               for x in _k.get("robust_russian", []) if _keep(x)])[:10]
         if _ua or _ru:
             _kj[_slug] = {"ua": _ua, "ru": _ru,
                           "sources": _k.get("sources_used") or _a.get("sources_used")}
@@ -2268,10 +2294,10 @@ def main():
                 except Exception as _ex:               # noqa: BLE001
                     log.info(f"    solo spread failed for {_slug}: {_ex}")
             _side = "ukrainian" if _k.get("solo_variant") == "ukrainian" else "russian"
-            _solo = [_entry(x, _side)
+            _solo = _dedup_family([_entry(x, _side)
                      for x in _k["solo_terms"]
                      if _keep(x) and x["word"] not in _dom_tokens
-                     and _spread.get(str(x["word"]).lower(), 0) >= 5][:10]
+                     and _spread.get(str(x["word"]).lower(), 0) >= 5])[:10]
             if len(_solo) >= 4:
                 _kj[_slug] = {"solo": _solo, "solo_variant": _k.get("solo_variant")}
     write_json(SITE_DATA_DIR / "cl_keyness.json", _kj)
