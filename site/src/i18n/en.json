@@ -17,7 +17,8 @@
     "sort_popular": "Popular",
     "sort_volume": "Volume",
     "sort_adoption": "Adoption",
-    "sort_az": "A-Z"
+    "sort_az": "A-Z",
+    "scope_note": "What is measured: the Latin-script signal — every public text that writes these names in Latin letters, whatever its language. That is the text that reaches model training corpora, where tokenizers and embeddings ignore language boundaries. Non-English Latin usage (Russian, German, French, Spanish and others) is therefore included in the counts, not measured separately."
   },
   "card": {
     "adoption_2025": "Adoption in 2025",

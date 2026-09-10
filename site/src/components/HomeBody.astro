@@ -96,6 +96,7 @@ const pairs = [
     <p class="subtitle">
       <Fragment set:html={t(lang, 'home.hero_html', {pairs: m.analyzable_pairs, span: m.time_span})} />
     </p>
+    <p class="scope-note">{t(lang, 'home.scope_note')}</p>
   </div>
 </div>
 
@@ -142,6 +143,10 @@ const pairs = [
   @media (max-width: 640px) {
     .source-row { gap: 0.4rem; }
     .source-row-label { width: 100%; }
+  }
+  .scope-note {
+    margin: 0.6rem 0 0; font-size: 0.82rem; line-height: 1.5;
+    color: var(--text-muted, #6b7280); max-width: 58ch;
   }
 </style>
 
