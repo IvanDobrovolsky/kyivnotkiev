@@ -202,7 +202,15 @@ def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict
     # appears in every document by construction; c-TF-IDF damps it but cannot
     # zero it. Stopping it costs the genuine word, which is a fair trade in
     # labels that exist to distinguish clusters from each other.
+    # Scrape and platform residue. "click" and "local" were the top two terms
+    # for six pairs (kyiv, luhansk, ternopil, lviv, odesa, dynamo-kyiv) — they
+    # come from navigation chrome, not from anything the texts are about. The
+    # explicit terms come from reddit spam that several corpora carry; a cluster
+    # label is published verbatim on the site.
     FILLERS = {"name",
+               "click", "local", "col", "row", "comments", "comment", "posted",
+               "subscribe", "reply", "edit", "deleted", "removed", "http",
+               "https", "www", "com", "nsfw", "anal", "porn", "xxx", "sex",
                "like", "just", "time", "people", "know", "think", "really", "going",
                "want", "got", "way", "thing", "things", "good", "make", "say", "said",
                "yeah", "don", "didn", "doesn", "ve", "ll", "im", "actually", "right",
