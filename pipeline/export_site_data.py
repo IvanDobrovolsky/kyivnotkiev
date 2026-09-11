@@ -2417,6 +2417,10 @@ def main():
                     _a["example"] = _v2["example"]
                 _a["sources"] = _src_shares(_ma["src"])
                 _a["years"] = _year_span(_ma["yr"])
+                # peak was left at the first constituent's value, so a merged
+                # card printed "peak 2023" beside its own years.mode of 2013.
+                if _a["years"] and _a["years"].get("mode"):
+                    _a["peak"] = str(_a["years"]["mode"])
                 del _clusters[_k2]
             elif _g in _by_gloss:
                 _tier = ("mostly Ukrainian-spelling outlets" if _v2["ua_pct"] >= 67

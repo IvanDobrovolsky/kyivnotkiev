@@ -202,6 +202,9 @@ def merge_small(post: np.ndarray, means: np.ndarray) -> np.ndarray:
 # URLs shred into tokens that read like vocabulary: one chornobyl cluster was
 # labelled "https" and three more "youtube". Stripped before labelling, the
 # same way keyness.tokenise does it.
+# Same markdown-link residue the keyness tokenizer strips: the href goes, the
+# bracketed host name stays and becomes a label term.
+LABEL_MD = re.compile(r"\[([^\]\n]{0,120})\]\([^)\s]*\)")
 LABEL_URLS = re.compile(r"https?://\S+|\bwww\.\S+"
                         r"|\b[a-z0-9][a-z0-9-]*(?:\.[a-z0-9-]+)*"
                         r"\.(?:com|org|net|edu|gov|ru|ua|io|tv|me|info|"
@@ -244,7 +247,9 @@ def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict
     # of its docs) as cluster NAMES. Keyness got a document floor; this never
     # did. A label term must be used by several texts in its own cluster.
     groups = [texts[labels == c].head(2000) for c in range(k)]
-    docs = [LABEL_JUNK.sub(" ", LABEL_URLS.sub(" ", " ".join(g))) for g in groups]
+    docs = [LABEL_JUNK.sub(" ", LABEL_URLS.sub(" ", LABEL_MD.sub(
+        lambda m: " " if "." in m.group(1) else " " + m.group(1) + " ", " ".join(g))))
+        for g in groups]
     doc_freq = []
     for g in groups:
         seen: dict = {}

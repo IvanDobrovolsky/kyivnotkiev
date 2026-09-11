@@ -110,8 +110,22 @@ URLS = re.compile(r"https?://\S+|\bwww\.\S+"
                   r"co|de|fr|es|it|pl|uk|eu|cz|biz|xyz|online|site)\b\S*", re.I)
 
 
+# [Fanyi.YouDao](http://fanyi.youdao.com/...) loses its href to URLS but keeps
+# the bracketed text, and "fanyi.youdao" has no TLD so nothing else catches it.
+# One 25,526-char reddit row yielded 400 tokens, every one of them spam. Across
+# the 24 pairs, 12,154 canonical rows carry 5+ markdown links and 1,906 carry
+# 50+. Link text that looks like a host is dropped; ordinary link text is kept,
+# because "[the report](url)" is prose.
+MD_LINK = re.compile(r"\[([^\]\n]{0,120})\]\([^)\s]*\)")
+
+
+def _strip_md(t: str) -> str:
+    return MD_LINK.sub(lambda m: " " if "." in m.group(1) else " " + m.group(1) + " ", t)
+
+
 def tokenise(text: str, mask) -> list[str]:
     t = str(text or "").lower()
+    t = _strip_md(t)
     t = URLS.sub(" ", t)
     t = MARKUP.sub(" ", t)
     for rx in mask:
