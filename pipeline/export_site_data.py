@@ -2293,7 +2293,14 @@ def main():
                 _terms = []
                 _label = "non-English"
             else:
-                _label = " · ".join(_terms[:2]) if _terms else f"cluster {_cid}"
+                # Build the label from terms that can be printed. The gloss
+                # usually covers a spam cluster, but the site falls back to the
+                # raw label whenever a gloss is empty, and one explicit term is
+                # below the threshold that triggers the spam gloss — so the word
+                # must not reach the label in the first place.
+                _printable = [t for t in _terms if t.lower() not in EXPLICIT]
+                _label = " · ".join(_printable[:2]) if _printable else f"cluster {_cid}"
+                _terms = _printable or _terms
             _used = {v["label"] for v in _clusters.values()}
             _i = 2
             while _label in _used and _i < len(_terms):
