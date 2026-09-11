@@ -93,6 +93,9 @@ pairs:
   - one\s+5g\s+ace|codename\s+kiev
   - recruitment\s+agency\s+esca|raise\s+karma
   - sam\s+hyde
+  - world\s+of\s+warships
+  - \bwows\b
+  - \bwxw\b
   holdout_exclude:
   - dinamo\s+ki[ye]v
   - kievan

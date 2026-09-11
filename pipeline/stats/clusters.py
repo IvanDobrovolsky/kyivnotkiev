@@ -186,6 +186,13 @@ def merge_small(post: np.ndarray, means: np.ndarray) -> np.ndarray:
     return mapping
 
 
+# URLs shred into tokens that read like vocabulary: one chornobyl cluster was
+# labelled "https" and three more "youtube". Stripped before labelling, the
+# same way keyness.tokenise does it.
+LABEL_URLS = re.compile(r"https?://\S+|\bwww\.\S+"
+                        r"|\b[a-z0-9][a-z0-9-]*(?:\.[a-z0-9-]+)*"
+                        r"\.(?:com|org|net|edu|gov|ru|ua|io|tv|me|info|"
+                        r"co|de|fr|es|it|pl|uk|eu|cz|biz|xyz|online|site)\b\S*", re.I)
 LABEL_JUNK = re.compile(r"\[\]\(#[\w-]+\)|\(#[\w-]+\)|\b(?:background-(?:image|position|size|color)|linear-gradient|sprite\w*|bar-\w*|icon-\w*|webrip|yourmegafile|auto-generated)\b", re.I)
 
 
@@ -207,7 +214,7 @@ def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict
     # come from navigation chrome, not from anything the texts are about. The
     # explicit terms come from reddit spam that several corpora carry; a cluster
     # label is published verbatim on the site.
-    FILLERS = {"name",
+    FILLERS = {"name", "https", "http", "amp", "ref", "utm", "youtube", "youtu",
                "click", "local", "col", "row", "comments", "comment", "posted",
                "subscribe", "reply", "edit", "deleted", "removed", "http",
                "https", "www", "com", "nsfw", "anal", "porn", "xxx", "sex",
@@ -218,7 +225,8 @@ def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict
                "que", "por", "para", "una", "del", "las", "los", "con", "este",
                "und", "der", "die", "das", "les", "des", "dans", "pour"}
     stop = list(ENGLISH_STOP_WORDS | FILLERS)
-    docs = [LABEL_JUNK.sub(" ", " ".join(texts[labels == c].head(2000))) for c in range(k)]
+    docs = [LABEL_JUNK.sub(" ", LABEL_URLS.sub(" ", " ".join(texts[labels == c].head(2000))))
+            for c in range(k)]
     cv = CountVectorizer(stop_words=stop, max_features=30_000,
                          token_pattern=r"[a-zA-Z][a-zA-Z'-]{2,}")
     tf = cv.fit_transform(docs).toarray().astype(np.float64)
