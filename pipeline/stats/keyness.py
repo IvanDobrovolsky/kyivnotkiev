@@ -61,6 +61,14 @@ MIN_DOC_FREQ = 5
 # institutional evidence — while stopping it from outvoting a thousand
 # ordinary articles.
 MAX_TOKENS_PER_DOC = 1_000
+MIN_SIDE_DOCS = 3           # documents on the side a term leans to
+# A source whose two sides differ in token mass beyond this ratio cannot
+# produce a significant score for ANY term: the shared prior is then almost
+# entirely the larger side, and the log-odds collapses toward zero. On
+# oleksandr-usyk's reddit layer (163:1) the highest z over 4,619 terms is
+# +0.33. Such a source carries no information, and counting it as "usable"
+# only blocks the sources that do.
+MAX_TOKEN_RATIO = 20
 MIN_Z = 1.5
 TOP_N = 25
 
@@ -142,6 +150,14 @@ def _log_odds(ca: Counter, cb: Counter, da: Counter | None = None,
         if da is not None and db is not None:
             if (da[w] + db[w]) < MIN_DOC_FREQ:
                 continue
+            # ...and the side it leans TO must itself be several documents.
+            # Summing both sides let a term lean to a side that holds it in one
+            # text: "myself" shipped for oleksandr-usyk on a single reddit post.
+            if (ca[w] / max(na, 1)) >= (cb[w] / max(nb, 1)):
+                if da[w] < MIN_SIDE_DOCS:
+                    continue
+            elif db[w] < MIN_SIDE_DOCS:
+                continue
         # Monroe et al. add the SAME alpha_w to both sides. Splitting it in
         # proportion to each side's token mass looks symmetric — it preserves
         # each side's rate — but it is not: the smaller side's y sits far below
@@ -168,6 +184,12 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
             for t in terms]
     mask += [re.compile(r"\b" + re.escape(w) + r"\b", re.I)
              for t in terms for w in str(t).split() if len(w) >= 3]
+    # Hashtag forms run the words together, so a word-bounded mask misses them:
+    # "#oleksandrusyk" is in 19.0% of that pair's documents and shipped as its
+    # #2 YouTube term at z=17.31 — the pair's own name scoring as its own
+    # collocation.
+    mask += [re.compile(r"\b" + re.escape("".join(str(t).split())) + r"\b", re.I)
+             for t in terms if len(str(t).split()) > 1]
     def scan(floor: int) -> tuple[dict, dict]:
       per_source, skipped = {}, {}
       for src, g in df.groupby("source"):
@@ -183,6 +205,13 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
         for t in ru.text:
             _tk = tokenise(t, mask)[:MAX_TOKENS_PER_DOC]
             cb.update(_tk); db.update(set(_tk))
+        _na, _nb = sum(ca.values()), sum(cb.values())
+        _ratio = max(_na, _nb) / max(min(_na, _nb), 1)
+        if _ratio > MAX_TOKEN_RATIO:
+            skipped[src] = {"ukrainian": len(ua), "russian": len(ru),
+                            "token_ratio": round(_ratio, 1),
+                            "reason": "token imbalance beyond MAX_TOKEN_RATIO"}
+            continue
         sc = _log_odds(ca, cb, da, db)
         ranked = sorted(sc.items(), key=lambda kv: -kv[1][0])
         per_source[src] = {
@@ -211,7 +240,19 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
             hits = [(s, per_source[s]["_scores"][w][0]) for s in usable
                     if w in per_source[s]["_scores"]]
             zs = [z for _, z in hits]
-            if len(zs) >= 2 and (all(z >= MIN_Z for z in zs) or all(z <= -MIN_Z for z in zs)):
+            # Two sources must AGREE, and none may contradict — but a source
+            # that merely fails to reach the threshold no longer vetoes.
+            #
+            # Requiring every scoring source to clear MIN_Z made one degenerate
+            # source able to silence the rest. oleksandr-usyk's reddit layer is
+            # 163:1 in tokens, so the shared prior is 99.4% one side and the
+            # HIGHEST z it can produce across 4,619 terms is +0.33 — even for a
+            # word with 1,962 tokens on one side and none on the other. That
+            # vetoed all 1,174 terms its YouTube layer supports, and the one
+            # chip that survived did so by appearing in a single document.
+            pos = sum(1 for z in zs if z >= MIN_Z)
+            neg = sum(1 for z in zs if z <= -MIN_Z)
+            if (pos >= 2 and neg == 0) or (neg >= 2 and pos == 0):
                 robust[w] = sum(zs) / len(zs)
                 # Record WHICH sources carried the term. The exporter used to
                 # recover this from each source's top-25 display list, but
