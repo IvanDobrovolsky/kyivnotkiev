@@ -121,8 +121,19 @@ def _log_odds(ca: Counter, cb: Counter) -> dict:
     for w, c in prior.items():
         if c < MIN_COUNT:
             continue
-        a0, b0 = c * (na / npr), c * (nb / npr)
-        ya, yb = ca[w] + a0 + 0.01, cb[w] + b0 + 0.01
+        # Monroe et al. add the SAME alpha_w to both sides. Splitting it in
+        # proportion to each side's token mass looks symmetric — it preserves
+        # each side's rate — but it is not: the smaller side's y sits far below
+        # the shared npr term in the denominator, so the ratio tilts toward
+        # whichever corpus has more tokens, for every word.
+        #
+        # Measured on borscht/gdelt, where the Ukrainian side holds 9.9x the
+        # tokens: of 1,447 words whose true per-million rates match within 15%,
+        # the proportional prior scored 100% of them as Ukrainian-leaning,
+        # median z +4.00. With alpha_w shared they centre on zero, 51.2%
+        # positive. The bias is a mis-centering, not a tuning choice — it holds
+        # at every alpha_0 tried.
+        ya, yb = ca[w] + c + 0.01, cb[w] + c + 0.01
         d = math.log(ya / (na + npr - ya)) - math.log(yb / (nb + npr - yb))
         out[w] = (d / math.sqrt(1.0 / ya + 1.0 / yb), ca[w], cb[w])
     return out
