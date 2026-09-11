@@ -2061,7 +2061,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           const cmeta = encodeURIComponent(JSON.stringify({
             terms: info.terms || [], sources: info.sources || null,
             years: info.years || null, example: info.example || null,
-            size: info.size, ua: info.ua_pct }));
+            size: info.size, ua: info.ua_pct, desc: info.desc || null }));
           legendEl.innerHTML += `<button class="legend-item cl-legend-chip" data-cluster-legend="${idx}" data-meta="${cmeta}" style="display:inline-flex;align-items:center;gap:5px;white-space:nowrap;border:none;background:none;padding:0;font:inherit;cursor:pointer;color:var(--text);">` +
             `<span style="width:16px;height:16px;border-radius:50%;background:${color};color:#fff;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>` +
             `<strong>${glossT(info.gloss || info.label)}</strong>` +
@@ -2103,10 +2103,15 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             const bits: string[] = [];
             if (srcBits) bits.push(srcBits);
             if (yr) bits.push(yr);
+            // What the cluster IS comes first. The source mix and peak year are
+            // provenance, not meaning, and belong under a rule at the bottom.
             cpop.innerHTML =
-              `<div style="margin-bottom:0.35rem;">${escH(tt('pair.cluster_summary', 'A group of'))} <strong>${Number(m.size).toLocaleString()}</strong> ${escH(tt('pair.cluster_texts_that', 'texts the model placed together'))}${bits.length ? ' — ' + escH(bits.join(' · ')) : ''}.</div>`
+              (m.desc ? `<div style="margin-bottom:0.4rem; color:var(--text);">${escH(m.desc)}</div>` : '')
               + (extra.length ? `<div style="color:var(--text-muted); margin-bottom:0.3rem;">${escH(tt('pair.cluster_also', 'Also frequent'))}: ${escH(extra.slice(0, 6).join(', '))}</div>` : '')
-              + (m.example ? `<div style="border-left:2px solid var(--border,#e5e7eb); padding-left:0.5rem;">“${escH(m.example.t || m.example)}”</div>` : '');
+              + (m.example ? `<div style="border-left:2px solid var(--border,#e5e7eb); padding-left:0.5rem;">“${escH(m.example.t || m.example)}”</div>` : '')
+              + `<div style="color:var(--text-muted); margin-top:0.4rem; padding-top:0.35rem; border-top:1px solid var(--border,#e5e7eb); font-size:0.72rem;">`
+                + `${Number(m.size).toLocaleString()} ${escH(tt('pair.cluster_texts', 'texts'))}`
+                + (bits.length ? ' · ' + escH(bits.join(' · ')) : '') + `</div>`;
             const r = ch.getBoundingClientRect();
             cpop.style.left = Math.min(window.scrollX + r.left, window.scrollX + window.innerWidth - 400) + 'px';
             cpop.style.top = (window.scrollY + r.bottom + 6) + 'px';

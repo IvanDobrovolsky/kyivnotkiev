@@ -2359,6 +2359,10 @@ def main():
                 "peak": _peak,
                 # Self-explanation: what the label was cut from, where the texts
                 # came from, when they were written, and one line of the cluster.
+                # The written description, separate from the short label. The
+                # label names the cluster in the legend; this says what the
+                # group of texts actually IS.
+                "desc": _cluster_gloss.get(_slug, {}).get(str(_label).lower(), ""),
                 "terms": [t for t in _terms6 if t.lower() not in EXPLICIT],
                 "sources": _src_shares(_cmeta[str(_cid)]["src"]),
                 "years": _year_span(_cmeta[str(_cid)]["yr"]),
@@ -2413,6 +2417,7 @@ def main():
                     _ma["yr"][_k3] = _ma["yr"].get(_k3, 0) + _n3
                 if _a["label"] != _lab_a:
                     _a["terms"], _a["example"] = _v2["terms"], _v2["example"]
+                    _a["desc"] = _v2.get("desc", "")
                 elif not _a["example"]:
                     _a["example"] = _v2["example"]
                 _a["sources"] = _src_shares(_ma["src"])

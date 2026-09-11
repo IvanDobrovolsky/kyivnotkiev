@@ -420,6 +420,12 @@ def main() -> int:
     outdf["borderline"] = borderline
     outdf["umap_x"] = coords[:, 0].round(3)
     outdf["umap_y"] = coords[:, 1].round(3)
+    # Write the SAME id shape records.parquet uses. The loader normalises the
+    # slug out to do its own join, but wrote the store form back, so every other
+    # tool joining these two tables silently dropped all 58,756 GDELT rows —
+    # up to 81% of an individual cluster.
+    outdf["record_id"] = outdf.record_id.astype(str).str.replace(
+        rf"^gv_{re.escape(a.pair)}_", "gv_", regex=True)
     outdf.to_parquet(out_dir / "assignments.parquet", index=False)
 
     k = post.shape[1]
