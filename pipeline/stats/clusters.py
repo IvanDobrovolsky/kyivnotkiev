@@ -244,8 +244,27 @@ def main() -> int:
         print(f"  english gate: dropped {int((~_en).sum()):,} non-English of {len(df):,}")
         df = df[_en].copy()
 
-    log(f"  embedding {len(df):,} texts ({EMBED_MODEL})")
-    X = embed(df.text.tolist())
+    # MASK THE PAIR'S OWN NAMES BEFORE EMBEDDING. Without this the model
+    # separates on "Oleksandr" vs "Alexander" and the clusters encode the
+    # spelling itself — usyk produced two clusters of identical boxing
+    # coverage, 95% UA and 95% RU, which is a tautology, not a discourse
+    # finding. Masking makes the text identical under either spelling, so a
+    # surviving UA/RU split inside a cluster is a real register signal.
+    import yaml as _yaml
+    _pc = next((x for x in _yaml.safe_load(open(ROOT / "config" / "pairs.yaml"))["pairs"]
+                if x.get("slug") == a.pair), {})
+    _terms = [t for t in (_pc.get("ukrainian"), _pc.get("russian")) if t]
+    _mask_rx = [re.compile(r"\b" + r"[\s\-_,.]+".join(re.escape(w) for w in str(t).split()) + r"\b", re.I)
+                for t in _terms]
+    _mask_rx += [re.compile(r"\b" + re.escape(w) + r"\b", re.I)
+                 for t in _terms for w in str(t).split() if len(w) >= 3]
+    def _neutralise(t: str) -> str:
+        t = str(t)
+        for rx in _mask_rx:
+            t = rx.sub(" NAME ", t)
+        return t
+    log(f"  embedding {len(df):,} texts ({EMBED_MODEL}), pair names masked")
+    X = embed([_neutralise(t) for t in df.text.tolist()])
 
     gm, Xr = fit_gmm(X)
     post = gm.predict_proba(Xr)
