@@ -194,13 +194,22 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
             tier, floor_used = "exploratory", MIN_DOCS_WEAK
 
     usable = sorted(per_source)
-    robust = {}
+    robust, robust_src = {}, {}
     if len(usable) >= 2:
         allw = set().union(*[set(per_source[s]["_scores"]) for s in usable])
         for w in allw:
-            zs = [per_source[s]["_scores"][w][0] for s in usable if w in per_source[s]["_scores"]]
+            hits = [(s, per_source[s]["_scores"][w][0]) for s in usable
+                    if w in per_source[s]["_scores"]]
+            zs = [z for _, z in hits]
             if len(zs) >= 2 and (all(z >= MIN_Z for z in zs) or all(z <= -MIN_Z for z in zs)):
                 robust[w] = sum(zs) / len(zs)
+                # Record WHICH sources carried the term. The exporter used to
+                # recover this from each source's top-25 display list, but
+                # robustness is decided over every scored term, so a term robust
+                # in four sources could ship with an empty source list — and the
+                # page then printed the solo-tier disclaimer ("measured against
+                # the cross-pair background") on a four-source pair.
+                robust_src[w] = [s for s, z in hits if abs(z) >= MIN_Z]
     rr = sorted(robust.items(), key=lambda kv: -kv[1])
     for s in per_source:
         per_source[s].pop("_scores")
@@ -248,7 +257,11 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
         "min_docs_per_side": floor_used, "min_term_count": MIN_COUNT, "min_abs_z": MIN_Z,
         "sources_used": usable, "sources_skipped": skipped,
         "per_source": per_source,
-        "robust_ukrainian": [{"word": w, "mean_z": round(z, 2)} for w, z in rr if z >= MIN_Z][:TOP_N],
-        "robust_russian": [{"word": w, "mean_z": round(z, 2)} for w, z in rr[::-1] if z <= -MIN_Z][:TOP_N],
+        "robust_ukrainian": [{"word": w, "mean_z": round(z, 2),
+                              "sources": robust_src.get(w, [])}
+                             for w, z in rr if z >= MIN_Z][:TOP_N],
+        "robust_russian": [{"word": w, "mean_z": round(z, 2),
+                            "sources": robust_src.get(w, [])}
+                           for w, z in rr[::-1] if z <= -MIN_Z][:TOP_N],
         "interpretable": len(usable) >= 2,
     }

@@ -2534,7 +2534,21 @@ def main():
         # Provenance, derived from the data: which sources scored the term, and
         # one verbatim example from this pair's records. No hand-written blurbs.
         _ps = _k.get("per_source", {})
+        # keyness records which sources carried each robust term. Falling back
+        # to the per-source top-25 lists (as this did) reported nothing for a
+        # term that is robust but outside every source's display list, and the
+        # page then printed the solo-tier disclaimer on a four-source pair.
+        _robust_src = {}
+        for _side_key in ("robust_ukrainian", "robust_russian"):
+            for _t in _k.get(_side_key, []):
+                if _t.get("sources"):
+                    _robust_src[(_t["word"], _side_key)] = list(_t["sources"])
+
         def _prov(word, side):
+            _key = "robust_ukrainian" if side == "ukrainian" else "robust_russian"
+            _rec = _robust_src.get((word, _key))
+            if _rec:
+                return sorted(_rec)
             return sorted(s for s, d in _ps.items()
                           if any(t.get("word") == word for t in d.get(side, [])))
         _exdf = None
