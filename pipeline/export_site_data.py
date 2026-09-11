@@ -1644,21 +1644,11 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
 
     log.info(f"  Holdouts: {len(by_pair)} pairs across news/wiki/reddit/youtube")
 
-    # Global holdouts (top 100 news domains)
-    global_list = []
-    if len(gdelt):
-        g25 = gdelt[gdelt["date"] >= "2025-01"]
-        g2 = g25.groupby(["source_domain", "variant"])["count"].sum().reset_index()
-        p2 = g2.pivot_table(index="source_domain", columns="variant", values="count", fill_value=0).reset_index()
-        p2["total"] = p2.get("russian", 0) + p2.get("ukrainian", 0)
-        p2["rus_pct"] = (p2.get("russian", 0) / p2["total"] * 100).round(1)
-        p2 = p2[(p2["total"] >= 50) & (p2["rus_pct"] > 50)]
-        p2["is_ru"] = p2["source_domain"].str.endswith(".ru")
-        top = p2.nlargest(100, "total")
-        global_list = [{"domain": r["source_domain"], "russian_pct": float(r["rus_pct"]),
-                        "total": int(r["total"]), "is_ru": bool(r["is_ru"])} for _, r in top.iterrows()]
-
-    return by_pair, global_list
+    # The global top-100 outlet list is gone with the per-pair one. It came from
+    # the same URL-slug table, so it could not see an outlet that does not spell
+    # the place name in its links (tass.com: 0 of 131,830 rows) and counted
+    # Odessa, Texas as Odesa. Nothing imported the holdouts.json it fed.
+    return by_pair
 
 
 def export_pair_events(enabled_slugs: set[str]) -> dict:
@@ -1807,7 +1797,7 @@ def main():
     # One call, both results. Calling it twice rebuilt every pair's holdout
     # tables from the corpus a second time for the half of the tuple the first
     # call had already computed.
-    holdouts_by_pair, holdouts_global = export_holdouts(enabled_slugs)
+    holdouts_by_pair = export_holdouts(enabled_slugs)
 
     # GDELT article holdouts, validated against the rebuilt attested mention set.
     #
@@ -1902,7 +1892,6 @@ def main():
     write_json(SITE_DATA_DIR / "timeseries.json", timeseries)
     write_json(SITE_DATA_DIR / "domain_origins.json", domain_origins)
     write_json(SITE_DATA_DIR / "holdouts_by_pair.json", holdouts_by_pair)
-    write_json(SITE_DATA_DIR / "holdouts.json", holdouts_global)
     write_json(SITE_DATA_DIR / "pair_events.json", pair_events)
 
     # Pair metadata for the About table, straight from config/pairs.yaml so the forms
@@ -2562,6 +2551,8 @@ def main():
             except Exception:                          # noqa: BLE001
                 _exdf = None
         _exdf_full = None
+        _used_examples: set = set()
+
         def _example(word, side, prefer_sources=None):
             nonlocal _exdf_full
             if _exdf is None:
@@ -2596,14 +2587,39 @@ def main():
                     _m = _exdf_full[_exdf_full._lc.str.contains(_wrx, regex=True, na=False)]
             if not len(_m):
                 return None
-            _t = _rex.sub(r"\s+", " ", str(_m.iloc[0].text))
+            # records.parquet is date-sorted within source, so iloc[0] always
+            # returned the OLDEST match. On dnipro-river that is a 2013
+            # r/HistoricalWhatIf story set in 1538, and it illustrated five of
+            # the ten Russian chips; babyn-yar quoted one 2012 AskReddit comment
+            # for three. Prefer a typical-length text, and never quote the same
+            # document twice in one pair.
+            _cand = _m.assign(_len=_m.text.astype(str).str.len())
+            _cand = _cand[(_cand._len >= 200) & (_cand._len <= 4000)]
+            if not len(_cand):
+                _cand = _m.assign(_len=_m.text.astype(str).str.len())
+            _med = float(_cand._len.median())
+            _cand = _cand.assign(_d=(_cand._len - _med).abs()).sort_values(
+                ["_d", "_len"], kind="mergesort")
+            _row = None
+            for _r in _cand.itertuples():
+                _key = getattr(_r, "url", None) or str(_r.text)[:120]
+                if _key in _used_examples:
+                    continue
+                _row = _r
+                _used_examples.add(_key)
+                break
+            if _row is None:
+                _row = next(iter(_cand.itertuples()), None)
+            if _row is None:
+                return None
+            _t = _rex.sub(r"\s+", " ", str(_row.text))
             _mm = _rex.search(_wrx, _t.lower())
             _i = _mm.start() if _mm else -1
             if _i < 0:
                 return None
             _a0 = max(0, _i - 45)
             _snip = ("…" if _a0 else "") + _t[_a0:_i + len(word) + 60].strip() + "…"
-            return {"s": str(_m.iloc[0].source), "t": _snip}
+            return {"s": str(_row.source), "t": _snip}
         # Display-level morphological family collapse: statistics stay on
         # exact surface forms; the CHIP LIST spends one slot per family
         # (ukraine/ukrainian/ukraine's -> strongest member). Conservative
