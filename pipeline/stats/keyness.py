@@ -46,6 +46,11 @@ MIN_DOCS = 25
 # so surfaces whatever scraping debris is unique to this one. Same agreement
 # rule as the strong tier; only the per-source floor moves.
 MIN_DOCS_WEAK = 10
+# A term must be spread across DOCUMENTS, not just frequent. MIN_COUNT counts
+# pooled tokens, so four hits inside one post qualified a word: borscht shipped
+# six of ten Russian chips resting on 2-7 documents, one of them a single
+# Motley Fool transcript mentioning an analyst named Borsch.
+MIN_DOC_FREQ = 5
 MIN_Z = 1.5
 TOP_N = 25
 
@@ -112,7 +117,8 @@ def tokenise(text: str, mask) -> list[str]:
     return out
 
 
-def _log_odds(ca: Counter, cb: Counter) -> dict:
+def _log_odds(ca: Counter, cb: Counter, da: Counter | None = None,
+              db: Counter | None = None) -> dict:
     prior = ca + cb
     na, nb, npr = sum(ca.values()), sum(cb.values()), sum(prior.values())
     out = {}
@@ -121,6 +127,11 @@ def _log_odds(ca: Counter, cb: Counter) -> dict:
     for w, c in prior.items():
         if c < MIN_COUNT:
             continue
+        # Document frequency, when the caller measured it: the word has to be
+        # used by several texts on the side it leans to, not repeated inside one.
+        if da is not None and db is not None:
+            if (da[w] + db[w]) < MIN_DOC_FREQ:
+                continue
         # Monroe et al. add the SAME alpha_w to both sides. Splitting it in
         # proportion to each side's token mass looks symmetric — it preserves
         # each side's rate — but it is not: the smaller side's y sits far below
@@ -154,9 +165,15 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
         if len(ua) < floor or len(ru) < floor:
             skipped[src] = {"ukrainian": len(ua), "russian": len(ru)}
             continue
-        ca = Counter(w for t in ua.text for w in tokenise(t, mask))
-        cb = Counter(w for t in ru.text for w in tokenise(t, mask))
-        sc = _log_odds(ca, cb)
+        ca, da = Counter(), Counter()
+        for t in ua.text:
+            _tk = tokenise(t, mask)
+            ca.update(_tk); da.update(set(_tk))
+        cb, db = Counter(), Counter()
+        for t in ru.text:
+            _tk = tokenise(t, mask)
+            cb.update(_tk); db.update(set(_tk))
+        sc = _log_odds(ca, cb, da, db)
         ranked = sorted(sc.items(), key=lambda kv: -kv[1][0])
         per_source[src] = {
             "n_ukrainian": len(ua), "n_russian": len(ru), "terms_scored": len(sc),

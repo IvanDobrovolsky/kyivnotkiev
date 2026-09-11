@@ -87,8 +87,21 @@ def load_canonical(pair: str) -> pd.DataFrame:
         # there, or every upstream filter silently skips the cluster map — the
         # odesa ghost-outlier bug (32 deleted Texas genealogy docs still on
         # the published map).
-        df = df[df.record_id.isin(set(d.record_id))]
-        df = df.merge(d, on="record_id", how="left")
+        # The two files key verified GDELT rows differently — the store writes
+        # gv_<slug>_N, records.parquet writes gv_N — so an id-to-id join dropped
+        # every news row from the cluster map in every pair: 85.5% of
+        # volodymyr-zelenskyy's corpus, 46.0% of babyn-yar's, 21.8% of kyiv's.
+        # Clusters were then glossed "news coverage" while containing no news.
+        # Normalise the slug out of the store's id before matching.
+        _norm = lambda sr: sr.astype(str).str.replace(
+            rf"^gv_{re.escape(pair)}_", "gv_", regex=True)
+        df["_key"] = _norm(df.record_id)
+        d = d.assign(_key=_norm(d.record_id)).drop(columns=["record_id"])
+        _matched = df._key.isin(set(d._key))
+        log(f"  canonical match: {int(_matched.sum()):,} of {len(df):,} store rows"
+            f" ({int((~_matched).sum()):,} unmatched)")
+        df = df[_matched]
+        df = df.merge(d, on="_key", how="left").drop(columns=["_key"])
         before = len(df)
         df = df[df.is_canonical.fillna(True)]
         log(f"  canonical rows: {len(df):,} of {before:,}")
