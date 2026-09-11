@@ -2264,6 +2264,12 @@ def main():
             _wrx = r"\b" + _rex.escape(word.lower()) + r"\b"
             _m = _exdf[(_exdf.variant == side)
                        & _exdf._lc.str.contains(_wrx, regex=True, na=False)]
+            # Quote from a source the term is actually distinctive in, or the
+            # card says "Distinctive in: News, Reddit" then quotes Academic.
+            if prefer_sources and len(_m):
+                _pref = _m[_m.source.isin(prefer_sources)]
+                if len(_pref):
+                    _m = _pref
             if not len(_m):
                 _m = _exdf[_exdf._lc.str.contains(_wrx, regex=True, na=False)]
             if not len(_m):
@@ -2320,7 +2326,7 @@ def main():
             w = x["word"]
             e = {"w": w, "z": round(abs(float(x["mean_z"])), 1),
                  "src": _prov(w, side)}
-            ex = _example(w, side)
+            ex = _example(w, side, prefer_sources=set(e.get("src") or []))
             if ex:
                 e["ex"] = ex
             return e
