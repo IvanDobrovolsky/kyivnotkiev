@@ -1936,9 +1936,12 @@ def main():
         if not _an.exists():
             _stale_stats.add(_pf.stem); continue
         try:
-            _rows = _jf.loads(_an.read_text()).get("input_rows_store")
+            _aj = _jf.loads(_an.read_text())
+            _rows = _aj.get("input_rows_store", _aj.get("input_rows"))
             import pyarrow.parquet as _pq
-            if _rows is not None and _rows != _pq.read_metadata(_pf).num_rows:
+            # Fail closed: an analysis that does not record what it read
+            # cannot be shown as current.
+            if _rows is None or _rows != _pq.read_metadata(_pf).num_rows:
                 _stale_stats.add(_pf.stem)
         except Exception:                                  # noqa: BLE001
             _stale_stats.add(_pf.stem)
