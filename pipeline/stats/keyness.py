@@ -62,13 +62,13 @@ MIN_DOC_FREQ = 5
 # ordinary articles.
 MAX_TOKENS_PER_DOC = 1_000
 MIN_SIDE_DOCS = 3           # documents on the side a term leans to
-# A source whose two sides differ in token mass beyond this ratio cannot
-# produce a significant score for ANY term: the shared prior is then almost
-# entirely the larger side, and the log-odds collapses toward zero. On
-# oleksandr-usyk's reddit layer (163:1) the highest z over 4,619 terms is
-# +0.33. Such a source carries no information, and counting it as "usable"
-# only blocks the sources that do.
-MAX_TOKEN_RATIO = 20
+# NOTE: a whole-source veto on token imbalance was tried and removed. In a
+# lopsided source the prior suppresses the MAJORITY side, not the minority —
+# kazymyr-malevych's YouTube layer at 75.5:1 still yields Ukrainian-side terms
+# up to z=+3.45 while its Russian side cannot pass -0.41. Vetoing the source
+# discarded precisely the minority-side signal the study is about. The
+# majority side's scores are floor-bounded and simply never reach MIN_Z, which
+# the agreement rule below already handles without throwing anything away.
 MIN_Z = 1.5
 TOP_N = 25
 
@@ -149,10 +149,21 @@ def tokenise(text: str, mask) -> list[str]:
     return out
 
 
+# Strength of the informative prior. Setting it to the whole corpus (the old
+# behaviour, alpha_0 = npr) makes the prior overwhelm the smaller side and
+# imposes a ceiling on the LARGER one: on lviv's news layer, 19.6:1 Ukrainian,
+# terms clearing +MIN_Z against -MIN_Z ran 15 to 478 — a 31.9:1 asymmetry
+# pointing away from the majority side. At alpha_0 = 10,000 the same layer runs
+# 543 to 2,655 (4.9:1). Balanced pairs barely move (varenyky 1.46:1 -> 1.32:1),
+# so this corrects the lopsided pairs without disturbing the others.
+PRIOR_STRENGTH = 10_000
+
+
 def _log_odds(ca: Counter, cb: Counter, da: Counter | None = None,
               db: Counter | None = None) -> dict:
     prior = ca + cb
     na, nb, npr = sum(ca.values()), sum(cb.values()), sum(prior.values())
+    a0 = min(PRIOR_STRENGTH, npr) if npr else 0
     out = {}
     if not npr:
         return out
@@ -184,8 +195,9 @@ def _log_odds(ca: Counter, cb: Counter, da: Counter | None = None,
         # median z +4.00. With alpha_w shared they centre on zero, 51.2%
         # positive. The bias is a mis-centering, not a tuning choice — it holds
         # at every alpha_0 tried.
-        ya, yb = ca[w] + c + 0.01, cb[w] + c + 0.01
-        d = math.log(ya / (na + npr - ya)) - math.log(yb / (nb + npr - yb))
+        aw = a0 * c / npr
+        ya, yb = ca[w] + aw + 0.01, cb[w] + aw + 0.01
+        d = math.log(ya / (na + a0 - ya)) - math.log(yb / (nb + a0 - yb))
         out[w] = (d / math.sqrt(1.0 / ya + 1.0 / yb), ca[w], cb[w])
     return out
 
@@ -219,13 +231,6 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
         for t in ru.text:
             _tk = tokenise(t, mask)[:MAX_TOKENS_PER_DOC]
             cb.update(_tk); db.update(set(_tk))
-        _na, _nb = sum(ca.values()), sum(cb.values())
-        _ratio = max(_na, _nb) / max(min(_na, _nb), 1)
-        if _ratio > MAX_TOKEN_RATIO:
-            skipped[src] = {"ukrainian": len(ua), "russian": len(ru),
-                            "token_ratio": round(_ratio, 1),
-                            "reason": "token imbalance beyond MAX_TOKEN_RATIO"}
-            continue
         sc = _log_odds(ca, cb, da, db)
         ranked = sorted(sc.items(), key=lambda kv: -kv[1][0])
         per_source[src] = {
