@@ -51,6 +51,16 @@ MIN_DOCS_WEAK = 10
 # six of ten Russian chips resting on 2-7 documents, one of them a single
 # Motley Fool transcript mentioning an analyst named Borsch.
 MIN_DOC_FREQ = 5
+# One document contributes at most this many tokens. Without a cap a long text
+# that mentions the pair once donates its whole length as "context": 103 SEC
+# and legal filings are 18.0% of luhansk's Ukrainian GDELT token mass while
+# being 1.2% of its documents, each naming the place a median of ONCE in
+# sanctions boilerplate, and the longest is a 79,603-token prospectus with a
+# single mention. Fourteen of twenty-five terms on that side were filing
+# vocabulary. Capping keeps the row — OFAC writing "Luhansk" is real
+# institutional evidence — while stopping it from outvoting a thousand
+# ordinary articles.
+MAX_TOKENS_PER_DOC = 1_000
 MIN_Z = 1.5
 TOP_N = 25
 
@@ -167,11 +177,11 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
             continue
         ca, da = Counter(), Counter()
         for t in ua.text:
-            _tk = tokenise(t, mask)
+            _tk = tokenise(t, mask)[:MAX_TOKENS_PER_DOC]
             ca.update(_tk); da.update(set(_tk))
         cb, db = Counter(), Counter()
         for t in ru.text:
-            _tk = tokenise(t, mask)
+            _tk = tokenise(t, mask)[:MAX_TOKENS_PER_DOC]
             cb.update(_tk); db.update(set(_tk))
         sc = _log_odds(ca, cb, da, db)
         ranked = sorted(sc.items(), key=lambda kv: -kv[1][0])
