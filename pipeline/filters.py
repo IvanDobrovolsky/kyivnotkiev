@@ -68,6 +68,18 @@ def _blob(df: pd.DataFrame) -> pd.Series:
     for col in ("title", "text", "channel", "channel_title", "description"):
         if col in df.columns:
             parts.append(df[col].fillna("").astype(str))
+    # The subreddit, and nothing else from the URL. Nineteen patterns across
+    # pairs are written as "r/hellletloose" and matched nothing, because the
+    # blob never carried it and reddit_processed has no subreddit column: r/tf2
+    # is the largest subreddit in chicken-kyiv's reddit corpus (240 rows, ahead
+    # of r/food) and its Team Fortress hat-trading rows all survived.
+    # Only "r/<name>" is exposed — putting the whole URL in would let text
+    # patterns match link slugs, which is the defect that had West Texas radio
+    # stations counted as Odesa.
+    if "url" in df.columns:
+        _sub = df["url"].fillna("").astype(str).str.extract(
+            r"reddit\.com/r/([\w-]+)", expand=False).fillna("")
+        parts.append(_sub.where(_sub.eq(""), "r/" + _sub))
     if not parts:
         return pd.Series("", index=df.index)
     out = parts[0]

@@ -537,7 +537,7 @@ pairs:
   - \b(?:tf2|team fortress 2|pootis)\b
   - \bai[\s-]*(?:magic|generated)\b
   - arepas,\s*chicken kiev,\s*doner kebab
-  - chicken[\s-]*kiev['’"”]?\s+(?:speech|address)
+  - chicken[\s-]*k(?:ie|yi)v['’"”]?\s+(?:speech|address)
   - chicken\s+kiev\s+chicken\s+(?:noodles|chili)\b
   - chicken\s+kiev\s+videos?\s+chicken\s+\w+\s+video
   - r/(?:tf2|truetf2|tf2fashionadvice|tf2shitposterclub|sfm)\b
