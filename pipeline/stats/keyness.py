@@ -40,6 +40,12 @@ subscribe channel please thanks thank welcome what who whom which while because 
 during against among within without upon per via etc""".split())
 MIN_COUNT = 4
 MIN_DOCS = 25
+# Second tier for small pairs. Below MIN_DOCS a single source cannot carry a
+# contrast on its own, but three thin sources agreeing on the same direction
+# still beat the solo profile, which contrasts against OTHER pairs' corpora and
+# so surfaces whatever scraping debris is unique to this one. Same agreement
+# rule as the strong tier; only the per-source floor moves.
+MIN_DOCS_WEAK = 10
 MIN_Z = 1.5
 TOP_N = 25
 
@@ -118,10 +124,11 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
             for t in terms]
     mask += [re.compile(r"\b" + re.escape(w) + r"\b", re.I)
              for t in terms for w in str(t).split() if len(w) >= 3]
-    per_source, skipped = {}, {}
-    for src, g in df.groupby("source"):
+    def scan(floor: int) -> tuple[dict, dict]:
+      per_source, skipped = {}, {}
+      for src, g in df.groupby("source"):
         ua, ru = g[g.variant == "ukrainian"], g[g.variant == "russian"]
-        if len(ua) < MIN_DOCS or len(ru) < MIN_DOCS:
+        if len(ua) < floor or len(ru) < floor:
             skipped[src] = {"ukrainian": len(ua), "russian": len(ru)}
             continue
         ca = Counter(w for t in ua.text for w in tokenise(t, mask))
@@ -136,6 +143,15 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
                         for w, (z, na, nb) in ranked[::-1] if z <= -MIN_Z][:TOP_N],
             "_scores": sc,
         }
+      return per_source, skipped
+
+    per_source, skipped = scan(MIN_DOCS)
+    tier, floor_used = "robust", MIN_DOCS
+    if len(per_source) < 2:
+        weak, weak_skipped = scan(MIN_DOCS_WEAK)
+        if len(weak) >= 2:
+            per_source, skipped = weak, weak_skipped
+            tier, floor_used = "exploratory", MIN_DOCS_WEAK
 
     usable = sorted(per_source)
     robust = {}
@@ -188,7 +204,8 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
         "method": "log-odds ratio, informative Dirichlet prior (Monroe et al. 2008), within source",
         "solo_variant": solo_variant,
         "solo_terms": solo,
-        "min_docs_per_side": MIN_DOCS, "min_term_count": MIN_COUNT, "min_abs_z": MIN_Z,
+        "tier": tier if len(usable) >= 2 else ("solo" if solo else "none"),
+        "min_docs_per_side": floor_used, "min_term_count": MIN_COUNT, "min_abs_z": MIN_Z,
         "sources_used": usable, "sources_skipped": skipped,
         "per_source": per_source,
         "robust_ukrainian": [{"word": w, "mean_z": round(z, 2)} for w, z in rr if z >= MIN_Z][:TOP_N],
