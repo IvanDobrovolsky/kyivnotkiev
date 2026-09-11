@@ -1299,6 +1299,27 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       }
       container.style.display = 'block';
 
+      // Which outlets these articles come from, counted in distinct stories.
+      // This table used to be built from URL slugs, which cannot see an outlet
+      // that does not spell the place name in its links — it named one masthead
+      // for kharkiv while missing the 73 TASS stories, and listed West Texas
+      // radio for odesa. It is now aggregated from the same verified articles
+      // shown below, so the two cannot disagree.
+      const esc = (t: string) => String(t).replace(/[&<>"']/g, (ch: string) =>
+        ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch] as string));
+      const outlets: any[] = pairHoldouts?.news || [];
+      const strip = outlets.slice(0, 8).map((o: any) =>
+        `<span style="display:inline-flex;align-items:baseline;gap:4px;padding:0.12rem 0.45rem;border:1px solid var(--border,#e5e7eb);border-radius:10px;font-size:0.74rem;">`
+        + `<strong>${esc(String(o.name))}</strong>`
+        + `<span style="color:var(--text-muted);">${Number(o.total).toLocaleString()}</span></span>`).join(' ');
+      const stripEl = document.getElementById('news-outlet-strip');
+      if (stripEl) {
+        stripEl.innerHTML = outlets.length
+          ? `<div style="margin-bottom:0.5rem;"><span style="font-size:0.74rem;color:var(--text-muted);margin-right:0.4rem;">`
+            + `${tt('pair.news_outlets', 'Outlets, by stories')}:</span> ${strip}</div>`
+          : '';
+      }
+
       // Sort newest first
       const sorted = [...articles].sort((a: any, b: any) => (b.month || '').localeCompare(a.month || ''));
 
