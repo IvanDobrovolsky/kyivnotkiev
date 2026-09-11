@@ -76,8 +76,20 @@ NON_EN_STOP = {
 MARKUP = re.compile(r"\[\]\(#[\w-]+\)|\(#[\w-]+\)|\b(?:background-(?:image|position|size|color)|linear-gradient|border-radius)\b[^;\n]*", re.I)
 
 
+# URLs are not language. Left in, they shred into tokens that read like
+# vocabulary: donbas's "isch" is the tbm=isch parameter of a Google image
+# search pasted into 1,502 YouTube descriptions, and feodosiia's entire solo
+# profile was host names (easybranches, youdao, webpagetranslate). The rows
+# themselves are genuine mentions, so the text is cleaned rather than dropped.
+URLS = re.compile(r"https?://\S+|\bwww\.\S+"
+                  r"|\b[a-z0-9][a-z0-9-]*(?:\.[a-z0-9-]+)*"
+                  r"\.(?:com|org|net|edu|gov|ru|ua|io|tv|me|info|"
+                  r"co|de|fr|es|it|pl|uk|eu|cz|biz|xyz|online|site)\b\S*", re.I)
+
+
 def tokenise(text: str, mask) -> list[str]:
     t = str(text or "").lower()
+    t = URLS.sub(" ", t)
     t = MARKUP.sub(" ", t)
     for rx in mask:
         t = rx.sub(" ", t)
