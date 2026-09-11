@@ -2003,6 +2003,18 @@ def main():
                 "sexy", "sex", "escort", "escorts", "onlyfans", "webcam", "cam",
                 "hentai", "bdsm", "fetish", "orgy", "horny", "slut", "dick", "cock"}
 
+    # Cluster glosses a verification pass corrected by hand, keyed by the label
+    # the clustering produced. Keyword rules cannot know that a cluster of
+    # "hbo · series" is the miniseries rather than the disaster.
+    _cluster_gloss: dict = {}
+    _cg = ROOT / "data" / "audit" / "cluster_glosses.json"
+    if _cg.exists():
+        try:
+            _cluster_gloss = {k: {kk.lower(): vv for kk, vv in v.items()}
+                              for k, v in json.loads(_cg.read_text()).items()}
+        except Exception:                              # noqa: BLE001
+            pass
+
     GLOSS_RULES = [
         ({"police", "arrested", "department", "sheriff"}, "crime & police news"),
         ({"battle", "wagner", "soledar"}, "the battle for Bakhmut"),
@@ -2340,10 +2352,13 @@ def main():
                 "cx": _anchors[0][0], "cy": _anchors[0][1],
                 "ua_pct": _ua_pct,
                 "size": _c.get("size", int(len(_m))),
-                "gloss": ("non-English coverage" if _label == "non-English"
-                          else "adult-content spam"
-                          if len(EXPLICIT & {t.lower() for t in _c.get("top_terms", [])}) >= 2
-                          else _gloss_for(_c.get("top_terms", []), _label)),
+                # A verified override wins outright; "or" binds tighter than the
+                # conditional, so the fallback chain needs its own parentheses.
+                "gloss": (_cluster_gloss.get(_slug, {}).get(str(_label).lower())
+                          or ("non-English coverage" if _label == "non-English"
+                              else "adult-content spam"
+                              if len(EXPLICIT & {t.lower() for t in _c.get("top_terms", [])}) >= 2
+                              else _gloss_for(_c.get("top_terms", []), _label))),
                 # filled below once all clusters exist; placeholder keeps key order
                 "peak": _peak,
                 # Self-explanation: what the label was cut from, where the texts
@@ -2446,6 +2461,18 @@ def main():
     # Per-term glosses: what the word is doing in this pair's corpus, grounded
     # in the term's own rows rather than the one quoted example. Terms whose
     # evidence showed two unrelated senses were deliberately left unglossed.
+    # Terms a per-pair verification pass judged to be junk, boilerplate or the
+    # wrong referent. Keyed by pair so a word that is debris in one corpus can
+    # still be real vocabulary in another.
+    _term_block: dict = {}
+    _tb = ROOT / "data" / "audit" / "term_blocklist.json"
+    if _tb.exists():
+        try:
+            _term_block = {k: {w.lower() for w in v}
+                           for k, v in json.loads(_tb.read_text()).items()}
+        except Exception:                              # noqa: BLE001
+            pass
+
     _gloss_src = ROOT / "data" / "audit" / "collocation_glosses.json"
     _glosses, _suspect = {}, {}
     if _gloss_src.exists():
@@ -2614,10 +2641,13 @@ def main():
             if ex:
                 e["ex"] = ex
             return e
+        _blocked = _term_block.get(_slug, set())
         _ua = _dedup_family([_entry(x, "ukrainian")
-               for x in _k.get("robust_ukrainian", []) if _keep(x)])[:10]
+               for x in _k.get("robust_ukrainian", [])
+               if _keep(x) and x["word"].lower() not in _blocked])[:10]
         _ru = _dedup_family([_entry(x, "russian")
-               for x in _k.get("robust_russian", []) if _keep(x)])[:10]
+               for x in _k.get("robust_russian", [])
+               if _keep(x) and x["word"].lower() not in _blocked])[:10]
         if _ua or _ru:
             _kj[_slug] = {"ua": _ua, "ru": _ru,
                           "sources": _k.get("sources_used") or _a.get("sources_used"),
