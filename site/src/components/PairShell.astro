@@ -2303,17 +2303,23 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           const srcs = (m.src || []).map(srcName).join(', ');
           // "z = 7.3" tells a reader nothing. Lead with what it means, keep the
           // number for anyone who wants it, and say where the line is drawn.
-          const strength = m.z >= 6 ? tt('pair.colloc_very_strong', 'very strongly')
-                         : m.z >= 4 ? tt('pair.colloc_strong', 'strongly')
-                         : m.z >= 2.5 ? tt('pair.colloc_clear', 'clearly')
-                         : tt('pair.colloc_mild', 'mildly');
-          const sideTxt = m.side ? ` ${tt('pair.colloc_toward', 'toward')} ${escH(String(m.side))}` : '';
-          pop.innerHTML = `<div style="margin-bottom:0.2rem;"><strong>${escH(ch.textContent || '')}</strong> — ${strength} ${tt('pair.colloc_leans', 'associated with this spelling')}${sideTxt}</div>`
-            + `<div style="color:var(--text-muted); margin-bottom:0.3rem; font-size:0.72rem;">${tt('pair.colloc_z_explain', 'z = ' + m.z + ': how far its lean beats chance — 2 is the threshold for reporting')}</div>`
-            + (m.g ? `<div style="margin-bottom:0.35rem; color:var(--text);">${escH(m.g)}</div>` : '')
+          // What the word IS comes first. A restatement of the chip's own text
+          // ("heartofchornobyl — very strongly associated with this spelling")
+          // told the reader nothing they had not just clicked on.
+          const strength = m.z >= 6 ? tt('pair.colloc_very_strong', 'Appears almost only alongside this spelling')
+                         : m.z >= 4 ? tt('pair.colloc_strong', 'Appears far more often alongside this spelling')
+                         : m.z >= 2.5 ? tt('pair.colloc_clear', 'Appears noticeably more often alongside this spelling')
+                         : tt('pair.colloc_mild', 'Appears a little more often alongside this spelling');
+          pop.innerHTML =
+              (m.g ? `<div style="margin-bottom:0.35rem; color:var(--text);">${escH(m.g)}</div>` : '')
             + (srcs ? `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${tt('pair.colloc_sources', 'Distinctive in')}: ${escH(srcs)}</div>`
                     : `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${tt('pair.colloc_solo_note', 'Distinctive of the dominant form, measured against the cross-pair background')}</div>`)
-            + (m.ex ? `<div style="border-left:2px solid var(--border,#e5e7eb); padding-left:0.5rem; color:var(--text);">“${escH(m.ex.t)}” <span style="color:var(--text-muted);">— ${escH(srcName(m.ex.s))}</span></div>` : '');
+            + (m.ex ? `<div style="border-left:2px solid var(--border,#e5e7eb); padding-left:0.5rem; color:var(--text);">“${escH(m.ex.t)}” <span style="color:var(--text-muted);">— ${escH(srcName(m.ex.s))}</span></div>` : '')
+            // The number goes last, said in words: it measures how lopsided the
+            // word's use is between the two spellings, nothing more.
+            + `<div style="color:var(--text-muted); margin-top:0.4rem; padding-top:0.35rem; border-top:1px solid var(--border,#e5e7eb); font-size:0.72rem;">`
+              + `${strength} ${tt('pair.colloc_than_other', 'than alongside the other')} `
+              + `<span style="opacity:0.75;">(${m.z})</span></div>`;
           const r = ch.getBoundingClientRect();
           pop.style.left = Math.min(window.scrollX + r.left, window.scrollX + window.innerWidth - 360) + 'px';
           pop.style.top = (window.scrollY + r.bottom + 6) + 'px';
