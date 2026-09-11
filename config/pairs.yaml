@@ -406,7 +406,6 @@ pairs:
   - chernobyl\s+pack
   - chernobyl\s+vs\s+edgerunners
   - chilecomparte\.cl|\[?(?:1080p|720p)\]?.*\bx265\b
-  - heart\s+of\s+cherno?byl
   - midnight\s+in\s+cherno?byl
   - mini[\s-]?series\s+chernobyl
   - renck\s*\(chernobyl\)|\(hbo'?s[^)]*chernobyl\)
@@ -538,6 +537,7 @@ pairs:
   - \bai[\s-]*(?:magic|generated)\b
   - arepas,\s*chicken kiev,\s*doner kebab
   - chicken[\s-]*k(?:ie|yi)v['’"”]?\s+(?:speech|address)
+  - dynamo\s+chicken\s+k(?:ie|yi)v
   - chicken\s+kiev\s+chicken\s+(?:noodles|chili)\b
   - chicken\s+kiev\s+videos?\s+chicken\s+\w+\s+video
   - r/(?:tf2|truetf2|tf2fashionadvice|tf2shitposterclub|sfm)\b
