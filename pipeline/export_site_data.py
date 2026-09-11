@@ -1994,6 +1994,15 @@ def main():
     # Plain-language glosses for cluster registers. Deterministic keyword rules,
     # not per-pair hand edits: the first rule whose keywords intersect a cluster's
     # top terms names it. Editable here, reproducible everywhere.
+    # Reddit halves of several corpora carry adult spam. It is real signal — the
+    # cluster exists — but the site published its vocabulary verbatim as a label
+    # ("sundayschool · pussy") and listed milf/teen/blowjob under "Also frequent".
+    # The cluster is named for what it is and its terms are withheld.
+    EXPLICIT = {"pussy", "milf", "teen", "teens", "blowjob", "anal", "porn", "xxx",
+                "nude", "nudes", "naked", "tits", "boobs", "cum", "fuck", "fucking",
+                "sexy", "sex", "escort", "escorts", "onlyfans", "webcam", "cam",
+                "hentai", "bdsm", "fetish", "orgy", "horny", "slut", "dick", "cock"}
+
     GLOSS_RULES = [
         ({"police", "arrested", "department", "sheriff"}, "crime & police news"),
         ({"battle", "wagner", "soledar"}, "the battle for Bakhmut"),
@@ -2185,6 +2194,12 @@ def main():
                 _r = _snippet(_cand, meta[_cid]["terms"], meta[_cid]["names"])
                 if not _r:
                     continue
+                # An example that shows the pair name but none of the cluster's
+                # terms illustrates nothing: a podcast about Olga of Kiev was
+                # published under a cluster it had no connection to. A quote
+                # has to carry at least one term the cluster is named for.
+                if _r[1] < 1:
+                    continue
                 _t = 0 if (_r[2] and _r[1] >= 2) else 1 if _r[2] else 2
                 tiers[_t].setdefault(_cid, _r[0])
                 break
@@ -2326,12 +2341,14 @@ def main():
                 "ua_pct": _ua_pct,
                 "size": _c.get("size", int(len(_m))),
                 "gloss": ("non-English coverage" if _label == "non-English"
+                          else "adult-content spam"
+                          if len(EXPLICIT & {t.lower() for t in _c.get("top_terms", [])}) >= 2
                           else _gloss_for(_c.get("top_terms", []), _label)),
                 # filled below once all clusters exist; placeholder keeps key order
                 "peak": _peak,
                 # Self-explanation: what the label was cut from, where the texts
                 # came from, when they were written, and one line of the cluster.
-                "terms": _terms6,
+                "terms": [t for t in _terms6 if t.lower() not in EXPLICIT],
                 "sources": _src_shares(_cmeta[str(_cid)]["src"]),
                 "years": _year_span(_cmeta[str(_cid)]["yr"]),
                 "example": "",      # filled once every cluster is known
@@ -2341,6 +2358,10 @@ def main():
         # that belongs to whichever constituent ends up naming it.
         for _cid2, _ex2 in _cluster_examples(_slug, _asg, _cmeta).items():
             if _cid2 in _clusters:
+                # Adult-spam clusters are reported, not quoted: the snippet ships
+                # verbatim to the page.
+                if _clusters[_cid2].get("gloss") == "adult-content spam":
+                    continue
                 _clusters[_cid2]["example"] = _ex2
         # Identical glosses on different clusters read as duplicates — the exact
         # complaint the glosses were meant to fix. Append each cluster's first
