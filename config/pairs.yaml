@@ -133,29 +133,21 @@ pairs:
   ukrainian_cyrillic: Харків
   significance: Second largest city. 'Kharkov' is a direct Russian transliteration.
   homonym_filters:
-  - \barma\s?3\b|milsim
   - \bkharkov\s+8\b
   - balroomdancing|ballroomdancing
-  - call\s+of\s+duty
-  - hell\s*let\s*loose|\bhll\b
   - irishdentist\.ie
   - jean\s+lopez
   - kharkov never sleeps
   - kharkov:?\s*battles\s+before\s+and\s+after
   - kharkov\\?_\d+-\d+
-  - r/gatesofhellostfront
-  - r/hellletloose|hell\s*let\s*loose
   - r/natureofpredators
-  - r/thefirerisesmod
   - r/u_iam_tender_angel
-  - r/victoria3
   - send\.monobank\.ua
   - serge[iy]\s+kharkov
   - simona\s+kharkov
   - spring\s+prelude
   - st=kharkov|/l=kharkov
   - white\s+stork
-  - world\s+of\s+tanks
 - russian: Odessa
   ukrainian: Odesa
   enabled: true
