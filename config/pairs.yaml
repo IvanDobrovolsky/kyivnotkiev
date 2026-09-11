@@ -1137,7 +1137,7 @@ pairs:
   - quanto mais fundo
   - quizlit
   - teatru radiofonic
-  - nikolai\s*gogol\s*edit
+  - (?:nikolai\s*gogol|mykola\s*hohol)\s*edit
 - russian: Feodosiya
   ukrainian: Feodosiia
   enabled: true
