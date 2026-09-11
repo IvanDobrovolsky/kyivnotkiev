@@ -2427,6 +2427,21 @@ def main():
         except Exception:                              # noqa: BLE001
             pass
 
+    # Which sources this pair actually PLOTS. A term can be distinctive in a
+    # source whose series was dropped for being too thin to plot (keyness needs
+    # documents, the series needs volume over time), and feodosiia then quoted
+    # Academic under a panel reading "Insufficient Academic data". Quote from a
+    # source the reader can see whenever one is available.
+    _shown_sources = {}
+    try:
+        _tsj = json.loads((SITE_DATA_DIR / "timeseries.json").read_text())
+        for _s2, _v2s in _tsj.items():
+            if isinstance(_v2s, dict):
+                _shown_sources[_s2] = {_k2 for _k2, _val in _v2s.items()
+                                       if isinstance(_val, list) and _val}
+    except Exception:                                  # noqa: BLE001
+        pass
+
     _kj = {}
     for _f in sorted((ROOT / "data" / "stats").glob("*/analysis.json")):
         _slug = _f.parent.name
@@ -2562,7 +2577,11 @@ def main():
             _g = _pair_gloss.get(w)
             if _g:
                 e["g"] = _g
-            ex = _example(w, side, prefer_sources=set(e.get("src") or []))
+            _vis = _shown_sources.get(_slug) or set()
+            _pref = set(e.get("src") or [])
+            if _vis:
+                _pref = (_pref & _vis) or _vis
+            ex = _example(w, side, prefer_sources=_pref)
             if ex:
                 e["ex"] = ex
             return e
