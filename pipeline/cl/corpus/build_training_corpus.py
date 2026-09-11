@@ -26,7 +26,8 @@ FW = {"de", "la", "el", "los", "las", "una", "del", "en", "que", "com", "por",
       "die", "das", "und", "di", "il", "della", "dei", "dopo", "gli", "um",
       "uma", "dos", "per", "non", "nessun", "alla", "dalla", "como", "hacia",
       "ve", "bir", "için", "ile", "daha", "sonra", "önce", "con"}
-WRONG_REF = re.compile(r"\ba/kiev/\d|\bkiev(an)?\s+rus", re.I)
+# Non-capturing: str.contains ignores groups but warns about them on every run.
+WRONG_REF = re.compile(r"\ba/kiev/\d|\bkiev(?:an)?\s+rus", re.I)
 
 
 def sha1(p: pathlib.Path) -> str:
