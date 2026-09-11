@@ -198,7 +198,12 @@ def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict
     # are stopped as well; a Spanish-language cluster should surface through terms
     # like "video" or stay generic, not advertise "que - por" as if it meant
     # something about naming.
-    FILLERS = {"like", "just", "time", "people", "know", "think", "really", "going",
+    # "name" is the mask token substituted for the pair's own spelling, so it
+    # appears in every document by construction; c-TF-IDF damps it but cannot
+    # zero it. Stopping it costs the genuine word, which is a fair trade in
+    # labels that exist to distinguish clusters from each other.
+    FILLERS = {"name",
+               "like", "just", "time", "people", "know", "think", "really", "going",
                "want", "got", "way", "thing", "things", "good", "make", "say", "said",
                "yeah", "don", "didn", "doesn", "ve", "ll", "im", "actually", "right",
                "new", "old", "year", "years", "day", "days", "watch", "video",
@@ -264,7 +269,12 @@ def main() -> int:
             t = rx.sub(" NAME ", t)
         return t
     log(f"  embedding {len(df):,} texts ({EMBED_MODEL}), pair names masked")
-    X = embed([_neutralise(t) for t in df.text.tolist()])
+    # Masked text is used for LABELS too. The names are in every document by
+    # construction, so they carry no cluster information, and babyn-yar labelled
+    # its clusters "yar, babi, ..." — the pair's own spelling dressed up as a
+    # finding. Label from the same text the model clustered on.
+    _masked = pd.Series([_neutralise(t) for t in df.text.tolist()], index=df.index)
+    X = embed(_masked.tolist())
 
     gm, Xr = fit_gmm(X)
     post = gm.predict_proba(Xr)
@@ -287,7 +297,7 @@ def main() -> int:
     # deterministic, and reported.
     k0 = post.shape[1]
     lab0 = post.argmax(1)
-    terms0 = top_terms(df.text, lab0, k0, n=8)
+    terms0 = top_terms(_masked, lab0, k0, n=8)
     parent2 = list(range(k0))
     def find2(x):
         while parent2[x] != x:
@@ -354,7 +364,7 @@ def main() -> int:
     outdf.to_parquet(out_dir / "assignments.parquet", index=False)
 
     k = post.shape[1]
-    terms = top_terms(df.text, labels, k)
+    terms = top_terms(_masked, labels, k)
     summary = {"pair": a.pair, "seed": SEED, "n": len(df), "k_chosen": int(k),
                "borderline_margin": BORDERLINE_MARGIN,
                "borderline_share": round(float(borderline.mean()), 4),
