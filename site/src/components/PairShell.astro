@@ -2259,7 +2259,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const escH = (t: string) => t.replace(/[&<>"']/g, (ch: string) =>
         ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch] as string));
       const collChip = (x: any, c: string) => {
-        const meta = encodeURIComponent(JSON.stringify({src: x.src || [], ex: x.ex || null, z: x.z, g: x.g || null}));
+        const meta = encodeURIComponent(JSON.stringify({src: x.src || [], ex: x.ex || null, z: x.z, g: x.g || null, side: x._side || null}));
         return `<button class="coll-chip" data-meta="${meta}" style="padding:0.15rem 0.5rem; border:1px solid ${c}33; background:${c}0d; border-radius:10px; font-size:0.78rem; color:var(--text); cursor:pointer; font-family:inherit;">${escH(String(x.w))}</button>`;
       };
       function bindCollChips(scope: HTMLElement) {
@@ -2280,7 +2280,15 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         const showFor = (ch: any) => {
           const m = JSON.parse(decodeURIComponent(ch.dataset.meta || '%7B%7D'));
           const srcs = (m.src || []).map(srcName).join(', ');
-          pop.innerHTML = `<div style="margin-bottom:0.25rem;"><strong>${escH(ch.textContent || '')}</strong> <span style="color:var(--text-muted);">· ${tt('pair.colloc_z', 'distinctiveness')} z = ${m.z}</span></div>`
+          // "z = 7.3" tells a reader nothing. Lead with what it means, keep the
+          // number for anyone who wants it, and say where the line is drawn.
+          const strength = m.z >= 6 ? tt('pair.colloc_very_strong', 'very strongly')
+                         : m.z >= 4 ? tt('pair.colloc_strong', 'strongly')
+                         : m.z >= 2.5 ? tt('pair.colloc_clear', 'clearly')
+                         : tt('pair.colloc_mild', 'mildly');
+          const sideTxt = m.side ? ` ${tt('pair.colloc_toward', 'toward')} ${escH(String(m.side))}` : '';
+          pop.innerHTML = `<div style="margin-bottom:0.2rem;"><strong>${escH(ch.textContent || '')}</strong> — ${strength} ${tt('pair.colloc_leans', 'associated with this spelling')}${sideTxt}</div>`
+            + `<div style="color:var(--text-muted); margin-bottom:0.3rem; font-size:0.72rem;">${tt('pair.colloc_z_explain', 'z = ' + m.z + ': how far its lean beats chance — 2 is the threshold for reporting')}</div>`
             + (m.g ? `<div style="margin-bottom:0.35rem; color:var(--text);">${escH(m.g)}</div>` : '')
             + (srcs ? `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${tt('pair.colloc_sources', 'Distinctive in')}: ${escH(srcs)}</div>`
                     : `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${tt('pair.colloc_solo_note', 'Distinctive of the dominant form, measured against the cross-pair background')}</div>`)
@@ -2325,12 +2333,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         bindCollChips(collContainer);
       } else if (collContainer && kd && (kd.ua?.length || kd.ru?.length)) {
         const names = getLlmPerPair()?.pairs?.[pid] || {};
-        const chip = (x: any, c: string) => collChip(x, c);
+        const chip = (x: any, c: string, side?: string) => collChip({...x, _side: side}, c);
         const col = (label: string, color: string, list: any[]) => `
           <div>
             <div style="font-size:0.74rem; font-weight:700; color:${color}; margin-bottom:0.3rem;">${label}</div>
             <div style="display:flex; flex-wrap:wrap; gap:0.3rem;">
-              ${list.length ? list.map((x: any) => chip(x, color)).join('') : '<span style="font-size:0.76rem; color:var(--text-muted); font-style:italic;">no distinctive vocabulary — usage too scattered</span>'}
+              ${list.length ? list.map((x: any) => chip(x, color, label)).join('') : '<span style="font-size:0.76rem; color:var(--text-muted); font-style:italic;">no distinctive vocabulary — usage too scattered</span>'}
             </div>
           </div>`;
         collContainer.innerHTML = `
