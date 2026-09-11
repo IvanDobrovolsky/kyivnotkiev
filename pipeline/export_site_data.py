@@ -2559,8 +2559,15 @@ def main():
                 # Stratified per source: a head() sample was all news rows, so
                 # YouTube-hashtag terms (heartofchornobyl) never found their
                 # example. Up to 8K docs from EACH source.
+                # head() on a date-sorted frame is the OLDEST 8k, not a sample:
+                # zelenskyy's GDELT pool ran 2016-03-22 to 2022-03-04 — 6.2% of
+                # its 128,788 rows and nothing after the first ten days of the
+                # invasion — so every news-sourced quote was pre-presidency or
+                # pre-war, and the slice over-sampled the Russian variant 2.7x.
+                # Sample instead, seeded so the export stays reproducible.
                 _exdf = (_pdx.read_parquet(_rp0, columns=["text", "source", "variant"])
-                         .groupby("source", group_keys=False).head(8000))
+                         .groupby("source", group_keys=False)
+                         .apply(lambda g: g.sample(min(len(g), 8000), random_state=7)))
                 _exdf["_lc"] = _exdf.text.astype(str).str.lower()
             except Exception:                          # noqa: BLE001
                 _exdf = None
@@ -2616,7 +2623,10 @@ def main():
                 ["_d", "_len"], kind="mergesort")
             _row = None
             for _r in _cand.itertuples():
-                _key = getattr(_r, "url", None) or str(_r.text)[:120]
+                # _exdf carries no url column, so getattr always returned None
+                # and every row keyed on the same attribute name. Key on the
+                # text itself, which is what identifies the document here.
+                _key = str(_r.text)[:160]
                 if _key in _used_examples:
                     continue
                 _row = _r
