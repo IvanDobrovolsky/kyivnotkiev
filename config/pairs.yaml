@@ -314,7 +314,7 @@ pairs:
   is_control: false
   match_mode: word_boundary
   homonym_filters:
-  - nikolaev.{0,10}(born|author|professor|medal|coach|player)
+  - nikolaev.{0,10}(?:born|author|professor|medal|coach|player)
   homonym_type: surname
   ner_filter: true
   slug: mykolaiv
@@ -350,7 +350,7 @@ pairs:
   is_control: false
   match_mode: word_boundary
   homonym_filters:
-  - rovno.{0,5}(v|na|po)\b
+  - rovno.{0,5}(?:v|na|po)\b
   homonym_type: slavic_adverb
   slug: rivne
   events:
@@ -695,38 +695,38 @@ pairs:
   ukrainian_cyrillic: Динамо Київ
   significance: 'Sports media is a distinct discourse with its own inertia: club names are often frozen in the form the wire services first used.'
   homonym_filters:
-  - (pron[oó]sticos?|apuestas deportivas|futbol europeo|jornada \d)
-  - \b(ao vivo|sem delay|palpites|análises do|jogos do dia)\b
-  - \b(bgmi|1v[s]?4 clutch|spraygod|m416clutch)\b
-  - \b(bgmi|dynamo gaming|dynamogaming)\b
-  - \b(bgmi|dynamo gaming|dynamogaming|1v[s]?4 clutch|m416)\b
-  - \b(equipa|arriscamos|ganhar a primeira liga|já agora)\b
-  - \b(exploit incroyable|qui a marqué|l histoire)\b
-  - \b(golü|sanchezin|maçi|maçı)\b
-  - \b(hasil|tadi malam|ketika|semua pemain|kualifikasi|pertandingan|melawan|mempertemukan|menewaskan|menang lagi)\b
-  - \b(hasil|tadi malam|kualifikasi|jadwal|pertandingan)\b
-  - \b(kariyer önerisi|fm2[0-9]kariyer|türkçe|spiker)\b
-  - \b(konferans ligi|rakipleri|rakibi)\b
-  - \b(le roi oublié|du football)\b
-  - \b(maci biletleri|ne zaman|satisa cikar)\b
-  - \b(maçini|izlerse|fanatik|rezillik|tepki videosu)\b
-  - \b(mempertemukan|melawan|gol salto|pada tanggal)\b
-  - \b(menang lagi|menewaskan|padu mat|kalah)\b
-  - \b(palpites|análises do|ao vivo|sem delay|jogos do dia|o sucesso da equipa)\b
-  - \b(palpites|de quinta|da quinta)\b
-  - \b(pronostics?|pronostic foot|ligue des champions)\b
-  - \b(pronostics?|pronostic foot|ligue europa conference)\b
-  - \b(pronostics?|téléfoot|ligue des champions|ligue europa)\b
-  - \b(rakibi|rakibimizi|tanıyalım|rakipleri)\b
-  - \b(rezillik|tepki videosu|maçi|maçı)\b
-  - \b(semua pemain|klub lokal|dipaksa|tentara|pertandingan)\b
-  - \b(sintesi|andata|ritorno|calcio europeo)\b
-  - \b(téléfoot|1/[24] de finale|coupe des clubs champions)\b
-  - \b(téléfoot|pronostics?|1/[24] de finale|coupe de france)\b
-  - \b(türkçe|spiker|maçi|maçı)\b
-  - \b(victoire importante|pour continuer|l aventure europeenne)\b
-  - \b(özet|maçi|maçı|maçini|rakibi|rakibimizi|rakipleri|golü|türkçe|spiker|kariyer önerisi|tepki videosu|biletleri|kayıtları|satisa|tanıyalım|izlerse)\b
-  - \b(özet|maçi|maçı|rakibi|golü|türkçe|spiker|şov|futbol)\b
+  - (?:pron[oó]sticos?|apuestas deportivas|futbol europeo|jornada \d)
+  - \b(?:ao vivo|sem delay|palpites|análises do|jogos do dia)\b
+  - \b(?:bgmi|1v[s]?4 clutch|spraygod|m416clutch)\b
+  - \b(?:bgmi|dynamo gaming|dynamogaming)\b
+  - \b(?:bgmi|dynamo gaming|dynamogaming|1v[s]?4 clutch|m416)\b
+  - \b(?:equipa|arriscamos|ganhar a primeira liga|já agora)\b
+  - \b(?:exploit incroyable|qui a marqué|l histoire)\b
+  - \b(?:golü|sanchezin|maçi|maçı)\b
+  - \b(?:hasil|tadi malam|ketika|semua pemain|kualifikasi|pertandingan|melawan|mempertemukan|menewaskan|menang lagi)\b
+  - \b(?:hasil|tadi malam|kualifikasi|jadwal|pertandingan)\b
+  - \b(?:kariyer önerisi|fm2[0-9]kariyer|türkçe|spiker)\b
+  - \b(?:konferans ligi|rakipleri|rakibi)\b
+  - \b(?:le roi oublié|du football)\b
+  - \b(?:maci biletleri|ne zaman|satisa cikar)\b
+  - \b(?:maçini|izlerse|fanatik|rezillik|tepki videosu)\b
+  - \b(?:mempertemukan|melawan|gol salto|pada tanggal)\b
+  - \b(?:menang lagi|menewaskan|padu mat|kalah)\b
+  - \b(?:palpites|análises do|ao vivo|sem delay|jogos do dia|o sucesso da equipa)\b
+  - \b(?:palpites|de quinta|da quinta)\b
+  - \b(?:pronostics?|pronostic foot|ligue des champions)\b
+  - \b(?:pronostics?|pronostic foot|ligue europa conference)\b
+  - \b(?:pronostics?|téléfoot|ligue des champions|ligue europa)\b
+  - \b(?:rakibi|rakibimizi|tanıyalım|rakipleri)\b
+  - \b(?:rezillik|tepki videosu|maçi|maçı)\b
+  - \b(?:semua pemain|klub lokal|dipaksa|tentara|pertandingan)\b
+  - \b(?:sintesi|andata|ritorno|calcio europeo)\b
+  - \b(?:téléfoot|1/[24] de finale|coupe des clubs champions)\b
+  - \b(?:téléfoot|pronostics?|1/[24] de finale|coupe de france)\b
+  - \b(?:türkçe|spiker|maçi|maçı)\b
+  - \b(?:victoire importante|pour continuer|l aventure europeenne)\b
+  - \b(?:özet|maçi|maçı|maçini|rakibi|rakibimizi|rakipleri|golü|türkçe|spiker|kariyer önerisi|tepki videosu|biletleri|kayıtları|satisa|tanıyalım|izlerse)\b
+  - \b(?:özet|maçi|maçı|rakibi|golü|türkçe|spiker|şov|futbol)\b
   - \bgnk\s+d[iy]namo\b
   - \bmeci amical\b
   - ^fc_dynamo_kyiv$
@@ -973,9 +973,9 @@ pairs:
   ukrainian_cyrillic: Олександр Усик
   significance: An athlete who states his own name. Sports coverage is a test of whether English follows a person's own usage.
   homonym_filters:
-  - \b(analisis|pembalasan|pembuktian|tinju dunia)\b
-  - \b(mengerikan|pertarungan|prediksi|menumbangkan)\b
-  - \b(tinju|kehebatan|mengakui|tertandingi)\b
+  - \b(?:analisis|pembalasan|pembuktian|tinju dunia)\b
+  - \b(?:mengerikan|pertarungan|prediksi|menumbangkan)\b
+  - \b(?:tinju|kehebatan|mengakui|tertandingi)\b
   - \bbeobachtet\b|\bbei dem wiegen\b
   - \bboks\b|\bmmauzbekistan\b
   - \bbondia\b|\bamepigana\b
@@ -1197,7 +1197,7 @@ pairs:
   ukrainian_cyrillic: Ігор Сікорський
   significance: The Kyiv-born aviation pioneer behind the modern helicopter; American fame fixed the Russian rendering of his name.
   homonym_filters:
-  - igor\s+sikorsky\s+(kyiv|kiev)\s+international\s+airport
+  - igor\s+sikorsky\s+(?:kyiv|kiev)\s+international\s+airport
   - igor\s+sikorsky\s+bridge
   - igor\s+sikorsky\s+historical\s+archives
   - igor\s+sikorsky\s+memorial
@@ -1227,11 +1227,11 @@ pairs:
   ukrainian_cyrillic: Сергій Корольов
   significance: The Zhytomyr-born chief designer of the Soviet space programme, fixed in history books as Sergei Korolev.
   homonym_filters:
-  - (fsb|federal security service)[^.]{0,120}sergei korolev
+  - (?:fsb|federal security service)[^.]{0,120}sergei korolev
   - pobeda search group,\s*sergei korolev
   - sergei korolev,\s*first deputy director
   - sergei korolev,\s*general manager
-  - sergei korolev[^.]{0,60}(russian mafia|organi[sz]ed crime)
+  - sergei korolev[^.]{0,60}(?:russian mafia|organi[sz]ed crime)
   - sergei korolev\s+space\s*x
   - space\s+sergei korolev\s+soviet rocket program
 - russian: Bogdan Khmelnitsky
