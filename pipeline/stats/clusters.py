@@ -238,8 +238,20 @@ def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict
                "que", "por", "para", "una", "del", "las", "los", "con", "este",
                "und", "der", "die", "das", "les", "des", "dans", "pour"}
     stop = list(ENGLISH_STOP_WORDS | FILLERS)
-    docs = [LABEL_JUNK.sub(" ", LABEL_URLS.sub(" ", " ".join(texts[labels == c].head(2000))))
-            for c in range(k)]
+    # c-TF-IDF concatenates each cluster into one document, which hands maximal
+    # idf to a word confined to a single text: odesa published "wib" and "fur"
+    # (1 document each, Indonesian betting spam) and chornobyl "mclaren" (0.2%
+    # of its docs) as cluster NAMES. Keyness got a document floor; this never
+    # did. A label term must be used by several texts in its own cluster.
+    groups = [texts[labels == c].head(2000) for c in range(k)]
+    docs = [LABEL_JUNK.sub(" ", LABEL_URLS.sub(" ", " ".join(g))) for g in groups]
+    doc_freq = []
+    for g in groups:
+        seen: dict = {}
+        for t in g:
+            for w in set(re.findall(r"[a-zA-Z][a-zA-Z'-]{2,}", str(t).lower())):
+                seen[w] = seen.get(w, 0) + 1
+        doc_freq.append((seen, max(len(g), 1)))
     cv = CountVectorizer(stop_words=stop, max_features=30_000,
                          token_pattern=r"[a-zA-Z][a-zA-Z'-]{2,}")
     tf = cv.fit_transform(docs).toarray().astype(np.float64)
@@ -247,7 +259,20 @@ def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict
     idf = np.log(1 + k / np.maximum((tf > 0).sum(0), 1))
     ct = tf * idf
     vocab = np.array(cv.get_feature_names_out())
-    return {int(c): [str(w) for w in vocab[np.argsort(-ct[c])[:n]]] for c in range(k)}
+    out = {}
+    for c in range(k):
+        seen, n_docs = doc_freq[c]
+        floor = max(3, int(0.05 * n_docs))
+        picked = []
+        for w in vocab[np.argsort(-ct[c])]:
+            if seen.get(str(w), 0) >= floor:
+                picked.append(str(w))
+            if len(picked) >= n:
+                break
+        # Never return nothing: if the floor empties a small cluster, fall back
+        # to the unfiltered ranking rather than leaving it unnamed.
+        out[int(c)] = picked or [str(w) for w in vocab[np.argsort(-ct[c])[:n]]]
+    return out
 
 
 def main() -> int:

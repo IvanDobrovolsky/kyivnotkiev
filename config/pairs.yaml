@@ -229,6 +229,10 @@ pairs:
   - twin\s+peaks\s+odessa
   - vampirate\s+odessa|odessa\s+delico
   - williston|bakken|permian
+  - odessa[,\s]+(?:tx|texas|mo|missouri|wa|washington|fl|florida)\b
+  - west\s+odessa
+  - odessa\s+(?:city\s+council|isd|police|fire|college|high\s+school|american|chevrolet|jackalopes)
+  - newswest9|cbs7|oaoa|yourbasin|permian
   homonym_type: us_city
   referent_filter:
     evidence: \b(?:ukrain\w*|black sea|kyiv|kiev|kherson|mykolaiv|zelensk\w+|oblast|russia\w*|moscow|donbas|crimea\w*|odesa|trukhanov|saakashvili|potemkin st\w*|derybasivska|deribasovskaya|privoz|prymorsky|arcadia
