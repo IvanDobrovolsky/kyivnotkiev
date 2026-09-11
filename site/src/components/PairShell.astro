@@ -2280,7 +2280,6 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             ${col(`Around "${names.ukrainian || 'the Ukrainian form'}"`, '#2563eb', kd.ua || [])}
             ${col(`Around "${names.russian || 'the Russian form'}"`, '#dc2626', kd.ru || [])}
           </div>
-          <div style="font-size:0.7rem; color:var(--text-dim); margin-top:0.5rem;">Log-odds with a corpus prior; a word appears only if it leans the same way in two or more sources.</div>
         `;
         bindCollChips(collContainer);
       } else if (collContainer) {
