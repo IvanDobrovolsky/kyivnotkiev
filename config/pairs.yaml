@@ -72,7 +72,8 @@ pairs:
     label: Peace negotiation surge
   match_mode: word_boundary
   homonym_filters:
-  - k(?:ie|yi)v\s*-?\s*(?:60|88|4am?|19m?)\b
+  - k(?:ie|yi)v[\s-]*(?:60|88|4am?|19m?)\b.{0,120}(?:camera|lens|film|photo|tlr|rangefinder|medium\s+format)|(?:camera|lens|film|photo|tlr|rangefinder|medium\s+format).{0,120}k(?:ie|yi)v[\s-]*(?:60|88|4am?|19m?)\b
+  - dynamo\s+k(?:ie|yi)v|dinamo\s+k(?:ie|yi)v
   - lost\s+in\s+k(?:ie|yi)v
   - martens\s+kiev|kiev\s+leather\s+backpack
   - kiev\s+kwentel
