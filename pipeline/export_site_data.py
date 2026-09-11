@@ -1426,22 +1426,15 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     log.info("Exporting holdouts (2025, all sources)...")
     by_pair = {}
 
-    # News (GDELT): domains using Russian spelling
-    gdelt = _load("gdelt")
-    if len(gdelt):
-        g25 = gdelt[gdelt["date"] >= "2025-01"]
-        ga = g25.groupby(["pair_slug", "source_domain", "variant"])["count"].sum().reset_index()
-        gp = ga.pivot_table(index=["pair_slug", "source_domain"], columns="variant", values="count", fill_value=0).reset_index()
-        gp["total"] = gp.get("russian", 0) + gp.get("ukrainian", 0)
-        gp["rus_pct"] = (gp.get("russian", 0) / gp["total"] * 100).round(1)
-        gp = gp[(gp["total"] >= 5) & (gp["rus_pct"] > 50)]
-        for slug in enabled_slugs:
-            h = gp[gp["pair_slug"] == slug].nlargest(50, "total")
-            if len(h):
-                by_pair.setdefault(slug, {})["news"] = [
-                    {"name": r["source_domain"], "russian_pct": float(r["rus_pct"]), "total": int(r["total"])}
-                    for _, r in h.iterrows()
-                ]
+    # The outlet table is built further down from the VERIFIED article frame.
+    # It used to aggregate raw_gdelt, whose rows exist only where the outlet
+    # spells the place name in its URL: tass.com appears 0 times in all 131,830
+    # of them, so kharkiv's "outlets still using Kharkov" named one masthead and
+    # missed the 73 TASS articles that dominate the pair. Worse, URL-slug
+    # matching cannot tell a city from its namesake — 2,302 of odesa's 3,981
+    # Russian-form counts came from Odessa, TEXAS, and the table shipped
+    # newswest9.com and 1025kiss.com as holdouts. It carried no url column, so
+    # the verified-wrong audit could not be applied to it even in principle.
 
     # Every source below uses the SAME rules as the news holdouts: the window starts
     # at HOLDOUT_SINCE, Russian and mixed usage both count, and the cap is HOLDOUT_CAP.
@@ -1863,8 +1856,23 @@ def main():
                 for t, v in zip(_vdf.text, _vdf.variant)])
             _vdf = (_vdf.sort_values("date", ascending=False)
                         .drop_duplicates("_lead")
-                        .drop_duplicates("_ctx")
-                        .groupby("domain", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
+                        .drop_duplicates("_ctx"))
+
+            # Outlets still using the Russian form, counted in distinct stories
+            # whose BODY was classified — the same evidence as the article table
+            # below, so the two can no longer name disjoint sets of outlets.
+            _od = (_vdf.assign(_ru=_vdf.variant.eq("russian"))
+                       .groupby("domain")
+                       .agg(total=("url", "size"), russian=("_ru", "sum"))
+                       .reset_index())
+            _od["rus_pct"] = (_od.russian / _od.total * 100).round(1)
+            _od = _od[(_od.total >= 2) & (_od.rus_pct > 50)].nlargest(50, "total")
+            if len(_od):
+                holdouts_by_pair.setdefault(_slug, {})["news"] = [
+                    {"name": r.domain, "russian_pct": float(r.rus_pct), "total": int(r.total)}
+                    for r in _od.itertuples()]
+
+            _vdf = (_vdf.groupby("domain", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
                         .head(HOLDOUT_CAP)
                         .drop(columns=["_lead", "_ctx"]))
             holdouts_by_pair.setdefault(_slug, {})["news_articles"] = [{
