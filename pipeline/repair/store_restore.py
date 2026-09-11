@@ -101,8 +101,56 @@ def splice(stored: str, clean_strings: list) -> str:
     return out
 
 
+def local_splice(stored: str, clean_strings: list) -> str:
+    """Repair each hole from its own surroundings, not the whole string.
+
+    The store keeps truncated and whitespace-normalised copies, so requiring
+    the entire clean string to appear as a substring failed on most YouTube
+    rows. Instead: run the candidate through the old pattern, which yields the
+    same holes in the same order, and match a hole to its counterpart by the
+    40 characters in front of it. The original span is then known exactly.
+    """
+    from pipeline.repair.openalex_restore import OLD_EMAIL, OLD_PHONE
+    out = str(stored)
+    for c in clean_strings:
+        if "[phone]" not in out:
+            break
+        staged = OLD_EMAIL.sub("[email]", str(c))
+        originals = list(OLD_PHONE.finditer(staged))
+        if not originals:
+            continue
+        sc = OLD_PHONE.sub("[phone]", staged)
+        holes = [m.start() for m in re.finditer(r"\[phone\]", sc)]
+        pieces, last = [], 0
+        for m in re.finditer(r"\[phone\]", out):
+            ctx = re.sub(r"\s+", " ", out[max(0, m.start() - 40):m.start()]).strip()
+            post = re.sub(r"\s+", " ", out[m.end():m.end() + 40]).strip()
+            pick = None
+            # Anchor on whichever side is intact. The store repeats the title
+            # inside text, so the run BEFORE a hole is often identical for two
+            # different holes while the run after is not (and vice versa).
+            for width in (40, 20):
+                for idx, h in enumerate(holes):
+                    if idx >= len(originals):
+                        continue
+                    pre_c = re.sub(r"\s+", " ", sc[max(0, h - width):h]).strip()
+                    post_c = re.sub(r"\s+", " ", sc[h + 7:h + 7 + width]).strip()
+                    if (pre_c and pre_c == ctx[-len(pre_c):]) or (post_c and post_c == post[:len(post_c)]):
+                        pick = originals[idx].group(0)
+                        break
+                if pick is not None:
+                    break
+            pieces.append(out[last:m.start()])
+            pieces.append(pick if pick is not None else m.group(0))
+            last = m.end()
+        pieces.append(out[last:])
+        out = "".join(pieces)
+    return out
+
+
 SOURCES = {
-    "youtube": (["data/cl/raw/youtube_census", "data/bq_export/raw_youtube"],
+    "youtube": (["data/cl/raw/youtube_refetch", "data/cl/raw/youtube_census",
+                 "data/bq_export/raw_youtube"],
                 "video_id", ["title", "description"], "doc_id"),
     "reddit": (["data/raw/reddit", "data/cl/raw/reddit_full", "data/cl/raw/reddit"],
                "post_id", ["title", "selftext"], "doc_id"),
@@ -150,6 +198,8 @@ def main() -> int:
                     if not isinstance(v, str) or "[phone]" not in v:
                         continue
                     nv = splice(v, bag)
+                    if "[phone]" in nv:
+                        nv = local_splice(nv, bag)
                     if nv != v:
                         df.at[i, col] = scrub(nv)[0]
                         touched = True

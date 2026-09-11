@@ -40,10 +40,26 @@ def _phone_is_real(m: re.Match) -> bool:
     carries a run of zeros; neither is a phone number, which needs 9 digits at
     minimum once the country and area codes are counted.
     """
-    digits = re.sub(r"\D", "", m.group(0))
+    raw = m.group(0)
+    digits = re.sub(r"\D", "", raw)
     if len(digits) < 9:
         return False
     if re.search(r"0{6}", digits):
+        return False
+    # ISBNs clear the digit test and are not PII: "0-393-01707" (Norton),
+    # "0-520-21815" (UC Press). They carry a group-of-3 publisher prefix and
+    # never a leading country code, and bibliographies label them.
+    if re.match(r"^\d-\d{3}-\d{5}$", raw.strip()):
+        return False
+    # A run of four-digit years is a list of years: "2009 2010 2011" in a
+    # video description, not a number anyone can call. A card number like
+    # "4314 1402 1235" fails this because 4314 is not a year — which is what
+    # we want, since donation card numbers must stay redacted.
+    groups = re.findall(r"\d+", raw)
+    if len(groups) >= 2 and all(len(g) == 4 and 1900 <= int(g) <= 2100 for g in groups):
+        return False
+    lead = m.string[max(0, m.start() - 12):m.start()].lower()
+    if "isbn" in lead or "issn" in lead or "doi" in lead:
         return False
     return True
 
