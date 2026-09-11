@@ -1945,6 +1945,13 @@ def main():
             # cannot be shown as current.
             if _rows is None or _rows != _pq.read_metadata(_pf).num_rows:
                 _stale_stats.add(_pf.stem)
+            # Row count alone cannot see the corpus being REWRITTEN. A PII
+            # scrub redacts text in place and leaves the count identical, so
+            # every pair kept its green badge on an analysis computed from
+            # text that no longer exists. If the corpus is newer than the
+            # analysis, the analysis is stale whatever the count says.
+            elif _pf.stat().st_mtime > _an.stat().st_mtime:
+                _stale_stats.add(_pf.stem)
         except Exception:                                  # noqa: BLE001
             _stale_stats.add(_pf.stem)
     if _stale_stats:
