@@ -112,7 +112,14 @@ def _scrub_file(f: str) -> dict:
         df = pd.read_parquet(f)
         c = scrub_frame(df, source_hint=hint)
         if sum(c.values()):
-            df.to_parquet(f, compression="zstd", index=False)
+            # Write-then-replace, like the streaming path below. Writing in
+            # place left a window in which any concurrent reader saw a
+            # truncated parquet, and every pair file is under the streaming
+            # threshold, so the whole store took this path. The store is read
+            # by clustering, stats and the exporter, which can run alongside.
+            tmp = path.with_suffix(".scrub_tmp.parquet")
+            df.to_parquet(tmp, compression="zstd", index=False)
+            tmp.replace(path)
         return c
     # Stream row groups so a 2GB file never fully materializes.
     pf = pq.ParquetFile(f)
