@@ -2026,14 +2026,60 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       if (legendEl) {
         legendEl.innerHTML = '';
         legendEl.style.cssText = 'display:flex; flex-wrap:wrap; gap:0.35rem 1.1rem; justify-content:center; margin-top:0.5rem; font-size:0.82rem;';
+        // Local copies: the collocation block defines its own further down, in
+        // a scope this one cannot see.
+        const escH = (t: string) => String(t).replace(/[&<>"']/g, (ch: string) =>
+          ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch] as string));
+        const srcName = (sid: string) => (typeof sourceLabels !== 'undefined' && (sourceLabels as any)[sid]) || sid;
         ordered.forEach(([cid, info]: any, idx: number) => {
           const color = info.ua_pct > 50 ? '#0057B8' : '#374151';
-          // Meaning first, exact number second: "the 2024 STALKER game · 92.2% UA".
-          // The auto-terms live in the hover title for anyone who wants them.
-          legendEl.innerHTML += `<span class="legend-item" data-cluster-legend="${idx}" title="terms: ${info.label}" style="display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">` +
+          // A cluster name on its own reads as an assertion. The meta carries
+          // what the grouping was actually built from — its terms, which
+          // sources it came from, when it peaked and one real sentence — so a
+          // reader can check the label instead of trusting it.
+          const cmeta = encodeURIComponent(JSON.stringify({
+            terms: info.terms || [], sources: info.sources || null,
+            years: info.years || null, example: info.example || null,
+            size: info.size, ua: info.ua_pct }));
+          legendEl.innerHTML += `<button class="legend-item cl-legend-chip" data-cluster-legend="${idx}" data-meta="${cmeta}" style="display:inline-flex;align-items:center;gap:5px;white-space:nowrap;border:none;background:none;padding:0;font:inherit;cursor:pointer;color:var(--text);">` +
             `<span style="width:16px;height:16px;border-radius:50%;background:${color};color:#fff;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>` +
             `<strong>${glossT(info.gloss || info.label)}</strong>` +
-            `<span style="color:#6b7280;"><span style="color:#0057B8;font-weight:600;">${info.ua_pct}% UA</span> · <span style="color:#dc2626;font-weight:600;">${(100-info.ua_pct).toFixed(1)}% RU</span> · ${info.size.toLocaleString()} texts</span></span>`;
+            `<span style="color:#6b7280;"><span style="color:#0057B8;font-weight:600;">${info.ua_pct}% UA</span> · <span style="color:#dc2626;font-weight:600;">${(100-info.ua_pct).toFixed(1)}% RU</span> · ${info.size.toLocaleString()} texts</span></button>`;
+        });
+
+        let cpop: any = document.getElementById('cl-legend-pop');
+        if (!cpop) {
+          cpop = document.createElement('div');
+          cpop.id = 'cl-legend-pop';
+          cpop.hidden = true;
+          cpop.style.cssText = 'position:absolute; z-index:60; max-width:380px; background:var(--bg,#fff); border:1px solid var(--border,#e5e7eb); border-radius:8px; padding:0.6rem 0.7rem; font-size:0.78rem; line-height:1.45; box-shadow:0 6px 24px rgba(0,0,0,0.12);';
+          document.body.appendChild(cpop);
+          document.addEventListener('click', (ev: any) => {
+            if (!cpop.hidden && !cpop.contains(ev.target) && !ev.target.closest?.('.cl-legend-chip')) cpop.hidden = true;
+          });
+        }
+        legendEl.querySelectorAll('.cl-legend-chip').forEach((ch: any) => {
+          ch.addEventListener('click', (ev: any) => {
+            ev.stopPropagation();
+            const m = JSON.parse(decodeURIComponent(ch.dataset.meta || '%7B%7D'));
+            const srcBits = m.sources ? Object.entries(m.sources)
+              .sort((a: any, b: any) => b[1] - a[1])
+              .map(([k, v]: any) => `${srcName(k)} ${Math.round(v * 100)}%`).join(' · ') : '';
+            const yr = m.years && m.years.mode
+              ? `${tt('pair.cluster_peak', 'Peaks in')} ${m.years.mode}` +
+                (m.years.mode_share ? ` (${Math.round(m.years.mode_share * 100)}% ${tt('pair.cluster_of_texts', 'of its texts')})` : '')
+              : '';
+            cpop.innerHTML =
+              `<div style="margin-bottom:0.3rem;"><strong>${escH(ch.querySelector('strong')?.textContent || '')}</strong> <span style="color:var(--text-muted);">· ${Number(m.size).toLocaleString()} ${tt('pair.cluster_texts', 'texts')}</span></div>`
+              + (m.terms && m.terms.length ? `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${tt('pair.cluster_terms', 'Grouped by')}: ${escH(m.terms.slice(0, 6).join(', '))}</div>` : '')
+              + (srcBits ? `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${escH(srcBits)}</div>` : '')
+              + (yr ? `<div style="color:var(--text-muted); margin-bottom:0.35rem;">${escH(yr)}</div>` : '')
+              + (m.example ? `<div style="border-left:2px solid var(--border,#e5e7eb); padding-left:0.5rem;">“${escH(m.example.t || m.example)}”</div>` : '');
+            const r = ch.getBoundingClientRect();
+            cpop.style.left = Math.min(window.scrollX + r.left, window.scrollX + window.innerWidth - 400) + 'px';
+            cpop.style.top = (window.scrollY + r.bottom + 6) + 'px';
+            cpop.hidden = false;
+          });
         });
       }
     }
@@ -2202,7 +2248,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const escH = (t: string) => t.replace(/[&<>"']/g, (ch: string) =>
         ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch] as string));
       const collChip = (x: any, c: string) => {
-        const meta = encodeURIComponent(JSON.stringify({src: x.src || [], ex: x.ex || null, z: x.z}));
+        const meta = encodeURIComponent(JSON.stringify({src: x.src || [], ex: x.ex || null, z: x.z, g: x.g || null}));
         return `<button class="coll-chip" data-meta="${meta}" style="padding:0.15rem 0.5rem; border:1px solid ${c}33; background:${c}0d; border-radius:10px; font-size:0.78rem; color:var(--text); cursor:pointer; font-family:inherit;">${escH(String(x.w))}</button>`;
       };
       function bindCollChips(scope: HTMLElement) {
@@ -2224,6 +2270,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           const m = JSON.parse(decodeURIComponent(ch.dataset.meta || '%7B%7D'));
           const srcs = (m.src || []).map(srcName).join(', ');
           pop.innerHTML = `<div style="margin-bottom:0.25rem;"><strong>${escH(ch.textContent || '')}</strong> <span style="color:var(--text-muted);">· ${tt('pair.colloc_z', 'distinctiveness')} z = ${m.z}</span></div>`
+            + (m.g ? `<div style="margin-bottom:0.35rem; color:var(--text);">${escH(m.g)}</div>` : '')
             + (srcs ? `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${tt('pair.colloc_sources', 'Distinctive in')}: ${escH(srcs)}</div>`
                     : `<div style="color:var(--text-muted); margin-bottom:0.25rem;">${tt('pair.colloc_solo_note', 'Distinctive of the dominant form, measured against the cross-pair background')}</div>`)
             + (m.ex ? `<div style="border-left:2px solid var(--border,#e5e7eb); padding-left:0.5rem; color:var(--text);">“${escH(m.ex.t)}” <span style="color:var(--text-muted);">— ${escH(srcName(m.ex.s))}</span></div>` : '');

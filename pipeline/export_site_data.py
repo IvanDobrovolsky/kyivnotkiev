@@ -1811,8 +1811,10 @@ def main():
     # trends_countries removed — country distribution from GDELT only
     # Holdouts: preserve existing file if it has URLs (built by BQ CSV scan)
     # Only regenerate if file doesn't exist
-    holdouts_by_pair, _ = export_holdouts(enabled_slugs)
-    _, holdouts_global = export_holdouts(enabled_slugs)
+    # One call, both results. Calling it twice rebuilt every pair's holdout
+    # tables from the corpus a second time for the half of the tuple the first
+    # call had already computed.
+    holdouts_by_pair, holdouts_global = export_holdouts(enabled_slugs)
 
     # GDELT article holdouts, validated against the rebuilt attested mention set.
     #
@@ -2019,6 +2021,164 @@ def main():
                 best, best_n = g, n
         return best if best_n else label
 
+    # ── Cluster self-explanation ────────────────────────────────────────────
+    # A card reading "click · local — 22.5% UA · 432 texts" tells a reader
+    # nothing. Alongside the label each cluster now carries the terms the label
+    # was cut from, the source mix (a 90%-one-source cluster is a platform
+    # artifact, not a register), the year span with its modal year (one dominant
+    # year is an event), and one verbatim line out of the cluster itself.
+    _WS_RE = re.compile(r"\s+")
+    # Scrape residue: bare URLs, markdown link stubs and emphasis, HTML
+    # entities, CSS, table pipes. Square brackets are kept — "[homemade] Chicken
+    # Kiev" is how reddit titles read, not damage.
+    _JUNK_RE = re.compile(r"https?://|www\.|\[\]\(|\(#|\|\s*\||[{}]|@media"
+                          r"|&#?\w+;|\*\*|~~", re.I)
+    # The snippet is published verbatim on a public page, and the reddit half of
+    # several corpora carries porn spam and song lyrics; such candidates are
+    # skipped rather than censored, which keeps the quote literal.
+    _NSFW_RE = re.compile(r"\b(?:anal|porn|nsfw|nude|nudes|sex|sexy|tits|milf|cum"
+                          r"|blowjob|fuck\w*|shit|cunt|dick|pussy|bitch|whore|rape"
+                          r"|onlyfans)\b", re.I)
+    _term_re_cache = {}
+
+    def _term_re(t: str):
+        r = _term_re_cache.get(t)
+        if r is None:
+            r = _term_re_cache[t] = re.compile(
+                r"(?<![a-z0-9])" + re.escape(t.lower()) + r"(?![a-z0-9])")
+        return r
+
+    def _window(flat, pos, limit):
+        """The <=limit-char run of `flat` around `pos`, cut at word boundaries.
+        Two characters are held back for the ellipses so the returned snippet
+        never exceeds `limit` once they are attached."""
+        if len(flat) <= limit:
+            return flat, False, False
+        limit -= 2
+        start = max(0, min(pos - limit // 3, len(flat) - limit))
+        end = start + limit
+        if start:
+            sp = flat.find(" ", start)
+            start = sp + 1 if 0 <= sp < pos else start
+        if end < len(flat):
+            sp = flat.rfind(" ", start, end)
+            end = sp if sp > pos else end
+        return flat[start:end].strip(), start > 0, end < len(flat)
+
+    def _snippet(text, terms, names, limit=160):
+        """A verbatim window of `text`, whitespace-normalised, around a term the
+        cluster is named for. Returns (snippet, terms_visible, shows_the_name)
+        or None. Nothing inside the window is rewritten — only the edges are cut
+        to word boundaries and marked with an ellipsis."""
+        flat = _WS_RE.sub(" ", str(text or "")).strip()
+        if len(flat) < 40:
+            return None
+        low = flat.lower()
+        t_pos = -1
+        for t in terms:                      # terms are c-TF-IDF ranked
+            m = _term_re(t).search(low)
+            if m:
+                t_pos = m.start()
+                break
+        if t_pos < 0:
+            return None
+        n_pos = min([m.start() for m in
+                     (_term_re(n).search(low) for n in names) if m], default=-1)
+        best = None
+        for _anchor in ([t_pos, n_pos] if n_pos >= 0 else [t_pos]):
+            out, lead, trail = _window(flat, _anchor, limit)
+            if len(out) < 30 or _JUNK_RE.search(out) or _NSFW_RE.search(out):
+                continue
+            # Mostly digits and punctuation means a scoreboard or a nav strip,
+            # not a line anyone would read.
+            if sum(c.isalpha() or c == " " for c in out) < 0.75 * len(out):
+                continue
+            wl = out.lower()
+            seen = sum(1 for t in terms if _term_re(t).search(wl))
+            named = any(_term_re(n).search(wl) for n in names)
+            cand = (("…" + out if lead else out) + ("…" if trail else ""),
+                    seen, named)
+            if best is None or (named, seen) > (best[2], best[1]):
+                best = cand
+        return best
+
+    def _src_shares(counter):
+        tot = sum(counter.values()) or 1
+        return {k: round(n / tot, 3)
+                for k, n in sorted(counter.items(), key=lambda kv: (-kv[1], kv[0]))
+                if round(n / tot, 3) > 0}
+
+    def _year_span(counter):
+        if not counter:
+            return None
+        tot = sum(counter.values())
+        mode, cnt = max(counter.items(), key=lambda kv: (kv[1], -kv[0]))
+        return {"min": min(counter), "max": max(counter), "mode": mode,
+                "mode_share": round(cnt / tot, 3)}
+
+    def _cluster_examples(slug, asg, meta, cap_rows=5000):
+        """One verbatim snippet per cluster, drawn from that cluster's dominant
+        source. Deterministic: candidates are the first record_ids under a plain
+        sort and the first qualifying one wins — first choice is a window showing
+        two of the cluster's terms, falling back to one. (Taking the window with
+        the MOST terms instead rewards keyword-stuffed SEO text, which is how a
+        music cluster's example became a list of 'mp3 download' synonyms.)
+        Bounded: the candidate budget is split across the clusters, so at most
+        cap_rows texts are read per pair."""
+        import pyarrow.parquet as _pq
+        src_file = ROOT / "data" / "store" / "pairs" / f"{slug}.parquet"
+        if not src_file.exists():
+            return {}
+        per_cluster = max(50, cap_rows // max(1, len(meta)))
+        want = {}
+        for _cid, _mt in meta.items():
+            if not _mt["terms"] or not _mt["src"]:
+                continue
+            dom = min(_mt["src"].items(), key=lambda kv: (-kv[1], kv[0]))[0]
+            _mine = asg[asg.cluster == int(_cid)]
+            sel = _mine[_mine.source == dom] if "source" in asg.columns else _mine
+            ids = sorted(sel.record_id.astype(str))[:per_cluster]
+            if not ids:     # dominant source carries no rows: fall back to all
+                ids = sorted(_mine.record_id.astype(str))[:per_cluster]
+            for rid in ids:
+                want.setdefault(rid, _cid)
+        if not want:
+            return {}
+        rows = {}
+        try:
+            for _b in _pq.ParquetFile(src_file).iter_batches(
+                    batch_size=8192, columns=["record_id", "title", "text"]):
+                _d = _b.to_pydict()
+                for rid, ti, tx in zip(_d["record_id"], _d["title"], _d["text"]):
+                    if rid in want and rid not in rows:
+                        rows[rid] = (ti, tx)
+                if len(rows) >= min(cap_rows, len(want)):
+                    break
+        except Exception as _e:
+            log.warning(f"  clusters: no examples for {slug}: {_e}")
+            return {}
+        # Tier 1 = the pair's own name plus two of the cluster's terms in view,
+        # tier 2 = the name plus one, tier 3 = terms but no name. First candidate
+        # in the id sort to reach a tier takes it; the best tier reached wins.
+        tiers = ({}, {}, {})
+        for rid in sorted(rows):
+            _cid = want[rid]
+            if _cid in tiers[0]:
+                continue
+            _ti, _tx = rows[rid]
+            for _cand in (_tx, _ti):
+                _r = _snippet(_cand, meta[_cid]["terms"], meta[_cid]["names"])
+                if not _r:
+                    continue
+                _t = 0 if (_r[2] and _r[1] >= 2) else 1 if _r[2] else 2
+                tiers[_t].setdefault(_cid, _r[0])
+                break
+        best = {}
+        for _t in tiers:
+            for _cid, _sn in _t.items():
+                best.setdefault(_cid, _sn)
+        return best
+
     # Cluster scatter for the pair pages, regenerated from the stats pipeline
     # (pipeline/stats/clusters.py). Only pairs whose clustering has been run on the
     # CURRENT corpus appear; there is no fallback to the old artifact, which was
@@ -2055,6 +2215,7 @@ def main():
             _points.append({"x": float(r.umap_x), "y": float(r.umap_y),
                             "v": _k2[2]})
         _clusters = {}
+        _cmeta = {}     # per-cluster source/year tallies, merged alongside below
         # The pair's own spellings head almost every term list; excluding them makes
         # the labels describe the CONTEXT. Derived from config, not hardcoded.
         _pc = next((q for q in load_pairs().get("pairs", []) if q.get("slug") == _slug), {})
@@ -2069,6 +2230,20 @@ def main():
             # spellings, which head almost every list.
             _terms = [t for t in _c.get("top_terms", [])
                       if t.lower() not in _pairwords and len(t) > 2]
+            # Kept before the non-English override below: the six terms the label
+            # was cut from are what makes a two-word label legible.
+            _terms6 = _terms[:6]
+            # source/year are optional columns in assignments.parquet, so a pair
+            # clustered before they were written must not break the export.
+            _src_n = (_m.source.astype(str).value_counts().to_dict()
+                      if "source" in _m.columns else {})
+            _yr_n = (_m.year.dropna().astype(str).value_counts().to_dict()
+                     if "year" in _m.columns else {})
+            _yr_n = {int(y): int(n) for y, n in _yr_n.items()
+                     if y.isdigit() and 1900 < int(y) < 2100}
+            _cmeta[str(_cid)] = {"terms": _terms6, "names": sorted(_pairwords),
+                                 "src": {k: int(v) for k, v in _src_n.items()},
+                                 "yr": _yr_n}
             # Labels must be unique on the chart: two stalker clusters both showed
             # "shadow · stalker". Extend with further terms until distinct.
             if _c.get("english_ratio", 1.0) < 0.08:
@@ -2139,7 +2314,19 @@ def main():
                           else _gloss_for(_c.get("top_terms", []), _label)),
                 # filled below once all clusters exist; placeholder keeps key order
                 "peak": _peak,
+                # Self-explanation: what the label was cut from, where the texts
+                # came from, when they were written, and one line of the cluster.
+                "terms": _terms6,
+                "sources": _src_shares(_cmeta[str(_cid)]["src"]),
+                "years": _year_span(_cmeta[str(_cid)]["yr"]),
+                "example": "",      # filled once every cluster is known
             }
+        # One verbatim line per cluster, read from the pair corpus under a cap.
+        # Done before the merge below so a merged cluster inherits the example
+        # that belongs to whichever constituent ends up naming it.
+        for _cid2, _ex2 in _cluster_examples(_slug, _asg, _cmeta).items():
+            if _cid2 in _clusters:
+                _clusters[_cid2]["example"] = _ex2
         # Identical glosses on different clusters read as duplicates — the exact
         # complaint the glosses were meant to fix. Append each cluster's first
         # distinguishing term to break the tie.
@@ -2153,16 +2340,36 @@ def main():
             _g = _v2["gloss"]
             if _g in _by_gloss and abs(_clusters[_by_gloss[_g]]["ua_pct"] - _v2["ua_pct"]) <= 3.0:
                 _a = _clusters[_by_gloss[_g]]
+                _lab_a = _a["label"]      # before the size/label update below
                 _tot = _a["size"] + _v2["size"]
                 _a["ua_pct"] = round((_a["ua_pct"] * _a["size"] + _v2["ua_pct"] * _v2["size"]) / _tot, 1)
+                _size_a = _a["size"]          # before it becomes the merged total
                 _a["size"] = _tot
                 _a["anchors"] = (_a.get("anchors", []) + _v2.get("anchors", []))[:4]
                 # The LARGER constituent names the merged cluster: shorter-
                 # label-wins let a 470-text CS:GO-cheat cluster ("hvh ·
                 # youtube") name chornobyl's 7,246-text disaster coverage.
-                _a["label"] = (_a["label"] if _a["size"] - _v2["size"] >= _v2["size"] - _a["size"]
-                               else _v2["label"]) if _a["size"] != _v2["size"] else min(
+                # _a["size"] is already the merged total here, so comparing it
+                # against the constituent always favoured the first-seen cluster:
+                # a 325-text cluster named a 697-text merge. Compare the sizes
+                # the two clusters actually had.
+                _a["label"] = (_a["label"] if _size_a >= _v2["size"] else _v2["label"]
+                               ) if _size_a != _v2["size"] else min(
                                    _a["label"], _v2["label"], key=len)
+                # The explanation has to describe the cluster as PRESENTED: terms
+                # and example follow whichever constituent's label survived, while
+                # the source mix and the year span cover both.
+                _ma, _mb = _cmeta[_by_gloss[_g]], _cmeta[_k2]
+                for _k3, _n3 in _mb["src"].items():
+                    _ma["src"][_k3] = _ma["src"].get(_k3, 0) + _n3
+                for _k3, _n3 in _mb["yr"].items():
+                    _ma["yr"][_k3] = _ma["yr"].get(_k3, 0) + _n3
+                if _a["label"] != _lab_a:
+                    _a["terms"], _a["example"] = _v2["terms"], _v2["example"]
+                elif not _a["example"]:
+                    _a["example"] = _v2["example"]
+                _a["sources"] = _src_shares(_ma["src"])
+                _a["years"] = _year_span(_ma["yr"])
                 del _clusters[_k2]
             elif _g in _by_gloss:
                 _tier = ("mostly Ukrainian-spelling outlets" if _v2["ua_pct"] >= 67
@@ -2189,7 +2396,10 @@ def main():
         _cl_out[_slug] = {"points": _points, "clusters": _clusters,
                           "clipped": _clipped,
                           "total": int(_summ.get("n", len(_asg))),
-                          "n_clusters": int(_summ.get("k_chosen", len(_clusters))),
+                          # k_chosen counts components BEFORE merge_small drops
+                          # sub-threshold ones and before the gloss merge below;
+                          # 18 of 24 pairs advertised more clusters than shipped.
+                          "n_clusters": len(_clusters),
                           "borderline_share": _summ.get("borderline_share")}
     write_json(SITE_DATA_DIR / "cl_clusters.json", _cl_out)
     log.info(f"  Wrote cl_clusters.json ({len(_cl_out)} pair(s) with current clustering)")
@@ -2197,6 +2407,19 @@ def main():
     # Contrastive vocabulary (collocations): the words statistically distinctive
     # to each spelling's context. Read from each pair's stats analysis.json —
     # log-odds with an informative Dirichlet prior, robust across >=2 sources.
+    # Per-term glosses: what the word is doing in this pair's corpus, grounded
+    # in the term's own rows rather than the one quoted example. Terms whose
+    # evidence showed two unrelated senses were deliberately left unglossed.
+    _gloss_src = ROOT / "data" / "audit" / "collocation_glosses.json"
+    _glosses, _suspect = {}, {}
+    if _gloss_src.exists():
+        try:
+            _gj = json.loads(_gloss_src.read_text())
+            _glosses = _gj.get("glosses", {})
+            _suspect = _gj.get("suspect", {})
+        except Exception:                              # noqa: BLE001
+            pass
+
     _kj = {}
     for _f in sorted((ROOT / "data" / "stats").glob("*/analysis.json")):
         _slug = _f.parent.name
@@ -2322,10 +2545,16 @@ def main():
                 out.append(e)
             return out
 
+        _pair_gloss = _glosses.get(_slug, {})
+        _pair_suspect = _suspect.get(_slug, {}) if isinstance(_suspect, dict) else {}
+
         def _entry(x, side):
             w = x["word"]
             e = {"w": w, "z": round(abs(float(x["mean_z"])), 1),
                  "src": _prov(w, side)}
+            _g = _pair_gloss.get(w)
+            if _g:
+                e["g"] = _g
             ex = _example(w, side, prefer_sources=set(e.get("src") or []))
             if ex:
                 e["ex"] = ex
@@ -2336,7 +2565,11 @@ def main():
                for x in _k.get("robust_russian", []) if _keep(x)])[:10]
         if _ua or _ru:
             _kj[_slug] = {"ua": _ua, "ru": _ru,
-                          "sources": _k.get("sources_used") or _a.get("sources_used")}
+                          "sources": _k.get("sources_used") or _a.get("sources_used"),
+                          # "exploratory" = no single source cleared the 25-doc
+                          # floor, so the contrast rests on thinner evidence and
+                          # the page must say so.
+                          "tier": _k.get("tier") or "robust"}
         elif _k.get("solo_terms"):
             # Domain-label tokens (easybranches, worldnews, ...) are attribution
             # artifacts of aggregator-heavy corpora, not discourse: exclude any
@@ -2362,7 +2595,17 @@ def main():
                     import re as _re
                     import pandas as _pd3
                     _rr = _pd3.read_parquet(_rp, columns=["text", "url"])
-                    _hosts = _rr["url"].astype(str).str.extract(r"//([^/]+)")[0].fillna("")
+                    # Spread must be measured in the right unit per source: every
+                    # YouTube row shares one domain, so a domain-only rule scored
+                    # spread=1 for YouTube-dominated pairs and silently deleted
+                    # their whole solo profile (feodosiia: 25 terms computed, 0
+                    # shown). Use the channel/subreddit path segment where the
+                    # host is a single platform.
+                    _u = _rr["url"].astype(str)
+                    _hosts = _u.str.extract(r"//([^/]+)")[0].fillna("")
+                    _plat = _hosts.str.contains(r"youtube|youtu\.be|reddit", case=False, na=False)
+                    _sub = _u.str.extract(r"(?:/r/|[?&]v=|/watch\?v=)([\w-]+)")[0].fillna("")
+                    _hosts = _hosts.where(~_plat, _hosts + "/" + _sub)
                     _txt = _rr["text"].fillna("").astype(str).str.lower()
                     for x in _k["solo_terms"][:40]:
                         _w = str(x["word"]).lower()
