@@ -28,11 +28,45 @@ CLASSES = {
 REPLACEMENT = {k: f"[{k}]" for k in CLASSES}
 
 
+def _phone_is_real(m: re.Match) -> bool:
+    """Reject the numeric shapes that are not phone numbers.
+
+    The pattern reads "1904-1905" as 1 | 904 | - | 19 | 05 and redacted it, so
+    academic abstracts lost their date ranges: "the Russian-Japanese war of
+    [phone]", "pontificat d'Urbain II ([phone])". 1,870 rows were affected,
+    99.8% of them OpenAlex, in a study whose subject is historical naming.
+
+    A year range carries 8 digits and a grouped magnitude like "100 000 000"
+    carries a run of zeros; neither is a phone number, which needs 9 digits at
+    minimum once the country and area codes are counted.
+    """
+    digits = re.sub(r"\D", "", m.group(0))
+    if len(digits) < 9:
+        return False
+    if re.search(r"0{6}", digits):
+        return False
+    return True
+
+
+VALIDATORS = {"phone": _phone_is_real}
+
+
 def scrub(text: str) -> tuple[str, dict]:
     counts = {}
     out = str(text)
     for name, rx in CLASSES.items():
-        out, n = rx.subn(REPLACEMENT[name], out)
+        ok = VALIDATORS.get(name)
+        if ok is None:
+            out, n = rx.subn(REPLACEMENT[name], out)
+        else:
+            n = 0
+            def _rep(m, _name=name, _ok=ok):
+                nonlocal n
+                if not _ok(m):
+                    return m.group(0)
+                n += 1
+                return REPLACEMENT[_name]
+            out = rx.sub(_rep, out)
         if n:
             counts[name] = n
     return out, counts
