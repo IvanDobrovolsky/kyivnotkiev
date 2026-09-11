@@ -72,18 +72,18 @@ pairs:
     label: Peace negotiation surge
   match_mode: word_boundary
   homonym_filters:
-  - kiev\s*-?\s*(?:60|88|4am?|19m?)\b
-  - lost\s+in\s+kiev
+  - k(?:ie|yi)v\s*-?\s*(?:60|88|4am?|19m?)\b
+  - lost\s+in\s+k(?:ie|yi)v
   - martens\s+kiev|kiev\s+leather\s+backpack
   - kiev\s+kwentel
-  - \b(?:chicken|pheasant|frog\s+legs?|mushroom|garlic|veggie|vegan|salmon|turkey|beef|cod)\s+(?:a\s*la\s+|ala\s+)?kiev\b
+  - \b(?:chicken|pheasant|frog\s+legs?|mushroom|garlic|veggie|vegan|salmon|turkey|beef|cod)\s+(?:a\s*la\s+|ala\s+)?k(?:ie|yi)v\b
   - azur\s*lane|azurlane
-  - d[ií]namo\s+de\s+kiev
+  - d[ií]namo\s+de\s+k(?:ie|yi)v
   - ghost\s+of\s+kiev\s+ukrainian\s+freedom\s+vodka
   - giornaledibrescia\.it
   - green\s+soul\s+kiev|kiev\s+orthopedic
   - irishdentist\.ie
-  - kiev.{0,40}\bdestroyer\b
+  - k(?:ie|yi)v.{0,40}\bdestroyer\b
   - kiev[\s-]*class
   - kiev\s*-?\s*(?:4a?m?|6\s*c?|19m?|60|88)\b
   - kiev\s*beats
@@ -102,7 +102,7 @@ pairs:
   youtube_homonym_filters:
   - kiev\W{0,3}rtf
   - turfa\s+olam
-  - kiev\s*-?\s*(?:60|88|4am?|19m?)\b
+  - k(?:ie|yi)v\s*-?\s*(?:60|88|4am?|19m?)\b
   slug: kyiv
   blurb_uk: Столиця — тут англійська змінилася першою
   verdict_uk: 'Кампанія спрацювала: англійська перейшла на Kyiv близько 2019 року, ще до вторгнення — війна лише закріпила зміну.'
