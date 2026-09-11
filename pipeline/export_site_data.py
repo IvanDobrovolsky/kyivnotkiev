@@ -2484,7 +2484,7 @@ def main():
             except Exception:                          # noqa: BLE001
                 _exdf = None
         _exdf_full = None
-        def _example(word, side):
+        def _example(word, side, prefer_sources=None):
             nonlocal _exdf_full
             if _exdf is None:
                 return None
