@@ -1498,6 +1498,10 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
 
     _umb = umbrella_exclusions()
 
+    # Ranked-but-unprobed reddit candidates, written out for the liveness
+    # prober so it can work the whole pool rather than only what shipped.
+    _CANDIDATES: dict = {}
+
     # Reddit: actual post URLs, best-scoring first
     reddit = _load("reddit")
     if len(reddit) and "post_id" in reddit.columns:
@@ -1534,13 +1538,18 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                     if str(x["post_id"]) in _lv else {})}
                 for _, x in posts.iterrows()
             ]
-            # Exhibits are alive or absent: a probed-dead post is not a
-            # demonstration anyone can click. Series unaffected.
-            # Probed-live first, then never-probed (unknown is not dead —
-            # excluding them collapsed the tables to 10 entries total).
-            # Probed-dead are excluded outright.
-            _ok = ([e for e in _entries if e.get("live") is True]
-                   + [e for e in _entries if "live" not in e])[:HOLDOUT_CAP]
+            # PROBED-LIVE ONLY. Padding the table with never-probed posts to
+            # reach 100 is how deleted and archived threads reached the page:
+            # 1,076 of the 1,579 ids probed so far are removed, and the pool is
+            # ~14,000, so an unprobed id is more likely dead than alive. A
+            # shorter table of posts that all open is the exhibit; a full table
+            # where two thirds 404 is not. Pairs that cannot reach 100 live are
+            # reported by pipeline.audit.holdout_convergence.
+            _ok = [e for e in _entries if e.get("live") is True][:HOLDOUT_CAP]
+            # Everything ranked but not yet probed, so the prober knows what to
+            # look at next instead of re-probing only what already shipped.
+            _unprobed = [e["url"] for e in _entries if "live" not in e]
+            _CANDIDATES.setdefault(slug, []).extend(_unprobed)
             if _ok:
                 by_pair.setdefault(slug, {})["reddit"] = _ok
 
@@ -1642,6 +1651,11 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
         else:
             log.info("  YouTube holdouts ordered by recency — set YOUTUBE_API_KEY to rank by views")
 
+    if _CANDIDATES:
+        _cp = ROOT / "data" / "audit" / "reddit_holdout_candidates.json"
+        _cp.write_text(json.dumps(_CANDIDATES, indent=1))
+        log.info(f"  Reddit candidates awaiting a liveness probe: "
+                 f"{sum(len(v) for v in _CANDIDATES.values()):,} across {len(_CANDIDATES)} pair(s)")
     log.info(f"  Holdouts: {len(by_pair)} pairs across news/wiki/reddit/youtube")
 
     # The global top-100 outlet list is gone with the per-pair one. It came from
@@ -2350,11 +2364,14 @@ def main():
                 "size": _c.get("size", int(len(_m))),
                 # A verified override wins outright; "or" binds tighter than the
                 # conditional, so the fallback chain needs its own parentheses.
-                "gloss": (_cluster_gloss.get(_slug, {}).get(str(_label).lower())
-                          or ("non-English coverage" if _label == "non-English"
-                              else "adult-content spam"
-                              if len(EXPLICIT & {t.lower() for t in _c.get("top_terms", [])}) >= 2
-                              else _gloss_for(_c.get("top_terms", []), _label))),
+                # The LEGEND name: a couple of words, so a row of them can be
+                # scanned. The written sentence goes to "desc" and appears only
+                # on the panel — feeding it to both made the legend repeat the
+                # tooltip verbatim.
+                "gloss": ("non-English coverage" if _label == "non-English"
+                          else "adult-content spam"
+                          if len(EXPLICIT & {t.lower() for t in _c.get("top_terms", [])}) >= 2
+                          else _gloss_for(_c.get("top_terms", []), _label)),
                 # filled below once all clusters exist; placeholder keeps key order
                 "peak": _peak,
                 # Self-explanation: what the label was cut from, where the texts
