@@ -296,8 +296,18 @@ pairs:
   - lvovの意味
 - russian: Zaporozhye
   ukrainian: Zaporizhzhia
-  enabled: false
+  enabled: true
   is_control: false
+  notes: 'Enabled 2026-09-11, replacing the retired borscht pair. An active war
+    zone — the occupied nuclear plant and a front-line oblast — so usage is
+    current rather than historical, and the transliteration split is clean:
+    Zaporizhzhia against Zaporozhye, with no shared anglicisation of the kind
+    that made borscht unmeasurable. It already appears as a bundle term in the
+    volodymyr-zelenskyy analysis (Spearman 0.61 with Kiev-share across 330
+    domains), which is independent evidence that the two forms travel with the
+    two house styles. Referent risks to watch: the city, the oblast, the nuclear
+    plant, the Zaporizhian Sich, Metalurh Zaporizhzhia, and the Soviet ZAZ
+    Zaporozhets car.'
   events:
   - date: 2022-03
     label: Russia seizes nuclear plant
@@ -545,10 +555,24 @@ pairs:
   - viva food:\s*[^.]{0,60}chicken kiev recipe
 - russian: Borsch
   ukrainian: Borscht
-  enabled: true
+  enabled: false
   is_control: false
-  notes: UNESCO inscribed 'Culture of Ukrainian borscht cooking' in July 2022, using 'borscht' as the international form. Russian-derived 'borsch' (without t) tests whether English adopts the UNESCO/Ukrainian
-    standard.
+  notes: 'RETIRED 2026-09-11. The pair does not separate the two conventions.
+    Measured on 1,183 rows that explicitly frame the dish: texts calling it a
+    Ukrainian dish spell it borscht 70.7% / borsch 25.5%, texts calling it a
+    Russian dish spell it borscht 77.2% / borsch 22.1% — indistinguishable. Both
+    are English anglicisations (borscht reached English through Yiddish; the
+    final t is in neither Ukrainian nor Russian), so the contrast measured
+    nothing and shipped a 72.6% adoption figure that means nothing. The form
+    that DOES mark Ukrainian usage is borshch — 3.8% of Ukrainian-framing text
+    against 0.7% of Russian-framing, and the spelling Ukraine used in its own
+    UNESCO application — but it is 0.9% of English usage overall and the pair
+    never matched it. Original rationale kept for the record: UNESCO inscribed
+    "Culture of Ukrainian borscht cooking" in July 2022 using borscht as the
+    international form, and the pair was meant to test whether English adopted
+    it. Retiring rather than redefining: a borshch-vs-borscht pair would yield
+    3.48% adoption on 831 rows, which is a real but very thin measurement, and
+    it needs re-ingestion to collect.'
   events:
   - date: 2022-07
     label: UNESCO inscribes Ukrainian borscht

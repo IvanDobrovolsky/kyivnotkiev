@@ -716,6 +716,18 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
         for pid, grp in p.groupby("pair_slug"):
             if pid not in enabled_slugs:
                 continue
+            # Both spellings often resolve to ONE article — the Russian form is
+            # an en.wikipedia redirect — so the two variants return byte-identical
+            # pageviews and the series is 50.0% at every point by construction.
+            # Four pairs shipped 126 points each of that: babyn-yar, donbas,
+            # oleksandr-usyk, volodymyr-zelenskyy. A redirect is a fact about
+            # Wikipedia's title policy, not about how anyone writes the name.
+            _u = grp.get("ukrainian")
+            _r = grp.get("russian")
+            if _u is not None and _r is not None and len(grp) >= 3 and _u.equals(_r):
+                log.info(f"    {pid}: wikipedia variants share one article "
+                         f"(identical pageviews) — series dropped")
+                continue
             spid = pid
             result.setdefault(spid, {}).setdefault("wikipedia", [])
             for _, r in grp.sort_values("month").iterrows():
@@ -1502,6 +1514,25 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     # prober so it can work the whole pool rather than only what shipped.
     _CANDIDATES: dict = {}
 
+    # post_id -> score. reddit_processed carries no score column, so
+    # nlargest("score") silently fell through to head() and every table shipped
+    # unsorted with score "0" on the card. The raw dumps have it.
+    _RD_SCORE: dict = {}
+    for _rp in (ROOT / "data" / "cl" / "raw" / "reddit" / "all_pairs.parquet",
+                *sorted((ROOT / "data" / "raw" / "reddit").rglob("*.parquet")),
+                *sorted((ROOT / "data" / "cl" / "raw" / "reddit_full").rglob("*.parquet"))):
+        if not _rp.exists():
+            continue
+        try:
+            _rd = pd.read_parquet(_rp, columns=["post_id", "score"])
+        except Exception:                              # noqa: BLE001
+            continue
+        for _k, _v in zip(_rd.post_id.astype(str), _rd.score.fillna(0).astype("int64")):
+            if _v > _RD_SCORE.get(_k, -1):
+                _RD_SCORE[_k] = int(_v)
+    if _RD_SCORE:
+        log.info(f"  Reddit scores available for {len(_RD_SCORE):,} post(s)")
+
     # Reddit: actual post URLs, best-scoring first
     reddit = _load("reddit")
     if len(reddit) and "post_id" in reddit.columns:
@@ -1514,6 +1545,9 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                 posts = posts[~posts["title"].fillna("").astype(str).str.contains(_umb[slug])]
             # Rank a wider pool so liveness/verification drops refill from the
             # corpus instead of shrinking the table below HOLDOUT_CAP.
+            if _RD_SCORE:
+                posts = posts.assign(
+                    score=posts["post_id"].astype(str).map(_RD_SCORE).fillna(0).astype("int64"))
             posts = (posts.nlargest(HOLDOUT_CAP * 6, "score")
                      if "score" in posts.columns else posts.head(HOLDOUT_CAP * 6))
             # Liveness from the headless-probe cache (site/reddit_liveness.mjs):
@@ -1570,6 +1604,26 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                 capture_output=True, text=True, timeout=30).stdout.strip()
         except Exception:
             _yt_key = ""
+    # video_id -> view count, from the fetcher and the BigQuery export.
+    _YT_VIEWS: dict = {}
+    for _vp, _idc, _vc in ((ROOT / "data" / "cl" / "raw" / "youtube_views" / "views.parquet",
+                            "video_id", "view_count"),):
+        if _vp.exists():
+            try:
+                _vd = pd.read_parquet(_vp, columns=[_idc, _vc])
+                _YT_VIEWS.update(dict(zip(_vd[_idc].astype(str), _vd[_vc].astype("int64"))))
+            except Exception:                          # noqa: BLE001
+                pass
+    for _bq in sorted((ROOT / "data" / "bq_export" / "raw_youtube").rglob("*.parquet")):
+        try:
+            _bd = pd.read_parquet(_bq, columns=["video_id", "view_count"])
+            for _k, _v in zip(_bd.video_id.astype(str), _bd.view_count.fillna(0).astype("int64")):
+                _YT_VIEWS.setdefault(_k, _v)
+        except Exception:                              # noqa: BLE001
+            continue
+    if _YT_VIEWS:
+        log.info(f"  YouTube view counts available for {len(_YT_VIEWS):,} video(s)")
+
     _yt_ranked: list[str] = []
     if len(youtube) and "video_id" in youtube.columns:
         y = youtube[(youtube["date"] >= since) & (youtube["variant"].isin(HOLDOUT_VARIANTS))]
@@ -1579,9 +1633,17 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                 vids = vids[~vids["title"].fillna("").astype(str).str.contains(_umb[slug])]
             if not len(vids):
                 continue
-            # Rank by views when a key is available, most-recent otherwise. Which one
-            # ran is logged, so the table is never silently ordered by the fallback.
-            vids = vids.sort_values("date", ascending=False)
+            # Rank by views, falling back to recency for videos whose count we
+            # do not have. The comment here used to claim view-ranking while the
+            # code only sorted by date, so every table shipped newest-first.
+            # Counts come from pipeline.repair.youtube_views (videos.list,
+            # 50 ids per quota unit) plus the BigQuery export.
+            if _YT_VIEWS:
+                vids = vids.assign(
+                    _views=vids["video_id"].astype(str).map(_YT_VIEWS).fillna(-1).astype("int64"))
+                vids = vids.sort_values(["_views", "date"], ascending=[False, False])
+            else:
+                vids = vids.sort_values("date", ascending=False)
             vids = vids.groupby("channel_title", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
             # Exhibit-level guards (series untouched):
             # 1. CURRENT title must still attest the claimed form — creators
