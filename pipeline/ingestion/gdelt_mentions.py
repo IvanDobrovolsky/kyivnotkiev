@@ -82,12 +82,26 @@ USD_PER_TIB = 6.25
 
 
 def load_terms() -> list[tuple[str, str, str, str]]:
-    """Return (slug, variant, term, regex_fragment) for every enabled pair."""
+    """Return (slug, variant, term, regex_fragment) for EVERY defined pair.
+
+    Deliberately not filtered by `enabled`. The destination table is written
+    WRITE_TRUNCATE, so keying collection off the enabled flag meant that
+    retiring a pair silently destroyed its raw layer on the next scan — and
+    that enabling a pair changed the regex for every OTHER pair, because
+    REGEXP_EXTRACT takes the leftmost match and a new term can claim URLs that
+    previously went elsewhere. Neither is acceptable: the enabled flag decides
+    what the SITE SHOWS, never what exists on disk.
+
+    It is also free. BigQuery bills columns x partitions, not matched rows, so
+    the WHERE clause costs nothing: a one-pair regex and a 47-pair regex both
+    dry-run at 669,552,904,550 bytes, byte for byte. Collecting everything once
+    keeps attribution stable no matter which pairs ship.
+    """
     doc = yaml.safe_load(CONFIG.read_text())
     pairs = doc["pairs"] if isinstance(doc, dict) and "pairs" in doc else doc
     rows = []
     for p in pairs:
-        if not p.get("enabled"):
+        if not p.get(variant_key := "ukrainian") or not p.get("russian"):
             continue
         for variant in ("ukrainian", "russian"):
             term = str(p[variant]).strip().lower()
