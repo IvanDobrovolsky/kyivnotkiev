@@ -1224,11 +1224,23 @@ pairs:
   - igor\s+sikorsky\s+memorial
   - igor\s+sikorsky\s+street
 - russian: Sergei Korolev
-  ukrainian: Serhii Korolyov
+  ukrainian: Serhii Korolov
+  ukrainian_cyrillic: Сергій Корольов
   enabled: true
   is_control: false
-  notes: Chief rocket engineer of the Soviet space program (Сергій Корольов), born in Zhytomyr, Ukraine. English almost universally uses the Russian form. One of the most consequential cases of Ukrainian
-    identity erasure in global science history.
+  notes: 'Chief rocket engineer of the Soviet space program (Сергій Корольов),
+    born in Zhytomyr. Ukrainian form corrected 2026-09-11 to the official
+    romanisation: Cabinet Resolution 55 drops the soft sign, so Корольов is
+    Korolov, not Korolyov (verified with translitua against the Cyrillic).
+    Measured the same day, across all four stores: the official form has ZERO
+    attestations, the previous configured form had zero, and every Ukrainian
+    rendering combined — Serhiy Korolyov 9, Serhii Koroliov 3, Sergiy Koroliov
+    3, Serhiy Korolov 2 — totals 17 against 2,201 Russian-form mentions. No
+    spelling rescues this pair, so the near-zero is not an artifact of the
+    string chosen: English does not write this man''s name the Ukrainian way at
+    all. That is the finding, and it is the strongest case in the study of a
+    dead person carrying no naming authority — the mirror of Zelenskyy, whose
+    own office fixes his English spelling.'
   match_mode: exact_phrase
   slug: serhii-korolyov
   youtube_homonym_filters:
