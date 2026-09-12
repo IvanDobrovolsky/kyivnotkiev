@@ -290,10 +290,24 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
     # the Russian form alive"). Same log-odds machinery, different baseline.
     solo = []
     solo_variant = None
-    if len(usable) < 2:
-        counts = df.variant.value_counts()
-        solo_variant = ("russian" if counts.get("russian", 0) >= counts.get("ukrainian", 0)
-                        else "ukrainian")
+    # Fire the solo profile when the contrast produced NOTHING, not only when
+    # too few sources were usable. mykola-hohol has 7,379 Russian-form documents
+    # against 38 Ukrainian — the canon is right there (Dead Souls, The Overcoat,
+    # Fyodor, Kafka) — but with a shared prior the MAJORITY side cannot reach
+    # significance, because the prior is that side: its best score across every
+    # source is -0.59 against a bar of 2.0. Two usable sources that agree on
+    # nothing left the page reading "no distinctive vocabulary", which is false;
+    # the honest fallback is to profile the dominant form against the other
+    # pairs' corpora and label it as the different measurement it is.
+    _has_ua = any(z >= MIN_Z for _, z in rr)
+    _has_ru = any(z <= -MIN_Z for _, z in rr)
+    _counts = df.variant.value_counts()
+    _dominant = ("russian" if _counts.get("russian", 0) >= _counts.get("ukrainian", 0)
+                 else "ukrainian")
+    _dominant_empty = (_dominant == "russian" and not _has_ru) or \
+                      (_dominant == "ukrainian" and not _has_ua)
+    if len(usable) < 2 or _dominant_empty:
+        solo_variant = _dominant
         own = df[df.variant == solo_variant]
         if len(own) >= MIN_DOCS:
             import glob as _glob

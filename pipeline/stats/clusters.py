@@ -230,7 +230,22 @@ def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict
     # come from navigation chrome, not from anything the texts are about. The
     # explicit terms come from reddit spam that several corpora carry; a cluster
     # label is published verbatim on the site.
-    FILLERS = {"name", "https", "http", "amp", "ref", "utm", "youtube", "youtu",
+    # Function words, auxiliaries and contractions can never name a cluster.
+    # chornobyl shipped clusters called "did", "i'm · it's" and "zone · i'm";
+    # the token pattern keeps apostrophes, so contractions survive sklearn's
+    # list, which has no "did" either.
+    GRAMMAR = {"did", "does", "done", "doing", "was", "were", "been", "being",
+               "had", "has", "have", "will", "would", "could", "should", "shall",
+               "may", "might", "must", "can", "cannot", "am", "are", "is",
+               "i'm", "it's", "that's", "there's", "he's", "she's", "they're",
+               "we're", "you're", "isn't", "wasn't", "aren't", "weren't",
+               "don't", "didn't", "doesn't", "can't", "won't", "i've", "we've",
+               "you've", "they've", "i'd", "i'll", "we'll", "you'll", "let's",
+               "who", "whom", "whose", "which", "what", "when", "where", "why",
+               "how", "than", "then", "too", "very", "also", "even", "still",
+               "much", "many", "more", "most", "some", "any", "all", "both",
+               "each", "few", "other", "such", "own", "same", "only", "just"}
+    FILLERS = GRAMMAR | {"name", "https", "http", "amp", "ref", "utm", "youtube", "youtu",
                "click", "local", "col", "row", "comments", "comment", "posted",
                "subscribe", "reply", "edit", "deleted", "removed", "http",
                "https", "www", "com", "nsfw", "anal", "porn", "xxx", "sex",
