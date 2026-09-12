@@ -2064,7 +2064,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             size: info.size, ua: info.ua_pct, desc: info.desc || null }));
           legendEl.innerHTML += `<button class="legend-item cl-legend-chip" data-cluster-legend="${idx}" data-meta="${cmeta}" style="display:inline-flex;align-items:center;gap:5px;white-space:nowrap;border:none;background:none;padding:0;font:inherit;cursor:pointer;color:var(--text);">` +
             `<span style="width:16px;height:16px;border-radius:50%;background:${color};color:#fff;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">${idx+1}</span>` +
-            `<strong>${glossT(info.gloss || info.label)}</strong>` +
+            `<strong>${info.name ? escH(info.name) : glossT(info.gloss || info.label)}</strong>` +
             `<span style="color:#6b7280;"><span style="color:#0057B8;font-weight:600;">${info.ua_pct}% UA</span> · <span style="color:#dc2626;font-weight:600;">${(100-info.ua_pct).toFixed(1)}% RU</span> · ${info.size.toLocaleString()} texts</span></button>`;
         });
 

@@ -2071,6 +2071,18 @@ def main():
     # Cluster glosses a verification pass corrected by hand, keyed by the label
     # the clustering produced. Keyword rules cannot know that a cluster of
     # "hbo · series" is the miniseries rather than the disaster.
+    # Written legend names, verified per pair (data/audit/cluster_names.json).
+    # The statistical labeller produced "did", "i'm · it's" and "zone · i'm";
+    # these are names a reader can scan.
+    _cluster_name: dict = {}
+    _cn = ROOT / "data" / "audit" / "cluster_names.json"
+    if _cn.exists():
+        try:
+            _cluster_name = {k: {kk.lower(): vv for kk, vv in v.items()}
+                             for k, v in json.loads(_cn.read_text()).items()}
+        except Exception:                              # noqa: BLE001
+            pass
+
     _cluster_gloss: dict = {}
     _cg = ROOT / "data" / "audit" / "cluster_glosses.json"
     if _cg.exists():
@@ -2441,6 +2453,7 @@ def main():
                 # The written description, separate from the short label. The
                 # label names the cluster in the legend; this says what the
                 # group of texts actually IS.
+                "name": _cluster_name.get(_slug, {}).get(str(_label).lower(), ""),
                 "desc": _cluster_gloss.get(_slug, {}).get(str(_label).lower(), ""),
                 "terms": [t for t in _terms6 if t.lower() not in EXPLICIT],
                 "sources": _src_shares(_cmeta[str(_cid)]["src"]),
@@ -2497,6 +2510,7 @@ def main():
                 if _a["label"] != _lab_a:
                     _a["terms"], _a["example"] = _v2["terms"], _v2["example"]
                     _a["desc"] = _v2.get("desc", "")
+                    _a["name"] = _v2.get("name", "")
                 elif not _a["example"]:
                     _a["example"] = _v2["example"]
                 _a["sources"] = _src_shares(_ma["src"])
