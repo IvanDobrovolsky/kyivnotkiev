@@ -272,8 +272,11 @@ def top_terms(texts: pd.Series, labels: np.ndarray, k: int, n: int = 10) -> dict
             for w in set(re.findall(r"[a-zA-Z][a-zA-Z'-]{2,}", str(t).lower())):
                 seen[w] = seen.get(w, 0) + 1
         doc_freq.append((seen, max(len(g), 1)))
+    # Trailing punctuation was surviving into labels: a zaporizhzhia cluster
+    # shipped as "nuclear · later--" because 487 spam documents carry that exact
+    # string. Require the token to END on a letter.
     cv = CountVectorizer(stop_words=stop, max_features=30_000,
-                         token_pattern=r"[a-zA-Z][a-zA-Z'-]{2,}")
+                         token_pattern=r"[a-zA-Z][a-zA-Z'-]*[a-zA-Z]")
     tf = cv.fit_transform(docs).toarray().astype(np.float64)
     tf = tf / np.maximum(tf.sum(1, keepdims=True), 1)
     idf = np.log(1 + k / np.maximum((tf > 0).sum(0), 1))
