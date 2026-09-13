@@ -296,6 +296,7 @@ pairs:
   - lvovの意味
 - russian: Zaporozhye
   ukrainian: Zaporizhzhia
+  ukrainian_cyrillic: Запоріжжя
   enabled: true
   is_control: false
   notes: 'Enabled 2026-09-11, replacing the retired borscht pair. An active war
