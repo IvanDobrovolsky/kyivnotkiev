@@ -263,6 +263,37 @@ def cmd_final(args) -> int:
     df = pd.read_parquet(OUT / MATCHED)
     g = df[df.native_en & df.url_match].copy()
     before = len(g)
+
+    # Collection covers every defined pair so that toggling one cannot destroy
+    # its data. ATTRIBUTION, though, must run over the ENABLED set only: the
+    # leftmost-match rule otherwise hands articles to pairs the site does not
+    # publish, and the enabled pair loses them. Measured on the 47-pair scan,
+    # that silently moved 530 rows from chornobyl to chornobyl-exclusion-zone,
+    # 252 from kyiv to kyiv-pechersk-lavra and 393 from volodymyr-zelenskyy to
+    # dnipro — all three destinations invisible. Re-derive from the URL, which
+    # the matched frame keeps, using only enabled terms.
+    doc = yaml.safe_load(CONFIG.read_text())
+    pairs = doc["pairs"] if isinstance(doc, dict) and "pairs" in doc else doc
+    enabled = {p.get("slug") for p in pairs if p.get("enabled")}
+    term_map, frags = {}, []
+    for slug, variant, term, frag in load_terms():
+        if slug not in enabled:
+            continue
+        term_map[term] = (slug, variant)
+        frags.append(frag)
+    if frags:
+        import re as _re
+        rx = _re.compile("(" + "|".join(frags) + ")", _re.I)
+        found = g.url.astype(str).str.lower().str.extract(rx, expand=False)
+        hit = found.notna()
+        moved = int((g.pair_slug != found.map(lambda t: term_map.get(t, ("", ""))[0])).sum())
+        g = g[hit].copy()
+        g["pair_slug"] = found[hit].map(lambda t: term_map.get(t, ("", ""))[0])
+        g["var_url"] = found[hit].map(lambda t: term_map.get(t, ("", ""))[1])
+        print(f"attributed over {len(enabled)} enabled pairs "
+              f"({len(frags)} terms); {moved:,} row(s) re-attributed, "
+              f"{before - len(g):,} dropped as belonging only to disabled pairs")
+        before = len(g)
     g = g.sort_values("date").drop_duplicates("url", keep="first")
     g = g.rename(columns={"var_url": "variant"})[
         ["pair_slug", "variant", "date", "domain", "url", "url_term"]]

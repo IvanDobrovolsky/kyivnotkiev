@@ -1244,6 +1244,15 @@ pairs:
     own office fixes his English spelling.'
   match_mode: exact_phrase
   slug: serhii-korolyov
+  homonym_filters:
+  # Order-independent. The earlier patterns required the institution BEFORE the
+  # name, so they missed "Korolev, who is first deputy director" and "Sergei
+  # Korolev, the first deputy director" — the FSB official was counted as six
+  # Russian-form attestations of the rocket engineer, on a pair whose whole
+  # Russian side is 1,231 rows.
+  - korolev[^.]{0,80}\b(?:fsb|federal security service|first deputy director|security service)\b
+  - \b(?:fsb|federal security service|first deputy director|security service)\b[^.]{0,80}korolev
+  - korolev[^.]{0,60}\bvegetable union\b|\bvegetable union\b[^.]{0,60}korolev
   youtube_homonym_filters:
   - provided\s+to\s+youtube\s+by|auto-?generated\s+by\s+youtube
   blurb_uk: Інженер, що запустив Супутник
