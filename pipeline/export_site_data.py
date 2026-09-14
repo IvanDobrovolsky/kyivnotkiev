@@ -2909,4 +2909,17 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # One export at a time. The convergence loop and the stats chain both end
+    # in an export, and two of them interleaving writes leaves site/src/data
+    # holding half of each run — with no error, because every individual write
+    # succeeded. Waiting costs minutes; a silently mixed export costs a day.
+    import fcntl
+    _lock = ROOT / "data" / "audit" / ".export.lock"
+    _lock.parent.mkdir(parents=True, exist_ok=True)
+    with open(_lock, "w") as _fh:
+        try:
+            fcntl.flock(_fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            log.info("another export holds the lock; waiting for it to finish")
+            fcntl.flock(_fh, fcntl.LOCK_EX)
+        main()
