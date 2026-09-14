@@ -1353,9 +1353,18 @@ def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
     # WHO influenza strain IDs freeze "A/Kiev/1/57" into dataset titles
     # (EMPIAR cryo-EM depositions), and garbled translations render Kyivan
     # Rus as "Kiev Rus(sian)" — neither is a spelling choice about the city.
-    _wr = _re_o.compile(r"\ba/kiev/\d|\bkiev(an)?\s+rus", _re_o.I)
+    # The influenza-strain clause applies everywhere; the "Kievan Rus" clause
+    # must NOT apply to the kyivan-rus pair itself. It exists to stop garbled
+    # translations of Kyivan Rus contaminating the CITY's tables, but for the
+    # kyivan-rus pair "Kievan Rus" is precisely the Russian-form usage being
+    # measured — the filter deleted all five of that pair's academic holdouts
+    # and left it with no table at all.
+    _wr_any = _re_o.compile(r"\ba/kiev/\d", _re_o.I)
+    _wr_rus = _re_o.compile(r"\bkiev(?:an)?\s+rus", _re_o.I)
     _n0 = len(df)
-    df = df[~df["title"].astype(str).str.contains(_wr)]
+    _t = df["title"].astype(str)
+    df = df[~(_t.str.contains(_wr_any)
+              | (_t.str.contains(_wr_rus) & df["slug"].ne("kyivan-rus")))]
     df = df[~df["title"].map(_non_en_title)]
     if _n0 - len(df):
         log.info(f"  OpenAlex holdouts: {_n0 - len(df)} non-English-title row(s) excluded")
