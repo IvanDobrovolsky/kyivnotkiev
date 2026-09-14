@@ -176,8 +176,23 @@ def main() -> int:
     ap.add_argument("--skip-dedup", action="store_true")
     a = ap.parse_args()
 
-    slugs = ([pathlib.Path(f).stem for f in sorted(glob.glob(str(STORE / "*.parquet")))]
-             if a.all else [a.pair])
+    # --all means every ENABLED pair. Walking the store blindly re-analysed
+    # retired pairs: borscht is disabled in pairs.yaml and absent from the site,
+    # but its parquet is still on disk (the raw layer is kept deliberately), so
+    # every rebuild spent a full dedup+keyness pass producing output nothing
+    # reads. An explicit --pair still works for a disabled pair, for archaeology.
+    if a.all:
+        _cfg = yaml.safe_load(open(pathlib.Path("config") / "pairs.yaml"))
+        _on = {q["slug"] for q in _cfg["pairs"] if q.get("enabled", True)}
+        slugs = [pathlib.Path(f).stem
+                 for f in sorted(glob.glob(str(STORE / "*.parquet")))
+                 if pathlib.Path(f).stem in _on]
+        _skipped = sorted({pathlib.Path(f).stem
+                           for f in glob.glob(str(STORE / "*.parquet"))} - _on)
+        if _skipped:
+            print(f"skipping {len(_skipped)} disabled pair(s): {', '.join(_skipped)}")
+    else:
+        slugs = [a.pair]
     rows = []
     for s in slugs:
         m = analyse(s, quiet=a.quiet, skip_dedup=a.skip_dedup)
