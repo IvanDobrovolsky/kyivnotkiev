@@ -367,6 +367,18 @@ STUDY_END_YEAR = 2025      # last complete calendar year; partial years are not 
 # the adoption headline's own year, not the whole post-invasion era.
 HOLDOUT_SINCE = "2025-01-01"
 HOLDOUT_CAP = 100
+
+# Per (pair, source): how many candidates survived each of the exporter's own
+# filters, and how many shipped. Without this, "short" can only be compared
+# against the raw store, which counts rows the exporter is right to drop —
+# verified-drop lists, umbrella exclusions, syndication dedup, non-English
+# titles — so every short table looked like it had headroom it did not have.
+HOLDOUT_ACCOUNTING: dict = {}
+
+
+def _acct(slug: str, source: str, **stages) -> None:
+    """Record candidate counts for one pair/source. Later calls merge."""
+    HOLDOUT_ACCOUNTING.setdefault(slug, {}).setdefault(source, {}).update(stages)
 # One outlet can otherwise own the table -- sputniknews.com was 77 of 100 rows for
 # donbas and 66 for kyiv. The table is meant to show WHO still uses the old spelling,
 # so breadth of outlets matters more than depth on any one of them. State-affiliated
@@ -1365,6 +1377,8 @@ def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
             if len(g) >= HOLDOUT_CAP:
                 break
         g = g.head(HOLDOUT_CAP)
+        _acct(slug, "openalex", after_filters=int(len(_gs)),
+              per_year_cap=int(_py), shipped=int(len(g)))
         out[slug] = [{
             "name": str(r["title"])[:160],
             "url": str(r["openalex_id"]),
@@ -1600,6 +1614,12 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
             # pipeline.audit.holdout_convergence with their pool size, so short
             # is always distinguishable from unfinished.
             _ok = [e for e in _entries if e.get("live") is True][:HOLDOUT_CAP]
+            _acct(slug, "reddit", ranked_pool=int(len(_entries)),
+                  probed=int(sum(1 for e in _entries if "live" in e)),
+                  live_unarchived=int(sum(1 for e in _entries if e.get("live") is True)),
+                  archived=int(sum(1 for e in _entries if e.get("archived"))),
+                  unprobed=int(sum(1 for e in _entries if "live" not in e)),
+                  shipped=int(len(_ok)))
             # Everything ranked but not yet probed, so the prober knows what to
             # look at next instead of re-probing only what already shipped.
             _unprobed = [e["url"] for e in _entries if "live" not in e]
@@ -1664,11 +1684,6 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                 vids = vids.sort_values(["_views", "date"], ascending=[False, False])
             else:
                 vids = vids.sort_values("date", ascending=False)
-            _vsrc = vids
-            for _vper in (HOLDOUT_PER_DOMAIN, 4, 6, 10, 20, 10_000):
-                vids = _vsrc.groupby("channel_title", sort=False, group_keys=False).head(_vper)
-                if len(vids) >= HOLDOUT_CAP:
-                    break
             # Exhibit-level guards (series untouched):
             # 1. CURRENT title must still attest the claimed form — creators
             #    rename after collection (Kiev -> Kyiv) and a corrected title
@@ -1715,6 +1730,17 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                     return False
                 return True
             vids = vids[[_exhibitable(x) for _, x in vids.iterrows()]]
+            _yt_pool = int(len(vids))
+            # One video per channel so a prolific channel cannot own the table,
+            # relaxed only as far as filling the table requires. This runs AFTER
+            # the exhibit guards on purpose: capping first and filtering second
+            # meant a table that reached 100 then lost rows to the title checks
+            # and shipped short with candidates still unused.
+            _vsrc = vids
+            for _vper in (HOLDOUT_PER_DOMAIN, 4, 6, 10, 20, 10_000):
+                vids = _vsrc.groupby("channel_title", sort=False, group_keys=False).head(_vper)
+                if len(vids) >= HOLDOUT_CAP:
+                    break
             if _yt_key:
                 cand = vids.head(HOLDOUT_CAP * 3)
                 views = _youtube_view_counts(cand.video_id.tolist(), _yt_key)
@@ -1726,6 +1752,8 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                     vids = vids.head(HOLDOUT_CAP)
             else:
                 vids = vids.head(HOLDOUT_CAP)
+            _acct(slug, "youtube", exhibitable=_yt_pool,
+                  per_channel_cap=int(_vper), shipped=int(len(vids)))
             by_pair.setdefault(slug, {})["youtube"] = [
                 {"name": f"{x['channel_title']}: {str(x.get('title',''))[:80]}",
                  "url": f"https://youtube.com/watch?v={x['video_id']}",
@@ -1737,6 +1765,10 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
         else:
             log.info("  YouTube holdouts ordered by recency — set YOUTUBE_API_KEY to rank by views")
 
+    if HOLDOUT_ACCOUNTING:
+        _ap = ROOT / "data" / "audit" / "holdout_accounting.json"
+        _ap.write_text(json.dumps(HOLDOUT_ACCOUNTING, indent=1, sort_keys=True))
+        log.info(f"  Holdout accounting written for {len(HOLDOUT_ACCOUNTING)} pair(s)")
     if _CANDIDATES:
         _cp = ROOT / "data" / "audit" / "reddit_holdout_candidates.json"
         _cp.write_text(json.dumps(_CANDIDATES, indent=1))
@@ -1944,9 +1976,12 @@ def main():
             _vdf = _vdf.assign(_ctx=[
                 re.sub(r"\s+", " ", str(_preview_around_match(t, v, _slug) or "")).lower()
                 for t, v in zip(_vdf.text, _vdf.variant)])
+            _n_window = int(len(_vdf))
             _vdf = (_vdf.sort_values("date", ascending=False)
                         .drop_duplicates("_lead")
                         .drop_duplicates("_ctx"))
+            _acct(_slug, "news_articles", in_window=_n_window,
+                  after_syndication_dedup=int(len(_vdf)))
 
             # Outlets still using the Russian form, counted in distinct stories
             # whose BODY was classified — the same evidence as the article table
@@ -1978,6 +2013,8 @@ def main():
                 log.info(f"    {_slug}: news per-domain cap relaxed to {_per} "
                          f"to reach {min(len(_vdf), HOLDOUT_CAP)} entries")
             _vdf = _vdf.head(HOLDOUT_CAP).drop(columns=["_lead", "_ctx"])
+            _acct(_slug, "news_articles", after_filters=int(len(_src)),
+                  per_domain_cap=int(_per), shipped=int(len(_vdf)))
             holdouts_by_pair.setdefault(_slug, {})["news_articles"] = [{
                 "domain": r.domain,
                 "url": r.url,
