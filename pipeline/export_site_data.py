@@ -1765,10 +1765,6 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
         else:
             log.info("  YouTube holdouts ordered by recency — set YOUTUBE_API_KEY to rank by views")
 
-    if HOLDOUT_ACCOUNTING:
-        _ap = ROOT / "data" / "audit" / "holdout_accounting.json"
-        _ap.write_text(json.dumps(HOLDOUT_ACCOUNTING, indent=1, sort_keys=True))
-        log.info(f"  Holdout accounting written for {len(HOLDOUT_ACCOUNTING)} pair(s)")
     if _CANDIDATES:
         _cp = ROOT / "data" / "audit" / "reddit_holdout_candidates.json"
         _cp.write_text(json.dumps(_CANDIDATES, indent=1))
@@ -2978,6 +2974,14 @@ def main():
     # enabling or disabling a pair.
     from pipeline.prune_site_data import main as prune_main
     prune_main()
+
+    # Written last: the news and academic tables are built after the reddit and
+    # youtube ones, so an earlier write captured only half the sources.
+    if HOLDOUT_ACCOUNTING:
+        _ap = ROOT / "data" / "audit" / "holdout_accounting.json"
+        _ap.write_text(json.dumps(HOLDOUT_ACCOUNTING, indent=1, sort_keys=True))
+        log.info(f"Holdout accounting written for {len(HOLDOUT_ACCOUNTING)} pair(s), "
+                 f"{sum(len(v) for v in HOLDOUT_ACCOUNTING.values())} table(s)")
 
     log.info("=" * 60)
     log.info("Export complete!")
