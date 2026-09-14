@@ -28,6 +28,15 @@ import pandas as pd
 import yaml
 
 
+# Generated affiliate-listing boilerplate, matched on the network's own call to
+# action rather than on any one hotel name.
+_LISTING_SPAM = re.compile(
+    r"smart-booking\.club"
+    r"|save up to \d+% with smart booking"
+    r"|book it now:\s*https?://"
+    r"|\bzip code:\s*\d{4,6}\b.{0,80}\bset in\b",
+    re.I | re.S)
+
 _CFG_CACHE: dict | None = None
 _VDROP_CACHE: dict | None = None
 
@@ -124,6 +133,19 @@ def apply_source_filters(df: pd.DataFrame, slug: str, source: str,
                 if hit.any():
                     note("dropped_verified_wrong", hit.sum())
                     df, blob = df[~hit], blob[~hit]
+
+    # Affiliate listing spam. A booking network generates one description per
+    # property ("<hotel> - Feodosiya - country / Save up to 25% with Smart
+    # Booking / Book it now: <url> / zip code: 98000"), so every row differs by
+    # hotel name and address and text-hash dedup keeps all of them. The template
+    # is boilerplate, not discourse about the place, and it is dense enough to
+    # own a small pair: 290 rows corpus-wide (0.05% of YouTube) but 2.3% of
+    # feodosiia, whose solo vocabulary profile came back as guest / code / zip.
+    if len(df):
+        spam = blob.str.contains(_LISTING_SPAM)
+        if spam.any():
+            note("dropped_listing_spam", spam.sum())
+            df, blob = df[~spam], blob[~spam]
 
     pats = list(cfg.get("homonym_filters", []))
     if source == "youtube":
