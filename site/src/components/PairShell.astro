@@ -68,6 +68,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     const timeseriesData = JSON.parse(document.getElementById('pair-timeseries-data')?.textContent || '{}');
     import manifest from '../data/manifest.json';
     const holdoutsByPair = { [document.getElementById('pair-detail')!.dataset.pairSlug!]: JSON.parse(document.getElementById('pair-holdouts-data')?.textContent || 'null') };
+
+    // Pointer capability, not screen width: a laptop in a narrow window still
+    // has a mouse, and a large tablet does not. Desktop opens the detail panel
+    // on hover; touch devices open it on tap and keep it open until dismissed,
+    // because a tap that only "hovers" leaves the panel stuck with no way back.
+    const CAN_HOVER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     import pairEvents from '../data/pair_events.json';
     // trends_countries removed — using GDELT country distribution only
     const errorAnalysis: any = {};
@@ -2081,8 +2087,20 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           cpop.style.cssText = 'position:absolute; z-index:60; max-width:380px; background:var(--bg,#fff); border:1px solid var(--border,#e5e7eb); border-radius:8px; padding:0.6rem 0.7rem; font-size:0.78rem; line-height:1.45; box-shadow:0 6px 24px rgba(0,0,0,0.12);';
           document.body.appendChild(cpop);
           document.addEventListener('click', (ev: any) => {
-            if (!cpop.hidden && !cpop.contains(ev.target) && !ev.target.closest?.('.cl-legend-chip')) cpop.hidden = true;
+            if (!cpop.hidden && !cpop.contains(ev.target) && !ev.target.closest?.('.cl-legend-chip')) {
+              // Unpin as well as hide. Leaving the pin set meant that after one
+              // outside click the legend never responded to hover again, because
+              // every hover handler is guarded on "not pinned".
+              cpop._pinned = null;
+              cpop.hidden = true;
+            }
           });
+        }
+        let cHideTimer: any = null;
+        if (CAN_HOVER && !cpop._hoverBound) {
+          cpop._hoverBound = true;
+          cpop.addEventListener('mouseenter', () => { if (cHideTimer) clearTimeout(cHideTimer); });
+          cpop.addEventListener('mouseleave', () => { if (!cpop._pinned) cpop.hidden = true; });
         }
         legendEl.querySelectorAll('.cl-legend-chip').forEach((ch: any) => {
           const _m0 = JSON.parse(decodeURIComponent(ch.dataset.meta || '%7B%7D'));
@@ -2091,8 +2109,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             ch.style.cursor = 'default';
             return;
           }
-          ch.addEventListener('click', (ev: any) => {
-            ev.stopPropagation();
+          const showCluster = (ev: any) => {
+            if (ev) ev.stopPropagation();
             const m = JSON.parse(decodeURIComponent(ch.dataset.meta || '%7B%7D'));
             const srcBits = m.sources ? Object.entries(m.sources)
               .sort((a: any, b: any) => b[1] - a[1])
@@ -2121,6 +2139,20 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             cpop.style.left = Math.min(window.scrollX + r.left, window.scrollX + window.innerWidth - 400) + 'px';
             cpop.style.top = (window.scrollY + r.bottom + 6) + 'px';
             cpop.hidden = false;
+          };
+          // Same rule as the collocation chips: hover on a real pointer, tap
+          // everywhere else. The cluster legend was click-only, so on desktop
+          // the description a reader needs to interpret the plot was one
+          // unprompted click away and most readers never saw it.
+          if (CAN_HOVER) {
+            ch.addEventListener('mouseenter', () => { if (cHideTimer) clearTimeout(cHideTimer); if (!cpop._pinned) showCluster(null); });
+            ch.addEventListener('mouseleave', () => {
+              if (!cpop._pinned) cHideTimer = setTimeout(() => { cpop.hidden = true; }, 180);
+            });
+          }
+          ch.addEventListener('click', (ev: any) => {
+            if (cpop._pinned === ch) { cpop._pinned = null; cpop.hidden = true; ev.stopPropagation(); return; }
+            cpop._pinned = ch; showCluster(ev);
           });
         });
       }
@@ -2335,13 +2367,17 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           pop.style.top = (window.scrollY + r.bottom + 6) + 'px';
           pop.hidden = false;
         };
-        pop.addEventListener('mouseenter', () => { if (hideTimer) clearTimeout(hideTimer); });
-        pop.addEventListener('mouseleave', () => { if (!pinned) pop.hidden = true; });
+        if (CAN_HOVER) {
+          pop.addEventListener('mouseenter', () => { if (hideTimer) clearTimeout(hideTimer); });
+          pop.addEventListener('mouseleave', () => { if (!pinned) pop.hidden = true; });
+        }
         scope.querySelectorAll('.coll-chip').forEach((ch: any) => {
-          ch.addEventListener('mouseenter', () => { if (hideTimer) clearTimeout(hideTimer); if (!pinned) showFor(ch); });
-          ch.addEventListener('mouseleave', () => {
-            if (!pinned) hideTimer = setTimeout(() => { pop.hidden = true; }, 180);
-          });
+          if (CAN_HOVER) {
+            ch.addEventListener('mouseenter', () => { if (hideTimer) clearTimeout(hideTimer); if (!pinned) showFor(ch); });
+            ch.addEventListener('mouseleave', () => {
+              if (!pinned) hideTimer = setTimeout(() => { pop.hidden = true; }, 180);
+            });
+          }
           ch.addEventListener('click', (ev: any) => {
             ev.stopPropagation();
             if (pinned === ch) { pinned = null; pop.hidden = true; return; }
