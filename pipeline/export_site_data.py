@@ -1550,6 +1550,15 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                     score=posts["post_id"].astype(str).map(_RD_SCORE).fillna(0).astype("int64"))
             posts = (posts.nlargest(HOLDOUT_CAP * 6, "score")
                      if "score" in posts.columns else posts.head(HOLDOUT_CAP * 6))
+            # An entry counts as live only if it is viewable AND unfrozen.
+            # `archived` is carried through so the audit can report what the
+            # constraint costs rather than silently dropping rows.
+            def _rd_state(e: dict) -> dict:
+                if e.get("status") != "live":
+                    return {"live": False}
+                return {"live": not e.get("archived", False),
+                        "archived": bool(e.get("archived", False))}
+
             # Liveness from the headless-probe cache (site/reddit_liveness.mjs):
             # live posts sort first — the table is a "see for yourself" exhibit —
             # and removed ones ship tagged rather than hidden, because deletion
@@ -1568,17 +1577,20 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                  "url": f"https://reddit.com/r/{x['subreddit']}/comments/{x['post_id']}",
                  "month": str(x.get("date", ""))[:7],
                  "score": int(x.get("score", 0) or 0),
-                 **({"live": _lv[str(x["post_id"])]["status"] == "live"}
+                 **(_rd_state(_lv[str(x["post_id"])])
                     if str(x["post_id"]) in _lv else {})}
                 for _, x in posts.iterrows()
             ]
-            # PROBED-LIVE ONLY. Padding the table with never-probed posts to
-            # reach 100 is how deleted and archived threads reached the page:
-            # 1,076 of the 1,579 ids probed so far are removed, and the pool is
-            # ~14,000, so an unprobed id is more likely dead than alive. A
-            # shorter table of posts that all open is the exhibit; a full table
-            # where two thirds 404 is not. Pairs that cannot reach 100 live are
-            # reported by pipeline.audit.holdout_convergence.
+            # PROBED-LIVE ONLY, and "live" here means the post opens and can
+            # still be participated in: not deleted, not moderator-removed, not
+            # in a banned or private subreddit, and not archived. Archiving
+            # freezes a thread, so an archived post fails the "go look at it"
+            # standard the table exists to meet; it costs ~17% of the live 2025
+            # pool, which the candidate pool (6x the cap) absorbs. Padding with
+            # never-probed ids is what previously put dead threads on the page.
+            # Pairs that cannot reach 100 are reported by
+            # pipeline.audit.holdout_convergence with their pool size, so short
+            # is always distinguishable from unfinished.
             _ok = [e for e in _entries if e.get("live") is True][:HOLDOUT_CAP]
             # Everything ranked but not yet probed, so the prober knows what to
             # look at next instead of re-probing only what already shipped.
@@ -1644,7 +1656,11 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
                 vids = vids.sort_values(["_views", "date"], ascending=[False, False])
             else:
                 vids = vids.sort_values("date", ascending=False)
-            vids = vids.groupby("channel_title", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
+            _vsrc = vids
+            for _vper in (HOLDOUT_PER_DOMAIN, 4, 6, 10, 20, 10_000):
+                vids = _vsrc.groupby("channel_title", sort=False, group_keys=False).head(_vper)
+                if len(vids) >= HOLDOUT_CAP:
+                    break
             # Exhibit-level guards (series untouched):
             # 1. CURRENT title must still attest the claimed form — creators
             #    rename after collection (Kiev -> Kyiv) and a corrected title
@@ -1938,9 +1954,22 @@ def main():
                     {"name": r.domain, "russian_pct": float(r.rus_pct), "total": int(r.total)}
                     for r in _od.itertuples()]
 
-            _vdf = (_vdf.groupby("domain", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN)
-                        .head(HOLDOUT_CAP)
-                        .drop(columns=["_lead", "_ctx"]))
+            # Prefer diversity, but do not leave the table short because of it.
+            # A flat 3-per-domain cap is why luhansk shipped 80 of a 379-row
+            # pool and zaporizhzhia 32 of 205: coverage concentrates in a few
+            # outlets, so the cap binds long before the pool runs out. Raise the
+            # allowance one step at a time and stop at the first value that
+            # fills the table — the result is as diverse as it can be while
+            # still being 100 entries, and short only when the pool is spent.
+            _src = _vdf
+            for _per in (HOLDOUT_PER_DOMAIN, 4, 6, 10, 20, 10_000):
+                _vdf = _src.groupby("domain", sort=False, group_keys=False).head(_per)
+                if len(_vdf) >= HOLDOUT_CAP:
+                    break
+            if _per > HOLDOUT_PER_DOMAIN:
+                log.info(f"    {_slug}: news per-domain cap relaxed to {_per} "
+                         f"to reach {min(len(_vdf), HOLDOUT_CAP)} entries")
+            _vdf = _vdf.head(HOLDOUT_CAP).drop(columns=["_lead", "_ctx"])
             holdouts_by_pair.setdefault(_slug, {})["news_articles"] = [{
                 "domain": r.domain,
                 "url": r.url,
