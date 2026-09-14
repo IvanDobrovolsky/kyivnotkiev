@@ -11,9 +11,11 @@ reports which it is, so "fewer than 100" is a measurement rather than a claim.
 Reddit carries an extra condition: every shipped entry must be probed live AND
 unarchived, because the table exists to be clicked through.
 
-Pool sizes are computed with the exporter's OWN constants, imported rather than
-restated — a local copy of HOLDOUT_VARIANTS drifted to ("russian", "both") and
-invented headroom that the exporter could never have filled.
+Pool sizes come from the exporter's own ledger (data/audit/holdout_accounting.json),
+not from the raw store. The store counts rows the exporter is right to drop —
+verified-drop lists, umbrella exclusions, syndication dedup, non-English titles —
+so a store-derived pool reports headroom that cannot be filled. The store count
+is still shown, as the outer bound, but only the ledger decides convergence.
 
 Exit 1 while any table can still be improved.
 
@@ -72,6 +74,11 @@ def openalex_pools() -> dict:
 
 def main() -> int:
     h = json.loads((SITE / "holdouts_by_pair.json").read_text())
+    acct_p = ROOT / "data" / "audit" / "holdout_accounting.json"
+    acct = json.loads(acct_p.read_text()) if acct_p.exists() else {}
+    if not acct:
+        print("NOTE: no holdout_accounting.json — run the exporter first; "
+              "falling back to raw-store pools, which overstate headroom.\n")
     enabled = [p["slug"] for p in json.loads((SITE / "pairs_meta.json").read_text())]
     oa = openalex_pools()
     cand_p = ROOT / "data" / "audit" / "reddit_holdout_candidates.json"
@@ -84,7 +91,12 @@ def main() -> int:
                          ("news_articles", "gdelt"), ("openalex", None)):
             rows = h.get(slug, {}).get(key) or []
             ships = len(rows)
-            pool = oa.get(slug, 0) if key == "openalex" else store_pool(slug, src)
+            led = (acct.get(slug) or {}).get(key) or {}
+            # What the exporter actually had to choose from, after its filters.
+            pool = led.get("after_filters", led.get("exhibitable",
+                   led.get("live_unarchived")))
+            if pool is None:
+                pool = oa.get(slug, 0) if key == "openalex" else store_pool(slug, src)
 
             if key == "reddit":
                 bad = sum(1 for e in rows if e.get("live") is not True)
@@ -103,8 +115,13 @@ def main() -> int:
             elif ships >= pool:
                 exhausted += 1
             else:
-                problems.append(f"{slug}/{key}: {ships} of {HOLDOUT_CAP}, {pool - ships} available")
-                print(f"  {slug:22s} {key:14s} {ships:>6d} {pool:>7d}  headroom {pool - ships}")
+                cap = (led.get("per_domain_cap") or led.get("per_year_cap")
+                       or led.get("per_channel_cap"))
+                why = f" (cap settled at {cap})" if cap and cap < 10_000 else ""
+                problems.append(
+                    f"{slug}/{key}: {ships} of {HOLDOUT_CAP}, {pool - ships} available{why}")
+                print(f"  {slug:22s} {key:14s} {ships:>6d} {pool:>7d}  "
+                      f"headroom {pool - ships}{why}")
 
     print(f"\nfull tables: {full}   short but pool-exhausted: {exhausted}   "
           f"improvable: {len(problems)}")
