@@ -2750,6 +2750,19 @@ def main():
         _exdf_full = None
         _used_examples: set = set()
 
+        # Both spellings of this pair, for locating the chip word's relevant
+        # occurrence inside a document.
+        _term_rx = None
+        try:
+            _pp = next((q for q in load_pairs()["pairs"] if q.get("slug") == _slug), None)
+            if _pp:
+                import re as _rex0
+                _term_rx = _rex0.compile("|".join(
+                    r"\b" + r"[-_\s]+".join(_rex0.escape(x) for x in str(_pp[v]).split()) + r"\b"
+                    for v in ("ukrainian", "russian")), _rex0.I)
+        except Exception:                                  # noqa: BLE001
+            _term_rx = None
+
         def _example(word, side, prefer_sources=None):
             nonlocal _exdf_full
             if _exdf is None:
@@ -2794,9 +2807,29 @@ def main():
             _cand = _cand[(_cand._len >= 200) & (_cand._len <= 4000)]
             if not len(_cand):
                 _cand = _m.assign(_len=_m.text.astype(str).str.len())
+            # The quote has to show WHY the word is distinctive to this pair, so
+            # prefer occurrences that sit near a mention of the pair term. lviv's
+            # "division" chip is about Steel Division 2's Lvov Offensive, but the
+            # picker quoted "sowing of division" after Ukip protesters — a real
+            # occurrence in the corpus, of an unrelated sense, which reads as a
+            # false chip. Rank by distance from the chip word to the nearest
+            # pair-term mention, then by typical length as before.
+            def _gap(_txt: str) -> int:
+                _low = str(_txt).lower()
+                _wm = [m.start() for m in _rex.finditer(_wrx, _low)]
+                if not _wm or _term_rx is None:
+                    return 10 ** 6
+                _tm = [m.start() for m in _term_rx.finditer(_low)]
+                if not _tm:
+                    return 10 ** 6
+                return min(abs(a - b) for a in _wm for b in _tm)
+            _cand = _cand.assign(_gap=[_gap(t) for t in _cand.text])
+            _near = _cand[_cand._gap <= 400]
+            if len(_near):
+                _cand = _near
             _med = float(_cand._len.median())
             _cand = _cand.assign(_d=(_cand._len - _med).abs()).sort_values(
-                ["_d", "_len"], kind="mergesort")
+                ["_gap", "_d", "_len"], kind="mergesort")
             _row = None
             for _r in _cand.itertuples():
                 # _exdf carries no url column, so getattr always returned None
@@ -2813,10 +2846,16 @@ def main():
             if _row is None:
                 return None
             _t = _rex.sub(r"\s+", " ", str(_row.text))
-            _mm = _rex.search(_wrx, _t.lower())
-            _i = _mm.start() if _mm else -1
-            if _i < 0:
+            _low = _t.lower()
+            _hits = [m.start() for m in _rex.finditer(_wrx, _low)]
+            if not _hits:
                 return None
+            # Quote the occurrence nearest the pair term, for the same reason
+            # the document was chosen that way — the first occurrence in a long
+            # article is often the unrelated sense.
+            _tm = [m.start() for m in _term_rx.finditer(_low)] if _term_rx else []
+            _i = (min(_hits, key=lambda h: min(abs(h - t) for t in _tm))
+                  if _tm else _hits[0])
             _a0 = max(0, _i - 45)
             _snip = ("…" if _a0 else "") + _t[_a0:_i + len(word) + 60].strip() + "…"
             return {"s": str(_row.source), "t": _snip}
