@@ -2099,11 +2099,21 @@ def main():
                 _stale_stats.add(_pf.stem)
             # Row count alone cannot see the corpus being REWRITTEN. A PII
             # scrub redacts text in place and leaves the count identical, so
-            # every pair kept its green badge on an analysis computed from
-            # text that no longer exists. If the corpus is newer than the
-            # analysis, the analysis is stale whatever the count says.
-            elif _pf.stat().st_mtime > _an.stat().st_mtime:
-                _stale_stats.add(_pf.stem)
+            # every pair kept its green badge on an analysis computed from text
+            # that no longer exists.
+            #
+            # Compare CONTENT, not mtime. analyze_pair records the sha1 of the
+            # store file it read, so this answers "was the analysis computed
+            # from these exact bytes". mtime answered "was the file touched",
+            # which a store rebuild does to every pair: the last one rewrote all
+            # 24 while changing only 9, and would have sent 15 correct pairs
+            # amber and had them recomputed for nothing.
+            else:
+                import hashlib as _hl
+                _cur = _hl.sha1(_pf.read_bytes()).hexdigest()[:16]
+                _rec = _aj.get("input_sha1")
+                if not _rec or _rec != _cur:
+                    _stale_stats.add(_pf.stem)
         except Exception:                                  # noqa: BLE001
             _stale_stats.add(_pf.stem)
     if _stale_stats:
