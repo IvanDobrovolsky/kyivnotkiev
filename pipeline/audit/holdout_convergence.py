@@ -8,7 +8,12 @@ A table that is short because a cap bound early, or because candidates were
 never checked, is NOT converged — it just looks the same from outside. This
 reports which it is, so "fewer than 100" is a measurement rather than a claim.
 
-Reddit carries an extra condition: every shipped entry must be probed LIVE.
+Reddit carries an extra condition: every shipped entry must be probed live AND
+unarchived, because the table exists to be clicked through.
+
+Pool sizes are computed with the exporter's OWN constants, imported rather than
+restated — a local copy of HOLDOUT_VARIANTS drifted to ("russian", "both") and
+invented headroom that the exporter could never have filled.
 
 Exit 1 while any table can still be improved.
 
@@ -21,18 +26,17 @@ import sys
 
 import pandas as pd
 
+from pipeline.export_site_data import (HOLDOUT_CAP, HOLDOUT_SINCE,
+                                       HOLDOUT_VARIANTS, OPENALEX_COLLISIONS,
+                                       OPENALEX_SINCE_YEAR)
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 SITE = ROOT / "site" / "src" / "data"
-CAP = 100
-SINCE = "2025-01"
-
-# site key -> the store source that feeds it
-FED_BY = {"reddit": "reddit", "youtube": "youtube",
-          "news_articles": "gdelt", "openalex": "openalex"}
+SINCE_M = HOLDOUT_SINCE[:7]
 
 
-def pool_for(slug: str, source: str) -> int:
-    """Rows the table could draw on: the holdout window, the holdout variants."""
+def store_pool(slug: str, source: str) -> int:
+    """Rows the table could draw on: holdout window, holdout variants."""
     f = ROOT / "data" / "store" / "pairs" / f"{slug}.parquet"
     if not f.exists():
         return 0
@@ -41,55 +45,78 @@ def pool_for(slug: str, source: str) -> int:
     except Exception:                                  # noqa: BLE001
         return 0
     return int(((d.source == source)
-                & d.variant.isin(["russian", "both"])
-                & (d.date.astype(str) >= SINCE)).sum())
+                & d.variant.isin(HOLDOUT_VARIANTS)
+                & (d.date.astype(str) >= SINCE_M)).sum())
+
+
+def openalex_pools() -> dict:
+    """Distinct works per pair in the academic holdout window."""
+    f = ROOT / "data" / "cl" / "raw" / "openalex" / "all_pairs.parquet"
+    if not f.exists():
+        return {}
+    import yaml
+    cfg = yaml.safe_load((ROOT / "config" / "pairs.yaml").read_text())
+    lut = {}
+    for p in cfg["pairs"]:
+        for v in ("ukrainian", "russian"):
+            lut[str(p[v]).strip().lower()] = (p["slug"], v)
+    d = pd.read_parquet(f)
+    m = d["matched_term"].astype(str).str.strip().str.lower().map(
+        lambda t: lut.get(t, (None, None)))
+    d = d.assign(slug=[x[0] for x in m], var=[x[1] for x in m])
+    d = d[d.slug.notna() & d["var"].isin(HOLDOUT_VARIANTS)
+          & (d.year >= OPENALEX_SINCE_YEAR) & ~d.slug.isin(OPENALEX_COLLISIONS)
+          & d.openalex_id.notna() & d.title.notna()]
+    return d.drop_duplicates("openalex_id").groupby("slug").size().to_dict()
 
 
 def main() -> int:
     h = json.loads((SITE / "holdouts_by_pair.json").read_text())
-    meta = json.loads((SITE / "pairs_meta.json").read_text())
-    enabled = [p["slug"] for p in meta]
-    lv_p = ROOT / "data" / "audit" / "reddit_liveness.json"
-    lv = json.loads(lv_p.read_text()) if lv_p.exists() else {}
+    enabled = [p["slug"] for p in json.loads((SITE / "pairs_meta.json").read_text())]
+    oa = openalex_pools()
     cand_p = ROOT / "data" / "audit" / "reddit_holdout_candidates.json"
     cand = json.loads(cand_p.read_text()) if cand_p.exists() else {}
 
     problems, full, exhausted = [], 0, 0
     print(f"{'pair':22s} {'source':14s} {'ships':>6s} {'pool':>7s}  state")
     for slug in enabled:
-        for key, src in FED_BY.items():
-            ships = len(h.get(slug, {}).get(key) or [])
-            pool = pool_for(slug, src)
+        for key, src in (("reddit", "reddit"), ("youtube", "youtube"),
+                         ("news_articles", "gdelt"), ("openalex", None)):
+            rows = h.get(slug, {}).get(key) or []
+            ships = len(rows)
+            pool = oa.get(slug, 0) if key == "openalex" else store_pool(slug, src)
 
             if key == "reddit":
-                dead = sum(1 for e in (h.get(slug, {}).get(key) or [])
-                           if e.get("live") is not True)
-                if dead:
-                    problems.append(f"{slug}/{key}: {dead} entr(ies) not probed-live")
-                    print(f"  {slug:22s} {key:14s} {ships:>6d} {pool:>7d}  FAIL {dead} not live")
+                bad = sum(1 for e in rows if e.get("live") is not True)
+                if bad:
+                    problems.append(f"{slug}/{key}: {bad} entr(ies) not live-and-unarchived")
+                    print(f"  {slug:22s} {key:14s} {ships:>6d} {pool:>7d}  FAIL {bad} not live")
                     continue
                 left = len(cand.get(slug, []))
-                if ships < CAP and left:
-                    problems.append(f"{slug}/{key}: {ships}/{CAP}, {left} candidates unprobed")
+                if ships < HOLDOUT_CAP and left:
+                    problems.append(f"{slug}/{key}: {ships}/{HOLDOUT_CAP}, {left} unprobed")
                     print(f"  {slug:22s} {key:14s} {ships:>6d} {pool:>7d}  short, {left} unprobed")
                     continue
 
-            if ships >= CAP:
+            if ships >= HOLDOUT_CAP:
                 full += 1
-                continue
-            if ships >= pool:
+            elif ships >= pool:
                 exhausted += 1
-                continue
-            problems.append(f"{slug}/{key}: {ships} of {CAP} with {pool - ships} still available")
-            print(f"  {slug:22s} {key:14s} {ships:>6d} {pool:>7d}  headroom {pool - ships}")
+            else:
+                problems.append(f"{slug}/{key}: {ships} of {HOLDOUT_CAP}, {pool - ships} available")
+                print(f"  {slug:22s} {key:14s} {ships:>6d} {pool:>7d}  headroom {pool - ships}")
 
     print(f"\nfull tables: {full}   short but pool-exhausted: {exhausted}   "
           f"improvable: {len(problems)}")
-    if lv:
-        live = sum(1 for v in lv.values() if v.get("status") == "live")
-        print(f"reddit liveness: {len(lv):,} probed, {live:,} live "
-              f"({100 * live / max(len(lv), 1):.0f}%), "
-              f"{sum(len(v) for v in cand.values()):,} candidates unprobed")
+    lv_p = ROOT / "data" / "audit" / "reddit_liveness.json"
+    if lv_p.exists():
+        lv = json.loads(lv_p.read_text())
+        cur = [v for v in lv.values() if v.get("schema") == 2]
+        live = [v for v in cur if v.get("status") == "live"]
+        print(f"reddit: {len(cur):,} probed, {len(live):,} live "
+              f"({100 * len(live) / max(len(cur), 1):.0f}%), "
+              f"{sum(1 for v in live if v.get('archived')):,} of those archived, "
+              f"{sum(len(v) for v in cand.values()):,} unprobed")
     print("CONVERGED" if not problems else f"NOT converged: {len(problems)} table(s)")
     return 1 if problems else 0
 
