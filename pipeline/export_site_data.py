@@ -1354,9 +1354,17 @@ def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
     for slug, g in df.groupby("slug"):
         g = (g.drop_duplicates("openalex_id")
                .sort_values("cited_by_count", ascending=False)
-               .drop_duplicates("_tkey")
-               .groupby("year", sort=False, group_keys=False).head(HOLDOUT_PER_DOMAIN * 10)
-               .head(HOLDOUT_CAP))
+               .drop_duplicates("_tkey"))
+        # Spread across years so one prolific year cannot own the table, but
+        # relax the per-year allowance until the table fills. At 30/year over a
+        # two-year window the ceiling was 60, so no academic table could ever
+        # reach 100 however large its pool.
+        _gs = g
+        for _py in (HOLDOUT_PER_DOMAIN * 10, 50, 100, 10_000):
+            g = _gs.groupby("year", sort=False, group_keys=False).head(_py)
+            if len(g) >= HOLDOUT_CAP:
+                break
+        g = g.head(HOLDOUT_CAP)
         out[slug] = [{
             "name": str(r["title"])[:160],
             "url": str(r["openalex_id"]),
