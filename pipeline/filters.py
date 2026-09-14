@@ -34,7 +34,15 @@ _LISTING_SPAM = re.compile(
     r"smart-booking\.club"
     r"|save up to \d+% with smart booking"
     r"|book it now:\s*https?://"
-    r"|\bzip code:\s*\d{4,6}\b.{0,80}\bset in\b",
+    r"|\bzip code:\s*\d{4,6}\b.{0,80}\bset in\b"
+    # A second network with the same business model and a different template:
+    # "<property> - <city> - country / <property> hotel city: <city> -
+    # Country: country / Address: ...". 540 rows across 9 pairs, 85 of them in
+    # feodosiia, which is what kept "guest" in that pair's vocabulary profile
+    # after the first network was filtered.
+    r"|hotelvaluecompare"
+    r"|compare prices:\s*https?://"
+    r"|\bhotel city:\s*\S",
     re.I | re.S)
 
 _CFG_CACHE: dict | None = None

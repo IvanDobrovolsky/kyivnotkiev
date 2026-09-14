@@ -2171,6 +2171,32 @@ def main():
         except Exception:                              # noqa: BLE001
             pass
 
+    def _written(book: dict, slug: str, label: str, terms: list) -> str:
+        """Find this cluster's written entry, tolerating a changed label.
+
+        Entries are keyed by the cluster's label, which is its top two c-TF-IDF
+        terms. Those move whenever the clusters are recomputed, so an exact-key
+        lookup silently loses the whole book: last night's rebuild left 62 of
+        129 clusters with no name and no description, and an earlier one left
+        39 of 145. Fall back to term identity — a stored key whose terms are ALL
+        still among this cluster's top terms is the same cluster under a new
+        label. Requiring every key term (not just an overlap) keeps
+        "ukraine · russian" from claiming "ukraine · city".
+        """
+        book_p = book.get(slug) or {}
+        lab = str(label).lower()
+        if lab in book_p:
+            return book_p[lab]
+        have = {str(t).lower() for t in (terms or [])}
+        if not have:
+            return ""
+        best, best_n = "", 0
+        for k, v in book_p.items():
+            kt = {x.strip() for x in str(k).split("\u00b7") if x.strip()}
+            if kt and kt <= have and len(kt) > best_n:
+                best, best_n = v, len(kt)
+        return best
+
     GLOSS_RULES = [
         ({"police", "arrested", "department", "sheriff"}, "crime & police news"),
         ({"battle", "wagner", "soledar"}, "the battle for Bakhmut"),
@@ -2532,8 +2558,8 @@ def main():
                 # The written description, separate from the short label. The
                 # label names the cluster in the legend; this says what the
                 # group of texts actually IS.
-                "name": _cluster_name.get(_slug, {}).get(str(_label).lower(), ""),
-                "desc": _cluster_gloss.get(_slug, {}).get(str(_label).lower(), ""),
+                "name": _written(_cluster_name, _slug, _label, _c.get("top_terms", [])),
+                "desc": _written(_cluster_gloss, _slug, _label, _c.get("top_terms", [])),
                 "terms": [t for t in _terms6 if t.lower() not in EXPLICIT],
                 "sources": _src_shares(_cmeta[str(_cid)]["src"]),
                 "years": _year_span(_cmeta[str(_cid)]["yr"]),
