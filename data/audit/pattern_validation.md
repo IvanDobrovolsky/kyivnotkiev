@@ -1,0 +1,509 @@
+# Drop-pattern validation
+
+auto-safe 410 · review 8 · reject 9
+
+## reject
+- **borscht** `^borscht$` — 0 rows (0.00%) {}
+- **chornobyl** `shadow\s+of\s+cherno?byl` — 31,643 rows (13.70%) {"youtube": 17592, "reddit": 13897, "gdelt": 151, "openalex": 3}
+    - The long awaited patch for Call of Chernobyl is finally here. The mod has seen a tremendous amount of growth a
+    - Where Are Chernobyl’s Children? Photography in the Age of Disaster Tourism National Geographic photographer Ge
+    - Hello All, Stalker Shadow of Chernobyl Zone Revolution ™ is active, and look at the news we have. Environment 
+- **donbas** `^donbas$` — 0 rows (0.00%) {}
+- **ihor-sikorsky** `igor\s+sikorsky\s+((kyiv|kiev)\s+polytechnic|kpi\b)` — 450 rows (17.81%) {"youtube": 341, "openalex": 52, "gdelt": 48, "reddit": 9}
+    - ISLAMABAD: The Ukrainian Ambassador Volodymyr Lakomov has said that Ukraine is a reliable and constructive par
+    - The implementation of the Sustainable Development Doctrine will allow Ukraine to achieve the level of Western 
+    - People wearing VR glasses paints during the Global Innovator Conference 2017 in Shenzhen, south China's Guangd
+- **mykola-hohol** `nikolai\s*gogol[^\n]{0,40}(?:bungou?\s*stray\s*dogs|bungosd|bsd)|(?:bungou?\s*stray\s*dogs|bungosd|bsd)[^\n]{0,40}nikolai\s*gogol` — 1,073 rows (10.76%) {"youtube": 971, "reddit": 102}
+    - [self] Nikolai Gogol from Bungou Stray Dogs, bath pic in absence of others (see comments)
+    - BSD Nikolai Gogol fanart
+    - [self] This is my Nikolai Gogol cosplay from Bungo Stray Dogs. Right now he's manga only but will come out in 
+- **oleksandr-usyk** `^oleksandr[ _]usyk$` — 0 rows (0.00%) {}
+- **ternopil** `[а-яё]{4,}` — 6,471 rows (41.02%) {"youtube": 6243, "reddit": 119, "openalex": 102, "gdelt": 7}
+    - The highest turnout was in Ternopil (56.50%) / Photo from UNIAN The CEC reported on the highest turnout in the
+    - According to Ruslan Zabily, Director of the National Memorial Museum “Tiurma na Lontskoho” (Prison on Lonskoho
+    - Photo from UNIAN A Ukrainian toddler, 2.5, was put under observation in the western Ukrainian city of Ternopil
+- **volodymyr-zelenskyy** `^vladimir zelensky$` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `^volodymyr zelenskyy$` — 0 rows (0.00%) {}
+
+## review
+- **chicken-kyiv** `[а-яё]{4,}` — 421 rows (6.03%) {"youtube": 346, "reddit": 70, "gdelt": 5}
+    - Years before I ever tasted it, I was pre-conditioned to adore schnitzel. Maria in “The Sound of Music” listed 
+    - With the Russian invasion of Ukraine, we’ve all become much more attuned to some parts of Ukrainian culture — 
+    - Thinking of Ukraine-Foodie Friday Chicken Kyiv Our thoughts are with the people of Ukraine and that led me to 
+- **donbas** `(?:^|\s)#\w*donbass\w*` — 4,024 rows (4.73%) {"youtube": 3738, "reddit": 271, "gdelt": 15}
+    - French military intelligence rules out ‘Russian invasion plans’ for Ukraine Published 11 Apr, 2015 13:02 | Upd
+    - Some of the countries in it, either in major or minor roles: USA, UK, Canada, Australia, New Zealand, Lebanon,
+    - EU Humanitarian partners stretched by worsening conflict in #Donbass According to the United Nations Organizat
+- **ihor-sikorsky** `\b(helikopter|penemu|sejarah|kisah|pencipta)\b` — 111 rows (4.39%) {"youtube": 110, "reddit": 1}
+    - İlk Başarılı Helikopter Uçuşu 1939'da: Igor Sikorsky tarafından icat edildi
+    - Helicopterverbinding Brussel-Rotterdam (1953) Rotterdam en Brussel hebben een geregelde luchtverbinding opgeze
+    - Penemu Alat alat Transportasi dan perlengkapannya di Dunia Penemu Motor Honda - Soichiro Honda Penemu Mesin 4 
+- **ihor-sikorsky** `\bhelic[oó]ptero\b` — 73 rows (2.89%) {"youtube": 73}
+    - 08-10-2010. SERIE HALLAZGOS Y CREACIONES: El helicóptero Un helicóptero es una aeronave más pesada que el aire
+    - Igor Sikorsky e o desenvolvimento do helicóptero Uma breve história das pesquisas de Igor Sikorsky
+    - PISTON ENGINES HELICOPTERS Dois helicopteros foram modelos ímpares, no desenvolvimento de aparelhos movidos a 
+- **luhansk** `#lugansk\b` — 1,914 rows (2.98%) {"youtube": 1873, "reddit": 35, "gdelt": 6}
+    - cross-referenced news and research resources about municipalities of Lugansk Oblast, Ukraine images: google ya
+    - “Military invasion into #Lugansk city now. Seems "someone" wants to bring the situation back under control,” J
+    - "We can say that today was the best ever, the second best ever, day for the Russians in the territory of Ukrai
+- **oleksandr-usyk** `[Ѐ-ӿ]{3,}` — 902 rows (2.05%) {"youtube": 874, "reddit": 20, "gdelt": 8}
+    - Day 428 of the invasion of Ukraine. Summary of key events in the last 24 hours: - NATO: We have delivered 230 
+    - 🙏🤼♂️ DTEK: Fight for Light: Oleksandr Usyk to Support Rebuilding of Ukraine's Shattered Energy Sector 🌿🔋⛽ Wedn
+    - AFTER A WEEK-LONG psychological war which neither boxer even remotely bothered the other, Tyson Fury paid Olek
+- **serhii-korolyov** `,\s*sergei korolev[^,]{0,25},` — 106 rows (7.65%) {"youtube": 46, "gdelt": 44, "reddit": 16}
+    - “Hey sky, take off your hat, I’m coming!” – Valentina Tereshkova Five decades ago, a young woman, a textile fa
+    - As design icons go, it’s hard to beat a Sputnik: for its combination of sphere and line, its double otherworld
+    - TV channel "Moscow-24" reported this week that the price of produce on the shelves in the capital have fallen 
+- **varenyky** `https?://[^\s)]*vareniki` — 286 rows (7.07%) {"youtube": 277, "reddit": 9}
+    - It's time for RGD Mod Favorites (December 5th - 11th)! See inside for details :) **EDIT: It's been brought to 
+    - Swapping out kefir with greek yogurt in dough? Hi all. So I'm trying to make vareniki (pretty much dumplings),
+    - Food Diary: A week in Portland, OR **Number of People in household:** 2, myself and my husband **Pets:** 2 dog
+
+## auto-safe
+- **babyn-yar** `13th symphony[^\n]{0,20}babi yar` — 0 rows (0.00%) {}
+- **babyn-yar** `babi yar (?:memorial )?park` — 0 rows (0.00%) {}
+- **babyn-yar** `babi yar colombiano` — 0 rows (0.00%) {}
+- **babyn-yar** `babi yar commemoration` — 0 rows (0.00%) {}
+- **babyn-yar** `babi yar concert` — 0 rows (0.00%) {}
+- **babyn-yar** `babi yar et les` — 0 rows (0.00%) {}
+- **babyn-yar** `babi yar park` — 0 rows (0.00%) {}
+- **babyn-yar** `babi yar symphony` — 0 rows (0.00%) {}
+- **babyn-yar** `babi yar.{0,2}\s*symphony` — 0 rows (0.00%) {}
+- **babyn-yar** `babi yar\s+symphony` — 0 rows (0.00%) {}
+- **babyn-yar** `babin yar` — 0 rows (0.00%) {}
+- **babyn-yar** `in memoriam[^\n]{0,15}babi yar` — 0 rows (0.00%) {}
+- **babyn-yar** `jurang pembantaian` — 0 rows (0.00%) {}
+- **babyn-yar** `massacre de babi yar` — 0 rows (0.00%) {}
+- **babyn-yar** `op\.?\s*113[^\n]{0,25}babi yar` — 0 rows (0.00%) {}
+- **babyn-yar** `poems?[^\n]{0,25}babi yar` — 0 rows (0.00%) {}
+- **babyn-yar** `sarabi yar` — 0 rows (0.00%) {}
+- **babyn-yar** `symphony no\.?\s*13[^\n]{0,25}babi yar` — 104 rows (1.72%) {"youtube": 76, "gdelt": 20, "reddit": 7, "openalex": 1}
+    - Arts & Events Press Release: Berkeley Symphony Announces Next Season Music Director Joana Carneiro and Berkele
+    - Russian Poet Yevgeny Yevtushenko dies: “Today, I am as old. As the entire Jewish People itself” The power of h
+    - This week on Open Air, host David Latulippe’s guests include Berkeley Symphony Executive Director René Mandel,
+- **bakhmut** `#artemovsk\b` — 0 rows (0.00%) {}
+- **bakhmut** `\s-\s*topic:` — 0 rows (0.00%) {}
+- **bakhmut** `artemovsk\s+overpass` — 0 rows (0.00%) {}
+- **bakhmut** `green\s+revonk|arma\s*3` — 0 rows (0.00%) {}
+- **bakhmut** `onlyfans\.com` — 0 rows (0.00%) {}
+- **borscht** `#\s*rezept\b` — 22 rows (0.10%) {"youtube": 22}
+    - Russischer Borschtsch Rezept Борщ #Russischer #Borschtsch #Rezept #Борщ / Russische Gemüse Suppe / Original Ru
+    - Борщ. Рецепт. Готовим вкусный борщ. Kochen leckeren Borschtsch. Cooking delicious borsch. Borsch. Борщ - это о
+    - Borsch Borschtsch Борщ Suppe- PraaaTV Kitchen Borsch Borschtsch Борщ Soup Suppe суп- PraaaTV Kitchen Russian f
+- **borscht** `(?:ev|auto\w*|parts|component)\s+supplier[^.]{0,25}\bborsch\b` — 0 rows (0.00%) {}
+- **borscht** `\b(?:himar[eë]|dh[eë]rmi|ksamil|albanian?\s+riviera)\b` — 0 rows (0.00%) {}
+- **borscht** `\b(?:onlyfans|girlcock|tgirl|cumshot|blowjob|pornstar|milf|creampie|nsfw)\b` — 0 rows (0.00%) {}
+- **borscht** `\bborsch\b(?=[\s\S]{0,400}\b(?:bosch|refrigerator|fridge|freezer|dishwasher|compressor)\b)` — 0 rows (0.00%) {}
+- **borscht** `\bborsch\b(?=[\s\S]{0,400}\b(?:frigidaire|dishwasher|ikea|appliance)\b)` — 0 rows (0.00%) {}
+- **borscht** `\bborsch\b(?=[\s\S]{0,400}\b(?:hoover|vacuum|appliance|bosch)\b)` — 0 rows (0.00%) {}
+- **borscht** `\bdon(?:ald)?\s+borsch\b` — 0 rows (0.00%) {}
+- **borscht** `\bmamaalltag\b` — 7 rows (0.03%) {"youtube": 7}
+    - Kirsch-Bananen-Sahnekuchen und Borsch für Samstag/Mamaalltag/Bald Jahrestag vom Kanal. Instagram: https://www.
+    - Daily Vlog/ Pfirsichkuchen mit Tworog/ Borsch in Schnelldurchlauf/ Haushalt/ Freitag/Mamaalltag Instagram: htt
+    - Daily Vlog / Borsch für Manuel / Haushalt / Sehr müde / Mamaalltag Instagram: https://www.instagram.com/irinch
+- **borscht** `anistyn(?:\s+grace)?\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `borsch\s+bandit` — 0 rows (0.00%) {}
+- **borscht** `borsch\s+belt` — 0 rows (0.00%) {}
+- **borscht** `borsch\s+house` — 0 rows (0.00%) {}
+- **borscht** `borsch\s+man` — 0 rows (0.00%) {}
+- **borscht** `borschev` — 0 rows (0.00%) {}
+- **borscht** `chess\s+fight\s+night` — 4 rows (0.02%) {"youtube": 4}
+    - M. Borsch (1333) vs D. Salimova (1448). Chess Fight Night. CFN. Rapid Support the channel ⇶ https://www.donati
+    - Gl. Yunker (1308) vs M. Borsch (1369). Chess Fight Night. CFN. Rapid Support the channel ⇶ https://www.donatio
+    - M. Borsch (1710) vs M. Zhekova (1181). Chess Fight Night. CFN. Blitz Support the channel ⇶ https://www.donatio
+- **borscht** `dan\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `dirty\s+borsch\s*(?:[-/]|f(?:ea)?t\b)` — 17 rows (0.08%) {"youtube": 17}
+    - Dirty Borsch - Спонсор. Проект "МИНИМУМ" дарит музыкальный подарок. P.s - очки купили на Орто-Сайском рынке. Г
+    - Dirty Borsch - Ariston Йоу, ман, встречай второй shit от коллектива "Dirty Borsh". Всем грязнулям и богачам в 
+    - Dirty Borsch feat. MC Beautiful - Собственном персоне Группа в ВК: https://vk.com/minimumkg Instagram: https:/
+- **borscht** `frederick\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `freekarma` — 0 rows (0.00%) {}
+- **borscht** `jerome(?:\s+francisco)?\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `jo[ãa]o\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `johnny\s+yong\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `katarina\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `lexvorn` — 3 rows (0.01%) {"youtube": 3}
+    - Borsch Provided to YouTube by Routenote Borsch · AlexVorn · Oleksii Voronka PreBORSCH ℗ AlexVorn Released on: 
+    - BORSCH KNIGHT [prod. DannygMoneyАTX] (Official Lyrics) BORSCH KNIGHT [prod. DannygMoneyАTX] (Official Lyrics) 
+    - This is 'New Idol' from 'BORSCH' by AlexVorn This is 'New Idol' from 'BORSCH' by AlexVorn #newidol #alexvorn #
+- **borscht** `mark\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `olga\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `operation\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `peter\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `sopa\s+russa` — 22 rows (0.10%) {"youtube": 22}
+    - Gastrô na Copa Rússia x Coreia do Sul Confiram nossa página de vídeos: http://diariode.pe/multimidia Para a pa
+    - Viver Bem | Sopa Russa Borscht INGREDIENTES 150 g de carne desfiada com caldo 1 beterraba cozida e ralada 250 
+    - SOPA BORSCH - MARAVILHAS DA RÚSSIA!!! VENHA DESCOBRIR OS SEGREDOS DESTA DELICIOSA SOPA RUSSA COM O CHAPELEIRO 
+- **borscht** `sopa\s+t[ií]pica` — 11 rows (0.05%) {"youtube": 11}
+    - 👩🏼‍🍳 RECETA DEL BORSCH - la sopa típica ucraniana de remolacha La receta del plato típico de Ucrania - el BORS
+    - COMO PREPARAR SOPA BORSCH - Sopa Típica Russa e Ucrânia Hoje vamos ensinar vocês a preparar sopa Borsch, uma s
+    - El borsch ruso- la sopa típica de Rusia. En la visita por Rusia visitamos un restaurante típico ruso en la que
+- **borscht** `tatiana\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `thomas\s+borsch` — 0 rows (0.00%) {}
+- **borscht** `ucraniano\s+tradicional` — 2 rows (0.01%) {"youtube": 2}
+    - Смачний український Борщ. Borscht ucraniano tradicional #рецепт #борщ #ucranianotradicional
+    - #Borsch ucraniano tradicional
+- **borscht** `vlad\s+borsch` — 14 rows (0.06%) {"youtube": 13, "reddit": 1}
+    - Can you help me know what do these slang terms exactly mean? I got these words from watching Russian memes, su
+    - Dirty Monk ft. Vlad Borsch, Povar & Doshi - RYTP GOD JustLoseIt Production Aftermath ©.
+    - Vlad Borsch against haters
+- **borscht** `wostok\s+style` — 2 rows (0.01%) {"youtube": 2}
+    - BORSCH Wostok Style 👌🏼👨🏻 #rezept
+    - BORSCH SALAT Wostok Style 🔥 Borschtsch Salat Wostok Style
+- **chicken-kyiv** `#ai(?:generated|cat)\b` — 0 rows (0.00%) {}
+- **chicken-kyiv** `\b(?:tf2|team fortress 2|pootis)\b` — 0 rows (0.00%) {}
+- **chicken-kyiv** `\bai[\s-]*(?:magic|generated)\b` — 0 rows (0.00%) {}
+- **chicken-kyiv** `arepas,\s*chicken kiev,\s*doner kebab` — 0 rows (0.00%) {}
+- **chicken-kyiv** `chicken[\s-]*kiev['’"”]?\s+(?:speech|address)` — 0 rows (0.00%) {}
+- **chicken-kyiv** `chicken\s+kiev\s+videos?\s+chicken\s+\w+\s+video` — 0 rows (0.00%) {}
+- **chicken-kyiv** `r/(?:tf2|truetf2|tf2fashionadvice|tf2shitposterclub|sfm)\b` — 0 rows (0.00%) {}
+- **chicken-kyiv** `r/[A-Za-z]*personals\b` — 0 rows (0.00%) {}
+- **chicken-kyiv** `r/kuhinja\b` — 0 rows (0.00%) {}
+- **chicken-kyiv** `r/playrust\b` — 0 rows (0.00%) {}
+- **chicken-kyiv** `renam\w*\s+[“"']?chicken\s*kiev` — 0 rows (0.00%) {}
+- **chicken-kyiv** `viva food:\s*[^.]{0,60}chicken kiev recipe` — 0 rows (0.00%) {}
+- **chornobyl** `#tamil` — 0 rows (0.00%) {}
+- **chornobyl** `(?:hbo'?s|miniseries|mini[- ]series)\s+chernobyl` — 0 rows (0.00%) {}
+- **chornobyl** `(?:re)?watch(?:ing|ed)\s+chernobyl` — 0 rows (0.00%) {}
+- **chornobyl** `9\s*lb\s+hammer|skunk\s*#\s*1` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl:?\s*escape\s+from\s+pripyat` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl[\s-]*(?:disaster\s*)?optimi[sz](?:er|ation|ing)` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl[\s-]*(?:disaster\s*)?optimi[sz](?:er|ation|ing)|chernobyl[\s-]inspired\s+optimi` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl[\s-]inspired\s+optimi` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\.\s*adam\s+nagaitis` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\s*(?:,|and)\s*(?:i\s+also|mindhunter|severance)` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\s*2\s*exclu[sz]ion\s+zone` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\s*\(2019\)` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\s*\(2019\)|#chernobyl\s*#hboseries` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\s*\(?\s*2019\s*\)?` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\s*\(?\s*76\s*sticks\)?|hooligan\s+chase` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\s+children` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\s+diaries` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\s+mini[\s-]?series` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\s+pack` — 0 rows (0.00%) {}
+- **chornobyl** `chernobyl\s+vs\s+edgerunners` — 0 rows (0.00%) {}
+- **chornobyl** `chilecomparte\.cl|\[?(?:1080p|720p)\]?.*\bx265\b` — 0 rows (0.00%) {}
+- **chornobyl** `heart\s+of\s+cherno?byl` — 0 rows (0.00%) {}
+- **chornobyl** `midnight\s+in\s+cherno?byl` — 0 rows (0.00%) {}
+- **chornobyl** `mini[\s-]?series\s+chernobyl` — 0 rows (0.00%) {}
+- **chornobyl** `renck\s*\(chernobyl\)|\(hbo'?s[^)]*chernobyl\)` — 0 rows (0.00%) {}
+- **dnipro-river** `(?:bender|tiraspol|transnistria\w*|chisinau|moldova\w*)[^.]{0,150}dnieper|dnieper[^.]{0,150}(?:bender|tiraspol|transnistria\w*)` — 0 rows (0.00%) {}
+- **dnipro-river** `(?:hit|struck|attack(?:ed|s)?|shell(?:ed|s)?)\s+the\s+dnieper\s+river\b` — 0 rows (0.00%) {}
+- **dnipro-river** `(?:transnistria\w*|tiraspol|bender|gagauz|moldova\w*)[^.]{0,150}dnieper|dnieper[^.]{0,150}(?:transnistria\w*|tiraspol|bender|gagauz)` — 0 rows (0.00%) {}
+- **dnipro-river** `\b(?:aur|kya|hain|karte|jante|kaun|zaroor|nahi|ka istemaal|ki tijarat)\b` — 0 rows (0.00%) {}
+- **dnipro-river** `belarusian\s+dnieper\s+river` — 0 rows (0.00%) {}
+- **dnipro-river** `captivating\s+destination|why\s+should\s+you\s+visit` — 0 rows (0.00%) {}
+- **donbas** `(?:union\s+of\s+donbass\s+volunteers|donbass\s+volunteers?\s+union)` — 0 rows (0.00%) {}
+- **donbas** `\b(?:novyi?|new)\s+donbass\b(?!\s+line)` — 0 rows (0.00%) {}
+- **donbas** `\breptilians?\b|\benerg(?:y|etic)\s+healer\b` — 0 rows (0.00%) {}
+- **donbas** `divided\s+donbass` — 0 rows (0.00%) {}
+- **donbas** `donbass\s*arena` — 0 rows (0.00%) {}
+- **donbas** `donbass\s+arena` — 0 rows (0.00%) {}
+- **donbas** `donbass\s+case` — 0 rows (0.00%) {}
+- **donbas** `donbass\s+dome` — 0 rows (0.00%) {}
+- **donbas** `donbass\s+media\s+cent(?:re|er)` — 0 rows (0.00%) {}
+- **donbas** `dw\.com/ru/donbass` — 0 rows (0.00%) {}
+- **donbas** `giornaledibrescia\.it` — 0 rows (0.00%) {}
+- **donbas** `irishdentist\.ie` — 0 rows (0.00%) {}
+- **donbas** `moddb\.com` — 0 rows (0.00%) {}
+- **donbas** `odnako\.org` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `(pron[oó]sticos?|apuestas deportivas|futbol europeo|jornada \d)` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(ao vivo|sem delay|palpites|análises do|jogos do dia)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(bgmi|1v[s]?4 clutch|spraygod|m416clutch)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(bgmi|dynamo gaming|dynamogaming)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(bgmi|dynamo gaming|dynamogaming|1v[s]?4 clutch|m416)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(equipa|arriscamos|ganhar a primeira liga|já agora)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(exploit incroyable|qui a marqué|l histoire)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(golü|sanchezin|maçi|maçı)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(hasil|tadi malam|ketika|semua pemain|kualifikasi|pertandingan|melawan|mempertemukan|menewaskan|menang lagi)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(hasil|tadi malam|kualifikasi|jadwal|pertandingan)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(kariyer önerisi|fm2[0-9]kariyer|türkçe|spiker)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(konferans ligi|rakipleri|rakibi)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(le roi oublié|du football)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(maci biletleri|ne zaman|satisa cikar)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(maçini|izlerse|fanatik|rezillik|tepki videosu)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(mempertemukan|melawan|gol salto|pada tanggal)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(menang lagi|menewaskan|padu mat|kalah)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(palpites|análises do|ao vivo|sem delay|jogos do dia|o sucesso da equipa)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(palpites|de quinta|da quinta)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(pronostics?|pronostic foot|ligue des champions)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(pronostics?|pronostic foot|ligue europa conference)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(pronostics?|téléfoot|ligue des champions|ligue europa)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(rakibi|rakibimizi|tanıyalım|rakipleri)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(rezillik|tepki videosu|maçi|maçı)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(semua pemain|klub lokal|dipaksa|tentara|pertandingan)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(sintesi|andata|ritorno|calcio europeo)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(téléfoot|1/[24] de finale|coupe des clubs champions)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(téléfoot|pronostics?|1/[24] de finale|coupe de france)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(türkçe|spiker|maçi|maçı)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(victoire importante|pour continuer|l aventure europeenne)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(özet|maçi|maçı|maçini|rakibi|rakibimizi|rakipleri|golü|türkçe|spiker|kariyer önerisi|tepki videosu|biletleri|kayıtları|satisa|tanıyalım|izlerse)\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\b(özet|maçi|maçı|rakibi|golü|türkçe|spiker|şov|futbol)\b` — 427 rows (1.29%) {"youtube": 393, "reddit": 23, "gdelt": 11}
+    - Season › 2015-16 › News Yarmolenko set to stay put , 25 August, Updated Everton are turning their attentions a
+    - Some might say that money is Basel’s secret, the reason why they are the only Swiss club to enjoy a real impac
+    - Jose Mourinho scouting Isco or Yarmolenko? Jose Mourinho was at Spain’s Euro 2016 qualifer with Ukraine on Mon
+- **dynamo-kyiv** `\bgnk\s+d[iy]namo\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `\bmeci amical\b` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `^fc_dynamo_kyiv$` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `anyone looking for matchworn shirts` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `free sports pick loaded from` — 0 rows (0.00%) {}
+- **dynamo-kyiv** `next4k` — 0 rows (0.00%) {}
+- **feodosiia** `\(es\)\s*\d{2}\.\d{2}\.\d{4}` — 0 rows (0.00%) {}
+- **feodosiia** `\b(?:partlayiş\w*|hücum\w*|vuruldu|neft\s+bazası|şəhərind\w*)\b` — 0 rows (0.00%) {}
+- **feodosiia** `\b(?:serangan|ukraina|krimea|jembatan|pelabuhan)\b` — 32 rows (1.72%) {"youtube": 32}
+    - Пансионат "Украина-1", г. Феодосия Подробней на сайте http://livecrimea.net/comfort/360-pansionat-ukraina-1-g-
+    - mountain bike,downhill Feodosiya, Krimea by Sotnikov Roman music by AWOLNATION – Sail
+    - DUCKY 2013 06 22 FEODOSIYA regHD DUCKY 2013.06.22 FEODOSIYA Ukraina hd 23/06/2013 утро в Феодосии, "Золотой Пл
+- **feodosiia** `feodosiya\s+lapschina` — 0 rows (0.00%) {}
+- **feodosiia** `feodosiya\s+mironova` — 0 rows (0.00%) {}
+- **feodosiia** `feodosiya\s+to(?:&#39;|['’`])?qliyeva` — 0 rows (0.00%) {}
+- **feodosiia** `happy\s+birthday\s+song\b|#makemyday` — 0 rows (0.00%) {}
+- **ihor-sikorsky** `igor\s+sikorsky\s+(kyiv|kiev)\s+international\s+airport` — 0 rows (0.00%) {}
+- **ihor-sikorsky** `igor\s+sikorsky\s+bridge` — 0 rows (0.00%) {}
+- **ihor-sikorsky** `igor\s+sikorsky\s+historical\s+archives` — 0 rows (0.00%) {}
+- **ihor-sikorsky** `igor\s+sikorsky\s+memorial` — 0 rows (0.00%) {}
+- **ihor-sikorsky** `igor\s+sikorsky\s+street` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `\(@artistmalevich\)` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `artista abstracto` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `customcanvascurators` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `hanno contribuito significativamente` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `how to pronounce\s*['"‘’“”]{0,2}\s*kazimir malevich` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `il dipinto|a causa della` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `kazimir malevich artist (?:prize|award)` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `kazimir malevich[ -]*(?:inspired|style)[^\n]{0,80}(?:metal )?wall (?:art|decor|sign)` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `kazimir malevich\s+maurizio cattelan` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `malevich pintor ruso` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `patricia taxxon\s*[-–]\s*kazimir malevich` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `t[aáạ]c ph[aẩ]m|hinh vuong den` — 0 rows (0.00%) {}
+- **kazymyr-malevych** `vamos conhecer um pouco de` — 0 rows (0.00%) {}
+- **kharkiv** `\barma\s?3\b|milsim` — 0 rows (0.00%) {}
+- **kharkiv** `\bkharkov\s+8\b` — 0 rows (0.00%) {}
+- **kharkiv** `balroomdancing|ballroomdancing` — 0 rows (0.00%) {}
+- **kharkiv** `call\s+of\s+duty` — 0 rows (0.00%) {}
+- **kharkiv** `hell\s*let\s*loose|\bhll\b` — 0 rows (0.00%) {}
+- **kharkiv** `irishdentist\.ie` — 0 rows (0.00%) {}
+- **kharkiv** `jean\s+lopez` — 0 rows (0.00%) {}
+- **kharkiv** `kharkov never sleeps` — 0 rows (0.00%) {}
+- **kharkiv** `kharkov:?\s*battles\s+before\s+and\s+after` — 0 rows (0.00%) {}
+- **kharkiv** `kharkov\\?_\d+-\d+` — 0 rows (0.00%) {}
+- **kharkiv** `r/gatesofhellostfront` — 0 rows (0.00%) {}
+- **kharkiv** `r/hellletloose|hell\s*let\s*loose` — 0 rows (0.00%) {}
+- **kharkiv** `r/natureofpredators` — 0 rows (0.00%) {}
+- **kharkiv** `r/thefirerisesmod` — 0 rows (0.00%) {}
+- **kharkiv** `r/u_iam_tender_angel` — 0 rows (0.00%) {}
+- **kharkiv** `r/victoria3` — 0 rows (0.00%) {}
+- **kharkiv** `send\.monobank\.ua` — 0 rows (0.00%) {}
+- **kharkiv** `serge[iy]\s+kharkov` — 0 rows (0.00%) {}
+- **kharkiv** `simona\s+kharkov` — 0 rows (0.00%) {}
+- **kharkiv** `spring\s+prelude` — 0 rows (0.00%) {}
+- **kharkiv** `st=kharkov|/l=kharkov` — 0 rows (0.00%) {}
+- **kharkiv** `white\s+stork` — 0 rows (0.00%) {}
+- **kharkiv** `world\s+of\s+tanks` — 0 rows (0.00%) {}
+- **kyiv** `\b(?:chicken|pheasant|frog\s+legs?|mushroom|garlic|veggie|vegan|salmon|turkey|beef|cod)\s+(?:a\s*la\s+|ala\s+)?kiev\b` — 0 rows (0.00%) {}
+- **kyiv** `azur\s*lane|azurlane` — 0 rows (0.00%) {}
+- **kyiv** `d[ií]namo\s+de\s+kiev` — 0 rows (0.00%) {}
+- **kyiv** `ghost\s+of\s+kiev\s+ukrainian\s+freedom\s+vodka` — 0 rows (0.00%) {}
+- **kyiv** `giornaledibrescia\.it` — 0 rows (0.00%) {}
+- **kyiv** `green\s+soul\s+kiev|kiev\s+orthopedic` — 0 rows (0.00%) {}
+- **kyiv** `irishdentist\.ie` — 0 rows (0.00%) {}
+- **kyiv** `kiev.{0,40}\bdestroyer\b` — 0 rows (0.00%) {}
+- **kyiv** `kiev[\s-]*class` — 0 rows (0.00%) {}
+- **kyiv** `kiev\s*-?\s*(?:4a?m?|6\s*c?|19m?|60|88)\b` — 0 rows (0.00%) {}
+- **kyiv** `kiev\s*beats` — 0 rows (0.00%) {}
+- **kyiv** `kiev\s+kwentel` — 0 rows (0.00%) {}
+- **kyiv** `kiev\s+station` — 0 rows (0.00%) {}
+- **kyiv** `langa\s*finga|kappalani` — 0 rows (0.00%) {}
+- **kyiv** `lost\s+in\s+kiev` — 0 rows (0.00%) {}
+- **kyiv** `martens\s+kiev|kiev\s+leather\s+backpack` — 0 rows (0.00%) {}
+- **kyiv** `new escort ads|last week'?s new profiles` — 0 rows (0.00%) {}
+- **kyiv** `one\s+5g\s+ace|codename\s+kiev` — 0 rows (0.00%) {}
+- **kyiv** `recruitment\s+agency\s+esca|raise\s+karma` — 0 rows (0.00%) {}
+- **kyiv** `sam\s+hyde` — 0 rows (0.00%) {}
+- **kyivan-rus** `(?:analysis|report)\s+from\s+chatgpt` — 0 rows (0.00%) {}
+- **kyivan-rus** `(?:countries|country) (?:i|we) show in this video` — 0 rows (0.00%) {}
+- **kyivan-rus** `\b(?:kasaysayan|paano ito|mula sa|susuriin natin)\b` — 0 rows (0.00%) {}
+- **kyivan-rus** `\|\s*kievan rus\s*\|\s*kievan rus fall\s*\|` — 0 rows (0.00%) {}
+- **kyivan-rus** `^r/(?:chto_ne_skache|the_way_of_the_doommm|the_big_doommm|doommm_links\d*|corona_links\d*|punishment_panic)\b` — 0 rows (0.00%) {}
+- **kyivan-rus** `countries i show in this video` — 0 rows (0.00%) {}
+- **kyivan-rus** `if you like our content, check out our original comics` — 0 rows (0.00%) {}
+- **kyivan-rus** `kievan rus\s+\d{3,4}\s*ad` — 0 rows (0.00%) {}
+- **kyivan-rus** `oxiwyle|com\.oxiwyle\.kievanrus|apps\.apple\.com/[a-z]{2}/app/kievan-rus` — 0 rows (0.00%) {}
+- **kyivan-rus** `sterling silver 925|ebay\.us/m/` — 0 rows (0.00%) {}
+- **luhansk** `carollism` — 0 rows (0.00%) {}
+- **luhansk** `getmusic\.fm/tags/lugansk` — 0 rows (0.00%) {}
+- **luhansk** `lugansk\.ua` — 0 rows (0.00%) {}
+- **luhansk** `lugansk\s+4-prong` — 0 rows (0.00%) {}
+- **luhansk** `mbbs\s+(?:in\s+russia|abroad)` — 0 rows (0.00%) {}
+- **luhansk** `onlyfans\.com/` — 0 rows (0.00%) {}
+- **luhansk** `urbanhellcirclejerk` — 0 rows (0.00%) {}
+- **luhansk** `wikimedia\.org/wiki/file:\S*lugansk` — 0 rows (0.00%) {}
+- **lviv** `#lvov\b` — 0 rows (0.00%) {}
+- **lviv** `/city/lvov/` — 0 rows (0.00%) {}
+- **lviv** `\balexe[yi]\s+lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bberlioz\s+et\s+lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bchristine\s+lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bdmitri[iy]\s+lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bevgeny\s+\w+\s+lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bgene\s+lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bgeorg\w*\s+lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bi\s+lvov\W{0,3}e\b` — 0 rows (0.00%) {}
+- **lviv** `\blvov(?:'|’)?s\b[^.]{0,40}\bgiggy\b` — 0 rows (0.00%) {}
+- **lviv** `\blvov-kompaneets\b` — 0 rows (0.00%) {}
+- **lviv** `\blvov[\s-]sandomir\b` — 0 rows (0.00%) {}
+- **lviv** `\blvov[\s–-]*warsaw\b` — 0 rows (0.00%) {}
+- **lviv** `\blvov\s*,?\s*ukraina\b` — 0 rows (0.00%) {}
+- **lviv** `\blvov\s+vodka\b` — 0 rows (0.00%) {}
+- **lviv** `\bmikhail\s+lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bnikola[iy]\s+(?:\w+\s+)?lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bpavel\s+lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bprince\s+lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bromance\s+in\s+lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bsverdlovsk[\s–-]*lvov\b` — 0 rows (0.00%) {}
+- **lviv** `\bv\.\s*lvov\b` — 0 rows (0.00%) {}
+- **lviv** `arkady\s+lvov` — 0 rows (0.00%) {}
+- **lviv** `bohdan\s+lvov` — 0 rows (0.00%) {}
+- **lviv** `david\s+lvov` — 0 rows (0.00%) {}
+- **lviv** `dmitri\s+lvov` — 0 rows (0.00%) {}
+- **lviv** `love\s+song\s+for\s+lemberg\s+lvov` — 0 rows (0.00%) {}
+- **lviv** `lvovの意味` — 0 rows (0.00%) {}
+- **mykola-hohol** `#animeart|animeart` — 0 rows (0.00%) {}
+- **mykola-hohol** `#animeart|animedrawing` — 0 rows (0.00%) {}
+- **mykola-hohol** `,\s*de\s+nikolai\s+gogol` — 0 rows (0.00%) {}
+- **mykola-hohol** `\(amv\)|jester-like design` — 0 rows (0.00%) {}
+- **mykola-hohol** `^r/recomandaricarti_ro` — 0 rows (0.00%) {}
+- **mykola-hohol** `^r/transbr` — 0 rows (0.00%) {}
+- **mykola-hohol** `almas mortas` — 0 rows (0.00%) {}
+- **mykola-hohol** `audiolivro|clássico da literatura russa` — 0 rows (0.00%) {}
+- **mykola-hohol** `carte audio|povestiri` — 0 rows (0.00%) {}
+- **mykola-hohol** `creepypasta reacts|m!y/n` — 0 rows (0.00%) {}
+- **mykola-hohol** `despre vindecarea` — 0 rows (0.00%) {}
+- **mykola-hohol** `islamic video|quranrecitation` — 0 rows (0.00%) {}
+- **mykola-hohol** `klasiket|frymë të vdekura` — 0 rows (0.00%) {}
+- **mykola-hohol** `literatura russa|história mais triste` — 0 rows (0.00%) {}
+- **mykola-hohol** `nikolai\s*gogol\s*edit` — 0 rows (0.00%) {}
+- **mykola-hohol** `quanto mais fundo` — 0 rows (0.00%) {}
+- **mykola-hohol** `quizlit` — 0 rows (0.00%) {}
+- **mykola-hohol** `teatru radiofonic` — 0 rows (0.00%) {}
+- **odesa** `\b(?:permian|midland|landman|west\s+texas|oil\s+jobs)\b` — 0 rows (0.00%) {}
+- **odesa** `\bm\.?\s?v\.?\s+odessa\b` — 0 rows (0.00%) {}
+- **odesa** `^r/(?:odessatexxx|westtexasgonewild|midessa432wtxslutz|permianplaytime3|midland432m4a|midlandtxxx|trapsgonewild|wtx_pnp|texasswingersofficial|midlandstraight4gaybi|kcm4m|delawarer4r)\b` — 0 rows (0.00%) {}
+- **odesa** `^r/delaware\b` — 0 rows (0.00%) {}
+- **odesa** `^r/midessa\b` — 0 rows (0.00%) {}
+- **odesa** `^r/namenerds\b` — 0 rows (0.00%) {}
+- **odesa** `band\s+odessa` — 0 rows (0.00%) {}
+- **odesa** `géographie des ténèbres` — 0 rows (0.00%) {}
+- **odesa** `historic\s+odessa|odessa,?\s*delaware|women'?s\s+club\s+of\s+odessa` — 0 rows (0.00%) {}
+- **odesa** `kagura\s+odessa|global\s+kagura` — 0 rows (0.00%) {}
+- **odesa** `neon\s+love|\bby\s+odessa\b` — 0 rows (0.00%) {}
+- **odesa** `new\s+odessa` — 0 rows (0.00%) {}
+- **odesa** `nova\s+odessa` — 0 rows (0.00%) {}
+- **odesa** `o['’]dessa|sadie\s+sink` — 0 rows (0.00%) {}
+- **odesa** `odessa,?\s*wash(?:ington)?\b|deutschesfest` — 0 rows (0.00%) {}
+- **odesa** `odessa,?\s+(?:de|delaware)\b|odessa,\s*de\s+197` — 0 rows (0.00%) {}
+- **odesa** `odessa[\s-]*doran|odessa\s+canyon` — 0 rows (0.00%) {}
+- **odesa** `odessa[^.]{0,30}\b(?:1250|model|grill|smoker|pellet)\b` — 0 rows (0.00%) {}
+- **odesa** `odessa[^a-z]{0,5}(?:fl|florida)\b|tampa[^.]{0,20}odessa` — 0 rows (0.00%) {}
+- **odesa** `odessa\s*[-–]\s*caribou|caribou[^.]{0,12}odessa` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+(?:group|network|organi[sz]ation)` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+(?:mini\s+)?dress` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+(?:network|group|organi[sz]ation)` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+(?:v\d|prometheus)` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+a['’]?zion` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+bulgar` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+cubbage` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+grocery` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+oliveira` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+priority\s+emergency\s+room` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+silverberg` — 0 rows (0.00%) {}
+- **odesa** `odessa\s+young` — 0 rows (0.00%) {}
+- **odesa** `onroute|mallorytown` — 0 rows (0.00%) {}
+- **odesa** `parov\s+stelar` — 0 rows (0.00%) {}
+- **odesa** `project\s+odessa` — 0 rows (0.00%) {}
+- **odesa** `project\s+odessa|odessa\s+baby` — 0 rows (0.00%) {}
+- **odesa** `reasonings\s+with\s+odessa` — 0 rows (0.00%) {}
+- **odesa** `setlist` — 0 rows (0.00%) {}
+- **odesa** `smart\s+and\s+strong\s+dogs` — 0 rows (0.00%) {}
+- **odesa** `the\s+odessa\s+journal` — 0 rows (0.00%) {}
+- **odesa** `the\s+odessa\s+review` — 0 rows (0.00%) {}
+- **odesa** `twin\s+peaks\s+odessa` — 0 rows (0.00%) {}
+- **odesa** `vampirate\s+odessa|odessa\s+delico` — 0 rows (0.00%) {}
+- **odesa** `williston|bakken|permian` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\b(analisis|pembalasan|pembuktian|tinju dunia)\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\b(mengerikan|pertarungan|prediksi|menumbangkan)\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\b(tinju|kehebatan|mengakui|tertandingi)\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\bbeobachtet\b|\bbei dem wiegen\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\bboks\b|\bmmauzbekistan\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\bbondia\b|\bamepigana\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\bbondia\b|\bpambano\b|\bndiye\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\bkekalahan\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\bkelas berat\b|\bsiapa yang\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\bkucing\b|\bnamanya\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\boleksander\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `\btype beat\b` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `alexander usyk\s+asmr` — 0 rows (0.00%) {}
+- **oleksandr-usyk** `ballad\s+of\s+alexander\s+usyk` — 0 rows (0.00%) {}
+- **serhii-korolyov** `(fsb|federal security service)[^.]{0,120}sergei korolev` — 0 rows (0.00%) {}
+- **serhii-korolyov** `pobeda search group,\s*sergei korolev` — 0 rows (0.00%) {}
+- **serhii-korolyov** `sergei korolev,\s*first deputy director` — 0 rows (0.00%) {}
+- **serhii-korolyov** `sergei korolev,\s*general manager` — 0 rows (0.00%) {}
+- **serhii-korolyov** `sergei korolev[^.]{0,60}(russian mafia|organi[sz]ed crime)` — 0 rows (0.00%) {}
+- **serhii-korolyov** `sergei korolev\s+space\s*x` — 0 rows (0.00%) {}
+- **serhii-korolyov** `space\s+sergei korolev\s+soviet rocket program` — 0 rows (0.00%) {}
+- **ternopil** `#\s?ternopol` — 0 rows (0.00%) {}
+- **ternopil** `\bukraina\b` — 0 rows (0.00%) {}
+- **ternopil** `https?://[^\s)\]]*ternopol` — 0 rows (0.00%) {}
+- **ternopil** `onlyfans\.com` — 0 rows (0.00%) {}
+- **ternopil** `ternopol\s*leather` — 0 rows (0.00%) {}
+- **varenyky** `#(?:essen|sehr|lecker|deutschland)\b` — 0 rows (0.00%) {}
+- **varenyky** `#(?:tarif|pratik\w*tarif\w*)\b` — 0 rows (0.00%) {}
+- **varenyky** `#cherryculinar\w*` — 0 rows (0.00%) {}
+- **varenyky** `#ke[sş]fet` — 0 rows (0.00%) {}
+- **varenyky** `#retsept\b|kartoshkali` — 0 rows (0.00%) {}
+- **varenyky** `\bkartof\s+p[ie]lmeni\b` — 0 rows (0.00%) {}
+- **varenyky** `\blos\s+vareniki` — 0 rows (0.00%) {}
+- **varenyky** `\bpeynirli\b|\brus\s+mant[ıi]\b` — 0 rows (0.00%) {}
+- **varenyky** `\bravioli\s+russi\b|\bcucina\s+russa\b` — 0 rows (0.00%) {}
+- **varenyky** `\bteigtaschen\b` — 0 rows (0.00%) {}
+- **varenyky** `\bukrainische\b` — 0 rows (0.00%) {}
+- **varenyky** `\bvareniki\s+con\b` — 0 rows (0.00%) {}
+- **varenyky** `\bşirin\s+varenik` — 0 rows (0.00%) {}
+- **varenyky** `\bсталик\b` — 0 rows (0.00%) {}
+- **varenyky** `^(?:\s*#\w+)+\s*$` — 0 rows (0.00%) {}
+- **varenyky** `^\s*vareniki\s*@` — 0 rows (0.00%) {}
+- **varenyky** `^r/u_` — 0 rows (0.00%) {}
+- **varenyky** `ukrayna\s+mant[ıi]s[ıi]` — 0 rows (0.00%) {}
+- **varenyky** `vareniki\s+s\s+[ck]artoshkoi` — 0 rows (0.00%) {}
+- **varenyky** `вареники\s+по\s+рецепту` — 0 rows (0.00%) {}
+- **volodymyr-the-great** `\bsejarah\b` — 0 rows (0.00%) {}
+- **volodymyr-the-great** `^r/kaiserreich` — 0 rows (0.00%) {}
+- **volodymyr-the-great** `house of huisache|tuatha de acacia|chinacate` — 0 rows (0.00%) {}
+- **volodymyr-the-great** `klyucharev` — 0 rows (0.00%) {}
+- **volodymyr-the-great** `taariikhda` — 0 rows (0.00%) {}
+- **volodymyr-the-great** `vladimir the dirty` — 0 rows (0.00%) {}
+- **volodymyr-the-great** `vladimir the great,[^.]{0,80}volodymyr` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `(?:russian president|president of russia)\s+vladimir zelensk` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `,\s*vladimir putin,\s*vladimir zelensky,` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `/\s*vladimir zelensky` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\b(?:ane vale hai|ab .{0,20} india ane)\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\b(?:ang|ng|sina|nagkita|kasama)\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\b(?:el enviado especial|calificó de|declaraciones de)\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\b(?:incontrer|riferendosi|settimane|abbiamo)\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\b(?:indo à luta|guarda costas)\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\b(?:ki phir amad|kon sy|par pabandi)\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\b(?:pani|bata nai thiye|dherai similarities xa)\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\b(?:presiden ukraina|ukraina|rusia|dengan|yang|untuk)\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\b(?:presidencial|candidato|pero no lo es también)\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\b(?:presidentin|deklaroi|takimi|mund të)\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\b(?:rais wa|amesema|kutoka kwa|akijibu)\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\bgreat prophecy\b` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `\|\s*vladimir zelensky\s*\|` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `donald trump-\s*vladimir zelensky zelensky` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `ex-zelensky aide threatens to jail him for life` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `i stand with ukraine vladimir zelensky` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `starring ai models:` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `the flamingo that doesn'?t fly` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `this is the first gay erotic piece i ever wrote` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `trump and j\.d\. v[ae]nce glorified president vladimir zelensky` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `ukraine'?s deaths reach 1 millions` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `zelensky claimed he ‘never heard of’ ukrainian nazi wwii crimes` — 0 rows (0.00%) {}
+- **volodymyr-zelenskyy** `•\s*vladimir zelensky \(ukraine\)` — 0 rows (0.00%) {}

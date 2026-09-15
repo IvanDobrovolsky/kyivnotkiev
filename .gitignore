@@ -78,13 +78,28 @@ data/cl/raw/**/*.session
 data/cl/raw/**/*.session-journal
 output/
 
-# All data (source of truth is HuggingFace)
-/data/
+# All data (source of truth is HuggingFace).
+# "/data/*" not "/data/": git does not descend into an excluded DIRECTORY, so
+# with "/data/" the negations below can never fire, however they are written.
+/data/*
 /output/
 /dataset/
 # Keep site data JSON (generated, needed for build)
 !site/src/data/
 !site/src/data/*.json
+
+# Hand-written editorial content, NOT derived data. The pipeline reads these;
+# nothing regenerates them. 375 collocation glosses, 128 cluster names and
+# descriptions and the term blocklist were written by hand against measured
+# evidence, and they lived only on one disk because /data/ is ignored wholesale.
+# HuggingFace is the source of truth for the CORPUS, not for this.
+!/data/audit/
+/data/audit/*
+!/data/audit/collocation_glosses.json
+!/data/audit/cluster_names.json
+!/data/audit/cluster_glosses.json
+!/data/audit/term_blocklist.json
+!/data/audit/*.md
 
 private/
 node_modules/
