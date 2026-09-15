@@ -62,6 +62,20 @@ MIN_DOC_FREQ = 5
 # ordinary articles.
 MAX_TOKENS_PER_DOC = 1_000
 MIN_SIDE_DOCS = 3           # documents on the side a term leans to
+# A chip claims "this word belongs to this spelling". Token rate alone cannot
+# support that claim on a lopsided pair: the two sides of zaporizhzhia hold the
+# SAME 872 tokens of "republic", but the Russian side is 2.6x smaller, so the
+# rate differs and the word scored z=14.9 — while the share of documents
+# containing it is 2.13% Ukrainian against 2.52% Russian, a difference no reader
+# could find. Within-document repetition does the rest: one Russian-side text
+# uses "republic" 97 times.
+#
+# Measured over the 355 shipped chips: 11 (3.1%) pointed the WRONG WAY at the
+# document level, every one of them on the Russian side, which is the minority
+# side in nearly every pair; 37 (10.4%) had under 1.25x separation. So require
+# the document share to agree with the token-rate direction and to differ by a
+# margin a reader can verify by opening documents.
+MIN_DF_RATIO = 1.25
 # NOTE: a whole-source veto on token imbalance was tried and removed. In a
 # lopsided source the prior suppresses the MAJORITY side, not the minority —
 # kazymyr-malevych's YouTube layer at 75.5:1 still yields Ukrainian-side terms
@@ -160,7 +174,7 @@ PRIOR_STRENGTH = 10_000
 
 
 def _log_odds(ca: Counter, cb: Counter, da: Counter | None = None,
-              db: Counter | None = None) -> dict:
+              db: Counter | None = None, nda: int = 0, ndb: int = 0) -> dict:
     prior = ca + cb
     na, nb, npr = sum(ca.values()), sum(cb.values()), sum(prior.values())
     a0 = min(PRIOR_STRENGTH, npr) if npr else 0
@@ -178,11 +192,23 @@ def _log_odds(ca: Counter, cb: Counter, da: Counter | None = None,
             # ...and the side it leans TO must itself be several documents.
             # Summing both sides let a term lean to a side that holds it in one
             # text: "myself" shipped for oleksandr-usyk on a single reddit post.
-            if (ca[w] / max(na, 1)) >= (cb[w] / max(nb, 1)):
+            _lean_a = (ca[w] / max(na, 1)) >= (cb[w] / max(nb, 1))
+            if _lean_a:
                 if da[w] < MIN_SIDE_DOCS:
                     continue
             elif db[w] < MIN_SIDE_DOCS:
                 continue
+            # Document-share support, in the direction the token rate claims.
+            # nda/ndb are document COUNTS per side; without them this degrades
+            # to the old token-only behaviour rather than silently passing.
+            if nda and ndb:
+                _pa = da[w] / nda
+                _pb = db[w] / ndb
+                _claimed, _other = (_pa, _pb) if _lean_a else (_pb, _pa)
+                if _other <= 0:
+                    pass                      # absent from the other side: real
+                elif (_claimed / _other) < MIN_DF_RATIO:
+                    continue
         # Monroe et al. add the SAME alpha_w to both sides. Splitting it in
         # proportion to each side's token mass looks symmetric — it preserves
         # each side's rate — but it is not: the smaller side's y sits far below
@@ -231,7 +257,7 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
         for t in ru.text:
             _tk = tokenise(t, mask)[:MAX_TOKENS_PER_DOC]
             cb.update(_tk); db.update(set(_tk))
-        sc = _log_odds(ca, cb, da, db)
+        sc = _log_odds(ca, cb, da, db, len(ua), len(ru))
         ranked = sorted(sc.items(), key=lambda kv: -kv[1][0])
         per_source[src] = {
             "n_ukrainian": len(ua), "n_russian": len(ru), "terms_scored": len(sc),
