@@ -89,16 +89,19 @@ current clusters still resolve to no curated entry (chornobyl `radiation ·
 thyroid`, kyivan-rus `ukraine · armor`) and are invisible only because the
 display merge folds them into larger cards.
 
-**No gate is enforced by anything.** `full_rebuild.sh` sets `-u` but not `-e`,
-and both audit exit codes are discarded into the log. The pre-push hook checks
-the build, i18n parity and a runtime smoke — it calls none of the audits. Every
-green number holds because a human read the log.
+**The rebuild chain gates, the push path still does not.** `full_rebuild.sh`
+now runs all four audits, records which failed and exits 1 — previously both
+exit codes were discarded into the log, so a chain ending with an unglossed chip
+exited 0. The **pre-push hook still calls none of them**: it checks the build,
+i18n parity and a runtime smoke only, so a stale-but-parseable export passes the
+push gate silently.
 
-**`green_check`'s sha1 comparison can never be true.** It compares a 40-character
-`hexdigest()` against the 16-character value `analyze_pair.py:155` writes, so it
-is False for every pair and silently falls back to the row-count check. A scrub
-that rewrites text without changing row count would still print PASS. `green_check`
-is also absent from `full_rebuild.sh`.
+**`site_invariants` guards the SHIPPED set only.** It now checks cluster `name`
+as well as `desc`, but reads `site/src/data`. Two clusters in the *computed* set
+resolve to no curated entry (chornobyl `radiation · thyroid`, kyivan-rus
+`ukraine · armor`) and never reach it, because the display merge folds them into
+larger cards. Catching those needs a check over
+`data/stats/<slug>/clusters/summary.json`.
 
 ## Counting rules that do not fall out of the obvious query
 
@@ -148,9 +151,14 @@ Read these as artifact-presence claims, not statistical-strength ones. "green"
 says the census finished and the files exist; it says nothing about keyness
 quality — serhii-korolyov is green with `interpretable: false` and zero usable
 sources. "CONVERGED" includes 16 of 96 tables that ship zero rows and pass only
-because their pool is also zero. Stats staleness is judged by the sha1 recorded
-in `analysis.json` **in the exporter**; see the `green_check` note above for why
-the audit does not actually do this.
+because their pool is also zero.
+
+Stats staleness: `analysis.json` records `sha1(store_file)[:16]`. Both the
+exporter and `green_check` compare against it, but sha1 equality is only a fast
+path — the content signal is row count, because `pipeline.rebuild` rewrites
+parquets with identical content and different bytes. (`green_check` compared 40
+chars against 16 until `34b3c575`, so the fast path never fired; no verdict was
+affected, since both routes end at the same row-count test.)
 
 ## Conventions
 
