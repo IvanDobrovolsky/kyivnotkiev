@@ -32,9 +32,21 @@ echo "CLUSTERS DONE $(date +%H:%M:%S)" >> $LOG
 /opt/anaconda3/bin/python -m pipeline.export_site_data >> $LOG 2>&1
 echo "EXPORT DONE $(date +%H:%M:%S)" >> $LOG
 
-# Both audits exit non-zero on any gap, so the tail of the log is the verdict.
-/opt/anaconda3/bin/python -m pipeline.audit.holdout_convergence >> $LOG 2>&1
-/opt/anaconda3/bin/python -m pipeline.audit.gloss_coverage >> $LOG 2>&1
+# Every gate exits non-zero on a gap. Run them all so the log shows the whole
+# picture, then carry the worst status out: the exit code was previously thrown
+# away, so a chain that ended with an unglossed chip or an amber pair still
+# looked successful to anything reading $?.
+GATE_FAIL=0
+for gate in green_check holdout_convergence gloss_coverage site_invariants; do
+  /opt/anaconda3/bin/python -m pipeline.audit.$gate >> $LOG 2>&1 || {
+    GATE_FAIL=1
+    echo "GATE FAILED: $gate" >> $LOG
+  }
+done
 echo "ALL DONE $(date +%H:%M:%S)" >> $LOG
 
-echo "done — new chips may need glosses; see the gloss_coverage output above"
+if [ $GATE_FAIL -ne 0 ]; then
+  echo "FAILED — a gate reported a gap; grep 'GATE FAILED' $LOG"
+  exit 1
+fi
+echo "done — all gates pass"
