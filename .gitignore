@@ -89,7 +89,7 @@ output/
 !site/src/data/*.json
 
 # Hand-written editorial content, NOT derived data. The pipeline reads these;
-# nothing regenerates them. 375 collocation glosses, 128 cluster names and
+# nothing regenerates them. 372 collocation glosses, 128 cluster names and
 # descriptions and the term blocklist were written by hand against measured
 # evidence, and they lived only on one disk because /data/ is ignored wholesale.
 # HuggingFace is the source of truth for the CORPUS, not for this.
@@ -106,3 +106,13 @@ node_modules/
 .astro/
 
 !site/src/i18n/*.json
+
+# data/stats is generated and stays ignored, with one exception: the record of
+# why borscht was retired. CLAUDE.md points readers at it, and it lived on one
+# disk only. Git does not descend into an excluded DIRECTORY, so each path
+# component has to be re-admitted before the file itself can be.
+!/data/stats/
+/data/stats/*
+!/data/stats/borscht/
+/data/stats/borscht/*
+!/data/stats/borscht/ABANDONED.md
