@@ -139,6 +139,11 @@ def run_readme():
 REGENERATED = {
     "manifest.json", "timeseries.json", "holdouts_by_pair.json", "holdouts.json",
     "pair_events.json", "analysis.json", "domain_origins.json",
+    # export_site_data writes these three every run too (pairs_meta.json:2146,
+    # cl_clusters.json:2668, cl_keyness.json:3010). Omitting them made
+    # report_stale_artifacts tag freshly-regenerated files "NO PRODUCER",
+    # which is exactly the noise that teaches people to ignore the warning.
+    "pairs_meta.json", "cl_clusters.json", "cl_keyness.json",
 }
 STALE_AFTER_DAYS = 7
 
