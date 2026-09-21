@@ -2050,9 +2050,14 @@ def main():
     write_json(SITE_DATA_DIR / "pair_events.json", pair_events)
 
     # Pair metadata for the About table, straight from config/pairs.yaml so the forms
-    # and rationales on the page cannot drift from what the study measures. Disabled
-    # pairs are carried with enabled=false and filtered at render, not dropped here,
-    # so the file stays a faithful view of the config.
+    # and rationales on the page cannot drift from what the study measures.
+    #
+    # This builds _meta over ALL 47 configured pairs, disabled ones carrying
+    # enabled=false. They do NOT survive to the site: prune_site_data drops them
+    # at the end of this same main() (prune_site_data.py:125), so the shipped
+    # file holds 24 entries. Anything reading pairs_meta.json must still check
+    # `enabled` rather than trusting the prune to have run — see
+    # pipeline/audit/holdout_convergence.py, which assumed otherwise.
     # Data-readiness flag for the pair grid: a pair is "ready" when its YouTube
     # census is complete for 2010-2025, both variants, 12 resolved months each —
     # the same completeness the census orchestrator enforces.
