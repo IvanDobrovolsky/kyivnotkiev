@@ -411,6 +411,13 @@ def build_pairs() -> bool:
             }))
         if _vframes:
             _gv = pd.concat(_vframes, ignore_index=True)
+            # The verified corpus is read straight off disk, so it never passed
+            # through the raw->processed path where apply_study_scope runs. That
+            # bypass put 27,575 rows dated after STUDY_END into 22 pair files,
+            # and analyze_pair repeats the same substitution, so post-window
+            # text reached keyness and collocations too. Clamp it here: the
+            # comment on STUDY_END promises the cut reaches the pair files.
+            _gv = apply_study_scope(_gv, "gdelt")
             _n_store = int((allp.source == "gdelt").sum())
             allp = pd.concat([allp[allp.source != "gdelt"], _gv],
                              ignore_index=True)
