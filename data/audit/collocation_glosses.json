@@ -1,8 +1,13 @@
 {
  "counts": {
-  "glossed": 359,
-  "null": 3,
-  "suspect": 12
+  "_note": "Derived, regenerated 2026-09-21. The book accumulates across rebuilds: labels move, so entries outnumbering shipped chips is expected and is not drift. Each quantity is named because the old block said 359 while the audit said 372 and .gitignore said 375.",
+  "gloss_entries": 817,
+  "pairs_covered": 25,
+  "null_glosses": 3,
+  "suspect": 12,
+  "shipped_chips": 372,
+  "shipped_with_gloss": 372,
+  "entries_not_currently_shipped": 445
  },
  "glosses": {
   "babyn-yar": {
