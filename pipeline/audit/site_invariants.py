@@ -53,6 +53,13 @@ def main() -> int:
                 continue
             desc = (c.get("desc") or "").strip()
             label = str(c.get("gloss") or c.get("label") or "").strip()
+            # `name` was unguarded, which is how an exact-key lookup once
+            # orphaned 62 of 129 clusters unnoticed: a missing name renders as
+            # the raw c-TF-IDF label, so it reads as poor labelling rather than
+            # a lookup miss. Checking desc alone does not catch it — the two
+            # live in separate curated books and can go missing independently.
+            if not (c.get("name") or "").strip():
+                bad.append(f"{slug}: cluster '{label}' has no legend name")
             if not desc:
                 bad.append(f"{slug}: cluster '{label}' has no description")
             elif desc.lower() == label.lower():
