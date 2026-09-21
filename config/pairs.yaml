@@ -15,46 +15,6 @@ metadata:
     label: Euromaidan
   - date: 2022-02
     label: Full-scale war
-metadata:
-  version: '2.0'
-  description: Ukrainian toponym pairs for adoption analysis
-  time_range: 2010-01-01 to 2025-12-31
-  default_source: trends
-  global_events:
-  - date: 2014-02
-    label: Euromaidan
-  - date: 2022-02
-    label: Full-scale war
-metadata:
-  version: '2.0'
-  description: Ukrainian toponym pairs for adoption analysis
-  time_range: 2010-01-01 to 2025-12-31
-  default_source: trends
-  global_events:
-  - date: 2014-02
-    label: Euromaidan
-  - date: 2022-02
-    label: Full-scale war
-metadata:
-  version: '2.0'
-  description: Ukrainian toponym pairs for adoption analysis
-  time_range: 2010-01-01 to 2025-12-31
-  default_source: trends
-  global_events:
-  - date: 2014-02
-    label: Euromaidan
-  - date: 2022-02
-    label: Full-scale war
-metadata:
-  version: '2.0'
-  description: Ukrainian toponym pairs for adoption analysis
-  time_range: 2010-01-01 to 2025-12-31
-  default_source: trends
-  global_events:
-  - date: 2014-02
-    label: Euromaidan
-  - date: 2022-02
-    label: Full-scale war
 pairs:
 - russian: Kiev
   ukrainian: Kyiv
