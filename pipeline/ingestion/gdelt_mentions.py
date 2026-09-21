@@ -283,13 +283,28 @@ def cmd_final(args) -> int:
         frags.append(frag)
     if frags:
         import re as _re
-        rx = _re.compile("(" + "|".join(frags) + ")", _re.I)
+        # Longest-first, same rule as build_regex: "kyivan rus" must win over
+        # "kyiv" and "chicken kiev" over "kiev" when both start at one position.
+        rx = _re.compile("(" + "|".join(sorted(set(frags), key=len, reverse=True)) + ")", _re.I)
         found = g.url.astype(str).str.lower().str.extract(rx, expand=False)
         hit = found.notna()
-        moved = int((g.pair_slug != found.map(lambda t: term_map.get(t, ("", ""))[0])).sum())
+        # The regex fragment joins words with [-_ ], so a URL yields the SLUG form
+        # ("volodymyr-zelenskyy") while term_map is keyed by the pairs.yaml form
+        # ("volodymyr zelenskyy"). flag_rows() normalises before its lookup; this
+        # path re-derives attribution and has to do the same. Without it every
+        # multi-word pair resolved to ("", ""): the 2026-09-12 run lost 11 of 24
+        # enabled pairs and left 17,103 rows with a blank pair_slug, while the 13
+        # single-word pairs were untouched because they carry no separator.
+        _norm = lambda t: _re.sub(r"[-_]+", " ", t).strip() if isinstance(t, str) else t
+        key = found.map(_norm)
+        moved = int((g.pair_slug != key.map(lambda t: term_map.get(t, ("", ""))[0])).sum())
         g = g[hit].copy()
-        g["pair_slug"] = found[hit].map(lambda t: term_map.get(t, ("", ""))[0])
-        g["var_url"] = found[hit].map(lambda t: term_map.get(t, ("", ""))[1])
+        g["pair_slug"] = key[hit].map(lambda t: term_map.get(t, ("", ""))[0])
+        g["var_url"] = key[hit].map(lambda t: term_map.get(t, ("", ""))[1])
+        unresolved = int((g.pair_slug == "").sum())
+        if unresolved:
+            raise SystemExit(f"attribution failed for {unresolved:,} rows "
+                             f"(terms: {sorted(key[hit][g.pair_slug == ''].unique())[:8]})")
         print(f"attributed over {len(enabled)} enabled pairs "
               f"({len(frags)} terms); {moved:,} row(s) re-attributed, "
               f"{before - len(g):,} dropped as belonging only to disabled pairs")
