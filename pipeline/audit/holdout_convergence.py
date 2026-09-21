@@ -79,7 +79,13 @@ def main() -> int:
     if not acct:
         print("NOTE: no holdout_accounting.json — run the exporter first; "
               "falling back to raw-store pools, which overstate headroom.\n")
-    enabled = [p["slug"] for p in json.loads((SITE / "pairs_meta.json").read_text())]
+    # Check the flag; do not trust the file to be pre-filtered. export_site_data
+    # builds _meta over all 47 pairs at :2144 and only prune_site_data drops the
+    # disabled ones at the end of the same main(). If that prune is ever skipped
+    # or fails, an unfiltered read here would audit 47 pairs and report 25 — the
+    # trap CLAUDE.md warns about, in a different file.
+    enabled = [p["slug"] for p in json.loads((SITE / "pairs_meta.json").read_text())
+               if p.get("enabled", True)]
     oa = openalex_pools()
     cand_p = ROOT / "data" / "audit" / "reddit_holdout_candidates.json"
     cand = json.loads(cand_p.read_text()) if cand_p.exists() else {}
