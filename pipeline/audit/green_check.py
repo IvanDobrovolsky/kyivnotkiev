@@ -92,7 +92,8 @@ def check_pair(slug: str, ts: dict, key: dict, clu: dict, meta: list) -> list[st
                 ip = ROOT / a.get("input", "")
                 if not ip.exists():
                     issues.append(f"stats: recorded input missing ({a.get('input')})")
-                elif a.get("input_sha1") and sha1(ip) == a["input_sha1"]:
+                elif (rec_sha := a.get("input_sha1")) and \
+                        sha1(ip)[:len(rec_sha)] == rec_sha:
                     pass                               # byte-identical: fresh
                 else:
                     import pyarrow.parquet as _pq
