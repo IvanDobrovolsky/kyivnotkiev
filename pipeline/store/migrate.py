@@ -376,7 +376,7 @@ def migrate_source(source: str, dry_run: bool = False) -> bool:
     return ok and write_verified(proc, f"{source}_processed", KEY_COLS, note=note)
 
 
-def build_pairs() -> bool:
+def build_pairs(dry_run: bool = False) -> bool:
     """Stack every source's processed rows per pair. Unbalanced; carries source."""
     files = sorted(STORE.glob("*_processed.parquet"))
     frames = []
@@ -447,6 +447,9 @@ def build_pairs() -> bool:
         g = g.sort_values(["source", "date"]).reset_index(drop=True)
         path = out / f"{slug}.parquet"
         before = checksum(g, KEY_COLS)
+        if dry_run:
+            print(f"    DRY RUN  {path.name}  {len(g):,} rows (not written)")
+            continue
         g.to_parquet(path, compression="zstd", index=False)
         back = pd.read_parquet(path)
         ok = before == checksum(back, KEY_COLS) and len(back) == len(g)
@@ -465,7 +468,10 @@ def main() -> int:
     a = ap.parse_args()
 
     if a.source == "pairs":
-        return 0 if build_pairs() else 1
+        # Pass the flag through. This dispatch used to ignore --dry-run entirely
+        # and write unconditionally, so a run asking "what would this do" rewrote
+        # all 25 pair files and sent every pair amber against its recorded stats.
+        return 0 if build_pairs(a.dry_run) else 1
     targets = list(SOURCES) if a.source == "all" else [a.source]
     unknown = [t for t in targets if t not in SOURCES]
     if unknown:
@@ -473,7 +479,7 @@ def main() -> int:
         return 1
     ok = all(migrate_source(t, a.dry_run) for t in targets)
     if a.source == "all" and not a.dry_run:
-        ok &= build_pairs()
+        ok &= build_pairs(a.dry_run)
     print("\n" + ("all steps verified" if ok else "SOME STEPS FAILED VERIFICATION"))
     return 0 if ok else 1
 
