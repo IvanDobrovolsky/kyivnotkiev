@@ -2075,7 +2075,13 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             // cluster was published as "the 1986 disaster" (Chornobyl's rule)
             // and a music/dance cluster as "football coverage". The raw label
             // is at least derived from this cluster's own text.
-            `<strong>${info.name ? escH(info.name) : glossT(info.label)}</strong>` +
+            // An unnamed cluster is marked, not silently degraded. The fallback
+            // renders the raw c-TF-IDF label, which reads as a bad name rather
+            // than a missing one — that is how 62 of 129 clusters once shipped
+            // unnoticed. The "?" badge makes the gap findable during review.
+            `<strong>${info.name
+              ? escH(info.name)
+              : `<span title="No written legend name — showing the raw statistical label" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:#b45309;color:#fff;font-size:10px;font-weight:700;margin-right:4px;vertical-align:1px;">?</span>${glossT(info.label)}`}</strong>` +
             `<span style="color:#6b7280;"><span style="color:#0057B8;font-weight:600;">${info.ua_pct}% UA</span> · <span style="color:#dc2626;font-weight:600;">${(100-info.ua_pct).toFixed(1)}% RU</span> · ${info.size.toLocaleString()} texts</span></button>`;
         });
 
@@ -2129,7 +2135,9 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             // What the cluster IS comes first. The source mix and peak year are
             // provenance, not meaning, and belong under a rule at the bottom.
             cpop.innerHTML =
-              (m.desc ? `<div style="margin-bottom:0.4rem; color:var(--text);">${escH(m.desc)}</div>` : '')
+              (m.desc
+                ? `<div style="margin-bottom:0.4rem; color:var(--text);">${escH(m.desc)}</div>`
+                : `<div style="margin-bottom:0.4rem; color:#b45309; font-style:italic;">No written description for this cluster yet.</div>`)
               + (extra.length ? `<div style="color:var(--text-muted); margin-bottom:0.3rem;">${escH(tt('pair.cluster_also', 'Also frequent'))}: ${escH(extra.slice(0, 6).join(', '))}</div>` : '')
               + (m.example ? `<div style="border-left:2px solid var(--border,#e5e7eb); padding-left:0.5rem;">“${escH(m.example.t || m.example)}”</div>` : '')
               + `<div style="color:var(--text-muted); margin-top:0.4rem; padding-top:0.35rem; border-top:1px solid var(--border,#e5e7eb); font-size:0.72rem;">`
