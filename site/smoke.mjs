@@ -6,9 +6,13 @@ const base = process.argv[2] || 'http://localhost:4173';
 // nothing loaded ?source=gdelt.
 const paths = ['/', '/uk/', '/pair/kyiv/', '/uk/pair/kyiv/',
                '/pair/chicken-kyiv/?source=gdelt', '/pair/kyiv/?source=youtube'];
-const exe = process.env.CHROME_BIN ||
-  '/Users/tati/Library/Caches/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-mac-arm64/chrome-headless-shell';
-const b = await chromium.launch({ executablePath: exe });
+// Let playwright-core resolve the browser for its own version. A hard-coded
+// chromium_headless_shell-1234 path blocked every site/ push once another
+// project's `playwright install` garbage-collected 1234 and left only 1223
+// (2026-10-13). If it is missing, the error names the fix:
+//   cd site && npx playwright-core install chromium-headless-shell
+// Installing that way also registers a link, so the next GC keeps it.
+const b = await chromium.launch(process.env.CHROME_BIN ? { executablePath: process.env.CHROME_BIN } : {});
 const p = await b.newPage();
 let failed = false;
 p.on('pageerror', e => { console.log('PAGEERROR', e.message.slice(0, 160)); failed = true; });
