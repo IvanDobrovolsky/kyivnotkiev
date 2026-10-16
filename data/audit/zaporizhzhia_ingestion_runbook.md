@@ -33,7 +33,7 @@ is untouched (last job on the project was 26 Aug).
 
 ## Steps
 
-0. DONE — collector restored from git (f17e4bf7^, deleted as a dead module) and
+0. DONE — collector restored from git (edc41e1e^, deleted as a dead module) and
    the four overwrite-in-place artefacts backed up to
    data/raw/gdelt/mentions_v2/pre_zaporizhzhia_backup/ (548 MB).
 1. Re-enable borscht in config/pairs.yaml.

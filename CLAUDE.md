@@ -39,7 +39,7 @@ re-derives attribution from the URL and must do the same. It did not, so a URL
 yielding `volodymyr-zelenskyy` missed a map keyed `volodymyr zelenskyy` and
 **every multi-word pair resolved to `("", "")`** — the 2026-09-12 run lost 11 of
 24 enabled pairs and left 17,103 blank-slug rows. All 13 single-word pairs were
-unaffected, so it read as thin data rather than breakage. Fixed in `26f805c8`,
+unaffected, so it read as thin data rather than breakage. Fixed in `e78483f4`,
 which now raises instead of writing an unresolvable row. Sort term fragments
 longest-first in both places or `kyiv` steals `kyivan rus`.
 
@@ -157,13 +157,13 @@ Stats staleness: `analysis.json` records `sha1(store_file)[:16]`. Both the
 exporter and `green_check` compare against it, but sha1 equality is only a fast
 path — the content signal is row count, because `pipeline.rebuild` rewrites
 parquets with identical content and different bytes. (`green_check` compared 40
-chars against 16 until `34b3c575`, so the fast path never fired; no verdict was
+chars against 16 until `09af9158`, so the fast path never fired; no verdict was
 affected, since both routes end at the same row-count test.)
 
 ## Conventions
 
 Commit each meaningful change separately. Never add AI attribution to commits —
-note that 225 commits from 2026-08-25 to `ff61c868` carry a `Claude-Session:`
+note that 225 commits from 2026-08-25 to `3f801f42` carry a `Claude-Session:`
 trailer injected by a different client; nothing in this repo adds it, and
 commits made here come out clean.
 
