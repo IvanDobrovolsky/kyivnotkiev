@@ -756,6 +756,29 @@ def _openalex_yearly(path: Path) -> tuple[list, str]:
     return doc, as_of
 
 
+def _text_window_ok(slug: str, analysis: dict) -> bool:
+    """The pair's keyness/cluster input stops at TEXT_END.
+
+    analysis.json written since the text-window clamp records
+    text_window.end; it must equal last_day(TEXT_END), so moving TEXT_END also
+    marks every older analysis stale. An analysis without the key predates the
+    clamp and is checked against what it read: the latest date in
+    data/stats/<slug>/records.parquet."""
+    tw = analysis.get("text_window")
+    if isinstance(tw, dict) and tw.get("end"):
+        return tw["end"] == _cfg.last_day(_cfg.TEXT_END)
+    rp = DATA_DIR / "stats" / slug / "records.parquet"
+    if not rp.exists():
+        return False
+    import pyarrow.parquet as _pq
+    md = _pq.ParquetFile(rp).metadata
+    i = md.schema.to_arrow_schema().names.index("date")
+    hi = [str(md.row_group(g).column(i).statistics.max)
+          for g in range(md.num_row_groups)
+          if md.row_group(g).column(i).statistics is not None]
+    return bool(hi) and max(hi)[:7] <= _cfg.TEXT_END
+
+
 def export_timeseries(enabled_slugs: set[str]) -> dict:
     log.info("Exporting timeseries...")
     result = {"events": [
@@ -2463,6 +2486,16 @@ def main():
                 _rec = _aj.get("input_sha1")
                 if not _rec or _rec != _cur:
                     _stale_stats.add(_pf.stem)
+            # Current input, wrong window: the analysis must have read the
+            # TEXT window (STUDY_START..TEXT_END) and nothing past it. Neither
+            # check above can see this, because the store file never changed
+            # while analyze_pair substituted the verified news corpus unclamped:
+            # 21 of 24 pairs' keyness inputs run into 2026 (latest 2026-09-12,
+            # zaporizhzhia; measured 2026-11-02). analysis.json records its
+            # window since the clamp; one written before it is judged by the
+            # dates it actually read (row-group statistics, no data loaded).
+            if _pf.stem not in _stale_stats and not _text_window_ok(_pf.stem, _aj):
+                _stale_stats.add(_pf.stem)
         except Exception:                                  # noqa: BLE001
             _stale_stats.add(_pf.stem)
     if _stale_stats:
