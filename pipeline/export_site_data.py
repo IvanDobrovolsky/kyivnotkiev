@@ -211,6 +211,7 @@ def _stale_youtube_years() -> set:
         bound) and does not condemn its year; it is excluded month-level
         instead, by _capped_youtube_months()
       * collected at a depth other than the one declared in config/pairs.yaml
+      * collected but not yet enriched -- see _youtube_unenriched_years()
 
     Depth is declared, not inferred: a sparse pair peaks at 58 results in a month
     window and needs no day-level descent, while chornobyl peaks at 521 and loses most
@@ -253,8 +254,11 @@ def _stale_youtube_years() -> set:
         }
 
     end = _src_end("youtube")
+    unenriched = _youtube_unenriched_years()
     stale = set()
     for (pair, year), v in seen.items():
+        if (pair, year) in unenriched:
+            stale.add((pair, year)); continue
         due = set(_months_due(int(year), end))
         if not due:
             stale.add((pair, year)); continue
@@ -270,6 +274,51 @@ def _stale_youtube_years() -> set:
                 or (uk["depth"] and uk["depth"] != want[pair])):
             stale.add((pair, year))
     return stale
+
+
+_UNENRICHED: dict = {}
+
+
+def _youtube_unenriched_years() -> set:
+    """(pair, 'YYYY') whose census videos are not all in the enriched file.
+
+    The series is read from <pair>_enriched.parquet, which youtube_enrich
+    builds from the census files after the fact. A year whose census is
+    complete but not yet enriched has a full set of checkpoints and no videos
+    on the chart side, so the zero-fill below published every month as a
+    measured zero: kyiv, kharkiv, odesa, lviv and zaporizhzhia 2026 were
+    collected 2026-11-02 with 0-0.04% of their video ids enriched, and kyiv
+    plotted Jan-Sep 2026 as ukr=0, rus=0. Every one of the 761 census files
+    for 2010-2025 is 100% covered by video id (measured the same day), so the
+    rule is exact coverage and changes no complete year. A year with no
+    census file found nothing to enrich.
+    """
+    if "v" in _UNENRICHED:
+        return _UNENRICHED["v"]
+    census = ROOT / "data" / "cl" / "raw" / "youtube_census"
+    out: set = set()
+    have: dict = {}
+    for f in census.glob("*_*_*.parquet"):
+        m = re.fullmatch(r"(.+)_(russian|ukrainian)_(\d{4})\.parquet", f.name)
+        if not m:
+            continue
+        pair, year = m.group(1), m.group(3)
+        try:
+            ids = set(pd.read_parquet(f, columns=["video_id"])["video_id"].astype(str))
+        except Exception:                              # noqa: BLE001
+            out.add((pair, year)); continue
+        if not ids:
+            continue
+        if pair not in have:
+            ef = census / f"{pair}_enriched.parquet"
+            try:
+                have[pair] = set(pd.read_parquet(ef, columns=["video_id"])["video_id"].astype(str))
+            except Exception:                          # noqa: BLE001
+                have[pair] = set()
+        if not ids <= have[pair]:
+            out.add((pair, year))
+    _UNENRICHED["v"] = out
+    return out
 
 
 def _youtube_checkpoint_years() -> set:
