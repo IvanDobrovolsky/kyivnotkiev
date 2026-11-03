@@ -46,7 +46,7 @@ SOURCE_SERIES_END = {
     "ngrams": "2022-12",     # Google Books corpus 37 ends at 2022; none is newer
     "openalex": "2025-12",
     "reddit": "2025-12",
-    "youtube": "2026-09",
+    "youtube": "2026-08",
 }
 
 
