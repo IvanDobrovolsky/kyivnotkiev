@@ -1389,6 +1389,11 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
         openalex_total_pairs = int(oa_df["pair_slug"].nunique())
     elif openalex_path.exists():
         oa_data, _ = _openalex_yearly(openalex_path)
+        # Enabled pairs only. The file holds all 47 defined pairs, so the
+        # manifest counted 30,702 papers where the 24 studied pairs have
+        # 22,209 -- the other 8,493 belong to the 23 retired pairs (measured
+        # 2026-11-02) and inflated toponym_matches with them.
+        oa_data = [p for p in oa_data if p.get("pair_slug") in enabled_slugs]
         _oa_last = int(_src_end("openalex")[:4])
         openalex_total_pairs = len(oa_data)
         openalex_total_papers = sum(sum(yr["total"] for yr in p["yearly"]
