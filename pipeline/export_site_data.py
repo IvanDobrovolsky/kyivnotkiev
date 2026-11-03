@@ -740,9 +740,23 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
     if len(df):
         df["month"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m")
         g = df.groupby(["pair_slug", "month", "variant"])["pageviews"].sum().reset_index()
+        # Variants that have an article on disk at all, per pair. The pivot below
+        # fills an absent variant with 0, which is right for a month the article
+        # had no views and wrong for an article that was never collected:
+        # ihor-sikorsky and serhii-korolyov hold only their Russian-titled page,
+        # so each shipped 126 months of 0.0% adoption manufactured by fill_value.
+        _wiki_vars = g.groupby("pair_slug")["variant"].agg(set).to_dict()
         p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="pageviews", fill_value=0).reset_index()
         for pid, grp in p.groupby("pair_slug"):
             if pid not in enabled_slugs:
+                continue
+            # Same principle as the identical-article drop just below: a series
+            # whose share is fixed by what was collected says nothing about how
+            # anyone writes the name.
+            _absent = {"ukrainian", "russian"} - _wiki_vars.get(pid, set())
+            if _absent:
+                log.info(f"    {pid}: no {'/'.join(sorted(_absent))} wikipedia article "
+                         f"on disk — series dropped rather than zero-filled")
                 continue
             # Both spellings often resolve to ONE article — the Russian form is
             # an en.wikipedia redirect — so the two variants return byte-identical
