@@ -43,15 +43,19 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
 <script type="application/json" id="pair-holdouts-data" set:html={JSON.stringify(pairHoldoutsData)} />
 <script type="application/json" id="pair-timeseries-data" set:html={JSON.stringify(pairTimeseriesData)} />
 <div id="pair-detail" data-pair-slug={slug}>
-  <PairView lang={lang} llmTraj={llmTraj} llmPerPair={llmPerPair} timeSpan={(m as any).time_span} />
+  <PairView lang={lang} llmTraj={llmTraj} llmPerPair={llmPerPair} />
 </div>
 
   <script type="application/json" id="i18n-dict" set:html={JSON.stringify(clientDict(lang))} />
 <script>
   const __T = (() => { try { return JSON.parse(document.getElementById('i18n-dict')?.textContent || '{}'); } catch (e) { return {}; } })();
-  const tt = (path: string, fb: string) => {
+  // {var} interpolation, as the server-side t() does: the holdout subtitles
+  // render here, and without it a "{year}" placeholder would print verbatim.
+  const tt = (path: string, fb: string, vars?: Record<string, string | number>) => {
     const v = String(path).split('.').reduce((o: any, k: string) => (o ? o[k] : undefined), __T);
-    return (v === undefined || v === null) ? fb : v;
+    let out = (v === undefined || v === null) ? fb : v;
+    if (vars && typeof out === 'string') for (const [k, x] of Object.entries(vars)) out = out.replaceAll(`{${k}}`, String(x));
+    return out;
   };
 
   const glossT = (g: string) => {
@@ -67,6 +71,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     import * as d3 from 'd3';
     const timeseriesData = JSON.parse(document.getElementById('pair-timeseries-data')?.textContent || '{}');
     import manifest from '../data/manifest.json';
+    import { monthStart, monthEnd, monthsOfYear, partialYear, studyWindow } from '../i18n/window';
+    // The window, from manifest.study_window (written from pipeline/config.py).
+    const SW = studyWindow(manifest);
+    const LANG = document.documentElement.lang === 'uk' ? 'uk' : 'en';
+    const HEADLINE_YEAR: number = SW.headline_year;
     const holdoutsByPair = { [document.getElementById('pair-detail')!.dataset.pairSlug!]: JSON.parse(document.getElementById('pair-holdouts-data')?.textContent || 'null') };
 
     // Pointer capability, not screen width: a laptop in a narrow window still
@@ -363,16 +372,21 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       }
       if (allDates.length === 0) return;
 
-      // Dynamic range based on actual data for this pair + source
-      const seriesData = pairData[activeSource] || [];
+      // Dynamic range based on actual data for this pair + source. A provisional
+      // point (a year still open, OpenAlex) is a share only: its count is
+      // Jan..end-month against full years, so in volume mode it would read as
+      // a collapse. It is not part of the volume series at all.
+      const isProv = (d: any) => !!(d && d.provisional);
+      const seriesData = (pairData[activeSource] || []).filter((d: any) => chartMode === 'adoption' || !isProv(d));
       const dataMinDate = d3.min(allDates) as Date;
       const dataMaxDate = d3.max(allDates) as Date;
 
       // Tight fit — minimal padding so bars fill the chart, clamped to the study
-      // period. The data runs 2010-01 to 2025-12; padding a month past the last
-      // point pushed the axis into 2026 and rendered a year with no data in it.
-      const STUDY_START = new Date(2010, 0, 1);
-      const STUDY_END = new Date(2025, 11, 31);
+      // period from manifest.study_window: first month to the last day of the
+      // last CLOSED month. It was pinned to 2025-12-31 here, so 2026 points would
+      // have drawn past the axis. A source that ends earlier is hatched below.
+      const STUDY_START = monthStart(SW.start);
+      const STUDY_END = monthEnd(SW.end);
       // The x axis is the whole study period for every source, never the active
       // source's own extent. Sources begin at different times -- GDELT has nothing
       // before 2015 -- and rescaling the axis per source made series covering
@@ -455,6 +469,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         yTicks = [0, rnd(st), rnd(st * 2), rnd(st * 3), rnd(yMax)];
       }
 
+      // Nothing draws outside the axis: the export clamps every source to its
+      // window, and this is the second line of defence.
+      const clipId = `chart-clip-${activePairSlug}`;
+      svg.append('clipPath').attr('id', clipId)
+        .append('rect').attr('x', 0).attr('y', -1).attr('width', width).attr('height', height + 2);
+
       // Grid lines
       svg.append('g').selectAll('line')
         .data(yTicks)
@@ -512,7 +532,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
         // a covered period as missing — ngrams' 2022-01 point covers all of 2022.
         // The blank strip this leaves on yearly sources is closed by extending the
         // plotted area instead (see seriesForPlot below), not by moving the hatch.
-        const lastCovered = covDates[covDates.length - 1].getTime() + med;
+        // A provisional point covers its year only through the month it was
+        // counted to (manifest `through`), not a full cadence.
+        const _lastPt = seriesData[seriesData.length - 1];
+        const lastCovered = isProv(_lastPt) && _lastPt.through
+          ? monthEnd(_lastPt.through).getTime()
+          : covDates[covDates.length - 1].getTime() + med;
         if (lastCovered < xEnd.getTime()) gapSpans.push([new Date(lastCovered), xEnd]);
         (window as any).__lastCadenceMs = med;
         // Hour-capped YouTube months: the point exists but carries no usable
@@ -551,8 +576,18 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
             .attr('font-size', 12).attr('fill', '#94a3b8')
             .attr('transform', vertical ? `rotate(-90 ${cx} ${height / 2})` : null)
-            .text('no data');
+            .text(tt('pair.hatch_no_data', 'no data'));
         }
+      }
+
+      // A partial final year is marked where it starts, and named in the chart
+      // header and the tooltip: its sources stop at their own closed months and
+      // the rest of the year is hatched, which must not read as a collapse.
+      const partialStart = partialYear(SW) ? new Date(+SW.end.slice(0, 4), 0, 1) : null;
+      if (partialStart && partialStart > xStart) {
+        const px = x(partialStart);
+        svg.append('line').attr('x1', px).attr('x2', px).attr('y1', 0).attr('y2', height)
+          .attr('stroke', '#94a3b8').attr('stroke-width', 1).attr('stroke-dasharray', '2,3');
       }
 
       // Y-axis labels — same ticks as grid
@@ -714,9 +749,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const activeLegend: {label: string; color: string; value: number}[] = [];
 
       for (const src of activeSources) {
-        const series = pairData[src];
-        if (!series) continue;
-        allSeriesData[src] = series;
+        const fullSeries = pairData[src];
+        if (!fullSeries) continue;
+        const series = fullSeries.filter((d: any) => !isProv(d));
+        const provPts = chartMode === 'adoption' ? fullSeries.filter(isProv) : [];
+        allSeriesData[src] = chartMode === 'adoption' ? fullSeries : series;
+        if (!series.length) continue;
 
         // A yearly point stands for its whole year, but the drawn line stops at the
         // point's own date — so ngrams (last point 2022-01) and openalex (2025-01)
@@ -742,6 +780,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
           return [...series, { ...series[series.length - 1], date: key }];
         })();
 
+        const plotG = svg.append('g').attr('clip-path', `url(#${clipId})`);
         if (chartMode === 'volume') {
           // ── VOLUME MODE: lines with filled areas ──
           if (lineMode !== 'russian') {
@@ -751,10 +790,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .y1((d: any) => y(d.ukr || 0))
               .defined((d: any) => !d.capped)
               .curve(d3.curveMonotoneX);
-            svg.append('path').datum(plotSeries)
+            plotG.append('path').datum(plotSeries)
               .attr('fill', sourceColors[src]).attr('opacity', 0.15)
               .attr('d', ukrArea);
-            svg.append('path').datum(plotSeries)
+            plotG.append('path').datum(plotSeries)
               .attr('fill', 'none').attr('stroke', sourceColors[src]).attr('stroke-width', 3)
               .attr('d', d3.line<any>().defined((d: any) => !d.capped).x(d => x(parseDate(d.date)!)).y(d => y(d.ukr || 0)).curve(d3.curveMonotoneX));
           }
@@ -765,10 +804,10 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .y1((d: any) => y(d.rus || 0))
               .defined((d: any) => !d.capped)
               .curve(d3.curveMonotoneX);
-            svg.append('path').datum(plotSeries)
+            plotG.append('path').datum(plotSeries)
               .attr('fill', '#dc2626').attr('opacity', 0.08)
               .attr('d', rusArea);
-            svg.append('path').datum(plotSeries)
+            plotG.append('path').datum(plotSeries)
               .attr('fill', 'none').attr('stroke', '#dc2626')
               .attr('stroke-width', lineMode === 'russian' ? 3 : 1.5)
               .attr('stroke-dasharray', lineMode === 'russian' ? 'none' : '6,4')
@@ -784,16 +823,34 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               .y0(height)
               .y1((d: any) => y(d.adoption))
               .curve(d3.curveMonotoneX);
-            svg.append('path').datum(plotSeries)
+            plotG.append('path').datum(plotSeries)
               .attr('fill', sourceColors[src]).attr('opacity', 0.12)
               .attr('d', uaArea);
-            svg.append('path').datum(plotSeries)
+            plotG.append('path').datum(plotSeries)
               .attr('fill', 'none').attr('stroke', sourceColors[src]).attr('stroke-width', 3)
               .attr('d', d3.line<any>().defined((d: any) => d.adoption != null).x(d => x(parseDate(d.date)!)).y(d => y(d.adoption)).curve(d3.curveMonotoneX));
           }
 
           // Adoption is one number; a mirrored 100−x "Russian" line doubles
           // the ink with zero information and made the mode read as two series.
+
+          // Provisional year: a hollow point at its date and a dashed level
+          // across the months it was counted to -- never joined into the
+          // solid line, which is reserved for complete years.
+          for (const pv of provPts) {
+            const d0 = parseDate(pv.date);
+            if (!d0 || pv.adoption == null) continue;
+            const d1 = pv.through ? monthEnd(pv.through) : xEnd;
+            const yv = y(pv.adoption);
+            plotG.append('line')
+              .attr('x1', x(d0)).attr('x2', x(d1 < xEnd ? d1 : xEnd))
+              .attr('y1', yv).attr('y2', yv)
+              .attr('stroke', sourceColors[src]).attr('stroke-width', 2)
+              .attr('stroke-dasharray', '4,3').attr('opacity', 0.9);
+            plotG.append('circle')
+              .attr('cx', x(d0)).attr('cy', yv).attr('r', 4)
+              .attr('fill', '#fff').attr('stroke', sourceColors[src]).attr('stroke-width', 2);
+          }
         }
 
         const last = series[series.length - 1];
@@ -856,7 +913,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
             }
           }
           if (!snapDate) { tooltip.style('opacity', '0'); crosshairLine.style('opacity', 0); return; }
-          const dateStr = d3.timeFormat('%b %Y')(snapDate);
+          const dateStr = d3.timeFormat('%b %Y')(snapDate)
+            + (partialStart && snapDate >= partialStart ? ` · ${tt('pair.partial_tip', 'partial year')}` : '');
           const snapT = snapDate.getTime();
 
           crosshairLine.attr('x1', x(snapDate)).attr('x2', x(snapDate)).style('opacity', 1);
@@ -885,6 +943,12 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
               html += `<br/>&nbsp;&nbsp;<span style="color:#6b7280">Adoption: ${adopt}%</span>`;
             } else {
               html += `<br/><span style="color:${sourceColors[src]}">● ${sourceLabels[src]}: <strong>${pt.adoption}%</strong></span>`;
+              if (pt.provisional) {
+                // "Jan–Sep 2026, provisional, as of 2026-10-15": the year is
+                // open and still being indexed, so the share can still move.
+                html += `<br/>&nbsp;&nbsp;<span style="color:#6b7280">${tt('pair.provisional', '{months}, provisional, as of {date}',
+                  { months: monthsOfYear(LANG, pt.through || SW.end), date: pt.as_of || '' })}</span>`;
+              }
             }
           }
 
@@ -968,46 +1032,20 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
     type BarRow = { src: string; pct: number; ukr: number; rus: number; note?: string };
 
     function sourceBarRows(): BarRow[] {
-      // ONE window for everything on a row. Previously the bar showed the latest
-      // month, the headline the 12-month mean, and the counts lifetime totals —
-      // Reddit read 22.6% beside counts implying 26.8%, Telegram "100%" beside
-      // 175·17. Percent and counts now both come from the last 12 study months.
-      const SINCE = '2025-01';
+      // The headline-year rows come from the exporter (manifest.headline), built
+      // from that calendar year's RAW data. They were computed here from the
+      // plotted points with SINCE='2025-01' and no end, so they would have
+      // averaged 21 months under "in 2025" once 2026 points existed, and the
+      // Trends share was the smoothed one, whose centred window reaches into the
+      // next year. The home card reads the same figure, so the two pages agree.
+      const hp = (((manifest as any).headline || {}).pairs || {})[activePairSlug];
       const rows: BarRow[] = [];
-      // pairData is local to drawChart — reading it here was a ReferenceError that
-      // silently emptied the whole popover. Resolve the series from the module-level
-      // data by the active slug instead.
-      const pd2 = (timeseriesData as any)[activePairSlug] || {};
+      if (!hp) return rows;
       for (const src of ['trends','gdelt','wikipedia','reddit','youtube','ngrams','openalex']) {
-        const series = pd2[src];
-        if (!series || !series.length) continue;
-        let win = series.filter((d: any) => d.date >= SINCE);
-        let note = '';
-        if (!win.length && src === 'ngrams') {
-          win = series.slice(-12);
-          note = (win[win.length - 1]?.date || '').slice(0, 4) + ', latest available';
-        }
-        if (!win.length) continue;
-        let ukr = 0, rus = 0, wsum = 0, asum = 0, cukr = 0;
-        for (const d of win) {
-          ukr += d.ukr || 0; rus += d.rus || 0; cukr += d.cukr || 0;
-          if (d.adoption !== null && d.adoption !== undefined) {
-            const w = (d.ukr || 0) + (d.rus || 0) || 1;
-            asum += d.adoption * w; wsum += w;
-          }
-        }
-        const countable = !(src === 'trends' || src === 'ngrams');
-        const pct = countable
-          ? (ukr + rus > 0 ? +(ukr / (ukr + rus) * 100).toFixed(1) : null)
-          : (wsum ? +(asum / wsum).toFixed(1) : null);
-        if (pct === null || (countable && ukr + rus < 5)) continue;
-        // Trends: sum the CALIBRATED UA index against the RU index — the only
-        // pair of trends numbers on one scale. Label carries the unit.
-        const tUkr = src === 'trends' ? Math.round(cukr) : Math.round(ukr);
-        rows.push({ src, pct,
-                    ukr: countable || (src === 'trends' && cukr > 0) ? tUkr : 0,
-                    rus: countable || (src === 'trends' && cukr > 0) ? Math.round(rus) : 0,
-                    note: note || (src === 'trends' ? (cukr > 0 ? tt('pair.search_index', 'search index') : 'relative index') : '') });
+        const r = (hp.sources || {})[src];
+        if (!r) continue;
+        rows.push({ src, pct: r.adoption, ukr: r.ukr || 0, rus: r.rus || 0,
+                    note: src === 'trends' ? (r.calibrated ? tt('pair.search_index', 'search index') : 'relative index') : '' });
       }
       return rows;
     }
@@ -1052,7 +1090,8 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const pair = (pairs as any).pairs.find((p: any) => p.slug === activePairSlug);
       const titleEl = document.getElementById('adoption-pct-title');
       const rowsNow = sourceBarRows();
-      const mean = rowsNow.length ? (rowsNow.reduce((a, r) => a + r.pct, 0) / rowsNow.length) : null;
+      const hpA = ((((manifest as any).headline || {}).pairs || {})[activePairSlug] || {}).adoption;
+      const mean = hpA ?? (rowsNow.length ? (rowsNow.reduce((a, r) => a + r.pct, 0) / rowsNow.length) : null);
       if (titleEl) titleEl.textContent = mean === null ? '—' : `${mean.toFixed(1)}%`;
       renderSourceBars(document.getElementById('adoption-calc-body'), rowsNow, { barH: 9, labelW: 72 });
     }
@@ -1333,13 +1372,15 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // variant here. So there is nothing to filter between, and a per-row RU/UA
       // label would restate what the whole table already means.
       const DISPLAY_LIMIT = 100;
-      const now = new Date();
-      const twoYearsAgo = `${now.getFullYear() - 2}-${String(now.getMonth()+1).padStart(2,'0')}`;
+      // Tinted rows are the headline year's, not "the last two years by the
+      // reader's clock": the table is that year's by construction, and a browser
+      // clock made the same page render differently from one day to the next.
+      const recentFrom = `${HEADLINE_YEAR}-01`;
 
       const displayed = sorted.slice(0, DISPLAY_LIMIT);
       for (const a of displayed) {
         const color = '#dc2626';
-        const isRecent = (a.month || '') >= twoYearsAgo;   // tints the row; every row is a Russian holdout
+        const isRecent = (a.month || '') >= recentFrom;   // tints the row; every row is a Russian holdout
         const item = document.createElement('div');
         item.style.cssText = `padding:0.5rem 0.75rem; border-bottom:1px solid var(--border, #e5e7eb); font-size:0.8rem; ${isRecent ? 'background:#fef2f2;' : ''}`;
         item.innerHTML = `
@@ -1364,7 +1405,7 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       const totalArticles = (pairHoldouts as any)?._total_articles || articles.length;
       const ua = articles.filter((a: any) => a.variant === 'ukrainian').length;
       const ru = articles.filter((a: any) => a.variant === 'russian').length;
-      const recentRu = articles.filter((a: any) => a.variant === 'russian' && (a.month || '') >= twoYearsAgo).length;
+      const recentRu = articles.filter((a: any) => a.variant === 'russian' && (a.month || '') >= recentFrom).length;
       const subtitle = document.getElementById('news-holdouts-subtitle');
       if (subtitle) {
         subtitle.textContent = tt('pair.holdout_news_head', 'Recent news articles that keep using the Russian form');
@@ -1630,11 +1671,11 @@ const pairTimeseriesData = { events: (allTimeseries as any)?.events || [], [slug
       // Update subtitle and filter visibility per source
       const subtitleEl = document.getElementById('holdout-subtitle');
       const subtitles: Record<string, string> = {
-        news: tt('pair.holdout_sub.news', 'News articles using the Russian spelling — in 2025'),
-        wikipedia: tt('pair.holdout_sub.wikipedia', 'Wikipedia pages titled with the Russian spelling — pageviews in 2025'),
-        reddit: tt('pair.holdout_sub.reddit', 'Reddit posts using the Russian spelling — in 2025, by score'),
-        youtube: tt('pair.holdout_sub.youtube', 'YouTube videos using the Russian spelling — in 2025'),
-        openalex: tt('pair.holdout_sub.openalex', 'Papers using the Russian spelling — in 2025, ordered by citations (most have none)'),
+        news: tt('pair.holdout_sub.news', 'News articles using the Russian spelling — in {year}', { year: HEADLINE_YEAR }),
+        wikipedia: tt('pair.holdout_sub.wikipedia', 'Wikipedia pages titled with the Russian spelling — pageviews in {year}', { year: HEADLINE_YEAR }),
+        reddit: tt('pair.holdout_sub.reddit', 'Reddit posts using the Russian spelling — in {year}, by score', { year: HEADLINE_YEAR }),
+        youtube: tt('pair.holdout_sub.youtube', 'YouTube videos using the Russian spelling — in {year}', { year: HEADLINE_YEAR }),
+        openalex: tt('pair.holdout_sub.openalex', 'Papers using the Russian spelling — in {year}, ordered by citations (most have none)', { year: HEADLINE_YEAR }),
         ngrams: 'Google Books corpus — compare spellings',
       };
       if (subtitleEl) subtitleEl.textContent = subtitles[holdoutKey] || tt('pair.holdout_sub.default', 'Using the Russian spelling');

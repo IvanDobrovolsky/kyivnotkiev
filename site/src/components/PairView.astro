@@ -1,5 +1,7 @@
 ---
 import { t } from '../i18n';
+import { textsLabel, partialYear, monthsOfYear, pointLabel, studyWindow } from '../i18n/window';
+import m from '../data/manifest.json';
 /**
  * Pair detail view — shown when a pair is selected from the sidebar.
  * All content is rendered dynamically by client-side JS via element IDs.
@@ -8,10 +10,18 @@ import { t } from '../i18n';
 interface Props {
   llmTraj: any;
   llmPerPair: any;
-  timeSpan: string;
 }
 
-const { llmTraj, llmPerPair, timeSpan, lang = 'en' } = Astro.props;
+const { llmTraj, llmPerPair, lang = 'en' } = Astro.props;
+// Window wording, per locale, from manifest.study_window. The text-analysis
+// panels name their own window: chips and clusters are frozen at TEXT_END while
+// the chart runs on, and without saying so a reader assumes they include 2026.
+const sw = studyWindow(m);
+const hy = sw.headline_year;
+const texts = textsLabel(lang, sw);
+const partialNote = partialYear(sw)
+  ? t(lang, 'pair.partial_year', { end: pointLabel(lang, sw.end), months: monthsOfYear(lang, sw.end) })
+  : '';
 const nModels = llmTraj?.summary?.n_models || 72;
 const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 ---
@@ -32,11 +42,11 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
            both the "Adoption Calculation" card and the per-source stats list,
            which said the same numbers twice in two blocks. -->
       <span id="adoption-summary" style="margin-left:auto; position:relative; white-space:nowrap; font-size:0.86rem;">
-        {t(lang, 'pair.estimated_adoption')} <strong id="adoption-pct-title" style="font-size:1rem;"></strong>
+        {t(lang, 'pair.estimated_adoption', { year: hy })} <strong id="adoption-pct-title" style="font-size:1rem;"></strong>
         <button id="adoption-details-btn" class="method-btn">{t(lang, 'pair.view_details')}</button>
         <div id="adoption-pop" class="info-pop" hidden style="right:0; left:auto; top:1.9rem; width:min(30rem,92vw); white-space:normal;">
           <button id="adoption-pop-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>
-          <p style="margin:0 0 0.5rem;" set:html={t(lang, "pair.avg_note_html")}></p>
+          <p style="margin:0 0 0.5rem;" set:html={t(lang, "pair.avg_note_html", { year: hy })}></p>
           <div id="adoption-calc-body"></div>
         </div>
       </span>
@@ -58,6 +68,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
     </div>
     <div style="display:flex; align-items:center; gap:0.9rem; flex-wrap:wrap; min-height:1.2rem;">
       <span id="chart-info" style="font-size:0.81rem; color:var(--text-dim);"></span>
+      {partialNote && <span id="chart-window-note" style="font-size:0.78rem; color:var(--text-dim);">{partialNote}</span>}
       <span id="vol-legend" style="display:none; font-size:0.78rem; color:var(--text-muted); gap:0.7rem; align-items:center;"></span>
     </div>
   </div>
@@ -74,7 +85,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
   </div>
   <div class="chart-container" id="pair-cl-collocations" style="margin-bottom:0;">
     <div class="chart-title" style="color: var(--text)">{t(lang, 'pair.contrastive_title')}</div>
-    <div class="chart-subtitle" style="margin-bottom:0.5rem; position:relative;">{t(lang, 'pair.contrastive_sub')}
+    <div class="chart-subtitle" style="margin-bottom:0.5rem; position:relative;">{t(lang, 'pair.contrastive_sub', { texts })}
       <button id="keyness-info-btn" class="method-btn">{t(lang, 'pair.view_methodology')}</button>
       <div id="keyness-info-pop" hidden class="info-pop">
         <button id="keyness-info-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>
@@ -89,7 +100,7 @@ const nLabs = Object.keys(llmTraj?.families || {}).length || 8;
 <div class="chart-container" id="cluster-container" style="margin-bottom:0.75rem; display:none;">
   <div class="chart-title" style="color: var(--text)">{t(lang, 'pair.discourse_title')}</div>
   <div class="chart-subtitle" id="cluster-subtitle" style="margin-bottom:0.5rem; position:relative;">
-    {t(lang, 'pair.cluster_sub')}
+    {t(lang, 'pair.cluster_sub', { texts })}
     <button id="cluster-info-btn" class="method-btn">{t(lang, 'pair.view_methodology')}</button>
     <div id="cluster-info-pop" hidden class="info-pop">
       <button id="cluster-info-close" aria-label="Close" style="position:absolute;top:6px;right:8px;border:none;background:none;font-size:14px;color:#9ca3af;cursor:pointer;">×</button>

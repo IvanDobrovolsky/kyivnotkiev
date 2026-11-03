@@ -1,5 +1,8 @@
 {
   "banner": "Work in progress — data collection is ongoing and figures on this site will change.",
+  "meta": {
+    "description": "In 2018 Ukraine asked the world to write Ukrainian names the Ukrainian way — cities, people, dishes, historical figures. This project tracks how far that took hold across {span}, and asks the same of today's AI chatbots."
+  },
   "nav": {
     "ai": "AI audit",
     "lang": "УКР"
@@ -21,7 +24,7 @@
     "scope_note": "Measured: the Latin-script signal — any text writing these names in Latin letters, in any language and including transliterations. That is what reaches model training data, where tokenizers ignore language."
   },
   "card": {
-    "adoption_2025": "Adoption in 2025",
+    "adoption_year": "Adoption in {year}",
     "ready_title": "Complete dataset — all sources fully collected",
     "collecting_title": "Data collection in progress"
   },
@@ -36,7 +39,7 @@
   },
   "pair": {
     "back": "All pairs",
-    "estimated_adoption": "Estimated adoption in 2025",
+    "estimated_adoption": "Estimated adoption in {year}",
     "view_details": "View details",
     "view_methodology": "View methodology",
     "volume": "Volume",
@@ -45,7 +48,7 @@
     "ru": "Russian",
     "discourse_title": "Discourse Clusters",
     "contrastive_title": "Contrastive Analysis",
-    "contrastive_sub": "Words that keep company with each spelling",
+    "contrastive_sub": "Words that keep company with each spelling ({texts})",
     "ai_title": "What AI says about",
     "no_data": {
       "ngrams": "Google Books data ends in 2022 and covers only widely printed names",
@@ -57,10 +60,14 @@
       "reddit": "Too few Reddit posts mention this pair",
       "default": "No data for this pair from this source"
     },
-    "avg_note_html": "The average of the sources below, over the last 12 months. Counts: <span style=\"color:#0057B8;font-weight:600;\">Ukrainian</span> · <span style=\"color:#dc2626;font-weight:600;\">Russian</span> spelling.",
+    "avg_note_html": "The average of the sources below, over calendar {year}. Counts: <span style=\"color:#0057B8;font-weight:600;\">Ukrainian</span> · <span style=\"color:#dc2626;font-weight:600;\">Russian</span> spelling.",
     "discourse_ctx_title": "Discourse Context",
     "discourse_ctx_sub": "Where each spelling shows up — by kind of writing",
-    "cluster_sub": "Texts grouped by what they talk about",
+    "cluster_sub": "Texts grouped by what they talk about ({texts})",
+    "partial_year": "{months} is a partial year",
+    "hatch_no_data": "no data",
+    "partial_tip": "partial year",
+    "provisional": "{months}, provisional, as of {date}",
     "news_holdouts_title": "Verified News Articles",
     "news_holdouts_sub": "English-language articles from verified news outlets",
     "holdouts_title": "Holdouts:",
@@ -83,11 +90,11 @@
     "search_index": "search index",
     "reddit_removed": "removed on Reddit — archived",
     "holdout_sub": {
-      "news": "News articles using the Russian spelling — in 2025",
-      "wikipedia": "Wikipedia pages titled with the Russian spelling — pageviews in 2025",
-      "reddit": "Reddit posts using the Russian spelling — in 2025, by score",
-      "youtube": "YouTube videos using the Russian spelling — in 2025",
-      "openalex": "Papers using the Russian spelling — in 2025, ordered by citations (most have none)",
+      "news": "News articles using the Russian spelling — in {year}",
+      "wikipedia": "Wikipedia pages titled with the Russian spelling — pageviews in {year}",
+      "reddit": "Reddit posts using the Russian spelling — in {year}, by score",
+      "youtube": "YouTube videos using the Russian spelling — in {year}",
+      "openalex": "Papers using the Russian spelling — in {year}, ordered by citations (most have none)",
       "default": "Using the Russian spelling"
     },
     "holdout_news_head": "Recent news articles that keep using the Russian form"

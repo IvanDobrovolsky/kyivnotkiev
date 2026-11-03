@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { t, altPath, localePath } from '../i18n';
+import { spanLabel, studyWindow } from '../i18n/window';
 import m from '../data/manifest.json';
 
 interface Props {
@@ -17,11 +18,14 @@ function fmtBig(n: string | number) {
   return v.toString();
 }
 
+const { lang = 'en' } = Astro.props;
+// Per-locale, with the span built from study_window: the English sentence and
+// its English-only span were served as the description of /uk pages too.
+const _sw = studyWindow(m);
 const {
   title = '#KyivNotKiev — Measuring Ukrainian Toponym Adoption',
-  description = `In 2018 Ukraine asked the world to write Ukrainian names the Ukrainian way — cities, people, dishes, historical figures. This project tracks how far that took hold across ${m.time_span}, and asks the same of today's AI chatbots.`,
+  description = t(lang, 'meta.description', { span: spanLabel(lang, _sw.start, _sw.end) }),
   activeNav = '',
-  lang = 'en',
 } = Astro.props;
 
 // "Pairs" is dropped: the wordmark already returns to the pair index, so it was a

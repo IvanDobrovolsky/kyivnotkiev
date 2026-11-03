@@ -1,7 +1,10 @@
 ---
-import { localePath } from '../i18n';
+import { localePath, t } from '../i18n';
 /**
- * Single pair card for the home grid.
+ * Single pair card for the home grid. Every year on it comes from the caller,
+ * which reads manifest.study_window: the axis labels were literal '2010' and
+ * '2025' and the headline an inline 'Adoption in 2025', so they would have
+ * stayed put while the window moved.
  */
 interface Props {
   slug: string;
@@ -18,6 +21,9 @@ interface Props {
   switchYear?: string;
   switchPos?: number;
   lang?: string;
+  axisStart?: string;      // sparkline's first period, e.g. '2010'
+  axisEnd?: string;        // its last period: '2025', or 'Jul 2026' mid-year
+  headlineYear?: number;   // the complete year the card's figure describes
 }
 
 function adoptionColor(pct: number) {
@@ -26,7 +32,7 @@ function adoptionColor(pct: number) {
   return 'var(--red)';
 }
 
-const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false, statsStale = false, spark = [], verdict = '', switchYear = '', switchPos = 0, lang = 'en' } = Astro.props;
+const { slug, russian, ukrainian, adoption, total, popularRank = 999, significance = '', dataReady = false, statsStale = false, spark = [], verdict = '', switchYear = '', switchPos = 0, lang = 'en', axisStart = '', axisEnd = '', headlineYear } = Astro.props;
 const SW = 260, SH = 34;
 function path(vals: number[], flip = false): string {
   if (vals.length < 2) return '';
@@ -60,14 +66,14 @@ const color = adoptionColor(pct);
       <path d={path(spark)} fill="none" stroke="#0057B8" stroke-width="2" />
     </svg>
     <div class="spark-axis">
-      <span>2010</span>
+      <span>{axisStart}</span>
       {switchYear && <span class="spark-switch" style={`left:${(switchPos * 100).toFixed(0)}%;`}>{switchYear}</span>}
-      <span>2025</span>
+      <span>{axisEnd}</span>
     </div>
     </>
   )}
   <div class="pair-adopt" style="display:flex; align-items:baseline; justify-content:space-between; gap:0.5rem;">
-    <span>{lang === 'uk' ? 'Прийняття у 2025' : 'Adoption in 2025'}: <span class="pair-pct" style={`color:${color}`}>{pct}%</span></span>
+    <span>{t(lang, 'card.adoption_year', { year: headlineYear ?? '' })}: <span class="pair-pct" style={`color:${color}`}>{pct}%</span></span>
     <span class="mini-legend" aria-hidden="true">
       <span class="ml-swatch" style="background:#0057B8;"></span>UA
       <span class="ml-swatch ml-dash"></span>RU

@@ -2,6 +2,7 @@
 const { lang = 'en' } = Astro.props;
 import Base from '../layouts/Base.astro';
 import { t } from '../i18n';
+import { spanLabel, pointLabel, aggregateEnd, studyWindow } from '../i18n/window';
 import PairCard from '../components/PairCard.astro';
 import m from '../data/manifest.json';
 import icons from '../data/source_icons.json';
@@ -20,15 +21,22 @@ function fmtBig(n: string | number) {
 const popularOrder = ['kyiv', 'chornobyl', 'odesa', 'lviv', 'kharkiv', 'donbas', 'luhansk', 'dnipro', 'zaporizhzhia', 'volodymyr-zelenskyy', 'oleksandr-usyk', 'bakhmut'];
 const sigBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, (lang === 'uk' ? (p.blurb_uk || p.significance) : p.significance) || p.blurb || '']));
 
+const sw = studyWindow(m);
+const headline = ((m as any).headline || { pairs: {} }) as any;
+
 // Per-card sparkline: combined adoption across sources, quarterly means.
 // Computed at build time; each card gets the same-sized pair of curves.
-function sparkSeries(slug: string): { v: number[]; switchYear: string | null; switchPos: number } {
+// Only months every source with headline-year data covers: past the earliest
+// of their window ends a quarter's mean is a different mix of sources, which
+// is how GDELT-only 2026 quarters invented '2026' switch labels.
+function sparkSeries(slug: string): { v: number[]; switchYear: string | null; switchPos: number; end: string } {
   const src = (timeseries as any)[slug] || {};
+  const end = aggregateEnd(sw, src);
   const byQ: Record<string, number[]> = {};
   for (const [name, rows] of Object.entries(src)) {
     if (!Array.isArray(rows)) continue;
     for (const r of rows as any[]) {
-      if (!r?.date || r.adoption == null) continue;
+      if (!r?.date || r.adoption == null || r.provisional || r.date > end) continue;
       const q = r.date.slice(0, 4) + '-Q' + (Math.floor((+r.date.slice(5, 7) - 1) / 3) + 1);
       (byQ[q] = byQ[q] || []).push(r.adoption);
     }
@@ -48,7 +56,7 @@ function sparkSeries(slug: string): { v: number[]; switchYear: string | null; sw
       }
     }
   }
-  return { v, switchYear, switchPos };
+  return { v, switchYear, switchPos, end };
 }
 function sparkPath(vals: number[], w: number, h: number, flip = false): string {
   if (vals.length < 2) return '';
@@ -61,19 +69,13 @@ function sparkPath(vals: number[], w: number, h: number, flip = false): string {
 const sparkBySlug: Record<string, any> = Object.fromEntries(
   (pairsMeta as any[]).filter((p: any) => p.enabled).map((p: any) => [p.slug, sparkSeries(p.slug)]));
 
-// Headline number per card: mean adoption across sources over 2025 months.
-function adoption2025(slug: string): number | null {
-  const src = (timeseries as any)[slug] || {};
-  const vals: number[] = [];
-  for (const rows of Object.values(src)) {
-    if (!Array.isArray(rows)) continue;
-    const own = (rows as any[]).filter(r => r?.date >= '2025-01' && r.adoption != null);
-    if (own.length) vals.push(own.reduce((a, r) => a + r.adoption, 0) / own.length);
-  }
-  return vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length * 10) / 10 : null;
-}
-const adoption25BySlug: Record<string, number | null> = Object.fromEntries(
-  (pairsMeta as any[]).filter((p: any) => p.enabled).map((p: any) => [p.slug, adoption2025(p.slug)]));
+// Headline number per card: the exporter's headline-year figure, from raw data
+// of that calendar year only (manifest.headline). It was averaged here from the
+// plotted points with an open start ('>= 2025-01'), over values the smoothers
+// had already widened, so it would have absorbed 2026 the day it arrived.
+const adoptionHY: Record<string, number | null> = Object.fromEntries(
+  (pairsMeta as any[]).filter((p: any) => p.enabled)
+    .map((p: any) => [p.slug, headline.pairs?.[p.slug]?.adoption ?? null]));
 const readyBySlug: Record<string, boolean> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, !!p.data_ready]));
 const staleBySlug = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, !!p.stats_stale]));
 const verdictBySlug: Record<string, string> = Object.fromEntries((pairsMeta as any[]).map((p: any) => [p.slug, (lang === 'uk' ? p.verdict_uk : p.verdict) || p.verdict || '']));
@@ -95,7 +97,7 @@ const pairs = [
   </div>
   <div class="hero-body">
     <p class="subtitle">
-      <Fragment set:html={t(lang, 'home.hero_html', {pairs: m.analyzable_pairs, span: m.time_span})} />
+      <Fragment set:html={t(lang, 'home.hero_html', {pairs: m.analyzable_pairs, span: spanLabel(lang, sw.start, sw.end)})} />
     </p>
     <p class="scope-note">{t(lang, 'home.scope_note')}</p>
   </div>
@@ -172,7 +174,10 @@ const pairs = [
       slug={p.slug}
       russian={p.russian}
       ukrainian={p.ukrainian}
-      adoption={adoption25BySlug[p.slug] ?? (p.adoption || 0)}
+      adoption={adoptionHY[p.slug] ?? (p.adoption || 0)}
+      headlineYear={sw.headline_year}
+      axisStart={sw.start.slice(0, 4)}
+      axisEnd={pointLabel(lang, sparkBySlug[p.slug]?.end || sw.end)}
       total={p.total || 0}
       popularRank={i}
       lang={lang}
