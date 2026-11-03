@@ -91,6 +91,22 @@ def _load(name: str) -> pd.DataFrame:
                     log.info(f"  {name}: dropped {int((~_keep).sum()):,} rows after {STUDY_END_DATE[:4]}")
                     df = df[_keep].reset_index(drop=True)
 
+            # The site's Reddit series must count the rows the pair files count.
+            # The source filters (homonym, referent, verified-wrong, listing
+            # spam) run only in migrate.build_pairs, so reading the processed
+            # tier served every row they remove: odesa shipped 52,144 Reddit
+            # rows against 23,375 in its pair file -- Odessa, Texas -- and its
+            # 2025 Ukrainian-form share read 11-26% where the filtered rows read
+            # 49-73%. Same call and grouping as build_pairs, so the two cannot
+            # drift; the holdout tables below inherit the cleaned frame too.
+            if name == "reddit" and len(df) and "pair_slug" in df.columns:
+                _n0 = len(df)
+                df = pd.concat([apply_source_filters(g, s_, "reddit")
+                                for s_, g in df.groupby("pair_slug", dropna=False,
+                                                        sort=False)]).sort_index()
+                log.info(f"  reddit: source filters removed {_n0 - len(df):,} of "
+                         f"{_n0:,} rows (as in the pair files)")
+
             # The store's processed reddit uses doc_id and drops subreddit;
             # derive the columns the exporter grew up expecting.
             if name == "reddit" and "post_id" not in df.columns and "doc_id" in df.columns:
