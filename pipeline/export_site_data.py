@@ -15,11 +15,12 @@ import logging
 import os
 import re
 from collections import defaultdict
-from datetime import date, timedelta
+from datetime import date
 from pathlib import Path
 
 import pandas as pd
 
+import pipeline.config as _cfg
 from pipeline.config import load_pairs
 from pipeline.filters import apply_source_filters, _verified_drops
 
@@ -28,8 +29,65 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 
 ROOT = Path(__file__).resolve().parent.parent
 DATASET_DIR = ROOT / "dataset"
-STUDY_END_DATE = "2025-12-31"   # the study period ends here; 2026 is partial
 MAX_ZERO_FILL_RUN = 6          # longer silent runs read as non-collection, not zeros
+
+
+# ── Study window ─────────────────────────────────────────────────────────────
+# Read from pipeline.config at CALL time, never copied into a module constant:
+# a source's end advances by editing one dict entry, and an end-to-end test
+# moves SOURCE_SERIES_END after this module is imported. Two constants in this
+# file (STUDY_END_DATE and STUDY_END_YEAR) once encoded the same end separately,
+# and YouTube was clamped by year while everything else was clamped by date.
+
+def _src_end(source: str) -> str:
+    """Last month ('YYYY-MM') `source` may plot."""
+    return _cfg.series_end(source)
+
+
+def _months_due(year: int, end_ym: str) -> list[str]:
+    """Months of `year` inside [STUDY_START, end_ym]: twelve for a complete
+    year, 1..N for the final partial one, none outside the window."""
+    return [f"{year}-{m:02d}" for m in range(1, 13)
+            if _cfg.STUDY_START <= f"{year}-{m:02d}" <= end_ym]
+
+
+def _headline_bounds() -> tuple[str, str]:
+    """('YYYY-01', 'YYYY-12') of HEADLINE_YEAR. Both bounds, always: an
+    open-ended '>= 2025-01' filter would average 21 months under a '2025' label
+    the moment 2026 rows exist; 34 OpenAlex holdouts dated 2026 already shipped
+    under 'in 2025' that way."""
+    y = _cfg.HEADLINE_YEAR
+    return f"{y}-01", f"{y}-12"
+
+
+def _in_headline_year(d) -> bool:
+    """`d` is 'YYYY-MM' or 'YYYY-MM-DD'; string order is calendar order."""
+    lo, hi = _headline_bounds()
+    return lo <= str(d)[:7] <= hi
+
+
+def study_window() -> dict:
+    """manifest.study_window: the site reads its axis and every label from this."""
+    return {
+        "start": _cfg.STUDY_START,
+        "end": _cfg.SERIES_END,
+        "text_end": _cfg.TEXT_END,
+        "headline_year": _cfg.HEADLINE_YEAR,
+        "sources": {s: _src_end(s) for s in sorted(_cfg.SOURCE_SERIES_END)},
+    }
+
+
+def time_span_label() -> str:
+    """'2010 – Sep 2026', or '2010–2025' when the window ends in December. Never
+    '2010-2026' while 2026 is partial. English: manifest.time_span is read by
+    the README generator and the paper; the site builds per-locale labels from
+    study_window instead (site/src/i18n/window.ts)."""
+    s, e = _cfg.STUDY_START, _cfg.SERIES_END
+    if e[5:7] == "12":
+        return f"{s[:4]}–{e[:4]}"
+    mon = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][int(e[5:7]) - 1]
+    return f"{s[:4]} – {mon} {e[:4]}"
 DATA_DIR = ROOT / "data"
 SITE_DATA_DIR = ROOT / "site" / "src" / "data"
 
@@ -71,24 +129,32 @@ def _load(name: str) -> pd.DataFrame:
                     table = table.set_column(i, field.name, table.column(i).cast(pa.string()))
             table = table.replace_schema_metadata({})
             df = table.to_pandas()
-            # Clamp every source to the study period in one place. 2026 is a
-            # partial year: a trailing fragment beside sixteen complete ones reads
-            # as a collapse in volume rather than an incomplete window. GDELT ran
-            # to 2026-08 and was drawing points past the axis end.
+            # Clamp every source to ITS OWN window in one place: through the last
+            # month that source has collected, closed and settled, never the
+            # axis end. A trailing partial month reads as a collapse in volume
+            # rather than an incomplete window -- GDELT ran to 2026-08 and was
+            # drawing points past the axis end -- and a freshly closed month is
+            # not comparable on arrival (a YouTube month queried 28 days after
+            # it closed read 8.6x the same month a year earlier).
+            _end = _src_end(name)
             if "date" in df.columns:
                 # utc=True then drop the zone: telegram's dates are tz-aware, and
                 # comparing them against a naive Timestamp raised — which killed the
                 # whole export, not just the telegram block.
                 _d = pd.to_datetime(df["date"], errors="coerce", utc=True).dt.tz_localize(None)
-                _keep = _d.isna() | (_d <= pd.Timestamp(STUDY_END_DATE))
+                _keep = _d.isna() | (_d <= pd.Timestamp(_cfg.last_day(_end)))
                 if int((~_keep).sum()):
-                    log.info(f"  {name}: dropped {int((~_keep).sum()):,} rows after {STUDY_END_DATE}")
+                    log.info(f"  {name}: dropped {int((~_keep).sum()):,} rows after {_end}")
                     df = df[_keep].reset_index(drop=True)
             elif "year" in df.columns:
+                # Year-granular (ngrams): a year is kept only once it is complete
+                # inside the source's window, so a partial year cannot pass as a
+                # full one.
                 _y = pd.to_numeric(df["year"], errors="coerce")
-                _keep = _y.isna() | (_y <= int(STUDY_END_DATE[:4]))
+                _last_full = int(_end[:4]) if _end[5:7] == "12" else int(_end[:4]) - 1
+                _keep = _y.isna() | (_y <= _last_full)
                 if int((~_keep).sum()):
-                    log.info(f"  {name}: dropped {int((~_keep).sum()):,} rows after {STUDY_END_DATE[:4]}")
+                    log.info(f"  {name}: dropped {int((~_keep).sum()):,} rows after {_last_full}")
                     df = df[_keep].reset_index(drop=True)
 
             # The site's Reddit series must count the rows the pair files count.
@@ -126,13 +192,16 @@ def _load(name: str) -> pd.DataFrame:
 def _stale_youtube_years() -> set:
     """(pair, year) that must not be plotted. A year is excluded when it is:
 
-      * past STUDY_END_YEAR — a partial year is not comparable with full ones
+      * past series_end('youtube') — outside the window altogether
       * missing a variant entirely — the other side then reads as 0% adoption
-      * incomplete — fewer than 12 RECORDED months on either side, so the year's
-        total is a fraction of the truth and its dip reads as history. A month
-        that is recorded but hour-capped is explored (a flagged lower bound) and
-        does not condemn its year; it is excluded month-level instead, by
-        _capped_youtube_months()
+      * incomplete — a month DUE in the window is not RECORDED on either side,
+        so the year's total is a fraction of the truth and its dip reads as
+        history. Twelve months are due in a complete year, months 1..N in the
+        final one: the census of a year still in progress holds 1..N, and
+        demanding 12 dropped it whole while the log blamed a depth mismatch.
+        A month that is recorded but hour-capped is explored (a flagged lower
+        bound) and does not condemn its year; it is excluded month-level
+        instead, by _capped_youtube_months()
       * collected at a depth other than the one declared in config/pairs.yaml
 
     Depth is declared, not inferred: a sparse pair peaks at 58 results in a month
@@ -169,18 +238,20 @@ def _stale_youtube_years() -> set:
         # descent, so inference called it "month" and the year was discarded
         # as a depth mismatch — 21,554 rows, nine pairs, measured 2026-09-10.
         seen.setdefault((pair, year), {})[variant] = {
-            "explored": len(months),
+            "explored": set(months),
             "depth": d.get("min_depth"),
         }
 
+    end = _src_end("youtube")
     stale = set()
     for (pair, year), v in seen.items():
-        if int(year) > STUDY_END_YEAR:
+        due = set(_months_due(int(year), end))
+        if not due:
             stale.add((pair, year)); continue
         ru, uk = v.get("russian"), v.get("ukrainian")
         if ru is None or uk is None:
             stale.add((pair, year)); continue
-        if ru["explored"] < 12 or uk["explored"] < 12:
+        if not (due <= ru["explored"] and due <= uk["explored"]):
             stale.add((pair, year)); continue
         # Only a RECORDED depth can contradict the declaration; an unknown
         # depth is not evidence of a mismatch.
@@ -273,14 +344,19 @@ def _load_youtube_census() -> pd.DataFrame:
     df["date"] = pd.to_datetime(df["published_at"], errors="coerce", utc=True).dt.strftime("%Y-%m-%d")
     df = df.dropna(subset=["date"])
 
-    # Drop anything past the last complete calendar year: a partial year is not
-    # comparable with full ones and, on chornobyl 2026, its ukrainian half was never
-    # collected at all, so every month read as 0% adoption.
+    # Drop anything outside YouTube's own window, by DATE. It was clamped by
+    # year, so moving the end into 2026 would have let 2026-10..12 through while
+    # every other source stopped at its month. Past that end the census is not
+    # comparable: on chornobyl 2026 the ukrainian half was never collected, so
+    # every month read as 0% adoption, and a month queried 28 days after it
+    # closed read 8.6x the same month a year earlier.
+    _end = _src_end("youtube")
     before_year = len(df)
-    df = df[df.date.str[:4].astype(int) <= STUDY_END_YEAR].copy()
+    df = df[(df.date >= f"{_cfg.STUDY_START}-01")
+            & (df.date <= _cfg.last_day(_end))].copy()
     if before_year - len(df):
-        log.info(f"  YouTube: dropped {before_year-len(df):,} rows after "
-                 f"{STUDY_END_YEAR} (incomplete year)")
+        log.info(f"  YouTube: dropped {before_year-len(df):,} rows outside "
+                 f"{_cfg.STUDY_START}..{_end}")
 
     stale = _stale_youtube_years()
     if stale:
@@ -288,8 +364,9 @@ def _load_youtube_census() -> pd.DataFrame:
         df = df[[(p, d[:4]) not in stale for p, d in zip(df.pair_slug, df.date)]].copy()
         if before - len(df):
             years = sorted({f"{p} {y}" for p, y in stale})
-            log.info(f"  YouTube: dropped {before-len(df):,} rows whose collection depth "
-                     f"differs from the declared youtube_depth ({', '.join(years[:6])}"
+            log.info(f"  YouTube: dropped {before-len(df):,} rows in years not fully "
+                     f"collected for the window, or collected at a depth other than "
+                     f"the declared youtube_depth ({', '.join(years[:6])}"
                      f"{'...' if len(years) > 6 else ''}) — shown as gaps, not wrong values")
 
     capped = _capped_youtube_months()
@@ -377,11 +454,12 @@ def _filter_youtube(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # Holdouts are evidence of *current* usage. Outlets that switched in 2019 are not
-# holdouts today, so the window starts at the 2022 invasion.
-STUDY_END_YEAR = 2025      # last complete calendar year; partial years are not comparable
-# The exhibits claim "still using the Russian spelling" — the honest window is
-# the adoption headline's own year, not the whole post-invasion era.
-HOLDOUT_SINCE = "2025-01-01"
+# holdouts today. The exhibits claim "still using the Russian spelling", so the
+# honest window is the adoption headline's own year -- HEADLINE_YEAR, both
+# bounds -- not the whole post-invasion era and not "since" an open start.
+# pipeline.audit.holdout_convergence imports these, so its pools use the same.
+HOLDOUT_SINCE = f"{_cfg.HEADLINE_YEAR}-01-01"
+HOLDOUT_UNTIL = _cfg.last_day(f"{_cfg.HEADLINE_YEAR}-12")
 HOLDOUT_CAP = 100
 
 # Per (pair, source): how many candidates survived each of the exporter's own
@@ -622,6 +700,26 @@ def _safe_div(a, b):
 
 # ── Exports ───────────────────────────────────────────────────────────────────
 
+# Unsmoothed headline-year points for sources whose plotted value is smoothed in
+# place (trends). Filled by export_timeseries, read by headline_numbers().
+HEADLINE_RAW: dict = {}
+
+
+def _openalex_yearly(path: Path) -> tuple[list, str]:
+    """The per-pair yearly OpenAlex counts and the date they were fetched.
+
+    The fetch date dates a provisional year ("as of ..."). The current file
+    records none, so its mtime stands in; a collector that writes `fetched_at`,
+    per entry or at the top level, takes precedence.
+    """
+    doc = json.loads(path.read_text())
+    as_of = date.fromtimestamp(path.stat().st_mtime).isoformat()
+    if isinstance(doc, dict):
+        as_of = str(doc.get("fetched_at") or as_of)[:10]
+        doc = doc.get("pairs", [])
+    return doc, as_of
+
+
 def export_timeseries(enabled_slugs: set[str]) -> dict:
     log.info("Exporting timeseries...")
     result = {"events": [
@@ -697,6 +795,11 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                             # comparable across variants — the summary bars sum it
                             "cukr": round(cu, 4)})
             result.setdefault(pid, {})
+            # The headline needs the UNSMOOTHED calibrated share: smooth_series
+            # centres its window, so a December point would average in January
+            # of the next year once that month exists.
+            HEADLINE_RAW.setdefault(pid, {})["trends"] = [
+                dict(d) for d in raw if _in_headline_year(d["date"])]
             result[pid]["trends"] = smooth_series(raw, window=3)
 
     # GDELT (monthly)
@@ -714,7 +817,11 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
             _sr = pd.read_parquet(_f)
             _pv = _sr.pivot_table(index="month", columns="variant", values="articles",
                                   fill_value=0).reset_index()
-            _pv = _pv[_pv["month"].astype(str) <= STUDY_END_DATE[:7]]
+            # Through GDELT's own end only. The verified corpus runs to
+            # 2026-08-26 for most pairs, so a later month would draw a partial
+            # count as a collapse.
+            _m = _pv["month"].astype(str)
+            _pv = _pv[(_m >= _cfg.STUDY_START) & (_m <= _src_end("gdelt"))]
             _rows = []
             for _, r in _pv.sort_values("month").iterrows():
                 ukr, rus = int(r.get("ukrainian", 0)), int(r.get("russian", 0))
@@ -824,11 +931,13 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
         # Coverage comes from the COLLECTION state, not from where the first verified
         # video happens to fall. volodymyr-the-great collected 5,160 videos for 2010
         # and verified none — that is a measured zero, and rendering it as a gap
-        # claims the source was never observed. Every month of a complete,
-        # study-period year (both variants, 12 resolved months, not stale) is
+        # claims the source was never observed. Every month DUE in a fully
+        # collected year (both variants, every due month recorded, not stale) is
         # emitted; those without a verified video carry ukr=0, rus=0 and a null
         # adoption, since a share of nothing is undefined. Months outside collected
-        # years stay absent, which is what a real gap looks like.
+        # years stay absent, which is what a real gap looks like. Due means inside
+        # YouTube's window: emitting range(1, 13) for a year still in progress
+        # would publish its future months as counted zeros.
         import json as _cj, re as _cre
         _ck = ROOT / "data" / "cl" / "raw" / "youtube_census" / ".checkpoints"
         _stale2 = _stale_youtube_years()
@@ -839,13 +948,14 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 if not _m:
                     continue
                 _slug2, _, _yr = _m.group(1), _m.group(2), int(_m.group(3))
-                if _yr > int(STUDY_END_DATE[:4]) or (_slug2, str(_yr)) in _stale2:
+                _due = _months_due(_yr, _src_end("youtube"))
+                if not _due or (_slug2, str(_yr)) in _stale2:
                     continue
                 try:
                     _mo = _cj.load(open(_f)).get("months") or {}
                 except Exception:
                     continue
-                if len(_mo) >= 12:
+                if set(_due) <= set(_mo):
                     _complete.setdefault(_slug2, {}).setdefault(_yr, 0)
                     _complete[_slug2][_yr] += 1
         _zeroed = 0
@@ -858,8 +968,7 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
             for _yr, _nvar in sorted(_yrs.items()):
                 if _nvar < 2:
                     continue                    # one variant missing: not observed
-                for _mm in range(1, 13):
-                    _key = f"{_yr}-{_mm:02d}"
+                for _key in _months_due(_yr, _src_end("youtube")):
                     if (_slug2, _key) in _capped2:
                         # Emit an explicit capped marker, not an absent month: the
                         # chart interpolates straight across absent points, which
@@ -900,20 +1009,39 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
     log.info("  OpenAlex...")
     openalex_path = DATA_DIR / "raw" / "openalex" / "openalex_all_pairs.json"
     if openalex_path.exists():
-        with open(openalex_path) as f:
-            openalex_data = json.load(f)
+        openalex_data, _oa_as_of = _openalex_yearly(openalex_path)
+        # OpenAlex is year-granular, so a year can only be cut whole. A year
+        # still open inside OpenAlex's window is PROVISIONAL: its count is
+        # Jan..end-month and still revising (the partial-2026 Kyiv share moved
+        # from 100% to 87.5% between April and October), so it ships flagged,
+        # outside every smoothing pool -- the ratio smoother widens by list
+        # index, i.e. by up to +/-6 YEARS on this series, and would have blended
+        # it into 2020-2025 -- and never in volume mode or a headline.
+        _oa_end = _src_end("openalex")
+        _oa_lo = int(_cfg.STUDY_START[:4])
         for pair_data in openalex_data:
             pid = pair_data["pair_slug"]
             if pid not in enabled_slugs:
                 continue
             spid = pid
-            raw_series = []
+            raw_series, prov = [], []
             for yr in pair_data["yearly"]:
+                _y = int(yr["year"])
+                if not (_oa_lo <= _y <= int(_oa_end[:4])):
+                    continue
                 total = yr["total"]
                 adoption = round(yr["ukrainian_count"] / total * 100, 1) if total > 0 else None
-                raw_series.append({"date": f"{yr['year']}-01", "adoption": adoption, "ukr": yr["ukrainian_count"], "rus": yr["russian_count"]})
+                pt = {"date": f"{_y}-01", "adoption": adoption,
+                      "ukr": yr["ukrainian_count"], "rus": yr["russian_count"]}
+                if f"{_y}-12" > _oa_end:
+                    pt.update(provisional=True, through=_oa_end,
+                              as_of=pair_data.get("fetched_at") or _oa_as_of)
+                    if adoption is not None:
+                        prov.append(pt)
+                else:
+                    raw_series.append(pt)
             result.setdefault(spid, {})
-            result[spid]["openalex"] = smooth_series(raw_series, window=3)
+            result[spid]["openalex"] = smooth_series(raw_series, window=3) + prov
 
     # Telegram (monthly)
     log.info("  Telegram...")
@@ -992,10 +1120,13 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 continue
             if _src not in COUNT_BASED_SOURCES:
                 continue
-            _new = smooth_ratio_series(_ser)
-            if _new is not _ser:
-                result[_slug][_src] = _new
-                _smoothed += 1
+            # Provisional points stay out of every pool (see OpenAlex above).
+            _base = [d for d in _ser if not d.get("provisional")]
+            _prov = [d for d in _ser if d.get("provisional")]
+            _new = smooth_ratio_series(_base)
+            if _new is not _base or _prov:
+                result[_slug][_src] = _new + _prov
+                _smoothed += _new is not _base
     if _smoothed:
         log.info(f"  Adaptive ratio smoothing applied to {_smoothed} pair×source series "
                  f"(min denominator {SMOOTH_MIN_DENOM}, max ±{SMOOTH_MAX_HALF} months)")
@@ -1023,8 +1154,10 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                     del pair_sources[src]
                     removed += 1
             else:
-                # For count-based sources, check total volume
-                total = sum((d.get("ukr") or 0) + (d.get("rus") or 0) for d in series)
+                # For count-based sources, check total volume. A provisional
+                # year cannot carry a series on its own.
+                total = sum((d.get("ukr") or 0) + (d.get("rus") or 0) for d in series
+                            if not d.get("provisional"))
                 if total < MIN_COUNT_THRESHOLD:
                     del pair_sources[src]
                     removed += 1
@@ -1034,6 +1167,111 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
     pair_count = len([k for k in result if k != "events"])
     log.info(f"  Timeseries: {pair_count} pairs")
     return result
+
+
+# The pair page lists headline rows in this order.
+HEADLINE_SOURCES = ("trends", "gdelt", "wikipedia", "reddit", "youtube", "ngrams", "openalex")
+# Sources whose ukr/rus are document counts, so the share is a ratio of sums.
+# Trends and Ngrams carry an index and a frequency, so they average the share.
+HEADLINE_COUNTABLE = {"gdelt", "wikipedia", "reddit", "youtube", "openalex"}
+
+
+def headline_numbers(timeseries: dict) -> dict:
+    """'Adoption in <HEADLINE_YEAR>' per pair and per source, from RAW
+    headline-year data only, computed once for every page that prints it.
+
+    The home card and the pair page each computed this in the browser from the
+    plotted points, with an open start ('>= 2025-01') and no end, over values
+    the smoothers had already widened. 42 shipped 2025 points sit on ratio
+    windows reaching past December and the Trends smoother is centred, so the
+    2025 figure would have moved the day 2026 months arrived. The two pages
+    also used different formulas -- a mean of monthly smoothed shares on the
+    card, a ratio of the year's counts on the pair page -- so one pair showed
+    two different "adoption in 2025" figures. One definition now:
+
+      * count sources: the year's Ukrainian-form records over both forms,
+        dropped below 5 records, exactly as the pair page always did;
+      * Trends: the year's monthly CALIBRATED share, unsmoothed, weighted by
+        monthly interest, as the pair page did but on the smoothed share;
+      * a source whose window ends inside the year has no complete year and is
+        left out, and so is a source with no data in the year at all -- Ngrams
+        (corpus ends 2022) entered "Estimated adoption in 2025" with its
+        2011-2022 share;
+      * provisional points never count.
+
+    The pair's figure is the mean of its sources' figures, as before.
+    """
+    hy = _cfg.HEADLINE_YEAR
+    out: dict = {}
+    for slug, srcs in timeseries.items():
+        if slug == "events" or not isinstance(srcs, dict):
+            continue
+        rows: dict = {}
+        for src in HEADLINE_SOURCES:
+            ser = srcs.get(src)
+            if not isinstance(ser, list) or not ser:
+                continue                    # not plotted for this pair
+            if _src_end(src) < f"{hy}-12":
+                continue                    # the source's own year is incomplete
+            if src == "trends":
+                raw = (HEADLINE_RAW.get(slug) or {}).get("trends") or []
+                ukr = rus = cukr = asum = wsum = 0.0
+                for d in raw:
+                    ukr += d.get("ukr") or 0
+                    rus += d.get("rus") or 0
+                    cukr += d.get("cukr") or 0
+                    if d.get("adoption") is not None:
+                        w = (d.get("ukr") or 0) + (d.get("rus") or 0) or 1
+                        asum += d["adoption"] * w
+                        wsum += w
+                if not wsum:
+                    continue
+                cal = cukr > 0
+                rows[src] = {"adoption": round(asum / wsum, 1),
+                             "ukr": int(round(cukr)) if cal else 0,
+                             "rus": int(round(rus)) if cal else 0,
+                             "calibrated": cal}
+            elif src in HEADLINE_COUNTABLE:
+                win = [d for d in ser if _in_headline_year(d.get("date", ""))
+                       and not d.get("provisional")]
+                ukr = sum(float(d.get("ukr") or 0) for d in win)
+                rus = sum(float(d.get("rus") or 0) for d in win)
+                if ukr + rus < 5:
+                    continue
+                rows[src] = {"adoption": round(ukr / (ukr + rus) * 100, 1),
+                             "ukr": int(round(ukr)), "rus": int(round(rus))}
+        if rows:
+            vals = [r["adoption"] for r in rows.values()]
+            out[slug] = {"adoption": round(sum(vals) / len(vals), 1),
+                         "n_sources": len(vals), "sources": rows}
+    return {"year": hy, "pairs": out}
+
+
+def written_entry(book: dict, slug: str, label: str, terms: list) -> str:
+    """Find a cluster's written entry, tolerating a changed label.
+
+    Entries are keyed by the cluster's label, which is its top two c-TF-IDF
+    terms. Those move whenever the clusters are recomputed, so an exact-key
+    lookup silently loses the whole book: last night's rebuild left 62 of
+    129 clusters with no name and no description, and an earlier one left
+    39 of 145. Fall back to term identity — a stored key whose terms are ALL
+    still among this cluster's top terms is the same cluster under a new
+    label. Requiring every key term (not just an overlap) keeps
+    "ukraine · russian" from claiming "ukraine · city".
+    """
+    book_p = book.get(slug) or {}
+    lab = str(label).lower()
+    if lab in book_p:
+        return book_p[lab]
+    have = {str(t).lower() for t in (terms or [])}
+    if not have:
+        return ""
+    best, best_n = "", 0
+    for k, v in book_p.items():
+        kt = {x.strip() for x in str(k).split("\u00b7") if x.strip()}
+        if kt and kt <= have and len(kt) > best_n:
+            best, best_n = v, len(kt)
+    return best
 
 
 def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control_slugs: set[str]) -> dict:
@@ -1091,25 +1329,33 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
         openalex_total_papers = int(oa_df["count"].sum()) if "count" in oa_df.columns else len(oa_df)
         openalex_total_pairs = int(oa_df["pair_slug"].nunique())
     elif openalex_path.exists():
-        with open(openalex_path) as f:
-            oa_data = json.load(f)
+        oa_data, _ = _openalex_yearly(openalex_path)
+        _oa_last = int(_src_end("openalex")[:4])
         openalex_total_pairs = len(oa_data)
-        openalex_total_papers = sum(sum(yr["total"] for yr in p["yearly"]) for p in oa_data)
+        openalex_total_papers = sum(sum(yr["total"] for yr in p["yearly"]
+                                        if int(yr["year"]) <= _oa_last) for p in oa_data)
 
 
-    # ── Per-pair adoption (mean across sources, last 12 months / 5 years) ──
+    # ── Per-pair adoption (mean across sources, HEADLINE_YEAR / 5 years to it) ──
+    # Calendar HEADLINE_YEAR, both bounds. This was date.today() minus 365 days:
+    # an export on 2026-10-15 averaged only 2025-10-15..12-31 of data clamped at
+    # 2025-12-31, and from 2027-01-01 it would have averaged nothing at all. The
+    # yearly sources take the five years ending at HEADLINE_YEAR.
     log.info("  Computing per-pair adoption...")
-    today = date.today()
-    cutoff_12m = today - timedelta(days=365)
-    cutoff_5y = today - timedelta(days=5 * 365)
+    _hy = _cfg.HEADLINE_YEAR
+    _hy_lo, _hy_hi = _headline_bounds()
 
     def _source_adoption(df, value_col, date_col, cutoff, agg_mode="sum", min_total=5):
-        """Compute adoption ratio per pair for a single source."""
+        """Compute adoption ratio per pair for a single source. `cutoff` is the
+        first year of a year-granular window ending at HEADLINE_YEAR, or None
+        for the headline year itself."""
         if isinstance(cutoff, int):
-            # Year-based cutoff (ngrams)
-            d = df[df[date_col].astype(int) >= cutoff].copy()
+            # Year-based window (ngrams)
+            _yy = df[date_col].astype(int)
+            d = df[(_yy >= cutoff) & (_yy <= _hy)].copy()
         else:
-            d = df[pd.to_datetime(df[date_col]).dt.date >= cutoff].copy()
+            _ym = df[date_col].astype(str).str[:7]
+            d = df[(_ym >= _hy_lo) & (_ym <= _hy_hi)].copy()
         if not len(d):
             return {}
         if agg_mode == "count":
@@ -1129,24 +1375,23 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
     per_source = {}
     if len(trends):
         t = trends[(trends["geo"] == "") | (trends["geo"].isna())]
-        per_source["trends"] = _source_adoption(t, "interest", "date", cutoff_12m)
+        per_source["trends"] = _source_adoption(t, "interest", "date", None)
     if len(gdelt):
-        per_source["gdelt"] = _source_adoption(gdelt, "count", "date", cutoff_12m, min_total=5)
+        per_source["gdelt"] = _source_adoption(gdelt, "count", "date", None, min_total=5)
     if len(wiki):
-        per_source["wikipedia"] = _source_adoption(wiki, "pageviews", "date", cutoff_12m, min_total=10)
+        per_source["wikipedia"] = _source_adoption(wiki, "pageviews", "date", None, min_total=10)
     if len(reddit):
-        per_source["reddit"] = _source_adoption(reddit, None, "date", cutoff_12m, agg_mode="count", min_total=3)
+        per_source["reddit"] = _source_adoption(reddit, None, "date", None, agg_mode="count", min_total=3)
     if len(youtube):
-        per_source["youtube"] = _source_adoption(youtube, None, "date", cutoff_12m, agg_mode="count", min_total=3)
+        per_source["youtube"] = _source_adoption(youtube, None, "date", None, agg_mode="count", min_total=3)
     if len(ngrams):
-        per_source["ngrams"] = _source_adoption(ngrams, "frequency", "year", cutoff_5y.year, min_total=0)
+        per_source["ngrams"] = _source_adoption(ngrams, "frequency", "year", _hy - 4, min_total=0)
     # OpenAlex
     if openalex_path.exists():
-        with open(openalex_path) as f:
-            oa_data = json.load(f)
+        oa_data, _ = _openalex_yearly(openalex_path)
         oa_adopt = {}
         for p in oa_data:
-            recent = [yr for yr in p["yearly"] if yr["year"] >= cutoff_5y.year]
+            recent = [yr for yr in p["yearly"] if _hy - 4 <= int(yr["year"]) <= _hy]
             if recent:
                 ukr = sum(yr["ukrainian_count"] for yr in recent)
                 rus = sum(yr["russian_count"] for yr in recent)
@@ -1191,12 +1436,13 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
     # OpenAlex
     openalex_path2 = DATA_DIR / "raw" / "openalex" / "openalex_all_pairs.json"
     if openalex_path2.exists():
-        with open(openalex_path2) as f:
-            oa = json.load(f)
+        oa, _ = _openalex_yearly(openalex_path2)
+        _oa_last = int(_src_end("openalex")[:4])
         for pair_data in oa:
             pid = pair_data.get("pair_slug")
             if pid in enabled_slugs:
-                oa_total = sum(yr["total"] for yr in pair_data.get("yearly", []))
+                oa_total = sum(yr["total"] for yr in pair_data.get("yearly", [])
+                               if int(yr["year"]) <= _oa_last)
                 total_map[pid] = total_map.get(pid, 0) + oa_total
 
     # Build pairs
@@ -1228,7 +1474,8 @@ def export_manifest(enabled_slugs: set[str], analyzable_slugs: set[str], control
         "analyzable_pairs": len(analyzable_slugs),
         "toponym_matches": toponym_matches,
         "cl_corpus": _get_cl_corpus_size(),
-        "time_span": "2010-2025",
+        "time_span": time_span_label(),
+        "study_window": study_window(),
         "num_sources": 7,  # telegram deprecated 2026-09-02; religious removed 2026-08-25
         "num_countries": int(extra_map.get("trends_countries", "0")),
         "sources": {
@@ -1291,6 +1538,7 @@ def export_trends_countries(enabled_slugs: set[str]) -> dict:
 #               English name, so matches are affiliation strings, not the person.
 OPENALEX_COLLISIONS = {"borscht", "ihor-sikorsky"}
 OPENALEX_SINCE_YEAR = int(HOLDOUT_SINCE[:4])   # same window as every other source
+OPENALEX_UNTIL_YEAR = int(HOLDOUT_UNTIL[:4])
 
 
 def _preview_around_match(text: str, variant: str, slug: str, width: int = 220) -> str:
@@ -1358,7 +1606,10 @@ def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
     mapped = df["mt"].map(lambda t: lut.get(t, (None, None)))
     df["slug"] = [m[0] for m in mapped]
     df["var"] = [m[1] for m in mapped]
-    df = df[df["slug"].notna() & df["var"].isin(HOLDOUT_VARIANTS) & (df["year"] >= OPENALEX_SINCE_YEAR)]
+    # Both bounds: with only the lower one, 34 papers dated 2026 shipped under
+    # "Papers using the Russian spelling — in 2025".
+    df = df[df["slug"].notna() & df["var"].isin(HOLDOUT_VARIANTS)
+            & (df["year"] >= OPENALEX_SINCE_YEAR) & (df["year"] <= OPENALEX_UNTIL_YEAR)]
     df = df[~df["slug"].isin(OPENALEX_COLLISIONS)]
     df = df[df["openalex_id"].notna() & df["title"].notna()]
     from pipeline.filters import _verified_drops as _vd
@@ -1425,7 +1676,7 @@ def export_openalex_holdouts(enabled_slugs: set[str]) -> dict:
             "year": int(r["year"]),
         } for _, r in g.iterrows()]
     log.info(f"  OpenAlex holdouts: {len(out)} pairs, {sum(len(v) for v in out.values()):,} papers "
-             f"(since {OPENALEX_SINCE_YEAR}, cap {HOLDOUT_CAP}; excluded collisions: {', '.join(skipped)})")
+             f"({OPENALEX_SINCE_YEAR}-{OPENALEX_UNTIL_YEAR}, cap {HOLDOUT_CAP}; excluded collisions: {', '.join(skipped)})")
     return out
 
 
@@ -1495,8 +1746,8 @@ def umbrella_exclusions() -> dict:
 
 
 def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
-    """Per-source holdouts for 2025: who still uses Russian spellings."""
-    log.info("Exporting holdouts (2025, all sources)...")
+    """Per-source holdouts for HEADLINE_YEAR: who still uses Russian spellings."""
+    log.info(f"Exporting holdouts ({_cfg.HEADLINE_YEAR}, all sources)...")
     by_pair = {}
 
     # The outlet table is built further down from the VERIFIED article frame.
@@ -1514,6 +1765,10 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     # They previously used 2025-only, russian-only and a hard-coded 20, which is why
     # YouTube looked empty while its chart showed data.
     since = HOLDOUT_SINCE[:7]          # these sources carry "YYYY-MM" strings
+    # Exclusive upper bound, the first month after HEADLINE_YEAR: compares
+    # correctly against both "YYYY-MM" and "YYYY-MM-DD" strings. Without it the
+    # tables would stretch to whatever each source's series end becomes.
+    until = f"{_cfg.HEADLINE_YEAR + 1}-01"
 
     # Wikipedia: actual page URLs with the Russian spelling. Redirect status is
     # MEASURED against the live API (one batched call, cached in data/audit/) —
@@ -1521,7 +1776,8 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     # Kiev since 2020. A title missing from the cache gets no tag at all.
     wiki = _load("wikipedia")
     if len(wiki) and "page_title" in wiki.columns:
-        w = wiki[(wiki["date"] >= since) & (wiki["variant"].isin(HOLDOUT_VARIANTS))]
+        w = wiki[(wiki["date"] >= since) & (wiki["date"] < until)
+                 & (wiki["variant"].isin(HOLDOUT_VARIANTS))]
         _tops: dict = {}
         for slug in enabled_slugs:
             pages = w[w["pair_slug"] == slug]
@@ -1597,7 +1853,8 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
     # Reddit: actual post URLs, best-scoring first
     reddit = _load("reddit")
     if len(reddit) and "post_id" in reddit.columns:
-        r = reddit[(reddit["date"] >= since) & (reddit["variant"].isin(HOLDOUT_VARIANTS))]
+        r = reddit[(reddit["date"] >= since) & (reddit["date"] < until)
+                   & (reddit["variant"].isin(HOLDOUT_VARIANTS))]
         for slug in enabled_slugs:
             posts = r[r["pair_slug"] == slug]
             if not len(posts):
@@ -1705,7 +1962,8 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
 
     _yt_ranked: list[str] = []
     if len(youtube) and "video_id" in youtube.columns:
-        y = youtube[(youtube["date"] >= since) & (youtube["variant"].isin(HOLDOUT_VARIANTS))]
+        y = youtube[(youtube["date"] >= since) & (youtube["date"] < until)
+                    & (youtube["variant"].isin(HOLDOUT_VARIANTS))]
         for slug in enabled_slugs:
             vids = y[y["pair_slug"] == slug]
             if slug in _umb and "title" in vids.columns:
@@ -1847,8 +2105,12 @@ def export_domain_origins(enabled_slugs: set[str]) -> dict:
     df = _load("gdelt")
     if not len(df):
         return {}
-    cutoff = date.today() - timedelta(days=24 * 30)
-    recent = df[pd.to_datetime(df["date"]).dt.date >= cutoff].copy()
+    # HEADLINE_YEAR, both bounds. This was date.today() minus 720 days, so
+    # the window depended on the day the export ran and shrank as the
+    # clamped data aged.
+    _lo, _hi = _headline_bounds()
+    _ym = df["date"].astype(str).str[:7]
+    recent = df[(_ym >= _lo) & (_ym <= _hi)].copy()
 
     def _origin(domain):
         if domain.endswith(".ru"):
@@ -1931,6 +2193,11 @@ def main():
         for _src, _ser in _srcs.items():
             if not isinstance(_ser, list) or not _ser:
                 continue
+            # A provisional year is shown as a share only; it is not part of
+            # any total or mean.
+            _ser = [d for d in _ser if not d.get("provisional")]
+            if not _ser:
+                continue
             u = sum(float(d.get("ukr") or 0) for d in _ser)
             r = sum(float(d.get("rus") or 0) for d in _ser)
             if u + r <= 0:
@@ -1950,6 +2217,10 @@ def main():
                 e["ukr"], e["rus"] = int(round(u)), int(round(r))
             pss.setdefault(_slug, {})[_src] = e
     manifest["pair_source_stats"] = pss
+    manifest["headline"] = headline_numbers(timeseries)
+    log.info(f"  Headline {manifest['headline']['year']}: "
+             f"{len(manifest['headline']['pairs'])} pairs, from raw "
+             f"{manifest['headline']['year']} data (both bounds, unsmoothed)")
     log.info(f"  Per-pair source stats: {len(pss)} pairs, "
              f"{sum(len(v) for v in pss.values())} pair×source entries "
              f"(derived from the plotted series)")
@@ -1992,7 +2263,7 @@ def main():
             _vdf = pd.read_parquet(_vf)
             _vdf = _vdf[_vdf.variant.isin(HOLDOUT_VARIANTS)
                         & (_vdf.date >= HOLDOUT_SINCE)
-                        & (_vdf.date <= STUDY_END_DATE)]
+                        & (_vdf.date <= HOLDOUT_UNTIL)]
             _umb2 = umbrella_exclusions()
             if _slug in _umb2:
                 _vdf = _vdf[~_vdf.text.fillna("").astype(str).str.contains(_umb2[_slug])]
@@ -2089,8 +2360,11 @@ def main():
     # `enabled` rather than trusting the prune to have run — see
     # pipeline/audit/holdout_convergence.py, which assumed otherwise.
     # Data-readiness flag for the pair grid: a pair is "ready" when its YouTube
-    # census is complete for 2010-2025, both variants, 12 resolved months each —
-    # the same completeness the census orchestrator enforces.
+    # census is complete for the TEXT window (STUDY_START..TEXT_END), both
+    # variants, every due month recorded — the window the collocations and
+    # clusters are computed over. It is not about the series: a 2026 the charts
+    # show month by month does not make a pair amber, and a pair is not green
+    # on the strength of months the text analysis never reads.
     import json as _json
     _ck = ROOT / "data" / "cl" / "raw" / "youtube_census" / ".checkpoints"
     _done: dict = {}
@@ -2108,11 +2382,15 @@ def main():
             # A legacy month-grid year "resolves" 12 months with ~12-16 windows;
             # a week-floor year uses 60+. Completeness requires the real grid,
             # so hollow legacy checkpoints can never turn a pair green.
-            # 12 RECORDED months mean the year was fully explored; hour-capped
-            # months are flagged lower bounds, excluded month-level, and must
-            # not hold a pair's readiness hostage.
+            # Every DUE month RECORDED means the year was fully explored; hour-
+            # capped months are flagged lower bounds, excluded month-level, and
+            # must not hold a pair's readiness hostage. A partial final year
+            # needs the window floor pro rata: Jan-Sep inside the 768 enabled
+            # full-year checkpoints never falls below 51 windows (measured
+            # 2026-10-15), so 30 for nine months cannot pass a hollow grid.
             _w = len(_d.get("done_windows", [])) + len(_d.get("split_windows", []))
-            if len(_m) >= 12 and _w >= 40:
+            _due = _months_due(int(_yr), _cfg.TEXT_END) if _yr.isdigit() else []
+            if _due and set(_due) <= set(_m) and _w >= -(-40 * len(_due) // 12):
                 _done.setdefault(_pair, set()).add((_var, _yr))
     # Stats freshness per pair: collocations and clusters are computed from the
     # store, so a pair whose store file is newer than its analysis.json is
@@ -2157,7 +2435,7 @@ def main():
     def _yt_complete(slug):
         s_ = _done.get(slug, set())
         return all((v, str(y)) in s_ for v in ("russian", "ukrainian")
-                   for y in range(2010, 2026))
+                   for y in range(int(_cfg.STUDY_START[:4]), int(_cfg.TEXT_END[:4]) + 1))
     def _ready(slug):
         # "Ready" is a promise to the reader: fully collected AND fully
         # analyzed. A complete census without clusters/collocations is amber.
@@ -2216,31 +2494,9 @@ def main():
         except Exception:                              # noqa: BLE001
             pass
 
-    def _written(book: dict, slug: str, label: str, terms: list) -> str:
-        """Find this cluster's written entry, tolerating a changed label.
-
-        Entries are keyed by the cluster's label, which is its top two c-TF-IDF
-        terms. Those move whenever the clusters are recomputed, so an exact-key
-        lookup silently loses the whole book: last night's rebuild left 62 of
-        129 clusters with no name and no description, and an earlier one left
-        39 of 145. Fall back to term identity — a stored key whose terms are ALL
-        still among this cluster's top terms is the same cluster under a new
-        label. Requiring every key term (not just an overlap) keeps
-        "ukraine · russian" from claiming "ukraine · city".
-        """
-        book_p = book.get(slug) or {}
-        lab = str(label).lower()
-        if lab in book_p:
-            return book_p[lab]
-        have = {str(t).lower() for t in (terms or [])}
-        if not have:
-            return ""
-        best, best_n = "", 0
-        for k, v in book_p.items():
-            kt = {x.strip() for x in str(k).split("\u00b7") if x.strip()}
-            if kt and kt <= have and len(kt) > best_n:
-                best, best_n = v, len(kt)
-        return best
+    # One lookup for the export and for pipeline.audit.site_invariants, which
+    # applies it to the COMPUTED clusters as well as the shipped ones.
+    _written = written_entry
 
     GLOSS_RULES = [
         ({"police", "arrested", "department", "sheriff"}, "crime & police news"),
