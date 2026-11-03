@@ -28,13 +28,16 @@ import sys
 
 import pandas as pd
 
-from pipeline.export_site_data import (HOLDOUT_CAP, HOLDOUT_SINCE,
+from pipeline.export_site_data import (HOLDOUT_CAP, HOLDOUT_SINCE, HOLDOUT_UNTIL,
                                        HOLDOUT_VARIANTS, OPENALEX_COLLISIONS,
-                                       OPENALEX_SINCE_YEAR)
+                                       OPENALEX_SINCE_YEAR, OPENALEX_UNTIL_YEAR)
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 SITE = ROOT / "site" / "src" / "data"
-SINCE_M = HOLDOUT_SINCE[:7]
+# The exporter's own holdout window, both bounds (calendar HEADLINE_YEAR). A
+# pool counted from an open start would grow with every month a source gains
+# and report headroom the tables are not allowed to use.
+SINCE_M, UNTIL_M = HOLDOUT_SINCE[:7], HOLDOUT_UNTIL[:7]
 
 
 def store_pool(slug: str, source: str) -> int:
@@ -46,9 +49,10 @@ def store_pool(slug: str, source: str) -> int:
         d = pd.read_parquet(f, columns=["source", "variant", "date"])
     except Exception:                                  # noqa: BLE001
         return 0
+    _m = d.date.astype(str).str[:7]
     return int(((d.source == source)
                 & d.variant.isin(HOLDOUT_VARIANTS)
-                & (d.date.astype(str) >= SINCE_M)).sum())
+                & (_m >= SINCE_M) & (_m <= UNTIL_M)).sum())
 
 
 def openalex_pools() -> dict:
@@ -67,7 +71,8 @@ def openalex_pools() -> dict:
         lambda t: lut.get(t, (None, None)))
     d = d.assign(slug=[x[0] for x in m], var=[x[1] for x in m])
     d = d[d.slug.notna() & d["var"].isin(HOLDOUT_VARIANTS)
-          & (d.year >= OPENALEX_SINCE_YEAR) & ~d.slug.isin(OPENALEX_COLLISIONS)
+          & (d.year >= OPENALEX_SINCE_YEAR) & (d.year <= OPENALEX_UNTIL_YEAR)
+          & ~d.slug.isin(OPENALEX_COLLISIONS)
           & d.openalex_id.notna() & d.title.notna()]
     return d.drop_duplicates("openalex_id").groupby("slug").size().to_dict()
 
@@ -91,6 +96,7 @@ def main() -> int:
     cand = json.loads(cand_p.read_text()) if cand_p.exists() else {}
 
     problems, full, exhausted = [], 0, 0
+    print(f"holdout window {SINCE_M}..{UNTIL_M}\n")
     print(f"{'pair':22s} {'source':14s} {'ships':>6s} {'pool':>7s}  state")
     for slug in enabled:
         for key, src in (("reddit", "reddit"), ("youtube", "youtube"),

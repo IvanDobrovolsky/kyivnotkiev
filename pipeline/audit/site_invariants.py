@@ -14,15 +14,117 @@ import json
 import pathlib
 import sys
 
+import pipeline.config as cfg
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 SITE = ROOT / "site" / "src" / "data"
+STATS = ROOT / "data" / "stats"
 CAP = 100
+
+
+def window_violations(man: dict, ts: dict, hold: dict) -> list:
+    """What the reader sees must sit inside the window pipeline.config defines.
+
+    The window moves by hand, one closed month at a time. A stale export keeps
+    the old axis and labels while the config says otherwise, and nothing in the
+    build or the pre-push smoke can tell: both pass on any parseable JSON."""
+    bad = []
+    sw = man.get("study_window") or {}
+    want = {"start": cfg.STUDY_START, "end": cfg.SERIES_END,
+            "text_end": cfg.TEXT_END, "headline_year": cfg.HEADLINE_YEAR,
+            "sources": {k: cfg.series_end(k) for k in sorted(cfg.SOURCE_SERIES_END)}}
+    for k, v in want.items():
+        if sw.get(k) != v:
+            bad.append(f"manifest.study_window.{k} is {sw.get(k)!r}, config says {v!r} "
+                       f"— re-run pipeline.export_site_data")
+    hy = cfg.HEADLINE_YEAR
+    if (man.get("headline") or {}).get("year") != hy:
+        bad.append(f"manifest.headline.year is not HEADLINE_YEAR {hy}")
+
+    # Every plotted point inside its source's window. A yearly point is dated
+    # YYYY-01 and stands for its year: a year still open in the source's window
+    # may ship only flagged provisional, and never in volume mode (the site
+    # filters on the flag).
+    for slug, srcs in ts.items():
+        if not isinstance(srcs, dict):
+            continue
+        for src, ser in srcs.items():
+            if not isinstance(ser, list) or not ser:
+                continue
+            end = cfg.series_end(src)
+            for d in ser:
+                dt = str(d.get("date", ""))
+                if dt < cfg.STUDY_START:
+                    bad.append(f"{slug}/{src}: point {dt} before STUDY_START")
+                elif d.get("provisional"):
+                    if src != "openalex" or f"{dt[:4]}-12" <= end or dt[:4] > end[:4]:
+                        bad.append(f"{slug}/{src}: provisional point {dt} with window end {end}")
+                elif dt > end or (src in ("openalex", "ngrams") and f"{dt[:4]}-12" > end):
+                    bad.append(f"{slug}/{src}: point {dt} past its window end {end}")
+
+    # Every holdout inside the headline year: the subtitles say "in <year>".
+    for slug, srcs in hold.items():
+        for key in ("reddit", "youtube", "news_articles"):
+            for e in (srcs.get(key) or []):
+                if str(e.get("month", ""))[:4] != str(hy):
+                    bad.append(f"{slug}: {key} holdout dated {e.get('month')} outside {hy}")
+        for e in (srcs.get("openalex") or []):
+            if e.get("year") != hy:
+                bad.append(f"{slug}: openalex holdout from {e.get('year')} outside {hy}")
+    return bad
+
+
+def computed_cluster_violations(enabled: set) -> list:
+    """Every COMPUTED cluster resolves to a curated name and description.
+
+    The shipped set is checked below, but the display merge folds clusters that
+    share a gloss into larger cards, so a computed cluster with no curated entry
+    can be invisible today and surface after any rebuild moves the merge
+    (chornobyl 'radiation · thyroid' and kyivan-rus 'ukraine · armor' were two
+    such). Same lookup as the exporter, by label or by term identity."""
+    from pipeline.export_site_data import written_entry
+
+    def book(name):
+        p = ROOT / "data" / "audit" / name
+        try:
+            return {k: {kk.lower(): vv for kk, vv in v.items()}
+                    for k, v in json.loads(p.read_text()).items()}
+        except (OSError, ValueError):
+            return {}
+    names, glosses = book("cluster_names.json"), book("cluster_glosses.json")
+    pairs = {p["slug"]: p for p in cfg.load_pairs()["pairs"]}
+    bad = []
+    for summ in sorted(STATS.glob("*/clusters/summary.json")):
+        slug = summ.parent.parent.name
+        if slug not in enabled:
+            continue
+        try:
+            cs = json.loads(summ.read_text()).get("clusters", [])
+        except ValueError:
+            bad.append(f"{slug}: computed clusters unreadable")
+            continue
+        pw = {w.lower() for v in ("russian", "ukrainian")
+              for w in str(pairs.get(slug, {}).get(v, "")).split()}
+        for c in cs:
+            top = c.get("top_terms", [])
+            terms = [t for t in top if t.lower() not in pw and len(t) > 2]
+            label = ("non-English" if c.get("english_ratio", 1.0) < 0.08
+                     else " · ".join(terms[:2]) or f"cluster {c.get('cluster')}")
+            miss = [what for what, b in (("name", names), ("description", glosses))
+                    if not str(written_entry(b, slug, label, top) or "").strip()]
+            if miss:
+                bad.append(f"{slug}: computed cluster '{label}' (size {c.get('size')}) "
+                           f"has no curated {' or '.join(miss)}")
+    return bad
 
 
 def main() -> int:
     key = json.loads((SITE / "cl_keyness.json").read_text())
     clus = json.loads((SITE / "cl_clusters.json").read_text())
     hold = json.loads((SITE / "holdouts_by_pair.json").read_text())
+    man = json.loads((SITE / "manifest.json").read_text())
+    ts = json.loads((SITE / "timeseries.json").read_text())
+    enabled = {p["slug"] for p in cfg.load_pairs()["pairs"] if p.get("enabled", True)}
     cand_p = ROOT / "data" / "audit" / "reddit_holdout_candidates.json"
     cand = json.loads(cand_p.read_text()) if cand_p.exists() else {}
 
@@ -84,14 +186,20 @@ def main() -> int:
         if not (p.get("ua") or p.get("ru") or p.get("solo")):
             bad.append(f"{slug}: ships no vocabulary at all and no solo profile")
 
+    # 7. The window: config, manifest, every plotted point and every holdout agree.
+    bad += window_violations(man, ts, hold)
+
+    # 8. Every computed cluster, shipped or folded, has its curated entry.
+    bad += computed_cluster_violations(enabled)
+
     if not bad:
         print("site invariants: all pass")
         return 0
     print(f"site invariants: {len(bad)} violation(s)\n")
-    for b in bad[:60]:
+    for b in bad[:80]:
         print(f"  {b}")
-    if len(bad) > 60:
-        print(f"  ... and {len(bad) - 60} more")
+    if len(bad) > 80:
+        print(f"  ... and {len(bad) - 80} more")
     return 1
 
 

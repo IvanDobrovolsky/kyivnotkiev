@@ -11,8 +11,27 @@ import json
 import pathlib
 import sys
 
+import pipeline.config as cfg
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 SITE = ROOT / "site" / "src" / "data" / "cl_keyness.json"
+STATS = ROOT / "data" / "stats"
+
+
+def text_reach(slug: str) -> str | None:
+    """Latest date in the keyness input, from parquet row-group statistics."""
+    p = STATS / slug / "records.parquet"
+    if not p.exists():
+        return None
+    try:
+        import pyarrow.parquet as pq
+        md = pq.ParquetFile(p).metadata
+        i = md.schema.to_arrow_schema().names.index("date")
+        return max(str(md.row_group(g).column(i).statistics.max)
+                   for g in range(md.num_row_groups)
+                   if md.row_group(g).column(i).statistics is not None)
+    except (ValueError, OSError):
+        return None
 
 
 def main() -> int:
@@ -30,9 +49,18 @@ def main() -> int:
                     glossed += 1
                 else:
                     missing.setdefault(slug, []).append(x["w"])
-    print(f"collocation chips: {total}, glossed {glossed}, missing {total - glossed}")
+    print(f"collocation chips (TEXT window {cfg.STUDY_START}..{cfg.TEXT_END}): "
+          f"{total}, glossed {glossed}, missing {total - glossed}")
     for slug, words in sorted(missing.items()):
         print(f"  {slug:22s} {', '.join(words)}")
+    # A gloss describes a chip computed over the TEXT window. Chips computed
+    # from text past it are a different measurement wearing the same gloss:
+    # volodymyr-zelenskyy ru 'regime' survived only on 2026 GDELT rows.
+    # green_check gates on this; listed here so the gloss review sees it.
+    late = {s: r for s in sorted(k) if (r := text_reach(s)) and r[:7] > cfg.TEXT_END}
+    if late:
+        print(f"  NOTE {len(late)} pair(s) ship chips computed from text past "
+              f"{cfg.TEXT_END}: " + ", ".join(f"{s} ({r[:10]})" for s, r in late.items()))
     return 1 if missing else 0
 
 
