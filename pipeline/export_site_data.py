@@ -756,6 +756,25 @@ def _openalex_yearly(path: Path) -> tuple[list, str]:
     return doc, as_of
 
 
+WIKI_TITLES = DATA_DIR / "raw" / "wikipedia" / "titles.json"
+
+
+def _wiki_titles() -> dict:
+    """Per-pair title record from the Wikipedia collector, {} when absent.
+
+    wikipedia_merge promote writes it beside the dataset it promotes. It is the
+    only place that knows whether a title is missing (no page at all, so a zero
+    is not a measurement), shared with the other variant (one article, so the
+    share is 50% by construction) and from which month each title has views.
+    Absent until the first promote; the on-disk checks below still apply.
+    """
+    try:
+        doc = json.loads(WIKI_TITLES.read_text())
+    except (OSError, ValueError):
+        return {}
+    return doc if isinstance(doc, dict) else {}
+
+
 def _text_window_ok(slug: str, analysis: dict) -> bool:
     """The pair's keyness/cluster input stops at TEXT_END.
 
@@ -912,6 +931,7 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
         # ihor-sikorsky and serhii-korolyov hold only their Russian-titled page,
         # so each shipped 126 months of 0.0% adoption manufactured by fill_value.
         _wiki_vars = g.groupby("pair_slug")["variant"].agg(set).to_dict()
+        _wtitles = _wiki_titles()
         p = g.pivot_table(index=["pair_slug", "month"], columns="variant", values="pageviews", fill_value=0).reset_index()
         for pid, grp in p.groupby("pair_slug"):
             if pid not in enabled_slugs:
@@ -924,6 +944,25 @@ def export_timeseries(enabled_slugs: set[str]) -> dict:
                 log.info(f"    {pid}: no {'/'.join(sorted(_absent))} wikipedia article "
                          f"on disk — series dropped rather than zero-filled")
                 continue
+            # The collector's own verdict, when it has run: a missing title or
+            # an article shared by both spellings is not measurable, whatever
+            # rows are on disk ('Ihor Sikorsky' has no page; its zeros were
+            # never views).
+            _tt = _wtitles.get(pid)
+            if _tt is not None and not _tt.get("measurable", True):
+                log.info(f"    {pid}: wikipedia not measurable per titles.json "
+                         f"({'shared article' if _tt.get('shared_article') else 'missing title'})"
+                         f" — series dropped")
+                continue
+            # A title with no views before some month did not exist yet, or
+            # was not yet the page's name: the pivot's 0 for the other title
+            # there is not a share. Start at the later of the two first months.
+            # Not last_month: that describes the fetch, while the dataset is
+            # held back at series_end('wikipedia') by _load.
+            if _tt is not None:
+                _f = [(_tt.get(v) or {}).get("first_month") for v in ("russian", "ukrainian")]
+                if all(_f):
+                    grp = grp[grp["month"] >= max(_f)]
             # Both spellings often resolve to ONE article — the Russian form is
             # an en.wikipedia redirect — so the two variants return byte-identical
             # pageviews and the series is 50.0% at every point by construction.
@@ -1843,7 +1882,12 @@ def export_holdouts(enabled_slugs: set[str]) -> tuple[dict, list]:
         w = wiki[(wiki["date"] >= since) & (wiki["date"] < until)
                  & (wiki["variant"].isin(HOLDOUT_VARIANTS))]
         _tops: dict = {}
+        _wt = _wiki_titles()
         for slug in enabled_slugs:
+            # One article under both spellings: its Russian title is a
+            # redirect into the same page, so its views are not holdouts.
+            if (_wt.get(slug) or {}).get("shared_article"):
+                continue
             pages = w[w["pair_slug"] == slug]
             if len(pages):
                 _tops[slug] = pages.groupby("page_title")["pageviews"].sum().nlargest(HOLDOUT_CAP)
