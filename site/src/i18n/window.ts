@@ -89,8 +89,9 @@ export function textsLabel(lang: string, sw: StudyWindow): string {
  *  GDELT-only number and gave four home cards a false '2026' switch label
  *  (odesa, dnipro-river, kyivan-rus, babyn-yar; measured 2026-10-15).
  *  A source's cover is the earlier of its window end and its own last point
- *  for this pair: YouTube's 2026 arrives pair by pair as the census runs, so a
- *  window end of 2026-09 does not mean this pair's YouTube reaches it. */
+ *  for this pair, but never before December of the headline year: YouTube's
+ *  2026 arrives pair by pair as the census runs, so a window end of 2026-09
+ *  does not mean this pair's YouTube reaches it. */
 const YEARLY = new Set(['openalex', 'ngrams']);
 
 export function aggregateEnd(sw: StudyWindow, pairSeries: Record<string, any>): string {
@@ -107,7 +108,12 @@ export function aggregateEnd(sw: StudyWindow, pairSeries: Record<string, any>): 
       const ym = YEARLY.has(src) ? `${String(r.date).slice(0, 4)}-12` : String(r.date).slice(0, 7);
       if (ym > last) last = ym;
     }
-    if (last && last < e) e = last;
+    // Never earlier than December of the headline year: the source has data
+    // in that year, and a sparse series (varenyky's GDELT ends 2025-07) must
+    // not cut every other source's curve short. Past it, only as far as this
+    // pair's own points go.
+    const floor = `${hy}-12`;
+    if (last && last < e) e = last < floor ? (floor < e ? floor : e) : last;
     if (e < end) end = e;
   }
   return end;
