@@ -65,6 +65,7 @@ pairs:
   - turfa\s+olam
   - k(?:ie|yi)v\s*-?\s*(?:60|88|4am?|19m?)\b
   slug: kyiv
+  youtube_depth: week
   blurb_uk: Столиця — тут англійська змінилася першою
   verdict_uk: 'Кампанія спрацювала: англійська перейшла на Kyiv близько 2019 року, ще до вторгнення — війна лише закріпила зміну.'
   verdict: 'The campaign worked: English switched around 2019, before the invasion — and the war cemented it.'
@@ -85,6 +86,7 @@ pairs:
     label: Russian border offensive
   match_mode: word_boundary
   slug: kharkiv
+  youtube_depth: week
   blurb_uk: Друге місто, 40 км від російського кордону
   verdict_uk: 'Харків пішов шляхом Києва: англомовні новини майже повністю пишуть Kharkiv.'
   verdict: The second city followed Kyiv's path; English news agencies predominantly write Kharkiv.
@@ -208,6 +210,7 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: lviv
+  youtube_depth: week
   referent_filter:
     drop:
     - prince\s+(?:georg\w+\s+)?lvov
@@ -285,6 +288,7 @@ pairs:
     label: Nuclear plant shelling crisis
   match_mode: word_boundary
   slug: zaporizhzhia
+  youtube_depth: week
 - russian: Nikolaev
   ukrainian: Mykolaiv
   enabled: false
@@ -399,6 +403,7 @@ pairs:
     label: Retreat from Lyman, Luhansk oblast
   match_mode: word_boundary
   slug: luhansk
+  youtube_depth: week
   blurb_uk: Окупований із 2014 року
   verdict_uk: Висвітлення окупації просунуло Luhansk уперед; російська форма живе в архівах до 2014 року.
   verdict: News coverage pushed Luhansk ahead; the Russian spelling lives on in pre-2014 archives.
@@ -463,6 +468,7 @@ pairs:
     label: Full-scale invasion
   match_mode: word_boundary
   slug: donbas
+  youtube_depth: week
   blurb_uk: Перший фронт війни; одна «с» чи дві
   verdict_uk: Одна «с» перемогла в новинах; Donbass затримується у проросійських виданнях.
   verdict: The single-s form won the news; Donbass lingers in Russian-aligned outlets.
@@ -839,6 +845,7 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: ternopil
+  youtube_depth: week
   hide_global_events: true
   blurb_uk: Українське -піль проти російського -поль
   verdict_uk: Тихий, майже повний перехід — Ternopol практично зник із сучасної англійської.
@@ -865,6 +872,7 @@ pairs:
   is_control: false
   match_mode: word_boundary
   slug: varenyky
+  youtube_depth: week
   blurb_uk: Вареники виходять у світ
   verdict_uk: Українська назва набирає силу з глобалізацією кухні; vareniki живе в старих рецептах.
   verdict: The Ukrainian name gained ground as the cuisine went global; vareniki persists in older recipe archives.
@@ -905,6 +913,7 @@ pairs:
   is_control: false
   match_mode: exact_phrase
   slug: babyn-yar
+  youtube_depth: week
   blurb_uk: Місце Голокосту з двома традиціями назви
   verdict_uk: 'Мова памʼяті розділена: меморіальні інституції прийняли Babyn Yar, історіографія тримає Babi Yar.'
   verdict: 'Commemorative language is split: memorial institutions adopted Babyn Yar, historical writing keeps Babi Yar.'
@@ -995,6 +1004,7 @@ pairs:
     label: Oval Office clash with Trump
   match_mode: exact_phrase
   slug: volodymyr-zelenskyy
+  youtube_depth: week
   blurb_uk: Президент, якого світ пізнав 2022 року
   verdict_uk: Війна майже миттєво зробила українську форму стандартом; коротше Zelensky тримається в заголовках.
   verdict: The war made the Ukrainian form the default almost overnight.
@@ -1090,6 +1100,7 @@ pairs:
   - onlyfans\.com
   homonym_type: brand_composer
   slug: bakhmut
+  youtube_depth: week
   blurb_uk: Перейменований 2016-го, відомий світові 2023-го
   verdict_uk: 'Битва написала імʼя: англійська вивчила місто як Bakhmut, Artemovsk не мав англійського життя.'
   verdict: 'The battle wrote the name: English learned the city as Bakhmut, and Artemovsk never had an English life.'
@@ -1139,6 +1150,7 @@ pairs:
   notes: Crimean city (Феодосія). Post-annexation — correct transliteration affirms Ukraine's territorial integrity.
   match_mode: word_boundary
   slug: feodosiia
+  youtube_depth: week
   youtube_homonym_filters:
   - cheap.?hotels|accomodation\.today|best\s+hotels\s+in
   blurb_uk: Кримський порт під окупацією
