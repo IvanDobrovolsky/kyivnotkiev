@@ -45,10 +45,18 @@ def _src_end(source: str) -> str:
 
 
 def _months_due(year: int, end_ym: str) -> list[str]:
-    """Months of `year` inside [STUDY_START, end_ym]: twelve for a complete
-    year, 1..N for the final partial one, none outside the window."""
-    return [f"{year}-{m:02d}" for m in range(1, 13)
-            if _cfg.STUDY_START <= f"{year}-{m:02d}" <= end_ym]
+    """YouTube census months a complete `year` must hold, ending at `end_ym`:
+    twelve for a complete year, 1..N for the final partial one, none outside
+    the window. One rule, pipeline.ingestion.youtube_window.expected_months,
+    shared with the census, its orchestrator and green_check: the 12-month
+    rule was re-derived in six places and went wrong in both directions for a
+    year in progress. `end_ym` is passed explicitly because expected_months'
+    default binds SERIES_END at import time."""
+    from pipeline.ingestion.youtube_window import WindowError, expected_months
+    try:
+        return expected_months(int(year), end_ym)
+    except WindowError:
+        return []
 
 
 def _headline_bounds() -> tuple[str, str]:
@@ -229,6 +237,8 @@ def _stale_youtube_years() -> set:
         try:
             d = _json.loads(f.read_text())
         except Exception:                              # noqa: BLE001
+            # Fail closed: an unreadable checkpoint cannot vouch for its year.
+            seen.setdefault((pair, year), {})["_unreadable"] = True
             continue
         months = d.get("months", {})
         w = len(d.get("done_windows", []))
@@ -249,7 +259,7 @@ def _stale_youtube_years() -> set:
         if not due:
             stale.add((pair, year)); continue
         ru, uk = v.get("russian"), v.get("ukrainian")
-        if ru is None or uk is None:
+        if ru is None or uk is None or v.get("_unreadable"):
             stale.add((pair, year)); continue
         if not (due <= ru["explored"] and due <= uk["explored"]):
             stale.add((pair, year)); continue
@@ -260,6 +270,18 @@ def _stale_youtube_years() -> set:
                 or (uk["depth"] and uk["depth"] != want[pair])):
             stale.add((pair, year))
     return stale
+
+
+def _youtube_checkpoint_years() -> set:
+    """(pair, 'YYYY') with at least one census checkpoint on disk."""
+    ck = ROOT / "data" / "cl" / "raw" / "youtube_census" / ".checkpoints"
+    out: set = set()
+    if ck.exists():
+        for f in ck.glob("*.json"):
+            parts = f.stem.rsplit("_", 2)
+            if len(parts) == 3:
+                out.add((parts[0], parts[2]))
+    return out
 
 
 def _capped_youtube_months() -> set:
@@ -357,6 +379,20 @@ def _load_youtube_census() -> pd.DataFrame:
     if before_year - len(df):
         log.info(f"  YouTube: dropped {before_year-len(df):,} rows outside "
                  f"{_cfg.STUDY_START}..{_end}")
+
+    # A year plots only from a census that ran: a (pair, year) with no
+    # checkpoint at all was never collected, so any rows it has are strays from
+    # some other query, not a sample of the year. _stale_youtube_years() cannot
+    # see such a year because it walks checkpoints. kyiv carries 3 videos dated
+    # 2026 and no 2026 checkpoint (measured 2026-11-02): with YouTube's end at
+    # 2026-09 they would have drawn a 2026 from three videos. The census runs
+    # pair by pair, so while it does, a pair without its 2026 stays at 2025.
+    _ran = _youtube_checkpoint_years()
+    before = len(df)
+    df = df[[(p, d[:4]) in _ran for p, d in zip(df.pair_slug, df.date)]].copy()
+    if before - len(df):
+        log.info(f"  YouTube: dropped {before-len(df):,} rows in pair-years with no "
+                 f"census checkpoint (never collected)")
 
     stale = _stale_youtube_years()
     if stale:
