@@ -17,6 +17,19 @@ Ukrainian titles on 2026-04-03 and 632 on 2026-10-15, and the partial 2026 share
 went from 100% to 87.5%. as_of is therefore part of every entry, and a promotion
 always comes with a per-year diff.
 
+A multi-word term is searched as a quoted phrase. Unquoted, title.search
+matches each word anywhere in the title: 'Vladimir the Great' over
+2010-01..2026-10 returned 91 works of which 12 carry the phrase ('Crimea: From
+Catherine the Great to Vladimir the Gambler', 'Vladimir Region during the Great
+Patriotic War'), and refreshing with it moved mykola-hohol's closed-year papers
+130 -> 201 and volodymyr-zelenskyy's 31 -> 54 (2026-11-05). Quoted, the same
+query returned exactly the 12; 'Kievan Rus' 193 of 197 and 'Volodymyr
+Zelenskyy' 51 of 53, each count equal to its title-verified set. That restores
+the exact-phrase rule of 9df1935f (2026-04-25), which the rewrite dropped.
+Single words stay unquoted: 'Odessa' 2018 matched the word in 199 of 200 titles
+and 'Zaporizhzhia' 2025 in 114 of 114, the one miss being the Polish
+inflection 'Odessą'.
+
 Three changes from the old query, each measured:
   - per_page 200, and a refusal if groups_count exceeds the groups returned. At
     per_page=50 a group_by query returns only the top 50 years by count: 'Kiev'
@@ -99,9 +112,10 @@ def _api_key() -> str | None:
 
 def count_papers_by_year(term: str, through: str, budget: Budget) -> dict[int, int]:
     """{publication_year: works with `term` in the title}, years START_YEAR..through."""
-    if any(c in term for c in ",|"):
+    if any(c in term for c in ',|"'):
         raise ValueError(f"{term!r} would split the OpenAlex filter")
-    params = {"filter": f"title.search:{term},from_publication_date:{START_YEAR}-01-01,"
+    q = f'"{term}"' if len(term.split()) > 1 else term     # phrase, not bag of words
+    params = {"filter": f"title.search:{q},from_publication_date:{START_YEAR}-01-01,"
                         f"to_publication_date:{through}",
               "group_by": "publication_year", "per_page": PER_PAGE, "mailto": MAILTO}
     key = _api_key()
