@@ -1,382 +1,263 @@
-"""Collect Wikipedia pageview data for toponym pairs.
+"""Collect monthly en.wikipedia pageviews for each enabled pair's two titles.
 
-Uses the Wikimedia REST API (free, no auth required) to get daily/monthly
-pageview counts for Wikipedia articles corresponding to each spelling variant.
+Wikimedia REST per-article pageviews, all-access, all-agents, monthly. That is
+the definition the stored series already uses: the 2026-05-04 collection reads
+80,500 / 58,776 / 61,783 for Kyiv 2026-01..03, identical to the API today, and
+2026-04 drifted by 3 views in 68,345.
 
-This provides a fourth independent data source measuring public interest
-in each spelling form.
+Range is 2015-07 .. SERIES_END. 2015-07 is the first month the pageviews API
+serves, and no stored or shipped series has an earlier month: all 19 pairs on
+the site start at 2015-07, as do dataset/ and both store tiers. There is no
+earlier source to preserve; the legacy pagecount dumps were never used.
 
-API docs: https://wikimedia.org/api/rest_v1/
+The titles and which spelling each measures are declared in wikipedia_titles.py.
+Before fetching, one MediaWiki prop=info call records whether each title is an
+article, a redirect or missing. A 404 from the pageviews API cannot tell a
+missing title from a quiet one, and the difference decides whether a zero is a
+measurement.
+
+Output goes to a staging directory and never to dataset/:
+    fetched.parquet   new rows in dataset/raw_wikipedia.parquet's schema
+    titles.json       per pair and variant: title, status, months, first month
+    run.json          as_of, range, request count
+wikipedia_merge.py stages them against the live dataset, writes a diff report,
+and is the only step that replaces dataset/raw_wikipedia.parquet. A --pairs run
+gets its own default directory, and no run writes into a directory that already
+holds a stage report (--replace-staged discards it): promote copies titles.json
+from the run, so a recheck written over a staged run would ship its manifest.
 
 Usage:
-    python -m pipeline.ingestion.collect_wikipedia [--pair-ids 1,2,3]
+    python -m pipeline.ingestion.wikipedia --dry-run            # plan only, no requests
+    python -m pipeline.ingestion.wikipedia                      # all enabled pairs
+    python -m pipeline.ingestion.wikipedia --pairs kyiv,dynamo-kyiv --out-dir /tmp/wk
 """
 
 import argparse
+import hashlib
 import json
 import logging
+import re
 import time
-from dataclasses import dataclass
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 import pandas as pd
 import requests
 
-from pipeline.config import (
-    DATA_DIR,
-    PROCESSED_DIR,
-    ensure_dirs,
-    get_all_pairs,
-)
+from pipeline.config import RAW_DIR, ROOT_DIR, SERIES_END, get_enabled_pairs, last_day
+from pipeline.ingestion import wikipedia_titles as wt
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-WIKI_RAW_DIR = DATA_DIR / "raw" / "wikipedia"
-WIKI_API = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article"
-USER_AGENT = "KyivNotKiev-Research/1.0 (academic research; contact: kyivnotkiev@example.com)"
-REQUEST_DELAY = 0.5  # seconds between requests (API is generous but be polite)
+WIKI_RAW_DIR = RAW_DIR / "wikipedia"
+STAGING_DIR = WIKI_RAW_DIR / "staging"
+PAGEVIEWS_API = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article"
+INFO_API = "https://en.wikipedia.org/w/api.php"
+USER_AGENT = "kyivnotkiev.org research (ivan@kyivnotkiev.org)"
+START_YM = "2015-07"     # the pageviews API's first month, not a study choice
+YM = re.compile(r"\d{4}-(0[1-9]|1[0-2])")
+STAGED_FILES = ("stage_report.json", "raw_wikipedia.parquet")   # wikipedia_merge.stage writes these
+REQUEST_DELAY = 0.5      # the last run did 47 files in 59 s at this delay
+RETRIES = 3
 
-# Start/end for pageview data (available from July 2015)
-START = "20150701"
-END = "20260430"
-
-# Wikipedia article mappings: russian_article, ukrainian_article
-# These map toponym pairs to their actual Wikipedia article titles
-# Wikipedia redirects handle most cases, but we track the canonical title
-WIKI_ARTICLES = {
-    # Geographical
-    1: {"russian": "Kiev", "ukrainian": "Kyiv"},
-    2: {"russian": "Kharkiv", "ukrainian": "Kharkiv",
-        "note": "Article always at Kharkiv; track redirect from Kharkov"},
-    3: {"russian": "Odessa", "ukrainian": "Odesa",
-        "redirects": ["Odessa", "Odesa"]},
-    4: {"russian": "Lvov", "ukrainian": "Lviv"},
-    5: {"russian": "Zaporizhzhia", "ukrainian": "Zaporizhzhia"},
-    7: {"russian": "Dnipro", "ukrainian": "Dnipro"},
-    10: {"russian": "Chernobyl", "ukrainian": "Chornobyl",
-         "note": "Article at 'Chernobyl disaster' is the main draw"},
-    11: {"russian": "Luhansk", "ukrainian": "Luhansk"},
-    # Food
-    21: {"russian": "Chicken_Kiev", "ukrainian": "Chicken_Kyiv",
-         "note": "Check both article titles"},
-    23: {"russian": "Borscht", "ukrainian": "Borscht",
-         "note": "Single article, no Ukrainian variant article"},
-    # Landmarks
-    24: {"russian": "Kyiv_Pechersk_Lavra", "ukrainian": "Kyiv_Pechersk_Lavra"},
-    # Country
-    27: {"russian": "Ukraine", "ukrainian": "Ukraine",
-         "note": "Single article; track 'The_Ukraine' redirect pageviews"},
-    # Institutional
-    28: {"russian": "Taras_Shevchenko_National_University_of_Kyiv",
-         "ukrainian": "Taras_Shevchenko_National_University_of_Kyiv"},
-    # Sports
-    32: {"russian": "FC_Dynamo_Kyiv", "ukrainian": "FC_Dynamo_Kyiv"},
-    # Historical
-    35: {"russian": "Kievan_Rus%27", "ukrainian": "Kievan_Rus%27",
-         "note": "Article at Kievan Rus'; Kyivan Rus redirects"},
-    36: {"russian": "Cossacks", "ukrainian": "Cossacks"},
-    # Additional pairs — Wikipedia article titles
-    6: {"russian": "Mykolaiv", "ukrainian": "Mykolaiv"},
-    8: {"russian": "Vinnytsia", "ukrainian": "Vinnytsia"},
-    9: {"russian": "Rivne", "ukrainian": "Rivne"},
-    15: {"russian": "Dnieper", "ukrainian": "Dnieper"},
-    16: {"russian": "Dniester", "ukrainian": "Dniester"},
-    17: {"russian": "Donbas", "ukrainian": "Donbas"},
-    19: {"russian": "Zakarpattia_Oblast", "ukrainian": "Zakarpattia_Oblast"},
-    20: {"russian": "Podolia", "ukrainian": "Podolia"},
-    22: {"russian": "Kyiv_cake", "ukrainian": "Kyiv_cake"},
-    25: {"russian": "Saint_Sophia%27s_Cathedral%2C_Kyiv", "ukrainian": "Saint_Sophia%27s_Cathedral%2C_Kyiv"},
-    26: {"russian": "Chernobyl_Exclusion_Zone", "ukrainian": "Chernobyl_Exclusion_Zone"},
-    29: {"russian": "National_University_of_Kharkiv", "ukrainian": "National_University_of_Kharkiv"},
-    30: {"russian": "Igor_Sikorsky_Kyiv_Polytechnic_Institute", "ukrainian": "Igor_Sikorsky_Kyiv_Polytechnic_Institute"},
-    31: {"russian": "Ukrainian_Orthodox_Church_%E2%80%93_Kyiv_Patriarchate", "ukrainian": "Ukrainian_Orthodox_Church_%E2%80%93_Kyiv_Patriarchate"},
-    34: {"russian": "Kyiv_State_Choreographic_School", "ukrainian": "Kyiv_State_Choreographic_School"},
-    38: {"russian": "Chernihiv", "ukrainian": "Chernihiv"},
-    39: {"russian": "Chernivtsi", "ukrainian": "Chernivtsi"},
-    40: {"russian": "Zhytomyr", "ukrainian": "Zhytomyr"},
-    41: {"russian": "Cherkasy", "ukrainian": "Cherkasy"},
-    42: {"russian": "Uzhhorod", "ukrainian": "Uzhhorod"},
-    43: {"russian": "Kremenchuk", "ukrainian": "Kremenchuk"},
-    44: {"russian": "Kropyvnytskyi", "ukrainian": "Kropyvnytskyi"},
-    45: {"russian": "Ternopil", "ukrainian": "Ternopil"},
-    46: {"russian": "Varenyky", "ukrainian": "Varenyky"},
-    48: {"russian": "Hopak", "ukrainian": "Hopak"},
-    52: {"russian": "FC_Metalist_Kharkiv", "ukrainian": "FC_Metalist_Kharkiv"},
-    54: {"russian": "Babi_Yar", "ukrainian": "Babi_Yar"},
-    55: {"russian": "Potemkin_Stairs", "ukrainian": "Potemkin_Stairs"},
-    56: {"russian": "Motherland_Monument", "ukrainian": "Motherland_Monument"},
-    57: {"russian": "Lviv_Polytechnic", "ukrainian": "Lviv_Polytechnic"},
-    58: {"russian": "Odesa_University", "ukrainian": "Odesa_University"},
-    60: {"russian": "Oleksandr_Usyk", "ukrainian": "Oleksandr_Usyk"},
-    61: {"russian": "Volodymyr_Zelenskyy", "ukrainian": "Volodymyr_Zelenskyy"},
-    62: {"russian": "Andriy_Shevchenko", "ukrainian": "Andriy_Shevchenko"},
-    70: {"russian": "Volodymyr_the_Great", "ukrainian": "Volodymyr_the_Great"},
-    71: {"russian": "Volodymyr_the_Great", "ukrainian": "Volodymyr_the_Great",
-         "note": "Same article as pair 70; different conceptual framing"},
-    72: {"russian": "Bakhmut", "ukrainian": "Bakhmut"},
-    80: {"russian": "Nikolai_Gogol", "ukrainian": "Nikolai_Gogol"},
-    82: {"russian": "Feodosia", "ukrainian": "Feodosia"},
-    83: {"russian": "Olga_of_Kiev", "ukrainian": "Olga_of_Kiev"},
-    84: {"russian": "Igor_Sikorsky", "ukrainian": "Igor_Sikorsky"},
-    85: {"russian": "Sergei_Korolev", "ukrainian": "Sergei_Korolev"},
-    86: {"russian": "Bohdan_Khmelnytsky", "ukrainian": "Bohdan_Khmelnytsky"},
-    87: {"russian": "Kazimir_Malevich", "ukrainian": "Kazimir_Malevich"},
-    89: {"russian": "Sviatohirsk_Lavra", "ukrainian": "Sviatohirsk_Lavra"},
-}
-
-# Additional redirect/search tracking: measure how people FIND the article
-# By tracking redirect pageviews, we can see if people type "Kiev" or "Kyiv"
-REDIRECT_PAIRS = {
-    1: [
-        ("Kiev", "Russian-derived search"),
-        ("Kyiv", "Ukrainian-derived search"),
-    ],
-    3: [
-        ("Odessa", "Russian-derived"),
-        ("Odesa", "Ukrainian-derived"),
-    ],
-    10: [
-        ("Chernobyl_disaster", "Chernobyl (disaster)"),
-        ("Chornobyl_disaster", "Chornobyl (disaster)"),
-        ("Chernobyl", "Chernobyl (city)"),
-        ("Chornobyl", "Chornobyl (city)"),
-    ],
-    21: [
-        ("Chicken_Kiev", "Chicken Kiev"),
-        ("Chicken_Kyiv", "Chicken Kyiv"),
-    ],
-    27: [
-        ("Ukraine", "Ukraine (no article)"),
-        ("The_Ukraine", "The Ukraine (with article)"),
-    ],
-    32: [
-        ("FC_Dynamo_Kyiv", "Dynamo Kyiv"),
-        ("FC_Dynamo_Kiev", "Dynamo Kiev"),
-    ],
-    35: [
-        ("Kievan_Rus%27", "Kievan Rus'"),
-        ("Kyivan_Rus%27", "Kyivan Rus'"),
-    ],
-    # People — new pairs
-    62: [
-        ("Andriy_Shevchenko", "Andriy Shevchenko"),
-        ("Andrei_Shevchenko", "Andrei Shevchenko"),
-    ],
-    80: [
-        ("Nikolai_Gogol", "Nikolai Gogol"),
-        ("Mykola_Hohol", "Mykola Hohol"),
-    ],
-    83: [
-        ("Olga_of_Kiev", "Olga of Kiev"),
-        ("Olha_of_Kyiv", "Olha of Kyiv"),
-    ],
-    84: [
-        ("Igor_Sikorsky", "Igor Sikorsky"),
-        ("Ihor_Sikorsky", "Ihor Sikorsky"),
-    ],
-    85: [
-        ("Sergei_Korolev", "Sergei Korolev"),
-        ("Serhii_Korolyov", "Serhii Korolyov"),
-    ],
-    86: [
-        ("Bohdan_Khmelnytsky", "Bohdan Khmelnytsky"),
-        ("Bogdan_Khmelnitsky", "Bogdan Khmelnitsky"),
-    ],
-    87: [
-        ("Kazimir_Malevich", "Kazimir Malevich"),
-        ("Kazymyr_Malevych", "Kazymyr Malevych"),
-    ],
-    # Geographical — new
-    82: [
-        ("Feodosia", "Feodosia"),
-        ("Feodosiia", "Feodosiia"),
-    ],
-    # Landmarks — new
-    89: [
-        ("Sviatohirsk_Lavra", "Sviatohirsk Lavra"),
-        ("Sviatogorsk_Lavra", "Sviatogorsk Lavra"),
-    ],
-}
+# Column order and dtypes of dataset/raw_wikipedia.parquet. `article`, `views`
+# and `label` are what the 2026-05 collector wrote; `article` and `views` are
+# filled the same way here, `label` was a hand-written caption and stays empty.
+SCHEMA_COLUMNS = ["page_title", "variant", "date", "pageviews", "edits",
+                  "ingested_at", "article", "views", "label", "pair_slug"]
 
 
-@dataclass
-class WikiPageviews:
-    article: str
-    granularity: str  # "daily" or "monthly"
-    views: list[dict]  # [{timestamp, views}, ...]
+def _get(url: str, params: dict | None = None) -> requests.Response:
+    """GET with retry on 429/5xx. A 404 is returned, not raised."""
+    for attempt in range(1, RETRIES + 1):
+        r = requests.get(url, params=params, headers={"User-Agent": USER_AGENT}, timeout=30)
+        if r.status_code == 404 or r.ok:
+            return r
+        if r.status_code in (429, 500, 502, 503, 504) and attempt < RETRIES:
+            time.sleep(2 ** attempt)
+            continue
+        r.raise_for_status()
+    return r
 
 
-def fetch_pageviews(
-    article: str,
-    project: str = "en.wikipedia",
-    access: str = "all-access",
-    agent: str = "all-agents",
-    granularity: str = "monthly",
-    start: str = START,
-    end: str = END,
-) -> pd.DataFrame | None:
-    """Fetch pageview data for a single Wikipedia article."""
-    url = f"{WIKI_API}/{project}/{access}/{agent}/{article}/{granularity}/{start}/{end}"
-    headers = {"User-Agent": USER_AGENT}
+def title_status(titles: list[str]) -> dict[str, dict]:
+    """{stored title: {"status": "article" | "redirect" | "missing"}}.
 
-    try:
-        resp = requests.get(url, headers=headers, timeout=30)
-        if resp.status_code == 404:
-            log.warning(f"  Article not found: {article}")
-            return None
-        resp.raise_for_status()
-        data = resp.json()
-    except requests.RequestException as e:
-        log.error(f"  Request failed for {article}: {e}")
-        return None
+    prop=info WITHOUT redirects=1, the request shape probed on 2026-10-19: each
+    asked title comes back as its own page, flagged missing or redirect. A title
+    absent from the reply raises rather than defaulting to "article".
+    """
+    out: dict[str, dict] = {}
+    uniq = sorted({wt.display_title(t) for t in titles})
+    for i in range(0, len(uniq), 50):                 # prop=info takes 50 titles a call
+        chunk = uniq[i:i + 50]
+        d = _get(INFO_API, {"action": "query", "format": "json", "formatversion": 2,
+                            "prop": "info", "titles": "|".join(chunk)}).json()
+        q = d.get("query", {})
+        norm = {n["from"]: n["to"] for n in q.get("normalized", [])}
+        pages = {p["title"]: p for p in q.get("pages", [])}
+        for t in chunk:
+            pg = pages.get(norm.get(t, t))
+            if pg is None:
+                raise RuntimeError(f"prop=info returned nothing for {t!r}")
+            out[t] = {"status": "missing" if pg.get("missing") or pg.get("invalid")
+                      else "redirect" if pg.get("redirect") else "article"}
+    return {t: out[wt.display_title(t)] for t in titles}
 
-    items = data.get("items", [])
-    if not items:
-        return None
 
+def fetch_monthly(title: str, start_ym: str, end_ym: str) -> tuple[int, list[dict]]:
+    """(http status, [{"date": "YYYY-MM-01", "views": int}]) for one title.
+
+    The API omits months with no views, so a month absent here is a zero for an
+    existing title. Whether the title existed is title_status()'s job.
+    """
+    url = (f"{PAGEVIEWS_API}/en.wikipedia/all-access/all-agents/{wt.api_title(title)}"
+           f"/monthly/{start_ym.replace('-', '')}0100/{last_day(end_ym).replace('-', '')}00")
+    r = _get(url)
+    if r.status_code == 404:
+        return 404, []
     rows = []
-    for item in items:
-        ts = item["timestamp"]
-        # Parse timestamp: "2015070100" -> "2015-07-01"
-        date = f"{ts[:4]}-{ts[4:6]}-{ts[6:8]}"
-        rows.append({
-            "date": date,
-            "article": article,
-            "views": item["views"],
-        })
-
-    return pd.DataFrame(rows)
+    for it in r.json().get("items", []):
+        ts = it["timestamp"]
+        ym = f"{ts[:4]}-{ts[4:6]}"
+        if start_ym <= ym <= end_ym:
+            rows.append({"date": f"{ym}-01", "views": int(it["views"])})
+    return r.status_code, rows
 
 
-def collect_pair_pageviews(pair_id: int) -> pd.DataFrame | None:
-    """Collect pageviews for all article variants of a toponym pair."""
-    if pair_id not in REDIRECT_PAIRS:
-        log.info(f"  Pair {pair_id}: no Wikipedia articles mapped, skipping")
-        return None
+def plan(slugs: list[str]) -> dict:
+    titles = sorted({wt.TITLES[s][v] for s in slugs for v in wt.VARIANTS},
+                    key=wt.display_title)
+    return {"pairs": len(slugs), "titles": len(titles),
+            "requests": len(titles) + -(-len(titles) // 50), "title_list": titles}
 
-    frames = []
-    for article, label in REDIRECT_PAIRS[pair_id]:
-        log.info(f"  Fetching: {article} ({label})")
-        df = fetch_pageviews(article, granularity="monthly")
-        if df is not None:
-            df["label"] = label
-            df["variant"] = "russian" if REDIRECT_PAIRS[pair_id].index((article, label)) == 0 else "ukrainian"
-            frames.append(df)
+
+def collect(slugs: list[str], start_ym: str, end_ym: str) -> tuple[pd.DataFrame, dict, dict]:
+    as_of = datetime.now(timezone.utc).replace(tzinfo=None, microsecond=0)
+    p = plan(slugs)
+    status = title_status(p["title_list"])
+    time.sleep(REQUEST_DELAY)
+    fetched: dict[str, tuple[int, list[dict]]] = {}
+    for t in p["title_list"]:
+        fetched[t] = fetch_monthly(t, start_ym, end_ym)
+        log.info(f"  {t!r}: {status[t]['status']}, http {fetched[t][0]}, "
+                 f"{len(fetched[t][1])} months")
         time.sleep(REQUEST_DELAY)
 
-        # Also try daily for the last 2 years (more granular)
-        df_daily = fetch_pageviews(article, granularity="daily", start="20240101", end=END)
-        if df_daily is not None:
-            df_daily["label"] = label
-            df_daily["variant"] = "russian" if REDIRECT_PAIRS[pair_id].index((article, label)) == 0 else "ukrainian"
-            daily_path = WIKI_RAW_DIR / f"pair_{pair_id:02d}_{article.lower().replace('%27','').replace(' ','_')}_daily.csv"
-            df_daily.to_csv(daily_path, index=False)
-        time.sleep(REQUEST_DELAY)
-
-    if not frames:
-        return None
-
-    combined = pd.concat(frames, ignore_index=True)
-    combined["pair_id"] = pair_id
-    return combined
-
-
-def collect_all(pair_ids: list[int] | None = None):
-    """Collect Wikipedia pageview data for all mapped pairs."""
-    ensure_dirs()
-    WIKI_RAW_DIR.mkdir(parents=True, exist_ok=True)
-
-    target_pairs = pair_ids if pair_ids else list(REDIRECT_PAIRS.keys())
-
-    results = {}
-    for pair_id in target_pairs:
-        log.info(f"Pair {pair_id}:")
-        df = collect_pair_pageviews(pair_id)
-        if df is not None:
-            out_path = WIKI_RAW_DIR / f"pair_{pair_id:02d}_monthly.csv"
-            df.to_csv(out_path, index=False)
-            log.info(f"  Saved: {out_path} ({len(df)} rows)")
-            results[pair_id] = df
-        else:
-            log.warning(f"  No data for pair {pair_id}")
-
-    log.info(f"Collection complete: {len(results)} pairs collected")
-    return results
+    rows, manifest = [], {}
+    for slug in slugs:
+        entry = {"shared_article": wt.is_shared(slug)}
+        for variant in wt.VARIANTS:
+            t = wt.TITLES[slug][variant]
+            code, months = fetched[t]
+            st = dict(status[t])
+            if st["status"] == "missing" and months:
+                # Gone now but measured before: the history is real, keep it.
+                st["status"] = "missing_now"
+            entry[variant] = {"title": t, **st, "http": code, "months": len(months),
+                              "first_month": months[0]["date"][:7] if months else None,
+                              "last_month": months[-1]["date"][:7] if months else None,
+                              "views": sum(m["views"] for m in months)}
+            for m in months:
+                rows.append({"page_title": t, "variant": variant, "date": m["date"],
+                             "pageviews": float(m["views"]), "edits": float("nan"),
+                             "ingested_at": as_of, "article": wt.api_title(t),
+                             "views": float(m["views"]), "label": None, "pair_slug": slug})
+        # A series is measurable only with two distinct titles that both exist.
+        entry["measurable"] = (not entry["shared_article"]
+                               and all(entry[v]["status"] != "missing" for v in wt.VARIANTS))
+        manifest[slug] = entry
+    df = pd.DataFrame(rows, columns=SCHEMA_COLUMNS)
+    run = {"as_of": as_of.isoformat() + "Z", "start": start_ym, "end": end_ym,
+           "pairs": slugs, "titles": p["titles"], "requests": p["requests"],
+           "rows": len(df)}
+    return df, manifest, run
 
 
-def preprocess_wikipedia() -> pd.DataFrame | None:
-    """Preprocess Wikipedia pageview data into adoption ratios."""
-    csv_files = sorted(WIKI_RAW_DIR.glob("pair_*_monthly.csv"))
-    if not csv_files:
-        log.warning("No Wikipedia CSV files found")
-        return None
-
-    pairs_lookup = {p["id"]: p for p in get_all_pairs()}
-    frames = []
-
-    for f in csv_files:
-        df = pd.read_csv(f)
-        if df.empty:
-            continue
-
-        pair_id = df["pair_id"].iloc[0]
-        pair = pairs_lookup.get(pair_id)
-        if pair is None:
-            continue
-
-        # Pivot: sum views by date and variant
-        pivot = df.groupby(["date", "variant"])["views"].sum().reset_index()
-        pivot_wide = pivot.pivot(index="date", columns="variant", values="views").fillna(0)
-
-        if "russian" not in pivot_wide.columns:
-            pivot_wide["russian"] = 0
-        if "ukrainian" not in pivot_wide.columns:
-            pivot_wide["ukrainian"] = 0
-
-        result = pd.DataFrame({
-            "date": pivot_wide.index,
-            "russian_views": pivot_wide["russian"].values,
-            "ukrainian_views": pivot_wide["ukrainian"].values,
-        })
-
-        total = result["russian_views"] + result["ukrainian_views"]
-        result["adoption_ratio"] = result["ukrainian_views"] / total.replace(0, float("nan"))
-        result["pair_id"] = pair_id
-        result["russian_term"] = pair["russian"]
-        result["ukrainian_term"] = pair["ukrainian"]
-        result["source"] = "wikipedia"
-
-        frames.append(result)
-
-    if not frames:
-        return None
-
-    combined = pd.concat(frames, ignore_index=True)
-    out_path = PROCESSED_DIR / "wikipedia_merged.parquet"
-    combined.to_parquet(out_path, index=False)
-    log.info(f"Wikipedia processed: {len(combined)} rows, {combined['pair_id'].nunique()} pairs -> {out_path}")
-    return combined
+def check_end(end: str) -> None:
+    """A closed YYYY-MM month in START_YM..SERIES_END; SERIES_END moves by hand only."""
+    if not YM.fullmatch(str(end)):
+        raise SystemExit(f"--end {end!r} is not YYYY-MM")
+    open_month = date.today().strftime("%Y-%m")
+    if end >= open_month:
+        raise SystemExit(f"--end {end} is not a closed month (today is in {open_month})")
+    if end > SERIES_END:
+        raise SystemExit(f"--end {end} is past SERIES_END {SERIES_END} (pipeline/config.py)")
+    if end < START_YM:
+        raise SystemExit(f"--end {end} is before {START_YM}, the pageviews API's first month")
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Collect Wikipedia pageview data")
-    parser.add_argument("--pair-ids", type=str, default=None,
-                        help="Comma-separated pair IDs (default: all mapped)")
-    parser.add_argument("--preprocess-only", action="store_true",
-                        help="Only preprocess existing data, don't collect")
-    args = parser.parse_args()
+def default_out_dir(slugs: list[str], all_enabled: list[str], end: str) -> Path:
+    base = f"{START_YM}_{end}"
+    if sorted(slugs) == sorted(all_enabled):
+        return STAGING_DIR / base
+    s = sorted(slugs)
+    name = ("+".join(s) if len(s) <= 3 else
+            f"{len(s)}pairs-{hashlib.sha1(','.join(s).encode()).hexdigest()[:8]}")
+    return STAGING_DIR / f"{base}.{name}"
 
-    if args.preprocess_only:
-        preprocess_wikipedia()
+
+def claim_out_dir(out_dir: Path, replace_staged: bool) -> None:
+    """Refuse a staged directory; with replace_staged, unstage it so promote cannot run."""
+    if not (out_dir / "stage_report.json").exists():
         return
+    if not replace_staged:
+        raise SystemExit(f"{out_dir} holds a stage report: a run written here would change files "
+                         f"a pending promote copies. Use another --out-dir, or --replace-staged "
+                         f"to discard that staging")
+    for name in STAGED_FILES:
+        (out_dir / name).unlink(missing_ok=True)
+    log.warning(f"unstaged {out_dir}: stage it again before promoting")
 
-    pair_ids = None
-    if args.pair_ids:
-        pair_ids = [int(x) for x in args.pair_ids.split(",")]
 
-    collect_all(pair_ids=pair_ids)
-    preprocess_wikipedia()
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--pairs", help="comma-separated slugs (default: every enabled pair)")
+    ap.add_argument("--end", default=SERIES_END, help="last month, YYYY-MM (default SERIES_END)")
+    ap.add_argument("--out-dir", type=Path, help="staging directory")
+    ap.add_argument("--replace-staged", action="store_true",
+                    help="write into a directory that was already staged, discarding its stage report")
+    ap.add_argument("--dry-run", action="store_true", help="print the plan, make no requests")
+    args = ap.parse_args()
+
+    check_end(args.end)
+
+    enabled = get_enabled_pairs()
+    problems = wt.check(enabled)
+    if problems:
+        raise SystemExit("wikipedia_titles.py does not match config/pairs.yaml:\n  "
+                         + "\n  ".join(problems))
+    slugs = [p["slug"] for p in enabled]
+    if args.pairs:
+        want = [s.strip() for s in args.pairs.split(",")]
+        unknown = sorted(set(want) - set(slugs))
+        if unknown:
+            raise SystemExit(f"not enabled: {unknown}")
+        slugs = [s for s in slugs if s in want]
+
+    p = plan(slugs)
+    out_dir = args.out_dir or default_out_dir(slugs, [q["slug"] for q in enabled], args.end)
+    if out_dir.resolve() in (WIKI_RAW_DIR.resolve(), (ROOT_DIR / "dataset").resolve()):
+        raise SystemExit(f"{out_dir} is a live directory; write to staging and promote with "
+                         f"wikipedia_merge.py")
+    log.info(f"{p['pairs']} pairs, {p['titles']} titles, {p['requests']} requests, "
+             f"{START_YM}..{args.end} -> {out_dir}")
+    if args.dry_run:
+        return
+    claim_out_dir(out_dir, args.replace_staged)
+
+    df, manifest, run = collect(slugs, START_YM, args.end)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    df.to_parquet(out_dir / "fetched.parquet", index=False)
+    (out_dir / "titles.json").write_text(json.dumps(manifest, indent=1, ensure_ascii=False))
+    (out_dir / "run.json").write_text(json.dumps(run, indent=1))
+    for slug, e in manifest.items():
+        if not e["measurable"]:
+            why = "shared article" if e["shared_article"] else "missing title"
+            log.info(f"  {slug}: not measurable ({why})")
+    log.info(f"{len(df):,} rows -> {out_dir}. Next: python -m pipeline.ingestion."
+             f"wikipedia_merge stage --run {out_dir}")
 
 
 if __name__ == "__main__":
