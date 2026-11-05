@@ -19,6 +19,17 @@ and with the never-merged 2026-05-04 CSVs in data/raw/wikipedia/, and promotion
 refuses unless the pair is named in --accept if any of its titles' overlap
 total drifts more than 0.5%.
 
+REPLACE IS NAMED. `stage --replace SLUG` is the one exception to append-only:
+that pair's stored months are dropped and the run's values for its declared
+titles taken instead. It exists for a stored series that is not the declared
+title's views. bakhmut's was not: rows ingested 2026-04-03 carry
+'Artemovsk' views that equal Artemivsk's in all 126 months (2015-07 94 against
+Artemovsk's 23), and 'Bakhmut' views that equal Battle_of_Bakhmut's in 42
+months (2022-05 and 2022-08..2025-12; 2023-05 741,419 against Bakhmut's
+417,871). Appending 2026 to that history would join two different pages at
+2026-01 and draw the seam as a fall in attention. A replaced pair is always
+gated, and the report keeps its drift against what was stored.
+
 BACKFILL IS GATED. A month the run supplies at or before the pair's last
 stored month rewrites shipped history rather than extending it. serhii-korolyov's
 redirect 'Serhii_Korolov' adds 39 such months (2022-10..2025-12) and is meant
@@ -43,6 +54,7 @@ pair instead of drawing fill_value=0 as 0.0% adoption.
 Usage:
     python -m pipeline.ingestion.wikipedia_merge stage --run DIR --relabel-only
     python -m pipeline.ingestion.wikipedia_merge stage --run data/raw/wikipedia/staging/2015-07_2026-09
+    python -m pipeline.ingestion.wikipedia_merge stage --run DIR --replace bakhmut
     python -m pipeline.ingestion.wikipedia_merge promote --run DIR [--accept SLUG,...]
 """
 
@@ -204,8 +216,11 @@ def _last3(ym: str) -> list[str]:
 
 def stage(run: Path, live_path: Path = LIVE_DATASET, relabel_only: bool = False,
           csv_dir: Path = WIKI_RAW_DIR, enabled: list[str] | None = None,
-          max_rel: float = MAX_REL_DRIFT) -> dict:
+          max_rel: float = MAX_REL_DRIFT, replace=()) -> dict:
     _guard_run_dir(run, live_path)
+    replace = sorted({s for s in replace if s})
+    if replace and relabel_only:
+        raise SystemExit("--replace needs a run; --relabel-only has none")
     live_sha = _sha1(live_path)                      # before anything is written
     run_files = {} if relabel_only else {n: _sha1(run / n) for n in RUN_FILES}
     through = series_end(SOURCE)
@@ -250,6 +265,25 @@ def stage(run: Path, live_path: Path = LIVE_DATASET, relabel_only: bool = False,
                 hard.append(f"{slug}/{v}: stored title {st[(slug, v)]} != run title "
                             f"{f['page_title'].iloc[0]!r}")
         report["drift"], gate = drift(relabelled, fetched, legacy_csv(csv_dir), max_rel)
+        # Drift above is measured against what was stored, before any replace.
+        report["replaced"] = {}
+        for slug in replace:
+            if slug not in enabled_set or slug not in set(fetched["pair_slug"]):
+                hard.append(f"--replace {slug}: not an enabled pair in the run")
+                continue
+            old = relabelled[relabelled["pair_slug"] == slug]
+            if old.empty:
+                hard.append(f"--replace {slug}: nothing stored to replace")
+                continue
+            report["replaced"][slug] = {
+                v: {"rows": int(len(g)), "first": g["date"].min()[:7], "last": g["date"].max()[:7],
+                    "titles": sorted(g["page_title"].unique()),
+                    "stored_total": float(g["pageviews"].sum())}
+                for v, g in old.groupby("variant")}
+            gate.setdefault(slug, []).append(
+                f"replaces {len(old)} stored rows with the run's ({old['date'].min()[:7]}.."
+                f"{old['date'].max()[:7]})")
+            relabelled = relabelled[relabelled["pair_slug"] != slug]
         have = set(map(tuple, relabelled[KEY].astype(str).values))
         new = fetched[[tuple(r) not in have for r in fetched[KEY].astype(str).values]]
         ym = new["date"].str[:7]
@@ -258,7 +292,8 @@ def stage(run: Path, live_path: Path = LIVE_DATASET, relabel_only: bool = False,
         # extends from the dataset's last month.
         last = relabelled.groupby("pair_slug")["date"].max().str[:7].to_dict()
         top = relabelled["date"].max()[:7]
-        back = new[new["date"].str[:7] <= new["pair_slug"].map(lambda s: last.get(s, top))]
+        back = new[(new["date"].str[:7] <= new["pair_slug"].map(lambda s: last.get(s, top)))
+                   & ~new["pair_slug"].isin(report["replaced"])]
 
         def spans(df):
             return {f"{s}/{v}": {"rows": int(len(g)), "first": g["date"].min()[:7],
@@ -312,6 +347,10 @@ def print_report(r: dict) -> None:
         if c:
             line += f" | vs csv {c['months']} mo, {c['months_differing']} differ, unstored {c['unstored']}"
         print(line)
+    for slug, by_v in (r.get("replaced") or {}).items():
+        for v, a in by_v.items():
+            print(f"REPLACE {slug}/{v}: {a['rows']} stored rows {a['first']}..{a['last']} "
+                  f"{a['titles']} (stored total {a['stored_total']:,.0f}) -> the run's")
     for k, a in (r.get("appended") or {}).items():
         print(f"APPEND {k}: {a['rows']} rows {a['first']}..{a['last']}")
     hb = r.get("held_back") or {}
@@ -371,6 +410,9 @@ def main() -> None:
                    help="apply the declared variants to stored rows; no run needed")
     s.add_argument("--csv-dir", type=Path, default=WIKI_RAW_DIR)
     s.add_argument("--max-rel-drift", type=float, default=MAX_REL_DRIFT)
+    s.add_argument("--replace", default="",
+                   help="comma-separated slugs whose stored months are dropped for the run's; "
+                        "always gated")
     p = sub.add_parser("promote")
     p.add_argument("--run", type=Path, required=True)
     p.add_argument("--accept", default="",
@@ -382,7 +424,7 @@ def main() -> None:
         if problems:
             raise SystemExit("wikipedia_titles.py: " + "; ".join(problems))
         r = stage(args.run, args.live, args.relabel_only, args.csv_dir,
-                  max_rel=args.max_rel_drift)
+                  max_rel=args.max_rel_drift, replace=args.replace.split(","))
         print_report(r)
         print(f"report: {args.run / 'stage_report.json'}")
     else:
