@@ -84,7 +84,14 @@ def enabled_pairs() -> list[str]:
 
 
 def declared_depths() -> dict[str, str | None]:
+    """The pair's own youtube_depth, before any per-year raise."""
     return {p["slug"]: p.get("youtube_depth") for p in get_enabled_pairs()}
+
+
+def depth_for(pair: str, year: int) -> str | None:
+    """The floor (pair, year) is collected at: yw.declared_depth, the one rule the
+    census and the exporter also apply."""
+    return yw.declared_depth(next(p for p in get_enabled_pairs() if p["slug"] == pair), year)
 
 
 def ckpt_path(pair: str, variant: str, year: int) -> pathlib.Path:
@@ -295,7 +302,7 @@ def main(argv: list[str] | None = None) -> int:
         for p, v, y in pending:
             if depths.get(p) not in LADDER:
                 continue
-            why = resume_refusals(p, v, y, depths[p])
+            why = resume_refusals(p, v, y, depth_for(p, y))
             if why:
                 refusals[(p, v, y)] = why
                 print(f"  WILL BE REFUSED: {p} {y} {v} {'; '.join(why)}. Rerun it with "
@@ -310,7 +317,7 @@ def main(argv: list[str] | None = None) -> int:
             todo = [m for m in yw.expected_months(y, a.through)
                     if a.force or m not in recorded_months(p, v, y)]
             span = f"{todo[0]}..{todo[-1]} ({len(todo)})" if todo else "none"
-            print(f"    {p} {y} {v}  depth {depths.get(p) or 'UNDECLARED'}  months {span}")
+            print(f"    {p} {y} {v}  depth {depth_for(p, y) or 'UNDECLARED'}  months {span}")
         if len(pending) > 60:
             print(f"    ... and {len(pending)-60} more")
         return 1 if (undeclared or refusals) else 0
@@ -340,11 +347,11 @@ def main(argv: list[str] | None = None) -> int:
         if led.exists():
             ARCHIVE.mkdir(parents=True, exist_ok=True)
             shutil.move(str(led), str(ARCHIVE / f"{int(time.time())}_stale_{led.name}"))
-        print(f"[{i}/{len(pending)}] {pair} {year} {variant}  depth {depths[pair]}  "
+        print(f"[{i}/{len(pending)}] {pair} {year} {variant}  depth {depth_for(pair, year)}  "
               f"(spent {spent:,}/{run_cap:,})", flush=True)
         r = subprocess.run([sys.executable, "-u", "-m", "pipeline.ingestion.youtube_census",
                             "--pair", pair, "--year", str(year), "--variant", variant,
-                            "--min-depth", depths[pair], "--through", a.through,
+                            "--min-depth", depth_for(pair, year), "--through", a.through,
                             "--api-key", key, "--max-searches", str(run_cap - spent)],
                            capture_output=True, text=True, cwd=ROOT)
         used = searches_used(pair, variant, year)

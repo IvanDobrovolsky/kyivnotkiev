@@ -61,6 +61,17 @@ def series_end(source: str) -> str:
     return min(SERIES_END, SOURCE_SERIES_END.get(source, SERIES_END))
 
 
+# The narrowest YouTube census window a year must reach, raised from a year on.
+# A pair's youtube_depth (config/pairs.yaml) describes the floor its history was
+# collected at; from each year here the floor is at least this level. 2026 at the
+# week floor was under-sampled: re-run at day floor (2026-11-05) March and June
+# returned 47->82 and 8->83 videos for kazymyr-malevych UA, 125->280 and 157->306
+# for mykola-hohol UA, 224->336 in June for kyiv UA, losing 0-49 of the week set.
+# The same test on kyiv UA 2025 read 1.15x and 0.94x, so 2025 at week floor was
+# already near saturation and is left as collected.
+YOUTUBE_FLOOR_FROM_YEAR = {2026: "day"}
+
+
 def _check_window() -> None:
     open_month = date.today().strftime("%Y-%m")
     if SERIES_END >= open_month:

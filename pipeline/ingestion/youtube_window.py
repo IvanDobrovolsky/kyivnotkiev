@@ -27,7 +27,7 @@ import calendar
 import re
 from datetime import datetime, timedelta, timezone
 
-from pipeline.config import SERIES_END, STUDY_START
+from pipeline.config import SERIES_END, STUDY_START, YOUTUBE_FLOOR_FROM_YEAR
 
 _YM = re.compile(r"^(\d{4})-(0[1-9]|1[0-2])$")
 
@@ -141,3 +141,21 @@ def collectable_months(year: int, through: str = SERIES_END, now: datetime | Non
         raise WindowError(f"--months {','.join(outside)} past --through {through} or "
                           f"before STUDY_START {STUDY_START}; refusing to collect them")
     return wanted
+
+
+DEPTH_LADDER = ["month", "week", "day", "hour"]
+
+
+def declared_depth(pair: dict, year: int) -> str | None:
+    """The census floor `year` of `pair` must be collected at.
+
+    The pair's youtube_depth, raised to YOUTUBE_FLOOR_FROM_YEAR's level for years
+    on or after each key there. None (undeclared) and 'legacy' are returned as
+    they are: neither describes a single floor to raise."""
+    base = pair.get("youtube_depth")
+    if base not in DEPTH_LADDER:
+        return base
+    for y0, lvl in sorted(YOUTUBE_FLOOR_FROM_YEAR.items()):
+        if year >= y0 and DEPTH_LADDER.index(lvl) > DEPTH_LADDER.index(base):
+            base = lvl
+    return base

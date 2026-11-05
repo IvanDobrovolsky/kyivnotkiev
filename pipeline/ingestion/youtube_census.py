@@ -490,8 +490,9 @@ def resolve_descend_above(requested: int | None, separate_dir: bool) -> int:
     return requested
 
 
-def resolve_depth(pair: dict, requested: str | None, separate_dir: bool) -> str:
-    """The floor for this run: the pair's declared youtube_depth.
+def resolve_depth(pair: dict, requested: str | None, separate_dir: bool, year: int) -> str:
+    """The floor for this run: the pair's declared youtube_depth, raised for
+    `year` by pipeline.config.YOUTUBE_FLOOR_FROM_YEAR (yw.declared_depth).
 
     Counts track window width: "Kyiv" on 2022-02-24 returned 8 ids in 6 hours,
     30 in a day, 115 in a week and 188 in a month, against 19 for an ordinary day
@@ -506,7 +507,7 @@ def resolve_depth(pair: dict, requested: str | None, separate_dir: bool) -> str:
     would have noticed. A separate --checkpoint-dir may override the declaration:
     measuring what another floor does is the point of such a run.
     """
-    declared = pair.get("youtube_depth")
+    declared = yw.declared_depth(pair, year)
     if declared is not None and declared not in LADDER:
         raise yw.WindowError(f"{pair['slug']}: youtube_depth {declared!r} is not one of "
                              f"{LADDER}; the census cannot collect at it")
@@ -592,7 +593,7 @@ def main(argv: list[str] | None = None) -> int:
             raise yw.WindowError("--months re-collects into a separate --checkpoint-dir "
                                  "only; it never edits the real checkpoints")
         schedule = yw.collectable_months(args.year, args.through, now, args.months)
-        _min_depth = resolve_depth(pair, args.min_depth, separate)
+        _min_depth = resolve_depth(pair, args.min_depth, separate, args.year)
         _descend_above = resolve_descend_above(args.descend_above, separate)
     except yw.WindowError as e:
         log.error(f"REFUSED: {e}")

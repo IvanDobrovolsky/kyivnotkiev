@@ -223,8 +223,11 @@ def _stale_youtube_years() -> set:
     """
     import json as _json
     cfg = load_pairs()
-    want = {p["slug"]: p.get("youtube_depth") for p in cfg["pairs"]
-            if p.get("youtube_depth") and p.get("youtube_depth") != "legacy"}
+    # Per (pair, year): from 2026 the floor is raised (config.YOUTUBE_FLOOR_FROM_YEAR),
+    # so one depth per pair would condemn either the history or the new year.
+    from pipeline.ingestion.youtube_window import declared_depth as _declared_depth
+    _pcfg = {p["slug"]: p for p in cfg["pairs"]
+             if p.get("youtube_depth") and p.get("youtube_depth") != "legacy"}
     ck = ROOT / "data" / "cl" / "raw" / "youtube_census" / ".checkpoints"
     if not ck.exists():
         return set()
@@ -269,9 +272,10 @@ def _stale_youtube_years() -> set:
             stale.add((pair, year)); continue
         # Only a RECORDED depth can contradict the declaration; an unknown
         # depth is not evidence of a mismatch.
-        if pair in want and (
-                (ru["depth"] and ru["depth"] != want[pair])
-                or (uk["depth"] and uk["depth"] != want[pair])):
+        want = _declared_depth(_pcfg[pair], int(year)) if pair in _pcfg else None
+        if want and (
+                (ru["depth"] and ru["depth"] != want)
+                or (uk["depth"] and uk["depth"] != want)):
             stale.add((pair, year))
     return stale
 
