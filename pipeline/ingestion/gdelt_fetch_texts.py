@@ -67,6 +67,7 @@ USAGE
     python -m pipeline.ingestion.gdelt_fetch_texts --since 2026-01-01 --dry-run
     python -m pipeline.ingestion.gdelt_fetch_texts --since 2026-01-01
     python -m pipeline.ingestion.gdelt_fetch_texts --since 2026-01-01 --unattested
+    python -m pipeline.ingestion.gdelt_fetch_texts --since 2026-01-01 --no-abandon   # the residue
 
 Use the first day after TEXT_END, not the day the verified tier stops:
 gdelt_paths_reconcile (R2b) needs every URL in the plotted 2026 months queued,
@@ -110,6 +111,15 @@ PER_HOST_MIN = 1
 HOST_DELAY = 0.0         # no blanket delay; back off only on evidence
 HOST_FAIL_LIMIT = 8      # consecutive failures before a host is abandoned
 HOST_429_BACKOFF = 30    # seconds to stand down from a host that rate-limits us
+# --no-abandon: every target gets a real request. Abandonment and backoff-skips
+# write rows that never sent a request, and a rerun only reaches about
+# HOST_FAIL_LIMIT more URLs per dead host, so the residue never converges:
+# after the 2026-11-05 --since 2026-01-01 runs, 4,665 of 36,388 targets on 99
+# hosts were still unrequested (russiaherald 723, europesun 584, yahoo 508,
+# interfax 392 -- interfax answered 2,740 of 3,145 in the same run). With the
+# flag a failing host is still tried URL by URL and a 429 cooldown is waited
+# out instead of skipped; per-host AIMD limits still apply.
+NO_ABANDON = False
 
 # A per-host cap makes dead hosts far more expensive than they look: a ConnectTimeout
 # holds a slot for the full timeout, so with ~17 urls per host in a batch and
@@ -179,7 +189,7 @@ async def fetch_one(client, row, pats, sem, host_sems, host_last, host_fails, ho
            "body_ua": 0, "body_ru": 0, "body_variant": None, "agrees": None,
            "final_url": None, "redirected_off_article": False, "text_hash": None}
     host = urlparse(str(row.url)).netloc
-    if host_fails.get(host, 0) >= HOST_FAIL_LIMIT:
+    if host_fails.get(host, 0) >= HOST_FAIL_LIMIT and not NO_ABANDON:
         rec["error"] = "host_abandoned"
         return rec
     # Additive-increase / multiplicative-decrease per host, the same shape as TCP
@@ -191,8 +201,11 @@ async def fetch_one(client, row, pats, sem, host_sems, host_last, host_fails, ho
     async with sem, hs:
         now = asyncio.get_event_loop().time()
         if host_until.get(host, 0) > now:
-            rec["error"] = "host_backoff"
-            return rec
+            if not NO_ABANDON:
+                rec["error"] = "host_backoff"
+                return rec
+            await asyncio.sleep(host_until[host] - now)
+            now = asyncio.get_event_loop().time()
         host_last[host] = now
         try:
             r = await client.get(row.url, follow_redirects=True,
@@ -408,8 +421,12 @@ def main() -> int:
                     help="only URLs first dated on or after this day, every enabled pair; "
                          "never retries older URLs")
     ap.add_argument("--dry-run", action="store_true", help="print the plan and write nothing")
+    ap.add_argument("--no-abandon", action="store_true",
+                    help="never abandon a host or skip a 429 cooldown: every target is requested")
     ap.add_argument("--concurrency", type=int, default=CONCURRENCY)
     a = ap.parse_args()
+    global NO_ABANDON
+    NO_ABANDON = a.no_abandon
 
     if a.since:
         if a.sample_per_year:
