@@ -10,7 +10,7 @@ config/pairs.yaml:
 What it does:
   1. Validates all dataset/ parquets (counts, dups, schema)
   2. Recomputes aggregate stats over enabled pairs (analysis.json)
-  3. Rebuilds verified GDELT records from fetched article text (no fetching)
+  3. Checks the verified GDELT records are stamped and current (no rebuild)
   4. Runs export_site_data.py (manifest + timeseries + holdouts + prune)
   5. Refreshes README numbers from the manifest
   6. Verifies site JSON matches dataset AND config/pairs.yaml
@@ -18,7 +18,7 @@ What it does:
 
 After running, commit + push:
   git add site/src/data/ && git commit && git push
-  Then push HF: python -m pipeline.rebuild --push-hf
+  HF is published only by `python -m pipeline.store.publish`; --push-hf is retired.
 """
 
 import argparse
@@ -97,26 +97,35 @@ def run_stats():
     # recompute_stats retired 2026-09-02 with the stale exploratory statistics;
     # the hierarchical model replaces it at paper time.
 def run_gdelt_verified():
-    """Rebuild verified GDELT records from whatever article text is on disk.
+    """Check, do not rebuild, the verified GDELT records.
 
-    Derivation, not collection: it never fetches. Fetching is a separate long-running
-    step (pipeline.ingestion.gdelt_fetch_texts). This runs before the export so the
-    series and the holdouts are always regenerated from the current records rather
-    than from whatever happened to be written last.
+    This used to run `gdelt_verified --all-pairs` on every rebuild. That
+    rebuilt retired borscht and every disabled pair with text, folded filter
+    drift and newly fetched 2026 text into one unattributable change (step (a)
+    alone was measured to move 433 rows dated 2025 or earlier), and left the
+    corpus unstamped, which gdelt_paths_reconcile (R2c) fails once
+    series_end('gdelt') passes TEXT_END. The rebuild is now explicit:
+
+        python -m pipeline.build_gdelt_verified --step filters [--since D] --write
+        python -m pipeline.build_gdelt_verified --step additions --since D --write
+
+    Here we only refuse to export from a corpus that was not built by that
+    path, or was built from different texts than article_texts now holds.
     """
-    import subprocess, sys
-    log.info("\n3. REBUILDING VERIFIED GDELT RECORDS")
-    texts = ROOT / "data" / "raw" / "gdelt" / "texts" / "article_texts.parquet"
-    if not texts.exists():
-        log.info("  no fetched article text yet — skipping")
-        return
-    res = subprocess.run([sys.executable, "-m", "pipeline.cl.corpus.gdelt_verified", "--all-pairs"],
-                         capture_output=True, text=True, cwd=ROOT)
-    for line in res.stdout.strip().split("\n"):
-        if line.strip():
-            log.info(f"  {line}")
-    if res.returncode:
-        raise SystemExit(f"verified rebuild failed: {res.stderr.strip()[-400:]}")
+    log.info("\n3. CHECKING VERIFIED GDELT RECORDS (no rebuild)")
+    import pipeline.config as cfg
+    from pipeline.audit.gdelt_paths_reconcile import extension_months, r2c_build
+    slugs = [p["slug"] for p in cfg.get_enabled_pairs()]
+    S = cfg.series_end("gdelt")
+    fails, status = r2c_build(slugs, S, extension_months(S))
+    counts = pd.Series(status).value_counts().to_dict()
+    log.info(f"  build provenance: {counts}")
+    if fails:
+        for f in fails:
+            log.warning(f"  {f}")
+        raise SystemExit("verified GDELT corpus is not current; rebuild it with "
+                         "`python -m pipeline.build_gdelt_verified --step filters --write` "
+                         "(see its docstring for the --since steps)")
 
 
 def run_export():
@@ -217,85 +226,27 @@ def verify_site_data():
     return issues
 
 
-# Publishing is opt-in per file. The previous version uploaded every *.parquet in
-# dataset/, which meant a backup written alongside the real data -- raw_gdelt.v1_
-# allnames.bak.parquet, 2,053,205 rows of superseded AllNames counts -- was a
-# publication candidate purely because of its extension. An allowlist cannot do that.
-HF_REPO = "KyivNotKiev/toponym-adoption-data"
-HF_PUBLISHABLE = {
-    "raw_gdelt.parquet",
-    "raw_ngrams.parquet",
-    "raw_reddit.parquet",
-    "raw_trends.parquet",
-    "raw_wikipedia.parquet",
-}
-# Excluded on purpose, with the reason, so removing a line is a deliberate act:
-HF_WITHHELD = {
-    "raw_youtube.parquet": "pre-2026-08-25 collection is void (result cap bug, 6-7x "
-                           "undercount); rebuild from data/cl/raw/youtube_census first",
-    "raw_telegram.parquet": "80% Cyrillic — measures Ukrainian-language channels, not "
-                            "English adoption",
-}
-
-
 def push_hf():
-    """Upload the allowlisted datasets, pruned to enabled pairs.
+    """Retired. pipeline.store.publish is the only path to HuggingFace.
 
-    Disabled pairs were reaching the published dataset even though the site prunes
-    them: five files carried 15-22 pairs that config/pairs.yaml no longer enables.
-    Pruning happens here rather than in dataset/ so the local parquets stay complete
-    and re-enabling a pair needs no re-collection.
+    This uploaded dataset/raw_* under data/ in the HF repo with no shrink guard
+    and no date clamp (raw_gdelt held 9,098 rows from 2026, through a partial
+    2026-09-13), alongside the store layout that publish.py checks against the
+    HF snapshot. Two writers to one remote, one of them unguarded, is how a
+    degraded file replaces a good one. Removed rather than patched; it is in
+    git history before this commit.
     """
-    log.info("\n7. PUSHING TO HUGGINGFACE")
-    import tempfile
-
-    from huggingface_hub import HfApi
-
-    token = None
-    for candidate in (Path("/etc/secrets/hf"), Path.home() / ".huggingface" / "token"):
-        if candidate.exists():
-            token = candidate.read_text().strip()
-            break
-    api = HfApi(token=token)
-
-    from pipeline.export_site_data import get_enabled_slugs
-    enabled = get_enabled_slugs()
-    for name, why in sorted(HF_WITHHELD.items()):
-        if (DATASET_DIR / name).exists():
-            log.info(f"  WITHHELD {name}: {why}")
-
-    present = {f.name for f in DATASET_DIR.glob("*.parquet")}
-    unknown = present - HF_PUBLISHABLE - set(HF_WITHHELD)
-    for name in sorted(unknown):
-        log.warning(f"  NOT PUBLISHED (not on the allowlist): {name}")
-
-    with tempfile.TemporaryDirectory() as tmp:
-        for name in sorted(HF_PUBLISHABLE):
-            path = DATASET_DIR / name
-            if not path.exists():
-                log.warning(f"  missing, skipped: {name}")
-                continue
-            df = pd.read_parquet(path)
-            if "pair_slug" in df.columns:
-                before = df.pair_slug.nunique()
-                df = df[df.pair_slug.isin(enabled)]
-                if df.pair_slug.nunique() != before:
-                    log.info(f"  {name}: pruned {before - df.pair_slug.nunique()} disabled pair(s)")
-            staged = Path(tmp) / name
-            df.to_parquet(staged, compression="zstd", index=False)
-            mb = staged.stat().st_size / 1024 / 1024
-            log.info(f"  Uploading {name} ({len(df):,} rows, {mb:.1f}MB)...")
-            api.upload_file(path_or_fileobj=str(staged), path_in_repo=f"data/{name}",
-                            repo_id=HF_REPO, repo_type="dataset")
-
-    log.info("  HuggingFace push complete ✓")
+    raise SystemExit("rebuild --push-hf is retired: publish with "
+                     "`python -m pipeline.store.publish --dry-run`, then without --dry-run")
 
 
 def main():
     parser = argparse.ArgumentParser(description="Rebuild all derived data from dataset/ parquets")
-    parser.add_argument("--push-hf", action="store_true", help="Also push to HuggingFace")
+    parser.add_argument("--push-hf", action="store_true", help="Retired; refuses (use pipeline.store.publish)")
     parser.add_argument("--verify-only", action="store_true", help="Only verify, don't re-export")
     args = parser.parse_args()
+    if args.push_hf:
+        push_hf()                      # refuses before anything runs
 
     log.info("=" * 60)
     log.info("REBUILD — single source of truth pipeline")
@@ -310,9 +261,6 @@ def main():
         run_readme()
 
     verify_issues = verify_site_data()
-
-    if args.push_hf:
-        push_hf()
 
     log.info("\n" + "=" * 60)
     total_issues = len(issues) + len(verify_issues)
