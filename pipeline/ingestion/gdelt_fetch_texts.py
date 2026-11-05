@@ -31,16 +31,55 @@ Resumable: a ledger of completed URLs is written alongside the results, so an
 interrupted run resumes without refetching. Results are flushed per batch, never
 accumulated in memory.
 
+DATE-BOUNDED RUNS
+-----------------
+`--since YYYY-MM-DD` fetches only URLs whose EARLIEST GDELT date is on or after
+that day, across every enabled pair, skipping any URL already in the ledger or
+already carrying text. A URL whose earlier attempt never sent a request
+(host_abandoned / host_backoff, kept out of the ledger) is fetched: inside the
+window that is a first request, not a retry. That is the slice the verified tier
+has never seen -- from 2026-08-27 for 22 pairs, because the 2026-09-10 fetch ran
+against a matched file that ended 2026-08-26 23:45 -- plus whatever increments
+were appended since.
+
+It deliberately does NOT retry the historical backlog. 55,722 enabled-pair URLs
+outside the ledger are dated before 2026-08-27 (host_abandoned / host_backoff are
+kept out of the ledger by design, see flush()); retrying them in the same run
+would move the 2015-2025 series inside the change that adds 2026, and nobody
+could then say which part of a shift was new data (decided 2026-10-15). They are
+a separate job with its own reported delta.
+
+A URL first seen in 2019 and re-recorded in 2026-09 is a 2019 article: the
+earliest date across every matched row decides, the same rule `final` uses.
+
+Each date-bounded run records the URLs it targeted in runs/since_<day>.parquet
+before fetching, so `pipeline.build_gdelt_verified --step filters` can rebuild
+the verified tier without them and attribute every change to one cause.
+
+This is a producer: --since bounds what is fetched, never what is kept, and no
+study window is applied here. The exporter, migrate and analyze_pair clamp with
+pipeline.config.
+
 USAGE
 -----
     python -m pipeline.ingestion.gdelt_fetch_texts --limit 600 --sample-per-year 50
     python -m pipeline.ingestion.gdelt_fetch_texts --all --concurrency 6
+    python -m pipeline.ingestion.gdelt_fetch_texts --since 2026-01-01 --dry-run
+    python -m pipeline.ingestion.gdelt_fetch_texts --since 2026-01-01
+    python -m pipeline.ingestion.gdelt_fetch_texts --since 2026-01-01 --unattested
+
+Use the first day after TEXT_END, not the day the verified tier stops:
+gdelt_paths_reconcile (R2b) needs every URL in the plotted 2026 months queued,
+and 3 kyiv attested URLs from 2026-01 and 2026-03 never were. Measured 2026-10-19:
+--since 2026-08-27 targets 3,649 attested + 4,199 unattested = 7,848 URLs;
+--since 2026-01-01 targets 4,604 + 4,761 = 9,365, every one dated 2026.
 """
 from __future__ import annotations
 
 import argparse
 import asyncio
 import json
+import os
 import pathlib
 import random
 import hashlib
@@ -58,6 +97,11 @@ OUT = pathlib.Path("data/raw/gdelt/texts")
 LEDGER = OUT / "fetched_urls.txt"
 RESULTS = OUT / "article_texts.parquet"
 PARTS = OUT / "parts"
+RUNS = OUT / "runs"
+
+# zaporizhzhia, 2026-09-12: 58,194 urls in 65.1 min. The older 11.8 url/s figure
+# predates the per-host AIMD limits below.
+MEASURED_URL_PER_S = 14.9
 
 CONCURRENCY = 96         # global ceiling
 PER_HOST_START = 8       # starting simultaneous requests per host
@@ -268,6 +312,87 @@ async def run(targets, pats_by_pair, concurrency):
                   f"{done/(time.time()-t0):.1f} url/s  hosts_abandoned={dead}", flush=True)
 
 
+def since_pool(since: str, unattested: bool, enabled: set[str]) -> pd.DataFrame:
+    """One pool's URLs whose earliest matched date is on or after `since`.
+
+    Columns: url, pair_slug, variant, domain, date (the earliest one).
+
+    Attested: final already carries one row per URL at its earliest date. The
+    unattested pool is read with a date filter, and a URL is dropped if any
+    matched row of it is dated before `since` -- checked against the url column
+    of the older rows only, so the 14.4M-row frame is never materialised.
+    """
+    ts = pd.Timestamp(since)
+    if not unattested:
+        df = pd.read_parquet(SRC)
+        return df[(df.date >= ts) & df.pair_slug.isin(enabled)].copy()
+
+    import pyarrow as pa
+    import pyarrow.compute as pc
+    import pyarrow.parquet as pq
+    new = pq.read_table(MATCHED, columns=["url", "domain", "date", "pair_slug", "native_en", "url_match"],
+                        filters=[("date", ">=", ts)]).to_pandas()
+    cand = pa.array(new.url.dropna().unique())
+    old = pq.read_table(MATCHED, columns=["url"], filters=[("date", "<", ts)]).column("url")
+    seen_before = set(old.filter(pc.is_in(old, value_set=cand)).to_pylist()) if len(cand) else set()
+    del old
+    attested = set(pd.read_parquet(SRC, columns=["url"]).url)
+    df = new[~new.url.isin(seen_before) & new.native_en & ~new.url_match]
+    # Earliest row per URL: its date is the article's, and its AllNames decided
+    # the pair. The undated path keeps file order; this one must not, because an
+    # appended increment sits at the end of the file.
+    df = df.sort_values("date", kind="stable").drop_duplicates("url")
+    df = df[~df.url.isin(attested) & df.pair_slug.isin(enabled)].copy()
+    df["variant"] = None
+    return df[["url", "pair_slug", "variant", "domain", "date"]]
+
+
+def attempted_urls() -> tuple[set, set]:
+    """(urls in the ledger, urls with text in the results). Merged browser and
+    wayback recoveries carry text without passing through the ledger."""
+    ledger = set(LEDGER.read_text().split()) if LEDGER.exists() else set()
+    with_text = set()
+    if RESULTS.exists():
+        r = pd.read_parquet(RESULTS, columns=["url", "text_hash"])
+        with_text = set(r.url[r.text_hash.notna()])
+    return ledger, with_text
+
+
+def manifest_path(since: str) -> pathlib.Path:
+    return RUNS / f"since_{since}.parquet"
+
+
+def record_manifest(since: str, df: pd.DataFrame, pool: str) -> pathlib.Path:
+    """Add this run's targets to runs/since_<day>.parquet before any fetch, so a
+    crash mid-run still leaves every row it wrote attributable to the run."""
+    path = manifest_path(since)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    rows = df[["url", "pair_slug", "date"]].assign(
+        pool=pool, planned_at=pd.Timestamp.now(tz="UTC").isoformat(timespec="seconds"))
+    if path.exists():
+        old = pd.read_parquet(path)
+        rows = pd.concat([old, rows[~rows.url.isin(set(old.url))]], ignore_index=True)
+    tmp = path.with_name(path.name + ".writing")
+    rows.to_parquet(tmp, compression="zstd", index=False)
+    os.replace(tmp, path)
+    return path
+
+
+def report_plan(pool: pd.DataFrame, done: pd.Series, label: str) -> None:
+    t = pd.DataFrame({"pool": pool.groupby("pair_slug").size(),
+                      "requested": pool[done].groupby("pair_slug").size()}).fillna(0).astype(int)
+    t["to_fetch"] = t["pool"] - t["requested"]
+    print(t.sort_values("to_fetch", ascending=False).to_string())
+    todo = pool[~done]
+    by_month = todo.date.dt.to_period("M").astype(str).value_counts().sort_index()
+    print(f"\n{label}: pool {len(pool):,} urls, already requested or with text {int(done.sum()):,}, "
+          f"to fetch {len(todo):,} across {todo.pair_slug.nunique()} pair(s)")
+    if len(by_month):
+        print("to fetch by month: " + " · ".join(f"{k} {v:,}" for k, v in by_month.items()))
+    print(f"~{len(todo) / MEASURED_URL_PER_S / 60:.0f} min at the measured {MEASURED_URL_PER_S} url/s "
+          f"(arithmetic, not a timed run)")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--pair", help="restrict to one pair slug, for a controlled trial run")
@@ -279,38 +404,63 @@ def main() -> int:
     ap.add_argument("--sample-per-year", type=int, default=0,
                     help="stratify the sample evenly across years to expose link rot by age")
     ap.add_argument("--all", action="store_true")
+    ap.add_argument("--since", metavar="YYYY-MM-DD",
+                    help="only URLs first dated on or after this day, every enabled pair; "
+                         "never retries older URLs")
+    ap.add_argument("--dry-run", action="store_true", help="print the plan and write nothing")
     ap.add_argument("--concurrency", type=int, default=CONCURRENCY)
     a = ap.parse_args()
 
-    OUT.mkdir(parents=True, exist_ok=True)
-    if a.unattested:
-        m = pd.read_parquet(MATCHED, columns=["url", "domain", "date", "pair_slug",
-                                              "native_en", "url_match"])
-        attested = set(pd.read_parquet(SRC, columns=["url"]).url)
-        df = m[m.native_en & ~m.url_match].drop_duplicates("url")
-        df = df[~df.url.isin(attested) & df.pair_slug.notna()].copy()
-        df["variant"] = None          # unknown by definition -- that is the point
-    else:
-        df = pd.read_parquet(SRC)
-    if a.pair:
-        df = df[df.pair_slug == a.pair]
+    if a.since:
+        if a.sample_per_year:
+            print("--since and --sample-per-year do not combine", file=sys.stderr); return 1
+        pd.Timestamp(a.since)                      # fail early on a malformed day
+        pool = since_pool(a.since, a.unattested, set(pair_patterns()))
+        if a.pair:
+            pool = pool[pool.pair_slug == a.pair]
+        ledger, with_text = attempted_urls()
+        done = pool.url.isin(ledger) | pool.url.isin(with_text)
+        report_plan(pool, done, f"{'unattested' if a.unattested else 'attested'} since {a.since}")
+        if a.dry_run:
+            return 0
+        df, seen = pool[~done], ledger
         if df.empty:
-            print(f"no attested urls for pair '{a.pair}'", file=sys.stderr); return 1
-    seen = set(LEDGER.read_text().split()) if LEDGER.exists() else set()
-    df = df[~df.url.isin(seen)]
-    if df.empty:
-        print("nothing left to fetch"); return 0
+            print("nothing left to fetch"); return 0
+        OUT.mkdir(parents=True, exist_ok=True)
+        print(f"targets recorded -> {record_manifest(a.since, df, 'unattested' if a.unattested else 'attested')}")
+    else:
+        if a.unattested:
+            m = pd.read_parquet(MATCHED, columns=["url", "domain", "date", "pair_slug",
+                                                  "native_en", "url_match"])
+            attested = set(pd.read_parquet(SRC, columns=["url"]).url)
+            df = m[m.native_en & ~m.url_match].drop_duplicates("url")
+            df = df[~df.url.isin(attested) & df.pair_slug.notna()].copy()
+            df["variant"] = None          # unknown by definition -- that is the point
+        else:
+            df = pd.read_parquet(SRC)
+        if a.pair:
+            df = df[df.pair_slug == a.pair]
+            if df.empty:
+                print(f"no attested urls for pair '{a.pair}'", file=sys.stderr); return 1
+        seen = set(LEDGER.read_text().split()) if LEDGER.exists() else set()
+        df = df[~df.url.isin(seen)]
+        if df.empty:
+            print("nothing left to fetch"); return 0
 
-    if a.sample_per_year:
-        rng = random.Random(20260826)      # fixed seed: reruns pick the same sample
-        parts = []
-        for _, g in df.groupby(df.date.dt.year):
-            idx = list(g.index)
-            rng.shuffle(idx)
-            parts.append(g.loc[idx[:a.sample_per_year]])
-        df = pd.concat(parts)
-    elif not a.all and not a.pair:
-        df = df.head(a.limit)
+        if a.sample_per_year:
+            rng = random.Random(20260826)      # fixed seed: reruns pick the same sample
+            parts = []
+            for _, g in df.groupby(df.date.dt.year):
+                idx = list(g.index)
+                rng.shuffle(idx)
+                parts.append(g.loc[idx[:a.sample_per_year]])
+            df = pd.concat(parts)
+        elif not a.all and not a.pair:
+            df = df.head(a.limit)
+        if a.dry_run:
+            print(f"would fetch {len(df):,} urls ({len(seen):,} already in the ledger)")
+            return 0
+        OUT.mkdir(parents=True, exist_ok=True)
 
     # Round-robin across hosts so a single batch never piles onto one site: sorting
     # by pair/date groups same-host urls together, which is the worst possible order.
@@ -322,9 +472,14 @@ def main() -> int:
           f"({len(seen):,} already done)")
     asyncio.run(run(targets, pair_patterns(), a.concurrency))
     consolidate()
-    df = pd.read_parquet(RESULTS)
-    ok = df.text.notna().sum()
+    # Two columns, not the 1.6 GB text column, to report coverage.
+    df = pd.read_parquet(RESULTS, columns=["url", "pair_slug", "text_hash"])
+    ok = df.text_hash.notna().sum()
     print(f"-> {RESULTS}  {len(df):,} rows, {ok:,} with text ({ok/len(df)*100:.1f}%)")
+    if a.since:
+        mine = df[df.url.isin({t.url for t in targets})]
+        per = mine.groupby("pair_slug").text_hash.agg(rows="size", with_text="count")
+        print(f"this run: {len(mine):,} rows for {len(targets):,} targets\n{per.to_string()}")
     return 0
 
 
