@@ -237,6 +237,7 @@ def run_step(step: str, since: str | None, targets: list[str], write: bool,
              report: Path | None, tmp_dir: str | None) -> int:
     import pyarrow.parquet as pq
 
+    prior: dict = {}
     if since:
         # A --since with no manifest excludes nothing, so step (a) would silently
         # absorb the fetch and step (b) would attribute zero rows to it: the two
@@ -249,6 +250,15 @@ def run_step(step: str, since: str | None, targets: list[str], write: bool,
             return 1
         stamp_path = VERIFIED / STAMP
         prior = json.loads(stamp_path.read_text()) if stamp_path.exists() else {}
+        if prior.get("step") == "additions" and prior.get("since") == since:
+            # A redo of (b) is only sound if the manifest gained no URLs since
+            # (b) was written: a new URL would be absorbed without its own (a).
+            n_now = len(excluded_urls(since))
+            if step == "additions" and n_now != prior.get("manifest_urls", n_now):
+                print(f"manifest since_{since} grew from {prior.get('manifest_urls')} to "
+                      f"{n_now} URLs after (b) was written; fetch new URLs under a new --since",
+                      file=sys.stderr)
+                return 1
         if (step == "filters" and prior.get("step") == "additions"
                 and prior.get("since") == since):
             # The additions of this manifest are already written. Re-running (a)
@@ -259,6 +269,10 @@ def run_step(step: str, since: str | None, targets: list[str], write: bool,
                   f"its additions back. Fetch the next range with a new --since.",
                   file=sys.stderr)
             return 1
+    # (b) may be repeated for one manifest: its targets are fetched again by
+    # --no-abandon without adding URLs, so (a) is unchanged and is not re-run.
+    redo_b = bool(since) and step == "additions" and prior.get("step") == "additions" \
+        and prior.get("since") == since
     exclude = excluded_urls(since)
     print(f"step {step}: {len(targets)} enabled pair(s); since {since or '-'}; "
           f"{len(exclude):,} URL(s) targeted by the date-bounded fetch "
@@ -296,6 +310,14 @@ def run_step(step: str, since: str | None, targets: list[str], write: bool,
                                     else build_from(paths["full"], slug)[:2])
                     r = {"pair": slug, **delta(va, new_v)}
                     r["disk_is_a"] = same_rows(old_v, va)
+                    if not r["disk_is_a"] and redo_b:
+                        # A re-run of (b) for the same manifest, after a further
+                        # fetch of its own targets (--no-abandon): the disk is the
+                        # earlier (b), and outside the manifest's URLs it must
+                        # still be exactly (a). Its own delta is reported below.
+                        r["disk_is_a"] = same_rows(
+                            old_v[~old_v.url.isin(exclude)] if old_v is not None else None, va)
+                        r["added_vs_disk"] = delta(old_v, new_v)["added_post"]
                     cut = pd.Timestamp(since)
                     before_a = va[pd.to_datetime(va.date) < cut] if len(va) else va
                     before_b = new_v[pd.to_datetime(new_v.date) < cut] if len(new_v) else new_v
@@ -335,7 +357,7 @@ def run_step(step: str, since: str | None, targets: list[str], write: bool,
         show = [c for c in ["old_hist", "new_hist", "d_hist", "added_hist", "removed_hist",
                             "old_post", "new_post", "d_post", "added_post", "removed_post",
                             "series_months_changed", "excluded_text_rows",
-                            "disk_is_a", "pre_since_unchanged"] if c in t.columns]
+                            "disk_is_a", "pre_since_unchanged", "added_vs_disk"] if c in t.columns]
         base = "files on disk" if step == "filters" else "step (a)"
         print(f"\nper-pair delta against {base}; hist = month <= {cfg.TEXT_END}, post = after")
         with pd.option_context("display.width", 250, "display.max_columns", 30):
@@ -373,7 +395,8 @@ def run_step(step: str, since: str | None, targets: list[str], write: bool,
         stamp.update({"step": step, "since": since,
                       "written_at": pd.Timestamp.now(tz="UTC").isoformat(timespec="seconds"),
                       "texts_rows": pq.ParquetFile(TEXTS).metadata.num_rows,
-                      "excluded_urls": len(exclude) if step == "filters" else 0})
+                      "excluded_urls": len(exclude) if step == "filters" else 0,
+                      "manifest_urls": len(exclude)})
         tmp_stamp = stamp_path.with_name(stamp_path.name + ".writing")
         tmp_stamp.write_text(json.dumps(stamp, indent=1))
         os.replace(tmp_stamp, stamp_path)
