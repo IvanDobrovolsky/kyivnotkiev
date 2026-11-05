@@ -12,8 +12,14 @@ verified this directly: Kiev/Kyiv crosses over in 2022 in this corpus.
 Corpus 37 = English All 2022. Corpus 38 = English Fiction 2022.
 We use 37 for the broadest coverage.
 
+Not part of any rebuild. Live values no longer reproduce the stored ones (Kyiv
+2018-2022 live/stored 1.023, 0.983, 1.008, 1.027, 1.028 on 2026-10-15), so a
+refetch would move history, and collect_pair still keys its CSVs by the numeric
+pair id that config/pairs.yaml dropped in 51f9cfef: it refuses below rather
+than write pair files nobody can join.
+
 Usage:
-    python -m pipeline.ingestion.collect_ngrams [--pair-ids 1,2,3]
+    python -m pipeline.ingestion.ngrams [--pair-ids 1,2,3]
 """
 
 import argparse
@@ -23,18 +29,22 @@ import time
 import pandas as pd
 import requests
 
-from pipeline.config import (
-    NGRAMS_RAW_DIR,
-    ensure_dirs,
-    get_all_pairs,
-)
+from pipeline.config import RAW_DIR, load_pairs
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
+# pipeline.config lost NGRAMS_RAW_DIR, ensure_dirs and get_all_pairs in 51f9cfef,
+# which left this module failing at import.
+NGRAMS_RAW_DIR = RAW_DIR / "ngrams"
+
 NGRAM_URL = "https://books.google.com/ngrams/json"
 NGRAM_START_YEAR = 1900
-NGRAM_END_YEAR = 2022      # English 2022 corpus (corpus id 37) extends through 2022
+# Stays 2022 when the study window moves: corpus 37 (English 2022) is the newest
+# Google Books corpus and has no later year. Asked for year_end=2026, the viewer
+# returned exactly 5 values, 2018-2022 (probe 2026-10-15). SOURCE_SERIES_END
+# ["ngrams"] in pipeline.config holds the same limit for the site.
+NGRAM_END_YEAR = 2022
 NGRAM_CORPUS = 37          # English All 2022 — replaces previous corpus 26 (English 2019)
 NGRAM_SMOOTHING = 0
 
@@ -122,8 +132,11 @@ def collect_pair(pair: dict) -> pd.DataFrame | None:
 
 def collect_all(pair_ids: list[int] | None = None) -> None:
     """Collect ngram data for all (or selected) toponym pairs."""
-    ensure_dirs()
-    pairs = get_all_pairs()
+    pairs = load_pairs()["pairs"]
+    if any("id" not in p for p in pairs):
+        raise SystemExit("config/pairs.yaml pairs are slug-keyed; this collector still writes "
+                         "pair_{id}.csv by numeric id. Re-key it before any refetch.")
+    NGRAMS_RAW_DIR.mkdir(parents=True, exist_ok=True)
 
     if pair_ids:
         pairs = [p for p in pairs if p["id"] in pair_ids]
