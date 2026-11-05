@@ -29,8 +29,10 @@ import re
 import sys
 
 import pandas as pd
+import pyarrow.parquet as pq
 import yaml
 
+from pipeline.config import SERIES_END, TEXT_END, last_day
 from pipeline.filters import apply_source_filters
 
 STORE = pathlib.Path("data/store")
@@ -50,12 +52,21 @@ SOURCES = {
     # measures Ukrainian-language Telegram, not international English usage.
     # Store file renamed deprecated_telegram_raw.parquet; raw archive untouched.
 }
-# The study period. `raw` deliberately keeps whatever the provider returned --
-# collection ran into 2026 and that data is real, so discarding it would destroy
-# provenance. But 2026 is a partial year: a trailing fragment against fifteen
-# complete ones reads as a collapse in volume rather than as an incomplete
-# window, so it is cut from `processed` and therefore from the pair files too.
-STUDY_END = "2025-12-31"
+# The study window, in two tiers (pipeline/config.py holds the definitions).
+# `raw` deliberately keeps whatever the provider returned -- collection ran into
+# 2026 and that data is real, so discarding it would destroy provenance.
+#
+#   <source>_processed  clamped at SERIES_END. This tier feeds the charts (the
+#                       site's Reddit series reads reddit_processed), which run
+#                       into 2026. A source plots only through its own
+#                       series_end(); the exporter applies that, not this file.
+#   pairs/<slug>        clamped at TEXT_END. Keyness and clusters read these, and
+#                       the text analysis is frozen at 2010-2025. 27,499 GDELT
+#                       rows from 2026 reached keyness while clusters held none.
+#
+# One constant used to clamp both, so extending the series for Reddit would have
+# pushed 2026 into every pair file, sent all 24 pairs amber on row count and
+# forced a rebuild plus fresh glosses and cluster names.
 
 TEXT_SOURCES = {"gdelt", "youtube", "reddit", "openalex"}
 COUNT_SOURCES = {"wikipedia", "trends", "ngrams"}
@@ -154,7 +165,7 @@ def raw_counts(source: str) -> pd.DataFrame:
     return df
 
 
-def raw_reddit() -> pd.DataFrame:
+def raw_reddit(dry_run: bool = False) -> pd.DataFrame:
     df = pd.read_parquet(SOURCES["reddit"]["file"])
     # 2025-05..12 gap, recovered from the public monthly dumps after PullPush
     # went paid (pipeline/ingestion/reddit_backfill_merge.py). Concatenated
@@ -162,7 +173,27 @@ def raw_reddit() -> pd.DataFrame:
     _bf = pathlib.Path("data/raw/reddit/backfill/backfill_submissions.parquet")
     if _bf.exists():
         _b = pd.read_parquet(_bf)
-        print(f"  reddit: +{len(_b):,} backfilled rows (dump sweep 2025-05..12)")
+        _meta = _bf.with_name(_bf.stem + ".meta.json")
+        _info = json.loads(_meta.read_text()) if _meta.exists() else None
+        # The span comes from the file, not from a label: the merge now also
+        # carries 2026 months, and a fixed "(2025-05..12)" would misreport them.
+        _months = (_info or {}).get("months") or []
+        _span = (f"{min(_months)}..{max(_months)}" if _months else
+                 f"{str(_b.date.min())[:7]}..{str(_b.date.max())[:7]}" if len(_b) else "empty")
+        print(f"  reddit: +{len(_b):,} backfilled rows (dump sweep {_span})")
+        # The merge records which pair set its sweeps searched. A sweep searches
+        # every DEFINED pair (swept_pairs), so a pairs.yaml term edit after the
+        # sweep means the backfill no longer answers the current terms.
+        from pipeline.ingestion.reddit_dump_filter import pair_set, swept_pairs
+        _want = pair_set(swept_pairs())["sha1"]
+        _got = ((_info or {}).get("pairset") or {}).get("sha1")
+        if _info is None:
+            print(f"  reddit: WARNING no {_meta.name}; cannot check which pair set the "
+                  f"backfill was swept with")
+        elif _got != _want:
+            raise SystemExit(f"reddit backfill was swept under pair set {str(_got)[:12]}, but "
+                             f"pairs.yaml now hashes to {_want[:12]}: re-sweep and re-merge "
+                             f"(pipeline.ingestion.reddit_dump_sweep) before migrating")
         df = pd.concat([df, _b], ignore_index=True)
     # Mirror/bot subreddits (autotldr, AutoNewspaper, DOOMMM_* chain-posters...)
     # repeat the OUTLET's spelling, not a redditor's choice — they leak the news
@@ -172,22 +203,46 @@ def raw_reddit() -> pd.DataFrame:
     # (N/M) chain-post marker. Human subs with templated titles survive the
     # author gate (indiegameswap: 241 authors). The kyivan-rus 2023-03 "spike"
     # was one syndicated article chain-posted 104x. Audit CSV in data/audit/.
+    #
+    # The rule is computed over a population, so adding months can flip a
+    # subreddit across a threshold and delete rows from months already
+    # published. It is therefore bounded at TEXT_END: rows <= TEXT_END are
+    # judged by a list computed from rows <= TEXT_END only (the 2010-2025 text
+    # corpus stays what it was however much 2026 is collected), and rows after
+    # TEXT_END by a list computed over everything through SERIES_END, so a
+    # mirror that only becomes visible in 2026 is still caught there. Undated
+    # rows are judged with the historical list.
     if "subreddit" in df.columns and "author" in df.columns:
-        _t = df.get("title", pd.Series("", index=df.index)).astype(str)
-        _chunk = _t.str.match(r"\(\d+/\d+\)")
-        _st = df.groupby("subreddit").agg(
-            posts=("post_id", "size"), authors=("author", "nunique"))
-        _st["chunk_share"] = _chunk.groupby(df["subreddit"]).mean()
-        _bots = _st[(_st.posts >= 100)
-                    & ((_st.authors <= 2) | (_st.chunk_share >= 0.10))]
+        def _bot_list(d: pd.DataFrame) -> pd.DataFrame:
+            _t = d.get("title", pd.Series("", index=d.index)).astype(str)
+            _chunk = _t.str.match(r"\(\d+/\d+\)")
+            _st = d.groupby("subreddit").agg(
+                posts=("post_id", "size"), authors=("author", "nunique"))
+            _st["chunk_share"] = _chunk.groupby(d["subreddit"]).mean()
+            return _st[(_st.posts >= 100)
+                       & ((_st.authors <= 2) | (_st.chunk_share >= 0.10))]
+        _dt = pd.to_datetime(df["date"], errors="coerce") if "date" in df.columns \
+            else pd.Series(pd.NaT, index=df.index)
+        _next = pd.Timestamp(last_day(TEXT_END)) + pd.Timedelta(days=1)
+        _late = (_dt >= _next).to_numpy()
+        _in_series = (_dt.isna() | (_dt < pd.Timestamp(last_day(SERIES_END)) + pd.Timedelta(days=1))).to_numpy()
+        _bots = _bot_list(df[~_late])
+        _bots_late = _bot_list(df[_in_series]) if _late.any() else _bots.iloc[0:0]
         _n0 = len(df)
-        df = df[~df.subreddit.isin(set(_bots.index))].copy()
+        _drop = ((~_late & df.subreddit.isin(set(_bots.index)).to_numpy())
+                 | (_late & df.subreddit.isin(set(_bots_late.index)).to_numpy()))
+        df = df[~_drop].copy()
         print(f"  reddit: dropped {_n0 - len(df):,} rows from "
-              f"{len(_bots)} mirror/bot subreddit(s)")
-        try:
-            _bots.to_csv(pathlib.Path("data/audit/reddit_bot_subreddits.csv"))
-        except Exception:                              # noqa: BLE001
-            pass
+              f"{len(_bots)} mirror/bot subreddit(s) <= {TEXT_END}"
+              + (f" and {len(_bots_late)} judged through {SERIES_END} for later rows"
+                 if _late.any() else ""))
+        # A dry run answers "what would this do"; it must not rewrite the
+        # audit trail of a run that has not happened.
+        if not dry_run:
+            try:
+                _bots.to_csv(pathlib.Path("data/audit/reddit_bot_subreddits.csv"))
+            except Exception:                          # noqa: BLE001
+                pass
     df["source"] = "reddit"
     df["doc_id"] = df["post_id"].astype(str)
     df["url"] = "https://reddit.com/r/" + df["subreddit"].astype(str) + "/comments/" + df["doc_id"]
@@ -305,35 +360,59 @@ def process_text_source(raw: pd.DataFrame, source: str, pats: dict) -> pd.DataFr
         out = out.drop_duplicates("record_id", keep="first").reset_index(drop=True)
         if len(out) < before:
             print(f"    dropped {before - len(out)} duplicate record_id(s)")
-    return apply_study_scope(out, source)
+    return apply_study_scope(out, SERIES_END, "series window")
 
 
 def process_count_source(raw: pd.DataFrame, source: str, pats: dict) -> pd.DataFrame:
     enabled = {s for s, p in pats.items() if p["enabled"]}
     df = raw[raw.pair_slug.isin(enabled)].copy()
     df["source"] = source
-    return apply_study_scope(df.reset_index(drop=True), source)
+    return apply_study_scope(df.reset_index(drop=True), SERIES_END, "series window")
 
 
-def apply_study_scope(df: pd.DataFrame, source: str) -> pd.DataFrame:
-    """Drop anything past STUDY_END, on whichever date column the source carries."""
+def apply_study_scope(df: pd.DataFrame, end: str, window: str) -> pd.DataFrame:
+    """Drop anything after the last day of month `end` ('YYYY-MM').
+
+    `window` names the clamp in the log line ("series window", "text
+    window", or a more specific label from a caller). The stats
+    modules import this too, so keyness, clusters and the pair files apply one
+    rule rather than three re-implementations of it.
+    """
     if not len(df):
         return df
     # An undated row must survive: missing dates are a data-quality problem tracked
     # elsewhere, and dropping them here would delete records under the wrong banner.
-    # Note NaT <= Timestamp evaluates to False, not NaN, so the null case has to be
+    # Note NaT < Timestamp evaluates to False, not NaN, so the null case has to be
     # spelled out -- a .fillna(True) after the comparison never fires.
+    cut = last_day(end)
     if "date" in df.columns:
-        dt = pd.to_datetime(df["date"], errors="coerce")
-        keep = dt.isna() | (dt <= pd.Timestamp(STUDY_END))
+        # Strictly before the first instant of the next month, so a timestamped
+        # row on the last day is kept. Comparing against midnight of the last day
+        # would drop 2025-12-31T14:00 while keeping 2025-12-31.
+        #
+        # ISO8601, not inferred: pandas infers ONE format from the first value,
+        # so in a column mixing "2025-12-31" with "2025-12-31T14:00:00" every
+        # value of the other shape coerced to NaT and was KEPT as undated --
+        # a 2026 timestamp walked straight through the clamp. Every tier holds
+        # date-only strings today (measured 2026-11-05), so this changes no row.
+        dt = pd.to_datetime(df["date"], errors="coerce", format="ISO8601")
+        if getattr(dt.dt, "tz", None) is not None:
+            dt = dt.dt.tz_convert(None)
+        keep = dt.isna() | (dt < pd.Timestamp(cut) + pd.Timedelta(days=1))
     elif "year" in df.columns:
+        # Year-granular rows stand for the whole year, so an `end` before
+        # December keeps that year entire. That is a partial year by
+        # construction; the exporter has to label it, it cannot be cut here.
         yr = pd.to_numeric(df["year"], errors="coerce")
-        keep = yr.isna() | (yr <= int(STUDY_END[:4]))
+        keep = yr.isna() | (yr <= int(end[:4]))
     else:
         return df
     dropped = int((~keep).sum())
     if dropped:
-        print(f"    study scope: dropped {dropped:,} row(s) after {STUDY_END}")
+        by = ""
+        if "source" in df.columns and df["source"].nunique() > 1:
+            by = "  " + str(df.loc[~keep, "source"].value_counts().to_dict())
+        print(f"    {window}: dropped {dropped:,} row(s) after {cut}{by}")
     return df[keep].reset_index(drop=True)
 
 
@@ -343,7 +422,7 @@ KEY_COLS = ["record_id", "doc_id", "url", "pair_slug", "date", "variant", "text_
 def migrate_source(source: str, dry_run: bool = False) -> bool:
     print(f"\n=== {source} ===")
     pats = pair_patterns()
-    raw = RAW_BUILDERS[source]()
+    raw = raw_reddit(dry_run) if source == "reddit" else RAW_BUILDERS[source]()
     print(f"    raw assembled: {len(raw):,} rows, {len(raw.columns)} columns")
     if dry_run:
         if source in TEXT_SOURCES:
@@ -377,29 +456,55 @@ def migrate_source(source: str, dry_run: bool = False) -> bool:
 
 
 def build_pairs(dry_run: bool = False) -> bool:
-    """Stack every source's processed rows per pair. Unbalanced; carries source."""
-    files = sorted(STORE.glob("*_processed.parquet"))
-    frames = []
-    for f in files:
-        d = pd.read_parquet(f)
-        if "text" in d.columns and "record_id" in d.columns:
-            frames.append(d)
-    if not frames:
-        print("no text-bearing processed files yet")
-        return False
-    allp = pd.concat(frames, ignore_index=True)
+    """Stack every source's processed rows per pair. Unbalanced; carries source.
+
+    Pair files hold the TEXT window: every row is clamped at TEXT_END here,
+    because the processed tiers it stacks now run to SERIES_END.
+    """
+    enabled = {s for s, p in pair_patterns().items() if p["enabled"]}
 
     # GDELT rows come from the VERIFIED corpus, not gdelt_processed: the
     # referent filters (US-town evidence rule, analyst-surname and 1917-prince
     # drops), the story/paragraph dedups and the reclassification all live
     # there. Publishing the store's unfiltered gdelt sent the noise to
     # HuggingFace even after the site was fixed.
+    #
+    # Retired pairs are not rebuilt. The verified corpus still holds borscht,
+    # and stacking it here rewrote pairs/borscht.parquet as a 1,443-row
+    # GDELT-only file over the 21,428-row multi-source one its retirement
+    # rests on (72.8% UA; that copy now survives only on HuggingFace and in
+    # ~/kyivnotkiev-archive). The processed tiers already skip disabled pairs,
+    # so this is the one path that kept producing it.
     _vdir = pathlib.Path("data/cl/corpus/gdelt_verified")
-    if _vdir.exists():
+    _vfiles = sorted(f for f in _vdir.glob("*.parquet")
+                     if not f.stem.endswith("_series")) if _vdir.exists() else []
+    _retired = sorted(f.stem for f in _vfiles if f.stem not in enabled)
+    _vfiles = [f for f in _vfiles if f.stem in enabled]
+    if _retired:
+        print(f"  gdelt: verified corpus skipped for {len(_retired)} disabled "
+              f"pair(s): {', '.join(_retired)}")
+
+    files = sorted(STORE.glob("*_processed.parquet"))
+    frames = []
+    _n_store = 0
+    for f in files:
+        if _vfiles and f.name == "gdelt_processed.parquet":
+            # Every one of its rows is replaced by the verified corpus below.
+            # Loading it only to discard it was 3.6 GB of the 7.0 GB of
+            # uncompressed parquet this step read (616,943 rows with bodies).
+            _n_store = pq.read_metadata(f).num_rows
+            continue
+        d = pd.read_parquet(f)
+        if "text" in d.columns and "record_id" in d.columns:
+            frames.append(d)
+    if not frames and not _vfiles:
+        print("no text-bearing processed files yet")
+        return False
+    allp = pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+
+    if _vfiles:
         _vframes = []
-        for _vf in sorted(_vdir.glob("*.parquet")):
-            if _vf.stem.endswith("_series"):
-                continue
+        for _vf in _vfiles:
             _v = pd.read_parquet(_vf)
             _vframes.append(pd.DataFrame({
                 "record_id": "gv_" + _vf.stem + "_" + _v.reset_index().index.astype(str),
@@ -409,20 +514,19 @@ def build_pairs(dry_run: bool = False) -> bool:
                 "title": "", "text": _v.text.astype(str),
                 "variant": _v.variant,
             }))
-        if _vframes:
-            _gv = pd.concat(_vframes, ignore_index=True)
-            # The verified corpus is read straight off disk, so it never passed
-            # through the raw->processed path where apply_study_scope runs. That
-            # bypass put 27,575 rows dated after STUDY_END into 22 pair files,
-            # and analyze_pair repeats the same substitution, so post-window
-            # text reached keyness and collocations too. Clamp it here: the
-            # comment on STUDY_END promises the cut reaches the pair files.
-            _gv = apply_study_scope(_gv, "gdelt")
-            _n_store = int((allp.source == "gdelt").sum())
-            allp = pd.concat([allp[allp.source != "gdelt"], _gv],
-                             ignore_index=True)
-            print(f"  gdelt: {_n_store:,} store rows replaced by "
-                  f"{len(_gv):,} verified rows")
+        _gv = pd.concat(_vframes, ignore_index=True)
+        print(f"  gdelt: {_n_store:,} store rows replaced by "
+              f"{len(_gv):,} verified rows")
+        allp = pd.concat([allp[allp.source != "gdelt"] if len(allp) else allp, _gv],
+                         ignore_index=True)
+
+    # The text window, applied to every source at once. The verified corpus is
+    # read straight off disk and never passes through apply_study_scope on the
+    # raw->processed path; that bypass once put 27,575 rows dated 2026 into 22
+    # pair files. The processed tiers are clamped only at SERIES_END, so
+    # without this cut a Reddit or YouTube 2026 ingest would reach keyness too.
+    # Before the source filters, as both clamps were before this was split.
+    allp = apply_study_scope(allp, TEXT_END, "text window")
 
     # Homonym and referent false positives are excluded from the
     # analysis-ready pair files — the same release principle as the telegram
@@ -441,14 +545,32 @@ def build_pairs(dry_run: bool = False) -> bool:
 
     out = STORE / "pairs"
     out.mkdir(parents=True, exist_ok=True)
-    print(f"\n=== pairs === ({len(allp):,} records from {len(frames)} source(s))")
+    print(f"\n=== pairs === ({len(allp):,} records from "
+          f"{allp.source.nunique()} source(s))")
     okall = True
+    changed, produced = [], set()
     for slug, g in allp.groupby("pair_slug"):
         g = g.sort_values(["source", "date"]).reset_index(drop=True)
         path = out / f"{slug}.parquet"
         before = checksum(g, KEY_COLS)
+        produced.add(path.name)
         if dry_run:
-            print(f"    DRY RUN  {path.name}  {len(g):,} rows (not written)")
+            # Compare against the file a real run would replace. Freshness is
+            # judged by row count, so any difference here sends the pair amber
+            # and forces its keyness and clusters to be recomputed.
+            if path.exists():
+                cols = [c for c in KEY_COLS if c in pq.read_schema(path).names]
+                cur = pd.read_parquet(path, columns=cols)
+                cur_ck = checksum(cur, KEY_COLS)
+                same = len(cur) == len(g) and cur_ck == before
+                verdict = ("unchanged" if same else
+                           f"WOULD CHANGE: on disk {len(cur):,} rows, checksum {cur_ck}")
+                if not same:
+                    changed.append(path.name)
+            else:
+                verdict = "new file"
+                changed.append(path.name)
+            print(f"    DRY RUN  {path.name:<30}{len(g):>8,} rows  checksum {before}  {verdict}")
             continue
         g.to_parquet(path, compression="zstd", index=False)
         back = pd.read_parquet(path)
@@ -457,6 +579,12 @@ def build_pairs(dry_run: bool = False) -> bool:
         by_src = g.source.value_counts().to_dict()
         print(f"    {'OK ' if ok else 'MISMATCH'} {slug:<24}{len(g):>7,} rows  {by_src}")
         record_manifest(f"pairs/{slug}", back, KEY_COLS, note="all sources stacked, unbalanced")
+    untouched = sorted(p.name for p in out.glob("*.parquet") if p.name not in produced)
+    if untouched:
+        print(f"    left untouched (no rows produced): {', '.join(untouched)}")
+    if dry_run:
+        print(f"    {len(changed)} of {len(produced)} pair file(s) would change"
+              + (f": {', '.join(changed)}" if changed else ""))
     return okall
 
 
