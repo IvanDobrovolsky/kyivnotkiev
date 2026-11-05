@@ -113,6 +113,13 @@ ACCOUNT_URL = "https://serpapi.com/account.json"   # free: costs no search credi
 
 CAL_MONTHS = 24            # width of the calibration window
 CAL_CANDIDATES = 3         # joint calls tried per pair before giving up
+# A joint window must show the weaker variant in at least this many buckets.
+# One bucket is a spike, not a ratio: the 2026-11-05 refetch took k from a single
+# non-zero week for ihor-sikorsky (Ihor 10 in 1 of 105 weeks, 2010-02..2012-01)
+# and kazymyr-malevych (19 in 1 of 105), lifting both off the k = 0 floor the
+# 2026-09-05 audit set, and moved mykola-hohol's k 4.5x (1 week against the
+# shipped window's 3). 3 is the fewest any shipped window had.
+MIN_JOINT_NONZERO = 3
 # Fewer non-zero solo months than this share of the span is quantisation noise.
 # Set as 10 of 192 when the span was fixed at 2010-2025; the four pinned pairs
 # had 0-2. Stated as a fraction so the bar holds as the span grows (10 of 201).
@@ -173,6 +180,7 @@ def make_span(end: str = SERIES_END) -> Span:
 
 def solo_tag(term: str, span: Span) -> str:
     return f"solo_{term}_{span.tag}"
+
 
 
 class BudgetExhausted(RuntimeError):
@@ -343,6 +351,7 @@ def collect_pair(pair: dict, span: Span,
     # Quantisation is only visible after the call, so try candidate windows in order.
     tried = []
     k = None
+    fallback = None     # first window resolved only to 0/1 buckets on one side
     for lo, hi in calibration_windows(ru_s, uk_s, span):
         jd = call(f"{ru},{uk}", f"{lo} {hi}", f"joint_{slug}_{lo[:7]}_{hi[:7]}", cache)
         j, _ = timeline(jd, hi[:7])
@@ -362,8 +371,25 @@ def collect_pair(pair: dict, span: Span,
         if s_ru <= 0 or s_uk <= 0:
             tried.append(f"{lo[:7]}:solo_zero")
             continue
-        k = (j_uk / j_ru) * s_ru / s_uk
+        nz = min(int((j[ru] > 0).sum()), int((j[uk] > 0).sum()))
+        if nz < MIN_JOINT_NONZERO:
+            tried.append(f"{lo[:7]}:sparse({nz} non-zero)")
+            continue
+        cand = ((j_uk / j_ru) * s_ru / s_uk, lo, hi, j_uk / j_ru)
+        if min(j[ru].max(), j[uk].max()) <= 1:
+            # Every bucket of one side rounded to 0 or 1: the ratio is set by
+            # rounding. varenyky's 2024-11..2026-10 window met a 60x 'Vareniki'
+            # surge (2026-02) that flattened Varenyky to 1 in 96 of 105 weeks
+            # (joint ratio 0.109 there, 0.439 over 2024-01..2025-12).
+            # Try the next window; keep this one only if none resolves better
+            # (bakhmut's Artemovsk is 0/1 in every window it has had).
+            tried.append(f"{lo[:7]}:flat(max 1)")
+            fallback = fallback or cand
+            continue
+        k, lo, hi, jr = cand
         break
+    if k is None and fallback:
+        k, lo, hi, jr = fallback
     if k is None:
         # No window resolves both variants. The weaker one is then treated as below
         # the instrument floor when its solo series is a handful of non-zero months:
@@ -401,7 +427,8 @@ def collect_pair(pair: dict, span: Span,
                               f"{uk}__cal": uk_s * k}).dropna()
     return frame_out, {**base, "ok": True, "control": False,
                        "cal_window": f"{lo}..{hi}", "k": round(float(k), 6),
-                       "joint_ratio": round(float(j_uk / j_ru), 5)}
+                       "joint_ratio": round(float(jr), 5),
+                       **({"tried": "; ".join(tried)} if tried else {})}
 
 
 def to_records(frame_out: pd.DataFrame, pair: dict) -> pd.DataFrame:
