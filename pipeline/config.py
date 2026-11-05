@@ -36,7 +36,7 @@ PROCESSED_DIR = DATA_DIR / "processed"
 # 28 days after it closed read 8.6x the same month a year earlier, against 1.1x
 # on GDELT and Wikipedia (chornobyl, July 2026).
 STUDY_START = "2010-01"
-SERIES_END = "2026-09"
+SERIES_END = "2026-10"
 TEXT_END = "2025-12"
 HEADLINE_YEAR = 2025
 SOURCE_SERIES_END = {
