@@ -99,6 +99,7 @@ output/
 !/data/audit/cluster_names.json
 !/data/audit/cluster_glosses.json
 !/data/audit/term_blocklist.json
+!/data/audit/wikipedia_renames.json
 !/data/audit/*.md
 
 private/

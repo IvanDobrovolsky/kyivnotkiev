@@ -1,0 +1,218 @@
+{
+  "andrii-shevchenko": {
+    "russian_page": "Andriy_Shevchenko",
+    "ukrainian_page": "Andrei_Shevchenko",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "bakhmut": {
+    "russian_page": "Artemovsk",
+    "ukrainian_page": "Bakhmut",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "bohdan-khmelnytskyi": {
+    "russian_page": "Bohdan_Khmelnytsky",
+    "ukrainian_page": "Bogdan_Khmelnitsky",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "cherkasy": {
+    "russian_page": "Cherkassy",
+    "ukrainian_page": "Cherkasy",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "chernihiv": {
+    "russian_page": "Chernigov",
+    "ukrainian_page": "Chernihiv",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "chernivtsi": {
+    "russian_page": "Chernovtsy",
+    "ukrainian_page": "Chernivtsi",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "chicken-kyiv": {
+    "russian_page": "Chicken_Kiev",
+    "ukrainian_page": "Chicken_Kyiv",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "chornobyl": {
+    "russian_page": "Chernobyl_disaster",
+    "ukrainian_page": "Chornobyl_disaster",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "chornobyl-exclusion-zone": {
+    "russian_page": "Chernobyl Exclusion Zone",
+    "ukrainian_page": "Chornobyl Exclusion Zone",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "dnipro-river": {
+    "russian_page": "Dnieper",
+    "ukrainian_page": "Dnipro (river)",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "dnister": {
+    "russian_page": "Dniester",
+    "ukrainian_page": "Dnister",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "dynamo-kyiv": {
+    "russian_page": "FC_Dynamo_Kiev",
+    "ukrainian_page": "FC_Dynamo_Kyiv",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "feodosiia": {
+    "russian_page": "Feodosia",
+    "ukrainian_page": "Feodosiia",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "kazymyr-malevych": {
+    "russian_page": "Kazimir_Malevich",
+    "ukrainian_page": "Kazymyr_Malevych",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "kharkiv": {
+    "russian_page": "Kharkov",
+    "ukrainian_page": "Kharkiv",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "kharkiv-university": {
+    "russian_page": "Kharkiv University",
+    "ukrainian_page": "University of Kharkiv",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "kremenchuk": {
+    "russian_page": "Kremenchug",
+    "ukrainian_page": "Kremenchuk",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "kropyvnytskyi": {
+    "russian_page": "Kirovograd",
+    "ukrainian_page": "Kropyvnytskyi",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "kyiv": {
+    "russian_page": "Kiev",
+    "ukrainian_page": "Kyiv",
+    "rename_month": "2020-10",
+    "rename_type": "detected"
+  },
+  "kyiv-ballet": {
+    "russian_page": "Kiev_Ballet",
+    "ukrainian_page": "Kyiv_Ballet",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "kyiv-national-university": {
+    "russian_page": "Kiev National University",
+    "ukrainian_page": "Kyiv National University",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "kyiv-pechersk-lavra": {
+    "russian_page": "Kiev Pechersk Lavra",
+    "ukrainian_page": "Kyiv Pechersk Lavra",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "kyiv-polytechnic": {
+    "russian_page": "Kiev Polytechnic Institute",
+    "ukrainian_page": "Igor Sikorsky Kyiv Polytechnic Institute",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "kyivan-rus": {
+    "russian_page": "Kievan_Rus%27",
+    "ukrainian_page": "Kyivan_Rus%27",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "luhansk": {
+    "russian_page": "Lugansk",
+    "ukrainian_page": "Luhansk",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "lviv": {
+    "russian_page": "Lvov",
+    "ukrainian_page": "Lviv",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "mykola-hohol": {
+    "russian_page": "Nikolai_Gogol",
+    "ukrainian_page": "Mykola_Hohol",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "odesa": {
+    "russian_page": "Odessa",
+    "ukrainian_page": "Odesa",
+    "rename_month": "2022-08",
+    "rename_type": "detected"
+  },
+  "olha-of-kyiv": {
+    "russian_page": "Olga_of_Kiev",
+    "ukrainian_page": "Olha_of_Kyiv",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "rivne": {
+    "russian_page": "Rovno",
+    "ukrainian_page": "Rivne",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "ternopil": {
+    "russian_page": "Ternopol",
+    "ukrainian_page": "Ternopil",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "uzhhorod": {
+    "russian_page": "Uzhgorod",
+    "ukrainian_page": "Uzhhorod",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "varenyky": {
+    "russian_page": "Vareniki",
+    "ukrainian_page": "Varenyky",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "vinnytsia": {
+    "russian_page": "Vinnitsa",
+    "ukrainian_page": "Vinnytsia",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "volodymyr-the-great": {
+    "russian_page": "Vladimir the Great",
+    "ukrainian_page": "Volodymyr the Great",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  },
+  "zhytomyr": {
+    "russian_page": "Zhitomir",
+    "ukrainian_page": "Zhytomyr",
+    "rename_month": null,
+    "rename_type": "gradual_or_pre_existing"
+  }
+}
