@@ -22,8 +22,10 @@ back as zero.  On a common monthly basis:
     single 16-year query   120/192 months non-zero  (62 %)
     4 x 4-year windows     102/193 months non-zero  (53 %)
 
-So the widest possible span is the right call for solo queries, and no
-stitching or chain-rescaling is needed at all.
+So the widest possible span is the right call for solo queries. The one
+splice is at ANCHOR_END: a late surge renormalises the whole history down, so
+months through ANCHOR_END come from a STUDY_START..ANCHOR_END call rescaled by
+one factor (see ANCHOR_END below).
 
 RECOVERING THE SCALE
 --------------------
@@ -48,7 +50,10 @@ moves only through integer quantisation, sampling noise and a calibration window
 that can itself move. trends_merge.py measures that movement per pair-month
 against what ships before anything replaces dataset/raw_trends.parquet.
 
-Cache tags carry the span ('solo_Kyiv_2010-01_2026-09'). The old tag
+Cache tags carry the span ('solo_Kyiv_2010-01_2026-09'). The anchor tags
+('solo_Kyiv_2010-01_2025-12') were seeded on 2026-11-05 as byte copies of the
+'_16y' files, whose search_parameters.date is '2010-01-01 2025-12-31' in all
+48. The old tag
 'solo_Kyiv_16y' carried none, so moving the end date returned the cached
 2010-2025 series and the run "succeeded" without changing a value. The 47
 '_16y' files stay on disk, unread: they are the provenance of what ships. All
@@ -98,7 +103,7 @@ from datetime import date, datetime, timezone
 
 import pandas as pd
 
-from pipeline.config import (ROOT_DIR, SERIES_END, STUDY_START, get_enabled_pairs,
+from pipeline.config import (ROOT_DIR, SERIES_END, STUDY_START, TEXT_END, get_enabled_pairs,
                              get_pair_by_slug, last_day)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -181,6 +186,50 @@ def make_span(end: str = SERIES_END) -> Span:
 def solo_tag(term: str, span: Span) -> str:
     return f"solo_{term}_{span.tag}"
 
+
+# HISTORY IS ANCHORED. Months through ANCHOR_END come from a solo call over
+# STUDY_START..ANCHOR_END, rescaled onto the full-span call by the ratio of
+# their sums over those months; only later months come from the full span.
+# A full-span solo renormalises to its own peak, so a late surge flattens the
+# whole history: 'Vareniki' rose about 6x from 2025-10 to a 2026-02 peak, and
+# over 2010-01..2026-10 its 2010-2025 months came back as 1-2 (5 distinct
+# values) where 2010-01..2025-12 had 10-100 (20). Integer steps of 1 to 2 are
+# 2x jumps in the share: varenyky's 2010-2025 share moved by a median 7.7 pp and
+# up to 36 pp. 'Kyivan Rus' lost 38 -> 16 distinct values the same way. The
+# rescale leaves the share untouched (k absorbs both factors), and over 192
+# months the sum ratio averages the rounding that ruins each month. The anchor
+# span's responses are the 2025-08 calls that ship today, so 2010-2025 moves
+# only where the calibration window or its joint call does.
+ANCHOR_END = TEXT_END
+
+
+def splice(full: pd.Series, anchor: pd.Series | None) -> tuple[pd.Series, dict]:
+    """Anchor months rescaled onto the full span, then the full span's later months."""
+    if anchor is None or anchor.empty or full.empty:
+        return full, {}
+    cut = pd.Timestamp(last_day(ANCHOR_END))
+    a, f_hist = anchor[:cut], full[:cut]
+    if a.sum() <= 0 or f_hist.sum() <= 0:
+        return full, {"anchor": "unused: zero sum"}
+    c = float(f_hist.sum() / a.sum())
+    out = pd.concat([a * c, full[full.index > cut]])
+    return out, {"anchor_scale": round(c, 6), "anchor_distinct": int(a.nunique()),
+                 "full_distinct_hist": int(f_hist.nunique())}
+
+
+def anchor_span(span: Span) -> Span | None:
+    return Span(span.start, ANCHOR_END) if span.end > ANCHOR_END else None
+
+
+def solo_series(term: str, span: Span, cache: pathlib.Path) -> tuple[pd.DataFrame, int, dict]:
+    """The full-span solo call with its history anchored (see ANCHOR_END)."""
+    full, dropped = timeline(call(term, span.serp, solo_tag(term, span), cache), span.end)
+    sp = anchor_span(span)
+    if full.empty or sp is None:
+        return full, dropped, {}
+    anc, _ = timeline(call(term, sp.serp, solo_tag(term, sp), cache), sp.end)
+    s, meta = splice(full.iloc[:, 0], anc.iloc[:, 0] if not anc.empty else None)
+    return s.to_frame(full.columns[0]), dropped, meta
 
 
 class BudgetExhausted(RuntimeError):
@@ -323,7 +372,7 @@ def collect_pair(pair: dict, span: Span,
     slug, ru, uk = pair["slug"], pair["russian"], pair["ukrainian"]
     base = {"slug": slug, "span": span.tag, "ru_term": ru, "ua_term": uk}
 
-    ru_s, dropped = timeline(call(ru, span.serp, solo_tag(ru, span), cache), span.end)
+    ru_s, dropped, ru_anchor = solo_series(ru, span, cache)
     if ru_s.empty:
         return None, {**base, "ok": False, "reason": "no_ru_series"}
     ru_s = ru_s.iloc[:, 0]
@@ -333,9 +382,12 @@ def collect_pair(pair: dict, span: Span,
         return pd.DataFrame({ru: ru_s}), {**base, "ok": True, "control": True,
                                           "partial_dropped": dropped}
 
-    uk_raw, d_uk = timeline(call(uk, span.serp, solo_tag(uk, span), cache), span.end)
+    uk_raw, d_uk, uk_anchor = solo_series(uk, span, cache)
     dropped += d_uk
     base["partial_dropped"] = dropped
+    for side, m in (("ru", ru_anchor), ("ua", uk_anchor)):
+        for k_, v_ in m.items():
+            base[f"{side}_{k_}"] = v_
     if uk_raw.empty:
         # Below Trends' reporting threshold for the entire span. That is a result:
         # the spelling has no detectable English search volume. Carry it as an
@@ -462,7 +514,11 @@ def plan(pairs: list[dict], span: Span, cache: pathlib.Path = CACHE) -> list[dic
         ru, uk = p["russian"], p["ukrainian"]
         control = p.get("is_control") and ru == uk
         tags = [solo_tag(ru, span)] + ([] if control else [solo_tag(uk, span)])
-        solo_miss = sum(not (cache / f"{t}.json").exists() for t in tags)
+        sp = anchor_span(span)
+        anchors = [solo_tag(t, sp) for t in ([ru] if control else [ru, uk])] if sp else []
+        # An anchor call is made only when its full-span call returned a series;
+        # counted as a miss regardless, so the plan stays an upper bound.
+        solo_miss = sum(not (cache / f"{t}.json").exists() for t in tags + anchors)
         lo, hi = (0, 0) if control else (1, CAL_CANDIDATES)
         if not control and solo_miss == 0:
             ru_s = frame(json.loads((cache / f"{tags[0]}.json").read_text()))
@@ -470,7 +526,12 @@ def plan(pairs: list[dict], span: Span, cache: pathlib.Path = CACHE) -> list[dic
             if ru_s.empty or uk_s.empty:
                 lo = hi = 0
             else:
-                wins = calibration_windows(ru_s.iloc[:, 0], uk_s.iloc[:, 0], span)
+                a = [frame(json.loads((cache / f"{t}.json").read_text())) for t in anchors]
+                r_, u_ = ru_s.iloc[:, 0], uk_s.iloc[:, 0]
+                if len(a) == 2:
+                    r_ = splice(r_, a[0].iloc[:, 0] if not a[0].empty else None)[0]
+                    u_ = splice(u_, a[1].iloc[:, 0] if not a[1].empty else None)[0]
+                wins = calibration_windows(r_, u_, span)
                 miss = [not (cache / f"joint_{p['slug']}_{a[:7]}_{b[:7]}.json").exists()
                         for a, b in wins]
                 # Windows are tried in order and the first success stops the loop.
