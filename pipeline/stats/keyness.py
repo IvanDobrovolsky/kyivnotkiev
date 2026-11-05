@@ -337,14 +337,32 @@ def run(df: pd.DataFrame, terms: list[str], quiet: bool = False) -> dict:
         own = df[df.variant == solo_variant]
         if len(own) >= MIN_DOCS:
             import glob as _glob
+            import pathlib as _pl
             import pandas as _pd
+            from pipeline.config import TEXT_END, get_enabled_pairs
+            from pipeline.store.migrate import apply_study_scope
             bg_frames = []
             here = df.pair_slug.iloc[0] if "pair_slug" in df.columns and len(df) else ""
+            # Enabled pairs only. Retired borscht still has records.parquet in
+            # data/stats and sorts third; after the text clamp it holds 1,443
+            # rows and falls out only because that is under the 1,500 sample.
+            # The background must not depend on that accident.
+            _on = {p["slug"] for p in get_enabled_pairs()}
             for f in sorted(_glob.glob("data/stats/*/records.parquet")):
-                if f"/{here}/" in f:
+                if f"/{here}/" in f or _pl.Path(f).parent.name not in _on:
                     continue
                 try:
-                    bg_frames.append(_pd.read_parquet(f, columns=["text"]).sample(
+                    # The background is other pairs' records as they sit on
+                    # disk, whatever rebuild wrote them, so the text window has
+                    # to be applied here too. Before the clamp they held 27,556
+                    # rows from 2026 between them (borscht's 57 included), so
+                    # feodosiia, with no 2026 rows of its own, was profiled
+                    # against 2026 text. A file left under 1,500 rows by the
+                    # clamp is skipped, as any small file always was.
+                    _bg = apply_study_scope(
+                        _pd.read_parquet(f, columns=["text", "date"]), TEXT_END,
+                        f"text window, solo background {_pl.Path(f).parent.name}")
+                    bg_frames.append(_bg[["text"]].sample(
                         n=1500, random_state=7, replace=False))
                 except Exception:                      # noqa: BLE001
                     continue

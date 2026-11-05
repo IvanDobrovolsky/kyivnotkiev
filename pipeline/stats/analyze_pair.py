@@ -30,8 +30,10 @@ from datetime import datetime, timezone
 import pandas as pd
 import yaml
 
+from pipeline.config import TEXT_END, last_day
 from pipeline.filters import apply_source_filters
 from pipeline.stats import dedup, keyness, prosody
+from pipeline.store.migrate import apply_study_scope
 
 STORE = pathlib.Path("data/store/pairs")
 OUT = pathlib.Path("data/stats")
@@ -46,7 +48,8 @@ def pair_terms(slug: str) -> list[str]:
     return [str(p["ukrainian"]), str(p["russian"])]
 
 
-def analyse(slug: str, quiet: bool = False, skip_dedup: bool = False) -> dict:
+def analyse(slug: str, quiet: bool = False, skip_dedup: bool = False,
+            out: pathlib.Path = OUT) -> dict:
     src = STORE / f"{slug}.parquet"
     if not src.exists():
         raise SystemExit(f"no store file: {src}")
@@ -70,6 +73,18 @@ def analyse(slug: str, quiet: bool = False, skip_dedup: bool = False) -> dict:
             "text": _v.text.astype(str), "variant": _v.variant,
         })
         df = pd.concat([df[df.source != "gdelt"], _g], ignore_index=True)
+
+    # The text window. The verified corpus above is read straight off disk, so
+    # nothing upstream clamped it: 27,499 GDELT rows dated 2026 sat in
+    # records.parquet (24,578 canonical; 8.4% of canonical GDELT) while no other
+    # source had any 2026, which shifts the source mix on each spelling side --
+    # the within-source contrast that keyness exists to protect. The store rows
+    # are already clamped by migrate.build_pairs, so for them this is a no-op
+    # that keeps the guarantee local. Before the language gate, so langdetect
+    # never runs on rows that are about to be dropped.
+    _n_in = len(df)
+    df = apply_study_scope(df, TEXT_END, "text window")
+    dropped_text_window = _n_in - len(df)
 
     # Document-level language gate: ASCII-spelled French/Spanish/Dutch/Turkish
     # passed every token heuristic and shipped as collocations (que, voor,
@@ -105,7 +120,7 @@ def analyse(slug: str, quiet: bool = False, skip_dedup: bool = False) -> dict:
         ).sort_index()
         if _before - len(df):
             print(f"  homonym filter: dropped {_before - len(df):,} of {_before:,}")
-    outdir = OUT / slug
+    outdir = out / slug
     outdir.mkdir(parents=True, exist_ok=True)
 
     print(f"\n=== {slug} ===")
@@ -113,11 +128,28 @@ def analyse(slug: str, quiet: bool = False, skip_dedup: bool = False) -> dict:
     print(f"  sources {df.source.value_counts().to_dict()}")
     print(f"  variants {df.variant.value_counts().to_dict()}")
 
+    cached = None
     if skip_dedup and (outdir / "records.parquet").exists():
+        cached = pd.read_parquet(outdir / "records.parquet")
+        # A cache written before the text window existed holds rows past it.
+        # Clamping it in place is not safe: a dropped row may be the canonical
+        # member of a duplicate group (13 of the 24,578 canonical 2026 rows
+        # headed groups with pre-2026 members), which would leave its 15
+        # earlier duplicates with no canonical and silently remove them.
+        # Same boundary as apply_study_scope: before the first instant of the
+        # next month, so a timestamped row on the last day is not "late".
+        _late = int((pd.to_datetime(cached["date"], errors="coerce", format="ISO8601")
+                     >= pd.Timestamp(last_day(TEXT_END)) + pd.Timedelta(days=1)).sum())
+        if _late:
+            print(f"  [1/3] dedup — cached records.parquet holds {_late:,} row(s) "
+                  f"after {last_day(TEXT_END)}; it predates the text window, "
+                  f"so it cannot be reused")
+            cached = None
+    if cached is not None:
         # Stages 2-3 only: reuse the deduplicated records so a stopword or
         # tokenizer change re-derives keyness/prosody in minutes, not the
         # 30-minute MinHash pass.
-        df = pd.read_parquet(outdir / "records.parquet")
+        df = cached
         d_stats = {"duplicate_groups": int(df.dup_group.nunique()),
                    "redundant": int((~df.is_canonical).sum()),
                    "redundant_pct": round(float((~df.is_canonical).mean()) * 100, 1),
@@ -155,6 +187,10 @@ def analyse(slug: str, quiet: bool = False, skip_dedup: bool = False) -> dict:
         "input_sha1": hashlib.sha1(src.read_bytes()).hexdigest()[:16],
         "input_rows": len(df),
         "input_rows_store": store_rows,
+        # Lets a check prove the analysis never read past the text window,
+        # instead of inferring it from the store's clamp.
+        "text_window": {"end": last_day(TEXT_END),
+                        "dropped_after_end": dropped_text_window},
         "terms": terms,
         "sources": df.source.value_counts().to_dict(),
         "variants": df.variant.value_counts().to_dict(),
@@ -174,6 +210,10 @@ def main() -> int:
     g.add_argument("--all", action="store_true")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--skip-dedup", action="store_true")
+    # A scratch directory, so a change to the analysis can be checked end to
+    # end without overwriting the records and analysis.json the site reads.
+    ap.add_argument("--out", type=pathlib.Path, default=OUT,
+                    help=f"output root (default {OUT})")
     a = ap.parse_args()
 
     # --all means every ENABLED pair. Walking the store blindly re-analysed
@@ -195,7 +235,7 @@ def main() -> int:
         slugs = [a.pair]
     rows = []
     for s in slugs:
-        m = analyse(s, quiet=a.quiet, skip_dedup=a.skip_dedup)
+        m = analyse(s, quiet=a.quiet, skip_dedup=a.skip_dedup, out=a.out)
         rows.append({"pair": s, "records": m["input_rows"],
                      "redundant_pct": m["dedup"]["redundant_pct"],
                      "sources_usable": len(m["keyness"]["sources_used"]),

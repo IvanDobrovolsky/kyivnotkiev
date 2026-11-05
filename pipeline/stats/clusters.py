@@ -53,6 +53,9 @@ import re
 import numpy as np
 import pandas as pd
 
+from pipeline.config import TEXT_END
+from pipeline.store.migrate import apply_study_scope
+
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 STORE = ROOT / "data" / "store" / "pairs"
 STATS = ROOT / "data" / "stats"
@@ -76,6 +79,12 @@ def log(msg: str) -> None:
 
 def load_canonical(pair: str) -> pd.DataFrame:
     df = pd.read_parquet(STORE / f"{pair}.parquet")
+    # Clusters and chips must describe the same corpus. Both read the text
+    # window; the pair file is already clamped there by migrate.build_pairs,
+    # so this is a no-op today, kept so the two stages cannot drift apart the
+    # way they did when only one of them leaked 2026 rows (keyness held 27,499,
+    # clusters 0).
+    df = apply_study_scope(df, TEXT_END, "text window")
     # analyze_pair writes the dedup columns into records.parquet, not a separate
     # dedup file — the guard and this loader both guessed the wrong name once.
     dd = STATS / pair / "records.parquet"
