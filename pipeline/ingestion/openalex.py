@@ -30,6 +30,13 @@ Single words stay unquoted: 'Odessa' 2018 matched the word in 199 of 200 titles
 and 'Zaporizhzhia' 2025 in 114 of 114, the one miss being the Polish
 inflection 'Odessą'.
 
+Dataset records are excluded (type:!dataset). They are repository deposits,
+not publications, and they arrive in bulk: 25 of the 51 'Kiev' works dated
+2026-01..10 were Zenodo object records ('Mary at The Kiev Museum of Western
+and Oriental Art, Ukraine'), against 77 of 1,377 over 2010-2025. With them the
+partial 2026 read Kyiv at 88.0% Ukrainian after 93.6% in 2025, a dip made by
+one museum's catalogue upload.
+
 Three changes from the old query, each measured:
   - per_page 200, and a refusal if groups_count exceeds the groups returned. At
     per_page=50 a group_by query returns only the top 50 years by count: 'Kiev'
@@ -116,7 +123,7 @@ def count_papers_by_year(term: str, through: str, budget: Budget) -> dict[int, i
         raise ValueError(f"{term!r} would split the OpenAlex filter")
     q = f'"{term}"' if len(term.split()) > 1 else term     # phrase, not bag of words
     params = {"filter": f"title.search:{q},from_publication_date:{START_YEAR}-01-01,"
-                        f"to_publication_date:{through}",
+                        f"to_publication_date:{through},type:!dataset",
               "group_by": "publication_year", "per_page": PER_PAGE, "mailto": MAILTO}
     key = _api_key()
     if key:
