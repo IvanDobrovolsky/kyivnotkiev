@@ -40,12 +40,12 @@ SERIES_END = "2026-10"
 TEXT_END = "2025-12"
 HEADLINE_YEAR = 2025
 SOURCE_SERIES_END = {
-    "gdelt": "2025-12",
+    "gdelt": "2026-10",
     "trends": "2026-10",
     "wikipedia": "2025-12",
     "ngrams": "2022-12",     # Google Books corpus 37 ends at 2022; none is newer
     "openalex": "2025-12",
-    "reddit": "2025-12",
+    "reddit": "2026-09",
     "youtube": "2026-08",
 }
 
