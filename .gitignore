@@ -101,6 +101,13 @@ output/
 !/data/audit/term_blocklist.json
 !/data/audit/wikipedia_renames.json
 !/data/audit/*.md
+# Reddit dump-era provenance: each month's sidecar (pair set, torrent piece and
+# head verification, filter counts, output sha256) and the re-sweep gate verdicts
+# the merge checks. The 2025 sweep's runner, logs and validation were lost
+# because they lived only in ignored paths on one disk.
+!/data/audit/reddit_resweep_gate.json
+!/data/audit/reddit_dump_sidecars/
+!/data/audit/reddit_dump_sidecars/*.json
 
 private/
 node_modules/
