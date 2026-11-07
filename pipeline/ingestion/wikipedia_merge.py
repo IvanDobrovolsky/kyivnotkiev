@@ -83,6 +83,17 @@ LIVE_DATASET = ROOT_DIR / "dataset" / "raw_wikipedia.parquet"
 RUN_FILES = ("fetched.parquet", "titles.json", "run.json")
 WIKI_RAW_DIR = ROOT_DIR / "data" / "raw" / "wikipedia"
 LIVE_TITLES = WIKI_RAW_DIR / "titles.json"       # the exporter's record of measurability
+LIVE_RUN = WIKI_RAW_DIR / "run.json"             # the live series' run, incl. its agent class
+# Series collected before run.json carried an agent were all-agents (2026-05 and
+# 2026-11-05 collections).
+LEGACY_AGENT = "all-agents"
+
+
+def live_agent(path: Path = LIVE_RUN) -> str:
+    try:
+        return json.loads(path.read_text()).get("agent", LEGACY_AGENT)
+    except FileNotFoundError:
+        return LEGACY_AGENT
 KEY = ["pair_slug", "date", "variant"]           # rebuild.validate_datasets' key
 MAX_REL_DRIFT = 0.005
 
@@ -241,6 +252,16 @@ def stage(run: Path, live_path: Path = LIVE_DATASET, relabel_only: bool = False,
         titles = json.loads((run / "titles.json").read_text())
         meta = json.loads((run / "run.json").read_text())
         report["run"] = meta
+        # One agent class per series: all-agents counts bots, which choose no
+        # spelling, so appending user-only months to an all-agents history (or the
+        # reverse) would draw a seam. A changed class must replace every pair.
+        run_agent, cur_agent = meta.get("agent", LEGACY_AGENT), live_agent()
+        report["agent"] = {"run": run_agent, "live": cur_agent}
+        if run_agent != cur_agent:
+            missing = sorted(enabled_set - set(replace))
+            if missing:
+                hard.append(f"run agent {run_agent!r} != live {cur_agent!r}: --replace every "
+                            f"enabled pair (missing {len(missing)}: {', '.join(missing[:6])}...)")
         open_month = date.today().strftime("%Y-%m")
         if (fetched["date"].str[:7] >= open_month).any():
             hard.append(f"run has rows in or after the open month {open_month}")
@@ -390,6 +411,7 @@ def promote(run: Path, accept=(), live_path: Path = LIVE_DATASET,
     items = [(staged, live_path, r["staged"]["sha1"])]
     if not r["relabel_only"]:
         items.append((run / "titles.json", titles_path, r["run_files"]["titles.json"]))
+        items.append((run / "run.json", titles_path.parent / "run.json", r["run_files"]["run.json"]))
     promote_files(items, stamp, backups)
     log.info(f"promoted {staged} -> {live_path}"
              + ("" if r["relabel_only"] else f", {titles_path}")

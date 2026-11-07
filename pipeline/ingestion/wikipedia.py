@@ -1,9 +1,19 @@
 """Collect monthly en.wikipedia pageviews for each enabled pair's two titles.
 
-Wikimedia REST per-article pageviews, all-access, all-agents, monthly. That is
-the definition the stored series already uses: the 2026-05-04 collection reads
-80,500 / 58,776 / 61,783 for Kyiv 2026-01..03, identical to the API today, and
-2026-04 drifted by 3 views in 68,345.
+Wikimedia REST per-article pageviews, all-access, agent=user (human readers),
+monthly. Until 2026-11-06 the series used all-agents, which counts automated
+traffic, and bots do not choose a spelling. On 2026-11-05 Kyiv 2026 read
+~83% Ukrainian under all-agents against 87% in 2025, a dip that was entirely
+automated traffic: views of the "Kiev" redirect classed as automated rose ~50%
+(52.8K to 79.2K a month) while human views fell 21%, and user-only reads 89.6%
+(2025) against 89.8% (2026). Every pair and every month is collected under one
+agent class, so a series never mixes the two (wikipedia_merge refuses a run whose
+agent differs from the live one unless every pair is replaced).
+
+Known limit: Wikimedia classes traffic as "automated" only from 2020-05. Before
+that, undetected bots sit inside "user" (spiders were split out from 2015-07), so
+pre-2020-05 user views still include some automated traffic. No better consistent
+definition exists in the API.
 
 Range is 2015-07 .. SERIES_END. 2015-07 is the first month the pageviews API
 serves, and no stored or shipped series has an earlier month: all 19 pairs on
@@ -19,7 +29,7 @@ measurement.
 Output goes to a staging directory and never to dataset/:
     fetched.parquet   new rows in dataset/raw_wikipedia.parquet's schema
     titles.json       per pair and variant: title, status, months, first month
-    run.json          as_of, range, request count
+    run.json          as_of, range, agent class, request count
 wikipedia_merge.py stages them against the live dataset, writes a diff report,
 and is the only step that replaces dataset/raw_wikipedia.parquet. A --pairs run
 gets its own default directory, and no run writes into a directory that already
@@ -55,6 +65,7 @@ STAGING_DIR = WIKI_RAW_DIR / "staging"
 PAGEVIEWS_API = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article"
 INFO_API = "https://en.wikipedia.org/w/api.php"
 USER_AGENT = "kyivnotkiev.org research (ivan@kyivnotkiev.org)"
+AGENT = "user"           # pageviews agent class; see the module docstring
 START_YM = "2015-07"     # the pageviews API's first month, not a study choice
 YM = re.compile(r"\d{4}-(0[1-9]|1[0-2])")
 STAGED_FILES = ("stage_report.json", "raw_wikipedia.parquet")   # wikipedia_merge.stage writes these
@@ -112,7 +123,7 @@ def fetch_monthly(title: str, start_ym: str, end_ym: str) -> tuple[int, list[dic
     The API omits months with no views, so a month absent here is a zero for an
     existing title. Whether the title existed is title_status()'s job.
     """
-    url = (f"{PAGEVIEWS_API}/en.wikipedia/all-access/all-agents/{wt.api_title(title)}"
+    url = (f"{PAGEVIEWS_API}/en.wikipedia/all-access/{AGENT}/{wt.api_title(title)}"
            f"/monthly/{start_ym.replace('-', '')}0100/{last_day(end_ym).replace('-', '')}00")
     r = _get(url)
     if r.status_code == 404:
@@ -169,7 +180,7 @@ def collect(slugs: list[str], start_ym: str, end_ym: str) -> tuple[pd.DataFrame,
                                and all(entry[v]["status"] != "missing" for v in wt.VARIANTS))
         manifest[slug] = entry
     df = pd.DataFrame(rows, columns=SCHEMA_COLUMNS)
-    run = {"as_of": as_of.isoformat() + "Z", "start": start_ym, "end": end_ym,
+    run = {"as_of": as_of.isoformat() + "Z", "start": start_ym, "end": end_ym, "agent": AGENT,
            "pairs": slugs, "titles": p["titles"], "requests": p["requests"],
            "rows": len(df)}
     return df, manifest, run
